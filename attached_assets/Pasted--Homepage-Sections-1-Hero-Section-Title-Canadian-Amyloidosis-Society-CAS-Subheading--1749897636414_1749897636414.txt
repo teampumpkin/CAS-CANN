@@ -1,0 +1,60 @@
+🧩 Homepage Sections:
+
+1. Hero Section:
+	•	Title: Canadian Amyloidosis Society (CAS)
+	•	Subheading: Accelerating awareness, diagnosis, and care
+	•	Background: abstract image (protein structure → heart)
+	•	Below hero: 4 clickable tiles – Directory, Upload, Learn, Join
+	•	Animations: title/subhead fade in, tiles animate up on scroll
+	•	Responsive: content adapts for mobile with stacked layout
+
+2. Welcome Section:
+	•	Two-column layout: mission text + optional image
+	•	Animation: fade-in with left/right slide of each column
+	•	Soft colored background for contrast
+
+3. What is Amyloidosis Section:
+	•	Short overview + link to “About Amyloidosis”
+	•	Special feature card (e.g., recent research/event)
+	•	Hover lift on card, fade-up animation on scroll
+
+4. Upcoming Events + Newsletter:
+	•	Event cards (1–2 upcoming events)
+	•	Newsletter signup form (name + email)
+	•	Animation: slide-in of form, cards fade-in on scroll
+	•	If newsletter is removed, convert space to callout block
+
+5. What You’ll Find Here (Directory Preview):
+	•	Mini map preview with icons or pins
+	•	Grid of 4 features:
+	•	Directory of clinics
+	•	Uploadable resources
+	•	Info on amyloidosis types
+	•	Join/share mission
+	•	Animation: staggered fade-in of items, map icons animate
+
+6. Quick Links Tiles:
+	•	4 action tiles: Find Support, Upload Resource, Join CAS, Browse Resources
+	•	Hover: lift, slight glow, icon color shift
+	•	Scroll: tiles animate in with delay sequence
+
+7. Featured Spotlights (Rotator):
+	•	Content rotator with 3 cards:
+	•	What is ATTR
+	•	BC Cardiac Pathway Upload
+	•	Join the Movement
+	•	Manual + auto scroll
+	•	Mobile: stacked or swipeable
+	•	Animation: fade transition between cards
+
+🧠 Interaction Notes:
+	•	Button hover = scale + soft glow
+	•	Forms = glow or border focus
+	•	Cards = shadow lift on hover
+	•	Spotlight = smooth rotation with nav dots or arrows
+
+📱 Mobile Responsiveness:
+	•	All content stacks cleanly
+	•	Quick links become vertical
+	•	Hero image resizes and centers
+	•	Navigation collapses into hamburger

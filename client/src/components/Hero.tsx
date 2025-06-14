@@ -2,82 +2,73 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="min-h-screen bg-[#F8FAFB] flex items-center">
-      <div className="max-w-6xl mx-auto px-6 py-20">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Content */}
+    <section className="relative min-h-screen bg-gradient-to-br from-[#F8FAFB] to-white flex items-center overflow-hidden">
+      {/* Background Abstract Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <svg className="w-full h-full" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M200 150 Q 250 100, 300 150 T 400 150" stroke="#00AFE6" strokeWidth="2" fill="none" opacity="0.3"/>
+          <path d="M150 200 Q 200 150, 250 200 T 350 200" stroke="#00DD89" strokeWidth="2" fill="none" opacity="0.3"/>
+          <circle cx="300" cy="200" r="80" fill="none" stroke="#00AFE6" strokeWidth="1" opacity="0.2"/>
+          <circle cx="350" cy="250" r="60" fill="none" stroke="#00DD89" strokeWidth="1" opacity="0.2"/>
+          <path d="M100 300 C 150 250, 200 350, 250 300 S 350 250, 400 300" stroke="#00AFE6" strokeWidth="1.5" fill="none" opacity="0.2"/>
+        </svg>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-20 relative z-10">
+        <div className="text-center">
+          {/* Title and Subheading */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <motion.h1 
-              className="headline-xl mb-8"
-              initial={{ opacity: 0, y: 20 }}
+              className="headline-xl mb-6"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Supporting{' '}
-              <span className="text-[#00AFE6]">Amyloidosis</span>{' '}
-              Patients & Families
+              Canadian Amyloidosis Society
+              <span className="block text-[#00AFE6] mt-2">CAS</span>
             </motion.h1>
             
             <motion.p 
-              className="body-lg mb-12 max-w-xl"
-              initial={{ opacity: 0, y: 20 }}
+              className="text-2xl md:text-3xl text-[#6B7280] font-light mb-16 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
-              The Canadian Amyloidosis Society provides comprehensive support, resources, and community for those affected by amyloidosis across Canada.
+              Accelerating awareness, diagnosis, and care
             </motion.p>
-            
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <motion.button
-                className="btn-primary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Find Support
-              </motion.button>
-              <motion.button
-                className="btn-secondary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Learn More
-              </motion.button>
-            </motion.div>
           </motion.div>
 
-          {/* Hero Card */}
-          <motion.div
-            className="module-card-large text-center"
-            initial={{ opacity: 0, y: 20 }}
+          {/* Action Tiles */}
+          <motion.div 
+            className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="w-20 h-20 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-3xl mx-auto mb-8 flex items-center justify-center">
-              <span className="text-white text-2xl font-bold">CAS</span>
-            </div>
-            <h3 className="headline-md mb-6">Your Journey, Our Support</h3>
-            <p className="body-md mb-8">
-              Connecting patients, families, and healthcare professionals across Canada with resources, community, and hope.
-            </p>
-            <div className="grid grid-cols-2 gap-4 text-center">
-              <div>
-                <div className="text-2xl font-medium text-[#00AFE6] mb-2">500+</div>
-                <div className="text-sm text-[#9CA3AF]">Patients Supported</div>
-              </div>
-              <div>
-                <div className="text-2xl font-medium text-[#00DD89] mb-2">15</div>
-                <div className="text-sm text-[#9CA3AF]">Support Groups</div>
-              </div>
-            </div>
+            {[
+              { title: 'Directory', description: 'Find specialists and clinics', icon: '🗂️' },
+              { title: 'Upload', description: 'Share resources and research', icon: '📤' },
+              { title: 'Learn', description: 'About amyloidosis types', icon: '📚' },
+              { title: 'Join', description: 'Connect with our community', icon: '🤝' }
+            ].map((tile, index) => (
+              <motion.div
+                key={tile.title}
+                className="module-card text-center cursor-pointer group"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
+                whileHover={{ scale: 1.03, y: -5 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <div className="text-3xl mb-4">{tile.icon}</div>
+                <h3 className="headline-md mb-3">{tile.title}</h3>
+                <p className="body-md text-[#9CA3AF]">{tile.description}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>

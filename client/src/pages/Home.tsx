@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import NavigationTiles from '@/components/NavigationTiles';
-import AboutSection from '@/components/AboutSection';
-import ResourcesSection from '@/components/ResourcesSection';
+import WelcomeSection from '@/components/WelcomeSection';
+import AmyloidosisSection from '@/components/AmyloidosisSection';
+import EventsNewsletterSection from '@/components/EventsNewsletterSection';
+import DirectoryPreviewSection from '@/components/DirectoryPreviewSection';
+import QuickLinksSection from '@/components/QuickLinksSection';
+import FeaturedSpotlights from '@/components/FeaturedSpotlights';
 import FAQSection from '@/components/FAQSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
@@ -14,7 +17,7 @@ export default function Home() {
   useScrollAnimations();
 
   useEffect(() => {
-    document.title = "Canadian Amyloidosis Society - Supporting Patients & Families";
+    document.title = "Canadian Amyloidosis Society - Accelerating awareness, diagnosis, and care";
   }, []);
 
   return (
@@ -22,9 +25,12 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <NavigationTiles />
-        <AboutSection />
-        <ResourcesSection />
+        <WelcomeSection />
+        <AmyloidosisSection />
+        <EventsNewsletterSection />
+        <DirectoryPreviewSection />
+        <QuickLinksSection />
+        <FeaturedSpotlights />
         <FAQSection />
         <ContactSection />
       </main>

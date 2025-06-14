@@ -1,49 +1,45 @@
 import { motion } from 'framer-motion';
-import { Search, Upload, Users, BookOpen, ArrowRight } from 'lucide-react';
+import { Search, Upload, Users, BookOpen } from 'lucide-react';
 
 const quickLinks = [
   {
     title: 'Find Support',
     description: 'Connect with support groups and patient resources',
     icon: Search,
-    color: 'from-[#00AFE6] to-[#0099CC]',
-    hoverColor: 'group-hover:shadow-[#00AFE6]/20'
+    color: '#00AFE6'
   },
   {
     title: 'Upload Resource',
     description: 'Share clinical guidelines and research materials',
     icon: Upload,
-    color: 'from-[#00DD89] to-[#00BB77]',
-    hoverColor: 'group-hover:shadow-[#00DD89]/20'
+    color: '#00DD89'
   },
   {
     title: 'Join CAS',
     description: 'Become part of our advocacy community',
     icon: Users,
-    color: 'from-purple-500 to-purple-600',
-    hoverColor: 'group-hover:shadow-purple-500/20'
+    color: '#8B5CF6'
   },
   {
     title: 'Browse Resources',
     description: 'Explore our comprehensive resource library',
     icon: BookOpen,
-    color: 'from-gray-600 to-gray-700',
-    hoverColor: 'group-hover:shadow-gray-600/20'
+    color: '#6B7280'
   }
 ];
 
 export default function QuickLinksSection() {
   return (
-    <section className="py-24 bg-[#F8FAFB]">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="section-spacer bg-[#FAFBFC]">
+      <div className="crawford-section">
         <motion.div 
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <h2 className="headline-lg mb-6">
+          <h2 className="heading-xl mb-8">
             Quick Actions
           </h2>
           <p className="body-lg max-w-2xl mx-auto">
@@ -57,45 +53,35 @@ export default function QuickLinksSection() {
             return (
               <motion.div
                 key={link.title}
-                className={`module-card cursor-pointer group transition-all duration-300 hover:shadow-xl ${link.hoverColor}`}
-                initial={{ opacity: 0, y: 20 }}
+                className="crawford-card tile-crawford group"
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
                 viewport={{ once: true, margin: "-50px" }}
-                whileHover={{ 
-                  scale: 1.03, 
-                  y: -8,
-                  transition: { duration: 0.2 }
-                }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ y: -6 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <motion.div 
-                  className={`w-16 h-16 bg-gradient-to-br ${link.color} rounded-3xl flex items-center justify-center mb-6 shadow-sm`}
-                  whileHover={{ 
-                    scale: 1.1,
-                    rotate: 5,
-                    transition: { duration: 0.2 }
-                  }}
-                >
-                  <IconComponent className="w-8 h-8 text-white" />
-                </motion.div>
-                
-                <h3 className="headline-md mb-4">
-                  {link.title}
-                </h3>
-                
-                <p className="body-md mb-6 text-[#6B7280]">
-                  {link.description}
-                </p>
-                
-                <motion.div 
-                  className="flex items-center text-[#00AFE6] font-medium"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span>Get Started</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </motion.div>
+                <div className="tile-content text-center">
+                  <motion.div 
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 mx-auto"
+                    style={{ backgroundColor: link.color }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 3,
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    <IconComponent className="w-7 h-7 text-white" />
+                  </motion.div>
+                  
+                  <h3 className="heading-lg mb-4">
+                    {link.title}
+                  </h3>
+                  
+                  <p className="body-md text-[#6a6a6a]">
+                    {link.description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}

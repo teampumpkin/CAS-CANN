@@ -2,102 +2,99 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen bg-[#FAFBFC] flex items-center overflow-hidden">
-      {/* Abstract Background - Protein morphing into heart */}
-      <div className="absolute inset-0 opacity-[0.04]">
-        <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-          {/* Protein structure morphing into heart shape */}
-          <path d="M200 200 Q 300 150, 400 200 T 600 220 Q 700 240, 800 200" stroke="#00AFE6" strokeWidth="2" fill="none"/>
-          <path d="M180 250 Q 280 200, 380 250 T 580 270 Q 680 290, 780 250" stroke="#00DD89" strokeWidth="1.5" fill="none"/>
-          <circle cx="300" cy="180" r="8" fill="#00AFE6" opacity="0.3"/>
-          <circle cx="500" cy="200" r="6" fill="#00DD89" opacity="0.3"/>
-          <circle cx="700" cy="220" r="7" fill="#00AFE6" opacity="0.3"/>
-          
-          {/* Heart shape formation */}
-          <path d="M600 400 C 580 360, 520 360, 520 400 C 520 360, 460 360, 440 400 C 460 440, 520 480, 600 520 C 680 480, 740 440, 760 400 C 740 360, 680 360, 680 400 C 680 360, 620 360, 600 400 Z" 
-                stroke="#00AFE6" strokeWidth="1" fill="none" opacity="0.2"/>
-          
-          {/* Connecting elements */}
-          <path d="M400 250 Q 500 300, 600 350" stroke="#00DD89" strokeWidth="1" fill="none" opacity="0.3"/>
-          <path d="M800 250 Q 750 300, 700 350" stroke="#00AFE6" strokeWidth="1" fill="none" opacity="0.3"/>
+    <section className="relative min-h-screen bg-white flex items-center overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/30 to-transparent"></div>
+        {/* Very subtle protein to heart morphing abstract */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.02]" viewBox="0 0 1000 600" fill="none">
+          <path d="M100 200 Q 200 150, 300 200 T 500 220 Q 600 240, 700 200" stroke="#00AFE6" strokeWidth="1"/>
+          <path d="M150 350 C 130 310, 70 310, 70 350 C 70 310, 10 310, -10 350 C 10 390, 70 430, 150 470 C 230 430, 290 390, 310 350 C 290 310, 230 310, 230 350 C 230 310, 170 310, 150 350 Z" stroke="#00AFE6" strokeWidth="0.5"/>
+          <circle cx="200" cy="180" r="3" fill="#00AFE6" opacity="0.1"/>
+          <circle cx="400" cy="200" r="2" fill="#00DD89" opacity="0.1"/>
         </svg>
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-8 py-24">
-        <div className="text-center">
-          {/* Hero Text */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-          >
+      <div className="w-full">
+        <div className="max-w-6xl mx-auto px-6 py-32">
+          <div className="text-center">
+            {/* Main heading */}
             <motion.h1 
-              className="text-5xl md:text-6xl lg:text-7xl font-light text-[#1a1a1a] mb-6 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4 tracking-tight leading-tight"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
               Canadian Amyloidosis Society
-              <span className="block text-[#00AFE6] mt-4 font-normal">(CAS)</span>
             </motion.h1>
             
-            <motion.p 
-              className="text-xl md:text-2xl text-[#6a6a6a] font-light mb-20 max-w-4xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 30 }}
+            <motion.div 
+              className="text-3xl md:text-4xl lg:text-5xl font-light text-[#00AFE6] mb-8"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              (CAS)
+            </motion.div>
+            
+            <motion.p 
+              className="text-lg md:text-xl text-gray-600 mb-16 max-w-2xl mx-auto font-light leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
               Accelerating awareness, diagnosis, and care
             </motion.p>
-          </motion.div>
 
-          {/* Action Tiles */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {[
-              { title: 'Directory', description: 'Find specialists and clinics' },
-              { title: 'Upload', description: 'Share resources and research' },
-              { title: 'Learn', description: 'About amyloidosis types' },
-              { title: 'Join', description: 'Connect with our community' }
-            ].map((tile, index) => (
-              <motion.div
-                key={tile.title}
-                className="group cursor-pointer"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: 0.8 + index * 0.1, 
-                  ease: [0.25, 0.1, 0.25, 1] 
-                }}
-                whileHover={{ 
-                  y: -8,
-                  transition: { duration: 0.3 }
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div 
-                  className="bg-white rounded-3xl p-8 text-center transition-all duration-300 group-hover:shadow-2xl"
-                  style={{
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
+            {/* Action tiles */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+              {[
+                { title: 'Directory', description: 'Find specialists and clinics' },
+                { title: 'Upload', description: 'Share resources and research' },
+                { title: 'Learn', description: 'About amyloidosis types' },
+                { title: 'Join', description: 'Connect with our community' }
+              ].map((tile, index) => (
+                <motion.div
+                  key={tile.title}
+                  className="group cursor-pointer"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: 0.8 + index * 0.1,
+                    ease: [0.25, 0.1, 0.25, 1]
                   }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = index % 2 === 0 
-                      ? '0 16px 64px rgba(0, 175, 230, 0.15)' 
-                      : '0 16px 64px rgba(0, 221, 137, 0.15)';
+                  whileHover={{ 
+                    y: -4,
+                    transition: { duration: 0.2 }
                   }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.08)';
-                  }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <h3 className="text-2xl font-medium text-[#1a1a1a] mb-4">
-                    {tile.title}
-                  </h3>
-                  <p className="text-lg text-[#6a6a6a] leading-relaxed">
-                    {tile.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                  <div 
+                    className="bg-white border border-gray-100 rounded-2xl p-6 text-center transition-all duration-300 hover:border-gray-200"
+                    style={{
+                      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+                    }}
+                    onMouseEnter={(e) => {
+                      const color = index % 2 === 0 ? '#00AFE6' : '#00DD89';
+                      e.currentTarget.style.boxShadow = `0 8px 25px ${color}15`;
+                      e.currentTarget.style.borderColor = `${color}30`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.05)';
+                      e.currentTarget.style.borderColor = '#f3f4f6';
+                    }}
+                  >
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      {tile.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {tile.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

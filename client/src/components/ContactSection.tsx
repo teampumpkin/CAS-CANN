@@ -23,7 +23,7 @@ const contactInfo = [
     title: 'Address',
     content: '123 Health Street\nToronto, ON M5V 3A8',
     href: null,
-    bgColor: 'bg-purple-500'
+    bgColor: 'bg-gray-500'
   }
 ];
 
@@ -46,7 +46,6 @@ export default function ContactSection() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: "Please fill in all required fields",
@@ -56,7 +55,6 @@ export default function ContactSection() {
       return;
     }
 
-    // Simulate form submission
     setTimeout(() => {
       toast({
         title: "Message sent successfully!",
@@ -68,39 +66,48 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 bg-[#F8FAFB]">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <h2 className="headline-lg mb-6">
+            Get in Touch
+          </h2>
+          <p className="body-lg max-w-2xl mx-auto">
+            Have questions or need support? We're here to help. Reach out to us through any of the methods below.
+          </p>
+        </motion.div>
+
         <div className="grid lg:grid-cols-2 gap-16">
+          {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Get in Touch
-            </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Have questions or need support? We're here to help. Reach out to us through any of the methods below.
-            </p>
-            
-            <div className="space-y-6">
+            <div className="space-y-8">
               {contactInfo.map((info, index) => {
                 const IconComponent = info.icon;
                 return (
                   <motion.div
                     key={info.title}
-                    className="flex items-start space-x-4"
+                    className="flex items-start space-x-5"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className={`w-10 h-10 ${info.bgColor} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                      <IconComponent className="w-5 h-5 text-white" />
+                    <div className={`w-14 h-14 ${info.bgColor} rounded-3xl flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                      <IconComponent className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">
+                      <h3 className="headline-md mb-2">
                         {info.title}
                       </h3>
                       {info.href ? (
@@ -108,7 +115,7 @@ export default function ContactSection() {
                           {info.content}
                         </a>
                       ) : (
-                        <p className="text-gray-600 whitespace-pre-line">
+                        <p className="body-md whitespace-pre-line">
                           {info.content}
                         </p>
                       )}
@@ -119,15 +126,16 @@ export default function ContactSection() {
             </div>
           </motion.div>
           
+          {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <form onSubmit={handleSubmit} className="bg-[#FAFAFA] p-8 rounded-2xl">
+            <form onSubmit={handleSubmit} className="module-card">
               <div className="mb-6">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-[#1F2937] mb-3">
                   Full Name *
                 </label>
                 <input
@@ -143,7 +151,7 @@ export default function ContactSection() {
               </div>
               
               <div className="mb-6">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-[#1F2937] mb-3">
                   Email Address *
                 </label>
                 <input
@@ -159,7 +167,7 @@ export default function ContactSection() {
               </div>
               
               <div className="mb-6">
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-900 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-[#1F2937] mb-3">
                   Subject
                 </label>
                 <select
@@ -177,14 +185,14 @@ export default function ContactSection() {
                 </select>
               </div>
               
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-2">
+              <div className="mb-8">
+                <label htmlFor="message" className="block text-sm font-medium text-[#1F2937] mb-3">
                   Message *
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows={4}
+                  rows={5}
                   required
                   value={formData.message}
                   onChange={handleChange}

@@ -31,25 +31,26 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-4 gap-8">
+    <footer className="bg-[#1F2937] text-white">
+      <div className="max-w-6xl mx-auto px-6 py-20">
+        <div className="grid md:grid-cols-4 gap-12">
+          {/* Brand Section */}
           <div className="md:col-span-2">
             <motion.div 
-              className="flex items-center mb-6"
+              className="flex items-center mb-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center text-white font-bold text-lg">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-sm">
                 CAS
               </div>
-              <span className="ml-3 text-xl font-semibold">Canadian Amyloidosis Society</span>
+              <span className="ml-4 text-xl font-light tracking-tight">Canadian Amyloidosis Society</span>
             </motion.div>
             
             <motion.p 
-              className="text-gray-300 mb-6 leading-relaxed max-w-md"
+              className="text-gray-300 mb-8 leading-relaxed max-w-md font-light text-lg"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -71,8 +72,8 @@ export default function Footer() {
                   <motion.a
                     key={social.name}
                     href={social.href}
-                    className="w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-[#00AFE6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:ring-offset-gray-900"
-                    whileHover={{ scale: 1.1 }}
+                    className="w-12 h-12 bg-gray-700 rounded-2xl flex items-center justify-center hover:bg-[#00AFE6] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:ring-offset-gray-900"
+                    whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -87,14 +88,15 @@ export default function Footer() {
             </motion.div>
           </div>
           
+          {/* Quick Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-3">
+            <h3 className="text-lg font-medium mb-6 text-white">Quick Links</h3>
+            <ul className="space-y-4">
               {quickLinks.map((link, index) => (
                 <motion.li
                   key={link.name}
@@ -105,7 +107,7 @@ export default function Footer() {
                 >
                   <a 
                     href={link.href} 
-                    className="text-gray-300 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:ring-offset-gray-900 focus:rounded-sm"
+                    className="text-gray-300 hover:text-[#00AFE6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:ring-offset-gray-900 focus:rounded-md font-light"
                   >
                     {link.name}
                   </a>
@@ -114,14 +116,15 @@ export default function Footer() {
             </ul>
           </motion.div>
           
+          {/* Professional Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-semibold mb-4">For Professionals</h3>
-            <ul className="space-y-3">
+            <h3 className="text-lg font-medium mb-6 text-white">For Professionals</h3>
+            <ul className="space-y-4">
               {professionalLinks.map((link, index) => (
                 <motion.li
                   key={link.name}
@@ -132,7 +135,7 @@ export default function Footer() {
                 >
                   <a 
                     href={link.href} 
-                    className="text-gray-300 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:ring-offset-gray-900 focus:rounded-sm"
+                    className="text-gray-300 hover:text-[#00AFE6] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:ring-offset-gray-900 focus:rounded-md font-light"
                   >
                     {link.name}
                   </a>
@@ -142,22 +145,23 @@ export default function Footer() {
           </motion.div>
         </div>
         
+        {/* Bottom Section */}
         <motion.div 
-          className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
+          className="border-t border-gray-600 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-300 text-sm">
+          <p className="text-gray-400 text-sm font-light">
             © 2024 Canadian Amyloidosis Society. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex space-x-8 mt-4 md:mt-0">
             {legalLinks.map((link, index) => (
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-white text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:ring-offset-gray-900 focus:rounded-sm"
+                className="text-gray-400 hover:text-[#00AFE6] text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:ring-offset-gray-900 focus:rounded-md font-light"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}

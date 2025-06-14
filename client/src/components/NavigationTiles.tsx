@@ -36,61 +36,61 @@ const tiles = [
 
 export default function NavigationTiles() {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-gradient-to-b from-white to-[#F8FCFF]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
-          className="text-center mb-16 section-reveal"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-20 section-reveal"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-light text-[#2D3748] mb-6 tracking-tight">
             How Can We Help You?
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
             Choose your path to access resources, support, and information tailored to your needs.
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {tiles.map((tile, index) => {
             const IconComponent = tile.icon;
             return (
               <motion.div
                 key={tile.id}
-                className={`card-hover bg-gradient-to-br ${tile.gradient} p-8 rounded-2xl shadow-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2`}
+                className={`card-hover bg-white border border-gray-100 p-8 rounded-3xl shadow-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2`}
                 tabIndex={0}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <motion.div 
-                  className={`w-16 h-16 ${tile.iconBg} rounded-xl flex items-center justify-center mb-6`}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className={`w-12 h-12 ${tile.iconBg} rounded-2xl flex items-center justify-center mb-6`}
+                  whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <IconComponent className="w-8 h-8 text-white" />
+                  <IconComponent className="w-6 h-6 text-white" />
                 </motion.div>
                 
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+                <h3 className="text-xl font-medium text-[#2D3748] mb-4">
                   {tile.title}
                 </h3>
                 
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-gray-600 mb-6 leading-relaxed font-light">
                   {tile.description}
                 </p>
                 
                 <motion.div 
-                  className={`flex items-center ${tile.textColor} font-medium`}
-                  whileHover={{ x: 5 }}
+                  className={`flex items-center ${tile.textColor} font-medium text-sm`}
+                  whileHover={{ x: 3 }}
                   transition={{ duration: 0.2 }}
                 >
                   <span>{tile.ctaText}</span>
-                  <ArrowRight className="w-5 h-5 ml-2" />
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </motion.div>
               </motion.div>
             );

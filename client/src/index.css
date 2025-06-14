@@ -3,34 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(0, 0%, 20%);
+  --background: hsl(0, 0%, 99%);
+  --foreground: hsl(210, 15%, 20%);
   --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(0, 0%, 20%);
+  --card-foreground: hsl(210, 15%, 20%);
   --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(0, 0%, 20%);
+  --popover-foreground: hsl(210, 15%, 20%);
   --primary: hsl(197, 100%, 46%);
   --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(0, 0%, 96%);
-  --secondary-foreground: hsl(0, 0%, 20%);
+  --secondary: hsl(0, 0%, 97%);
+  --secondary-foreground: hsl(210, 15%, 30%);
   --muted: hsl(0, 0%, 96%);
-  --muted-foreground: hsl(0, 5%, 45%);
-  --accent: hsl(0, 0%, 96%);
-  --accent-foreground: hsl(0, 0%, 20%);
+  --muted-foreground: hsl(210, 10%, 50%);
+  --accent: hsl(0, 0%, 97%);
+  --accent-foreground: hsl(210, 15%, 20%);
   --destructive: hsl(0, 62%, 50%);
   --destructive-foreground: hsl(0, 0%, 98%);
-  --border: hsl(0, 0%, 90%);
-  --input: hsl(0, 0%, 90%);
+  --border: hsl(0, 0%, 92%);
+  --input: hsl(0, 0%, 95%);
   --ring: hsl(197, 100%, 46%);
-  --radius: 0.75rem;
+  --radius: 1rem;
   
   /* CAS Brand Colors */
-  --cas-blue: hsl(197, 100%, 46%);
-  --cas-green: hsl(153, 100%, 43%);
-  --cas-blue-light: hsl(197, 100%, 96%);
-  --cas-green-light: hsl(153, 100%, 95%);
-  --cas-gray: hsl(0, 0%, 98%);
-  --cas-text: hsl(0, 0%, 20%);
+  --cas-blue: #00AFE6;
+  --cas-green: #00DD89;
+  --cas-neutral: #F8FAFB;
+  --cas-text-primary: #1F2937;
+  --cas-text-secondary: #6B7280;
+  --cas-text-muted: #9CA3AF;
 }
 
 .dark {
@@ -62,7 +62,9 @@
   
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
   }
   
   html {
@@ -71,78 +73,89 @@
 }
 
 @layer components {
-  .cas-primary {
-    @apply bg-[#00AFE6] text-white;
+  /* Modular Card System */
+  .module-card {
+    @apply bg-white rounded-3xl shadow-sm border border-gray-100 p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
   
-  .cas-secondary {
-    @apply bg-[#00DD89] text-white;
+  .module-card-large {
+    @apply bg-white rounded-3xl shadow-sm border border-gray-100 p-12 transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
   
-  .cas-blue-light {
-    @apply bg-[#E6F7FF];
+  /* Typography System */
+  .headline-xl {
+    @apply text-4xl md:text-5xl lg:text-6xl font-light text-[#1F2937] tracking-tight leading-tight;
   }
   
-  .cas-green-light {
-    @apply bg-[#E6FFF4];
+  .headline-lg {
+    @apply text-3xl md:text-4xl font-light text-[#1F2937] tracking-tight leading-tight;
   }
   
-  .cas-gray {
-    @apply bg-[#FAFAFA];
+  .headline-md {
+    @apply text-2xl md:text-3xl font-medium text-[#1F2937] tracking-tight;
   }
   
-  .cas-text {
-    @apply text-[#333333];
+  .body-lg {
+    @apply text-lg text-[#6B7280] font-light leading-relaxed;
   }
   
+  .body-md {
+    @apply text-base text-[#6B7280] font-light leading-relaxed;
+  }
+  
+  /* Button System */
   .btn-primary {
-    @apply bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2;
+    @apply bg-[#00AFE6] text-white px-8 py-4 rounded-2xl font-medium transition-all duration-200 hover:bg-[#0099CC] hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2;
   }
   
+  .btn-secondary {
+    @apply bg-white text-[#00AFE6] border-2 border-[#00AFE6] px-8 py-4 rounded-2xl font-medium transition-all duration-200 hover:bg-[#00AFE6] hover:text-white hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2;
+  }
+  
+  .btn-ghost {
+    @apply text-[#6B7280] px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:text-[#00AFE6] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2;
+  }
+  
+  /* Navigation */
   .nav-link {
-    @apply relative text-gray-700 hover:text-[#00AFE6] px-3 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:rounded-md;
+    @apply relative text-[#6B7280] hover:text-[#00AFE6] px-4 py-2 font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:rounded-lg;
   }
   
   .nav-link::after {
-    @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] transition-all duration-300 transform -translate-x-1/2;
+    @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#00AFE6] transition-all duration-200 transform -translate-x-1/2 rounded-full;
     content: '';
   }
   
   .nav-link:hover::after {
-    @apply w-full;
+    @apply w-3/4;
   }
   
-  .card-hover {
-    @apply transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl;
-  }
-  
+  /* Form Elements */
   .form-input {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all duration-200;
+    @apply w-full px-6 py-4 bg-white border border-gray-200 rounded-2xl font-light focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all duration-200 hover:border-gray-300;
   }
   
-  .section-reveal {
-    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  .form-input:focus {
+    @apply shadow-lg shadow-[#00AFE6]/10;
   }
   
-  .section-reveal.visible {
+  /* Accessibility */
+  .accessible-link {
+    @apply text-[#00AFE6] underline underline-offset-2 decoration-2 hover:text-[#0099CC] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:rounded-md;
+  }
+  
+  /* Scroll Reveal */
+  .reveal-up {
+    @apply opacity-0 translate-y-6 transition-all duration-500 ease-out;
+  }
+  
+  .reveal-up.visible {
     @apply opacity-100 translate-y-0;
   }
   
-  .accessible-link {
-    @apply text-[#00AFE6] underline underline-offset-2 hover:text-[#0086B3] hover:decoration-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2 focus:rounded-sm;
-  }
-  
-  .parallax-bg {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
-  @media (max-width: 768px) {
-    .parallax-bg {
-      background-attachment: scroll;
-    }
+  /* Sticky CTA */
+  .sticky-cta {
+    @apply fixed bottom-8 right-8 z-50 bg-[#00AFE6] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:ring-offset-2;
   }
 }
 

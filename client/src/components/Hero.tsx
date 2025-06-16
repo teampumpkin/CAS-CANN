@@ -66,15 +66,34 @@ export default function Hero() {
 
           {/* Main headline */}
           <motion.h1
-            className="crawford-hero-title text-white mb-8 relative"
+            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-white mb-8 relative leading-none tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            <span className="block">Canadian Amyloidosis</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
-              Society (CAS)
+            <span className="block">Canadian</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] relative">
+              <motion.span
+                animate={{ 
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                }}
+                transition={{ duration: 4, repeat: Infinity }}
+                style={{
+                  background: "linear-gradient(90deg, #00AFE6, #00DD89, #00AFE6)",
+                  backgroundSize: "200% 100%",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent"
+                }}
+              >
+                Amyloidosis
+              </motion.span>
             </span>
+            <span className="block">Society</span>
+            <motion.div 
+              className="absolute -inset-4 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 blur-3xl opacity-0"
+              animate={{ opacity: [0, 0.3, 0] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+            />
           </motion.h1>
 
           {/* Subtitle */}

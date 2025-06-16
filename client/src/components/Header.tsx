@@ -13,7 +13,7 @@ export default function Header() {
       href: '#about',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'About CAS', href: '/about-cas' },
+        { name: 'About CAS', href: '/about' },
         { name: 'About Amyloidosis', href: '/about-amyloidosis' },
         { name: 'Governance & Strategy', href: '/governance' },
       ]

@@ -1,100 +1,111 @@
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
-
-const navigation = [
-  { name: 'About', href: '#about' },
-  { name: 'Resources', href: '#resources' },
-  { name: 'Directory', href: '#directory' },
-  { name: 'Research', href: '#research' },
-  { name: 'Contact', href: '#contact' }
-];
+import { Menu, X } from 'lucide-react';
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navItems = [
+    { name: 'About', href: '#about' },
+    { name: 'Directory', href: '#directory' },
+    { name: 'Resources', href: '#resources' },
+    { name: 'Events', href: '#events' },
+    { name: 'Contact', href: '#contact' }
+  ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-50">
+    <motion.header 
+      className="crawford-nav"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
+    >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <motion.div
+          <motion.div 
             className="flex items-center space-x-3"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.05 }}
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">CAS</span>
+            <div className="w-10 h-10 crawford-gradient rounded-lg flex items-center justify-center">
+              <span className="text-black font-black text-lg">CAS</span>
             </div>
-            <span className="font-medium text-gray-900">Canadian Amyloidosis Society</span>
+            <span className="font-bold text-xl tracking-tight">Canadian Amyloidosis Society</span>
           </motion.div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {navigation.map((item, index) => (
+            {navItems.map((item, index) => (
               <motion.a
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
-                initial={{ opacity: 0, y: -10 }}
+                className="text-white hover:text-[#00AFE6] font-medium transition-colors duration-200 uppercase tracking-wider text-sm"
+                initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
               >
                 {item.name}
               </motion.a>
             ))}
+            
             <motion.button
-              className="bg-[#00AFE6] text-white px-6 py-2 rounded-full font-medium hover:bg-[#0099CC] transition-colors duration-200"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              className="crawford-btn ml-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Get Support
+              JOIN CAS
             </motion.button>
           </nav>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          {/* Mobile Menu Button */}
+          <motion.button
+            className="md:hidden text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
-            )}
-          </button>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </motion.button>
         </div>
 
         {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <motion.div
-            className="md:hidden py-4 border-t border-gray-100"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            <div className="flex flex-col space-y-4">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ))}
-              <button className="bg-[#00AFE6] text-white px-6 py-2 rounded-full font-medium hover:bg-[#0099CC] transition-colors duration-200 self-start">
-                Get Support
-              </button>
-            </div>
-          </motion.div>
-        )}
+        <motion.div
+          className={`md:hidden overflow-hidden ${isMenuOpen ? 'max-h-96' : 'max-h-0'}`}
+          initial={false}
+          animate={{ 
+            maxHeight: isMenuOpen ? 384 : 0,
+            opacity: isMenuOpen ? 1 : 0
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="py-6 space-y-4 border-t border-zinc-800">
+            {navItems.map((item) => (
+              <motion.a
+                key={item.name}
+                href={item.href}
+                className="block text-white hover:text-[#00AFE6] font-medium transition-colors duration-200 uppercase tracking-wider text-sm"
+                onClick={() => setIsMenuOpen(false)}
+                whileHover={{ x: 10 }}
+              >
+                {item.name}
+              </motion.a>
+            ))}
+            
+            <motion.button
+              className="crawford-btn w-full mt-4"
+              onClick={() => setIsMenuOpen(false)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              JOIN CAS
+            </motion.button>
+          </div>
+        </motion.div>
       </div>
-    </header>
+    </motion.header>
   );
 }

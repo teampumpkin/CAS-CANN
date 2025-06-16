@@ -3,19 +3,19 @@ import { ArrowRight, Settings, Search } from 'lucide-react';
 
 export default function ContactSection() {
   return (
-    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-white via-gray-50/50 to-white overflow-hidden">
+    <section className="relative py-32 lg:py-40 bg-gray-900 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/5 to-[#00AFE6]/5 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="bg-white rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-gray-100/50 overflow-hidden">
+        <div className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left Side - Contact Info */}
             <motion.div
-              className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-12 lg:p-16"
+              className="bg-white/5 backdrop-blur-xl p-12 lg:p-16"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -87,40 +87,40 @@ export default function ContactSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <div className="mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Send us a message</h3>
-                <p className="text-gray-600">We'll get back to you within 24 hours.</p>
+                <h3 className="text-2xl font-bold text-white mb-4">Send us a message</h3>
+                <p className="text-white/70">We'll get back to you within 24 hours.</p>
               </div>
 
               <form className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-gray-700 text-sm font-semibold mb-3">
+                    <label className="block text-white text-sm font-semibold mb-3">
                       Full Name
                     </label>
                     <input
                       type="text"
                       placeholder="Enter your full name"
-                      className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300"
+                      className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-700 text-sm font-semibold mb-3">
+                    <label className="block text-white text-sm font-semibold mb-3">
                       Email Address
                     </label>
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300"
+                      className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 text-sm font-semibold mb-3">
+                  <label className="block text-white text-sm font-semibold mb-3">
                     How can we help?
                   </label>
                   <div className="relative">
-                    <select className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300 appearance-none">
+                    <select className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300 appearance-none">
                       <option value="">Select a topic</option>
                       <option value="patient-support">Patient Support</option>
                       <option value="caregiver-resources">Caregiver Resources</option>
@@ -130,7 +130,7 @@ export default function ContactSection() {
                       <option value="general">General Inquiry</option>
                     </select>
                     <div className="absolute right-6 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                      <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
@@ -138,13 +138,13 @@ export default function ContactSection() {
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 text-sm font-semibold mb-3">
+                  <label className="block text-white text-sm font-semibold mb-3">
                     Your Message
                   </label>
                   <textarea
                     rows={6}
                     placeholder="Please describe how we can help you..."
-                    className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300 resize-none"
+                    className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300 resize-none"
                   ></textarea>
                 </div>
 

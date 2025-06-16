@@ -33,8 +33,8 @@ export default function Header() {
               <span className="text-white font-bold text-lg">C</span>
             </div>
             <div>
-              <div className="font-semibold text-gray-900">Canadian Amyloidosis</div>
-              <div className="text-sm text-gray-600">Society</div>
+              <div className="font-semibold text-white">Canadian Amyloidosis</div>
+              <div className="text-sm text-white/70">Society</div>
             </div>
           </motion.div>
 

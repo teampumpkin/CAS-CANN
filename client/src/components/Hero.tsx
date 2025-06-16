@@ -11,12 +11,20 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Sophisticated background with medical theme */}
+      {/* Sophisticated background with real hospital image */}
       <div className="absolute inset-0">
-        {/* Dynamic gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900"></div>
+        {/* Hospital exterior background image */}
+        <div className="absolute inset-0">
+          <img 
+            src="/attached_assets/DSC_0022_1750068812552.jpg" 
+            alt="Modern healthcare facility exterior" 
+            className="w-full h-full object-cover"
+          />
+          {/* Sophisticated overlay for text readability and brand enhancement */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-blue-900/70 to-gray-900/80"></div>
+        </div>
         
-        {/* Animated background elements */}
+        {/* Animated brand accent elements */}
         <div className="absolute inset-0">
           <motion.div
             className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-3xl"
@@ -34,17 +42,10 @@ export default function Hero() {
             }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-white/5 to-transparent rounded-full blur-3xl"
-            animate={{ 
-              rotate: [0, 360]
-            }}
-            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          />
         </div>
 
-        {/* Medical pattern overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
+        {/* Subtle pattern overlay for texture */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='1'%3E%3Cpath d='M50 15v70M15 50h70' stroke='white' stroke-width='1' fill='none'/%3E%3C/g%3E%3C/svg%3E")`
         }}></div>
       </div>

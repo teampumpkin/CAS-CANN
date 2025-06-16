@@ -94,30 +94,15 @@ export default function WelcomeSection() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <div className="relative">
-              {/* Main visual element */}
-              <div className="relative aspect-[5/4] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl overflow-hidden shadow-2xl">
-                {/* Background pattern */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/20 via-transparent to-[#00DD89]/20"></div>
-                
-                {/* Medical iconography */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative">
-                    {/* Central medical cross */}
-                    <div className="w-24 h-24 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-8">
-                      <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                      </svg>
-                    </div>
-                    
-                    {/* Floating elements */}
-                    <div className="absolute -top-12 -left-16 w-8 h-8 bg-[#00AFE6]/30 rounded-full animate-pulse"></div>
-                    <div className="absolute -top-8 -right-12 w-6 h-6 bg-[#00DD89]/30 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-                    <div className="absolute -bottom-8 -left-8 w-4 h-4 bg-white/20 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
-                  </div>
-                </div>
-
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+              {/* Healthcare professional image */}
+              <div className="relative aspect-[5/4] rounded-3xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/attached_assets/DSC02826_1750068895453.jpg" 
+                  alt="Healthcare professional working at computer workstation" 
+                  className="w-full h-full object-cover"
+                />
+                {/* Subtle overlay to maintain text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
               </div>
 
               {/* Enhanced statistics card */}

@@ -56,11 +56,10 @@ export default function AboutAmyloidosisSection() {
           </motion.div>
 
           <h2 className="crawford-section-title text-white mb-8">
-            Understanding Amyloidosis
+            What is Amyloidosis?
           </h2>
           <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Amyloidosis is a group of rare diseases where abnormal protein deposits (amyloid) build up in organs and tissues, 
-            potentially affecting their structure and function.
+            Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
           </p>
         </motion.div>
 

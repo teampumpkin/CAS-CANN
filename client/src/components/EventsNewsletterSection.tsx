@@ -1,81 +1,113 @@
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin } from 'lucide-react';
+import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 
 export default function EventsNewsletterSection() {
-  const events = [
+  const upcomingEvents = [
     {
-      date: 'Mar 15, 2024',
-      time: '2:00 PM EST',
-      title: 'Amyloidosis Research Symposium',
-      location: 'Virtual Event',
-      description: 'Join leading researchers and clinicians for the latest updates in amyloidosis treatment and diagnosis.'
+      id: 1,
+      date: {
+        day: "15",
+        month: "Mar",
+        year: "2025"
+      },
+      title: "Amyloidosis Research Symposium",
+      location: "Toronto, ON",
+      description: "Join leading researchers and clinicians for the latest advances in amyloidosis research and treatment.",
+      type: "Conference",
+      href: "#event-1"
     },
     {
-      date: 'Apr 22, 2024', 
-      time: '10:00 AM PST',
-      title: 'Patient Support Workshop',
-      location: 'Vancouver, BC',
-      description: 'Interactive workshop for patients and caregivers focusing on managing daily life with amyloidosis.'
+      id: 2,
+      date: {
+        day: "22",
+        month: "Apr",
+        year: "2025"
+      },
+      title: "Patient Support Workshop",
+      location: "Virtual Event",
+      description: "Interactive workshop covering treatment options, support resources, and Q&A with specialists.",
+      type: "Workshop",
+      href: "#event-2"
     }
   ];
 
   return (
-    <section className="crawford-light-section">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0">
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Events Section */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
           >
-            <motion.h2
-              className="text-3xl md:text-4xl font-normal text-gray-900 mb-8 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
+            <motion.div
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.6 }}
             >
-              Upcoming Events
-            </motion.h2>
+              <Calendar className="w-4 h-4 text-[#00AFE6]" />
+              <span className="text-white/90 font-medium tracking-wide">Upcoming Events</span>
+            </motion.div>
 
-            <div className="space-y-6">
-              {events.map((event, index) => (
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
+              Join Our Community Events
+            </h2>
+
+            <div className="space-y-8">
+              {upcomingEvents.map((event, index) => (
                 <motion.div
-                  key={index}
-                  className="crawford-card group cursor-pointer"
-                  initial={{ opacity: 0, y: 40 }}
+                  key={event.id}
+                  className="group bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:bg-white/10"
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.8, delay: index * 0.2 }}
+                  whileHover={{ y: -4 }}
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center flex-shrink-0">
-                      <Calendar className="w-8 h-8 text-white" />
+                  <div className="flex items-start gap-6">
+                    {/* Date */}
+                    <div className="flex-shrink-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl p-4 text-center min-w-[80px]">
+                      <div className="text-white font-bold text-2xl">{event.date.day}</div>
+                      <div className="text-white/90 text-sm font-medium">{event.date.month}</div>
+                      <div className="text-white/80 text-xs">{event.date.year}</div>
                     </div>
-                    
+
+                    {/* Event Details */}
                     <div className="flex-1">
-                      <div className="flex items-center gap-4 mb-2 text-sm text-gray-600">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {event.date}
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="bg-white/10 text-white/80 px-3 py-1 rounded-full text-xs font-medium">
+                          {event.type}
                         </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {event.time}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
+                        <div className="flex items-center gap-1 text-white/60 text-sm">
+                          <MapPin className="w-3 h-3" />
                           {event.location}
-                        </span>
+                        </div>
                       </div>
                       
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-[#00AFE6] transition-colors">
+                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors">
                         {event.title}
                       </h3>
                       
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-white/70 text-sm leading-relaxed mb-4">
                         {event.description}
                       </p>
+
+                      <motion.a
+                        href={event.href}
+                        className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#0088CC] font-semibold text-sm transition-colors"
+                        whileHover={{ x: 5 }}
+                      >
+                        Learn More
+                        <ArrowRight className="w-4 h-4" />
+                      </motion.a>
                     </div>
                   </div>
                 </motion.div>
@@ -85,66 +117,79 @@ export default function EventsNewsletterSection() {
 
           {/* Newsletter Section */}
           <motion.div
+            className="lg:pl-8"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
           >
-            <div className="crawford-card h-full">
-              <motion.h2
-                className="text-3xl md:text-4xl font-normal text-gray-900 mb-6 leading-tight"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
-                Stay Updated
-              </motion.h2>
+            <motion.div
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+              <span className="text-white/90 font-medium tracking-wide">Stay Informed</span>
+            </motion.div>
 
-              <motion.p
-                className="text-gray-600 mb-8 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-              >
-                Get the latest updates on amyloidosis research, events, and resources 
-                delivered directly to your inbox.
-              </motion.p>
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
+              Newsletter Signup
+            </h2>
 
-              <motion.form
-                className="space-y-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.9 }}
+            <p className="text-xl text-white/80 mb-10 leading-relaxed">
+              Get the latest updates on amyloidosis research, events, and resources delivered to your inbox.
+            </p>
+
+            {/* Newsletter Form */}
+            <form className="space-y-6">
+              <div>
+                <label className="block text-white/90 text-sm font-semibold mb-3">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/50 focus:border-[#00AFE6] transition-all duration-300"
+                />
+              </div>
+
+              <div>
+                <label className="block text-white/90 text-sm font-semibold mb-3">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/50 focus:border-[#00AFE6] transition-all duration-300"
+                />
+              </div>
+
+              <motion.button
+                type="submit"
+                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#0088CC] hover:to-[#00BB77] text-white px-10 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    className="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all"
-                  />
+                Subscribe to Newsletter
+              </motion.button>
+            </form>
+
+            {/* Trust indicators */}
+            <div className="mt-8 pt-8 border-t border-white/10">
+              <div className="flex items-center gap-6 text-white/60 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-[#00DD89] rounded-full"></div>
+                  <span>Monthly updates</span>
                 </div>
-                
-                <div>
-                  <input
-                    type="email"
-                    placeholder="Your email address"
-                    className="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all"
-                  />
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-[#00AFE6] rounded-full"></div>
+                  <span>No spam</span>
                 </div>
-
-                <motion.button
-                  type="submit"
-                  className="w-full crawford-btn-primary"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Subscribe to Newsletter
-                </motion.button>
-              </motion.form>
-
-              <div className="mt-6 text-center">
-                <p className="text-xs text-gray-500">
-                  We respect your privacy. Unsubscribe at any time.
-                </p>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                  <span>Unsubscribe anytime</span>
+                </div>
               </div>
             </div>
           </motion.div>

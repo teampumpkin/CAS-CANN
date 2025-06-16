@@ -133,8 +133,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {quickTiles.slice(0, 3).map((tile, index) => (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {quickTiles.map((tile, index) => (
                 <motion.a
                   key={tile.label}
                   href={tile.href}

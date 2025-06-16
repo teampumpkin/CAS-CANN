@@ -78,8 +78,37 @@ export default function ALAmyloidosis() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Hero Section */}
-      <ParallaxBackground className="relative overflow-hidden">
-        <div className="container mx-auto px-6 py-32 relative z-10">
+      <section className="py-32 bg-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent" />
+        
+        {/* Floating accent elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-20"
+              style={{
+                left: `${20 + i * 15}%`,
+                top: `${30 + i * 10}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                x: [0, 10, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.5, 0.2]
+              }}
+              transition={{
+                duration: 4 + i,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.5
+              }}
+            />
+          ))}
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -113,7 +142,7 @@ export default function ALAmyloidosis() {
             </p>
           </motion.div>
         </div>
-      </ParallaxBackground>
+      </section>
 
       {/* Overview Section with Image */}
       <section className="py-24 bg-gray-900 relative">

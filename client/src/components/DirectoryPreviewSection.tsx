@@ -32,11 +32,11 @@ export default function DirectoryPreviewSection() {
   ];
 
   return (
-    <section className="relative py-24 bg-white overflow-hidden">
+    <section className="relative py-24 bg-gray-900 overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-green-400 to-blue-600 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2"></div>
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-[#00AFE6] to-[#0088CC] rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-[#00DD89] to-[#00BB77] rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -49,7 +49,7 @@ export default function DirectoryPreviewSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-blue-50 text-[#0088CC] px-4 py-2 rounded-full text-sm font-medium mb-8 border border-blue-100"
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/20"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -58,13 +58,13 @@ export default function DirectoryPreviewSection() {
             <span>Resource Hub</span>
           </motion.div>
 
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
             What You'll{" "}
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent">
               Find Here
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
             Comprehensive resources and tools to support patients, families, and healthcare professionals across Canada.
           </p>
         </motion.div>

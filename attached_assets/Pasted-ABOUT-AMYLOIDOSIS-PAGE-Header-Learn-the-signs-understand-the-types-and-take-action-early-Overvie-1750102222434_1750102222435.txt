@@ -1,0 +1,31 @@
+ABOUT AMYLOIDOSIS PAGE
+Header Learn the signs, understand the types, and take action early. 
+Overview Amyloidosis is a group of rare diseases caused by abnormal protein buildup (amyloid) in the body. These deposits can damage organs and tissues, leading to serious health complications. Because symptoms often mimic other conditions, diagnosis is frequently delayed. 
+Why It Matters Early diagnosis and treatment can significantly improve quality of life and outcomes. Understanding the signs—and acting on them—is key.
+Amyloidosis Types and Clinical Pathways Each subtype affects different organs and may require distinct treatment approaches. Below are summaries of the most common forms:
+1. AL (Light-Chain) Amyloidosis
+· Signs & Symptoms: Fatigue, swelling (especially legs), numbness, irregular heartbeat, enlarged tongue
+· Diagnosis & Testing: Blood and urine tests (free light chains), biopsy, cardiac imaging, bone marrow biopsy
+· Treatment: Chemotherapy, stem cell transplant, supportive organ care
+ 
+2. ATTR (Transthyretin) Amyloidosis – Hereditary and Wild-Type
+· Signs & Symptoms: Heart failure, peripheral neuropathy, gastrointestinal issues, carpal tunnel syndrome
+· Diagnosis & Testing: Genetic testing (for hereditary), scintigraphy, cardiac MRI, tissue biopsy
+· Treatment: TTR stabilizers (tafamidis), gene silencers, cardiac therapies, supportive care
+3. AA (Secondary) Amyloidosis
+· Signs & Symptoms: Kidney dysfunction, joint pain, fatigue
+· Diagnosis & Testing: SAA blood levels, kidney or fat pad biopsy
+· Treatment: Address underlying inflammatory condition (e.g., RA, infections), anti-inflammatory biologics
+4. Other Types (Localized, Dialysis-Related, Rare Mutations)
+· Treatment varies widely based on type, organ impact, and cause
+Disclaimers & Clinical Oversight This content is for informational purposes only. It is not intended to replace medical advice. All medical decisions should be made in consultation with a qualified healthcare provider. 
+ Visual Prompts for Canva / Magic Media
+1. Infographic showing protein → amyloid → organ damage sequence
+2. Side-by-side symptom icons for AL vs ATTR
+3. Simple visual chart of diagnosis steps (bloodwork → biopsy → imaging)
+4. Callout box: “Early signs of ATTR often missed — learn what to watch for” 
+ CMS/UX Notes for Replit
+· Break each subtype into collapsible or tabbed sections
+· Highlight warning signs using callout or badge components
+· Include CTA to Directory (“Find a Clinic”) and Resources page
+· Ensure persistent disclaimer at bottom of page  

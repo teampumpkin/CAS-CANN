@@ -54,7 +54,7 @@ export default function QuickLinksSection() {
   ];
 
   return (
-    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-50 via-white to-gray-50/50 overflow-hidden">
+    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
       {/* Background decorative elements matching amyloidosis section style */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 rounded-full blur-3xl"></div>
@@ -71,19 +71,19 @@ export default function QuickLinksSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/30 rounded-full px-6 py-3 mb-8"
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-gray-700 font-medium tracking-wide">Quick Access</span>
+            <span className="text-white/90 font-medium tracking-wide">Quick Access</span>
           </motion.div>
 
-          <h2 className="crawford-section-title text-gray-900 mb-8">
+          <h2 className="crawford-section-title text-white mb-8">
             Essential Resources
           </h2>
-          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
             Quick access to the most important tools and information for patients, families, and healthcare professionals.
           </p>
         </motion.div>
@@ -100,21 +100,21 @@ export default function QuickLinksSection() {
               transition={{ duration: 0.6, delay: 0.1 * index }}
               whileHover={{ y: -8, scale: 1.02 }}
             >
-              <div className="group relative bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-white/30 hover:border-white/40 transition-all duration-500 hover:bg-white/70 overflow-hidden shadow-xl">
-                {/* Gradient overlay on hover */}
+              <div className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:bg-white/10 overflow-hidden">
+                {/* Gradient background on hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${link.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
                 
                 {/* Content */}
                 <div className="relative z-10">
                   {/* Icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${link.gradient} rounded-2xl flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`w-16 h-16 bg-gradient-to-br ${link.gradient} rounded-2xl flex items-center justify-center shadow-lg mb-6`}>
                     <link.icon className="w-8 h-8 text-white" />
                   </div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors duration-300 font-cardo">
+                  <h3 className="text-xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors duration-300 font-cardo">
                     {link.title}
                   </h3>
-                  <p className="text-gray-700 leading-relaxed mb-6 group-hover:text-gray-800 transition-colors duration-300">
+                  <p className="text-white/70 leading-relaxed mb-6 group-hover:text-white/80 transition-colors duration-300">
                     {link.description}
                   </p>
                   
@@ -127,6 +127,9 @@ export default function QuickLinksSection() {
                       <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-0.5 transition-transform duration-300" />
                     </div>
                   </div>
+                
+                {/* Hover effect lines */}
+                <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${link.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-3xl`} />
                 </div>
 
                 {/* Hover effect line */}

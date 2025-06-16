@@ -1,99 +1,100 @@
-import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+
+const navigation = [
+  { name: 'About', href: '#about' },
+  { name: 'Resources', href: '#resources' },
+  { name: 'Directory', href: '#directory' },
+  { name: 'Research', href: '#research' },
+  { name: 'Contact', href: '#contact' }
+];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
-    <motion.header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-sm shadow-sm' : 'bg-white/70 backdrop-blur-sm'
-      }`}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
+    <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-gray-100 z-50">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div 
+          <motion.div
             className="flex items-center space-x-3"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center text-white font-medium text-sm">
-              CAS
+            <div className="w-8 h-8 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">CAS</span>
             </div>
-            <span className="text-lg font-medium text-gray-900 hidden sm:block">
-              Canadian Amyloidosis Society
-            </span>
+            <span className="font-medium text-gray-900">Canadian Amyloidosis Society</span>
           </motion.div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium">
-              About
-            </a>
-            <a href="#patients" className="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium">
-              For Patients
-            </a>
-            <a href="#clinicians" className="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium">
-              For Clinicians
-            </a>
-            <a href="#resources" className="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium">
-              Resources
-            </a>
-            <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium">
-              Contact
-            </a>
+            {navigation.map((item, index) => (
+              <motion.a
+                key={item.name}
+                href={item.href}
+                className="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                {item.name}
+              </motion.a>
+            ))}
+            <motion.button
+              className="bg-[#00AFE6] text-white px-6 py-2 rounded-full font-medium hover:bg-[#0099CC] transition-colors duration-200"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Get Support
+            </motion.button>
           </nav>
 
           {/* Mobile menu button */}
           <button
+            className="md:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-gray-600 hover:text-gray-900 p-2"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6 text-gray-700" />
+            ) : (
+              <Menu className="w-6 h-6 text-gray-700" />
+            )}
           </button>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
+        {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <motion.div
-            className="md:hidden bg-white border-t border-gray-100"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            className="md:hidden py-4 border-t border-gray-100"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
           >
-            <div className="px-6 py-4 space-y-2">
-              {['About', 'For Patients', 'For Clinicians', 'Resources', 'Contact'].map((item) => (
+            <div className="flex flex-col space-y-4">
+              {navigation.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
-                  className="block py-3 text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium"
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {item}
+                  {item.name}
                 </a>
               ))}
+              <button className="bg-[#00AFE6] text-white px-6 py-2 rounded-full font-medium hover:bg-[#0099CC] transition-colors duration-200 self-start">
+                Get Support
+              </button>
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
-    </motion.header>
+      </div>
+    </header>
   );
 }

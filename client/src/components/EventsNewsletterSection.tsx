@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, Clock } from 'lucide-react';
 
 const upcomingEvents = [
   {
@@ -8,8 +8,7 @@ const upcomingEvents = [
     date: 'April 15, 2024',
     time: '2:00 PM EST',
     location: 'Virtual Event',
-    description: 'Understanding ATTR Amyloidosis: Diagnosis and Treatment Options',
-    registrationLink: '#register'
+    description: 'Understanding ATTR Amyloidosis: Diagnosis and Treatment Options'
   },
   {
     id: 2,
@@ -17,42 +16,35 @@ const upcomingEvents = [
     date: 'April 28, 2024',
     time: '9:00 AM EST',
     location: 'Toronto, ON',
-    description: 'Early Recognition and Diagnostic Strategies for Amyloidosis',
-    registrationLink: '#register'
+    description: 'Early Recognition and Diagnostic Strategies for Amyloidosis'
   }
 ];
 
 export default function EventsNewsletterSection() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-32 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-20">
           {/* Upcoming Events */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-12">
+            <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-16">
               Upcoming Events
             </h2>
 
-            <div className="space-y-6">
+            <div className="space-y-8">
               {upcomingEvents.map((event, index) => (
                 <motion.div
                   key={event.id}
-                  className="bg-white rounded-2xl p-8 border border-gray-100"
-                  style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)' }}
-                  initial={{ opacity: 0, y: 20 }}
+                  className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  whileHover={{ 
-                    y: -4,
-                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.08)',
-                    transition: { duration: 0.2 }
-                  }}
                 >
                   <h3 className="text-xl font-medium text-gray-900 mb-4">
                     {event.title}
@@ -79,43 +71,22 @@ export default function EventsNewsletterSection() {
                     </div>
                   </div>
 
-                  <motion.a
-                    href={event.registrationLink}
-                    className="inline-flex items-center space-x-2 text-[#00AFE6] font-medium hover:text-[#0099CC] transition-colors duration-200"
-                    whileHover={{ x: 5 }}
-                  >
-                    <span>Register Now</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.a>
+                  <button className="bg-[#00AFE6] text-white px-6 py-2 rounded-full font-medium hover:bg-[#0099CC] transition-colors duration-200">
+                    Register Now
+                  </button>
                 </motion.div>
               ))}
             </div>
-
-            <motion.div 
-              className="mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <a
-                href="#all-events"
-                className="inline-flex items-center space-x-2 text-gray-600 hover:text-[#00AFE6] transition-colors duration-200"
-              >
-                <span>View All Events</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </motion.div>
           </motion.div>
 
           {/* Newsletter Signup */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <div className="bg-white rounded-3xl p-12 border border-gray-100" style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)' }}>
+            <div className="bg-white rounded-3xl p-12 border border-gray-100 shadow-sm">
               <div className="text-center mb-10">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl mx-auto mb-6 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -123,49 +94,30 @@ export default function EventsNewsletterSection() {
                   </svg>
                 </div>
 
-                <h2 className="text-3xl font-light text-gray-900 mb-4">
+                <h2 className="text-3xl font-light text-gray-900 mb-6">
                   Stay Informed
                 </h2>
                 
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Get the latest updates on research, events, and resources delivered to your inbox monthly.
+                  Get the latest updates on research, events, and resources delivered monthly.
                 </p>
               </div>
 
               <form className="space-y-6">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                    First Name
-                  </label>
                   <input
                     type="text"
-                    id="firstName"
+                    placeholder="Your name"
                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all"
-                    placeholder="Enter your first name"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
-                  </label>
                   <input
                     type="email"
-                    id="email"
+                    placeholder="Your email address"
                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all"
-                    placeholder="Enter your email address"
                   />
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <input
-                    type="checkbox"
-                    id="consent"
-                    className="mt-1 w-4 h-4 text-[#00AFE6] border-gray-300 rounded focus:ring-[#00AFE6]"
-                  />
-                  <label htmlFor="consent" className="text-sm text-gray-600 leading-relaxed">
-                    I agree to receive email communications from the Canadian Amyloidosis Society and understand I can unsubscribe at any time.
-                  </label>
                 </div>
 
                 <motion.button

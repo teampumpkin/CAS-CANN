@@ -5,28 +5,28 @@ const actionTiles = [
   {
     id: 'directory',
     title: 'Directory',
-    description: 'Find specialized clinics and healthcare providers',
+    description: 'Find clinics and specialists',
     icon: Search,
     href: '#directory'
   },
   {
     id: 'upload',
     title: 'Upload',
-    description: 'Share resources and clinical materials',
+    description: 'Share resources',
     icon: Upload,
     href: '#upload'
   },
   {
     id: 'learn',
     title: 'Learn',
-    description: 'Access educational materials and research',
+    description: 'Educational materials',
     icon: BookOpen,
     href: '#learn'
   },
   {
     id: 'join',
     title: 'Join',
-    description: 'Connect with our community and mission',
+    description: 'Connect with us',
     icon: Users,
     href: '#join'
   }
@@ -34,29 +34,26 @@ const actionTiles = [
 
 export default function Hero() {
   return (
-    <section className="relative bg-white overflow-hidden">
-      {/* Abstract Background */}
-      <div className="absolute inset-0 opacity-5">
-        <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none">
-          <defs>
-            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#00AFE6" />
-              <stop offset="100%" stopColor="#00DD89" />
-            </linearGradient>
-          </defs>
-          <path d="M200,150 Q300,50 450,120 T750,200 Q900,150 1100,250" stroke="url(#gradient1)" strokeWidth="2" fill="none" opacity="0.3"/>
-          <circle cx="300" cy="200" r="80" fill="url(#gradient1)" opacity="0.2"/>
-          <circle cx="800" cy="300" r="120" fill="url(#gradient1)" opacity="0.15"/>
-          <path d="M100,400 Q400,300 700,450 T1000,500" stroke="url(#gradient1)" strokeWidth="3" fill="none" opacity="0.2"/>
+    <section className="relative min-h-screen bg-white flex items-center pt-16">
+      {/* Subtle abstract background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <svg className="absolute top-20 left-10 w-32 h-32 text-gray-100" fill="currentColor" opacity="0.3">
+          <circle cx="64" cy="64" r="32" />
+        </svg>
+        <svg className="absolute top-40 right-20 w-24 h-24 text-blue-50" fill="currentColor" opacity="0.4">
+          <circle cx="48" cy="48" r="24" />
+        </svg>
+        <svg className="absolute bottom-32 left-1/4 w-20 h-20 text-green-50" fill="currentColor" opacity="0.3">
+          <circle cx="40" cy="40" r="20" />
         </svg>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 pt-32 pb-20">
+      <div className="relative max-w-7xl mx-auto px-6 w-full">
         {/* Hero Content */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-24">
           <motion.h1
-            className="text-5xl lg:text-7xl font-light text-gray-900 mb-8"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-light text-gray-900 mb-8 leading-tight"
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
           >
@@ -64,7 +61,7 @@ export default function Hero() {
           </motion.h1>
           
           <motion.p
-            className="text-xl lg:text-2xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed"
+            className="text-xl md:text-2xl text-gray-600 font-light max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.6, -0.05, 0.01, 0.99] }}
@@ -73,42 +70,36 @@ export default function Hero() {
           </motion.p>
         </div>
 
-        {/* Action Tiles */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {/* Action Tiles - Crawford style cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
           {actionTiles.map((tile, index) => {
             const IconComponent = tile.icon;
             return (
               <motion.a
                 key={tile.id}
                 href={tile.href}
-                className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-gray-200 transition-all duration-300"
-                style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)' }}
-                initial={{ opacity: 0, y: 40 }}
+                className="group bg-white rounded-2xl p-8 border border-gray-100 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
-                  duration: 0.6, 
+                  duration: 0.8, 
                   delay: 0.4 + (index * 0.1),
                   ease: [0.6, -0.05, 0.01, 0.99]
                 }}
-                whileHover={{ 
-                  y: -8,
-                  boxShadow: '0 8px 40px rgba(0, 0, 0, 0.08)',
-                  transition: { duration: 0.2 }
-                }}
               >
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-gray-50 rounded-2xl flex items-center justify-center group-hover:bg-[#00AFE6] transition-all duration-300">
-                    <IconComponent className="w-8 h-8 text-gray-600 group-hover:text-white transition-colors duration-300" />
+                <div className="mb-6">
+                  <div className="w-12 h-12 mx-auto bg-gray-50 rounded-xl flex items-center justify-center group-hover:bg-[#00AFE6] transition-colors duration-300">
+                    <IconComponent className="w-6 h-6 text-gray-600 group-hover:text-white transition-colors duration-300" />
                   </div>
-                  
-                  <h3 className="text-xl font-medium text-gray-900 mb-3 group-hover:text-[#00AFE6] transition-colors duration-300">
-                    {tile.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    {tile.description}
-                  </p>
                 </div>
+                
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  {tile.title}
+                </h3>
+                
+                <p className="text-sm text-gray-600">
+                  {tile.description}
+                </p>
               </motion.a>
             );
           })}

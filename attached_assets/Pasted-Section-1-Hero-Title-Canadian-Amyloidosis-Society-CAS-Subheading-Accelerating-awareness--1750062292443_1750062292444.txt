@@ -1,0 +1,91 @@
+Section 1: Hero
+	•	Title: Canadian Amyloidosis Society (CAS)
+	•	Subheading: Accelerating awareness, diagnosis, and care
+	•	Background: abstract image (protein structure morphing into heart)
+	•	Below: 4 quick tiles (Directory, Upload, Learn, Join)
+	•	Animation: title fades in, tiles slide-up or zoom-in on scroll
+	•	Responsive layout on mobile
+
+⸻
+
+Section 2: Welcome
+	•	Heading: Welcome to the Canadian Amyloidosis Society (CAS)
+	•	Paragraph:
+We are dedicated to transforming amyloidosis care in Canada through patient-centered innovation, collaboration, and advocacy. Our mission is to enhance the quality and timeliness of care for individuals affected by this rare and complex disease. By accelerating access to diagnosis, treatment, and support, we are working to ensure that every person living with amyloidosis receives the care they need—when they need it, wherever they are in Canada.
+	•	Two-column layout with optional image
+	•	Soft fade-in animation
+
+⸻
+
+Section 3: What is Amyloidosis
+	•	Heading: What is Amyloidosis?
+	•	Paragraph:
+Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
+	•	CTA: “Learn More” button linking to About Amyloidosis
+	•	Optional featured card for publications or news
+	•	Hover interaction on cards, scroll fade-in animation
+
+⸻
+
+Section 4: Upcoming Events + Newsletter
+	•	Highlight 1–2 event cards with date, title, and CTA
+	•	Newsletter signup form (name + email)
+	•	If newsletter is removed, keep event section centered
+	•	Smooth animation for form and cards
+	•	Input fields glow on focus, clean validation
+
+⸻
+
+Section 5: What You’ll Find Here
+	•	Mini Canada map or graphic
+	•	List of 4 bullet points with icons or small visuals:
+	•	Searchable clinic directory
+	•	Uploadable clinical resources
+	•	Clear, accessible medical info
+	•	Ways to get involved and support
+	•	Layout: Grid or two-column, responsive
+	•	Animations on scroll and hover
+
+⸻
+
+Section 6: Quick Links Tiles
+	•	4 tiles with icon + heading:
+	•	Find Support in Your Region
+	•	Upload a Clinical Resource
+	•	Join CAS
+	•	Browse the Resources
+	•	Hover: soft scale or glow
+	•	Cards spaced evenly in a responsive grid
+
+⸻
+
+Section 7: Featured Spotlights
+	•	3 rotating or swipeable content blocks:
+	•	“What is ATTR? Learn the signs…”
+	•	“New Upload: B.C. Cardiac Amyloidosis Pathway”
+	•	“Join the Movement: Why clinicians, researchers, and families are uniting.”
+	•	Use a dark background for contrast
+	•	Cards rotate automatically and can be swiped on mobile
+	•	Smooth transitions, light box-shadow
+
+⸻
+
+✨ Global Interactions:
+	•	Hover: lift cards, soft shadows, gentle glow on buttons
+	•	Scroll-triggered animations: fade-in, slide-up, zoom-in
+	•	Accordion-style expansion for FAQs or nested content (if used later)
+	•	Inputs: glow on focus
+	•	Navigation: underline or bold active links on hover
+
+⸻
+
+♿ Accessibility:
+	•	High contrast
+	•	Large, readable font
+	•	Tab/keyboard support
+	•	Alt text on all visuals
+	•	Mobile-first responsiveness
+
+⸻
+
+Let me know if you want the About Page or Directory Page prompts next — or if you’d like this formatted into a Figma-ready layout brief.

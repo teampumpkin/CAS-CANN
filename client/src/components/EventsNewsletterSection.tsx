@@ -36,7 +36,7 @@ export default function EventsNewsletterSection() {
   ];
 
   return (
-    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-white via-blue-50/40 to-indigo-50/30 overflow-hidden">
+    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-50 via-white to-gray-50/50 overflow-hidden">
       {/* Background decorative elements matching amyloidosis section style */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 rounded-full blur-3xl"></div>
@@ -53,7 +53,7 @@ export default function EventsNewsletterSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-gray-200/30 rounded-full px-6 py-3 mb-8"
+            className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-full px-6 py-3 mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -99,7 +99,7 @@ export default function EventsNewsletterSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/20 overflow-hidden">
+            <div className="relative bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-white/30 overflow-hidden shadow-xl">
               {/* Background gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
               
@@ -147,7 +147,7 @@ export default function EventsNewsletterSection() {
               </div>
             </div>
 
-            {/* Quick Stats with glassmorphism */}
+            {/* Quick Stats with simplified glassmorphism */}
             <motion.div
               className="grid grid-cols-3 gap-6"
               initial={{ opacity: 0, y: 20 }}
@@ -155,17 +155,17 @@ export default function EventsNewsletterSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               {[
-                { value: '5K+', label: 'Subscribers', gradient: 'from-[#00AFE6] to-[#0088CC]' },
-                { value: '50+', label: 'Events/Year', gradient: 'from-[#00DD89] to-[#00BB77]' },
-                { value: '13', label: 'Provinces', gradient: 'from-purple-500 to-purple-600' }
+                { value: '5K+', label: 'Subscribers' },
+                { value: '50+', label: 'Events/Year' },
+                { value: '13', label: 'Provinces' }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
-                  className="relative bg-white/20 backdrop-blur-sm rounded-2xl p-6 text-center border border-gray-200/30 hover:bg-white/30 transition-all duration-300"
+                  className="relative bg-white/70 backdrop-blur-sm rounded-2xl p-6 text-center border border-gray-200/40 hover:bg-white/80 transition-all duration-300 shadow-md"
                   whileHover={{ scale: 1.02, y: -4 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className={`text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-2`}>{stat.value}</div>
+                  <div className="text-3xl font-bold text-[#00AFE6] mb-2">{stat.value}</div>
                   <div className="text-gray-700 text-sm font-medium">{stat.label}</div>
                 </motion.div>
               ))}
@@ -183,14 +183,14 @@ export default function EventsNewsletterSection() {
               {events.map((event, index) => (
                 <motion.div
                   key={index}
-                  className="group relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/20 hover:border-gray-200/30 transition-all duration-500 hover:bg-white/20"
+                  className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/30 hover:border-gray-200/50 transition-all duration-500 hover:bg-white/90 shadow-lg"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   whileHover={{ y: -8, scale: 1.02 }}
                 >
-                  {/* Glassmorphism background gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
+                  {/* Subtle background gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/2 via-transparent to-[#00DD89]/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
                   
                   <div className="relative z-10 flex items-start gap-6">
                     <motion.div 

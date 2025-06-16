@@ -215,6 +215,59 @@ export default function Directory() {
         </div>
       </ParallaxBackground>
 
+      {/* CANN Section */}
+      <section className="py-24 bg-gray-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-2xl -translate-y-16 translate-x-16" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center">
+                    <Network className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold font-rosarivo">Canadian Amyloidosis Nursing Network</h2>
+                    <p className="text-white/70">CANN - A CAS Affiliate</p>
+                  </div>
+                </div>
+                
+                <div className="prose prose-invert max-w-none">
+                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                    The field of amyloidosis has experienced tremendous growth in recent years. Within this multidisciplinary community, nurses play a vital role in enhancing the quality, accessibility, and coordination of healthcare services for amyloidosis patients.
+                  </p>
+                  
+                  <p className="text-white/70 leading-relaxed mb-6">
+                    This evolving landscape generates enthusiasm for the development of a national nursing network to unite amyloidosis nurses across the country. The Canadian Amyloidosis Nursing Network (CANN) is proudly developing as an affiliate of the Canadian Amyloidosis Society (CAS).
+                  </p>
+                  
+                  <p className="text-white/70 leading-relaxed mb-8">
+                    This purpose-driven network aims to meet the dynamic educational needs of amyloidosis nurses through professional development, knowledge translation, and best practice sharing and to facilitate collaboration amongst this community of nursing professionals while supporting individuals with amyloidosis.
+                  </p>
+                  
+                  <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-2xl p-6 text-center">
+                    <h3 className="text-xl font-semibold text-white mb-4">Join the Movement</h3>
+                    <p className="text-white/80 mb-6">We invite you to join this exciting movement!</p>
+                    <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2 mx-auto">
+                      Learn About CANN
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Interactive Map Section */}
       <section className="py-24 bg-gray-900 relative">
         <div className="container mx-auto px-6">
@@ -512,58 +565,7 @@ export default function Directory() {
         </div>
       </section>
 
-      {/* CANN Section */}
-      <section className="py-24 pb-32 bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            className="max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-2xl -translate-y-16 translate-x-16" />
-              
-              <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center">
-                    <Network className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <h2 className="text-3xl font-bold font-rosarivo">Canadian Amyloidosis Nursing Network</h2>
-                    <p className="text-white/70">CANN - A CAS Affiliate</p>
-                  </div>
-                </div>
-                
-                <div className="prose prose-invert max-w-none">
-                  <p className="text-lg text-white/80 leading-relaxed mb-6">
-                    The field of amyloidosis has experienced tremendous growth in recent years. Within this multidisciplinary community, nurses play a vital role in enhancing the quality, accessibility, and coordination of healthcare services for amyloidosis patients.
-                  </p>
-                  
-                  <p className="text-white/70 leading-relaxed mb-6">
-                    This evolving landscape generates enthusiasm for the development of a national nursing network to unite amyloidosis nurses across the country. The Canadian Amyloidosis Nursing Network (CANN) is proudly developing as an affiliate of the Canadian Amyloidosis Society (CAS).
-                  </p>
-                  
-                  <p className="text-white/70 leading-relaxed mb-8">
-                    This purpose-driven network aims to meet the dynamic educational needs of amyloidosis nurses through professional development, knowledge translation, and best practice sharing and to facilitate collaboration amongst this community of nursing professionals while supporting individuals with amyloidosis.
-                  </p>
-                  
-                  <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-2xl p-6 text-center">
-                    <h3 className="text-xl font-semibold text-white mb-4">Join the Movement</h3>
-                    <p className="text-white/80 mb-6">We invite you to join this exciting movement!</p>
-                    <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2 mx-auto">
-                      Learn About CANN
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target } from 'lucide-react';
 import ParallaxBackground from '../components/ParallaxBackground';
+import medicalResearchImg from '@assets/DSC02841_1750068895454.jpg';
 
 export default function AboutAmyloidosis() {
   const amyloidosisTypes = [
@@ -197,50 +198,136 @@ export default function AboutAmyloidosis() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            className="max-w-4xl mx-auto text-center mb-16"
+            className="max-w-7xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
-              <Microscope className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Overview</span>
-            </div>
-            
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-8">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Understanding
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Amyloidosis
-              </span>
-            </h2>
-            
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10">
-              <p className="text-lg text-white/80 leading-relaxed mb-8">
-                Amyloidosis is a group of rare diseases caused by abnormal protein buildup (amyloid) in the body. These deposits can damage organs and tissues, leading to serious health complications. Because symptoms often mimic other conditions, diagnosis is frequently delayed.
-              </p>
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Content Column - Left Side */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+                  <Microscope className="w-5 h-5 text-[#00AFE6]" />
+                  <span className="text-sm font-medium text-white/90">Overview</span>
+                </div>
+                
+                <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
+                  <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                    Understanding
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                    Amyloidosis
+                  </span>
+                </h2>
+                
+                <p className="text-lg text-white/70 leading-relaxed mb-8">
+                  Amyloidosis is a group of rare diseases caused by abnormal protein buildup (amyloid) in the body. These deposits can damage organs and tissues, leading to serious health complications. Because symptoms often mimic other conditions, diagnosis is frequently delayed.
+                </p>
+                
+                <div className="space-y-6 mb-8">
+                  {keyPoints.map((point, index) => (
+                    <motion.div
+                      key={point.title}
+                      className="flex items-start gap-4"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0">
+                        <point.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-white mb-2">{point.title}</h3>
+                        <p className="text-white/70">{point.description}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+                
+                <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-2xl p-6">
+                  <h3 className="text-xl font-semibold text-white mb-3">Why It Matters</h3>
+                  <p className="text-white/80">Early diagnosis and treatment can significantly improve quality of life and outcomes. Understanding the signs—and acting on them—is key.</p>
+                </div>
+              </motion.div>
               
-              <div className="grid md:grid-cols-3 gap-6">
-                {keyPoints.map((point, index) => (
+              {/* Image Column - Right Side */}
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
+                  <div className="aspect-[4/5] relative">
+                    <img 
+                      src={medicalResearchImg} 
+                      alt="Medical research and diagnostic equipment for amyloidosis"
+                      className="w-full h-full object-cover"
+                    />
+                    
+                    {/* Stats Overlay */}
+                    <motion.div
+                      className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.5 }}
+                    >
+                      <div className="px-6 py-4">
+                        <div className="grid grid-cols-2 gap-4">
+                          <motion.div
+                            className="text-center"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.6 }}
+                          >
+                            <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                              3,000+
+                            </div>
+                            <div className="text-xs text-white/80">Canadians Affected</div>
+                          </motion.div>
+                          
+                          <motion.div
+                            className="text-center"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.7 }}
+                          >
+                            <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
+                              4
+                            </div>
+                            <div className="text-xs text-white/80">Main Types</div>
+                          </motion.div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                  
+                  {/* Floating accent elements */}
                   <motion.div
-                    key={point.title}
-                    className="bg-white/5 rounded-xl p-6 text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
+                    className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center"
+                    animate={{ 
+                      y: [0, -8, 0],
+                      rotate: [0, 5, 0]
+                    }}
+                    transition={{ 
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
                   >
-                    <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center mx-auto mb-4">
-                      <point.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2">{point.title}</h3>
-                    <p className="text-white/70 text-sm">{point.description}</p>
+                    <Microscope className="w-6 h-6 text-white" />
                   </motion.div>
-                ))}
-              </div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

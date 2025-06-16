@@ -182,9 +182,10 @@ export default function FeaturedSpotlights() {
                         transition={{ duration: 0.6, delay: 0.3 }}
                       >
                         <div className={`w-24 h-24 bg-gradient-to-br ${spotlights[currentIndex].gradient} rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-2xl`}>
-                          {React.createElement(spotlights[currentIndex].icon, { 
-                            className: "w-12 h-12 text-white" 
-                          })}
+                          {(() => {
+                            const Icon = spotlights[currentIndex].icon;
+                            return <Icon className="w-12 h-12 text-white" />;
+                          })()}
                         </div>
                         <p className="text-sm font-medium">Image placeholder</p>
                         <p className="text-xs opacity-70">{spotlights[currentIndex].category}</p>

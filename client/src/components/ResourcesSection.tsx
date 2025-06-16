@@ -30,7 +30,7 @@ const resourceCategories = [
 
 export default function ResourcesSection() {
   return (
-    <section id="resources" className="py-20 bg-white">
+    <section id="resources" className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           className="text-center mb-16"

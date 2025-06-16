@@ -3,26 +3,10 @@ import { motion } from 'framer-motion';
 export default function WelcomeSection() {
   return (
     <section className="relative py-32 lg:py-40 bg-gradient-to-br from-white via-blue-50/30 to-gray-50 overflow-hidden">
-      {/* Enhanced background elements */}
+      {/* Background elements */}
       <div className="absolute inset-0">
-        <motion.div 
-          className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, 20, 0],
-            y: [0, -10, 0],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, -15, 0],
-            y: [0, 15, 0],
-            scale: [1.1, 1, 1.1]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -35,7 +19,7 @@ export default function WelcomeSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-[#0088CC] px-4 py-2 rounded-full text-sm font-medium border border-blue-100 shadow-sm mb-8"
+            className="inline-flex items-center gap-2 bg-blue-50 text-[#0088CC] px-4 py-2 rounded-full text-sm font-medium border border-blue-100 mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -44,7 +28,7 @@ export default function WelcomeSection() {
             <span>Our Mission</span>
           </motion.div>
 
-          <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-8 leading-tight">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
             Welcome to the{" "}
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent">
               Canadian Amyloidosis Society
@@ -99,23 +83,22 @@ export default function WelcomeSection() {
             </div>
           </motion.div>
 
-          {/* Image and Stats Column */}
+          {/* Image and Stats Column - Following Crawford design pattern */}
           <motion.div
             className="lg:col-span-4"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="space-y-8">
-              {/* Medical Image */}
+            <div className="relative">
+              {/* Medical Image with Professional Styling */}
               <motion.div
-                className="relative bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-xl border border-white/50"
+                className="relative bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-100"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                whileHover={{ scale: 1.02 }}
               >
-                <div className="aspect-[4/3] bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+                <div className="aspect-[4/5] bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center relative">
                   <div className="text-center text-gray-500 p-8">
                     <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6] to-[#0088CC] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,154 +108,77 @@ export default function WelcomeSection() {
                     <p className="text-sm font-medium">Medical Research Image</p>
                     <p className="text-xs opacity-70">Healthcare professionals collaboration</p>
                   </div>
-                </div>
-              </motion.div>
 
-              {/* Enhanced Our Impact Stats Card */}
-              <motion.div
-                className="relative bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-xl border border-white/60"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                whileHover={{ y: -4, scale: 1.02 }}
-              >
-                {/* Enhanced Header with gradient */}
-                <div className="bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] p-6 relative overflow-hidden">
+                  {/* Stats Overlay - Crawford Style */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/20 to-white/10"
-                    animate={{ x: ['-100%', '100%'] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  />
-                  <h4 className="relative text-white font-bold text-xl text-center">Our Impact</h4>
+                    className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm text-white p-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  >
+                    <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-4 mb-4 rounded-lg">
+                      <h4 className="text-white font-bold text-lg text-center">Our Impact</h4>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.6 }}
+                      >
+                        <div className="text-2xl font-bold text-white mb-1">15+</div>
+                        <div className="text-xs text-white/80 font-medium">Years Supporting</div>
+                        <div className="w-full h-1 bg-white/20 rounded-full mt-2">
+                          <motion.div 
+                            className="w-4/5 h-full bg-[#00AFE6] rounded-full"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "80%" }}
+                            transition={{ duration: 1, delay: 0.8 }}
+                          />
+                        </div>
+                      </motion.div>
+
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.7 }}
+                      >
+                        <div className="text-2xl font-bold text-white mb-1">1K+</div>
+                        <div className="text-xs text-white/80 font-medium">Patients Helped</div>
+                        <div className="w-full h-1 bg-white/20 rounded-full mt-2">
+                          <motion.div 
+                            className="w-full h-full bg-[#00DD89] rounded-full"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "100%" }}
+                            transition={{ duration: 1, delay: 0.9 }}
+                          />
+                        </div>
+                      </motion.div>
+
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.8 }}
+                      >
+                        <div className="text-2xl font-bold text-white mb-1">100%</div>
+                        <div className="text-xs text-white/80 font-medium">Patient Focused</div>
+                        <div className="w-full h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-2">
+                          <motion.div 
+                            className="w-full h-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "100%" }}
+                            transition={{ duration: 1, delay: 1 }}
+                          />
+                        </div>
+                      </motion.div>
+                    </div>
+                  </motion.div>
                 </div>
-                
-                {/* Enhanced Statistics with modern design */}
-                <div className="p-8">
-                  <div className="grid grid-cols-3 gap-6">
-                    <motion.div 
-                      className="text-center group"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <motion.div 
-                        className="text-3xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent mb-2"
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ duration: 0.6, delay: 0.5, type: "spring", bounce: 0.4 }}
-                      >
-                        15+
-                      </motion.div>
-                      <div className="text-sm text-gray-700 font-semibold mb-2">Years Supporting</div>
-                      <motion.div 
-                        className="w-full h-2 bg-[#00AFE6]/20 rounded-full overflow-hidden"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "100%" }}
-                        transition={{ duration: 1, delay: 0.7 }}
-                      >
-                        <motion.div 
-                          className="h-full bg-gradient-to-r from-[#00AFE6] to-[#0088CC] rounded-full"
-                          initial={{ width: "0%" }}
-                          whileInView={{ width: "80%" }}
-                          transition={{ duration: 1.5, delay: 0.8 }}
-                        />
-                      </motion.div>
-                    </motion.div>
-
-                    <motion.div 
-                      className="text-center group"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <motion.div 
-                        className="text-3xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00BB77] bg-clip-text text-transparent mb-2"
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ duration: 0.6, delay: 0.6, type: "spring", bounce: 0.4 }}
-                      >
-                        1K+
-                      </motion.div>
-                      <div className="text-sm text-gray-700 font-semibold mb-2">Patients Helped</div>
-                      <motion.div 
-                        className="w-full h-2 bg-[#00DD89]/20 rounded-full overflow-hidden"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "100%" }}
-                        transition={{ duration: 1, delay: 0.8 }}
-                      >
-                        <motion.div 
-                          className="h-full bg-gradient-to-r from-[#00DD89] to-[#00BB77] rounded-full"
-                          initial={{ width: "0%" }}
-                          whileInView={{ width: "100%" }}
-                          transition={{ duration: 1.5, delay: 0.9 }}
-                        />
-                      </motion.div>
-                    </motion.div>
-
-                    <motion.div 
-                      className="text-center group"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <motion.div 
-                        className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-purple-700 bg-clip-text text-transparent mb-2"
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ duration: 0.6, delay: 0.7, type: "spring", bounce: 0.4 }}
-                      >
-                        100%
-                      </motion.div>
-                      <div className="text-sm text-gray-700 font-semibold mb-2">Patient Focused</div>
-                      <motion.div 
-                        className="w-full h-2 bg-gradient-to-r from-purple-200 to-purple-300 rounded-full overflow-hidden"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "100%" }}
-                        transition={{ duration: 1, delay: 0.9 }}
-                      >
-                        <motion.div 
-                          className="h-full bg-gradient-to-r from-purple-500 to-purple-700 rounded-full"
-                          initial={{ width: "0%" }}
-                          whileInView={{ width: "100%" }}
-                          transition={{ duration: 1.5, delay: 1 }}
-                        />
-                      </motion.div>
-                    </motion.div>
-                  </div>
-                </div>
-
-                {/* Subtle hover effects */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background: "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)"
-                  }}
-                />
               </motion.div>
 
-              {/* Enhanced Decorative floating elements */}
-              <motion.div 
-                className="absolute -top-4 left-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 shadow-lg"
-                animate={{ 
-                  y: [0, -10, 0],
-                  rotate: [0, 180, 360]
-                }}
-                transition={{ 
-                  duration: 6, 
-                  repeat: Infinity, 
-                  ease: "easeInOut",
-                  delay: 0.5
-                }}
-              />
-              <motion.div 
-                className="absolute top-1/3 -left-6 w-8 h-8 bg-gradient-to-br from-[#00AFE6]/30 to-[#00DD89]/30 rounded-full shadow-lg"
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.6, 1, 0.6]
-                }}
-                transition={{ 
-                  duration: 4, 
-                  repeat: Infinity, 
-                  ease: "easeInOut"
-                }}
-              />
+              {/* Decorative floating elements */}
+              <div className="absolute -top-4 left-4 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute top-1/3 -left-6 w-8 h-8 bg-[#00AFE6]/20 rounded-full animate-pulse"></div>
             </div>
           </motion.div>
         </div>

@@ -11,6 +11,7 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import AboutAmyloidosis from "@/pages/AboutAmyloidosis";
 import Directory from "@/pages/Directory";
+import Resources from "@/pages/Resources";
 import ALAmyloidosis from "@/pages/amyloidosis-types/ALAmyloidosis";
 import ATTRAmyloidosis from "@/pages/amyloidosis-types/ATTRAmyloidosis";
 import AAAmyloidosis from "@/pages/amyloidosis-types/AAAmyloidosis";
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
       <Route path="/directory" component={Directory} />
+      <Route path="/resources" component={Resources} />
       <Route path="/amyloidosis-types/al-light-chain-amyloidosis" component={ALAmyloidosis} />
       <Route path="/amyloidosis-types/attr-transthyretin-amyloidosis" component={ATTRAmyloidosis} />
       <Route path="/amyloidosis-types/aa-inflammatory-amyloidosis" component={AAAmyloidosis} />

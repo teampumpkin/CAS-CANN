@@ -30,19 +30,19 @@ const quickLinks = [
 
 export default function QuickLinksSection() {
   return (
-    <section className="section-spacer bg-[#FAFBFC]">
-      <div className="crawford-section">
+    <section className="py-20 bg-[#f8fafc]">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <h2 className="heading-xl mb-8">
+          <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-6">
             Quick Actions
           </h2>
-          <p className="body-lg max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Get started with the most common tasks and resources for patients, caregivers, and healthcare professionals.
           </p>
         </motion.div>
@@ -53,17 +53,28 @@ export default function QuickLinksSection() {
             return (
               <motion.div
                 key={link.title}
-                className="crawford-card tile-crawford group"
-                initial={{ opacity: 0, y: 40 }}
+                className="group cursor-pointer"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                whileHover={{ y: -6 }}
+                whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="tile-content text-center">
+                <div 
+                  className="bg-white rounded-2xl p-8 text-center transition-all duration-300 border border-gray-100/50"
+                  style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `0 12px 40px ${link.color}20`;
+                    e.currentTarget.style.borderColor = `${link.color}40`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.04)';
+                    e.currentTarget.style.borderColor = 'rgba(229, 231, 235, 0.5)';
+                  }}
+                >
                   <motion.div 
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 mx-auto"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 mx-auto"
                     style={{ backgroundColor: link.color }}
                     whileHover={{ 
                       scale: 1.1,
@@ -71,14 +82,14 @@ export default function QuickLinksSection() {
                       transition: { duration: 0.2 }
                     }}
                   >
-                    <IconComponent className="w-7 h-7 text-white" />
+                    <IconComponent className="w-6 h-6 text-white" />
                   </motion.div>
                   
-                  <h3 className="heading-lg mb-4">
+                  <h3 className="text-xl font-medium text-gray-900 mb-3">
                     {link.title}
                   </h3>
                   
-                  <p className="body-md text-[#6a6a6a]">
+                  <p className="text-gray-600 text-sm leading-relaxed">
                     {link.description}
                   </p>
                 </div>

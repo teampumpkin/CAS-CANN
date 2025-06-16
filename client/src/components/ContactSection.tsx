@@ -66,19 +66,19 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-spacer bg-white">
-      <div className="crawford-section">
+    <section id="contact" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <h2 className="heading-xl mb-8">
+          <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-6">
             Get in Touch
           </h2>
-          <p className="body-lg max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Have questions or need support? We're here to help. Reach out to us through any of the methods below.
           </p>
         </motion.div>
@@ -86,9 +86,9 @@ export default function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true, margin: "-100px" }}
           >
             <div className="space-y-8">
@@ -97,26 +97,25 @@ export default function ContactSection() {
                 return (
                   <motion.div
                     key={info.title}
-                    className="flex items-start space-x-6"
+                    className="flex items-start space-x-4"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className={`w-12 h-12 ${info.bgColor} rounded-2xl flex items-center justify-center flex-shrink-0`}
-                         style={{ boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)' }}>
-                      <IconComponent className="w-6 h-6 text-white" />
+                    <div className={`w-10 h-10 ${info.bgColor} rounded-xl flex items-center justify-center flex-shrink-0`}>
+                      <IconComponent className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="heading-lg mb-3">
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">
                         {info.title}
                       </h3>
                       {info.href ? (
-                        <a href={info.href} className="link-crawford">
+                        <a href={info.href} className="text-[#00AFE6] hover:text-[#0099CC] transition-colors">
                           {info.content}
                         </a>
                       ) : (
-                        <p className="body-lg whitespace-pre-line">
+                        <p className="text-gray-600 whitespace-pre-line leading-relaxed">
                           {info.content}
                         </p>
                       )}
@@ -129,14 +128,14 @@ export default function ContactSection() {
           
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <form onSubmit={handleSubmit} className="crawford-card">
-              <div className="mb-8">
-                <label htmlFor="name" className="block body-lg font-medium text-[#1a1a1a] mb-4">
+            <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8" style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)' }}>
+              <div className="mb-6">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-3">
                   Full Name *
                 </label>
                 <input
@@ -146,13 +145,13 @@ export default function ContactSection() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="input-crawford"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all"
                   placeholder="Enter your full name"
                 />
               </div>
               
-              <div className="mb-8">
-                <label htmlFor="email" className="block body-lg font-medium text-[#1a1a1a] mb-4">
+              <div className="mb-6">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-3">
                   Email Address *
                 </label>
                 <input
@@ -162,13 +161,13 @@ export default function ContactSection() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="input-crawford"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all"
                   placeholder="Enter your email address"
                 />
               </div>
               
-              <div className="mb-8">
-                <label htmlFor="subject" className="block body-lg font-medium text-[#1a1a1a] mb-4">
+              <div className="mb-6">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-3">
                   Subject
                 </label>
                 <select
@@ -176,7 +175,7 @@ export default function ContactSection() {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="input-crawford"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all"
                 >
                   <option value="">Select a subject</option>
                   <option value="support">Patient Support</option>
@@ -186,8 +185,8 @@ export default function ContactSection() {
                 </select>
               </div>
               
-              <div className="mb-10">
-                <label htmlFor="message" className="block body-lg font-medium text-[#1a1a1a] mb-4">
+              <div className="mb-8">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-3">
                   Message *
                 </label>
                 <textarea
@@ -197,7 +196,7 @@ export default function ContactSection() {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="input-crawford resize-none"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all resize-none"
                   placeholder="Enter your message"
                 />
               </div>
@@ -205,7 +204,7 @@ export default function ContactSection() {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-crawford-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-[#00AFE6] text-white px-8 py-3 rounded-xl font-medium hover:bg-[#0099CC] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                 whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >

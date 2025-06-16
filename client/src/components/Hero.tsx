@@ -51,103 +51,92 @@ export default function Hero() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          {/* Decorative badge */}
-          <motion.div
-            className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
-            <span className="text-white/90 font-medium tracking-wide">Transforming Amyloidosis Care in Canada</span>
-          </motion.div>
+      <div className="relative z-10 min-h-screen flex flex-col px-6">
+        {/* Top spacer */}
+        <div className="flex-1 flex items-center justify-center pt-20 pb-32">
+          <div className="max-w-7xl mx-auto text-center">
+            {/* Decorative badge */}
+            <motion.div
+              className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
+              <span className="text-white/90 font-medium tracking-wide">Transforming Amyloidosis Care in Canada</span>
+            </motion.div>
 
-          {/* Main headline */}
-          <motion.h1
-            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-white mb-8 relative leading-none tracking-tight"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            <span className="block">Canadian</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] relative">
-              <motion.span
-                animate={{ 
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{ duration: 4, repeat: Infinity }}
-                style={{
-                  background: "linear-gradient(90deg, #00AFE6, #00DD89, #00AFE6)",
-                  backgroundSize: "200% 100%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent"
-                }}
-              >
-                Amyloidosis
-              </motion.span>
-            </span>
-            <span className="block">Society</span>
-            <motion.div 
-              className="absolute -inset-4 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 blur-3xl opacity-0"
-              animate={{ opacity: [0, 0.3, 0] }}
-              transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-            />
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            className="text-2xl md:text-3xl lg:text-4xl font-light text-white/90 mb-16 max-w-4xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-          >
-            Accelerating awareness, diagnosis, and care
-          </motion.p>
-
-          <motion.div
-            className="text-lg md:text-xl font-light tracking-wide mb-12 opacity-90"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            Canadian Amyloidosis Society | Building a National Healthcare Hub
-          </motion.div>
-
-          {/* Enhanced action buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-20"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            <button className="group relative bg-white text-gray-900 px-8 py-4 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative flex items-center gap-2 group-hover:text-white">
-                Get Started
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+            {/* Main headline */}
+            <motion.h1
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-8 relative leading-tight tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
+              <span className="block">Canadian</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] relative">
+                <motion.span
+                  animate={{ 
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  style={{
+                    background: "linear-gradient(90deg, #00AFE6, #00DD89, #00AFE6)",
+                    backgroundSize: "200% 100%",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent"
+                  }}
+                >
+                  Amyloidosis
+                </motion.span>
               </span>
-            </button>
-            
-            <button className="group bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-semibold text-lg border border-white/30 hover:border-white/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-              <span className="flex items-center gap-2">
-                Learn More
-                <svg className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-              </span>
-            </button>
-          </motion.div>
+              <span className="block">Society</span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6 }}
+            >
+              Accelerating awareness, diagnosis, and care
+            </motion.p>
+
+            {/* Enhanced action buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
+              <button className="group relative bg-white text-gray-900 px-8 py-4 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative flex items-center gap-2 group-hover:text-white">
+                  Get Started
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </button>
+              
+              <button className="group bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-semibold text-lg border border-white/30 hover:border-white/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <span className="flex items-center gap-2">
+                  Learn More
+                  <svg className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                </span>
+              </button>
+            </motion.div>
+          </div>
         </div>
 
         {/* Bottom section with tiles and scroll indicator */}
-        <div className="absolute bottom-0 left-0 right-0 pb-8">
+        <div className="pb-8">
           {/* Quick Action Tiles - Premium Style */}
           <motion.div
-            className="w-full max-w-5xl mx-auto px-6 mb-12"
+            className="w-full max-w-6xl mx-auto px-6 mb-8"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
@@ -164,36 +153,37 @@ export default function Hero() {
                   whileHover={{ y: -8 }}
                 >
                   {/* Glass morphism card */}
-                  <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 group-hover:bg-white/10">
+                  <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-500 group-hover:bg-white/10">
                     {/* Gradient background on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
                     
                     {/* Content */}
                     <div className="relative z-10 text-center">
                       {/* Icon container */}
-                      <div className="relative mx-auto mb-6 w-16 h-16">
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
+                      <div className="relative mx-auto mb-4 w-12 h-12">
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
                         <div className="relative flex items-center justify-center w-full h-full">
-                          <tile.icon className="w-7 h-7 text-white" />
+                          <tile.icon className="w-6 h-6 text-white" />
                         </div>
                       </div>
                       
                       {/* Title */}
-                      <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-white/90 transition-colors duration-300">
+                      <h3 className="text-white font-semibold text-base mb-2 group-hover:text-white/90 transition-colors duration-300">
                         {tile.label}
                       </h3>
                       
                       {/* Subtitle */}
-                      <p className="text-white/70 text-sm font-light leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                      <p className="text-white/70 text-xs font-light leading-relaxed group-hover:text-white/80 transition-colors duration-300">
                         {index === 0 && "Find healthcare providers and support"}
                         {index === 1 && "Share your experience and stories"}
                         {index === 2 && "Access educational resources"}
+                        {index === 3 && "Connect with our community"}
                       </p>
                     </div>
 
                     {/* Hover effect lines */}
-                    <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                    <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-2xl" />
                   </div>
                 </motion.a>
               ))}

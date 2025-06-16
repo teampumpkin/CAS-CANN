@@ -103,20 +103,24 @@ export default function Header() {
                   {/* Dropdown Menu */}
                   {item.hasDropdown && activeDropdown === item.name && (
                     <motion.div
-                      className="absolute top-full left-0 mt-2 w-56 bg-gray-800/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl py-2 z-50"
+                      className="absolute top-full left-0 pt-2 w-56 z-50"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.2 }}
+                      onMouseEnter={() => setActiveDropdown(item.name)}
+                      onMouseLeave={() => setActiveDropdown(null)}
                     >
-                      {item.dropdownItems?.map((dropdownItem) => (
-                        <a
-                          key={dropdownItem.name}
-                          href={dropdownItem.href}
-                          className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 text-sm"
-                        >
-                          {dropdownItem.name}
-                        </a>
-                      ))}
+                      <div className="bg-gray-800/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl py-2">
+                        {item.dropdownItems?.map((dropdownItem) => (
+                          <a
+                            key={dropdownItem.name}
+                            href={dropdownItem.href}
+                            className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 text-sm"
+                          >
+                            {dropdownItem.name}
+                          </a>
+                        ))}
+                      </div>
                     </motion.div>
                   )}
                 </div>

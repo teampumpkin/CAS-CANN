@@ -150,48 +150,78 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.4 + index * 0.2 }}
-                  whileHover={{ y: -8 }}
+                  whileHover={{ y: -12, scale: 1.05 }}
                 >
-                  {/* Glass morphism card */}
-                  <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 transition-all duration-500 group-hover:bg-white/8 group-hover:border-white/30 overflow-hidden">
-                    {/* Animated gradient border on hover */}
-                    <div className="absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-r from-[#00AFE6]/0 via-[#00DD89]/0 to-[#00AFE6]/0 group-hover:from-[#00AFE6]/50 group-hover:via-[#00DD89]/50 group-hover:to-[#00AFE6]/50 transition-all duration-500">
-                      <div className="w-full h-full bg-white/5 rounded-2xl" />
+                  {/* Enhanced Glass morphism card */}
+                  <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 backdrop-blur-2xl rounded-3xl p-6 border border-white/20 transition-all duration-700 group-hover:bg-gradient-to-br group-hover:from-white/15 group-hover:via-white/8 group-hover:to-white/3 group-hover:border-white/40 group-hover:shadow-2xl group-hover:shadow-[#00AFE6]/20 overflow-hidden">
+                    
+                    {/* Dynamic Mesh Background */}
+                    <div className="absolute inset-0 opacity-20">
+                      <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-transparent rounded-full blur-xl" />
+                      <div className="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-tl from-[#00DD89]/20 to-transparent rounded-full blur-lg" />
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-md" />
                     </div>
                     
-                    {/* Subtle shimmer effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                    {/* Animated border gradient */}
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/0 via-[#00DD89]/0 to-[#00AFE6]/0 group-hover:from-[#00AFE6]/60 group-hover:via-[#00DD89]/60 group-hover:to-[#00AFE6]/60 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 blur-sm" />
+                    
+                    {/* Enhanced shimmer effect */}
+                    <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out opacity-0 group-hover:opacity-100" />
+                    </div>
+                    
+                    {/* Floating particles effect */}
+                    <div className="absolute inset-0">
+                      <div className="absolute top-4 right-4 w-1 h-1 bg-[#00AFE6] rounded-full opacity-0 group-hover:opacity-60 transition-all duration-500 group-hover:animate-pulse" />
+                      <div className="absolute top-8 right-8 w-0.5 h-0.5 bg-[#00DD89] rounded-full opacity-0 group-hover:opacity-40 transition-all duration-700 group-hover:animate-pulse" style={{ animationDelay: '0.2s' }} />
+                      <div className="absolute bottom-6 left-4 w-1 h-1 bg-white/60 rounded-full opacity-0 group-hover:opacity-30 transition-all duration-600 group-hover:animate-pulse" style={{ animationDelay: '0.4s' }} />
+                    </div>
                     
                     {/* Content */}
                     <div className="relative z-10 text-center">
-                      {/* Icon container with pulse effect */}
-                      <div className="relative mx-auto mb-4 w-12 h-12 group-hover:scale-110 transition-transform duration-300">
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl blur-lg opacity-30 group-hover:opacity-60 transition-opacity duration-300" />
-                        {/* Pulse ring effect */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl opacity-0 group-hover:opacity-30 group-hover:scale-125 transition-all duration-500" />
+                      {/* Enhanced icon container */}
+                      <div className="relative mx-auto mb-4 w-14 h-14 group-hover:scale-125 group-hover:-rotate-6 transition-all duration-500">
+                        {/* Main icon background */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300" />
+                        {/* Glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl blur-lg opacity-40 group-hover:opacity-80 transition-opacity duration-500" />
+                        {/* Pulse rings */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl opacity-0 group-hover:opacity-20 group-hover:scale-150 transition-all duration-700" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl opacity-0 group-hover:opacity-10 group-hover:scale-200 transition-all duration-1000" />
+                        {/* Icon */}
                         <div className="relative flex items-center justify-center w-full h-full">
-                          <tile.icon className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
+                          <tile.icon className="w-7 h-7 text-white group-hover:scale-110 transition-transform duration-300" />
                         </div>
                       </div>
                       
-                      {/* Title with enhanced hover effect */}
-                      <h3 className="text-white font-semibold text-base mb-2 group-hover:text-white transition-colors duration-300 group-hover:scale-105 transform">
+                      {/* Enhanced title */}
+                      <h3 className="text-white font-bold text-sm mb-2 group-hover:text-white/95 transition-all duration-300 group-hover:scale-105 transform font-cardo">
                         {tile.label}
                       </h3>
                       
-                      {/* Subtitle with fade-in effect */}
-                      <p className="text-white/70 text-xs font-light leading-relaxed group-hover:text-white/90 transition-all duration-300">
+                      {/* Enhanced subtitle */}
+                      <p className="text-white/60 text-xs font-light leading-relaxed group-hover:text-white/80 transition-all duration-300 transform group-hover:translate-y-0.5">
                         {index === 0 && "Find healthcare providers and support"}
                         {index === 1 && "Share your experience and stories"}
                         {index === 2 && "Access educational resources"}
                         {index === 3 && "Connect with our community"}
                       </p>
+                      
+                      {/* Progress indicator */}
+                      <div className="mt-4 h-0.5 bg-white/10 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="h-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full transform -translate-x-full group-hover:translate-x-0 transition-transform duration-1000 ease-out" />
+                      </div>
                     </div>
 
-                    {/* Corner accent dots */}
-                    <div className="absolute top-2 right-2 w-1 h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
-                    <div className="absolute bottom-2 left-2 w-1 h-1 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
+                    {/* Enhanced corner accents */}
+                    <div className="absolute top-3 right-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="w-1 h-1 bg-[#00AFE6] rounded-full animate-pulse" />
+                      <div className="w-0.5 h-0.5 bg-[#00DD89] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+                    </div>
+                    <div className="absolute bottom-3 left-3 w-2 h-2 border border-white/30 rounded-full opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
+                    
+                    {/* Subtle gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/0 via-transparent to-[#00DD89]/0 group-hover:from-[#00AFE6]/5 group-hover:to-[#00DD89]/5 transition-all duration-700 rounded-3xl" />
                   </div>
                 </motion.a>
               ))}

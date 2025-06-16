@@ -153,28 +153,35 @@ export default function Hero() {
                   whileHover={{ y: -8 }}
                 >
                   {/* Glass morphism card */}
-                  <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-500 group-hover:bg-white/10">
-                    {/* Gradient background on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                  <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 transition-all duration-500 group-hover:bg-white/8 group-hover:border-white/30 overflow-hidden">
+                    {/* Animated gradient border on hover */}
+                    <div className="absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-r from-[#00AFE6]/0 via-[#00DD89]/0 to-[#00AFE6]/0 group-hover:from-[#00AFE6]/50 group-hover:via-[#00DD89]/50 group-hover:to-[#00AFE6]/50 transition-all duration-500">
+                      <div className="w-full h-full bg-white/5 rounded-2xl" />
+                    </div>
+                    
+                    {/* Subtle shimmer effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
                     
                     {/* Content */}
                     <div className="relative z-10 text-center">
-                      {/* Icon container */}
-                      <div className="relative mx-auto mb-4 w-12 h-12">
+                      {/* Icon container with pulse effect */}
+                      <div className="relative mx-auto mb-4 w-12 h-12 group-hover:scale-110 transition-transform duration-300">
                         <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl blur-lg opacity-30 group-hover:opacity-60 transition-opacity duration-300" />
+                        {/* Pulse ring effect */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl opacity-0 group-hover:opacity-30 group-hover:scale-125 transition-all duration-500" />
                         <div className="relative flex items-center justify-center w-full h-full">
-                          <tile.icon className="w-6 h-6 text-white" />
+                          <tile.icon className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
                         </div>
                       </div>
                       
-                      {/* Title */}
-                      <h3 className="text-white font-semibold text-base mb-2 group-hover:text-white/90 transition-colors duration-300">
+                      {/* Title with enhanced hover effect */}
+                      <h3 className="text-white font-semibold text-base mb-2 group-hover:text-white transition-colors duration-300 group-hover:scale-105 transform">
                         {tile.label}
                       </h3>
                       
-                      {/* Subtitle */}
-                      <p className="text-white/70 text-xs font-light leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                      {/* Subtitle with fade-in effect */}
+                      <p className="text-white/70 text-xs font-light leading-relaxed group-hover:text-white/90 transition-all duration-300">
                         {index === 0 && "Find healthcare providers and support"}
                         {index === 1 && "Share your experience and stories"}
                         {index === 2 && "Access educational resources"}
@@ -182,8 +189,9 @@ export default function Hero() {
                       </p>
                     </div>
 
-                    {/* Hover effect lines */}
-                    <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-2xl" />
+                    {/* Corner accent dots */}
+                    <div className="absolute top-2 right-2 w-1 h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
+                    <div className="absolute bottom-2 left-2 w-1 h-1 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
                   </div>
                 </motion.a>
               ))}

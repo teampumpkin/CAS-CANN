@@ -1,9 +1,10 @@
 import Hero from '@/components/Hero';
 import WelcomeSection from '@/components/WelcomeSection';
 import AmyloidosisSection from '@/components/AmyloidosisSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import ServicesSection from '@/components/ServicesSection';
-import ContactSection from '@/components/ContactSection';
+import EventsNewsletterSection from '@/components/EventsNewsletterSection';
+import DirectoryPreviewSection from '@/components/DirectoryPreviewSection';
+import QuickLinksSection from '@/components/QuickLinksSection';
+import FeaturedSpotlights from '@/components/FeaturedSpotlights';
 
 export default function Home() {
   return (
@@ -11,9 +12,10 @@ export default function Home() {
       <Hero />
       <WelcomeSection />
       <AmyloidosisSection />
-      <TestimonialsSection />
-      <ServicesSection />
-      <ContactSection />
+      <EventsNewsletterSection />
+      <DirectoryPreviewSection />
+      <QuickLinksSection />
+      <FeaturedSpotlights />
     </main>
   );
 }

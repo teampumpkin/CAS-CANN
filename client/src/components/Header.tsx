@@ -73,7 +73,7 @@ export default function Header() {
               <Heart className="w-5 h-5 text-white" />
             </div>
             <div className="hidden sm:block">
-              <div className="text-lg font-bold text-white font-cardo">CAS</div>
+              <div className="text-lg font-bold text-white font-ovo">CAS</div>
               <div className="text-xs text-white/70 -mt-1">Canadian Amyloidosis Society</div>
             </div>
           </motion.div>

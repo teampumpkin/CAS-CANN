@@ -6,9 +6,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'cardo': ['Cardo', 'serif'],
-        'sora': ['Sora', 'sans-serif'],
-        'sans': ['Sora', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        'ovo': ['Ovo', 'serif'],
+        'mulish': ['Mulish', 'sans-serif'],
+        'sans': ['Mulish', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        'serif': ['Ovo', 'serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -195,7 +195,7 @@ export default function Hero() {
                       </div>
                       
                       {/* Enhanced title */}
-                      <h3 className="text-white font-bold text-sm mb-2 group-hover:text-white/95 transition-all duration-300 group-hover:scale-105 transform font-cardo">
+                      <h3 className="text-white font-bold text-sm mb-2 group-hover:text-white/95 transition-all duration-300 group-hover:scale-105 transform font-ovo">
                         {tile.label}
                       </h3>
                       

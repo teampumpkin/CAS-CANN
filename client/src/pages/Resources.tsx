@@ -266,41 +266,78 @@ export default function Resources() {
       {/* Search and Filters */}
       <section className="py-12 bg-gray-900 border-b border-white/10">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            {/* Search Bar */}
-            <div className="relative mb-6">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 w-5 h-5" />
-              <Input
-                type="text"
-                placeholder="Search resources by title..."
-                value={filters.search}
-                onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-                className="pl-12 h-14 bg-white/5 border-white/20 text-white placeholder-white/40 text-lg"
-              />
-            </div>
+          <div className="max-w-6xl mx-auto">
+            {/* Search and Filter Controls */}
+            <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 mb-8">
+              {/* Search Bar */}
+              <div className="relative mb-6">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 w-5 h-5" />
+                <Input
+                  type="text"
+                  placeholder="Search resources by title..."
+                  value={filters.search}
+                  onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
+                  className="pl-12 h-14 bg-white/10 border-white/20 text-white placeholder-white/40 text-lg rounded-xl"
+                />
+              </div>
 
-            {/* Filter Toggle */}
-            <div className="flex items-center justify-between mb-6">
+              {/* Filter Toggle and Quick Filters */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
+                    <CollapsibleTrigger asChild>
+                      <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 bg-white/5">
+                        <Filter className="w-4 h-4 mr-2" />
+                        Advanced Filters
+                        {activeFiltersCount > 0 && (
+                          <Badge variant="secondary" className="ml-2 bg-[#00AFE6] text-white">
+                            {activeFiltersCount}
+                          </Badge>
+                        )}
+                        <ChevronDown className={`w-4 h-4 ml-2 transition-transform duration-200 ${isFiltersOpen ? 'rotate-180' : ''}`} />
+                      </Button>
+                    </CollapsibleTrigger>
+                  </Collapsible>
+
+                  {activeFiltersCount > 0 && (
+                    <Button variant="ghost" onClick={clearFilters} className="text-white/70 hover:text-white hover:bg-white/10">
+                      <X className="w-4 h-4 mr-2" />
+                      Clear All
+                    </Button>
+                  )}
+                </div>
+
+                {/* Quick Filter Buttons */}
+                <div className="flex flex-wrap gap-2">
+                  {['AL', 'ATTR', 'AA', 'ALect2'].map((type) => (
+                    <Button
+                      key={type}
+                      variant={filters.amyloidosisType === type ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setFilters(prev => ({ 
+                        ...prev, 
+                        amyloidosisType: prev.amyloidosisType === type ? 'all' : type 
+                      }))}
+                      className={
+                        filters.amyloidosisType === type 
+                          ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0" 
+                          : "border-white/20 text-white/70 hover:text-white hover:bg-white/10"
+                      }
+                    >
+                      {type}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Advanced Filters */}
               <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
-                <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                    <Filter className="w-4 h-4 mr-2" />
-                    Filters
-                    {activeFiltersCount > 0 && (
-                      <Badge variant="secondary" className="ml-2 bg-[#00AFE6] text-white">
-                        {activeFiltersCount}
-                      </Badge>
-                    )}
-                    <ChevronDown className="w-4 h-4 ml-2" />
-                  </Button>
-                </CollapsibleTrigger>
-                
                 <CollapsibleContent className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6 bg-white/5 rounded-xl border border-white/10">
                     <div>
                       <label className="block text-sm font-medium text-white/70 mb-2">Amyloidosis Type</label>
                       <Select value={filters.amyloidosisType} onValueChange={(value) => setFilters(prev => ({ ...prev, amyloidosisType: value }))}>
-                        <SelectTrigger className="bg-white/5 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -314,7 +351,7 @@ export default function Resources() {
                     <div>
                       <label className="block text-sm font-medium text-white/70 mb-2">Resource Type</label>
                       <Select value={filters.resourceType} onValueChange={(value) => setFilters(prev => ({ ...prev, resourceType: value }))}>
-                        <SelectTrigger className="bg-white/5 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -328,7 +365,7 @@ export default function Resources() {
                     <div>
                       <label className="block text-sm font-medium text-white/70 mb-2">Category</label>
                       <Select value={filters.category} onValueChange={(value) => setFilters(prev => ({ ...prev, category: value }))}>
-                        <SelectTrigger className="bg-white/5 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -342,7 +379,7 @@ export default function Resources() {
                     <div>
                       <label className="block text-sm font-medium text-white/70 mb-2">Audience</label>
                       <Select value={filters.audience} onValueChange={(value) => setFilters(prev => ({ ...prev, audience: value }))}>
-                        <SelectTrigger className="bg-white/5 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -356,7 +393,7 @@ export default function Resources() {
                     <div>
                       <label className="block text-sm font-medium text-white/70 mb-2">Language</label>
                       <Select value={filters.language} onValueChange={(value) => setFilters(prev => ({ ...prev, language: value }))}>
-                        <SelectTrigger className="bg-white/5 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -370,7 +407,7 @@ export default function Resources() {
                     <div>
                       <label className="block text-sm font-medium text-white/70 mb-2">Region</label>
                       <Select value={filters.region} onValueChange={(value) => setFilters(prev => ({ ...prev, region: value }))}>
-                        <SelectTrigger className="bg-white/5 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -381,15 +418,6 @@ export default function Resources() {
                       </Select>
                     </div>
                   </div>
-                  
-                  {activeFiltersCount > 0 && (
-                    <div className="mt-4 flex justify-end">
-                      <Button variant="ghost" onClick={clearFilters} className="text-white/70 hover:text-white hover:bg-white/10">
-                        <X className="w-4 h-4 mr-2" />
-                        Clear All Filters
-                      </Button>
-                    </div>
-                  )}
                 </CollapsibleContent>
               </Collapsible>
             </div>

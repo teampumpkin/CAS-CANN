@@ -98,46 +98,77 @@ export default function QuickLinksSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 * index }}
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -12, scale: 1.03 }}
             >
-              <div className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-500 hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20 overflow-hidden">
-                {/* Animated glow effect */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out skew-x-12" />
-                </div>
-
-                {/* Gradient background on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${link.gradient} opacity-0 group-hover:opacity-8 transition-opacity duration-500 rounded-3xl`} />
-                
-                {/* Content */}
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${link.gradient} rounded-2xl flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                    <link.icon className="w-8 h-8 text-white" />
+              <div className="group relative h-full overflow-hidden">
+                {/* Main Card Container */}
+                <div className="relative h-full bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-2xl rounded-3xl border border-white/20 group-hover:border-white/40 transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-[#00AFE6]/25 overflow-hidden">
+                  
+                  {/* Dynamic Background Pattern */}
+                  <div className="absolute inset-0 opacity-30">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent rounded-full blur-xl" />
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/5 to-transparent rounded-full blur-lg" />
                   </div>
                   
-                  <h3 className="text-xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors duration-300 font-cardo">
-                    {link.title}
-                  </h3>
-                  <p className="text-white/70 leading-relaxed mb-6 group-hover:text-white/80 transition-colors duration-300">
-                    {link.description}
-                  </p>
+                  {/* Animated Border Glow */}
+                  <div className={`absolute -inset-0.5 bg-gradient-to-r ${link.gradient} rounded-3xl opacity-0 group-hover:opacity-50 transition-opacity duration-700 blur-sm`} />
                   
-                  {/* Arrow */}
-                  <div className="flex items-center justify-between">
-                    <div className={`text-transparent bg-clip-text bg-gradient-to-r ${link.gradient} text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
-                      Learn More
+                  {/* Floating Icon Background */}
+                  <div className="absolute top-6 right-6 w-20 h-20 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+                    <link.icon className="w-full h-full text-white" />
+                  </div>
+
+                  {/* Content Container */}
+                  <div className="relative z-10 p-8 h-full flex flex-col">
+                    
+                    {/* Header Section */}
+                    <div className="flex items-start justify-between mb-6">
+                      {/* Main Icon */}
+                      <div className={`relative w-14 h-14 bg-gradient-to-br ${link.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500`}>
+                        <link.icon className="w-7 h-7 text-white" />
+                        {/* Inner glow */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${link.gradient} rounded-2xl opacity-0 group-hover:opacity-60 blur-md transition-opacity duration-500`} />
+                      </div>
+                      
+                      {/* Status Indicator */}
+                      <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                        <span className="text-xs text-white/60 font-medium">Available</span>
+                      </div>
                     </div>
-                    <div className={`w-10 h-10 bg-gradient-to-br ${link.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110`}>
-                      <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-0.5 transition-transform duration-300" />
+                    
+                    {/* Text Content */}
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white/95 transition-colors duration-300 font-cardo">
+                        {link.title}
+                      </h3>
+                      <p className="text-white/60 leading-relaxed text-sm group-hover:text-white/75 transition-colors duration-300">
+                        {link.description}
+                      </p>
+                    </div>
+                    
+                    {/* Action Footer */}
+                    <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                      {/* Action Text */}
+                      <div className={`text-transparent bg-clip-text bg-gradient-to-r ${link.gradient} font-semibold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0`}>
+                        Access Now
+                      </div>
+                      
+                      {/* Action Button */}
+                      <div className={`w-10 h-10 bg-gradient-to-br ${link.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-12`}>
+                        <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform duration-300" />
+                      </div>
                     </div>
                   </div>
+                  
+                  {/* Animated Mesh Gradient Overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${link.gradient} opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700 rounded-3xl`} />
+                  
+                  {/* Enhanced Shimmer Effect */}
+                  <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1200 ease-out skew-x-12 opacity-0 group-hover:opacity-100" />
+                  </div>
                 </div>
-
-
               </div>
             </motion.a>
           ))}

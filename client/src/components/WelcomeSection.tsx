@@ -3,11 +3,11 @@ import medicalProfessionalImg from '@assets/DSC02826_1750092328495.jpg';
 
 export default function WelcomeSection() {
   return (
-    <section className="relative py-20 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 overflow-hidden">
+    <section className="relative py-20 lg:py-32 bg-gray-900 overflow-hidden">
       {/* Premium background elements */}
       <div className="absolute inset-0">
         <motion.div 
-          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.5, 0.3]
@@ -15,7 +15,7 @@ export default function WelcomeSection() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-purple-400/6 to-blue-400/6 rounded-full blur-3xl"
+          className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-purple-400/8 to-blue-400/8 rounded-full blur-3xl"
           animate={{ 
             scale: [1.1, 1, 1.1],
             opacity: [0.4, 0.6, 0.4]
@@ -36,7 +36,7 @@ export default function WelcomeSection() {
           >
             {/* Premium tag */}
             <motion.div
-              className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-[#0088CC] px-4 py-2 rounded-full text-sm font-semibold border border-blue-100/50 shadow-sm mb-8"
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold border border-white/20 mb-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -47,7 +47,7 @@ export default function WelcomeSection() {
 
             {/* Premium heading with gradient accent */}
             <motion.h2 
-              className="text-4xl lg:text-6xl font-bold text-gray-900 mb-10 leading-tight font-cardo"
+              className="text-4xl lg:text-6xl font-bold text-white mb-10 leading-tight font-cardo"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -61,16 +61,16 @@ export default function WelcomeSection() {
 
             {/* Premium description with enhanced styling */}
             <motion.div 
-              className="space-y-8 text-gray-700 text-xl leading-relaxed"
+              className="space-y-8 text-white/80 text-xl leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <p className="text-gray-600 font-light">
+              <p className="text-white/70 font-light">
                 We are dedicated to transforming amyloidosis care in Canada through patient-centered innovation, collaboration, and advocacy. Our mission is to enhance the quality and timeliness of care for individuals affected by this rare and complex disease.
               </p>
               
-              <p className="text-gray-600 font-light">
+              <p className="text-white/70 font-light">
                 By accelerating access to diagnosis, treatment, and support, we are working to ensure that every person living with amyloidosis receives the care they need—when they need it, wherever they are in Canada.
               </p>
             </motion.div>
@@ -103,7 +103,7 @@ export default function WelcomeSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gray-100/50">
+            <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
               <div className="aspect-[4/5] relative">
                 <img 
                   src={medicalProfessionalImg} 

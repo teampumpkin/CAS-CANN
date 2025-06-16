@@ -29,90 +29,137 @@ export default function AboutAmyloidosisSection() {
   ];
 
   return (
-    <section className="relative py-32 lg:py-40 gradient-bg-light overflow-hidden">
-      {/* Floating background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-blue-500/6 to-purple-500/6 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-green-500/6 to-cyan-500/6 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
-        <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/4 to-pink-500/4 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
+    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0">
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
         <motion.div 
           className="text-center mb-20"
-          initial={{ opacity: 0, y: 60 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
+          {/* Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 glass-card rounded-full px-6 py-3 mb-8"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-gray-700 font-medium tracking-wide">Medical Information</span>
+            <span className="text-white/90 font-medium tracking-wide">Medical Information</span>
           </motion.div>
 
-          <motion.h2 
-            className="crawford-section-title text-gray-900 mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            About Amyloidosis
-          </motion.h2>
-
-          <motion.p 
-            className="text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto crawford-body-text"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            Amyloidosis is a rare disease caused by deposits of abnormal proteins called amyloids in organs and tissues. 
-            Early diagnosis and proper treatment are crucial for patient outcomes.
-          </motion.p>
+          <h2 className="crawford-section-title text-white mb-8">
+            What is Amyloidosis?
+          </h2>
+          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
+            Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
+          </p>
         </motion.div>
 
-        {/* Types Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {amyloidosisTypes.map((type, index) => (
             <motion.div
               key={type.name}
-              className="glass-card rounded-3xl p-8 hover-lift group"
-              initial={{ opacity: 0, y: 60 }}
+              className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:bg-white/10"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.8, delay: index * 0.15 }}
               viewport={{ once: true, margin: "-50px" }}
+              whileHover={{ y: -8 }}
             >
-              <div className="relative">
-                {/* Gradient accent */}
-                <div className={`w-full h-1 bg-gradient-to-r ${type.gradient} rounded-full mb-6`}></div>
-                
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{type.name}</h3>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium text-white bg-gradient-to-r ${type.gradient}`}>
-                    {type.prevalence}
-                  </span>
+              {/* Gradient background on hover */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${type.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
+              
+              {/* Content */}
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className={`w-12 h-12 bg-gradient-to-br ${type.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}>
+                  <div className="w-6 h-6 bg-white rounded-full"></div>
                 </div>
                 
-                <p className="text-gray-700 leading-relaxed mb-6">{type.description}</p>
-                
-                <motion.a
-                  href="#learn-more"
-                  className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#0088CC] font-semibold text-sm transition-colors"
-                  whileHover={{ x: 4 }}
-                >
-                  Learn More
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </motion.a>
+                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors duration-300">
+                  {type.name}
+                </h3>
+                <p className="text-white/70 text-sm mb-6 leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                  {type.description}
+                </p>
+                <div className={`text-transparent bg-clip-text bg-gradient-to-r ${type.gradient} text-sm font-bold`}>
+                  {type.prevalence}
+                </div>
               </div>
+
+              {/* Hover effect lines */}
+              <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${type.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-3xl`} />
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-12 lg:p-16 border border-white/10 overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
+          
+          <div className="relative grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h3 className="crawford-section-title text-white mb-8 text-left">
+                Early Detection Saves Lives
+              </h3>
+              <div className="space-y-6 mb-10">
+                <p className="text-xl text-white/80 leading-relaxed">
+                  Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. 
+                  Early recognition and proper testing are crucial for better patient outcomes.
+                </p>
+                <p className="text-lg text-white/70 leading-relaxed">
+                  Our directory connects patients with specialized centers and healthcare providers experienced 
+                  in diagnosing and treating amyloidosis across Canada.
+                </p>
+              </div>
+              <motion.a
+                href="#about-amyloidosis"
+                className="group relative bg-gradient-to-r from-[#00DD89] to-[#00BB77] text-white px-10 py-4 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 inline-flex items-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span className="relative">Learn More</span>
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </motion.a>
+            </div>
+            <div className="space-y-8">
+              <motion.div 
+                className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#0088CC] mb-3">2-3 years</div>
+                <div className="text-white font-bold text-lg mb-2">Average time to diagnosis</div>
+                <div className="text-white/70">Many patients see multiple doctors before receiving proper diagnosis</div>
+              </motion.div>
+              <motion.div 
+                className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00DD89] to-[#00BB77] mb-3">3,000+</div>
+                <div className="text-white font-bold text-lg mb-2">Canadians affected</div>
+                <div className="text-white/70">Estimated number of people living with amyloidosis in Canada</div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

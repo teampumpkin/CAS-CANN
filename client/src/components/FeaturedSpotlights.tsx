@@ -1,61 +1,73 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Heart, Upload, Users, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Heart, Users, BookOpen, Lightbulb } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function FeaturedSpotlights() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const spotlights = [
     {
-      id: 1,
+      category: 'Patient Story',
       icon: Heart,
-      category: "Medical Education",
-      title: "What is ATTR? Learn the signs...",
-      description: "Understand the symptoms, diagnosis, and treatment options for ATTR amyloidosis. Early recognition can dramatically improve patient outcomes.",
-      imageUrl: "/images/medical-research.jpg",
-      href: "#attr-guide",
-      gradient: "from-[#00AFE6] to-[#0088CC]"
+      title: 'Sarah\'s Journey with AL Amyloidosis',
+      description: 'From diagnosis to treatment, Sarah shares her experience navigating amyloidosis care in Canada and finding hope through our community.',
+      image: '/images/patient-story-1.jpg',
+      readTime: '5 min read',
+      gradient: 'from-pink-500 to-rose-600',
+      bgGradient: 'from-pink-50 to-rose-50'
     },
     {
-      id: 2,
-      icon: Upload,
-      category: "New Resource",
-      title: "New Upload: B.C. Cardiac Amyloidosis Pathway",
-      description: "Access the latest clinical pathway developed by British Columbia's cardiac amyloidosis experts to standardize care across the province.",
-      imageUrl: "/images/medical-pathway.jpg",
-      href: "#bc-pathway",
-      gradient: "from-[#00DD89] to-[#00BB77]"
+      category: 'Research Update',
+      icon: Lightbulb,
+      title: 'Breakthrough in Early Detection Methods',
+      description: 'Canadian researchers develop new biomarker testing that could revolutionize early amyloidosis diagnosis and improve patient outcomes.',
+      image: '/images/research-update-1.jpg',
+      readTime: '7 min read',
+      gradient: 'from-blue-500 to-indigo-600',
+      bgGradient: 'from-blue-50 to-indigo-50'
     },
     {
-      id: 3,
+      category: 'Community',
       icon: Users,
-      category: "Community",
-      title: "Join the Movement: Why clinicians, researchers, and families are uniting",
-      description: "Discover how our collaborative approach is transforming amyloidosis care across Canada through shared knowledge and resources.",
-      imageUrl: "/images/community-collaboration.jpg",
-      href: "#join-movement",
-      gradient: "from-purple-500 to-purple-700"
+      title: 'National Support Network Expansion',
+      description: 'Our support group network now spans all provinces, connecting over 500 patients and families across Canada.',
+      image: '/images/community-1.jpg',
+      readTime: '4 min read',
+      gradient: 'from-green-500 to-emerald-600',
+      bgGradient: 'from-green-50 to-emerald-50'
+    },
+    {
+      category: 'Education',
+      icon: BookOpen,
+      title: 'New Healthcare Provider Resources',
+      description: 'Comprehensive diagnostic guidelines and treatment protocols now available to support healthcare professionals across Canada.',
+      image: '/images/education-1.jpg',
+      readTime: '6 min read',
+      gradient: 'from-purple-500 to-violet-600',
+      bgGradient: 'from-purple-50 to-violet-50'
     }
   ];
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % spotlights.length);
+    setCurrentIndex((prev) => (prev + 1) % spotlights.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + spotlights.length) % spotlights.length);
+    setCurrentIndex((prev) => (prev - 1 + spotlights.length) % spotlights.length);
   };
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
-      {/* Background decorative elements */}
+    <section className="relative py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 overflow-hidden">
+      {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -65,7 +77,7 @@ export default function FeaturedSpotlights() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
             className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
@@ -74,137 +86,151 @@ export default function FeaturedSpotlights() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-white/90 font-medium tracking-wide">Featured Content</span>
+            <span className="text-white/90 font-medium tracking-wide">Featured Stories</span>
           </motion.div>
 
-          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
-            Spotlight Stories
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
+            Community{" "}
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+              Spotlights
+            </span>
           </h2>
-          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Discover the latest resources, research insights, and community stories that are shaping amyloidosis care in Canada.
+          <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            Inspiring stories, breakthrough research, and community updates from across our amyloidosis network.
           </p>
         </motion.div>
 
-        {/* Main Carousel */}
+        {/* Carousel */}
         <div className="relative">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5 }}
-            >
-              {/* Content Side */}
-              <div className="order-2 lg:order-1">
-                <motion.div
-                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  {(() => {
-                    const IconComponent = spotlights[currentIndex].icon;
-                    return <IconComponent className="w-4 h-4 text-white" />;
-                  })()}
-                  <span className="text-white/90 text-sm font-medium">
-                    {spotlights[currentIndex].category}
-                  </span>
-                </motion.div>
-
-                <motion.h3
-                  className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  {spotlights[currentIndex].title}
-                </motion.h3>
-
-                <motion.p
-                  className="text-xl text-white/80 mb-10 leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  {spotlights[currentIndex].description}
-                </motion.p>
-
-                <motion.a
-                  href={spotlights[currentIndex].href}
-                  className={`group inline-flex items-center gap-3 bg-gradient-to-r ${spotlights[currentIndex].gradient} text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span>Learn More</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </motion.a>
-              </div>
-
-              {/* Image Side */}
+          <div className="overflow-hidden rounded-3xl">
+            <AnimatePresence mode="wait">
               <motion.div
-                className="order-1 lg:order-2 relative"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                key={currentIndex}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
               >
-                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
-                  <img 
-                    src={spotlights[currentIndex].imageUrl}
-                    alt={spotlights[currentIndex].title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                <div className="grid lg:grid-cols-12 gap-0 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden">
+                  {/* Content Side */}
+                  <div className="lg:col-span-7 p-12 lg:p-16 flex items-center">
+                    <div className="w-full">
+                      <motion.div
+                        className="flex items-center gap-3 mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                      >
+                        <div className={`w-12 h-12 bg-gradient-to-br ${spotlights[currentIndex].gradient} rounded-2xl flex items-center justify-center shadow-lg`}>
+                          {(() => {
+                            const Icon = spotlights[currentIndex].icon;
+                            return <Icon className="w-6 h-6 text-white" />;
+                          })()}
+                        </div>
+                        <div>
+                          <span className="text-white/70 text-sm font-medium uppercase tracking-wide">
+                            {spotlights[currentIndex].category}
+                          </span>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="w-1 h-1 bg-white/40 rounded-full"></div>
+                            <span className="text-white/60 text-sm">{spotlights[currentIndex].readTime}</span>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      <motion.h3
+                        className="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                      >
+                        {spotlights[currentIndex].title}
+                      </motion.h3>
+
+                      <motion.p
+                        className="text-xl text-white/80 leading-relaxed mb-8"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                      >
+                        {spotlights[currentIndex].description}
+                      </motion.p>
+
+                      <motion.button
+                        className="group inline-flex items-center gap-3 bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-semibold border border-white/20 hover:bg-white/30 transition-all duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span>Read Full Story</span>
+                        <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </motion.button>
+                    </div>
+                  </div>
+
+                  {/* Visual Side */}
+                  <div className="lg:col-span-5 relative">
+                    <div className={`h-full min-h-[400px] lg:min-h-[500px] bg-gradient-to-br ${spotlights[currentIndex].bgGradient} flex items-center justify-center`}>
+                      <motion.div
+                        className="text-center text-gray-500"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                      >
+                        <div className={`w-24 h-24 bg-gradient-to-br ${spotlights[currentIndex].gradient} rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-2xl`}>
+                          {React.createElement(spotlights[currentIndex].icon, { 
+                            className: "w-12 h-12 text-white" 
+                          })}
+                        </div>
+                        <p className="text-sm font-medium">Image placeholder</p>
+                        <p className="text-xs opacity-70">{spotlights[currentIndex].category}</p>
+                      </motion.div>
+                    </div>
+                  </div>
                 </div>
-                
-                {/* Floating gradient accent */}
-                <div className={`absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br ${spotlights[currentIndex].gradient} rounded-full blur-2xl opacity-60`}></div>
               </motion.div>
-            </motion.div>
-          </AnimatePresence>
+            </AnimatePresence>
+          </div>
 
           {/* Navigation Controls */}
-          <div className="flex items-center justify-between mt-16">
-            {/* Previous/Next Buttons */}
-            <div className="flex gap-4">
-              <motion.button
+          <div className="flex items-center justify-between mt-8">
+            <div className="flex items-center gap-4">
+              <button
                 onClick={prevSlide}
-                className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
               >
                 <ChevronLeft className="w-5 h-5" />
-              </motion.button>
-              
-              <motion.button
+              </button>
+              <button
                 onClick={nextSlide}
-                className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
               >
                 <ChevronRight className="w-5 h-5" />
-              </motion.button>
+              </button>
             </div>
 
-            {/* Slide Indicators */}
-            <div className="flex gap-3">
+            {/* Dots Indicator */}
+            <div className="flex items-center gap-2">
               {spotlights.map((_, index) => (
-                <motion.button
+                <button
                   key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     index === currentIndex 
-                      ? 'bg-white' 
-                      : 'bg-white/30 hover:bg-white/50'
+                      ? 'bg-white w-8' 
+                      : 'bg-white/40 hover:bg-white/60'
                   }`}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
                 />
               ))}
+            </div>
+
+            {/* Counter */}
+            <div className="text-white/60 text-sm font-medium">
+              {String(currentIndex + 1).padStart(2, '0')} / {String(spotlights.length).padStart(2, '0')}
             </div>
           </div>
         </div>

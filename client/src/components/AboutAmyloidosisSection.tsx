@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Heart, Activity, Users } from 'lucide-react';
 
 export default function AboutAmyloidosisSection() {
   const amyloidosisTypes = [

@@ -52,7 +52,7 @@ export default function DirectoryPreviewSection() {
             <span>Comprehensive Resources</span>
           </div>
 
-          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-ovo">
+          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-rosarivo">
             Healthcare{" "}
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
               Directory

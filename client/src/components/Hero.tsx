@@ -68,7 +68,7 @@ export default function Hero() {
 
             {/* Main headline */}
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-8 relative leading-tight tracking-tight font-ovo"
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-8 relative leading-tight tracking-tight font-rosarivo"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -195,7 +195,7 @@ export default function Hero() {
                       </div>
                       
                       {/* Enhanced title */}
-                      <h3 className="text-white font-bold text-sm mb-2 group-hover:text-white/95 transition-all duration-300 group-hover:scale-105 transform font-ovo">
+                      <h3 className="text-white font-bold text-sm mb-2 group-hover:text-white/95 transition-all duration-300 group-hover:scale-105 transform font-rosarivo">
                         {tile.label}
                       </h3>
                       

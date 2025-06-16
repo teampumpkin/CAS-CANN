@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ovo&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rosarivo:ital@0;1&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -77,14 +77,14 @@
   /* Crawford-style typography with better scaling */
   .crawford-hero-title {
     @apply text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tight text-gray-900;
-    font-family: 'Ovo', serif;
-    font-weight: 700;
+    font-family: 'Rosarivo', serif;
+    font-weight: 400;
   }
   
   .crawford-section-title {
     @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[0.95] tracking-tight;
-    font-family: 'Ovo', serif;
-    font-weight: 700;
+    font-family: 'Rosarivo', serif;
+    font-weight: 400;
   }
   
   .crawford-subtitle {

@@ -6,10 +6,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'ovo': ['Ovo', 'serif'],
+        'rosarivo': ['Rosarivo', 'serif'],
         'mulish': ['Mulish', 'sans-serif'],
         'sans': ['Mulish', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
-        'serif': ['Ovo', 'serif'],
+        'serif': ['Rosarivo', 'serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

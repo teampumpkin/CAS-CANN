@@ -139,7 +139,7 @@ export default function QuickLinksSection() {
                     
                     {/* Text Content */}
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white/95 transition-colors duration-300 font-ovo">
+                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white/95 transition-colors duration-300 font-rosarivo">
                         {link.title}
                       </h3>
                       <p className="text-white/60 leading-relaxed text-sm group-hover:text-white/75 transition-colors duration-300">

@@ -31,18 +31,35 @@ const resourceCategories = [
 export default function ResourcesSection() {
   return (
     <section id="resources" className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0">
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-6">
+          {/* Badge */}
+          <motion.div
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+            <span className="text-white/90 font-medium tracking-wide">Educational Resources</span>
+          </motion.div>
+
+          <h2 className="crawford-section-title text-white mb-8">
             Resources & Information
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
             Access comprehensive resources, clinical guidelines, research publications, and educational materials 
             to support patients, families, and healthcare professionals.
           </p>
@@ -54,53 +71,54 @@ export default function ResourcesSection() {
             return (
               <motion.div
                 key={category.title}
-                className="bg-white rounded-2xl p-8 border border-gray-100"
-                style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)' }}
+                className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:bg-white/10"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.8, delay: index * 0.15 }}
                 viewport={{ once: true, margin: "-50px" }}
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -8 }}
               >
-                <div className="flex items-start space-x-4 mb-8">
-                  <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center"
-                    style={{ backgroundColor: category.color }}
-                  >
-                    <IconComponent className="w-6 h-6 text-white" />
+                {/* Gradient background on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${index === 0 ? 'from-[#00AFE6]/5 to-[#0088CC]/5' : 'from-[#00DD89]/5 to-[#00BB77]/5'} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl`} />
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex items-start space-x-4 mb-8">
+                    <div className={`w-12 h-12 bg-gradient-to-br ${index === 0 ? 'from-[#00AFE6] to-[#0088CC]' : 'from-[#00DD89] to-[#00BB77]'} rounded-2xl flex items-center justify-center shadow-lg`}>
+                      <IconComponent className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors duration-300 font-cardo">
+                        {category.title}
+                      </h3>
+                      <p className="text-white/70 leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                        {category.description}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-medium text-gray-900 mb-3">
-                      {category.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {category.description}
-                    </p>
-                  </div>
-                </div>
 
-                <div className="space-y-3">
-                  {category.resources.map((resource, resourceIndex) => (
-                    <motion.div
-                      key={resource.name}
-                      className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-200 cursor-pointer group/item"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: (index * 0.1) + (resourceIndex * 0.05) }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      whileHover={{ x: 5 }}
-                    >
-                      <div className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-[#00AFE6] rounded-full"></div>
-                        <div>
-                          <div className="font-medium text-gray-900">
-                            {resource.name}
-                          </div>
-                          <div className="text-sm text-gray-600">
-                            {resource.type} • {resource.size}
+                  <div className="space-y-4">
+                    {category.resources.map((resource, resourceIndex) => (
+                      <motion.div
+                        key={resource.name}
+                        className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm rounded-2xl hover:bg-white/20 transition-colors duration-200 cursor-pointer group/item border border-white/20"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: (index * 0.1) + (resourceIndex * 0.05) }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        whileHover={{ x: 5 }}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-2 h-2 bg-gradient-to-r ${index === 0 ? 'from-[#00AFE6] to-[#0088CC]' : 'from-[#00DD89] to-[#00BB77]'} rounded-full`}></div>
+                          <div>
+                            <div className="font-medium text-white">
+                              {resource.name}
+                            </div>
+                            <div className="text-sm text-white/70">
+                              {resource.type} • {resource.size}
+                            </div>
                           </div>
                         </div>
-                      </div>
                       <div className="opacity-0 group-hover/item:opacity-100 transition-opacity duration-200">
                         {resource.size === 'Web' ? (
                           <ExternalLink className="w-4 h-4 text-[#00AFE6]" />
@@ -109,16 +127,17 @@ export default function ResourcesSection() {
                         )}
                       </div>
                     </motion.div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
 
-                <motion.button
-                  className="w-full mt-6 bg-gray-100 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-200 transition-colors duration-200"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  View All {category.title}
-                </motion.button>
+                  <motion.button
+                    className="w-full mt-6 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-xl font-medium hover:bg-white/20 transition-colors duration-200"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    View All {category.title}
+                  </motion.button>
+                </div>
               </motion.div>
             );
           })}

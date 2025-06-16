@@ -54,11 +54,11 @@ export default function QuickLinksSection() {
   ];
 
   return (
-    <section className="relative py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/4 left-0 w-72 h-72 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full blur-3xl transform -translate-x-1/2"></div>
-        <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-gradient-to-br from-green-400 to-blue-500 rounded-full blur-3xl transform translate-x-1/2"></div>
+    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-white via-blue-50/40 to-indigo-50/30 overflow-hidden">
+      {/* Background decorative elements matching amyloidosis section style */}
+      <div className="absolute inset-0">
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/8 to-[#00AFE6]/8 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">

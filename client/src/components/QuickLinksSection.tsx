@@ -71,7 +71,7 @@ export default function QuickLinksSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-full px-6 py-3 mb-8"
+            className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/30 rounded-full px-6 py-3 mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -100,9 +100,9 @@ export default function QuickLinksSection() {
               transition={{ duration: 0.6, delay: 0.1 * index }}
               whileHover={{ y: -8, scale: 1.02 }}
             >
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/30 hover:border-gray-200/50 transition-all duration-500 hover:bg-white/90 overflow-hidden shadow-lg">
-                {/* Subtle gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/2 via-transparent to-[#00DD89]/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+              <div className="group relative bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-white/30 hover:border-white/40 transition-all duration-500 hover:bg-white/70 overflow-hidden shadow-xl">
+                {/* Gradient overlay on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${link.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
                 
                 {/* Content */}
                 <div className="relative z-10">

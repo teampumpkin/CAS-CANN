@@ -147,7 +147,7 @@ export default function EventsNewsletterSection() {
               </div>
             </div>
 
-            {/* Quick Stats with simplified glassmorphism */}
+            {/* Quick Stats with proper glassmorphism */}
             <motion.div
               className="grid grid-cols-3 gap-6"
               initial={{ opacity: 0, y: 20 }}
@@ -161,7 +161,7 @@ export default function EventsNewsletterSection() {
               ].map((stat, index) => (
                 <motion.div
                   key={index}
-                  className="relative bg-white/70 backdrop-blur-sm rounded-2xl p-6 text-center border border-gray-200/40 hover:bg-white/80 transition-all duration-300 shadow-md"
+                  className="relative bg-white/60 backdrop-blur-xl rounded-2xl p-6 text-center border border-white/30 hover:bg-white/70 transition-all duration-300 shadow-xl"
                   whileHover={{ scale: 1.02, y: -4 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -183,14 +183,14 @@ export default function EventsNewsletterSection() {
               {events.map((event, index) => (
                 <motion.div
                   key={index}
-                  className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/30 hover:border-gray-200/50 transition-all duration-500 hover:bg-white/90 shadow-lg"
+                  className="group relative bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-white/30 hover:border-white/40 transition-all duration-500 hover:bg-white/70 shadow-xl"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   whileHover={{ y: -8, scale: 1.02 }}
                 >
-                  {/* Subtle background gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/2 via-transparent to-[#00DD89]/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+                  {/* Gradient background on hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
                   
                   <div className="relative z-10 flex items-start gap-6">
                     <motion.div 

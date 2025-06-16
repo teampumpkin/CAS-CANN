@@ -1,98 +1,111 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Youtube } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const footerLinks = [
+  const footerSections = [
     {
-      title: 'Organization',
+      title: 'ORGANIZATION',
       links: [
-        { name: 'About CAS', href: '#about' },
-        { name: 'Our Mission', href: '#mission' },
-        { name: 'Leadership', href: '#leadership' },
-        { name: 'Annual Reports', href: '#reports' }
+        { name: 'ABOUT CAS', href: '#about' },
+        { name: 'OUR MISSION', href: '#mission' },
+        { name: 'LEADERSHIP', href: '#leadership' },
+        { name: 'ANNUAL REPORTS', href: '#reports' }
       ]
     },
     {
-      title: 'Resources',
+      title: 'RESOURCES',
       links: [
-        { name: 'Patient Support', href: '#support' },
-        { name: 'Clinical Guidelines', href: '#guidelines' },
-        { name: 'Research', href: '#research' },
-        { name: 'Support Groups', href: '#groups' }
+        { name: 'PATIENT SUPPORT', href: '#support' },
+        { name: 'CLINICAL GUIDELINES', href: '#guidelines' },
+        { name: 'RESEARCH', href: '#research' },
+        { name: 'SUPPORT GROUPS', href: '#groups' }
       ]
     },
     {
-      title: 'Get Involved',
+      title: 'GET INVOLVED',
       links: [
-        { name: 'Volunteer', href: '#volunteer' },
-        { name: 'Donate', href: '#donate' },
-        { name: 'Events', href: '#events' },
-        { name: 'Newsletter', href: '#newsletter' }
+        { name: 'VOLUNTEER', href: '#volunteer' },
+        { name: 'DONATE', href: '#donate' },
+        { name: 'EVENTS', href: '#events' },
+        { name: 'NEWSLETTER', href: '#newsletter' }
       ]
     }
   ];
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-zinc-950 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto px-6 py-20">
         {/* Main Footer Content */}
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 mb-16">
-          {/* About Section */}
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-16 mb-20">
+          {/* Brand Section */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-100px" }}
           >
             <div className="flex items-center space-x-3 mb-8">
-              <div className="w-8 h-8 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">CAS</span>
+              <div className="w-12 h-12 crawford-gradient rounded-lg flex items-center justify-center">
+                <span className="text-black font-black text-xl">CAS</span>
               </div>
-              <span className="font-medium text-white">Canadian Amyloidosis Society</span>
+              <div>
+                <div className="font-bold text-xl">CANADIAN</div>
+                <div className="font-bold text-xl">AMYLOIDOSIS</div>
+                <div className="font-bold text-xl">SOCIETY</div>
+              </div>
             </div>
             
-            <p className="text-gray-400 mb-8 leading-relaxed">
+            <p className="text-gray-400 mb-10 leading-relaxed uppercase tracking-wider text-sm">
               Dedicated to supporting patients, families, and healthcare professionals affected by amyloidosis.
             </p>
             
             {/* Contact Info */}
             <div className="space-y-4">
               <div className="flex items-center space-x-3 text-gray-400">
-                <Mail className="w-4 h-4 text-[#00AFE6]" />
-                <span className="text-sm">info@amyloidosis.ca</span>
+                <svg className="w-4 h-4 text-[#00AFE6]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span className="text-sm uppercase tracking-wider">INFO@AMYLOIDOSIS.CA</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-400">
-                <Phone className="w-4 h-4 text-[#00AFE6]" />
-                <span className="text-sm">1-800-AMYLOID</span>
+                <svg className="w-4 h-4 text-[#00AFE6]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span className="text-sm uppercase tracking-wider">1-800-AMYLOID</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-400">
-                <MapPin className="w-4 h-4 text-[#00AFE6]" />
-                <span className="text-sm">Toronto, Ontario</span>
+                <svg className="w-4 h-4 text-[#00AFE6]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span className="text-sm uppercase tracking-wider">TORONTO, ONTARIO</span>
               </div>
             </div>
           </motion.div>
 
           {/* Footer Links */}
-          {footerLinks.map((section, index) => (
+          {footerSections.map((section, index) => (
             <motion.div
               key={section.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              <h3 className="text-lg font-medium text-white mb-6">{section.title}</h3>
-              <ul className="space-y-3">
+              <h3 className="text-xl font-bold text-white mb-8 uppercase tracking-wider">
+                {section.title}
+              </h3>
+              <ul className="space-y-4">
                 {section.links.map((link) => (
                   <li key={link.name}>
-                    <a
+                    <motion.a
                       href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-200"
+                      className="text-gray-400 hover:text-[#00AFE6] transition-colors duration-200 uppercase tracking-wider text-sm font-medium"
+                      whileHover={{ x: 5 }}
                     >
                       {link.name}
-                    </a>
+                    </motion.a>
                   </li>
                 ))}
               </ul>
@@ -102,54 +115,56 @@ export default function Footer() {
 
         {/* Newsletter & Social */}
         <motion.div
-          className="border-t border-gray-800 pt-12 mb-8"
+          className="border-t border-zinc-800 pt-16 mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-8 lg:space-y-0">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Newsletter */}
-            <div className="flex-1 max-w-md">
-              <h4 className="text-lg font-medium text-white mb-4">Stay Updated</h4>
-              <p className="text-gray-400 mb-6">
+            <div>
+              <h4 className="text-3xl font-bold text-white mb-6 uppercase tracking-wider">
+                STAY <span className="crawford-gradient bg-clip-text text-transparent">UPDATED</span>
+              </h4>
+              <p className="text-gray-400 mb-8 uppercase tracking-wider text-sm">
                 Get the latest news and resources from CAS.
               </p>
-              <div className="flex space-x-3">
+              <div className="flex space-x-4">
                 <input
                   type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent transition-all"
+                  placeholder="ENTER YOUR EMAIL"
+                  className="flex-1 px-6 py-4 bg-zinc-900 border border-zinc-700 text-white placeholder-gray-500 uppercase tracking-wider text-sm focus:outline-none focus:border-[#00AFE6] transition-colors"
                 />
                 <motion.button
-                  className="px-6 py-3 bg-[#00AFE6] text-white rounded-xl font-medium hover:bg-[#0099CC] transition-colors duration-200"
+                  className="crawford-btn"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Subscribe
+                  SUBSCRIBE
                 </motion.button>
               </div>
             </div>
 
             {/* Social Media */}
-            <div className="flex items-center space-x-6">
-              <span className="text-gray-400">Follow us:</span>
-              <div className="flex space-x-3">
+            <div className="text-center lg:text-right">
+              <div className="text-gray-400 uppercase tracking-wider text-sm mb-6">FOLLOW US:</div>
+              <div className="flex justify-center lg:justify-end space-x-4">
                 {[
-                  { icon: Facebook, href: '#', label: 'Facebook' },
-                  { icon: Twitter, href: '#', label: 'Twitter' },
-                  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                  { icon: Youtube, href: '#', label: 'YouTube' }
+                  { name: 'FACEBOOK', href: '#' },
+                  { name: 'TWITTER', href: '#' },
+                  { name: 'LINKEDIN', href: '#' },
+                  { name: 'YOUTUBE', href: '#' }
                 ].map((social) => (
                   <motion.a
-                    key={social.label}
+                    key={social.name}
                     href={social.href}
-                    className="w-10 h-10 bg-gray-800 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-200"
-                    whileHover={{ scale: 1.1 }}
+                    className="w-12 h-12 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-[#00AFE6] flex items-center justify-center text-gray-400 hover:text-[#00AFE6] transition-all duration-200 uppercase tracking-wider text-xs font-bold"
+                    whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.9 }}
-                    aria-label={social.label}
+                    aria-label={social.name}
                   >
-                    <social.icon className="w-5 h-5" />
+                    <span>{social.name[0]}</span>
                   </motion.a>
                 ))}
               </div>
@@ -159,26 +174,27 @@ export default function Footer() {
 
         {/* Bottom Footer */}
         <motion.div
-          className="border-t border-gray-800 pt-8"
+          className="border-t border-zinc-800 pt-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm">
-            <div className="text-gray-400">
-              <p>&copy; {currentYear} Canadian Amyloidosis Society. All rights reserved.</p>
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+            <div className="text-gray-500 uppercase tracking-wider text-sm">
+              © {currentYear} CANADIAN AMYLOIDOSIS SOCIETY. ALL RIGHTS RESERVED.
             </div>
-            <div className="flex space-x-6">
-              <a href="#privacy" className="text-gray-400 hover:text-white transition-colors duration-200">
-                Privacy Policy
-              </a>
-              <a href="#terms" className="text-gray-400 hover:text-white transition-colors duration-200">
-                Terms of Service
-              </a>
-              <a href="#accessibility" className="text-gray-400 hover:text-white transition-colors duration-200">
-                Accessibility
-              </a>
+            <div className="flex space-x-8">
+              {['PRIVACY POLICY', 'TERMS OF SERVICE', 'ACCESSIBILITY'].map((link) => (
+                <motion.a
+                  key={link}
+                  href="#"
+                  className="text-gray-500 hover:text-[#00AFE6] transition-colors duration-200 uppercase tracking-wider text-sm"
+                  whileHover={{ y: -2 }}
+                >
+                  {link}
+                </motion.a>
+              ))}
             </div>
           </div>
         </motion.div>

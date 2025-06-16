@@ -312,7 +312,6 @@ export default function Resources() {
                   {['AL', 'ATTR', 'AA', 'ALect2'].map((type) => (
                     <Button
                       key={type}
-                      variant={filters.amyloidosisType === type ? "default" : "outline"}
                       size="sm"
                       onClick={() => setFilters(prev => ({ 
                         ...prev, 
@@ -320,8 +319,8 @@ export default function Resources() {
                       }))}
                       className={
                         filters.amyloidosisType === type 
-                          ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0" 
-                          : "border-white/30 text-white/80 hover:text-white hover:bg-white/20"
+                          ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 font-medium" 
+                          : "bg-white/10 border border-white/30 text-white hover:text-white hover:bg-white/20 font-medium"
                       }
                     >
                       {type}

@@ -118,7 +118,7 @@ export default function DirectoryPreviewSection() {
                 <div className="w-12 h-12 bg-gradient-to-br from-[#00DD89] to-[#00BB77] rounded-xl flex items-center justify-center">
                   <FileText className="w-6 h-6 text-white" />
                 </div>
-                <h4 className="text-xl font-bold text-white font-ovo">Clinical Resources</h4>
+                <h4 className="text-xl font-bold text-white font-rosarivo">Clinical Resources</h4>
               </div>
               <p className="text-white/70 leading-relaxed">
                 Access medical protocols, treatment guidelines, and clinical pathways developed by leading specialists.

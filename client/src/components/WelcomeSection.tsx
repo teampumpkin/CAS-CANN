@@ -83,7 +83,7 @@ export default function WelcomeSection() {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <motion.button
-                className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-sora"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >

@@ -97,7 +97,7 @@ export default function EventsNewsletterSection() {
           </motion.div>
           
           <motion.h2 
-            className="text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-8 leading-tight"
+            className="text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-8 leading-tight font-cardo"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}

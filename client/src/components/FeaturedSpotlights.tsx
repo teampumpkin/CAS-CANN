@@ -51,38 +51,51 @@ export default function FeaturedSpotlights() {
   };
 
   return (
-    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
-      {/* Background decorative elements */}
+    <section className="relative py-32 lg:py-40 gradient-bg-dark grain-overlay overflow-hidden">
+      {/* Parallax floating elements */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-blue-500/12 to-purple-500/12 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-green-500/12 to-cyan-500/12 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
+        <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/8 to-pink-500/8 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div 
           className="text-center mb-20"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 glass-morphism-dark rounded-full px-6 py-3 mb-8 glow-effect-blue"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
             <span className="text-white/90 font-medium tracking-wide">Featured Content</span>
           </motion.div>
 
-          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+          <motion.h2 
+            className="text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' }}
+          >
             Spotlight Stories
-          </h2>
-          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed crawford-body-text"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)' }}
+          >
             Discover the latest resources, research insights, and community stories that are shaping amyloidosis care in Canada.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Main Carousel */}

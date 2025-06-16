@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target, Hospital } from 'lucide-react';
+import { Link } from 'wouter';
 import ParallaxBackground from '../components/ParallaxBackground';
 import medicalResearchImg from '@assets/DSC02841_1750068895454.jpg';
 
@@ -467,10 +468,12 @@ export default function AboutAmyloidosis() {
                 </div>
                 
                 <div className="mt-8 flex justify-center">
-                  <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
-                    Learn More About {type.type}
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                  <Link href={`/amyloidosis-types/${type.type.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
+                      Learn More About {type.type}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </Link>
                 </div>
               </motion.div>
             ))}

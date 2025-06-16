@@ -92,6 +92,16 @@
     font-family: 'Mulish', sans-serif;
     font-weight: 300;
   }
+
+  /* Hide scrollbars for horizontal scroll */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
   
   /* Enhanced Crawford-style cards */
   .crawford-card {

@@ -229,12 +229,7 @@ export default function EventsNewsletterSection() {
             <div className="absolute top-20 left-0 right-0 h-1 bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] rounded-full opacity-30"></div>
             
             {/* Events grid with horizontal scroll */}
-            <div className="flex gap-8 overflow-x-auto pb-8 px-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              <style jsx>{`
-                div::-webkit-scrollbar {
-                  display: none;
-                }
-              `}</style>
+            <div className="flex gap-8 overflow-x-auto pb-8 px-4 scrollbar-hide">
               
               {events.map((event, index) => (
                 <motion.div

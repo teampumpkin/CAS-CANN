@@ -19,7 +19,10 @@ export default function Hero() {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden gradient-bg-dark grain-overlay parallax-container"
+      className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800 grain-overlay parallax-container"
+      style={{
+        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%, #0a0a0a 100%)'
+      }}
     >
       {/* Parallax Background Elements */}
       <motion.div 

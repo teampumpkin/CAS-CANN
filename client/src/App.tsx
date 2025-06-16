@@ -25,7 +25,9 @@ function App() {
       <TooltipProvider>
         <div className="min-h-screen bg-gray-900">
           <Header />
-          <Router />
+          <div className="pt-16">
+            <Router />
+          </div>
           <Footer />
         </div>
         <Toaster />

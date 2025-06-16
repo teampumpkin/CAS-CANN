@@ -1,111 +1,142 @@
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, Heart, Phone } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const navItems = [
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
+    { name: 'About CAS', href: '#about' },
     { name: 'Resources', href: '#resources' },
-    { name: 'Support', href: '#support' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Healthcare Network', href: '#network' },
+    { name: 'Support Groups', href: '#support' },
+    { name: 'Get Involved', href: '#involved' },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <motion.header
-      className="crawford-nav"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-gray-900/80 backdrop-blur-xl border-b border-white/10' 
+          : 'bg-transparent'
+      }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
+          
           {/* Logo */}
           <motion.div
-            className="flex items-center space-x-3"
+            className="flex items-center gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-lg">C</span>
+            <div className="w-10 h-10 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center shadow-lg">
+              <Heart className="w-5 h-5 text-white" />
             </div>
-            <div>
-              <div className="font-semibold text-white">Canadian Amyloidosis</div>
-              <div className="text-sm text-white/70">Society</div>
+            <div className="hidden sm:block">
+              <div className="text-lg font-bold text-white font-cardo">CAS</div>
+              <div className="text-xs text-white/70 -mt-1">Canadian Amyloidosis Society</div>
             </div>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                className="text-white/80 hover:text-white font-medium transition-colors duration-200"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              >
-                {item.name}
-              </motion.a>
-            ))}
+          <nav className="hidden lg:flex items-center">
+            <div className="flex items-center gap-1 bg-white/5 backdrop-blur-xl rounded-full px-2 py-2 border border-white/10">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  className="px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                >
+                  {item.name}
+                </motion.a>
+              ))}
+            </div>
           </nav>
 
-          {/* CTA Button */}
+          {/* CTA Section */}
           <motion.div
-            className="hidden md:flex items-center space-x-4"
+            className="hidden md:flex items-center gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <button className="crawford-btn-primary text-sm">
-              📞 Book a free call
+            <div className="hidden lg:flex items-center gap-2 text-white/70 text-sm">
+              <Phone className="w-4 h-4" />
+              <span>1-800-AMYLOID</span>
+            </div>
+            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-2 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
+              Get Support
             </button>
           </motion.div>
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+            className="lg:hidden p-2 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6 text-white" />
+              <X className="w-5 h-5 text-white" />
             ) : (
-              <Menu className="w-6 h-6 text-white" />
+              <Menu className="w-5 h-5 text-white" />
             )}
           </motion.button>
         </div>
 
         {/* Mobile Menu */}
         <motion.div
-          className={`md:hidden overflow-hidden ${isMenuOpen ? 'max-h-96' : 'max-h-0'}`}
+          className="lg:hidden overflow-hidden"
           initial={false}
-          animate={{ maxHeight: isMenuOpen ? 384 : 0 }}
+          animate={{ 
+            height: isMenuOpen ? 'auto' : 0,
+            opacity: isMenuOpen ? 1 : 0
+          }}
           transition={{ duration: 0.3 }}
         >
-          <div className="py-6 space-y-4 border-t border-white/10">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="block text-white/80 hover:text-white font-medium py-2"
+          <div className="py-6 bg-white/5 backdrop-blur-xl rounded-2xl mt-4 border border-white/10">
+            <div className="space-y-2 px-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <div className="px-4 pt-4 border-t border-white/10 mt-4">
+              <div className="flex items-center gap-2 text-white/70 text-sm mb-3">
+                <Phone className="w-4 h-4" />
+                <span>1-800-AMYLOID</span>
+              </div>
+              <button 
+                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
-                {item.name}
-              </a>
-            ))}
-            <button 
-              className="crawford-btn-primary w-full text-sm mt-4"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              📞 Book a free call
-            </button>
+                Get Support
+              </button>
+            </div>
           </div>
         </motion.div>
       </div>

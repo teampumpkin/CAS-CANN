@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import medicalProfessionalImg from '@assets/DSC02826_1750092328495.jpg';
 
 export default function WelcomeSection() {
   return (
@@ -31,12 +32,9 @@ export default function WelcomeSection() {
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
             Welcome to the{" "}
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent">
-              Canadian Amyloidosis Society
+              Canadian Amyloidosis Society (CAS)
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            Accelerating awareness, diagnosis, and care for patients facing amyloidosis across Canada.
-          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-12 gap-16 items-center">
@@ -48,38 +46,9 @@ export default function WelcomeSection() {
             transition={{ duration: 0.8 }}
           >
             <div className="prose prose-lg max-w-none">
-              <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                The <strong>Canadian Amyloidosis Society (CAS)</strong> is dedicated to transforming the landscape of amyloidosis care in Canada. 
-                We serve as a vital bridge connecting patients, families, healthcare professionals, and researchers in the fight against this rare disease.
+              <p className="text-xl text-gray-600 leading-relaxed">
+                We are dedicated to transforming amyloidosis care in Canada through patient-centered innovation, collaboration, and advocacy. Our mission is to enhance the quality and timeliness of care for individuals affected by this rare and complex disease. By accelerating access to diagnosis, treatment, and support, we are working to ensure that every person living with amyloidosis receives the care they need—when they need it, wherever they are in Canada.
               </p>
-              
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <motion.div
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                >
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">Our Vision</h3>
-                  <p className="text-gray-600">
-                    A world where amyloidosis is diagnosed early, treated effectively, and every patient receives comprehensive support.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/50"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                >
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">Our Mission</h3>
-                  <p className="text-gray-600">
-                    To accelerate awareness, improve diagnosis, and enhance care through education, research, and community building.
-                  </p>
-                </motion.div>
-              </div>
             </div>
           </motion.div>
 
@@ -98,16 +67,12 @@ export default function WelcomeSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                <div className="aspect-[4/5] bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center relative">
-                  <div className="text-center text-gray-500 p-8">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6] to-[#0088CC] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                    </div>
-                    <p className="text-sm font-medium">Medical Research Image</p>
-                    <p className="text-xs opacity-70">Healthcare professionals collaboration</p>
-                  </div>
+                <div className="aspect-[4/5] relative">
+                  <img 
+                    src={medicalProfessionalImg} 
+                    alt="Medical professional working with healthcare technology"
+                    className="w-full h-full object-cover"
+                  />
 
                   {/* Stats Overlay - Crawford Style */}
                   <motion.div

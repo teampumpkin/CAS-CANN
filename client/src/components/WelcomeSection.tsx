@@ -2,96 +2,165 @@ import { motion } from 'framer-motion';
 
 export default function WelcomeSection() {
   return (
-    <section className="py-24 lg:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-white via-gray-50/30 to-white overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/5 to-[#00AFE6]/5 rounded-full blur-3xl"></div>
+        
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
           <motion.div
-            className="col-span-1 lg:col-span-6"
+            className="col-span-1 lg:col-span-6 relative z-10"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
+            {/* Decorative badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-full px-4 py-2 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+              <span className="text-sm font-medium text-gray-700">Transforming Healthcare in Canada</span>
+            </motion.div>
+
             <motion.h2
-              className="crawford-section-title text-gray-900 mb-8"
+              className="crawford-section-title text-gray-900 mb-8 relative"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             >
               Welcome to the Canadian Amyloidosis Society (CAS)
+              {/* Subtle underline decoration */}
+              <div className="absolute -bottom-2 left-0 w-24 h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
             </motion.h2>
 
-            <motion.p
-              className="text-lg text-gray-700 leading-relaxed mb-8"
+            <motion.div
+              className="space-y-6 mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              We are dedicated to transforming amyloidosis care in Canada through patient-centered 
-              innovation, collaboration, and advocacy. Our mission is to enhance the quality and 
-              timeliness of care for individuals affected by this rare and complex disease. By 
-              accelerating access to diagnosis, treatment, and support, we are working to ensure 
-              that every person living with amyloidosis receives the care they need—when they need 
-              it, wherever they are in Canada.
-            </motion.p>
+              <p className="text-xl text-gray-700 leading-relaxed">
+                We are dedicated to transforming amyloidosis care in Canada through patient-centered 
+                innovation, collaboration, and advocacy.
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Our mission is to enhance the quality and timeliness of care for individuals affected by this rare and complex disease. By accelerating access to diagnosis, treatment, and support, we are working to ensure that every person living with amyloidosis receives the care they need—when they need it, wherever they are in Canada.
+              </p>
+            </motion.div>
 
-            {/* Contact buttons similar to screenshot */}
+            {/* Enhanced action buttons */}
             <motion.div
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row gap-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <button className="bg-gray-900 text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors">
-                Contact Us Today
+              <button className="group relative bg-gray-900 text-white px-8 py-4 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative flex items-center gap-2">
+                  Contact Us Today
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
               </button>
-              <button className="bg-gray-100 text-gray-900 px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition-colors">
-                Learn More
+              
+              <button className="group bg-white/80 backdrop-blur-sm text-gray-900 px-8 py-4 rounded-2xl font-semibold text-lg border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <span className="flex items-center gap-2">
+                  Learn More
+                  <svg className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                </span>
               </button>
             </motion.div>
           </motion.div>
 
           <motion.div
-            className="col-span-1 lg:col-span-6"
+            className="col-span-1 lg:col-span-6 relative"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <div className="relative">
-              {/* Professional image placeholder with medical theme */}
-              <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10"></div>
+              {/* Main visual element */}
+              <div className="relative aspect-[5/4] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl overflow-hidden shadow-2xl">
+                {/* Background pattern */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/20 via-transparent to-[#00DD89]/20"></div>
+                
+                {/* Medical iconography */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-gray-400">
-                    <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-                    </svg>
-                    <p className="text-sm font-medium">Professional Healthcare Image</p>
+                  <div className="relative">
+                    {/* Central medical cross */}
+                    <div className="w-24 h-24 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-8">
+                      <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                    </div>
+                    
+                    {/* Floating elements */}
+                    <div className="absolute -top-12 -left-16 w-8 h-8 bg-[#00AFE6]/30 rounded-full animate-pulse"></div>
+                    <div className="absolute -top-8 -right-12 w-6 h-6 bg-[#00DD89]/30 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                    <div className="absolute -bottom-8 -left-8 w-4 h-4 bg-white/20 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
                   </div>
                 </div>
+
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
               </div>
 
-              {/* Statistics overlay similar to screenshot */}
+              {/* Enhanced statistics card */}
               <motion.div
-                className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-6 border border-gray-100"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
+                className="absolute -bottom-8 -right-8 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden"
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <div className="grid grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-2xl font-bold text-gray-900">15+</div>
-                    <div className="text-sm text-gray-600">Years Supporting</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-gray-900">1000+</div>
-                    <div className="text-sm text-gray-600">Patients Helped</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-gray-900">100%</div>
-                    <div className="text-sm text-gray-600">Patient Focused</div>
+                {/* Card header */}
+                <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-4">
+                  <h4 className="text-white font-bold text-lg">Our Impact</h4>
+                </div>
+                
+                {/* Statistics */}
+                <div className="p-6">
+                  <div className="grid grid-cols-3 gap-6">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-gray-900 mb-1">15+</div>
+                      <div className="text-sm text-gray-600 font-medium">Years Supporting</div>
+                      <div className="w-full h-1 bg-[#00AFE6]/20 rounded-full mt-2">
+                        <div className="w-4/5 h-full bg-[#00AFE6] rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-gray-900 mb-1">1K+</div>
+                      <div className="text-sm text-gray-600 font-medium">Patients Helped</div>
+                      <div className="w-full h-1 bg-[#00DD89]/20 rounded-full mt-2">
+                        <div className="w-full h-full bg-[#00DD89] rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-gray-900 mb-1">100%</div>
+                      <div className="text-sm text-gray-600 font-medium">Patient Focused</div>
+                      <div className="w-full h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-2"></div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
+
+              {/* Decorative floating elements */}
+              <div className="absolute -top-4 left-4 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute top-1/3 -left-6 w-8 h-8 bg-[#00AFE6]/20 rounded-full animate-pulse"></div>
             </div>
           </motion.div>
         </div>

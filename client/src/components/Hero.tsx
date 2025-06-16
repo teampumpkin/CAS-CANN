@@ -10,106 +10,121 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen overflow-hidden pt-20">
-      {/* Background Image with Overlay */}
+    <section className="relative min-h-screen overflow-hidden">
+      {/* Sophisticated background with medical theme */}
       <div className="absolute inset-0">
-        {/* Medical Professional Background */}
+        {/* Dynamic gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900"></div>
+        
+        {/* Animated background elements */}
         <div className="absolute inset-0">
-          {/* Create a sophisticated medical background using CSS */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-                        linear-gradient(135deg, #667eea 0%, #764ba2 100%)`
+          <motion.div
+            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.6, 0.3]
             }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
-          
-          {/* Subtle animated elements */}
-          <div className="absolute inset-0 opacity-10">
-            <motion.div
-              className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full blur-3xl"
-              animate={{ 
-                scale: [1, 1.1, 1],
-                x: [0, 20, 0],
-                y: [0, -10, 0]
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.div
-              className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full blur-3xl"
-              animate={{ 
-                scale: [1.1, 1, 1.1],
-                x: [0, -20, 0],
-                y: [0, 20, 0]
-              }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
+          <motion.div
+            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1.2, 1, 1.2],
+              opacity: [0.2, 0.5, 0.2]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-white/5 to-transparent rounded-full blur-3xl"
+            animate={{ 
+              rotate: [0, 360]
+            }}
+            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+          />
         </div>
 
-        {/* Professional overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/50 to-gray-900/70"></div>
+        {/* Medical pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='1'%3E%3Cpath d='M50 15v70M15 50h70' stroke='white' stroke-width='1' fill='none'/%3E%3C/g%3E%3C/svg%3E")`
+        }}></div>
       </div>
 
-      {/* Main content container with proper layout */}
-      <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Main content area */}
-        <div className="flex-1 flex items-center justify-center text-center text-white px-6">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <span className="text-lg md:text-xl font-light tracking-wide opacity-90">
-                Amyloidosis Care in Canada
+      {/* Main content */}
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
+        <div className="max-w-7xl mx-auto text-center">
+          {/* Decorative badge */}
+          <motion.div
+            className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
+            <span className="text-white/90 font-medium tracking-wide">Transforming Amyloidosis Care in Canada</span>
+          </motion.div>
+
+          {/* Main headline */}
+          <motion.h1
+            className="crawford-hero-title text-white mb-8 relative"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <span className="block">Canadian Amyloidosis</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
+              Society (CAS)
+            </span>
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            className="text-2xl md:text-3xl lg:text-4xl font-light text-white/90 mb-16 max-w-4xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
+            Accelerating awareness, diagnosis, and care
+          </motion.p>
+
+          <motion.div
+            className="text-lg md:text-xl font-light tracking-wide mb-12 opacity-90"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            Canadian Amyloidosis Society | Building a National Healthcare Hub
+          </motion.div>
+
+          {/* Enhanced action buttons */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
+            <button className="group relative bg-white text-gray-900 px-8 py-4 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative flex items-center gap-2 group-hover:text-white">
+                Get Started
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </span>
-            </motion.div>
-
-            <motion.h1
-              className="text-4xl md:text-6xl lg:text-7xl font-light leading-[0.9] mb-8 max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-            >
-              Canadian Amyloidosis Society (CAS)
-            </motion.h1>
-
-            <motion.p
-              className="text-2xl md:text-3xl lg:text-4xl font-light italic mb-12 text-white/95 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6 }}
-            >
-              Accelerating awareness, diagnosis, and care
-            </motion.p>
-
-            <motion.div
-              className="text-lg md:text-xl font-light tracking-wide mb-12 opacity-90"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              Canadian Amyloidosis Society | Building a National Healthcare Hub
-            </motion.div>
-
-            {/* Contact Button */}
-            <motion.button
-              className="bg-gray-900/80 hover:bg-gray-900 text-white px-10 py-4 rounded-full font-medium text-lg transition-all duration-300 backdrop-blur-sm border border-white/30 shadow-xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Us
-            </motion.button>
-          </div>
+            </button>
+            
+            <button className="group bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-semibold text-lg border border-white/30 hover:border-white/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              <span className="flex items-center gap-2">
+                Learn More
+                <svg className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+              </span>
+            </button>
+          </motion.div>
         </div>
 
         {/* Bottom section with tiles and scroll indicator */}
-        <div className="pb-8">
+        <div className="absolute bottom-0 left-0 right-0 pb-8">
           {/* Quick Action Tiles - Premium Style */}
           <motion.div
             className="w-full max-w-5xl mx-auto px-6 mb-12"

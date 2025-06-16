@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Search, Upload, FileText, Users } from 'lucide-react';
 import canadaMapPath from '@assets/Canada Map_1750069387234.png';
+import InteractiveStatsCounter from './InteractiveStatsCounter';
 
 export default function DirectoryPreviewSection() {
   const features = [
@@ -114,16 +115,16 @@ export default function DirectoryPreviewSection() {
                   />
                 </div>
 
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4 mt-8">
-                  <div className="text-center p-4 bg-white/70 backdrop-blur-sm rounded-2xl">
-                    <div className="text-2xl font-bold text-[#00AFE6] mb-1">150+</div>
-                    <div className="text-sm text-gray-600">Healthcare Providers</div>
-                  </div>
-                  <div className="text-center p-4 bg-white/70 backdrop-blur-sm rounded-2xl">
-                    <div className="text-2xl font-bold text-[#00DD89] mb-1">13</div>
-                    <div className="text-sm text-gray-600">Provinces & Territories</div>
-                  </div>
+                {/* Enhanced Interactive Stats */}
+                <div className="mt-8">
+                  <InteractiveStatsCounter 
+                    stats={[
+                      { value: 150, suffix: "+", label: "Healthcare Providers", gradient: "from-[#00AFE6] to-[#0088CC]" },
+                      { value: 13, label: "Provinces & Territories", gradient: "from-[#00DD89] to-[#00BB77]" },
+                      { value: 25, suffix: "+", label: "Major Cities", gradient: "from-purple-500 to-purple-700" },
+                      { value: 500, suffix: "+", label: "Resources Available", gradient: "from-orange-500 to-orange-700" }
+                    ]}
+                  />
                 </div>
               </motion.div>
             </div>

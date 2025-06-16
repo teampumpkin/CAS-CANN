@@ -4,6 +4,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import EnhancedScrollIndicator from "@/components/EnhancedScrollIndicator";
+import AdvancedMouseFollower from "@/components/AdvancedMouseFollower";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/not-found";
 
@@ -22,6 +23,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <EnhancedScrollIndicator />
+        <AdvancedMouseFollower />
         <Router />
       </TooltipProvider>
     </QueryClientProvider>

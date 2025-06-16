@@ -5,10 +5,18 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: 'About CAS', href: '#about', icon: Heart },
-    { name: 'Patient Resources', href: '#resources', icon: Stethoscope },
-    { name: 'Healthcare Network', href: '#network', icon: Globe },
-    { name: 'Support Groups', href: '#groups', icon: Users }
+    { name: 'About CAS', href: '/about-cas', icon: Heart },
+    { name: 'About Amyloidosis', href: '/about-amyloidosis', icon: Stethoscope },
+    { name: 'Directory - Find Support', href: '/directory', icon: Globe },
+    { name: 'Resources', href: '/resources', icon: Users }
+  ];
+
+  const secondaryLinks = [
+    { name: 'Governance & Strategy', href: '/governance' },
+    { name: 'Contact Us', href: '/contact' },
+    { name: 'Get Involved', href: '/get-involved' },
+    { name: 'Upload Resource', href: '/upload-resource' },
+    { name: 'Join CAS', href: '/join-cas' }
   ];
 
   const socialLinks = [
@@ -68,7 +76,7 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Quick Links */}
+          {/* Quick Links & Secondary Navigation */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +84,7 @@ export default function Footer() {
             className="lg:col-span-1"
           >
             <h4 className="text-xl font-bold text-white mb-6 font-cardo">Quick Links</h4>
-            <div className="space-y-4">
+            <div className="space-y-4 mb-8">
               {quickLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
@@ -88,6 +96,19 @@ export default function Footer() {
                   <span>{link.name}</span>
                   <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </motion.a>
+              ))}
+            </div>
+
+            <h5 className="text-lg font-semibold text-white mb-4 font-cardo">More</h5>
+            <div className="space-y-3">
+              {secondaryLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="block text-white/60 hover:text-white transition-colors duration-300 text-sm"
+                >
+                  {link.name}
+                </a>
               ))}
             </div>
           </motion.div>
@@ -148,13 +169,18 @@ export default function Footer() {
               © {currentYear} Canadian Amyloidosis Society. All rights reserved.
             </p>
             <div className="flex gap-6">
-              {['Privacy Policy', 'Terms of Service', 'Accessibility'].map((link) => (
+              {[
+                { name: 'Privacy Policy', href: '/privacy' },
+                { name: 'Terms of Service', href: '/terms' },
+                { name: 'Accessibility', href: '/accessibility' },
+                { name: 'Disclaimers', href: '/disclaimers' }
+              ].map((link) => (
                 <a
-                  key={link}
-                  href="#"
+                  key={link.name}
+                  href={link.href}
                   className="text-white/60 hover:text-white text-sm transition-colors duration-300"
                 >
-                  {link}
+                  {link.name}
                 </a>
               ))}
             </div>

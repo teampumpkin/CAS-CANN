@@ -1,17 +1,43 @@
 import { motion } from 'framer-motion';
-import { Menu, X, Heart, Phone } from 'lucide-react';
+import { Menu, X, Heart, Phone, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const navItems = [
-    { name: 'About CAS', href: '#about' },
-    { name: 'Resources', href: '#resources' },
-    { name: 'Healthcare Network', href: '#network' },
-    { name: 'Support Groups', href: '#support' },
-    { name: 'Get Involved', href: '#involved' },
+    {
+      name: 'About',
+      href: '#about',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'About CAS', href: '/about-cas' },
+        { name: 'About Amyloidosis', href: '/about-amyloidosis' },
+        { name: 'Governance & Strategy', href: '/governance' },
+      ]
+    },
+    {
+      name: 'Resources',
+      href: '#resources',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'Resource Library', href: '/resources' },
+        { name: 'Directory - Find Support', href: '/directory' },
+        { name: 'Upload Resource', href: '/upload-resource' },
+      ]
+    },
+    {
+      name: 'Get Involved',
+      href: '#get-involved',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'Get Involved', href: '/get-involved' },
+        { name: 'Join CAS', href: '/join-cas' },
+        { name: 'Contact Us', href: '/contact' },
+      ]
+    },
   ];
 
   useEffect(() => {
@@ -56,16 +82,44 @@ export default function Header() {
           <nav className="hidden lg:flex items-center">
             <div className="flex items-center gap-1 bg-white/5 backdrop-blur-xl rounded-full px-2 py-2 border border-white/10">
               {navItems.map((item, index) => (
-                <motion.a
+                <div
                   key={item.name}
-                  href={item.href}
-                  className="px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown(item.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  {item.name}
-                </motion.a>
+                  <motion.button
+                    className="flex items-center gap-1 px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  >
+                    {item.name}
+                    {item.hasDropdown && (
+                      <ChevronDown className="w-3 h-3 transition-transform duration-200" />
+                    )}
+                  </motion.button>
+
+                  {/* Dropdown Menu */}
+                  {item.hasDropdown && activeDropdown === item.name && (
+                    <motion.div
+                      className="absolute top-full left-0 mt-2 w-56 bg-gray-800/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl py-2 z-50"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {item.dropdownItems?.map((dropdownItem) => (
+                        <a
+                          key={dropdownItem.name}
+                          href={dropdownItem.href}
+                          className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 text-sm"
+                        >
+                          {dropdownItem.name}
+                        </a>
+                      ))}
+                    </motion.div>
+                  )}
+                </div>
               ))}
             </div>
           </nav>
@@ -115,14 +169,21 @@ export default function Header() {
           <div className="py-6 bg-white/5 backdrop-blur-xl rounded-2xl mt-4 border border-white/10">
             <div className="space-y-2 px-4">
               {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
+                <div key={item.name} className="space-y-1">
+                  <div className="px-4 py-2 text-white font-medium text-sm border-b border-white/10">
+                    {item.name}
+                  </div>
+                  {item.dropdownItems?.map((dropdownItem) => (
+                    <a
+                      key={dropdownItem.name}
+                      href={dropdownItem.href}
+                      className="block px-6 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 text-sm"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {dropdownItem.name}
+                    </a>
+                  ))}
+                </div>
               ))}
             </div>
             <div className="px-4 pt-4 border-t border-white/10 mt-4">

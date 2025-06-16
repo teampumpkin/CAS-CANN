@@ -47,7 +47,7 @@ export default function WelcomeSection() {
 
             {/* Premium heading with gradient accent */}
             <motion.h2 
-              className="text-4xl lg:text-6xl font-bold text-white mb-10 leading-tight font-cardo"
+              className="text-4xl lg:text-6xl font-bold text-white mb-10 leading-tight font-rosarivo"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -83,7 +83,7 @@ export default function WelcomeSection() {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <motion.button
-                className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-sora"
+                className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-mulish"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >

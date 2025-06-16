@@ -62,33 +62,13 @@ export default function EventsNewsletterSection() {
             <span className="text-gray-700 font-medium tracking-wide">Stay Connected</span>
           </motion.div>
           
-          <motion.h2 
-            className="text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-8 leading-tight font-cardo"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Events &{" "}
-            <span className="relative">
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent">
-                Newsletter
-              </span>
-              <motion.div
-                className="absolute -inset-2 bg-gradient-to-r from-[#00AFE6]/20 to-[#0088CC]/20 blur-2xl opacity-0"
-                animate={{ opacity: [0, 0.5, 0] }}
-                transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-              />
-            </span>
-          </motion.h2>
+          <h2 className="crawford-section-title text-gray-900 mb-8">
+            Events & Newsletter
+          </h2>
           
-          <motion.p 
-            className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
             Join our community to stay informed about the latest research, upcoming events, and important updates in amyloidosis care across Canada.
-          </motion.p>
+          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-12 gap-16 items-start">
@@ -108,37 +88,28 @@ export default function EventsNewsletterSection() {
                 
                 <div className="space-y-6">
                   <motion.button
-                    className="group w-full bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white p-6 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+                    className="group w-full bg-[#00AFE6] text-white p-6 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-[#0088CC] transition-all duration-300"
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12"
-                      initial={{ x: '-100%' }}
-                      whileHover={{ x: '100%' }}
-                      transition={{ duration: 0.6 }}
-                    />
-                    <div className="relative flex items-center justify-between">
+                    <div className="flex items-center justify-between">
                       <div className="text-left">
                         <div className="font-bold mb-1">Subscribe to Newsletter</div>
-                        <div className="text-white/80 text-sm">Monthly updates and research news</div>
+                        <div className="text-white/90 text-sm">Monthly updates and research news</div>
                       </div>
                       <Mail className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </motion.button>
 
                   <motion.button
-                    className="group w-full bg-white/20 backdrop-blur-sm border-2 border-[#00DD89]/30 text-gray-800 p-6 rounded-2xl font-semibold text-lg shadow-lg hover:bg-[#00DD89] hover:text-white hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+                    className="group w-full bg-white/50 backdrop-blur-sm border border-gray-300 text-gray-800 p-6 rounded-2xl font-semibold text-lg shadow-lg hover:bg-white/70 hover:shadow-xl transition-all duration-300"
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <motion.div
-                      className="absolute inset-0 bg-[#00DD89] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                    />
-                    <div className="relative flex items-center justify-between">
+                    <div className="flex items-center justify-between">
                       <div className="text-left">
                         <div className="font-bold mb-1">View Upcoming Events</div>
-                        <div className="opacity-70 text-sm">Conferences, webinars, and support groups</div>
+                        <div className="text-gray-600 text-sm">Conferences, webinars, and support groups</div>
                       </div>
                       <Calendar className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
@@ -189,17 +160,13 @@ export default function EventsNewsletterSection() {
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   whileHover={{ y: -8, scale: 1.02 }}
                 >
-                  {/* Gradient background on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
+                  {/* Subtle background on hover */}
+                  <div className="absolute inset-0 bg-[#00AFE6]/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
                   
                   <div className="relative z-10 flex items-start gap-6">
-                    <motion.div 
-                      className={`w-20 h-20 bg-gradient-to-br ${event.gradient} rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}
-                      whileHover={{ rotate: [0, 5, -5, 0] }}
-                      transition={{ duration: 0.5 }}
-                    >
+                    <div className="w-20 h-20 bg-[#00AFE6] rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
                       <event.icon className="w-10 h-10 text-white" />
-                    </motion.div>
+                    </div>
                     
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-4">
@@ -207,7 +174,7 @@ export default function EventsNewsletterSection() {
                           {event.title}
                         </h3>
                         <div className="flex gap-2">
-                          <span className={`px-3 py-1 bg-gradient-to-r ${event.gradient} text-white text-xs font-semibold rounded-full`}>
+                          <span className="px-3 py-1 bg-[#00AFE6] text-white text-xs font-semibold rounded-full">
                             {event.type}
                           </span>
                           <span className="px-3 py-1 bg-white/70 text-gray-700 text-xs font-semibold rounded-full">
@@ -227,7 +194,7 @@ export default function EventsNewsletterSection() {
                         </div>
                         
                         <motion.button
-                          className={`inline-flex items-center gap-2 bg-gradient-to-r ${event.gradient} text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}
+                          className="inline-flex items-center gap-2 bg-[#00AFE6] text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl hover:bg-[#0088CC] transition-all duration-300"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
@@ -239,9 +206,7 @@ export default function EventsNewsletterSection() {
                   </div>
                   
                   {/* Hover accent line */}
-                  <motion.div
-                    className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${event.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}
-                  />
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-[#00AFE6] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                 </motion.div>
               ))}
             </div>

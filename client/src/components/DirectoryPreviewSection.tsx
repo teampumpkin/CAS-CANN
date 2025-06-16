@@ -52,7 +52,7 @@ export default function DirectoryPreviewSection() {
             <span>Comprehensive Resources</span>
           </div>
 
-          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-cardo">
+          <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight font-ovo">
             Healthcare{" "}
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
               Directory
@@ -118,7 +118,7 @@ export default function DirectoryPreviewSection() {
                 <div className="w-12 h-12 bg-gradient-to-br from-[#00DD89] to-[#00BB77] rounded-xl flex items-center justify-center">
                   <FileText className="w-6 h-6 text-white" />
                 </div>
-                <h4 className="text-xl font-bold text-white font-cardo">Clinical Resources</h4>
+                <h4 className="text-xl font-bold text-white font-ovo">Clinical Resources</h4>
               </div>
               <p className="text-white/70 leading-relaxed">
                 Access medical protocols, treatment guidelines, and clinical pathways developed by leading specialists.

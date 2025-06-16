@@ -99,7 +99,7 @@ export default function Footer() {
               ))}
             </div>
 
-            <h5 className="text-lg font-semibold text-white mb-4 font-cardo">More</h5>
+            <h5 className="text-lg font-semibold text-white mb-4 font-ovo">More</h5>
             <div className="space-y-3">
               {secondaryLinks.map((link) => (
                 <a

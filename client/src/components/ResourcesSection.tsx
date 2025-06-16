@@ -88,7 +88,7 @@ export default function ResourcesSection() {
                       <IconComponent className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors duration-300 font-cardo">
+                      <h3 className="text-xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors duration-300 font-ovo">
                         {category.title}
                       </h3>
                       <p className="text-white/70 leading-relaxed group-hover:text-white/80 transition-colors duration-300">

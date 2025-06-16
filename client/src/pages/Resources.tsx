@@ -268,16 +268,16 @@ export default function Resources() {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             {/* Search and Filter Controls */}
-            <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 mb-8">
+            <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-6 mb-8 shadow-2xl">
               {/* Search Bar */}
               <div className="relative mb-6">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 w-5 h-5" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/60 w-5 h-5" />
                 <Input
                   type="text"
                   placeholder="Search resources by title..."
                   value={filters.search}
                   onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-                  className="pl-12 h-14 bg-white/10 border-white/20 text-white placeholder-white/40 text-lg rounded-xl"
+                  className="pl-12 h-14 bg-white/20 border-white/30 text-white placeholder-white/60 text-lg rounded-xl focus:ring-2 focus:ring-[#00AFE6] focus:border-[#00AFE6]"
                 />
               </div>
 
@@ -286,7 +286,7 @@ export default function Resources() {
                 <div className="flex items-center gap-4">
                   <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
                     <CollapsibleTrigger asChild>
-                      <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 bg-white/5">
+                      <Button variant="outline" className="border-white/30 text-white hover:bg-white/20 bg-white/15">
                         <Filter className="w-4 h-4 mr-2" />
                         Advanced Filters
                         {activeFiltersCount > 0 && (
@@ -300,7 +300,7 @@ export default function Resources() {
                   </Collapsible>
 
                   {activeFiltersCount > 0 && (
-                    <Button variant="ghost" onClick={clearFilters} className="text-white/70 hover:text-white hover:bg-white/10">
+                    <Button variant="ghost" onClick={clearFilters} className="text-white/80 hover:text-white hover:bg-white/20">
                       <X className="w-4 h-4 mr-2" />
                       Clear All
                     </Button>
@@ -321,7 +321,7 @@ export default function Resources() {
                       className={
                         filters.amyloidosisType === type 
                           ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0" 
-                          : "border-white/20 text-white/70 hover:text-white hover:bg-white/10"
+                          : "border-white/30 text-white/80 hover:text-white hover:bg-white/20"
                       }
                     >
                       {type}
@@ -333,11 +333,11 @@ export default function Resources() {
               {/* Advanced Filters */}
               <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
                 <CollapsibleContent className="mt-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6 bg-white/5 rounded-xl border border-white/10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6 bg-white/15 rounded-xl border border-white/20">
                     <div>
-                      <label className="block text-sm font-medium text-white/70 mb-2">Amyloidosis Type</label>
+                      <label className="block text-sm font-medium text-white/90 mb-2">Amyloidosis Type</label>
                       <Select value={filters.amyloidosisType} onValueChange={(value) => setFilters(prev => ({ ...prev, amyloidosisType: value }))}>
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -349,9 +349,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/70 mb-2">Resource Type</label>
+                      <label className="block text-sm font-medium text-white/90 mb-2">Resource Type</label>
                       <Select value={filters.resourceType} onValueChange={(value) => setFilters(prev => ({ ...prev, resourceType: value }))}>
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -363,9 +363,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/70 mb-2">Category</label>
+                      <label className="block text-sm font-medium text-white/90 mb-2">Category</label>
                       <Select value={filters.category} onValueChange={(value) => setFilters(prev => ({ ...prev, category: value }))}>
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -377,9 +377,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/70 mb-2">Audience</label>
+                      <label className="block text-sm font-medium text-white/90 mb-2">Audience</label>
                       <Select value={filters.audience} onValueChange={(value) => setFilters(prev => ({ ...prev, audience: value }))}>
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -391,9 +391,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/70 mb-2">Language</label>
+                      <label className="block text-sm font-medium text-white/90 mb-2">Language</label>
                       <Select value={filters.language} onValueChange={(value) => setFilters(prev => ({ ...prev, language: value }))}>
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -405,9 +405,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/70 mb-2">Region</label>
+                      <label className="block text-sm font-medium text-white/90 mb-2">Region</label>
                       <Select value={filters.region} onValueChange={(value) => setFilters(prev => ({ ...prev, region: value }))}>
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>

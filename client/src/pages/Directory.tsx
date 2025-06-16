@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { MapPin, Users, Hospital, Search, Navigation, Phone, Mail, ExternalLink, Stethoscope, GraduationCap, Network, ArrowRight } from 'lucide-react';
 import ParallaxBackground from '../components/ParallaxBackground';
+import canadaMapPath from '@assets/Canada Map_1750069387234.png';
 import { useState } from 'react';
 
 export default function Directory() {
@@ -244,18 +245,78 @@ export default function Directory() {
             {/* Map Area */}
             <div className="lg:col-span-2">
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 h-96 relative overflow-hidden"
+                className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 relative overflow-hidden"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-3xl" />
-                <div className="relative z-10 h-full flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="w-16 h-16 text-white/30 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-white/70 mb-2">Interactive Map</h3>
-                    <p className="text-white/50">Geographic visualization of treatment centers, research registries, and healthcare networks across Canada</p>
+                
+                <div className="relative z-10">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-white px-4 py-2 rounded-full text-sm font-medium mb-4 border border-[#00AFE6]/30">
+                      <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
+                      <span>National Network</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-2 font-rosarivo">
+                      Treatment Centers & Research Programs
+                    </h3>
+                    <p className="text-white/70">Geographic visualization across Canada</p>
+                  </div>
+                  
+                  <div className="relative w-full max-w-2xl mx-auto">
+                    <img 
+                      src={canadaMapPath}
+                      alt="Canada Map showing healthcare network coverage"
+                      className="w-full h-auto rounded-xl shadow-xl border border-white/10"
+                    />
+                    
+                    {/* Network points with subtle animation */}
+                    <motion.div
+                      className="absolute top-[25%] left-[15%] w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+                    />
+                    <motion.div
+                      className="absolute top-[35%] left-[25%] w-3 h-3 bg-[#00DD89] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                    />
+                    <motion.div
+                      className="absolute top-[45%] left-[40%] w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                    />
+                    <motion.div
+                      className="absolute top-[40%] left-[55%] w-4 h-4 bg-[#00DD89] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+                    />
+                    <motion.div
+                      className="absolute top-[30%] left-[70%] w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                    />
+                    <motion.div
+                      className="absolute top-[25%] left-[80%] w-3 h-3 bg-[#00DD89] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.8 }}
+                    />
+                    
+                    {/* Legend */}
+                    <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-xl rounded-lg p-3 border border-white/20">
+                      <div className="flex items-center gap-4 text-xs">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-[#00AFE6] rounded-full" />
+                          <span className="text-white/80">Treatment Centers</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-[#00DD89] rounded-full" />
+                          <span className="text-white/80">Research Programs</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </motion.div>

@@ -69,107 +69,95 @@ export default function DirectoryPreviewSection() {
           </p>
         </motion.div>
 
-        {/* Main Content Layout */}
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
-          {/* Features List */}
-          <motion.div
-            className="lg:col-span-7 space-y-6"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-500 hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
-                whileHover={{ y: -8, scale: 1.02 }}
-              >
-                {/* Animated glow effect */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out skew-x-12" />
-                </div>
-
-                {/* Background gradient effect */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-8 transition-opacity duration-500 rounded-3xl`} />
-                
-                <div className="relative z-10 flex items-start gap-6">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                    <feature.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="text-xl font-bold text-white mb-2 group-hover:text-white transition-colors duration-300 font-cardo">
-                      {feature.title}
-                    </h4>
-                    <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-                
-
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Canada Map & Stats Sidebar */}
-          <motion.div
-            className="lg:col-span-5 space-y-8"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {/* Map Section */}
-            <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:bg-white/10 overflow-hidden">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-white mb-2 font-cardo">Canada-Wide Network</h3>
-                <p className="text-white/70">Connecting care across all provinces and territories</p>
-              </div>
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-500 hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 * index }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              {/* Animated glow effect */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
               
-              <div className="relative w-full max-w-md mx-auto">
-                <motion.img 
-                  src={canadaMapPath}
-                  alt="Canada Map showing healthcare network coverage"
-                  className="w-full h-auto rounded-2xl shadow-lg"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                />
-                
-                {/* Animated Dots */}
-                <motion.div
-                  className="absolute top-1/4 left-1/3 w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <motion.div
-                  className="absolute top-1/2 right-1/4 w-3 h-3 bg-[#00DD89] rounded-full shadow-lg"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                />
-                <motion.div
-                  className="absolute bottom-1/3 left-1/2 w-3 h-3 bg-purple-500 rounded-full shadow-lg"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                />
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out skew-x-12" />
               </div>
-            </div>
 
-            {/* Stats Section */}
-            <div className="space-y-6">
-              <InteractiveStatsCounter 
-                stats={[
-                  { value: 150, suffix: "+", label: "Healthcare Providers", gradient: "from-[#00AFE6] to-[#0088CC]" },
-                  { value: 13, label: "Provinces & Territories", gradient: "from-[#00DD89] to-[#00BB77]" },
-                  { value: 25, suffix: "+", label: "Major Cities", gradient: "from-purple-500 to-purple-700" },
-                  { value: 500, suffix: "+", label: "Resources Available", gradient: "from-orange-500 to-orange-700" }
-                ]}
+              {/* Background gradient effect */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-8 transition-opacity duration-500 rounded-3xl`} />
+              
+              <div className="relative z-10 text-center">
+                <div className={`w-20 h-20 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center shadow-lg mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                  <feature.icon className="w-10 h-10 text-white" />
+                </div>
+                <h4 className="text-xl font-bold text-white mb-4 group-hover:text-white transition-colors duration-300 font-cardo">
+                  {feature.title}
+                </h4>
+                <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                  {feature.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Canada Network Section */}
+        <motion.div
+          className="grid lg:grid-cols-2 gap-12 items-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          {/* Map Section */}
+          <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:bg-white/10 overflow-hidden">
+            <div className="text-center mb-6">
+              <h3 className="text-3xl font-bold text-white mb-3 font-cardo">Canada-Wide Network</h3>
+              <p className="text-white/70 text-lg">Connecting care across all provinces and territories</p>
+            </div>
+            
+            <div className="relative w-full max-w-lg mx-auto">
+              <motion.img 
+                src={canadaMapPath}
+                alt="Canada Map showing healthcare network coverage"
+                className="w-full h-auto rounded-2xl shadow-lg"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              />
+              
+              {/* Animated Dots */}
+              <motion.div
+                className="absolute top-1/4 left-1/3 w-4 h-4 bg-[#00AFE6] rounded-full shadow-lg"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <motion.div
+                className="absolute top-1/2 right-1/4 w-4 h-4 bg-[#00DD89] rounded-full shadow-lg"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+              />
+              <motion.div
+                className="absolute bottom-1/3 left-1/2 w-4 h-4 bg-purple-500 rounded-full shadow-lg"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
               />
             </div>
+          </div>
+
+          {/* Stats & CTA Section */}
+          <div className="space-y-8">
+            <InteractiveStatsCounter 
+              stats={[
+                { value: 150, suffix: "+", label: "Healthcare Providers", gradient: "from-[#00AFE6] to-[#0088CC]" },
+                { value: 13, label: "Provinces & Territories", gradient: "from-[#00DD89] to-[#00BB77]" },
+                { value: 25, suffix: "+", label: "Major Cities", gradient: "from-purple-500 to-purple-700" },
+                { value: 500, suffix: "+", label: "Resources Available", gradient: "from-orange-500 to-orange-700" }
+              ]}
+            />
 
             {/* CTA Button */}
             <motion.div
@@ -190,15 +178,15 @@ export default function DirectoryPreviewSection() {
                   transition={{ duration: 0.6 }}
                 />
                 <div className="relative flex items-center justify-center gap-3">
-                  <span>Explore Resources</span>
+                  <span>Explore All Resources</span>
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>
               </motion.button>
             </motion.div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

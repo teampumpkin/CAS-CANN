@@ -1,141 +1,72 @@
 import { motion } from 'framer-motion';
-import { Settings, Code, Video } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function AmyloidosisSection() {
   return (
     <section className="crawford-section bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className="crawford-asymmetric">
           <motion.div
-            className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            className="crawford-content-7"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            🔬 Smooth & efficient process
+            <motion.h2
+              className="crawford-section-title text-gray-900 mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              What is Amyloidosis?
+            </motion.h2>
+
+            <motion.p
+              className="text-lg text-gray-700 leading-relaxed mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Amyloidosis is a rare disease with life-altering consequences—but early detection 
+              can dramatically improve outcomes. The Canadian Amyloidosis Society is building 
+              a trusted national hub for clinicians, researchers, and families seeking answers.
+            </motion.p>
+
+            <motion.button
+              className="crawford-btn-primary inline-flex items-center gap-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Learn More
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
           </motion.div>
 
-          <motion.h2
-            className="crawford-section-title text-gray-900 mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            An Example Amyloidosis
-            Care Support Project
-          </motion.h2>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Process Card 1 */}
           <motion.div
-            className="crawford-card"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
-            <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-8">
-              <Settings className="w-8 h-8 text-blue-600" />
-            </div>
-
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-              Patient Assessment
-              & Care Planning
-            </h3>
-
-            <p className="text-gray-600 mb-8 leading-relaxed">
-              Book a discovery call to discuss your vision and see if 
-              we're a perfect match. Afterwards, you'll receive a 
-              detailed proposal outlining the scope of work, 
-              deliverables, timeline, and pricing.
-            </p>
-
-            <div className="bg-gray-50 rounded-2xl p-6 aspect-video flex items-center justify-center">
-              <div className="bg-white rounded-xl p-4 shadow-sm w-full max-w-xs">
-                <div className="space-y-3">
-                  <div className="h-3 bg-gray-200 rounded-full"></div>
-                  <div className="h-3 bg-gray-200 rounded-full w-3/4"></div>
-                  <div className="h-3 bg-blue-200 rounded-full w-1/2"></div>
-                  <div className="h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white text-xs font-medium">Assessment Form</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Process Card 2 */}
-          <motion.div
-            className="crawford-card"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-8">
-              <Code className="w-8 h-8 text-green-600" />
-            </div>
-
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-              Treatment Development
-              And Feedback
-            </h3>
-
-            <p className="text-gray-600 mb-8 leading-relaxed">
-              Once we agree on the scope and you accept the 
-              proposal, the treatment plan begins. Using markup, 
-              you can provide feedback easily, ensuring a seamless 
-              and collaborative process from start to finish.
-            </p>
-
-            <div className="bg-gray-50 rounded-2xl p-6 aspect-video flex items-center justify-center">
-              <div className="bg-white rounded-xl p-4 shadow-sm w-full max-w-xs">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[#00AFE6] rounded-full"></div>
-                    <div className="flex-1">
-                      <div className="h-2 bg-gray-200 rounded-full mb-1"></div>
-                      <div className="h-2 bg-gray-200 rounded-full w-2/3"></div>
-                    </div>
-                  </div>
-                  <div className="bg-yellow-50 rounded-lg p-3">
-                    <div className="text-xs text-yellow-700 font-medium">Treatment Protocol</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Process Card 3 */}
-          <motion.div
-            className="crawford-card"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="crawford-content-5"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-8">
-              <Video className="w-8 h-8 text-purple-600" />
-            </div>
-
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-              Ongoing Support
-              Training
-            </h3>
-
-            <p className="text-gray-600 mb-8 leading-relaxed">
-              Upon your approval of the finished treatment plan, you'll 
-              receive bespoke handover training via Loom link. Plus, enjoy 30 days of free email 
-              support to help you transition smoothly.
-            </p>
-
-            <div className="bg-gray-50 rounded-2xl p-6 aspect-video flex items-center justify-center">
-              <div className="bg-white rounded-xl p-4 shadow-sm w-full max-w-xs relative">
-                <div className="flex items-center justify-center h-24 bg-gray-100 rounded-lg">
-                  <div className="w-12 h-12 bg-[#00DD89] rounded-full flex items-center justify-center">
-                    <div className="w-0 h-0 border-l-4 border-l-white border-t-2 border-t-transparent border-b-2 border-b-transparent ml-1"></div>
+            <div className="crawford-card h-full">
+              <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl p-8 h-full flex flex-col justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-red-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 47.478 47.478 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 47.478 47.478 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3 3-3"/>
+                    </svg>
                   </div>
-                </div>
-                <div className="mt-3 text-center">
-                  <div className="text-xs text-gray-600">Training Session</div>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    Featured Research
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm">
+                    Latest findings and clinical insights
+                  </p>
                 </div>
               </div>
             </div>

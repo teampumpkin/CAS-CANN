@@ -1,85 +1,77 @@
 import { motion } from 'framer-motion';
-
-const quickLinks = [
-  { id: 'support', title: 'FIND SUPPORT', description: 'CONNECT WITH PATIENT SUPPORT GROUPS' },
-  { id: 'upload', title: 'UPLOAD RESOURCE', description: 'SHARE CLINICAL MATERIALS' },
-  { id: 'join', title: 'JOIN CAS', description: 'BECOME PART OF OUR COMMUNITY' },
-  { id: 'browse', title: 'BROWSE RESOURCES', description: 'EXPLORE OUR RESOURCE LIBRARY' }
-];
+import { MapPin, Upload, Users, FileText } from 'lucide-react';
 
 export default function QuickLinksSection() {
+  const quickLinks = [
+    {
+      icon: MapPin,
+      title: 'Find Support in Your Region',
+      description: 'Locate specialized amyloidosis clinics and healthcare providers near you',
+      href: '#support',
+      color: 'from-blue-500 to-blue-600'
+    },
+    {
+      icon: Upload,
+      title: 'Upload a Clinical Resource',
+      description: 'Share treatment protocols, guidelines, and clinical insights with the community',
+      href: '#upload',
+      color: 'from-green-500 to-green-600'
+    },
+    {
+      icon: Users,
+      title: 'Join CAS',
+      description: 'Become part of our mission to transform amyloidosis care in Canada',
+      href: '#join',
+      color: 'from-purple-500 to-purple-600'
+    },
+    {
+      icon: FileText,
+      title: 'Browse the Resources',
+      description: 'Access comprehensive educational materials and research findings',
+      href: '#resources',
+      color: 'from-orange-500 to-orange-600'
+    }
+  ];
+
   return (
-    <section className="crawford-section bg-zinc-900">
+    <section className="crawford-light-section">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div 
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 50 }}
+        <motion.h2
+          className="crawford-section-title text-gray-900 text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
-          viewport={{ once: true, margin: "-200px" }}
+          transition={{ duration: 0.8 }}
         >
-          <h2 className="crawford-title mb-8">
-            QUICK
-            <br />
-            <span className="crawford-gradient bg-clip-text text-transparent">
-              ACTIONS
-            </span>
-          </h2>
-          <p className="crawford-subtitle max-w-4xl mx-auto">
-            Take action today to support the amyloidosis community and access the resources you need.
-          </p>
-        </motion.div>
+          Quick Actions
+        </motion.h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {quickLinks.map((link, index) => (
-            <motion.div
-              key={link.id}
-              className="crawford-card crawford-card-hover p-12 text-center cursor-pointer group relative overflow-hidden"
-              initial={{ opacity: 0, y: 100 }}
+            <motion.a
+              key={link.title}
+              href={link.href}
+              className="crawford-card group cursor-pointer text-center"
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 1, 
-                delay: index * 0.15,
-                ease: [0.6, -0.05, 0.01, 0.99]
-              }}
-              viewport={{ once: true, margin: "-100px" }}
-              whileHover={{ 
-                y: -10,
-                transition: { duration: 0.3 }
-              }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div className="absolute inset-0 crawford-gradient opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-              
-              <div className="relative z-10">
-                <motion.div
-                  className="w-20 h-20 bg-zinc-800 group-hover:bg-gradient-to-br group-hover:from-[#00AFE6] group-hover:to-[#00DD89] rounded-full mx-auto mb-8 flex items-center justify-center transition-all duration-500"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  <svg 
-                    className="w-10 h-10 text-gray-400 group-hover:text-black transition-colors duration-500" 
-                    fill="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </motion.div>
-
-                <h3 className="text-2xl font-bold mb-6 group-hover:text-white transition-colors duration-300">
-                  {link.title}
-                </h3>
-
-                <p className="text-gray-400 group-hover:text-gray-300 uppercase tracking-wider text-sm leading-relaxed transition-colors duration-300">
-                  {link.description}
-                </p>
-
-                <motion.div
-                  className="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-12 h-px bg-[#00AFE6] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
+              <div className={`w-16 h-16 bg-gradient-to-br ${link.color} rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
+                <link.icon className="w-8 h-8 text-white" />
               </div>
-            </motion.div>
+
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors">
+                {link.title}
+              </h3>
+
+              <p className="text-gray-600 leading-relaxed text-sm">
+                {link.description}
+              </p>
+
+              {/* Hover Glow Effect */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-300`}></div>
+            </motion.a>
           ))}
         </div>
       </div>

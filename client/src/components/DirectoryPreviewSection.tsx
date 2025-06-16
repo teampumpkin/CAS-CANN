@@ -1,163 +1,134 @@
 import { motion } from 'framer-motion';
-
-const directoryFeatures = [
-  { id: 'clinics', title: 'DIRECTORY OF CLINICS', count: '75+ CENTERS' },
-  { id: 'resources', title: 'UPLOADABLE RESOURCES', count: '500+ RESOURCES' },
-  { id: 'types', title: 'AMYLOIDOSIS TYPES', count: '12 TYPES' },
-  { id: 'mission', title: 'JOIN MISSION', count: '2,500+ MEMBERS' }
-];
+import { MapPin, Upload, FileText, Users } from 'lucide-react';
 
 export default function DirectoryPreviewSection() {
-  return (
-    <section className="crawford-section crawford-mesh">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div 
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
-          viewport={{ once: true, margin: "-200px" }}
-        >
-          <h2 className="crawford-title mb-8">
-            WHAT YOU'LL
-            <br />
-            <span className="crawford-gradient bg-clip-text text-transparent">
-              FIND HERE
-            </span>
-          </h2>
-          <p className="crawford-subtitle max-w-4xl mx-auto">
-            Discover comprehensive resources and connect with specialists across Canada.
-          </p>
-        </motion.div>
+  const features = [
+    {
+      icon: MapPin,
+      title: 'Searchable clinic directory',
+      description: 'Find specialized amyloidosis care centers across Canada'
+    },
+    {
+      icon: Upload,
+      title: 'Uploadable clinical resources',
+      description: 'Share and access treatment protocols and guidelines'
+    },
+    {
+      icon: FileText,
+      title: 'Clear, accessible medical info',
+      description: 'Comprehensive patient education and resources'
+    },
+    {
+      icon: Users,
+      title: 'Ways to get involved and support',
+      description: 'Join our community and advocacy efforts'
+    }
+  ];
 
+  return (
+    <section className="crawford-section bg-white">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="crawford-asymmetric">
           <motion.div
-            className="crawford-content-left"
-            initial={{ opacity: 0, x: -100 }}
+            className="crawford-content-5"
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: [0.6, -0.05, 0.01, 0.99] }}
-            viewport={{ once: true, margin: "-200px" }}
+            transition={{ duration: 0.8 }}
           >
-            <div className="crawford-card crawford-card-hover p-12 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900"></div>
-              
-              <div className="relative z-10">
-                <h3 className="text-3xl font-bold mb-8 text-center">
-                  TREATMENT CENTERS
-                  <br />
-                  <span className="crawford-gradient bg-clip-text text-transparent">
-                    ACROSS CANADA
-                  </span>
-                </h3>
-
-                <div className="relative w-full h-80 bg-zinc-800 rounded-lg border border-zinc-700 overflow-hidden mb-6">
-                  <svg className="w-full h-full" viewBox="0 0 100 60" fill="none">
-                    <path
-                      d="M10 25 Q20 20 35 27 L50 30 Q65 27 80 32 L90 35 L90 45 Q80 47 65 44 L50 42 Q35 45 20 42 L10 40 Z"
-                      fill="rgba(39, 39, 42, 0.5)"
-                      stroke="rgba(113, 113, 122, 0.3)"
-                      strokeWidth="1"
-                    />
-                  </svg>
-
-                  {[
-                    { id: 1, name: 'Vancouver', x: '15%', y: '35%' },
-                    { id: 2, name: 'Calgary', x: '25%', y: '40%' },
-                    { id: 3, name: 'Toronto', x: '55%', y: '65%' },
-                    { id: 4, name: 'Montreal', x: '65%', y: '58%' },
-                    { id: 5, name: 'Halifax', x: '75%', y: '70%' }
-                  ].map((location, index) => (
+            {/* Mini Canada Map */}
+            <div className="crawford-card h-full flex items-center justify-center">
+              <div className="text-center">
+                <motion.div
+                  className="relative w-48 h-48 mx-auto mb-6"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                >
+                  {/* Canada Map Shape */}
+                  <div className="w-full h-full bg-gradient-to-br from-blue-50 to-green-50 rounded-3xl relative overflow-hidden">
+                    {/* Map Outline */}
+                    <div className="absolute inset-4 border-2 border-[#00AFE6] rounded-2xl opacity-30"></div>
+                    
+                    {/* Location Pins */}
                     <motion.div
-                      key={location.id}
-                      className="absolute transform -translate-x-1/2 -translate-y-1/2"
-                      style={{ left: location.x, top: location.y }}
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ 
-                        duration: 0.5, 
-                        delay: 0.5 + (index * 0.1),
-                        type: "spring",
-                        stiffness: 300
-                      }}
-                      viewport={{ once: true }}
-                      whileHover={{ scale: 1.5 }}
-                    >
-                      <div className="relative group cursor-pointer">
-                        <div className="w-4 h-4 crawford-gradient rounded-full shadow-lg"></div>
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap border border-zinc-700">
-                          {location.name}
-                        </div>
+                      className="absolute top-8 left-12 w-3 h-3 bg-[#00AFE6] rounded-full"
+                      animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+                    />
+                    <motion.div
+                      className="absolute top-16 right-16 w-3 h-3 bg-[#00DD89] rounded-full"
+                      animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                    />
+                    <motion.div
+                      className="absolute bottom-12 left-20 w-3 h-3 bg-[#00AFE6] rounded-full"
+                      animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                    />
+                    <motion.div
+                      className="absolute bottom-20 right-12 w-3 h-3 bg-[#00DD89] rounded-full"
+                      animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+                    />
+                    
+                    {/* Central Icon */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center">
+                        <MapPin className="w-6 h-6 text-white" />
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className="text-center text-gray-400 uppercase tracking-wider text-sm">
-                  INTERACTIVE MAP SHOWING TREATMENT CENTERS
-                </div>
+                    </div>
+                  </div>
+                </motion.div>
+                
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  Canada-Wide Network
+                </h3>
+                <p className="text-gray-600">
+                  Interactive clinic locations and resources
+                </p>
               </div>
             </div>
           </motion.div>
 
           <motion.div
-            className="crawford-content-right"
-            initial={{ opacity: 0, x: 100 }}
+            className="crawford-content-7"
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.6, -0.05, 0.01, 0.99] }}
-            viewport={{ once: true, margin: "-200px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="space-y-6">
-              {directoryFeatures.map((feature, index) => (
+            <motion.h2
+              className="crawford-section-title text-gray-900 mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              What You'll Find Here
+            </motion.h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {features.map((feature, index) => (
                 <motion.div
-                  key={feature.id}
-                  className="crawford-card crawford-card-hover p-8 border-l-4 border-[#00AFE6]"
-                  initial={{ opacity: 0, y: 50 }}
+                  key={feature.title}
+                  className="flex items-start gap-4 p-6 rounded-2xl hover:bg-gray-50 transition-colors duration-300"
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: 0.2 + (index * 0.1),
-                    ease: [0.6, -0.05, 0.01, 0.99]
-                  }}
-                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                 >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">
-                        {feature.title}
-                      </h3>
-                      <div className="text-gray-400 uppercase tracking-wider text-sm">
-                        FIND SPECIALIZED CARE
-                      </div>
-                    </div>
-                    
-                    <div className="text-right">
-                      <div className="text-3xl font-black crawford-gradient bg-clip-text text-transparent">
-                        {feature.count.split(' ')[0]}
-                      </div>
-                      <div className="text-gray-400 uppercase tracking-wider text-xs">
-                        {feature.count.split(' ')[1]}
-                      </div>
-                    </div>
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <feature.icon className="w-6 h-6 text-white" />
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {feature.description}
+                    </p>
                   </div>
                 </motion.div>
               ))}
             </div>
-
-            <motion.div 
-              className="mt-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <motion.button
-                className="crawford-btn w-full"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                EXPLORE FULL DIRECTORY
-              </motion.button>
-            </motion.div>
           </motion.div>
         </div>
       </div>

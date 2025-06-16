@@ -50,18 +50,18 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       whileHover={{ scale: 1.05 }}
     >
-      <div className={`relative bg-gradient-to-br ${stat.gradient} p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden`}>
-        {/* Animated background effect */}
+      <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden">
+        {/* Subtle animated background effect */}
         <motion.div
-          className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           animate={{
             background: [
-              "radial-gradient(circle at 0% 0%, rgba(255,255,255,0.1) 0%, transparent 50%)",
-              "radial-gradient(circle at 100% 100%, rgba(255,255,255,0.1) 0%, transparent 50%)",
-              "radial-gradient(circle at 0% 0%, rgba(255,255,255,0.1) 0%, transparent 50%)"
+              "radial-gradient(circle at 0% 0%, rgba(255,255,255,0.05) 0%, transparent 50%)",
+              "radial-gradient(circle at 100% 100%, rgba(255,255,255,0.05) 0%, transparent 50%)",
+              "radial-gradient(circle at 0% 0%, rgba(255,255,255,0.05) 0%, transparent 50%)"
             ]
           }}
-          transition={{ duration: 3, repeat: Infinity }}
+          transition={{ duration: 4, repeat: Infinity }}
         />
         
         <div className="relative z-10 text-center">
@@ -69,14 +69,14 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
             <span ref={ref}>0</span>
             {stat.suffix && <span className="text-2xl ml-1">{stat.suffix}</span>}
           </div>
-          <div className="text-white/90 text-sm font-medium">{stat.label}</div>
+          <div className="text-white/70 text-sm font-medium">{stat.label}</div>
         </div>
         
-        {/* Pulse effect */}
+        {/* Subtle pulse effect */}
         <motion.div
-          className="absolute inset-0 border-2 border-white/20 rounded-2xl"
-          animate={{ scale: [1, 1.02, 1], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute inset-0 border border-white/10 rounded-2xl"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 3, repeat: Infinity }}
         />
       </div>
     </motion.div>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target } from 'lucide-react';
+import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target, Hospital } from 'lucide-react';
 import ParallaxBackground from '../components/ParallaxBackground';
 import medicalResearchImg from '@assets/DSC02841_1750068895454.jpg';
 
@@ -385,7 +385,7 @@ export default function AboutAmyloidosis() {
                   </div>
                 </div>
                 
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-4 gap-6">
                   {/* Symptoms */}
                   <div className="bg-white/5 rounded-xl p-6">
                     <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -393,12 +393,15 @@ export default function AboutAmyloidosis() {
                       Signs & Symptoms
                     </h4>
                     <ul className="space-y-2">
-                      {type.symptoms.map((symptom, idx) => (
+                      {type.symptoms.slice(0, 3).map((symptom, idx) => (
                         <li key={idx} className="text-white/70 text-sm flex items-start gap-2">
                           <div className="w-1.5 h-1.5 bg-orange-400 rounded-full mt-2 flex-shrink-0" />
                           {symptom}
                         </li>
                       ))}
+                      {type.symptoms.length > 3 && (
+                        <li className="text-white/50 text-xs">+ {type.symptoms.length - 3} more</li>
+                      )}
                     </ul>
                   </div>
                   
@@ -409,12 +412,15 @@ export default function AboutAmyloidosis() {
                       Diagnosis & Testing
                     </h4>
                     <ul className="space-y-2">
-                      {type.diagnosis.map((test, idx) => (
+                      {type.diagnosis.slice(0, 3).map((test, idx) => (
                         <li key={idx} className="text-white/70 text-sm flex items-start gap-2">
                           <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
                           {test}
                         </li>
                       ))}
+                      {type.diagnosis.length > 3 && (
+                        <li className="text-white/50 text-xs">+ {type.diagnosis.length - 3} more</li>
+                      )}
                     </ul>
                   </div>
                   
@@ -425,14 +431,46 @@ export default function AboutAmyloidosis() {
                       Treatment
                     </h4>
                     <ul className="space-y-2">
-                      {type.treatment.map((treatment, idx) => (
+                      {type.treatment.slice(0, 3).map((treatment, idx) => (
                         <li key={idx} className="text-white/70 text-sm flex items-start gap-2">
                           <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-2 flex-shrink-0" />
                           {treatment}
                         </li>
                       ))}
+                      {type.treatment.length > 3 && (
+                        <li className="text-white/50 text-xs">+ {type.treatment.length - 3} more</li>
+                      )}
                     </ul>
                   </div>
+                  
+                  {/* Treatment Centers & Clinical Trials */}
+                  <div className="bg-white/5 rounded-xl p-6">
+                    <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                      <Target className="w-5 h-5 text-purple-400" />
+                      Centers & Trials
+                    </h4>
+                    <div className="space-y-3">
+                      <div className="text-white/70 text-sm flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                        Specialized treatment centers
+                      </div>
+                      <div className="text-white/70 text-sm flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                        Active clinical trials
+                      </div>
+                      <div className="text-white/70 text-sm flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                        Research opportunities
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-8 flex justify-center">
+                  <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
+                    Learn More About {type.type}
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               </motion.div>
             ))}

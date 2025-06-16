@@ -11,6 +11,7 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import AboutAmyloidosis from "@/pages/AboutAmyloidosis";
 import Directory from "@/pages/Directory";
+import ALAmyloidosis from "@/pages/amyloidosis-types/ALAmyloidosis";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
       <Route path="/directory" component={Directory} />
+      <Route path="/amyloidosis-types/al" component={ALAmyloidosis} />
       <Route component={NotFound} />
     </Switch>
   );

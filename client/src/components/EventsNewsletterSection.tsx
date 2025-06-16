@@ -224,13 +224,12 @@ export default function EventsNewsletterSection() {
           </div>
 
           {/* Horizontal Events Carousel */}
-          <div className="relative overflow-hidden">
+          <div className="relative">
             {/* Horizontal timeline line */}
-            <div className="absolute top-20 left-0 right-0 h-1 bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] rounded-full opacity-30"></div>
+            <div className="absolute top-8 left-8 right-8 h-0.5 bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] rounded-full opacity-40"></div>
             
             {/* Events grid with horizontal scroll */}
-            <div className="flex gap-8 overflow-x-auto pb-8 px-4 scrollbar-hide">
-              
+            <div className="flex gap-6 overflow-x-auto pb-8 px-6 scrollbar-hide">
               {events.map((event, index) => (
                 <motion.div
                   key={index}
@@ -240,21 +239,21 @@ export default function EventsNewsletterSection() {
                   transition={{ duration: 0.8, delay: index * 0.15 }}
                   viewport={{ once: true, margin: "-50px" }}
                 >
-                  {/* Timeline node */}
-                  <div className="absolute top-[76px] left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full border-4 border-gray-900 z-10">
+                  {/* Timeline node - positioned at the top */}
+                  <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full border-2 border-gray-900 z-10">
                     <motion.div
-                      className="w-full h-full bg-white rounded-full"
-                      animate={{ scale: [1, 1.2, 1] }}
+                      className="w-full h-full bg-white rounded-full scale-50"
+                      animate={{ scale: [0.5, 0.8, 0.5] }}
                       transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
                     />
                   </div>
 
-                  {/* Event card */}
+                  {/* Event card - positioned below timeline */}
                   <motion.div
-                    className="mt-8"
+                    className="mt-12"
                     whileHover={{ scale: 1.02, y: -8 }}
                   >
-                    <div className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 hover:border-white/30 transition-all duration-500 hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20 overflow-hidden h-full">
+                    <div className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 hover:border-white/30 transition-all duration-500 hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20 overflow-hidden">
                       {/* Animated glow effect */}
                       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
                       
@@ -273,15 +272,15 @@ export default function EventsNewsletterSection() {
                         transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
                       />
 
-                      <div className="relative z-10 h-full flex flex-col">
+                      <div className="relative z-10">
                         {/* Header */}
                         <div className="flex items-start gap-3 mb-4">
                           <div className={`w-12 h-12 bg-gradient-to-br ${event.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                             <event.icon className="w-6 h-6 text-white" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="px-2 py-1 bg-[#00AFE6] text-white text-xs font-semibold rounded-full">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="px-3 py-1 bg-[#00AFE6] text-white text-xs font-semibold rounded-full">
                                 {event.type}
                               </span>
                             </div>
@@ -297,24 +296,24 @@ export default function EventsNewsletterSection() {
                         </div>
 
                         {/* Description */}
-                        <p className="text-white/70 text-sm leading-relaxed mb-4 flex-1">
+                        <p className="text-white/70 text-sm leading-relaxed mb-6">
                           {event.description}
                         </p>
 
                         {/* Footer */}
                         <div className="flex items-center justify-between pt-4 border-t border-white/10">
                           <div className="flex items-center gap-2 text-white/60 text-xs">
-                            <Users className="w-3 h-3" />
+                            <Users className="w-4 h-4" />
                             <span>{event.attendees}</span>
                           </div>
                           
                           <motion.button
-                            className="group/btn inline-flex items-center gap-2 bg-[#00AFE6] text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-[#0088CC] transition-all duration-300"
+                            className="group/btn inline-flex items-center gap-2 bg-[#00AFE6] text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#0088CC] transition-all duration-300"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >
-                            <span>Join</span>
-                            <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform duration-300" />
+                            <span>Join Event</span>
+                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform duration-300" />
                           </motion.button>
                         </div>
                       </div>
@@ -325,18 +324,24 @@ export default function EventsNewsletterSection() {
             </div>
 
             {/* Scroll indicators */}
-            <div className="flex justify-center mt-6 gap-2">
+            <div className="flex justify-center mt-8 gap-2">
               {events.map((_, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="w-2 h-2 bg-white/30 rounded-full transition-all duration-300 hover:bg-white/60"
+                  className="w-2 h-2 bg-white/30 rounded-full transition-all duration-300 hover:bg-white/60 cursor-pointer"
+                  whileHover={{ scale: 1.5 }}
                 />
               ))}
             </div>
 
             {/* Navigation hint */}
-            <div className="flex justify-center mt-4">
-              <div className="inline-flex items-center gap-2 text-white/60 text-sm">
+            <div className="flex justify-center mt-6">
+              <motion.div 
+                className="inline-flex items-center gap-2 text-white/60 text-sm"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
                 <span>Scroll horizontally to view more events</span>
                 <motion.div
                   animate={{ x: [0, 5, 0] }}
@@ -344,7 +349,7 @@ export default function EventsNewsletterSection() {
                 >
                   <ArrowRight className="w-4 h-4" />
                 </motion.div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>

@@ -44,7 +44,7 @@ export default function Header() {
               <motion.a
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200"
+                className="text-white/80 hover:text-white font-medium transition-colors duration-200"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -68,16 +68,16 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6 text-gray-900" />
+              <X className="w-6 h-6 text-white" />
             ) : (
-              <Menu className="w-6 h-6 text-gray-900" />
+              <Menu className="w-6 h-6 text-white" />
             )}
           </motion.button>
         </div>
@@ -89,12 +89,12 @@ export default function Header() {
           animate={{ maxHeight: isMenuOpen ? 384 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="py-6 space-y-4 border-t border-gray-100">
+          <div className="py-6 space-y-4 border-t border-white/10">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="block text-gray-700 hover:text-gray-900 font-medium py-2"
+                className="block text-white/80 hover:text-white font-medium py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}

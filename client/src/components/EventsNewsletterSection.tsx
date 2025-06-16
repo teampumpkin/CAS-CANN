@@ -78,11 +78,12 @@ export default function EventsNewsletterSection() {
               {upcomingEvents.map((event, index) => (
                 <motion.div
                   key={event.id}
-                  className="group bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:bg-white/10"
-                  initial={{ opacity: 0, y: 30 }}
+                  className="group glass-morphism rounded-3xl p-8 hover:glow-effect-blue transition-all duration-500"
+                  initial={{ opacity: 0, y: 60 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ y: -4, scale: 1.01 }}
                 >
                   <div className="flex items-start gap-6">
                     {/* Date */}
@@ -95,20 +96,20 @@ export default function EventsNewsletterSection() {
                     {/* Event Details */}
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="bg-white/10 text-white/80 px-3 py-1 rounded-full text-xs font-medium">
+                        <span className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 text-gray-700 px-3 py-1 rounded-full text-xs font-medium">
                           {event.type}
                         </span>
-                        <div className="flex items-center gap-1 text-white/60 text-sm">
+                        <div className="flex items-center gap-1 text-gray-600 text-sm">
                           <MapPin className="w-3 h-3" />
                           {event.location}
                         </div>
                       </div>
                       
-                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors">
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors">
                         {event.title}
                       </h3>
                       
-                      <p className="text-white/70 text-sm leading-relaxed mb-4">
+                      <p className="text-gray-700 text-sm leading-relaxed mb-4">
                         {event.description}
                       </p>
 

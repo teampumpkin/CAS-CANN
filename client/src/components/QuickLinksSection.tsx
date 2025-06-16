@@ -96,10 +96,10 @@ export default function QuickLinksSection() {
               <motion.a
                 key={link.id}
                 href={link.href}
-                className="group relative bg-white rounded-3xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-100/50 cursor-pointer overflow-hidden transition-all duration-500 hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] hover:-translate-y-4"
-                initial={{ opacity: 0, y: 30 }}
+                className="group relative glass-morphism rounded-3xl p-8 cursor-pointer overflow-hidden transition-all duration-500 hover:glow-effect-blue hover:-translate-y-4"
+                initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.15 }}
+                transition={{ duration: 0.8, delay: index * 0.15, ease: "easeOut" }}
                 viewport={{ once: true, margin: "-50px" }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

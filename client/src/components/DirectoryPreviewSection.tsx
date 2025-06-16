@@ -174,7 +174,7 @@ export default function DirectoryPreviewSection() {
                 <p className="text-white/70">Connecting healthcare across the nation</p>
               </div>
               
-              <div className="relative w-full max-w-md mx-auto">
+              <div className="relative w-full max-w-xl mx-auto">
                 <img 
                   src={canadaMapPath}
                   alt="Canada Map showing healthcare network coverage"

@@ -7,7 +7,8 @@ export default {
     extend: {
       fontFamily: {
         'cardo': ['Cardo', 'serif'],
-        'sans': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        'sora': ['Sora', 'sans-serif'],
+        'sans': ['Sora', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

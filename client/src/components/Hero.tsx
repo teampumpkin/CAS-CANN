@@ -16,7 +16,7 @@ export default function Hero() {
         {/* Hospital exterior background image */}
         <div className="absolute inset-0">
           <img 
-            src="/attached_assets/DSC_0022_1750068812552.jpg" 
+            src="/images/hospital-exterior.jpg" 
             alt="Modern healthcare facility exterior" 
             className="w-full h-full object-cover"
           />

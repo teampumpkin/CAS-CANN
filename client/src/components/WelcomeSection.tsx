@@ -97,7 +97,7 @@ export default function WelcomeSection() {
               {/* Healthcare professional image */}
               <div className="relative aspect-[5/4] rounded-3xl overflow-hidden shadow-2xl">
                 <img 
-                  src="/attached_assets/DSC02826_1750068895453.jpg" 
+                  src="/images/healthcare-professional.jpg" 
                   alt="Healthcare professional working at computer workstation" 
                   className="w-full h-full object-cover"
                 />

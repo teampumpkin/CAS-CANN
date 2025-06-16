@@ -103,89 +103,92 @@ export default function WelcomeSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gray-100/50">
-              <div className="aspect-[4/5] relative">
-                <img 
-                  src={medicalProfessionalImg} 
-                  alt="Medical professional working with healthcare technology"
-                  className="w-full h-full object-cover"
-                />
-                
-                {/* Premium gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                
-                {/* Enhanced Stats Overlay */}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-black/90 via-black/80 to-black/90 backdrop-blur-lg text-white"
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                >
-                  <div className="px-8 py-8">
-                    <div className="flex">
-                      {/* First Stat */}
-                      <motion.div
-                        className="flex-1 text-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.6 }}
-                      >
-                        <div className="text-4xl lg:text-5xl font-bold text-white mb-2">15+</div>
-                        <div className="text-sm text-white/90 font-medium">Years Supporting</div>
-                      </motion.div>
-                      
-                      {/* Vertical Divider */}
-                      <div className="w-px bg-white/20 mx-6"></div>
-                      
-                      {/* Second Stat */}
-                      <motion.div
-                        className="flex-1 text-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.7 }}
-                      >
-                        <div className="text-4xl lg:text-5xl font-bold text-white mb-2">1K+</div>
-                        <div className="text-sm text-white/90 font-medium">Patients Helped</div>
-                      </motion.div>
-                      
-                      {/* Vertical Divider */}
-                      <div className="w-px bg-white/20 mx-6"></div>
-                      
-                      {/* Third Stat */}
-                      <motion.div
-                        className="flex-1 text-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.8 }}
-                      >
-                        <div className="text-4xl lg:text-5xl font-bold text-white mb-2">100%</div>
-                        <div className="text-sm text-white/90 font-medium">Patient Focused</div>
-                      </motion.div>
-                    </div>
-                  </div>
+            <div className="relative">
+              {/* Image container */}
+              <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gray-100/50 mb-6">
+                <div className="aspect-[4/5] relative">
+                  <img 
+                    src={medicalProfessionalImg} 
+                    alt="Medical professional working with healthcare technology"
+                    className="w-full h-full object-cover"
+                  />
                   
-                  {/* Subtle accent line */}
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                </motion.div>
+                  {/* Premium gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                </div>
+                
+                {/* Premium floating accent elements */}
+                <motion.div
+                  className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-xl"
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [0.5, 0.8, 0.5]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.div
+                  className="absolute -bottom-4 -left-4 w-8 h-8 bg-gradient-to-br from-purple-400/20 to-blue-400/20 rounded-full blur-lg"
+                  animate={{ 
+                    scale: [1.2, 1, 1.2],
+                    opacity: [0.6, 0.9, 0.6]
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                />
               </div>
-              
-              {/* Premium floating accent elements */}
+
+              {/* Floating Stats Overlay - Crawford Style */}
               <motion.div
-                className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-xl"
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.5, 0.8, 0.5]
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute -bottom-4 -left-4 w-8 h-8 bg-gradient-to-br from-purple-400/20 to-blue-400/20 rounded-full blur-lg"
-                animate={{ 
-                  scale: [1.2, 1, 1.2],
-                  opacity: [0.6, 0.9, 0.6]
-                }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              />
+                className="relative -mt-12 mx-4 bg-gradient-to-r from-black/90 via-black/85 to-black/90 backdrop-blur-lg text-white rounded-2xl shadow-2xl"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                <div className="px-8 py-8">
+                  <div className="flex">
+                    {/* First Stat */}
+                    <motion.div
+                      className="flex-1 text-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.6 }}
+                    >
+                      <div className="text-4xl lg:text-5xl font-bold text-white mb-2">15+</div>
+                      <div className="text-sm text-white/90 font-medium">Years Supporting</div>
+                    </motion.div>
+                    
+                    {/* Vertical Divider */}
+                    <div className="w-px bg-white/20 mx-6"></div>
+                    
+                    {/* Second Stat */}
+                    <motion.div
+                      className="flex-1 text-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.7 }}
+                    >
+                      <div className="text-4xl lg:text-5xl font-bold text-white mb-2">1K+</div>
+                      <div className="text-sm text-white/90 font-medium">Patients Helped</div>
+                    </motion.div>
+                    
+                    {/* Vertical Divider */}
+                    <div className="w-px bg-white/20 mx-6"></div>
+                    
+                    {/* Third Stat */}
+                    <motion.div
+                      className="flex-1 text-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.8 }}
+                    >
+                      <div className="text-4xl lg:text-5xl font-bold text-white mb-2">100%</div>
+                      <div className="text-sm text-white/90 font-medium">Patient Focused</div>
+                    </motion.div>
+                  </div>
+                </div>
+                
+                {/* Subtle accent line */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

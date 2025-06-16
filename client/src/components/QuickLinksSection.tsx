@@ -127,9 +127,6 @@ export default function QuickLinksSection() {
                       <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-0.5 transition-transform duration-300" />
                     </div>
                   </div>
-                
-                {/* Hover effect lines */}
-                <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${link.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-3xl`} />
                 </div>
 
                 {/* Hover effect line */}

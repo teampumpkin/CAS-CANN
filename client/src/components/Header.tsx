@@ -84,44 +84,55 @@ export default function Header() {
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
-                  className="relative"
-                  onMouseEnter={() => setActiveDropdown(item.name)}
-                  onMouseLeave={() => setActiveDropdown(null)}
+                  className="relative group"
                 >
                   <motion.button
                     className="flex items-center gap-1 px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                    onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.name)}
                   >
                     {item.name}
                     {item.hasDropdown && (
-                      <ChevronDown className="w-3 h-3 transition-transform duration-200" />
+                      <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
                     )}
                   </motion.button>
 
                   {/* Dropdown Menu */}
-                  {item.hasDropdown && activeDropdown === item.name && (
-                    <motion.div
-                      className="absolute top-full left-0 pt-2 w-56 z-50"
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
+                  {item.hasDropdown && (
+                    <div
+                      className="absolute top-full left-0 pt-1 w-56 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
                       onMouseEnter={() => setActiveDropdown(item.name)}
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
-                      <div className="bg-gray-800/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl py-2">
-                        {item.dropdownItems?.map((dropdownItem) => (
-                          <a
+                      <motion.div
+                        className="bg-gray-800/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl py-2"
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ 
+                          opacity: activeDropdown === item.name ? 1 : 0, 
+                          y: activeDropdown === item.name ? 0 : -10,
+                          scale: activeDropdown === item.name ? 1 : 0.95
+                        }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {item.dropdownItems?.map((dropdownItem, dropdownIndex) => (
+                          <motion.a
                             key={dropdownItem.name}
                             href={dropdownItem.href}
                             className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 text-sm"
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ 
+                              opacity: activeDropdown === item.name ? 1 : 0,
+                              x: activeDropdown === item.name ? 0 : -10
+                            }}
+                            transition={{ duration: 0.2, delay: dropdownIndex * 0.05 }}
                           >
                             {dropdownItem.name}
-                          </a>
+                          </motion.a>
                         ))}
-                      </div>
-                    </motion.div>
+                      </motion.div>
+                    </div>
                   )}
                 </div>
               ))}

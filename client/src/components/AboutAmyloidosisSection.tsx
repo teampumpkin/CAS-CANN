@@ -29,12 +29,17 @@ export default function AboutAmyloidosisSection() {
   ];
 
   return (
-    <section className="relative py-32 lg:py-40 gradient-bg-dark grain-overlay overflow-hidden">
+    <section 
+      className="relative py-32 lg:py-40 overflow-hidden"
+      style={{
+        background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)'
+      }}
+    >
       {/* Parallax floating elements */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-blue-500/12 to-purple-500/12 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-green-500/12 to-cyan-500/12 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
-        <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/8 to-pink-500/8 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-blue-500/6 to-purple-500/6 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-green-500/6 to-cyan-500/6 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
+        <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/4 to-pink-500/4 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -47,17 +52,22 @@ export default function AboutAmyloidosisSection() {
         >
           {/* Glass morphism badge */}
           <motion.div
-            className="inline-flex items-center gap-2 glass-morphism-dark rounded-full px-6 py-3 mb-8 glow-effect-blue"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-3 mb-8"
+            style={{
+              background: 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.3)'
+            }}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-white/90 font-medium tracking-wide">Medical Information</span>
+            <span className="text-gray-700 font-medium tracking-wide">Medical Information</span>
           </motion.div>
 
           <motion.h2 
-            className="crawford-section-title text-white mb-8"
+            className="crawford-section-title text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}

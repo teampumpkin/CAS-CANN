@@ -32,35 +32,47 @@ export default function EventsNewsletterSection() {
   ];
 
   return (
-    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
-      {/* Background decorative elements */}
+    <section className="relative py-32 lg:py-40 gradient-bg-subtle grain-overlay overflow-hidden">
+      {/* Floating background elements */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-blue-500/8 to-purple-500/8 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-green-500/8 to-cyan-500/8 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/6 to-pink-500/6 rounded-full blur-3xl animate-float" style={{animationDelay: '4s'}}></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Events Section */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-100px" }}
           >
             <motion.div
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 glass-morphism rounded-full px-6 py-3 mb-8 glow-effect-blue"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
               <Calendar className="w-4 h-4 text-[#00AFE6]" />
-              <span className="text-white/90 font-medium tracking-wide">Upcoming Events</span>
+              <span className="text-gray-700 font-medium tracking-wide">Upcoming Events</span>
             </motion.div>
 
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
+            <motion.h2 
+              className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{
+                background: 'linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}
+            >
               Join Our Community Events
-            </h2>
+            </motion.h2>
 
             <div className="space-y-8">
               {upcomingEvents.map((event, index) => (

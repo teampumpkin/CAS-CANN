@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import AboutAmyloidosis from "@/pages/AboutAmyloidosis";
+import Directory from "@/pages/Directory";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
+      <Route path="/directory" component={Directory} />
       <Route component={NotFound} />
     </Switch>
   );

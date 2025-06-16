@@ -104,9 +104,10 @@ export default function FeaturedSpotlights() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  {React.createElement(spotlights[currentIndex].icon, { 
-                    className: `w-4 h-4 text-white` 
-                  })}
+                  {(() => {
+                    const IconComponent = spotlights[currentIndex].icon;
+                    return <IconComponent className="w-4 h-4 text-white" />;
+                  })()}
                   <span className="text-white/90 text-sm font-medium">
                     {spotlights[currentIndex].category}
                   </span>

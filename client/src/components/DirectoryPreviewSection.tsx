@@ -81,31 +81,40 @@ export default function DirectoryPreviewSection() {
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:bg-white/10"
+                className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-500 hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                whileHover={{ y: -4, scale: 1.01 }}
+                whileHover={{ y: -8, scale: 1.02 }}
               >
+                {/* Animated glow effect */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+                
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out skew-x-12" />
+                </div>
+
                 {/* Background gradient effect */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-8 transition-opacity duration-500 rounded-3xl`} />
                 
                 <div className="relative z-10 flex items-start gap-6">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-300`}>
+                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                     <feature.icon className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-xl font-bold text-white mb-2 group-hover:text-white/90 transition-colors duration-300 font-cardo">
+                    <h4 className="text-xl font-bold text-white mb-2 group-hover:text-white transition-colors duration-300 font-cardo">
                       {feature.title}
                     </h4>
-                    <p className="text-white/70 leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                    <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
                       {feature.description}
                     </p>
                   </div>
                 </div>
                 
-                {/* Hover accent line */}
+                {/* Enhanced accent line with pulse */}
                 <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${feature.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-3xl`} />
+                <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-3xl animate-pulse`} />
               </motion.div>
             ))}
           </motion.div>

@@ -252,9 +252,17 @@ export default function EventsNewsletterSection() {
                     className={`w-5/12 ${index % 2 === 0 ? 'ml-auto' : 'mr-auto'}`}
                     whileHover={{ scale: 1.02, y: -5 }}
                   >
-                    <div className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 overflow-hidden">
+                    <div className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-500 hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20 overflow-hidden">
+                      {/* Animated glow effect */}
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+                      
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out skew-x-12" />
+                      </div>
+
                       {/* Background effects */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`} />
+                      <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} opacity-0 group-hover:opacity-8 transition-opacity duration-500 rounded-3xl`} />
                       
                       {/* Micro animations */}
                       <motion.div
@@ -265,7 +273,7 @@ export default function EventsNewsletterSection() {
 
                       <div className="relative z-10">
                         <div className="flex items-start gap-4 mb-6">
-                          <div className={`w-16 h-16 bg-gradient-to-br ${event.gradient} rounded-2xl flex items-center justify-center shadow-lg`}>
+                          <div className={`w-16 h-16 bg-gradient-to-br ${event.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                             <event.icon className="w-8 h-8 text-white" />
                           </div>
                           <div className="flex-1">

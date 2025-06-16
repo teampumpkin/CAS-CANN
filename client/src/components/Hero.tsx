@@ -51,57 +51,59 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/50 to-gray-900/70"></div>
       </div>
 
-      {/* Content Overlay */}
-      <div className="relative z-10 text-center text-white px-6 max-w-5xl mx-auto">
-        <motion.div
-          className="mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <span className="text-lg md:text-xl font-light tracking-wide">
-            Amyloidosis Care in Canada
-          </span>
-        </motion.div>
+      {/* Content Overlay - Centered and properly spaced */}
+      <div className="relative z-10 text-center text-white px-6 max-w-6xl mx-auto">
+        <div className="min-h-[60vh] flex flex-col justify-center items-center">
+          <motion.div
+            className="mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <span className="text-lg md:text-xl font-light tracking-wide opacity-90">
+              Amyloidosis Care in Canada
+            </span>
+          </motion.div>
 
-        <motion.h1
-          className="text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-        >
-          Canadian Amyloidosis Society (CAS)
-        </motion.h1>
+          <motion.h1
+            className="text-4xl md:text-6xl lg:text-7xl font-light leading-[0.9] mb-8 max-w-4xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            Canadian Amyloidosis Society (CAS)
+          </motion.h1>
 
-        <motion.p
-          className="text-2xl md:text-3xl lg:text-4xl font-light italic mb-16 text-white/90"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-        >
-          Accelerating awareness, diagnosis, and care
-        </motion.p>
+          <motion.p
+            className="text-2xl md:text-3xl lg:text-4xl font-light italic mb-12 text-white/95 max-w-3xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
+            Accelerating awareness, diagnosis, and care
+          </motion.p>
 
-        <motion.div
-          className="text-lg md:text-xl font-light tracking-wide mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          Canadian Amyloidosis Society | Building a National Healthcare Hub
-        </motion.div>
+          <motion.div
+            className="text-lg md:text-xl font-light tracking-wide mb-12 opacity-90"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            Canadian Amyloidosis Society | Building a National Healthcare Hub
+          </motion.div>
 
-        {/* Contact Button */}
-        <motion.button
-          className="bg-gray-900/80 hover:bg-gray-900 text-white px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 backdrop-blur-sm border border-white/20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Contact Us
-        </motion.button>
+          {/* Contact Button */}
+          <motion.button
+            className="bg-gray-900/80 hover:bg-gray-900 text-white px-10 py-4 rounded-full font-medium text-lg transition-all duration-300 backdrop-blur-sm border border-white/30 shadow-xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Contact Us
+          </motion.button>
+        </div>
       </div>
 
       {/* Quick Action Tiles - Positioned at Bottom */}

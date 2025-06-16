@@ -2,137 +2,156 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="crawford-section crawford-mesh">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section className="crawford-section bg-white">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="crawford-asymmetric">
           <motion.div
-            className="crawford-content-left"
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: [0.6, -0.05, 0.01, 0.99] }}
+            className="crawford-content-7"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
           >
-            <motion.h1
-              className="crawford-hero mb-8"
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.5, delay: 0.2, ease: [0.6, -0.05, 0.01, 0.99] }}
-            >
-              CANADIAN
-              <br />
-              <span className="crawford-gradient bg-clip-text text-transparent">
-                AMYLOIDOSIS
+            <div className="mb-6">
+              <span className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
+                ⚡ Who am I?
               </span>
-              <br />
-              SOCIETY
+            </div>
+
+            <motion.h1
+              className="crawford-hero-title mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Meet Canadian Amyloidosis Society - Your
+              Dedicated Healthcare Support Organization
             </motion.h1>
             
             <motion.p
               className="crawford-subtitle mb-12 max-w-2xl"
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Accelerating awareness, diagnosis, and care through innovation and community
+              Looking to create comprehensive amyloidosis care without the hassle of navigating 
+              alone? Collaborate with us, your go-to healthcare support organization. 
+              With deep understanding of patient needs and medical expertise—from intuitive 
+              support services to advanced care coordination—we deliver top-tier assistance 
+              tailored to your journey.
             </motion.p>
 
-            <motion.div
-              className="flex flex-col sm:flex-row gap-6"
-              initial={{ opacity: 0, y: 30 }}
+            <motion.p
+              className="text-gray-700 mb-8 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              As a recognized healthcare advocate and community leader, we bring 
+              unparalleled skill and experience to every case. With over 1,200 patients 
+              supported successfully, we don't just provide care—we create comprehensive 
+              support experiences that resonate and empower.
+            </motion.p>
+
+            <motion.p
+              className="text-gray-700 mb-12 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              <motion.button
-                className="crawford-btn"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                EXPLORE DIRECTORY
-              </motion.button>
-              
-              <motion.button
-                className="crawford-btn-outline"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                LEARN MORE
-              </motion.button>
+              Ready to unlock the full potential of your healthcare journey? Let's work 
+              together to craft modern, impactful support for your needs.{' '}
+              <a href="#contact" className="text-blue-600 underline hover:text-blue-700">
+                Contact us today!
+              </a>
+            </motion.p>
+
+            {/* Social Links */}
+            <motion.div
+              className="flex space-x-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
+              {[
+                { name: 'Be', href: '#', bg: 'bg-black' },
+                { name: 'Dr', href: '#', bg: 'bg-pink-500' },
+                { name: 'Li', href: '#', bg: 'bg-blue-600' },
+                { name: 'Yt', href: '#', bg: 'bg-red-500' },
+                { name: '@', href: '#', bg: 'bg-gray-600' }
+              ].map((social) => (
+                <motion.a
+                  key={social.name}
+                  href={social.href}
+                  className={`w-12 h-12 ${social.bg} text-white rounded-full flex items-center justify-center font-medium hover:scale-110 transition-transform duration-200`}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {social.name}
+                </motion.a>
+              ))}
             </motion.div>
           </motion.div>
 
           <motion.div
-            className="crawford-content-right"
-            initial={{ opacity: 0, x: 100 }}
+            className="crawford-content-5"
+            initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, delay: 0.4, ease: [0.6, -0.05, 0.01, 0.99] }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="relative">
-              <motion.div
-                className="crawford-card crawford-card-hover p-12"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 1 }}
-              >
-                <div className="text-center">
-                  <div className="w-20 h-20 crawford-gradient rounded-full mx-auto mb-8 flex items-center justify-center">
-                    <svg className="w-10 h-10 text-black" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2L2 7L12 12L22 7L12 2Z" />
-                      <path d="M2 17L12 22L22 17" />
-                      <path d="M2 12L12 17L22 12" />
-                    </svg>
-                  </div>
-                  
-                  <h3 className="text-3xl font-bold mb-6">Impact by Numbers</h3>
-                  
-                  <div className="space-y-6">
-                    <div className="flex justify-between items-center py-4 border-b border-zinc-700">
-                      <span className="text-gray-400">Patients Supported</span>
-                      <span className="text-2xl font-bold text-[#00AFE6]">1,200+</span>
+              {/* Main Image Container */}
+              <div className="bg-gradient-to-br from-blue-100 via-purple-50 to-green-100 rounded-3xl p-8 relative overflow-hidden">
+                <div className="bg-white rounded-2xl p-8 relative z-10">
+                  <div className="text-center">
+                    <div className="w-20 h-20 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl mx-auto mb-8 flex items-center justify-center">
+                      <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
                     </div>
                     
-                    <div className="flex justify-between items-center py-4 border-b border-zinc-700">
-                      <span className="text-gray-400">Healthcare Providers</span>
-                      <span className="text-2xl font-bold text-[#00AFE6]">350+</span>
-                    </div>
-                    
-                    <div className="flex justify-between items-center py-4">
-                      <span className="text-gray-400">Research Studies</span>
-                      <span className="text-2xl font-bold text-[#00AFE6]">25+</span>
+                    <div className="grid grid-cols-3 gap-8 text-center">
+                      <div>
+                        <div className="text-3xl font-bold text-gray-900 mb-2">450+</div>
+                        <div className="text-sm text-gray-600">Successful Cases</div>
+                      </div>
+                      
+                      <div>
+                        <div className="text-3xl font-bold text-gray-900 mb-2">05</div>
+                        <div className="text-sm text-gray-600">Awards Won</div>
+                      </div>
+                      
+                      <div>
+                        <div className="text-3xl font-bold text-gray-900 mb-2">100%</div>
+                        <div className="text-sm text-gray-600">Client Satisfaction</div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                
+                {/* Decorative Pattern */}
+                <div className="absolute top-4 right-4 w-24 h-24 opacity-20">
+                  <div className="grid grid-cols-4 gap-1 h-full">
+                    {Array.from({ length: 16 }).map((_, i) => (
+                      <div key={i} className="bg-gray-400 rounded-sm"></div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating CTA */}
+              <motion.div
+                className="absolute -bottom-6 right-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+              >
+                <button className="bg-gray-900 text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors duration-200 shadow-lg">
+                  📞 Book a free call
+                </button>
               </motion.div>
             </div>
           </motion.div>
         </div>
-      </div>
-      
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 -left-20 w-96 h-96 bg-[#00AFE6] rounded-full opacity-5 blur-3xl"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0]
-          }}
-          transition={{ 
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        
-        <motion.div
-          className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#00DD89] rounded-full opacity-5 blur-3xl"
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            rotate: [90, 0, 90]
-          }}
-          transition={{ 
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
       </div>
     </section>
   );

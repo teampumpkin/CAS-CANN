@@ -28,11 +28,11 @@ export default function WelcomeSection() {
           >
             <div className="inline-flex items-center gap-2 mb-8">
               <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-              <span className="text-sm font-medium text-gray-700">Transforming Healthcare in Canada</span>
+              <span className="text-sm font-medium text-gray-300">Transforming Healthcare in Canada</span>
             </div>
 
             <motion.h2
-              className="crawford-section-title text-gray-900 mb-8 relative"
+              className="crawford-section-title text-white mb-8 relative"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -48,7 +48,7 @@ export default function WelcomeSection() {
             </motion.h2>
 
             <motion.p
-              className="text-xl text-gray-700 leading-relaxed mb-8 crawford-body-text"
+              className="text-xl text-gray-300 leading-relaxed mb-8 crawford-body-text"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -60,7 +60,7 @@ export default function WelcomeSection() {
             </motion.p>
 
             <motion.p
-              className="text-lg text-gray-600 leading-relaxed crawford-body-text"
+              className="text-lg text-gray-400 leading-relaxed crawford-body-text"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}

@@ -22,27 +22,36 @@ export default function AdvancedMouseFollower() {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX - 32);
       cursorY.set(e.clientY - 32);
-    };
-
-    const handleMouseEnter = (e: MouseEvent) => {
+      
+      // Check if hovering over interactive elements
       const target = e.target as HTMLElement;
-      if (target.tagName === 'BUTTON' || target.tagName === 'A' || target.closest('button') || target.closest('a')) {
-        setIsHovering(true);
+      let isInteractive = false;
+      
+      if (target && target.nodeType === Node.ELEMENT_NODE) {
+        // Check direct element
+        if (target.tagName === 'BUTTON' || target.tagName === 'A') {
+          isInteractive = true;
+        }
+        // Check parent elements safely
+        else {
+          let parent = target.parentElement;
+          while (parent && !isInteractive) {
+            if (parent.tagName === 'BUTTON' || parent.tagName === 'A') {
+              isInteractive = true;
+              break;
+            }
+            parent = parent.parentElement;
+          }
+        }
       }
-    };
-
-    const handleMouseLeave = () => {
-      setIsHovering(false);
+      
+      setIsHovering(isInteractive);
     };
 
     window.addEventListener('mousemove', moveCursor);
-    document.addEventListener('mouseenter', handleMouseEnter, true);
-    document.addEventListener('mouseleave', handleMouseLeave, true);
     
     return () => {
       window.removeEventListener('mousemove', moveCursor);
-      document.removeEventListener('mouseenter', handleMouseEnter, true);
-      document.removeEventListener('mouseleave', handleMouseLeave, true);
     };
   }, [cursorX, cursorY]);
 

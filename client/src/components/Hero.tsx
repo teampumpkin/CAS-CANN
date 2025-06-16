@@ -110,29 +110,56 @@ export default function Hero() {
 
         {/* Bottom section with tiles and scroll indicator */}
         <div className="pb-8">
-          {/* Quick Action Tiles */}
+          {/* Quick Action Tiles - Premium Style */}
           <motion.div
-            className="w-full max-w-4xl mx-auto px-6 mb-8"
+            className="w-full max-w-5xl mx-auto px-6 mb-12"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {quickTiles.map((tile, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {quickTiles.slice(0, 3).map((tile, index) => (
                 <motion.a
                   key={tile.label}
                   href={tile.href}
-                  className="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center group cursor-pointer border border-white/20 hover:bg-white/20 transition-all duration-300"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="group relative overflow-hidden"
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 1.4 + index * 0.1 }}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.8, delay: 1.4 + index * 0.2 }}
+                  whileHover={{ y: -8 }}
                 >
-                  <div className="w-10 h-10 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
-                    <tile.icon className="w-5 h-5 text-white" />
+                  {/* Glass morphism card */}
+                  <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 group-hover:bg-white/10">
+                    {/* Gradient background on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+                    
+                    {/* Content */}
+                    <div className="relative z-10 text-center">
+                      {/* Icon container */}
+                      <div className="relative mx-auto mb-6 w-16 h-16">
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
+                        <div className="relative flex items-center justify-center w-full h-full">
+                          <tile.icon className="w-7 h-7 text-white" />
+                        </div>
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-white/90 transition-colors duration-300">
+                        {tile.label}
+                      </h3>
+                      
+                      {/* Subtitle */}
+                      <p className="text-white/70 text-sm font-light leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                        {index === 0 && "Find healthcare providers and support"}
+                        {index === 1 && "Share your experience and stories"}
+                        {index === 2 && "Access educational resources"}
+                      </p>
+                    </div>
+
+                    {/* Hover effect lines */}
+                    <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                   </div>
-                  <div className="text-white font-medium text-sm">{tile.label}</div>
                 </motion.a>
               ))}
             </div>

@@ -122,37 +122,43 @@ export default function WelcomeSection() {
                   transition={{ duration: 0.8, delay: 0.5 }}
                 >
                   <div className="px-8 py-8">
-                    <div className="grid grid-cols-3 gap-8 text-center">
+                    <div className="flex">
+                      {/* First Stat */}
                       <motion.div
-                        className="group"
+                        className="flex-1 text-center"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.6 }}
-                        whileHover={{ scale: 1.05 }}
                       >
-                        <div className="text-4xl lg:text-5xl font-bold text-white mb-2 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">15+</div>
+                        <div className="text-4xl lg:text-5xl font-bold text-white mb-2">15+</div>
                         <div className="text-sm text-white/90 font-medium">Years Supporting</div>
                       </motion.div>
                       
+                      {/* Vertical Divider */}
+                      <div className="w-px bg-white/20 mx-6"></div>
+                      
+                      {/* Second Stat */}
                       <motion.div
-                        className="group"
+                        className="flex-1 text-center"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.7 }}
-                        whileHover={{ scale: 1.05 }}
                       >
-                        <div className="text-4xl lg:text-5xl font-bold text-white mb-2 bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent">1K+</div>
+                        <div className="text-4xl lg:text-5xl font-bold text-white mb-2">1K+</div>
                         <div className="text-sm text-white/90 font-medium">Patients Helped</div>
                       </motion.div>
                       
+                      {/* Vertical Divider */}
+                      <div className="w-px bg-white/20 mx-6"></div>
+                      
+                      {/* Third Stat */}
                       <motion.div
-                        className="group"
+                        className="flex-1 text-center"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.8 }}
-                        whileHover={{ scale: 1.05 }}
                       >
-                        <div className="text-4xl lg:text-5xl font-bold text-white mb-2 bg-gradient-to-r from-white to-purple-100 bg-clip-text text-transparent">100%</div>
+                        <div className="text-4xl lg:text-5xl font-bold text-white mb-2">100%</div>
                         <div className="text-sm text-white/90 font-medium">Patient Focused</div>
                       </motion.div>
                     </div>

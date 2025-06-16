@@ -81,13 +81,13 @@ export default function FAQSection() {
                 </span>
                 <motion.div
                   animate={{ rotate: openAccordion === faq.id ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex-shrink-0"
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full flex items-center justify-center group-hover:from-[#00AFE6]/20 group-hover:to-[#00DD89]/20"
                 >
                   {openAccordion === faq.id ? (
                     <Minus className="w-6 h-6 text-[#00AFE6]" />
                   ) : (
-                    <Plus className="w-6 h-6 text-[#6B7280]" />
+                    <Plus className="w-6 h-6 text-[#00AFE6]" />
                   )}
                 </motion.div>
               </motion.button>
@@ -98,11 +98,11 @@ export default function FAQSection() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden"
+                    transition={{ duration: 0.4, ease: [0.4, 0.0, 0.2, 1] }}
+                    className="overflow-hidden border-t border-gray-100"
                   >
-                    <div className="px-8 pb-8">
-                      <p className="body-md">
+                    <div className="px-8 lg:px-10 py-8 bg-gradient-to-r from-gray-50/50 to-transparent">
+                      <p className="text-lg text-gray-700 leading-relaxed">
                         {faq.answer}
                       </p>
                     </div>

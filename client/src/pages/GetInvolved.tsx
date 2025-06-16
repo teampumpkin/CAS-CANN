@@ -1,0 +1,974 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useMutation } from "@tanstack/react-query";
+import { 
+  Users, 
+  Heart, 
+  Upload, 
+  MessageSquare, 
+  Calendar, 
+  ExternalLink,
+  CheckCircle,
+  Mail,
+  MapPin,
+  Clock,
+  ArrowRight,
+  Shield,
+  UserPlus,
+  Gift
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+import { z } from "zod";
+
+const membershipFormSchema = z.object({
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  role: z.string().min(1, "Please select your role"),
+  organization: z.string().optional(),
+  province: z.string().min(1, "Please select your province"),
+  interests: z.array(z.string()).min(1, "Please select at least one area of interest"),
+  privacyConsent: z.boolean().refine(val => val === true, "You must agree to the privacy policy"),
+  codeOfConduct: z.boolean().refine(val => val === true, "You must agree to the code of conduct"),
+});
+
+type MembershipFormData = z.infer<typeof membershipFormSchema>;
+
+const storyFormSchema = z.object({
+  title: z.string().min(5, "Title must be at least 5 characters"),
+  storyType: z.string().min(1, "Please select story type"),
+  content: z.string().min(50, "Story must be at least 50 characters"),
+  authorName: z.string().min(2, "Please provide your name"),
+  authorRole: z.string().optional(),
+  canFeature: z.boolean(),
+  privacyConsent: z.boolean().refine(val => val === true, "You must agree to the privacy policy"),
+});
+
+type StoryFormData = z.infer<typeof storyFormSchema>;
+
+const participationWays = [
+  {
+    icon: UserPlus,
+    title: "Join CAS",
+    description: "Become a member of our growing community. Clinicians, researchers, and health system leaders are especially encouraged to register.",
+    action: "Register Now",
+    color: "from-[#00AFE6] to-blue-500"
+  },
+  {
+    icon: Upload,
+    title: "Contribute Resources",
+    description: "Upload clinical tools or patient education materials through our structured portal to help the community.",
+    action: "Upload Resource",
+    color: "from-[#00DD89] to-green-500"
+  },
+  {
+    icon: MessageSquare,
+    title: "Share Your Story",
+    description: "Help raise awareness by sharing a lived experience, reflection, or clinical journey with the community.",
+    action: "Share Story",
+    color: "from-purple-500 to-purple-600"
+  },
+  {
+    icon: Gift,
+    title: "Support the Mission",
+    description: "We welcome support from aligned organizations, philanthropic partners, and volunteers. Donations support CAS initiatives.",
+    action: "Donate Now",
+    color: "from-orange-500 to-red-500"
+  }
+];
+
+const membershipInterests = [
+  "Clinical Research",
+  "Patient Education",
+  "Resource Development",
+  "Policy Advocacy",
+  "Event Organization",
+  "Fundraising",
+  "Awareness Campaigns",
+  "Professional Development"
+];
+
+const provinces = [
+  { value: "BC", label: "British Columbia" },
+  { value: "AB", label: "Alberta" },
+  { value: "SK", label: "Saskatchewan" },
+  { value: "MB", label: "Manitoba" },
+  { value: "ON", label: "Ontario" },
+  { value: "QC", label: "Quebec" },
+  { value: "NB", label: "New Brunswick" },
+  { value: "NS", label: "Nova Scotia" },
+  { value: "PE", label: "Prince Edward Island" },
+  { value: "NL", label: "Newfoundland and Labrador" },
+  { value: "YT", label: "Yukon" },
+  { value: "NT", label: "Northwest Territories" },
+  { value: "NU", label: "Nunavut" }
+];
+
+const upcomingEvents = [
+  {
+    id: 1,
+    title: "Amyloidosis Research Symposium 2025",
+    date: "2025-08-15",
+    time: "9:00 AM - 5:00 PM",
+    location: "Toronto Convention Centre",
+    type: "Conference",
+    description: "Annual symposium bringing together leading researchers and clinicians to discuss latest advances in amyloidosis research and treatment.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "https://example.com/symposium-2025"
+  },
+  {
+    id: 2,
+    title: "Patient & Caregiver Workshop",
+    date: "2025-07-20",
+    time: "1:00 PM - 4:00 PM",
+    location: "Virtual Event",
+    type: "Workshop",
+    description: "Interactive workshop focused on navigation tools, support resources, and connecting with other families affected by amyloidosis.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "https://example.com/workshop-2025"
+  },
+  {
+    id: 3,
+    title: "Clinical Guidelines Update Webinar",
+    date: "2025-06-30",
+    time: "7:00 PM - 8:30 PM",
+    location: "Online",
+    type: "Webinar",
+    description: "Review of updated diagnostic and treatment guidelines for amyloidosis, featuring expert panel discussion and Q&A.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "https://example.com/webinar-guidelines"
+  }
+];
+
+const recentEvents = [
+  {
+    id: 1,
+    title: "World Amyloidosis Day 2024",
+    date: "2024-10-26",
+    description: "Global awareness campaign highlighting the importance of early diagnosis and access to care.",
+    image: "/api/placeholder/300/200",
+    attendees: 150
+  },
+  {
+    id: 2,
+    title: "Cross-Canada Clinical Network Meeting",
+    date: "2024-09-15",
+    description: "Healthcare providers from across Canada gathered to discuss regional care coordination strategies.",
+    image: "/api/placeholder/300/200",
+    attendees: 75
+  }
+];
+
+export default function GetInvolved() {
+  const [activeTab, setActiveTab] = useState("overview");
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const { toast } = useToast();
+
+  const membershipForm = useForm<MembershipFormData>({
+    resolver: zodResolver(membershipFormSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      role: "",
+      organization: "",
+      province: "",
+      interests: [],
+      privacyConsent: false,
+      codeOfConduct: false,
+    }
+  });
+
+  const storyForm = useForm<StoryFormData>({
+    resolver: zodResolver(storyFormSchema),
+    defaultValues: {
+      title: "",
+      storyType: "",
+      content: "",
+      authorName: "",
+      authorRole: "",
+      canFeature: false,
+      privacyConsent: false,
+    }
+  });
+
+  const membershipMutation = useMutation({
+    mutationFn: async (data: MembershipFormData) => {
+      return await apiRequest('/api/membership', 'POST', data);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Membership Application Submitted",
+        description: "Thank you for joining CAS! You'll receive a confirmation email shortly.",
+      });
+      membershipForm.reset();
+      setSelectedInterests([]);
+    },
+    onError: () => {
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your application. Please try again.",
+        variant: "destructive",
+      });
+    }
+  });
+
+  const storyMutation = useMutation({
+    mutationFn: async (data: StoryFormData) => {
+      return await apiRequest('/api/stories', 'POST', data);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Story Submitted",
+        description: "Thank you for sharing your story! It will be reviewed before publication.",
+      });
+      storyForm.reset();
+    },
+    onError: () => {
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your story. Please try again.",
+        variant: "destructive",
+      });
+    }
+  });
+
+  const handleInterestToggle = (interest: string) => {
+    const updated = selectedInterests.includes(interest)
+      ? selectedInterests.filter(i => i !== interest)
+      : [...selectedInterests, interest];
+    
+    setSelectedInterests(updated);
+    membershipForm.setValue('interests', updated);
+  };
+
+  const onMembershipSubmit = async (data: MembershipFormData) => {
+    membershipMutation.mutate(data);
+  };
+
+  const onStorySubmit = async (data: StoryFormData) => {
+    storyMutation.mutate(data);
+  };
+
+  const formatEventDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-CA', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Header */}
+      <section className="py-24 bg-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+              <Users className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-white/90">Get Involved</span>
+            </div>
+            
+            <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Join Our Mission
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                To Improve Awareness, Diagnosis, and Care
+              </span>
+            </h1>
+            
+            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+              The Canadian Amyloidosis Society is powered by people who care. Whether you're a clinician, researcher, patient, caregiver, or ally—you have a role to play in accelerating change.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Ways to Participate */}
+      <section className="py-24 bg-gray-900">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl lg:text-4xl font-bold font-rosarivo mb-6 text-white">
+              Ways to Participate
+            </h2>
+            <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              Choose how you'd like to contribute to our mission of improving amyloidosis care across Canada.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {participationWays.map((way, index) => (
+              <motion.div
+                key={way.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300 h-full group">
+                  <CardContent className="p-8">
+                    <div className="flex items-start gap-4">
+                      <div className={`p-3 rounded-xl bg-gradient-to-r ${way.color} group-hover:scale-110 transition-transform duration-300`}>
+                        <way.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold text-white mb-3">{way.title}</h3>
+                        <p className="text-white/70 mb-6 leading-relaxed">{way.description}</p>
+                        
+                        {way.title === "Join CAS" && (
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button className={`bg-gradient-to-r ${way.color} hover:opacity-90 text-white border-0`}>
+                                {way.action}
+                                <ArrowRight className="w-4 h-4 ml-2" />
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="bg-gray-800 border-white/20 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
+                              <DialogHeader>
+                                <DialogTitle className="text-white text-2xl">Join the Canadian Amyloidosis Society</DialogTitle>
+                              </DialogHeader>
+                              
+                              <Form {...membershipForm}>
+                                <form onSubmit={membershipForm.handleSubmit(onMembershipSubmit)} className="space-y-6">
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <FormField
+                                      control={membershipForm.control}
+                                      name="firstName"
+                                      render={({ field }) => (
+                                        <FormItem>
+                                          <FormLabel className="text-white/90">First Name *</FormLabel>
+                                          <FormControl>
+                                            <Input {...field} className="bg-white/10 border-white/30 text-white" />
+                                          </FormControl>
+                                          <FormMessage />
+                                        </FormItem>
+                                      )}
+                                    />
+
+                                    <FormField
+                                      control={membershipForm.control}
+                                      name="lastName"
+                                      render={({ field }) => (
+                                        <FormItem>
+                                          <FormLabel className="text-white/90">Last Name *</FormLabel>
+                                          <FormControl>
+                                            <Input {...field} className="bg-white/10 border-white/30 text-white" />
+                                          </FormControl>
+                                          <FormMessage />
+                                        </FormItem>
+                                      )}
+                                    />
+                                  </div>
+
+                                  <FormField
+                                    control={membershipForm.control}
+                                    name="email"
+                                    render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel className="text-white/90">Email Address *</FormLabel>
+                                        <FormControl>
+                                          <Input {...field} type="email" className="bg-white/10 border-white/30 text-white" />
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                    )}
+                                  />
+
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <FormField
+                                      control={membershipForm.control}
+                                      name="role"
+                                      render={({ field }) => (
+                                        <FormItem>
+                                          <FormLabel className="text-white/90">Role *</FormLabel>
+                                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            <FormControl>
+                                              <SelectTrigger className="bg-white/10 border-white/30 text-white">
+                                                <SelectValue placeholder="Select your role" />
+                                              </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                              <SelectItem value="clinician">Clinician</SelectItem>
+                                              <SelectItem value="researcher">Researcher</SelectItem>
+                                              <SelectItem value="patient">Patient</SelectItem>
+                                              <SelectItem value="caregiver">Caregiver</SelectItem>
+                                              <SelectItem value="administrator">Healthcare Administrator</SelectItem>
+                                              <SelectItem value="student">Student</SelectItem>
+                                              <SelectItem value="other">Other</SelectItem>
+                                            </SelectContent>
+                                          </Select>
+                                          <FormMessage />
+                                        </FormItem>
+                                      )}
+                                    />
+
+                                    <FormField
+                                      control={membershipForm.control}
+                                      name="province"
+                                      render={({ field }) => (
+                                        <FormItem>
+                                          <FormLabel className="text-white/90">Province/Territory *</FormLabel>
+                                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            <FormControl>
+                                              <SelectTrigger className="bg-white/10 border-white/30 text-white">
+                                                <SelectValue placeholder="Select province" />
+                                              </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                              {provinces.map(province => (
+                                                <SelectItem key={province.value} value={province.value}>
+                                                  {province.label}
+                                                </SelectItem>
+                                              ))}
+                                            </SelectContent>
+                                          </Select>
+                                          <FormMessage />
+                                        </FormItem>
+                                      )}
+                                    />
+                                  </div>
+
+                                  <FormField
+                                    control={membershipForm.control}
+                                    name="organization"
+                                    render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel className="text-white/90">Organization (Optional)</FormLabel>
+                                        <FormControl>
+                                          <Input {...field} placeholder="Hospital, university, or organization name" className="bg-white/10 border-white/30 text-white" />
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                    )}
+                                  />
+
+                                  <div>
+                                    <FormLabel className="text-white/90 mb-3 block">Areas of Interest *</FormLabel>
+                                    <div className="grid grid-cols-2 gap-3">
+                                      {membershipInterests.map((interest) => (
+                                        <div key={interest} className="flex items-center space-x-2">
+                                          <Checkbox
+                                            id={interest}
+                                            checked={selectedInterests.includes(interest)}
+                                            onCheckedChange={() => handleInterestToggle(interest)}
+                                            className="border-white/30"
+                                          />
+                                          <label
+                                            htmlFor={interest}
+                                            className="text-sm text-white/90 cursor-pointer"
+                                          >
+                                            {interest}
+                                          </label>
+                                        </div>
+                                      ))}
+                                    </div>
+                                    {membershipForm.formState.errors.interests && (
+                                      <p className="text-red-400 text-sm mt-1">
+                                        {membershipForm.formState.errors.interests.message}
+                                      </p>
+                                    )}
+                                  </div>
+
+                                  <div className="space-y-4">
+                                    <FormField
+                                      control={membershipForm.control}
+                                      name="privacyConsent"
+                                      render={({ field }) => (
+                                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                                          <FormControl>
+                                            <Checkbox
+                                              checked={field.value}
+                                              onCheckedChange={field.onChange}
+                                              className="border-white/30"
+                                            />
+                                          </FormControl>
+                                          <div className="space-y-1 leading-none">
+                                            <FormLabel className="text-white/90 text-sm">
+                                              I agree to the Privacy Policy *
+                                            </FormLabel>
+                                            <p className="text-xs text-white/60">
+                                              Your information will be used solely for CAS membership communications and activities.
+                                            </p>
+                                          </div>
+                                          <FormMessage />
+                                        </FormItem>
+                                      )}
+                                    />
+
+                                    <FormField
+                                      control={membershipForm.control}
+                                      name="codeOfConduct"
+                                      render={({ field }) => (
+                                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                                          <FormControl>
+                                            <Checkbox
+                                              checked={field.value}
+                                              onCheckedChange={field.onChange}
+                                              className="border-white/30"
+                                            />
+                                          </FormControl>
+                                          <div className="space-y-1 leading-none">
+                                            <FormLabel className="text-white/90 text-sm">
+                                              I agree to the Code of Conduct *
+                                            </FormLabel>
+                                            <p className="text-xs text-white/60">
+                                              I commit to respectful, professional, and collaborative participation in CAS activities.
+                                            </p>
+                                          </div>
+                                          <FormMessage />
+                                        </FormItem>
+                                      )}
+                                    />
+                                  </div>
+
+                                  <Button
+                                    type="submit"
+                                    disabled={membershipMutation.isPending}
+                                    className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0"
+                                  >
+                                    {membershipMutation.isPending ? (
+                                      <>
+                                        <Users className="w-4 h-4 mr-2 animate-spin" />
+                                        Submitting...
+                                      </>
+                                    ) : (
+                                      <>
+                                        <CheckCircle className="w-4 h-4 mr-2" />
+                                        Join CAS
+                                      </>
+                                    )}
+                                  </Button>
+                                </form>
+                              </Form>
+                            </DialogContent>
+                          </Dialog>
+                        )}
+
+                        {way.title === "Contribute Resources" && (
+                          <Button 
+                            onClick={() => window.location.href = '/upload-resource'}
+                            className={`bg-gradient-to-r ${way.color} hover:opacity-90 text-white border-0`}
+                          >
+                            {way.action}
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </Button>
+                        )}
+
+                        {way.title === "Share Your Story" && (
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button className={`bg-gradient-to-r ${way.color} hover:opacity-90 text-white border-0`}>
+                                {way.action}
+                                <ArrowRight className="w-4 h-4 ml-2" />
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="bg-gray-800 border-white/20 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
+                              <DialogHeader>
+                                <DialogTitle className="text-white text-2xl">Share Your Story</DialogTitle>
+                              </DialogHeader>
+                              
+                              <Form {...storyForm}>
+                                <form onSubmit={storyForm.handleSubmit(onStorySubmit)} className="space-y-6">
+                                  <FormField
+                                    control={storyForm.control}
+                                    name="title"
+                                    render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel className="text-white/90">Story Title *</FormLabel>
+                                        <FormControl>
+                                          <Input {...field} placeholder="Give your story a meaningful title" className="bg-white/10 border-white/30 text-white" />
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                    )}
+                                  />
+
+                                  <FormField
+                                    control={storyForm.control}
+                                    name="storyType"
+                                    render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel className="text-white/90">Story Type *</FormLabel>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                          <FormControl>
+                                            <SelectTrigger className="bg-white/10 border-white/30 text-white">
+                                              <SelectValue placeholder="Select story type" />
+                                            </SelectTrigger>
+                                          </FormControl>
+                                          <SelectContent>
+                                            <SelectItem value="patient">Patient Experience</SelectItem>
+                                            <SelectItem value="caregiver">Caregiver Journey</SelectItem>
+                                            <SelectItem value="clinical">Clinical Reflection</SelectItem>
+                                            <SelectItem value="research">Research Experience</SelectItem>
+                                            <SelectItem value="advocacy">Advocacy Story</SelectItem>
+                                          </SelectContent>
+                                        </Select>
+                                        <FormMessage />
+                                      </FormItem>
+                                    )}
+                                  />
+
+                                  <FormField
+                                    control={storyForm.control}
+                                    name="content"
+                                    render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel className="text-white/90">Your Story *</FormLabel>
+                                        <FormControl>
+                                          <Textarea 
+                                            {...field}
+                                            placeholder="Share your experience, insights, or reflections. Your story can help others in the amyloidosis community..."
+                                            rows={8}
+                                            className="bg-white/10 border-white/30 text-white placeholder-white/50"
+                                          />
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                    )}
+                                  />
+
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <FormField
+                                      control={storyForm.control}
+                                      name="authorName"
+                                      render={({ field }) => (
+                                        <FormItem>
+                                          <FormLabel className="text-white/90">Your Name *</FormLabel>
+                                          <FormControl>
+                                            <Input {...field} placeholder="How would you like to be credited?" className="bg-white/10 border-white/30 text-white" />
+                                          </FormControl>
+                                          <FormMessage />
+                                        </FormItem>
+                                      )}
+                                    />
+
+                                    <FormField
+                                      control={storyForm.control}
+                                      name="authorRole"
+                                      render={({ field }) => (
+                                        <FormItem>
+                                          <FormLabel className="text-white/90">Role (Optional)</FormLabel>
+                                          <FormControl>
+                                            <Input {...field} placeholder="e.g., Patient, Caregiver, Physician" className="bg-white/10 border-white/30 text-white" />
+                                          </FormControl>
+                                          <FormMessage />
+                                        </FormItem>
+                                      )}
+                                    />
+                                  </div>
+
+                                  <div className="space-y-4">
+                                    <FormField
+                                      control={storyForm.control}
+                                      name="canFeature"
+                                      render={({ field }) => (
+                                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                                          <FormControl>
+                                            <Checkbox
+                                              checked={field.value}
+                                              onCheckedChange={field.onChange}
+                                              className="border-white/30"
+                                            />
+                                          </FormControl>
+                                          <div className="space-y-1 leading-none">
+                                            <FormLabel className="text-white/90 text-sm">
+                                              CAS may feature this story
+                                            </FormLabel>
+                                            <p className="text-xs text-white/60">
+                                              Allow CAS to use this story in awareness campaigns, newsletters, or events.
+                                            </p>
+                                          </div>
+                                        </FormItem>
+                                      )}
+                                    />
+
+                                    <FormField
+                                      control={storyForm.control}
+                                      name="privacyConsent"
+                                      render={({ field }) => (
+                                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                                          <FormControl>
+                                            <Checkbox
+                                              checked={field.value}
+                                              onCheckedChange={field.onChange}
+                                              className="border-white/30"
+                                            />
+                                          </FormControl>
+                                          <div className="space-y-1 leading-none">
+                                            <FormLabel className="text-white/90 text-sm">
+                                              I agree to the Privacy Policy *
+                                            </FormLabel>
+                                            <p className="text-xs text-white/60">
+                                              I understand how my story will be used and shared by CAS.
+                                            </p>
+                                          </div>
+                                          <FormMessage />
+                                        </FormItem>
+                                      )}
+                                    />
+                                  </div>
+
+                                  <Button
+                                    type="submit"
+                                    disabled={storyMutation.isPending}
+                                    className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-600/80 hover:to-purple-500/80 text-white border-0"
+                                  >
+                                    {storyMutation.isPending ? (
+                                      <>
+                                        <MessageSquare className="w-4 h-4 mr-2 animate-spin" />
+                                        Submitting...
+                                      </>
+                                    ) : (
+                                      <>
+                                        <CheckCircle className="w-4 h-4 mr-2" />
+                                        Submit Story
+                                      </>
+                                    )}
+                                  </Button>
+                                </form>
+                              </Form>
+                            </DialogContent>
+                          </Dialog>
+                        )}
+
+                        {way.title === "Support the Mission" && (
+                          <Button 
+                            onClick={() => window.open('https://www.ucalgary.ca/medicine/ways-give', '_blank')}
+                            className={`bg-gradient-to-r ${way.color} hover:opacity-90 text-white border-0`}
+                          >
+                            {way.action}
+                            <ExternalLink className="w-4 h-4 ml-2" />
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Events Section */}
+      <section className="py-24 bg-gray-900 border-t border-white/10">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl lg:text-4xl font-bold font-rosarivo mb-6 text-white">
+              Events & Community
+            </h2>
+            <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              Join us at upcoming events and see highlights from our recent community gatherings.
+            </p>
+          </motion.div>
+
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
+            <TabsList className="grid w-full grid-cols-2 bg-white/10 border border-white/20">
+              <TabsTrigger value="overview" className="data-[state=active]:bg-white/20 text-white">
+                Upcoming Events
+              </TabsTrigger>
+              <TabsTrigger value="recent" className="data-[state=active]:bg-white/20 text-white">
+                Recent Events
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview" className="mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {upcomingEvents.map((event) => (
+                  <motion.div
+                    key={event.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300 h-full">
+                      <div className="aspect-[4/3] bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-t-lg flex items-center justify-center">
+                        <Calendar className="w-12 h-12 text-white/60" />
+                      </div>
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Badge variant="outline" className="text-[#00AFE6] border-[#00AFE6]/30">
+                            {event.type}
+                          </Badge>
+                        </div>
+                        
+                        <h3 className="text-lg font-semibold text-white mb-2">{event.title}</h3>
+                        
+                        <div className="space-y-2 mb-4 text-sm text-white/70">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4" />
+                            <span>{formatEventDate(event.date)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4" />
+                            <span>{event.time}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4" />
+                            <span>{event.location}</span>
+                          </div>
+                        </div>
+                        
+                        <p className="text-white/70 text-sm mb-6 line-clamp-3">
+                          {event.description}
+                        </p>
+                        
+                        <Button 
+                          onClick={() => window.open(event.registrationUrl, '_blank')}
+                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0"
+                        >
+                          Register Now
+                          <ExternalLink className="w-4 h-4 ml-2" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="recent" className="mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {recentEvents.map((event) => (
+                  <motion.div
+                    key={event.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="bg-white/5 border-white/20 overflow-hidden">
+                      <div className="aspect-[4/3] bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
+                        <Users className="w-12 h-12 text-white/60" />
+                      </div>
+                      <CardContent className="p-6">
+                        <div className="flex items-center justify-between mb-3">
+                          <Badge variant="outline" className="text-white/70 border-white/30">
+                            {formatEventDate(event.date)}
+                          </Badge>
+                          <div className="flex items-center gap-1 text-sm text-white/60">
+                            <Users className="w-4 h-4" />
+                            <span>{event.attendees} attendees</span>
+                          </div>
+                        </div>
+                        
+                        <h3 className="text-lg font-semibold text-white mb-3">{event.title}</h3>
+                        <p className="text-white/70 text-sm">{event.description}</p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
+      {/* Membership Benefits */}
+      <section className="py-24 bg-gray-900 border-t border-white/10">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl lg:text-4xl font-bold font-rosarivo mb-6 text-white">
+                Why Join CAS?
+              </h2>
+            </motion.div>
+
+            <Card className="bg-white/10 border-white/20">
+              <CardContent className="p-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-[#00AFE6]" />
+                      Member Benefits
+                    </h3>
+                    <ul className="space-y-3 text-white/80">
+                      <li className="flex items-start gap-2">
+                        <Mail className="w-4 h-4 text-[#00AFE6] mt-0.5" />
+                        <span>Periodic updates on amyloidosis research and initiatives</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Users className="w-4 h-4 text-[#00AFE6] mt-0.5" />
+                        <span>Invitations to contribute resources and expertise</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Shield className="w-4 h-4 text-[#00AFE6] mt-0.5" />
+                        <span>Recognition as contributor on shared resources</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Calendar className="w-4 h-4 text-[#00AFE6] mt-0.5" />
+                        <span>Early access to events and educational content</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                      <Shield className="w-5 h-5 text-[#00AFE6]" />
+                      Participation Notes
+                    </h3>
+                    <div className="space-y-3 text-white/80 text-sm">
+                      <p>
+                        Membership in CAS is voluntary and non-financial. There are no membership fees or obligations.
+                      </p>
+                      <p>
+                        Participation is governed by our Membership Policy and Code of Conduct, which ensure respectful and professional collaboration.
+                      </p>
+                      <p>
+                        Your privacy is protected - we only use your information for CAS communications and activities, and you can unsubscribe at any time.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

@@ -111,6 +111,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Membership API routes
+  app.post("/api/membership", async (req, res) => {
+    try {
+      // In a real implementation, this would save to a membership table
+      // For now, we'll just acknowledge the submission
+      console.log("Membership application received:", req.body);
+      res.status(201).json({ message: "Membership application submitted successfully" });
+    } catch (error) {
+      console.error(`Error submitting membership: ${error}`);
+      res.status(500).json({ message: "Failed to submit membership application" });
+    }
+  });
+
+  // Stories API routes
+  app.post("/api/stories", async (req, res) => {
+    try {
+      // In a real implementation, this would save to a stories table
+      // For now, we'll just acknowledge the submission
+      console.log("Story submission received:", req.body);
+      res.status(201).json({ message: "Story submitted successfully" });
+    } catch (error) {
+      console.error(`Error submitting story: ${error}`);
+      res.status(500).json({ message: "Failed to submit story" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

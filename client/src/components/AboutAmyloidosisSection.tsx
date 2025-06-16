@@ -104,8 +104,7 @@ export default function AboutAmyloidosisSection() {
                 </div>
               </div>
 
-              {/* Hover effect lines */}
-              <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${type.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-3xl`} />
+
             </motion.div>
           ))}
         </div>

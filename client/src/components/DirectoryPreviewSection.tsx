@@ -112,9 +112,7 @@ export default function DirectoryPreviewSection() {
                   </div>
                 </div>
                 
-                {/* Enhanced accent line with pulse */}
-                <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${feature.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-3xl`} />
-                <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-3xl animate-pulse`} />
+
               </motion.div>
             ))}
           </motion.div>

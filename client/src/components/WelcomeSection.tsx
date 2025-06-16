@@ -2,17 +2,12 @@ import { motion } from 'framer-motion';
 
 export default function WelcomeSection() {
   return (
-    <section 
-      className="relative py-32 lg:py-40 overflow-hidden"
-      style={{
-        background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)',
-      }}
-    >
+    <section className="relative py-32 lg:py-40 gradient-bg-subtle overflow-hidden">
       {/* Floating background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-green-500/10 to-cyan-500/10 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-purple-500/5 to-blue-500/5 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-blue-500/6 to-purple-500/6 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-green-500/6 to-cyan-500/6 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-purple-500/3 to-blue-500/3 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
       </div>
 
       <div className="relative max-w-4xl mx-auto px-6">
@@ -25,13 +20,7 @@ export default function WelcomeSection() {
         >
           {/* Glass morphism container */}
           <motion.div
-            className="rounded-3xl p-12 md:p-16"
-            style={{
-              background: 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.8)'
-            }}
+            className="glass-card-strong rounded-3xl p-12 md:p-16"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -48,12 +37,6 @@ export default function WelcomeSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
-              style={{
-                background: 'linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}
             >
               Welcome to the Canadian Amyloidosis Society
             </motion.h2>

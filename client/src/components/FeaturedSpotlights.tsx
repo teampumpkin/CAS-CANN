@@ -1,226 +1,192 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Heart, Upload, Users, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Star, Award, Heart } from 'lucide-react';
+import facilityImage1 from '@assets/DSC02826_1750068895453.jpg';
+import facilityImage2 from '@assets/DSC02841_1750068895454.jpg';
+import facilityImage3 from '@assets/DSC_0022_1750068812552.jpg';
 
 export default function FeaturedSpotlights() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   const spotlights = [
     {
       id: 1,
-      icon: Heart,
-      category: "Medical Education",
-      title: "What is ATTR? Learn the signs...",
-      description: "Understand the symptoms, diagnosis, and treatment options for ATTR amyloidosis. Early recognition can dramatically improve patient outcomes.",
-      imageUrl: "/images/medical-research.jpg",
-      href: "#attr-guide",
-      gradient: "from-[#00AFE6] to-[#0088CC]"
+      title: 'Leading Research Excellence',
+      description: 'Discover groundbreaking research initiatives that are advancing amyloidosis treatment and improving patient outcomes across Canada.',
+      image: facilityImage1,
+      category: 'Research',
+      readTime: '5 min read',
+      href: '#research-spotlight'
     },
     {
       id: 2,
-      icon: Upload,
-      category: "New Resource",
-      title: "New Upload: B.C. Cardiac Amyloidosis Pathway",
-      description: "Access the latest clinical pathway developed by British Columbia's cardiac amyloidosis experts to standardize care across the province.",
-      imageUrl: "/images/medical-pathway.jpg",
-      href: "#bc-pathway",
-      gradient: "from-[#00DD89] to-[#00BB77]"
+      title: 'Patient Success Stories',
+      description: 'Read inspiring stories from patients and families who have navigated their amyloidosis journey with strength and hope.',
+      image: facilityImage2,
+      category: 'Patient Stories',
+      readTime: '4 min read',
+      href: '#patient-stories'
     },
     {
       id: 3,
-      icon: Users,
-      category: "Community",
-      title: "Join the Movement: Why clinicians, researchers, and families are uniting",
-      description: "Discover how our collaborative approach is transforming amyloidosis care across Canada through shared knowledge and resources.",
-      imageUrl: "/images/community-collaboration.jpg",
-      href: "#join-movement",
-      gradient: "from-purple-500 to-purple-700"
+      title: 'Innovation in Treatment',
+      description: 'Explore the latest treatment innovations and clinical breakthroughs that are transforming amyloidosis care.',
+      image: facilityImage3,
+      category: 'Innovation',
+      readTime: '6 min read',
+      href: '#innovation-spotlight'
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % spotlights.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + spotlights.length) % spotlights.length);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
-
   return (
-    <section className="relative py-32 lg:py-40 gradient-bg-dark grain-overlay overflow-hidden">
-      {/* Parallax floating elements */}
-      <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-blue-500/12 to-purple-500/12 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-green-500/12 to-cyan-500/12 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
-        <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/8 to-pink-500/8 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
+    <section className="relative py-32 lg:py-40 gradient-bg-light overflow-hidden">
+      {/* Floating background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 right-10 w-80 h-80 bg-gradient-to-br from-blue-500/4 to-purple-500/4 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-gradient-to-tr from-green-500/4 to-cyan-500/4 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 right-1/3 w-72 h-72 bg-gradient-to-r from-purple-500/3 to-pink-500/3 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <motion.div 
-          className="text-center mb-20"
+        <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-20"
         >
           <motion.div
-            className="inline-flex items-center gap-2 glass-morphism-dark rounded-full px-6 py-3 mb-8 glow-effect-blue"
+            className="inline-flex items-center gap-2 glass-card rounded-full px-6 py-3 mb-8"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-white/90 font-medium tracking-wide">Featured Content</span>
+            <Star className="w-4 h-4 text-[#00AFE6]" />
+            <span className="text-gray-700 font-medium tracking-wide">Featured Stories</span>
           </motion.div>
 
           <motion.h2 
-            className="text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight"
+            className="crawford-section-title text-gray-900 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)' }}
           >
-            Spotlight Stories
+            Featured Spotlights
           </motion.h2>
+
           <motion.p 
-            className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed crawford-body-text"
+            className="text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto crawford-body-text"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)' }}
           >
-            Discover the latest resources, research insights, and community stories that are shaping amyloidosis care in Canada.
+            Highlighting the latest research, inspiring patient journeys, and innovative treatments 
+            that are making a difference in the amyloidosis community.
           </motion.p>
         </motion.div>
 
-        {/* Main Carousel */}
-        <div className="relative">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5 }}
+        {/* Spotlights Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {spotlights.map((spotlight, index) => (
+            <motion.article
+              key={spotlight.id}
+              className="glass-card rounded-3xl overflow-hidden hover-lift group"
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-50px" }}
             >
-              {/* Content Side */}
-              <div className="order-2 lg:order-1">
-                <motion.div
-                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  {(() => {
-                    const IconComponent = spotlights[currentIndex].icon;
-                    return <IconComponent className="w-4 h-4 text-white" />;
-                  })()}
-                  <span className="text-white/90 text-sm font-medium">
-                    {spotlights[currentIndex].category}
+              {/* Image */}
+              <div className="relative overflow-hidden">
+                <img 
+                  src={spotlight.image} 
+                  alt={spotlight.title}
+                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-3 py-1 rounded-full text-xs font-medium">
+                    {spotlight.category}
                   </span>
-                </motion.div>
-
-                <motion.h3
-                  className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  {spotlights[currentIndex].title}
-                </motion.h3>
-
-                <motion.p
-                  className="text-xl text-white/80 mb-10 leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  {spotlights[currentIndex].description}
-                </motion.p>
-
-                <motion.a
-                  href={spotlights[currentIndex].href}
-                  className={`group inline-flex items-center gap-3 bg-gradient-to-r ${spotlights[currentIndex].gradient} text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span>Learn More</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </motion.a>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/30 transition-colors duration-300"></div>
               </div>
 
-              {/* Image Side */}
-              <motion.div
-                className="order-1 lg:order-2 relative"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
-                  <img 
-                    src={spotlights[currentIndex].imageUrl}
-                    alt={spotlights[currentIndex].title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+              {/* Content */}
+              <div className="p-8">
+                <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
+                  <Heart className="w-4 h-4" />
+                  <span>{spotlight.readTime}</span>
                 </div>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors crawford-heading">
+                  {spotlight.title}
+                </h3>
                 
-                {/* Floating gradient accent */}
-                <div className={`absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br ${spotlights[currentIndex].gradient} rounded-full blur-2xl opacity-60`}></div>
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation Controls */}
-          <div className="flex items-center justify-between mt-16">
-            {/* Previous/Next Buttons */}
-            <div className="flex gap-4">
-              <motion.button
-                onClick={prevSlide}
-                className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </motion.button>
-              
-              <motion.button
-                onClick={nextSlide}
-                className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <ChevronRight className="w-5 h-5" />
-              </motion.button>
-            </div>
-
-            {/* Slide Indicators */}
-            <div className="flex gap-3">
-              {spotlights.map((_, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentIndex 
-                      ? 'bg-white' 
-                      : 'bg-white/30 hover:bg-white/50'
-                  }`}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                />
-              ))}
-            </div>
-          </div>
+                <p className="text-gray-700 leading-relaxed mb-8 crawford-body-text">
+                  {spotlight.description}
+                </p>
+                
+                <motion.a
+                  href={spotlight.href}
+                  className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#0088CC] font-semibold text-sm transition-colors group-hover:gap-3"
+                  whileHover={{ x: 4 }}
+                >
+                  Read More
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                </motion.a>
+              </div>
+            </motion.article>
+          ))}
         </div>
+
+        {/* Call to Action */}
+        <motion.div
+          className="text-center mt-16"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <motion.div
+            className="glass-card-strong rounded-3xl p-12 max-w-4xl mx-auto"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-3xl flex items-center justify-center">
+                <Award className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            
+            <h3 className="text-3xl font-bold text-gray-900 mb-4 crawford-heading">
+              Join Our Community
+            </h3>
+            
+            <p className="text-xl text-gray-700 leading-relaxed mb-8 crawford-body-text">
+              Connect with patients, families, and healthcare providers across Canada. 
+              Together, we're building a stronger amyloidosis community.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.a
+                href="#join-community"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold py-4 px-8 rounded-xl hover:shadow-xl transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Heart className="w-5 h-5" />
+                Join Community
+              </motion.a>
+              
+              <motion.a
+                href="#learn-more"
+                className="inline-flex items-center gap-2 bg-white text-gray-900 font-semibold py-4 px-8 rounded-xl border-2 border-gray-200 hover:border-[#00AFE6] hover:shadow-lg transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Learn More
+                <ArrowRight className="w-5 h-5" />
+              </motion.a>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

@@ -63,11 +63,11 @@ export default function FeaturedSpotlights() {
   }, []);
 
   return (
-    <section className="relative py-24 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 overflow-hidden">
-      {/* Background Elements */}
+    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+      {/* Background decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2"></div>
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -89,13 +89,10 @@ export default function FeaturedSpotlights() {
             <span className="text-white/90 font-medium tracking-wide">Featured Stories</span>
           </motion.div>
 
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight">
-            Community{" "}
-            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-              Spotlights
-            </span>
+          <h2 className="crawford-section-title text-white mb-8">
+            Community Spotlights
           </h2>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
             Inspiring stories, breakthrough research, and community updates from across our amyloidosis network.
           </p>
         </motion.div>
@@ -139,7 +136,7 @@ export default function FeaturedSpotlights() {
                       </motion.div>
 
                       <motion.h3
-                        className="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight"
+                        className="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight font-cardo"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}

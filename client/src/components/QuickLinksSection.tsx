@@ -71,22 +71,19 @@ export default function QuickLinksSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-[#0088CC] px-4 py-2 rounded-full text-sm font-medium mb-8 border border-blue-100 shadow-sm"
+            className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-gray-200/30 rounded-full px-6 py-3 mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span>Quick Access</span>
+            <span className="text-gray-700 font-medium tracking-wide">Quick Access</span>
           </motion.div>
 
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-            Essential{" "}
-            <span className="bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent">
-              Resources
-            </span>
+          <h2 className="crawford-section-title text-gray-900 mb-8">
+            Essential Resources
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
             Quick access to the most important tools and information for patients, families, and healthcare professionals.
           </p>
         </motion.div>
@@ -103,7 +100,7 @@ export default function QuickLinksSection() {
               transition={{ duration: 0.6, delay: 0.1 * index }}
               whileHover={{ y: -8, scale: 1.02 }}
             >
-              <div className={`relative bg-gradient-to-br ${link.bgColor} rounded-3xl p-8 border border-white/60 shadow-xl group-hover:shadow-2xl transition-all duration-500 overflow-hidden`}>
+              <div className="group relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/20 hover:border-gray-200/30 transition-all duration-500 hover:bg-white/20 overflow-hidden">
                 {/* Gradient overlay on hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${link.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
                 
@@ -114,10 +111,10 @@ export default function QuickLinksSection() {
                     <link.icon className="w-8 h-8 text-white" />
                   </div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors duration-300 font-cardo">
                     {link.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed mb-6 group-hover:text-gray-700 transition-colors duration-300">
+                  <p className="text-gray-700 leading-relaxed mb-6 group-hover:text-gray-800 transition-colors duration-300">
                     {link.description}
                   </p>
                   

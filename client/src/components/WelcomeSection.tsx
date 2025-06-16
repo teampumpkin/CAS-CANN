@@ -5,7 +5,7 @@ export default function WelcomeSection() {
     <section 
       className="relative py-32 lg:py-40 overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #0a0a0a 0%, #111111 100%)',
+        background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)',
       }}
     >
       {/* Floating background elements */}
@@ -27,10 +27,10 @@ export default function WelcomeSection() {
           <motion.div
             className="rounded-3xl p-12 md:p-16"
             style={{
-              background: 'rgba(255, 255, 255, 0.05)',
+              background: 'rgba(255, 255, 255, 0.7)',
               backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.08)'
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.8)'
             }}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -39,11 +39,11 @@ export default function WelcomeSection() {
           >
             <div className="inline-flex items-center gap-2 mb-8">
               <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-              <span className="text-sm font-medium text-gray-300">Transforming Healthcare in Canada</span>
+              <span className="text-sm font-medium text-gray-600">Transforming Healthcare in Canada</span>
             </div>
 
             <motion.h2
-              className="crawford-section-title text-white mb-8 relative"
+              className="crawford-section-title text-gray-900 mb-8 relative"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -59,7 +59,7 @@ export default function WelcomeSection() {
             </motion.h2>
 
             <motion.p
-              className="text-xl text-gray-300 leading-relaxed mb-8 crawford-body-text"
+              className="text-xl text-gray-700 leading-relaxed mb-8 crawford-body-text"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -71,7 +71,7 @@ export default function WelcomeSection() {
             </motion.p>
 
             <motion.p
-              className="text-lg text-gray-400 leading-relaxed crawford-body-text"
+              className="text-lg text-gray-600 leading-relaxed crawford-body-text"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}

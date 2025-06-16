@@ -19,9 +19,9 @@ export default function Hero() {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800 grain-overlay parallax-container"
+      className="relative min-h-screen overflow-hidden parallax-container"
       style={{
-        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%, #0a0a0a 100%)'
+        background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%, #ffffff 100%)'
       }}
     >
       {/* Parallax Background Elements */}
@@ -54,30 +54,28 @@ export default function Hero() {
         >
           {/* Hero Title */}
           <motion.h1 
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             style={{ 
-              fontFamily: 'Cardo, serif',
-              textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+              fontFamily: 'Cardo, serif'
             }}
           >
             Canadian Amyloidosis Society
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89] mt-2 glow-effect-blue">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89] mt-2">
               (CAS)
             </span>
           </motion.h1>
 
           {/* Hero Subheading */}
           <motion.p 
-            className="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed max-w-3xl mx-auto"
+            className="text-xl md:text-2xl text-gray-700 mb-12 leading-relaxed max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             style={{ 
-              fontFamily: 'Cardo, serif',
-              textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)'
+              fontFamily: 'Cardo, serif'
             }}
           >
             Accelerating awareness, improving diagnosis, and advancing care for amyloidosis patients across Canada

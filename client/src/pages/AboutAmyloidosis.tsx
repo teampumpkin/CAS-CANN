@@ -468,7 +468,7 @@ export default function AboutAmyloidosis() {
                 </div>
                 
                 <div className="mt-8 flex justify-center">
-                  <Link href={`/amyloidosis-types/${type.type.toLowerCase().replace(/\s+/g, '-')}`}>
+                  <Link href={`/amyloidosis-types/${type.type.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace(/--+/g, '-')}`}>
                     <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
                       Learn More About {type.type}
                       <ArrowRight className="w-4 h-4" />

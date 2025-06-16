@@ -21,7 +21,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
       <Route path="/directory" component={Directory} />
-      <Route path="/amyloidosis-types/al-(light-chain)-amyloidosis" component={ALAmyloidosis} />
+      <Route path="/amyloidosis-types/al-light-chain-amyloidosis" component={ALAmyloidosis} />
       <Route component={NotFound} />
     </Switch>
   );

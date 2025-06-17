@@ -40,10 +40,24 @@ export default function About() {
   ];
 
   const partners = [
-    { name: 'TAC', logo: '/api/placeholder/120/60', url: '#' },
-    { name: 'CANN', logo: '/api/placeholder/120/60', url: '#' },
-    { name: 'ARC', logo: '/api/placeholder/120/60', url: '#' },
-    { name: 'ISA', logo: '/api/placeholder/120/60', url: '#' }
+    { 
+      name: 'The Amyloidosis Centre (TAC)', 
+      shortName: 'TAC',
+      url: 'https://madhattr.ca/',
+      description: 'Leading Canadian amyloidosis treatment center'
+    },
+    { 
+      name: 'Amyloidosis Research Consortium (ARC)', 
+      shortName: 'ARC',
+      url: 'https://arci.org/about-amyloidosis/al-amyloidosis/',
+      description: 'International amyloidosis research network'
+    },
+    { 
+      name: 'International Society of Amyloidosis (ISA)', 
+      shortName: 'ISA',
+      url: 'https://www.isaamyloidosis.org/',
+      description: 'Global amyloidosis medical society'
+    }
   ];
 
   return (
@@ -761,21 +775,34 @@ export default function About() {
               
               <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 mb-8">
                 <h3 className="text-lg font-semibold text-white mb-4">Key Partners</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
                   {partners.map((partner, index) => (
-                    <motion.div
-                      key={partner.name}
-                      className="flex items-center gap-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300"
+                    <motion.a
+                      key={partner.shortName}
+                      href={partner.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300 group border border-white/5 hover:border-white/20"
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-xs font-bold text-white">{partner.name}</span>
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <span className="text-lg font-bold text-white">{partner.shortName}</span>
                       </div>
-                      <span className="text-sm text-white/80 font-medium">{partner.name}</span>
-                    </motion.div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-[#00AFE6] transition-colors duration-300">
+                          {partner.name}
+                        </h4>
+                        <p className="text-white/70 text-xs leading-relaxed">{partner.description}</p>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <svg className="w-4 h-4 text-white/40 group-hover:text-[#00AFE6] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </div>
+                    </motion.a>
                   ))}
                 </div>
               </div>

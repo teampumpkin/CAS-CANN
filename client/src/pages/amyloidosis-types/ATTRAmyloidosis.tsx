@@ -110,7 +110,7 @@ export default function ATTRAmyloidosis() {
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            className="max-w-4xl mx-auto text-center"
+            className="max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -120,24 +120,26 @@ export default function ATTRAmyloidosis() {
               Back to Amyloidosis Types
             </Link>
             
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
-              <Brain className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">ATTR Amyloidosis</span>
+            <div className="text-center">
+              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+                <Brain className="w-5 h-5 text-[#00AFE6]" />
+                <span className="text-sm font-medium text-white/90">ATTR Amyloidosis</span>
+              </div>
+              
+              <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  ATTR Amyloidosis
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  Transthyretin
+                </span>
+              </h1>
+              
+              <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+                ATTR amyloidosis is caused by misfolded transthyretin proteins. It includes both hereditary (genetic mutations) and wild-type (age-related) forms, primarily affecting the heart and nervous system.
+              </p>
             </div>
-            
-            <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                ATTR Amyloidosis
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Transthyretin
-              </span>
-            </h1>
-            
-            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
-              ATTR amyloidosis is caused by misfolded transthyretin proteins. It includes both hereditary (genetic mutations) and wild-type (age-related) forms, primarily affecting the heart and nervous system.
-            </p>
           </motion.div>
         </div>
       </section>

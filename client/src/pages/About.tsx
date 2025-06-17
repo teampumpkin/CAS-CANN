@@ -779,34 +779,77 @@ export default function About() {
                 We collaborate with leading organizations, research institutions, and healthcare networks to amplify our impact and accelerate progress in amyloidosis care across Canada and internationally.
               </p>
               
-              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 mb-8">
-                <h3 className="text-lg font-semibold text-white mb-4">Key Partners</h3>
-                <div className="space-y-4">
+              <div className="bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl mb-8">
+                <motion.div
+                  className="text-center mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-xl rounded-full px-6 py-3 border border-white/30 mb-4">
+                    <Network className="w-5 h-5 text-[#00AFE6]" />
+                    <span className="text-sm font-medium text-white/90">Strategic Alliances</span>
+                  </div>
+                  <h3 className="text-2xl font-bold font-rosarivo text-white mb-2">
+                    <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                      Global
+                    </span>
+                    {' '}
+                    <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                      Partners
+                    </span>
+                  </h3>
+                  <p className="text-white/70 text-sm max-w-md mx-auto">
+                    Collaborating with leading organizations to advance amyloidosis care worldwide
+                  </p>
+                </motion.div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
                   {partners.map((partner, index) => (
                     <motion.a
                       key={partner.shortName}
                       href={partner.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-start gap-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300 group border border-white/5 hover:border-white/20"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                      className="relative group"
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
                       viewport={{ once: true }}
+                      whileHover={{ y: -8 }}
                     >
-                      <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                        <span className="text-lg font-bold text-white">{partner.shortName}</span>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-[#00AFE6] transition-colors duration-300">
-                          {partner.name}
-                        </h4>
-                        <p className="text-white/70 text-xs leading-relaxed">{partner.description}</p>
-                      </div>
-                      <div className="flex-shrink-0">
-                        <svg className="w-4 h-4 text-white/40 group-hover:text-[#00AFE6] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
+                      <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-white/30 transition-all duration-500 group-hover:bg-white/10 overflow-hidden">
+                        {/* Background Gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        {/* Content */}
+                        <div className="relative z-10 flex items-start gap-4">
+                          <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/30 to-[#00DD89]/30 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-500 shadow-lg">
+                            <span className="text-xl font-bold text-white drop-shadow-lg">{partner.shortName}</span>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-start justify-between mb-2">
+                              <h4 className="text-white font-bold text-base group-hover:text-[#00AFE6] transition-colors duration-300 leading-tight">
+                                {partner.name}
+                              </h4>
+                              <div className="flex-shrink-0 ml-3">
+                                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-[#00AFE6]/20 transition-all duration-300">
+                                  <svg className="w-4 h-4 text-white/60 group-hover:text-[#00AFE6] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <p className="text-white/80 text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+                              {partner.description}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {/* Floating Elements */}
+                        <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200" />
+                        <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300" />
                       </div>
                     </motion.a>
                   ))}

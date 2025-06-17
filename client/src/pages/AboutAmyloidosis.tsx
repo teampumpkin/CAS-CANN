@@ -154,7 +154,7 @@ export default function AboutAmyloidosis() {
           </motion.div>
           
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -165,15 +165,15 @@ export default function AboutAmyloidosis() {
               <span className="text-sm text-white/80 group-hover:text-white">Warning Signs</span>
             </a>
             
-            <a href="#al-amyloidosis" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-red-500/30 hover:bg-red-500/10 transition-all duration-300 text-center group">
+            <Link href="/amyloidosis-types/al-light-chain-amyloidosis" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-red-500/30 hover:bg-red-500/10 transition-all duration-300 text-center group">
               <Heart className="w-6 h-6 text-red-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
-              <span className="text-sm text-white/80 group-hover:text-white">AL Type</span>
-            </a>
+              <span className="text-sm text-white/80 group-hover:text-white">AL Details</span>
+            </Link>
             
-            <a href="#attr-amyloidosis" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-blue-500/30 hover:bg-blue-500/10 transition-all duration-300 text-center group">
+            <Link href="/amyloidosis-types/attr-transthyretin-amyloidosis" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-blue-500/30 hover:bg-blue-500/10 transition-all duration-300 text-center group">
               <Brain className="w-6 h-6 text-blue-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
-              <span className="text-sm text-white/80 group-hover:text-white">ATTR Type</span>
-            </a>
+              <span className="text-sm text-white/80 group-hover:text-white">ATTR Details</span>
+            </Link>
             
             <Link href="/directory" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-[#00AFE6]/30 hover:bg-[#00AFE6]/10 transition-all duration-300 text-center group">
               <MapPin className="w-6 h-6 text-[#00AFE6] mx-auto mb-2 group-hover:scale-110 transition-transform" />
@@ -188,6 +188,16 @@ export default function AboutAmyloidosis() {
             <Link href="/contact" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-purple-500/30 hover:bg-purple-500/10 transition-all duration-300 text-center group">
               <Users className="w-6 h-6 text-purple-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
               <span className="text-sm text-white/80 group-hover:text-white">Get Support</span>
+            </Link>
+            
+            <Link href="/amyloidosis-types/aa-inflammatory-amyloidosis" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-green-500/30 hover:bg-green-500/10 transition-all duration-300 text-center group">
+              <Droplets className="w-6 h-6 text-green-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">AA Details</span>
+            </Link>
+            
+            <Link href="/amyloidosis-types/alect2-amyloidosis" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-purple-500/30 hover:bg-purple-500/10 transition-all duration-300 text-center group">
+              <Microscope className="w-6 h-6 text-purple-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">Other Types</span>
             </Link>
             
             <Link href="/get-involved" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-yellow-500/30 hover:bg-yellow-500/10 transition-all duration-300 text-center group">
@@ -448,6 +458,22 @@ export default function AboutAmyloidosis() {
                           Treatment Guides
                         </Link>
                       </div>
+                    </div>
+
+                    {/* Learn More Button for Detail Pages */}
+                    <div className="pt-8 border-t border-white/10 text-center">
+                      <Link 
+                        href={
+                          type.id === 'al' ? '/amyloidosis-types/al-light-chain-amyloidosis' :
+                          type.id === 'attr' ? '/amyloidosis-types/attr-transthyretin-amyloidosis' :
+                          type.id === 'aa' ? '/amyloidosis-types/aa-inflammatory-amyloidosis' :
+                          '/amyloidosis-types/alect2-amyloidosis'
+                        }
+                        className={`inline-flex items-center gap-2 bg-gradient-to-r ${type.color} text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 group`}
+                      >
+                        Learn More About {type.type.split(' ')[0]}
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </Link>
                     </div>
                   </div>
                 </motion.div>

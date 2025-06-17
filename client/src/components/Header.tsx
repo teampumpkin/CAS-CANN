@@ -34,7 +34,7 @@ export default function Header() {
       hasDropdown: true,
       dropdownItems: [
         { name: 'Get Involved', href: '/get-involved' },
-        { name: 'Join CAS', href: '/join-cas' },
+        { name: 'Join CAS', href: '/join' },
       ]
     },
     {

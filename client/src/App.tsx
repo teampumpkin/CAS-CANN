@@ -14,6 +14,7 @@ import Directory from "@/pages/Directory";
 import Resources from "@/pages/Resources";
 import UploadResource from "@/pages/UploadResource";
 import GetInvolved from "@/pages/GetInvolved";
+import JoinCAS from "@/pages/JoinCAS";
 import Contact from "@/pages/Contact";
 import ALAmyloidosis from "@/pages/amyloidosis-types/ALAmyloidosis";
 import ATTRAmyloidosis from "@/pages/amyloidosis-types/ATTRAmyloidosis";
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/resources" component={Resources} />
       <Route path="/upload-resource" component={UploadResource} />
       <Route path="/get-involved" component={GetInvolved} />
+      <Route path="/join" component={JoinCAS} />
       <Route path="/contact" component={Contact} />
       <Route path="/amyloidosis-types/al-light-chain-amyloidosis" component={ALAmyloidosis} />
       <Route path="/amyloidosis-types/attr-transthyretin-amyloidosis" component={ATTRAmyloidosis} />

@@ -229,6 +229,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Membership application API route
+  app.post("/api/membership", async (req, res) => {
+    try {
+      const membershipSchema = z.object({
+        firstName: z.string().min(2),
+        lastName: z.string().min(2),
+        email: z.string().email(),
+        phone: z.string().min(10),
+        address: z.string().min(5),
+        city: z.string().min(2),
+        province: z.string().min(2),
+        postalCode: z.string().min(6),
+        membershipType: z.enum(["individual", "family", "professional", "corporate", "student"]),
+        interests: z.array(z.string()).min(1),
+        experience: z.enum(["patient", "caregiver", "healthcare", "researcher", "advocate", "other"]),
+        howHeard: z.string().min(1),
+        additionalInfo: z.string().optional(),
+        newsletter: z.boolean().default(true),
+        terms: z.boolean().refine(val => val === true, {
+          message: 'Terms and conditions must be accepted'
+        })
+      });
+
+      const validatedData = membershipSchema.parse(req.body);
+      
+      console.log("Membership application received:", {
+        name: `${validatedData.firstName} ${validatedData.lastName}`,
+        email: validatedData.email,
+        membershipType: validatedData.membershipType,
+        interests: validatedData.interests,
+        timestamp: new Date().toISOString()
+      });
+
+      res.status(200).json({ 
+        message: "Membership application submitted successfully",
+        membershipId: `CAS-${Date.now()}`
+      });
+    } catch (error) {
+      console.error("Membership application error:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Validation failed", 
+          errors: error.errors.map(e => e.message) 
+        });
+      }
+      res.status(500).json({ message: "Failed to process membership application" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

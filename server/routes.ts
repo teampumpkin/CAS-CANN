@@ -137,6 +137,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Contact form API route
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const contactSchema = z.object({
+        name: z.string().min(2),
+        email: z.string().email(),
+        organization: z.string().optional(),
+        inquiryType: z.string().min(1),
+        subject: z.string().min(5),
+        message: z.string().min(20),
+      });
+
+      const validatedData = contactSchema.parse(req.body);
+      
+      // In a real implementation, this would:
+      // 1. Save to a contacts/messages database table
+      // 2. Send an email notification to the admin team
+      // 3. Send an auto-reply confirmation to the sender
+      console.log("Contact form submission received:", validatedData);
+      
+      res.status(201).json({ 
+        message: "Contact form submitted successfully",
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error(`Error submitting contact form: ${error}`);
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ 
+          message: "Validation error", 
+          errors: error.errors 
+        });
+      } else {
+        res.status(500).json({ message: "Failed to submit contact form" });
+      }
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

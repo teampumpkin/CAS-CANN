@@ -1,342 +1,152 @@
 import { motion } from 'framer-motion';
-import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target, Hospital } from 'lucide-react';
+import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target, Hospital, ChevronDown, ChevronRight, MapPin, BookOpen, ExternalLink } from 'lucide-react';
 import { Link } from 'wouter';
+import { useState } from 'react';
 import ParallaxBackground from '../components/ParallaxBackground';
-import medicalResearchImg from '@assets/DSC02841_1750068895454.jpg';
 
 export default function AboutAmyloidosis() {
-  const amyloidosisTypes = [
+  const [expandedType, setExpandedType] = useState<string | null>(null);
+
+  const toggleType = (type: string) => {
+    setExpandedType(expandedType === type ? null : type);
+  };
+
+  const warningSignsData = [
     {
-      type: 'AL (Light-Chain) Amyloidosis',
+      category: 'Cardiac Symptoms',
       icon: Heart,
-      color: 'from-red-500 to-pink-500',
-      symptoms: ['Fatigue', 'Swelling (especially legs)', 'Numbness', 'Irregular heartbeat', 'Enlarged tongue'],
-      diagnosis: ['Blood and urine tests (free light chains)', 'Biopsy', 'Cardiac imaging', 'Bone marrow biopsy'],
-      treatment: ['Chemotherapy', 'Stem cell transplant', 'Supportive organ care']
+      color: 'bg-red-500/20 border-red-500/30 text-red-400',
+      signs: ['Shortness of breath', 'Chest pain', 'Irregular heartbeat', 'Swelling in legs/ankles', 'Fatigue during normal activities']
     },
     {
-      type: 'ATTR (Transthyretin) Amyloidosis',
-      subtitle: 'Hereditary and Wild-Type',
+      category: 'Neurological Symptoms',
       icon: Brain,
-      color: 'from-blue-500 to-cyan-500',
-      symptoms: ['Heart failure', 'Peripheral neuropathy', 'Gastrointestinal issues', 'Carpal tunnel syndrome'],
-      diagnosis: ['Genetic testing (for hereditary)', 'Scintigraphy', 'Cardiac MRI', 'Tissue biopsy'],
-      treatment: ['TTR stabilizers (tafamidis)', 'Gene silencers', 'Cardiac therapies', 'Supportive care']
+      color: 'bg-blue-500/20 border-blue-500/30 text-blue-400',
+      signs: ['Numbness in hands/feet', 'Tingling sensations', 'Muscle weakness', 'Carpal tunnel syndrome', 'Balance problems']
     },
     {
-      type: 'AA (Secondary) Amyloidosis',
-      icon: Droplets,
-      color: 'from-green-500 to-emerald-500',
-      symptoms: ['Kidney dysfunction', 'Joint pain', 'Fatigue'],
-      diagnosis: ['SAA blood levels', 'Kidney or fat pad biopsy'],
-      treatment: ['Address underlying inflammatory condition (e.g., RA, infections)', 'Anti-inflammatory biologics']
-    },
-    {
-      type: 'Other Types',
-      subtitle: 'Localized, Dialysis-Related, Rare Mutations',
-      icon: Microscope,
-      color: 'from-purple-500 to-violet-500',
-      symptoms: ['Varies by type and location'],
-      diagnosis: ['Specialized testing based on presentation'],
-      treatment: ['Treatment varies widely based on type, organ impact, and cause']
+      category: 'Systemic Symptoms',
+      icon: Activity,
+      color: 'bg-orange-500/20 border-orange-500/30 text-orange-400',
+      signs: ['Unexplained weight loss', 'Enlarged tongue', 'Easy bruising', 'Changes in skin texture', 'Kidney dysfunction']
     }
   ];
 
-  const keyPoints = [
+  const amyloidosisTypes = [
     {
-      icon: Clock,
-      title: 'Early Action',
-      description: 'Early diagnosis and treatment can significantly improve quality of life and outcomes.'
+      id: 'al',
+      type: 'AL (Light-Chain) Amyloidosis',
+      subtitle: 'Most common form affecting multiple organs',
+      icon: Heart,
+      color: 'from-red-500 to-pink-500',
+      borderColor: 'border-red-500/30',
+      prevalence: '70% of systemic amyloidosis cases',
+      urgency: 'High - Progressive and potentially life-threatening',
+      symptoms: ['Fatigue and weakness', 'Swelling in legs and ankles', 'Numbness in hands/feet', 'Irregular heartbeat', 'Enlarged tongue', 'Easy bruising'],
+      diagnosis: ['Blood and urine free light chain tests', 'Tissue biopsy (fat pad, bone marrow)', 'Cardiac imaging (echo, MRI)', 'Congo red staining'],
+      treatment: ['Chemotherapy targeting plasma cells', 'Autologous stem cell transplant', 'Supportive organ care', 'Clinical trial participation'],
+      warningSign: 'Combination of heart and kidney symptoms with unexplained protein in urine'
     },
     {
-      icon: Search,
-      title: 'Recognition',
-      description: 'Understanding the signs and acting on them is key to better outcomes.'
+      id: 'attr',
+      type: 'ATTR (Transthyretin) Amyloidosis',
+      subtitle: 'Hereditary (hATTR) and Wild-Type (wtATTR)',
+      icon: Brain,
+      color: 'from-blue-500 to-cyan-500',
+      borderColor: 'border-blue-500/30',
+      prevalence: '25% of systemic amyloidosis cases',
+      urgency: 'Moderate to High - Progressive with available treatments',
+      symptoms: ['Heart failure symptoms', 'Peripheral neuropathy', 'Carpal tunnel syndrome (often bilateral)', 'Gastrointestinal issues', 'Eye problems'],
+      diagnosis: ['Genetic testing (for hereditary form)', 'DPD or PYP scintigraphy', 'Cardiac MRI', 'Tissue biopsy if needed'],
+      treatment: ['TTR stabilizers (tafamidis)', 'Gene silencing therapy', 'Cardiac support therapies', 'Liver transplant (severe hereditary cases)'],
+      warningSign: 'Heart failure in elderly men or family history with neuropathy'
     },
     {
-      icon: Target,
-      title: 'Precision Care',
-      description: 'Each subtype affects different organs and may require distinct treatment approaches.'
+      id: 'aa',
+      type: 'AA (Secondary) Amyloidosis',
+      subtitle: 'Caused by chronic inflammatory conditions',
+      icon: Droplets,
+      color: 'from-green-500 to-emerald-500',
+      borderColor: 'border-green-500/30',
+      prevalence: '5% of systemic amyloidosis cases',
+      urgency: 'Moderate - Depends on underlying condition control',
+      symptoms: ['Kidney dysfunction', 'Protein in urine', 'Joint pain and swelling', 'Chronic fatigue'],
+      diagnosis: ['SAA blood levels', 'Kidney or fat pad biopsy', 'Congo red staining', 'Assessment of inflammatory condition'],
+      treatment: ['Control underlying inflammatory disease', 'Anti-inflammatory biologics', 'Kidney support therapy', 'Treatment of rheumatoid arthritis, IBD, or infections'],
+      warningSign: 'Kidney problems in patients with chronic inflammatory diseases'
+    },
+    {
+      id: 'other',
+      type: 'Other Amyloidosis Types',
+      subtitle: 'Localized, Dialysis-Related, and Rare Forms',
+      icon: Microscope,
+      color: 'from-purple-500 to-violet-500',
+      borderColor: 'border-purple-500/30',
+      prevalence: 'Variable depending on type',
+      urgency: 'Variable - Depends on location and type',
+      symptoms: ['Varies by type and organ involvement', 'Local symptoms at affected sites', 'May be asymptomatic initially'],
+      diagnosis: ['Specialized testing based on presentation', 'Imaging of affected organs', 'Tissue biopsy', 'Genetic testing if familial'],
+      treatment: ['Varies by type and location', 'Local treatments for localized forms', 'Dialysis management for β2M type', 'Organ-specific supportive care'],
+      warningSign: 'Unexplained organ dysfunction or family history of similar symptoms'
     }
   ];
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Hero Section */}
-      <ParallaxBackground className="min-h-screen flex items-center relative overflow-hidden">
+      <ParallaxBackground className="min-h-[80vh] flex items-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/20 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/20 rounded-full blur-3xl translate-x-48 translate-y-48" />
-        <div className="absolute top-1/3 left-1/3 w-64 h-64 bg-white/5 rounded-full blur-2xl" />
         
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Hero Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
-            >
-              <motion.div
-                className="inline-block mb-6"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-xl rounded-full px-4 py-2 border border-white/20">
-                  <Microscope className="w-4 h-4 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">Medical Information</span>
-                </div>
-              </motion.div>
-              
-              <motion.h1
-                className="text-5xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.3 }}
-              >
-                <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-                  About
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Amyloidosis
-                </span>
-              </motion.h1>
-              
-              <motion.p
-                className="text-xl text-white/70 leading-relaxed mb-10 max-w-lg"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
-                Learn the signs, understand the types, and take action early.
-              </motion.p>
-              
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-              >
-                <button className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
-                  Learn More
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button className="bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
-                  Find Support
-                </button>
-              </motion.div>
-            </motion.div>
-            
-            {/* Hero Visual */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-            >
-              <div className="relative">
-                <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
-                  <div className="grid grid-cols-2 gap-6 mb-8">
-                    <div className="bg-gradient-to-r from-red-500/20 to-pink-500/20 rounded-2xl p-6 text-center">
-                      <AlertTriangle className="w-8 h-8 text-red-400 mx-auto mb-3" />
-                      <div className="text-lg font-bold text-white">Rare</div>
-                      <div className="text-sm text-white/70">Disease Group</div>
-                    </div>
-                    <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl p-6 text-center">
-                      <Clock className="w-8 h-8 text-blue-400 mx-auto mb-3" />
-                      <div className="text-lg font-bold text-white">Early</div>
-                      <div className="text-sm text-white/70">Detection Key</div>
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <Stethoscope className="w-12 h-12 text-white/50 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-white mb-2">Medical Expertise</h3>
-                    <p className="text-white/60 text-sm">Specialized knowledge for better outcomes</p>
-                  </div>
-                </div>
-                
-                {/* Floating medical icons */}
-                <motion.div
-                  className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center"
-                  animate={{ 
-                    y: [0, -10, 0],
-                    rotate: [0, 5, 0]
-                  }}
-                  transition={{ 
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <Heart className="w-8 h-8 text-white" />
-                </motion.div>
-                
-                <motion.div
-                  className="absolute -bottom-4 -left-4 w-16 h-16 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 flex items-center justify-center"
-                  animate={{ 
-                    x: [0, 10, 0],
-                    y: [0, -5, 0]
-                  }}
-                  transition={{ 
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1
-                  }}
-                >
-                  <Activity className="w-6 h-6 text-white/70" />
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </ParallaxBackground>
-
-      {/* Overview Section */}
-      <section className="py-24 bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 text-center">
           <motion.div
-            className="max-w-7xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
           >
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Content Column - Left Side */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
-                  <Microscope className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">Overview</span>
-                </div>
-                
-                <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                    Understanding
-                  </span>
-                  <br />
-                  <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                    Amyloidosis
-                  </span>
-                </h2>
-                
-                <p className="text-lg text-white/70 leading-relaxed mb-8">
-                  Amyloidosis is a group of rare diseases caused by abnormal protein buildup (amyloid) in the body. These deposits can damage organs and tissues, leading to serious health complications. Because symptoms often mimic other conditions, diagnosis is frequently delayed.
-                </p>
-                
-                <div className="space-y-6 mb-8">
-                  {keyPoints.map((point, index) => (
-                    <motion.div
-                      key={point.title}
-                      className="flex items-start gap-4"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                    >
-                      <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0">
-                        <point.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-white mb-2">{point.title}</h3>
-                        <p className="text-white/70">{point.description}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-                
-                <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-2xl p-6">
-                  <h3 className="text-xl font-semibold text-white mb-3">Why It Matters</h3>
-                  <p className="text-white/80">Early diagnosis and treatment can significantly improve quality of life and outcomes. Understanding the signs—and acting on them—is key.</p>
-                </div>
-              </motion.div>
-              
-              {/* Image Column - Right Side */}
-              <motion.div
-                className="relative"
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
-                  <div className="aspect-[4/5] relative">
-                    <img 
-                      src={medicalResearchImg} 
-                      alt="Medical research and diagnostic equipment for amyloidosis"
-                      className="w-full h-full object-cover"
-                    />
-                    
-                    {/* Stats Overlay */}
-                    <motion.div
-                      className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
-                      initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.5 }}
-                    >
-                      <div className="px-6 py-4">
-                        <div className="grid grid-cols-2 gap-4">
-                          <motion.div
-                            className="text-center"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.6 }}
-                          >
-                            <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                              3,000+
-                            </div>
-                            <div className="text-xs text-white/80">Canadians Affected</div>
-                          </motion.div>
-                          
-                          <motion.div
-                            className="text-center"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.7 }}
-                          >
-                            <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
-                              4
-                            </div>
-                            <div className="text-xs text-white/80">Main Types</div>
-                          </motion.div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
-                  
-                  {/* Floating accent elements */}
-                  <motion.div
-                    className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center"
-                    animate={{ 
-                      y: [0, -8, 0],
-                      rotate: [0, 5, 0]
-                    }}
-                    transition={{ 
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    <Microscope className="w-6 h-6 text-white" />
-                  </motion.div>
-                </div>
-              </motion.div>
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xl rounded-full px-4 py-2 border border-white/20 mb-6">
+              <Microscope className="w-4 h-4 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-white/90">Medical Information</span>
+            </div>
+            
+            <h1 className="text-5xl lg:text-7xl font-bold font-rosarivo mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                About
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Amyloidosis
+              </span>
+            </h1>
+            
+            <p className="text-xl text-white/70 leading-relaxed mb-10 max-w-3xl mx-auto">
+              Learn the signs, understand the types, and take action early. Knowledge and early detection can significantly improve outcomes.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/directory">
+                <a className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
+                  <MapPin className="w-4 h-4" />
+                  Find a Clinic
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </Link>
+              <Link href="/resources">
+                <a className="bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center gap-2">
+                  <BookOpen className="w-4 h-4" />
+                  View Resources
+                </a>
+              </Link>
             </div>
           </motion.div>
         </div>
-      </section>
+      </ParallaxBackground>
 
-      {/* Types Section */}
-      <section className="py-24 bg-gray-900">
-        <div className="container mx-auto px-6">
+      {/* Warning Signs Section */}
+      <section className="py-24 bg-gray-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+        <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -344,174 +154,310 @@ export default function AboutAmyloidosis() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
-              <Users className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Clinical Pathways</span>
+            <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-xl rounded-full px-4 py-2 border border-red-500/30 mb-6">
+              <AlertTriangle className="w-4 h-4 text-red-400" />
+              <span className="text-sm font-medium text-red-400">Critical Warning Signs</span>
             </div>
             
             <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
               <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Amyloidosis Types &
+                Recognize the
               </span>
               <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Clinical Pathways
+              <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
+                Warning Signs
               </span>
             </h2>
             
-            <p className="text-lg text-white/70 max-w-3xl mx-auto">
-              Each subtype affects different organs and may require distinct treatment approaches. Below are summaries of the most common forms:
+            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Early recognition of symptoms can lead to faster diagnosis and better outcomes. These signs warrant immediate medical attention.
             </p>
           </motion.div>
-          
-          <div className="grid gap-8 max-w-6xl mx-auto">
-            {amyloidosisTypes.map((type, index) => (
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {warningSignsData.map((category, index) => (
               <motion.div
-                key={type.type}
-                className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10"
+                key={category.category}
+                className={`bg-white/5 backdrop-blur-xl rounded-2xl p-6 border ${category.color.split(' ')[1]} ${category.color.split(' ')[2]}`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="flex items-start gap-6 mb-8">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${type.color} rounded-2xl flex items-center justify-center flex-shrink-0`}>
-                    <type.icon className="w-8 h-8 text-white" />
+                <div className="flex items-center gap-4 mb-6">
+                  <div className={`w-12 h-12 ${category.color.split(' ')[0]} rounded-xl flex items-center justify-center`}>
+                    <category.icon className={`w-6 h-6 ${category.color.split(' ')[2]}`} />
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold font-rosarivo mb-2">{type.type}</h3>
-                    {type.subtitle && (
-                      <p className="text-white/70 text-lg">{type.subtitle}</p>
-                    )}
-                  </div>
+                  <h3 className="text-lg font-bold text-white">{category.category}</h3>
                 </div>
                 
-                <div className="grid md:grid-cols-4 gap-6">
-                  {/* Symptoms */}
-                  <div className="bg-white/5 rounded-xl p-6">
-                    <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <AlertTriangle className="w-5 h-5 text-orange-400" />
-                      Signs & Symptoms
-                    </h4>
-                    <ul className="space-y-2">
-                      {type.symptoms.slice(0, 3).map((symptom, idx) => (
-                        <li key={idx} className="text-white/70 text-sm flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 bg-orange-400 rounded-full mt-2 flex-shrink-0" />
-                          {symptom}
-                        </li>
-                      ))}
-                      {type.symptoms.length > 3 && (
-                        <li className="text-white/50 text-xs">+ {type.symptoms.length - 3} more</li>
-                      )}
-                    </ul>
-                  </div>
-                  
-                  {/* Diagnosis */}
-                  <div className="bg-white/5 rounded-xl p-6">
-                    <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <Search className="w-5 h-5 text-blue-400" />
-                      Diagnosis & Testing
-                    </h4>
-                    <ul className="space-y-2">
-                      {type.diagnosis.slice(0, 3).map((test, idx) => (
-                        <li key={idx} className="text-white/70 text-sm flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
-                          {test}
-                        </li>
-                      ))}
-                      {type.diagnosis.length > 3 && (
-                        <li className="text-white/50 text-xs">+ {type.diagnosis.length - 3} more</li>
-                      )}
-                    </ul>
-                  </div>
-                  
-                  {/* Treatment */}
-                  <div className="bg-white/5 rounded-xl p-6">
-                    <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <Heart className="w-5 h-5 text-green-400" />
-                      Treatment
-                    </h4>
-                    <ul className="space-y-2">
-                      {type.treatment.slice(0, 3).map((treatment, idx) => (
-                        <li key={idx} className="text-white/70 text-sm flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-2 flex-shrink-0" />
-                          {treatment}
-                        </li>
-                      ))}
-                      {type.treatment.length > 3 && (
-                        <li className="text-white/50 text-xs">+ {type.treatment.length - 3} more</li>
-                      )}
-                    </ul>
-                  </div>
-                  
-                  {/* Treatment Centers & Clinical Trials */}
-                  <div className="bg-white/5 rounded-xl p-6">
-                    <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <Target className="w-5 h-5 text-purple-400" />
-                      Centers & Trials
-                    </h4>
-                    <div className="space-y-3">
-                      <div className="text-white/70 text-sm flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
-                        Specialized treatment centers
+                <div className="space-y-3">
+                  {category.signs.map((sign, signIndex) => (
+                    <div key={signIndex} className="flex items-start gap-3">
+                      <AlertTriangle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-white/80 text-sm">{sign}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Emergency CTA */}
+          <motion.div
+            className="bg-gradient-to-r from-red-500/20 to-orange-500/20 backdrop-blur-xl rounded-2xl p-8 border border-red-500/30 mt-12 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <AlertTriangle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-white mb-4">If you experience multiple symptoms from different categories</h3>
+            <p className="text-white/80 mb-6">Contact your healthcare provider immediately or visit an emergency department. Early diagnosis can be life-saving.</p>
+            <Link href="/directory">
+              <a className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
+                <Hospital className="w-5 h-5" />
+                Find Emergency Care
+              </a>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Amyloidosis Types - Collapsible Sections */}
+      <section className="py-24 bg-gray-900 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Types of
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Amyloidosis
+              </span>
+            </h2>
+            
+            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Understanding the different types helps guide diagnosis and treatment. Click on each type to learn more.
+            </p>
+          </motion.div>
+
+          <div className="space-y-6">
+            {amyloidosisTypes.map((type, index) => (
+              <motion.div
+                key={type.id}
+                className={`bg-white/5 backdrop-blur-xl rounded-2xl border ${type.borderColor} overflow-hidden`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                {/* Header - Always Visible */}
+                <div
+                  className="p-6 cursor-pointer hover:bg-white/5 transition-colors duration-300"
+                  onClick={() => toggleType(type.id)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className={`w-14 h-14 bg-gradient-to-r ${type.color} rounded-xl flex items-center justify-center shadow-lg`}>
+                        <type.icon className="w-7 h-7 text-white" />
                       </div>
-                      <div className="text-white/70 text-sm flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
-                        Active clinical trials
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-1">{type.type}</h3>
+                        <p className="text-white/70 text-sm">{type.subtitle}</p>
                       </div>
-                      <div className="text-white/70 text-sm flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
-                        Research opportunities
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-white/50 text-xs uppercase tracking-wide">Prevalence</p>
+                        <p className="text-white font-medium text-sm">{type.prevalence}</p>
                       </div>
+                      {expandedType === type.id ? (
+                        <ChevronDown className="w-6 h-6 text-white/60" />
+                      ) : (
+                        <ChevronRight className="w-6 h-6 text-white/60" />
+                      )}
                     </div>
                   </div>
                 </div>
-                
-                <div className="mt-8 flex justify-center">
-                  <Link href={`/amyloidosis-types/${type.type.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '').replace(/--+/g, '-')}`}>
-                    <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
-                      Learn More About {type.type}
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </Link>
-                </div>
+
+                {/* Expandable Content */}
+                <motion.div
+                  className={`overflow-hidden ${expandedType === type.id ? 'border-t border-white/10' : ''}`}
+                  initial={false}
+                  animate={{ 
+                    height: expandedType === type.id ? 'auto' : 0,
+                    opacity: expandedType === type.id ? 1 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="p-6 space-y-8">
+                    {/* Urgency Badge */}
+                    <div className={`inline-flex items-center gap-2 bg-gradient-to-r ${type.color}/20 rounded-full px-4 py-2 border ${type.borderColor}`}>
+                      <Clock className="w-4 h-4" />
+                      <span className="text-sm font-medium">{type.urgency}</span>
+                    </div>
+
+                    {/* Warning Sign Callout */}
+                    <div className="bg-orange-500/20 border border-orange-500/30 rounded-xl p-4">
+                      <div className="flex items-start gap-3">
+                        <AlertTriangle className="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <h4 className="text-orange-400 font-semibold mb-2">Key Warning Sign</h4>
+                          <p className="text-white/80 text-sm">{type.warningSign}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                      {/* Symptoms */}
+                      <div>
+                        <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                          <Stethoscope className="w-5 h-5 text-[#00AFE6]" />
+                          Symptoms
+                        </h4>
+                        <ul className="space-y-2">
+                          {type.symptoms.map((symptom, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
+                              <span className="text-white/80 text-sm">{symptom}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Diagnosis */}
+                      <div>
+                        <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                          <Search className="w-5 h-5 text-[#00DD89]" />
+                          Diagnosis
+                        </h4>
+                        <ul className="space-y-2">
+                          {type.diagnosis.map((test, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 bg-[#00DD89] rounded-full mt-2 flex-shrink-0" />
+                              <span className="text-white/80 text-sm">{test}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Treatment */}
+                      <div>
+                        <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                          <Target className="w-5 h-5 text-purple-400" />
+                          Treatment
+                        </h4>
+                        <ul className="space-y-2">
+                          {type.treatment.map((treatment, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                              <span className="text-white/80 text-sm">{treatment}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Disclaimer Section */}
-      <section className="py-24 pb-32 bg-gray-900">
-        <div className="container mx-auto px-6">
+      {/* CTA Section */}
+      <section className="py-24 bg-gray-900 relative border-t border-white/10">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+        <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            className="max-w-4xl mx-auto"
+            className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-2xl" />
-              
-              <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
-                    <Shield className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold font-rosarivo">Disclaimers & Clinical Oversight</h3>
-                </div>
-                
-                <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-6">
-                  <p className="text-white/80 leading-relaxed">
-                    <strong className="text-amber-400">Important:</strong> This content is for informational purposes only. It is not intended to replace medical advice. All medical decisions should be made in consultation with a qualified healthcare provider.
-                  </p>
-                </div>
-              </div>
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Take Action
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Today
+              </span>
+            </h2>
+            
+            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto mb-12">
+              Early detection and proper care can make a significant difference. Connect with specialists and access resources to support your journey.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <motion.div
+                className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <MapPin className="w-12 h-12 text-[#00AFE6] mx-auto mb-6" />
+                <h3 className="text-2xl font-bold text-white mb-4">Find Expert Care</h3>
+                <p className="text-white/70 mb-6">
+                  Connect with amyloidosis specialists and treatment centers across Canada.
+                </p>
+                <Link href="/directory">
+                  <a className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                    Find a Clinic
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </Link>
+              </motion.div>
+
+              <motion.div
+                className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <BookOpen className="w-12 h-12 text-[#00DD89] mx-auto mb-6" />
+                <h3 className="text-2xl font-bold text-white mb-4">Access Resources</h3>
+                <p className="text-white/70 mb-6">
+                  Explore educational materials, treatment guides, and support resources.
+                </p>
+                <Link href="/resources">
+                  <a className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300">
+                    View Resources
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         </div>
       </section>
+
+      {/* Persistent Disclaimer */}
+      <div className="bg-gray-800 border-t border-white/10 py-6 sticky bottom-0 z-50">
+        <div className="container mx-auto px-6">
+          <div className="flex items-start gap-4">
+            <Shield className="w-6 h-6 text-[#00AFE6] mt-0.5 flex-shrink-0" />
+            <div className="flex-1">
+              <p className="text-white/90 text-sm leading-relaxed">
+                <strong className="text-[#00AFE6]">Medical Disclaimer:</strong> This information is for educational purposes only and should not replace professional medical advice. 
+                Always consult with qualified healthcare providers for diagnosis, treatment recommendations, and medical decisions. 
+                Amyloidosis is a complex condition requiring specialized medical expertise.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

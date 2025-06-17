@@ -164,7 +164,7 @@ export default function JoinCAS() {
 
   const membershipMutation = useMutation({
     mutationFn: async (data: MembershipFormData) => {
-      return await apiRequest("/api/membership", "POST", data);
+      return await apiRequest("POST", "/api/membership", data);
     },
     onSuccess: () => {
       toast({

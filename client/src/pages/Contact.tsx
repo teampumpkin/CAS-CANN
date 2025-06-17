@@ -471,21 +471,17 @@ export default function Contact() {
                       name="inquiryType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/90 font-medium">Inquiry Type *</FormLabel>
+                          <FormLabel className="text-white/90 font-medium">Message Type *</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-[#00AFE6] focus:ring-[#00AFE6]/20">
-                                <SelectValue placeholder="Select inquiry type" />
+                                <SelectValue placeholder="Select message type" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent className="bg-gray-800 border-white/20">
                               <SelectItem value="general">General Inquiry</SelectItem>
                               <SelectItem value="upload-followup">Upload Follow-up</SelectItem>
                               <SelectItem value="technical">Technical Support</SelectItem>
-                              <SelectItem value="media">Media Request</SelectItem>
-                              <SelectItem value="collaboration">Collaboration</SelectItem>
-                              <SelectItem value="research">Research Partnership</SelectItem>
-                              <SelectItem value="resource">Resource Submission</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage className="text-red-400" />

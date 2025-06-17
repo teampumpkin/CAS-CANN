@@ -189,6 +189,16 @@ export default function AboutAmyloidosis() {
               <Users className="w-6 h-6 text-purple-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
               <span className="text-sm text-white/80 group-hover:text-white">Get Support</span>
             </Link>
+            
+            <Link href="/get-involved" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-yellow-500/30 hover:bg-yellow-500/10 transition-all duration-300 text-center group">
+              <Heart className="w-6 h-6 text-yellow-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">Get Involved</span>
+            </Link>
+            
+            <Link href="/about" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-gray-500/30 hover:bg-gray-500/10 transition-all duration-300 text-center group">
+              <Shield className="w-6 h-6 text-gray-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">About CAS</span>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -510,6 +520,268 @@ export default function AboutAmyloidosis() {
               </motion.div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Related Resources & Detailed Links Section */}
+      <section className="py-16 bg-gray-800 border-t border-white/10">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold font-rosarivo text-white mb-4">
+              Explore More <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Resources</span>
+            </h2>
+            <p className="text-white/70 max-w-2xl mx-auto">
+              Access comprehensive information, find specialists, and connect with support networks across Canada.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Diagnostic Information */}
+            <motion.div
+              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                  <Search className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-white">Diagnostic Resources</h3>
+              </div>
+              <ul className="space-y-3 mb-6">
+                <li>
+                  <Link href="/resources?category=diagnostic-tests" className="text-sm text-white/80 hover:text-[#00AFE6] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00AFE6] rounded-full" />
+                    Diagnostic Test Information
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=biopsy-guides" className="text-sm text-white/80 hover:text-[#00AFE6] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00AFE6] rounded-full" />
+                    Biopsy Preparation Guides
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=lab-results" className="text-sm text-white/80 hover:text-[#00AFE6] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00AFE6] rounded-full" />
+                    Understanding Lab Results
+                  </Link>
+                </li>
+              </ul>
+              <Link href="/directory?specialty=diagnostic" className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-white transition-colors text-sm font-medium">
+                <MapPin className="w-4 h-4" />
+                Find Diagnostic Centers
+              </Link>
+            </motion.div>
+
+            {/* Treatment Information */}
+            <motion.div
+              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                  <Target className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-white">Treatment Options</h3>
+              </div>
+              <ul className="space-y-3 mb-6">
+                <li>
+                  <Link href="/resources?category=chemotherapy" className="text-sm text-white/80 hover:text-[#00DD89] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00DD89] rounded-full" />
+                    Chemotherapy Information
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=stem-cell" className="text-sm text-white/80 hover:text-[#00DD89] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00DD89] rounded-full" />
+                    Stem Cell Transplant Guide
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=clinical-trials" className="text-sm text-white/80 hover:text-[#00DD89] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00DD89] rounded-full" />
+                    Clinical Trial Opportunities
+                  </Link>
+                </li>
+              </ul>
+              <Link href="/directory?specialty=treatment" className="inline-flex items-center gap-2 text-[#00DD89] hover:text-white transition-colors text-sm font-medium">
+                <Hospital className="w-4 h-4" />
+                Find Treatment Centers
+              </Link>
+            </motion.div>
+
+            {/* Support & Care */}
+            <motion.div
+              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center">
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-white">Support & Care</h3>
+              </div>
+              <ul className="space-y-3 mb-6">
+                <li>
+                  <Link href="/resources?category=patient-support" className="text-sm text-white/80 hover:text-purple-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-purple-400 rounded-full" />
+                    Patient Support Groups
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=caregiver-guides" className="text-sm text-white/80 hover:text-purple-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-purple-400 rounded-full" />
+                    Caregiver Resources
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=financial-assistance" className="text-sm text-white/80 hover:text-purple-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-purple-400 rounded-full" />
+                    Financial Assistance
+                  </Link>
+                </li>
+              </ul>
+              <Link href="/contact" className="inline-flex items-center gap-2 text-purple-400 hover:text-white transition-colors text-sm font-medium">
+                <Users className="w-4 h-4" />
+                Get Connected
+              </Link>
+            </motion.div>
+
+            {/* Research & Education */}
+            <motion.div
+              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                  <Microscope className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-white">Research & Education</h3>
+              </div>
+              <ul className="space-y-3 mb-6">
+                <li>
+                  <Link href="/resources?category=research-updates" className="text-sm text-white/80 hover:text-orange-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-orange-400 rounded-full" />
+                    Latest Research Updates
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=medical-publications" className="text-sm text-white/80 hover:text-orange-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-orange-400 rounded-full" />
+                    Medical Publications
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=educational-materials" className="text-sm text-white/80 hover:text-orange-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-orange-400 rounded-full" />
+                    Educational Materials
+                  </Link>
+                </li>
+              </ul>
+              <Link href="/get-involved" className="inline-flex items-center gap-2 text-orange-400 hover:text-white transition-colors text-sm font-medium">
+                <Heart className="w-4 h-4" />
+                Support Research
+              </Link>
+            </motion.div>
+
+            {/* Healthcare Professionals */}
+            <motion.div
+              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-blue-500 rounded-xl flex items-center justify-center">
+                  <Stethoscope className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-white">For Healthcare Professionals</h3>
+              </div>
+              <ul className="space-y-3 mb-6">
+                <li>
+                  <Link href="/resources?category=clinical-guidelines" className="text-sm text-white/80 hover:text-teal-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-teal-400 rounded-full" />
+                    Clinical Guidelines
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=diagnostic-tools" className="text-sm text-white/80 hover:text-teal-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-teal-400 rounded-full" />
+                    Diagnostic Tools
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=continuing-education" className="text-sm text-white/80 hover:text-teal-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-teal-400 rounded-full" />
+                    Continuing Education
+                  </Link>
+                </li>
+              </ul>
+              <Link href="/resources?audience=healthcare-professionals" className="inline-flex items-center gap-2 text-teal-400 hover:text-white transition-colors text-sm font-medium">
+                <Stethoscope className="w-4 h-4" />
+                Professional Resources
+              </Link>
+            </motion.div>
+
+            {/* Emergency Information */}
+            <motion.div
+              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-red-500/30"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
+                  <AlertTriangle className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-white">Emergency Information</h3>
+              </div>
+              <ul className="space-y-3 mb-6">
+                <li>
+                  <Link href="/resources?category=emergency-symptoms" className="text-sm text-white/80 hover:text-red-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-red-400 rounded-full" />
+                    Emergency Symptoms Guide
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=when-to-call-doctor" className="text-sm text-white/80 hover:text-red-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-red-400 rounded-full" />
+                    When to Call Your Doctor
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources?category=emergency-contacts" className="text-sm text-white/80 hover:text-red-400 flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-red-400 rounded-full" />
+                    Emergency Contact List
+                  </Link>
+                </li>
+              </ul>
+              <Link href="/directory?urgent=true" className="inline-flex items-center gap-2 text-red-400 hover:text-white transition-colors text-sm font-medium">
+                <Hospital className="w-4 h-4" />
+                Find Emergency Care
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </section>
 

@@ -47,6 +47,12 @@ export default function About() {
       description: 'Leading Canadian amyloidosis treatment center'
     },
     { 
+      name: 'Canadian Amyloidosis Network (CANN)', 
+      shortName: 'CANN',
+      url: '#',
+      description: 'National network for amyloidosis research and care'
+    },
+    { 
       name: 'Amyloidosis Research Consortium (ARC)', 
       shortName: 'ARC',
       url: 'https://arci.org/about-amyloidosis/al-amyloidosis/',

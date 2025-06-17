@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
 import { Users, Target, Heart, Shield, BookOpen, Network, UserCheck, Globe, ArrowRight, Stethoscope, Building2, Award } from 'lucide-react';
 import ParallaxBackground from '../components/ParallaxBackground';
+import facilityImage from '@assets/DSC_0022_1750141054185.jpg';
+import diagnosticImage from '@assets/DSC05873_1750141133352.jpg';
+import collaborationImage from '@assets/DSC02843_1750141211187.jpg';
+import leadershipImage from '@assets/DSC02841_1750141287437.jpg';
+import partnershipImage from '@assets/DSC_0022_1750141322198.jpg';
 
 export default function About() {
   const values = [
@@ -241,7 +246,7 @@ export default function About() {
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
                 <div className="aspect-[4/5] relative">
                   <img 
-                    src="/assets/DSC_0022_1750141054185.jpg" 
+                    src={facilityImage} 
                     alt="Modern healthcare facility representing the Canadian Amyloidosis Society's clinical network"
                     className="w-full h-full object-cover"
                   />
@@ -303,7 +308,7 @@ export default function About() {
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
                 <div className="aspect-[4/5] relative">
                   <img 
-                    src="/assets/DSC05873_1750141133352.jpg" 
+                    src={diagnosticImage} 
                     alt="Healthcare professional using diagnostic equipment, representing our vision for timely and accurate diagnosis"
                     className="w-full h-full object-cover"
                   />
@@ -464,7 +469,7 @@ export default function About() {
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
                 <div className="aspect-[4/5] relative">
                   <img 
-                    src="/assets/DSC02843_1750141211187.jpg" 
+                    src={collaborationImage} 
                     alt="Healthcare professionals collaborating at workstations, representing our network of connections and coordinated care"
                     className="w-full h-full object-cover"
                   />
@@ -582,7 +587,7 @@ export default function About() {
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
                 <div className="aspect-[4/5] relative">
                   <img 
-                    src="/assets/DSC02841_1750141287437.jpg" 
+                    src={leadershipImage} 
                     alt="Healthcare professionals collaborating, representing the Executive Committee's leadership and expertise"
                     className="w-full h-full object-cover"
                   />

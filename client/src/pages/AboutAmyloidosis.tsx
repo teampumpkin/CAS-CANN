@@ -125,26 +125,76 @@ export default function AboutAmyloidosis() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/directory">
-                <a className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  Find a Clinic
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
+              <Link href="/directory" className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
+                <MapPin className="w-4 h-4" />
+                Find a Clinic
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/resources">
-                <a className="bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center gap-2">
-                  <BookOpen className="w-4 h-4" />
-                  View Resources
-                </a>
+              <Link href="/resources" className="bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center gap-2">
+                <BookOpen className="w-4 h-4" />
+                View Resources
               </Link>
             </div>
           </motion.div>
         </div>
       </ParallaxBackground>
 
+      {/* Quick Navigation Section */}
+      <section className="py-12 bg-gray-800 border-y border-white/10">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-2xl font-bold text-white mb-2">Quick Navigation</h2>
+            <p className="text-white/60 text-sm">Jump to specific sections or explore related resources</p>
+          </motion.div>
+          
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <a href="#warning-signs" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-red-500/30 hover:bg-red-500/10 transition-all duration-300 text-center group">
+              <AlertTriangle className="w-6 h-6 text-red-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">Warning Signs</span>
+            </a>
+            
+            <a href="#al-amyloidosis" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-red-500/30 hover:bg-red-500/10 transition-all duration-300 text-center group">
+              <Heart className="w-6 h-6 text-red-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">AL Type</span>
+            </a>
+            
+            <a href="#attr-amyloidosis" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-blue-500/30 hover:bg-blue-500/10 transition-all duration-300 text-center group">
+              <Brain className="w-6 h-6 text-blue-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">ATTR Type</span>
+            </a>
+            
+            <Link href="/directory" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-[#00AFE6]/30 hover:bg-[#00AFE6]/10 transition-all duration-300 text-center group">
+              <MapPin className="w-6 h-6 text-[#00AFE6] mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">Find Clinics</span>
+            </Link>
+            
+            <Link href="/resources" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-[#00DD89]/30 hover:bg-[#00DD89]/10 transition-all duration-300 text-center group">
+              <BookOpen className="w-6 h-6 text-[#00DD89] mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">Resources</span>
+            </Link>
+            
+            <Link href="/contact" className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-purple-500/30 hover:bg-purple-500/10 transition-all duration-300 text-center group">
+              <Users className="w-6 h-6 text-purple-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-white/80 group-hover:text-white">Get Support</span>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Warning Signs Section */}
-      <section className="py-24 bg-gray-900 relative">
+      <section id="warning-signs" className="py-24 bg-gray-900 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -191,13 +241,26 @@ export default function AboutAmyloidosis() {
                   <h3 className="text-lg font-bold text-white">{category.category}</h3>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-3 mb-6">
                   {category.signs.map((sign, signIndex) => (
                     <div key={signIndex} className="flex items-start gap-3">
                       <AlertTriangle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
                       <span className="text-white/80 text-sm">{sign}</span>
                     </div>
                   ))}
+                </div>
+                
+                <div className="pt-4 border-t border-white/10">
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Link href="/resources?category=diagnosis" className="text-xs text-white/60 hover:text-[#00AFE6] flex items-center gap-1 transition-colors">
+                      <Search className="w-3 h-3" />
+                      Diagnostic Resources
+                    </Link>
+                    <Link href="/directory" className="text-xs text-white/60 hover:text-[#00DD89] flex items-center gap-1 transition-colors">
+                      <Hospital className="w-3 h-3" />
+                      Find Specialists
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -214,11 +277,9 @@ export default function AboutAmyloidosis() {
             <AlertTriangle className="w-12 h-12 text-red-400 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-white mb-4">If you experience multiple symptoms from different categories</h3>
             <p className="text-white/80 mb-6">Contact your healthcare provider immediately or visit an emergency department. Early diagnosis can be life-saving.</p>
-            <Link href="/directory">
-              <a className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
-                <Hospital className="w-5 h-5" />
-                Find Emergency Care
-              </a>
+            <Link href="/directory" className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
+              <Hospital className="w-5 h-5" />
+              Find Emergency Care
             </Link>
           </motion.div>
         </div>
@@ -252,6 +313,7 @@ export default function AboutAmyloidosis() {
           <div className="space-y-6">
             {amyloidosisTypes.map((type, index) => (
               <motion.div
+                id={`${type.id}-amyloidosis`}
                 key={type.id}
                 className={`bg-white/5 backdrop-blur-xl rounded-2xl border ${type.borderColor} overflow-hidden`}
                 initial={{ opacity: 0, y: 30 }}
@@ -323,7 +385,7 @@ export default function AboutAmyloidosis() {
                           <Stethoscope className="w-5 h-5 text-[#00AFE6]" />
                           Symptoms
                         </h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2 mb-4">
                           {type.symptoms.map((symptom, idx) => (
                             <li key={idx} className="flex items-start gap-2">
                               <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
@@ -331,6 +393,10 @@ export default function AboutAmyloidosis() {
                             </li>
                           ))}
                         </ul>
+                        <Link href="/resources?category=symptoms" className="text-[#00AFE6] hover:text-[#00DD89] text-sm flex items-center gap-1 transition-colors">
+                          <BookOpen className="w-3 h-3" />
+                          Symptom Resources
+                        </Link>
                       </div>
 
                       {/* Diagnosis */}
@@ -339,7 +405,7 @@ export default function AboutAmyloidosis() {
                           <Search className="w-5 h-5 text-[#00DD89]" />
                           Diagnosis
                         </h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2 mb-4">
                           {type.diagnosis.map((test, idx) => (
                             <li key={idx} className="flex items-start gap-2">
                               <div className="w-1.5 h-1.5 bg-[#00DD89] rounded-full mt-2 flex-shrink-0" />
@@ -347,6 +413,10 @@ export default function AboutAmyloidosis() {
                             </li>
                           ))}
                         </ul>
+                        <Link href="/directory" className="text-[#00DD89] hover:text-[#00AFE6] text-sm flex items-center gap-1 transition-colors">
+                          <MapPin className="w-3 h-3" />
+                          Find Testing Centers
+                        </Link>
                       </div>
 
                       {/* Treatment */}
@@ -355,7 +425,7 @@ export default function AboutAmyloidosis() {
                           <Target className="w-5 h-5 text-purple-400" />
                           Treatment
                         </h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2 mb-4">
                           {type.treatment.map((treatment, idx) => (
                             <li key={idx} className="flex items-start gap-2">
                               <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
@@ -363,6 +433,10 @@ export default function AboutAmyloidosis() {
                             </li>
                           ))}
                         </ul>
+                        <Link href="/resources?category=treatment" className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1 transition-colors">
+                          <Target className="w-3 h-3" />
+                          Treatment Guides
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -411,11 +485,9 @@ export default function AboutAmyloidosis() {
                 <p className="text-white/70 mb-6">
                   Connect with amyloidosis specialists and treatment centers across Canada.
                 </p>
-                <Link href="/directory">
-                  <a className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                    Find a Clinic
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                <Link href="/directory" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                  Find a Clinic
+                  <ExternalLink className="w-4 h-4" />
                 </Link>
               </motion.div>
 
@@ -431,11 +503,9 @@ export default function AboutAmyloidosis() {
                 <p className="text-white/70 mb-6">
                   Explore educational materials, treatment guides, and support resources.
                 </p>
-                <Link href="/resources">
-                  <a className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300">
-                    View Resources
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                <Link href="/resources" className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300">
+                  View Resources
+                  <ExternalLink className="w-4 h-4" />
                 </Link>
               </motion.div>
             </div>

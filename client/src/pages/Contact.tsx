@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Upload, Users, MessageCircle, ExternalLink, Send, User, Building2 } from 'lucide-react';
+import { Mail, Upload, Users, MessageCircle, ExternalLink, Send, User, Building2, Shield, RefreshCw } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -8,10 +8,12 @@ import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { apiRequest } from '@/lib/queryClient';
 import ParallaxBackground from '../components/ParallaxBackground';
+import { useState, useEffect } from 'react';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -20,9 +22,103 @@ const contactFormSchema = z.object({
   inquiryType: z.string().min(1, 'Please select an inquiry type'),
   subject: z.string().min(5, 'Subject must be at least 5 characters'),
   message: z.string().min(20, 'Message must be at least 20 characters'),
+  privacyConsent: z.boolean().refine(val => val === true, {
+    message: 'You must agree to the privacy policy to continue'
+  }),
+  captchaToken: z.string().min(1, 'Please complete the security verification'),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
+
+// Simple CAPTCHA Component
+function SimpleCaptcha({ onVerify }: { onVerify: (token: string) => void }) {
+  const [captchaQuestion, setCaptchaQuestion] = useState('');
+  const [captchaAnswer, setCaptchaAnswer] = useState('');
+  const [userAnswer, setUserAnswer] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
+
+  const generateCaptcha = () => {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    const operations = ['+', '-'];
+    const operation = operations[Math.floor(Math.random() * operations.length)];
+    
+    let answer;
+    let question;
+    
+    if (operation === '+') {
+      answer = num1 + num2;
+      question = `${num1} + ${num2}`;
+    } else {
+      // Ensure positive result for subtraction
+      const larger = Math.max(num1, num2);
+      const smaller = Math.min(num1, num2);
+      answer = larger - smaller;
+      question = `${larger} - ${smaller}`;
+    }
+    
+    setCaptchaQuestion(question);
+    setCaptchaAnswer(answer.toString());
+    setUserAnswer('');
+    setIsVerified(false);
+  };
+
+  useEffect(() => {
+    generateCaptcha();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const verifyCaptcha = () => {
+    if (userAnswer === captchaAnswer) {
+      setIsVerified(true);
+      onVerify(`captcha_${Date.now()}`);
+      return true;
+    } else {
+      setIsVerified(false);
+      onVerify('');
+      return false;
+    }
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center gap-3 p-4 bg-white/5 border border-white/20 rounded-xl">
+        <Shield className="w-5 h-5 text-[#00AFE6]" />
+        <div className="flex-1">
+          <span className="text-white text-sm">Security verification: What is </span>
+          <span className="text-[#00AFE6] font-mono font-bold">{captchaQuestion}</span>
+          <span className="text-white text-sm"> ?</span>
+        </div>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={generateCaptcha}
+          className="text-white/60 hover:text-white hover:bg-white/10"
+        >
+          <RefreshCw className="w-4 h-4" />
+        </Button>
+      </div>
+      <div className="flex items-center gap-3">
+        <Input
+          value={userAnswer}
+          onChange={(e) => {
+            setUserAnswer(e.target.value);
+            setTimeout(() => verifyCaptcha(), 100);
+          }}
+          placeholder="Enter answer"
+          className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20 w-24"
+        />
+        {isVerified && (
+          <div className="flex items-center gap-2 text-green-400 text-sm">
+            <Shield className="w-4 h-4" />
+            Verified
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Contact() {
   const { toast } = useToast();
@@ -36,6 +132,8 @@ export default function Contact() {
       inquiryType: '',
       subject: '',
       message: '',
+      privacyConsent: false,
+      captchaToken: '',
     },
   });
 
@@ -382,11 +480,12 @@ export default function Contact() {
                             </FormControl>
                             <SelectContent className="bg-gray-800 border-white/20">
                               <SelectItem value="general">General Inquiry</SelectItem>
+                              <SelectItem value="upload-followup">Upload Follow-up</SelectItem>
+                              <SelectItem value="technical">Technical Support</SelectItem>
                               <SelectItem value="media">Media Request</SelectItem>
                               <SelectItem value="collaboration">Collaboration</SelectItem>
                               <SelectItem value="research">Research Partnership</SelectItem>
                               <SelectItem value="resource">Resource Submission</SelectItem>
-                              <SelectItem value="technical">Technical Support</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage className="text-red-400" />

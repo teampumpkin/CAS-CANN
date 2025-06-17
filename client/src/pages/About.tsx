@@ -240,12 +240,11 @@ export default function About() {
             >
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
                 <div className="aspect-[4/5] relative">
-                  <div className="w-full h-full bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 flex items-center justify-center">
-                    <div className="text-center text-white/60">
-                      <Users className="w-16 h-16 mx-auto mb-4" />
-                      <p className="text-sm">Team Photo Placeholder</p>
-                    </div>
-                  </div>
+                  <img 
+                    src="/assets/DSC_0022_1750141054185.jpg" 
+                    alt="Modern healthcare facility representing the Canadian Amyloidosis Society's clinical network"
+                    className="w-full h-full object-cover"
+                  />
                   
                   {/* Stats Overlay */}
                   <motion.div

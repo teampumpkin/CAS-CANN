@@ -666,7 +666,7 @@ export default function About() {
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
                 <div className="aspect-[4/5] relative">
                   <img 
-                    src="/assets/DSC_0022_1750141322198.jpg" 
+                    src={partnershipImage} 
                     alt="Modern healthcare complex representing our strategic partnerships and institutional collaborations"
                     className="w-full h-full object-cover"
                   />

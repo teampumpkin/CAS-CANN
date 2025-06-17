@@ -30,13 +30,13 @@ export default function Header() {
     },
     {
       name: 'Get Involved',
-      href: '#get-involved',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Get Involved', href: '/get-involved' },
-        { name: 'Join CAS', href: '/join-cas' },
-        { name: 'Contact Us', href: '/contact' },
-      ]
+      href: '/get-involved',
+      hasDropdown: false,
+    },
+    {
+      name: 'Contact Us',
+      href: '/contact',
+      hasDropdown: false,
     },
   ];
 
@@ -86,18 +86,28 @@ export default function Header() {
                   key={item.name}
                   className="relative group"
                 >
-                  <motion.button
-                    className="flex items-center gap-1 px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                    onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.name)}
-                  >
-                    {item.name}
-                    {item.hasDropdown && (
+                  {item.hasDropdown ? (
+                    <motion.button
+                      className="flex items-center gap-1 px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                      onMouseEnter={() => setActiveDropdown(item.name)}
+                    >
+                      {item.name}
                       <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
-                    )}
-                  </motion.button>
+                    </motion.button>
+                  ) : (
+                    <motion.a
+                      href={item.href}
+                      className="flex items-center gap-1 px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                    >
+                      {item.name}
+                    </motion.a>
+                  )}
 
                   {/* Dropdown Menu */}
                   {item.hasDropdown && (
@@ -185,19 +195,31 @@ export default function Header() {
             <div className="space-y-2 px-4">
               {navItems.map((item) => (
                 <div key={item.name} className="space-y-1">
-                  <div className="px-4 py-2 text-white font-medium text-sm border-b border-white/10">
-                    {item.name}
-                  </div>
-                  {item.dropdownItems?.map((dropdownItem) => (
+                  {item.hasDropdown ? (
+                    <>
+                      <div className="px-4 py-2 text-white font-medium text-sm border-b border-white/10">
+                        {item.name}
+                      </div>
+                      {item.dropdownItems?.map((dropdownItem) => (
+                        <a
+                          key={dropdownItem.name}
+                          href={dropdownItem.href}
+                          className="block px-6 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 text-sm"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {dropdownItem.name}
+                        </a>
+                      ))}
+                    </>
+                  ) : (
                     <a
-                      key={dropdownItem.name}
-                      href={dropdownItem.href}
-                      className="block px-6 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 text-sm"
+                      href={item.href}
+                      className="block px-4 py-3 text-white font-medium text-sm hover:bg-white/10 rounded-lg transition-all duration-300"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {dropdownItem.name}
+                      {item.name}
                     </a>
-                  ))}
+                  )}
                 </div>
               ))}
             </div>

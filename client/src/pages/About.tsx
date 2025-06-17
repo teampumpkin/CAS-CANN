@@ -824,23 +824,21 @@ export default function About() {
                         <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         
                         {/* Content */}
-                        <div className="relative z-10 flex items-start gap-4">
-                          <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/30 to-[#00DD89]/30 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-500 shadow-lg">
-                            <span className="text-xl font-bold text-white drop-shadow-lg">{partner.shortName}</span>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-start justify-between mb-2">
-                              <h4 className="text-white font-bold text-base group-hover:text-[#00AFE6] transition-colors duration-300 leading-tight">
-                                {partner.name}
-                              </h4>
-                              <div className="flex-shrink-0 ml-3">
-                                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-[#00AFE6]/20 transition-all duration-300">
-                                  <svg className="w-4 h-4 text-white/60 group-hover:text-[#00AFE6] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                  </svg>
-                                </div>
-                              </div>
+                        <div className="relative z-10">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/30 to-[#00DD89]/30 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-500 shadow-lg">
+                              <span className="text-xl font-bold text-white drop-shadow-lg">{partner.shortName}</span>
                             </div>
+                            <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-[#00AFE6]/20 transition-all duration-300">
+                              <svg className="w-4 h-4 text-white/60 group-hover:text-[#00AFE6] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                              </svg>
+                            </div>
+                          </div>
+                          <div className="space-y-3">
+                            <h4 className="text-white font-bold text-lg group-hover:text-[#00AFE6] transition-colors duration-300 leading-tight">
+                              {partner.name}
+                            </h4>
                             <p className="text-white/80 text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
                               {partner.description}
                             </p>

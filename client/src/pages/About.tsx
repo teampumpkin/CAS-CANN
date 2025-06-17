@@ -181,78 +181,193 @@ export default function About() {
         </div>
       </ParallaxBackground>
 
-      {/* Who We Are & Vision Section */}
+      {/* Who We Are Section */}
       <section className="py-24 relative bg-gray-900">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Who We Are */}
+            {/* Content Column - Left Side */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="mb-8">
-                <motion.div
-                  className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  <Users className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">Who We Are</span>
-                </motion.div>
-                
-                <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                    Clinician-Led,
-                  </span>
-                  <br />
-                  <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                    Patient-Informed
-                  </span>
-                </h2>
-                
-                <p className="text-lg text-white/70 leading-relaxed mb-8">
-                  The Canadian Amyloidosis Society (CAS) is dedicated to increasing awareness, accelerating diagnosis, and improving coordinated care for people living with amyloidosis. We serve as a national platform to connect, align, and support individuals and institutions working across the amyloidosis spectrum.
-                </p>
-                
-                <div className="flex gap-4">
-                  <div className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-xl p-4 flex-1">
-                    <div className="text-2xl font-bold text-white mb-1">100%</div>
-                    <div className="text-sm text-white/70">Clinician-Led</div>
-                  </div>
-                  <div className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-xl p-4 flex-1">
-                    <div className="text-2xl font-bold text-white mb-1">Canada</div>
-                    <div className="text-sm text-white/70">Nationwide</div>
-                  </div>
+              <motion.div
+                className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Users className="w-5 h-5 text-[#00AFE6]" />
+                <span className="text-sm font-medium text-white/90">Who We Are</span>
+              </motion.div>
+              
+              <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
+                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  Clinician-Led,
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  Patient-Informed
+                </span>
+              </h2>
+              
+              <p className="text-lg text-white/70 leading-relaxed mb-8">
+                The Canadian Amyloidosis Society (CAS) is dedicated to increasing awareness, accelerating diagnosis, and improving coordinated care for people living with amyloidosis. We serve as a national platform to connect, align, and support individuals and institutions working across the amyloidosis spectrum.
+              </p>
+              
+              <div className="flex gap-4">
+                <div className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-xl p-4 flex-1">
+                  <div className="text-2xl font-bold text-white mb-1">100%</div>
+                  <div className="text-sm text-white/70">Clinician-Led</div>
+                </div>
+                <div className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-xl p-4 flex-1">
+                  <div className="text-2xl font-bold text-white mb-1">Canada</div>
+                  <div className="text-sm text-white/70">Nationwide</div>
                 </div>
               </div>
             </motion.div>
             
-            {/* Vision */}
+            {/* Image Column - Right Side */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
+                <div className="aspect-[4/5] relative">
+                  <div className="w-full h-full bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 flex items-center justify-center">
+                    <div className="text-center text-white/60">
+                      <Users className="w-16 h-16 mx-auto mb-4" />
+                      <p className="text-sm">Team Photo Placeholder</p>
+                    </div>
+                  </div>
+                  
+                  {/* Stats Overlay */}
+                  <motion.div
+                    className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  >
+                    <div className="px-6 py-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <motion.div
+                          className="text-center"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.6 }}
+                        >
+                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                            50+
+                          </div>
+                          <div className="text-xs text-white/80">Expert Clinicians</div>
+                        </motion.div>
+                        
+                        <motion.div
+                          className="text-center"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.7 }}
+                        >
+                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
+                            10
+                          </div>
+                          <div className="text-xs text-white/80">Provinces</div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision Section */}
+      <section className="py-24 bg-gray-900 border-t border-white/10">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Image Column - Left Side */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
+                <div className="aspect-[4/5] relative">
+                  <div className="w-full h-full bg-gradient-to-br from-[#00DD89]/20 to-[#00AFE6]/20 flex items-center justify-center">
+                    <div className="text-center text-white/60">
+                      <Target className="w-16 h-16 mx-auto mb-4" />
+                      <p className="text-sm">Vision Illustration Placeholder</p>
+                    </div>
+                  </div>
+                  
+                  {/* Floating accent elements */}
+                  <motion.div
+                    className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center"
+                    animate={{ 
+                      y: [0, -8, 0],
+                      rotate: [0, 5, 0]
+                    }}
+                    transition={{ 
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <Heart className="w-6 h-6 text-white" />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Content Column - Right Side */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-2xl -translate-y-16 translate-x-16" />
+              <motion.div
+                className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Target className="w-5 h-5 text-[#00AFE6]" />
+                <span className="text-sm font-medium text-white/90">Our Vision</span>
+              </motion.div>
+              
+              <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
+                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  A Better
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  Future
+                </span>
+              </h2>
+              
+              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-2xl -translate-y-12 translate-x-12" />
                 
                 <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
-                      <Target className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold font-rosarivo">Our Vision</h3>
-                  </div>
-                  
-                  <blockquote className="text-xl text-white/90 leading-relaxed font-medium italic border-l-4 border-[#00AFE6] pl-6">
+                  <blockquote className="text-xl text-white/90 leading-relaxed font-medium italic border-l-4 border-[#00AFE6] pl-6 mb-6">
                     "A Canada where every person affected by amyloidosis receives timely, accurate diagnosis and high-quality care."
                   </blockquote>
+                  
+                  <p className="text-white/70 leading-relaxed">
+                    We envision a healthcare system where amyloidosis is recognized early, managed effectively, and where patients and families receive the support they need throughout their journey.
+                  </p>
                 </div>
               </div>
             </motion.div>

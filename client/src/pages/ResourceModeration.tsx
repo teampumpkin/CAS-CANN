@@ -399,7 +399,7 @@ export default function ResourceModeration() {
           {isLoading ? (
             <div className="grid grid-cols-1 gap-6">
               {[...Array(3)].map((_, i) => (
-                <Card key={i} className="bg-white/5 border-white/20 animate-pulse">
+                <Card key={i} className="bg-white/5 backdrop-blur-xl border-white/20 animate-pulse">
                   <CardContent className="p-6">
                     <div className="h-6 bg-white/10 rounded mb-4"></div>
                     <div className="h-4 bg-white/10 rounded mb-2"></div>
@@ -429,7 +429,7 @@ export default function ResourceModeration() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Card className="bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
+                  <Card className="bg-white/5 backdrop-blur-xl border-white/20 hover:bg-white/10 transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">

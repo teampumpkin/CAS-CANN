@@ -609,7 +609,7 @@ export default function UploadResource() {
                 </Card>
 
                 {/* Contributor Information */}
-                <Card className="bg-white/10 border-white/20">
+                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
                   <CardHeader>
                     <CardTitle className="text-white flex items-center gap-2">
                       <UserCheck className="w-5 h-5 text-[#00AFE6]" />
@@ -676,7 +676,7 @@ export default function UploadResource() {
                 </Card>
 
                 {/* Consent and Privacy */}
-                <Card className="bg-white/10 border-white/20">
+                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
                   <CardHeader>
                     <CardTitle className="text-white flex items-center gap-2">
                       <Shield className="w-5 h-5 text-[#00AFE6]" />

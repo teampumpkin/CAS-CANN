@@ -67,20 +67,21 @@ export default function Header() {
         <div className="flex items-center justify-between h-24">
           
           {/* Logo */}
-          <motion.div
-            className="flex items-center gap-3"
+          <motion.a
+            href="/"
+            className="flex items-center gap-3 group cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="w-10 h-10 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center shadow-lg">
+            <div className="w-10 h-10 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 group-hover:shadow-xl transition-all duration-300">
               <Heart className="w-5 h-5 text-white" />
             </div>
             <div className="hidden sm:block">
-              <div className="text-lg font-bold text-white font-rosarivo">CAS</div>
-              <div className="text-xs text-white/70 -mt-1">Canadian Amyloidosis Society</div>
+              <div className="text-lg font-bold text-white font-rosarivo group-hover:text-white/90 transition-colors">CAS</div>
+              <div className="text-xs text-white/70 -mt-1 group-hover:text-white/60 transition-colors">Canadian Amyloidosis Society</div>
             </div>
-          </motion.div>
+          </motion.a>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">

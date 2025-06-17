@@ -336,7 +336,7 @@ export default function GetInvolved() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300 h-full group">
+                <Card className="bg-white/5 backdrop-blur-xl border-white/20 hover:bg-white/10 transition-all duration-300 h-full group">
                   <CardContent className="p-8">
                     <div className="flex items-start gap-4">
                       <div className={`p-3 rounded-xl bg-gradient-to-r ${way.color} group-hover:scale-110 transition-transform duration-300`}>
@@ -354,7 +354,7 @@ export default function GetInvolved() {
                                 <ArrowRight className="w-4 h-4 ml-2" />
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="bg-gray-800 border-white/20 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
+                            <DialogContent className="bg-gray-800/90 backdrop-blur-xl border-white/20 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
                               <DialogHeader>
                                 <DialogTitle className="text-white text-2xl">Join the Canadian Amyloidosis Society</DialogTitle>
                               </DialogHeader>
@@ -593,7 +593,7 @@ export default function GetInvolved() {
                                 <ArrowRight className="w-4 h-4 ml-2" />
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="bg-gray-800 border-white/20 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
+                            <DialogContent className="bg-gray-800/90 backdrop-blur-xl border-white/20 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
                               <DialogHeader>
                                 <DialogTitle className="text-white text-2xl">Share Your Story</DialogTitle>
                               </DialogHeader>
@@ -819,7 +819,7 @@ export default function GetInvolved() {
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                   >
-                    <Card className="bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300 h-full">
+                    <Card className="bg-white/5 backdrop-blur-xl border-white/20 hover:bg-white/10 transition-all duration-300 h-full">
                       <div className="aspect-[4/3] bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-t-lg flex items-center justify-center">
                         <Calendar className="w-12 h-12 text-white/60" />
                       </div>

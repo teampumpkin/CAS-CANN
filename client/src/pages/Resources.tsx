@@ -469,7 +469,7 @@ export default function Resources() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <Card className="bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300 h-full">
+                    <Card className="bg-white/5 backdrop-blur-xl border-white/20 hover:bg-white/10 transition-all duration-300 h-full">
                       <CardHeader className="pb-3">
                         <div className="flex items-start justify-between mb-2">
                           <div className="flex items-center gap-2">

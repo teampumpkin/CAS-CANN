@@ -530,6 +530,74 @@ export default function Contact() {
                       )}
                     />
 
+                    {/* CAPTCHA Field */}
+                    <FormField
+                      control={form.control}
+                      name="captchaToken"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white/90 font-medium">Security Verification *</FormLabel>
+                          <FormControl>
+                            <SimpleCaptcha 
+                              onVerify={(token) => {
+                                field.onChange(token);
+                              }}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-400" />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Privacy Consent */}
+                    <FormField
+                      control={form.control}
+                      name="privacyConsent"
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <div className="flex items-start space-x-3 space-y-0">
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                                className="border-white/20 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                              />
+                            </FormControl>
+                            <div className="space-y-1 leading-none">
+                              <FormLabel className="text-white/90 text-sm leading-relaxed">
+                                I agree to the collection and processing of my personal data as outlined in the{' '}
+                                <a 
+                                  href="/privacy-policy" 
+                                  className="text-[#00AFE6] hover:text-[#00DD89] underline transition-colors duration-300"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  Privacy Policy
+                                </a>
+                                . My information will only be used to respond to this inquiry and will not be shared with third parties without consent. *
+                              </FormLabel>
+                            </div>
+                          </div>
+                          <FormMessage className="text-red-400" />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Privacy Notice */}
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+                      <div className="flex items-start gap-3">
+                        <Shield className="w-5 h-5 text-[#00AFE6] mt-0.5 flex-shrink-0" />
+                        <div className="text-sm text-white/80 leading-relaxed">
+                          <p className="font-medium text-white mb-2">Your Privacy Matters</p>
+                          <p>
+                            We collect only the information necessary to respond to your inquiry. Your data is stored securely, 
+                            used solely for communication purposes, and never shared without your explicit consent. 
+                            You can request deletion of your data at any time by contacting us.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
                     <Button
                       type="submit"
                       disabled={contactMutation.isPending}

@@ -302,12 +302,11 @@ export default function About() {
             >
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
                 <div className="aspect-[4/5] relative">
-                  <div className="w-full h-full bg-gradient-to-br from-[#00DD89]/20 to-[#00AFE6]/20 flex items-center justify-center">
-                    <div className="text-center text-white/60">
-                      <Target className="w-16 h-16 mx-auto mb-4" />
-                      <p className="text-sm">Vision Illustration Placeholder</p>
-                    </div>
-                  </div>
+                  <img 
+                    src="/assets/DSC05873_1750141133352.jpg" 
+                    alt="Healthcare professional using diagnostic equipment, representing our vision for timely and accurate diagnosis"
+                    className="w-full h-full object-cover"
+                  />
                   
                   {/* Floating accent elements */}
                   <motion.div

@@ -339,7 +339,7 @@ export default function UploadResource() {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 
                 {/* File Upload Section */}
-                <Card className="bg-white/10 border-white/20">
+                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
                   <CardHeader>
                     <CardTitle className="text-white">Upload File</CardTitle>
                   </CardHeader>
@@ -412,7 +412,7 @@ export default function UploadResource() {
                 </Card>
 
                 {/* Resource Information */}
-                <Card className="bg-white/10 border-white/20">
+                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
                   <CardHeader>
                     <CardTitle className="text-white">Resource Information</CardTitle>
                   </CardHeader>

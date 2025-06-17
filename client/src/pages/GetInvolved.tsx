@@ -875,7 +875,7 @@ export default function GetInvolved() {
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                   >
-                    <Card className="bg-white/5 border-white/20 overflow-hidden">
+                    <Card className="bg-white/5 backdrop-blur-xl border-white/20 overflow-hidden">
                       <div className="aspect-[4/3] bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
                         <Users className="w-12 h-12 text-white/60" />
                       </div>
@@ -918,7 +918,7 @@ export default function GetInvolved() {
               </h2>
             </motion.div>
 
-            <Card className="bg-white/10 border-white/20">
+            <Card className="bg-white/10 backdrop-blur-xl border-white/20">
               <CardContent className="p-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>

@@ -457,27 +457,65 @@ export default function About() {
             </motion.div>
             
             <motion.div
+              className="relative"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10">
-                <div className="space-y-6">
-                  {services.map((service, index) => (
-                    <motion.div
-                      key={index}
-                      className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors duration-300"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                    >
-                      <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                      <p className="text-white/80 leading-relaxed">{service}</p>
-                    </motion.div>
-                  ))}
+              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
+                <div className="aspect-[4/5] relative">
+                  <div className="w-full h-full bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 flex items-center justify-center">
+                    <div className="text-center text-white/60">
+                      <Globe className="w-16 h-16 mx-auto mb-4" />
+                      <p className="text-sm">Network Illustration Placeholder</p>
+                    </div>
+                  </div>
+                  
+                  {/* Services Overlay */}
+                  <motion.div
+                    className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  >
+                    <div className="p-4">
+                      <h3 className="text-sm font-semibold text-white mb-3">Our Services</h3>
+                      <div className="space-y-2 max-h-32 overflow-y-auto">
+                        {services.slice(0, 3).map((service, index) => (
+                          <motion.div
+                            key={index}
+                            className="flex items-start gap-2"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                            viewport={{ once: true }}
+                          >
+                            <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-2 flex-shrink-0" />
+                            <p className="text-xs text-white/80 leading-relaxed">{service}</p>
+                          </motion.div>
+                        ))}
+                        <div className="text-xs text-white/60 pt-1">+{services.length - 3} more services</div>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
+                
+                {/* Floating accent elements */}
+                <motion.div
+                  className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-2xl flex items-center justify-center"
+                  animate={{ 
+                    y: [0, -8, 0],
+                    rotate: [0, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <Network className="w-6 h-6 text-white" />
+                </motion.div>
               </div>
             </motion.div>
           </div>
@@ -485,46 +523,229 @@ export default function About() {
       </section>
 
       {/* Executive Committee Section */}
-      <section className="py-24 bg-gray-900">
+      <section className="py-24 bg-gray-900 border-t border-white/10">
         <div className="container mx-auto px-6">
-          <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10">
-              <div className="flex items-center justify-center gap-4 mb-8">
-                <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
-                  <UserCheck className="w-6 h-6 text-white" />
-                </div>
-                <h2 className="text-3xl font-bold font-rosarivo">Executive Committee</h2>
-              </div>
-              <p className="text-lg text-white/80 leading-relaxed">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Content Column - Left Side */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <motion.div
+                className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <UserCheck className="w-5 h-5 text-[#00AFE6]" />
+                <span className="text-sm font-medium text-white/90">Leadership</span>
+              </motion.div>
+              
+              <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
+                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  Executive
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  Committee
+                </span>
+              </h2>
+              
+              <p className="text-lg text-white/70 leading-relaxed mb-8">
                 The CAS Executive Committee is composed of clinical leaders, researchers, strategic partners, and lived-experience advisors. This group guides platform strategy, ensures ethical oversight, and supports resource curation.
               </p>
-            </div>
-          </motion.div>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                  <p className="text-white/70">Clinical leaders from across Canada</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                  <p className="text-white/70">Research specialists and academic partners</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                  <p className="text-white/70">Lived-experience advisors and patient advocates</p>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Image Column - Right Side */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
+                <div className="aspect-[4/5] relative">
+                  <div className="w-full h-full bg-gradient-to-br from-purple-500/20 to-[#00AFE6]/20 flex items-center justify-center">
+                    <div className="text-center text-white/60">
+                      <UserCheck className="w-16 h-16 mx-auto mb-4" />
+                      <p className="text-sm">Committee Photo Placeholder</p>
+                    </div>
+                  </div>
+                  
+                  {/* Leadership Stats Overlay */}
+                  <motion.div
+                    className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  >
+                    <div className="px-6 py-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <motion.div
+                          className="text-center"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.6 }}
+                        >
+                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                            12
+                          </div>
+                          <div className="text-xs text-white/80">Committee Members</div>
+                        </motion.div>
+                        
+                        <motion.div
+                          className="text-center"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.7 }}
+                        >
+                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
+                            5
+                          </div>
+                          <div className="text-xs text-white/80">Specialties</div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+                
+                {/* Floating accent elements */}
+                <motion.div
+                  className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-purple-500 to-[#00AFE6] rounded-2xl flex items-center justify-center"
+                  animate={{ 
+                    y: [0, -8, 0],
+                    rotate: [0, 5, 0]
+                  }}
+                  transition={{ 
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                >
+                  <Award className="w-6 h-6 text-white" />
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Partners Section */}
-      <section className="py-24 pb-32 bg-gray-900">
+      <section className="py-24 pb-32 bg-gray-900 border-t border-white/10">
         <div className="container mx-auto px-6">
-          <motion.div
-            className="max-w-6xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Image Column - Left Side */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
+                <div className="aspect-[4/5] relative">
+                  <div className="w-full h-full bg-gradient-to-br from-green-500/20 to-[#00DD89]/20 flex items-center justify-center">
+                    <div className="text-center text-white/60">
+                      <Network className="w-16 h-16 mx-auto mb-4" />
+                      <p className="text-sm">Partnership Network Placeholder</p>
+                    </div>
+                  </div>
+                  
+                  {/* Partnership Stats Overlay */}
+                  <motion.div
+                    className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  >
+                    <div className="px-6 py-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <motion.div
+                          className="text-center"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.6 }}
+                        >
+                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                            15+
+                          </div>
+                          <div className="text-xs text-white/80">Strategic Partners</div>
+                        </motion.div>
+                        
+                        <motion.div
+                          className="text-center"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.7 }}
+                        >
+                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
+                            3
+                          </div>
+                          <div className="text-xs text-white/80">Countries</div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+                
+                {/* Floating accent elements */}
+                <motion.div
+                  className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-green-500 to-[#00DD89] rounded-2xl flex items-center justify-center"
+                  animate={{ 
+                    y: [0, -8, 0],
+                    rotate: [0, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 3.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5
+                  }}
+                >
+                  <Users className="w-6 h-6 text-white" />
+                </motion.div>
+              </div>
+            </motion.div>
+            
+            {/* Content Column - Right Side */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <motion.div
+                className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
                 <Network className="w-5 h-5 text-[#00AFE6]" />
                 <span className="text-sm font-medium text-white/90">Our Partners</span>
-              </div>
-              <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo">
+              </motion.div>
+              
+              <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
                   Strategic
                 </span>
@@ -533,32 +754,48 @@ export default function About() {
                   Partnerships
                 </span>
               </h2>
-            </div>
-            
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/10">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {partners.map((partner, index) => (
-                  <motion.a
-                    key={partner.name}
-                    href={partner.url}
-                    className="flex items-center justify-center p-6 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300 group"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-3 mx-auto group-hover:bg-white/20 transition-colors">
-                        <span className="text-xl font-bold text-white">{partner.name}</span>
+              
+              <p className="text-lg text-white/70 leading-relaxed mb-8">
+                We collaborate with leading organizations, research institutions, and healthcare networks to amplify our impact and accelerate progress in amyloidosis care across Canada and internationally.
+              </p>
+              
+              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 mb-8">
+                <h3 className="text-lg font-semibold text-white mb-4">Key Partners</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {partners.map((partner, index) => (
+                    <motion.div
+                      key={partner.name}
+                      className="flex items-center gap-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-xs font-bold text-white">{partner.name}</span>
                       </div>
-                      <span className="text-sm text-white/70">{partner.name}</span>
-                    </div>
-                  </motion.a>
-                ))}
+                      <span className="text-sm text-white/80 font-medium">{partner.name}</span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                  <p className="text-white/70">International amyloidosis organizations</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                  <p className="text-white/70">Leading Canadian research institutions</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                  <p className="text-white/70">Healthcare networks and specialty centers</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>

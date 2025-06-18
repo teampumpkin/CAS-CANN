@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import AboutAmyloidosis from "@/pages/AboutAmyloidosis";
+import Governance from "@/pages/Governance";
 import Directory from "@/pages/Directory";
 import Resources from "@/pages/Resources";
 import UploadResource from "@/pages/UploadResource";
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
+      <Route path="/governance" component={Governance} />
       <Route path="/directory" component={Directory} />
       <Route path="/resources" component={Resources} />
       <Route path="/upload-resource" component={UploadResource} />

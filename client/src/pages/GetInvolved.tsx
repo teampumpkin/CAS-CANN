@@ -796,12 +796,14 @@ export default function GetInvolved() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 text-white">
-              Events & Community
-            </h2>
-            <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
-              Join us at upcoming events and see highlights from our recent community gatherings.
-            </p>
+            <div className="inline-block bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-12 shadow-2xl">
+              <h2 className="text-3xl lg:text-4xl font-bold font-rosarivo mb-6 text-white">
+                Events & Community
+              </h2>
+              <p className="text-lg text-white/70 max-w-3xl mx-auto">
+                Join us at upcoming events and see highlights from our recent community gatherings.
+              </p>
+            </div>
           </motion.div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
@@ -944,9 +946,12 @@ export default function GetInvolved() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl lg:text-4xl font-bold font-rosarivo mb-6 text-white">
-                Why Join CAS?
-              </h2>
+              <div className="inline-block bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl px-12 py-8 shadow-2xl">
+                <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-4 text-white">
+                  Why Join CAS?
+                </h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mx-auto"></div>
+              </div>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -957,7 +962,7 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+                <Card className="bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,175,230,0.1)] transition-all duration-500 h-full">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                       <CheckCircle className="w-5 h-5 text-[#00AFE6]" />
@@ -992,7 +997,7 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+                <Card className="bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,221,137,0.1)] transition-all duration-500 h-full">
                   <CardContent className="p-8">
                     <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                       <Shield className="w-5 h-5 text-[#00AFE6]" />

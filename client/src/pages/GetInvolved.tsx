@@ -952,18 +952,22 @@ export default function GetInvolved() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-7xl mx-auto">
             <motion.div
-              className="text-center mb-20"
+              className="text-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="inline-block bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl px-12 py-8 shadow-2xl">
-                <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-4 text-white">
-                  Why Join CAS?
-                </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mx-auto"></div>
+              <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 mb-8">
+                <Shield className="w-5 h-5 text-[#00AFE6]" />
+                <span className="text-white/90 font-medium">Membership</span>
               </div>
+              <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
+                <span className="text-white">Why Join </span>
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  CAS?
+                </span>
+              </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

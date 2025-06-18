@@ -946,12 +946,9 @@ export default function GetInvolved() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="inline-block bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl px-12 py-8 shadow-2xl">
-                <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-4 text-white">
-                  Why Join CAS?
-                </h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mx-auto"></div>
-              </div>
+              <h2 className="text-3xl lg:text-4xl font-bold font-rosarivo mb-6 text-white">
+                Why Join CAS?
+              </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

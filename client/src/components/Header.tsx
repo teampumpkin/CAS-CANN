@@ -39,7 +39,7 @@ export default function Header() {
       ]
     },
     {
-      name: 'events',
+      name: 'Contact Us',
       href: '/contact',
       hasDropdown: false,
     },

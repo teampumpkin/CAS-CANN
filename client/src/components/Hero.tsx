@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { MapPin, Upload, BookOpen, Users } from 'lucide-react';
+import heroBackgroundImage from '@assets/shutterstock_2324709287_1750240360296.jpg';
 
 export default function Hero() {
   const quickTiles = [
@@ -11,13 +12,13 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Sophisticated background with real hospital image */}
+      {/* Sophisticated background with medical heart visualization */}
       <div className="absolute inset-0">
-        {/* Hospital exterior background image */}
+        {/* Medical heart background image */}
         <div className="absolute inset-0">
           <img 
-            src="/images/hospital-exterior.jpg" 
-            alt="Modern healthcare facility exterior" 
+            src={heroBackgroundImage}
+            alt="Digital heart visualization representing cardiac amyloidosis research" 
             className="w-full h-full object-cover"
           />
           {/* Sophisticated overlay for text readability and brand enhancement */}

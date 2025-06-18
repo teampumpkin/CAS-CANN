@@ -790,27 +790,18 @@ export default function GetInvolved() {
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            className="text-center mb-20"
+            className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="relative inline-block">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl px-12 py-16 shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/[0.05] to-transparent rounded-full blur-xl"></div>
-                <div className="relative z-10">
-                  <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 text-white">
-                    Events & Community
-                  </h2>
-                  <div className="w-24 h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mx-auto mb-6"></div>
-                  <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
-                    Join us at upcoming events and see highlights from our recent community gatherings.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 text-white">
+              Events & Community
+            </h2>
+            <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
+              Join us at upcoming events and see highlights from our recent community gatherings.
+            </p>
           </motion.div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
@@ -855,33 +846,31 @@ export default function GetInvolved() {
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(0,175,230,0.1),transparent)]"></div>
                         <Calendar className="w-12 h-12 text-white/60 group-hover:text-white/80 transition-colors duration-300 relative z-10" />
                       </div>
-                      <CardContent className="p-8">
-                        <div className="flex items-center gap-2 mb-6">
-                          <Badge className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-xl border-[#00AFE6]/30 text-[#00AFE6] hover:bg-[#00AFE6]/30 transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Badge variant="outline" className="text-[#00AFE6] border-[#00AFE6]/30">
                             {event.type}
                           </Badge>
                         </div>
                         
-                        <h3 className="text-xl font-bold text-white mb-4 font-rosarivo group-hover:text-white/90 transition-colors duration-300">
-                          {event.title}
-                        </h3>
+                        <h3 className="text-lg font-semibold text-white mb-2">{event.title}</h3>
                         
-                        <div className="space-y-3 mb-6">
-                          <div className="flex items-center gap-3 text-white/70 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-3">
-                            <Calendar className="w-4 h-4 text-[#00AFE6]" />
-                            <span className="text-sm">{formatEventDate(event.date)}</span>
+                        <div className="space-y-2 mb-4 text-sm text-white/70">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4" />
+                            <span>{formatEventDate(event.date)}</span>
                           </div>
-                          <div className="flex items-center gap-3 text-white/70 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-3">
-                            <Clock className="w-4 h-4 text-[#00AFE6]" />
-                            <span className="text-sm">{event.time}</span>
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4" />
+                            <span>{event.time}</span>
                           </div>
-                          <div className="flex items-center gap-3 text-white/70 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-3">
-                            <MapPin className="w-4 h-4 text-[#00AFE6]" />
-                            <span className="text-sm">{event.location}</span>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4" />
+                            <span>{event.location}</span>
                           </div>
                         </div>
                         
-                        <p className="text-white/70 leading-relaxed mb-8 group-hover:text-white/80 transition-colors duration-300">
+                        <p className="text-white/70 text-sm mb-6 line-clamp-3">
                           {event.description}
                         </p>
                         
@@ -915,30 +904,19 @@ export default function GetInvolved() {
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,221,137,0.1),transparent)]"></div>
                         <Users className="w-12 h-12 text-white/60 group-hover:text-white/80 transition-colors duration-300 relative z-10" />
                       </div>
-                      <CardContent className="p-8">
-                        <div className="flex items-center justify-between mb-6">
-                          <Badge className="bg-white/10 backdrop-blur-xl border-white/20 text-white/90 hover:bg-white/20 transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-center justify-between mb-3">
+                          <Badge variant="outline" className="text-white/70 border-white/30">
                             {formatEventDate(event.date)}
                           </Badge>
-                          <div className="flex items-center gap-2 text-sm text-white/60 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-3 py-1">
+                          <div className="flex items-center gap-1 text-sm text-white/60">
                             <Users className="w-4 h-4" />
                             <span>{event.attendees} attendees</span>
                           </div>
                         </div>
                         
-                        <h3 className="text-xl font-bold text-white mb-4 font-rosarivo group-hover:text-white/90 transition-colors duration-300">
-                          {event.title}
-                        </h3>
-                        <p className="text-white/70 leading-relaxed group-hover:text-white/80 transition-colors duration-300">
-                          {event.description}
-                        </p>
-
-                        <div className="mt-6 p-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl">
-                          <div className="flex items-center gap-2 text-sm text-white/60">
-                            <Calendar className="w-4 h-4 text-[#00DD89]" />
-                            <span>Event completed successfully</span>
-                          </div>
-                        </div>
+                        <h3 className="text-lg font-semibold text-white mb-3">{event.title}</h3>
+                        <p className="text-white/70 text-sm">{event.description}</p>
                       </CardContent>
                     </Card>
                   </motion.div>

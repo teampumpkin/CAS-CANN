@@ -796,14 +796,12 @@ export default function GetInvolved() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-block bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-12 shadow-2xl">
-              <h2 className="text-3xl lg:text-4xl font-bold font-rosarivo mb-6 text-white">
-                Events & Community
-              </h2>
-              <p className="text-lg text-white/70 max-w-3xl mx-auto">
-                Join us at upcoming events and see highlights from our recent community gatherings.
-              </p>
-            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 text-white">
+              Events & Community
+            </h2>
+            <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
+              Join us at upcoming events and see highlights from our recent community gatherings.
+            </p>
           </motion.div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
@@ -946,9 +944,12 @@ export default function GetInvolved() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl lg:text-4xl font-bold font-rosarivo mb-6 text-white">
-                Why Join CAS?
-              </h2>
+              <div className="inline-block bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl px-12 py-8 shadow-2xl">
+                <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-4 text-white">
+                  Why Join CAS?
+                </h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mx-auto"></div>
+              </div>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -959,30 +960,42 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,175,230,0.1)] transition-all duration-500 h-full">
-                  <CardContent className="p-8">
-                    <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                      <CheckCircle className="w-5 h-5 text-[#00AFE6]" />
-                      Member Benefits
-                    </h3>
-                    <ul className="space-y-3 text-white/80">
-                      <li className="flex items-start gap-2">
-                        <Mail className="w-4 h-4 text-[#00AFE6] mt-0.5" />
-                        <span>Periodic updates on amyloidosis research and initiatives</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Users className="w-4 h-4 text-[#00AFE6] mt-0.5" />
-                        <span>Invitations to contribute resources and expertise</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Shield className="w-4 h-4 text-[#00AFE6] mt-0.5" />
-                        <span>Recognition as contributor on shared resources</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Calendar className="w-4 h-4 text-[#00AFE6] mt-0.5" />
-                        <span>Early access to events and educational content</span>
-                      </li>
-                    </ul>
+                <Card className="bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,175,230,0.1)] transition-all duration-500 h-full group">
+                  <CardContent className="p-10">
+                    <div className="mb-8">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                          <CheckCircle className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-white font-rosarivo">Member Benefits</h3>
+                      </div>
+                      <div className="w-16 h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                    </div>
+                    
+                    <div className="space-y-6">
+                      {[
+                        { icon: Mail, text: "Periodic updates on amyloidosis research and initiatives" },
+                        { icon: Users, text: "Invitations to contribute resources and expertise" },
+                        { icon: Shield, text: "Recognition as contributor on shared resources" },
+                        { icon: Calendar, text: "Early access to events and educational content" }
+                      ].map((benefit, index) => (
+                        <motion.div
+                          key={index}
+                          className="flex items-start gap-4 group/item"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                          viewport={{ once: true }}
+                        >
+                          <div className="w-10 h-10 bg-white/5 backdrop-blur-xl border border-white/20 rounded-xl flex items-center justify-center group-hover/item:bg-white/10 transition-all duration-300">
+                            <benefit.icon className="w-5 h-5 text-[#00AFE6] group-hover/item:text-white transition-colors duration-300" />
+                          </div>
+                          <span className="text-white/80 group-hover/item:text-white transition-colors duration-300 leading-relaxed">
+                            {benefit.text}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -994,23 +1007,54 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,221,137,0.1)] transition-all duration-500 h-full">
-                  <CardContent className="p-8">
-                    <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                      <Shield className="w-5 h-5 text-[#00AFE6]" />
-                      Participation Notes
-                    </h3>
-                    <div className="space-y-3 text-white/80 text-sm">
-                      <p>
-                        Membership in CAS is voluntary and non-financial. There are no membership fees or obligations.
-                      </p>
-                      <p>
-                        Participation is governed by our Membership Policy and Code of Conduct, which ensure respectful and professional collaboration.
-                      </p>
-                      <p>
-                        Your privacy is protected - we only use your information for CAS communications and activities, and you can unsubscribe at any time.
-                      </p>
+                <Card className="bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,221,137,0.1)] transition-all duration-500 h-full group">
+                  <CardContent className="p-10">
+                    <div className="mb-8">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+                          <Shield className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-white font-rosarivo">Participation Notes</h3>
+                      </div>
+                      <div className="w-16 h-0.5 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full"></div>
                     </div>
+                    
+                    <div className="space-y-6">
+                      {[
+                        "Membership in CAS is voluntary and non-financial. There are no membership fees or obligations.",
+                        "Participation is governed by our Membership Policy and Code of Conduct, which ensure respectful and professional collaboration.",
+                        "Your privacy is protected - we only use your information for CAS communications and activities, and you can unsubscribe at any time."
+                      ].map((note, index) => (
+                        <motion.div
+                          key={index}
+                          className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                          viewport={{ once: true }}
+                        >
+                          <p className="text-white/80 leading-relaxed">
+                            {note}
+                          </p>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    <motion.div
+                      className="mt-8 p-6 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-white/10 rounded-2xl"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.9 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <CheckCircle className="w-5 h-5 text-[#00AFE6]" />
+                        <span className="text-white font-semibold">Ready to Get Started?</span>
+                      </div>
+                      <p className="text-white/70 text-sm">
+                        Join our community of healthcare professionals, researchers, and advocates working together to advance amyloidosis awareness and care.
+                      </p>
+                    </motion.div>
                   </CardContent>
                 </Card>
               </motion.div>

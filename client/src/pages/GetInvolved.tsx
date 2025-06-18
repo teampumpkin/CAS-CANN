@@ -800,11 +800,17 @@ export default function GetInvolved() {
           </motion.div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
-            <TabsList className="grid w-full grid-cols-2 bg-white/10 border border-white/20">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-white/20 text-white">
+            <TabsList className="grid w-full grid-cols-2 bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-2 shadow-2xl">
+              <TabsTrigger 
+                value="overview" 
+                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00AFE6] data-[state=active]:to-[#00DD89] data-[state=active]:text-white data-[state=active]:shadow-lg text-white/80 hover:text-white transition-all duration-300 rounded-xl font-medium"
+              >
                 Upcoming Events
               </TabsTrigger>
-              <TabsTrigger value="recent" className="data-[state=active]:bg-white/20 text-white">
+              <TabsTrigger 
+                value="recent" 
+                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00AFE6] data-[state=active]:to-[#00DD89] data-[state=active]:text-white data-[state=active]:shadow-lg text-white/80 hover:text-white transition-all duration-300 rounded-xl font-medium"
+              >
                 Recent Events
               </TabsTrigger>
             </TabsList>

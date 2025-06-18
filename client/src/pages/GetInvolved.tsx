@@ -319,8 +319,15 @@ export default function GetInvolved() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-4xl font-bold font-rosarivo mb-6 text-white">
-              Ways to Participate
+            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 mb-8">
+              <Users className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-white/90 font-medium">Get Involved</span>
+            </div>
+            <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
+              <span className="text-white">Ways to </span>
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Participate
+              </span>
             </h2>
             <p className="text-lg text-white/70 max-w-3xl mx-auto">
               Choose how you'd like to contribute to our mission of improving amyloidosis care across Canada.
@@ -796,8 +803,15 @@ export default function GetInvolved() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 text-white">
-              Events & Community
+            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 mb-8">
+              <Calendar className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-white/90 font-medium">Community</span>
+            </div>
+            <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
+              <span className="text-white">Events & </span>
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Community
+              </span>
             </h2>
             <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
               Join us at upcoming events and see highlights from our recent community gatherings.

@@ -81,6 +81,154 @@ export default function Directory() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      {/* Interactive Map Section */}
+      <section className="py-24 bg-gray-900 relative">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+              <Navigation className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-white/90">Geo-spatial Map</span>
+            </div>
+            
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Treatment Centers &
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Research Programs
+              </span>
+            </h2>
+          </motion.div>
+          
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Map Area */}
+            <div className="lg:col-span-2">
+              <motion.div
+                className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 relative overflow-hidden"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-3xl" />
+                
+                <div className="relative z-10">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-white px-4 py-2 rounded-full text-sm font-medium mb-4 border border-[#00AFE6]/30">
+                      <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
+                      <span>National Network</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-2 font-rosarivo">
+                      Treatment Centers & Research Programs
+                    </h3>
+                    <p className="text-white/70">Geographic visualization across Canada</p>
+                  </div>
+                  
+                  <div className="relative w-full max-w-2xl mx-auto">
+                    <img 
+                      src={canadaMapPath}
+                      alt="Canada Map showing healthcare network coverage"
+                      className="w-full h-auto rounded-xl shadow-xl border border-white/10"
+                    />
+                    
+                    {/* Network points with subtle animation */}
+                    <motion.div
+                      className="absolute top-[25%] left-[15%] w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+                    />
+                    <motion.div
+                      className="absolute top-[35%] left-[25%] w-3 h-3 bg-[#00DD89] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                    />
+                    <motion.div
+                      className="absolute top-[45%] left-[40%] w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                    />
+                    <motion.div
+                      className="absolute top-[40%] left-[55%] w-4 h-4 bg-[#00DD89] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+                    />
+                    <motion.div
+                      className="absolute top-[30%] left-[70%] w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                    />
+                    <motion.div
+                      className="absolute top-[25%] left-[80%] w-3 h-3 bg-[#00DD89] rounded-full shadow-lg"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.8 }}
+                    />
+                    
+                    {/* Legend */}
+                    <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-xl rounded-lg p-3 border border-white/20">
+                      <div className="flex items-center gap-4 text-xs">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-[#00AFE6] rounded-full" />
+                          <span className="text-white/80">Treatment Centers</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-[#00DD89] rounded-full" />
+                          <span className="text-white/80">Research Programs</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+            
+            {/* Province List */}
+            <div className="space-y-4">
+              <motion.div
+                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                  <MapPin className="w-5 h-5 text-[#00AFE6]" />
+                  Provinces & Territories
+                </h3>
+                <div className="space-y-2 max-h-80 overflow-y-auto">
+                  {provinces.map((province, index) => (
+                    <motion.div
+                      key={province.code}
+                      className="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 cursor-pointer transition-colors"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                      onClick={() => setSelectedProvince(province.code)}
+                    >
+                      <div>
+                        <div className="font-medium text-white">{province.code}</div>
+                        <div className="text-xs text-white/70">{province.name}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-semibold text-[#00AFE6]">{province.centers}</div>
+                        <div className="text-xs text-white/70">centers</div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <ParallaxBackground className="min-h-screen flex items-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
@@ -351,154 +499,6 @@ export default function Directory() {
               </motion.div>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Interactive Map Section */}
-      <section className="py-24 bg-gray-900 relative">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
-              <Navigation className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Geo-spatial Map</span>
-            </div>
-            
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Treatment Centers &
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Research Programs
-              </span>
-            </h2>
-          </motion.div>
-          
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Map Area */}
-            <div className="lg:col-span-2">
-              <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 relative overflow-hidden"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-3xl" />
-                
-                <div className="relative z-10">
-                  <div className="text-center mb-6">
-                    <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-white px-4 py-2 rounded-full text-sm font-medium mb-4 border border-[#00AFE6]/30">
-                      <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
-                      <span>National Network</span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-2 font-rosarivo">
-                      Treatment Centers & Research Programs
-                    </h3>
-                    <p className="text-white/70">Geographic visualization across Canada</p>
-                  </div>
-                  
-                  <div className="relative w-full max-w-2xl mx-auto">
-                    <img 
-                      src={canadaMapPath}
-                      alt="Canada Map showing healthcare network coverage"
-                      className="w-full h-auto rounded-xl shadow-xl border border-white/10"
-                    />
-                    
-                    {/* Network points with subtle animation */}
-                    <motion.div
-                      className="absolute top-[25%] left-[15%] w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 0 }}
-                    />
-                    <motion.div
-                      className="absolute top-[35%] left-[25%] w-3 h-3 bg-[#00DD89] rounded-full shadow-lg"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                    />
-                    <motion.div
-                      className="absolute top-[45%] left-[40%] w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                    />
-                    <motion.div
-                      className="absolute top-[40%] left-[55%] w-4 h-4 bg-[#00DD89] rounded-full shadow-lg"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
-                    />
-                    <motion.div
-                      className="absolute top-[30%] left-[70%] w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
-                    />
-                    <motion.div
-                      className="absolute top-[25%] left-[80%] w-3 h-3 bg-[#00DD89] rounded-full shadow-lg"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 0.8 }}
-                    />
-                    
-                    {/* Legend */}
-                    <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-xl rounded-lg p-3 border border-white/20">
-                      <div className="flex items-center gap-4 text-xs">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-[#00AFE6] rounded-full" />
-                          <span className="text-white/80">Treatment Centers</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-[#00DD89] rounded-full" />
-                          <span className="text-white/80">Research Programs</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-            
-            {/* Province List */}
-            <div className="space-y-4">
-              <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-[#00AFE6]" />
-                  Provinces & Territories
-                </h3>
-                <div className="space-y-2 max-h-80 overflow-y-auto">
-                  {provinces.map((province, index) => (
-                    <motion.div
-                      key={province.code}
-                      className="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 cursor-pointer transition-colors"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.05 }}
-                      viewport={{ once: true }}
-                      onClick={() => setSelectedProvince(province.code)}
-                    >
-                      <div>
-                        <div className="font-medium text-white">{province.code}</div>
-                        <div className="text-xs text-white/70">{province.name}</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-semibold text-[#00AFE6]">{province.centers}</div>
-                        <div className="text-xs text-white/70">centers</div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </div>
         </div>
       </section>
 

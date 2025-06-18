@@ -81,6 +81,141 @@ export default function Directory() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      {/* Hero Section */}
+      <ParallaxBackground className="min-h-screen flex items-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/20 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/20 rounded-full blur-3xl translate-x-48 translate-y-48" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Hero Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
+            >
+              <motion.div
+                className="inline-block mb-6"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-xl rounded-full px-4 py-2 border border-white/20">
+                  <MapPin className="w-4 h-4 text-[#00AFE6]" />
+                  <span className="text-sm font-medium text-white/90">Directory - Find Support</span>
+                </div>
+              </motion.div>
+              
+              <motion.h1
+                className="text-5xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+              >
+                <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
+                  Find
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  Support
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
+                  Near You
+                </span>
+              </motion.h1>
+              
+              <motion.p
+                className="text-xl text-white/70 leading-relaxed mb-10 max-w-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                Connect with specialized treatment centers, research programs, and healthcare professionals across Canada.
+              </motion.p>
+              
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+              >
+                <button className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
+                  Explore Map
+                  <Navigation className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button className="bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
+                  Browse Centers
+                </button>
+              </motion.div>
+            </motion.div>
+            
+            {/* Hero Visual - Interactive Map Preview */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+            >
+              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-[#00AFE6]" />
+                    Treatment Centers Across Canada
+                  </h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-xl p-4 text-center">
+                      <div className="text-2xl font-bold text-white">28+</div>
+                      <div className="text-sm text-white/70">Treatment Centers</div>
+                    </div>
+                    <div className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-xl p-4 text-center">
+                      <div className="text-2xl font-bold text-white">10</div>
+                      <div className="text-sm text-white/70">Provinces</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Simplified Map Visualization */}
+                <div className="bg-white/5 rounded-2xl p-6 relative overflow-hidden">
+                  <div className="grid grid-cols-3 gap-2">
+                    {provinces.slice(0, 9).map((province, index) => (
+                      <motion.div
+                        key={province.code}
+                        className={`bg-gradient-to-r ${province.color} rounded-lg p-3 text-center cursor-pointer hover:scale-105 transition-transform`}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.1 }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="text-xs font-semibold text-white">{province.code}</div>
+                        <div className="text-xs text-white/80">{province.centers}</div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating elements */}
+              <motion.div
+                className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center"
+                animate={{ 
+                  y: [0, -10, 0],
+                  rotate: [0, 5, 0]
+                }}
+                transition={{ 
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <Hospital className="w-8 h-8 text-white" />
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </ParallaxBackground>
+
       {/* Interactive Map Section */}
       <section className="py-24 bg-gray-900 relative">
         <div className="container mx-auto px-6">
@@ -228,141 +363,6 @@ export default function Directory() {
           </div>
         </div>
       </section>
-
-      {/* Hero Section */}
-      <ParallaxBackground className="min-h-screen flex items-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
-        <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/20 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/20 rounded-full blur-3xl translate-x-48 translate-y-48" />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Hero Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
-            >
-              <motion.div
-                className="inline-block mb-6"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-xl rounded-full px-4 py-2 border border-white/20">
-                  <MapPin className="w-4 h-4 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">Directory - Find Support</span>
-                </div>
-              </motion.div>
-              
-              <motion.h1
-                className="text-5xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.3 }}
-              >
-                <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-                  Find
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Support
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-                  Near You
-                </span>
-              </motion.h1>
-              
-              <motion.p
-                className="text-xl text-white/70 leading-relaxed mb-10 max-w-lg"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
-                Connect with specialized treatment centers, research programs, and healthcare professionals across Canada.
-              </motion.p>
-              
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-              >
-                <button className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
-                  Explore Map
-                  <Navigation className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button className="bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
-                  Browse Centers
-                </button>
-              </motion.div>
-            </motion.div>
-            
-            {/* Hero Visual - Interactive Map Preview */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-            >
-              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
-                <div className="mb-6">
-                  <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-[#00AFE6]" />
-                    Treatment Centers Across Canada
-                  </h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-white">28+</div>
-                      <div className="text-sm text-white/70">Treatment Centers</div>
-                    </div>
-                    <div className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-white">10</div>
-                      <div className="text-sm text-white/70">Provinces</div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Simplified Map Visualization */}
-                <div className="bg-white/5 rounded-2xl p-6 relative overflow-hidden">
-                  <div className="grid grid-cols-3 gap-2">
-                    {provinces.slice(0, 9).map((province, index) => (
-                      <motion.div
-                        key={province.code}
-                        className={`bg-gradient-to-r ${province.color} rounded-lg p-3 text-center cursor-pointer hover:scale-105 transition-transform`}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.1 }}
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <div className="text-xs font-semibold text-white">{province.code}</div>
-                        <div className="text-xs text-white/80">{province.centers}</div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              
-              {/* Floating elements */}
-              <motion.div
-                className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center"
-                animate={{ 
-                  y: [0, -10, 0],
-                  rotate: [0, 5, 0]
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <Hospital className="w-8 h-8 text-white" />
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </ParallaxBackground>
 
       {/* CANN Section */}
       <section className="py-24 bg-gray-900 relative">

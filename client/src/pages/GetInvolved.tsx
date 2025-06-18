@@ -814,22 +814,32 @@ export default function GetInvolved() {
           </motion.div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
-            <TabsList className="grid w-full grid-cols-2 bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-2 shadow-2xl">
-              <TabsTrigger 
-                value="overview" 
-                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00AFE6] data-[state=active]:to-[#00DD89] data-[state=active]:text-white data-[state=active]:shadow-lg text-white/80 hover:text-white transition-all duration-300 rounded-xl font-medium"
-              >
-                Upcoming Events
-              </TabsTrigger>
-              <TabsTrigger 
-                value="recent" 
-                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00AFE6] data-[state=active]:to-[#00DD89] data-[state=active]:text-white data-[state=active]:shadow-lg text-white/80 hover:text-white transition-all duration-300 rounded-xl font-medium"
-              >
-                Recent Events
-              </TabsTrigger>
-            </TabsList>
+            <div className="flex justify-center mb-8">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-2 shadow-2xl inline-flex">
+                <button
+                  onClick={() => setActiveTab("overview")}
+                  className={`px-8 py-3 rounded-xl font-medium transition-all duration-300 ${
+                    activeTab === "overview"
+                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  Upcoming Events
+                </button>
+                <button
+                  onClick={() => setActiveTab("recent")}
+                  className={`px-8 py-3 rounded-xl font-medium transition-all duration-300 ${
+                    activeTab === "recent"
+                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  Recent Events
+                </button>
+              </div>
+            </div>
 
-            <TabsContent value="overview" className="mt-12">
+            <TabsContent value="overview" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {upcomingEvents.map((event, index) => (
                   <motion.div
@@ -889,7 +899,7 @@ export default function GetInvolved() {
               </div>
             </TabsContent>
 
-            <TabsContent value="recent" className="mt-12">
+            <TabsContent value="recent" className="mt-0">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {recentEvents.map((event, index) => (
                   <motion.div

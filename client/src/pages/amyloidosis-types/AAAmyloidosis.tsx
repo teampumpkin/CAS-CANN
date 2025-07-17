@@ -1,12 +1,17 @@
 import { motion } from 'framer-motion';
 import { Droplets, AlertTriangle, Search, Target, ArrowLeft, ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import ParallaxBackground from '../../components/ParallaxBackground';
 import medicalResearchImg from '@assets/DSC02841_1750068895454.jpg';
 
 export default function AAAmyloidosis() {
   const [openSection, setOpenSection] = useState<string | null>(null);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const toggleSection = (section: string) => {
     setOpenSection(openSection === section ? null : section);

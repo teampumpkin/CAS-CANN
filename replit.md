@@ -10,6 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Navigation Scroll Behavior Fix (July 17, 2025)
+- ✅ Fixed CTA "Learn More" button navigation to land at hero sections instead of mid-page
+- ✅ Added useEffect scroll-to-top functionality to all detailed amyloidosis pages
+- ✅ Enhanced user experience by ensuring seamless navigation to page tops
+- ✅ Applied smooth scroll behavior to ALAmyloidosis.tsx, ATTRAmyloidosis.tsx, OtherAmyloidosis.tsx, AAAmyloidosis.tsx, and ALect2Amyloidosis.tsx
+- ✅ Created comprehensive "Other Amyloidosis Types" page consolidating AA, localized, and dialysis-related forms
+- ✅ Updated App.tsx routing to include new consolidated amyloidosis types page
+- ✅ Successfully reduced amyloidosis type sections from 4 to 3 as requested (AL, ATTR, Other)
+
 ### About Page Light Theme Optimization (July 17, 2025)
 - ✅ Fixed About CAS page for proper light theme support
 - ✅ Updated hero section text elements to use theme-aware classes

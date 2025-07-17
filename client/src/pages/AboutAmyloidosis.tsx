@@ -27,10 +27,22 @@ export default function AboutAmyloidosis() {
       signs: ['Numbness in hands/feet', 'Tingling sensations', 'Muscle weakness', 'Carpal tunnel syndrome', 'Balance problems']
     },
     {
-      category: 'Systemic Symptoms',
+      category: 'Gastrointestinal (GI) Symptoms',
       icon: Activity,
+      color: 'bg-green-500/20 border-green-500/30 text-green-400',
+      signs: ['Persistent diarrhea', 'Nausea and vomiting', 'Abdominal pain', 'Loss of appetite', 'Malabsorption symptoms']
+    },
+    {
+      category: 'Genitourinary (GU) Symptoms',
+      icon: Droplets,
+      color: 'bg-purple-500/20 border-purple-500/30 text-purple-400',
+      signs: ['Proteinuria (protein in urine)', 'Decreased urine output', 'Kidney dysfunction', 'Urinary retention', 'Bladder problems']
+    },
+    {
+      category: 'Systemic Symptoms',
+      icon: Microscope,
       color: 'bg-orange-500/20 border-orange-500/30 text-orange-400',
-      signs: ['Unexplained weight loss', 'Enlarged tongue', 'Easy bruising', 'Changes in skin texture', 'Kidney dysfunction']
+      signs: ['Unexplained weight loss', 'Enlarged tongue', 'Easy bruising', 'Changes in skin texture', 'Chronic fatigue']
     }
   ];
 
@@ -374,7 +386,7 @@ export default function AboutAmyloidosis() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {warningSignsData.map((category, index) => (
               <motion.div
                 key={category.category}
@@ -383,6 +395,10 @@ export default function AboutAmyloidosis() {
                     ? 'bg-gradient-to-br from-red-50/95 to-pink-50/95 dark:from-red-900/25 dark:to-pink-900/25 border-red-200/50 dark:border-red-400/30'
                     : index === 1
                     ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200/50 dark:border-blue-400/30'
+                    : index === 2
+                    ? 'bg-gradient-to-br from-green-50/95 to-emerald-50/95 dark:from-green-900/25 dark:to-emerald-900/25 border-green-200/50 dark:border-green-400/30'
+                    : index === 3
+                    ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/50 dark:border-purple-400/30'
                     : 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/50 dark:border-orange-400/30'
                 }`}
                 initial={{ opacity: 0, y: 30 }}
@@ -399,6 +415,10 @@ export default function AboutAmyloidosis() {
                       ? 'text-red-900 dark:text-red-100'
                       : index === 1
                       ? 'text-blue-900 dark:text-blue-100'
+                      : index === 2
+                      ? 'text-green-900 dark:text-green-100'
+                      : index === 3
+                      ? 'text-purple-900 dark:text-purple-100'
                       : 'text-orange-900 dark:text-orange-100'
                   }`}>{category.category}</h3>
                 </div>

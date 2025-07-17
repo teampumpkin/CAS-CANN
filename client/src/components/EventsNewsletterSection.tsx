@@ -126,14 +126,14 @@ export default function EventsNewsletterSection() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="w-2 h-2 bg-[#00DD89] rounded-full animate-pulse"></div>
-                  <span className="text-gray-900 dark:text-white/90 text-sm font-medium">Stay Connected</span>
+                  <span className="text-gray-900 dark:text-white/90 text-sm font-medium">{t('events.stayConnected')}</span>
                 </motion.div>
 
                 <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-cardo">
-                  Join Our Community
+                  {t('events.joinCommunity')}
                 </h3>
                 <p className="text-gray-700 dark:text-white/80 text-lg mb-8 leading-relaxed">
-                  Get exclusive access to research updates, community events, and expert insights delivered monthly.
+                  {t('events.joinCommunityDesc')}
                 </p>
 
                 <div className="space-y-4">
@@ -143,7 +143,7 @@ export default function EventsNewsletterSection() {
                   >
                     <input
                       type="email"
-                      placeholder="Enter your email address"
+                      placeholder={t('events.emailPlaceholder')}
                       className="w-full px-6 py-4 bg-white/90 dark:bg-white/10 backdrop-blur-sm border border-[#00AFE6]/30 dark:border-white/20 rounded-2xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 focus:outline-none focus:border-[#00AFE6] focus:bg-white/95 dark:focus:bg-white/20 transition-all duration-300"
                     />
                     <motion.button
@@ -151,7 +151,7 @@ export default function EventsNewsletterSection() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      Subscribe
+                      {t('events.subscribe')}
                     </motion.button>
                   </motion.div>
 
@@ -164,7 +164,7 @@ export default function EventsNewsletterSection() {
                         />
                       ))}
                     </div>
-                    <span>Join 5,000+ community members</span>
+                    <span>{t('events.joinMembers')}</span>
                   </div>
                 </div>
               </div>
@@ -172,10 +172,10 @@ export default function EventsNewsletterSection() {
               {/* Stats with animated counters */}
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { value: 5000, suffix: '+', label: 'Subscribers', icon: '📧' },
-                  { value: 50, suffix: '+', label: 'Events/Year', icon: '📅' },
-                  { value: 13, suffix: '', label: 'Provinces', icon: '🇨🇦' },
-                  { value: 95, suffix: '%', label: 'Satisfaction', icon: '⭐' }
+                  { value: 5000, suffix: '+', label: t('events.stats.subscribers'), icon: '📧' },
+                  { value: 50, suffix: '+', label: t('events.stats.eventsYear'), icon: '📅' },
+                  { value: 13, suffix: '', label: t('events.stats.provinces'), icon: '🇨🇦' },
+                  { value: 95, suffix: '%', label: t('events.stats.satisfaction'), icon: '⭐' }
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -218,11 +218,11 @@ export default function EventsNewsletterSection() {
               whileHover={{ scale: 1.05 }}
             >
               <Calendar className="w-4 h-4 text-[#00AFE6]" />
-              <span className="text-gray-900 dark:text-white/90 font-medium">Upcoming Events</span>
+              <span className="text-gray-900 dark:text-white/90 font-medium">{t('events.upcomingEvents')}</span>
             </motion.div>
-            <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">Community Calendar</h3>
+            <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">{t('events.communityCalendar')}</h3>
             <p className="text-gray-700 dark:text-white/80 text-lg max-w-2xl mx-auto">
-              Connect with experts, patients, and researchers through our comprehensive event program.
+              {t('events.communityCalendarDesc')}
             </p>
           </div>
 

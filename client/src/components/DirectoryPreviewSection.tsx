@@ -81,12 +81,12 @@ export default function DirectoryPreviewSection() {
               <div className="text-center mb-8">
                 <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-4 py-2 rounded-full text-sm font-medium mb-4 border border-[#00AFE6]/30">
                   <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
-                  <span>National Network</span>
+                  <span>{t('directory.nationalNetwork')}</span>
                 </div>
                 <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 font-rosarivo">
-                  Canada-Wide Coverage
+                  {t('directory.canadaWide')}
                 </h3>
-                <p className="text-gray-700 dark:text-white/70">Connecting healthcare across the nation</p>
+                <p className="text-gray-700 dark:text-white/70">{t('directory.connectingHealthcare')}</p>
               </div>
               
               <div className="relative w-full max-w-xl mx-auto">
@@ -118,7 +118,7 @@ export default function DirectoryPreviewSection() {
             {/* Statistics Display - Fixed Grid Layout */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">Network Reach</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">{t('directory.networkReach')}</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <motion.div
                     className="text-center p-6 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
@@ -130,7 +130,7 @@ export default function DirectoryPreviewSection() {
                     <div className="text-4xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent mb-2">
                       150+
                     </div>
-                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">Healthcare Providers</div>
+                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">{t('directory.healthcareProviders')}</div>
                   </motion.div>
                   
                   <motion.div
@@ -143,7 +143,7 @@ export default function DirectoryPreviewSection() {
                     <div className="text-4xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00BB77] bg-clip-text text-transparent mb-2">
                       13
                     </div>
-                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">Provinces & Territories</div>
+                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">{t('directory.provincesAndTerritories')}</div>
                   </motion.div>
                   
                   <motion.div
@@ -156,7 +156,7 @@ export default function DirectoryPreviewSection() {
                     <div className="text-4xl font-bold bg-gradient-to-r from-purple-500 to-purple-700 bg-clip-text text-transparent mb-2">
                       25+
                     </div>
-                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">Major Cities</div>
+                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">{t('directory.majorCities')}</div>
                   </motion.div>
                   
                   <motion.div
@@ -169,7 +169,7 @@ export default function DirectoryPreviewSection() {
                     <div className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent mb-2">
                       500+
                     </div>
-                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">Resources Available</div>
+                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">{t('directory.resourcesAvailable')}</div>
                   </motion.div>
                 </div>
               </div>

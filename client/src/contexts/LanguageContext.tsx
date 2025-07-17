@@ -85,6 +85,16 @@ const translations = {
     'events.latestNews': 'Latest News & Updates',
     'events.emailPlaceholder': 'Enter your email address',
     'events.subscribe': 'Subscribe to Newsletter',
+    'events.stayConnected': 'Stay Connected',
+    'events.joinCommunity': 'Join Our Community',
+    'events.joinCommunityDesc': 'Get exclusive access to research updates, community events, and expert insights delivered monthly.',
+    'events.joinMembers': 'Join 5,000+ community members',
+    'events.stats.subscribers': 'Subscribers',
+    'events.stats.eventsYear': 'Events/Year',
+    'events.stats.provinces': 'Provinces',
+    'events.stats.satisfaction': 'Satisfaction',
+    'events.communityCalendar': 'Community Calendar',
+    'events.communityCalendarDesc': 'Connect with experts, patients, and researchers through our comprehensive event program.',
     
     // Directory Section
     'directory.badge': 'Find Care',
@@ -103,6 +113,9 @@ const translations = {
     'directory.liveStats': 'Live Stats',
     'directory.directoryInsights': 'Directory Insights',
     'directory.needHelp': 'Need Help Finding Care?',
+    'directory.nationalNetwork': 'National Network',
+    'directory.canadaWide': 'Canada-Wide Coverage',
+    'directory.connectingHealthcare': 'Connecting healthcare across the nation',
     
     // Quick Links Section
     'quickLinks.badge': 'Quick Access',
@@ -220,6 +233,16 @@ const translations = {
     'events.latestNews': 'Últimas Noticias y Actualizaciones',
     'events.emailPlaceholder': 'Ingrese su dirección de correo electrónico',
     'events.subscribe': 'Suscribirse al Boletín',
+    'events.stayConnected': 'Manténgase Conectado',
+    'events.joinCommunity': 'Únase a Nuestra Comunidad',
+    'events.joinCommunityDesc': 'Obtenga acceso exclusivo a actualizaciones de investigación, eventos comunitarios y perspectivas de expertos entregadas mensualmente.',
+    'events.joinMembers': 'Únase a más de 5,000 miembros de la comunidad',
+    'events.stats.subscribers': 'Suscriptores',
+    'events.stats.eventsYear': 'Eventos/Año',
+    'events.stats.provinces': 'Provincias',
+    'events.stats.satisfaction': 'Satisfacción',
+    'events.communityCalendar': 'Calendario Comunitario',
+    'events.communityCalendarDesc': 'Conéctese con expertos, pacientes e investigadores a través de nuestro programa integral de eventos.',
     
     // Directory Section
     'directory.badge': 'Encontrar Atención',
@@ -238,6 +261,9 @@ const translations = {
     'directory.liveStats': 'Estadísticas en Vivo',
     'directory.directoryInsights': 'Perspectivas del Directorio',
     'directory.needHelp': '¿Necesita Ayuda para Encontrar Atención?',
+    'directory.nationalNetwork': 'Red Nacional',
+    'directory.canadaWide': 'Cobertura Nacional de Canadá',
+    'directory.connectingHealthcare': 'Conectando la atención médica en toda la nación',
     
     // Quick Links Section
     'quickLinks.badge': 'Acceso Rápido',

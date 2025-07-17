@@ -44,10 +44,10 @@ export default function About() {
 
   const partners = [
     { 
-      name: 'The Amyloidosis Centre (TAC)', 
+      name: 'Transthyretin Amyloidosis Canada (TAC)', 
       shortName: 'TAC',
       url: 'https://madhattr.ca/',
-      description: 'Leading Canadian amyloidosis treatment center'
+      description: 'Patient and family support network for transthyretin amyloidosis'
     },
     { 
       name: 'Canadian Amyloidosis Network (CANN)', 

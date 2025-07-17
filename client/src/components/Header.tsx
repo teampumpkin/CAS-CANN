@@ -166,10 +166,7 @@ export default function Header() {
           >
             <LanguageSwitcher />
             <ThemeToggle />
-            <div className="hidden lg:flex items-center gap-2 text-white/70 text-sm">
-              <Phone className="w-4 h-4" />
-              <span>1-800-AMYLOID</span>
-            </div>
+            
             <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-2 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
               {t('nav.getHelp')}
             </button>

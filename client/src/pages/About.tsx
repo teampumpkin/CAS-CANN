@@ -75,9 +75,51 @@ export default function About() {
       <ParallaxBackground className="min-h-screen flex items-center relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
-        <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/20 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/20 rounded-full blur-3xl translate-x-48 translate-y-48" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/30 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/30 rounded-full blur-3xl translate-x-48 translate-y-48" />
+        <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-[#00AFE6]/15 rounded-full blur-2xl" />
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-[#00DD89]/15 rounded-full blur-2xl" />
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-white/5 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2" />
+        
+        {/* Animated Brand Elements */}
+        <motion.div
+          className="absolute top-20 left-20 w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-20"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-20 w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full opacity-25"
+          animate={{ 
+            scale: [1, 1.3, 1],
+            rotate: [360, 180, 0]
+          }}
+          transition={{ 
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div
+          className="absolute top-1/3 right-1/3 w-8 h-8 bg-[#00AFE6]/40 rounded-full"
+          animate={{ 
+            y: [0, -20, 0],
+            opacity: [0.4, 0.8, 0.4]
+          }}
+          transition={{ 
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -93,9 +135,10 @@ export default function About() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-xl rounded-full px-4 py-2 border border-white/20">
+                <div className="flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-xl rounded-full px-4 py-2 border border-[#00AFE6]/30 shadow-lg shadow-[#00AFE6]/10">
                   <Heart className="w-4 h-4 text-[#00AFE6]" />
                   <span className="text-sm font-medium text-white/90">{t('about.hero.badge')}</span>
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse" />
                 </div>
               </motion.div>
               
@@ -133,11 +176,12 @@ export default function About() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
               >
-                <button className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
-                  {t('about.hero.ourMission')}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <button className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2 hover:scale-105 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="relative z-10">{t('about.hero.ourMission')}</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
                 </button>
-                <button className="bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <button className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-[#00AFE6]/30 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 hover:border-[#00AFE6]/50 transition-all duration-300 hover:scale-105 shadow-lg shadow-[#00AFE6]/5">
                   {t('about.hero.getInvolved')}
                 </button>
               </motion.div>
@@ -152,32 +196,45 @@ export default function About() {
             >
               <div className="relative">
                 {/* Main visual card */}
-                <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
-                  <div className="grid grid-cols-2 gap-6 mb-8">
-                    <div className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl p-6 text-center">
-                      <Stethoscope className="w-8 h-8 text-[#00AFE6] mx-auto mb-3" />
-                      <div className="text-2xl font-bold text-white">50+</div>
-                      <div className="text-sm text-white/70">Clinicians</div>
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/20 shadow-2xl shadow-[#00AFE6]/10 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-2xl -translate-y-16 translate-x-16" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-xl translate-y-12 -translate-x-12" />
+                  <div className="relative z-10">
+                    <div className="grid grid-cols-2 gap-6 mb-8">
+                      <motion.div 
+                        className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl p-6 text-center border border-[#00AFE6]/30 hover:border-[#00AFE6]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00AFE6]/20"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <Stethoscope className="w-8 h-8 text-[#00AFE6] mx-auto mb-3" />
+                        <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">50+</div>
+                        <div className="text-sm text-white/70">Clinicians</div>
+                      </motion.div>
+                      <motion.div 
+                        className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-2xl p-6 text-center border border-[#00DD89]/30 hover:border-[#00DD89]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00DD89]/20"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <Building2 className="w-8 h-8 text-[#00DD89] mx-auto mb-3" />
+                        <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">25+</div>
+                        <div className="text-sm text-white/70">Institutions</div>
+                      </motion.div>
                     </div>
-                    <div className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-2xl p-6 text-center">
-                      <Building2 className="w-8 h-8 text-[#00DD89] mx-auto mb-3" />
-                      <div className="text-2xl font-bold text-white">25+</div>
-                      <div className="text-sm text-white/70">Institutions</div>
+                    <div className="text-center">
+                      <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-[#00AFE6]/30">
+                        <Award className="w-6 h-6 text-[#00AFE6]" />
+                      </div>
+                      <h3 className="text-lg font-semibold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent mb-2">National Platform</h3>
+                      <p className="text-white/60 text-sm">Connecting the amyloidosis community across Canada</p>
                     </div>
-                  </div>
-                  <div className="text-center">
-                    <Award className="w-12 h-12 text-white/50 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-white mb-2">National Platform</h3>
-                    <p className="text-white/60 text-sm">Connecting the amyloidosis community across Canada</p>
                   </div>
                 </div>
                 
                 {/* Floating elements */}
                 <motion.div
-                  className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center"
+                  className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center shadow-2xl shadow-[#00AFE6]/25 border border-[#00AFE6]/30"
                   animate={{ 
                     y: [0, -10, 0],
-                    rotate: [0, 5, 0]
+                    rotate: [0, 5, 0],
+                    scale: [1, 1.05, 1]
                   }}
                   transition={{ 
                     duration: 4,
@@ -189,10 +246,11 @@ export default function About() {
                 </motion.div>
                 
                 <motion.div
-                  className="absolute -bottom-4 -left-4 w-16 h-16 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20 flex items-center justify-center"
+                  className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 backdrop-blur-xl rounded-xl border border-[#00DD89]/30 flex items-center justify-center shadow-lg shadow-[#00DD89]/20"
                   animate={{ 
                     x: [0, 10, 0],
-                    y: [0, -5, 0]
+                    y: [0, -5, 0],
+                    scale: [1, 1.1, 1]
                   }}
                   transition={{ 
                     duration: 3,
@@ -201,7 +259,7 @@ export default function About() {
                     delay: 1
                   }}
                 >
-                  <Users className="w-6 h-6 text-white/70" />
+                  <Users className="w-6 h-6 text-[#00DD89]" />
                 </motion.div>
               </div>
             </motion.div>

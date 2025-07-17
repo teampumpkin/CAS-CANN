@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Users, Target, Heart, Shield, BookOpen, Network, UserCheck, Globe, ArrowRight, Stethoscope, Building2, Award } from 'lucide-react';
 import ParallaxBackground from '../components/ParallaxBackground';
+import { useLanguage } from '@/contexts/LanguageContext';
 import facilityImage from '@assets/DSC_0022_1750141054185.jpg';
 import diagnosticImage from '@assets/DSC05873_1750141133352.jpg';
 import collaborationImage from '@assets/DSC02843_1750141211187.jpg';
@@ -8,35 +9,37 @@ import leadershipImage from '@assets/DSC02841_1750141287437.jpg';
 import partnershipImage from '@assets/DSC_0022_1750141322198.jpg';
 
 export default function About() {
+  const { t } = useLanguage();
+  
   const values = [
     {
       icon: Heart,
-      title: 'Patient-Centered',
-      description: 'We elevate lived experience alongside clinical and scientific expertise.'
+      title: t('about.values.patientCentered.title'),
+      description: t('about.values.patientCentered.description')
     },
     {
       icon: Network,
-      title: 'Collaborative',
-      description: 'We bridge sectors and geographies to drive collective impact.'
+      title: t('about.values.collaborative.title'),
+      description: t('about.values.collaborative.description')
     },
     {
       icon: BookOpen,
-      title: 'Evidence-Informed',
-      description: 'We prioritize data, research, and clinical excellence.'
+      title: t('about.values.evidenceInformed.title'),
+      description: t('about.values.evidenceInformed.description')
     },
     {
       icon: Shield,
-      title: 'Transparent',
-      description: 'We uphold clarity, governance, and responsible leadership.'
+      title: t('about.values.transparent.title'),
+      description: t('about.values.transparent.description')
     }
   ];
 
   const services = [
-    'Curate a national Directory of clinics, care teams, and resources',
-    'Facilitate access to tools that support earlier and more accurate diagnosis',
-    'Share trusted information for patients, families, and care providers',
-    'Enable clinicians to upload, share, and adapt resources',
-    'Convene a national Executive Committee for strategic alignment'
+    t('about.services.directory'),
+    t('about.services.diagnosis'),
+    t('about.services.information'),
+    t('about.services.resources'),
+    t('about.services.committee')
   ];
 
   const partners = [
@@ -92,7 +95,7 @@ export default function About() {
               >
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-xl rounded-full px-4 py-2 border border-white/20">
                   <Heart className="w-4 h-4 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">About Canadian Amyloidosis Society</span>
+                  <span className="text-sm font-medium text-white/90">{t('about.hero.badge')}</span>
                 </div>
               </motion.div>
               
@@ -103,15 +106,15 @@ export default function About() {
                 transition={{ duration: 1, delay: 0.3 }}
               >
                 <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-                  Connecting
+                  {t('about.hero.title.connecting')}
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Healthcare
+                  {t('about.hero.title.healthcare')}
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-                  Canada
+                  {t('about.hero.title.canada')}
                 </span>
               </motion.h1>
               
@@ -121,7 +124,7 @@ export default function About() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                Connecting patients, clinicians, researchers, and advocates to improve outcomes in amyloidosis care across Canada.
+                {t('about.hero.description')}
               </motion.p>
               
               <motion.div
@@ -131,11 +134,11 @@ export default function About() {
                 transition={{ duration: 0.8, delay: 0.7 }}
               >
                 <button className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
-                  Our Mission
+                  {t('about.hero.ourMission')}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button className="bg-white/10 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
-                  Get Involved
+                  {t('about.hero.getInvolved')}
                 </button>
               </motion.div>
             </motion.div>

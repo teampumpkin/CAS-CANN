@@ -143,6 +143,82 @@ const translations = {
     'quickLinks.needHelp': "Need help finding what you're looking for?",
     'quickLinks.contactSupport': 'Contact Support',
     
+    // About Page
+    'about.values.patientCentered.title': 'Patient-Centered',
+    'about.values.patientCentered.description': 'We elevate lived experience alongside clinical and scientific expertise.',
+    'about.values.collaborative.title': 'Collaborative',
+    'about.values.collaborative.description': 'We bridge sectors and geographies to drive collective impact.',
+    'about.values.evidenceInformed.title': 'Evidence-Informed',
+    'about.values.evidenceInformed.description': 'We prioritize data, research, and clinical excellence.',
+    'about.values.transparent.title': 'Transparent',
+    'about.values.transparent.description': 'We uphold clarity, governance, and responsible leadership.',
+    'about.services.directory': 'Curate a national Directory of clinics, care teams, and resources',
+    'about.services.diagnosis': 'Facilitate access to tools that support earlier and more accurate diagnosis',
+    'about.services.information': 'Share trusted information for patients, families, and care providers',
+    'about.services.resources': 'Enable clinicians to upload, share, and adapt resources',
+    'about.services.committee': 'Convene a national Executive Committee for strategic alignment',
+    
+    // Contact Page
+    'contact.title': 'Contact Us',
+    'contact.subtitle': 'Get in touch with our team',
+    'contact.form.name': 'Name',
+    'contact.form.email': 'Email',
+    'contact.form.organization': 'Organization',
+    'contact.form.subject': 'Subject',
+    'contact.form.message': 'Message',
+    'contact.form.send': 'Send Message',
+    
+    // Directory Page
+    'directory.page.title': 'Healthcare Directory',
+    'directory.page.subtitle': 'Find specialized amyloidosis care across Canada',
+    'directory.search.placeholder': 'Search by location, specialty, or provider name',
+    'directory.provinces': 'Provinces & Territories',
+    'directory.centers': 'Treatment Centers',
+    'directory.specialists': 'Specialists',
+    
+    // Resources Page
+    'resources.title': 'Resource Library',
+    'resources.subtitle': 'Access comprehensive amyloidosis resources',
+    'resources.search.placeholder': 'Search resources...',
+    'resources.filters.type': 'Resource Type',
+    'resources.filters.audience': 'Audience',
+    'resources.filters.language': 'Language',
+    'resources.types.all': 'All Types',
+    'resources.types.al': 'AL (Light Chain)',
+    'resources.types.attr': 'ATTR (Transthyretin)',
+    'resources.types.aa': 'AA (Inflammatory)',
+    'resources.types.alect2': 'ALect2',
+    'resources.types.general': 'General',
+    'resources.filters.advanced': 'Advanced Filters',
+    'resources.filters.clearAll': 'Clear All',
+    
+    // About Page - Hero Section
+    'about.hero.badge': 'About Canadian Amyloidosis Society',
+    'about.hero.title.connecting': 'Connecting',
+    'about.hero.title.healthcare': 'Healthcare',
+    'about.hero.title.canada': 'Canada',
+    'about.hero.description': 'Connecting patients, clinicians, researchers, and advocates to improve outcomes in amyloidosis care across Canada.',
+    'about.hero.ourMission': 'Our Mission',
+    'about.hero.getInvolved': 'Get Involved',
+    
+    // Contact Page
+    'contact.hero.badge': 'Contact Us',
+    'contact.hero.title': 'Get in Touch',
+    'contact.hero.description': 'We\'re here to help. Whether you\'re a patient, caregiver, or healthcare professional, reach out to us.',
+    
+    // Directory Page
+    'directory.hero.badge': 'Directory - Find Support',
+    'directory.hero.title.find': 'Find',
+    'directory.hero.title.support': 'Support',
+    'directory.hero.title.nearYou': 'Near You',
+    'directory.hero.description': 'Connect with specialized treatment centers, research programs, and healthcare professionals across Canada.',
+    
+    // AboutAmyloidosis Page
+    'aboutAmyloidosis.hero.badge': 'About Amyloidosis',
+    'aboutAmyloidosis.hero.title.understanding': 'Understanding',
+    'aboutAmyloidosis.hero.title.amyloidosis': 'Amyloidosis',
+    'aboutAmyloidosis.hero.description': 'Learn about the signs, types, diagnosis, and treatment of amyloidosis to help you or your loved one.',
+    
     // Footer
     'footer.aboutUs': 'About Us',
     'footer.ourMission': 'Our Mission',
@@ -294,6 +370,82 @@ const translations = {
     'quickLinks.accessNow': 'Acceder Ahora',
     'quickLinks.needHelp': '¿Necesita ayuda para encontrar lo que busca?',
     'quickLinks.contactSupport': 'Contactar Soporte',
+    
+    // About Page
+    'about.values.patientCentered.title': 'Centrado en el Paciente',
+    'about.values.patientCentered.description': 'Elevamos la experiencia vivida junto con la experiencia clínica y científica.',
+    'about.values.collaborative.title': 'Colaborativo',
+    'about.values.collaborative.description': 'Conectamos sectores y geografías para impulsar el impacto colectivo.',
+    'about.values.evidenceInformed.title': 'Basado en Evidencia',
+    'about.values.evidenceInformed.description': 'Priorizamos los datos, la investigación y la excelencia clínica.',
+    'about.values.transparent.title': 'Transparente',
+    'about.values.transparent.description': 'Defendemos la claridad, la gobernanza y el liderazgo responsable.',
+    'about.services.directory': 'Curar un Directorio nacional de clínicas, equipos de atención y recursos',
+    'about.services.diagnosis': 'Facilitar el acceso a herramientas que apoyen el diagnóstico más temprano y preciso',
+    'about.services.information': 'Compartir información confiable para pacientes, familias y proveedores de atención',
+    'about.services.resources': 'Permitir que los médicos suban, compartan y adapten recursos',
+    'about.services.committee': 'Convocar un Comité Ejecutivo nacional para la alineación estratégica',
+    
+    // Contact Page
+    'contact.title': 'Contáctanos',
+    'contact.subtitle': 'Ponte en contacto con nuestro equipo',
+    'contact.form.name': 'Nombre',
+    'contact.form.email': 'Correo Electrónico',
+    'contact.form.organization': 'Organización',
+    'contact.form.subject': 'Asunto',
+    'contact.form.message': 'Mensaje',
+    'contact.form.send': 'Enviar Mensaje',
+    
+    // Directory Page
+    'directory.page.title': 'Directorio de Atención Médica',
+    'directory.page.subtitle': 'Encuentra atención especializada en amiloidosis en todo Canadá',
+    'directory.search.placeholder': 'Buscar por ubicación, especialidad o nombre del proveedor',
+    'directory.provinces': 'Provincias y Territorios',
+    'directory.centers': 'Centros de Tratamiento',
+    'directory.specialists': 'Especialistas',
+    
+    // Resources Page
+    'resources.title': 'Biblioteca de Recursos',
+    'resources.subtitle': 'Accede a recursos integrales sobre amiloidosis',
+    'resources.search.placeholder': 'Buscar recursos...',
+    'resources.filters.type': 'Tipo de Recurso',
+    'resources.filters.audience': 'Audiencia',
+    'resources.filters.language': 'Idioma',
+    'resources.types.all': 'Todos los Tipos',
+    'resources.types.al': 'AL (Cadena Ligera)',
+    'resources.types.attr': 'ATTR (Transtiretina)',
+    'resources.types.aa': 'AA (Inflamatoria)',
+    'resources.types.alect2': 'ALect2',
+    'resources.types.general': 'General',
+    'resources.filters.advanced': 'Filtros Avanzados',
+    'resources.filters.clearAll': 'Limpiar Todo',
+    
+    // About Page - Hero Section
+    'about.hero.badge': 'Acerca de la Sociedad Canadiense de Amiloidosis',
+    'about.hero.title.connecting': 'Conectando',
+    'about.hero.title.healthcare': 'Atención Médica',
+    'about.hero.title.canada': 'Canadá',
+    'about.hero.description': 'Conectando pacientes, médicos, investigadores y defensores para mejorar los resultados en la atención de amiloidosis en todo Canadá.',
+    'about.hero.ourMission': 'Nuestra Misión',
+    'about.hero.getInvolved': 'Involucrarse',
+    
+    // Contact Page
+    'contact.hero.badge': 'Contáctanos',
+    'contact.hero.title': 'Ponte en Contacto',
+    'contact.hero.description': 'Estamos aquí para ayudar. Ya sea paciente, cuidador o profesional de la salud, contáctanos.',
+    
+    // Directory Page
+    'directory.hero.badge': 'Directorio - Encuentra Apoyo',
+    'directory.hero.title.find': 'Encuentra',
+    'directory.hero.title.support': 'Apoyo',
+    'directory.hero.title.nearYou': 'Cerca de Ti',
+    'directory.hero.description': 'Conecta con centros de tratamiento especializados, programas de investigación y profesionales de la salud en todo Canadá.',
+    
+    // AboutAmyloidosis Page
+    'aboutAmyloidosis.hero.badge': 'Acerca de la Amiloidosis',
+    'aboutAmyloidosis.hero.title.understanding': 'Entendiendo',
+    'aboutAmyloidosis.hero.title.amyloidosis': 'Amiloidosis',
+    'aboutAmyloidosis.hero.description': 'Aprende sobre los signos, tipos, diagnóstico y tratamiento de la amiloidosis para ayudarte a ti o a tu ser querido.',
     
     // Footer
     'footer.aboutUs': 'Acerca de Nosotros',

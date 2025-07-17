@@ -4,8 +4,10 @@ import ParallaxBackground from '../components/ParallaxBackground';
 import canadaMapPath from '@assets/Canada Map_1750069387234.png';
 import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Directory() {
+  const { t } = useLanguage();
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -103,7 +105,7 @@ export default function Directory() {
               >
                 <div className="flex items-center gap-2 bg-white/10 backdrop-blur-xl rounded-full px-4 py-2 border border-white/20">
                   <MapPin className="w-4 h-4 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">Directory - Find Support</span>
+                  <span className="text-sm font-medium text-white/90">{t('directory.hero.badge')}</span>
                 </div>
               </motion.div>
               
@@ -114,15 +116,15 @@ export default function Directory() {
                 transition={{ duration: 1, delay: 0.3 }}
               >
                 <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-                  Find
+                  {t('directory.hero.title.find')}
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Support
+                  {t('directory.hero.title.support')}
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-                  Near You
+                  {t('directory.hero.title.nearYou')}
                 </span>
               </motion.h1>
               
@@ -132,7 +134,7 @@ export default function Directory() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                Connect with specialized treatment centers, research programs, and healthcare professionals across Canada.
+                {t('directory.hero.description')}
               </motion.p>
               
               <motion.div

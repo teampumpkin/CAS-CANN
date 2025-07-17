@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { 
   Search, 
   Filter, 
@@ -38,13 +39,14 @@ interface ResourceFilters {
   region: string;
 }
 
-const amyloidosisTypes = [
-  { value: "all", label: "All Types" },
-  { value: "AL", label: "AL (Light Chain)" },
-  { value: "ATTR", label: "ATTR (Transthyretin)" },
-  { value: "AA", label: "AA (Inflammatory)" },
-  { value: "ALect2", label: "ALect2" },
-  { value: "General", label: "General" }
+// Helper function to get amyloidosis types with translations
+const getAmyloidosisTypes = (t: any) => [
+  { value: "all", label: t('resources.types.all') },
+  { value: "AL", label: t('resources.types.al') },
+  { value: "ATTR", label: t('resources.types.attr') },
+  { value: "AA", label: t('resources.types.aa') },
+  { value: "ALect2", label: t('resources.types.alect2') },
+  { value: "General", label: t('resources.types.general') }
 ];
 
 const resourceTypes = [
@@ -153,6 +155,11 @@ const formatDate = (date: string | Date | null) => {
 };
 
 export default function Resources() {
+  const { t } = useLanguage();
+  
+  // Get translated amyloidosis types
+  const amyloidosisTypes = getAmyloidosisTypes(t);
+  
   const [filters, setFilters] = useState<ResourceFilters>({
     search: '',
     amyloidosisType: 'all',
@@ -243,12 +250,12 @@ export default function Resources() {
           >
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
               <BookOpen className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Resource Library</span>
+              <span className="text-sm font-medium text-white/90">{t('resources.title')}</span>
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
               <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                A Living Library
+                {t('resources.title')}
               </span>
               <br />
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
@@ -257,7 +264,7 @@ export default function Resources() {
             </h1>
             
             <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
-              The CAS Resource Library hosts documents, tools, and visuals that support diagnosis, treatment, education, and care coordination. Contributors from across Canada submit new materials, which are reviewed by moderators before publication.
+              {t('resources.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -274,7 +281,7 @@ export default function Resources() {
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/60 w-5 h-5" />
                 <Input
                   type="text"
-                  placeholder="Search resources by title..."
+                  placeholder={t('resources.search.placeholder')}
                   value={filters.search}
                   onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
                   className="pl-12 h-14 bg-white/20 border-white/30 text-white placeholder-white/60 text-lg rounded-xl focus:ring-2 focus:ring-[#00AFE6] focus:border-[#00AFE6]"
@@ -288,7 +295,7 @@ export default function Resources() {
                     <CollapsibleTrigger asChild>
                       <Button variant="outline" className="border-white/30 text-white hover:bg-white/20 bg-white/15">
                         <Filter className="w-4 h-4 mr-2" />
-                        Advanced Filters
+                        {t('resources.filters.advanced')}
                         {activeFiltersCount > 0 && (
                           <Badge variant="secondary" className="ml-2 bg-[#00AFE6] text-white">
                             {activeFiltersCount}
@@ -302,7 +309,7 @@ export default function Resources() {
                   {activeFiltersCount > 0 && (
                     <Button variant="ghost" onClick={clearFilters} className="text-white/80 hover:text-white hover:bg-white/20">
                       <X className="w-4 h-4 mr-2" />
-                      Clear All
+                      {t('resources.filters.clearAll')}
                     </Button>
                   )}
                 </div>

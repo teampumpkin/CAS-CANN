@@ -3,8 +3,10 @@ import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain,
 import { Link } from 'wouter';
 import { useState } from 'react';
 import ParallaxBackground from '../components/ParallaxBackground';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AboutAmyloidosis() {
+  const { t } = useLanguage();
   const [expandedType, setExpandedType] = useState<string | null>(null);
 
   const toggleType = (type: string) => {

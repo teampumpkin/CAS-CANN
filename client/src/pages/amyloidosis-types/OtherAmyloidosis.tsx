@@ -77,11 +77,11 @@ export default function OtherAmyloidosis() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Hero Section */}
-      <section className="py-32 bg-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent" />
+      <section className="py-32 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-800 dark:via-gray-900 dark:to-black" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
         
         {/* Floating accent elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -116,19 +116,19 @@ export default function OtherAmyloidosis() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors mb-8">
+            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" />
               Back to Amyloidosis Types
             </Link>
             
             <div className="text-center">
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+              <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
                 <Microscope className="w-5 h-5 text-purple-400" />
-                <span className="text-sm font-medium text-white/90">Other Amyloidosis Types</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/90">Other Amyloidosis Types</span>
               </div>
             
               <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Other Amyloidosis
                 </span>
                 <br />
@@ -137,7 +137,7 @@ export default function OtherAmyloidosis() {
                 </span>
               </h1>
               
-              <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
                 This includes AA (Secondary) amyloidosis, localized forms, dialysis-related amyloidosis, and rare hereditary types. Each requires specific diagnostic approaches and targeted treatments.
               </p>
             </div>
@@ -146,8 +146,8 @@ export default function OtherAmyloidosis() {
       </section>
 
       {/* Overview Section with Image */}
-      <section className="py-24 bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+      <section className="py-24 bg-white dark:bg-gray-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="max-w-7xl mx-auto"

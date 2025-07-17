@@ -81,11 +81,11 @@ export default function ALAmyloidosis() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Hero Section */}
-      <section className="py-32 bg-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent" />
+      <section className="py-32 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-800 dark:via-gray-900 dark:to-black" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
         
         {/* Floating accent elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -120,19 +120,19 @@ export default function ALAmyloidosis() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors mb-8">
+            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" />
               Back to Amyloidosis Types
             </Link>
             
             <div className="text-center">
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+              <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
                 <Heart className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-white/90">AL Amyloidosis</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/90">AL Amyloidosis</span>
               </div>
             
               <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   AL Amyloidosis
                 </span>
                 <br />
@@ -141,7 +141,7 @@ export default function ALAmyloidosis() {
                 </span>
               </h1>
               
-              <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
                 AL amyloidosis is the most common form of systemic amyloidosis. It occurs when plasma cells in the bone marrow produce abnormal antibody light chains that misfold and deposit as amyloid in organs and tissues.
               </p>
             </div>
@@ -150,8 +150,8 @@ export default function ALAmyloidosis() {
       </section>
 
       {/* Overview Section with Image */}
-      <section className="py-24 bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+      <section className="py-24 bg-white dark:bg-gray-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="max-w-7xl mx-auto"
@@ -168,13 +168,13 @@ export default function ALAmyloidosis() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+                <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
                   <Heart className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">Overview</span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-white/90">Overview</span>
                 </div>
                 
                 <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                     Understanding AL
                   </span>
                   <br />
@@ -183,7 +183,7 @@ export default function ALAmyloidosis() {
                   </span>
                 </h2>
                 
-                <div className="space-y-6 text-white/70 leading-relaxed">
+                <div className="space-y-6 text-gray-600 dark:text-white/70 leading-relaxed">
                   <p className="text-lg">
                     AL amyloidosis affects approximately 3,000-4,000 people in North America each year. The "AL" stands for "Amyloid Light chain," referring to the misfolded light chain proteins that form amyloid deposits.
                   </p>
@@ -198,15 +198,15 @@ export default function ALAmyloidosis() {
                 </div>
                 
                 <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-2xl p-6 mt-8">
-                  <h3 className="text-xl font-semibold text-white mb-3">Key Facts</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Key Facts</h3>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="text-[#00AFE6] font-medium">Prevalence:</span>
-                      <div className="text-white/80">~8-12 per million</div>
+                      <div className="text-gray-700 dark:text-white/80">~8-12 per million</div>
                     </div>
                     <div>
                       <span className="text-[#00AFE6] font-medium">Median Age:</span>
-                      <div className="text-white/80">65 years</div>
+                      <div className="text-gray-700 dark:text-white/80">65 years</div>
                     </div>
                   </div>
                 </div>
@@ -220,7 +220,7 @@ export default function ALAmyloidosis() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
+                <div className="relative bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-900/10 dark:border-white/10">
                   <div className="aspect-[4/5] relative">
                     <img 
                       src={medicalResearchImg} 
@@ -229,7 +229,7 @@ export default function ALAmyloidosis() {
                     />
                     
                     <motion.div
-                      className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
+                      className="absolute bottom-6 left-6 right-6 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl border border-gray-900/20 dark:border-white/20 text-gray-900 dark:text-white rounded-2xl shadow-2xl"
                       initial={{ opacity: 0, y: 40 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.5 }}
@@ -240,13 +240,13 @@ export default function ALAmyloidosis() {
                             <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                               70%
                             </div>
-                            <div className="text-xs text-white/80">Heart Involvement</div>
+                            <div className="text-xs text-gray-700 dark:text-white/80">Heart Involvement</div>
                           </div>
                           <div className="text-center">
                             <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
                               60%
                             </div>
-                            <div className="text-xs text-white/80">Kidney Involvement</div>
+                            <div className="text-xs text-gray-700 dark:text-white/80">Kidney Involvement</div>
                           </div>
                         </div>
                       </div>
@@ -275,7 +275,7 @@ export default function ALAmyloidosis() {
       </section>
 
       {/* Detailed Information Sections */}
-      <section className="py-24 bg-gray-900">
+      <section className="py-24 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-4xl mx-auto"
@@ -286,11 +286,11 @@ export default function ALAmyloidosis() {
           >
             <div className="text-center mb-16">
               <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Detailed Information
                 </span>
               </h2>
-              <p className="text-lg text-white/70">
+              <p className="text-lg text-gray-600 dark:text-white/70">
                 Comprehensive information about AL amyloidosis symptoms, diagnosis, treatment, and care options.
               </p>
             </div>
@@ -298,7 +298,7 @@ export default function ALAmyloidosis() {
             <div className="space-y-6">
               {/* Symptoms */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden"
+                className="bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-gray-900/10 dark:border-white/10 overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -306,21 +306,21 @@ export default function ALAmyloidosis() {
               >
                 <button
                   onClick={() => toggleSection('symptoms')}
-                  className="w-full p-8 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                  className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
                       <AlertTriangle className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold font-rosarivo">Signs & Symptoms</h3>
-                      <p className="text-white/70">Recognizing early warning signs of AL amyloidosis</p>
+                      <h3 className="text-2xl font-bold font-rosarivo text-gray-900 dark:text-white">Signs & Symptoms</h3>
+                      <p className="text-gray-600 dark:text-white/70">Recognizing early warning signs of AL amyloidosis</p>
                     </div>
                   </div>
                   {openSection === 'symptoms' ? (
-                    <ChevronUp className="w-6 h-6 text-white/70" />
+                    <ChevronUp className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-white/70" />
+                    <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   )}
                 </button>
                 
@@ -331,12 +331,12 @@ export default function ALAmyloidosis() {
                     animate={{ opacity: 1, height: 'auto' }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="bg-white/5 rounded-xl p-6">
+                    <div className="bg-gray-900/5 dark:bg-white/5 rounded-xl p-6">
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.symptoms.map((symptom, index) => (
                           <div key={index} className="flex items-start gap-3">
                             <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-white/80">{symptom}</span>
+                            <span className="text-gray-700 dark:text-white/80">{symptom}</span>
                           </div>
                         ))}
                       </div>

@@ -81,11 +81,11 @@ export default function ATTRAmyloidosis() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Hero Section */}
-      <section className="py-32 bg-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent" />
+      <section className="py-32 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-800 dark:via-gray-900 dark:to-black" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
         
         {/* Floating accent elements */}
         <div className="absolute inset-0 overflow-hidden">

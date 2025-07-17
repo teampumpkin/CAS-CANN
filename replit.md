@@ -18,6 +18,17 @@ Preferred communication style: Simple, everyday language.
 - ✅ Created comprehensive "Other Amyloidosis Types" page consolidating AA, localized, and dialysis-related forms
 - ✅ Updated App.tsx routing to include new consolidated amyloidosis types page
 - ✅ Successfully reduced amyloidosis type sections from 4 to 3 as requested (AL, ATTR, Other)
+- ✅ Removed dropdown functionality from "Other Amyloidosis Types" page - all information visible by default
+
+### Light/Dark Theme Conversion for Amyloidosis Detail Pages (July 17, 2025)
+- ✅ Converting all amyloidosis detail pages from dark-only to light/dark theme support
+- ✅ Updated ALAmyloidosis.tsx with theme-aware classes for hero section, overview, and detailed information
+- ✅ Updated OtherAmyloidosis.tsx with theme-aware classes for hero and overview sections
+- ✅ Applied proper light theme styling: bg-white dark:bg-gray-900, text-gray-900 dark:text-white
+- ✅ Updated all badge, button, and card backgrounds with theme-adaptive styling
+- ✅ Enhanced gradient text colors for both light and dark themes
+- 🔄 In progress: Completing theme conversion for ATTRAmyloidosis.tsx, AAAmyloidosis.tsx, and ALect2Amyloidosis.tsx
+- 🔄 In progress: Updating all accordion sections and card backgrounds for theme consistency
 
 ### About Page Light Theme Optimization (July 17, 2025)
 - ✅ Fixed About CAS page for proper light theme support

@@ -21,6 +21,20 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Fix text overlapping for headings */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+  }
+  
+  h1 {
+    line-height: 1.1;
+  }
+  
+  /* Specifically fix large headings */
+  .text-4xl, .text-5xl, .text-6xl {
+    line-height: 1.1;
+  }
 }
 
 :root {

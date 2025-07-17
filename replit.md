@@ -86,6 +86,21 @@ Preferred communication style: Simple, everyday language.
 - ✅ Implemented brand-consistent gradients and medical aesthetic
 - ✅ Added subtle background patterns and professional color scheme
 
+### Navigation Bar Optimization (July 17, 2025)
+- ✅ Implemented consistent dark navbar across entire website
+- ✅ Removed theme-adaptive behavior for better visibility and consistency
+- ✅ Fixed language switcher and theme toggle visibility in all themes
+- ✅ Updated mobile menu styling to match dark theme
+- ✅ Removed phone number display from desktop navbar as requested
+- ✅ All navigation elements now use white text on dark background
+
+### Text Overlapping Fix (July 17, 2025)
+- ✅ Fixed h1 text overlapping issues across all pages
+- ✅ Updated CSS with proper line height rules for all heading elements
+- ✅ Changed leading-tight to leading-none for large text sizes
+- ✅ Applied fixes to Hero.tsx, About.tsx, Contact.tsx, UploadResource.tsx
+- ✅ Added global CSS rules to prevent text overlapping for text-4xl, text-5xl, text-6xl
+
 ### Custom Cursor Removal (July 17, 2025)
 - ✅ Removed AdvancedMouseFollower component from App.tsx
 - ✅ Deleted AdvancedMouseFollower.tsx component file

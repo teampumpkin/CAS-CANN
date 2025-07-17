@@ -246,7 +246,7 @@ export default function Contact() {
                 <span className="text-sm font-medium text-white/90">Connect & Collaborate</span>
               </motion.div>
               
-              <h1 className="text-6xl lg:text-8xl font-bold font-rosarivo mb-8 leading-tight">
+              <h1 className="text-6xl lg:text-8xl font-bold font-rosarivo mb-8 leading-none">
                 <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
                   Let's
                 </span>

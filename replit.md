@@ -8,6 +8,24 @@ This is a modern, patient-focused website for the Canadian Amyloidosis Society, 
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### Light/Dark Theme System Implementation (July 17, 2025)
+- ✅ Created comprehensive ThemeProvider component with localStorage persistence
+- ✅ Added theme toggle button with sun/moon icons in header navigation
+- ✅ Implemented system preference detection for automatic theme selection
+- ✅ Updated all major sections with complete light/dark mode support:
+  - Hero section with proper background overlays
+  - WelcomeSection with theme-aware styling
+  - AboutAmyloidosisSection with adaptive text colors
+  - EventsNewsletterSection with light/dark backgrounds
+  - DirectoryPreviewSection with proper gradient handling
+  - QuickLinksSection with theme-aware cards
+  - Footer with comprehensive light mode styling
+- ✅ Fixed hardcoded dark styling issues throughout the application
+- ✅ Applied theme-aware Tailwind classes (dark: prefixes) consistently
+- ✅ Ensured proper contrast ratios and accessibility in both themes
+
 ## System Architecture
 
 ### Frontend Architecture

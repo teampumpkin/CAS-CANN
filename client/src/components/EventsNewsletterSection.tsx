@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { Calendar, Mail, Video, Heart, Users, ArrowRight } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function EventsNewsletterSection() {
+  const { t } = useLanguage();
   const events = [
     {
       icon: Users,

@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { Heart, Activity, Users } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AboutAmyloidosisSection() {
+  const { t } = useLanguage();
   const amyloidosisTypes = [
     {
       name: 'AL Amyloidosis',

@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Users, BookOpen, Heart, Search, Calendar, Phone } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function QuickLinksSection() {
+  const { t } = useLanguage();
   const quickLinks = [
     {
       icon: Search,

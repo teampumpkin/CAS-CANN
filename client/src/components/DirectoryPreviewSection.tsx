@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
 import { Search, FileText, Heart, Users, MapPin, Building2, Phone, Mail } from 'lucide-react';
 import canadaMapPath from '@assets/Canada Map_1750069387234.png';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 
 export default function DirectoryPreviewSection() {
+  const { t } = useLanguage();
   const directoryFeatures = [
     {
       icon: Building2,

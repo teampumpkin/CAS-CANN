@@ -3,7 +3,7 @@ import medicalProfessionalImg from '@assets/DSC02826_1750092328495.jpg';
 
 export default function WelcomeSection() {
   return (
-    <section className="relative py-20 lg:py-32 bg-gray-100 dark:bg-gray-900 overflow-hidden">
+    <section className="relative py-12 lg:py-20 bg-gray-100 dark:bg-gray-900 overflow-hidden">
       {/* Premium background elements */}
       <div className="absolute inset-0">
         <motion.div 
@@ -25,7 +25,7 @@ export default function WelcomeSection() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content Column - Left Side */}
           <motion.div
             className="lg:pr-8"
@@ -47,7 +47,7 @@ export default function WelcomeSection() {
 
             {/* Premium heading with gradient accent */}
             <motion.h2 
-              className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-10 leading-tight font-rosarivo"
+              className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight font-rosarivo"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -61,7 +61,7 @@ export default function WelcomeSection() {
 
             {/* Premium description with enhanced styling */}
             <motion.div 
-              className="space-y-8 text-gray-700 dark:text-white/80 text-xl leading-relaxed"
+              className="space-y-6 text-gray-700 dark:text-white/80 text-xl leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -77,7 +77,7 @@ export default function WelcomeSection() {
 
             {/* Premium call-to-action */}
             <motion.div 
-              className="mt-12"
+              className="mt-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}

@@ -36,7 +36,7 @@ export default function EventsNewsletterSection() {
   ];
 
   return (
-    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       {/* Background decorative elements matching amyloidosis section style */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 rounded-full blur-3xl"></div>
@@ -46,7 +46,7 @@ export default function EventsNewsletterSection() {
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header matching amyloidosis section style */}
         <motion.div 
-          className="text-center mb-20"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -73,7 +73,7 @@ export default function EventsNewsletterSection() {
 
         {/* Interactive Newsletter Card */}
         <motion.div
-          className="relative mb-20"
+          className="relative mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}

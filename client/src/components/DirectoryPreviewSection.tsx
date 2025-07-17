@@ -37,7 +37,7 @@ export default function DirectoryPreviewSection() {
   ];
 
   return (
-    <section className="py-24 bg-gray-100 dark:bg-gray-900 relative overflow-hidden">
+    <section className="py-16 bg-gray-100 dark:bg-gray-900 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/10 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
@@ -46,7 +46,7 @@ export default function DirectoryPreviewSection() {
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -65,12 +65,12 @@ export default function DirectoryPreviewSection() {
 
         {/* Canada Network Stats - Moved to Top */}
         <motion.div
-          className="bg-gradient-to-br from-white/90 to-white/80 dark:from-white/10 dark:to-white/5 backdrop-blur-xl rounded-3xl p-12 border border-gray-200 dark:border-white/20 mb-16"
+          className="bg-gradient-to-br from-white/90 to-white/80 dark:from-white/10 dark:to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-gray-200 dark:border-white/20 mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             {/* Map Visualization */}
             <div className="relative">
               <div className="text-center mb-8">

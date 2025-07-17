@@ -27,8 +27,8 @@ export default function Footer() {
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Main Content */}
-        <div className="py-20">
-          <div className="grid lg:grid-cols-12 gap-16">
+        <div className="py-12">
+          <div className="grid lg:grid-cols-12 gap-12">
             
             {/* Brand Section - Enhanced */}
             <div className="lg:col-span-4">

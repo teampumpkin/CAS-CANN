@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Search, FileText, Heart, Users, MapPin, Building2, Phone, Mail } from 'lucide-react';
+import canadaMapPath from '@assets/Canada Map_1750069387234.png';
 
 
 export default function DirectoryPreviewSection() {
@@ -87,61 +88,28 @@ export default function DirectoryPreviewSection() {
               </div>
               
               <div className="relative w-full max-w-xl mx-auto">
-                {/* Visual representation without map image */}
-                <div className="w-full h-48 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-xl shadow-xl border border-white/10 relative overflow-hidden">
-                  {/* Abstract network visualization */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-4xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-2">
-                        Canada-Wide
-                      </div>
-                      <div className="text-gray-700 dark:text-white/70 font-medium">
-                        Healthcare Network
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Network points with subtle animation */}
-                  <motion.div
-                    className="absolute top-1/4 left-1/3 w-3 h-3 bg-[#00AFE6] rounded-full shadow-lg"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  <motion.div
-                    className="absolute top-1/2 right-1/4 w-3 h-3 bg-[#00DD89] rounded-full shadow-lg"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
-                  />
-                  <motion.div
-                    className="absolute bottom-1/3 left-1/2 w-3 h-3 bg-purple-500 rounded-full shadow-lg"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 1.3 }}
-                  />
-                  
-                  {/* Connecting lines */}
-                  <svg className="absolute inset-0 w-full h-full">
-                    <motion.path
-                      d="M 30 60 Q 150 100 250 60"
-                      stroke="#00AFE6"
-                      strokeWidth="2"
-                      fill="none"
-                      opacity="0.3"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    />
-                    <motion.path
-                      d="M 100 30 Q 200 80 300 120"
-                      stroke="#00DD89"
-                      strokeWidth="2"
-                      fill="none"
-                      opacity="0.3"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 1 }}
-                    />
-                  </svg>
-                </div>
+                <img 
+                  src={canadaMapPath}
+                  alt="Canada Map showing healthcare network coverage"
+                  className="w-full h-auto rounded-xl"
+                />
+                
+                {/* Network points with subtle animation */}
+                <motion.div
+                  className="absolute top-1/4 left-1/3 w-3 h-3 bg-[#00AFE6] rounded-full"
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <motion.div
+                  className="absolute top-1/2 right-1/4 w-3 h-3 bg-[#00DD89] rounded-full"
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
+                />
+                <motion.div
+                  className="absolute bottom-1/3 left-1/2 w-3 h-3 bg-purple-500 rounded-full"
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 1.3 }}
+                />
               </div>
             </div>
 

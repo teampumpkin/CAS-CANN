@@ -30,11 +30,20 @@ export default function AboutAmyloidosisSection() {
   ];
 
   return (
-    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-[#00DD89]/8 via-gray-50 to-[#00AFE6]/8 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
-      {/* Background decorative elements */}
+    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-[#00DD89]/12 via-blue-50/80 to-[#00AFE6]/12 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+      {/* Enhanced background decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/15 to-[#00AFE6]/15 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/20 to-[#00AFE6]/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-br from-blue-400/8 to-teal-400/8 rounded-full blur-3xl"></div>
+        
+        {/* Medical pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 20% 50%, #00AFE6 1px, transparent 1px), radial-gradient(circle at 80% 50%, #00DD89 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -45,30 +54,37 @@ export default function AboutAmyloidosisSection() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Badge */}
+          {/* Enhanced Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm border border-gray-900/20 dark:border-white/20 rounded-full px-6 py-3 mb-8"
+            className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-[#00AFE6]/30 dark:border-white/20 rounded-full px-6 py-3 mb-8 shadow-lg shadow-[#00AFE6]/10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+            <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
             <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Medical Information</span>
           </motion.div>
 
           <h2 className="crawford-section-title text-gray-900 dark:text-white mb-8">
             What is Amyloidosis?
           </h2>
-          <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
-          </p>
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xl text-gray-700 dark:text-white/80 leading-relaxed mb-4">
+              Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
+            </p>
+            <div className="flex items-center justify-center gap-4 mt-6">
+              <div className="w-16 h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+              <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+              <div className="w-16 h-0.5 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full"></div>
+            </div>
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {amyloidosisTypes.map((type, index) => (
             <motion.div
               key={type.name}
-              className="group relative bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/20 dark:border-white/10 hover:border-[#00AFE6]/40 dark:hover:border-white/30 transition-all duration-500 hover:bg-white/95 dark:hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20"
+              className="group relative bg-white/95 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/30 dark:border-white/10 hover:border-[#00AFE6]/50 dark:hover:border-white/30 transition-all duration-500 hover:bg-white/98 dark:hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/25 shadow-lg shadow-blue-100/50 dark:shadow-none"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.15 }}
@@ -110,14 +126,25 @@ export default function AboutAmyloidosisSection() {
         </div>
 
         <motion.div
-          className="relative bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-12 lg:p-16 border border-gray-200 dark:border-white/10 overflow-hidden"
+          className="relative bg-white/95 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-12 lg:p-16 border border-[#00AFE6]/30 dark:border-white/10 overflow-hidden shadow-xl shadow-blue-100/50 dark:shadow-none"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
+          {/* Enhanced background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/8 via-blue-50/30 to-[#00DD89]/8 dark:from-[#00AFE6]/5 dark:via-transparent dark:to-[#00DD89]/5"></div>
+          
+          {/* Medical cross pattern */}
+          <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.08]">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `
+                linear-gradient(90deg, #00AFE6 1px, transparent 1px),
+                linear-gradient(0deg, #00DD89 1px, transparent 1px)
+              `,
+              backgroundSize: '60px 60px'
+            }}></div>
+          </div>
           
           <div className="relative grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -148,7 +175,7 @@ export default function AboutAmyloidosisSection() {
             </div>
             <div className="space-y-8">
               <motion.div 
-                className="relative bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 dark:border-white/20"
+                className="relative bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-[#00AFE6]/25 dark:border-white/20 shadow-lg shadow-blue-100/40 dark:shadow-none"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >
@@ -157,7 +184,7 @@ export default function AboutAmyloidosisSection() {
                 <div className="text-gray-700 dark:text-white/70">Many patients see multiple doctors before receiving proper diagnosis</div>
               </motion.div>
               <motion.div 
-                className="relative bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 dark:border-white/20"
+                className="relative bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-[#00DD89]/25 dark:border-white/20 shadow-lg shadow-green-100/40 dark:shadow-none"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >

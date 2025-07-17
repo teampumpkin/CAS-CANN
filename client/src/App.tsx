@@ -23,6 +23,7 @@ import ALAmyloidosis from "@/pages/amyloidosis-types/ALAmyloidosis";
 import ATTRAmyloidosis from "@/pages/amyloidosis-types/ATTRAmyloidosis";
 import AAAmyloidosis from "@/pages/amyloidosis-types/AAAmyloidosis";
 import ALect2Amyloidosis from "@/pages/amyloidosis-types/ALect2Amyloidosis";
+import OtherAmyloidosis from "@/pages/amyloidosis-types/OtherAmyloidosis";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -42,6 +43,7 @@ function Router() {
       <Route path="/amyloidosis-types/attr-transthyretin-amyloidosis" component={ATTRAmyloidosis} />
       <Route path="/amyloidosis-types/aa-inflammatory-amyloidosis" component={AAAmyloidosis} />
       <Route path="/amyloidosis-types/alect2-amyloidosis" component={ALect2Amyloidosis} />
+      <Route path="/amyloidosis-types/other-amyloidosis-types" component={OtherAmyloidosis} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -141,110 +141,6 @@ export default function AboutAmyloidosis() {
         </div>
       </ParallaxBackground>
 
-      {/* Warning Signs Section */}
-      <section id="warning-signs" className="py-24 bg-gray-50 dark:bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-xl rounded-full px-4 py-2 border border-red-500/30 mb-6">
-              <AlertTriangle className="w-4 h-4 text-red-400" />
-              <span className="text-sm font-medium text-red-400">Critical Warning Signs</span>
-            </div>
-            
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Recognize the
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
-                Warning Signs
-              </span>
-            </h2>
-            
-            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Early recognition of symptoms can lead to faster diagnosis and better outcomes. These signs warrant immediate medical attention.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {warningSignsData.map((category, index) => (
-              <motion.div
-                key={category.category}
-                className={`backdrop-blur-xl rounded-2xl p-6 border ${category.color.split(' ')[1]} ${category.color.split(' ')[2]} ${
-                  index === 0 
-                    ? 'bg-gradient-to-br from-red-900/25 to-pink-900/25 border-red-400/30'
-                    : index === 1
-                    ? 'bg-gradient-to-br from-blue-900/25 to-cyan-900/25 border-blue-400/30'
-                    : 'bg-gradient-to-br from-orange-900/25 to-amber-900/25 border-orange-400/30'
-                }`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className={`w-12 h-12 ${category.color.split(' ')[0]} rounded-xl flex items-center justify-center`}>
-                    <category.icon className={`w-6 h-6 ${category.color.split(' ')[2]}`} />
-                  </div>
-                  <h3 className={`text-lg font-bold ${
-                    index === 0 
-                      ? 'text-red-100'
-                      : index === 1
-                      ? 'text-blue-100'
-                      : 'text-orange-100'
-                  }`}>{category.category}</h3>
-                </div>
-                
-                <div className="space-y-3 mb-6">
-                  {category.signs.map((sign, signIndex) => (
-                    <div key={signIndex} className="flex items-start gap-3">
-                      <AlertTriangle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-white/80 text-sm">{sign}</span>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="pt-4 border-t border-white/10">
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <Link href="/resources?category=diagnosis" className="text-xs text-white/60 hover:text-[#00AFE6] flex items-center gap-1 transition-colors">
-                      <Search className="w-3 h-3" />
-                      Diagnostic Resources
-                    </Link>
-                    <Link href="/directory" className="text-xs text-white/60 hover:text-[#00DD89] flex items-center gap-1 transition-colors">
-                      <Hospital className="w-3 h-3" />
-                      Find Specialists
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Emergency CTA */}
-          <motion.div
-            className="bg-gradient-to-r from-red-500/20 to-orange-500/20 backdrop-blur-xl rounded-2xl p-8 border border-red-500/30 mt-12 text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <AlertTriangle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-4">If you experience multiple symptoms from different categories</h3>
-            <p className="text-white/80 mb-6">Contact your healthcare provider immediately or visit an emergency department. Early diagnosis can be life-saving.</p>
-            <Link href="/directory" className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
-              <Hospital className="w-5 h-5" />
-              Find Emergency Care
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Amyloidosis Types - Collapsible Sections */}
       <section className="py-24 bg-white dark:bg-gray-900 relative">
         <div className="container mx-auto px-6 relative z-10">
@@ -447,8 +343,112 @@ export default function AboutAmyloidosis() {
         </div>
       </section>
 
+      {/* Warning Signs Section */}
+      <section id="warning-signs" className="py-24 bg-gray-50 dark:bg-gray-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-xl rounded-full px-4 py-2 border border-red-500/30 mb-6">
+              <AlertTriangle className="w-4 h-4 text-red-400" />
+              <span className="text-sm font-medium text-red-400">Critical Warning Signs</span>
+            </div>
+            
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Recognize the
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
+                Warning Signs
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Early recognition of symptoms can lead to faster diagnosis and better outcomes. These signs warrant immediate medical attention.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {warningSignsData.map((category, index) => (
+              <motion.div
+                key={category.category}
+                className={`backdrop-blur-xl rounded-2xl p-6 border ${category.color.split(' ')[1]} ${category.color.split(' ')[2]} ${
+                  index === 0 
+                    ? 'bg-gradient-to-br from-red-50/95 to-pink-50/95 dark:from-red-900/25 dark:to-pink-900/25 border-red-200/50 dark:border-red-400/30'
+                    : index === 1
+                    ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200/50 dark:border-blue-400/30'
+                    : 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/50 dark:border-orange-400/30'
+                }`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className={`w-12 h-12 ${category.color.split(' ')[0]} rounded-xl flex items-center justify-center`}>
+                    <category.icon className={`w-6 h-6 ${category.color.split(' ')[2]}`} />
+                  </div>
+                  <h3 className={`text-lg font-bold ${
+                    index === 0 
+                      ? 'text-red-900 dark:text-red-100'
+                      : index === 1
+                      ? 'text-blue-900 dark:text-blue-100'
+                      : 'text-orange-900 dark:text-orange-100'
+                  }`}>{category.category}</h3>
+                </div>
+                
+                <div className="space-y-3 mb-6">
+                  {category.signs.map((sign, signIndex) => (
+                    <div key={signIndex} className="flex items-start gap-3">
+                      <AlertTriangle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-white/80 text-sm">{sign}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="pt-4 border-t border-gray-200 dark:border-white/10">
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Link href="/resources?category=diagnosis" className="text-xs text-gray-600 dark:text-white/60 hover:text-[#00AFE6] flex items-center gap-1 transition-colors">
+                      <Search className="w-3 h-3" />
+                      Diagnostic Resources
+                    </Link>
+                    <Link href="/directory" className="text-xs text-gray-600 dark:text-white/60 hover:text-[#00DD89] flex items-center gap-1 transition-colors">
+                      <Hospital className="w-3 h-3" />
+                      Find Specialists
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Emergency CTA */}
+          <motion.div
+            className="bg-gradient-to-r from-red-500/20 to-orange-500/20 backdrop-blur-xl rounded-2xl p-8 border border-red-500/30 mt-12 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <AlertTriangle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">If you experience multiple symptoms from different categories</h3>
+            <p className="text-gray-700 dark:text-white/80 mb-6">Contact your healthcare provider immediately or visit an emergency department. Early diagnosis can be life-saving.</p>
+            <Link href="/directory" className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
+              <Hospital className="w-5 h-5" />
+              Find Emergency Care
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900 relative border-t border-gray-200 dark:border-white/10">
+      <section className="py-24 bg-white dark:bg-gray-900 relative border-t border-gray-200 dark:border-white/10">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div

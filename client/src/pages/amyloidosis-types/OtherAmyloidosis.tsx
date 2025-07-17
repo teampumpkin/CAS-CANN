@@ -1,21 +1,15 @@
 import { motion } from 'framer-motion';
-import { Microscope, AlertTriangle, Search, Target, ArrowLeft, ChevronDown, ChevronUp } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Microscope, AlertTriangle, Search, Target, ArrowLeft } from 'lucide-react';
+import { useEffect } from 'react';
 import { Link } from 'wouter';
 import ParallaxBackground from '../../components/ParallaxBackground';
 import medicalResearchImg from '@assets/DSC02841_1750068895454.jpg';
 
 export default function OtherAmyloidosis() {
-  const [openSection, setOpenSection] = useState<string | null>(null);
-
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
-
-  const toggleSection = (section: string) => {
-    setOpenSection(openSection === section ? null : section);
-  };
 
   const detailedInfo = {
     symptoms: [
@@ -268,149 +262,83 @@ export default function OtherAmyloidosis() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Symptoms */}
             <motion.div
-              className="bg-gradient-to-br from-red-900/25 to-pink-900/25 backdrop-blur-xl rounded-2xl border border-red-400/30 overflow-hidden"
+              className="bg-gradient-to-br from-red-900/25 to-pink-900/25 backdrop-blur-xl rounded-2xl border border-red-400/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              <div 
-                className="p-6 cursor-pointer hover:bg-white/5 transition-colors duration-300"
-                onClick={() => toggleSection('symptoms')}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
-                      <AlertTriangle className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-red-100">Symptoms</h3>
+              <div className="p-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
+                    <AlertTriangle className="w-6 h-6 text-white" />
                   </div>
-                  {openSection === 'symptoms' ? (
-                    <ChevronUp className="w-5 h-5 text-white/60" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-white/60" />
-                  )}
+                  <h3 className="text-xl font-bold text-red-100">Symptoms</h3>
                 </div>
+                
+                <ul className="space-y-3">
+                  {detailedInfo.symptoms.map((symptom, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-white/80 text-sm">{symptom}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              
-              <motion.div
-                className="overflow-hidden"
-                initial={false}
-                animate={{ 
-                  height: openSection === 'symptoms' ? 'auto' : 0,
-                  opacity: openSection === 'symptoms' ? 1 : 0
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="p-6 pt-0 border-t border-white/10">
-                  <ul className="space-y-3">
-                    {detailedInfo.symptoms.map((symptom, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-white/80 text-sm">{symptom}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
             </motion.div>
 
             {/* Diagnosis */}
             <motion.div
-              className="bg-gradient-to-br from-blue-900/25 to-cyan-900/25 backdrop-blur-xl rounded-2xl border border-blue-400/30 overflow-hidden"
+              className="bg-gradient-to-br from-blue-900/25 to-cyan-900/25 backdrop-blur-xl rounded-2xl border border-blue-400/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div 
-                className="p-6 cursor-pointer hover:bg-white/5 transition-colors duration-300"
-                onClick={() => toggleSection('diagnosis')}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
-                      <Search className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-blue-100">Diagnosis</h3>
+              <div className="p-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                    <Search className="w-6 h-6 text-white" />
                   </div>
-                  {openSection === 'diagnosis' ? (
-                    <ChevronUp className="w-5 h-5 text-white/60" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-white/60" />
-                  )}
+                  <h3 className="text-xl font-bold text-blue-100">Diagnosis</h3>
                 </div>
+                
+                <ul className="space-y-3">
+                  {detailedInfo.diagnosis.map((test, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-white/80 text-sm">{test}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              
-              <motion.div
-                className="overflow-hidden"
-                initial={false}
-                animate={{ 
-                  height: openSection === 'diagnosis' ? 'auto' : 0,
-                  opacity: openSection === 'diagnosis' ? 1 : 0
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="p-6 pt-0 border-t border-white/10">
-                  <ul className="space-y-3">
-                    {detailedInfo.diagnosis.map((test, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-white/80 text-sm">{test}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
             </motion.div>
 
             {/* Treatment */}
             <motion.div
-              className="bg-gradient-to-br from-green-900/25 to-emerald-900/25 backdrop-blur-xl rounded-2xl border border-green-400/30 overflow-hidden"
+              className="bg-gradient-to-br from-green-900/25 to-emerald-900/25 backdrop-blur-xl rounded-2xl border border-green-400/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <div 
-                className="p-6 cursor-pointer hover:bg-white/5 transition-colors duration-300"
-                onClick={() => toggleSection('treatment')}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
-                      <Target className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-green-100">Treatment</h3>
+              <div className="p-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                    <Target className="w-6 h-6 text-white" />
                   </div>
-                  {openSection === 'treatment' ? (
-                    <ChevronUp className="w-5 h-5 text-white/60" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-white/60" />
-                  )}
+                  <h3 className="text-xl font-bold text-green-100">Treatment</h3>
                 </div>
+                
+                <ul className="space-y-3">
+                  {detailedInfo.treatment.map((treatment, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-white/80 text-sm">{treatment}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              
-              <motion.div
-                className="overflow-hidden"
-                initial={false}
-                animate={{ 
-                  height: openSection === 'treatment' ? 'auto' : 0,
-                  opacity: openSection === 'treatment' ? 1 : 0
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="p-6 pt-0 border-t border-white/10">
-                  <ul className="space-y-3">
-                    {detailedInfo.treatment.map((treatment, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-white/80 text-sm">{treatment}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </div>

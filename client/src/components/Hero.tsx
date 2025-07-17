@@ -11,7 +11,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden bg-white dark:bg-gray-900">
       {/* Sophisticated background with medical heart visualization */}
       <div className="absolute inset-0">
         {/* Medical heart background image */}
@@ -22,7 +22,7 @@ export default function Hero() {
             className="w-full h-full object-cover"
           />
           {/* Sophisticated overlay for text readability and brand enhancement */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-blue-900/70 to-gray-900/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-200/60 via-blue-200/50 to-gray-200/60 dark:from-gray-900/80 dark:via-blue-900/70 dark:to-gray-900/80"></div>
         </div>
         
         {/* Animated brand accent elements */}
@@ -58,18 +58,18 @@ export default function Hero() {
           <div className="max-w-7xl mx-auto text-center">
             {/* Decorative badge */}
             <motion.div
-              className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
+              className="inline-flex items-center gap-3 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 rounded-full px-6 py-3 mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
               <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
-              <span className="text-white/90 font-medium tracking-wide">Transforming Amyloidosis Care in Canada</span>
+              <span className="text-gray-800 dark:text-white/90 font-medium tracking-wide">Transforming Amyloidosis Care in Canada</span>
             </motion.div>
 
             {/* Main headline */}
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-8 relative leading-tight tracking-tight font-rosarivo"
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-8 relative leading-tight tracking-tight font-rosarivo"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}

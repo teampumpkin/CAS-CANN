@@ -19,7 +19,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white relative overflow-hidden border-t border-white/10">
+    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden border-t border-gray-200 dark:border-white/10">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/10 rounded-full blur-3xl -translate-x-48 -translate-y-48" />

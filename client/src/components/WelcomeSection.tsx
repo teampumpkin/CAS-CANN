@@ -3,7 +3,7 @@ import medicalProfessionalImg from '@assets/DSC02826_1750092328495.jpg';
 
 export default function WelcomeSection() {
   return (
-    <section className="relative py-20 lg:py-32 bg-gray-900 overflow-hidden">
+    <section className="relative py-20 lg:py-32 bg-gray-100 dark:bg-gray-900 overflow-hidden">
       {/* Premium background elements */}
       <div className="absolute inset-0">
         <motion.div 
@@ -36,7 +36,7 @@ export default function WelcomeSection() {
           >
             {/* Premium tag */}
             <motion.div
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold border border-white/20 mb-8"
+              className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm text-gray-900 dark:text-white px-4 py-2 rounded-full text-sm font-semibold border border-gray-900/20 dark:border-white/20 mb-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -47,7 +47,7 @@ export default function WelcomeSection() {
 
             {/* Premium heading with gradient accent */}
             <motion.h2 
-              className="text-4xl lg:text-6xl font-bold text-white mb-10 leading-tight font-rosarivo"
+              className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-10 leading-tight font-rosarivo"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -61,16 +61,16 @@ export default function WelcomeSection() {
 
             {/* Premium description with enhanced styling */}
             <motion.div 
-              className="space-y-8 text-white/80 text-xl leading-relaxed"
+              className="space-y-8 text-gray-700 dark:text-white/80 text-xl leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <p className="text-white/70 font-light">
+              <p className="text-gray-600 dark:text-white/70 font-light">
                 We are dedicated to transforming amyloidosis care in Canada through patient-centered innovation, collaboration, and advocacy. Our mission is to enhance the quality and timeliness of care for individuals affected by this rare and complex disease.
               </p>
               
-              <p className="text-white/70 font-light">
+              <p className="text-gray-600 dark:text-white/70 font-light">
                 By accelerating access to diagnosis, treatment, and support, we are working to ensure that every person living with amyloidosis receives the care they need—when they need it, wherever they are in Canada.
               </p>
             </motion.div>

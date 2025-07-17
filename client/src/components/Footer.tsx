@@ -19,9 +19,9 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-[#00DD89]/6 via-gray-50 to-[#00AFE6]/6 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white relative overflow-hidden border-t border-[#00AFE6]/20 dark:border-white/10">
+    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden border-t border-white/10">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#00DD89]/8 via-gray-50 to-[#00AFE6]/8 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/15 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/15 rounded-full blur-3xl translate-x-48 translate-y-48" />
       
@@ -43,19 +43,19 @@ export default function Footer() {
                     <Heart className="w-7 h-7 text-white" />
                   </div>
                   <div>
-                    <span className="text-2xl font-bold font-rosarivo text-gray-900 dark:text-white">CAS</span>
-                    <p className="text-gray-700 dark:text-white/70 text-sm">Canadian Amyloidosis Society</p>
+                    <span className="text-2xl font-bold font-rosarivo text-white">CAS</span>
+                    <p className="text-white/70 text-sm">Canadian Amyloidosis Society</p>
                   </div>
                 </div>
                 
-                <p className="text-gray-700 dark:text-white/70 text-base leading-relaxed mb-6">
+                <p className="text-white/70 text-base leading-relaxed mb-6">
                   Advancing awareness, accelerating research, and improving outcomes for all Canadians affected by amyloidosis.
                 </p>
 
                 {/* Newsletter Signup */}
-                <div className="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-gray-200 dark:border-white/10">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Stay Informed</h3>
-                  <p className="text-gray-700 dark:text-white/60 text-sm mb-4">
+                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
+                  <h3 className="text-lg font-semibold text-white mb-3">Stay Informed</h3>
+                  <p className="text-white/60 text-sm mb-4">
                     Get research updates and community news — no spam.
                   </p>
                   

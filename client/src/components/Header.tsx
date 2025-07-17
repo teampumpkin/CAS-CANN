@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import casLogo from '@assets/image 1_1750236540297.png';
+import { ThemeToggle } from './ThemeToggle';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,7 +58,7 @@ export default function Header() {
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-gray-900/80 backdrop-blur-xl border-b border-white/10' 
+          ? 'bg-gray-900/80 dark:bg-gray-800/80 backdrop-blur-xl border-b border-white/10 dark:border-gray-700/50' 
           : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
@@ -84,7 +85,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-1 bg-white/5 backdrop-blur-xl rounded-full px-2 py-2 border border-white/10">
+            <div className="flex items-center gap-1 bg-white/5 dark:bg-gray-800/30 backdrop-blur-xl rounded-full px-2 py-2 border border-white/10 dark:border-gray-700/50">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -92,7 +93,7 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className="flex items-center gap-1 px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
+                      className="flex items-center gap-1 px-4 py-2 text-white/80 dark:text-gray-300 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-gray-700/50 rounded-full transition-all duration-300 text-sm font-medium"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -104,7 +105,7 @@ export default function Header() {
                   ) : (
                     <motion.a
                       href={item.href}
-                      className="flex items-center gap-1 px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
+                      className="flex items-center gap-1 px-4 py-2 text-white/80 dark:text-gray-300 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-gray-700/50 rounded-full transition-all duration-300 text-sm font-medium"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -121,7 +122,7 @@ export default function Header() {
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
                       <motion.div
-                        className="bg-gray-800/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl py-2"
+                        className="bg-gray-800/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-2xl border border-white/10 dark:border-gray-700/50 shadow-2xl py-2"
                         initial={{ opacity: 0, y: -10, scale: 0.95 }}
                         animate={{ 
                           opacity: activeDropdown === item.name ? 1 : 0, 
@@ -134,7 +135,7 @@ export default function Header() {
                           <motion.a
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 text-sm"
+                            className="block px-4 py-3 text-white/80 dark:text-gray-300 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-gray-700/50 transition-all duration-200 text-sm"
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ 
                               opacity: activeDropdown === item.name ? 1 : 0,
@@ -153,14 +154,15 @@ export default function Header() {
             </div>
           </nav>
 
-          {/* CTA Section */}
+          {/* Theme Toggle & CTA Section */}
           <motion.div
             className="hidden md:flex items-center gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="hidden lg:flex items-center gap-2 text-white/70 text-sm">
+            <ThemeToggle />
+            <div className="hidden lg:flex items-center gap-2 text-white/70 dark:text-gray-400 text-sm">
               <Phone className="w-4 h-4" />
               <span>1-800-AMYLOID</span>
             </div>
@@ -171,16 +173,16 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="lg:hidden p-2 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20 transition-all duration-300"
+            className="lg:hidden p-2 rounded-xl bg-white/10 dark:bg-gray-800/30 backdrop-blur-xl border border-white/20 dark:border-gray-700/50 hover:bg-white/20 dark:hover:bg-gray-700/50 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             {isMenuOpen ? (
-              <X className="w-5 h-5 text-white" />
+              <X className="w-5 h-5 text-white dark:text-gray-300" />
             ) : (
-              <Menu className="w-5 h-5 text-white" />
+              <Menu className="w-5 h-5 text-white dark:text-gray-300" />
             )}
           </motion.button>
         </div>
@@ -195,20 +197,20 @@ export default function Header() {
           }}
           transition={{ duration: 0.3 }}
         >
-          <div className="py-6 bg-white/5 backdrop-blur-xl rounded-2xl mt-4 border border-white/10">
+          <div className="py-6 bg-white/5 dark:bg-gray-800/30 backdrop-blur-xl rounded-2xl mt-4 border border-white/10 dark:border-gray-700/50">
             <div className="space-y-2 px-4">
               {navItems.map((item) => (
                 <div key={item.name} className="space-y-1">
                   {item.hasDropdown ? (
                     <>
-                      <div className="px-4 py-2 text-white font-medium text-sm border-b border-white/10">
+                      <div className="px-4 py-2 text-white dark:text-gray-300 font-medium text-sm border-b border-white/10 dark:border-gray-700/50">
                         {item.name}
                       </div>
                       {item.dropdownItems?.map((dropdownItem) => (
                         <a
                           key={dropdownItem.name}
                           href={dropdownItem.href}
-                          className="block px-6 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 text-sm"
+                          className="block px-6 py-2 text-white/80 dark:text-gray-400 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-300 text-sm"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {dropdownItem.name}
@@ -218,7 +220,7 @@ export default function Header() {
                   ) : (
                     <a
                       href={item.href}
-                      className="block px-4 py-3 text-white font-medium text-sm hover:bg-white/10 rounded-lg transition-all duration-300"
+                      className="block px-4 py-3 text-white dark:text-gray-300 font-medium text-sm hover:bg-white/10 dark:hover:bg-gray-700/50 rounded-lg transition-all duration-300"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -227,10 +229,13 @@ export default function Header() {
                 </div>
               ))}
             </div>
-            <div className="px-4 pt-4 border-t border-white/10 mt-4">
-              <div className="flex items-center gap-2 text-white/70 text-sm mb-3">
-                <Phone className="w-4 h-4" />
-                <span>1-800-AMYLOID</span>
+            <div className="px-4 pt-4 border-t border-white/10 dark:border-gray-700/50 mt-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2 text-white/70 dark:text-gray-400 text-sm">
+                  <Phone className="w-4 h-4" />
+                  <span>1-800-AMYLOID</span>
+                </div>
+                <ThemeToggle />
               </div>
               <button 
                 className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"

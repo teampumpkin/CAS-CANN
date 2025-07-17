@@ -3,6 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import EnhancedScrollIndicator from "@/components/EnhancedScrollIndicator";
 import AdvancedMouseFollower from "@/components/AdvancedMouseFollower";
 import Header from "@/components/Header";
@@ -48,18 +49,20 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="min-h-screen bg-gray-900">
-          <Header />
-          <div className="pt-24">
-            <Router />
+      <ThemeProvider>
+        <TooltipProvider>
+          <div className="min-h-screen bg-background text-foreground">
+            <Header />
+            <div className="pt-24">
+              <Router />
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-        <Toaster />
-        <EnhancedScrollIndicator />
-        <AdvancedMouseFollower />
-      </TooltipProvider>
+          <Toaster />
+          <EnhancedScrollIndicator />
+          <AdvancedMouseFollower />
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

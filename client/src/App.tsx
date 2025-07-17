@@ -51,7 +51,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
-          <div className="min-h-screen bg-background text-foreground">
+          <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
             <Header />
             <div className="pt-24">
               <Router />

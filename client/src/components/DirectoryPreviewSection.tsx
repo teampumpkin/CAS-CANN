@@ -39,7 +39,7 @@ export default function DirectoryPreviewSection() {
   return (
     <section className="py-24 bg-gray-100 dark:bg-gray-900 relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/10 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/10 rounded-full blur-3xl translate-x-48 translate-y-48" />
 
@@ -51,21 +51,21 @@ export default function DirectoryPreviewSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 border border-[#00AFE6]/30">
+          <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-4 py-2 rounded-full text-sm font-medium mb-6 border border-[#00AFE6]/30">
             <MapPin className="w-4 h-4" />
             <span>Healthcare Directory</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 font-rosarivo">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">
             Find Specialized Care <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Across Canada</span>
           </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-700 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
             Access specialized care, clinical resources, and support networks across Canada
           </p>
         </motion.div>
 
         {/* Canada Network Stats - Moved to Top */}
         <motion.div
-          className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-12 border border-white/20 mb-16"
+          className="bg-gradient-to-br from-white/90 to-white/80 dark:from-white/10 dark:to-white/5 backdrop-blur-xl rounded-3xl p-12 border border-gray-200 dark:border-white/20 mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -74,14 +74,14 @@ export default function DirectoryPreviewSection() {
             {/* Map Visualization */}
             <div className="relative">
               <div className="text-center mb-8">
-                <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-white px-4 py-2 rounded-full text-sm font-medium mb-4 border border-[#00AFE6]/30">
+                <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-4 py-2 rounded-full text-sm font-medium mb-4 border border-[#00AFE6]/30">
                   <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
                   <span>National Network</span>
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-2 font-rosarivo">
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 font-rosarivo">
                   Canada-Wide Coverage
                 </h3>
-                <p className="text-white/70">Connecting healthcare across the nation</p>
+                <p className="text-gray-700 dark:text-white/70">Connecting healthcare across the nation</p>
               </div>
               
               <div className="relative w-full max-w-xl mx-auto">

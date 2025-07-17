@@ -54,7 +54,7 @@ export default function QuickLinksSection() {
   ];
 
   return (
-    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       {/* Background decorative elements matching amyloidosis section style */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 rounded-full blur-3xl"></div>
@@ -71,19 +71,19 @@ export default function QuickLinksSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
+            className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm border border-gray-900/20 dark:border-white/20 rounded-full px-6 py-3 mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-white/90 font-medium tracking-wide">Quick Access</span>
+            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Quick Access</span>
           </motion.div>
 
-          <h2 className="crawford-section-title text-white mb-8">
+          <h2 className="crawford-section-title text-gray-900 dark:text-white mb-8">
             Essential Resources
           </h2>
-          <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
             Quick access to the most important tools and information for patients, families, and healthcare professionals.
           </p>
         </motion.div>
@@ -102,12 +102,12 @@ export default function QuickLinksSection() {
             >
               <div className="group relative h-full overflow-hidden">
                 {/* Main Card Container */}
-                <div className="relative h-full bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-2xl rounded-3xl border border-white/20 group-hover:border-white/40 transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-[#00AFE6]/25 overflow-hidden">
+                <div className="relative h-full bg-gradient-to-br from-white/80 via-white/60 to-white/40 dark:from-white/8 dark:via-white/4 dark:to-white/2 backdrop-blur-2xl rounded-3xl border border-gray-200 dark:border-white/20 group-hover:border-gray-300 dark:group-hover:border-white/40 transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-[#00AFE6]/25 overflow-hidden">
                   
                   {/* Dynamic Background Pattern */}
                   <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent rounded-full blur-xl" />
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/5 to-transparent rounded-full blur-lg" />
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-gray-900/10 dark:from-white/10 to-transparent rounded-full blur-xl" />
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-gray-900/5 dark:from-white/5 to-transparent rounded-full blur-lg" />
                   </div>
                   
                   {/* Animated Border Glow */}
@@ -115,7 +115,7 @@ export default function QuickLinksSection() {
                   
                   {/* Floating Icon Background */}
                   <div className="absolute top-6 right-6 w-20 h-20 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
-                    <link.icon className="w-full h-full text-white" />
+                    <link.icon className="w-full h-full text-gray-900 dark:text-white" />
                   </div>
 
                   {/* Content Container */}
@@ -133,22 +133,22 @@ export default function QuickLinksSection() {
                       {/* Status Indicator */}
                       <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                        <span className="text-xs text-white/60 font-medium">Available</span>
+                        <span className="text-xs text-gray-700 dark:text-white/60 font-medium">Available</span>
                       </div>
                     </div>
                     
                     {/* Text Content */}
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white/95 transition-colors duration-300 font-rosarivo">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gray-800 dark:group-hover:text-white/95 transition-colors duration-300 font-rosarivo">
                         {link.title}
                       </h3>
-                      <p className="text-white/60 leading-relaxed text-sm group-hover:text-white/75 transition-colors duration-300">
+                      <p className="text-gray-700 dark:text-white/60 leading-relaxed text-sm group-hover:text-gray-600 dark:group-hover:text-white/75 transition-colors duration-300">
                         {link.description}
                       </p>
                     </div>
                     
                     {/* Action Footer */}
-                    <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                    <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/10">
                       {/* Action Text */}
                       <div className={`text-transparent bg-clip-text bg-gradient-to-r ${link.gradient} font-semibold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0`}>
                         Access Now

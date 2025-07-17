@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Language = 'en' | 'es';
+type Language = 'en' | 'fr';
 
 interface LanguageContextType {
   language: Language;
@@ -259,50 +259,50 @@ const translations = {
     'footer.copyright': '© 2024 Canadian Amyloidosis Society. All rights reserved.',
     'footer.registeredCharity': 'Registered Charity #123456789RR0001'
   },
-  es: {
+  fr: {
     // Navigation
-    'nav.home': 'Inicio',
-    'nav.about': 'Acerca de',
-    'nav.resources': 'Recursos',
-    'nav.directory': 'Directorio',
-    'nav.community': 'Comunidad',
-    'nav.contact': 'Contacto',
-    'nav.getHelp': 'Obtener Ayuda',
+    'nav.home': 'Accueil',
+    'nav.about': 'À propos',
+    'nav.resources': 'Ressources',
+    'nav.directory': 'Répertoire',
+    'nav.community': 'Communauté',
+    'nav.contact': 'Contact',
+    'nav.getHelp': 'Obtenir de l\'aide',
     
     // Hero Section
-    'hero.badge': 'Transformando el Cuidado de la Amiloidosis en Canadá',
-    'hero.title.canadian': 'Sociedad',
-    'hero.title.amyloidosis': 'Canadiense',
-    'hero.title.society': 'de Amiloidosis',
-    'hero.subtitle': 'Acelerando la conciencia, el diagnóstico y la atención',
-    'hero.getStarted': 'Comenzar',
-    'hero.learnMore': 'Saber Más',
+    'hero.badge': 'Transformer les soins de l\'amylose au Canada',
+    'hero.title.canadian': 'Société',
+    'hero.title.amyloidosis': 'Canadienne',
+    'hero.title.society': 'd\'Amylose',
+    'hero.subtitle': 'Accélérer la sensibilisation, le diagnostic et les soins',
+    'hero.getStarted': 'Commencer',
+    'hero.learnMore': 'En savoir plus',
     
     // Welcome Section
-    'welcome.badge': 'Quiénes somos',
-    'welcome.title.welcome': 'Bienvenido a la',
-    'welcome.title.cas': 'Sociedad Canadiense de Amiloidosis',
-    'welcome.subtitle': 'Su socio de confianza en el cuidado de la amiloidosis, conectando pacientes, familias y profesionales de la salud en todo Canadá.',
-    'welcome.description': 'Estamos dedicados a mejorar las vidas de quienes se ven afectados por la amiloidosis a través de la educación, el apoyo y la defensa. Nuestra plataforma integral proporciona recursos esenciales, lo conecta con atención especializada y construye una comunidad de apoyo para pacientes y familias en todo el país.',
-    'welcome.mission': 'Nuestra Misión',
-    'welcome.missionText': 'Acelerar la conciencia, mejorar el diagnóstico y mejorar la atención para pacientes con amiloidosis en todo Canadá a través de la educación, la defensa y el apoyo comunitario.',
-    'welcome.vision': 'Nuestra Visión',
-    'welcome.visionText': 'Un futuro donde cada canadiense afectado por la amiloidosis reciba un diagnóstico oportuno, tratamiento óptimo y apoyo integral.',
-    'welcome.exploreResources': 'Aprenda Más Sobre Nuestro Trabajo',
+    'welcome.badge': 'Qui nous sommes',
+    'welcome.title.welcome': 'Bienvenue à la',
+    'welcome.title.cas': 'Société Canadienne d\'Amylose',
+    'welcome.subtitle': 'Votre partenaire de confiance dans les soins de l\'amylose, connectant les patients, les familles et les professionnels de la santé à travers le Canada.',
+    'welcome.description': 'Nous nous consacrons à améliorer la vie de ceux qui sont touchés par l\'amylose grâce à l\'éducation, au soutien et à la défense des droits. Notre plateforme complète fournit des ressources essentielles, vous connecte avec des soins spécialisés et construit une communauté de soutien pour les patients et les familles à travers le pays.',
+    'welcome.mission': 'Notre Mission',
+    'welcome.missionText': 'Accélérer la sensibilisation, améliorer le diagnostic et améliorer les soins pour les patients d\'amylose à travers le Canada grâce à l\'éducation, à la défense et au soutien communautaire.',
+    'welcome.vision': 'Notre Vision',
+    'welcome.visionText': 'Un avenir où chaque Canadien affecté par l\'amylose reçoit un diagnostic opportun, un traitement optimal et un soutien complet.',
+    'welcome.exploreResources': 'En savoir plus sur notre travail',
     
     // About Amyloidosis Section
-    'about.badge': 'Información Médica',
-    'about.title.what': '¿Qué es la',
-    'about.title.amyloidosis': 'Amiloidosis',
-    'about.subtitle': 'La amiloidosis es una enfermedad rara con consecuencias que cambian la vida, pero la detección temprana puede mejorar dramáticamente los resultados. La Sociedad Canadiense de Amiloidosis está construyendo un centro nacional confiable para médicos, investigadores y familias que buscan respuestas.',
-    'about.description': 'La amiloidosis es una condición rara pero seria donde las proteínas mal plegadas (amiloide) se acumulan en órganos y tejidos por todo el cuerpo. Entender los diferentes tipos, reconocer los síntomas tempranos y acceder a atención especializada son cruciales para manejar esta condición efectivamente.',
-    'about.earlyDetection': 'La Detección Temprana Salva Vidas',
-    'about.earlyDetectionText': 'Reconocer los síntomas temprano y obtener un diagnóstico adecuado puede mejorar significativamente los resultados del tratamiento y la calidad de vida.',
-    'about.earlyDetection.title': 'Detección Temprana',
-    'about.earlyDetection.subtitle': 'Salva Vidas',
-    'about.earlyDetection.description': 'La amiloidosis a menudo se diagnostica erróneamente o se diagnostica tardíamente porque sus síntomas imitan otras condiciones. El reconocimiento temprano y las pruebas adecuadas son cruciales para mejores resultados del paciente.',
-    'about.earlyDetection.subdescription': 'Nuestro directorio conecta a los pacientes con centros especializados y proveedores de atención médica experimentados en el diagnóstico y tratamiento de la amiloidosis en todo Canadá.',
-    'about.learnMore': 'Saber Más',
+    'about.badge': 'Information Médicale',
+    'about.title.what': 'Qu\'est-ce que l\'',
+    'about.title.amyloidosis': 'Amylose',
+    'about.subtitle': 'L\'amylose est une maladie rare aux conséquences bouleversantes, mais la détection précoce peut considérablement améliorer les résultats. La Société Canadienne d\'Amylose construit un centre national fiable pour les cliniciens, les chercheurs et les familles qui cherchent des réponses.',
+    'about.description': 'L\'amylose est une condition rare mais sérieuse où les protéines mal repliées (amyloïde) s\'accumulent dans les organes et les tissus à travers le corps. Comprendre les différents types, reconnaître les symptômes précoces et accéder aux soins spécialisés sont cruciaux pour gérer cette condition efficacement.',
+    'about.earlyDetection': 'La Détection Précoce Sauve des Vies',
+    'about.earlyDetectionText': 'Reconnaître les symptômes tôt et obtenir un diagnostic approprié peut considérablement améliorer les résultats du traitement et la qualité de vie.',
+    'about.earlyDetection.title': 'Détection Précoce',
+    'about.earlyDetection.subtitle': 'Sauve des Vies',
+    'about.earlyDetection.description': 'L\'amylose est souvent mal diagnostiquée ou diagnostiquée tard parce que ses symptômes imitent d\'autres conditions. La reconnaissance précoce et les tests appropriés sont cruciaux pour de meilleurs résultats du patient.',
+    'about.earlyDetection.subdescription': 'Notre répertoire connecte les patients avec des centres spécialisés et des fournisseurs de soins de santé expérimentés dans le diagnostic et le traitement de l\'amylose à travers le Canada.',
+    'about.learnMore': 'En savoir plus',
     'about.types.al.name': 'Amiloidosis AL',
     'about.types.al.description': 'Forma más común, afecta corazón, riñones, hígado y sistema nervioso',
     'about.types.al.prevalence': '70% de los casos',
@@ -513,7 +513,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') as Language;
-    if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'es')) {
+    if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'fr')) {
       setLanguage(savedLanguage);
     }
   }, []);

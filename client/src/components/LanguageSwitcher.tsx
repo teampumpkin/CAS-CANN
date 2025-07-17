@@ -15,11 +15,11 @@ export const LanguageSwitcher = () => {
         <Globe className="w-4 h-4 text-white" />
         <select
           value={language}
-          onChange={(e) => setLanguage(e.target.value as 'en' | 'es')}
+          onChange={(e) => setLanguage(e.target.value as 'en' | 'fr')}
           className="bg-transparent text-white text-sm font-medium cursor-pointer outline-none"
         >
           <option value="en" className="bg-gray-800 text-white">EN</option>
-          <option value="es" className="bg-gray-800 text-white">ES</option>
+          <option value="fr" className="bg-gray-800 text-white">FR</option>
         </select>
       </motion.div>
     </div>

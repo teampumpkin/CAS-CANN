@@ -36,7 +36,7 @@ export default function EventsNewsletterSection() {
   ];
 
   return (
-    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-[#00AFE6]/6 via-gray-50 to-[#00DD89]/6 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-[#00AFE6]/6 via-gray-50 to-[#00DD89]/6 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       {/* Background decorative elements matching amyloidosis section style */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/12 to-[#00DD89]/12 rounded-full blur-3xl"></div>

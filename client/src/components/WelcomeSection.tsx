@@ -3,7 +3,7 @@ import medicalProfessionalImg from '@assets/DSC02826_1750092328495.jpg';
 
 export default function WelcomeSection() {
   return (
-    <section className="relative py-12 lg:py-20 bg-gradient-to-br from-[#00AFE6]/5 via-white to-[#00DD89]/5 dark:bg-gray-900 overflow-hidden">
+    <section className="relative py-12 lg:py-20 bg-gradient-to-br from-[#00AFE6]/5 via-white to-[#00DD89]/5 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       {/* Premium background elements */}
       <div className="absolute inset-0">
         <motion.div 

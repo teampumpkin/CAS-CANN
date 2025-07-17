@@ -11,7 +11,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#00AFE6]/8 via-white to-[#00DD89]/8 dark:bg-gray-900">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#00AFE6]/8 via-white to-[#00DD89]/8 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Sophisticated background with medical heart visualization */}
       <div className="absolute inset-0">
         {/* Medical heart background image */}

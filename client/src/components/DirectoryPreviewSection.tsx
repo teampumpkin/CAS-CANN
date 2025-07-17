@@ -83,22 +83,7 @@ export default function DirectoryPreviewSection() {
           </p>
         </motion.div>
 
-        {/* Map Section Header - Moved Outside Grid */}
-        <motion.div
-          className="text-center mb-4"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-        >
-          <div className="inline-flex items-center gap-1 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-2 py-1 rounded-full text-xs font-medium mb-2 border border-[#00AFE6]/30">
-            <div className="w-1 h-1 bg-[#00AFE6] rounded-full animate-pulse" />
-            <span>{t('directory.nationalNetwork')}</span>
-          </div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 font-rosarivo">
-            {t('directory.canadaWide')}
-          </h3>
-          <p className="text-gray-700 dark:text-white/70 text-xs">{t('directory.connectingHealthcare')}</p>
-        </motion.div>
+        
 
         {/* Canada Network Stats - Ultra Compact Layout */}
         <motion.div

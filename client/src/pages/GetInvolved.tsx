@@ -172,6 +172,59 @@ const recentEvents = [
   }
 ];
 
+const pastEvents = [
+  {
+    id: 1,
+    title: "Amyloidosis Research Symposium 2024",
+    date: "2024-08-20",
+    description: "Annual symposium brought together leading researchers and clinicians to discuss advances in amyloidosis research and treatment.",
+    image: "/api/placeholder/300/200",
+    attendees: 200,
+    location: "Vancouver Convention Centre",
+    type: "Conference"
+  },
+  {
+    id: 2,
+    title: "Patient & Caregiver Workshop Series",
+    date: "2024-06-15",
+    description: "Interactive workshop series focused on navigation tools, support resources, and connecting families affected by amyloidosis.",
+    image: "/api/placeholder/300/200",
+    attendees: 85,
+    location: "Virtual Event",
+    type: "Workshop"
+  },
+  {
+    id: 3,
+    title: "Clinical Guidelines Webinar",
+    date: "2024-05-30",
+    description: "Review of diagnostic and treatment guidelines for amyloidosis, featuring expert panel discussion and Q&A.",
+    image: "/api/placeholder/300/200",
+    attendees: 120,
+    location: "Online",
+    type: "Webinar"
+  },
+  {
+    id: 4,
+    title: "CAS Annual General Meeting",
+    date: "2024-03-12",
+    description: "Annual meeting featuring organizational updates, strategic planning, and member recognition.",
+    image: "/api/placeholder/300/200",
+    attendees: 65,
+    location: "Toronto, ON",
+    type: "Meeting"
+  },
+  {
+    id: 5,
+    title: "Rare Disease Awareness Month Event",
+    date: "2024-02-28",
+    description: "Special event highlighting amyloidosis as part of Rare Disease Awareness Month activities.",
+    image: "/api/placeholder/300/200",
+    attendees: 95,
+    location: "Calgary, AB",
+    type: "Awareness Event"
+  }
+];
+
 export default function GetInvolved() {
   const [activeTab, setActiveTab] = useState("overview");
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
@@ -812,159 +865,6 @@ export default function GetInvolved() {
         </div>
       </section>
 
-      {/* Events Section */}
-      <section className="py-24 bg-gray-900 border-t border-white/10 relative overflow-hidden">
-        {/* Frost Background Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-white/[0.01]"></div>
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 mb-8">
-              <Calendar className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-white/90 font-medium">Community</span>
-            </div>
-            <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
-              <span className="text-white">Events & </span>
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Community
-              </span>
-            </h2>
-            <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
-              Join us at upcoming events and see highlights from our recent community gatherings.
-            </p>
-          </motion.div>
-
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
-            <div className="flex justify-center mb-8">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-2 shadow-2xl inline-flex">
-                <button
-                  onClick={() => setActiveTab("overview")}
-                  className={`px-8 py-3 rounded-xl font-medium transition-all duration-300 ${
-                    activeTab === "overview"
-                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
-                  }`}
-                >
-                  Upcoming Events
-                </button>
-                <button
-                  onClick={() => setActiveTab("recent")}
-                  className={`px-8 py-3 rounded-xl font-medium transition-all duration-300 ${
-                    activeTab === "recent"
-                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
-                  }`}
-                >
-                  Recent Events
-                </button>
-              </div>
-            </div>
-
-            <TabsContent value="overview" className="mt-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {upcomingEvents.map((event, index) => (
-                  <motion.div
-                    key={event.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <Card className="bg-white/5 backdrop-blur-xl border border-white/20 hover:bg-white/10 hover:border-white/30 transition-all duration-500 h-full shadow-2xl hover:shadow-[0_0_40px_rgba(0,175,230,0.15)] group">
-                      <div className="aspect-[4/3] bg-gradient-to-br from-[#00AFE6]/10 via-transparent to-[#00DD89]/10 rounded-t-lg flex items-center justify-center relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent"></div>
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(0,175,230,0.1),transparent)]"></div>
-                        <Calendar className="w-12 h-12 text-white/60 group-hover:text-white/80 transition-colors duration-300 relative z-10" />
-                      </div>
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Badge variant="outline" className="text-[#00AFE6] border-[#00AFE6]/30">
-                            {event.type}
-                          </Badge>
-                        </div>
-                        
-                        <h3 className="text-lg font-semibold text-white mb-2">{event.title}</h3>
-                        
-                        <div className="space-y-2 mb-4 text-sm text-white/70">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />
-                            <span>{formatEventDate(event.date)}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4" />
-                            <span>{event.time}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4" />
-                            <span>{event.location}</span>
-                          </div>
-                        </div>
-                        
-                        <p className="text-white/70 text-sm mb-6 line-clamp-3">
-                          {event.description}
-                        </p>
-                        
-                        <Button 
-                          onClick={() => window.open(event.registrationUrl, '_blank')}
-                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group/btn"
-                        >
-                          Register Now
-                          <ExternalLink className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="recent" className="mt-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {recentEvents.map((event, index) => (
-                  <motion.div
-                    key={event.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <Card className="bg-white/5 backdrop-blur-xl border border-white/20 hover:bg-white/10 hover:border-white/30 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(0,221,137,0.15)] group">
-                      <div className="aspect-[4/3] bg-gradient-to-br from-[#00DD89]/10 via-transparent to-[#00AFE6]/10 flex items-center justify-center relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent"></div>
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,221,137,0.1),transparent)]"></div>
-                        <Users className="w-12 h-12 text-white/60 group-hover:text-white/80 transition-colors duration-300 relative z-10" />
-                      </div>
-                      <CardContent className="p-6">
-                        <div className="flex items-center justify-between mb-3">
-                          <Badge variant="outline" className="text-white/70 border-white/30">
-                            {formatEventDate(event.date)}
-                          </Badge>
-                          <div className="flex items-center gap-1 text-sm text-white/60">
-                            <Users className="w-4 h-4" />
-                            <span>{event.attendees} attendees</span>
-                          </div>
-                        </div>
-                        
-                        <h3 className="text-lg font-semibold text-white mb-3">{event.title}</h3>
-                        <p className="text-white/70 text-sm">{event.description}</p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-
       {/* Membership Benefits */}
       <section className="py-32 bg-gray-900 border-t border-white/10 relative overflow-hidden">
         {/* Advanced Frost Background Effects */}
@@ -1102,6 +1002,219 @@ export default function GetInvolved() {
               </motion.div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Events Section */}
+      <section className="py-24 bg-gray-900 border-t border-white/10 relative overflow-hidden">
+        {/* Frost Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-white/[0.01]"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 mb-8">
+              <Calendar className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-white/90 font-medium">Community</span>
+            </div>
+            <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
+              <span className="text-white">Events & </span>
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Community
+              </span>
+            </h2>
+            <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
+              Join us at upcoming events and see highlights from our recent community gatherings.
+            </p>
+          </motion.div>
+
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
+            <div className="flex justify-center mb-8">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-2 shadow-2xl inline-flex">
+                <button
+                  onClick={() => setActiveTab("overview")}
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                    activeTab === "overview"
+                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  Upcoming Events
+                </button>
+                <button
+                  onClick={() => setActiveTab("recent")}
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                    activeTab === "recent"
+                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  Recent Events
+                </button>
+                <button
+                  onClick={() => setActiveTab("past")}
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                    activeTab === "past"
+                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  Past Events
+                </button>
+              </div>
+            </div>
+
+            <TabsContent value="overview" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {upcomingEvents.map((event, index) => (
+                  <motion.div
+                    key={event.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="bg-white/5 backdrop-blur-xl border border-white/20 hover:bg-white/10 hover:border-white/30 transition-all duration-500 h-full shadow-2xl hover:shadow-[0_0_40px_rgba(0,175,230,0.15)] group">
+                      <div className="aspect-[4/3] bg-gradient-to-br from-[#00AFE6]/10 via-transparent to-[#00DD89]/10 rounded-t-lg flex items-center justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent"></div>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(0,175,230,0.1),transparent)]"></div>
+                        <Calendar className="w-12 h-12 text-white/60 group-hover:text-white/80 transition-colors duration-300 relative z-10" />
+                      </div>
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Badge variant="outline" className="text-[#00AFE6] border-[#00AFE6]/30">
+                            {event.type}
+                          </Badge>
+                        </div>
+                        
+                        <h3 className="text-lg font-semibold text-white mb-2">{event.title}</h3>
+                        
+                        <div className="space-y-2 mb-4 text-sm text-white/70">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4" />
+                            <span>{formatEventDate(event.date)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4" />
+                            <span>{event.time}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4" />
+                            <span>{event.location}</span>
+                          </div>
+                        </div>
+                        
+                        <p className="text-white/70 text-sm mb-6 line-clamp-3">
+                          {event.description}
+                        </p>
+                        
+                        <Button 
+                          onClick={() => window.open(event.registrationUrl, '_blank')}
+                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group/btn"
+                        >
+                          Register Now
+                          <ExternalLink className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="recent" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {recentEvents.map((event, index) => (
+                  <motion.div
+                    key={event.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="bg-white/5 backdrop-blur-xl border border-white/20 hover:bg-white/10 hover:border-white/30 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(0,221,137,0.15)] group">
+                      <div className="aspect-[4/3] bg-gradient-to-br from-[#00DD89]/10 via-transparent to-[#00AFE6]/10 flex items-center justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent"></div>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,221,137,0.1),transparent)]"></div>
+                        <Users className="w-12 h-12 text-white/60 group-hover:text-white/80 transition-colors duration-300 relative z-10" />
+                      </div>
+                      <CardContent className="p-6">
+                        <div className="flex items-center justify-between mb-3">
+                          <Badge variant="outline" className="text-white/70 border-white/30">
+                            {formatEventDate(event.date)}
+                          </Badge>
+                          <div className="flex items-center gap-1 text-sm text-white/60">
+                            <Users className="w-4 h-4" />
+                            <span>{event.attendees} attendees</span>
+                          </div>
+                        </div>
+                        
+                        <h3 className="text-lg font-semibold text-white mb-3">{event.title}</h3>
+                        <p className="text-white/70 text-sm">{event.description}</p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="past" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {pastEvents.map((event, index) => (
+                  <motion.div
+                    key={event.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="bg-white/5 backdrop-blur-xl border border-white/20 hover:bg-white/10 hover:border-white/30 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(128,90,213,0.15)] group">
+                      <div className="aspect-[4/3] bg-gradient-to-br from-purple-500/10 via-transparent to-indigo-500/10 flex items-center justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent"></div>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(128,90,213,0.1),transparent)]"></div>
+                        <Calendar className="w-12 h-12 text-white/60 group-hover:text-white/80 transition-colors duration-300 relative z-10" />
+                      </div>
+                      <CardContent className="p-6">
+                        <div className="flex items-center justify-between mb-3">
+                          <Badge variant="outline" className="text-purple-400 border-purple-400/30">
+                            {event.type}
+                          </Badge>
+                          <div className="flex items-center gap-1 text-sm text-white/60">
+                            <Users className="w-4 h-4" />
+                            <span>{event.attendees} attendees</span>
+                          </div>
+                        </div>
+                        
+                        <h3 className="text-lg font-semibold text-white mb-2">{event.title}</h3>
+                        
+                        <div className="space-y-2 mb-4 text-sm text-white/70">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4" />
+                            <span>{formatEventDate(event.date)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4" />
+                            <span>{event.location}</span>
+                          </div>
+                        </div>
+                        
+                        <p className="text-white/70 text-sm line-clamp-3">
+                          {event.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
     </div>

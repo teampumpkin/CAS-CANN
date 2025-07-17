@@ -20,6 +20,27 @@ Preferred communication style: Simple, everyday language.
 - ✅ Successfully reduced amyloidosis type sections from 4 to 3 as requested (AL, ATTR, Other)
 - ✅ Removed dropdown functionality from "Other Amyloidosis Types" page - all information visible by default
 
+### CANN Detailed Page Creation (July 17, 2025)
+- ✅ Created comprehensive Canadian Amyloidosis Network (CANN) detailed page
+- ✅ Added CANN.tsx with full light/dark theme support and proper theme-aware styling
+- ✅ Implemented complete network information including mission, objectives, and achievements
+- ✅ Added professional network statistics and impact metrics
+- ✅ Included network coverage details (all 10 provinces and 3 territories)
+- ✅ Added routing for CANN page (/cann) in App.tsx
+- ✅ Created responsive design with proper medical imagery and brand consistency
+- ✅ Implemented professional network objectives with colored icons and hover effects
+- ✅ Added comprehensive achievements section with measurable impact data
+- ✅ Included join network CTA section with proper call-to-action buttons
+
+### GetInvolved Page Events Enhancement (July 17, 2025)
+- ✅ Added "Past Events" tab to the events section with comprehensive historical data
+- ✅ Created 5 past events with detailed information including dates, locations, and attendee counts
+- ✅ Moved entire Events section to appear after "Why Join CAS" section as requested
+- ✅ Updated tab navigation to include three options: Upcoming, Recent, and Past Events
+- ✅ Applied proper styling with purple theme for past events to differentiate from other tabs
+- ✅ Enhanced events display with proper badges, icons, and responsive grid layouts
+- ✅ Maintained consistent dark theme styling throughout all event tabs
+
 ### Light/Dark Theme Conversion for Amyloidosis Detail Pages (July 17, 2025)
 - ✅ Converting all amyloidosis detail pages from dark-only to light/dark theme support
 - ✅ Updated ALAmyloidosis.tsx with theme-aware classes for hero section, overview, and detailed information

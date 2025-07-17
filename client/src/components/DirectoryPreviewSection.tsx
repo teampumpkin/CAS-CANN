@@ -61,7 +61,7 @@ export default function DirectoryPreviewSection() {
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/15 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/15 rounded-full blur-3xl translate-x-48 translate-y-48" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
         {/* Section Header */}
         <motion.div
           className="text-center mb-6"
@@ -90,7 +90,7 @@ export default function DirectoryPreviewSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="grid lg:grid-cols-5 gap-4 items-center justify-center">
+          <div className="grid lg:grid-cols-5 gap-4 items-center">
             {/* Map Visualization - Compact */}
             <div className="lg:col-span-3 relative">
               <div className="text-center mb-3">

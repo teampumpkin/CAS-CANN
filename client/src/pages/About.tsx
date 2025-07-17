@@ -70,11 +70,11 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Hero Section with Parallax */}
       <ParallaxBackground className="min-h-screen flex items-center relative overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/30 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/30 rounded-full blur-3xl translate-x-48 translate-y-48" />
         <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-[#00AFE6]/15 rounded-full blur-2xl" />
@@ -268,8 +268,8 @@ export default function About() {
       </ParallaxBackground>
 
       {/* Who We Are Section */}
-      <section className="py-24 relative bg-gray-900">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+      <section className="py-24 relative bg-gray-50 dark:bg-gray-900">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-100/20 dark:via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Content Column - Left Side */}
@@ -375,7 +375,7 @@ export default function About() {
       </section>
 
       {/* Vision Section */}
-      <section className="py-24 bg-gray-900 border-t border-white/10">
+      <section className="py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-white/10">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Image Column - Left Side */}
@@ -460,7 +460,7 @@ export default function About() {
       </section>
 
       {/* Values Section */}
-      <section className="py-24 bg-gray-900">
+      <section className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             className="text-center mb-16"
@@ -534,8 +534,8 @@ export default function About() {
       </section>
 
       {/* What We Do Section */}
-      <section className="py-24 bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+      <section className="py-24 bg-gray-50 dark:bg-gray-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div

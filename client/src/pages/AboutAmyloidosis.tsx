@@ -94,10 +94,10 @@ export default function AboutAmyloidosis() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Hero Section */}
       <ParallaxBackground className="min-h-[80vh] flex items-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/20 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/20 rounded-full blur-3xl translate-x-48 translate-y-48" />
         
@@ -142,7 +142,7 @@ export default function AboutAmyloidosis() {
       </ParallaxBackground>
 
       {/* Warning Signs Section */}
-      <section id="warning-signs" className="py-24 bg-gray-900 relative">
+      <section id="warning-signs" className="py-24 bg-gray-50 dark:bg-gray-900 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -246,7 +246,7 @@ export default function AboutAmyloidosis() {
       </section>
 
       {/* Amyloidosis Types - Collapsible Sections */}
-      <section className="py-24 bg-gray-900 relative">
+      <section className="py-24 bg-white dark:bg-gray-900 relative">
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="text-center mb-16"
@@ -448,8 +448,8 @@ export default function AboutAmyloidosis() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gray-900 relative border-t border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+      <section className="py-24 bg-gray-50 dark:bg-gray-900 relative border-t border-gray-200 dark:border-white/10">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="text-center mb-16"

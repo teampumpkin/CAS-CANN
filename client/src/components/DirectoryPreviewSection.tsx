@@ -1,11 +1,26 @@
 import { motion } from 'framer-motion';
 import { Search, FileText, Heart, Users, MapPin, Building2, Phone, Mail } from 'lucide-react';
+import { useState } from 'react';
 import canadaMapPath from '@assets/Canada Map_1750069387234.png';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { healthcareCenters, HealthcareCenter } from '@/data/healthcareCenters';
+import HealthcareCenterModal from './HealthcareCenterModal';
 
 
 export default function DirectoryPreviewSection() {
   const { t } = useLanguage();
+  const [selectedCenter, setSelectedCenter] = useState<HealthcareCenter | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCenterClick = (center: HealthcareCenter) => {
+    setSelectedCenter(center);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedCenter(null);
+  };
   const directoryFeatures = [
     {
       icon: Building2,
@@ -96,22 +111,74 @@ export default function DirectoryPreviewSection() {
                   className="w-full h-auto rounded-xl"
                 />
                 
-                {/* Network points with subtle animation */}
-                <motion.div
-                  className="absolute top-1/4 left-1/3 w-3 h-3 bg-[#00AFE6] rounded-full"
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <motion.div
-                  className="absolute top-1/2 right-1/4 w-3 h-3 bg-[#00DD89] rounded-full"
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
-                />
-                <motion.div
-                  className="absolute bottom-1/3 left-1/2 w-3 h-3 bg-purple-500 rounded-full"
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: 1.3 }}
-                />
+                {/* Interactive Healthcare Centers */}
+                {healthcareCenters.map((center, index) => (
+                  <motion.button
+                    key={center.id}
+                    className="absolute w-4 h-4 rounded-full cursor-pointer hover:scale-150 transition-all duration-300 z-10 group"
+                    style={{
+                      left: `${center.coordinates.x}%`,
+                      top: `${center.coordinates.y}%`,
+                      backgroundColor: center.type === 'hospital' ? '#00AFE6' : 
+                                     center.type === 'specialty' ? '#00DD89' :
+                                     center.type === 'research' ? '#8B5CF6' : '#F59E0B'
+                    }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ 
+                      opacity: 1, 
+                      scale: 1,
+                      boxShadow: [
+                        '0 0 0 0 rgba(0, 175, 230, 0.7)',
+                        '0 0 0 10px rgba(0, 175, 230, 0)',
+                        '0 0 0 0 rgba(0, 175, 230, 0)'
+                      ]
+                    }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: index * 0.1,
+                      boxShadow: {
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: index * 0.3
+                      }
+                    }}
+                    onClick={() => handleCenterClick(center)}
+                    whileHover={{ scale: 1.5 }}
+                    whileTap={{ scale: 1.2 }}
+                  >
+                    {/* Tooltip */}
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
+                      <div className="bg-gray-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+                        <div className="font-semibold">{center.name}</div>
+                        <div className="text-xs text-gray-300">{center.city}, {center.province}</div>
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                      </div>
+                    </div>
+                  </motion.button>
+                ))}
+                
+                {/* Legend */}
+                <div className="absolute bottom-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-3 text-xs">
+                  <div className="font-semibold text-gray-900 dark:text-white mb-2">{t('map.legend.title')}</div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-[#00AFE6] rounded-full"></div>
+                      <span className="text-gray-700 dark:text-gray-300">{t('map.legend.hospitals')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-[#00DD89] rounded-full"></div>
+                      <span className="text-gray-700 dark:text-gray-300">{t('map.legend.specialty')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                      <span className="text-gray-700 dark:text-gray-300">{t('map.legend.research')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                      <span className="text-gray-700 dark:text-gray-300">{t('map.legend.clinics')}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -297,6 +364,13 @@ export default function DirectoryPreviewSection() {
           </motion.div>
         </div>
       </div>
+      
+      {/* Healthcare Center Modal */}
+      <HealthcareCenterModal
+        center={selectedCenter}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </section>
   );
 }

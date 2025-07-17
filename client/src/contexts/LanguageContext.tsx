@@ -219,6 +219,25 @@ const translations = {
     'aboutAmyloidosis.hero.title.amyloidosis': 'Amyloidosis',
     'aboutAmyloidosis.hero.description': 'Learn about the signs, types, diagnosis, and treatment of amyloidosis to help you or your loved one.',
     
+    // Healthcare Center Modal
+    'modal.aboutThisCenter': 'About This Center',
+    'modal.specialties': 'Specialties',
+    'modal.services': 'Services',
+    'modal.contactInformation': 'Contact Information',
+    'modal.established': 'Established',
+    'modal.certifications': 'Certifications',
+    'modal.callNow': 'Call Now',
+    'modal.sendEmail': 'Send Email',
+    'modal.visitWebsite': 'Visit Website',
+    'modal.viewOnMap': 'View on Map',
+    
+    // Healthcare Map Legend
+    'map.legend.title': 'Healthcare Centers',
+    'map.legend.hospitals': 'Hospitals',
+    'map.legend.specialty': 'Specialty Centers',
+    'map.legend.research': 'Research Centers',
+    'map.legend.clinics': 'Clinics',
+    
     // Footer
     'footer.aboutUs': 'About Us',
     'footer.ourMission': 'Our Mission',
@@ -446,6 +465,25 @@ const translations = {
     'aboutAmyloidosis.hero.title.understanding': 'Entendiendo',
     'aboutAmyloidosis.hero.title.amyloidosis': 'Amiloidosis',
     'aboutAmyloidosis.hero.description': 'Aprende sobre los signos, tipos, diagnóstico y tratamiento de la amiloidosis para ayudarte a ti o a tu ser querido.',
+    
+    // Healthcare Center Modal
+    'modal.aboutThisCenter': 'Acerca de Este Centro',
+    'modal.specialties': 'Especialidades',
+    'modal.services': 'Servicios',
+    'modal.contactInformation': 'Información de Contacto',
+    'modal.established': 'Establecido',
+    'modal.certifications': 'Certificaciones',
+    'modal.callNow': 'Llamar Ahora',
+    'modal.sendEmail': 'Enviar Email',
+    'modal.visitWebsite': 'Visitar Sitio Web',
+    'modal.viewOnMap': 'Ver en Mapa',
+    
+    // Healthcare Map Legend
+    'map.legend.title': 'Centros de Atención Médica',
+    'map.legend.hospitals': 'Hospitales',
+    'map.legend.specialty': 'Centros Especializados',
+    'map.legend.research': 'Centros de Investigación',
+    'map.legend.clinics': 'Clínicas',
     
     // Footer
     'footer.aboutUs': 'Acerca de Nosotros',

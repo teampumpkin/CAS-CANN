@@ -7,48 +7,48 @@ export default function QuickLinksSection() {
   const quickLinks = [
     {
       icon: Search,
-      title: 'Find Specialists',
-      description: 'Connect with amyloidosis experts near you',
+      title: t('quickLinks.findSpecialists'),
+      description: t('quickLinks.findSpecialistsDesc'),
       href: '#specialists',
       gradient: 'from-[#00AFE6] to-[#0088CC]',
       bgColor: 'from-blue-50 to-indigo-50'
     },
     {
       icon: BookOpen,
-      title: 'Patient Resources',
-      description: 'Educational materials and treatment guides',
+      title: t('quickLinks.patientResources'),
+      description: t('quickLinks.patientResourcesDesc'),
       href: '#resources',
       gradient: 'from-[#00DD89] to-[#00BB77]',
       bgColor: 'from-green-50 to-emerald-50'
     },
     {
       icon: Users,
-      title: 'Support Groups',
-      description: 'Connect with patients and families',
+      title: t('quickLinks.supportGroups'),
+      description: t('quickLinks.supportGroupsDesc'),
       href: '#support',
       gradient: 'from-purple-500 to-purple-700',
       bgColor: 'from-purple-50 to-indigo-50'
     },
     {
       icon: Heart,
-      title: 'Get Involved',
-      description: 'Volunteer, donate, or advocate with us',
+      title: t('quickLinks.getInvolved'),
+      description: t('quickLinks.getInvolvedDesc'),
       href: '#get-involved',
       gradient: 'from-pink-500 to-rose-600',
       bgColor: 'from-pink-50 to-rose-50'
     },
     {
       icon: Calendar,
-      title: 'Events',
-      description: 'Upcoming conferences and webinars',
+      title: t('quickLinks.events'),
+      description: t('quickLinks.eventsDesc'),
       href: '#events',
       gradient: 'from-orange-500 to-amber-600',
       bgColor: 'from-orange-50 to-amber-50'
     },
     {
       icon: Phone,
-      title: 'Contact Us',
-      description: 'Get in touch with our team',
+      title: t('quickLinks.contactUs'),
+      description: t('quickLinks.contactUsDesc'),
       href: '#contact',
       gradient: 'from-slate-600 to-slate-800',
       bgColor: 'from-slate-50 to-gray-50'
@@ -79,15 +79,15 @@ export default function QuickLinksSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Quick Access</span>
+            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">{t('quickLinks.badge')}</span>
           </motion.div>
 
           <h2 className="crawford-section-title mb-8">
-            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Essential</span>
-            <span className="text-gray-900 dark:text-white"> Resources</span>
+            <span className="text-gray-900 dark:text-white">{t('quickLinks.title.essential')} </span>
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('quickLinks.title.resources')}</span>
           </h2>
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Quick access to the most important tools and information for patients, families, and healthcare professionals.
+            {t('quickLinks.subtitle')}
           </p>
         </motion.div>
 

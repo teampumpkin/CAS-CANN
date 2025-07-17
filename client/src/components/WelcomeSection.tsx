@@ -44,7 +44,7 @@ export default function WelcomeSection() {
               transition={{ duration: 0.6 }}
             >
               <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-              <span>Who we are</span>
+              <span>{t('welcome.badge')}</span>
             </motion.div>
 
             {/* Premium heading with gradient accent */}
@@ -54,9 +54,9 @@ export default function WelcomeSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <span className="text-gray-900 dark:text-white">Welcome to the </span>
+              <span className="text-gray-900 dark:text-white">{t('welcome.title.welcome')} </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent">
-                Canadian Amyloidosis Society
+                {t('welcome.title.cas')}
               </span>
               <span className="text-gray-900 dark:text-white"> (CAS)</span>
             </motion.h2>
@@ -69,11 +69,11 @@ export default function WelcomeSection() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <p className="text-gray-600 dark:text-white/70 font-light">
-                We are dedicated to transforming amyloidosis care in Canada through patient-centered innovation, collaboration, and advocacy. Our mission is to enhance the quality and timeliness of care for individuals affected by this rare and complex disease.
+                {t('welcome.subtitle')}
               </p>
               
               <p className="text-gray-600 dark:text-white/70 font-light">
-                By accelerating access to diagnosis, treatment, and support, we are working to ensure that every person living with amyloidosis receives the care they need—when they need it, wherever they are in Canada.
+                {t('welcome.description')}
               </p>
             </motion.div>
 
@@ -89,7 +89,7 @@ export default function WelcomeSection() {
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span>Learn More About Our Work</span>
+                <span>{t('welcome.exploreResources')}</span>
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

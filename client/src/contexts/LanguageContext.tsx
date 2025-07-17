@@ -32,6 +32,7 @@ const translations = {
     'hero.learnMore': 'Learn More',
     
     // Welcome Section
+    'welcome.badge': 'Who we are',
     'welcome.title.welcome': 'Welcome to the',
     'welcome.title.cas': 'Canadian Amyloidosis Society',
     'welcome.subtitle': 'Your trusted partner in amyloidosis care, connecting patients, families, and healthcare professionals across Canada.',
@@ -40,13 +41,13 @@ const translations = {
     'welcome.missionText': 'To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support.',
     'welcome.vision': 'Our Vision',
     'welcome.visionText': 'A future where every Canadian affected by amyloidosis receives timely diagnosis, optimal treatment, and comprehensive support.',
-    'welcome.exploreResources': 'Explore Resources',
+    'welcome.exploreResources': 'Learn More About Our Work',
     
     // About Amyloidosis Section
-    'about.badge': 'Understanding the Disease',
+    'about.badge': 'Medical Information',
     'about.title.what': 'What is',
     'about.title.amyloidosis': 'Amyloidosis',
-    'about.subtitle': 'A complex condition that affects multiple organ systems, requiring specialized knowledge and early detection for optimal outcomes.',
+    'about.subtitle': 'Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.',
     'about.description': 'Amyloidosis is a rare but serious condition where misfolded proteins (amyloid) accumulate in organs and tissues throughout the body. Understanding the different types, recognizing early symptoms, and accessing specialized care are crucial for managing this condition effectively.',
     'about.earlyDetection': 'Early Detection Saves Lives',
     'about.earlyDetectionText': 'Recognizing symptoms early and getting proper diagnosis can significantly improve treatment outcomes and quality of life.',
@@ -98,6 +99,10 @@ const translations = {
     'quickLinks.treatmentOptionsDesc': 'Explore available therapies and care',
     'quickLinks.contactUs': 'Contact Us',
     'quickLinks.contactUsDesc': 'Get in touch with our team',
+    'quickLinks.getInvolved': 'Get Involved',
+    'quickLinks.getInvolvedDesc': 'Volunteer, donate, or advocate with us',
+    'quickLinks.events': 'Events',
+    'quickLinks.eventsDesc': 'Upcoming conferences and webinars',
     
     // Footer
     'footer.aboutUs': 'About Us',
@@ -140,6 +145,7 @@ const translations = {
     'hero.learnMore': 'Saber Más',
     
     // Welcome Section
+    'welcome.badge': 'Quiénes somos',
     'welcome.title.welcome': 'Bienvenido a la',
     'welcome.title.cas': 'Sociedad Canadiense de Amiloidosis',
     'welcome.subtitle': 'Su socio de confianza en el cuidado de la amiloidosis, conectando pacientes, familias y profesionales de la salud en todo Canadá.',
@@ -148,13 +154,13 @@ const translations = {
     'welcome.missionText': 'Acelerar la conciencia, mejorar el diagnóstico y mejorar la atención para pacientes con amiloidosis en todo Canadá a través de la educación, la defensa y el apoyo comunitario.',
     'welcome.vision': 'Nuestra Visión',
     'welcome.visionText': 'Un futuro donde cada canadiense afectado por la amiloidosis reciba un diagnóstico oportuno, tratamiento óptimo y apoyo integral.',
-    'welcome.exploreResources': 'Explorar Recursos',
+    'welcome.exploreResources': 'Aprenda Más Sobre Nuestro Trabajo',
     
     // About Amyloidosis Section
-    'about.badge': 'Entendiendo la Enfermedad',
+    'about.badge': 'Información Médica',
     'about.title.what': '¿Qué es la',
     'about.title.amyloidosis': 'Amiloidosis',
-    'about.subtitle': 'Una condición compleja que afecta múltiples sistemas de órganos, requiriendo conocimiento especializado y detección temprana para resultados óptimos.',
+    'about.subtitle': 'La amiloidosis es una enfermedad rara con consecuencias que cambian la vida, pero la detección temprana puede mejorar dramáticamente los resultados. La Sociedad Canadiense de Amiloidosis está construyendo un centro nacional confiable para médicos, investigadores y familias que buscan respuestas.',
     'about.description': 'La amiloidosis es una condición rara pero seria donde las proteínas mal plegadas (amiloide) se acumulan en órganos y tejidos por todo el cuerpo. Entender los diferentes tipos, reconocer los síntomas tempranos y acceder a atención especializada son cruciales para manejar esta condición efectivamente.',
     'about.earlyDetection': 'La Detección Temprana Salva Vidas',
     'about.earlyDetectionText': 'Reconocer los síntomas temprano y obtener un diagnóstico adecuado puede mejorar significativamente los resultados del tratamiento y la calidad de vida.',
@@ -206,6 +212,10 @@ const translations = {
     'quickLinks.treatmentOptionsDesc': 'Explorar terapias disponibles y cuidados',
     'quickLinks.contactUs': 'Contáctanos',
     'quickLinks.contactUsDesc': 'Póngase en contacto con nuestro equipo',
+    'quickLinks.getInvolved': 'Participar',
+    'quickLinks.getInvolvedDesc': 'Voluntariado, donar o abogar con nosotros',
+    'quickLinks.events': 'Eventos',
+    'quickLinks.eventsDesc': 'Próximas conferencias y webinarios',
     
     // Footer
     'footer.aboutUs': 'Acerca de Nosotros',

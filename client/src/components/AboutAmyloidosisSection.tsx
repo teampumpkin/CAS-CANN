@@ -64,17 +64,17 @@ export default function AboutAmyloidosisSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
-            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Medical Information</span>
+            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">{t('about.badge')}</span>
           </motion.div>
 
           <h2 className="crawford-section-title mb-8">
-            <span className="text-gray-900 dark:text-white">What is </span>
-            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Amyloidosis</span>
+            <span className="text-gray-900 dark:text-white">{t('about.title.what')} </span>
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('about.title.amyloidosis')}</span>
             <span className="text-gray-900 dark:text-white">?</span>
           </h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-xl text-gray-700 dark:text-white/80 leading-relaxed mb-4">
-              Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
+              {t('about.subtitle')}
             </p>
             <div className="flex items-center justify-center gap-4 mt-6">
               <div className="w-16 h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>

@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
 import { Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from './ThemeProvider';
 
 export const LanguageSwitcher = () => {
   const { language, setLanguage } = useLanguage();
+  const { theme } = useTheme();
 
   return (
     <div className="relative">
@@ -12,12 +14,13 @@ export const LanguageSwitcher = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Globe className="w-4 h-4 text-white" />
+        <Globe className={`w-4 h-4 ${theme === 'light' ? 'text-gray-700' : 'text-white'}`} />
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value as 'en' | 'es')}
-          className="bg-transparent text-white text-sm font-medium cursor-pointer outline-none"
-          style={{ color: 'white' }}
+          className={`bg-transparent text-sm font-medium cursor-pointer outline-none ${
+            theme === 'light' ? 'text-gray-700' : 'text-white'
+          }`}
         >
           <option value="en" className="bg-gray-800 text-white">EN</option>
           <option value="es" className="bg-gray-800 text-white">ES</option>

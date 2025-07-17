@@ -29,6 +29,11 @@ Preferred communication style: Simple, everyday language.
 - ✅ Enhanced theme application with explicit document class management
 - ✅ Ensured proper contrast ratios and accessibility in both themes
 
+### Custom Cursor Removal (July 17, 2025)
+- ✅ Removed AdvancedMouseFollower component from App.tsx
+- ✅ Deleted AdvancedMouseFollower.tsx component file
+- ✅ Application now uses default browser cursor instead of custom cursor
+
 ## System Architecture
 
 ### Frontend Architecture

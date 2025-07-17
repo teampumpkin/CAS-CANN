@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import EnhancedScrollIndicator from "@/components/EnhancedScrollIndicator";
-import AdvancedMouseFollower from "@/components/AdvancedMouseFollower";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
@@ -60,7 +60,6 @@ function App() {
           </div>
           <Toaster />
           <EnhancedScrollIndicator />
-          <AdvancedMouseFollower />
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>

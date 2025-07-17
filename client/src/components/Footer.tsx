@@ -19,11 +19,11 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden border-t border-gray-200 dark:border-white/10">
+    <footer className="bg-gradient-to-br from-[#00DD89]/6 via-gray-50 to-[#00AFE6]/6 dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden border-t border-[#00AFE6]/20 dark:border-white/10">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/10 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/10 rounded-full blur-3xl translate-x-48 translate-y-48" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#00DD89]/8 via-gray-50 to-[#00AFE6]/8 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/15 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/15 rounded-full blur-3xl translate-x-48 translate-y-48" />
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Main Content */}

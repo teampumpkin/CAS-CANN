@@ -11,7 +11,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-white dark:bg-gray-900">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#00AFE6]/8 via-white to-[#00DD89]/8 dark:bg-gray-900">
       {/* Sophisticated background with medical heart visualization */}
       <div className="absolute inset-0">
         {/* Medical heart background image */}
@@ -22,13 +22,13 @@ export default function Hero() {
             className="w-full h-full object-cover"
           />
           {/* Sophisticated overlay for text readability and brand enhancement */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-200/60 via-blue-200/50 to-gray-200/60 dark:from-gray-900/80 dark:via-blue-900/70 dark:to-gray-900/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/20 via-[#00DD89]/15 to-[#00AFE6]/25 dark:from-gray-900/80 dark:via-blue-900/70 dark:to-gray-900/80"></div>
         </div>
         
         {/* Animated brand accent elements */}
         <div className="absolute inset-0">
           <motion.div
-            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-3xl"
+            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-[#00AFE6]/25 to-[#00DD89]/25 rounded-full blur-3xl"
             animate={{ 
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.6, 0.3]
@@ -36,7 +36,7 @@ export default function Hero() {
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 rounded-full blur-3xl"
+            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-[#00DD89]/20 to-[#00AFE6]/20 rounded-full blur-3xl"
             animate={{ 
               scale: [1.2, 1, 1.2],
               opacity: [0.2, 0.5, 0.2]

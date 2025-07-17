@@ -30,11 +30,11 @@ export default function AboutAmyloidosisSection() {
   ];
 
   return (
-    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-[#00DD89]/8 via-gray-50 to-[#00AFE6]/8 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/15 to-[#00AFE6]/15 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -68,7 +68,7 @@ export default function AboutAmyloidosisSection() {
           {amyloidosisTypes.map((type, index) => (
             <motion.div
               key={type.name}
-              className="group relative bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/30 transition-all duration-500 hover:bg-white/90 dark:hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20"
+              className="group relative bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/20 dark:border-white/10 hover:border-[#00AFE6]/40 dark:hover:border-white/30 transition-all duration-500 hover:bg-white/95 dark:hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.15 }}

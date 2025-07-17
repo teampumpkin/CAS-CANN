@@ -3,11 +3,11 @@ import medicalProfessionalImg from '@assets/DSC02826_1750092328495.jpg';
 
 export default function WelcomeSection() {
   return (
-    <section className="relative py-12 lg:py-20 bg-gray-100 dark:bg-gray-900 overflow-hidden">
+    <section className="relative py-12 lg:py-20 bg-gradient-to-br from-[#00AFE6]/5 via-white to-[#00DD89]/5 dark:bg-gray-900 overflow-hidden">
       {/* Premium background elements */}
       <div className="absolute inset-0">
         <motion.div 
-          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 rounded-full blur-3xl"
           animate={{ 
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.5, 0.3]
@@ -15,7 +15,7 @@ export default function WelcomeSection() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-purple-400/8 to-blue-400/8 rounded-full blur-3xl"
+          className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-[#00DD89]/12 to-[#00AFE6]/12 rounded-full blur-3xl"
           animate={{ 
             scale: [1.1, 1, 1.1],
             opacity: [0.4, 0.6, 0.4]

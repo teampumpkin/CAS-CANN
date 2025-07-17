@@ -36,11 +36,11 @@ export default function EventsNewsletterSection() {
   ];
 
   return (
-    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-[#00AFE6]/6 via-gray-50 to-[#00DD89]/6 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       {/* Background decorative elements matching amyloidosis section style */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/8 to-[#00AFE6]/8 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/12 to-[#00DD89]/12 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/12 to-[#00AFE6]/12 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
@@ -78,7 +78,7 @@ export default function EventsNewsletterSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-white/90 via-gray-50/90 to-white/90 dark:from-[#00AFE6]/10 dark:via-[#00DD89]/5 dark:to-[#00AFE6]/10 backdrop-blur-xl border border-gray-200 dark:border-white/20">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-white/95 via-[#00AFE6]/5 to-white/95 dark:from-[#00AFE6]/10 dark:via-[#00DD89]/5 dark:to-[#00AFE6]/10 backdrop-blur-xl border border-[#00AFE6]/30 dark:border-white/20">
             {/* Animated background pattern */}
             <div className="absolute inset-0">
               <motion.div
@@ -141,7 +141,7 @@ export default function EventsNewsletterSection() {
                     <input
                       type="email"
                       placeholder="Enter your email address"
-                      className="w-full px-6 py-4 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/20 rounded-2xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 focus:outline-none focus:border-[#00AFE6] focus:bg-white/90 dark:focus:bg-white/20 transition-all duration-300"
+                      className="w-full px-6 py-4 bg-white/90 dark:bg-white/10 backdrop-blur-sm border border-[#00AFE6]/30 dark:border-white/20 rounded-2xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 focus:outline-none focus:border-[#00AFE6] focus:bg-white/95 dark:focus:bg-white/20 transition-all duration-300"
                     />
                     <motion.button
                       className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#00AFE6] text-white px-6 py-2 rounded-xl font-semibold hover:bg-[#0088CC] transition-colors duration-300"
@@ -182,7 +182,7 @@ export default function EventsNewsletterSection() {
                     transition={{ duration: 0.6, delay: 0.1 * index }}
                     whileHover={{ y: -5 }}
                   >
-                    <div className="bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 group-hover:border-gray-300 dark:group-hover:border-white/40 transition-all duration-300">
+                    <div className="bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-white/20 group-hover:border-[#00AFE6]/40 dark:group-hover:border-white/40 transition-all duration-300">
                       <div className="text-2xl mb-2">{stat.icon}</div>
                       <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
                         <motion.span
@@ -253,7 +253,7 @@ export default function EventsNewsletterSection() {
                     className="mt-12"
                     whileHover={{ scale: 1.02, y: -8 }}
                   >
-                    <div className="group relative bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/30 transition-all duration-500 hover:bg-white/95 dark:hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20 overflow-hidden min-h-[400px]">
+                    <div className="group relative bg-white/95 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/20 dark:border-white/10 hover:border-[#00AFE6]/40 dark:hover:border-white/30 transition-all duration-500 hover:bg-white/98 dark:hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20 overflow-hidden min-h-[400px]">
                       {/* Animated glow effect */}
                       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
                       

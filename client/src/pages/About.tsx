@@ -50,10 +50,10 @@ export default function About() {
       description: 'Patient and family support network for transthyretin amyloidosis'
     },
     { 
-      name: 'Canadian Amyloidosis Network (CANN)', 
+      name: 'Canadian Amyloidosis Nursing Network (CANN)', 
       shortName: 'CANN',
       url: '#',
-      description: 'National network for amyloidosis research and care'
+      description: 'National network for connecting amyloidosis nurses'
     },
     { 
       name: 'Amyloidosis Research Consortium (ARC)', 

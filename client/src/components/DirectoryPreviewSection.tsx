@@ -284,19 +284,43 @@ export default function DirectoryPreviewSection() {
               {directoryFeatures.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  className="group bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/30 transition-all duration-300 hover:bg-white/95 dark:hover:bg-white/10"
+                  className={`group backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl ${
+                    index === 0 
+                      ? 'bg-gradient-to-br from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200/50 dark:border-blue-400/20 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/30 dark:hover:to-cyan-800/30 hover:border-blue-300/60 dark:hover:border-blue-300/30 hover:shadow-blue-500/25 dark:hover:shadow-blue-400/20'
+                      : index === 1
+                      ? 'bg-gradient-to-br from-emerald-50/90 to-green-50/90 dark:from-emerald-900/20 dark:to-green-900/20 border-emerald-200/50 dark:border-emerald-400/20 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/30 dark:hover:to-green-800/30 hover:border-emerald-300/60 dark:hover:border-emerald-300/30 hover:shadow-emerald-500/25 dark:hover:shadow-emerald-400/20'
+                      : index === 2
+                      ? 'bg-gradient-to-br from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20 border-purple-200/50 dark:border-purple-400/20 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/30 dark:hover:to-violet-800/30 hover:border-purple-300/60 dark:hover:border-purple-300/30 hover:shadow-purple-500/25 dark:hover:shadow-purple-400/20'
+                      : 'bg-gradient-to-br from-orange-50/90 to-amber-50/90 dark:from-orange-900/20 dark:to-amber-900/20 border-orange-200/50 dark:border-orange-400/20 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/30 dark:hover:to-amber-800/30 hover:border-orange-300/60 dark:hover:border-orange-300/30 hover:shadow-orange-500/25 dark:hover:shadow-orange-400/20'
+                  }`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.05 }}
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`w-12 h-12 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-12 h-12 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                       <feature.icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-lg">{feature.title}</h4>
-                      <p className="text-gray-700 dark:text-white/70 text-sm">{feature.description}</p>
+                      <h4 className={`font-semibold mb-2 text-lg ${
+                        index === 0 
+                          ? 'text-blue-900 dark:text-blue-100'
+                          : index === 1
+                          ? 'text-emerald-900 dark:text-emerald-100'
+                          : index === 2
+                          ? 'text-purple-900 dark:text-purple-100'
+                          : 'text-orange-900 dark:text-orange-100'
+                      }`}>{feature.title}</h4>
+                      <p className={`text-sm ${
+                        index === 0 
+                          ? 'text-blue-700 dark:text-blue-300'
+                          : index === 1
+                          ? 'text-emerald-700 dark:text-emerald-300'
+                          : index === 2
+                          ? 'text-purple-700 dark:text-purple-300'
+                          : 'text-orange-700 dark:text-orange-300'
+                      }`}>{feature.description}</p>
                     </div>
                   </div>
                 </motion.div>

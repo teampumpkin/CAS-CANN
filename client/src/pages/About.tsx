@@ -674,10 +674,7 @@ export default function About() {
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
                   <p className="text-gray-600 dark:text-white/70">Research specialists and academic partners</p>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-white/70">Lived-experience advisors and patient advocates</p>
-                </div>
+                
               </div>
             </motion.div>
             

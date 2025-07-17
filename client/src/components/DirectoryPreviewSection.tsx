@@ -61,7 +61,7 @@ export default function DirectoryPreviewSection() {
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/15 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/15 rounded-full blur-3xl translate-x-48 translate-y-48" />
 
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
+      <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           className="text-center mb-6"
@@ -85,14 +85,14 @@ export default function DirectoryPreviewSection() {
 
         {/* Canada Network Stats - Ultra Compact Layout */}
         <motion.div
-          className="bg-gradient-to-br from-white/95 to-white/90 dark:from-white/10 dark:to-white/5 backdrop-blur-xl rounded-2xl p-4 border border-[#00AFE6]/20 dark:border-white/20 mb-4"
+          className="bg-gradient-to-br from-white/95 to-white/90 dark:from-white/10 dark:to-white/5 backdrop-blur-xl rounded-2xl p-4 border border-[#00AFE6]/20 dark:border-white/20 mb-4 max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="grid lg:grid-cols-5 gap-4 items-center">
+          <div className="grid lg:grid-cols-5 gap-4 items-center justify-items-center">
             {/* Map Visualization - Compact */}
-            <div className="lg:col-span-3 relative">
+            <div className="lg:col-span-3 relative w-full">
               <div className="text-center mb-3">
                 <div className="inline-flex items-center gap-1 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-2 py-1 rounded-full text-xs font-medium mb-2 border border-[#00AFE6]/30">
                   <div className="w-1 h-1 bg-[#00AFE6] rounded-full animate-pulse" />
@@ -190,7 +190,7 @@ export default function DirectoryPreviewSection() {
             </div>
 
             {/* Statistics Display - Ultra Compact Layout */}
-            <div className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-4 w-full">
               <div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 font-rosarivo">{t('directory.networkReach')}</h3>
                 <div className="grid grid-cols-2 gap-2">

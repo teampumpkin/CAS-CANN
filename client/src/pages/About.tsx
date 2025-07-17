@@ -137,7 +137,7 @@ export default function About() {
               >
                 <div className="flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-xl rounded-full px-4 py-2 border border-[#00AFE6]/30 shadow-lg shadow-[#00AFE6]/10">
                   <Heart className="w-4 h-4 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">{t('about.hero.badge')}</span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-white/90">{t('about.hero.badge')}</span>
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse" />
                 </div>
               </motion.div>
@@ -148,7 +148,7 @@ export default function About() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
               >
-                <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 via-gray-900 to-gray-700 dark:from-white dark:via-white dark:to-white/70 bg-clip-text text-transparent">
                   {t('about.hero.title.connecting')}
                 </span>
                 <br />
@@ -156,13 +156,13 @@ export default function About() {
                   {t('about.hero.title.healthcare')}
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 via-gray-900 to-gray-700 dark:from-white dark:via-white dark:to-white/70 bg-clip-text text-transparent">
                   {t('about.hero.title.canada')}
                 </span>
               </motion.h1>
               
               <motion.p
-                className="text-xl text-white/70 leading-relaxed mb-10 max-w-lg"
+                className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-10 max-w-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
@@ -181,7 +181,7 @@ export default function About() {
                   <span className="relative z-10">{t('about.hero.ourMission')}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
                 </button>
-                <button className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-xl text-white px-8 py-4 rounded-full font-medium border border-[#00AFE6]/30 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 hover:border-[#00AFE6]/50 transition-all duration-300 hover:scale-105 shadow-lg shadow-[#00AFE6]/5">
+                <button className="bg-gradient-to-r from-gray-200/20 to-gray-300/10 dark:from-white/10 dark:to-white/5 backdrop-blur-xl text-gray-700 dark:text-white px-8 py-4 rounded-full font-medium border border-[#00AFE6]/30 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 hover:border-[#00AFE6]/50 transition-all duration-300 hover:scale-105 shadow-lg shadow-[#00AFE6]/5">
                   {t('about.hero.getInvolved')}
                 </button>
               </motion.div>
@@ -207,7 +207,7 @@ export default function About() {
                       >
                         <Stethoscope className="w-8 h-8 text-[#00AFE6] mx-auto mb-3" />
                         <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">50+</div>
-                        <div className="text-sm text-white/70">Clinicians</div>
+                        <div className="text-sm text-gray-600 dark:text-white/70">Clinicians</div>
                       </motion.div>
                       <motion.div 
                         className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-2xl p-6 text-center border border-[#00DD89]/30 hover:border-[#00DD89]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00DD89]/20"
@@ -215,15 +215,15 @@ export default function About() {
                       >
                         <Building2 className="w-8 h-8 text-[#00DD89] mx-auto mb-3" />
                         <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">25+</div>
-                        <div className="text-sm text-white/70">Institutions</div>
+                        <div className="text-sm text-gray-600 dark:text-white/70">Institutions</div>
                       </motion.div>
                     </div>
                     <div className="text-center">
                       <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-[#00AFE6]/30">
                         <Award className="w-6 h-6 text-[#00AFE6]" />
                       </div>
-                      <h3 className="text-lg font-semibold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent mb-2">National Platform</h3>
-                      <p className="text-white/60 text-sm">Connecting the amyloidosis community across Canada</p>
+                      <h3 className="text-lg font-semibold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-2">National Platform</h3>
+                      <p className="text-gray-600 dark:text-white/60 text-sm">Connecting the amyloidosis community across Canada</p>
                     </div>
                   </div>
                 </div>
@@ -287,11 +287,11 @@ export default function About() {
                 viewport={{ once: true }}
               >
                 <Users className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-white/90">Who We Are</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/90">Who We Are</span>
               </motion.div>
               
               <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Clinician-Led,
                 </span>
                 <br />
@@ -300,18 +300,18 @@ export default function About() {
                 </span>
               </h2>
               
-              <p className="text-lg text-white/70 leading-relaxed mb-8">
+              <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-8">
                 The Canadian Amyloidosis Society (CAS) is dedicated to increasing awareness, accelerating diagnosis, and improving coordinated care for people living with amyloidosis. We serve as a national platform to connect, align, and support individuals and institutions working across the amyloidosis spectrum.
               </p>
               
               <div className="flex gap-4">
                 <div className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-xl p-4 flex-1">
-                  <div className="text-2xl font-bold text-white mb-1">100%</div>
-                  <div className="text-sm text-white/70">Clinician-Led</div>
+                  <div className="text-2xl font-bold text-gray-800 dark:text-white mb-1">100%</div>
+                  <div className="text-sm text-gray-600 dark:text-white/70">Clinician-Led</div>
                 </div>
                 <div className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-xl p-4 flex-1">
-                  <div className="text-2xl font-bold text-white mb-1">Canada</div>
-                  <div className="text-sm text-white/70">Nationwide</div>
+                  <div className="text-2xl font-bold text-gray-800 dark:text-white mb-1">Canada</div>
+                  <div className="text-sm text-gray-600 dark:text-white/70">Nationwide</div>
                 </div>
               </div>
             </motion.div>
@@ -350,7 +350,7 @@ export default function About() {
                           <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                             50+
                           </div>
-                          <div className="text-xs text-white/80">Expert Clinicians</div>
+                          <div className="text-xs text-gray-600 dark:text-white/80">Expert Clinicians</div>
                         </motion.div>
                         
                         <motion.div
@@ -362,7 +362,7 @@ export default function About() {
                           <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
                             10
                           </div>
-                          <div className="text-xs text-white/80">Provinces</div>
+                          <div className="text-xs text-gray-600 dark:text-white/80">Provinces</div>
                         </motion.div>
                       </div>
                     </div>
@@ -428,11 +428,11 @@ export default function About() {
                 viewport={{ once: true }}
               >
                 <Target className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-white/90">Our Vision</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/90">Our Vision</span>
               </motion.div>
               
               <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   A Better
                 </span>
                 <br />
@@ -445,11 +445,11 @@ export default function About() {
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-2xl -translate-y-12 translate-x-12" />
                 
                 <div className="relative z-10">
-                  <blockquote className="text-xl text-white/90 leading-relaxed font-medium italic border-l-4 border-[#00AFE6] pl-6 mb-6">
+                  <blockquote className="text-xl text-gray-700 dark:text-white/90 leading-relaxed font-medium italic border-l-4 border-[#00AFE6] pl-6 mb-6">
                     "A Canada where every person affected by amyloidosis receives timely, accurate diagnosis and high-quality care."
                   </blockquote>
                   
-                  <p className="text-white/70 leading-relaxed">
+                  <p className="text-gray-600 dark:text-white/70 leading-relaxed">
                     We envision a healthcare system where amyloidosis is recognized early, managed effectively, and where patients and families receive the support they need throughout their journey.
                   </p>
                 </div>
@@ -471,10 +471,10 @@ export default function About() {
           >
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
               <Shield className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Our Values</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-white/90">Our Values</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Guided by
               </span>
               <br />

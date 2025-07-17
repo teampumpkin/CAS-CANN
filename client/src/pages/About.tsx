@@ -490,12 +490,12 @@ export default function About() {
                 key={value.title}
                 className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl ${
                   index === 0 
-                    ? 'bg-gradient-to-br from-pink-900/25 to-rose-900/25 border-pink-400/30 hover:from-pink-800/35 hover:to-rose-800/35 hover:border-pink-300/40 hover:shadow-pink-500/25'
+                    ? 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200/50 dark:border-pink-400/30 hover:from-pink-100/95 hover:to-rose-100/95 dark:hover:from-pink-800/35 dark:hover:to-rose-800/35 hover:border-pink-300/60 dark:hover:border-pink-300/40 hover:shadow-pink-200/40 dark:hover:shadow-pink-500/25'
                     : index === 1
-                    ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30 hover:from-emerald-800/35 hover:to-green-800/35 hover:border-emerald-300/40 hover:shadow-emerald-500/25'
+                    ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200/50 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300/60 dark:hover:border-emerald-300/40 hover:shadow-emerald-200/40 dark:hover:shadow-emerald-500/25'
                     : index === 2
-                    ? 'bg-gradient-to-br from-blue-900/25 to-indigo-900/25 border-blue-400/30 hover:from-blue-800/35 hover:to-indigo-800/35 hover:border-blue-300/40 hover:shadow-blue-500/25'
-                    : 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30 hover:from-purple-800/35 hover:to-violet-800/35 hover:border-purple-300/40 hover:shadow-purple-500/25'
+                    ? 'bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 border-blue-200/50 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-indigo-100/95 dark:hover:from-blue-800/35 dark:hover:to-indigo-800/35 hover:border-blue-300/60 dark:hover:border-blue-300/40 hover:shadow-blue-200/40 dark:hover:shadow-blue-500/25'
+                    : 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/50 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/60 dark:hover:border-purple-300/40 hover:shadow-purple-200/40 dark:hover:shadow-purple-500/25'
                 }`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -509,21 +509,21 @@ export default function About() {
                   <div>
                     <h3 className={`text-xl font-semibold mb-3 font-rosarivo ${
                       index === 0 
-                        ? 'text-pink-100'
+                        ? 'text-pink-900 dark:text-pink-100'
                         : index === 1
-                        ? 'text-emerald-100'
+                        ? 'text-emerald-900 dark:text-emerald-100'
                         : index === 2
-                        ? 'text-blue-100'
-                        : 'text-purple-100'
+                        ? 'text-blue-900 dark:text-blue-100'
+                        : 'text-purple-900 dark:text-purple-100'
                     }`}>{value.title}</h3>
                     <p className={`leading-relaxed ${
                       index === 0 
-                        ? 'text-pink-300'
+                        ? 'text-pink-700 dark:text-pink-300'
                         : index === 1
-                        ? 'text-emerald-300'
+                        ? 'text-emerald-700 dark:text-emerald-300'
                         : index === 2
-                        ? 'text-blue-300'
-                        : 'text-purple-300'
+                        ? 'text-blue-700 dark:text-blue-300'
+                        : 'text-purple-700 dark:text-purple-300'
                     }`}>{value.description}</p>
                   </div>
                 </div>
@@ -546,11 +546,11 @@ export default function About() {
             >
               <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
                 <Globe className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-white/90">What We Do</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/90">What We Do</span>
               </div>
               
               <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Building
                 </span>
                 <br />
@@ -559,7 +559,7 @@ export default function About() {
                 </span>
               </h2>
               
-              <p className="text-lg text-white/70 leading-relaxed mb-8">
+              <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-8">
                 We create pathways for collaboration, knowledge sharing, and coordinated care across Canada's amyloidosis community.
               </p>
             </motion.div>
@@ -587,7 +587,7 @@ export default function About() {
                     transition={{ duration: 0.8, delay: 0.5 }}
                   >
                     <div className="p-4">
-                      <h3 className="text-sm font-semibold text-white mb-3">Our Services</h3>
+                      <h3 className="text-sm font-semibold text-gray-800 dark:text-white mb-3">Our Services</h3>
                       <div className="space-y-2 max-h-32 overflow-y-auto">
                         {services.slice(0, 3).map((service, index) => (
                           <motion.div
@@ -599,10 +599,10 @@ export default function About() {
                             viewport={{ once: true }}
                           >
                             <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-2 flex-shrink-0" />
-                            <p className="text-xs text-white/80 leading-relaxed">{service}</p>
+                            <p className="text-xs text-gray-600 dark:text-white/80 leading-relaxed">{service}</p>
                           </motion.div>
                         ))}
-                        <div className="text-xs text-white/60 pt-1">+{services.length - 3} more services</div>
+                        <div className="text-xs text-gray-500 dark:text-white/60 pt-1">+{services.length - 3} more services</div>
                       </div>
                     </div>
                   </motion.div>
@@ -630,7 +630,7 @@ export default function About() {
       </section>
 
       {/* Executive Committee Section */}
-      <section className="py-24 bg-gray-900 border-t border-white/10">
+      <section className="py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Content Column - Left Side */}
@@ -648,11 +648,11 @@ export default function About() {
                 viewport={{ once: true }}
               >
                 <UserCheck className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-white/90">Leadership</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/90">Leadership</span>
               </motion.div>
               
               <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Executive
                 </span>
                 <br />
@@ -661,22 +661,22 @@ export default function About() {
                 </span>
               </h2>
               
-              <p className="text-lg text-white/70 leading-relaxed mb-8">
+              <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-8">
                 The CAS Executive Committee is composed of clinical leaders, researchers, strategic partners, and lived-experience advisors. This group guides platform strategy, ensures ethical oversight, and supports resource curation.
               </p>
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-white/70">Clinical leaders from across Canada</p>
+                  <p className="text-gray-600 dark:text-white/70">Clinical leaders from across Canada</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-white/70">Research specialists and academic partners</p>
+                  <p className="text-gray-600 dark:text-white/70">Research specialists and academic partners</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-white/70">Lived-experience advisors and patient advocates</p>
+                  <p className="text-gray-600 dark:text-white/70">Lived-experience advisors and patient advocates</p>
                 </div>
               </div>
             </motion.div>
@@ -715,7 +715,7 @@ export default function About() {
                           <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                             12
                           </div>
-                          <div className="text-xs text-white/80">Committee Members</div>
+                          <div className="text-xs text-gray-600 dark:text-white/80">Committee Members</div>
                         </motion.div>
                         
                         <motion.div
@@ -727,7 +727,7 @@ export default function About() {
                           <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
                             5
                           </div>
-                          <div className="text-xs text-white/80">Specialties</div>
+                          <div className="text-xs text-gray-600 dark:text-white/80">Specialties</div>
                         </motion.div>
                       </div>
                     </div>
@@ -757,7 +757,7 @@ export default function About() {
       </section>
 
       {/* Partners Section */}
-      <section className="py-24 pb-32 bg-gray-900 border-t border-white/10">
+      <section className="py-24 pb-32 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-white/10">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Image Column - Left Side */}
@@ -794,7 +794,7 @@ export default function About() {
                           <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                             15+
                           </div>
-                          <div className="text-xs text-white/80">Strategic Partners</div>
+                          <div className="text-xs text-gray-600 dark:text-white/80">Strategic Partners</div>
                         </motion.div>
                         
                         <motion.div
@@ -806,7 +806,7 @@ export default function About() {
                           <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
                             3
                           </div>
-                          <div className="text-xs text-white/80">Countries</div>
+                          <div className="text-xs text-gray-600 dark:text-white/80">Countries</div>
                         </motion.div>
                       </div>
                     </div>
@@ -847,11 +847,11 @@ export default function About() {
                 viewport={{ once: true }}
               >
                 <Network className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-white/90">Our Partners</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/90">Our Partners</span>
               </motion.div>
               
               <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Strategic
                 </span>
                 <br />
@@ -860,7 +860,7 @@ export default function About() {
                 </span>
               </h2>
               
-              <p className="text-lg text-white/70 leading-relaxed mb-8">
+              <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-8">
                 We collaborate with leading organizations, research institutions, and healthcare networks to amplify our impact and accelerate progress in amyloidosis care across Canada and internationally.
               </p>
               
@@ -874,10 +874,10 @@ export default function About() {
                 >
                   <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-xl rounded-full px-6 py-3 border border-white/30 mb-4">
                     <Network className="w-5 h-5 text-[#00AFE6]" />
-                    <span className="text-sm font-medium text-white/90">Strategic Alliances</span>
+                    <span className="text-sm font-medium text-gray-700 dark:text-white/90">Strategic Alliances</span>
                   </div>
-                  <h3 className="text-2xl font-bold font-rosarivo text-white mb-2">
-                    <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  <h3 className="text-2xl font-bold font-rosarivo text-gray-800 dark:text-white mb-2">
+                    <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                       Global
                     </span>
                     {' '}
@@ -885,7 +885,7 @@ export default function About() {
                       Partners
                     </span>
                   </h3>
-                  <p className="text-white/70 text-sm max-w-md mx-auto">
+                  <p className="text-gray-600 dark:text-white/70 text-sm max-w-md mx-auto">
                     Collaborating with leading organizations to advance amyloidosis care worldwide
                   </p>
                 </motion.div>
@@ -921,10 +921,10 @@ export default function About() {
                             </div>
                           </div>
                           <div className="space-y-3">
-                            <h4 className="text-white font-bold text-lg group-hover:text-[#00AFE6] transition-colors duration-300 leading-tight">
+                            <h4 className="text-gray-800 dark:text-white font-bold text-lg group-hover:text-[#00AFE6] transition-colors duration-300 leading-tight">
                               {partner.name}
                             </h4>
-                            <p className="text-white/80 text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
+                            <p className="text-gray-600 dark:text-white/80 text-sm leading-relaxed group-hover:text-gray-800 dark:group-hover:text-white transition-colors duration-300">
                               {partner.description}
                             </p>
                           </div>
@@ -942,15 +942,15 @@ export default function About() {
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-white/70">International amyloidosis organizations</p>
+                  <p className="text-gray-600 dark:text-white/70">International amyloidosis organizations</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-white/70">Leading Canadian research institutions</p>
+                  <p className="text-gray-600 dark:text-white/70">Leading Canadian research institutions</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-white/70">Healthcare networks and specialty centers</p>
+                  <p className="text-gray-600 dark:text-white/70">Healthcare networks and specialty centers</p>
                 </div>
               </div>
             </motion.div>

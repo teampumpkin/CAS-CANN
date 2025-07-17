@@ -163,26 +163,27 @@ export default function DirectoryPreviewSection() {
                   </motion.button>
                 ))}
                 
-                {/* Legend */}
-                <div className="absolute bottom-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-3 text-xs">
-                  <div className="font-semibold text-gray-900 dark:text-white mb-2">{t('map.legend.title')}</div>
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-[#00AFE6] rounded-full"></div>
-                      <span className="text-gray-700 dark:text-gray-300">{t('map.legend.hospitals')}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-[#00DD89] rounded-full"></div>
-                      <span className="text-gray-700 dark:text-gray-300">{t('map.legend.specialty')}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                      <span className="text-gray-700 dark:text-gray-300">{t('map.legend.research')}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                      <span className="text-gray-700 dark:text-gray-300">{t('map.legend.clinics')}</span>
-                    </div>
+              </div>
+              
+              {/* Legend - Moved outside map */}
+              <div className="mt-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-4 text-sm max-w-md mx-auto">
+                <div className="font-semibold text-gray-900 dark:text-white mb-3 text-center">{t('map.legend.title')}</div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-[#00AFE6] rounded-full border-2 border-white shadow-sm"></div>
+                    <span className="text-gray-700 dark:text-gray-300">{t('map.legend.hospitals')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-[#00DD89] rounded-full border-2 border-white shadow-sm"></div>
+                    <span className="text-gray-700 dark:text-gray-300">{t('map.legend.specialty')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-purple-500 rounded-full border-2 border-white shadow-sm"></div>
+                    <span className="text-gray-700 dark:text-gray-300">{t('map.legend.research')}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-orange-500 rounded-full border-2 border-white shadow-sm"></div>
+                    <span className="text-gray-700 dark:text-gray-300">{t('map.legend.clinics')}</span>
                   </div>
                 </div>
               </div>

@@ -10,11 +10,7 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      className={`w-10 h-10 hover:bg-white/10 dark:hover:bg-gray-700/50 transition-all duration-300 rounded-full ${
-        theme === 'light' 
-          ? 'text-gray-700 hover:text-gray-900' 
-          : 'text-white/80 hover:text-white'
-      }`}
+      className="w-10 h-10 hover:bg-white/10 text-white/80 hover:text-white transition-all duration-300 rounded-full"
       title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
       {theme === 'light' ? (

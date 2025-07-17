@@ -61,8 +61,8 @@ export default function Header() {
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-gray-900/80 dark:bg-gray-800/80 backdrop-blur-xl border-b border-white/10 dark:border-gray-700/50' 
-          : 'bg-transparent'
+          ? 'bg-gray-900/95 backdrop-blur-xl border-b border-white/10' 
+          : 'bg-gray-900/80 backdrop-blur-xl'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -88,7 +88,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-1 bg-white/20 dark:bg-gray-800/30 backdrop-blur-xl rounded-full px-2 py-2 border border-gray-200/30 dark:border-gray-700/50">
+            <div className="flex items-center gap-1 bg-white/10 backdrop-blur-xl rounded-full px-2 py-2 border border-white/20">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -96,11 +96,7 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className={`flex items-center gap-1 px-4 py-2 ${
-                        isScrolled 
-                          ? 'text-white/90 hover:text-white hover:bg-white/20 dark:hover:bg-gray-700/50' 
-                          : 'text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/20 dark:hover:bg-gray-700/50'
-                      } rounded-full transition-all duration-300 text-sm font-medium`}
+                      className="flex items-center gap-1 px-4 py-2 text-white/90 hover:text-white hover:bg-white/20 rounded-full transition-all duration-300 text-sm font-medium"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -112,11 +108,7 @@ export default function Header() {
                   ) : (
                     <motion.a
                       href={item.href}
-                      className={`flex items-center gap-1 px-4 py-2 ${
-                        isScrolled 
-                          ? 'text-white/90 hover:text-white hover:bg-white/20 dark:hover:bg-gray-700/50' 
-                          : 'text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/20 dark:hover:bg-gray-700/50'
-                      } rounded-full transition-all duration-300 text-sm font-medium`}
+                      className="flex items-center gap-1 px-4 py-2 text-white/90 hover:text-white hover:bg-white/20 rounded-full transition-all duration-300 text-sm font-medium"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -133,7 +125,7 @@ export default function Header() {
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
                       <motion.div
-                        className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-2xl border border-gray-200/30 dark:border-gray-700/50 shadow-2xl py-2"
+                        className="bg-gray-800/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl py-2"
                         initial={{ opacity: 0, y: -10, scale: 0.95 }}
                         animate={{ 
                           opacity: activeDropdown === item.name ? 1 : 0, 
@@ -146,7 +138,7 @@ export default function Header() {
                           <motion.a
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="block px-4 py-3 text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-700/50 transition-all duration-200 text-sm"
+                            className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700/50 transition-all duration-200 text-sm"
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ 
                               opacity: activeDropdown === item.name ? 1 : 0,
@@ -174,11 +166,7 @@ export default function Header() {
           >
             <LanguageSwitcher />
             <ThemeToggle />
-            <div className={`hidden lg:flex items-center gap-2 text-sm ${
-              isScrolled 
-                ? 'text-white/70 dark:text-gray-400' 
-                : 'text-gray-700 dark:text-gray-400'
-            }`}>
+            <div className="hidden lg:flex items-center gap-2 text-white/70 text-sm">
               <Phone className="w-4 h-4" />
               <span>1-800-AMYLOID</span>
             </div>
@@ -189,24 +177,16 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="lg:hidden p-2 rounded-xl bg-white/20 dark:bg-gray-800/30 backdrop-blur-xl border border-gray-200/30 dark:border-gray-700/50 hover:bg-white/30 dark:hover:bg-gray-700/50 transition-all duration-300"
+            className="lg:hidden p-2 rounded-xl bg-white/20 backdrop-blur-xl border border-white/20 hover:bg-white/30 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             {isMenuOpen ? (
-              <X className={`w-5 h-5 ${
-                isScrolled 
-                  ? 'text-white/90 dark:text-gray-300' 
-                  : 'text-gray-800 dark:text-gray-300'
-              }`} />
+              <X className="w-5 h-5 text-white/90" />
             ) : (
-              <Menu className={`w-5 h-5 ${
-                isScrolled 
-                  ? 'text-white/90 dark:text-gray-300' 
-                  : 'text-gray-800 dark:text-gray-300'
-              }`} />
+              <Menu className="w-5 h-5 text-white/90" />
             )}
           </motion.button>
         </div>
@@ -221,28 +201,20 @@ export default function Header() {
           }}
           transition={{ duration: 0.3 }}
         >
-          <div className="py-6 bg-white/20 dark:bg-gray-800/30 backdrop-blur-xl rounded-2xl mt-4 border border-gray-200/30 dark:border-gray-700/50">
+          <div className="py-6 bg-gray-800/90 backdrop-blur-xl rounded-2xl mt-4 border border-white/20">
             <div className="space-y-2 px-4">
               {navItems.map((item) => (
                 <div key={item.name} className="space-y-1">
                   {item.hasDropdown ? (
                     <>
-                      <div className={`px-4 py-2 font-medium text-sm border-b border-gray-200/30 dark:border-gray-700/50 ${
-                        isScrolled 
-                          ? 'text-white/90 dark:text-gray-300' 
-                          : 'text-gray-800 dark:text-gray-300'
-                      }`}>
+                      <div className="px-4 py-2 font-medium text-sm border-b border-white/20 text-white/90">
                         {item.name}
                       </div>
                       {item.dropdownItems?.map((dropdownItem) => (
                         <a
                           key={dropdownItem.name}
                           href={dropdownItem.href}
-                          className={`block px-6 py-2 rounded-lg transition-all duration-300 text-sm ${
-                            isScrolled 
-                              ? 'text-white/80 dark:text-gray-400 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-gray-700/50' 
-                              : 'text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white/10 dark:hover:bg-gray-700/50'
-                          }`}
+                          className="block px-6 py-2 rounded-lg transition-all duration-300 text-sm text-white/80 hover:text-white hover:bg-white/10"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {dropdownItem.name}
@@ -252,11 +224,7 @@ export default function Header() {
                   ) : (
                     <a
                       href={item.href}
-                      className={`block px-4 py-3 font-medium text-sm rounded-lg transition-all duration-300 ${
-                        isScrolled 
-                          ? 'text-white/90 dark:text-gray-300 hover:bg-white/10 dark:hover:bg-gray-700/50' 
-                          : 'text-gray-800 dark:text-gray-300 hover:bg-white/10 dark:hover:bg-gray-700/50'
-                      }`}
+                      className="block px-4 py-3 font-medium text-sm rounded-lg transition-all duration-300 text-white/90 hover:bg-white/10"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -265,13 +233,9 @@ export default function Header() {
                 </div>
               ))}
             </div>
-            <div className="px-4 pt-4 border-t border-gray-200/30 dark:border-gray-700/50 mt-4">
+            <div className="px-4 pt-4 border-t border-white/20 mt-4">
               <div className="flex items-center justify-between mb-3">
-                <div className={`flex items-center gap-2 text-sm ${
-                  isScrolled 
-                    ? 'text-white/70 dark:text-gray-400' 
-                    : 'text-gray-700 dark:text-gray-400'
-                }`}>
+                <div className="flex items-center gap-2 text-sm text-white/70">
                   <Phone className="w-4 h-4" />
                   <span>1-800-AMYLOID</span>
                 </div>

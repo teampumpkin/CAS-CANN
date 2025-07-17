@@ -185,9 +185,25 @@ export default function EventsNewsletterSection() {
                     transition={{ duration: 0.6, delay: 0.1 * index }}
                     whileHover={{ y: -5 }}
                   >
-                    <div className="bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-white/20 group-hover:border-[#00AFE6]/40 dark:group-hover:border-white/40 transition-all duration-300">
+                    <div className={`backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl ${
+                      index === 0 
+                        ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200/60 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/35 dark:hover:to-cyan-800/35 hover:border-blue-300/70 dark:hover:border-blue-300/40 hover:shadow-blue-500/25 dark:hover:shadow-blue-400/20'
+                        : index === 1
+                        ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200/60 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300/70 dark:hover:border-emerald-300/40 hover:shadow-emerald-500/25 dark:hover:shadow-emerald-400/20'
+                        : index === 2
+                        ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/60 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/70 dark:hover:border-purple-300/40 hover:shadow-purple-500/25 dark:hover:shadow-purple-400/20'
+                        : 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/60 dark:border-orange-400/30 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/35 dark:hover:to-amber-800/35 hover:border-orange-300/70 dark:hover:border-orange-300/40 hover:shadow-orange-500/25 dark:hover:shadow-orange-400/20'
+                    }`}>
                       <div className="text-2xl mb-2">{stat.icon}</div>
-                      <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+                      <div className={`text-3xl font-bold mb-1 ${
+                        index === 0 
+                          ? 'text-blue-900 dark:text-blue-100'
+                          : index === 1
+                          ? 'text-emerald-900 dark:text-emerald-100'
+                          : index === 2
+                          ? 'text-purple-900 dark:text-purple-100'
+                          : 'text-orange-900 dark:text-orange-100'
+                      }`}>
                         <motion.span
                           initial={{ opacity: 0 }}
                           whileInView={{ opacity: 1 }}
@@ -196,7 +212,15 @@ export default function EventsNewsletterSection() {
                           {stat.value}{stat.suffix}
                         </motion.span>
                       </div>
-                      <div className="text-gray-700 dark:text-white/70 text-sm font-medium">{stat.label}</div>
+                      <div className={`text-sm font-medium ${
+                        index === 0 
+                          ? 'text-blue-700 dark:text-blue-300'
+                          : index === 1
+                          ? 'text-emerald-700 dark:text-emerald-300'
+                          : index === 2
+                          ? 'text-purple-700 dark:text-purple-300'
+                          : 'text-orange-700 dark:text-orange-300'
+                      }`}>{stat.label}</div>
                     </div>
                   </motion.div>
                 ))}
@@ -256,7 +280,17 @@ export default function EventsNewsletterSection() {
                     className="mt-12"
                     whileHover={{ scale: 1.02, y: -8 }}
                   >
-                    <div className="group relative bg-white/95 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/20 dark:border-white/10 hover:border-[#00AFE6]/40 dark:hover:border-white/30 transition-all duration-500 hover:bg-white/98 dark:hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20 overflow-hidden min-h-[400px]">
+                    <div className={`group relative backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 hover:shadow-2xl overflow-hidden min-h-[400px] ${
+                      index === 0 
+                        ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200/60 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/35 dark:hover:to-cyan-800/35 hover:border-blue-300/70 dark:hover:border-blue-300/40 hover:shadow-blue-500/25 dark:hover:shadow-blue-400/20'
+                        : index === 1
+                        ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200/60 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300/70 dark:hover:border-emerald-300/40 hover:shadow-emerald-500/25 dark:hover:shadow-emerald-400/20'
+                        : index === 2
+                        ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/60 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/70 dark:hover:border-purple-300/40 hover:shadow-purple-500/25 dark:hover:shadow-purple-400/20'
+                        : index === 3
+                        ? 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200/60 dark:border-pink-400/30 hover:from-pink-100/95 hover:to-rose-100/95 dark:hover:from-pink-800/35 dark:hover:to-rose-800/35 hover:border-pink-300/70 dark:hover:border-pink-300/40 hover:shadow-pink-500/25 dark:hover:shadow-pink-400/20'
+                        : 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/60 dark:border-orange-400/30 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/35 dark:hover:to-amber-800/35 hover:border-orange-300/70 dark:hover:border-orange-300/40 hover:shadow-orange-500/25 dark:hover:shadow-orange-400/20'
+                    }`}>
                       {/* Animated glow effect */}
                       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
                       
@@ -287,25 +321,65 @@ export default function EventsNewsletterSection() {
                                 {event.type}
                               </span>
                             </div>
-                            <h4 className="text-xl font-bold text-gray-900 dark:text-white font-rosarivo leading-tight">
+                            <h4 className={`text-xl font-bold font-rosarivo leading-tight ${
+                              index === 0 
+                                ? 'text-blue-900 dark:text-blue-100'
+                                : index === 1
+                                ? 'text-emerald-900 dark:text-emerald-100'
+                                : index === 2
+                                ? 'text-purple-900 dark:text-purple-100'
+                                : index === 3
+                                ? 'text-pink-900 dark:text-pink-100'
+                                : 'text-orange-900 dark:text-orange-100'
+                            }`}>
                               {event.title}
                             </h4>
                           </div>
                         </div>
 
                         {/* Date */}
-                        <div className="text-gray-600 dark:text-white/60 text-sm mb-4 font-medium">
+                        <div className={`text-sm mb-4 font-medium ${
+                          index === 0 
+                            ? 'text-blue-600 dark:text-blue-400'
+                            : index === 1
+                            ? 'text-emerald-600 dark:text-emerald-400'
+                            : index === 2
+                            ? 'text-purple-600 dark:text-purple-400'
+                            : index === 3
+                            ? 'text-pink-600 dark:text-pink-400'
+                            : 'text-orange-600 dark:text-orange-400'
+                        }`}>
                           {event.date}
                         </div>
 
                         {/* Description */}
-                        <p className="text-gray-700 dark:text-white/70 text-sm leading-relaxed mb-8 flex-1">
+                        <p className={`text-sm leading-relaxed mb-8 flex-1 ${
+                          index === 0 
+                            ? 'text-blue-700 dark:text-blue-300'
+                            : index === 1
+                            ? 'text-emerald-700 dark:text-emerald-300'
+                            : index === 2
+                            ? 'text-purple-700 dark:text-purple-300'
+                            : index === 3
+                            ? 'text-pink-700 dark:text-pink-300'
+                            : 'text-orange-700 dark:text-orange-300'
+                        }`}>
                           {event.description}
                         </p>
 
                         {/* Footer */}
                         <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/10 mt-auto">
-                          <div className="flex items-center gap-2 text-gray-600 dark:text-white/60 text-sm">
+                          <div className={`flex items-center gap-2 text-sm ${
+                            index === 0 
+                              ? 'text-blue-600 dark:text-blue-400'
+                              : index === 1
+                              ? 'text-emerald-600 dark:text-emerald-400'
+                              : index === 2
+                              ? 'text-purple-600 dark:text-purple-400'
+                              : index === 3
+                              ? 'text-pink-600 dark:text-pink-400'
+                              : 'text-orange-600 dark:text-orange-400'
+                          }`}>
                             <Users className="w-4 h-4" />
                             <span>{event.attendees}</span>
                           </div>

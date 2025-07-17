@@ -430,7 +430,15 @@ export default function About() {
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 group"
+                className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl ${
+                  index === 0 
+                    ? 'bg-gradient-to-br from-pink-900/25 to-rose-900/25 border-pink-400/30 hover:from-pink-800/35 hover:to-rose-800/35 hover:border-pink-300/40 hover:shadow-pink-500/25'
+                    : index === 1
+                    ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30 hover:from-emerald-800/35 hover:to-green-800/35 hover:border-emerald-300/40 hover:shadow-emerald-500/25'
+                    : index === 2
+                    ? 'bg-gradient-to-br from-blue-900/25 to-indigo-900/25 border-blue-400/30 hover:from-blue-800/35 hover:to-indigo-800/35 hover:border-blue-300/40 hover:shadow-blue-500/25'
+                    : 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30 hover:from-purple-800/35 hover:to-violet-800/35 hover:border-purple-300/40 hover:shadow-purple-500/25'
+                }`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -441,8 +449,24 @@ export default function About() {
                     <value.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-3 font-rosarivo">{value.title}</h3>
-                    <p className="text-white/70 leading-relaxed">{value.description}</p>
+                    <h3 className={`text-xl font-semibold mb-3 font-rosarivo ${
+                      index === 0 
+                        ? 'text-pink-100'
+                        : index === 1
+                        ? 'text-emerald-100'
+                        : index === 2
+                        ? 'text-blue-100'
+                        : 'text-purple-100'
+                    }`}>{value.title}</h3>
+                    <p className={`leading-relaxed ${
+                      index === 0 
+                        ? 'text-pink-300'
+                        : index === 1
+                        ? 'text-emerald-300'
+                        : index === 2
+                        ? 'text-blue-300'
+                        : 'text-purple-300'
+                    }`}>{value.description}</p>
                   </div>
                 </div>
               </motion.div>

@@ -10,6 +10,26 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Complete Card Background Enhancement (July 17, 2025)
+- ✅ Enhanced all card backgrounds across the entire website to be properly visible in both light and dark themes
+- ✅ Applied colorful glassmorphism with theme-aware backgrounds:
+  - Blue gradient: `bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25`
+  - Green gradient: `bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25`
+  - Purple gradient: `bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25`
+  - Pink gradient: `bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25`
+  - Orange gradient: `bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25`
+- ✅ Updated text colors to match themed backgrounds for better readability
+- ✅ Enhanced all 12 different card types across components:
+  - EventsNewsletterSection: Statistics and event cards
+  - AboutAmyloidosisSection: Medical type cards
+  - QuickLinksSection: Quick action cards
+  - FeaturedSpotlights: News and story cards
+  - About page: Values cards
+  - DirectoryPreviewSection: Feature and statistics cards (previously completed)
+- ✅ Fixed the "all white" appearance problem in light theme
+- ✅ Maintained consistent hover effects and shadows with theme-aware colors
+- ✅ Applied color-coded theming system for better visual hierarchy
+
 ### Spanish Language Support Implementation (July 17, 2025)
 - ✅ Created comprehensive LanguageContext with English and Spanish translations
 - ✅ Added language switcher in navbar with globe icon and EN/ES dropdown

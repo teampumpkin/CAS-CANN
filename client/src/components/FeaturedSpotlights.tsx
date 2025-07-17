@@ -108,7 +108,15 @@ export default function FeaturedSpotlights() {
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
               >
-                <div className="grid lg:grid-cols-12 gap-0 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden">
+                <div className={`grid lg:grid-cols-12 gap-0 backdrop-blur-xl border rounded-3xl overflow-hidden ${
+                  currentIndex === 0 
+                    ? 'bg-gradient-to-br from-pink-900/25 to-rose-900/25 border-pink-400/30'
+                    : currentIndex === 1
+                    ? 'bg-gradient-to-br from-blue-900/25 to-indigo-900/25 border-blue-400/30'
+                    : currentIndex === 2
+                    ? 'bg-gradient-to-br from-green-900/25 to-emerald-900/25 border-green-400/30'
+                    : 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30'
+                }`}>
                   {/* Content Side */}
                   <div className="lg:col-span-7 p-12 lg:p-16 flex items-center">
                     <div className="w-full">

@@ -88,7 +88,15 @@ export default function AboutAmyloidosisSection() {
           {amyloidosisTypes.map((type, index) => (
             <motion.div
               key={type.name}
-              className="group relative bg-white/95 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/30 dark:border-white/10 hover:border-[#00AFE6]/50 dark:hover:border-white/30 transition-all duration-500 hover:bg-white/98 dark:hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/25 shadow-lg shadow-blue-100/50 dark:shadow-none"
+              className={`group relative backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 hover:shadow-2xl ${
+                index === 0 
+                  ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200/60 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/35 dark:hover:to-cyan-800/35 hover:border-blue-300/70 dark:hover:border-blue-300/40 hover:shadow-blue-500/25 dark:hover:shadow-blue-400/20'
+                  : index === 1
+                  ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200/60 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300/70 dark:hover:border-emerald-300/40 hover:shadow-emerald-500/25 dark:hover:shadow-emerald-400/20'
+                  : index === 2
+                  ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/60 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/70 dark:hover:border-purple-300/40 hover:shadow-purple-500/25 dark:hover:shadow-purple-400/20'
+                  : 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/60 dark:border-orange-400/30 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/35 dark:hover:to-amber-800/35 hover:border-orange-300/70 dark:hover:border-orange-300/40 hover:shadow-orange-500/25 dark:hover:shadow-orange-400/20'
+              }`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.15 }}
@@ -113,10 +121,26 @@ export default function AboutAmyloidosisSection() {
                   <div className="w-6 h-6 bg-white rounded-full"></div>
                 </div>
                 
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-gray-800 dark:group-hover:text-white/90 transition-colors duration-300">
+                <h3 className={`text-xl font-bold mb-4 transition-colors duration-300 ${
+                  index === 0 
+                    ? 'text-blue-900 dark:text-blue-100 group-hover:text-blue-800 dark:group-hover:text-blue-50'
+                    : index === 1
+                    ? 'text-emerald-900 dark:text-emerald-100 group-hover:text-emerald-800 dark:group-hover:text-emerald-50'
+                    : index === 2
+                    ? 'text-purple-900 dark:text-purple-100 group-hover:text-purple-800 dark:group-hover:text-purple-50'
+                    : 'text-orange-900 dark:text-orange-100 group-hover:text-orange-800 dark:group-hover:text-orange-50'
+                }`}>
                   {type.name}
                 </h3>
-                <p className="text-gray-700 dark:text-white/70 text-sm mb-6 leading-relaxed group-hover:text-gray-600 dark:group-hover:text-white/80 transition-colors duration-300">
+                <p className={`text-sm mb-6 leading-relaxed transition-colors duration-300 ${
+                  index === 0 
+                    ? 'text-blue-700 dark:text-blue-300 group-hover:text-blue-600 dark:group-hover:text-blue-200'
+                    : index === 1
+                    ? 'text-emerald-700 dark:text-emerald-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-200'
+                    : index === 2
+                    ? 'text-purple-700 dark:text-purple-300 group-hover:text-purple-600 dark:group-hover:text-purple-200'
+                    : 'text-orange-700 dark:text-orange-300 group-hover:text-orange-600 dark:group-hover:text-orange-200'
+                }`}>
                   {type.description}
                 </p>
                 <div className={`text-transparent bg-clip-text bg-gradient-to-r ${type.gradient} text-sm font-bold`}>

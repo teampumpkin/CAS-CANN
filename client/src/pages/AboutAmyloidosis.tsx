@@ -428,22 +428,7 @@ export default function AboutAmyloidosis() {
             ))}
           </div>
 
-          {/* Emergency CTA */}
-          <motion.div
-            className="bg-gradient-to-r from-red-500/20 to-orange-500/20 backdrop-blur-xl rounded-2xl p-8 border border-red-500/30 mt-12 text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <AlertTriangle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">If you experience multiple symptoms from different categories</h3>
-            <p className="text-gray-700 dark:text-white/80 mb-6">Contact your healthcare provider immediately or visit an emergency department. Early diagnosis can be life-saving.</p>
-            <Link href="/directory" className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-300">
-              <Hospital className="w-5 h-5" />
-              Find Emergency Care
-            </Link>
-          </motion.div>
+          
         </div>
       </section>
 

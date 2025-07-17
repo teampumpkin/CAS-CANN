@@ -65,8 +65,10 @@ export default function AboutAmyloidosisSection() {
             <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Medical Information</span>
           </motion.div>
 
-          <h2 className="crawford-section-title text-gray-900 dark:text-white mb-8">
-            What is Amyloidosis?
+          <h2 className="crawford-section-title mb-8">
+            <span className="text-gray-900 dark:text-white">What is </span>
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Amyloidosis</span>
+            <span className="text-gray-900 dark:text-white">?</span>
           </h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-xl text-gray-700 dark:text-white/80 leading-relaxed mb-4">
@@ -148,8 +150,9 @@ export default function AboutAmyloidosisSection() {
           
           <div className="relative grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h3 className="crawford-section-title text-gray-900 dark:text-white mb-8 text-left">
-                Early Detection Saves Lives
+              <h3 className="crawford-section-title mb-8 text-left">
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Early Detection</span>
+                <span className="text-gray-900 dark:text-white"> Saves Lives</span>
               </h3>
               <div className="space-y-6 mb-10">
                 <p className="text-xl text-gray-700 dark:text-white/80 leading-relaxed">

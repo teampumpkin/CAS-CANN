@@ -52,11 +52,11 @@ export default function WelcomeSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Welcome to the{" "}
+              <span className="text-gray-900 dark:text-white">Welcome to the </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent">
                 Canadian Amyloidosis Society
               </span>
-              {" "}(CAS)
+              <span className="text-gray-900 dark:text-white"> (CAS)</span>
             </motion.h2>
 
             {/* Premium description with enhanced styling */}

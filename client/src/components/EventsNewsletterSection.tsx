@@ -62,8 +62,10 @@ export default function EventsNewsletterSection() {
             <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Stay Connected</span>
           </motion.div>
           
-          <h2 className="crawford-section-title text-gray-900 dark:text-white mb-8">
-            Events & Newsletter
+          <h2 className="crawford-section-title mb-8">
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Events</span>
+            <span className="text-gray-900 dark:text-white"> & </span>
+            <span className="bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">Newsletter</span>
           </h2>
           
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">

@@ -80,8 +80,9 @@ export default function QuickLinksSection() {
             <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Quick Access</span>
           </motion.div>
 
-          <h2 className="crawford-section-title text-gray-900 dark:text-white mb-8">
-            Essential Resources
+          <h2 className="crawford-section-title mb-8">
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Essential</span>
+            <span className="text-gray-900 dark:text-white"> Resources</span>
           </h2>
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
             Quick access to the most important tools and information for patients, families, and healthcare professionals.

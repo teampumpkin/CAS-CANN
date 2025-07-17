@@ -4,6 +4,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import EnhancedScrollIndicator from "@/components/EnhancedScrollIndicator";
 
 import Header from "@/components/Header";
@@ -50,17 +51,19 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <TooltipProvider>
-          <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-            <Header />
+        <LanguageProvider>
+          <TooltipProvider>
+            <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+              <Header />
             <div className="pt-24">
               <Router />
             </div>
             <Footer />
+            <EnhancedScrollIndicator />
           </div>
           <Toaster />
-          <EnhancedScrollIndicator />
         </TooltipProvider>
+        </LanguageProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

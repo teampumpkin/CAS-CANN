@@ -3,15 +3,18 @@ import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import casLogo from '@assets/image 1_1750236540297.png';
 import { ThemeToggle } from './ThemeToggle';
+import { LanguageSwitcher } from './LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   const navItems = [
     {
-      name: 'About',
+      name: t('nav.about'),
       href: '#about',
       hasDropdown: true,
       dropdownItems: [
@@ -21,7 +24,7 @@ export default function Header() {
       ]
     },
     {
-      name: 'Resources',
+      name: t('nav.resources'),
       href: '#resources',
       hasDropdown: true,
       dropdownItems: [
@@ -31,7 +34,7 @@ export default function Header() {
       ]
     },
     {
-      name: 'Get Involved',
+      name: t('nav.community'),
       href: '#get-involved',
       hasDropdown: true,
       dropdownItems: [
@@ -40,7 +43,7 @@ export default function Header() {
       ]
     },
     {
-      name: 'Contact Us',
+      name: t('nav.contact'),
       href: '/contact',
       hasDropdown: false,
     },
@@ -161,13 +164,14 @@ export default function Header() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
+            <LanguageSwitcher />
             <ThemeToggle />
             <div className="hidden lg:flex items-center gap-2 text-white/70 dark:text-gray-400 text-sm">
               <Phone className="w-4 h-4" />
               <span>1-800-AMYLOID</span>
             </div>
             <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-2 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
-              Get Support
+              {t('nav.getHelp')}
             </button>
           </motion.div>
 

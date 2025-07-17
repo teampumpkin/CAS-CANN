@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion';
 import { MapPin, Upload, BookOpen, Users } from 'lucide-react';
 import heroBackgroundImage from '@assets/shutterstock_2324709287_1750240360296.jpg';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Hero() {
+  const { t } = useLanguage();
+  
   const quickTiles = [
-    { icon: MapPin, label: 'Directory', href: '#directory' },
+    { icon: MapPin, label: t('nav.directory'), href: '#directory' },
     { icon: Upload, label: 'Upload', href: '#upload' },
     { icon: BookOpen, label: 'Learn', href: '#learn' },
     { icon: Users, label: 'Join', href: '#join' }
@@ -64,7 +67,7 @@ export default function Hero() {
               transition={{ duration: 0.8 }}
             >
               <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
-              <span className="text-gray-800 dark:text-white/90 font-medium tracking-wide">Transforming Amyloidosis Care in Canada</span>
+              <span className="text-gray-800 dark:text-white/90 font-medium tracking-wide">{t('hero.badge')}</span>
             </motion.div>
 
             {/* Main headline */}
@@ -74,7 +77,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
             >
-              <span className="block">Canadian</span>
+              <span className="block">{t('hero.title.canadian')}</span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] relative">
                 <motion.span
                   animate={{ 
@@ -88,10 +91,10 @@ export default function Hero() {
                     WebkitTextFillColor: "transparent"
                   }}
                 >
-                  Amyloidosis
+                  {t('hero.title.amyloidosis')}
                 </motion.span>
               </span>
-              <span className="block">Society</span>
+              <span className="block">{t('hero.title.society')}</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -101,7 +104,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
             >
-              Accelerating awareness, diagnosis, and care
+{t('hero.subtitle')}
             </motion.p>
 
             {/* Enhanced action buttons */}
@@ -114,7 +117,7 @@ export default function Hero() {
               <button className="group relative bg-white text-gray-900 px-8 py-4 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative flex items-center gap-2 group-hover:text-white">
-                  Get Started
+{t('hero.getStarted')}
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -123,7 +126,7 @@ export default function Hero() {
               
               <button className="group bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-semibold text-lg border border-white/30 hover:border-white/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                 <span className="flex items-center gap-2">
-                  Learn More
+{t('hero.learnMore')}
                   <svg className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>

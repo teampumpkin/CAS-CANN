@@ -24,6 +24,7 @@
 }
 
 :root {
+  /* Light Theme - Medical Professional */
   --background: hsl(197, 30%, 98%);
   --foreground: hsl(0, 0%, 9%);
   --card: hsl(197, 40%, 99%);
@@ -48,9 +49,16 @@
   /* CAS Brand Colors */
   --cas-blue: #00AFE6;
   --cas-green: #00DD89;
+  
+  /* Light Theme Specific Variables */
+  --section-bg: hsl(197, 25%, 97%);
+  --card-border: hsl(197, 40%, 85%);
+  --gradient-from: hsl(197, 50%, 96%);
+  --gradient-to: hsl(158, 50%, 96%);
 }
 
 .dark {
+  /* Dark Theme - Professional Medical */
   --background: hsl(224, 71%, 4%);
   --foreground: hsl(213, 31%, 91%);
   --card: hsl(224, 71%, 4%);
@@ -74,6 +82,12 @@
   /* CAS Brand Colors (same in dark mode) */
   --cas-blue: #00AFE6;
   --cas-green: #00DD89;
+  
+  /* Dark Theme Specific Variables */
+  --section-bg: hsl(224, 71%, 6%);
+  --card-border: hsl(215, 27%, 20%);
+  --gradient-from: hsl(224, 71%, 8%);
+  --gradient-to: hsl(224, 71%, 8%);
 }
 
 @layer components {

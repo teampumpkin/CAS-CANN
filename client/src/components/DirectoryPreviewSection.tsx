@@ -55,7 +55,7 @@ export default function DirectoryPreviewSection() {
   ];
 
   return (
-    <section className="py-12 bg-gradient-to-br from-[#00DD89]/4 via-gray-50 to-[#00AFE6]/4 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
+    <section className="py-8 bg-gradient-to-br from-[#00DD89]/4 via-gray-50 to-[#00AFE6]/4 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#00DD89]/6 via-gray-50 to-[#00AFE6]/6 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/15 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
@@ -64,47 +64,47 @@ export default function DirectoryPreviewSection() {
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-8"
+          className="text-center mb-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-4 py-2 rounded-full text-sm font-medium mb-4 border border-[#00AFE6]/30">
-            <MapPin className="w-4 h-4" />
+          <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-3 py-1 rounded-full text-xs font-medium mb-3 border border-[#00AFE6]/30">
+            <MapPin className="w-3 h-3" />
             <span>{t('directory.badge')}</span>
           </div>
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 font-rosarivo">
+          <h2 className="text-2xl lg:text-3xl font-bold mb-3 font-rosarivo">
             <span className="text-gray-900 dark:text-white">{t('directory.title.find')} </span>
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('directory.title.specialized')}</span>
             <span className="text-gray-900 dark:text-white"> Across Canada</span>
           </h2>
-          <p className="text-lg text-gray-700 dark:text-white/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm text-gray-700 dark:text-white/70 max-w-xl mx-auto leading-relaxed">
             {t('directory.subtitle')}
           </p>
         </motion.div>
 
-        {/* Canada Network Stats - Compact Layout */}
+        {/* Canada Network Stats - Ultra Compact Layout */}
         <motion.div
-          className="bg-gradient-to-br from-white/95 to-white/90 dark:from-white/10 dark:to-white/5 backdrop-blur-xl rounded-3xl p-6 border border-[#00AFE6]/20 dark:border-white/20 mb-6"
+          className="bg-gradient-to-br from-white/95 to-white/90 dark:from-white/10 dark:to-white/5 backdrop-blur-xl rounded-2xl p-4 border border-[#00AFE6]/20 dark:border-white/20 mb-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="grid lg:grid-cols-5 gap-6 items-center">
-            {/* Map Visualization - Larger */}
+          <div className="grid lg:grid-cols-5 gap-4 items-center justify-center">
+            {/* Map Visualization - Compact */}
             <div className="lg:col-span-3 relative">
-              <div className="text-center mb-4">
-                <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-3 py-1 rounded-full text-xs font-medium mb-3 border border-[#00AFE6]/30">
-                  <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse" />
+              <div className="text-center mb-3">
+                <div className="inline-flex items-center gap-1 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-2 py-1 rounded-full text-xs font-medium mb-2 border border-[#00AFE6]/30">
+                  <div className="w-1 h-1 bg-[#00AFE6] rounded-full animate-pulse" />
                   <span>{t('directory.nationalNetwork')}</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 font-rosarivo">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 font-rosarivo">
                   {t('directory.canadaWide')}
                 </h3>
                 <p className="text-gray-700 dark:text-white/70 text-xs">{t('directory.connectingHealthcare')}</p>
               </div>
               
-              <div className="relative w-full max-w-3xl mx-auto">
+              <div className="relative w-full max-w-2xl mx-auto">
                 <img 
                   src={canadaMapPath}
                   alt="Canada Map showing healthcare network coverage"
@@ -165,82 +165,82 @@ export default function DirectoryPreviewSection() {
                 
               </div>
               
-              {/* Legend - Compact design */}
-              <div className="mt-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-3 text-xs max-w-lg mx-auto">
-                <div className="font-semibold text-gray-900 dark:text-white mb-2 text-center">{t('map.legend.title')}</div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-[#00AFE6] rounded-full border border-white shadow-sm flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300">{t('map.legend.hospitals')}</span>
+              {/* Legend - Ultra Compact design */}
+              <div className="mt-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-2 text-xs max-w-md mx-auto">
+                <div className="font-semibold text-gray-900 dark:text-white mb-1 text-center text-xs">{t('map.legend.title')}</div>
+                <div className="grid grid-cols-2 gap-1 text-xs">
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-[#00AFE6] rounded-full border border-white shadow-sm flex-shrink-0"></div>
+                    <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.hospitals')}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-[#00DD89] rounded-full border border-white shadow-sm flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300">{t('map.legend.specialty')}</span>
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-[#00DD89] rounded-full border border-white shadow-sm flex-shrink-0"></div>
+                    <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.specialty')}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-purple-500 rounded-full border border-white shadow-sm flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300">{t('map.legend.research')}</span>
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full border border-white shadow-sm flex-shrink-0"></div>
+                    <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.research')}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full border border-white shadow-sm flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300">{t('map.legend.clinics')}</span>
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full border border-white shadow-sm flex-shrink-0"></div>
+                    <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.clinics')}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Statistics Display - Compact Layout */}
-            <div className="lg:col-span-2 space-y-6">
+            {/* Statistics Display - Ultra Compact Layout */}
+            <div className="lg:col-span-2 space-y-4">
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">{t('directory.networkReach')}</h3>
-                <div className="grid grid-cols-2 gap-3">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 font-rosarivo">{t('directory.networkReach')}</h3>
+                <div className="grid grid-cols-2 gap-2">
                   <motion.div
-                    className="text-center p-4 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
+                    className="text-center p-3 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-lg border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     whileHover={{ scale: 1.02 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent mb-1">
+                    <div className="text-xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent mb-1">
                       150+
                     </div>
                     <div className="text-gray-700 dark:text-white/70 text-xs font-medium">{t('directory.healthcareProviders')}</div>
                   </motion.div>
                   
                   <motion.div
-                    className="text-center p-4 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
+                    className="text-center p-3 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-lg border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
                     whileHover={{ scale: 1.02 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00BB77] bg-clip-text text-transparent mb-1">
+                    <div className="text-xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00BB77] bg-clip-text text-transparent mb-1">
                       13
                     </div>
                     <div className="text-gray-700 dark:text-white/70 text-xs font-medium">{t('directory.provincesAndTerritories')}</div>
                   </motion.div>
                   
                   <motion.div
-                    className="text-center p-4 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
+                    className="text-center p-3 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-lg border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
                     whileHover={{ scale: 1.02 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-purple-700 bg-clip-text text-transparent mb-1">
+                    <div className="text-xl font-bold bg-gradient-to-r from-purple-500 to-purple-700 bg-clip-text text-transparent mb-1">
                       25+
                     </div>
                     <div className="text-gray-700 dark:text-white/70 text-xs font-medium">{t('directory.majorCities')}</div>
                   </motion.div>
                   
                   <motion.div
-                    className="text-center p-4 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
+                    className="text-center p-3 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-lg border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
                     whileHover={{ scale: 1.02 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent mb-1">
+                    <div className="text-xl font-bold bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent mb-1">
                       500+
                     </div>
                     <div className="text-gray-700 dark:text-white/70 text-xs font-medium">{t('directory.resourcesAvailable')}</div>
@@ -249,15 +249,15 @@ export default function DirectoryPreviewSection() {
               </div>
               
               {/* Call to Action */}
-              <div className="pt-4">
+              <div className="pt-2">
                 <motion.button 
-                  className="w-full bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-lg transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg transition-all duration-300"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <div className="flex items-center justify-center gap-2">
                     <span>Browse Directory</span>
-                    <Search className="w-4 h-4" />
+                    <Search className="w-3 h-3" />
                   </div>
                 </motion.button>
               </div>

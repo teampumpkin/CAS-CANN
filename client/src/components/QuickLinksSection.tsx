@@ -136,15 +136,13 @@ export default function QuickLinksSection() {
                       {/* Status Indicator */}
                       <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                        <span className="text-xs text-gray-700 dark:text-white/60 font-medium">Available</span>
+                        <span className="text-xs text-gray-700 dark:text-white/60 font-medium">{t('quickLinks.available')}</span>
                       </div>
                     </div>
                     
                     {/* Text Content */}
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gray-800 dark:group-hover:text-white/95 transition-colors duration-300 font-rosarivo">
-                        {link.title}
-                      </h3>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-gray-800 dark:group-hover:text-white/95 transition-colors duration-300 font-rosarivo">{link.title}</h3>
                       <p className="text-gray-700 dark:text-white/60 leading-relaxed text-sm group-hover:text-gray-600 dark:group-hover:text-white/75 transition-colors duration-300">
                         {link.description}
                       </p>
@@ -154,7 +152,7 @@ export default function QuickLinksSection() {
                     <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/10">
                       {/* Action Text */}
                       <div className={`text-transparent bg-clip-text bg-gradient-to-r ${link.gradient} font-semibold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0`}>
-                        Access Now
+                        {t('quickLinks.accessNow')}
                       </div>
                       
                       {/* Action Button */}
@@ -184,15 +182,15 @@ export default function QuickLinksSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <p className="text-gray-600 mb-6">
-            Need help finding what you're looking for?
+          <p className="text-gray-600 dark:text-white/60 mb-6">
+            {t('quickLinks.needHelp')}
           </p>
           <motion.button
             className="group inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl border border-gray-200 hover:border-gray-300 transition-all duration-300"
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
-            <span>Contact Support</span>
+            <span>{t('quickLinks.contactSupport')}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
           </motion.button>
         </motion.div>

@@ -138,6 +138,10 @@ const translations = {
     'quickLinks.getInvolvedDesc': 'Volunteer, donate, or advocate with us',
     'quickLinks.events': 'Events',
     'quickLinks.eventsDesc': 'Upcoming conferences and webinars',
+    'quickLinks.available': 'Available',
+    'quickLinks.accessNow': 'Access Now',
+    'quickLinks.needHelp': "Need help finding what you're looking for?",
+    'quickLinks.contactSupport': 'Contact Support',
     
     // Footer
     'footer.aboutUs': 'About Us',
@@ -286,6 +290,10 @@ const translations = {
     'quickLinks.getInvolvedDesc': 'Voluntariado, donar o abogar con nosotros',
     'quickLinks.events': 'Eventos',
     'quickLinks.eventsDesc': 'Próximas conferencias y webinarios',
+    'quickLinks.available': 'Disponible',
+    'quickLinks.accessNow': 'Acceder Ahora',
+    'quickLinks.needHelp': '¿Necesita ayuda para encontrar lo que busca?',
+    'quickLinks.contactSupport': 'Contactar Soporte',
     
     // Footer
     'footer.aboutUs': 'Acerca de Nosotros',

@@ -76,32 +76,18 @@ export default function AboutAmyloidosis() {
       warningSign: 'Heart failure in elderly men or family history with neuropathy'
     },
     {
-      id: 'aa',
-      type: 'AA (Secondary) Amyloidosis',
-      subtitle: 'Caused by chronic inflammatory conditions',
-      icon: Droplets,
-      color: 'from-green-500 to-emerald-500',
-      borderColor: 'border-green-500/30',
-      prevalence: '5% of systemic amyloidosis cases',
-      urgency: 'Moderate - Depends on underlying condition control',
-      symptoms: ['Kidney dysfunction', 'Protein in urine', 'Joint pain and swelling', 'Chronic fatigue'],
-      diagnosis: ['SAA blood levels', 'Kidney or fat pad biopsy', 'Congo red staining', 'Assessment of inflammatory condition'],
-      treatment: ['Control underlying inflammatory disease', 'Anti-inflammatory biologics', 'Kidney support therapy', 'Treatment of rheumatoid arthritis, IBD, or infections'],
-      warningSign: 'Kidney problems in patients with chronic inflammatory diseases'
-    },
-    {
       id: 'other',
       type: 'Other Amyloidosis Types',
-      subtitle: 'Localized, Dialysis-Related, and Rare Forms',
+      subtitle: 'AA (Secondary), Localized, Dialysis-Related, and Rare Forms',
       icon: Microscope,
       color: 'from-purple-500 to-violet-500',
       borderColor: 'border-purple-500/30',
-      prevalence: 'Variable depending on type',
-      urgency: 'Variable - Depends on location and type',
-      symptoms: ['Varies by type and organ involvement', 'Local symptoms at affected sites', 'May be asymptomatic initially'],
-      diagnosis: ['Specialized testing based on presentation', 'Imaging of affected organs', 'Tissue biopsy', 'Genetic testing if familial'],
-      treatment: ['Varies by type and location', 'Local treatments for localized forms', 'Dialysis management for β2M type', 'Organ-specific supportive care'],
-      warningSign: 'Unexplained organ dysfunction or family history of similar symptoms'
+      prevalence: 'Variable depending on type (AA: 5% of systemic cases)',
+      urgency: 'Variable - Depends on type and underlying condition',
+      symptoms: ['AA: Kidney dysfunction, protein in urine', 'AA: Joint pain and swelling from chronic inflammation', 'Localized: Symptoms at specific affected sites', 'Dialysis-related: Joint stiffness, carpal tunnel', 'May be asymptomatic initially'],
+      diagnosis: ['AA: SAA blood levels, kidney biopsy', 'Congo red staining for all types', 'Assessment of underlying inflammatory conditions', 'Imaging of affected organs', 'Genetic testing if familial'],
+      treatment: ['AA: Control underlying inflammatory disease', 'AA: Anti-inflammatory biologics, kidney support', 'Localized: Local treatments for affected areas', 'Dialysis-related: Improved dialysis management', 'Organ-specific supportive care'],
+      warningSign: 'AA: Kidney problems with chronic inflammatory diseases; Others: Unexplained organ dysfunction or family history'
     }
   ];
 
@@ -188,9 +174,7 @@ export default function AboutAmyloidosis() {
                     ? 'bg-gradient-to-br from-red-900/25 to-pink-900/25 border-red-400/30'
                     : index === 1
                     ? 'bg-gradient-to-br from-blue-900/25 to-cyan-900/25 border-blue-400/30'
-                    : index === 2
-                    ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30'
-                    : 'bg-gradient-to-br from-orange-900/25 to-amber-900/25 border-orange-400/30'
+                    : 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30'
                 }`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -213,18 +197,14 @@ export default function AboutAmyloidosis() {
                             ? 'text-red-100'
                             : index === 1
                             ? 'text-blue-100'
-                            : index === 2
-                            ? 'text-emerald-100'
-                            : 'text-orange-100'
+                            : 'text-purple-100'
                         }`}>{type.type}</h3>
                         <p className={`text-sm ${
                           index === 0 
                             ? 'text-red-300'
                             : index === 1
                             ? 'text-blue-300'
-                            : index === 2
-                            ? 'text-emerald-300'
-                            : 'text-orange-300'
+                            : 'text-purple-300'
                         }`}>{type.subtitle}</p>
                       </div>
                     </div>
@@ -338,8 +318,7 @@ export default function AboutAmyloidosis() {
                         href={
                           type.id === 'al' ? '/amyloidosis-types/al-light-chain-amyloidosis' :
                           type.id === 'attr' ? '/amyloidosis-types/attr-transthyretin-amyloidosis' :
-                          type.id === 'aa' ? '/amyloidosis-types/aa-inflammatory-amyloidosis' :
-                          '/amyloidosis-types/alect2-amyloidosis'
+                          '/amyloidosis-types/other-amyloidosis-types'
                         }
                         className={`inline-flex items-center gap-2 bg-gradient-to-r ${type.color} text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 group`}
                       >

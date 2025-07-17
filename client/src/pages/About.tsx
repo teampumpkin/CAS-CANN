@@ -861,6 +861,21 @@ export default function About() {
                 We collaborate with leading organizations, research institutions, and healthcare networks to amplify our impact and accelerate progress in amyloidosis care across Canada and internationally.
               </p>
               
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                  <p className="text-gray-600 dark:text-white/70">International amyloidosis organizations</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                  <p className="text-gray-600 dark:text-white/70">Leading Canadian research institutions</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                  <p className="text-gray-600 dark:text-white/70">Healthcare networks and specialty centers</p>
+                </div>
+              </div>
+              
               <div className="bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl mb-8">
                 <motion.div
                   className="text-center mb-8"
@@ -933,21 +948,6 @@ export default function About() {
                       </div>
                     </motion.a>
                   ))}
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-white/70">International amyloidosis organizations</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-white/70">Leading Canadian research institutions</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-white/70">Healthcare networks and specialty centers</p>
                 </div>
               </div>
             </motion.div>

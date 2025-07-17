@@ -176,7 +176,13 @@ export default function AboutAmyloidosis() {
             {warningSignsData.map((category, index) => (
               <motion.div
                 key={category.category}
-                className={`bg-white/5 backdrop-blur-xl rounded-2xl p-6 border ${category.color.split(' ')[1]} ${category.color.split(' ')[2]}`}
+                className={`backdrop-blur-xl rounded-2xl p-6 border ${category.color.split(' ')[1]} ${category.color.split(' ')[2]} ${
+                  index === 0 
+                    ? 'bg-gradient-to-br from-red-900/25 to-pink-900/25 border-red-400/30'
+                    : index === 1
+                    ? 'bg-gradient-to-br from-blue-900/25 to-cyan-900/25 border-blue-400/30'
+                    : 'bg-gradient-to-br from-orange-900/25 to-amber-900/25 border-orange-400/30'
+                }`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -186,7 +192,13 @@ export default function AboutAmyloidosis() {
                   <div className={`w-12 h-12 ${category.color.split(' ')[0]} rounded-xl flex items-center justify-center`}>
                     <category.icon className={`w-6 h-6 ${category.color.split(' ')[2]}`} />
                   </div>
-                  <h3 className="text-lg font-bold text-white">{category.category}</h3>
+                  <h3 className={`text-lg font-bold ${
+                    index === 0 
+                      ? 'text-red-100'
+                      : index === 1
+                      ? 'text-blue-100'
+                      : 'text-orange-100'
+                  }`}>{category.category}</h3>
                 </div>
                 
                 <div className="space-y-3 mb-6">
@@ -263,7 +275,15 @@ export default function AboutAmyloidosis() {
               <motion.div
                 id={`${type.id}-amyloidosis`}
                 key={type.id}
-                className={`bg-white/5 backdrop-blur-xl rounded-2xl border ${type.borderColor} overflow-hidden`}
+                className={`backdrop-blur-xl rounded-2xl border ${type.borderColor} overflow-hidden ${
+                  index === 0 
+                    ? 'bg-gradient-to-br from-red-900/25 to-pink-900/25 border-red-400/30'
+                    : index === 1
+                    ? 'bg-gradient-to-br from-blue-900/25 to-cyan-900/25 border-blue-400/30'
+                    : index === 2
+                    ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30'
+                    : 'bg-gradient-to-br from-orange-900/25 to-amber-900/25 border-orange-400/30'
+                }`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -280,8 +300,24 @@ export default function AboutAmyloidosis() {
                         <type.icon className="w-7 h-7 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-white mb-1">{type.type}</h3>
-                        <p className="text-white/70 text-sm">{type.subtitle}</p>
+                        <h3 className={`text-xl font-bold mb-1 ${
+                          index === 0 
+                            ? 'text-red-100'
+                            : index === 1
+                            ? 'text-blue-100'
+                            : index === 2
+                            ? 'text-emerald-100'
+                            : 'text-orange-100'
+                        }`}>{type.type}</h3>
+                        <p className={`text-sm ${
+                          index === 0 
+                            ? 'text-red-300'
+                            : index === 1
+                            ? 'text-blue-300'
+                            : index === 2
+                            ? 'text-emerald-300'
+                            : 'text-orange-300'
+                        }`}>{type.subtitle}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
@@ -438,15 +474,15 @@ export default function AboutAmyloidosis() {
 
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10"
+                className="bg-gradient-to-br from-blue-900/25 to-indigo-900/25 backdrop-blur-xl rounded-2xl p-8 border border-blue-400/30"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
                 <MapPin className="w-12 h-12 text-[#00AFE6] mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-4">Find Expert Care</h3>
-                <p className="text-white/70 mb-6">
+                <h3 className="text-2xl font-bold text-blue-100 mb-4">Find Expert Care</h3>
+                <p className="text-blue-300 mb-6">
                   Connect with amyloidosis specialists and treatment centers across Canada.
                 </p>
                 <Link href="/directory" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
@@ -456,15 +492,15 @@ export default function AboutAmyloidosis() {
               </motion.div>
 
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10"
+                className="bg-gradient-to-br from-emerald-900/25 to-green-900/25 backdrop-blur-xl rounded-2xl p-8 border border-emerald-400/30"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
                 <BookOpen className="w-12 h-12 text-[#00DD89] mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-4">Access Resources</h3>
-                <p className="text-white/70 mb-6">
+                <h3 className="text-2xl font-bold text-emerald-100 mb-4">Access Resources</h3>
+                <p className="text-emerald-300 mb-6">
                   Explore educational materials, treatment guides, and support resources.
                 </p>
                 <Link href="/resources" className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300">
@@ -498,7 +534,7 @@ export default function AboutAmyloidosis() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Diagnostic Information */}
             <motion.div
-              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              className="bg-gradient-to-br from-blue-900/25 to-cyan-900/25 backdrop-blur-xl rounded-2xl p-6 border border-blue-400/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -508,7 +544,7 @@ export default function AboutAmyloidosis() {
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
                   <Search className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Diagnostic Resources</h3>
+                <h3 className="text-lg font-bold text-blue-100">Diagnostic Resources</h3>
               </div>
               <ul className="space-y-3 mb-6">
                 <li>
@@ -538,7 +574,7 @@ export default function AboutAmyloidosis() {
 
             {/* Treatment Information */}
             <motion.div
-              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              className="bg-gradient-to-br from-emerald-900/25 to-green-900/25 backdrop-blur-xl rounded-2xl p-6 border border-emerald-400/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -548,7 +584,7 @@ export default function AboutAmyloidosis() {
                 <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
                   <Target className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Treatment Options</h3>
+                <h3 className="text-lg font-bold text-emerald-100">Treatment Options</h3>
               </div>
               <ul className="space-y-3 mb-6">
                 <li>
@@ -578,7 +614,7 @@ export default function AboutAmyloidosis() {
 
             {/* Support & Care */}
             <motion.div
-              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              className="bg-gradient-to-br from-purple-900/25 to-violet-900/25 backdrop-blur-xl rounded-2xl p-6 border border-purple-400/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -588,7 +624,7 @@ export default function AboutAmyloidosis() {
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center">
                   <Users className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Support & Care</h3>
+                <h3 className="text-lg font-bold text-purple-100">Support & Care</h3>
               </div>
               <ul className="space-y-3 mb-6">
                 <li>
@@ -618,7 +654,7 @@ export default function AboutAmyloidosis() {
 
             {/* Research & Education */}
             <motion.div
-              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              className="bg-gradient-to-br from-orange-900/25 to-red-900/25 backdrop-blur-xl rounded-2xl p-6 border border-orange-400/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -628,7 +664,7 @@ export default function AboutAmyloidosis() {
                 <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
                   <Microscope className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Research & Education</h3>
+                <h3 className="text-lg font-bold text-orange-100">Research & Education</h3>
               </div>
               <ul className="space-y-3 mb-6">
                 <li>
@@ -658,7 +694,7 @@ export default function AboutAmyloidosis() {
 
             {/* Healthcare Professionals */}
             <motion.div
-              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+              className="bg-gradient-to-br from-teal-900/25 to-blue-900/25 backdrop-blur-xl rounded-2xl p-6 border border-teal-400/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -668,7 +704,7 @@ export default function AboutAmyloidosis() {
                 <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-blue-500 rounded-xl flex items-center justify-center">
                   <Stethoscope className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-white">For Healthcare Professionals</h3>
+                <h3 className="text-lg font-bold text-teal-100">For Healthcare Professionals</h3>
               </div>
               <ul className="space-y-3 mb-6">
                 <li>
@@ -698,7 +734,7 @@ export default function AboutAmyloidosis() {
 
             {/* Emergency Information */}
             <motion.div
-              className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-red-500/30"
+              className="bg-gradient-to-br from-red-900/25 to-pink-900/25 backdrop-blur-xl rounded-2xl p-6 border border-red-400/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -708,7 +744,7 @@ export default function AboutAmyloidosis() {
                 <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
                   <AlertTriangle className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Emergency Information</h3>
+                <h3 className="text-lg font-bold text-red-100">Emergency Information</h3>
               </div>
               <ul className="space-y-3 mb-6">
                 <li>

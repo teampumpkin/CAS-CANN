@@ -343,15 +343,39 @@ export default function GetInvolved() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white/5 backdrop-blur-xl border-white/20 hover:bg-white/10 transition-all duration-300 h-full group">
+                <Card className={`backdrop-blur-xl border transition-all duration-300 h-full group hover:shadow-2xl ${
+                  index === 0 
+                    ? 'bg-gradient-to-br from-blue-900/25 to-cyan-900/25 border-blue-400/30 hover:from-blue-800/35 hover:to-cyan-800/35 hover:border-blue-300/40 hover:shadow-blue-500/25'
+                    : index === 1
+                    ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30 hover:from-emerald-800/35 hover:to-green-800/35 hover:border-emerald-300/40 hover:shadow-emerald-500/25'
+                    : index === 2
+                    ? 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30 hover:from-purple-800/35 hover:to-violet-800/35 hover:border-purple-300/40 hover:shadow-purple-500/25'
+                    : 'bg-gradient-to-br from-orange-900/25 to-red-900/25 border-orange-400/30 hover:from-orange-800/35 hover:to-red-800/35 hover:border-orange-300/40 hover:shadow-orange-500/25'
+                }`}>
                   <CardContent className="p-8">
                     <div className="flex items-start gap-4">
                       <div className={`p-3 rounded-xl bg-gradient-to-r ${way.color} group-hover:scale-110 transition-transform duration-300`}>
                         <way.icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-white mb-3">{way.title}</h3>
-                        <p className="text-white/70 mb-6 leading-relaxed">{way.description}</p>
+                        <h3 className={`text-xl font-semibold mb-3 ${
+                          index === 0 
+                            ? 'text-blue-100'
+                            : index === 1
+                            ? 'text-emerald-100'
+                            : index === 2
+                            ? 'text-purple-100'
+                            : 'text-orange-100'
+                        }`}>{way.title}</h3>
+                        <p className={`mb-6 leading-relaxed ${
+                          index === 0 
+                            ? 'text-blue-300'
+                            : index === 1
+                            ? 'text-emerald-300'
+                            : index === 2
+                            ? 'text-purple-300'
+                            : 'text-orange-300'
+                        }`}>{way.description}</p>
                         
                         {way.title === "Join CAS" && (
                           <Dialog>

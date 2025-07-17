@@ -328,7 +328,7 @@ export default function Directory() {
             {/* Province List */}
             <div className="space-y-4">
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+                className="bg-gradient-to-br from-blue-900/25 to-indigo-900/25 backdrop-blur-xl rounded-2xl p-6 border border-blue-400/30"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
@@ -535,7 +535,15 @@ export default function Directory() {
             {filteredCenters.map((center, index) => (
               <motion.div
                 key={center.name}
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300"
+                className={`backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-2xl ${
+                  index % 4 === 0 
+                    ? 'bg-gradient-to-br from-blue-900/25 to-indigo-900/25 border-blue-400/30 hover:from-blue-800/35 hover:to-indigo-800/35 hover:border-blue-300/40 hover:shadow-blue-500/25'
+                    : index % 4 === 1
+                    ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30 hover:from-emerald-800/35 hover:to-green-800/35 hover:border-emerald-300/40 hover:shadow-emerald-500/25'
+                    : index % 4 === 2
+                    ? 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30 hover:from-purple-800/35 hover:to-violet-800/35 hover:border-purple-300/40 hover:shadow-purple-500/25'
+                    : 'bg-gradient-to-br from-pink-900/25 to-rose-900/25 border-pink-400/30 hover:from-pink-800/35 hover:to-rose-800/35 hover:border-pink-300/40 hover:shadow-pink-500/25'
+                }`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -619,7 +627,11 @@ export default function Directory() {
             {registries.map((registry, index) => (
               <motion.div
                 key={registry.name}
-                className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10"
+                className={`backdrop-blur-xl rounded-3xl p-8 border transition-all duration-300 hover:shadow-2xl ${
+                  index === 0 
+                    ? 'bg-gradient-to-br from-green-900/25 to-emerald-900/25 border-green-400/30 hover:from-green-800/35 hover:to-emerald-800/35 hover:border-green-300/40 hover:shadow-green-500/25'
+                    : 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30 hover:from-purple-800/35 hover:to-violet-800/35 hover:border-purple-300/40 hover:shadow-purple-500/25'
+                }`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}

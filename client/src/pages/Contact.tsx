@@ -627,7 +627,7 @@ export default function Contact() {
             >
               {/* Direct Contact */}
               <motion.div
-                className="bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-xl"
+                className="bg-gradient-to-br from-blue-900/25 to-indigo-900/25 backdrop-blur-xl rounded-2xl p-8 border border-blue-400/30 shadow-xl"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
@@ -635,7 +635,7 @@ export default function Contact() {
                   <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <Mail className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">
+                  <h3 className="text-xl font-bold text-blue-100 mb-2">
                     Direct Contact
                   </h3>
                   <p className="text-white/70 text-sm">
@@ -655,7 +655,7 @@ export default function Contact() {
 
               {/* Response Time */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+                className="bg-gradient-to-br from-emerald-900/25 to-green-900/25 backdrop-blur-xl rounded-2xl p-6 border border-emerald-400/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -666,10 +666,10 @@ export default function Contact() {
                     <MessageCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-2">
+                    <h4 className="text-lg font-bold text-emerald-100 mb-2">
                       Quick Response
                     </h4>
-                    <p className="text-white/80 text-sm leading-relaxed">
+                    <p className="text-emerald-300 text-sm leading-relaxed">
                       We typically respond within 24-48 hours during business days. Urgent matters receive priority attention.
                     </p>
                   </div>
@@ -678,7 +678,7 @@ export default function Contact() {
 
               {/* Office Hours */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+                className="bg-gradient-to-br from-purple-900/25 to-violet-900/25 backdrop-blur-xl rounded-2xl p-6 border border-purple-400/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -689,10 +689,10 @@ export default function Contact() {
                     <Building2 className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-2">
+                    <h4 className="text-lg font-bold text-purple-100 mb-2">
                       Based in Canada
                     </h4>
-                    <p className="text-white/80 text-sm leading-relaxed">
+                    <p className="text-purple-300 text-sm leading-relaxed">
                       Operating across all provinces and territories, with team members from coast to coast.
                     </p>
                   </div>
@@ -701,7 +701,7 @@ export default function Contact() {
 
               {/* Community Note */}
               <motion.div
-                className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20"
+                className="bg-gradient-to-br from-orange-900/25 to-amber-900/25 backdrop-blur-xl rounded-2xl p-6 border border-orange-400/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
@@ -711,10 +711,10 @@ export default function Contact() {
                   <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center mx-auto mb-4">
                     <Users className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="text-lg font-bold text-white mb-3">
+                  <h4 className="text-lg font-bold text-orange-100 mb-3">
                     Join Our Community
                   </h4>
-                  <p className="text-white/80 text-sm leading-relaxed mb-4">
+                  <p className="text-orange-300 text-sm leading-relaxed mb-4">
                     Connect with healthcare professionals, researchers, and advocates working together to advance amyloidosis care.
                   </p>
                   <motion.a
@@ -764,7 +764,7 @@ export default function Contact() {
 
             <div className="grid md:grid-cols-3 gap-8">
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+                className="bg-gradient-to-br from-blue-900/25 to-cyan-900/25 backdrop-blur-xl rounded-2xl p-6 border border-blue-400/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -774,17 +774,17 @@ export default function Contact() {
                   <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center mx-auto mb-4">
                     <Users className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">
+                  <h3 className="text-lg font-bold text-blue-100 mb-2">
                     Collaborative Network
                   </h3>
-                  <p className="text-white/70 text-sm">
+                  <p className="text-blue-300 text-sm">
                     Connect with experts and advocates across Canada
                   </p>
                 </div>
               </motion.div>
 
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+                className="bg-gradient-to-br from-emerald-900/25 to-green-900/25 backdrop-blur-xl rounded-2xl p-6 border border-emerald-400/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -794,17 +794,17 @@ export default function Contact() {
                   <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center mx-auto mb-4">
                     <MessageCircle className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">
+                  <h3 className="text-lg font-bold text-emerald-100 mb-2">
                     Knowledge Sharing
                   </h3>
-                  <p className="text-white/70 text-sm">
+                  <p className="text-emerald-300 text-sm">
                     Share research, insights, and best practices
                   </p>
                 </div>
               </motion.div>
 
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+                className="bg-gradient-to-br from-purple-900/25 to-violet-900/25 backdrop-blur-xl rounded-2xl p-6 border border-purple-400/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -814,10 +814,10 @@ export default function Contact() {
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-[#00AFE6] rounded-xl flex items-center justify-center mx-auto mb-4">
                     <Building2 className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">
+                  <h3 className="text-lg font-bold text-purple-100 mb-2">
                     System Impact
                   </h3>
-                  <p className="text-white/70 text-sm">
+                  <p className="text-purple-300 text-sm">
                     Drive improvements in amyloidosis care nationwide
                   </p>
                 </div>

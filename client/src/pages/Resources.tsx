@@ -437,7 +437,15 @@ export default function Resources() {
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...Array(6)].map((_, i) => (
-                <Card key={i} className="bg-white/5 border-white/20 animate-pulse">
+                <Card key={i} className={`backdrop-blur-xl border animate-pulse ${
+                  i % 4 === 0 
+                    ? 'bg-gradient-to-br from-blue-900/25 to-indigo-900/25 border-blue-400/30'
+                    : i % 4 === 1
+                    ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30'
+                    : i % 4 === 2
+                    ? 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30'
+                    : 'bg-gradient-to-br from-pink-900/25 to-rose-900/25 border-pink-400/30'
+                }`}>
                   <CardHeader>
                     <div className="h-4 bg-white/10 rounded mb-2"></div>
                     <div className="h-3 bg-white/10 rounded w-2/3"></div>
@@ -476,7 +484,15 @@ export default function Resources() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <Card className="bg-white/5 backdrop-blur-xl border-white/20 hover:bg-white/10 transition-all duration-300 h-full">
+                    <Card className={`backdrop-blur-xl border transition-all duration-300 h-full hover:shadow-2xl ${
+                      resource.id % 4 === 0 
+                        ? 'bg-gradient-to-br from-blue-900/25 to-indigo-900/25 border-blue-400/30 hover:from-blue-800/35 hover:to-indigo-800/35 hover:border-blue-300/40 hover:shadow-blue-500/25'
+                        : resource.id % 4 === 1
+                        ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30 hover:from-emerald-800/35 hover:to-green-800/35 hover:border-emerald-300/40 hover:shadow-emerald-500/25'
+                        : resource.id % 4 === 2
+                        ? 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30 hover:from-purple-800/35 hover:to-violet-800/35 hover:border-purple-300/40 hover:shadow-purple-500/25'
+                        : 'bg-gradient-to-br from-pink-900/25 to-rose-900/25 border-pink-400/30 hover:from-pink-800/35 hover:to-rose-800/35 hover:border-pink-300/40 hover:shadow-pink-500/25'
+                    }`}>
                       <CardHeader className="pb-3">
                         <div className="flex items-start justify-between mb-2">
                           <div className="flex items-center gap-2">

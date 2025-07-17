@@ -1,21 +1,30 @@
 import { motion } from 'framer-motion';
-import { Heart, Instagram, Linkedin, Twitter, Facebook } from 'lucide-react';
+import { Heart, Instagram, Linkedin, Twitter, Facebook, MapPin, Phone, Mail, FileText, Users, Calendar, Search } from 'lucide-react';
 
 export default function Footer() {
   const informationLinks = [
-    { name: "About CAS", href: "/about-cas" },
+    { name: "About CAS", href: "/about" },
     { name: "About Amyloidosis", href: "/about-amyloidosis" },
-    { name: "For Patients", href: "/for-patients" },
-    { name: "For Healthcare Providers", href: "/for-professionals" },
     { name: "Resources", href: "/resources" },
-    { name: "FAQ", href: "/faq" }
+    { name: "Directory", href: "/directory" },
+    { name: "Contact Us", href: "/contact" },
+    { name: "Get Involved", href: "/get-involved" }
+  ];
+
+  const sitemapLinks = [
+    { name: "Homepage", href: "/", icon: Heart },
+    { name: "Patient Resources", href: "/resources", icon: FileText },
+    { name: "Healthcare Directory", href: "/directory", icon: MapPin },
+    { name: "Support Groups", href: "/support-groups", icon: Users },
+    { name: "Events & News", href: "/events", icon: Calendar },
+    { name: "Research Updates", href: "/research", icon: Search }
   ];
 
   const socialLinks = [
-    { name: 'Instagram', icon: Instagram, href: '#' },
-    { name: 'LinkedIn', icon: Linkedin, href: '#' },
-    { name: 'Twitter', icon: Twitter, href: '#' },
-    { name: 'Facebook', icon: Facebook, href: '#' }
+    { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/canadianamyloidosis', color: 'hover:text-pink-400' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/canadian-amyloidosis-society', color: 'hover:text-blue-400' },
+    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/amyloidosis_ca', color: 'hover:text-blue-400' },
+    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/canadianamyloidosis', color: 'hover:text-blue-500' }
   ];
 
   return (
@@ -75,7 +84,7 @@ export default function Footer() {
 
             {/* Navigation Links */}
             <div className="lg:col-span-8">
-              <div className="grid md:grid-cols-3 gap-12">
+              <div className="grid md:grid-cols-4 gap-8">
                 
                 {/* Quick Links */}
                 <motion.div
@@ -102,31 +111,76 @@ export default function Footer() {
                   </div>
                 </motion.div>
 
+                {/* Sitemap */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.15 }}
+                  viewport={{ once: true }}
+                >
+                  <h4 className="text-lg font-semibold text-white mb-6">Sitemap</h4>
+                  <div className="space-y-4">
+                    {sitemapLinks.map((link, index) => (
+                      <motion.a
+                        key={link.name}
+                        href={link.href}
+                        className="flex items-center gap-3 text-white/70 hover:text-[#00AFE6] transition-colors text-sm font-medium group"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.25 + index * 0.05 }}
+                        viewport={{ once: true }}
+                      >
+                        <link.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">{link.name}</span>
+                      </motion.a>
+                    ))}
+                  </div>
+                </motion.div>
+
                 {/* Contact Info */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  transition={{ duration: 0.6, delay: 0.25 }}
                   viewport={{ once: true }}
                 >
                   <h4 className="text-lg font-semibold text-white mb-6">Contact</h4>
                   <div className="space-y-4">
-                    <div>
-                      <p className="text-white/50 text-xs uppercase tracking-wide mb-2">Email</p>
-                      <a 
-                        href="mailto:info@canadianamyloidosis.ca" 
-                        className="text-white/70 hover:text-[#00AFE6] transition-colors text-sm font-medium"
-                      >
-                        info@canadianamyloidosis.ca
-                      </a>
+                    <div className="flex items-center gap-3">
+                      <Mail className="w-4 h-4 text-[#00AFE6]" />
+                      <div>
+                        <p className="text-white/50 text-xs uppercase tracking-wide mb-1">Email</p>
+                        <a 
+                          href="mailto:info@canadianamyloidosis.ca" 
+                          className="text-white/70 hover:text-[#00AFE6] transition-colors text-sm font-medium"
+                        >
+                          info@canadianamyloidosis.ca
+                        </a>
+                      </div>
                     </div>
                     
-                    <div>
-                      <p className="text-white/50 text-xs uppercase tracking-wide mb-2">Location</p>
-                      <p className="text-white/70 text-sm">
-                        Nationwide<br />
-                        Canada
-                      </p>
+                    <div className="flex items-center gap-3">
+                      <Phone className="w-4 h-4 text-[#00DD89]" />
+                      <div>
+                        <p className="text-white/50 text-xs uppercase tracking-wide mb-1">Phone</p>
+                        <a 
+                          href="tel:+1-800-555-0123" 
+                          className="text-white/70 hover:text-[#00DD89] transition-colors text-sm font-medium"
+                        >
+                          1-800-555-0123
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-3">
+                      <MapPin className="w-4 h-4 text-purple-400" />
+                      <div>
+                        <p className="text-white/50 text-xs uppercase tracking-wide mb-1">Location</p>
+                        <p className="text-white/70 text-sm">
+                          Nationwide<br />
+                          Canada
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -144,13 +198,16 @@ export default function Footer() {
                       <motion.a
                         key={social.name}
                         href={social.href}
-                        className="block text-white/70 hover:text-[#00AFE6] transition-colors text-sm font-medium hover:translate-x-1 transition-transform duration-300"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center gap-3 text-white/70 ${social.color} transition-colors text-sm font-medium group`}
                         initial={{ opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
                         viewport={{ once: true }}
                       >
-                        {social.name}
+                        <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">{social.name}</span>
                       </motion.a>
                     ))}
                   </div>
@@ -158,12 +215,19 @@ export default function Footer() {
                   <div className="mt-8">
                     <p className="text-white/50 text-xs uppercase tracking-wide mb-3">Follow us for updates</p>
                     <div className="flex gap-3">
-                      <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                        <div className="w-5 h-5 bg-[#00AFE6] rounded-sm"></div>
-                      </div>
-                      <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                        <div className="w-5 h-5 bg-[#00DD89] rounded-sm"></div>
-                      </div>
+                      {socialLinks.slice(0, 4).map((social, index) => (
+                        <motion.a
+                          key={social.name}
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <social.icon className="w-5 h-5 text-white/70 group-hover:text-white transition-colors duration-300" />
+                        </motion.a>
+                      ))}
                     </div>
                   </div>
                 </motion.div>

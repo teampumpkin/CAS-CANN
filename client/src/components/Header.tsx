@@ -99,7 +99,7 @@ export default function Header() {
                       className={`flex items-center gap-1 px-4 py-2 ${
                         isScrolled 
                           ? 'text-white/90 hover:text-white hover:bg-white/20 dark:hover:bg-gray-700/50' 
-                          : 'text-white hover:text-white hover:bg-white/20 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-700/50'
+                          : 'text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/20 dark:hover:bg-gray-700/50'
                       } rounded-full transition-all duration-300 text-sm font-medium`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -115,7 +115,7 @@ export default function Header() {
                       className={`flex items-center gap-1 px-4 py-2 ${
                         isScrolled 
                           ? 'text-white/90 hover:text-white hover:bg-white/20 dark:hover:bg-gray-700/50' 
-                          : 'text-white hover:text-white hover:bg-white/20 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-700/50'
+                          : 'text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/20 dark:hover:bg-gray-700/50'
                       } rounded-full transition-all duration-300 text-sm font-medium`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -177,7 +177,7 @@ export default function Header() {
             <div className={`hidden lg:flex items-center gap-2 text-sm ${
               isScrolled 
                 ? 'text-white/70 dark:text-gray-400' 
-                : 'text-white/90 dark:text-gray-400'
+                : 'text-gray-700 dark:text-gray-400'
             }`}>
               <Phone className="w-4 h-4" />
               <span>1-800-AMYLOID</span>
@@ -199,13 +199,13 @@ export default function Header() {
               <X className={`w-5 h-5 ${
                 isScrolled 
                   ? 'text-white/90 dark:text-gray-300' 
-                  : 'text-white dark:text-gray-300'
+                  : 'text-gray-800 dark:text-gray-300'
               }`} />
             ) : (
               <Menu className={`w-5 h-5 ${
                 isScrolled 
                   ? 'text-white/90 dark:text-gray-300' 
-                  : 'text-white dark:text-gray-300'
+                  : 'text-gray-800 dark:text-gray-300'
               }`} />
             )}
           </motion.button>
@@ -230,7 +230,7 @@ export default function Header() {
                       <div className={`px-4 py-2 font-medium text-sm border-b border-gray-200/30 dark:border-gray-700/50 ${
                         isScrolled 
                           ? 'text-white/90 dark:text-gray-300' 
-                          : 'text-white dark:text-gray-300'
+                          : 'text-gray-800 dark:text-gray-300'
                       }`}>
                         {item.name}
                       </div>
@@ -241,7 +241,7 @@ export default function Header() {
                           className={`block px-6 py-2 rounded-lg transition-all duration-300 text-sm ${
                             isScrolled 
                               ? 'text-white/80 dark:text-gray-400 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-gray-700/50' 
-                              : 'text-white/90 dark:text-gray-400 hover:text-white dark:hover:text-white hover:bg-white/10 dark:hover:bg-gray-700/50'
+                              : 'text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white/10 dark:hover:bg-gray-700/50'
                           }`}
                           onClick={() => setIsMenuOpen(false)}
                         >
@@ -255,7 +255,7 @@ export default function Header() {
                       className={`block px-4 py-3 font-medium text-sm rounded-lg transition-all duration-300 ${
                         isScrolled 
                           ? 'text-white/90 dark:text-gray-300 hover:bg-white/10 dark:hover:bg-gray-700/50' 
-                          : 'text-white dark:text-gray-300 hover:bg-white/10 dark:hover:bg-gray-700/50'
+                          : 'text-gray-800 dark:text-gray-300 hover:bg-white/10 dark:hover:bg-gray-700/50'
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -270,7 +270,7 @@ export default function Header() {
                 <div className={`flex items-center gap-2 text-sm ${
                   isScrolled 
                     ? 'text-white/70 dark:text-gray-400' 
-                    : 'text-white/90 dark:text-gray-400'
+                    : 'text-gray-700 dark:text-gray-400'
                 }`}>
                   <Phone className="w-4 h-4" />
                   <span>1-800-AMYLOID</span>

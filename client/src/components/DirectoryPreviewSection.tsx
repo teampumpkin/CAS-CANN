@@ -115,36 +115,42 @@ export default function DirectoryPreviewSection() {
                 {healthcareCenters.map((center, index) => (
                   <motion.button
                     key={center.id}
-                    className="absolute w-4 h-4 rounded-full cursor-pointer hover:scale-150 transition-all duration-300 z-10 group"
+                    className="absolute cursor-pointer transition-all duration-300 z-10 group flex items-center justify-center"
                     style={{
                       left: `${center.coordinates.x}%`,
                       top: `${center.coordinates.y}%`,
+                      width: '20px',
+                      height: '20px',
+                      transform: 'translate(-50%, -50%)',
                       backgroundColor: center.type === 'hospital' ? '#00AFE6' : 
                                      center.type === 'specialty' ? '#00DD89' :
-                                     center.type === 'research' ? '#8B5CF6' : '#F59E0B'
+                                     center.type === 'research' ? '#8B5CF6' : '#F59E0B',
+                      borderRadius: '50%',
+                      border: '3px solid white',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)'
                     }}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ 
                       opacity: 1, 
                       scale: 1,
                       boxShadow: [
-                        '0 0 0 0 rgba(0, 175, 230, 0.7)',
-                        '0 0 0 10px rgba(0, 175, 230, 0)',
-                        '0 0 0 0 rgba(0, 175, 230, 0)'
+                        '0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(0, 175, 230, 0.7)',
+                        '0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 15px rgba(0, 175, 230, 0)',
+                        '0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(0, 175, 230, 0)'
                       ]
                     }}
                     transition={{ 
                       duration: 0.6, 
                       delay: index * 0.1,
                       boxShadow: {
-                        duration: 2,
+                        duration: 3,
                         repeat: Infinity,
-                        delay: index * 0.3
+                        delay: index * 0.5
                       }
                     }}
                     onClick={() => handleCenterClick(center)}
-                    whileHover={{ scale: 1.5 }}
-                    whileTap={{ scale: 1.2 }}
+                    whileHover={{ scale: 1.3 }}
+                    whileTap={{ scale: 1.1 }}
                   >
                     {/* Tooltip */}
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20">

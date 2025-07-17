@@ -25,7 +25,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Vancouver General Hospital',
     city: 'Vancouver',
     province: 'BC',
-    coordinates: { x: 15, y: 65 },
+    coordinates: { x: 12, y: 70 },
     type: 'hospital',
     specialties: ['AL Amyloidosis', 'ATTR Amyloidosis', 'Cardiac Amyloidosis'],
     contact: {
@@ -44,7 +44,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'St. Paul\'s Hospital',
     city: 'Vancouver',
     province: 'BC',
-    coordinates: { x: 15, y: 67 },
+    coordinates: { x: 12, y: 68 },
     type: 'hospital',
     specialties: ['Cardiac Amyloidosis', 'Heart Failure'],
     contact: {
@@ -63,7 +63,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Foothills Medical Centre',
     city: 'Calgary',
     province: 'AB',
-    coordinates: { x: 28, y: 58 },
+    coordinates: { x: 22, y: 70 },
     type: 'hospital',
     specialties: ['AL Amyloidosis', 'Multi-organ Care', 'Hematology'],
     contact: {
@@ -82,7 +82,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'University of Alberta Hospital',
     city: 'Edmonton',
     province: 'AB',
-    coordinates: { x: 28, y: 52 },
+    coordinates: { x: 22, y: 65 },
     type: 'hospital',
     specialties: ['Research', 'Clinical Trials', 'AL Amyloidosis'],
     contact: {
@@ -101,7 +101,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Royal University Hospital',
     city: 'Saskatoon',
     province: 'SK',
-    coordinates: { x: 35, y: 55 },
+    coordinates: { x: 28, y: 67 },
     type: 'hospital',
     specialties: ['General Amyloidosis', 'Nephrology'],
     contact: {
@@ -120,7 +120,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'St. Boniface Hospital',
     city: 'Winnipeg',
     province: 'MB',
-    coordinates: { x: 42, y: 58 },
+    coordinates: { x: 35, y: 68 },
     type: 'hospital',
     specialties: ['Cardiac Amyloidosis', 'ATTR Amyloidosis'],
     contact: {
@@ -139,7 +139,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Toronto General Hospital',
     city: 'Toronto',
     province: 'ON',
-    coordinates: { x: 55, y: 68 },
+    coordinates: { x: 48, y: 75 },
     type: 'hospital',
     specialties: ['AL Amyloidosis', 'ATTR Amyloidosis', 'Liver Transplant'],
     contact: {
@@ -158,7 +158,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Princess Margaret Cancer Centre',
     city: 'Toronto',
     province: 'ON',
-    coordinates: { x: 55, y: 69 },
+    coordinates: { x: 48, y: 76 },
     type: 'specialty',
     specialties: ['AL Amyloidosis', 'Hematology', 'Stem Cell Transplant'],
     contact: {
@@ -175,7 +175,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'University of Ottawa Heart Institute',
     city: 'Ottawa',
     province: 'ON',
-    coordinates: { x: 58, y: 65 },
+    coordinates: { x: 50, y: 72 },
     type: 'specialty',
     specialties: ['Cardiac Amyloidosis', 'ATTR Amyloidosis'],
     contact: {
@@ -193,7 +193,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Hamilton General Hospital',
     city: 'Hamilton',
     province: 'ON',
-    coordinates: { x: 54, y: 71 },
+    coordinates: { x: 47, y: 77 },
     type: 'hospital',
     specialties: ['AL Amyloidosis', 'Nephrology'],
     contact: {
@@ -212,7 +212,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Montreal Heart Institute',
     city: 'Montreal',
     province: 'QC',
-    coordinates: { x: 62, y: 68 },
+    coordinates: { x: 53, y: 72 },
     type: 'specialty',
     specialties: ['Cardiac Amyloidosis', 'ATTR Amyloidosis', 'Research'],
     contact: {
@@ -231,7 +231,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Centre Hospitalier de l\'Université de Montréal',
     city: 'Montreal',
     province: 'QC',
-    coordinates: { x: 62, y: 69 },
+    coordinates: { x: 53, y: 73 },
     type: 'hospital',
     specialties: ['AL Amyloidosis', 'Hematology'],
     contact: {
@@ -248,7 +248,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Institut Universitaire de Cardiologie et de Pneumologie de Québec',
     city: 'Quebec City',
     province: 'QC',
-    coordinates: { x: 65, y: 65 },
+    coordinates: { x: 56, y: 70 },
     type: 'specialty',
     specialties: ['Cardiac Amyloidosis', 'Pulmonary Care'],
     contact: {
@@ -267,7 +267,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Saint John Regional Hospital',
     city: 'Saint John',
     province: 'NB',
-    coordinates: { x: 72, y: 72 },
+    coordinates: { x: 60, y: 76 },
     type: 'hospital',
     specialties: ['General Amyloidosis', 'Cardiology'],
     contact: {
@@ -286,7 +286,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'QEII Health Sciences Centre',
     city: 'Halifax',
     province: 'NS',
-    coordinates: { x: 75, y: 75 },
+    coordinates: { x: 62, y: 78 },
     type: 'hospital',
     specialties: ['AL Amyloidosis', 'Hematology', 'Cardiology'],
     contact: {
@@ -307,7 +307,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Queen Elizabeth Hospital',
     city: 'Charlottetown',
     province: 'PE',
-    coordinates: { x: 77, y: 73 },
+    coordinates: { x: 64, y: 75 },
     type: 'hospital',
     specialties: ['General Amyloidosis', 'Consultation'],
     contact: {
@@ -326,7 +326,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Health Sciences Centre',
     city: 'St. John\'s',
     province: 'NL',
-    coordinates: { x: 82, y: 72 },
+    coordinates: { x: 70, y: 74 },
     type: 'hospital',
     specialties: ['General Amyloidosis', 'Nephrology'],
     contact: {
@@ -345,7 +345,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Stanton Territorial Hospital',
     city: 'Yellowknife',
     province: 'NT',
-    coordinates: { x: 32, y: 35 },
+    coordinates: { x: 25, y: 45 },
     type: 'hospital',
     specialties: ['General Medicine', 'Consultation'],
     contact: {
@@ -364,7 +364,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Whitehorse General Hospital',
     city: 'Whitehorse',
     province: 'YT',
-    coordinates: { x: 18, y: 28 },
+    coordinates: { x: 15, y: 42 },
     type: 'hospital',
     specialties: ['General Medicine', 'Consultation'],
     contact: {
@@ -383,7 +383,7 @@ export const healthcareCenters: HealthcareCenter[] = [
     name: 'Qikiqtani General Hospital',
     city: 'Iqaluit',
     province: 'NU',
-    coordinates: { x: 68, y: 25 },
+    coordinates: { x: 58, y: 35 },
     type: 'hospital',
     specialties: ['General Medicine', 'Consultation'],
     contact: {

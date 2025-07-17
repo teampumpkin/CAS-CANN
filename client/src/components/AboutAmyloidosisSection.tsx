@@ -6,27 +6,27 @@ export default function AboutAmyloidosisSection() {
   const { t } = useLanguage();
   const amyloidosisTypes = [
     {
-      name: 'AL Amyloidosis',
-      description: 'Most common form, affects heart, kidneys, liver, and nervous system',
-      prevalence: '70% of cases',
+      name: t('about.types.al.name'),
+      description: t('about.types.al.description'),
+      prevalence: t('about.types.al.prevalence'),
       gradient: 'from-[#00AFE6] to-[#0088CC]'
     },
     {
-      name: 'AA Amyloidosis', 
-      description: 'Secondary to chronic inflammatory conditions',
-      prevalence: '20% of cases',
+      name: t('about.types.aa.name'), 
+      description: t('about.types.aa.description'),
+      prevalence: t('about.types.aa.prevalence'),
       gradient: 'from-[#00DD89] to-[#00BB77]'
     },
     {
-      name: 'Hereditary',
-      description: 'Genetic forms including TTR, fibrinogen, and lysozyme',
-      prevalence: '5% of cases',
+      name: t('about.types.hereditary.name'),
+      description: t('about.types.hereditary.description'),
+      prevalence: t('about.types.hereditary.prevalence'),
       gradient: 'from-purple-500 to-purple-700'
     },
     {
-      name: 'Other Types',
-      description: 'Including β2-microglobulin and localized forms',
-      prevalence: '5% of cases',
+      name: t('about.types.other.name'),
+      description: t('about.types.other.description'),
+      prevalence: t('about.types.other.prevalence'),
       gradient: 'from-orange-500 to-orange-700'
     }
   ];
@@ -153,17 +153,15 @@ export default function AboutAmyloidosisSection() {
           <div className="relative grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h3 className="crawford-section-title mb-8 text-left">
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Early Detection</span>
-                <span className="text-gray-900 dark:text-white"> Saves Lives</span>
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('about.earlyDetection.title')}</span>
+                <span className="text-gray-900 dark:text-white"> {t('about.earlyDetection.subtitle')}</span>
               </h3>
               <div className="space-y-6 mb-10">
                 <p className="text-xl text-gray-700 dark:text-white/80 leading-relaxed">
-                  Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. 
-                  Early recognition and proper testing are crucial for better patient outcomes.
+                  {t('about.earlyDetection.description')}
                 </p>
                 <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed">
-                  Our directory connects patients with specialized centers and healthcare providers experienced 
-                  in diagnosing and treating amyloidosis across Canada.
+                  {t('about.earlyDetection.subdescription')}
                 </p>
               </div>
               <motion.a
@@ -172,7 +170,7 @@ export default function AboutAmyloidosisSection() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span className="relative">Learn More</span>
+                <span className="relative">{t('about.learnMore')}</span>
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -184,18 +182,18 @@ export default function AboutAmyloidosisSection() {
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#0088CC] mb-3">2-3 years</div>
-                <div className="text-gray-900 dark:text-white font-bold text-lg mb-2">Average time to diagnosis</div>
-                <div className="text-gray-700 dark:text-white/70">Many patients see multiple doctors before receiving proper diagnosis</div>
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#0088CC] mb-3">{t('about.stats.diagnosisTime')}</div>
+                <div className="text-gray-900 dark:text-white font-bold text-lg mb-2">{t('about.stats.diagnosisTimeLabel')}</div>
+                <div className="text-gray-700 dark:text-white/70">{t('about.stats.diagnosisTimeDesc')}</div>
               </motion.div>
               <motion.div 
                 className="relative bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-[#00DD89]/25 dark:border-white/20 shadow-lg shadow-green-100/40 dark:shadow-none"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00DD89] to-[#00BB77] mb-3">3,000+</div>
-                <div className="text-gray-900 dark:text-white font-bold text-lg mb-2">Canadians affected</div>
-                <div className="text-gray-700 dark:text-white/70">Estimated number of people living with amyloidosis in Canada</div>
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00DD89] to-[#00BB77] mb-3">{t('about.stats.canadiansAffected')}</div>
+                <div className="text-gray-900 dark:text-white font-bold text-lg mb-2">{t('about.stats.canadiansAffectedLabel')}</div>
+                <div className="text-gray-700 dark:text-white/70">{t('about.stats.canadiansAffectedDesc')}</div>
               </motion.div>
             </div>
           </div>

@@ -61,17 +61,16 @@ export default function EventsNewsletterSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Stay Connected</span>
+            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">{t('events.badge')}</span>
           </motion.div>
           
           <h2 className="crawford-section-title mb-8">
-            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Events</span>
-            <span className="text-gray-900 dark:text-white"> & </span>
-            <span className="bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">Newsletter</span>
+            <span className="text-gray-900 dark:text-white">{t('events.title.events')} </span>
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('events.title.newsletter')}</span>
           </h2>
           
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Join our community to stay informed about the latest research, upcoming events, and important updates in amyloidosis care across Canada.
+            {t('events.subtitle')}
           </p>
         </motion.div>
 

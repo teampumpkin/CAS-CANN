@@ -56,15 +56,15 @@ export default function DirectoryPreviewSection() {
         >
           <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-4 py-2 rounded-full text-sm font-medium mb-6 border border-[#00AFE6]/30">
             <MapPin className="w-4 h-4" />
-            <span>Healthcare Directory</span>
+            <span>{t('directory.badge')}</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-rosarivo">
-            <span className="text-gray-900 dark:text-white">Find </span>
-            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Specialized Care</span>
+            <span className="text-gray-900 dark:text-white">{t('directory.title.find')} </span>
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('directory.title.specialized')}</span>
             <span className="text-gray-900 dark:text-white"> Across Canada</span>
           </h2>
           <p className="text-xl text-gray-700 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
-            Access specialized care, clinical resources, and support networks across Canada
+            {t('directory.subtitle')}
           </p>
         </motion.div>
 

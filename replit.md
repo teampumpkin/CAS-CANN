@@ -32,6 +32,12 @@ Preferred communication style: Simple, everyday language.
 - ✅ Added comprehensive achievements section with measurable impact data
 - ✅ Included join network CTA section with proper call-to-action buttons
 
+### Navigation Enhancement for CANN Access (July 17, 2025)
+- ✅ Added "Join CANN" option to Community dropdown menu in Header navigation
+- ✅ Positioned "Join CANN" between "Join CAS" and "Events" for logical organization
+- ✅ Linked "Join CANN" to /cann route for direct access to the Canadian Amyloidosis Network page
+- ✅ Enhanced navigation user experience with easy access to professional network information
+
 ### GetInvolved Page Events Enhancement (July 17, 2025)
 - ✅ Added "Past Events" tab to the events section with comprehensive historical data
 - ✅ Created 5 past events with detailed information including dates, locations, and attendee counts

@@ -113,10 +113,10 @@ export default function DirectoryPreviewSection() {
             {/* Statistics Display - Fixed Grid Layout */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6 font-rosarivo">Network Reach</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">Network Reach</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <motion.div
-                    className="text-center p-6 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300"
+                    className="text-center p-6 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
@@ -125,11 +125,11 @@ export default function DirectoryPreviewSection() {
                     <div className="text-4xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent mb-2">
                       150+
                     </div>
-                    <div className="text-white/70 text-sm font-medium">Healthcare Providers</div>
+                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">Healthcare Providers</div>
                   </motion.div>
                   
                   <motion.div
-                    className="text-center p-6 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300"
+                    className="text-center p-6 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
@@ -138,11 +138,11 @@ export default function DirectoryPreviewSection() {
                     <div className="text-4xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00BB77] bg-clip-text text-transparent mb-2">
                       13
                     </div>
-                    <div className="text-white/70 text-sm font-medium">Provinces & Territories</div>
+                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">Provinces & Territories</div>
                   </motion.div>
                   
                   <motion.div
-                    className="text-center p-6 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300"
+                    className="text-center p-6 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
@@ -151,11 +151,11 @@ export default function DirectoryPreviewSection() {
                     <div className="text-4xl font-bold bg-gradient-to-r from-purple-500 to-purple-700 bg-clip-text text-transparent mb-2">
                       25+
                     </div>
-                    <div className="text-white/70 text-sm font-medium">Major Cities</div>
+                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">Major Cities</div>
                   </motion.div>
                   
                   <motion.div
-                    className="text-center p-6 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300"
+                    className="text-center p-6 bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
@@ -164,7 +164,7 @@ export default function DirectoryPreviewSection() {
                     <div className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent mb-2">
                       500+
                     </div>
-                    <div className="text-white/70 text-sm font-medium">Resources Available</div>
+                    <div className="text-gray-700 dark:text-white/70 text-sm font-medium">Resources Available</div>
                   </motion.div>
                 </div>
               </div>
@@ -190,7 +190,7 @@ export default function DirectoryPreviewSection() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Directory Content */}
           <motion.div
-            className="lg:col-span-2 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-xl rounded-3xl p-10 border border-white/20"
+            className="lg:col-span-2 bg-gradient-to-br from-white/90 to-white/80 dark:from-white/15 dark:to-white/5 backdrop-blur-xl rounded-3xl p-10 border border-gray-200 dark:border-white/20"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -200,10 +200,10 @@ export default function DirectoryPreviewSection() {
                 <Search className="w-10 h-10 text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="text-3xl font-bold text-white mb-4 font-rosarivo">
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">
                   Searchable Healthcare Directory
                 </h3>
-                <p className="text-white/80 text-lg leading-relaxed mb-6">
+                <p className="text-gray-700 dark:text-white/80 text-lg leading-relaxed mb-6">
                   Find specialized amyloidosis treatment centers, experienced physicians, and clinical experts across all Canadian provinces and territories.
                 </p>
               </div>
@@ -214,7 +214,7 @@ export default function DirectoryPreviewSection() {
               {directoryFeatures.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  className="group bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300 hover:bg-white/10"
+                  className="group bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/30 transition-all duration-300 hover:bg-white/95 dark:hover:bg-white/10"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
@@ -225,8 +225,8 @@ export default function DirectoryPreviewSection() {
                       <feature.icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-white mb-2 text-lg">{feature.title}</h4>
-                      <p className="text-white/70 text-sm">{feature.description}</p>
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-lg">{feature.title}</h4>
+                      <p className="text-gray-700 dark:text-white/70 text-sm">{feature.description}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -244,24 +244,24 @@ export default function DirectoryPreviewSection() {
 
           {/* Quick Stats Sidebar */}
           <motion.div
-            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/20"
+            className="bg-gradient-to-br from-white/90 to-white/80 dark:from-white/10 dark:to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-gray-200 dark:border-white/20"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 text-gray-800 dark:text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
                 <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
                 <span>Live Stats</span>
               </div>
-              <h3 className="text-xl font-bold text-white font-rosarivo">Directory Insights</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white font-rosarivo">Directory Insights</h3>
             </div>
 
             <div className="space-y-6">
               {quickStats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  className="text-center p-4 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300"
+                  className="text-center p-4 bg-white/90 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-white/95 dark:hover:bg-white/10 transition-all duration-300"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
@@ -270,16 +270,16 @@ export default function DirectoryPreviewSection() {
                   <div className={`text-3xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2`}>
                     {stat.number}
                   </div>
-                  <div className="text-white/70 text-sm font-medium">{stat.label}</div>
+                  <div className="text-gray-700 dark:text-white/70 text-sm font-medium">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
 
             {/* Contact Info */}
-            <div className="mt-8 pt-6 border-t border-white/10">
-              <h4 className="text-white font-semibold mb-4">Need Help Finding Care?</h4>
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
+              <h4 className="text-gray-900 dark:text-white font-semibold mb-4">Need Help Finding Care?</h4>
               <div className="space-y-3">
-                <div className="flex items-center gap-3 text-white/70 text-sm">
+                <div className="flex items-center gap-3 text-gray-700 dark:text-white/70 text-sm">
                   <Phone className="w-4 h-4" />
                   <span>1-800-AMYLOID</span>
                 </div>

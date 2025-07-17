@@ -93,10 +93,10 @@ export default function AboutAmyloidosisSection() {
                   <div className="w-6 h-6 bg-white rounded-full"></div>
                 </div>
                 
-                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-gray-800 dark:group-hover:text-white/90 transition-colors duration-300">
                   {type.name}
                 </h3>
-                <p className="text-white/70 text-sm mb-6 leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                <p className="text-gray-700 dark:text-white/70 text-sm mb-6 leading-relaxed group-hover:text-gray-600 dark:group-hover:text-white/80 transition-colors duration-300">
                   {type.description}
                 </p>
                 <div className={`text-transparent bg-clip-text bg-gradient-to-r ${type.gradient} text-sm font-bold`}>
@@ -110,7 +110,7 @@ export default function AboutAmyloidosisSection() {
         </div>
 
         <motion.div
-          className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-12 lg:p-16 border border-white/10 overflow-hidden"
+          className="relative bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-12 lg:p-16 border border-gray-200 dark:border-white/10 overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -121,15 +121,15 @@ export default function AboutAmyloidosisSection() {
           
           <div className="relative grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h3 className="crawford-section-title text-white mb-8 text-left">
+              <h3 className="crawford-section-title text-gray-900 dark:text-white mb-8 text-left">
                 Early Detection Saves Lives
               </h3>
               <div className="space-y-6 mb-10">
-                <p className="text-xl text-white/80 leading-relaxed">
+                <p className="text-xl text-gray-700 dark:text-white/80 leading-relaxed">
                   Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. 
                   Early recognition and proper testing are crucial for better patient outcomes.
                 </p>
-                <p className="text-lg text-white/70 leading-relaxed">
+                <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed">
                   Our directory connects patients with specialized centers and healthcare providers experienced 
                   in diagnosing and treating amyloidosis across Canada.
                 </p>
@@ -148,22 +148,22 @@ export default function AboutAmyloidosisSection() {
             </div>
             <div className="space-y-8">
               <motion.div 
-                className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+                className="relative bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 dark:border-white/20"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >
                 <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#0088CC] mb-3">2-3 years</div>
-                <div className="text-white font-bold text-lg mb-2">Average time to diagnosis</div>
-                <div className="text-white/70">Many patients see multiple doctors before receiving proper diagnosis</div>
+                <div className="text-gray-900 dark:text-white font-bold text-lg mb-2">Average time to diagnosis</div>
+                <div className="text-gray-700 dark:text-white/70">Many patients see multiple doctors before receiving proper diagnosis</div>
               </motion.div>
               <motion.div 
-                className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+                className="relative bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 dark:border-white/20"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >
                 <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00DD89] to-[#00BB77] mb-3">3,000+</div>
-                <div className="text-white font-bold text-lg mb-2">Canadians affected</div>
-                <div className="text-white/70">Estimated number of people living with amyloidosis in Canada</div>
+                <div className="text-gray-900 dark:text-white font-bold text-lg mb-2">Canadians affected</div>
+                <div className="text-gray-700 dark:text-white/70">Estimated number of people living with amyloidosis in Canada</div>
               </motion.div>
             </div>
           </div>

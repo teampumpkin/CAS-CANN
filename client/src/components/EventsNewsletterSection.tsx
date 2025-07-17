@@ -78,7 +78,7 @@ export default function EventsNewsletterSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#00AFE6]/10 via-[#00DD89]/5 to-[#00AFE6]/10 backdrop-blur-xl border border-white/20">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-white/90 via-gray-50/90 to-white/90 dark:from-[#00AFE6]/10 dark:via-[#00DD89]/5 dark:to-[#00AFE6]/10 backdrop-blur-xl border border-gray-200 dark:border-white/20">
             {/* Animated background pattern */}
             <div className="absolute inset-0">
               <motion.div
@@ -97,7 +97,7 @@ export default function EventsNewsletterSection() {
               {[...Array(6)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-2 h-2 bg-white/30 rounded-full"
+                  className="absolute w-2 h-2 bg-gray-900/30 dark:bg-white/30 rounded-full"
                   style={{
                     left: `${20 + i * 15}%`,
                     top: `${30 + (i % 2) * 40}%`,
@@ -119,17 +119,17 @@ export default function EventsNewsletterSection() {
               {/* Newsletter Signup */}
               <div className="flex flex-col justify-center">
                 <motion.div
-                  className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6 w-fit"
+                  className="inline-flex items-center gap-2 bg-gray-900/20 dark:bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6 w-fit"
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="w-2 h-2 bg-[#00DD89] rounded-full animate-pulse"></div>
-                  <span className="text-white/90 text-sm font-medium">Stay Connected</span>
+                  <span className="text-gray-900 dark:text-white/90 text-sm font-medium">Stay Connected</span>
                 </motion.div>
 
-                <h3 className="text-4xl font-bold text-white mb-4 font-cardo">
+                <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-cardo">
                   Join Our Community
                 </h3>
-                <p className="text-white/80 text-lg mb-8 leading-relaxed">
+                <p className="text-gray-700 dark:text-white/80 text-lg mb-8 leading-relaxed">
                   Get exclusive access to research updates, community events, and expert insights delivered monthly.
                 </p>
 
@@ -141,7 +141,7 @@ export default function EventsNewsletterSection() {
                     <input
                       type="email"
                       placeholder="Enter your email address"
-                      className="w-full px-6 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:border-[#00AFE6] focus:bg-white/20 transition-all duration-300"
+                      className="w-full px-6 py-4 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/20 rounded-2xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 focus:outline-none focus:border-[#00AFE6] focus:bg-white/90 dark:focus:bg-white/20 transition-all duration-300"
                     />
                     <motion.button
                       className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#00AFE6] text-white px-6 py-2 rounded-xl font-semibold hover:bg-[#0088CC] transition-colors duration-300"
@@ -152,12 +152,12 @@ export default function EventsNewsletterSection() {
                     </motion.button>
                   </motion.div>
 
-                  <div className="flex items-center gap-3 text-white/70 text-sm">
+                  <div className="flex items-center gap-3 text-gray-600 dark:text-white/70 text-sm">
                     <div className="flex -space-x-2">
                       {[...Array(3)].map((_, i) => (
                         <div
                           key={i}
-                          className="w-8 h-8 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-full border-2 border-white/20"
+                          className="w-8 h-8 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-full border-2 border-gray-200 dark:border-white/20"
                         />
                       ))}
                     </div>
@@ -182,9 +182,9 @@ export default function EventsNewsletterSection() {
                     transition={{ duration: 0.6, delay: 0.1 * index }}
                     whileHover={{ y: -5 }}
                   >
-                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 group-hover:border-white/40 transition-all duration-300">
+                    <div className="bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 group-hover:border-gray-300 dark:group-hover:border-white/40 transition-all duration-300">
                       <div className="text-2xl mb-2">{stat.icon}</div>
-                      <div className="text-3xl font-bold text-white mb-1">
+                      <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
                         <motion.span
                           initial={{ opacity: 0 }}
                           whileInView={{ opacity: 1 }}
@@ -193,7 +193,7 @@ export default function EventsNewsletterSection() {
                           {stat.value}{stat.suffix}
                         </motion.span>
                       </div>
-                      <div className="text-white/70 text-sm font-medium">{stat.label}</div>
+                      <div className="text-gray-700 dark:text-white/70 text-sm font-medium">{stat.label}</div>
                     </div>
                   </motion.div>
                 ))}
@@ -211,14 +211,14 @@ export default function EventsNewsletterSection() {
         >
           <div className="text-center mb-16">
             <motion.div
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6"
+              className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6"
               whileHover={{ scale: 1.05 }}
             >
               <Calendar className="w-4 h-4 text-[#00AFE6]" />
-              <span className="text-white/90 font-medium">Upcoming Events</span>
+              <span className="text-gray-900 dark:text-white/90 font-medium">Upcoming Events</span>
             </motion.div>
-            <h3 className="text-4xl font-bold text-white mb-4 font-rosarivo">Community Calendar</h3>
-            <p className="text-white/80 text-lg max-w-2xl mx-auto">
+            <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">Community Calendar</h3>
+            <p className="text-gray-700 dark:text-white/80 text-lg max-w-2xl mx-auto">
               Connect with experts, patients, and researchers through our comprehensive event program.
             </p>
           </div>
@@ -253,7 +253,7 @@ export default function EventsNewsletterSection() {
                     className="mt-12"
                     whileHover={{ scale: 1.02, y: -8 }}
                   >
-                    <div className="group relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-500 hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20 overflow-hidden min-h-[400px]">
+                    <div className="group relative bg-white/90 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/30 transition-all duration-500 hover:bg-white/95 dark:hover:bg-white/10 hover:shadow-2xl hover:shadow-[#00AFE6]/20 overflow-hidden min-h-[400px]">
                       {/* Animated glow effect */}
                       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
                       
@@ -284,25 +284,25 @@ export default function EventsNewsletterSection() {
                                 {event.type}
                               </span>
                             </div>
-                            <h4 className="text-xl font-bold text-white font-rosarivo leading-tight">
+                            <h4 className="text-xl font-bold text-gray-900 dark:text-white font-rosarivo leading-tight">
                               {event.title}
                             </h4>
                           </div>
                         </div>
 
                         {/* Date */}
-                        <div className="text-white/60 text-sm mb-4 font-medium">
+                        <div className="text-gray-600 dark:text-white/60 text-sm mb-4 font-medium">
                           {event.date}
                         </div>
 
                         {/* Description */}
-                        <p className="text-white/70 text-sm leading-relaxed mb-8 flex-1">
+                        <p className="text-gray-700 dark:text-white/70 text-sm leading-relaxed mb-8 flex-1">
                           {event.description}
                         </p>
 
                         {/* Footer */}
-                        <div className="flex items-center justify-between pt-6 border-t border-white/10 mt-auto">
-                          <div className="flex items-center gap-2 text-white/60 text-sm">
+                        <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/10 mt-auto">
+                          <div className="flex items-center gap-2 text-gray-600 dark:text-white/60 text-sm">
                             <Users className="w-4 h-4" />
                             <span>{event.attendees}</span>
                           </div>
@@ -328,7 +328,7 @@ export default function EventsNewsletterSection() {
               {events.map((_, index) => (
                 <motion.div
                   key={index}
-                  className="w-2 h-2 bg-white/30 rounded-full transition-all duration-300 hover:bg-white/60 cursor-pointer"
+                  className="w-2 h-2 bg-gray-400 dark:bg-white/30 rounded-full transition-all duration-300 hover:bg-gray-600 dark:hover:bg-white/60 cursor-pointer"
                   whileHover={{ scale: 1.5 }}
                 />
               ))}
@@ -337,7 +337,7 @@ export default function EventsNewsletterSection() {
             {/* Navigation hint */}
             <div className="flex justify-center mt-6">
               <motion.div 
-                className="inline-flex items-center gap-2 text-white/60 text-sm"
+                className="inline-flex items-center gap-2 text-gray-600 dark:text-white/60 text-sm"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}

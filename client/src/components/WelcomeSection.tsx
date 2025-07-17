@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export default function WelcomeSection() {
   const { t } = useLanguage();
   return (
-    <section className="relative py-12 lg:py-20 bg-gradient-to-br from-[#00AFE6]/5 via-white to-[#00DD89]/5 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+    <section className="relative py-8 lg:py-12 bg-gradient-to-br from-[#00AFE6]/5 via-white to-[#00DD89]/5 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       {/* Premium background elements */}
       <div className="absolute inset-0">
         <motion.div 
@@ -27,7 +27,7 @@ export default function WelcomeSection() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Content Column - Left Side */}
           <motion.div
             className="lg:pr-8"
@@ -38,7 +38,7 @@ export default function WelcomeSection() {
           >
             {/* Premium tag */}
             <motion.div
-              className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm text-gray-900 dark:text-white px-4 py-2 rounded-full text-sm font-semibold border border-gray-900/20 dark:border-white/20 mb-8"
+              className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm text-gray-900 dark:text-white px-4 py-2 rounded-full text-sm font-semibold border border-gray-900/20 dark:border-white/20 mb-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -49,7 +49,7 @@ export default function WelcomeSection() {
 
             {/* Premium heading with gradient accent */}
             <motion.h2 
-              className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight font-rosarivo"
+              className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 leading-tight font-rosarivo"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -63,7 +63,7 @@ export default function WelcomeSection() {
 
             {/* Premium description with enhanced styling */}
             <motion.div 
-              className="space-y-6 text-gray-700 dark:text-white/80 text-xl leading-relaxed"
+              className="space-y-4 text-gray-700 dark:text-white/80 text-xl leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}

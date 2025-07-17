@@ -55,7 +55,7 @@ export default function DirectoryPreviewSection() {
   ];
 
   return (
-    <section className="py-8 bg-gradient-to-br from-[#00DD89]/4 via-gray-50 to-[#00AFE6]/4 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
+    <section className="py-6 bg-gradient-to-br from-[#00DD89]/4 via-gray-50 to-[#00AFE6]/4 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#00DD89]/6 via-gray-50 to-[#00AFE6]/6 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/15 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
@@ -64,7 +64,7 @@ export default function DirectoryPreviewSection() {
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-6"
+          className="text-center mb-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}

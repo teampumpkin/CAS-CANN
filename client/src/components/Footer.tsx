@@ -27,8 +27,8 @@ export default function Footer() {
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Main Content */}
-        <div className="py-12">
-          <div className="grid lg:grid-cols-12 gap-12">
+        <div className="py-8">
+          <div className="grid lg:grid-cols-12 gap-8">
             
             {/* Brand Section - Enhanced */}
             <div className="lg:col-span-4">
@@ -38,7 +38,7 @@ export default function Footer() {
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="flex items-center gap-4 mb-8">
+                <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center shadow-lg">
                     <Heart className="w-7 h-7 text-white" />
                   </div>
@@ -48,14 +48,14 @@ export default function Footer() {
                   </div>
                 </div>
                 
-                <p className="text-gray-700 dark:text-white/70 text-base leading-relaxed mb-8">
+                <p className="text-gray-700 dark:text-white/70 text-base leading-relaxed mb-6">
                   Advancing awareness, accelerating research, and improving outcomes for all Canadians affected by amyloidosis.
                 </p>
 
                 {/* Newsletter Signup */}
                 <div className="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-gray-200 dark:border-white/10">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Stay Informed</h3>
-                  <p className="text-gray-700 dark:text-white/60 text-sm mb-6">
+                  <p className="text-gray-700 dark:text-white/60 text-sm mb-4">
                     Get research updates and community news — no spam.
                   </p>
                   

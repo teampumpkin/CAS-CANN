@@ -57,11 +57,11 @@ export default function Hero() {
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex flex-col px-6">
         {/* Top spacer */}
-        <div className="flex-1 flex items-center justify-center pt-16 pb-20">
+        <div className="flex-1 flex items-center justify-center pt-12 pb-12">
           <div className="max-w-7xl mx-auto text-center">
             {/* Decorative badge */}
             <motion.div
-              className="inline-flex items-center gap-3 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 rounded-full px-6 py-3 mb-8"
+              className="inline-flex items-center gap-3 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 rounded-full px-6 py-3 mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -72,7 +72,7 @@ export default function Hero() {
 
             {/* Main headline */}
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-6 relative leading-none tracking-tight font-rosarivo"
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-4 relative leading-none tracking-tight font-rosarivo"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -99,7 +99,7 @@ export default function Hero() {
 
             {/* Subtitle */}
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-6 max-w-4xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}

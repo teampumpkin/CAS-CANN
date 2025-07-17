@@ -63,7 +63,7 @@ export default function FeaturedSpotlights() {
   }, []);
 
   return (
-    <section className="relative py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
@@ -73,14 +73,14 @@ export default function FeaturedSpotlights() {
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div 
-          className="text-center mb-20"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8"
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -89,7 +89,7 @@ export default function FeaturedSpotlights() {
             <span className="text-white/90 font-medium tracking-wide">Featured Stories</span>
           </motion.div>
 
-          <h2 className="crawford-section-title text-white mb-8">
+          <h2 className="crawford-section-title text-white mb-4">
             Community Spotlights
           </h2>
           <p className="text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">

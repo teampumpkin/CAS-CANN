@@ -32,7 +32,7 @@ export default function AboutAmyloidosisSection() {
   ];
 
   return (
-    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-[#00DD89]/12 via-blue-50/80 to-[#00AFE6]/12 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+    <section className="relative py-10 lg:py-16 bg-gradient-to-br from-[#00DD89]/12 via-blue-50/80 to-[#00AFE6]/12 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       {/* Enhanced background decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-3xl"></div>
@@ -50,7 +50,7 @@ export default function AboutAmyloidosisSection() {
 
       <div className="relative max-w-7xl mx-auto px-6">
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -58,7 +58,7 @@ export default function AboutAmyloidosisSection() {
         >
           {/* Enhanced Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-[#00AFE6]/30 dark:border-white/20 rounded-full px-6 py-3 mb-8 shadow-lg shadow-[#00AFE6]/10"
+            className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-[#00AFE6]/30 dark:border-white/20 rounded-full px-6 py-3 mb-4 shadow-lg shadow-[#00AFE6]/10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -67,7 +67,7 @@ export default function AboutAmyloidosisSection() {
             <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">{t('about.badge')}</span>
           </motion.div>
 
-          <h2 className="crawford-section-title mb-8">
+          <h2 className="crawford-section-title mb-4">
             <span className="text-gray-900 dark:text-white">{t('about.title.what')} </span>
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('about.title.amyloidosis')}</span>
             <span className="text-gray-900 dark:text-white">?</span>

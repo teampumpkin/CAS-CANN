@@ -120,19 +120,19 @@ export default function ATTRAmyloidosis() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors mb-8">
+            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" />
               Back to Amyloidosis Types
             </Link>
             
             <div className="text-center">
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+              <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
                 <Brain className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-white/90">ATTR Amyloidosis</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/90">ATTR Amyloidosis</span>
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   ATTR Amyloidosis
                 </span>
                 <br />
@@ -141,7 +141,7 @@ export default function ATTRAmyloidosis() {
                 </span>
               </h1>
               
-              <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
                 ATTR amyloidosis is caused by misfolded transthyretin proteins. It includes both hereditary (genetic mutations) and wild-type (age-related) forms, primarily affecting the heart and nervous system.
               </p>
             </div>
@@ -150,8 +150,8 @@ export default function ATTRAmyloidosis() {
       </section>
 
       {/* Overview Section with Image */}
-      <section className="py-24 bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+      <section className="py-24 bg-white dark:bg-gray-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="max-w-7xl mx-auto"
@@ -168,13 +168,13 @@ export default function ATTRAmyloidosis() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+                <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
                   <Brain className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">Overview</span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-white/90">Overview</span>
                 </div>
                 
                 <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                     Understanding ATTR
                   </span>
                   <br />
@@ -183,7 +183,7 @@ export default function ATTRAmyloidosis() {
                   </span>
                 </h2>
                 
-                <div className="space-y-6 text-white/70 leading-relaxed">
+                <div className="space-y-6 text-gray-600 dark:text-white/70 leading-relaxed">
                   <p className="text-lg">
                     ATTR amyloidosis has two main forms: hereditary (hATTR) caused by genetic mutations in the TTR gene, and wild-type (wtATTR) which occurs naturally with aging, primarily affecting men over 65.
                   </p>
@@ -198,15 +198,15 @@ export default function ATTRAmyloidosis() {
                 </div>
                 
                 <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-2xl p-6 mt-8">
-                  <h3 className="text-xl font-semibold text-white mb-3">Key Facts</h3>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Key Facts</h3>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="text-[#00AFE6] font-medium">Types:</span>
-                      <div className="text-white/80">Hereditary & Wild-type</div>
+                      <div className="text-gray-600 dark:text-white/80">Hereditary & Wild-type</div>
                     </div>
                     <div>
                       <span className="text-[#00AFE6] font-medium">Primary Organs:</span>
-                      <div className="text-white/80">Heart & Nerves</div>
+                      <div className="text-gray-600 dark:text-white/80">Heart & Nerves</div>
                     </div>
                   </div>
                 </div>
@@ -220,7 +220,7 @@ export default function ATTRAmyloidosis() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
+                <div className="relative bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-900/10 dark:border-white/10">
                   <div className="aspect-[4/5] relative">
                     <img 
                       src={medicalResearchImg} 
@@ -229,7 +229,7 @@ export default function ATTRAmyloidosis() {
                     />
                     
                     <motion.div
-                      className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
+                      className="absolute bottom-6 left-6 right-6 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl border border-gray-900/20 dark:border-white/20 text-gray-900 dark:text-white rounded-2xl shadow-2xl"
                       initial={{ opacity: 0, y: 40 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.5 }}
@@ -240,13 +240,13 @@ export default function ATTRAmyloidosis() {
                             <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                               90%
                             </div>
-                            <div className="text-xs text-white/80">Cardiac in wtATTR</div>
+                            <div className="text-xs text-gray-600 dark:text-white/80">Cardiac in wtATTR</div>
                           </div>
                           <div className="text-center">
                             <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
                               130+
                             </div>
-                            <div className="text-xs text-white/80">Known Mutations</div>
+                            <div className="text-xs text-gray-600 dark:text-white/80">Known Mutations</div>
                           </div>
                         </div>
                       </div>
@@ -275,7 +275,7 @@ export default function ATTRAmyloidosis() {
       </section>
 
       {/* Detailed Information Sections */}
-      <section className="py-24 bg-gray-900">
+      <section className="py-24 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             className="max-w-4xl mx-auto"
@@ -286,11 +286,11 @@ export default function ATTRAmyloidosis() {
           >
             <div className="text-center mb-16">
               <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Detailed Information
                 </span>
               </h2>
-              <p className="text-lg text-white/70">
+              <p className="text-lg text-gray-600 dark:text-white/70">
                 Comprehensive information about ATTR amyloidosis symptoms, diagnosis, treatment, and care options.
               </p>
             </div>
@@ -298,7 +298,7 @@ export default function ATTRAmyloidosis() {
             <div className="space-y-6">
               {/* Symptoms */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden"
+                className="bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-gray-900/10 dark:border-white/10 overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -306,21 +306,21 @@ export default function ATTRAmyloidosis() {
               >
                 <button
                   onClick={() => toggleSection('symptoms')}
-                  className="w-full p-8 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                  className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
                       <AlertTriangle className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold font-rosarivo">Signs & Symptoms</h3>
-                      <p className="text-white/70">Recognizing early warning signs of ATTR amyloidosis</p>
+                      <h3 className="text-2xl font-bold font-rosarivo text-gray-900 dark:text-white">Signs & Symptoms</h3>
+                      <p className="text-gray-600 dark:text-white/70">Recognizing early warning signs of ATTR amyloidosis</p>
                     </div>
                   </div>
                   {openSection === 'symptoms' ? (
-                    <ChevronUp className="w-6 h-6 text-white/70" />
+                    <ChevronUp className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-white/70" />
+                    <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   )}
                 </button>
                 
@@ -331,12 +331,12 @@ export default function ATTRAmyloidosis() {
                     animate={{ opacity: 1, height: 'auto' }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="bg-white/5 rounded-xl p-6">
+                    <div className="bg-gray-900/5 dark:bg-white/5 rounded-xl p-6">
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.symptoms.map((symptom, index) => (
                           <div key={index} className="flex items-start gap-3">
                             <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-white/80">{symptom}</span>
+                            <span className="text-gray-700 dark:text-white/80">{symptom}</span>
                           </div>
                         ))}
                       </div>
@@ -347,7 +347,7 @@ export default function ATTRAmyloidosis() {
 
               {/* Diagnosis */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden"
+                className="bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-gray-900/10 dark:border-white/10 overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -355,21 +355,21 @@ export default function ATTRAmyloidosis() {
               >
                 <button
                   onClick={() => toggleSection('diagnosis')}
-                  className="w-full p-8 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                  className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
                       <Search className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold font-rosarivo">Diagnosis & Testing</h3>
-                      <p className="text-white/70">Comprehensive diagnostic procedures and tests</p>
+                      <h3 className="text-2xl font-bold font-rosarivo text-gray-900 dark:text-white">Diagnosis & Testing</h3>
+                      <p className="text-gray-600 dark:text-white/70">Comprehensive diagnostic procedures and tests</p>
                     </div>
                   </div>
                   {openSection === 'diagnosis' ? (
-                    <ChevronUp className="w-6 h-6 text-white/70" />
+                    <ChevronUp className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-white/70" />
+                    <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   )}
                 </button>
                 
@@ -380,12 +380,12 @@ export default function ATTRAmyloidosis() {
                     animate={{ opacity: 1, height: 'auto' }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="bg-white/5 rounded-xl p-6">
+                    <div className="bg-gray-900/5 dark:bg-white/5 rounded-xl p-6">
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.diagnosis.map((test, index) => (
                           <div key={index} className="flex items-start gap-3">
                             <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-white/80">{test}</span>
+                            <span className="text-gray-700 dark:text-white/80">{test}</span>
                           </div>
                         ))}
                       </div>
@@ -396,7 +396,7 @@ export default function ATTRAmyloidosis() {
 
               {/* Treatment */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden"
+                className="bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-gray-900/10 dark:border-white/10 overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -404,21 +404,21 @@ export default function ATTRAmyloidosis() {
               >
                 <button
                   onClick={() => toggleSection('treatment')}
-                  className="w-full p-8 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                  className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
                       <Brain className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold font-rosarivo">Treatment Options</h3>
-                      <p className="text-white/70">Current therapies and treatment approaches</p>
+                      <h3 className="text-2xl font-bold font-rosarivo text-gray-900 dark:text-white">Treatment Options</h3>
+                      <p className="text-gray-600 dark:text-white/70">Current therapies and treatment approaches</p>
                     </div>
                   </div>
                   {openSection === 'treatment' ? (
-                    <ChevronUp className="w-6 h-6 text-white/70" />
+                    <ChevronUp className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-white/70" />
+                    <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   )}
                 </button>
                 
@@ -429,12 +429,12 @@ export default function ATTRAmyloidosis() {
                     animate={{ opacity: 1, height: 'auto' }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="bg-white/5 rounded-xl p-6">
+                    <div className="bg-gray-900/5 dark:bg-white/5 rounded-xl p-6">
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.treatment.map((treatment, index) => (
                           <div key={index} className="flex items-start gap-3">
                             <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-white/80">{treatment}</span>
+                            <span className="text-gray-700 dark:text-white/80">{treatment}</span>
                           </div>
                         ))}
                       </div>
@@ -445,7 +445,7 @@ export default function ATTRAmyloidosis() {
 
               {/* Treatment Centers & Clinical Trials */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden"
+                className="bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-gray-900/10 dark:border-white/10 overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -453,21 +453,21 @@ export default function ATTRAmyloidosis() {
               >
                 <button
                   onClick={() => toggleSection('centers')}
-                  className="w-full p-8 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                  className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
                       <Target className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold font-rosarivo">Treatment Centers & Clinical Trials</h3>
-                      <p className="text-white/70">Specialized centers and research opportunities</p>
+                      <h3 className="text-2xl font-bold font-rosarivo text-gray-900 dark:text-white">Treatment Centers & Clinical Trials</h3>
+                      <p className="text-gray-600 dark:text-white/70">Specialized centers and research opportunities</p>
                     </div>
                   </div>
                   {openSection === 'centers' ? (
-                    <ChevronUp className="w-6 h-6 text-white/70" />
+                    <ChevronUp className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-white/70" />
+                    <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   )}
                 </button>
                 
@@ -478,21 +478,21 @@ export default function ATTRAmyloidosis() {
                     animate={{ opacity: 1, height: 'auto' }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="bg-white/5 rounded-xl p-6">
+                    <div className="bg-gray-900/5 dark:bg-white/5 rounded-xl p-6">
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.centers.map((center, index) => (
-                          <div key={index} className="bg-white/5 rounded-xl p-4">
+                          <div key={index} className="bg-gray-900/5 dark:bg-white/5 rounded-xl p-4">
                             <div className="flex items-start gap-3 mb-2">
                               <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
                               <div>
-                                <h4 className="font-semibold text-white">{center.name}</h4>
-                                <p className="text-white/70 text-sm">{center.location}</p>
-                                <p className="text-white/60 text-xs mt-1">
-                                  <span className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs">
+                                <h4 className="font-semibold text-gray-900 dark:text-white">{center.name}</h4>
+                                <p className="text-gray-600 dark:text-white/70 text-sm">{center.location}</p>
+                                <p className="text-gray-600 dark:text-white/60 text-xs mt-1">
+                                  <span className="bg-purple-500/20 text-purple-600 dark:text-purple-300 px-2 py-1 rounded-full text-xs">
                                     {center.type}
                                   </span>
                                 </p>
-                                <p className="text-white/80 text-sm mt-2">{center.specialty}</p>
+                                <p className="text-gray-700 dark:text-white/80 text-sm mt-2">{center.specialty}</p>
                               </div>
                             </div>
                           </div>

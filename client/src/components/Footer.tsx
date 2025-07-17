@@ -212,24 +212,7 @@ export default function Footer() {
                     ))}
                   </div>
                   
-                  <div className="mt-8">
-                    <p className="text-white/50 text-xs uppercase tracking-wide mb-3">Follow us for updates</p>
-                    <div className="flex gap-3">
-                      {socialLinks.slice(0, 4).map((social, index) => (
-                        <motion.a
-                          key={social.name}
-                          href={social.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <social.icon className="w-5 h-5 text-white/70 group-hover:text-white transition-colors duration-300" />
-                        </motion.a>
-                      ))}
-                    </div>
-                  </div>
+                  
                 </motion.div>
               </div>
             </div>

@@ -15,7 +15,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#00AFE6]/8 via-white to-[#00DD89]/8 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Sophisticated background with medical heart visualization */}
       <div className="absolute inset-0">
         {/* Medical heart background image */}
@@ -30,7 +30,7 @@ export default function Hero() {
             sizes="100vw"
           />
           {/* Sophisticated overlay for text readability and brand enhancement */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/50 to-gray-900/70 dark:from-gray-900/80 dark:via-blue-900/70 dark:to-gray-900/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/85 via-gray-900/80 to-gray-900/85"></div>
           {/* Brand color accent overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/8 to-[#00AFE6]/12"></div>
         </div>
@@ -68,18 +68,18 @@ export default function Hero() {
           <div className="max-w-7xl mx-auto text-center">
             {/* Decorative badge */}
             <motion.div
-              className="inline-flex items-center gap-3 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 rounded-full px-6 py-3 mb-4"
+              className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
               <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
-              <span className="text-gray-800 dark:text-white/90 font-medium tracking-wide">{t('hero.badge')}</span>
+              <span className="text-white/90 font-medium tracking-wide">{t('hero.badge')}</span>
             </motion.div>
 
             {/* Main headline */}
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-4 relative leading-none tracking-tight font-rosarivo"
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 relative leading-none tracking-tight font-rosarivo"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -106,7 +106,7 @@ export default function Hero() {
 
             {/* Subtitle */}
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl font-light text-gray-800 dark:text-white/90 mb-6 max-w-4xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-6 max-w-4xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}

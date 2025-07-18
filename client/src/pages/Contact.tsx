@@ -296,7 +296,7 @@ export default function Contact() {
 
             {/* Right Side - Interactive Contact Cards */}
             <motion.div
-              className="space-y-6"
+              className="grid grid-cols-2 gap-4"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -311,40 +311,40 @@ export default function Contact() {
                   whileHover={{ y: -5 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative bg-white/20 backdrop-blur-xl rounded-2xl p-6 border border-white/30 group-hover:border-white/50 transition-all duration-300 shadow-xl">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${section.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                        <section.icon className="w-6 h-6 text-white" />
+                  <div className="relative bg-white/20 backdrop-blur-xl rounded-2xl p-4 border border-white/30 group-hover:border-white/50 transition-all duration-300 shadow-xl h-full">
+                    <div className="flex flex-col items-center text-center mb-3">
+                      <div className={`w-10 h-10 bg-gradient-to-br ${section.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 mb-2`}>
+                        <section.icon className="w-5 h-5 text-white" />
                       </div>
-                      <h3 className="text-lg font-bold text-white drop-shadow-lg group-hover:text-[#00AFE6] transition-colors duration-300">
+                      <h3 className="text-base font-bold text-white drop-shadow-lg group-hover:text-[#00AFE6] transition-colors duration-300">
                         {section.title}
                       </h3>
                     </div>
-                    <p className="text-white/90 text-sm leading-relaxed mb-4 drop-shadow-sm">
+                    <p className="text-white/90 text-xs leading-relaxed mb-3 drop-shadow-sm text-center">
                       {section.description}
                     </p>
                     
                     {section.email && (
                       <motion.a
                         href={`mailto:${section.email}`}
-                        className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-semibold text-sm transition-colors duration-300 drop-shadow-sm"
-                        whileHover={{ x: 4 }}
+                        className="inline-flex items-center gap-1 text-[#00AFE6] hover:text-[#00DD89] font-semibold text-xs transition-colors duration-300 drop-shadow-sm justify-center"
+                        whileHover={{ x: 2 }}
                       >
-                        <Mail className="w-4 h-4" />
-                        Direct Contact
+                        <Mail className="w-3 h-3" />
+                        Contact
                       </motion.a>
                     )}
                     
                     {section.links && (
-                      <div className="flex flex-wrap gap-3">
+                      <div className="flex flex-col gap-1 items-center">
                         {section.links.map((link, linkIndex) => (
                           <motion.a
                             key={linkIndex}
                             href={link.url}
-                            className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-semibold text-sm transition-colors duration-300 drop-shadow-sm"
-                            whileHover={{ x: 4 }}
+                            className="inline-flex items-center gap-1 text-[#00AFE6] hover:text-[#00DD89] font-semibold text-xs transition-colors duration-300 drop-shadow-sm"
+                            whileHover={{ x: 2 }}
                           >
-                            <ExternalLink className="w-4 h-4" />
+                            <ExternalLink className="w-3 h-3" />
                             {link.text}
                           </motion.a>
                         ))}

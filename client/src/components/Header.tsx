@@ -36,9 +36,6 @@ export default function Header() {
       dropdownItems: [
         { name: 'About CAS', href: '/about' },
         { name: 'About Amyloidosis', href: '/about-amyloidosis' },
-        { name: 'AL Amyloidosis', href: '/al-amyloidosis' },
-        { name: 'ATTR Amyloidosis', href: '/attr-amyloidosis' },
-        { name: 'Other Types', href: '/other-amyloidosis' },
       ]
     },
     {
@@ -47,7 +44,6 @@ export default function Header() {
       hasDropdown: true,
       dropdownItems: [
         { name: 'Resource Library', href: '/resources' },
-        { name: 'Healthcare Directory', href: '/directory' },
         { name: 'Upload Resource', href: '/upload-resource' },
       ]
     },
@@ -58,9 +54,7 @@ export default function Header() {
       hasDropdown: true,
       dropdownItems: [
         { name: 'Join CAS', href: '/join-cas' },
-        { name: 'Join CANN', href: '/join-cann' },
         { name: 'Get Involved', href: '/get-involved' },
-        { name: 'Events', href: '/events' },
       ]
     },
     { name: t('nav.contact'), href: '/contact' }

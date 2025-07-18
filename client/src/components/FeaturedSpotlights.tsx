@@ -8,44 +8,52 @@ export default function FeaturedSpotlights() {
 
   const spotlights = [
     {
-      category: 'Patient Story',
-      icon: Heart,
-      title: 'Sarah\'s Journey with AL Amyloidosis',
-      description: 'From diagnosis to treatment, Sarah shares her experience navigating amyloidosis care in Canada and finding hope through our community.',
-      image: '/images/patient-story-1.jpg',
-      readTime: '5 min read',
-      gradient: 'from-pink-500 to-rose-600',
-      bgGradient: 'from-pink-50 to-rose-50'
-    },
-    {
-      category: 'Research Update',
-      icon: Lightbulb,
-      title: 'Breakthrough in Early Detection Methods',
-      description: 'Canadian researchers develop new biomarker testing that could revolutionize early amyloidosis diagnosis and improve patient outcomes.',
-      image: '/images/research-update-1.jpg',
-      readTime: '7 min read',
-      gradient: 'from-blue-500 to-indigo-600',
-      bgGradient: 'from-blue-50 to-indigo-50'
-    },
-    {
-      category: 'Community',
-      icon: Users,
-      title: 'National Support Network Expansion',
-      description: 'Our support group network now spans all provinces, connecting over 500 patients and families across Canada.',
-      image: '/images/community-1.jpg',
-      readTime: '4 min read',
-      gradient: 'from-green-500 to-emerald-600',
-      bgGradient: 'from-green-50 to-emerald-50'
-    },
-    {
-      category: 'Education',
+      category: 'Clinical Guide',
       icon: BookOpen,
-      title: 'New Healthcare Provider Resources',
-      description: 'Comprehensive diagnostic guidelines and treatment protocols now available to support healthcare professionals across Canada.',
-      image: '/images/education-1.jpg',
+      title: 'New Provincial Biopsy Guide Released',
+      description: 'Ontario Health releases updated cardiac biopsy guidelines for amyloidosis diagnosis, featuring new endomyocardial biopsy protocols and safety standards.',
+      image: '/images/clinical-guide-1.jpg',
+      readTime: '8 min read',
+      gradient: 'from-[#00AFE6] to-[#00DD89]',
+      bgGradient: 'from-blue-50 to-cyan-50',
+      tags: ['Clinical Practice', 'Diagnosis', 'Provincial Guidelines'],
+      date: 'January 2025'
+    },
+    {
+      category: 'Research Breakthrough',
+      icon: Lightbulb,
+      title: 'TTR Stabilizer Therapy Shows Promise',
+      description: 'Canadian multi-center study demonstrates significant efficacy of tafamidis in hereditary ATTR amyloidosis patients with 78% reduction in disease progression.',
+      image: '/images/research-update-1.jpg',
+      readTime: '10 min read',
+      gradient: 'from-emerald-500 to-teal-600',
+      bgGradient: 'from-emerald-50 to-teal-50',
+      tags: ['Research', 'ATTR', 'Treatment'],
+      date: 'December 2024'
+    },
+    {
+      category: 'Treatment Update',
+      icon: Heart,
+      title: 'Gene Silencing Therapy Access Expanded',
+      description: 'Health Canada approves broader access to patisiran for hereditary ATTR amyloidosis, now available through provincial drug programs in BC, ON, and QC.',
+      image: '/images/treatment-update-1.jpg',
       readTime: '6 min read',
       gradient: 'from-purple-500 to-violet-600',
-      bgGradient: 'from-purple-50 to-violet-50'
+      bgGradient: 'from-purple-50 to-violet-50',
+      tags: ['Treatment Access', 'Gene Therapy', 'Provincial Coverage'],
+      date: 'November 2024'
+    },
+    {
+      category: 'Quality Improvement',
+      icon: Users,
+      title: 'Rapid Diagnostic Pathway Implementation',
+      description: 'Toronto General Hospital launches 6-week diagnostic pathway for suspected amyloidosis cases, reducing time to diagnosis from 8 months to 42 days.',
+      image: '/images/quality-improvement-1.jpg',
+      readTime: '7 min read',
+      gradient: 'from-orange-500 to-red-500',
+      bgGradient: 'from-orange-50 to-red-50',
+      tags: ['Quality Care', 'Diagnostic Efficiency', 'Hospital Initiative'],
+      date: 'October 2024'
     }
   ];
 
@@ -86,14 +94,14 @@ export default function FeaturedSpotlights() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Featured Stories</span>
+            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Clinical Updates</span>
           </motion.div>
 
           <h2 className="crawford-section-title text-gray-900 dark:text-white mb-4">
-            Community Spotlights
+            Clinical Updates & Featured Spotlights
           </h2>
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Inspiring stories, breakthrough research, and community updates from across our amyloidosis network.
+            Latest clinical guidelines, research breakthroughs, and treatment advances from across Canada's amyloidosis care network.
           </p>
         </motion.div>
 
@@ -139,6 +147,8 @@ export default function FeaturedSpotlights() {
                           <div className="flex items-center gap-2 mt-1">
                             <div className="w-1 h-1 bg-white/40 rounded-full"></div>
                             <span className="text-white/60 text-sm">{spotlights[currentIndex].readTime}</span>
+                            <div className="w-1 h-1 bg-white/40 rounded-full"></div>
+                            <span className="text-white/60 text-sm">{spotlights[currentIndex].date}</span>
                           </div>
                         </div>
                       </motion.div>
@@ -153,13 +163,30 @@ export default function FeaturedSpotlights() {
                       </motion.h3>
 
                       <motion.p
-                        className="text-xl text-white/80 leading-relaxed mb-8"
+                        className="text-xl text-white/80 leading-relaxed mb-6"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
                       >
                         {spotlights[currentIndex].description}
                       </motion.p>
+
+                      {/* Clinical Tags */}
+                      <motion.div
+                        className="flex flex-wrap gap-2 mb-8"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.35 }}
+                      >
+                        {spotlights[currentIndex].tags.map((tag, index) => (
+                          <span
+                            key={index}
+                            className="bg-white/10 backdrop-blur-sm text-white/90 px-3 py-1 rounded-full text-sm font-medium border border-white/20"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </motion.div>
 
                       <motion.button
                         className="group inline-flex items-center gap-3 bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-semibold border border-white/20 hover:bg-white/30 transition-all duration-300"

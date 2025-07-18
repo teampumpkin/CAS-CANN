@@ -120,9 +120,7 @@ export default function AboutAmyloidosis() {
               </span>
             </h1>
             
-            <p className="text-xl text-white/70 leading-relaxed mb-10 max-w-3xl mx-auto">
-              Learn the signs, understand the types, and take action early. Knowledge and early detection can significantly improve outcomes.
-            </p>
+            <p className="text-xl text-white/70 leading-relaxed mb-10 max-w-3xl mx-auto">Learn about the different types, recognize the symptoms and take action early</p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/directory" className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
@@ -138,7 +136,6 @@ export default function AboutAmyloidosis() {
           </motion.div>
         </div>
       </ParallaxBackground>
-
       {/* Amyloidosis Types - Collapsible Sections */}
       <section className="py-24 bg-white dark:bg-gray-900 relative">
         <div className="container mx-auto px-6 relative z-10">
@@ -333,7 +330,6 @@ export default function AboutAmyloidosis() {
           </div>
         </div>
       </section>
-
       {/* Warning Signs Section */}
       <section id="warning-signs" className="py-24 bg-gray-50 dark:bg-gray-900 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
@@ -430,7 +426,6 @@ export default function AboutAmyloidosis() {
           
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="py-24 bg-white dark:bg-gray-900 relative border-t border-gray-200 dark:border-white/10">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
@@ -496,7 +491,6 @@ export default function AboutAmyloidosis() {
           </motion.div>
         </div>
       </section>
-
       {/* Related Resources & Detailed Links Section */}
       <section className="py-16 bg-gray-800 border-t border-white/10">
         <div className="container mx-auto px-6">
@@ -758,7 +752,6 @@ export default function AboutAmyloidosis() {
           </div>
         </div>
       </section>
-
       {/* Persistent Disclaimer */}
       <div className="bg-gray-800 border-t border-white/10 py-6 sticky bottom-0 z-50">
         <div className="container mx-auto px-6">

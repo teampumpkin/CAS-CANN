@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AmyloidosisSection() {
+  const { t } = useLanguage();
   return (
     <section className="crawford-section bg-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -18,7 +20,7 @@ export default function AmyloidosisSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              What is Amyloidosis?
+              {t('about.title.what')} {t('about.title.amyloidosis')}
             </motion.h2>
 
             <motion.p
@@ -27,9 +29,7 @@ export default function AmyloidosisSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Amyloidosis is a rare disease with life-altering consequences—but early detection 
-              can dramatically improve outcomes. The Canadian Amyloidosis Society is building 
-              a trusted national hub for clinicians, researchers, and families seeking answers.
+              {t('about.subtitle')}
             </motion.p>
 
             <motion.button
@@ -40,7 +40,7 @@ export default function AmyloidosisSection() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Learn More
+              {t('about.learnMore')}
               <ArrowRight className="w-4 h-4" />
             </motion.button>
           </motion.div>

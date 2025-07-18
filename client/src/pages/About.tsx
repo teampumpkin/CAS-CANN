@@ -167,7 +167,7 @@ export default function About() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                The Canadian Amyloidosis Society supports clinical practice through evidence-based tools, diagnostic pathways, and collaborative networks that enhance patient care across Canada's healthcare system.
+                {t('about.hero.description')}
               </motion.p>
               
               <motion.div

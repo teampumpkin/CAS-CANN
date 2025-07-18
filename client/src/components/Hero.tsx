@@ -23,6 +23,9 @@ export default function Hero() {
             src={heroBackgroundImage}
             alt="Neural network visualization representing amyloidosis research and treatment" 
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            sizes="100vw"
           />
           {/* Sophisticated overlay for text readability and brand enhancement */}
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/50 to-gray-900/70 dark:from-gray-900/80 dark:via-blue-900/70 dark:to-gray-900/80"></div>

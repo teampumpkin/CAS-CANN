@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { 
   Search, 
@@ -26,7 +26,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { apiRequest } from "@/lib/queryClient";
 import type { Resource } from "@shared/schema";
 
 interface ResourceFilters {
@@ -203,18 +202,16 @@ export default function Resources() {
     }
   });
 
-  const downloadMutation = useMutation({
-    mutationFn: async (resourceId: number) => {
-      await apiRequest(`/api/resources/${resourceId}/download`, 'POST');
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/resources'] });
-    }
-  });
-
   const handleDownload = async (resource: Resource) => {
     // Track download
-    downloadMutation.mutate(resource.id);
+    try {
+      await fetch(`/api/resources/${resource.id}/download`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch (error) {
+      console.error('Failed to track download:', error);
+    }
     
     // Open file in new tab
     window.open(resource.fileUrl, '_blank');

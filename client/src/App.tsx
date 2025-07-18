@@ -6,50 +6,68 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import EnhancedScrollIndicator from "@/components/EnhancedScrollIndicator";
+import PerformanceDebugger from "@/components/PerformanceMonitor";
+import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Home from "@/pages/Home";
-import About from "@/pages/About";
-import AboutAmyloidosis from "@/pages/AboutAmyloidosis";
-import Governance from "@/pages/Governance";
-import Directory from "@/pages/Directory";
-import Resources from "@/pages/Resources";
-import UploadResource from "@/pages/UploadResource";
-import GetInvolved from "@/pages/GetInvolved";
-import JoinCAS from "@/pages/JoinCAS";
-import Contact from "@/pages/Contact";
-import ALAmyloidosis from "@/pages/amyloidosis-types/ALAmyloidosis";
-import ATTRAmyloidosis from "@/pages/amyloidosis-types/ATTRAmyloidosis";
-import AAAmyloidosis from "@/pages/amyloidosis-types/AAAmyloidosis";
-import ALect2Amyloidosis from "@/pages/amyloidosis-types/ALect2Amyloidosis";
-import OtherAmyloidosis from "@/pages/amyloidosis-types/OtherAmyloidosis";
-import CANN from "@/pages/CANN";
-import JoinCANN from "@/pages/JoinCANN";
-import NotFound from "@/pages/not-found";
+import { lazy, Suspense } from "react";
+import { Loader2 } from "lucide-react";
+
+// Lazy load components for better performance
+const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
+const AboutAmyloidosis = lazy(() => import("@/pages/AboutAmyloidosis"));
+const Governance = lazy(() => import("@/pages/Governance"));
+const Directory = lazy(() => import("@/pages/Directory"));
+const Resources = lazy(() => import("@/pages/Resources"));
+const UploadResource = lazy(() => import("@/pages/UploadResource"));
+const GetInvolved = lazy(() => import("@/pages/GetInvolved"));
+const JoinCAS = lazy(() => import("@/pages/JoinCAS"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const ALAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/ALAmyloidosis"));
+const ATTRAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/ATTRAmyloidosis"));
+const AAAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/AAAmyloidosis"));
+const ALect2Amyloidosis = lazy(() => import("@/pages/amyloidosis-types/ALect2Amyloidosis"));
+const OtherAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/OtherAmyloidosis"));
+const CANN = lazy(() => import("@/pages/CANN"));
+const JoinCANN = lazy(() => import("@/pages/JoinCANN"));
+const NotFound = lazy(() => import("@/pages/not-found"));
+
+// Loading component
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-900">
+    <div className="text-center">
+      <Loader2 className="w-8 h-8 animate-spin text-[#00AFE6] mx-auto mb-4" />
+      <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+    </div>
+  </div>
+);
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
-      <Route path="/governance" component={Governance} />
-      <Route path="/directory" component={Directory} />
-      <Route path="/resources" component={Resources} />
-      <Route path="/upload-resource" component={UploadResource} />
-      <Route path="/get-involved" component={GetInvolved} />
-      <Route path="/join" component={JoinCAS} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/amyloidosis-types/al-light-chain-amyloidosis" component={ALAmyloidosis} />
-      <Route path="/amyloidosis-types/attr-transthyretin-amyloidosis" component={ATTRAmyloidosis} />
-      <Route path="/amyloidosis-types/aa-inflammatory-amyloidosis" component={AAAmyloidosis} />
-      <Route path="/amyloidosis-types/alect2-amyloidosis" component={ALect2Amyloidosis} />
-      <Route path="/amyloidosis-types/other-amyloidosis-types" component={OtherAmyloidosis} />
-      <Route path="/cann" component={CANN} />
-      <Route path="/join-cann" component={JoinCANN} />
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense fallback={<PageLoader />}>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
+        <Route path="/governance" component={Governance} />
+        <Route path="/directory" component={Directory} />
+        <Route path="/resources" component={Resources} />
+        <Route path="/upload-resource" component={UploadResource} />
+        <Route path="/get-involved" component={GetInvolved} />
+        <Route path="/join" component={JoinCAS} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/amyloidosis-types/al-light-chain-amyloidosis" component={ALAmyloidosis} />
+        <Route path="/amyloidosis-types/attr-transthyretin-amyloidosis" component={ATTRAmyloidosis} />
+        <Route path="/amyloidosis-types/aa-inflammatory-amyloidosis" component={AAAmyloidosis} />
+        <Route path="/amyloidosis-types/alect2-amyloidosis" component={ALect2Amyloidosis} />
+        <Route path="/amyloidosis-types/other-amyloidosis-types" component={OtherAmyloidosis} />
+        <Route path="/cann" component={CANN} />
+        <Route path="/join-cann" component={JoinCANN} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 
@@ -66,6 +84,8 @@ function App() {
             </div>
             <Footer />
             <EnhancedScrollIndicator />
+            <PerformanceDebugger />
+            <PerformanceOptimizer />
           </div>
           <Toaster />
         </TooltipProvider>

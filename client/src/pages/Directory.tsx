@@ -3,7 +3,7 @@ import { MapPin, Users, Hospital, Search, Navigation, Phone, Mail, ExternalLink,
 import ParallaxBackground from '../components/ParallaxBackground';
 import canadaMapPath from '@assets/Canada Map_1750069387234.png';
 import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { healthcareCenters, HealthcareCenter } from '@/data/healthcareCenters';
 import HealthcareCenterModal from '@/components/HealthcareCenterModal';
@@ -16,6 +16,8 @@ export default function Directory() {
   const [selectedCenter, setSelectedCenter] = useState<HealthcareCenter | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const provinces = [
     { name: 'British Columbia', code: 'BC', centers: 5, color: 'from-blue-500 to-cyan-500' },
@@ -104,6 +106,17 @@ export default function Directory() {
     
     return matchesSearch && matchesProvince && matchesProgramType;
   });
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredCenters.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedCenters = filteredCenters.slice(startIndex, endIndex);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedProvince, selectedProgramType, searchTerm]);
 
   const handleCenterClick = (center: HealthcareCenter) => {
     setSelectedCenter(center);
@@ -327,7 +340,7 @@ export default function Directory() {
           {/* Results Summary with View Mode Toggle */}
           <div className="flex justify-between items-center mb-6">
             <div className="text-gray-600 dark:text-white/70">
-              Showing {filteredCenters.length} of {healthcareCenters.length} centers
+              Showing {startIndex + 1}-{Math.min(endIndex, filteredCenters.length)} of {filteredCenters.length} centers
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
@@ -370,99 +383,136 @@ export default function Directory() {
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           {viewMode === 'list' ? (
-            <div className="grid lg:grid-cols-2 gap-8">
-              {filteredCenters.map((center, index) => (
-                <motion.div
-                  key={center.id}
-                  className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-400/30 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  onClick={() => handleCenterClick(center)}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  {/* Header with metadata */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                        center.type === 'hospital' ? 'bg-gradient-to-r from-blue-500 to-cyan-500' :
-                        center.type === 'clinic' ? 'bg-gradient-to-r from-green-500 to-emerald-500' :
-                        center.type === 'research' ? 'bg-gradient-to-r from-purple-500 to-violet-500' :
-                        'bg-gradient-to-r from-orange-500 to-red-500'
-                      }`}>
-                        {center.type === 'hospital' ? <Hospital className="w-6 h-6 text-white" /> :
-                         center.type === 'clinic' ? <Stethoscope className="w-6 h-6 text-white" /> :
-                         center.type === 'research' ? <Microscope className="w-6 h-6 text-white" /> :
-                         <Building2 className="w-6 h-6 text-white" />}
+            <>
+              <div className="grid lg:grid-cols-2 gap-8">
+                {paginatedCenters.map((center, index) => (
+                  <motion.div
+                    key={center.id}
+                    className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-400/30 hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    onClick={() => handleCenterClick(center)}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    {/* Header with metadata */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                          center.type === 'hospital' ? 'bg-gradient-to-r from-blue-500 to-cyan-500' :
+                          center.type === 'clinic' ? 'bg-gradient-to-r from-green-500 to-emerald-500' :
+                          center.type === 'research' ? 'bg-gradient-to-r from-purple-500 to-violet-500' :
+                          'bg-gradient-to-r from-orange-500 to-red-500'
+                        }`}>
+                          {center.type === 'hospital' ? <Hospital className="w-6 h-6 text-white" /> :
+                           center.type === 'clinic' ? <Stethoscope className="w-6 h-6 text-white" /> :
+                           center.type === 'research' ? <Microscope className="w-6 h-6 text-white" /> :
+                           <Building2 className="w-6 h-6 text-white" />}
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-900 dark:text-white">{center.name}</h3>
+                          <p className="text-sm text-gray-600 dark:text-white/70">{center.city}, {center.province}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white">{center.name}</h3>
-                        <p className="text-sm text-gray-600 dark:text-white/70">{center.city}, {center.province}</p>
+                      <div className="text-right">
+                        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white/50 mb-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>Last Updated: Dec 2024</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          <span className="text-sm text-green-600 dark:text-green-400 font-medium">Verified</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white/50 mb-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>Last Updated: Dec 2024</span>
+                    
+                    {/* Subspecialty */}
+                    <div className="mb-4">
+                      <h4 className="text-sm font-semibold text-gray-700 dark:text-white/80 mb-2">Primary Subspecialty</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {center.specialties.slice(0, 3).map((specialty, idx) => (
+                          <span key={idx} className="px-3 py-1 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 text-[#00AFE6] dark:text-[#00AFE6] rounded-full text-sm font-medium border border-[#00AFE6]/20">
+                            {specialty}
+                          </span>
+                        ))}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                        <span className="text-sm text-green-600 dark:text-green-400 font-medium">Verified</span>
+                    </div>
+                    
+                    {/* Services */}
+                    <div className="mb-4">
+                      <h4 className="text-sm font-semibold text-gray-700 dark:text-white/80 mb-2">Services Available</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {center.services.slice(0, 4).map((service, idx) => (
+                          <span key={idx} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white/80 rounded-full text-xs">
+                            {service}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                  </div>
-                  
-                  {/* Subspecialty */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-700 dark:text-white/80 mb-2">Primary Subspecialty</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {center.specialties.slice(0, 3).map((specialty, idx) => (
-                        <span key={idx} className="px-3 py-1 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 text-[#00AFE6] dark:text-[#00AFE6] rounded-full text-sm font-medium border border-[#00AFE6]/20">
-                          {specialty}
-                        </span>
-                      ))}
+                    
+                    {/* Referral Status */}
+                    <div className="mb-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-600 dark:text-white/70">Referral Status:</span>
+                        <span className="text-sm font-medium text-green-600 dark:text-green-400">Required</span>
+                      </div>
                     </div>
-                  </div>
-                  
-                  {/* Services */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-700 dark:text-white/80 mb-2">Services Available</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {center.services.slice(0, 4).map((service, idx) => (
-                        <span key={idx} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white/80 rounded-full text-xs">
-                          {service}
-                        </span>
-                      ))}
+                    
+                    {/* Contact Quick Actions */}
+                    <div className="flex gap-2 pt-4 border-t border-gray-200 dark:border-gray-600">
+                      <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-300">
+                        <Phone className="w-4 h-4" />
+                        Call
+                      </button>
+                      <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">
+                        <Mail className="w-4 h-4" />
+                        Email
+                      </button>
+                      <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">
+                        <Eye className="w-4 h-4" />
+                        Details
+                      </button>
                     </div>
-                  </div>
+                  </motion.div>
+                ))}
+              </div>
+              
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex justify-center items-center gap-2 mt-12">
+                  <button
+                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Previous
+                  </button>
                   
-                  {/* Referral Status */}
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600 dark:text-white/70">Referral Status:</span>
-                      <span className="text-sm font-medium text-green-600 dark:text-green-400">Required</span>
-                    </div>
-                  </div>
-                  
-                  {/* Contact Quick Actions */}
-                  <div className="flex gap-2 pt-4 border-t border-gray-200 dark:border-gray-600">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-300">
-                      <Phone className="w-4 h-4" />
-                      Call
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        currentPage === page
+                          ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg'
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600'
+                      }`}
+                    >
+                      {page}
                     </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">
-                      <Mail className="w-4 h-4" />
-                      Email
-                    </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">
-                      <Eye className="w-4 h-4" />
-                      Details
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                  ))}
+                  
+                  <button
+                    onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             /* Map View */
             <div className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-400/30">

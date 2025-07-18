@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { 
   Network, 
   Users, 
@@ -23,13 +23,11 @@ import {
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
 import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
 import medicalTeamImg from '@assets/DSC02841_1750068895454.jpg';
 
 export default function JoinCANN() {
-  const [activeTab, setActiveTab] = useState('overview');
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -196,22 +194,11 @@ export default function JoinCANN() {
         </div>
       </section>
 
-      {/* Main Content */}
+      {/* Overview Section */}
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6 bg-gray-100 dark:bg-gray-800 rounded-2xl p-2 mb-12">
-                <TabsTrigger value="overview" className="rounded-xl font-semibold">Overview</TabsTrigger>
-                <TabsTrigger value="benefits" className="rounded-xl font-semibold">Benefits</TabsTrigger>
-                <TabsTrigger value="join" className="rounded-xl font-semibold">Join</TabsTrigger>
-                <TabsTrigger value="login" className="rounded-xl font-semibold">Login</TabsTrigger>
-                <TabsTrigger value="resources" className="rounded-xl font-semibold">Resources</TabsTrigger>
-                <TabsTrigger value="governance" className="rounded-xl font-semibold">Governance</TabsTrigger>
-              </TabsList>
-
-              {/* Overview Tab */}
-              <TabsContent value="overview" className="space-y-16">
+            <div className="space-y-16">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
@@ -299,10 +286,16 @@ export default function JoinCANN() {
                     </div>
                   </motion.div>
                 </div>
-              </TabsContent>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Benefits Tab */}
-              <TabsContent value="benefits" className="space-y-12">
+      {/* Benefits Section */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="space-y-12">
                 <div className="text-center mb-12">
                   <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">
                     Membership Benefits
@@ -337,10 +330,16 @@ export default function JoinCANN() {
                     </motion.div>
                   ))}
                 </div>
-              </TabsContent>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Join Tab */}
-              <TabsContent value="join" className="space-y-12">
+      {/* Join Section */}
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="space-y-12">
                 <div className="max-w-4xl mx-auto text-center">
                   <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">
                     Join CANN Today
@@ -390,10 +389,16 @@ export default function JoinCANN() {
                     </div>
                   </div>
                 </div>
-              </TabsContent>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Login Tab */}
-              <TabsContent value="login" className="space-y-12">
+      {/* Login Section */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="space-y-12">
                 <div className="max-w-2xl mx-auto text-center">
                   <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">
                     Member Login
@@ -441,10 +446,16 @@ export default function JoinCANN() {
                     </CardContent>
                   </Card>
                 </div>
-              </TabsContent>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Resources Tab */}
-              <TabsContent value="resources" className="space-y-12">
+      {/* Resources Section */}
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="space-y-12">
                 <div className="text-center mb-12">
                   <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">
                     Educational Resources
@@ -527,10 +538,16 @@ export default function JoinCANN() {
                     ))}
                   </div>
                 </div>
-              </TabsContent>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Governance Tab */}
-              <TabsContent value="governance" className="space-y-12">
+      {/* Governance Section */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="space-y-12">
                 <div className="text-center mb-12">
                   <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">
                     Governance Documents
@@ -579,8 +596,7 @@ export default function JoinCANN() {
                     </motion.div>
                   ))}
                 </div>
-              </TabsContent>
-            </Tabs>
+            </div>
           </div>
         </div>
       </section>

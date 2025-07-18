@@ -248,13 +248,13 @@ export default function Resources() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+            <div className="inline-flex items-center gap-3 bg-white/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 dark:border-white/20 mb-6">
               <BookOpen className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">{t('resources.title')}</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-white/90">{t('resources.title')}</span>
             </div>
             
             <h1 className="crawford-section-title mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 {t('resources.title')}
               </span>
               <br />
@@ -263,7 +263,7 @@ export default function Resources() {
               </span>
             </h1>
             
-            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl text-gray-700 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
               {t('resources.subtitle')}
             </p>
           </motion.div>
@@ -275,16 +275,16 @@ export default function Resources() {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             {/* Search and Filter Controls */}
-            <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-6 mb-8 shadow-2xl">
+            <div className="bg-white/80 dark:bg-white/10 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-white/20 p-6 mb-8 shadow-2xl">
               {/* Search Bar */}
               <div className="relative mb-6">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/60 w-5 h-5" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-white/60 w-5 h-5" />
                 <Input
                   type="text"
                   placeholder={t('resources.search.placeholder')}
                   value={filters.search}
                   onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-                  className="pl-12 h-14 bg-white/20 border-white/30 text-white placeholder-white/60 text-lg rounded-xl focus:ring-2 focus:ring-[#00AFE6] focus:border-[#00AFE6]"
+                  className="pl-12 h-14 bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 text-lg rounded-xl focus:ring-2 focus:ring-[#00AFE6] focus:border-[#00AFE6]"
                 />
               </div>
 
@@ -293,7 +293,7 @@ export default function Resources() {
                 <div className="flex items-center gap-4">
                   <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
                     <CollapsibleTrigger asChild>
-                      <Button variant="outline" className="border-white/30 text-white hover:bg-white/20 bg-white/15">
+                      <Button variant="outline" className="border-gray-300 dark:border-white/30 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/20 bg-white dark:bg-white/15">
                         <Filter className="w-4 h-4 mr-2" />
                         {t('resources.filters.advanced')}
                         {activeFiltersCount > 0 && (
@@ -307,7 +307,7 @@ export default function Resources() {
                   </Collapsible>
 
                   {activeFiltersCount > 0 && (
-                    <Button variant="ghost" onClick={clearFilters} className="text-white/80 hover:text-white hover:bg-white/20">
+                    <Button variant="ghost" onClick={clearFilters} className="text-gray-700 dark:text-white/80 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/20">
                       <X className="w-4 h-4 mr-2" />
                       {t('resources.filters.clearAll')}
                     </Button>
@@ -327,7 +327,7 @@ export default function Resources() {
                       className={
                         filters.amyloidosisType === type 
                           ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 font-medium" 
-                          : "bg-white/10 border border-white/30 text-white hover:text-white hover:bg-white/20 font-medium"
+                          : "bg-white dark:bg-white/10 border border-gray-300 dark:border-white/30 text-gray-900 dark:text-white hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/20 font-medium"
                       }
                     >
                       {type}
@@ -339,11 +339,11 @@ export default function Resources() {
               {/* Advanced Filters */}
               <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
                 <CollapsibleContent className="mt-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6 bg-white/15 rounded-xl border border-white/20">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6 bg-gray-50 dark:bg-white/15 rounded-xl border border-gray-200 dark:border-white/20">
                     <div>
-                      <label className="block text-sm font-medium text-white/90 mb-2">Amyloidosis Type</label>
+                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Amyloidosis Type</label>
                       <Select value={filters.amyloidosisType} onValueChange={(value) => setFilters(prev => ({ ...prev, amyloidosisType: value }))}>
-                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -355,9 +355,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/90 mb-2">Resource Type</label>
+                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Resource Type</label>
                       <Select value={filters.resourceType} onValueChange={(value) => setFilters(prev => ({ ...prev, resourceType: value }))}>
-                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -369,9 +369,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/90 mb-2">Category</label>
+                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Category</label>
                       <Select value={filters.category} onValueChange={(value) => setFilters(prev => ({ ...prev, category: value }))}>
-                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -383,9 +383,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/90 mb-2">Audience</label>
+                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Audience</label>
                       <Select value={filters.audience} onValueChange={(value) => setFilters(prev => ({ ...prev, audience: value }))}>
-                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -397,9 +397,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/90 mb-2">Language</label>
+                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Language</label>
                       <Select value={filters.language} onValueChange={(value) => setFilters(prev => ({ ...prev, language: value }))}>
-                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -411,9 +411,9 @@ export default function Resources() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/90 mb-2">Region</label>
+                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Region</label>
                       <Select value={filters.region} onValueChange={(value) => setFilters(prev => ({ ...prev, region: value }))}>
-                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -432,46 +432,46 @@ export default function Resources() {
       </section>
 
       {/* Resources Grid */}
-      <section className="py-12 bg-gray-900">
+      <section className="py-12 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-6">
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...Array(6)].map((_, i) => (
                 <Card key={i} className={`backdrop-blur-xl border animate-pulse ${
                   i % 4 === 0 
-                    ? 'bg-gradient-to-br from-blue-900/25 to-indigo-900/25 border-blue-400/30'
+                    ? 'bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 border-blue-200 dark:border-blue-400/30'
                     : i % 4 === 1
-                    ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30'
+                    ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200 dark:border-emerald-400/30'
                     : i % 4 === 2
-                    ? 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30'
-                    : 'bg-gradient-to-br from-pink-900/25 to-rose-900/25 border-pink-400/30'
+                    ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200 dark:border-purple-400/30'
+                    : 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200 dark:border-pink-400/30'
                 }`}>
                   <CardHeader>
-                    <div className="h-4 bg-white/10 rounded mb-2"></div>
-                    <div className="h-3 bg-white/10 rounded w-2/3"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-white/10 rounded mb-2"></div>
+                    <div className="h-3 bg-gray-200 dark:bg-white/10 rounded w-2/3"></div>
                   </CardHeader>
                   <CardContent>
-                    <div className="h-20 bg-white/10 rounded mb-4"></div>
-                    <div className="h-8 bg-white/10 rounded"></div>
+                    <div className="h-20 bg-gray-200 dark:bg-white/10 rounded mb-4"></div>
+                    <div className="h-8 bg-gray-200 dark:bg-white/10 rounded"></div>
                   </CardContent>
                 </Card>
               ))}
             </div>
           ) : error ? (
             <div className="text-center py-12">
-              <p className="text-red-400 text-lg mb-4">Failed to load resources</p>
-              <p className="text-white/60">Please try again later or contact support if the problem persists.</p>
+              <p className="text-red-500 text-lg mb-4">Failed to load resources</p>
+              <p className="text-gray-600 dark:text-white/60">Please try again later or contact support if the problem persists.</p>
             </div>
           ) : resources.length === 0 ? (
             <div className="text-center py-12">
-              <BookOpen className="w-12 h-12 text-white/40 mx-auto mb-4" />
-              <p className="text-white/60 text-lg mb-4">No resources found</p>
-              <p className="text-white/40">Try adjusting your search criteria or filters.</p>
+              <BookOpen className="w-12 h-12 text-gray-400 dark:text-white/40 mx-auto mb-4" />
+              <p className="text-gray-600 dark:text-white/60 text-lg mb-4">No resources found</p>
+              <p className="text-gray-500 dark:text-white/40">Try adjusting your search criteria or filters.</p>
             </div>
           ) : (
             <>
               <div className="mb-6">
-                <p className="text-white/60">
+                <p className="text-gray-600 dark:text-white/60">
                   Showing {resources.length} resource{resources.length !== 1 ? 's' : ''}
                 </p>
               </div>
@@ -486,12 +486,12 @@ export default function Resources() {
                   >
                     <Card className={`backdrop-blur-xl border transition-all duration-300 h-full hover:shadow-2xl ${
                       resource.id % 4 === 0 
-                        ? 'bg-gradient-to-br from-blue-900/25 to-indigo-900/25 border-blue-400/30 hover:from-blue-800/35 hover:to-indigo-800/35 hover:border-blue-300/40 hover:shadow-blue-500/25'
+                        ? 'bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 border-blue-200 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-indigo-100/95 dark:hover:from-blue-800/35 dark:hover:to-indigo-800/35 hover:border-blue-300 dark:hover:border-blue-300/40 hover:shadow-blue-500/25'
                         : resource.id % 4 === 1
-                        ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30 hover:from-emerald-800/35 hover:to-green-800/35 hover:border-emerald-300/40 hover:shadow-emerald-500/25'
+                        ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300 dark:hover:border-emerald-300/40 hover:shadow-emerald-500/25'
                         : resource.id % 4 === 2
-                        ? 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30 hover:from-purple-800/35 hover:to-violet-800/35 hover:border-purple-300/40 hover:shadow-purple-500/25'
-                        : 'bg-gradient-to-br from-pink-900/25 to-rose-900/25 border-pink-400/30 hover:from-pink-800/35 hover:to-rose-800/35 hover:border-pink-300/40 hover:shadow-pink-500/25'
+                        ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300 dark:hover:border-purple-300/40 hover:shadow-purple-500/25'
+                        : 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200 dark:border-pink-400/30 hover:from-pink-100/95 hover:to-rose-100/95 dark:hover:from-pink-800/35 dark:hover:to-rose-800/35 hover:border-pink-300 dark:hover:border-pink-300/40 hover:shadow-pink-500/25'
                     }`}>
                       <CardHeader className="pb-3">
                         <div className="flex items-start justify-between mb-2">
@@ -503,13 +503,13 @@ export default function Resources() {
                           </div>
                           <div className="flex items-center gap-1">
                             {getFileIcon(resource.fileType)}
-                            <span className="text-xs text-white/60 uppercase">
+                            <span className="text-xs text-gray-500 dark:text-white/60 uppercase">
                               {resource.fileType}
                             </span>
                           </div>
                         </div>
                         
-                        <CardTitle className="text-lg font-semibold text-white line-clamp-2">
+                        <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2">
                           {resource.title}
                         </CardTitle>
                         
@@ -517,7 +517,7 @@ export default function Resources() {
                           <Badge variant="outline" className="text-xs border-[#00AFE6]/30 text-[#00AFE6]">
                             {resource.amyloidosisType}
                           </Badge>
-                          <Badge variant="outline" className="text-xs border-white/20 text-white/70">
+                          <Badge variant="outline" className="text-xs border-gray-300 dark:border-white/20 text-gray-700 dark:text-white/70">
                             {resource.audience}
                           </Badge>
                         </div>
@@ -525,25 +525,25 @@ export default function Resources() {
                       
                       <CardContent className="pt-0">
                         {resource.description && (
-                          <p className="text-white/70 text-sm mb-4 line-clamp-3">
+                          <p className="text-gray-700 dark:text-white/70 text-sm mb-4 line-clamp-3">
                             {resource.description}
                           </p>
                         )}
                         
                         <div className="space-y-2 mb-4">
-                          <div className="flex items-center gap-2 text-xs text-white/50">
+                          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
                             <Calendar className="w-3 h-3" />
                             <span>{formatDate(resource.createdAt || null)}</span>
                           </div>
                           
                           {resource.submittedBy && (
-                            <div className="flex items-center gap-2 text-xs text-white/50">
+                            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
                               <User className="w-3 h-3" />
                               <span>By {resource.submittedBy}</span>
                             </div>
                           )}
                           
-                          <div className="flex items-center gap-2 text-xs text-white/50">
+                          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
                             <Download className="w-3 h-3" />
                             <span>{resource.downloadCount || 0} downloads</span>
                           </div>

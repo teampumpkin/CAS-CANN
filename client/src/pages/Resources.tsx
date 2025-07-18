@@ -350,7 +350,7 @@ export default function Resources() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0 shadow-lg"
+                    className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white border-0 shadow-lg"
                   >
                     <Upload className="w-5 h-5 mr-2" />
                     Upload Resource
@@ -549,7 +549,7 @@ export default function Resources() {
                         
                         <Button 
                           onClick={() => handleDownload(resource)}
-                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                         >
                           <Download className="w-4 h-4 mr-2" />
                           Download Resource

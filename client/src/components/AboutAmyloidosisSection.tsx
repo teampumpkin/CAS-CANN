@@ -137,7 +137,7 @@ export default function AboutAmyloidosisSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           {/* Enhanced background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/8 via-blue-50/30 to-[#00DD89]/8 dark:from-[#00AFE6]/5 dark:via-transparent dark:to-[#00DD89]/5"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/15 via-blue-50/30 to-[#00DD89]/15 dark:from-[#00AFE6]/5 dark:via-transparent dark:to-[#00DD89]/5"></div>
           
           {/* Medical cross pattern */}
           <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.08]">

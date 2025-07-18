@@ -950,7 +950,7 @@ export default function UploadResource() {
                   <Button
                     type="submit"
                     disabled={!selectedFile || isUploading || uploadMutation.isPending}
-                    className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0 px-8 py-3"
+                    className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white border-0 px-8 py-3"
                   >
                     {isUploading || uploadMutation.isPending ? (
                       <>

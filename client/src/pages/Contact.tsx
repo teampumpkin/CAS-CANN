@@ -322,7 +322,7 @@ export default function Contact() {
                 
                 <motion.a
                   href="#contact-form"
-                  className="flex items-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl px-6 py-4 hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 transition-all duration-300 group"
+                  className="flex items-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl px-6 py-4 hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 transition-all duration-300 group"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -747,7 +747,7 @@ export default function Contact() {
                     <Button
                       type="submit"
                       disabled={contactMutation.isPending}
-                      className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300 disabled:opacity-50 shadow-xl hover:shadow-2xl"
+                      className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300 disabled:opacity-50 shadow-xl hover:shadow-2xl"
                     >
                       {contactMutation.isPending ? (
                         <div className="flex items-center gap-3">

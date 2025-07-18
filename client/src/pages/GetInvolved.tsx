@@ -626,7 +626,7 @@ export default function GetInvolved() {
                                   <Button
                                     type="submit"
                                     disabled={membershipMutation.isPending}
-                                    className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0"
+                                    className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white border-0"
                                   >
                                     {membershipMutation.isPending ? (
                                       <>
@@ -813,7 +813,7 @@ export default function GetInvolved() {
                                   <Button
                                     type="submit"
                                     disabled={storyMutation.isPending}
-                                    className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0"
+                                    className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white border-0"
                                   >
                                     {storyMutation.isPending ? (
                                       <>
@@ -1242,7 +1242,7 @@ export default function GetInvolved() {
                         
                         <Button 
                           onClick={() => window.open(event.registrationUrl, '_blank')}
-                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group/btn"
+                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group/btn"
                         >
                           Register Now
                           <ExternalLink className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />

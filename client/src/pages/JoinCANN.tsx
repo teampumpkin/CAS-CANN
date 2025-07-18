@@ -314,19 +314,53 @@ export default function JoinCANN() {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm">
-                        <CardContent className="p-8">
-                          <div className={`w-16 h-16 bg-gradient-to-r ${benefit.color} rounded-2xl flex items-center justify-center mb-6`}>
-                            <benefit.icon className="w-8 h-8 text-white" />
+                      <div className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl h-full ${
+                        index === 0 
+                          ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200/50 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/35 dark:hover:to-cyan-800/35 hover:border-blue-300/60 dark:hover:border-blue-300/40 hover:shadow-blue-200/40 dark:hover:shadow-blue-500/25'
+                          : index === 1
+                          ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200/50 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300/60 dark:hover:border-emerald-300/40 hover:shadow-emerald-200/40 dark:hover:shadow-emerald-500/25'
+                          : index === 2
+                          ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/50 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/60 dark:hover:border-purple-300/40 hover:shadow-purple-200/40 dark:hover:shadow-purple-500/25'
+                          : index === 3
+                          ? 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/50 dark:border-orange-400/30 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/35 dark:hover:to-amber-800/35 hover:border-orange-300/60 dark:hover:border-orange-300/40 hover:shadow-orange-200/40 dark:hover:shadow-orange-500/25'
+                          : index === 4
+                          ? 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200/50 dark:border-pink-400/30 hover:from-pink-100/95 hover:to-rose-100/95 dark:hover:from-pink-800/35 dark:hover:to-rose-800/35 hover:border-pink-300/60 dark:hover:border-pink-300/40 hover:shadow-pink-200/40 dark:hover:shadow-pink-500/25'
+                          : 'bg-gradient-to-br from-red-50/95 to-pink-50/95 dark:from-red-900/25 dark:to-pink-900/25 border-red-200/50 dark:border-red-400/30 hover:from-red-100/95 hover:to-pink-100/95 dark:hover:from-red-800/35 dark:hover:to-pink-800/35 hover:border-red-300/60 dark:hover:border-red-300/40 hover:shadow-red-200/40 dark:hover:shadow-red-500/25'
+                      }`}>
+                        <div className="flex items-start gap-6">
+                          <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                            <benefit.icon className="w-6 h-6 text-white" />
                           </div>
-                          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                            {benefit.title}
-                          </h3>
-                          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                            {benefit.description}
-                          </p>
-                        </CardContent>
-                      </Card>
+                          <div>
+                            <h3 className={`text-xl font-semibold mb-3 font-rosarivo ${
+                              index === 0 
+                                ? 'text-blue-900 dark:text-blue-100'
+                                : index === 1
+                                ? 'text-emerald-900 dark:text-emerald-100'
+                                : index === 2
+                                ? 'text-purple-900 dark:text-purple-100'
+                                : index === 3
+                                ? 'text-orange-900 dark:text-orange-100'
+                                : index === 4
+                                ? 'text-pink-900 dark:text-pink-100'
+                                : 'text-red-900 dark:text-red-100'
+                            }`}>{benefit.title}</h3>
+                            <p className={`leading-relaxed ${
+                              index === 0 
+                                ? 'text-blue-700 dark:text-blue-300'
+                                : index === 1
+                                ? 'text-emerald-700 dark:text-emerald-300'
+                                : index === 2
+                                ? 'text-purple-700 dark:text-purple-300'
+                                : index === 3
+                                ? 'text-orange-700 dark:text-orange-300'
+                                : index === 4
+                                ? 'text-pink-700 dark:text-pink-300'
+                                : 'text-red-700 dark:text-red-300'
+                            }`}>{benefit.description}</p>
+                          </div>
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -474,37 +508,87 @@ export default function JoinCANN() {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm">
-                        <CardContent className="p-8">
-                          <div className="flex items-start gap-4 mb-6">
-                            <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center flex-shrink-0">
-                              <resource.icon className="w-6 h-6 text-white" />
-                            </div>
-                            <div>
-                              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                                {resource.title}
-                              </h3>
-                              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                                <span className="bg-[#00AFE6]/10 text-[#00AFE6] px-2 py-1 rounded-full">
-                                  {resource.type}
-                                </span>
-                                <span>•</span>
-                                <span>{resource.duration || resource.pages || resource.items}</span>
-                              </div>
-                            </div>
+                      <div className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl h-full ${
+                        index === 0 
+                          ? 'bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 border-blue-200/50 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-indigo-100/95 dark:hover:from-blue-800/35 dark:hover:to-indigo-800/35 hover:border-blue-300/60 dark:hover:border-blue-300/40 hover:shadow-blue-200/40 dark:hover:shadow-blue-500/25'
+                          : index === 1
+                          ? 'bg-gradient-to-br from-emerald-50/95 to-teal-50/95 dark:from-emerald-900/25 dark:to-teal-900/25 border-emerald-200/50 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-teal-100/95 dark:hover:from-emerald-800/35 dark:hover:to-teal-800/35 hover:border-emerald-300/60 dark:hover:border-emerald-300/40 hover:shadow-emerald-200/40 dark:hover:shadow-emerald-500/25'
+                          : index === 2
+                          ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/50 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/60 dark:hover:border-purple-300/40 hover:shadow-purple-200/40 dark:hover:shadow-purple-500/25'
+                          : 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/50 dark:border-orange-400/30 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/35 dark:hover:to-amber-800/35 hover:border-orange-300/60 dark:hover:border-orange-300/40 hover:shadow-orange-200/40 dark:hover:shadow-orange-500/25'
+                      }`}>
+                        <div className="flex items-start gap-6">
+                          <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                            <resource.icon className="w-6 h-6 text-white" />
                           </div>
-                          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                            {resource.description}
-                          </p>
-                          <Button 
-                            variant="outline"
-                            className="w-full border-[#00AFE6] text-[#00AFE6] hover:bg-[#00AFE6] hover:text-white transition-all duration-300"
-                          >
-                            <Download className="w-4 h-4 mr-2" />
-                            Access Resource
-                          </Button>
-                        </CardContent>
-                      </Card>
+                          <div className="flex-1">
+                            <h3 className={`text-xl font-semibold mb-2 font-rosarivo ${
+                              index === 0 
+                                ? 'text-blue-900 dark:text-blue-100'
+                                : index === 1
+                                ? 'text-emerald-900 dark:text-emerald-100'
+                                : index === 2
+                                ? 'text-purple-900 dark:text-purple-100'
+                                : 'text-orange-900 dark:text-orange-100'
+                            }`}>{resource.title}</h3>
+                            <div className="flex items-center gap-2 text-sm mb-4">
+                              <span className={`px-2 py-1 rounded-full ${
+                                index === 0 
+                                  ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300'
+                                  : index === 1
+                                  ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300'
+                                  : index === 2
+                                  ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300'
+                                  : 'bg-orange-100 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300'
+                              }`}>
+                                {resource.type}
+                              </span>
+                              <span className={`${
+                                index === 0 
+                                  ? 'text-blue-600 dark:text-blue-400'
+                                  : index === 1
+                                  ? 'text-emerald-600 dark:text-emerald-400'
+                                  : index === 2
+                                  ? 'text-purple-600 dark:text-purple-400'
+                                  : 'text-orange-600 dark:text-orange-400'
+                              }`}>•</span>
+                              <span className={`${
+                                index === 0 
+                                  ? 'text-blue-600 dark:text-blue-400'
+                                  : index === 1
+                                  ? 'text-emerald-600 dark:text-emerald-400'
+                                  : index === 2
+                                  ? 'text-purple-600 dark:text-purple-400'
+                                  : 'text-orange-600 dark:text-orange-400'
+                              }`}>{resource.duration || resource.pages || resource.items}</span>
+                            </div>
+                            <p className={`leading-relaxed mb-6 ${
+                              index === 0 
+                                ? 'text-blue-700 dark:text-blue-300'
+                                : index === 1
+                                ? 'text-emerald-700 dark:text-emerald-300'
+                                : index === 2
+                                ? 'text-purple-700 dark:text-purple-300'
+                                : 'text-orange-700 dark:text-orange-300'
+                            }`}>{resource.description}</p>
+                            <Button 
+                              variant="outline"
+                              className={`w-full transition-all duration-300 ${
+                                index === 0 
+                                  ? 'border-blue-300 text-blue-700 hover:bg-blue-600 hover:text-white dark:border-blue-400 dark:text-blue-300 dark:hover:bg-blue-500'
+                                  : index === 1
+                                  ? 'border-emerald-300 text-emerald-700 hover:bg-emerald-600 hover:text-white dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-500'
+                                  : index === 2
+                                  ? 'border-purple-300 text-purple-700 hover:bg-purple-600 hover:text-white dark:border-purple-400 dark:text-purple-300 dark:hover:bg-purple-500'
+                                  : 'border-orange-300 text-orange-700 hover:bg-orange-600 hover:text-white dark:border-orange-400 dark:text-orange-300 dark:hover:bg-orange-500'
+                              }`}
+                            >
+                              <Download className="w-4 h-4 mr-2" />
+                              Access Resource
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -566,33 +650,67 @@ export default function JoinCANN() {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm">
-                        <CardContent className="p-8">
-                          <div className="flex items-start gap-4 mb-6">
-                            <div className="w-12 h-12 bg-gradient-to-r from-gray-600 to-gray-700 rounded-2xl flex items-center justify-center flex-shrink-0">
-                              <doc.icon className="w-6 h-6 text-white" />
-                            </div>
-                            <div>
-                              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                                {doc.title}
-                              </h3>
-                              <span className="text-sm text-gray-500 dark:text-gray-400">
-                                {doc.date}
-                              </span>
-                            </div>
+                      <div className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl h-full ${
+                        index === 0 
+                          ? 'bg-gradient-to-br from-slate-50/95 to-gray-50/95 dark:from-slate-900/25 dark:to-gray-900/25 border-slate-200/50 dark:border-slate-400/30 hover:from-slate-100/95 hover:to-gray-100/95 dark:hover:from-slate-800/35 dark:hover:to-gray-800/35 hover:border-slate-300/60 dark:hover:border-slate-300/40 hover:shadow-slate-200/40 dark:hover:shadow-slate-500/25'
+                          : index === 1
+                          ? 'bg-gradient-to-br from-indigo-50/95 to-blue-50/95 dark:from-indigo-900/25 dark:to-blue-900/25 border-indigo-200/50 dark:border-indigo-400/30 hover:from-indigo-100/95 hover:to-blue-100/95 dark:hover:from-indigo-800/35 dark:hover:to-blue-800/35 hover:border-indigo-300/60 dark:hover:border-indigo-300/40 hover:shadow-indigo-200/40 dark:hover:shadow-indigo-500/25'
+                          : index === 2
+                          ? 'bg-gradient-to-br from-teal-50/95 to-cyan-50/95 dark:from-teal-900/25 dark:to-cyan-900/25 border-teal-200/50 dark:border-teal-400/30 hover:from-teal-100/95 hover:to-cyan-100/95 dark:hover:from-teal-800/35 dark:hover:to-cyan-800/35 hover:border-teal-300/60 dark:hover:border-teal-300/40 hover:shadow-teal-200/40 dark:hover:shadow-teal-500/25'
+                          : 'bg-gradient-to-br from-amber-50/95 to-yellow-50/95 dark:from-amber-900/25 dark:to-yellow-900/25 border-amber-200/50 dark:border-amber-400/30 hover:from-amber-100/95 hover:to-yellow-100/95 dark:hover:from-amber-800/35 dark:hover:to-yellow-800/35 hover:border-amber-300/60 dark:hover:border-amber-300/40 hover:shadow-amber-200/40 dark:hover:shadow-amber-500/25'
+                      }`}>
+                        <div className="flex items-start gap-6">
+                          <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                            <doc.icon className="w-6 h-6 text-white" />
                           </div>
-                          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                            {doc.description}
-                          </p>
-                          <Button 
-                            variant="outline"
-                            className="w-full border-gray-400 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300"
-                          >
-                            <Download className="w-4 h-4 mr-2" />
-                            Download Document
-                          </Button>
-                        </CardContent>
-                      </Card>
+                          <div className="flex-1">
+                            <h3 className={`text-xl font-semibold mb-2 font-rosarivo ${
+                              index === 0 
+                                ? 'text-slate-900 dark:text-slate-100'
+                                : index === 1
+                                ? 'text-indigo-900 dark:text-indigo-100'
+                                : index === 2
+                                ? 'text-teal-900 dark:text-teal-100'
+                                : 'text-amber-900 dark:text-amber-100'
+                            }`}>{doc.title}</h3>
+                            <span className={`text-sm mb-4 block ${
+                              index === 0 
+                                ? 'text-slate-600 dark:text-slate-400'
+                                : index === 1
+                                ? 'text-indigo-600 dark:text-indigo-400'
+                                : index === 2
+                                ? 'text-teal-600 dark:text-teal-400'
+                                : 'text-amber-600 dark:text-amber-400'
+                            }`}>
+                              {doc.date}
+                            </span>
+                            <p className={`leading-relaxed mb-6 ${
+                              index === 0 
+                                ? 'text-slate-700 dark:text-slate-300'
+                                : index === 1
+                                ? 'text-indigo-700 dark:text-indigo-300'
+                                : index === 2
+                                ? 'text-teal-700 dark:text-teal-300'
+                                : 'text-amber-700 dark:text-amber-300'
+                            }`}>{doc.description}</p>
+                            <Button 
+                              variant="outline"
+                              className={`w-full transition-all duration-300 ${
+                                index === 0 
+                                  ? 'border-slate-300 text-slate-700 hover:bg-slate-600 hover:text-white dark:border-slate-400 dark:text-slate-300 dark:hover:bg-slate-500'
+                                  : index === 1
+                                  ? 'border-indigo-300 text-indigo-700 hover:bg-indigo-600 hover:text-white dark:border-indigo-400 dark:text-indigo-300 dark:hover:bg-indigo-500'
+                                  : index === 2
+                                  ? 'border-teal-300 text-teal-700 hover:bg-teal-600 hover:text-white dark:border-teal-400 dark:text-teal-300 dark:hover:bg-teal-500'
+                                  : 'border-amber-300 text-amber-700 hover:bg-amber-600 hover:text-white dark:border-amber-400 dark:text-amber-300 dark:hover:bg-amber-500'
+                              }`}
+                            >
+                              <Download className="w-4 h-4 mr-2" />
+                              Download Document
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>

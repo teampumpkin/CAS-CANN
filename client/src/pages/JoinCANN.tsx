@@ -322,50 +322,14 @@ export default function JoinCANN() {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <div className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl h-full ${
-                        index === 0 
-                          ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200/50 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/35 dark:hover:to-cyan-800/35 hover:border-blue-300/60 dark:hover:border-blue-300/40 hover:shadow-blue-200/40 dark:hover:shadow-blue-500/25'
-                          : index === 1
-                          ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200/50 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300/60 dark:hover:border-emerald-300/40 hover:shadow-emerald-200/40 dark:hover:shadow-emerald-500/25'
-                          : index === 2
-                          ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/50 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/60 dark:hover:border-purple-300/40 hover:shadow-purple-200/40 dark:hover:shadow-purple-500/25'
-                          : index === 3
-                          ? 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/50 dark:border-orange-400/30 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/35 dark:hover:to-amber-800/35 hover:border-orange-300/60 dark:hover:border-orange-300/40 hover:shadow-orange-200/40 dark:hover:shadow-orange-500/25'
-                          : index === 4
-                          ? 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200/50 dark:border-pink-400/30 hover:from-pink-100/95 hover:to-rose-100/95 dark:hover:from-pink-800/35 dark:hover:to-rose-800/35 hover:border-pink-300/60 dark:hover:border-pink-300/40 hover:shadow-pink-200/40 dark:hover:shadow-pink-500/25'
-                          : 'bg-gradient-to-br from-red-50/95 to-pink-50/95 dark:from-red-900/25 dark:to-pink-900/25 border-red-200/50 dark:border-red-400/30 hover:from-red-100/95 hover:to-pink-100/95 dark:hover:from-red-800/35 dark:hover:to-pink-800/35 hover:border-red-300/60 dark:hover:border-red-300/40 hover:shadow-red-200/40 dark:hover:shadow-red-500/25'
-                      }`}>
+                      <div className="backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl h-full bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
                         <div className="flex items-start gap-6">
                           <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                             <benefit.icon className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <h3 className={`text-xl font-semibold mb-3 font-rosarivo ${
-                              index === 0 
-                                ? 'text-blue-900 dark:text-blue-100'
-                                : index === 1
-                                ? 'text-emerald-900 dark:text-emerald-100'
-                                : index === 2
-                                ? 'text-purple-900 dark:text-purple-100'
-                                : index === 3
-                                ? 'text-orange-900 dark:text-orange-100'
-                                : index === 4
-                                ? 'text-pink-900 dark:text-pink-100'
-                                : 'text-red-900 dark:text-red-100'
-                            }`}>{benefit.title}</h3>
-                            <p className={`leading-relaxed ${
-                              index === 0 
-                                ? 'text-blue-700 dark:text-blue-300'
-                                : index === 1
-                                ? 'text-emerald-700 dark:text-emerald-300'
-                                : index === 2
-                                ? 'text-purple-700 dark:text-purple-300'
-                                : index === 3
-                                ? 'text-orange-700 dark:text-orange-300'
-                                : index === 4
-                                ? 'text-pink-700 dark:text-pink-300'
-                                : 'text-red-700 dark:text-red-300'
-                            }`}>{benefit.description}</p>
+                            <h3 className="text-xl font-semibold mb-3 font-rosarivo text-gray-900 dark:text-white">{benefit.title}</h3>
+                            <p className="leading-relaxed text-gray-600 dark:text-gray-300">{benefit.description}</p>
                           </div>
                         </div>
                       </div>
@@ -518,12 +482,12 @@ export default function JoinCANN() {
                     >
                       <div className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl h-full ${
                         index === 0 
-                          ? 'bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 border-blue-200/50 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-indigo-100/95 dark:hover:from-blue-800/35 dark:hover:to-indigo-800/35 hover:border-blue-300/60 dark:hover:border-blue-300/40 hover:shadow-blue-200/40 dark:hover:shadow-blue-500/25'
+                          ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/25'
                           : index === 1
-                          ? 'bg-gradient-to-br from-emerald-50/95 to-teal-50/95 dark:from-emerald-900/25 dark:to-teal-900/25 border-emerald-200/50 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-teal-100/95 dark:hover:from-emerald-800/35 dark:hover:to-teal-800/35 hover:border-emerald-300/60 dark:hover:border-emerald-300/40 hover:shadow-emerald-200/40 dark:hover:shadow-emerald-500/25'
+                          ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/25'
                           : index === 2
-                          ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/50 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/60 dark:hover:border-purple-300/40 hover:shadow-purple-200/40 dark:hover:shadow-purple-500/25'
-                          : 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/50 dark:border-orange-400/30 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/35 dark:hover:to-amber-800/35 hover:border-orange-300/60 dark:hover:border-orange-300/40 hover:shadow-orange-200/40 dark:hover:shadow-orange-500/25'
+                          ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/25'
+                          : 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/25'
                       }`}>
                         <div className="flex items-start gap-6">
                           <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -660,12 +624,12 @@ export default function JoinCANN() {
                     >
                       <div className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl h-full ${
                         index === 0 
-                          ? 'bg-gradient-to-br from-slate-50/95 to-gray-50/95 dark:from-slate-900/25 dark:to-gray-900/25 border-slate-200/50 dark:border-slate-400/30 hover:from-slate-100/95 hover:to-gray-100/95 dark:hover:from-slate-800/35 dark:hover:to-gray-800/35 hover:border-slate-300/60 dark:hover:border-slate-300/40 hover:shadow-slate-200/40 dark:hover:shadow-slate-500/25'
+                          ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/25'
                           : index === 1
-                          ? 'bg-gradient-to-br from-indigo-50/95 to-blue-50/95 dark:from-indigo-900/25 dark:to-blue-900/25 border-indigo-200/50 dark:border-indigo-400/30 hover:from-indigo-100/95 hover:to-blue-100/95 dark:hover:from-indigo-800/35 dark:hover:to-blue-800/35 hover:border-indigo-300/60 dark:hover:border-indigo-300/40 hover:shadow-indigo-200/40 dark:hover:shadow-indigo-500/25'
+                          ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/25'
                           : index === 2
-                          ? 'bg-gradient-to-br from-teal-50/95 to-cyan-50/95 dark:from-teal-900/25 dark:to-cyan-900/25 border-teal-200/50 dark:border-teal-400/30 hover:from-teal-100/95 hover:to-cyan-100/95 dark:hover:from-teal-800/35 dark:hover:to-cyan-800/35 hover:border-teal-300/60 dark:hover:border-teal-300/40 hover:shadow-teal-200/40 dark:hover:shadow-teal-500/25'
-                          : 'bg-gradient-to-br from-amber-50/95 to-yellow-50/95 dark:from-amber-900/25 dark:to-yellow-900/25 border-amber-200/50 dark:border-amber-400/30 hover:from-amber-100/95 hover:to-yellow-100/95 dark:hover:from-amber-800/35 dark:hover:to-yellow-800/35 hover:border-amber-300/60 dark:hover:border-amber-300/40 hover:shadow-amber-200/40 dark:hover:shadow-amber-500/25'
+                          ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/25'
+                          : 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/25'
                       }`}>
                         <div className="flex items-start gap-6">
                           <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">

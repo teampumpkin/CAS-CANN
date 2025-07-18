@@ -15,7 +15,7 @@ export default function FeaturedSpotlights() {
       image: '/images/clinical-guide-1.jpg',
       readTime: '8 min read',
       gradient: 'from-[#00AFE6] to-[#00DD89]',
-      bgGradient: 'from-blue-50 to-cyan-50',
+      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
       tags: ['Clinical Practice', 'Diagnosis', 'Provincial Guidelines'],
       date: 'January 2025'
     },
@@ -27,7 +27,7 @@ export default function FeaturedSpotlights() {
       image: '/images/research-update-1.jpg',
       readTime: '10 min read',
       gradient: 'from-emerald-500 to-teal-600',
-      bgGradient: 'from-emerald-50 to-teal-50',
+      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
       tags: ['Research', 'ATTR', 'Treatment'],
       date: 'December 2024'
     },

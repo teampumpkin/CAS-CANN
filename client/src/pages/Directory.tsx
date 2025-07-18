@@ -20,19 +20,19 @@ export default function Directory() {
   const itemsPerPage = 6;
 
   const provinces = [
-    { name: 'British Columbia', code: 'BC', centers: 5, color: 'from-blue-500 to-cyan-500' },
-    { name: 'Alberta', code: 'AB', centers: 3, color: 'from-green-500 to-emerald-500' },
-    { name: 'Saskatchewan', code: 'SK', centers: 1, color: 'from-yellow-500 to-orange-500' },
-    { name: 'Manitoba', code: 'MB', centers: 2, color: 'from-purple-500 to-violet-500' },
-    { name: 'Ontario', code: 'ON', centers: 8, color: 'from-red-500 to-pink-500' },
-    { name: 'Quebec', code: 'QC', centers: 4, color: 'from-indigo-500 to-blue-500' },
-    { name: 'New Brunswick', code: 'NB', centers: 1, color: 'from-teal-500 to-cyan-500' },
-    { name: 'Nova Scotia', code: 'NS', centers: 2, color: 'from-orange-500 to-red-500' },
-    { name: 'Prince Edward Island', code: 'PE', centers: 1, color: 'from-pink-500 to-rose-500' },
-    { name: 'Newfoundland and Labrador', code: 'NL', centers: 1, color: 'from-emerald-500 to-green-500' },
-    { name: 'Northwest Territories', code: 'NT', centers: 1, color: 'from-cyan-500 to-blue-500' },
-    { name: 'Yukon', code: 'YT', centers: 1, color: 'from-green-500 to-teal-500' },
-    { name: 'Nunavut', code: 'NU', centers: 1, color: 'from-purple-500 to-pink-500' }
+    { name: 'British Columbia', code: 'BC', centers: 5, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Alberta', code: 'AB', centers: 3, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Saskatchewan', code: 'SK', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Manitoba', code: 'MB', centers: 2, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Ontario', code: 'ON', centers: 8, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Quebec', code: 'QC', centers: 4, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'New Brunswick', code: 'NB', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Nova Scotia', code: 'NS', centers: 2, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Prince Edward Island', code: 'PE', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Newfoundland and Labrador', code: 'NL', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Northwest Territories', code: 'NT', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Yukon', code: 'YT', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
+    { name: 'Nunavut', code: 'NU', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' }
   ];
 
   const programTypes = [

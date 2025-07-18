@@ -68,28 +68,28 @@ const participationWays = [
     title: "Join CAS",
     description: "Become a member of our growing community. Clinicians, researchers, and health system leaders are especially encouraged to register.",
     action: "Register Now",
-    color: "from-[#00AFE6] to-blue-500"
+    color: "from-[#00AFE6] to-[#00DD89]"
   },
   {
     icon: Upload,
     title: "Contribute Resources",
     description: "Upload clinical tools or patient education materials through our structured portal to help the community.",
     action: "Upload Resource",
-    color: "from-[#00DD89] to-green-500"
+    color: "from-[#00AFE6] to-[#00DD89]"
   },
   {
     icon: MessageSquare,
     title: "Share Your Story",
     description: "Help raise awareness by sharing a lived experience, reflection, or clinical journey with the community.",
     action: "Share Story",
-    color: "from-purple-500 to-purple-600"
+    color: "from-[#00AFE6] to-[#00DD89]"
   },
   {
     icon: Gift,
     title: "Support the Mission",
     description: "We welcome support from aligned organizations, philanthropic partners, and volunteers. Donations support CAS initiatives.",
     action: "Donate Now",
-    color: "from-orange-500 to-red-500"
+    color: "from-[#00AFE6] to-[#00DD89]"
   }
 ];
 
@@ -813,7 +813,7 @@ export default function GetInvolved() {
                                   <Button
                                     type="submit"
                                     disabled={storyMutation.isPending}
-                                    className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-600/80 hover:to-purple-500/80 text-white border-0"
+                                    className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0"
                                   >
                                     {storyMutation.isPending ? (
                                       <>

@@ -12,7 +12,7 @@ export default function EventsNewsletterSection() {
       description: 'Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.',
       date: 'November 15-16, 2024',
       gradient: 'from-[#00AFE6] to-[#0088CC]',
-      bgGradient: 'from-blue-50 to-indigo-50',
+      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
       attendees: '250+',
       type: 'In-Person'
     },
@@ -22,7 +22,7 @@ export default function EventsNewsletterSection() {
       description: 'Expert presentations on the latest treatment advances, diagnostic techniques, and clinical trial updates.',
       date: 'First Thursday of each month',
       gradient: 'from-[#00DD89] to-[#00BB77]',
-      bgGradient: 'from-green-50 to-emerald-50',
+      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
       attendees: '500+',
       type: 'Virtual'
     },
@@ -32,7 +32,7 @@ export default function EventsNewsletterSection() {
       description: 'Virtual and in-person meetings across Canada providing emotional support and practical guidance.',
       date: 'Weekly sessions available',
       gradient: 'from-purple-500 to-purple-700',
-      bgGradient: 'from-purple-50 to-indigo-50',
+      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
       attendees: '50+',
       type: 'Hybrid'
     }

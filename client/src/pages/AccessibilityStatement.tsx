@@ -234,15 +234,15 @@ export default function AccessibilityStatement() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200 dark:border-blue-800">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-blue-900 dark:text-blue-100">
+                  <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
                     <Target className="w-6 h-6" />
                     {language === 'en' ? 'Our Mission' : 'Notre mission'}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-blue-800 dark:text-blue-200">
+                  <p className="text-gray-600 dark:text-gray-300">
                     {language === 'en'
                       ? 'To provide accessible, comprehensive healthcare information and support services that empower all individuals affected by amyloidosis, ensuring no one is left behind due to accessibility barriers.'
                       : 'Fournir des informations et des services de soutien en matière de santé accessibles et complets qui permettent à toutes les personnes affectées par l\'amyloïdose de s\'autonomiser, en veillant à ce que personne ne soit laissé pour compte en raison d\'obstacles à l\'accessibilité.'
@@ -251,15 +251,15 @@ export default function AccessibilityStatement() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-green-50/95 to-emerald-50/95 dark:from-green-900/25 dark:to-emerald-900/25 border-green-200 dark:border-green-800">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-green-900 dark:text-green-100">
+                  <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
                     <Users className="w-6 h-6" />
                     {language === 'en' ? 'Who We Serve' : 'Qui nous servons'}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-green-800 dark:text-green-200">
+                  <p className="text-gray-600 dark:text-gray-300">
                     {language === 'en'
                       ? 'Patients, caregivers, healthcare professionals, and researchers - including those who use assistive technologies such as screen readers, voice recognition software, and alternative input devices.'
                       : 'Patients, soignants, professionnels de santé et chercheurs - y compris ceux qui utilisent des technologies d\'assistance telles que les lecteurs d\'écran, les logiciels de reconnaissance vocale et les dispositifs d\'entrée alternatifs.'
@@ -466,15 +466,15 @@ export default function AccessibilityStatement() {
             </p>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200 dark:border-blue-800">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-blue-900 dark:text-blue-100">
+                  <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
                     <Mail className="w-5 h-5" />
                     {language === 'en' ? 'Email Support' : 'Support par email'}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-blue-800 dark:text-blue-200 mb-4">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
                     {language === 'en'
                       ? 'For accessibility-related questions or to report issues:'
                       : 'Pour les questions liées à l\'accessibilité ou pour signaler des problèmes:'
@@ -482,7 +482,7 @@ export default function AccessibilityStatement() {
                   </p>
                   <Button 
                     variant="outline" 
-                    className="border-blue-300 text-blue-700 hover:bg-blue-50 dark:border-blue-700 dark:text-blue-300 dark:hover:bg-blue-900/20"
+                    className="border-[#00AFE6]/30 text-[#00AFE6] hover:bg-[#00AFE6]/10 dark:border-[#00AFE6]/50 dark:text-[#00AFE6] dark:hover:bg-[#00AFE6]/20"
                     asChild
                   >
                     <a href="mailto:accessibility@canadianamyloidosis.ca">
@@ -492,15 +492,15 @@ export default function AccessibilityStatement() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-green-50/95 to-emerald-50/95 dark:from-green-900/25 dark:to-emerald-900/25 border-green-200 dark:border-green-800">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-green-900 dark:text-green-100">
+                  <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
                     <Phone className="w-5 h-5" />
                     {language === 'en' ? 'Phone Support' : 'Support téléphonique'}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-green-800 dark:text-green-200 mb-4">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
                     {language === 'en'
                       ? 'Call us during business hours (Monday-Friday, 9 AM - 5 PM EST):'
                       : 'Appelez-nous pendant les heures ouvrables (lundi-vendredi, 9h-17h EST):'
@@ -508,7 +508,7 @@ export default function AccessibilityStatement() {
                   </p>
                   <Button 
                     variant="outline" 
-                    className="border-green-300 text-green-700 hover:bg-green-50 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/20"
+                    className="border-[#00DD89]/30 text-[#00DD89] hover:bg-[#00DD89]/10 dark:border-[#00DD89]/50 dark:text-[#00DD89] dark:hover:bg-[#00DD89]/20"
                     asChild
                   >
                     <a href="tel:+1-800-555-0123">

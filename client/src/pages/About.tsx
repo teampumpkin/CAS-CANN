@@ -642,8 +642,8 @@ export default function About() {
                 description: "Foundational governance documents outlining our mission, structure, and operating principles.",
                 icon: FileText,
                 color: "from-[#00AFE6] to-blue-500",
-                bgColor: "from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25",
-                borderColor: "border-blue-200/50 dark:border-blue-400/30",
+                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30",
                 documents: ["Articles of Incorporation", "Organizational Bylaws", "Mission Statement", "Code of Ethics"]
               },
               {
@@ -651,8 +651,8 @@ export default function About() {
                 description: "Policies and procedures ensuring high-quality clinical practice and patient safety standards.",
                 icon: Shield,
                 color: "from-[#00DD89] to-green-500",
-                bgColor: "from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25",
-                borderColor: "border-emerald-200/50 dark:border-emerald-400/30",
+                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30",
                 documents: ["Clinical Practice Guidelines", "Quality Assurance Framework", "Patient Safety Protocols", "Ethics Review Board"]
               },
               {
@@ -660,8 +660,8 @@ export default function About() {
                 description: "Annual reports, financial statements, and accountability measures for public transparency.",
                 icon: Globe,
                 color: "from-purple-500 to-violet-500",
-                bgColor: "from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25",
-                borderColor: "border-purple-200/50 dark:border-purple-400/30",
+                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30",
                 documents: ["Annual Financial Report", "Audit Results", "Funding Sources", "Impact Metrics"]
               }
             ].map((section, index) => (
@@ -820,15 +820,7 @@ export default function About() {
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
-                className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl ${
-                  index === 0 
-                    ? 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200/50 dark:border-pink-400/30 hover:from-pink-100/95 hover:to-rose-100/95 dark:hover:from-pink-800/35 dark:hover:to-rose-800/35 hover:border-pink-300/60 dark:hover:border-pink-300/40 hover:shadow-pink-200/40 dark:hover:shadow-pink-500/25'
-                    : index === 1
-                    ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200/50 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300/60 dark:hover:border-emerald-300/40 hover:shadow-emerald-200/40 dark:hover:shadow-emerald-500/25'
-                    : index === 2
-                    ? 'bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 border-blue-200/50 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-indigo-100/95 dark:hover:from-blue-800/35 dark:hover:to-indigo-800/35 hover:border-blue-300/60 dark:hover:border-blue-300/40 hover:shadow-blue-200/40 dark:hover:shadow-blue-500/25'
-                    : 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/50 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/60 dark:hover:border-purple-300/40 hover:shadow-purple-200/40 dark:hover:shadow-purple-500/25'
-                }`}
+                className="backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -839,24 +831,8 @@ export default function About() {
                     <value.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className={`text-xl font-semibold mb-3 font-rosarivo ${
-                      index === 0 
-                        ? 'text-pink-900 dark:text-pink-100'
-                        : index === 1
-                        ? 'text-emerald-900 dark:text-emerald-100'
-                        : index === 2
-                        ? 'text-blue-900 dark:text-blue-100'
-                        : 'text-purple-900 dark:text-purple-100'
-                    }`}>{value.title}</h3>
-                    <p className={`leading-relaxed ${
-                      index === 0 
-                        ? 'text-pink-700 dark:text-pink-300'
-                        : index === 1
-                        ? 'text-emerald-700 dark:text-emerald-300'
-                        : index === 2
-                        ? 'text-blue-700 dark:text-blue-300'
-                        : 'text-purple-700 dark:text-purple-300'
-                    }`}>{value.description}</p>
+                    <h3 className="text-xl font-semibold mb-3 font-rosarivo text-gray-900 dark:text-white">{value.title}</h3>
+                    <p className="leading-relaxed text-gray-600 dark:text-gray-300">{value.description}</p>
                   </div>
                 </div>
               </motion.div>

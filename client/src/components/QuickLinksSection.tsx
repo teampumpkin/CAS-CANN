@@ -11,7 +11,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.findSpecialistsDesc'),
       href: '#specialists',
       gradient: 'from-[#00AFE6] to-[#0088CC]',
-      bgColor: 'from-blue-50 to-indigo-50'
+      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
     },
     {
       icon: BookOpen,
@@ -19,7 +19,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.patientResourcesDesc'),
       href: '#resources',
       gradient: 'from-[#00DD89] to-[#00BB77]',
-      bgColor: 'from-green-50 to-emerald-50'
+      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
     },
     {
       icon: Users,
@@ -27,7 +27,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.supportGroupsDesc'),
       href: '#support',
       gradient: 'from-purple-500 to-purple-700',
-      bgColor: 'from-purple-50 to-indigo-50'
+      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
     },
     {
       icon: Heart,
@@ -35,7 +35,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.getInvolvedDesc'),
       href: '#get-involved',
       gradient: 'from-pink-500 to-rose-600',
-      bgColor: 'from-pink-50 to-rose-50'
+      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
     },
     {
       icon: Calendar,
@@ -43,7 +43,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.eventsDesc'),
       href: '#events',
       gradient: 'from-orange-500 to-amber-600',
-      bgColor: 'from-orange-50 to-amber-50'
+      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
     },
     {
       icon: Phone,
@@ -51,7 +51,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.contactUsDesc'),
       href: '#contact',
       gradient: 'from-slate-600 to-slate-800',
-      bgColor: 'from-slate-50 to-gray-50'
+      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
     }
   ];
 

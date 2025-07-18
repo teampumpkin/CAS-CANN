@@ -327,7 +327,7 @@ export default function UploadResource() {
             {/* Submission Guidelines */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* Who Can Submit */}
-              <Card className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 backdrop-blur-xl border-blue-200/50 dark:border-white/20">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
                   <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                     <Users className="w-5 h-5 text-[#00AFE6]" />
@@ -361,7 +361,7 @@ export default function UploadResource() {
               </Card>
 
               {/* What's Accepted */}
-              <Card className="bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 backdrop-blur-xl border-emerald-200/50 dark:border-white/20">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
                   <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                     <FileText className="w-5 h-5 text-[#00AFE6]" />
@@ -402,7 +402,7 @@ export default function UploadResource() {
               </Card>
 
               {/* Review Process */}
-              <Card className="bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 backdrop-blur-xl border-purple-200/50 dark:border-white/20">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
                   <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                     <Clock className="w-5 h-5 text-[#00AFE6]" />
@@ -483,7 +483,7 @@ export default function UploadResource() {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 
                 {/* File Upload Section */}
-                <Card className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 backdrop-blur-xl border-blue-200/50 dark:border-white/20">
+                <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                   <CardHeader>
                     <CardTitle className="text-gray-900 dark:text-white">Upload File</CardTitle>
                   </CardHeader>
@@ -774,7 +774,7 @@ export default function UploadResource() {
                 </Card>
 
                 {/* Contributor Information */}
-                <Card className="bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 backdrop-blur-xl border-purple-200/50 dark:border-white/20">
+                <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                   <CardHeader>
                     <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                       <UserCheck className="w-5 h-5 text-[#00AFE6]" />

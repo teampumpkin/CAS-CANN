@@ -11,6 +11,7 @@ import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AccessibilityTools from "@/components/AccessibilityTools";
 import { lazy, Suspense } from "react";
 import { Loader2 } from "lucide-react";
 
@@ -32,6 +33,7 @@ const ALect2Amyloidosis = lazy(() => import("@/pages/amyloidosis-types/ALect2Amy
 const OtherAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/OtherAmyloidosis"));
 const CANN = lazy(() => import("@/pages/CANN"));
 const JoinCANN = lazy(() => import("@/pages/JoinCANN"));
+const AccessibilityStatement = lazy(() => import("@/pages/AccessibilityStatement"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 // Loading component
@@ -66,6 +68,7 @@ function Router() {
         <Route path="/amyloidosis-types/other-amyloidosis-types" component={OtherAmyloidosis} />
         <Route path="/cann" component={CANN} />
         <Route path="/join-cann" component={JoinCANN} />
+        <Route path="/accessibility" component={AccessibilityStatement} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
@@ -79,14 +82,23 @@ function App() {
         <LanguageProvider>
           <TooltipProvider>
             <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+              {/* Skip Links for Screen Readers */}
+              <a href="#main-content" className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:bg-[#00AFE6] focus:text-white focus:px-4 focus:py-2 focus:z-50 focus:rounded-br-lg">
+                Skip to main content
+              </a>
+              <a href="#navigation" className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-32 focus:bg-[#00AFE6] focus:text-white focus:px-4 focus:py-2 focus:z-50 focus:rounded-br-lg">
+                Skip to navigation
+              </a>
+              
               <Header />
-            <div className="pt-24">
-              <Router />
+              <main id="main-content" className="pt-24">
+                <Router />
+              </main>
+              <Footer />
+              <EnhancedScrollIndicator />
+              <PerformanceOptimizer />
+              <AccessibilityTools />
             </div>
-            <Footer />
-            <EnhancedScrollIndicator />
-            <PerformanceOptimizer />
-          </div>
           <Toaster />
         </TooltipProvider>
         </LanguageProvider>

@@ -35,6 +35,37 @@
   .text-4xl, .text-5xl, .text-6xl {
     line-height: 1.1;
   }
+
+  /* Accessibility: Screen Reader Only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Accessibility: Skip Links */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 0 0 4px 4px;
+    z-index: 100;
+    transition: top 0.3s;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
 }
 
 :root {
@@ -242,6 +273,225 @@
   .crawford-gradient {
     background: linear-gradient(135deg, #00AFE6 0%, #00DD89 100%);
   }
+
+  /* Custom scrollbar styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 175, 230, 0.6);
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 175, 230, 0.8);
+  }
+}
+
+/* Accessibility Features */
+:root {
+  --accessibility-font-size: 16px;
+}
+
+/* Font size adjustment */
+html.accessibility-font-size * {
+  font-size: calc(var(--accessibility-font-size) * 1px) !important;
+}
+
+/* High contrast mode */
+.accessibility-high-contrast {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #1a1a1a;
+  --card-foreground: #ffffff;
+  --border: #ffffff;
+  --input: #1a1a1a;
+  --ring: #ffffff;
+}
+
+.accessibility-high-contrast * {
+  border-color: #ffffff !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.accessibility-high-contrast img {
+  filter: contrast(150%) brightness(110%);
+}
+
+/* Inverted colors */
+.accessibility-inverted {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.accessibility-inverted img,
+.accessibility-inverted video {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Reduced motion */
+.accessibility-reduced-motion,
+.accessibility-reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Enhanced focus indicators */
+.accessibility-focus-visible *:focus {
+  outline: 3px solid #00AFE6 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 5px rgba(0, 175, 230, 0.3) !important;
+}
+
+/* Dyslexia-friendly font */
+.accessibility-dyslexia-font,
+.accessibility-dyslexia-font * {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', 'Arial', sans-serif !important;
+}
+
+/* Cursor size adjustments */
+.accessibility-cursor-large,
+.accessibility-cursor-large * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><polygon points="8,1 16,13 13,13 16,27 8,15 11,15" fill="white" stroke="black" stroke-width="2"/></svg>') 16 16, auto !important;
+}
+
+.accessibility-cursor-extra-large,
+.accessibility-cursor-extra-large * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><polygon points="8,1 24,19 19,19 24,41 8,23 13,23" fill="white" stroke="black" stroke-width="3"/></svg>') 24 24, auto !important;
+}
+
+/* Keyboard navigation improvements */
+.accessibility-keyboard-nav {
+  outline: none;
+}
+
+.accessibility-keyboard-nav:focus-visible {
+  outline: 3px solid #00AFE6;
+  outline-offset: 2px;
+}
+
+/* Screen reader improvements */
+.accessibility-screen-reader .sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  border: 0;
+  background: #fffbf0;
+  color: #333;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* High contrast button styles */
+.accessibility-high-contrast button,
+.accessibility-high-contrast .btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+.accessibility-high-contrast button:hover,
+.accessibility-high-contrast .btn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Ensure minimum touch targets */
+button, 
+a, 
+input, 
+select, 
+textarea, 
+[role="button"], 
+[role="link"] {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Skip links */
+.skip-links {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.skip-links:focus {
+  top: 0;
+}
+
+/* Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+    --border: #ffffff;
+    --card: #1a1a1a;
+    --card-foreground: #ffffff;
+  }
+}
+
+/* Print styles for accessibility */
+@media print {
+  * {
+    color: #000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+}
   
   .crawford-gradient-subtle {
     background: linear-gradient(135deg, rgba(0, 175, 230, 0.1) 0%, rgba(0, 221, 137, 0.1) 100%);
@@ -311,4 +561,3 @@
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #0099cc 0%, #00bb77 100%);
   }
-}

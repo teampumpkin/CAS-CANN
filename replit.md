@@ -29,6 +29,8 @@ Preferred communication style: Simple, everyday language.
 - ✅ Added simplified pathophysiology section to About Amyloidosis page explaining misfolded proteins in everyday language
 - ✅ Moved CANN (Canadian Amyloidosis Nursing Network) section from Directory page to Get Involved page for better organization
 - ✅ Added "Get Involved" link to Community dropdown in header navigation for easy access to the Get Involved page
+- ✅ Created comprehensive "Join CANN" page with complete structure including Overview, Membership Benefits, Join section, Member Login, Educational Resources, and Governance Documents
+- ✅ Added routing for /join-cann with proper navigation links throughout the site
 
 ## Recent Changes
 

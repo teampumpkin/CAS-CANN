@@ -25,6 +25,7 @@ import AAAmyloidosis from "@/pages/amyloidosis-types/AAAmyloidosis";
 import ALect2Amyloidosis from "@/pages/amyloidosis-types/ALect2Amyloidosis";
 import OtherAmyloidosis from "@/pages/amyloidosis-types/OtherAmyloidosis";
 import CANN from "@/pages/CANN";
+import JoinCANN from "@/pages/JoinCANN";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -46,6 +47,7 @@ function Router() {
       <Route path="/amyloidosis-types/alect2-amyloidosis" component={ALect2Amyloidosis} />
       <Route path="/amyloidosis-types/other-amyloidosis-types" component={OtherAmyloidosis} />
       <Route path="/cann" component={CANN} />
+      <Route path="/join-cann" component={JoinCANN} />
       <Route component={NotFound} />
     </Switch>
   );

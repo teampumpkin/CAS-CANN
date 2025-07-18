@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, Mail, Video, Heart, Users, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import logoImage from '@assets/image 1_1750236540297.png';
 
 export default function EventsNewsletterSection() {
   const { t } = useLanguage();
@@ -121,18 +122,33 @@ export default function EventsNewsletterSection() {
             <div className="relative z-10 grid lg:grid-cols-2 gap-12 p-12">
               {/* Newsletter Signup */}
               <div className="flex flex-col justify-center">
+                {/* Logo */}
                 <motion.div
-                  className="inline-flex items-center gap-2 bg-gray-900/20 dark:bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6 w-fit"
+                  className="flex justify-center mb-6"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <img 
+                    src={logoImage} 
+                    alt="Canadian Amyloidosis Society Logo" 
+                    className="h-16 w-auto drop-shadow-lg"
+                  />
+                </motion.div>
+
+                <motion.div
+                  className="inline-flex items-center gap-2 bg-gray-900/20 dark:bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6 w-fit mx-auto"
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="w-2 h-2 bg-[#00DD89] rounded-full animate-pulse"></div>
                   <span className="text-gray-900 dark:text-white/90 text-sm font-medium">{t('events.stayConnected')}</span>
                 </motion.div>
 
-                <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-cardo">
+                <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-cardo text-center">
                   {t('events.joinCommunity')}
                 </h3>
-                <p className="text-gray-700 dark:text-white/80 text-lg mb-8 leading-relaxed">
+                <p className="text-gray-700 dark:text-white/80 text-lg mb-8 leading-relaxed text-center">
                   {t('events.joinCommunityDesc')}
                 </p>
 

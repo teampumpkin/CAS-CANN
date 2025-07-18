@@ -165,8 +165,13 @@ const translations = {
     // About Page
     'about.hero.badge': 'About CAS',
     'about.hero.title': 'Canadian Amyloidosis Society',
+    'about.hero.title.connecting': 'Connecting',
+    'about.hero.title.healthcare': 'Healthcare',
+    'about.hero.title.canada': 'Across Canada',
     'about.hero.subtitle': 'Building a national platform for clinical practice support',
     'about.hero.description': 'Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through evidence-based collaboration.',
+    'about.hero.ourMission': 'Our Mission',
+    'about.hero.getInvolved': 'Get Involved',
     'about.hero.stats.professionals': 'Healthcare Professionals',
     'about.hero.stats.institutions': 'Partner Institutions',
     'about.hero.stats.resources': 'Clinical Resources',

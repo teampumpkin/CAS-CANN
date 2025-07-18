@@ -10,6 +10,17 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Complete About Amyloidosis Page Redesign with Medical Professional Focus (July 18, 2025)
+- ✅ **Professional hero section** - Full-screen medical design with animated elements, clinical statistics, and professional branding
+- ✅ **Medical audience targeting** - Designed for PCPs, cardiologists, neurologists, nephrologists, and hematologists
+- ✅ **Clinical red flags checklist** - High-risk presentations vs supporting features with clinical pearls
+- ✅ **AL vs ATTR vs Wild Type comparison table** - 11 clinical features including age, gender, inheritance, symptoms, diagnosis, treatment, and prognosis
+- ✅ **Stepwise diagnostic pathway** - 5-step evidence-based approach from clinical suspicion to subtype classification
+- ✅ **Clinical guidelines section** - Links to CCS, Mayo Clinic, and NHS guidelines with external access
+- ✅ **Professional disclaimer** - Clear marking as professional resource, not public health advice
+- ✅ **Enhanced visual design** - Medical background patterns, floating elements, and interactive animations
+- ✅ **Complete clinical focus** - All content oriented toward healthcare professionals with evidence-based approach
+
 ### Complete About CAS Page Redesign with Clinical Practice Focus (July 18, 2025)
 - ✅ **Rewritten intro section** - Now focuses on clinical practice support and evidence-based care
 - ✅ **Expanded "What We Do" section** with three core areas:

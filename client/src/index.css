@@ -66,6 +66,20 @@
   .skip-link:focus {
     top: 0;
   }
+
+  /* Navigation Dropdown Fix */
+  .dropdown-container {
+    position: relative;
+    z-index: 9999 !important;
+  }
+
+  .dropdown-menu {
+    position: absolute !important;
+    z-index: 9999 !important;
+    top: 100% !important;
+    left: 0 !important;
+    min-width: 280px !important;
+  }
 }
 
 :root {

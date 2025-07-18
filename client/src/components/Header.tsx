@@ -74,7 +74,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
         isScrolled 
           ? 'bg-gray-900/95 backdrop-blur-xl border-b border-white/10' 
           : 'bg-gray-900/80 backdrop-blur-xl'
@@ -139,12 +139,13 @@ export default function Header() {
                   {/* Dropdown Menu */}
                   {item.hasDropdown && (
                     <div
-                      className="absolute top-full left-0 pt-2 w-72 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300"
+                      className="dropdown-menu absolute top-full left-0 pt-2 w-72 z-[9999] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300"
                       onMouseEnter={() => setActiveDropdown(item.name)}
                       onMouseLeave={() => setActiveDropdown(null)}
+                      style={{ zIndex: 9999 }}
                     >
                       <motion.div
-                        className="bg-gradient-to-br from-gray-900/98 to-gray-800/98 backdrop-blur-xl rounded-2xl border border-[#00AFE6]/30 shadow-2xl shadow-[#00AFE6]/10 py-3 overflow-hidden"
+                        className="bg-gray-900/98 backdrop-blur-xl rounded-2xl border border-[#00AFE6]/30 shadow-2xl shadow-[#00AFE6]/10 py-3 overflow-hidden relative"
                         initial={{ opacity: 0, y: -20, scale: 0.9 }}
                         animate={{ 
                           opacity: activeDropdown === item.name ? 1 : 0, 
@@ -152,6 +153,7 @@ export default function Header() {
                           scale: activeDropdown === item.name ? 1 : 0.9
                         }}
                         transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 20 }}
+                        style={{ zIndex: 9999 }}
                       >
                         {/* Gradient glow effect */}
                         <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-2xl"></div>

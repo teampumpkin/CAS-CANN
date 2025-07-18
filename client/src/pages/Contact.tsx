@@ -206,7 +206,7 @@ export default function Contact() {
       {/* Hero Section with Interactive Elements */}
       <ParallaxBackground className="min-h-screen flex items-center relative overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/20 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/20 rounded-full blur-3xl translate-x-48 translate-y-48" />
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-white/5 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2" />
@@ -311,23 +311,23 @@ export default function Contact() {
                   whileHover={{ y: -5 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 group-hover:border-white/40 transition-all duration-300">
+                  <div className="relative bg-white/20 backdrop-blur-xl rounded-2xl p-6 border border-white/30 group-hover:border-white/50 transition-all duration-300 shadow-xl">
                     <div className="flex items-center gap-4 mb-3">
                       <div className={`w-12 h-12 bg-gradient-to-br ${section.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                         <section.icon className="w-6 h-6 text-white" />
                       </div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-[#00AFE6] transition-colors duration-300">
+                      <h3 className="text-lg font-bold text-white drop-shadow-lg group-hover:text-[#00AFE6] transition-colors duration-300">
                         {section.title}
                       </h3>
                     </div>
-                    <p className="text-white/80 text-sm leading-relaxed mb-4">
+                    <p className="text-white/90 text-sm leading-relaxed mb-4 drop-shadow-sm">
                       {section.description}
                     </p>
                     
                     {section.email && (
                       <motion.a
                         href={`mailto:${section.email}`}
-                        className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-medium text-sm transition-colors duration-300"
+                        className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-semibold text-sm transition-colors duration-300 drop-shadow-sm"
                         whileHover={{ x: 4 }}
                       >
                         <Mail className="w-4 h-4" />
@@ -336,12 +336,12 @@ export default function Contact() {
                     )}
                     
                     {section.links && (
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-3">
                         {section.links.map((link, linkIndex) => (
                           <motion.a
                             key={linkIndex}
                             href={link.url}
-                            className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-medium text-sm transition-colors duration-300"
+                            className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-semibold text-sm transition-colors duration-300 drop-shadow-sm"
                             whileHover={{ x: 4 }}
                           >
                             <ExternalLink className="w-4 h-4" />

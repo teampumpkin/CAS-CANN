@@ -57,6 +57,7 @@ function Router() {
         <Route path="/upload-resource" component={UploadResource} />
         <Route path="/get-involved" component={GetInvolved} />
         <Route path="/join" component={JoinCAS} />
+        <Route path="/join-cas" component={JoinCAS} />
         <Route path="/contact" component={Contact} />
         <Route path="/amyloidosis-types/al-light-chain-amyloidosis" component={ALAmyloidosis} />
         <Route path="/amyloidosis-types/attr-transthyretin-amyloidosis" component={ATTRAmyloidosis} />

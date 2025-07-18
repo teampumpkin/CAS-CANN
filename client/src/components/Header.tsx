@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'wouter';
 import casLogo from '@assets/image 1_1750236540297.png';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -10,7 +11,21 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [location] = useLocation();
   const { t } = useLanguage();
+
+  // Function to check if current page matches navigation item
+  const isPageActive = (href: string, dropdownItems?: any[]) => {
+    if (href === '#' || href === '/') {
+      return location === '/';
+    }
+    
+    if (dropdownItems) {
+      return dropdownItems.some(item => item.href === location);
+    }
+    
+    return location === href;
+  };
 
   const navItems = [
     {
@@ -111,7 +126,11 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className="flex items-center gap-2 px-4 py-2 text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 rounded-full transition-all duration-300 text-sm font-semibold border border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20"
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 text-sm font-semibold border ${
+                        isPageActive(item.href, item.dropdownItems)
+                          ? 'text-white bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
+                          : 'text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
+                      }`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -120,12 +139,22 @@ export default function Header() {
                       whileTap={{ scale: 0.98 }}
                     >
                       {item.name}
-                      <ChevronDown className={`w-3 h-3 transition-all duration-300 ${activeDropdown === item.name ? 'rotate-180 text-[#00AFE6]' : ''}`} />
+                      <ChevronDown className={`w-3 h-3 transition-all duration-300 ${
+                        activeDropdown === item.name ? 'rotate-180 text-[#00AFE6]' : 
+                        isPageActive(item.href, item.dropdownItems) ? 'text-[#00AFE6]' : ''
+                      }`} />
+                      {isPageActive(item.href, item.dropdownItems) && (
+                        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                      )}
                     </motion.button>
                   ) : (
                     <motion.a
                       href={item.href}
-                      className="flex items-center gap-2 px-4 py-2 text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 rounded-full transition-all duration-300 text-sm font-semibold border border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20"
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative ${
+                        isPageActive(item.href)
+                          ? 'text-white bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
+                          : 'text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
+                      }`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -133,6 +162,9 @@ export default function Header() {
                       whileTap={{ scale: 0.98 }}
                     >
                       {item.name}
+                      {isPageActive(item.href) && (
+                        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                      )}
                     </motion.a>
                   )}
 
@@ -235,27 +267,46 @@ export default function Header() {
                 <div key={item.name} className="space-y-1">
                   {item.hasDropdown ? (
                     <>
-                      <div className="px-4 py-3 font-semibold text-base border-b border-white/20 text-white/90">
+                      <div className={`px-4 py-3 font-semibold text-base border-b border-white/20 ${
+                        isPageActive(item.href, item.dropdownItems) ? 'text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20' : 'text-white/90'
+                      }`}>
                         {item.name}
+                        {isPageActive(item.href, item.dropdownItems) && (
+                          <div className="inline-block ml-2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                        )}
                       </div>
                       {item.dropdownItems?.map((dropdownItem) => (
                         <a
                           key={dropdownItem.name}
                           href={dropdownItem.href}
-                          className="block px-6 py-3 rounded-lg transition-all duration-300 text-base text-white/80 hover:text-white hover:bg-white/10"
+                          className={`block px-6 py-3 rounded-lg transition-all duration-300 text-base ${
+                            location === dropdownItem.href
+                              ? 'text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
+                              : 'text-white/80 hover:text-white hover:bg-white/10'
+                          }`}
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {dropdownItem.name}
+                          {location === dropdownItem.href && (
+                            <div className="inline-block ml-2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                          )}
                         </a>
                       ))}
                     </>
                   ) : (
                     <a
                       href={item.href}
-                      className="block px-4 py-3 font-semibold text-base rounded-lg transition-all duration-300 text-white/90 hover:bg-white/10"
+                      className={`block px-4 py-3 font-semibold text-base rounded-lg transition-all duration-300 ${
+                        isPageActive(item.href)
+                          ? 'text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
+                          : 'text-white/90 hover:bg-white/10'
+                      }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
+                      {isPageActive(item.href) && (
+                        <div className="inline-block ml-2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                      )}
                     </a>
                   )}
                 </div>

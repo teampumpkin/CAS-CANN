@@ -156,7 +156,7 @@ export default function AccessibilityTools() {
     <>
       {/* Accessibility Button */}
       <motion.div
-        className="fixed right-6 top-1/2 -translate-y-1/2 z-50"
+        className="fixed right-6 top-1/2 -translate-y-1/2 z-[110]"
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 1 }}
@@ -175,7 +175,7 @@ export default function AccessibilityTools() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[110] flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target, Hospital, ChevronDown, ChevronRight, MapPin, BookOpen, ExternalLink, Zap, Lightbulb, ArrowDown } from 'lucide-react';
+import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target, Hospital, ChevronDown, ChevronRight, MapPin, BookOpen, ExternalLink, Zap, Lightbulb, ArrowDown, CheckCircle, XCircle, AlertCircle, FileText, TrendingUp, Calendar, UserCheck } from 'lucide-react';
 import { Link } from 'wouter';
 import { useState } from 'react';
 import ParallaxBackground from '../components/ParallaxBackground';
@@ -105,14 +105,14 @@ export default function AboutAmyloidosis() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-4 py-2 border border-gray-900/20 dark:border-white/20 mb-6">
-              <Microscope className="w-4 h-4 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-gray-700 dark:text-white/90">Medical Information</span>
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500/10 to-orange-500/10 backdrop-blur-xl rounded-full px-4 py-2 border border-red-500/20 mb-6">
+              <UserCheck className="w-4 h-4 text-red-500" />
+              <span className="text-sm font-medium text-red-700 dark:text-red-400">FOR HEALTHCARE PROFESSIONALS</span>
             </div>
             
             <h1 className="crawford-section-title mb-6 leading-tight">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                About
+                Clinical Guide to
               </span>
               <br />
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
@@ -120,7 +120,21 @@ export default function AboutAmyloidosis() {
               </span>
             </h1>
             
-            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-10 max-w-3xl mx-auto">Learn about the different types, recognize the symptoms and take action early</p>
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-6 max-w-4xl mx-auto">
+              Designed for Primary Care Physicians, Cardiologists, Neurologists, Nephrologists, and Hematologists
+            </p>
+            
+            <div className="bg-red-50/80 dark:bg-red-900/20 backdrop-blur-xl rounded-2xl p-6 border border-red-200/50 dark:border-red-400/30 max-w-4xl mx-auto mb-8">
+              <div className="flex items-start gap-4">
+                <AlertTriangle className="w-6 h-6 text-red-500 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold text-red-900 dark:text-red-200 mb-2">Professional Use Only</h3>
+                  <p className="text-red-800 dark:text-red-300 text-sm leading-relaxed">
+                    This content is intended for healthcare professionals and should not be used for self-diagnosis or as a substitute for professional medical advice, diagnosis, or treatment.
+                  </p>
+                </div>
+              </div>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/directory" className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2">
@@ -471,8 +485,8 @@ export default function AboutAmyloidosis() {
           </div>
         </div>
       </section>
-      {/* Warning Signs Section */}
-      <section id="warning-signs" className="py-24 bg-gray-50 dark:bg-gray-900 relative">
+      {/* Clinical Red Flags Checklist */}
+      <section id="clinical-red-flags" className="py-24 bg-gray-50 dark:bg-gray-900 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -482,91 +496,504 @@ export default function AboutAmyloidosis() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-xl rounded-full px-4 py-2 border border-red-500/30 mb-6">
-              <AlertTriangle className="w-4 h-4 text-red-400" />
-              <span className="text-sm font-medium text-red-400">Critical Warning Signs</span>
+            <div className="inline-flex items-center gap-2 bg-red-500/10 backdrop-blur-xl rounded-full px-4 py-2 border border-red-500/20 mb-6">
+              <AlertTriangle className="w-4 h-4 text-red-500" />
+              <span className="text-sm font-medium text-red-700 dark:text-red-400">Clinical Red Flags</span>
             </div>
             
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Recognize the
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
+                When to Suspect Amyloidosis
               </span>
-              <br />
-              <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
-                Warning Signs
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto mb-8">
+              Clinical presentation checklist for identifying potential amyloidosis cases
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* High-Risk Presentations */}
+            <motion.div
+              className="bg-gradient-to-br from-red-50/95 to-orange-50/95 dark:from-red-900/25 dark:to-orange-900/25 backdrop-blur-xl rounded-2xl p-8 border border-red-200/50 dark:border-red-400/30"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl flex items-center justify-center">
+                  <AlertTriangle className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-red-900 dark:text-red-200">High-Risk Presentations</h3>
+                  <p className="text-red-700 dark:text-red-300 text-sm">Immediate amyloidosis evaluation recommended</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                {[
+                  'Heart failure with preserved ejection fraction + proteinuria',
+                  'Bilateral carpal tunnel syndrome in patients &gt;50 years',
+                  'Unexplained cardiomyopathy with low-voltage ECG',
+                  'Nephrotic syndrome with cardiac symptoms',
+                  'Peripheral neuropathy + autonomic dysfunction',
+                  'Enlarged tongue (macroglossia) with systemic symptoms',
+                  'Easy bruising + periorbital purpura',
+                  'Family history of polyneuropathy or cardiomyopathy',
+                  'Chronic inflammatory disease with proteinuria',
+                  'Restrictive cardiomyopathy with granular sparkling on echo'
+                ].map((flag, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-red-800 dark:text-red-200 text-sm leading-relaxed">{flag}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Supporting Clinical Features */}
+            <motion.div
+              className="bg-gradient-to-br from-orange-50/95 to-yellow-50/95 dark:from-orange-900/25 dark:to-yellow-900/25 backdrop-blur-xl rounded-2xl p-8 border border-orange-200/50 dark:border-orange-400/30"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl flex items-center justify-center">
+                  <AlertCircle className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-orange-900 dark:text-orange-200">Supporting Features</h3>
+                  <p className="text-orange-700 dark:text-orange-300 text-sm">Consider amyloidosis in differential diagnosis</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                {[
+                  'Unexplained weight loss &gt;10% in 6 months',
+                  'Chronic diarrhea with malabsorption',
+                  'Orthostatic hypotension without clear cause',
+                  'Hoarse voice with systemic symptoms',
+                  'Shoulder pad sign (amyloid shoulder arthropathy)',
+                  'Chronic fatigue with multi-organ involvement',
+                  'Recurrent soft tissue bleeding',
+                  'Hepatomegaly with cardiac or renal symptoms',
+                  'Delayed gastric emptying + neuropathy',
+                  'Skin thickening (scleroderma-like) with cardiac symptoms'
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-orange-800 dark:text-orange-200 text-sm leading-relaxed">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Clinical Pearls */}
+          <motion.div
+            className="mt-12 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/20"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
+                <Lightbulb className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Clinical Pearls</h3>
+                <p className="text-gray-600 dark:text-white/70 text-sm">Key diagnostic considerations</p>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#00AFE6] flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-700 dark:text-white/80 text-sm">
+                    <strong>Think amyloidosis</strong> when multiple organ systems are affected simultaneously
+                  </span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#00DD89] flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-700 dark:text-white/80 text-sm">
+                    <strong>Age matters:</strong> ATTR more common &gt;60 years, AL can occur at any age
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#00AFE6] flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-700 dark:text-white/80 text-sm">
+                    <strong>Gender patterns:</strong> Wild-type ATTR predominantly affects elderly men
+                  </span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#00DD89] flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-700 dark:text-white/80 text-sm">
+                    <strong>Early referral</strong> to specialist centers improves outcomes significantly
+                  </span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Comparison Table Section */}
+      <section className="py-24 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-4 py-2 border border-[#00AFE6]/20 mb-6">
+              <FileText className="w-4 h-4 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-gray-700 dark:text-white/90">Clinical Comparison</span>
+            </div>
+            
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                AL vs ATTR vs Wild Type
               </span>
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Early recognition of symptoms can lead to faster diagnosis and better outcomes. These signs warrant immediate medical attention.
+              Clinical features comparison for differential diagnosis
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {warningSignsData.map((category, index) => (
+          <motion.div
+            className="overflow-x-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="min-w-full bg-gradient-to-br from-gray-50/95 to-white/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-400/30 overflow-hidden">
+              <table className="min-w-full">
+                <thead className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-gray-900 dark:text-white">Clinical Feature</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-red-700 dark:text-red-300">AL Amyloidosis</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-blue-700 dark:text-blue-300">ATTR Hereditary</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-green-700 dark:text-green-300">ATTR Wild Type</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 dark:divide-gray-600">
+                  {[
+                    {
+                      feature: 'Age of Onset',
+                      al: '40-70 years (peak 60s)',
+                      hattr: '20-70 years (variable)',
+                      wtattr: '&gt;60 years (usually &gt;70)'
+                    },
+                    {
+                      feature: 'Gender',
+                      al: 'M:F = 2:1',
+                      hattr: 'Equal M:F',
+                      wtattr: 'Predominantly male (95%)'
+                    },
+                    {
+                      feature: 'Inheritance',
+                      al: 'Acquired (plasma cell)',
+                      hattr: 'Autosomal dominant',
+                      wtattr: 'Age-related (sporadic)'
+                    },
+                    {
+                      feature: 'Cardiac Involvement',
+                      al: 'HF, low voltage ECG, LV wall thickness',
+                      hattr: 'Conduction defects, arrhythmias',
+                      wtattr: 'HF, conduction defects, AFib'
+                    },
+                    {
+                      feature: 'Neurological',
+                      al: 'Peripheral neuropathy (15%)',
+                      hattr: 'Prominent sensorimotor neuropathy',
+                      wtattr: 'Carpal tunnel syndrome'
+                    },
+                    {
+                      feature: 'Renal Involvement',
+                      al: 'Proteinuria, nephrotic syndrome',
+                      hattr: 'Rare renal involvement',
+                      wtattr: 'Minimal renal involvement'
+                    },
+                    {
+                      feature: 'GI Symptoms',
+                      al: 'Diarrhea, malabsorption',
+                      hattr: 'Gastroparesis, diarrhea',
+                      wtattr: 'Rare GI involvement'
+                    },
+                    {
+                      feature: 'Red Flag Signs',
+                      al: 'Macroglossia, periorbital purpura',
+                      hattr: 'Family history, early neuropathy',
+                      wtattr: 'Elderly male, bilateral CTS'
+                    },
+                    {
+                      feature: 'Key Diagnostic Test',
+                      al: 'Serum/urine free light chains',
+                      hattr: 'Genetic testing (TTR gene)',
+                      wtattr: 'DPD/PYP scintigraphy'
+                    },
+                    {
+                      feature: 'Treatment',
+                      al: 'Chemotherapy, ASCT',
+                      hattr: 'Tafamidis, gene therapy',
+                      wtattr: 'Tafamidis, supportive care'
+                    },
+                    {
+                      feature: 'Prognosis (untreated)',
+                      al: '6-24 months if advanced',
+                      hattr: '5-15 years (variable)',
+                      wtattr: '2-6 years from diagnosis'
+                    }
+                  ].map((row, index) => (
+                    <tr key={index} className="hover:bg-gray-50/50 dark:hover:bg-gray-700/50 transition-colors">
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{row.feature}</td>
+                      <td className="px-6 py-4 text-sm text-red-700 dark:text-red-300">{row.al}</td>
+                      <td className="px-6 py-4 text-sm text-blue-700 dark:text-blue-300">{row.hattr}</td>
+                      <td className="px-6 py-4 text-sm text-green-700 dark:text-green-300">{row.wtattr}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Stepwise Diagnostic Pathway */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-4 py-2 border border-[#00AFE6]/20 mb-6">
+              <TrendingUp className="w-4 h-4 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-gray-700 dark:text-white/90">Diagnostic Pathway</span>
+            </div>
+            
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Stepwise Diagnostic Approach
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Evidence-based diagnostic pathway for suspected amyloidosis
+            </p>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto">
+            {[
+              {
+                step: '1',
+                title: 'Clinical Suspicion',
+                description: 'Evaluate red flags and clinical presentation',
+                actions: [
+                  'Multi-organ involvement assessment',
+                  'Family history inquiry',
+                  'Age and gender considerations',
+                  'Characteristic symptom complex'
+                ],
+                color: 'from-red-500 to-orange-500',
+                bgColor: 'from-red-50/95 to-orange-50/95 dark:from-red-900/25 dark:to-orange-900/25',
+                borderColor: 'border-red-200/50 dark:border-red-400/30'
+              },
+              {
+                step: '2',
+                title: 'Initial Laboratory Tests',
+                description: 'Screen for amyloidogenic proteins',
+                actions: [
+                  'Serum and urine free light chains',
+                  'Serum protein electrophoresis (SPEP)',
+                  'Immunofixation electrophoresis',
+                  'Complete blood count, chemistry panel'
+                ],
+                color: 'from-blue-500 to-cyan-500',
+                bgColor: 'from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25',
+                borderColor: 'border-blue-200/50 dark:border-blue-400/30'
+              },
+              {
+                step: '3',
+                title: 'Cardiac Assessment',
+                description: 'Evaluate cardiac involvement',
+                actions: [
+                  'Echocardiography (wall thickness, strain)',
+                  'ECG (low voltage, conduction defects)',
+                  'Cardiac biomarkers (NT-proBNP, troponin)',
+                  'Consider cardiac MRI if available'
+                ],
+                color: 'from-green-500 to-emerald-500',
+                bgColor: 'from-green-50/95 to-emerald-50/95 dark:from-green-900/25 dark:to-emerald-900/25',
+                borderColor: 'border-green-200/50 dark:border-green-400/30'
+              },
+              {
+                step: '4',
+                title: 'Tissue Diagnosis',
+                description: 'Confirm amyloid deposits',
+                actions: [
+                  'Abdominal fat pad biopsy (first-line)',
+                  'Congo red staining with polarized light',
+                  'Organ biopsy if fat pad negative',
+                  'Mass spectrometry for typing'
+                ],
+                color: 'from-purple-500 to-violet-500',
+                bgColor: 'from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25',
+                borderColor: 'border-purple-200/50 dark:border-purple-400/30'
+              },
+              {
+                step: '5',
+                title: 'Subtype Classification',
+                description: 'Determine amyloid type for treatment',
+                actions: [
+                  'If AL: Hematology referral, bone marrow biopsy',
+                  'If ATTR: Genetic testing for hATTR',
+                  'DPD/PYP scintigraphy for ATTR',
+                  'Specialist center consultation'
+                ],
+                color: 'from-orange-500 to-amber-500',
+                bgColor: 'from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25',
+                borderColor: 'border-orange-200/50 dark:border-orange-400/30'
+              }
+            ].map((step, index) => (
               <motion.div
-                key={category.category}
-                className={`backdrop-blur-xl rounded-2xl p-6 border ${category.color.split(' ')[1]} ${category.color.split(' ')[2]} ${
-                  index === 0 
-                    ? 'bg-gradient-to-br from-red-50/95 to-pink-50/95 dark:from-red-900/25 dark:to-pink-900/25 border-red-200/50 dark:border-red-400/30'
-                    : index === 1
-                    ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200/50 dark:border-blue-400/30'
-                    : index === 2
-                    ? 'bg-gradient-to-br from-green-50/95 to-emerald-50/95 dark:from-green-900/25 dark:to-emerald-900/25 border-green-200/50 dark:border-green-400/30'
-                    : index === 3
-                    ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/50 dark:border-purple-400/30'
-                    : 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/50 dark:border-orange-400/30'
-                }`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                key={index}
+                className={`mb-8 bg-gradient-to-br ${step.bgColor} backdrop-blur-xl rounded-2xl p-8 border ${step.borderColor} relative`}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className={`w-12 h-12 ${category.color.split(' ')[0]} rounded-xl flex items-center justify-center`}>
-                    <category.icon className={`w-6 h-6 ${category.color.split(' ')[2]}`} />
+                <div className="flex items-start gap-6">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${step.color} rounded-2xl flex items-center justify-center flex-shrink-0`}>
+                    <span className="text-white font-bold text-xl">{step.step}</span>
                   </div>
-                  <h3 className={`text-lg font-bold ${
-                    index === 0 
-                      ? 'text-red-900 dark:text-red-100'
-                      : index === 1
-                      ? 'text-blue-900 dark:text-blue-100'
-                      : index === 2
-                      ? 'text-green-900 dark:text-green-100'
-                      : index === 3
-                      ? 'text-purple-900 dark:text-purple-100'
-                      : 'text-orange-900 dark:text-orange-100'
-                  }`}>{category.category}</h3>
-                </div>
-                
-                <div className="space-y-3 mb-6">
-                  {category.signs.map((sign, signIndex) => (
-                    <div key={signIndex} className="flex items-start gap-3">
-                      <AlertTriangle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-white/80 text-sm">{sign}</span>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{step.title}</h3>
+                    <p className="text-gray-600 dark:text-white/70 mb-6">{step.description}</p>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {step.actions.map((action, actionIndex) => (
+                        <div key={actionIndex} className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                          <span className="text-sm text-gray-700 dark:text-white/80">{action}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                
-                <div className="pt-4 border-t border-gray-200 dark:border-white/10">
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <Link href="/resources?category=diagnosis" className="text-xs text-gray-600 dark:text-white/60 hover:text-[#00AFE6] flex items-center gap-1 transition-colors">
-                      <Search className="w-3 h-3" />
-                      Diagnostic Resources
-                    </Link>
-                    <Link href="/directory" className="text-xs text-gray-600 dark:text-white/60 hover:text-[#00DD89] flex items-center gap-1 transition-colors">
-                      <Hospital className="w-3 h-3" />
-                      Find Specialists
-                    </Link>
                   </div>
                 </div>
+                
+                {index < 4 && (
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                    <div className="w-8 h-8 bg-white dark:bg-gray-900 rounded-full border-4 border-gray-200 dark:border-gray-600 flex items-center justify-center">
+                      <ArrowDown className="w-4 h-4 text-gray-600 dark:text-white/60" />
+                    </div>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
-
-          
         </div>
       </section>
+
+      {/* Clinical Guidelines Section */}
+      <section className="py-24 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-4 py-2 border border-[#00AFE6]/20 mb-6">
+              <BookOpen className="w-4 h-4 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-gray-700 dark:text-white/90">Clinical Guidelines</span>
+            </div>
+            
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Evidence-Based Guidelines
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Access authoritative clinical guidelines from leading organizations
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'Canadian Cardiovascular Society',
+                description: 'Canadian guidelines for cardiac amyloidosis diagnosis and management',
+                url: 'https://www.ccs.ca',
+                icon: Heart,
+                color: 'from-red-500 to-pink-500',
+                bgColor: 'from-red-50/95 to-pink-50/95 dark:from-red-900/25 dark:to-pink-900/25',
+                borderColor: 'border-red-200/50 dark:border-red-400/30'
+              },
+              {
+                title: 'Mayo Clinic Guidelines',
+                description: 'Comprehensive amyloidosis diagnostic and treatment protocols',
+                url: 'https://www.mayoclinic.org',
+                icon: Microscope,
+                color: 'from-blue-500 to-cyan-500',
+                bgColor: 'from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25',
+                borderColor: 'border-blue-200/50 dark:border-blue-400/30'
+              },
+              {
+                title: 'NHS Clinical Guidelines',
+                description: 'UK National Health Service amyloidosis management guidelines',
+                url: 'https://www.nhs.uk',
+                icon: FileText,
+                color: 'from-green-500 to-emerald-500',
+                bgColor: 'from-green-50/95 to-emerald-50/95 dark:from-green-900/25 dark:to-emerald-900/25',
+                borderColor: 'border-green-200/50 dark:border-green-400/30'
+              }
+            ].map((guideline, index) => (
+              <motion.div
+                key={index}
+                className={`bg-gradient-to-br ${guideline.bgColor} backdrop-blur-xl rounded-2xl p-8 border ${guideline.borderColor} hover:scale-105 transition-all duration-300 group`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className={`w-16 h-16 bg-gradient-to-r ${guideline.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-6`}>
+                  <guideline.icon className="w-8 h-8 text-white" />
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{guideline.title}</h3>
+                <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6">{guideline.description}</p>
+                
+                <a
+                  href={guideline.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-2 bg-gradient-to-r ${guideline.color} text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300`}
+                >
+                  <span>Access Guidelines</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-24 bg-white dark:bg-gray-900 relative border-t border-gray-200 dark:border-white/10">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />

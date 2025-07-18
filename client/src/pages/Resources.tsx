@@ -292,7 +292,7 @@ export default function Resources() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-gradient-to-br from-white/80 to-white/40 dark:from-gray-800/80 dark:to-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:border-[#00AFE6]/30 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-sm rounded-xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00AFE6]/20"
                   >
                     <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <Icon className="w-6 h-6 text-white" />
@@ -480,7 +480,7 @@ export default function Resources() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="group"
                   >
-                    <Card className="h-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:border-[#00AFE6]/50 group-hover:scale-105">
+                    <Card className="h-full bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:to-[#00DD89]/10 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 hover:border-[#00AFE6]/50 group-hover:scale-105 backdrop-blur-sm">
                       <CardHeader className="pb-4">
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex-1">

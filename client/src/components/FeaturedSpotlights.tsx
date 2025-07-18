@@ -118,12 +118,12 @@ export default function FeaturedSpotlights() {
               >
                 <div className={`grid lg:grid-cols-12 gap-0 backdrop-blur-xl border rounded-3xl overflow-hidden ${
                   currentIndex === 0 
-                    ? 'bg-gradient-to-br from-pink-900/25 to-rose-900/25 border-pink-400/30'
+                    ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30'
                     : currentIndex === 1
-                    ? 'bg-gradient-to-br from-blue-900/25 to-indigo-900/25 border-blue-400/30'
+                    ? 'bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 border-[#00DD89]/20 dark:border-[#00DD89]/30'
                     : currentIndex === 2
-                    ? 'bg-gradient-to-br from-green-900/25 to-emerald-900/25 border-green-400/30'
-                    : 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30'
+                    ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30'
+                    : 'bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 border-[#00DD89]/20 dark:border-[#00DD89]/30'
                 }`}>
                   {/* Content Side */}
                   <div className="lg:col-span-7 p-12 lg:p-16 flex items-center">

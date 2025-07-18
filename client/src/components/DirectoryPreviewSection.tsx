@@ -87,7 +87,7 @@ export default function DirectoryPreviewSection() {
 
         {/* Canada Network Stats - Ultra Compact Layout */}
         <motion.div
-          className="bg-gradient-to-br from-white/95 to-white/90 dark:from-white/10 dark:to-white/5 backdrop-blur-xl rounded-2xl p-4 border border-[#00AFE6]/20 dark:border-white/20 mb-4 max-w-6xl mx-auto"
+          className="bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-4 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 mb-4 max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -260,7 +260,7 @@ export default function DirectoryPreviewSection() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Directory Content */}
           <motion.div
-            className="lg:col-span-2 bg-gradient-to-br from-white/90 to-white/80 dark:from-white/15 dark:to-white/5 backdrop-blur-xl rounded-3xl p-10 border border-gray-200 dark:border-white/20"
+            className="lg:col-span-2 bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl rounded-3xl p-10 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-lg hover:shadow-[#00AFE6]/20"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}

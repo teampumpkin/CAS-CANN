@@ -401,12 +401,12 @@ export default function GetInvolved() {
               >
                 <Card className={`backdrop-blur-xl border transition-all duration-300 h-full group hover:shadow-2xl ${
                   index === 0 
-                    ? 'bg-gradient-to-br from-blue-900/25 to-cyan-900/25 border-blue-400/30 hover:from-blue-800/35 hover:to-cyan-800/35 hover:border-blue-300/40 hover:shadow-blue-500/25'
+                    ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/20'
                     : index === 1
-                    ? 'bg-gradient-to-br from-emerald-900/25 to-green-900/25 border-emerald-400/30 hover:from-emerald-800/35 hover:to-green-800/35 hover:border-emerald-300/40 hover:shadow-emerald-500/25'
+                    ? 'bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 border-[#00DD89]/20 dark:border-[#00DD89]/30 hover:border-[#00DD89]/40 dark:hover:border-[#00DD89]/50 hover:shadow-[#00DD89]/20'
                     : index === 2
-                    ? 'bg-gradient-to-br from-purple-900/25 to-violet-900/25 border-purple-400/30 hover:from-purple-800/35 hover:to-violet-800/35 hover:border-purple-300/40 hover:shadow-purple-500/25'
-                    : 'bg-gradient-to-br from-orange-900/25 to-red-900/25 border-orange-400/30 hover:from-orange-800/35 hover:to-red-800/35 hover:border-orange-300/40 hover:shadow-orange-500/25'
+                    ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/20'
+                    : 'bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 border-[#00DD89]/20 dark:border-[#00DD89]/30 hover:border-[#00DD89]/40 dark:hover:border-[#00DD89]/50 hover:shadow-[#00DD89]/20'
                 }`}>
                   <CardContent className="p-8">
                     <div className="flex items-start gap-4">
@@ -414,24 +414,8 @@ export default function GetInvolved() {
                         <way.icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h3 className={`text-xl font-semibold mb-3 ${
-                          index === 0 
-                            ? 'text-blue-100'
-                            : index === 1
-                            ? 'text-emerald-100'
-                            : index === 2
-                            ? 'text-purple-100'
-                            : 'text-orange-100'
-                        }`}>{way.title}</h3>
-                        <p className={`mb-6 leading-relaxed ${
-                          index === 0 
-                            ? 'text-blue-300'
-                            : index === 1
-                            ? 'text-emerald-300'
-                            : index === 2
-                            ? 'text-purple-300'
-                            : 'text-orange-300'
-                        }`}>{way.description}</p>
+                        <h3 className="text-xl font-semibold mb-3 text-white">{way.title}</h3>
+                        <p className="mb-6 leading-relaxed text-white/70">{way.description}</p>
                         
                         {way.title === "Join CAS" && (
                           <Dialog>
@@ -1222,7 +1206,7 @@ export default function GetInvolved() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <Card className="bg-white/5 backdrop-blur-xl border border-white/20 hover:bg-white/10 hover:border-white/30 transition-all duration-500 h-full shadow-2xl hover:shadow-[0_0_40px_rgba(0,175,230,0.15)] group">
+                    <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-500 h-full group">
                       <div className="aspect-[4/3] bg-gradient-to-br from-[#00AFE6]/10 via-transparent to-[#00DD89]/10 rounded-t-lg flex items-center justify-center relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent"></div>
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(0,175,230,0.1),transparent)]"></div>
@@ -1280,7 +1264,7 @@ export default function GetInvolved() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <Card className="bg-white/5 backdrop-blur-xl border border-white/20 hover:bg-white/10 hover:border-white/30 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(0,221,137,0.15)] group">
+                    <Card className="bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 backdrop-blur-xl border border-[#00DD89]/20 dark:border-[#00DD89]/30 hover:border-[#00DD89]/40 dark:hover:border-[#00DD89]/50 hover:shadow-2xl hover:shadow-[#00DD89]/20 transition-all duration-500 overflow-hidden group">
                       <div className="aspect-[4/3] bg-gradient-to-br from-[#00DD89]/10 via-transparent to-[#00AFE6]/10 flex items-center justify-center relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent"></div>
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,221,137,0.1),transparent)]"></div>
@@ -1316,15 +1300,15 @@ export default function GetInvolved() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <Card className="bg-white/5 backdrop-blur-xl border border-white/20 hover:bg-white/10 hover:border-white/30 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(128,90,213,0.15)] group">
-                      <div className="aspect-[4/3] bg-gradient-to-br from-purple-500/10 via-transparent to-indigo-500/10 flex items-center justify-center relative overflow-hidden">
+                    <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-500 overflow-hidden group">
+                      <div className="aspect-[4/3] bg-gradient-to-br from-[#00AFE6]/10 via-transparent to-[#00DD89]/10 flex items-center justify-center relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent"></div>
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(128,90,213,0.1),transparent)]"></div>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,175,230,0.1),transparent)]"></div>
                         <Calendar className="w-12 h-12 text-white/60 group-hover:text-white/80 transition-colors duration-300 relative z-10" />
                       </div>
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between mb-3">
-                          <Badge variant="outline" className="text-purple-400 border-purple-400/30">
+                          <Badge variant="outline" className="text-[#00AFE6] border-[#00AFE6]/30">
                             {event.type}
                           </Badge>
                           <div className="flex items-center gap-1 text-sm text-white/60">

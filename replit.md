@@ -10,6 +10,16 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Complete Brand Color Standardization (July 18, 2025)
+- ✅ **Completed comprehensive brand color standardization** across ALL CTA buttons website-wide
+- ✅ **Updated Hero section buttons** - "Join CAS" and "Upload a Resource" now use brand gradient colors
+- ✅ **Applied brand colors (#00AFE6 and #00DD89)** to all CTA buttons throughout entire website
+- ✅ **Updated component sections** - QuickLinksSection, ResourcesSection, AboutAmyloidosis, JoinCANN, ResourceModeration
+- ✅ **Updated amyloidosis type pages** - View Complete Directory and other action buttons
+- ✅ **Updated contact forms and navigation** - All interactive elements now use consistent brand colors
+- ✅ **Maintained hover effects and animations** - Enhanced with brand-specific shadows and gradients
+- ✅ **Created visual consistency** - All buttons now follow the same brand gradient pattern
+
 ### AboutAmyloidosis Page Light Theme Optimization (July 18, 2025)
 - ✅ Completed comprehensive light theme optimization for /about-amyloidosis page
 - ✅ Converted all hardcoded dark theme elements to theme-aware classes

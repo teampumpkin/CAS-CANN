@@ -8,10 +8,10 @@ export default function Hero() {
   const { t } = useLanguage();
   
   const quickTiles = [
+    { icon: Users, label: 'Join', href: '/get-involved' },
     { icon: MapPin, label: t('nav.directory'), href: '/directory' },
     { icon: Upload, label: 'Upload', href: '/upload-resource' },
-    { icon: BookOpen, label: 'Learn', href: '/about-amyloidosis' },
-    { icon: Users, label: 'Join', href: '/join-cas' }
+    { icon: BookOpen, label: 'Learn', href: '/about-amyloidosis' }
   ];
 
   return (
@@ -179,7 +179,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-center">
               {quickTiles.map((tile, index) => (
                 <motion.a
                   key={tile.label}
@@ -239,10 +239,10 @@ export default function Hero() {
                       
                       {/* Enhanced subtitle */}
                       <p className="text-white/60 text-xs font-light leading-relaxed group-hover:text-white/80 transition-all duration-300 transform group-hover:translate-y-0.5">
-                        {index === 0 && "Find healthcare providers and support"}
-                        {index === 1 && "Share your experience and stories"}
-                        {index === 2 && "Access educational resources"}
-                        {index === 3 && "Connect with our community"}
+                        {index === 0 && "Connect with our community"}
+                        {index === 1 && "Find healthcare providers and support"}
+                        {index === 2 && "Share your experience and stories"}
+                        {index === 3 && "Access educational resources"}
                       </p>
                       
                       {/* Progress indicator */}

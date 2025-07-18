@@ -76,15 +76,15 @@ Preferred communication style: Simple, everyday language.
 - ✅ **Interactive hover effects** - Scale animations and brand color integration
 - ✅ **Comprehensive clinical focus** - All content oriented toward healthcare professionals
 
-### Complete Brand Color Standardization (July 18, 2025)
+### Complete Brand Color Standardization with Enhanced Light Theme Visibility (July 18, 2025)
 - ✅ **Completed comprehensive brand color standardization** across ALL components website-wide
-- ✅ **Updated Hero section buttons** - "Join CAS" and "Upload a Resource" now use brand gradient colors
+- ✅ **Enhanced light theme visibility** - Increased brand color opacity from /8 to /15 for much better light theme contrast
+- ✅ **Systematic opacity optimization** - Applied darker brand gradients (from-[#00AFE6]/15 to-[#00DD89]/15) across all cards
+- ✅ **Updated Hero section cards** - Reorganized with "Join" card first, improved alignment with consistent 6-gap spacing
+- ✅ **Hero section navigation clarity** - Cards link to: /get-involved, /directory, /upload-resource, /about-amyloidosis
 - ✅ **Applied brand colors (#00AFE6 and #00DD89)** to all CTA buttons throughout entire website
-- ✅ **Updated component sections** - QuickLinksSection, ResourcesSection, AboutAmyloidosis, JoinCANN, ResourceModeration
-- ✅ **Updated amyloidosis type pages** - View Complete Directory and other action buttons
-- ✅ **Updated contact forms and navigation** - All interactive elements now use consistent brand colors
-- ✅ **Maintained hover effects and animations** - Enhanced with brand-specific shadows and gradients
-- ✅ **Created visual consistency** - All buttons now follow the same brand gradient pattern
+- ✅ **Updated component sections** - QuickLinksSection, EventsNewsletterSection, AboutAmyloidosisSection, FeaturedSpotlights
+- ✅ **Enhanced hover effects** - Updated hover states from /80 to /90 opacity for better button interactions
 - ✅ **Systematic card background standardization** - Replaced ALL multi-color card schemes with brand colors
 - ✅ **Updated Directory page cards** - Healthcare center cards, statistics cards, and modal dialogs
 - ✅ **Updated QuickLinksSection cards** - All 6 quick action cards now use brand gradient backgrounds
@@ -92,8 +92,8 @@ Preferred communication style: Simple, everyday language.
 - ✅ **Updated AboutAmyloidosisSection stats** - "Early Detection" cards use brand gradient text and backgrounds
 - ✅ **Updated WhatYoullFindHere cards** - "Filterable Clinic Directory", "Peer-Submitted Tools", and "Evidence Summaries" cards
 - ✅ **Eliminated all blue/green/purple/pink/orange card variants** - Now using consistent #00AFE6/#00DD89 brand gradient system
-- ✅ **Enhanced light theme visibility** - All cards now properly visible and styled in both light and dark themes
 - ✅ **Fixed light theme card display issues** - Resolved "all white" appearance problems with proper brand color gradients
+- ✅ **Applied consistent opacity across entire website** - Used efficient batch replacements to ensure complete coverage
 
 ### AboutAmyloidosis Page Light Theme Optimization (July 18, 2025)
 - ✅ Completed comprehensive light theme optimization for /about-amyloidosis page

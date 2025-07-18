@@ -34,15 +34,11 @@ export default function Header() {
       ]
     },
     {
-      name: 'Get Involved',
-      href: '/get-involved',
-      hasDropdown: false,
-    },
-    {
       name: t('nav.community'),
       href: '#get-involved',
       hasDropdown: true,
       dropdownItems: [
+        { name: 'Get Involved', href: '/get-involved' },
         { name: 'Join CAS', href: '/join' },
         { name: 'Join CANN', href: '/cann' },
         { name: 'Events', href: '/get-involved' },

@@ -277,11 +277,11 @@ export default function UploadResource() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Header */}
-      <section className="py-24 bg-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent" />
+      <section className="py-24 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-gray-800 dark:via-gray-900 dark:to-black" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -290,13 +290,13 @@ export default function UploadResource() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+            <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
               <Upload className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Resource Submission</span>
+              <span className="text-sm font-medium text-gray-900/90 dark:text-white/90">Resource Submission</span>
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-none">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Help Us Grow
               </span>
               <br />
@@ -305,7 +305,7 @@ export default function UploadResource() {
               </span>
             </h1>
             
-            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl text-gray-700 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
               This upload tool allows clinicians, researchers, and administrators to share tools, documents, or links that improve amyloidosis diagnosis, treatment, and coordination.
             </p>
           </motion.div>
@@ -313,22 +313,22 @@ export default function UploadResource() {
       </section>
 
       {/* Upload Form */}
-      <section className="py-12 bg-gray-900">
+      <section className="py-12 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             
             {/* Submission Guidelines */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* Who Can Submit */}
-              <Card className="bg-white/10 border-white/20">
+              <Card className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 backdrop-blur-xl border-blue-200/50 dark:border-white/20">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
+                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                     <Users className="w-5 h-5 text-[#00AFE6]" />
                     Who Can Submit
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="space-y-2 text-sm text-white/80">
+                  <div className="space-y-2 text-sm text-gray-700 dark:text-white/80">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
                       <span>Healthcare professionals (physicians, nurses, allied health)</span>
@@ -354,15 +354,15 @@ export default function UploadResource() {
               </Card>
 
               {/* What's Accepted */}
-              <Card className="bg-white/10 border-white/20">
+              <Card className="bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 backdrop-blur-xl border-emerald-200/50 dark:border-white/20">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
+                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                     <FileText className="w-5 h-5 text-[#00AFE6]" />
                     What Types Are Accepted
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="space-y-2 text-sm text-white/80">
+                  <div className="space-y-2 text-sm text-gray-700 dark:text-white/80">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
                       <span>Diagnostic tools and checklists</span>
@@ -385,50 +385,50 @@ export default function UploadResource() {
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-4">
-                    <Badge variant="outline" className="text-white/70 border-white/30">PDF</Badge>
-                    <Badge variant="outline" className="text-white/70 border-white/30">DOCX</Badge>
-                    <Badge variant="outline" className="text-white/70 border-white/30">XLSX</Badge>
-                    <Badge variant="outline" className="text-white/70 border-white/30">PNG</Badge>
-                    <Badge variant="outline" className="text-white/70 border-white/30">JPG</Badge>
+                    <Badge variant="outline" className="text-gray-700 dark:text-white/70 border-gray-400 dark:border-white/30">PDF</Badge>
+                    <Badge variant="outline" className="text-gray-700 dark:text-white/70 border-gray-400 dark:border-white/30">DOCX</Badge>
+                    <Badge variant="outline" className="text-gray-700 dark:text-white/70 border-gray-400 dark:border-white/30">XLSX</Badge>
+                    <Badge variant="outline" className="text-gray-700 dark:text-white/70 border-gray-400 dark:border-white/30">PNG</Badge>
+                    <Badge variant="outline" className="text-gray-700 dark:text-white/70 border-gray-400 dark:border-white/30">JPG</Badge>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Review Process */}
-              <Card className="bg-white/10 border-white/20">
+              <Card className="bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 backdrop-blur-xl border-purple-200/50 dark:border-white/20">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
+                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                     <Clock className="w-5 h-5 text-[#00AFE6]" />
                     Review Process
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="space-y-3 text-sm text-white/80">
+                  <div className="space-y-3 text-sm text-gray-700 dark:text-white/80">
                     <div className="flex items-start gap-3">
                       <div className="w-6 h-6 bg-[#00AFE6] text-white rounded-full flex items-center justify-center text-xs font-bold">1</div>
                       <div>
-                        <p className="font-medium text-white">Initial Review</p>
-                        <p className="text-white/70">Within 3-5 business days</p>
+                        <p className="font-medium text-gray-900 dark:text-white">Initial Review</p>
+                        <p className="text-gray-600 dark:text-white/70">Within 3-5 business days</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-6 h-6 bg-[#00AFE6] text-white rounded-full flex items-center justify-center text-xs font-bold">2</div>
                       <div>
-                        <p className="font-medium text-white">Clinical Review</p>
-                        <p className="text-white/70">7-14 business days</p>
+                        <p className="font-medium text-gray-900 dark:text-white">Clinical Review</p>
+                        <p className="text-gray-600 dark:text-white/70">7-14 business days</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-6 h-6 bg-[#00DD89] text-white rounded-full flex items-center justify-center text-xs font-bold">3</div>
                       <div>
-                        <p className="font-medium text-white">Publication</p>
-                        <p className="text-white/70">2-3 business days after approval</p>
+                        <p className="font-medium text-gray-900 dark:text-white">Publication</p>
+                        <p className="text-gray-600 dark:text-white/70">2-3 business days after approval</p>
                       </div>
                     </div>
                   </div>
                   <Alert className="bg-[#00AFE6]/10 border-[#00AFE6]/30">
                     <Clock className="w-4 h-4 text-[#00AFE6]" />
-                    <AlertDescription className="text-white/90">
+                    <AlertDescription className="text-gray-900 dark:text-white/90">
                       <strong>Estimated Total Review Time: 2-3 weeks</strong>
                     </AlertDescription>
                   </Alert>
@@ -436,15 +436,15 @@ export default function UploadResource() {
               </Card>
 
               {/* Licensing Rules */}
-              <Card className="bg-white/10 border-white/20">
+              <Card className="bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 backdrop-blur-xl border-orange-200/50 dark:border-white/20">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
+                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                     <Shield className="w-5 h-5 text-[#00AFE6]" />
                     Licensing & Terms
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="space-y-2 text-sm text-white/80">
+                  <div className="space-y-2 text-sm text-gray-700 dark:text-white/80">
                     <div className="flex items-center gap-2">
                       <AlertTriangle className="w-4 h-4 text-yellow-500" />
                       <span>Resources must be free of copyright restrictions</span>
@@ -462,8 +462,8 @@ export default function UploadResource() {
                       <span>Must comply with Canadian health information standards</span>
                     </div>
                   </div>
-                  <div className="mt-4 p-3 bg-white/5 rounded-lg">
-                    <p className="text-xs text-white/70">
+                  <div className="mt-4 p-3 bg-gray-100 dark:bg-white/5 rounded-lg">
+                    <p className="text-xs text-gray-600 dark:text-white/70">
                       By submitting, you confirm that you have the right to share this resource 
                       and agree to make it available under open licensing terms.
                     </p>
@@ -476,16 +476,16 @@ export default function UploadResource() {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 
                 {/* File Upload Section */}
-                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+                <Card className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 backdrop-blur-xl border-blue-200/50 dark:border-white/20">
                   <CardHeader>
-                    <CardTitle className="text-white">Upload File</CardTitle>
+                    <CardTitle className="text-gray-900 dark:text-white">Upload File</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div
                       className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 ${
                         dragActive 
                           ? "border-[#00AFE6] bg-[#00AFE6]/10" 
-                          : "border-white/30 hover:border-white/50"
+                          : "border-gray-300 dark:border-white/30 hover:border-gray-400 dark:hover:border-white/50"
                       }`}
                       onDragEnter={handleDrag}
                       onDragLeave={handleDrag}
@@ -497,14 +497,14 @@ export default function UploadResource() {
                           <div className="flex items-center justify-center gap-3">
                             {getFileIcon(selectedFile.type)}
                             <div className="text-left">
-                              <p className="text-white font-medium">{selectedFile.name}</p>
-                              <p className="text-white/60 text-sm">
+                              <p className="text-gray-900 dark:text-white font-medium">{selectedFile.name}</p>
+                              <p className="text-gray-600 dark:text-white/60 text-sm">
                                 {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                               </p>
                             </div>
                           </div>
                           {uploadProgress > 0 && uploadProgress < 100 && (
-                            <div className="w-full bg-white/20 rounded-full h-2">
+                            <div className="w-full bg-gray-200 dark:bg-white/20 rounded-full h-2">
                               <div 
                                 className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] h-2 rounded-full transition-all duration-300"
                                 style={{ width: `${uploadProgress}%` }}
@@ -515,7 +515,7 @@ export default function UploadResource() {
                             type="button"
                             variant="ghost"
                             onClick={() => setSelectedFile(null)}
-                            className="text-white/70 hover:text-white"
+                            className="text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white"
                           >
                             <X className="w-4 h-4 mr-2" />
                             Remove File
@@ -523,10 +523,10 @@ export default function UploadResource() {
                         </div>
                       ) : (
                         <div className="space-y-4">
-                          <Upload className="w-12 h-12 text-white/40 mx-auto" />
+                          <Upload className="w-12 h-12 text-gray-400 dark:text-white/40 mx-auto" />
                           <div>
-                            <p className="text-white text-lg mb-2">Drop your file here or click to browse</p>
-                            <p className="text-white/60 text-sm">
+                            <p className="text-gray-900 dark:text-white text-lg mb-2">Drop your file here or click to browse</p>
+                            <p className="text-gray-600 dark:text-white/60 text-sm">
                               Supports PDF, DOCX, XLSX, PNG, JPG (max 10MB)
                             </p>
                           </div>
@@ -538,7 +538,7 @@ export default function UploadResource() {
                             id="file-upload"
                           />
                           <label htmlFor="file-upload">
-                            <Button type="button" asChild className="bg-white/15 hover:bg-white/25 text-white border-white/30">
+                            <Button type="button" asChild className="bg-gray-200 dark:bg-white/15 hover:bg-gray-300 dark:hover:bg-white/25 text-gray-900 dark:text-white border-gray-300 dark:border-white/30">
                               <span>Choose File</span>
                             </Button>
                           </label>
@@ -549,9 +549,9 @@ export default function UploadResource() {
                 </Card>
 
                 {/* Resource Information */}
-                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+                <Card className="bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 backdrop-blur-xl border-emerald-200/50 dark:border-white/20">
                   <CardHeader>
-                    <CardTitle className="text-white">Resource Information</CardTitle>
+                    <CardTitle className="text-gray-900 dark:text-white">Resource Information</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -560,12 +560,12 @@ export default function UploadResource() {
                         name="title"
                         render={({ field }) => (
                           <FormItem className="md:col-span-2">
-                            <FormLabel className="text-white/90">Resource Title *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Resource Title *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
                                 placeholder="e.g., AL Amyloidosis Diagnosis Checklist"
-                                className="bg-white/10 border-white/30 text-white placeholder-white/50"
+                                className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50"
                               />
                             </FormControl>
                             <FormMessage />
@@ -578,10 +578,10 @@ export default function UploadResource() {
                         name="amyloidosisType"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Amyloidosis Type *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Amyloidosis Type *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-white/10 border-white/30 text-white">
+                                <SelectTrigger className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                                   <SelectValue placeholder="Select type" />
                                 </SelectTrigger>
                               </FormControl>
@@ -603,10 +603,10 @@ export default function UploadResource() {
                         name="resourceType"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Document Type *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Document Type *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-white/10 border-white/30 text-white">
+                                <SelectTrigger className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                                   <SelectValue placeholder="Select type" />
                                 </SelectTrigger>
                               </FormControl>
@@ -628,10 +628,10 @@ export default function UploadResource() {
                         name="category"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Category *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Category *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-white/10 border-white/30 text-white">
+                                <SelectTrigger className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                                   <SelectValue placeholder="Select category" />
                                 </SelectTrigger>
                               </FormControl>
@@ -653,10 +653,10 @@ export default function UploadResource() {
                         name="audience"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Target Audience *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Target Audience *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-white/10 border-white/30 text-white">
+                                <SelectTrigger className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                                   <SelectValue placeholder="Select audience" />
                                 </SelectTrigger>
                               </FormControl>
@@ -678,10 +678,10 @@ export default function UploadResource() {
                         name="language"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Language *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Language *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-white/10 border-white/30 text-white">
+                                <SelectTrigger className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                                   <SelectValue placeholder="Select language" />
                                 </SelectTrigger>
                               </FormControl>
@@ -703,10 +703,10 @@ export default function UploadResource() {
                         name="region"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Jurisdiction *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Jurisdiction *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-white/10 border-white/30 text-white">
+                                <SelectTrigger className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                                   <SelectValue placeholder="Select region" />
                                 </SelectTrigger>
                               </FormControl>
@@ -729,13 +729,13 @@ export default function UploadResource() {
                       name="description"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/90">Description *</FormLabel>
+                          <FormLabel className="text-gray-900 dark:text-white/90">Description *</FormLabel>
                           <FormControl>
                             <Textarea 
                               {...field}
                               placeholder="Provide a detailed description of the resource, its purpose, and how it should be used..."
                               rows={4}
-                              className="bg-white/10 border-white/30 text-white placeholder-white/50"
+                              className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50"
                             />
                           </FormControl>
                           <FormMessage />
@@ -748,15 +748,15 @@ export default function UploadResource() {
                       name="tags"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/90">Tags *</FormLabel>
+                          <FormLabel className="text-gray-900 dark:text-white/90">Tags *</FormLabel>
                           <FormControl>
                             <Input 
                               {...field}
                               placeholder="e.g., diagnosis, cardiac, biopsy, screening, treatment"
-                              className="bg-white/10 border-white/30 text-white placeholder-white/50"
+                              className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50"
                             />
                           </FormControl>
-                          <p className="text-sm text-white/60">
+                          <p className="text-sm text-gray-600 dark:text-white/60">
                             Enter relevant keywords separated by commas to help others find this resource
                           </p>
                           <FormMessage />
@@ -767,9 +767,9 @@ export default function UploadResource() {
                 </Card>
 
                 {/* Contributor Information */}
-                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+                <Card className="bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 backdrop-blur-xl border-purple-200/50 dark:border-white/20">
                   <CardHeader>
-                    <CardTitle className="text-white flex items-center gap-2">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                       <UserCheck className="w-5 h-5 text-[#00AFE6]" />
                       Contributor Information *
                     </CardTitle>
@@ -781,12 +781,12 @@ export default function UploadResource() {
                         name="submittedBy"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Name *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Name *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
                                 placeholder="Your full name"
-                                className="bg-white/10 border-white/30 text-white placeholder-white/50"
+                                className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50"
                               />
                             </FormControl>
                             <FormMessage />
@@ -799,12 +799,12 @@ export default function UploadResource() {
                         name="submitterRole"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Role/Title *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Role/Title *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
                                 placeholder="e.g., Cardiologist, Researcher, Nurse"
-                                className="bg-white/10 border-white/30 text-white placeholder-white/50"
+                                className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50"
                               />
                             </FormControl>
                             <FormMessage />
@@ -817,12 +817,12 @@ export default function UploadResource() {
                         name="submitterOrganization"
                         render={({ field }) => (
                           <FormItem className="md:col-span-2">
-                            <FormLabel className="text-white/90">Organization *</FormLabel>
+                            <FormLabel className="text-gray-900 dark:text-white/90">Organization *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
                                 placeholder="e.g., Toronto General Hospital, University of Toronto"
-                                className="bg-white/10 border-white/30 text-white placeholder-white/50"
+                                className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50"
                               />
                             </FormControl>
                             <FormMessage />
@@ -834,9 +834,9 @@ export default function UploadResource() {
                 </Card>
 
                 {/* Consent and Privacy */}
-                <Card className="bg-white/10 backdrop-blur-xl border-white/20">
+                <Card className="bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 backdrop-blur-xl border-pink-200/50 dark:border-white/20">
                   <CardHeader>
-                    <CardTitle className="text-white flex items-center gap-2">
+                    <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                       <Shield className="w-5 h-5 text-[#00AFE6]" />
                       Consent & Privacy
                     </CardTitle>
@@ -844,7 +844,7 @@ export default function UploadResource() {
                   <CardContent className="space-y-6">
                     <Alert className="bg-yellow-500/10 border-yellow-500/30">
                       <AlertCircle className="h-4 w-4 text-yellow-500" />
-                      <AlertDescription className="text-white/90">
+                      <AlertDescription className="text-gray-900 dark:text-white/90">
                         All uploads are reviewed by CAS moderators before public display. Resources may be flagged for enhancement (e.g., French translation, visual accessibility) prior to publishing.
                       </AlertDescription>
                     </Alert>
@@ -859,14 +859,14 @@ export default function UploadResource() {
                               <Checkbox
                                 checked={field.value}
                                 onCheckedChange={field.onChange}
-                                className="border-white/30"
+                                className="border-gray-300 dark:border-white/30"
                               />
                             </FormControl>
                             <div className="space-y-1 leading-none">
-                              <FormLabel className="text-white/90">
+                              <FormLabel className="text-gray-900 dark:text-white/90">
                                 I have the rights to submit and share this resource *
                               </FormLabel>
-                              <p className="text-sm text-white/60">
+                              <p className="text-sm text-gray-600 dark:text-white/60">
                                 I confirm that I have the necessary permissions to share this resource and that it does not violate any copyright or licensing restrictions.
                               </p>
                             </div>
@@ -884,14 +884,14 @@ export default function UploadResource() {
                               <Checkbox
                                 checked={field.value}
                                 onCheckedChange={field.onChange}
-                                className="border-white/30"
+                                className="border-gray-300 dark:border-white/30"
                               />
                             </FormControl>
                             <div className="space-y-1 leading-none">
-                              <FormLabel className="text-white/90">
+                              <FormLabel className="text-gray-900 dark:text-white/90">
                                 No personal health information (PHI) is included *
                               </FormLabel>
-                              <p className="text-sm text-white/60">
+                              <p className="text-sm text-gray-600 dark:text-white/60">
                                 I confirm that this resource does not contain any personal health information, patient identifiers, or confidential medical data.
                               </p>
                             </div>
@@ -909,14 +909,14 @@ export default function UploadResource() {
                               <Checkbox
                                 checked={field.value}
                                 onCheckedChange={field.onChange}
-                                className="border-white/30"
+                                className="border-gray-300 dark:border-white/30"
                               />
                             </FormControl>
                             <div className="space-y-1 leading-none">
-                              <FormLabel className="text-white/90">
+                              <FormLabel className="text-gray-900 dark:text-white/90">
                                 I acknowledge the Editorial Charter *
                               </FormLabel>
-                              <p className="text-sm text-white/60">
+                              <p className="text-sm text-gray-600 dark:text-white/60">
                                 I have reviewed and agree to the{' '}
                                 <a 
                                   href="/editorial-charter" 

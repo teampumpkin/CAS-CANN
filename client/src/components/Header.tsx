@@ -89,7 +89,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-xl rounded-full px-4 py-3 border border-white/20">
+            <div className="flex items-center gap-1 bg-gray-900/90 backdrop-blur-xl rounded-full px-3 py-2 border border-gray-700/50 shadow-lg">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -97,7 +97,7 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className="flex items-center gap-2 px-6 py-3 text-white/90 hover:text-white hover:bg-white/20 rounded-full transition-all duration-300 text-base font-semibold"
+                      className="flex items-center gap-2 px-5 py-2.5 text-white hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-base font-semibold border border-transparent hover:border-white/20"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -109,7 +109,7 @@ export default function Header() {
                   ) : (
                     <motion.a
                       href={item.href}
-                      className="flex items-center gap-2 px-6 py-3 text-white/90 hover:text-white hover:bg-white/20 rounded-full transition-all duration-300 text-base font-semibold"
+                      className="flex items-center gap-2 px-5 py-2.5 text-white hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-base font-semibold border border-transparent hover:border-white/20"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -126,7 +126,7 @@ export default function Header() {
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
                       <motion.div
-                        className="bg-gray-800/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl py-2"
+                        className="bg-gray-900/95 backdrop-blur-xl rounded-2xl border border-gray-700/50 shadow-2xl py-2"
                         initial={{ opacity: 0, y: -10, scale: 0.95 }}
                         animate={{ 
                           opacity: activeDropdown === item.name ? 1 : 0, 
@@ -139,7 +139,7 @@ export default function Header() {
                           <motion.a
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="block px-5 py-3 text-gray-300 hover:text-white hover:bg-gray-700/50 transition-all duration-200 text-base font-medium"
+                            className="block px-5 py-3 text-gray-200 hover:text-white hover:bg-gray-700/50 transition-all duration-200 text-base font-medium"
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ 
                               opacity: activeDropdown === item.name ? 1 : 0,

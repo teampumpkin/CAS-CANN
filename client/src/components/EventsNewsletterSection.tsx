@@ -12,7 +12,7 @@ export default function EventsNewsletterSection() {
       description: 'Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.',
       date: 'November 15-16, 2024',
       gradient: 'from-[#00AFE6] to-[#0088CC]',
-      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
+      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
       attendees: '250+',
       type: 'In-Person'
     },
@@ -22,7 +22,7 @@ export default function EventsNewsletterSection() {
       description: 'Expert presentations on the latest treatment advances, diagnostic techniques, and clinical trial updates.',
       date: 'First Thursday of each month',
       gradient: 'from-[#00DD89] to-[#00BB77]',
-      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
+      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
       attendees: '500+',
       type: 'Virtual'
     },
@@ -32,7 +32,7 @@ export default function EventsNewsletterSection() {
       description: 'Virtual and in-person meetings across Canada providing emotional support and practical guidance.',
       date: 'Weekly sessions available',
       gradient: 'from-purple-500 to-purple-700',
-      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
+      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
       attendees: '50+',
       type: 'Hybrid'
     }
@@ -201,7 +201,7 @@ export default function EventsNewsletterSection() {
                     transition={{ duration: 0.6, delay: 0.1 * index }}
                     whileHover={{ y: -5 }}
                   >
-                    <div className="backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
+                    <div className="backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
                       <div className="text-2xl mb-2">{stat.icon}</div>
                       <div className="text-3xl font-bold mb-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                         <motion.span
@@ -272,7 +272,7 @@ export default function EventsNewsletterSection() {
                     className="mt-12"
                     whileHover={{ scale: 1.02, y: -8 }}
                   >
-                    <div className="group relative backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 hover:shadow-2xl overflow-hidden min-h-[400px] bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
+                    <div className="group relative backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 hover:shadow-2xl overflow-hidden min-h-[400px] bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
                       {/* Animated glow effect */}
                       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
                       

@@ -185,7 +185,7 @@ export default function Directory() {
               </motion.p>
               
               <motion.div
-                className="bg-gradient-to-r from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 mb-8"
+                className="bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
@@ -245,13 +245,13 @@ export default function Directory() {
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Directory Statistics</h3>
                   
                   <div className="grid grid-cols-2 gap-6 mb-8">
-                    <div className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
+                    <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                       <Building2 className="w-8 h-8 text-[#00AFE6] mx-auto mb-4" />
                       <div className="text-3xl font-bold text-[#00AFE6] mb-2">{healthcareCenters.length}</div>
                       <div className="text-sm text-gray-600 dark:text-white/60">Treatment Centers</div>
                     </div>
                     
-                    <div className="bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 rounded-2xl p-6 border border-[#00DD89]/20 dark:border-[#00DD89]/30">
+                    <div className="bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 to-[#00AFE6]/20 rounded-2xl p-6 border border-[#00DD89]/20 dark:border-[#00DD89]/30">
                       <Heart className="w-8 h-8 text-[#00DD89] mx-auto mb-4" />
                       <div className="text-3xl font-bold text-[#00DD89] mb-2">13</div>
                       <div className="text-sm text-gray-600 dark:text-white/60">Provinces/Territories</div>

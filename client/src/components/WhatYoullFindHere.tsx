@@ -14,7 +14,7 @@ const features = [
       'Insurance and referral information'
     ],
     color: 'from-[#00AFE6] to-[#00DD89]',
-    bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15',
+    bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20',
     borderColor: 'border-[#00AFE6]/20 dark:border-[#00AFE6]/30',
     textColor: 'text-gray-900 dark:text-white'
   },
@@ -30,7 +30,7 @@ const features = [
       'Community-validated content'
     ],
     color: 'from-[#00DD89] to-[#00AFE6]',
-    bgColor: 'from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15',
+    bgColor: 'from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 to-[#00AFE6]/20',
     borderColor: 'border-[#00DD89]/20 dark:border-[#00DD89]/30',
     textColor: 'text-gray-900 dark:text-white'
   },
@@ -46,7 +46,7 @@ const features = [
       'Peer-reviewed content'
     ],
     color: 'from-[#00AFE6] to-[#00DD89]',
-    bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15',
+    bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20',
     borderColor: 'border-[#00AFE6]/20 dark:border-[#00AFE6]/30',
     textColor: 'text-gray-900 dark:text-white'
   }

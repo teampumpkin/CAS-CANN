@@ -11,7 +11,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.findSpecialistsDesc'),
       href: '#specialists',
       gradient: 'from-[#00AFE6] to-[#0088CC]',
-      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
+      bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
       icon: BookOpen,
@@ -19,7 +19,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.patientResourcesDesc'),
       href: '#resources',
       gradient: 'from-[#00DD89] to-[#00BB77]',
-      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
+      bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
       icon: Users,
@@ -27,7 +27,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.supportGroupsDesc'),
       href: '#support',
       gradient: 'from-purple-500 to-purple-700',
-      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
+      bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
       icon: Heart,
@@ -35,7 +35,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.getInvolvedDesc'),
       href: '#get-involved',
       gradient: 'from-pink-500 to-rose-600',
-      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
+      bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
       icon: Calendar,
@@ -43,7 +43,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.eventsDesc'),
       href: '#events',
       gradient: 'from-orange-500 to-amber-600',
-      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
+      bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
       icon: Phone,
@@ -51,7 +51,7 @@ export default function QuickLinksSection() {
       description: t('quickLinks.contactUsDesc'),
       href: '#contact',
       gradient: 'from-slate-600 to-slate-800',
-      bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8'
+      bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     }
   ];
 
@@ -105,7 +105,7 @@ export default function QuickLinksSection() {
             >
               <div className="group relative h-full overflow-hidden">
                 {/* Main Card Container */}
-                <div className="relative h-full backdrop-blur-2xl rounded-3xl border transition-all duration-700 group-hover:shadow-2xl overflow-hidden bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
+                <div className="relative h-full backdrop-blur-2xl rounded-3xl border transition-all duration-700 group-hover:shadow-2xl overflow-hidden bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
                   
                   {/* Dynamic Background Pattern */}
                   <div className="absolute inset-0 opacity-30">

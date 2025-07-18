@@ -15,7 +15,7 @@ export default function FeaturedSpotlights() {
       image: '/images/clinical-guide-1.jpg',
       readTime: '8 min read',
       gradient: 'from-[#00AFE6] to-[#00DD89]',
-      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
+      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
       tags: ['Clinical Practice', 'Diagnosis', 'Provincial Guidelines'],
       date: 'January 2025'
     },
@@ -27,7 +27,7 @@ export default function FeaturedSpotlights() {
       image: '/images/research-update-1.jpg',
       readTime: '10 min read',
       gradient: 'from-emerald-500 to-teal-600',
-      bgGradient: 'from-[#00AFE6]/8 to-[#00DD89]/8',
+      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
       tags: ['Research', 'ATTR', 'Treatment'],
       date: 'December 2024'
     },
@@ -118,12 +118,12 @@ export default function FeaturedSpotlights() {
               >
                 <div className={`grid lg:grid-cols-12 gap-0 backdrop-blur-xl border rounded-3xl overflow-hidden ${
                   currentIndex === 0 
-                    ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30'
+                    ? 'bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30'
                     : currentIndex === 1
-                    ? 'bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 border-[#00DD89]/20 dark:border-[#00DD89]/30'
+                    ? 'bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 to-[#00AFE6]/20 border-[#00DD89]/20 dark:border-[#00DD89]/30'
                     : currentIndex === 2
-                    ? 'bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30'
-                    : 'bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 border-[#00DD89]/20 dark:border-[#00DD89]/30'
+                    ? 'bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30'
+                    : 'bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 to-[#00AFE6]/20 border-[#00DD89]/20 dark:border-[#00DD89]/30'
                 }`}>
                   {/* Content Side */}
                   <div className="lg:col-span-7 p-12 lg:p-16 flex items-center">

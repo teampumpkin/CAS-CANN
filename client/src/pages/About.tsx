@@ -310,7 +310,7 @@ export default function About() {
                 description: "Evidence-based clinical tools, protocols, and guidelines curated by expert clinicians for practical implementation.",
                 features: ["Clinical Assessment Tools", "Diagnostic Algorithms", "Treatment Protocols", "Quality Metrics"],
                 color: "from-[#00AFE6] to-[#00DD89]",
-                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                bgColor: "from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20",
                 borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30"
               },
               {
@@ -319,7 +319,7 @@ export default function About() {
                 description: "Comprehensive diagnostic pathways and decision support tools to accelerate accurate amyloidosis diagnosis.",
                 features: ["Rapid Diagnostic Pathways", "Biomarker Interpretation", "Imaging Guidelines", "Biopsy Protocols"],
                 color: "from-[#00DD89] to-[#00AFE6]",
-                bgColor: "from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15",
+                bgColor: "from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 to-[#00AFE6]/20",
                 borderColor: "border-[#00DD89]/20 dark:border-[#00DD89]/30"
               },
               {
@@ -328,7 +328,7 @@ export default function About() {
                 description: "Collaborative networks connecting clinicians for case discussions, best practice sharing, and professional development.",
                 features: ["Case Consultations", "Best Practice Sharing", "Professional Development", "Multidisciplinary Teams"],
                 color: "from-[#00AFE6] to-[#00DD89]",
-                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                bgColor: "from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20",
                 borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30"
               }
             ].map((service, index) => (
@@ -451,7 +451,7 @@ export default function About() {
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:scale-105 hover:shadow-lg hover:shadow-[#00AFE6]/20 transition-all duration-300"
+                  className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:scale-105 hover:shadow-lg hover:shadow-[#00AFE6]/20 transition-all duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -575,7 +575,7 @@ export default function About() {
             ].map((member, index) => (
               <motion.div
                 key={index}
-                className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 group"
+                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -642,7 +642,7 @@ export default function About() {
                 description: "Foundational governance documents outlining our mission, structure, and operating principles.",
                 icon: FileText,
                 color: "from-[#00AFE6] to-blue-500",
-                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                bgColor: "from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20",
                 borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30",
                 documents: ["Articles of Incorporation", "Organizational Bylaws", "Mission Statement", "Code of Ethics"]
               },
@@ -651,7 +651,7 @@ export default function About() {
                 description: "Policies and procedures ensuring high-quality clinical practice and patient safety standards.",
                 icon: Shield,
                 color: "from-[#00DD89] to-green-500",
-                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                bgColor: "from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20",
                 borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30",
                 documents: ["Clinical Practice Guidelines", "Quality Assurance Framework", "Patient Safety Protocols", "Ethics Review Board"]
               },
@@ -660,7 +660,7 @@ export default function About() {
                 description: "Annual reports, financial statements, and accountability measures for public transparency.",
                 icon: Globe,
                 color: "from-purple-500 to-violet-500",
-                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                bgColor: "from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20",
                 borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30",
                 documents: ["Annual Financial Report", "Audit Results", "Funding Sources", "Impact Metrics"]
               }
@@ -820,7 +820,7 @@ export default function About() {
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
-                className="backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20"
+                className="backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}

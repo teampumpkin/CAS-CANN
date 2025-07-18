@@ -234,7 +234,7 @@ export default function AccessibilityStatement() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
                     <Target className="w-6 h-6" />
@@ -251,7 +251,7 @@ export default function AccessibilityStatement() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
                     <Users className="w-6 h-6" />
@@ -466,7 +466,7 @@ export default function AccessibilityStatement() {
             </p>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
                     <Mail className="w-5 h-5" />
@@ -492,7 +492,7 @@ export default function AccessibilityStatement() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
+              <Card className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
                     <Phone className="w-5 h-5" />

@@ -10,6 +10,19 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Complete Contact Page & Footer Enhancement with Bilingual UX (July 18, 2025)
+- ✅ **Professional contact system** - Added 4 dedicated email addresses (info@, resources@, support@, professionals@)
+- ✅ **Response time expectations** - Clear timelines for each inquiry type (24-48 hours to 3-5 business days)
+- ✅ **Comprehensive FAQ section** - 6 detailed FAQ items covering common questions about resources, membership, and support
+- ✅ **Enhanced contact information** - Phone numbers, response times, and specialized contact methods for different needs
+- ✅ **Persistent language toggle** - Footer-based language switcher with localStorage persistence across all pages
+- ✅ **Language status indicators** - "Available" / "Coming Soon" tags for all pages and features
+- ✅ **Translation disclaimers** - Form-level language status alerts explaining French support availability
+- ✅ **Comprehensive footer redesign** - 4-column layout with Quick Links, Contact Info, Legal & Privacy, and Language Status
+- ✅ **Bilingual UX system** - Complete language status tagging with visual indicators and user-friendly messaging
+- ✅ **Legal & privacy links** - Privacy Policy, Terms of Use, and Accessibility links with external indicators
+- ✅ **Professional branding** - Consistent CAS brand colors and professional contact presentation
+
 ### Complete About Amyloidosis Page Redesign with Medical Professional Focus (July 18, 2025)
 - ✅ **Professional hero section** - Full-screen medical design with animated elements, clinical statistics, and professional branding
 - ✅ **Medical audience targeting** - Designed for PCPs, cardiologists, neurologists, nephrologists, and hematologists

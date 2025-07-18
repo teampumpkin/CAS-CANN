@@ -30,7 +30,9 @@ import {
   Globe,
   Calendar,
   Award,
-  Gavel
+  Gavel,
+  Languages,
+  Info
 } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -40,6 +42,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Form schema
 const joinFormSchema = z.object({
@@ -165,6 +168,7 @@ const approvalProcess = [
 export default function JoinCAS() {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const { toast } = useToast();
+  const { language } = useLanguage();
 
   const {
     register,
@@ -740,6 +744,35 @@ export default function JoinCAS() {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Language Status & Translation Disclaimer */}
+              <Alert className="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200 dark:border-blue-800">
+                <div className="flex items-start gap-3">
+                  <div className="flex items-center gap-2">
+                    <Languages className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <span className={`text-xs px-2 py-1 rounded-full ${
+                      language === 'en' 
+                        ? 'bg-green-500/20 text-green-700 dark:text-green-300' 
+                        : 'bg-yellow-500/20 text-yellow-700 dark:text-yellow-300'
+                    }`}>
+                      {language === 'en' ? 'Available' : 'Disponible'}
+                    </span>
+                  </div>
+                  <div className="flex-1">
+                    <AlertDescription className="text-sm">
+                      <div className="font-medium text-blue-900 dark:text-blue-100 mb-1">
+                        {language === 'en' ? 'Language Status' : 'Statut de la langue'}
+                      </div>
+                      <p className="text-blue-700 dark:text-blue-300">
+                        {language === 'en' 
+                          ? 'This form is available in English. French support is coming soon. You may submit your application in French, and we will respond in your preferred language.'
+                          : 'Ce formulaire est disponible en anglais. Le support français arrive bientôt. Vous pouvez soumettre votre candidature en français, et nous répondrons dans votre langue préférée.'
+                        }
+                      </p>
+                    </AlertDescription>
+                  </div>
+                </div>
+              </Alert>
 
               {/* Submit Button */}
               <div className="text-center">

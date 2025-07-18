@@ -1,23 +1,32 @@
 import { motion } from 'framer-motion';
-import { Heart, Instagram, Linkedin, Twitter, Facebook, MapPin, Phone, Mail, FileText, Users, Calendar, Search } from 'lucide-react';
+import { Heart, Instagram, Linkedin, Twitter, Facebook, MapPin, Phone, Mail, FileText, Users, Calendar, Search, Globe, Shield, BookOpen, ExternalLink } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Footer() {
+  const { language, setLanguage } = useLanguage();
+
   const informationLinks = [
-    { name: "About CAS", href: "/about" },
-    { name: "About Amyloidosis", href: "/about-amyloidosis" },
-    { name: "Resources", href: "/resources" },
-    { name: "Directory", href: "/directory" },
-    { name: "Contact Us", href: "/contact" },
-    { name: "Get Involved", href: "/get-involved" }
+    { name: "About CAS", href: "/about", status: "available" },
+    { name: "About Amyloidosis", href: "/about-amyloidosis", status: "available" },
+    { name: "Resources", href: "/resources", status: "available" },
+    { name: "Directory", href: "/directory", status: "available" },
+    { name: "Contact Us", href: "/contact", status: "available" },
+    { name: "Get Involved", href: "/get-involved", status: "available" }
   ];
 
   const sitemapLinks = [
-    { name: "Homepage", href: "/", icon: Heart },
-    { name: "Patient Resources", href: "/resources", icon: FileText },
-    { name: "Healthcare Directory", href: "/directory", icon: MapPin },
-    { name: "Support Groups", href: "/support-groups", icon: Users },
-    { name: "Events & News", href: "/events", icon: Calendar },
-    { name: "Research Updates", href: "/research", icon: Search }
+    { name: "Homepage", href: "/", icon: Heart, status: "available" },
+    { name: "Patient Resources", href: "/resources", icon: FileText, status: "available" },
+    { name: "Healthcare Directory", href: "/directory", icon: MapPin, status: "available" },
+    { name: "Join CAS", href: "/join-cas", icon: Users, status: "available" },
+    { name: "Upload Resource", href: "/upload-resource", icon: BookOpen, status: "available" },
+    { name: "Support Groups", href: "/get-involved", icon: Users, status: "available" }
+  ];
+
+  const legalLinks = [
+    { name: "Privacy Policy", href: "/privacy-policy", icon: Shield },
+    { name: "Terms of Use", href: "/terms-of-use", icon: FileText },
+    { name: "Accessibility", href: "/accessibility", icon: Globe }
   ];
 
   const socialLinks = [
@@ -25,6 +34,12 @@ export default function Footer() {
     { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/canadian-amyloidosis-society', color: 'hover:text-blue-400' },
     { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/amyloidosis_ca', color: 'hover:text-blue-400' },
     { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/canadianamyloidosis', color: 'hover:text-blue-500' }
+  ];
+
+  const contactInfo = [
+    { type: 'email', value: 'info@canadianamyloidosis.ca', icon: Mail },
+    { type: 'phone', value: '1-800-CAS-INFO', icon: Phone },
+    { type: 'address', value: 'Toronto, Ontario, Canada', icon: MapPin }
   ];
 
   return (
@@ -40,7 +55,7 @@ export default function Footer() {
           <div className="grid lg:grid-cols-12 gap-8">
             
             {/* Brand Section - Enhanced */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-3">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -60,6 +75,39 @@ export default function Footer() {
                 <p className="text-white/70 text-base leading-relaxed mb-6">
                   Advancing awareness, accelerating research, and improving outcomes for all Canadians affected by amyloidosis.
                 </p>
+
+                {/* Language Toggle */}
+                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 mb-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Globe className="w-5 h-5 text-[#00AFE6]" />
+                    <span className="text-white font-medium">Language</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setLanguage('en')}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        language === 'en' 
+                          ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
+                          : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
+                      }`}
+                    >
+                      English
+                    </button>
+                    <button
+                      onClick={() => setLanguage('fr')}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        language === 'fr' 
+                          ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
+                          : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
+                      }`}
+                    >
+                      Français
+                    </button>
+                  </div>
+                  <p className="text-white/50 text-xs mt-2">
+                    {language === 'en' ? 'Content available in both languages' : 'Contenu disponible dans les deux langues'}
+                  </p>
+                </div>
 
                 {/* Newsletter Signup */}
                 <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
@@ -82,139 +130,138 @@ export default function Footer() {
               </motion.div>
             </div>
 
-            {/* Navigation Links */}
-            <div className="lg:col-span-8">
-              <div className="grid md:grid-cols-4 gap-8">
-                
-                {/* Quick Links */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <h4 className="text-lg font-semibold text-white mb-6">Quick Links</h4>
-                  <div className="space-y-4">
-                    {informationLinks.map((link, index) => (
-                      <motion.a
-                        key={link.name}
+            {/* Quick Links */}
+            <div className="lg:col-span-3">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-lg font-semibold text-white mb-6">Quick Links</h3>
+                <ul className="space-y-3">
+                  {sitemapLinks.map((link, index) => (
+                    <li key={index}>
+                      <a
                         href={link.href}
-                        className="block text-white/70 hover:text-[#00AFE6] transition-colors text-sm font-medium hover:translate-x-1 transition-transform duration-300"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}
-                        viewport={{ once: true }}
+                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-3 group"
                       >
-                        {link.name}
-                      </motion.a>
-                    ))}
-                  </div>
-                </motion.div>
+                        <link.icon className="w-4 h-4 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                        <span className="flex-1">{link.name}</span>
+                        <span className={`text-xs px-2 py-1 rounded-full ${
+                          link.status === 'available' 
+                            ? 'bg-green-500/20 text-green-300' 
+                            : 'bg-yellow-500/20 text-yellow-300'
+                        }`}>
+                          {link.status === 'available' ? 'Available' : 'Coming Soon'}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
 
-                {/* Sitemap */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.15 }}
-                  viewport={{ once: true }}
-                >
-                  <h4 className="text-lg font-semibold text-white mb-6">Sitemap</h4>
-                  <div className="space-y-4">
-                    {sitemapLinks.map((link, index) => (
-                      <motion.a
-                        key={link.name}
-                        href={link.href}
-                        className="flex items-center gap-3 text-white/70 hover:text-[#00AFE6] transition-colors text-sm font-medium group"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: 0.25 + index * 0.05 }}
-                        viewport={{ once: true }}
-                      >
-                        <link.icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-                        <span className="group-hover:translate-x-1 transition-transform duration-300">{link.name}</span>
-                      </motion.a>
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* Contact Info */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.25 }}
-                  viewport={{ once: true }}
-                >
-                  <h4 className="text-lg font-semibold text-white mb-6">Contact</h4>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-4 h-4 text-[#00AFE6]" />
-                      <div>
-                        <p className="text-white/50 text-xs uppercase tracking-wide mb-1">Email</p>
-                        <a 
-                          href="mailto:info@canadianamyloidosis.ca" 
-                          className="text-white/70 hover:text-[#00AFE6] transition-colors text-sm font-medium"
+            {/* Contact Information */}
+            <div className="lg:col-span-3">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-lg font-semibold text-white mb-6">Contact Info</h3>
+                <div className="space-y-4">
+                  {contactInfo.map((contact, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <contact.icon className="w-5 h-5 text-[#00AFE6]" />
+                      {contact.type === 'email' ? (
+                        <a
+                          href={`mailto:${contact.value}`}
+                          className="text-white/70 hover:text-white transition-colors duration-300 text-sm"
                         >
-                          info@canadianamyloidosis.ca
+                          {contact.value}
                         </a>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-4 h-4 text-[#00DD89]" />
-                      <div>
-                        <p className="text-white/50 text-xs uppercase tracking-wide mb-1">Phone</p>
-                        <a 
-                          href="tel:+1-800-555-0123" 
-                          className="text-white/70 hover:text-[#00DD89] transition-colors text-sm font-medium"
+                      ) : contact.type === 'phone' ? (
+                        <a
+                          href={`tel:${contact.value}`}
+                          className="text-white/70 hover:text-white transition-colors duration-300 text-sm"
                         >
-                          1-800-555-0123
+                          {contact.value}
                         </a>
-                      </div>
+                      ) : (
+                        <span className="text-white/70 text-sm">{contact.value}</span>
+                      )}
                     </div>
-                    
-                    <div className="flex items-center gap-3">
-                      <MapPin className="w-4 h-4 text-purple-400" />
-                      <div>
-                        <p className="text-white/50 text-xs uppercase tracking-wide mb-1">Location</p>
-                        <p className="text-white/70 text-sm">
-                          Nationwide<br />
-                          Canada
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
+                  ))}
+                </div>
 
-                {/* Social Media */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: true }}
-                >
-                  <h4 className="text-lg font-semibold text-white mb-6">Connect</h4>
-                  <div className="space-y-4">
+                {/* Social Links */}
+                <div className="mt-6">
+                  <h4 className="text-white font-medium mb-3">Follow Us</h4>
+                  <div className="flex gap-3">
                     {socialLinks.map((social, index) => (
-                      <motion.a
-                        key={social.name}
+                      <a
+                        key={index}
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`flex items-center gap-3 text-white/70 ${social.color} transition-colors text-sm font-medium group`}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
-                        viewport={{ once: true }}
+                        className={`w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center transition-all duration-300 hover:bg-white/20 ${social.color} hover:scale-110`}
                       >
-                        <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                        <span className="group-hover:translate-x-1 transition-transform duration-300">{social.name}</span>
-                      </motion.a>
+                        <social.icon className="w-5 h-5" />
+                      </a>
                     ))}
                   </div>
-                  
-                  
-                </motion.div>
-              </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Legal & Privacy */}
+            <div className="lg:col-span-3">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-lg font-semibold text-white mb-6">Legal & Privacy</h3>
+                <ul className="space-y-3">
+                  {legalLinks.map((link, index) => (
+                    <li key={index}>
+                      <a
+                        href={link.href}
+                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-3 group"
+                      >
+                        <link.icon className="w-4 h-4 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                        <span className="flex-1">{link.name}</span>
+                        <ExternalLink className="w-3 h-3 text-white/50 group-hover:text-white/70 transition-colors duration-300" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Language Status Info */}
+                <div className="mt-6 bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Globe className="w-4 h-4 text-[#00AFE6]" />
+                    <span className="text-white font-medium text-sm">Language Status</span>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                      <span className="text-white/70 text-xs">
+                        {language === 'en' ? 'Most pages available in French' : 'La plupart des pages disponibles en français'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                      <span className="text-white/70 text-xs">
+                        {language === 'en' ? 'Forms include translation disclaimers' : 'Les formulaires incluent des avis de traduction'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>

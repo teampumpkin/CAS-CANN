@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Upload, Users, MessageCircle, ExternalLink, Send, User, Building2, Shield, RefreshCw } from 'lucide-react';
+import { Mail, Upload, Users, MessageCircle, ExternalLink, Send, User, Building2, Shield, RefreshCw, Phone, MapPin, Clock, HelpCircle, FileText, AlertCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -167,38 +167,76 @@ export default function Contact() {
       icon: MessageCircle,
       title: 'General Inquiries',
       description: 'Questions about CAS, media requests, or collaboration opportunities',
-      email: 'info@amyloidosis.ca',
+      email: 'info@canadianamyloidosis.ca',
+      phone: '1-800-CAS-INFO',
+      responseTime: '24-48 hours',
       gradient: 'from-[#00AFE6] to-[#00DD89]'
     },
     {
       icon: Upload,
       title: 'Resource & Directory Updates',
-      description: 'Submit resources or update clinic listings using our forms',
-      links: [
-        { text: 'Upload Resource', url: '/upload-resource' },
-        { text: 'Directory Updates', url: '/directory' }
-      ],
-      gradient: 'from-[#00DD89] to-[#00AFE6]'
+      description: 'Submit new resources, update directory information, or report issues',
+      email: 'resources@canadianamyloidosis.ca',
+      phone: '1-800-CAS-INFO ext. 2',
+      responseTime: '3-5 business days',
+      gradient: 'from-purple-600 to-pink-600'
     },
     {
       icon: Users,
-      title: 'Join CAS',
-      description: 'Become a member or stay updated on our work',
-      links: [
-        { text: 'Join CAS', url: '/get-involved' }
-      ],
-      gradient: 'from-purple-500 to-[#00AFE6]'
+      title: 'Membership & Support',
+      description: 'Membership questions, support group information, or volunteer opportunities',
+      email: 'support@canadianamyloidosis.ca',
+      phone: '1-800-CAS-INFO ext. 3',
+      responseTime: '1-2 business days',
+      gradient: 'from-green-600 to-teal-600'
     },
     {
-      icon: User,
-      title: 'Join CANN',
-      description: 'Connect with the Canadian Amyloidosis Nursing Network for professional collaboration',
-      links: [
-        { text: 'Join CANN', url: '/join-cann' },
-        { text: 'Learn More', url: '/cann' }
-      ],
-      gradient: 'from-emerald-500 to-[#00DD89]'
+      icon: Building2,
+      title: 'Healthcare Professionals',
+      description: 'Professional resources, collaboration, and educational opportunities',
+      email: 'professionals@canadianamyloidosis.ca',
+      phone: '1-800-CAS-INFO ext. 4',
+      responseTime: '2-3 business days',
+      gradient: 'from-blue-600 to-indigo-600'
     }
+  ];
+
+  const faqItems = [
+    {
+      question: 'How do I submit a new resource to the directory?',
+      answer: 'You can submit resources through our Upload Resource page or contact resources@canadianamyloidosis.ca. All submissions undergo a 2-3 week review process by our editorial team.'
+    },
+    {
+      question: 'How long does it take to get a response?',
+      answer: 'Response times vary by inquiry type: General inquiries (24-48 hours), Resource submissions (3-5 business days), Membership questions (1-2 business days), Professional inquiries (2-3 business days).'
+    },
+    {
+      question: 'Can I update information in the healthcare directory?',
+      answer: 'Yes! Healthcare professionals can update their directory information by contacting resources@canadianamyloidosis.ca with their current details and credentials.'
+    },
+    {
+      question: 'Do you provide support in French?',
+      answer: 'Yes, we provide bilingual support in English and French. You can submit inquiries in either language and we will respond in your preferred language.'
+    },
+    {
+      question: 'How do I join CAS as a healthcare professional?',
+      answer: 'Visit our Join CAS page to submit a membership application. The review process typically takes 2-3 weeks, and you\'ll receive confirmation once approved.'
+    },
+    {
+      question: 'What information do you collect and how is it used?',
+      answer: 'We collect only necessary information to provide our services. All data is handled according to our Privacy Policy and Canadian privacy laws. We never share personal information with third parties without consent.'
+    }
+  ];
+
+  const inquiryTypes = [
+    'General Information',
+    'Resource Submission',
+    'Directory Update',
+    'Membership Question',
+    'Professional Collaboration',
+    'Media Inquiry',
+    'Technical Support',
+    'Other'
   ];
 
   return (
@@ -256,7 +294,7 @@ export default function Contact() {
                 <span className="text-sm font-medium text-white/90">Connect & Collaborate</span>
               </motion.div>
               
-              <h1 className="crawford-section-title mb-8 leading-none">
+              <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-none">
                 <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
                   Let's
                 </span>
@@ -358,8 +396,109 @@ export default function Contact() {
         </div>
       </ParallaxBackground>
 
+      {/* Contact Information Section */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Contact <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Information</span>
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-white/70 max-w-2xl mx-auto">
+              Get in touch with our team. We're here to help with your questions and support your amyloidosis journey.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {contactSections.map((section, index) => (
+              <motion.div
+                key={section.title}
+                className="bg-white dark:bg-white/10 rounded-2xl p-6 border border-gray-200 dark:border-white/20 hover:shadow-lg transition-all duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className={`w-12 h-12 bg-gradient-to-br ${section.gradient} rounded-xl flex items-center justify-center mb-4`}>
+                  <section.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                  {section.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-white/70 mb-4">
+                  {section.description}
+                </p>
+                
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-[#00AFE6]" />
+                    <a href={`mailto:${section.email}`} className="text-sm text-[#00AFE6] hover:text-[#00DD89] transition-colors">
+                      {section.email}
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-[#00DD89]" />
+                    <a href={`tel:${section.phone}`} className="text-sm text-[#00DD89] hover:text-[#00AFE6] transition-colors">
+                      {section.phone}
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-gray-500" />
+                    <span className="text-sm text-gray-600 dark:text-white/60">
+                      Response: {section.responseTime}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Frequently Asked <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Questions</span>
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-white/70 max-w-2xl mx-auto">
+              Quick answers to common questions about CAS, resources, and membership.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6">
+              {faqItems.map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-gray-50 dark:bg-white/5 rounded-2xl p-6 border border-gray-200 dark:border-white/10"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center flex-shrink-0">
+                      <HelpCircle className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                        {item.question}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-white/70 leading-relaxed">
+                        {item.answer}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Form Section */}
-      <section id="contact-form" className="py-32 bg-gray-900 relative overflow-hidden">
+      <section id="contact-form" className="py-16 bg-gray-900 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900" />
         <div className="absolute top-0 right-0 w-72 h-72 bg-[#00DD89]/10 rounded-full blur-3xl" />

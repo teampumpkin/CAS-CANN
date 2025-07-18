@@ -51,11 +51,11 @@ export default function Footer() {
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Main Content */}
-        <div className="py-8">
-          <div className="grid lg:grid-cols-12 gap-8">
+        <div className="py-12">
+          <div className="grid lg:grid-cols-4 gap-8">
             
             {/* Brand Section - Enhanced */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -72,20 +72,20 @@ export default function Footer() {
                   </div>
                 </div>
                 
-                <p className="text-white/70 text-base leading-relaxed mb-6">
+                <p className="text-white/80 text-sm leading-relaxed mb-6">
                   Advancing awareness, accelerating research, and improving outcomes for all Canadians affected by amyloidosis.
                 </p>
 
                 {/* Language Toggle */}
-                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 mb-6">
+                <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
                   <div className="flex items-center gap-2 mb-3">
-                    <Globe className="w-5 h-5 text-[#00AFE6]" />
-                    <span className="text-white font-medium">Language</span>
+                    <Globe className="w-4 h-4 text-[#00AFE6]" />
+                    <span className="text-white font-medium text-sm">Language</span>
                   </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setLanguage('en')}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
                         language === 'en' 
                           ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
                           : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
@@ -95,7 +95,7 @@ export default function Footer() {
                     </button>
                     <button
                       onClick={() => setLanguage('fr')}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
                         language === 'fr' 
                           ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
                           : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
@@ -108,30 +108,11 @@ export default function Footer() {
                     {language === 'en' ? 'Content available in both languages' : 'Contenu disponible dans les deux langues'}
                   </p>
                 </div>
-
-                {/* Newsletter Signup */}
-                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                  <h3 className="text-lg font-semibold text-white mb-3">Stay Informed</h3>
-                  <p className="text-white/60 text-sm mb-4">
-                    Get research updates and community news — no spam.
-                  </p>
-                  
-                  <div className="flex gap-3">
-                    <input
-                      type="email"
-                      placeholder="Your email address"
-                      className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:border-[#00AFE6] focus:ring-1 focus:ring-[#00AFE6]/20 transition-all duration-300"
-                    />
-                    <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
-                      Subscribe
-                    </button>
-                  </div>
-                </div>
               </motion.div>
             </div>
 
             {/* Quick Links */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -139,16 +120,16 @@ export default function Footer() {
                 viewport={{ once: true }}
               >
                 <h3 className="text-lg font-semibold text-white mb-6">Quick Links</h3>
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   {sitemapLinks.map((link, index) => (
                     <li key={index}>
                       <a
                         href={link.href}
-                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-3 group"
+                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
                       >
                         <link.icon className="w-4 h-4 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
                         <span className="flex-1">{link.name}</span>
-                        <span className={`text-xs px-2 py-1 rounded-full ${
+                        <span className={`text-xs px-2 py-0.5 rounded-full ${
                           link.status === 'available' 
                             ? 'bg-green-500/20 text-green-300' 
                             : 'bg-yellow-500/20 text-yellow-300'
@@ -163,7 +144,7 @@ export default function Footer() {
             </div>
 
             {/* Contact Information */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -171,10 +152,10 @@ export default function Footer() {
                 viewport={{ once: true }}
               >
                 <h3 className="text-lg font-semibold text-white mb-6">Contact Info</h3>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {contactInfo.map((contact, index) => (
                     <div key={index} className="flex items-center gap-3">
-                      <contact.icon className="w-5 h-5 text-[#00AFE6]" />
+                      <contact.icon className="w-4 h-4 text-[#00AFE6]" />
                       {contact.type === 'email' ? (
                         <a
                           href={`mailto:${contact.value}`}
@@ -198,17 +179,17 @@ export default function Footer() {
 
                 {/* Social Links */}
                 <div className="mt-6">
-                  <h4 className="text-white font-medium mb-3">Follow Us</h4>
-                  <div className="flex gap-3">
+                  <h4 className="text-white font-medium mb-3 text-sm">Follow Us</h4>
+                  <div className="flex gap-2">
                     {socialLinks.map((social, index) => (
                       <a
                         key={index}
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center transition-all duration-300 hover:bg-white/20 ${social.color} hover:scale-110`}
+                        className={`w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center transition-all duration-300 hover:bg-white/20 ${social.color} hover:scale-105`}
                       >
-                        <social.icon className="w-5 h-5" />
+                        <social.icon className="w-4 h-4" />
                       </a>
                     ))}
                   </div>
@@ -217,7 +198,7 @@ export default function Footer() {
             </div>
 
             {/* Legal & Privacy */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -225,12 +206,12 @@ export default function Footer() {
                 viewport={{ once: true }}
               >
                 <h3 className="text-lg font-semibold text-white mb-6">Legal & Privacy</h3>
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   {legalLinks.map((link, index) => (
                     <li key={index}>
                       <a
                         href={link.href}
-                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-3 group"
+                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
                       >
                         <link.icon className="w-4 h-4 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
                         <span className="flex-1">{link.name}</span>
@@ -239,28 +220,6 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
-
-                {/* Language Status Info */}
-                <div className="mt-6 bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Globe className="w-4 h-4 text-[#00AFE6]" />
-                    <span className="text-white font-medium text-sm">Language Status</span>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      <span className="text-white/70 text-xs">
-                        {language === 'en' ? 'Most pages available in French' : 'La plupart des pages disponibles en français'}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
-                      <span className="text-white/70 text-xs">
-                        {language === 'en' ? 'Forms include translation disclaimers' : 'Les formulaires incluent des avis de traduction'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
               </motion.div>
             </div>
           </div>

@@ -154,7 +154,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 justify-items-center max-w-5xl mx-auto">
               {quickTiles.map((tile, index) => (
                 <motion.a
                   key={tile.label}

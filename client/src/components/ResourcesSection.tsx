@@ -160,14 +160,14 @@ export default function ResourcesSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.button
-              className="bg-[#00AFE6] text-white px-8 py-3 rounded-full font-medium hover:bg-[#0099CC] transition-colors duration-200"
+              className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 rounded-full font-medium hover:from-[#0099CC] hover:to-[#00CC77] transition-all duration-200 shadow-lg hover:shadow-xl"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               Request Resources
             </motion.button>
             <motion.button
-              className="bg-white text-gray-700 px-8 py-3 rounded-full font-medium border border-gray-200 hover:bg-gray-50 transition-colors duration-200"
+              className="bg-white text-gray-700 px-8 py-3 rounded-full font-medium border-2 border-[#00AFE6] hover:bg-[#00AFE6] hover:text-white transition-all duration-200 shadow-lg hover:shadow-xl"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

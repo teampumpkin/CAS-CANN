@@ -399,7 +399,7 @@ export default function OtherAmyloidosis() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Link href="/directory" className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+            <Link href="/directory" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
               View Complete Directory
               <Search className="w-5 h-5" />
             </Link>

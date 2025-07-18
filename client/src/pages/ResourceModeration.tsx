@@ -534,7 +534,7 @@ export default function ResourceModeration() {
                                     />
                                   </div>
                                   
-                                  <Alert className="bg-blue-500/10 border-blue-500/30">
+                                  <Alert className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89]/10 border-blue-500/30">
                                     <AlertTriangle className="h-4 w-4 text-blue-400" />
                                     <AlertDescription className="text-white/90">
                                       Please review the resource carefully before making a decision. Approved resources will be immediately available to all users.

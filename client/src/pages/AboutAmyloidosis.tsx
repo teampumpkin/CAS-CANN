@@ -23,13 +23,13 @@ export default function AboutAmyloidosis() {
     {
       category: 'Neurological Symptoms',
       icon: Brain,
-      color: 'bg-blue-500/20 border-blue-500/30 text-blue-400',
+      color: 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89]/20 border-blue-500/30 text-blue-400',
       signs: ['Numbness in hands/feet', 'Tingling sensations', 'Muscle weakness', 'Carpal tunnel syndrome', 'Balance problems']
     },
     {
       category: 'Gastrointestinal (GI) Symptoms',
       icon: Activity,
-      color: 'bg-green-500/20 border-green-500/30 text-green-400',
+      color: 'bg-gradient-to-r from-[#00DD89] to-[#00AFE6]/20 border-green-500/30 text-green-400',
       signs: ['Persistent diarrhea', 'Nausea and vomiting', 'Abdominal pain', 'Loss of appetite', 'Malabsorption symptoms']
     },
     {

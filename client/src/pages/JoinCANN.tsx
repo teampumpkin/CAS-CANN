@@ -583,7 +583,7 @@ export default function JoinCANN() {
                               variant="outline"
                               className={`w-full transition-all duration-300 ${
                                 index === 0 
-                                  ? 'border-blue-300 text-blue-700 hover:bg-blue-600 hover:text-white dark:border-blue-400 dark:text-blue-300 dark:hover:bg-blue-500'
+                                  ? 'border-blue-300 text-blue-700 hover:bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:text-white dark:border-blue-400 dark:text-blue-300 dark:hover:bg-gradient-to-r from-[#00AFE6] to-[#00DD89]'
                                   : index === 1
                                   ? 'border-emerald-300 text-emerald-700 hover:bg-emerald-600 hover:text-white dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-500'
                                   : index === 2

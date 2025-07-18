@@ -222,7 +222,7 @@ export default function QuickLinksSection() {
             {t('quickLinks.needHelp')}
           </p>
           <motion.button
-            className="group inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl border border-gray-200 hover:border-gray-300 transition-all duration-300"
+            className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl border border-transparent transition-all duration-300 hover:from-[#0099CC] hover:to-[#00CC77]"
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >

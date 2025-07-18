@@ -156,7 +156,7 @@ export default function Header() {
                         style={{ zIndex: 9999 }}
                       >
                         {/* Gradient glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-2xl"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-2xl overflow-hidden"></div>
                         
                         {item.dropdownItems?.map((dropdownItem, dropdownIndex) => (
                           <motion.a

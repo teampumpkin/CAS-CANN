@@ -81,6 +81,13 @@
     min-width: 280px !important;
     background: rgb(17, 24, 39) !important;
     backdrop-filter: blur(12px) !important;
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  .dropdown-menu > div {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
   }
 }
 

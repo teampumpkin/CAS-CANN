@@ -28,32 +28,7 @@ export default function Header() {
   };
 
   const navItems = [
-    {
-      name: t('nav.resources'),
-      href: '#resources',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Resource Library', href: '/resources' },
-        { name: 'Healthcare Directory', href: '/directory' },
-        { name: 'Contribute Resource', href: '/upload-resource' },
-      ]
-    },
-    {
-      name: t('nav.directory'),
-      href: '/directory',
-      hasDropdown: false,
-    },
-    {
-      name: t('nav.community'),
-      href: '#community',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Join CAS', href: '/join-cas' },
-        { name: 'Join CANN', href: '/join-cann' },
-        { name: 'Get Involved', href: '/get-involved' },
-        { name: 'Events', href: '/events' },
-      ]
-    },
+    { name: t('nav.home'), href: '/' },
     {
       name: t('nav.about'),
       href: '#about',
@@ -64,6 +39,28 @@ export default function Header() {
         { name: 'AL Amyloidosis', href: '/al-amyloidosis' },
         { name: 'ATTR Amyloidosis', href: '/attr-amyloidosis' },
         { name: 'Other Types', href: '/other-amyloidosis' },
+      ]
+    },
+    {
+      name: t('nav.resources'),
+      href: '#resources',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'Resource Library', href: '/resources' },
+        { name: 'Healthcare Directory', href: '/directory' },
+        { name: 'Upload Resource', href: '/upload-resource' },
+      ]
+    },
+    { name: t('nav.directory'), href: '/directory' },
+    {
+      name: t('nav.community'),
+      href: '#community',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'Join CAS', href: '/join-cas' },
+        { name: 'Join CANN', href: '/join-cann' },
+        { name: 'Get Involved', href: '/get-involved' },
+        { name: 'Events', href: '/events' },
       ]
     },
     { name: t('nav.contact'), href: '/contact' }

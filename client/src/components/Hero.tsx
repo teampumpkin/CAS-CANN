@@ -159,14 +159,14 @@ export default function Hero() {
                 <motion.a
                   key={tile.label}
                   href={tile.href}
-                  className="group relative overflow-hidden"
+                  className="group relative overflow-hidden w-full max-w-[200px]"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.4 + index * 0.2 }}
                   whileHover={{ y: -12, scale: 1.05 }}
                 >
                   {/* Enhanced Glass morphism card */}
-                  <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 backdrop-blur-2xl rounded-3xl p-6 border border-white/20 transition-all duration-700 group-hover:bg-gradient-to-br group-hover:from-white/15 group-hover:via-white/8 group-hover:to-white/3 group-hover:border-white/40 group-hover:shadow-2xl group-hover:shadow-[#00AFE6]/20 overflow-hidden">
+                  <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 backdrop-blur-2xl rounded-3xl p-6 border border-white/20 transition-all duration-700 group-hover:bg-gradient-to-br group-hover:from-white/15 group-hover:via-white/8 group-hover:to-white/3 group-hover:border-white/40 group-hover:shadow-2xl group-hover:shadow-[#00AFE6]/20 overflow-hidden w-full h-full min-h-[160px]">
                     
                     {/* Dynamic Mesh Background */}
                     <div className="absolute inset-0 opacity-20">

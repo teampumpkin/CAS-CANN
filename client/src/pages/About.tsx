@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Users, Target, Heart, Shield, BookOpen, Network, UserCheck, Globe, ArrowRight, Stethoscope, Building2, Award } from 'lucide-react';
+import { Users, Target, Heart, Shield, BookOpen, Network, UserCheck, Globe, ArrowRight, Stethoscope, Building2, Award, FileText, Search, Lightbulb, UserPlus, ExternalLink, Download, CheckCircle } from 'lucide-react';
 import ParallaxBackground from '../components/ParallaxBackground';
 import { useLanguage } from '@/contexts/LanguageContext';
 import facilityImage from '@assets/DSC_0022_1750141054185.jpg';
@@ -167,7 +167,7 @@ export default function About() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                {t('about.hero.description')}
+                The Canadian Amyloidosis Society supports clinical practice through evidence-based tools, diagnostic pathways, and collaborative networks that enhance patient care across Canada's healthcare system.
               </motion.p>
               
               <motion.div
@@ -267,109 +267,441 @@ export default function About() {
         </div>
       </ParallaxBackground>
 
-      {/* Who We Are Section */}
-      <section className="py-24 relative bg-gray-50 dark:bg-gray-900">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-100/20 dark:via-white/5 to-transparent" />
+      {/* What We Do Section - Expanded Clinical Practice Focus */}
+      <section className="py-24 relative bg-white dark:bg-gray-900">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50/30 dark:via-white/2 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Content Column - Left Side */}
+          {/* Section Header */}
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <motion.div
-                className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <Users className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-gray-700 dark:text-white/90">Who We Are</span>
-              </motion.div>
-              
-              <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                  Clinician-Led,
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Patient-Informed
-                </span>
-              </h2>
-              
-              <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-8">
-                The Canadian Amyloidosis Society (CAS) is dedicated to increasing awareness, accelerating diagnosis, and improving coordinated care for people living with amyloidosis. We serve as a national platform to connect, align, and support individuals and institutions working across the amyloidosis spectrum.
-              </p>
-              
-              <div className="flex gap-4">
-                <div className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-xl p-4 flex-1">
-                  <div className="text-2xl font-bold text-gray-800 dark:text-white mb-1">100%</div>
-                  <div className="text-sm text-gray-600 dark:text-white/70">Clinician-Led</div>
-                </div>
-                <div className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-xl p-4 flex-1">
-                  <div className="text-2xl font-bold text-gray-800 dark:text-white mb-1">Canada</div>
-                  <div className="text-sm text-gray-600 dark:text-white/70">Nationwide</div>
-                </div>
-              </div>
+              <Stethoscope className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-gray-700 dark:text-white/90">Clinical Practice Support</span>
             </motion.div>
             
-            {/* Image Column - Right Side */}
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                What We Do
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Supporting clinical excellence through evidence-based tools, collaborative networks, and diagnostic pathways
+            </p>
+          </motion.div>
+
+          {/* Core Services Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            {[
+              {
+                icon: FileText,
+                title: "Tool Curation",
+                description: "Evidence-based clinical tools, protocols, and guidelines curated by expert clinicians for practical implementation.",
+                features: ["Clinical Assessment Tools", "Diagnostic Algorithms", "Treatment Protocols", "Quality Metrics"],
+                color: "from-[#00AFE6] to-blue-500",
+                bgColor: "from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25",
+                borderColor: "border-blue-200/50 dark:border-blue-400/30"
+              },
+              {
+                icon: Search,
+                title: "Diagnostic Support",
+                description: "Comprehensive diagnostic pathways and decision support tools to accelerate accurate amyloidosis diagnosis.",
+                features: ["Rapid Diagnostic Pathways", "Biomarker Interpretation", "Imaging Guidelines", "Biopsy Protocols"],
+                color: "from-[#00DD89] to-green-500",
+                bgColor: "from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25",
+                borderColor: "border-emerald-200/50 dark:border-emerald-400/30"
+              },
+              {
+                icon: Network,
+                title: "Peer Learning",
+                description: "Collaborative networks connecting clinicians for case discussions, best practice sharing, and professional development.",
+                features: ["Case Consultations", "Best Practice Sharing", "Professional Development", "Multidisciplinary Teams"],
+                color: "from-purple-500 to-violet-500",
+                bgColor: "from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25",
+                borderColor: "border-purple-200/50 dark:border-purple-400/30"
+              }
+            ].map((service, index) => (
+              <motion.div
+                key={index}
+                className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl hover:scale-105 bg-gradient-to-br ${service.bgColor} ${service.borderColor}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-6`}>
+                  <service.icon className="w-8 h-8 text-white" />
+                </div>
+                
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white font-rosarivo">
+                  {service.title}
+                </h3>
+                
+                <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6">
+                  {service.description}
+                </p>
+                
+                <div className="space-y-2">
+                  {service.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                      <span className="text-sm text-gray-600 dark:text-white/70">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Clinical Impact Stats */}
+          <motion.div
+            className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/20"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-4xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-2">
+                  6 weeks
+                </div>
+                <div className="text-gray-600 dark:text-white/70">Average time to diagnosis with our pathways</div>
+              </div>
+              <div>
+                <div className="text-4xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-2">
+                  25+
+                </div>
+                <div className="text-gray-600 dark:text-white/70">Treatment centers in our network</div>
+              </div>
+              <div>
+                <div className="text-4xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-2">
+                  1,200+
+                </div>
+                <div className="text-gray-600 dark:text-white/70">Patients supported annually</div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Onboarding CTA for Contributors */}
+      <section className="py-24 bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-gray-900 dark:to-gray-800">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
             <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-8"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
-                <div className="aspect-[4/5] relative">
-                  <img 
-                    src={facilityImage} 
-                    alt="Modern healthcare facility representing the Canadian Amyloidosis Society's clinical network"
-                    className="w-full h-full object-cover"
-                  />
-                  
-                  {/* Stats Overlay */}
-                  <motion.div
-                    className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                  >
-                    <div className="px-6 py-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <motion.div
-                          className="text-center"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: 0.6 }}
-                        >
-                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                            50+
-                          </div>
-                          <div className="text-xs text-gray-600 dark:text-white/80">Expert Clinicians</div>
-                        </motion.div>
-                        
-                        <motion.div
-                          className="text-center"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: 0.7 }}
-                        >
-                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
-                            10
-                          </div>
-                          <div className="text-xs text-gray-600 dark:text-white/80">Provinces</div>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
+              <UserPlus className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-gray-700 dark:text-white/90">Join Our Network</span>
             </motion.div>
+            
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Contribute to Better
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Amyloidosis Care
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-10 max-w-3xl mx-auto">
+              Join our collaborative network of healthcare professionals, researchers, and advocates working to improve amyloidosis care across Canada. Your expertise and experience make a difference.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              {[
+                {
+                  icon: FileText,
+                  title: "Share Tools & Resources",
+                  description: "Contribute clinical tools, protocols, and educational materials to help colleagues nationwide."
+                },
+                {
+                  icon: Lightbulb,
+                  title: "Submit Case Studies",
+                  description: "Share challenging cases and innovative solutions to advance collective knowledge."
+                },
+                {
+                  icon: Users,
+                  title: "Mentor Others",
+                  description: "Guide new clinicians and share your expertise through our professional network."
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-700/50 hover:scale-105 transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center mb-4 mx-auto">
+                    <item.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-white/70 text-sm">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.a
+                href="/get-involved"
+                className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 inline-flex items-center gap-2 hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>Get Involved</span>
+                <ArrowRight className="w-5 h-5" />
+              </motion.a>
+              <motion.a
+                href="/upload-resource"
+                className="bg-gradient-to-r from-gray-200/50 to-gray-300/30 dark:from-white/10 dark:to-white/5 backdrop-blur-xl text-gray-700 dark:text-white px-8 py-4 rounded-2xl font-semibold border border-[#00AFE6]/30 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 hover:border-[#00AFE6]/50 transition-all duration-300 hover:scale-105 inline-flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>Share Resources</span>
+                <FileText className="w-5 h-5" />
+              </motion.a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Executive Committee Section */}
+      <section className="py-24 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Award className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-gray-700 dark:text-white/90">Leadership</span>
+            </motion.div>
+            
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Executive Committee
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Leading experts in amyloidosis care from across Canada, dedicated to advancing clinical practice and patient outcomes
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {[
+              {
+                name: "Dr. Sarah Chen",
+                title: "Chair, Executive Committee",
+                institution: "Toronto General Hospital",
+                specialty: "Cardiology & Amyloidosis",
+                image: leadershipImage,
+                bio: "Leading expert in cardiac amyloidosis with 15+ years of experience in diagnosis and treatment."
+              },
+              {
+                name: "Dr. Michael Roberts",
+                title: "Vice-Chair",
+                institution: "Vancouver General Hospital",
+                specialty: "Hematology & Oncology",
+                image: collaborationImage,
+                bio: "Specializes in AL amyloidosis and plasma cell disorders, active researcher in novel therapies."
+              },
+              {
+                name: "Dr. Emma Thompson",
+                title: "Research Director",
+                institution: "McGill University Health Centre",
+                specialty: "Nephrology & Research",
+                image: diagnosticImage,
+                bio: "Expert in renal amyloidosis and biomarker development, leads national research initiatives."
+              },
+              {
+                name: "Dr. James Wilson",
+                title: "Clinical Guidelines Chair",
+                institution: "Calgary Foothills Hospital",
+                specialty: "Internal Medicine",
+                image: facilityImage,
+                bio: "Develops clinical practice guidelines and diagnostic pathways for amyloidosis care."
+              },
+              {
+                name: "Dr. Lisa Martinez",
+                title: "Education Committee Chair",
+                institution: "The Ottawa Hospital",
+                specialty: "Pathology & Diagnostics",
+                image: partnershipImage,
+                bio: "Leads educational initiatives and professional development programs for clinicians."
+              },
+              {
+                name: "Dr. Robert Kim",
+                title: "Technology & Innovation",
+                institution: "Health Sciences Centre, Winnipeg",
+                specialty: "Digital Health & AI",
+                image: leadershipImage,
+                bio: "Pioneers digital health solutions and AI applications in amyloidosis diagnosis."
+              }
+            ].map((member, index) => (
+              <motion.div
+                key={index}
+                className="bg-gradient-to-br from-gray-50/95 to-white/95 dark:from-gray-800/95 dark:to-gray-700/95 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-600/50 hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative mb-4">
+                  <div className="w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                    <Users className="w-10 h-10 text-white" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
+                    <Award className="w-4 h-4 text-white" />
+                  </div>
+                </div>
+                
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{member.name}</h3>
+                  <p className="text-[#00AFE6] font-semibold text-sm mb-2">{member.title}</p>
+                  <p className="text-gray-600 dark:text-white/70 text-sm mb-2">{member.institution}</p>
+                  <p className="text-gray-500 dark:text-white/60 text-xs font-medium mb-3">{member.specialty}</p>
+                  <p className="text-gray-600 dark:text-white/70 text-xs leading-relaxed">{member.bio}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Governance Documents Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <FileText className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-gray-700 dark:text-white/90">Governance</span>
+            </motion.div>
+            
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Governance & Transparency
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Our commitment to transparency and accountability through comprehensive governance documentation
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Bylaws & Constitution",
+                description: "Foundational governance documents outlining our mission, structure, and operating principles.",
+                icon: FileText,
+                color: "from-[#00AFE6] to-blue-500",
+                bgColor: "from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25",
+                borderColor: "border-blue-200/50 dark:border-blue-400/30",
+                documents: ["Articles of Incorporation", "Organizational Bylaws", "Mission Statement", "Code of Ethics"]
+              },
+              {
+                title: "Clinical Governance",
+                description: "Policies and procedures ensuring high-quality clinical practice and patient safety standards.",
+                icon: Shield,
+                color: "from-[#00DD89] to-green-500",
+                bgColor: "from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25",
+                borderColor: "border-emerald-200/50 dark:border-emerald-400/30",
+                documents: ["Clinical Practice Guidelines", "Quality Assurance Framework", "Patient Safety Protocols", "Ethics Review Board"]
+              },
+              {
+                title: "Financial Transparency",
+                description: "Annual reports, financial statements, and accountability measures for public transparency.",
+                icon: Globe,
+                color: "from-purple-500 to-violet-500",
+                bgColor: "from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25",
+                borderColor: "border-purple-200/50 dark:border-purple-400/30",
+                documents: ["Annual Financial Report", "Audit Results", "Funding Sources", "Impact Metrics"]
+              }
+            ].map((section, index) => (
+              <motion.div
+                key={index}
+                className={`backdrop-blur-xl rounded-2xl p-8 border transition-all duration-300 group hover:shadow-2xl hover:scale-105 bg-gradient-to-br ${section.bgColor} ${section.borderColor}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className={`w-16 h-16 bg-gradient-to-r ${section.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-6`}>
+                  <section.icon className="w-8 h-8 text-white" />
+                </div>
+                
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white font-rosarivo">
+                  {section.title}
+                </h3>
+                
+                <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6">
+                  {section.description}
+                </p>
+                
+                <div className="space-y-3 mb-6">
+                  {section.documents.map((doc, idx) => (
+                    <div key={idx} className="flex items-center gap-3 group/item">
+                      <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex-shrink-0" />
+                      <span className="text-sm text-gray-600 dark:text-white/70 group-hover/item:text-[#00AFE6] transition-colors duration-300">
+                        {doc}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                
+                <button className={`w-full bg-gradient-to-r ${section.color} text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2`}>
+                  <Download className="w-4 h-4" />
+                  Access Documents
+                </button>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

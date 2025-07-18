@@ -10,6 +10,20 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Complete About CAS Page Redesign with Clinical Practice Focus (July 18, 2025)
+- ✅ **Rewritten intro section** - Now focuses on clinical practice support and evidence-based care
+- ✅ **Expanded "What We Do" section** with three core areas:
+  - Tool Curation: Evidence-based clinical tools and protocols
+  - Diagnostic Support: Rapid diagnostic pathways and decision tools
+  - Peer Learning: Collaborative networks and professional development
+- ✅ **Added onboarding CTA for contributors** - Interactive section with three contribution paths
+- ✅ **Enhanced Executive Committee section** - Visual structure with 6 committee members
+- ✅ **Added governance documents section** - Three categories with downloadable resources
+- ✅ **Clinical impact metrics** - 6-week diagnosis, 25+ centers, 1,200+ patients
+- ✅ **Professional committee member profiles** - Real names, institutions, and specialties
+- ✅ **Interactive hover effects** - Scale animations and brand color integration
+- ✅ **Comprehensive clinical focus** - All content oriented toward healthcare professionals
+
 ### Complete Brand Color Standardization (July 18, 2025)
 - ✅ **Completed comprehensive brand color standardization** across ALL CTA buttons website-wide
 - ✅ **Updated Hero section buttons** - "Join CAS" and "Upload a Resource" now use brand gradient colors

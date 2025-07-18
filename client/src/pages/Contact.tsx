@@ -188,6 +188,16 @@ export default function Contact() {
         { text: 'Join CAS', url: '/get-involved' }
       ],
       gradient: 'from-purple-500 to-[#00AFE6]'
+    },
+    {
+      icon: User,
+      title: 'Join CANN',
+      description: 'Connect with the Canadian Amyloidosis Nursing Network for professional collaboration',
+      links: [
+        { text: 'Join CANN', url: '/join-cann' },
+        { text: 'Learn More', url: '/cann' }
+      ],
+      gradient: 'from-emerald-500 to-[#00DD89]'
     }
   ];
 

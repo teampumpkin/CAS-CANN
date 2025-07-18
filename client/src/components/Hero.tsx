@@ -25,7 +25,9 @@ export default function Hero() {
             className="w-full h-full object-cover"
           />
           {/* Sophisticated overlay for text readability and brand enhancement */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/20 via-[#00DD89]/15 to-[#00AFE6]/25 dark:from-gray-900/80 dark:via-blue-900/70 dark:to-gray-900/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/50 to-gray-900/70 dark:from-gray-900/80 dark:via-blue-900/70 dark:to-gray-900/80"></div>
+          {/* Brand color accent overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/8 to-[#00AFE6]/12"></div>
         </div>
         
         {/* Animated brand accent elements */}

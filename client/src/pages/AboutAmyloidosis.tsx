@@ -15,31 +15,31 @@ export default function AboutAmyloidosis() {
 
   const warningSignsData = [
     {
-      category: 'Cardiac Symptoms',
+      category: t('aboutAmyloidosis.cardiacSymptoms'),
       icon: Heart,
       color: 'bg-red-500/20 border-red-500/30 text-red-400',
       signs: ['Shortness of breath', 'Chest pain', 'Irregular heartbeat', 'Swelling in legs/ankles', 'Fatigue during normal activities']
     },
     {
-      category: 'Neurological Symptoms',
+      category: t('aboutAmyloidosis.neurologicalSymptoms'),
       icon: Brain,
       color: 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89]/20 border-blue-500/30 text-blue-400',
       signs: ['Numbness in hands/feet', 'Tingling sensations', 'Muscle weakness', 'Carpal tunnel syndrome', 'Balance problems']
     },
     {
-      category: 'Gastrointestinal (GI) Symptoms',
+      category: t('aboutAmyloidosis.gastrointestinalSymptoms'),
       icon: Activity,
       color: 'bg-gradient-to-r from-[#00DD89] to-[#00AFE6]/20 border-green-500/30 text-green-400',
       signs: ['Persistent diarrhea', 'Nausea and vomiting', 'Abdominal pain', 'Loss of appetite', 'Malabsorption symptoms']
     },
     {
-      category: 'Genitourinary (GU) Symptoms',
+      category: t('aboutAmyloidosis.genitourinarySymptoms'),
       icon: Droplets,
       color: 'bg-purple-500/20 border-purple-500/30 text-purple-400',
       signs: ['Proteinuria (protein in urine)', 'Decreased urine output', 'Kidney dysfunction', 'Urinary retention', 'Bladder problems']
     },
     {
-      category: 'Systemic Symptoms',
+      category: t('aboutAmyloidosis.systemicSymptoms'),
       icon: Microscope,
       color: 'bg-orange-500/20 border-orange-500/30 text-orange-400',
       signs: ['Unexplained weight loss', 'Enlarged tongue', 'Easy bruising', 'Changes in skin texture', 'Chronic fatigue']
@@ -151,21 +151,21 @@ export default function AboutAmyloidosis() {
             >
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-red-500/10 to-orange-500/10 backdrop-blur-xl rounded-full px-5 py-3 border border-red-500/20 mb-8">
                 <UserCheck className="w-5 h-5 text-red-500" />
-                <span className="text-sm font-semibold text-red-700 dark:text-red-400 tracking-wide">FOR HEALTHCARE PROFESSIONALS</span>
+                <span className="text-sm font-semibold text-red-700 dark:text-red-400 tracking-wide">{t('aboutAmyloidosis.hero.badge')}</span>
               </div>
               
               <h1 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-8 leading-tight">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                  Clinical Guide to
+                  {t('aboutAmyloidosis.hero.title.understanding')}
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Amyloidosis
+                  {t('aboutAmyloidosis.hero.title.amyloidosis')}
                 </span>
               </h1>
               
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8">
-                Evidence-based diagnostic and treatment resource for Primary Care Physicians, Cardiologists, Neurologists, Nephrologists, and Hematologists
+                {t('aboutAmyloidosis.hero.description')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -640,17 +640,17 @@ export default function AboutAmyloidosis() {
           >
             <div className="inline-flex items-center gap-2 bg-red-500/10 backdrop-blur-xl rounded-full px-4 py-2 border border-red-500/20 mb-6">
               <AlertTriangle className="w-4 h-4 text-red-500" />
-              <span className="text-sm font-medium text-red-700 dark:text-red-400">Clinical Red Flags</span>
+              <span className="text-sm font-medium text-red-700 dark:text-red-400">{t('aboutAmyloidosis.warningSignsTitle')}</span>
             </div>
             
             <h2 className="crawford-section-title mb-6">
               <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-                When to Suspect Amyloidosis
+                {t('aboutAmyloidosis.warningSignsSubtitle')}
               </span>
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto mb-8">
-              Clinical presentation checklist for identifying potential amyloidosis cases
+              {t('aboutAmyloidosis.warningSignsSubtitle')}
             </p>
           </motion.div>
 

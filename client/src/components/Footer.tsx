@@ -63,7 +63,13 @@ export default function Footer() {
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                
+                <div className="mb-6">
+                  <img 
+                    src={casLogo} 
+                    alt="Canadian Amyloidosis Society"
+                    className="h-14 w-14 rounded-2xl shadow-lg"
+                  />
+                </div>
                 
                 <p className="text-white/80 text-sm leading-relaxed mb-6">
                   Advancing awareness, accelerating research, and improving outcomes for all Canadians affected by amyloidosis.

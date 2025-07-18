@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { 
   Search, 
@@ -17,7 +17,27 @@ import {
   ChevronDown,
   X,
   Plus,
-  Eye
+  Eye,
+  Upload,
+  Shield,
+  Clock,
+  CheckCircle,
+  AlertCircle,
+  Star,
+  MapPin,
+  Languages,
+  Stethoscope,
+  FileUserIcon,
+  ClipboardList,
+  ArrowRight,
+  Heart,
+  ExternalLink,
+  Flag,
+  Sparkles,
+  Edit3,
+  FileEdit,
+  Award,
+  HelpCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -60,12 +80,10 @@ const resourceTypes = [
 
 const categories = [
   { value: "all", label: "All Categories" },
-  { value: "toolkit", label: "Toolkit" },
-  { value: "guidelines", label: "Guidelines" },
-  { value: "articles", label: "Articles" },
-  { value: "webinars", label: "Webinars" },
-  { value: "libraries", label: "Libraries" },
-  { value: "education", label: "Education" }
+  { value: "diagnostic-tools", label: "Diagnostic Tools", icon: Stethoscope },
+  { value: "referral-pathways", label: "Referral Pathways", icon: ArrowRight },
+  { value: "sops", label: "SOPs", icon: ClipboardList },
+  { value: "patient-handouts", label: "Patient Handouts", icon: FileUserIcon }
 ];
 
 const audiences = [
@@ -79,7 +97,8 @@ const audiences = [
 const languages = [
   { value: "all", label: "All Languages" },
   { value: "en", label: "English" },
-  { value: "fr", label: "French" }
+  { value: "fr", label: "French" },
+  { value: "bilingual", label: "Bilingual (EN/FR)" }
 ];
 
 const regions = [
@@ -233,24 +252,13 @@ export default function Resources() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      {/* Header */}
+      {/* Enhanced Header */}
       <section className="py-24 bg-gradient-to-br from-slate-100 via-blue-50 to-cyan-50 dark:bg-gray-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100/60 via-cyan-50/40 to-slate-100/60 dark:from-gray-800 dark:via-gray-900 dark:to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-blue-200/30 dark:via-white/5 to-transparent" />
         
         {/* Brand Color Elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/15 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/15 rounded-full blur-3xl translate-x-48 translate-y-48" />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-full blur-2xl -translate-x-32 -translate-y-32" />
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-20 w-3 h-3 bg-[#00AFE6] rounded-full animate-pulse" />
-        <div className="absolute top-40 right-32 w-2 h-2 bg-[#00DD89] rounded-full animate-pulse" />
-        <div className="absolute bottom-32 left-1/3 w-2 h-2 bg-[#00AFE6]/70 rounded-full animate-pulse" />
-        <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-[#00DD89]/60 rounded-full animate-pulse" />
-        
-        {/* Subtle Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-white/5 dark:from-transparent dark:via-white/5 dark:to-transparent" />
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -261,298 +269,277 @@ export default function Resources() {
           >
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6 shadow-lg">
               <BookOpen className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-gray-800 dark:text-white/90">{t('resources.title')}</span>
+              <span className="text-sm font-medium text-gray-800 dark:text-white/90">Professional Resources</span>
             </div>
             
-            <h1 className="crawford-section-title mb-6 leading-tight">
+            <h1 className="text-5xl font-bold mb-6 leading-tight">
               <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                {t('resources.title')}
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                for Healthcare Professionals
+                Clinical Practice Resources
               </span>
             </h1>
             
-            <p className="text-xl text-gray-700 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              {t('resources.subtitle')}
+            <p className="text-xl text-gray-600 dark:text-white/70 mb-8 max-w-3xl mx-auto">
+              Evidence-based tools, pathways, and resources for healthcare professionals managing amyloidosis patients across Canada
             </p>
+            
+            {/* Resource Categories Overview */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+              {categories.filter(cat => cat.value !== 'all').map((category, index) => {
+                const Icon = category.icon;
+                return (
+                  <motion.div
+                    key={category.value}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="bg-gradient-to-br from-white/80 to-white/40 dark:from-gray-800/80 dark:to-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:border-[#00AFE6]/30 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center mb-4 mx-auto">
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{category.label}</h3>
+                    <p className="text-sm text-gray-600 dark:text-white/70">
+                      {category.value === 'diagnostic-tools' && 'Assessment tools, screening protocols, and diagnostic aids'}
+                      {category.value === 'referral-pathways' && 'Structured referral guidelines and care pathways'}
+                      {category.value === 'sops' && 'Standard operating procedures and clinical protocols'}
+                      {category.value === 'patient-handouts' && 'Educational materials and patient information sheets'}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
           </motion.div>
         </div>
       </section>
-
-      {/* Search and Filters */}
-      <section className="py-12 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-white/10">
+      
+      {/* Enhanced Resource Categories with Submission CTA */}
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            {/* Search and Filter Controls */}
-            <div className="bg-white/80 dark:bg-white/10 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-white/20 p-6 mb-8 shadow-2xl">
-              {/* Search Bar */}
-              <div className="relative mb-6">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-white/60 w-5 h-5" />
-                <Input
-                  type="text"
-                  placeholder={t('resources.search.placeholder')}
-                  value={filters.search}
-                  onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-                  className="pl-12 h-14 bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 text-lg rounded-xl focus:ring-2 focus:ring-[#00AFE6] focus:border-[#00AFE6]"
-                />
+            {/* Submission CTA Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-xl p-8 mb-12 border border-[#00AFE6]/20"
+            >
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+                <div className="flex-1 text-center lg:text-left">
+                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                    <Upload className="w-6 h-6 inline mr-2 text-[#00AFE6]" />
+                    Contribute to the Knowledge Base
+                  </h2>
+                  <p className="text-gray-600 dark:text-white/70 mb-4">
+                    Share your clinical tools, protocols, and educational materials with the Canadian amyloidosis community
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+                    <Badge variant="outline" className="border-[#00AFE6]/30 text-[#00AFE6]">
+                      <CheckCircle className="w-3 h-3 mr-1" />
+                      Peer Reviewed
+                    </Badge>
+                    <Badge variant="outline" className="border-[#00DD89]/30 text-[#00DD89]">
+                      <Shield className="w-3 h-3 mr-1" />
+                      Quality Assured
+                    </Badge>
+                    <Badge variant="outline" className="border-gray-400 text-gray-600 dark:text-gray-400">
+                      <Globe className="w-3 h-3 mr-1" />
+                      National Access
+                    </Badge>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0 shadow-lg"
+                  >
+                    <Upload className="w-5 h-5 mr-2" />
+                    Upload Resource
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-gray-300 hover:border-[#00AFE6]/50"
+                  >
+                    <FileEdit className="w-5 h-5 mr-2" />
+                    Editorial Policy
+                  </Button>
+                </div>
               </div>
-
-              {/* Filter Toggle and Quick Filters */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
-                    <CollapsibleTrigger asChild>
-                      <Button variant="outline" className="border-gray-300 dark:border-white/30 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/20 bg-white dark:bg-white/15">
-                        <Filter className="w-4 h-4 mr-2" />
-                        {t('resources.filters.advanced')}
-                        {activeFiltersCount > 0 && (
-                          <Badge variant="secondary" className="ml-2 bg-[#00AFE6] text-white">
-                            {activeFiltersCount}
-                          </Badge>
-                        )}
-                        <ChevronDown className={`w-4 h-4 ml-2 transition-transform duration-200 ${isFiltersOpen ? 'rotate-180' : ''}`} />
-                      </Button>
-                    </CollapsibleTrigger>
-                  </Collapsible>
-
+            </motion.div>
+            
+            {/* Enhanced Filters Section */}
+            <div className="bg-white/80 dark:bg-white/10 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-white/20 p-6 mb-8 shadow-lg">
+              <div className="flex flex-col lg:flex-row gap-6">
+                {/* Search Bar */}
+                <div className="flex-1 relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-white/60 w-5 h-5" />
+                  <Input
+                    type="text"
+                    placeholder="Search resources..."
+                    value={filters.search}
+                    onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
+                    className="pl-12 h-12 bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 rounded-xl focus:ring-2 focus:ring-[#00AFE6] focus:border-[#00AFE6]"
+                  />
+                </div>
+                
+                {/* Filter Controls */}
+                <div className="flex flex-wrap gap-4 items-center">
+                  <Select value={filters.category} onValueChange={(value) => setFilters(prev => ({ ...prev, category: value }))}>
+                    <SelectTrigger className="w-48 h-12 bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 rounded-xl">
+                      <SelectValue placeholder="Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories.map(cat => (
+                        <SelectItem key={cat.value} value={cat.value}>{cat.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  <Select value={filters.language} onValueChange={(value) => setFilters(prev => ({ ...prev, language: value }))}>
+                    <SelectTrigger className="w-48 h-12 bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 rounded-xl">
+                      <SelectValue placeholder="Language" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {languages.map(lang => (
+                        <SelectItem key={lang.value} value={lang.value}>{lang.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  <Select value={filters.region} onValueChange={(value) => setFilters(prev => ({ ...prev, region: value }))}>
+                    <SelectTrigger className="w-48 h-12 bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 rounded-xl">
+                      <SelectValue placeholder="Region" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {regions.map(region => (
+                        <SelectItem key={region.value} value={region.value}>{region.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
                   {activeFiltersCount > 0 && (
-                    <Button variant="ghost" onClick={clearFilters} className="text-gray-700 dark:text-white/80 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/20">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={clearFilters}
+                      className="h-12 px-4 border-gray-300 dark:border-white/30 hover:border-red-400 hover:text-red-600"
+                    >
                       <X className="w-4 h-4 mr-2" />
-                      {t('resources.filters.clearAll')}
+                      Clear ({activeFiltersCount})
                     </Button>
                   )}
                 </div>
-
-                {/* Quick Filter Buttons */}
-                <div className="flex flex-wrap gap-2">
-                  {['AL', 'ATTR', 'AA', 'ALect2'].map((type) => (
-                    <Button
-                      key={type}
-                      size="sm"
-                      onClick={() => setFilters(prev => ({ 
-                        ...prev, 
-                        amyloidosisType: prev.amyloidosisType === type ? 'all' : type 
-                      }))}
-                      className={
-                        filters.amyloidosisType === type 
-                          ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 font-medium" 
-                          : "bg-white dark:bg-white/10 border border-gray-300 dark:border-white/30 text-gray-900 dark:text-white hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/20 font-medium"
-                      }
-                    >
-                      {type}
-                    </Button>
-                  ))}
-                </div>
               </div>
-
-              {/* Advanced Filters */}
-              <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
-                <CollapsibleContent className="mt-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6 bg-gray-50 dark:bg-white/15 rounded-xl border border-gray-200 dark:border-white/20">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Amyloidosis Type</label>
-                      <Select value={filters.amyloidosisType} onValueChange={(value) => setFilters(prev => ({ ...prev, amyloidosisType: value }))}>
-                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {amyloidosisTypes.map(type => (
-                            <SelectItem key={type.value} value={type.value}>{type.label}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Resource Type</label>
-                      <Select value={filters.resourceType} onValueChange={(value) => setFilters(prev => ({ ...prev, resourceType: value }))}>
-                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {resourceTypes.map(type => (
-                            <SelectItem key={type.value} value={type.value}>{type.label}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Category</label>
-                      <Select value={filters.category} onValueChange={(value) => setFilters(prev => ({ ...prev, category: value }))}>
-                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {categories.map(category => (
-                            <SelectItem key={category.value} value={category.value}>{category.label}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Audience</label>
-                      <Select value={filters.audience} onValueChange={(value) => setFilters(prev => ({ ...prev, audience: value }))}>
-                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {audiences.map(audience => (
-                            <SelectItem key={audience.value} value={audience.value}>{audience.label}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Language</label>
-                      <Select value={filters.language} onValueChange={(value) => setFilters(prev => ({ ...prev, language: value }))}>
-                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {languages.map(language => (
-                            <SelectItem key={language.value} value={language.value}>{language.label}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Region</label>
-                      <Select value={filters.region} onValueChange={(value) => setFilters(prev => ({ ...prev, region: value }))}>
-                        <SelectTrigger className="bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {regions.map(region => (
-                            <SelectItem key={region.value} value={region.value}>{region.label}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Resources Grid */}
-      <section className="py-12 bg-gray-50 dark:bg-gray-900">
+      {/* Enhanced Resource Display */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800/50">
         <div className="container mx-auto px-6">
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <Card key={i} className={`backdrop-blur-xl border animate-pulse ${
-                  i % 4 === 0 
-                    ? 'bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 border-blue-200 dark:border-blue-400/30'
-                    : i % 4 === 1
-                    ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200 dark:border-emerald-400/30'
-                    : i % 4 === 2
-                    ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200 dark:border-purple-400/30'
-                    : 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200 dark:border-pink-400/30'
-                }`}>
-                  <CardHeader>
-                    <div className="h-4 bg-gray-200 dark:bg-white/10 rounded mb-2"></div>
-                    <div className="h-3 bg-gray-200 dark:bg-white/10 rounded w-2/3"></div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="h-20 bg-gray-200 dark:bg-white/10 rounded mb-4"></div>
-                    <div className="h-8 bg-gray-200 dark:bg-white/10 rounded"></div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : error ? (
-            <div className="text-center py-12">
-              <p className="text-red-500 text-lg mb-4">Failed to load resources</p>
-              <p className="text-gray-600 dark:text-white/60">Please try again later or contact support if the problem persists.</p>
-            </div>
-          ) : resources.length === 0 ? (
-            <div className="text-center py-12">
-              <BookOpen className="w-12 h-12 text-gray-400 dark:text-white/40 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-white/60 text-lg mb-4">No resources found</p>
-              <p className="text-gray-500 dark:text-white/40">Try adjusting your search criteria or filters.</p>
-            </div>
-          ) : (
-            <>
-              <div className="mb-6">
-                <p className="text-gray-600 dark:text-white/60">
-                  Showing {resources.length} resource{resources.length !== 1 ? 's' : ''}
-                </p>
+          <div className="max-w-6xl mx-auto">
+            {/* Results Summary */}
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center gap-4">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+                  Resources Found
+                </h2>
+                <Badge variant="outline" className="bg-[#00AFE6]/10 border-[#00AFE6]/30 text-[#00AFE6] px-3 py-1">
+                  {resources.length} resources
+                </Badge>
               </div>
-              
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                <Clock className="w-4 h-4" />
+                <span>Updated daily</span>
+              </div>
+            </div>
+
+            {/* Resource Cards */}
+            {isLoading ? (
+              <div className="flex justify-center items-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00AFE6]"></div>
+              </div>
+            ) : error ? (
+              <div className="text-center py-12">
+                <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+                <p className="text-gray-600 dark:text-white/70">Failed to load resources. Please try again.</p>
+              </div>
+            ) : resources.length === 0 ? (
+              <div className="text-center py-12">
+                <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-600 dark:text-white/70">No resources found matching your criteria.</p>
+              </div>
+            ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {resources.map((resource) => (
+                {resources.map((resource, index) => (
                   <motion.div
                     key={resource.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="group"
                   >
-                    <Card className={`backdrop-blur-xl border transition-all duration-300 h-full hover:shadow-2xl ${
-                      resource.id % 4 === 0 
-                        ? 'bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 border-blue-200 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-indigo-100/95 dark:hover:from-blue-800/35 dark:hover:to-indigo-800/35 hover:border-blue-300 dark:hover:border-blue-300/40 hover:shadow-blue-500/25'
-                        : resource.id % 4 === 1
-                        ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300 dark:hover:border-emerald-300/40 hover:shadow-emerald-500/25'
-                        : resource.id % 4 === 2
-                        ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300 dark:hover:border-purple-300/40 hover:shadow-purple-500/25'
-                        : 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200 dark:border-pink-400/30 hover:from-pink-100/95 hover:to-rose-100/95 dark:hover:from-pink-800/35 dark:hover:to-rose-800/35 hover:border-pink-300 dark:hover:border-pink-300/40 hover:shadow-pink-500/25'
-                    }`}>
-                      <CardHeader className="pb-3">
-                        <div className="flex items-start justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            {getCategoryIcon(resource.category)}
-                            <Badge variant="secondary" className="text-xs">
-                              {resource.category}
-                            </Badge>
+                    <Card className="h-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:border-[#00AFE6]/50 group-hover:scale-105">
+                      <CardHeader className="pb-4">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1">
+                            <CardTitle className="text-lg font-semibold text-gray-800 dark:text-white mb-2 line-clamp-2">
+                              {resource.title}
+                            </CardTitle>
+                            <div className="flex flex-wrap gap-2 mb-3">
+                              <Badge 
+                                variant="secondary" 
+                                className={`
+                                  ${resource.category === 'diagnostic-tools' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' : ''}
+                                  ${resource.category === 'referral-pathways' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' : ''}
+                                  ${resource.category === 'sops' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300' : ''}
+                                  ${resource.category === 'patient-handouts' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300' : ''}
+                                `}
+                              >
+                                {categories.find(cat => cat.value === resource.category)?.label || 'Resource'}
+                              </Badge>
+                              
+                              {/* New/Updated Flag */}
+                              {resource.createdAt && new Date(resource.createdAt).getTime() > Date.now() - 30 * 24 * 60 * 60 * 1000 && (
+                                <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white">
+                                  <Sparkles className="w-3 h-3 mr-1" />
+                                  New
+                                </Badge>
+                              )}
+                            </div>
                           </div>
-                          <div className="flex items-center gap-1">
-                            {getFileIcon(resource.fileType)}
-                            <span className="text-xs text-gray-500 dark:text-white/60 uppercase">
-                              {resource.fileType}
-                            </span>
-                          </div>
-                        </div>
-                        
-                        <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2">
-                          {resource.title}
-                        </CardTitle>
-                        
-                        <div className="flex flex-wrap gap-1 mt-2">
-                          <Badge variant="outline" className="text-xs border-[#00AFE6]/30 text-[#00AFE6]">
-                            {resource.amyloidosisType}
-                          </Badge>
-                          <Badge variant="outline" className="text-xs border-gray-300 dark:border-white/20 text-gray-700 dark:text-white/70">
-                            {resource.audience}
-                          </Badge>
                         </div>
                       </CardHeader>
                       
                       <CardContent className="pt-0">
                         {resource.description && (
-                          <p className="text-gray-700 dark:text-white/70 text-sm mb-4 line-clamp-3">
+                          <p className="text-gray-600 dark:text-white/70 text-sm mb-4 line-clamp-3">
                             {resource.description}
                           </p>
                         )}
                         
+                        {/* Enhanced Metadata */}
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
-                            <Calendar className="w-3 h-3" />
-                            <span>{formatDate(resource.createdAt || null)}</span>
+                            <User className="w-3 h-3" />
+                            <span>Source: {resource.submittedBy || 'CAS Editorial Team'}</span>
                           </div>
                           
-                          {resource.submittedBy && (
-                            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
-                              <User className="w-3 h-3" />
-                              <span>By {resource.submittedBy}</span>
-                            </div>
-                          )}
+                          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
+                            <Shield className="w-3 h-3" />
+                            <span>Review Status: {resource.isApproved ? 'Peer Reviewed' : 'Under Review'}</span>
+                          </div>
+                          
+                          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
+                            <Languages className="w-3 h-3" />
+                            <span>Language: {resource.language === 'en' ? 'English' : resource.language === 'fr' ? 'French' : 'Bilingual'}</span>
+                          </div>
+                          
+                          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
+                            <MapPin className="w-3 h-3" />
+                            <span>Region: {resource.region || 'National'}</span>
+                          </div>
                           
                           <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">
                             <Download className="w-3 h-3" />
@@ -562,19 +549,18 @@ export default function Resources() {
                         
                         <Button 
                           onClick={() => handleDownload(resource)}
-                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0"
-                          disabled={downloadMutation.isPending}
+                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/80 hover:to-[#00DD89]/80 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                         >
                           <Download className="w-4 h-4 mr-2" />
-                          Download{formatFileSize(resource.fileSize)}
+                          Download Resource
                         </Button>
                       </CardContent>
                     </Card>
                   </motion.div>
                 ))}
               </div>
-            </>
-          )}
+            )}
+          </div>
         </div>
       </section>
     </div>

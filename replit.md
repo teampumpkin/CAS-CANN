@@ -22,6 +22,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ Updated disclaimer section with light theme background and text colors
 - ✅ Applied consistent theme-aware styling throughout all interactive elements
 - ✅ Maintained brand color integration (#00AFE6 and #00DD89) across both themes
+- ✅ Increased map section header text size from 30px to 48px for better visibility and prominence
 
 ## Recent Changes
 

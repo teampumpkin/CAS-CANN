@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target, Hospital, ChevronDown, ChevronRight, MapPin, BookOpen, ExternalLink } from 'lucide-react';
+import { Heart, AlertTriangle, Search, Microscope, Stethoscope, Activity, Brain, Droplets, Users, ArrowRight, Shield, Clock, Target, Hospital, ChevronDown, ChevronRight, MapPin, BookOpen, ExternalLink, Zap, Lightbulb, ArrowDown } from 'lucide-react';
 import { Link } from 'wouter';
 import { useState } from 'react';
 import ParallaxBackground from '../components/ParallaxBackground';
@@ -136,6 +136,147 @@ export default function AboutAmyloidosis() {
           </motion.div>
         </div>
       </ParallaxBackground>
+      
+      {/* Simplified Pathophysiology Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                What Is
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Amyloidosis?
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto mb-12">
+              Understanding amyloidosis starts with understanding proteins and what happens when they don't work properly in your body.
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            {/* Simple Explanation */}
+            <motion.div
+              className="space-y-8"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 backdrop-blur-xl rounded-2xl p-8 border border-blue-200/50 dark:border-blue-400/30">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                    <Activity className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-blue-800 dark:text-blue-100">Normal Proteins</h3>
+                </div>
+                <p className="text-blue-700 dark:text-blue-200 leading-relaxed">
+                  Think of proteins like tiny workers in your body. Normally, they have specific shapes that help them do their jobs—like carrying oxygen, fighting infections, or helping your heart pump blood.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-orange-50/95 to-red-50/95 dark:from-orange-900/25 dark:to-red-900/25 backdrop-blur-xl rounded-2xl p-8 border border-orange-200/50 dark:border-orange-400/30">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                    <AlertTriangle className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-orange-800 dark:text-orange-100">Misfolded Proteins</h3>
+                </div>
+                <p className="text-orange-700 dark:text-orange-200 leading-relaxed">
+                  In amyloidosis, these protein workers get "misfolded"—like origami that's been folded wrong. When this happens, they can't do their jobs properly and start clumping together instead.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 backdrop-blur-xl rounded-2xl p-8 border border-purple-200/50 dark:border-purple-400/30">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center">
+                    <Zap className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-purple-800 dark:text-purple-100">Amyloid Deposits</h3>
+                </div>
+                <p className="text-purple-700 dark:text-purple-200 leading-relaxed">
+                  These clumps, called "amyloid deposits," build up in organs like your heart, kidneys, or nerves. This buildup interferes with how these organs work, causing the symptoms of amyloidosis.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Visual Representation */}
+            <motion.div
+              className="bg-gradient-to-br from-gray-50/95 to-white/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-400/30"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Simple Visual Process</h3>
+              
+              <div className="space-y-8">
+                {/* Step 1 */}
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold text-lg">1</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-2">Healthy Proteins</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Proteins maintain their proper shape and function normally</p>
+                  </div>
+                </div>
+                
+                {/* Arrow */}
+                <div className="flex justify-center">
+                  <ArrowDown className="w-6 h-6 text-gray-400" />
+                </div>
+                
+                {/* Step 2 */}
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold text-lg">2</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-2">Protein Misfolding</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Proteins lose their proper shape and can't work correctly</p>
+                  </div>
+                </div>
+                
+                {/* Arrow */}
+                <div className="flex justify-center">
+                  <ArrowDown className="w-6 h-6 text-gray-400" />
+                </div>
+                
+                {/* Step 3 */}
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold text-lg">3</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-2">Amyloid Buildup</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Misfolded proteins clump together in organs, causing problems</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-8 p-6 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-xl border border-[#00AFE6]/20">
+                <div className="flex items-center gap-3 mb-3">
+                  <Lightbulb className="w-5 h-5 text-[#00AFE6]" />
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-100">Key Takeaway</h4>
+                </div>
+                <p className="text-sm text-gray-700 dark:text-gray-200">
+                  Amyloidosis isn't a single disease—it's a group of conditions caused by different proteins folding incorrectly. The type depends on which protein is misfolding and where it accumulates in your body.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Amyloidosis Types - Collapsible Sections */}
       <section className="py-24 bg-white dark:bg-gray-900 relative">
         <div className="container mx-auto px-6 relative z-10">

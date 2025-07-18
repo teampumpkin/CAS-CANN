@@ -26,6 +26,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ Updated hero section background image to neural network visualization for better medical relevance to amyloidosis
 - ✅ Added Canadian Amyloidosis Society logo to EventsNewsletterSection with animated entrance effect
 - ✅ Standardized all section headers to consistent 48px text size across the entire website
+- ✅ Added simplified pathophysiology section to About Amyloidosis page explaining misfolded proteins in everyday language
 
 ## Recent Changes
 

@@ -6,7 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import EnhancedScrollIndicator from "@/components/EnhancedScrollIndicator";
-import PerformanceDebugger from "@/components/PerformanceMonitor";
+
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 
 import Header from "@/components/Header";
@@ -84,7 +84,6 @@ function App() {
             </div>
             <Footer />
             <EnhancedScrollIndicator />
-            <PerformanceDebugger />
             <PerformanceOptimizer />
           </div>
           <Toaster />

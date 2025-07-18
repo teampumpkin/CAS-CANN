@@ -75,37 +75,3 @@ export const usePerformanceMonitor = () => {
   return metrics;
 };
 
-// Performance debugging component (only for development)
-export const PerformanceDebugger: React.FC = () => {
-  const metrics = usePerformanceMonitor();
-  
-  if (process.env.NODE_ENV !== 'development') return null;
-  
-  return (
-    <div className="fixed bottom-4 right-4 bg-black/80 text-white p-4 rounded-lg text-xs z-50 max-w-xs">
-      <div className="font-bold mb-2">Performance Metrics</div>
-      <div className="space-y-1">
-        {metrics.pageLoadTime && (
-          <div>Page Load: {Math.round(metrics.pageLoadTime)}ms</div>
-        )}
-        {metrics.domContentLoaded && (
-          <div>DOM Ready: {Math.round(metrics.domContentLoaded)}ms</div>
-        )}
-        {metrics.firstContentfulPaint && (
-          <div>FCP: {Math.round(metrics.firstContentfulPaint)}ms</div>
-        )}
-        {metrics.largestContentfulPaint && (
-          <div>LCP: {Math.round(metrics.largestContentfulPaint)}ms</div>
-        )}
-        {metrics.cumulativeLayoutShift && (
-          <div>CLS: {metrics.cumulativeLayoutShift.toFixed(3)}</div>
-        )}
-        {metrics.firstInputDelay && (
-          <div>FID: {Math.round(metrics.firstInputDelay)}ms</div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default PerformanceDebugger;

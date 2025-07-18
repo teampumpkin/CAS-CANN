@@ -233,42 +233,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/join", async (req, res) => {
     try {
       const joinSchema = z.object({
-        firstName: z.string().min(2),
-        lastName: z.string().min(2),
-        email: z.string().email(),
-        phone: z.string().min(10),
-        city: z.string().min(2),
-        province: z.string().min(2),
-        interests: z.array(z.string()).min(1),
-        experience: z.enum(["patient", "caregiver", "healthcare", "researcher", "advocate", "other"]),
-        howHeard: z.string().min(1),
+        firstName: z.string().min(2, "First name must be at least 2 characters"),
+        lastName: z.string().min(2, "Last name must be at least 2 characters"),
+        email: z.string().email("Please enter a valid email address"),
+        phone: z.string().min(10, "Phone number must be at least 10 characters"),
+        city: z.string().min(2, "City must be at least 2 characters"),
+        province: z.string().min(2, "Province is required"),
+        role: z.enum(["clinician", "researcher", "administrator", "patient", "caregiver", "advocate", "other"], {
+          required_error: "Role is required"
+        }),
+        specialty: z.string().optional(),
+        organization: z.string().optional(),
+        interests: z.array(z.string()).min(1, "Please select at least one area of interest"),
+        howHeard: z.string().min(1, "Please tell us how you heard about CAS"),
         message: z.string().optional(),
-        newsletter: z.boolean().default(true),
-        terms: z.boolean().refine(val => val === true, {
-          message: 'Terms and conditions must be accepted'
+        newsletter: z.boolean().default(false),
+        termsOfParticipation: z.boolean().refine(val => val === true, {
+          message: 'Terms of Participation must be accepted'
+        }),
+        privacyPolicy: z.boolean().refine(val => val === true, {
+          message: 'Privacy Policy must be accepted'
         })
       });
 
       const validatedData = joinSchema.parse(req.body);
       
-      console.log("CAS membership application received:", {
+      console.log("Enhanced CAS membership application received:", {
         name: `${validatedData.firstName} ${validatedData.lastName}`,
         email: validatedData.email,
-        experience: validatedData.experience,
+        role: validatedData.role,
+        specialty: validatedData.specialty,
+        organization: validatedData.organization,
         interests: validatedData.interests,
+        province: validatedData.province,
+        newsletter: validatedData.newsletter,
         timestamp: new Date().toISOString()
       });
 
+      // In a real implementation, save to database:
+      // await storage.createMembershipApplication(validatedData);
+
       res.status(200).json({ 
-        message: "Welcome to the Canadian Amyloidosis Society! We'll be in touch soon.",
-        applicationId: `CAS-${Date.now()}`
+        message: "Thank you for your membership application! We'll review your application and get back to you within 2-3 weeks.",
+        applicationId: `CAS-${Date.now()}`,
+        estimatedReviewTime: "2-3 weeks"
       });
     } catch (error) {
       console.error("Join CAS application error:", error);
       if (error instanceof z.ZodError) {
         return res.status(400).json({ 
           message: "Validation failed", 
-          errors: error.errors.map(e => e.message) 
+          errors: error.errors.map(e => ({
+            field: e.path.join('.'),
+            message: e.message
+          }))
         });
       }
       res.status(500).json({ message: "Failed to process application" });

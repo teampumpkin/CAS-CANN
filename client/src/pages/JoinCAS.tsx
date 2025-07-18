@@ -15,10 +15,29 @@ import {
   BookOpen,
   Shield,
   Star,
-  Handshake
+  Handshake,
+  Stethoscope,
+  Upload,
+  Vote,
+  Clock,
+  CheckCircle2,
+  AlertCircle,
+  ExternalLink,
+  FileText,
+  Network,
+  Gift,
+  UserCheck,
+  Globe,
+  Calendar,
+  Award,
+  Gavel
 } from "lucide-react";
 import { Link } from "wouter";
-import ParallaxBackground from "@/components/ParallaxBackground";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 
@@ -30,27 +49,117 @@ const joinFormSchema = z.object({
   phone: z.string().min(10, "Please enter a valid phone number"),
   city: z.string().min(2, "Please enter your city"),
   province: z.string().min(2, "Please enter your province"),
+  role: z.enum(["clinician", "researcher", "administrator", "patient", "caregiver", "advocate", "other"]),
+  specialty: z.string().optional(),
+  organization: z.string().optional(),
   interests: z.array(z.string()).min(1, "Please select at least one area of interest"),
-  experience: z.enum(["patient", "caregiver", "healthcare", "researcher", "advocate", "other"]),
   howHeard: z.string().min(1, "Please tell us how you heard about CAS"),
   message: z.string().optional(),
   newsletter: z.boolean().default(true),
-  terms: z.boolean().refine(val => val === true, "You must accept the terms and conditions")
+  termsOfParticipation: z.boolean().refine(val => val === true, "You must accept the Terms of Participation"),
+  privacyPolicy: z.boolean().refine(val => val === true, "You must accept the Privacy Policy")
 });
 
 type JoinFormData = z.infer<typeof joinFormSchema>;
 
 const interestAreas = [
-  "Patient Support",
-  "Caregiver Resources", 
-  "Medical Research",
-  "Fundraising Events",
-  "Advocacy & Awareness",
-  "Educational Programs",
-  "Volunteer Opportunities",
-  "Newsletter Contributions",
-  "Community Outreach",
-  "Policy Development"
+  "Clinical Practice Tools",
+  "Diagnostic Pathways", 
+  "Research Collaboration",
+  "Resource Development",
+  "Clinical Guidelines",
+  "Professional Education",
+  "Policy Development",
+  "Quality Improvement",
+  "Patient Education",
+  "Healthcare System Integration"
+];
+
+const membershipBenefits = [
+  {
+    icon: Upload,
+    title: "Resource Upload Rights",
+    description: "Submit and share clinical tools, protocols, and educational materials with the entire CAS community"
+  },
+  {
+    icon: Vote,
+    title: "Governance Voice",
+    description: "Participate in CAS governance decisions and vote on important policy matters affecting amyloidosis care"
+  },
+  {
+    icon: Network,
+    title: "Professional Network",
+    description: "Access to exclusive professional network of amyloidosis specialists across Canada"
+  },
+  {
+    icon: Gift,
+    title: "Premium Tools Access",
+    description: "Early access to new clinical tools, research findings, and professional development resources"
+  },
+  {
+    icon: Calendar,
+    title: "Priority Event Access",
+    description: "Priority registration for conferences, webinars, and professional development events"
+  },
+  {
+    icon: Award,
+    title: "Recognition & Listing",
+    description: "Professional recognition and listing in the CAS member directory with your specialization"
+  }
+];
+
+const whoCanJoin = [
+  {
+    icon: Stethoscope,
+    title: "Healthcare Professionals",
+    description: "Physicians, nurses, allied health professionals involved in amyloidosis care",
+    requirements: "Must have active healthcare license and clinical experience"
+  },
+  {
+    icon: BookOpen,
+    title: "Researchers & Academics",
+    description: "Scientists, academics, and research professionals studying amyloidosis",
+    requirements: "Must be affiliated with recognized research institution"
+  },
+  {
+    icon: Shield,
+    title: "Healthcare Administrators",
+    description: "Healthcare system leaders and administrators managing amyloidosis programs",
+    requirements: "Must hold leadership role in healthcare organization"
+  },
+  {
+    icon: Users,
+    title: "Patient Advocates",
+    description: "Patient representatives and advocacy group leaders",
+    requirements: "Must represent patient community or advocacy organization"
+  }
+];
+
+const approvalProcess = [
+  {
+    step: 1,
+    title: "Application Review",
+    description: "Initial review of application and credentials verification",
+    timeline: "3-5 business days"
+  },
+  {
+    step: 2,
+    title: "Credential Verification",
+    description: "Verification of professional credentials and organizational affiliation",
+    timeline: "5-7 business days"
+  },
+  {
+    step: 3,
+    title: "Committee Approval",
+    description: "Final review by CAS membership committee",
+    timeline: "7-10 business days"
+  },
+  {
+    step: 4,
+    title: "Welcome & Onboarding",
+    description: "Welcome package and access to member resources",
+    timeline: "1-2 business days"
+  }
 ];
 
 export default function JoinCAS() {
@@ -69,7 +178,8 @@ export default function JoinCAS() {
     defaultValues: {
       interests: [],
       newsletter: true,
-      terms: false
+      termsOfParticipation: false,
+      privacyPolicy: false
     }
   });
 
@@ -108,507 +218,554 @@ export default function JoinCAS() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center bg-gray-900 overflow-hidden">
+      <section className="relative py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-gray-900/20" />
+        <div className="absolute inset-0 dark:block hidden">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00AFE6]/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#00DD89]/10 rounded-full blur-3xl animate-pulse delay-1000" />
         </div>
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            className="max-w-5xl mx-auto text-center"
+            className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <motion.div 
-              className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl rounded-full px-6 py-3 border border-white/10 mb-8"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
+            <div className="inline-flex items-center gap-3 bg-[#00AFE6]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6">
               <UserPlus className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Join Our Community</span>
-            </motion.div>
+              <span className="text-sm font-medium text-gray-900 dark:text-white/90">Professional Membership</span>
+            </div>
             
-            <motion.h1 
-              className="text-5xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              <span className="block bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent mb-2">
-                Join the
-              </span>
-              <span className="block bg-gradient-to-r from-[#00AFE6] via-[#00C5D7] to-[#00DD89] bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight text-gray-900 dark:text-white">
+              Join the{" "}
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Canadian Amyloidosis Society
               </span>
-            </motion.h1>
+            </h1>
             
-            <motion.p 
-              className="text-xl lg:text-2xl text-white/70 leading-relaxed max-w-4xl mx-auto mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              Become part of a supportive community dedicated to advancing research, improving care, and raising awareness about amyloidosis across Canada.
-            </motion.p>
-
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-            >
-              <motion.button
+            <p className="text-xl text-gray-600 dark:text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Become part of Canada's premier professional network for amyloidosis care. Access exclusive clinical tools, contribute to governance decisions, and collaborate with leading experts across the country.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button
                 onClick={() => document.getElementById('join-form')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-10 py-5 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-10 py-6 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group"
               >
-                <span>Join CAS Today</span>
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+                <span>Apply for Membership</span>
+                <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
               
-              <motion.div
-                className="text-white/60 text-sm"
-                whileHover={{ scale: 1.02 }}
+              <Button
+                variant="outline"
+                onClick={() => document.getElementById('why-join')?.scrollIntoView({ behavior: 'smooth' })}
+                className="border-[#00AFE6]/30 text-[#00AFE6] hover:bg-[#00AFE6]/10 px-8 py-6 rounded-2xl font-semibold text-lg"
               >
-                <Link href="/about" className="inline-flex items-center gap-2 hover:text-white/80 transition-colors">
-                  Learn more about CAS
-                  <BookOpen className="w-4 h-4" />
-                </Link>
-              </motion.div>
-            </motion.div>
+                Learn More
+                <BookOpen className="w-5 h-5 ml-2" />
+              </Button>
+            </div>
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-        >
-          <motion.div
-            className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <motion.div
-              className="w-1 h-3 bg-white/60 rounded-full mt-2"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </motion.div>
-        </motion.div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-24 bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-        <div className="container mx-auto px-6 relative z-10">
+      {/* Why Join Section */}
+      <section id="why-join" className="py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-6">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Why Join
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Our Community?
-              </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Why Join <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">CAS?</span>
             </h2>
-            
-            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Joining CAS connects you with a supportive community and provides access to valuable resources.
+            <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
+              CAS membership provides exclusive access to professional tools, governance participation, and a network of Canada's leading amyloidosis experts.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Users,
-                title: "Community Support",
-                description: "Connect with patients, caregivers, and families who understand your journey.",
-                color: "from-blue-500 to-cyan-500"
-              },
-              {
-                icon: BookOpen,
-                title: "Educational Resources",
-                description: "Access comprehensive information about amyloidosis and latest research.",
-                color: "from-green-500 to-emerald-500"
-              },
-              {
-                icon: Shield,
-                title: "Advocacy & Awareness",
-                description: "Join our efforts to improve healthcare policies and funding for amyloidosis.",
-                color: "from-purple-500 to-pink-500"
-              },
-              {
-                icon: Star,
-                title: "Events & Programs",
-                description: "Participate in webinars, support groups, and educational conferences.",
-                color: "from-orange-500 to-red-500"
-              },
-              {
-                icon: Heart,
-                title: "Research Updates",
-                description: "Stay informed about clinical trials and new treatment options.",
-                color: "from-teal-500 to-blue-500"
-              },
-              {
-                icon: Handshake,
-                title: "Professional Network",
-                description: "Connect with healthcare professionals and researchers in the field.",
-                color: "from-pink-500 to-purple-500"
-              }
-            ].map((benefit, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {membershipBenefits.map((benefit, index) => (
               <motion.div
-                key={benefit.title}
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+                key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className={`w-12 h-12 bg-gradient-to-r ${benefit.color} rounded-xl flex items-center justify-center mb-4`}>
-                  <benefit.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">{benefit.title}</h3>
-                <p className="text-white/70">{benefit.description}</p>
+                <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20 hover:shadow-lg transition-all duration-300">
+                  <CardHeader>
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
+                        <benefit.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <CardTitle className="text-gray-900 dark:text-white">{benefit.title}</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600 dark:text-white/70">{benefit.description}</p>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Join Form Section */}
-      <section id="join-form" className="py-24 bg-gray-800 border-t border-white/10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold font-rosarivo mb-4">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                  Complete Your
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Application
-                </span>
-              </h2>
-              <p className="text-white/70">
-                Fill out the form below to join the Canadian Amyloidosis Society
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-[#00AFE6]" />
-                  Personal Information
-                </h3>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">First Name</label>
-                    <input
-                      {...register("firstName")}
-                      type="text"
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      placeholder="Enter your first name"
-                    />
-                    {errors.firstName && (
-                      <p className="text-red-400 text-sm mt-1">{errors.firstName.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">Last Name</label>
-                    <input
-                      {...register("lastName")}
-                      type="text"
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      placeholder="Enter your last name"
-                    />
-                    {errors.lastName && (
-                      <p className="text-red-400 text-sm mt-1">{errors.lastName.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">Email</label>
-                    <input
-                      {...register("email")}
-                      type="email"
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      placeholder="Enter your email address"
-                    />
-                    {errors.email && (
-                      <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">Phone</label>
-                    <input
-                      {...register("phone")}
-                      type="tel"
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      placeholder="Enter your phone number"
-                    />
-                    {errors.phone && (
-                      <p className="text-red-400 text-sm mt-1">{errors.phone.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">City</label>
-                    <input
-                      {...register("city")}
-                      type="text"
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      placeholder="Enter your city"
-                    />
-                    {errors.city && (
-                      <p className="text-red-400 text-sm mt-1">{errors.city.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">Province</label>
-                    <select
-                      {...register("province")}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                    >
-                      <option value="">Select Province</option>
-                      <option value="AB">Alberta</option>
-                      <option value="BC">British Columbia</option>
-                      <option value="MB">Manitoba</option>
-                      <option value="NB">New Brunswick</option>
-                      <option value="NL">Newfoundland and Labrador</option>
-                      <option value="NS">Nova Scotia</option>
-                      <option value="ON">Ontario</option>
-                      <option value="PE">Prince Edward Island</option>
-                      <option value="QC">Quebec</option>
-                      <option value="SK">Saskatchewan</option>
-                      <option value="NT">Northwest Territories</option>
-                      <option value="NU">Nunavut</option>
-                      <option value="YT">Yukon</option>
-                    </select>
-                    {errors.province && (
-                      <p className="text-red-400 text-sm mt-1">{errors.province.message}</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-[#00AFE6]" />
-                  Tell Us About Yourself
-                </h3>
-                
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">Your Experience</label>
-                    <select
-                      {...register("experience")}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                    >
-                      <option value="">Select your primary role</option>
-                      <option value="patient">Patient</option>
-                      <option value="caregiver">Caregiver/Family Member</option>
-                      <option value="healthcare">Healthcare Professional</option>
-                      <option value="researcher">Researcher</option>
-                      <option value="advocate">Advocate</option>
-                      <option value="other">Other</option>
-                    </select>
-                    {errors.experience && (
-                      <p className="text-red-400 text-sm mt-1">{errors.experience.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-3">Areas of Interest (Select all that apply)</label>
-                    <div className="grid grid-cols-2 gap-3">
-                      {interestAreas.map((interest) => (
-                        <label
-                          key={interest}
-                          className={`flex items-center gap-2 p-3 rounded-xl border cursor-pointer transition-all ${
-                            selectedInterests.includes(interest)
-                              ? 'bg-[#00AFE6]/20 border-[#00AFE6]/50 text-white'
-                              : 'bg-white/5 border-white/20 text-white/70 hover:bg-white/10'
-                          }`}
-                          onClick={() => handleInterestToggle(interest)}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={selectedInterests.includes(interest)}
-                            onChange={() => handleInterestToggle(interest)}
-                            className="sr-only"
-                          />
-                          <div className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
-                            selectedInterests.includes(interest)
-                              ? 'bg-[#00AFE6] border-[#00AFE6]'
-                              : 'border-white/40'
-                          }`}>
-                            {selectedInterests.includes(interest) && (
-                              <Check className="w-3 h-3 text-white" />
-                            )}
-                          </div>
-                          <span className="text-sm">{interest}</span>
-                        </label>
-                      ))}
-                    </div>
-                    {errors.interests && (
-                      <p className="text-red-400 text-sm mt-1">{errors.interests.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">How did you hear about CAS?</label>
-                    <input
-                      {...register("howHeard")}
-                      type="text"
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      placeholder="e.g., Healthcare provider, website, social media, etc."
-                    />
-                    {errors.howHeard && (
-                      <p className="text-red-400 text-sm mt-1">{errors.howHeard.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">Message (Optional)</label>
-                    <textarea
-                      {...register("message")}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6] h-24 resize-none"
-                      placeholder="Tell us anything else you'd like us to know..."
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-                <div className="space-y-4">
-                  <label className="flex items-center gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      {...register("newsletter")}
-                      className="sr-only"
-                    />
-                    <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-                      watch("newsletter") ? 'bg-[#00AFE6] border-[#00AFE6]' : 'border-white/40'
-                    }`}>
-                      {watch("newsletter") && <Check className="w-3 h-3 text-white" />}
-                    </div>
-                    <span className="text-white/80">
-                      Subscribe to our newsletter for updates and resources
-                    </span>
-                  </label>
-
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      {...register("terms")}
-                      className="sr-only"
-                    />
-                    <div className={`w-5 h-5 rounded border-2 flex items-center justify-center mt-0.5 flex-shrink-0 ${
-                      watch("terms") ? 'bg-[#00AFE6] border-[#00AFE6]' : 'border-white/40'
-                    }`}>
-                      {watch("terms") && <Check className="w-3 h-3 text-white" />}
-                    </div>
-                    <span className="text-white/80">
-                      I agree to the <Link href="/terms" className="text-[#00AFE6] hover:underline">Terms and Conditions</Link> and <Link href="/privacy" className="text-[#00AFE6] hover:underline">Privacy Policy</Link> of the Canadian Amyloidosis Society
-                    </span>
-                  </label>
-                  {errors.terms && (
-                    <p className="text-red-400 text-sm">{errors.terms.message}</p>
-                  )}
-                </div>
-              </div>
-
-              <div className="text-center">
-                <motion.button
-                  type="submit"
-                  disabled={joinMutation.isPending}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {joinMutation.isPending ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Joining CAS...
-                    </>
-                  ) : (
-                    <>
-                      Join the Canadian Amyloidosis Society
-                      <ArrowRight className="w-5 h-5" />
-                    </>
-                  )}
-                </motion.button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-16 bg-gray-900 border-t border-white/10">
+      {/* Who Can Join Section */}
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
-            className="max-w-4xl mx-auto text-center"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Questions About
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Joining CAS?
-              </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Who Can <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Join?</span>
             </h2>
-            
-            <p className="text-white/70 leading-relaxed mb-8">
-              We're here to help you get involved and answer any questions you may have.
+            <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
+              CAS membership is open to qualified professionals who contribute to amyloidosis care, research, and patient advocacy in Canada.
             </p>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                <Mail className="w-8 h-8 text-[#00AFE6] mx-auto mb-4" />
-                <h3 className="text-lg font-bold text-white mb-2">Email Us</h3>
-                <p className="text-white/70 mb-4">Send us your questions via email</p>
-                <Link href="/contact" className="text-[#00AFE6] hover:text-white transition-colors">
-                  info@canadianamyloidosis.ca
-                </Link>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                <Phone className="w-8 h-8 text-[#00DD89] mx-auto mb-4" />
-                <h3 className="text-lg font-bold text-white mb-2">Call Us</h3>
-                <p className="text-white/70 mb-4">Speak with our team</p>
-                <Link href="/contact" className="text-[#00DD89] hover:text-white transition-colors">
-                  1-800-CAS-INFO
-                </Link>
-              </div>
-            </div>
           </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {whoCanJoin.map((category, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20 hover:shadow-lg transition-all duration-300 h-full">
+                  <CardHeader>
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
+                        <category.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <CardTitle className="text-gray-900 dark:text-white">{category.title}</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600 dark:text-white/70 mb-4">{category.description}</p>
+                    <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-lg">
+                      <p className="text-sm text-gray-600 dark:text-white/60">
+                        <strong>Requirements:</strong> {category.requirements}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What Happens Next Section */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              What Happens <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Next?</span>
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
+              Our comprehensive review process ensures that all members meet professional standards while providing a streamlined approval experience.
+            </p>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto">
+            <Alert className="bg-[#00AFE6]/10 border-[#00AFE6]/30 mb-8">
+              <Clock className="w-4 h-4 text-[#00AFE6]" />
+              <AlertDescription className="text-gray-900 dark:text-white/90">
+                <strong>Total Review Time: 2-3 weeks</strong> - We aim to process applications as quickly as possible while maintaining high standards.
+              </AlertDescription>
+            </Alert>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {approvalProcess.map((process, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20 hover:shadow-lg transition-all duration-300">
+                    <CardHeader>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white font-bold">
+                          {process.step}
+                        </div>
+                        <CardTitle className="text-gray-900 dark:text-white">{process.title}</CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-600 dark:text-white/70 mb-3">{process.description}</p>
+                      <Badge variant="secondary" className="bg-[#00AFE6]/10 text-[#00AFE6] border-[#00AFE6]/30">
+                        {process.timeline}
+                      </Badge>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Join Form Section */}
+      <section id="join-form" className="py-16 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Complete Your <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Application</span>
+              </h2>
+              <p className="text-gray-600 dark:text-white/70 max-w-2xl mx-auto">
+                Join Canada's leading professional network for amyloidosis care. Please provide accurate information to help us process your application efficiently.
+              </p>
+            </div>
+
+            <Alert className="bg-[#00AFE6]/10 border-[#00AFE6]/30 mb-8">
+              <AlertCircle className="w-4 h-4 text-[#00AFE6]" />
+              <AlertDescription className="text-gray-900 dark:text-white/90">
+                <strong>Terms of Participation & Privacy Policy:</strong> By applying, you agree to abide by our professional standards and governance framework. All personal information is handled according to our privacy policy.
+              </AlertDescription>
+            </Alert>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+              {/* Personal Information */}
+              <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                    <Users className="w-5 h-5 text-[#00AFE6]" />
+                    Personal Information
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">First Name *</label>
+                      <input
+                        {...register("firstName")}
+                        type="text"
+                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                        placeholder="Enter your first name"
+                      />
+                      {errors.firstName && (
+                        <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Last Name *</label>
+                      <input
+                        {...register("lastName")}
+                        type="text"
+                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                        placeholder="Enter your last name"
+                      />
+                      {errors.lastName && (
+                        <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Email *</label>
+                      <input
+                        {...register("email")}
+                        type="email"
+                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                        placeholder="Enter your email address"
+                      />
+                      {errors.email && (
+                        <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Phone *</label>
+                      <input
+                        {...register("phone")}
+                        type="tel"
+                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                        placeholder="Enter your phone number"
+                      />
+                      {errors.phone && (
+                        <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">City *</label>
+                      <input
+                        {...register("city")}
+                        type="text"
+                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                        placeholder="Enter your city"
+                      />
+                      {errors.city && (
+                        <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Province *</label>
+                      <select
+                        {...register("province")}
+                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                      >
+                        <option value="">Select Province</option>
+                        <option value="AB">Alberta</option>
+                        <option value="BC">British Columbia</option>
+                        <option value="MB">Manitoba</option>
+                        <option value="NB">New Brunswick</option>
+                        <option value="NL">Newfoundland and Labrador</option>
+                        <option value="NS">Nova Scotia</option>
+                        <option value="ON">Ontario</option>
+                        <option value="PE">Prince Edward Island</option>
+                        <option value="QC">Quebec</option>
+                        <option value="SK">Saskatchewan</option>
+                        <option value="NT">Northwest Territories</option>
+                        <option value="NU">Nunavut</option>
+                        <option value="YT">Yukon</option>
+                      </select>
+                      {errors.province && (
+                        <p className="text-red-500 text-sm mt-1">{errors.province.message}</p>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Professional Information */}
+              <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                    <Stethoscope className="w-5 h-5 text-[#00AFE6]" />
+                    Professional Information
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Role *</label>
+                      <select
+                        {...register("role")}
+                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                      >
+                        <option value="">Select your role</option>
+                        <option value="clinician">Clinician/Healthcare Professional</option>
+                        <option value="researcher">Researcher/Academic</option>
+                        <option value="administrator">Healthcare Administrator</option>
+                        <option value="patient">Patient</option>
+                        <option value="caregiver">Caregiver/Family Member</option>
+                        <option value="advocate">Patient Advocate</option>
+                        <option value="other">Other</option>
+                      </select>
+                      {errors.role && (
+                        <p className="text-red-500 text-sm mt-1">{errors.role.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Specialty (if applicable)</label>
+                      <input
+                        {...register("specialty")}
+                        type="text"
+                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                        placeholder="e.g., Cardiology, Nephrology, etc."
+                      />
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Organization (if applicable)</label>
+                      <input
+                        {...register("organization")}
+                        type="text"
+                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                        placeholder="Hospital, clinic, research institution, etc."
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Areas of Interest */}
+              <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                    <Heart className="w-5 h-5 text-[#00AFE6]" />
+                    Areas of Interest
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <label className="block text-gray-700 dark:text-white/80 font-medium mb-3">Select all areas that apply to you *</label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {interestAreas.map((interest) => (
+                        <label
+                          key={interest}
+                          className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all ${
+                            selectedInterests.includes(interest)
+                              ? 'bg-[#00AFE6]/10 border-[#00AFE6]/50 text-[#00AFE6] dark:text-[#00AFE6]'
+                              : 'bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/20 text-gray-700 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'
+                          }`}
+                          onClick={() => handleInterestToggle(interest)}
+                        >
+                          <div className="flex items-center">
+                            <Checkbox
+                              checked={selectedInterests.includes(interest)}
+                              onChange={() => handleInterestToggle(interest)}
+                              className="data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                            />
+                          </div>
+                          <span className="text-sm font-medium">{interest}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {errors.interests && (
+                      <p className="text-red-500 text-sm mt-1">{errors.interests.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">How did you hear about CAS? *</label>
+                    <input
+                      {...register("howHeard")}
+                      type="text"
+                      className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                      placeholder="e.g., Healthcare provider, website, social media, colleague, etc."
+                    />
+                    {errors.howHeard && (
+                      <p className="text-red-500 text-sm mt-1">{errors.howHeard.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Additional Message (optional)</label>
+                    <textarea
+                      {...register("message")}
+                      rows={4}
+                      className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
+                      placeholder="Tell us more about your interest in joining CAS..."
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Terms and Conditions */}
+              <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
+                    <Gavel className="w-5 h-5 text-[#00AFE6]" />
+                    Terms and Conditions
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <Checkbox
+                        {...register("termsOfParticipation")}
+                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                      />
+                      <div className="flex-1">
+                        <label className="text-sm font-medium text-gray-700 dark:text-white/80">
+                          I agree to the Terms of Participation *
+                        </label>
+                        <p className="text-sm text-gray-600 dark:text-white/60 mt-1">
+                          I understand and agree to abide by CAS professional standards, governance framework, and participation guidelines.{" "}
+                          <Link href="/terms-of-participation" className="text-[#00AFE6] hover:underline">
+                            Read Terms of Participation
+                            <ExternalLink className="w-3 h-3 inline ml-1" />
+                          </Link>
+                        </p>
+                      </div>
+                    </div>
+                    {errors.termsOfParticipation && (
+                      <p className="text-red-500 text-sm">{errors.termsOfParticipation.message}</p>
+                    )}
+
+                    <div className="flex items-start gap-3">
+                      <Checkbox
+                        {...register("privacyPolicy")}
+                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                      />
+                      <div className="flex-1">
+                        <label className="text-sm font-medium text-gray-700 dark:text-white/80">
+                          I agree to the Privacy Policy *
+                        </label>
+                        <p className="text-sm text-gray-600 dark:text-white/60 mt-1">
+                          I understand how my personal information will be collected, used, and protected.{" "}
+                          <Link href="/privacy-policy" className="text-[#00AFE6] hover:underline">
+                            Read Privacy Policy
+                            <ExternalLink className="w-3 h-3 inline ml-1" />
+                          </Link>
+                        </p>
+                      </div>
+                    </div>
+                    {errors.privacyPolicy && (
+                      <p className="text-red-500 text-sm">{errors.privacyPolicy.message}</p>
+                    )}
+
+                    <div className="flex items-start gap-3">
+                      <Checkbox
+                        {...register("newsletter")}
+                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                      />
+                      <div className="flex-1">
+                        <label className="text-sm font-medium text-gray-700 dark:text-white/80">
+                          Subscribe to CAS Newsletter (optional)
+                        </label>
+                        <p className="text-sm text-gray-600 dark:text-white/60 mt-1">
+                          Receive updates about events, resources, and important announcements.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Submit Button */}
+              <div className="text-center">
+                <Button
+                  type="submit"
+                  disabled={joinMutation.isPending}
+                  className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-12 py-4 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {joinMutation.isPending ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
+                      Submitting Application...
+                    </>
+                  ) : (
+                    <>
+                      Submit Membership Application
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </>
+                  )}
+                </Button>
+                <p className="text-sm text-gray-600 dark:text-white/60 mt-4">
+                  We'll review your application and get back to you within 2-3 weeks.
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </div>

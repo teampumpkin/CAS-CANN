@@ -103,7 +103,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-1 bg-gradient-to-r from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-full px-4 py-3 border border-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 shadow-xl shadow-[#00AFE6]/10">
+            <div className="flex items-center gap-2 bg-gray-900/95 backdrop-blur-xl rounded-full px-6 py-2 border border-gray-700/50 shadow-lg">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -111,26 +111,26 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className="flex items-center gap-2 px-6 py-3 text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 rounded-full transition-all duration-300 text-base font-bold border border-transparent hover:border-[#00AFE6]/40 hover:shadow-lg hover:shadow-[#00AFE6]/20 hover:scale-105"
+                      className="flex items-center gap-2 px-4 py-2 text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 rounded-full transition-all duration-300 text-sm font-semibold border border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                       onMouseEnter={() => setActiveDropdown(item.name)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       {item.name}
-                      <ChevronDown className={`w-4 h-4 transition-all duration-300 ${activeDropdown === item.name ? 'rotate-180 text-[#00AFE6]' : ''}`} />
+                      <ChevronDown className={`w-3 h-3 transition-all duration-300 ${activeDropdown === item.name ? 'rotate-180 text-[#00AFE6]' : ''}`} />
                     </motion.button>
                   ) : (
                     <motion.a
                       href={item.href}
-                      className="flex items-center gap-2 px-6 py-3 text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 rounded-full transition-all duration-300 text-base font-bold border border-transparent hover:border-[#00AFE6]/40 hover:shadow-lg hover:shadow-[#00AFE6]/20 hover:scale-105"
+                      className="flex items-center gap-2 px-4 py-2 text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 rounded-full transition-all duration-300 text-sm font-semibold border border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       {item.name}
                     </motion.a>
@@ -186,15 +186,17 @@ export default function Header() {
 
           {/* Theme Toggle & CTA Section */}
           <motion.div
-            className="hidden md:flex items-center gap-3"
+            className="hidden md:flex items-center gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <LanguageSwitcher />
-            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
             
-            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 rounded-full font-bold text-base hover:shadow-lg hover:scale-105 transition-all duration-300">
+            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20">
               {t('nav.getHelp')}
             </button>
           </motion.div>

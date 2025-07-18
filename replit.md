@@ -27,6 +27,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ Added Canadian Amyloidosis Society logo to EventsNewsletterSection with animated entrance effect
 - ✅ Standardized all section headers to consistent 48px text size across the entire website
 - ✅ Added simplified pathophysiology section to About Amyloidosis page explaining misfolded proteins in everyday language
+- ✅ Moved CANN (Canadian Amyloidosis Nursing Network) section from Directory page to Get Involved page for better organization
 
 ## Recent Changes
 

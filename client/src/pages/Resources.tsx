@@ -237,9 +237,23 @@ export default function Resources() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Header */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-800 dark:via-gray-900 dark:to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-200/20 dark:via-white/5 to-transparent" />
+      <section className="py-24 bg-gradient-to-br from-slate-100 via-blue-50 to-cyan-50 dark:bg-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/60 via-cyan-50/40 to-slate-100/60 dark:from-gray-800 dark:via-gray-900 dark:to-black" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-blue-200/30 dark:via-white/5 to-transparent" />
+        
+        {/* Brand Color Elements */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-[#00AFE6]/15 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00DD89]/15 rounded-full blur-3xl translate-x-48 translate-y-48" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-full blur-2xl -translate-x-32 -translate-y-32" />
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-20 w-3 h-3 bg-[#00AFE6] rounded-full animate-pulse" />
+        <div className="absolute top-40 right-32 w-2 h-2 bg-[#00DD89] rounded-full animate-pulse" />
+        <div className="absolute bottom-32 left-1/3 w-2 h-2 bg-[#00AFE6]/70 rounded-full animate-pulse" />
+        <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-[#00DD89]/60 rounded-full animate-pulse" />
+        
+        {/* Subtle Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-white/5 dark:from-transparent dark:via-white/5 dark:to-transparent" />
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -248,13 +262,13 @@ export default function Resources() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 dark:border-white/20 mb-6">
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6 shadow-lg">
               <BookOpen className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-gray-900 dark:text-white/90">{t('resources.title')}</span>
+              <span className="text-sm font-medium text-gray-800 dark:text-white/90">{t('resources.title')}</span>
             </div>
             
             <h1 className="crawford-section-title mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 {t('resources.title')}
               </span>
               <br />

@@ -28,6 +28,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ Standardized all section headers to consistent 48px text size across the entire website
 - ✅ Added simplified pathophysiology section to About Amyloidosis page explaining misfolded proteins in everyday language
 - ✅ Moved CANN (Canadian Amyloidosis Nursing Network) section from Directory page to Get Involved page for better organization
+- ✅ Added "Get Involved" link to header navigation for easy access to the Get Involved page
 
 ## Recent Changes
 

@@ -153,7 +153,7 @@ export default function JoinCANN() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+      <section className="relative py-24 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 via-transparent to-[#00DD89]/10"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
@@ -166,13 +166,13 @@ export default function JoinCANN() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-8">
+              <div className="inline-flex items-center gap-3 bg-white/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-200/50 dark:border-white/20 mb-8">
                 <Network className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-white/90">Professional Network</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/90">Professional Network</span>
               </div>
               
               <h1 className="crawford-section-title mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Join the Canadian
                 </span>
                 <br />
@@ -181,7 +181,7 @@ export default function JoinCANN() {
                 </span>
               </h1>
               
-              <p className="text-xl text-white/70 leading-relaxed mb-8 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8 max-w-3xl mx-auto">
                 Unite with nursing professionals across Canada to enhance amyloidosis care through collaboration, education, and shared expertise.
               </p>
               

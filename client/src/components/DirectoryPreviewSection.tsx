@@ -73,7 +73,7 @@ export default function DirectoryPreviewSection() {
             <MapPin className="w-3 h-3" />
             <span>{t('directory.badge')}</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-3 font-rosarivo">
+          <h2 className="crawford-section-title mb-3">
             <span className="text-gray-900 dark:text-white">{t('directory.title.find')} </span>
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('directory.title.specialized')}</span>
             <span className="text-gray-900 dark:text-white"> Across Canada</span>

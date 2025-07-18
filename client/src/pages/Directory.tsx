@@ -110,7 +110,7 @@ export default function Directory() {
               </motion.div>
               
               <motion.h1
-                className="text-5xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight"
+                className="crawford-section-title mb-8 leading-tight"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}

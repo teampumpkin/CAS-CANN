@@ -49,7 +49,7 @@ export default function WelcomeSection() {
 
             {/* Premium heading with gradient accent */}
             <motion.h2 
-              className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 leading-tight font-rosarivo"
+              className="crawford-section-title mb-4 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}

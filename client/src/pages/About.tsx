@@ -473,7 +473,7 @@ export default function About() {
               <Shield className="w-5 h-5 text-[#00AFE6]" />
               <span className="text-sm font-medium text-gray-700 dark:text-white/90">Our Values</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+            <h2 className="crawford-section-title mb-6">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Guided by
               </span>

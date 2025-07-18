@@ -253,7 +253,7 @@ export default function Resources() {
               <span className="text-sm font-medium text-white/90">{t('resources.title')}</span>
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+            <h1 className="crawford-section-title mb-6 leading-tight">
               <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
                 {t('resources.title')}
               </span>

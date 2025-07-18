@@ -110,7 +110,7 @@ export default function AboutAmyloidosis() {
               <span className="text-sm font-medium text-gray-700 dark:text-white/90">Medical Information</span>
             </div>
             
-            <h1 className="text-5xl lg:text-7xl font-bold font-rosarivo mb-6 leading-tight">
+            <h1 className="crawford-section-title mb-6 leading-tight">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 About
               </span>
@@ -146,7 +146,7 @@ export default function AboutAmyloidosis() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+            <h2 className="crawford-section-title mb-6">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Types of
               </span>

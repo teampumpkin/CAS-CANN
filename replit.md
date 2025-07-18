@@ -25,6 +25,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ Increased map section header text size from 30px to 48px for better visibility and prominence
 - ✅ Updated hero section background image to neural network visualization for better medical relevance to amyloidosis
 - ✅ Added Canadian Amyloidosis Society logo to EventsNewsletterSection with animated entrance effect
+- ✅ Standardized all section headers to consistent 48px text size across the entire website
 
 ## Recent Changes
 

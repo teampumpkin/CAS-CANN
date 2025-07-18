@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Upload, BookOpen, Users } from 'lucide-react';
 import heroBackgroundImage from '@assets/shutterstock_2066097218_1752824393843.jpg';
 import { useLanguage } from '@/contexts/LanguageContext';
+import OptimizedImage from '@/components/OptimizedImage';
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -19,12 +20,13 @@ export default function Hero() {
       <div className="absolute inset-0">
         {/* Medical heart background image */}
         <div className="absolute inset-0">
-          <img 
+          <OptimizedImage
             src={heroBackgroundImage}
             alt="Neural network visualization representing amyloidosis research and treatment" 
             className="w-full h-full object-cover"
-            loading="lazy"
-            decoding="async"
+            loading="eager"
+            priority={true}
+            quality={70}
             sizes="100vw"
           />
           {/* Sophisticated overlay for text readability and brand enhancement */}

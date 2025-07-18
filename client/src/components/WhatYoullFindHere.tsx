@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Search, Users, FileText, MapPin, Filter, Star } from 'lucide-react';
-import { useState } from 'react';
 
 const features = [
   {
@@ -54,7 +53,6 @@ const features = [
 ];
 
 export default function WhatYoullFindHere() {
-  const [activeFeature, setActiveFeature] = useState<string | null>(null);
 
   return (
     <section className="py-24 bg-white dark:bg-gray-900 relative overflow-hidden">
@@ -109,9 +107,7 @@ export default function WhatYoullFindHere() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              onClick={() => setActiveFeature(activeFeature === feature.id ? null : feature.id)}
-              onMouseEnter={() => setActiveFeature(feature.id)}
-              onMouseLeave={() => setActiveFeature(null)}
+
             >
               {/* Icon */}
               <div className="flex items-center justify-between mb-6">
@@ -139,8 +135,8 @@ export default function WhatYoullFindHere() {
               {/* Expandable Details */}
               <motion.div
                 className="overflow-hidden"
-                initial={{ height: 0 }}
-                animate={{ height: activeFeature === feature.id ? 'auto' : 0 }}
+                initial={{ height: 'auto' }}
+                animate={{ height: 'auto' }}
                 transition={{ duration: 0.3 }}
               >
                 <div className="pt-4 border-t border-gray-200/50 dark:border-white/10">
@@ -159,8 +155,8 @@ export default function WhatYoullFindHere() {
               {/* Action Button */}
               <motion.div
                 className="mt-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: activeFeature === feature.id ? 1 : 0 }}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.2 }}
               >
                 <button className={`w-full bg-gradient-to-r ${feature.color} text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2`}>

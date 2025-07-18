@@ -10,6 +10,17 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Enhanced Navbar Design (July 18, 2025)
+- ✅ Made logo significantly bigger and more prominent (increased from h-12 to h-20)
+- ✅ Enhanced navbar height for better proportions (increased from h-24 to h-28)
+- ✅ Made navigation links bigger and more prominent (increased from text-sm to text-base)
+- ✅ Enhanced font weights for better visibility (changed from font-medium to font-semibold/font-bold)
+- ✅ Increased spacing and padding for better visual hierarchy
+- ✅ Enhanced mobile menu with bigger buttons and text
+- ✅ Improved dropdown menu styling with larger text and better spacing
+- ✅ Added drop shadow to logo for better prominence
+- ✅ Enhanced CTA button with bigger size and bolder styling
+
 ### Navigation Scroll Behavior Fix (July 17, 2025)
 - ✅ Fixed CTA "Learn More" button navigation to land at hero sections instead of mid-page
 - ✅ Added useEffect scroll-to-top functionality to all detailed amyloidosis pages

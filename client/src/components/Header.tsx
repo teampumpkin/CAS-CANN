@@ -70,7 +70,7 @@ export default function Header() {
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-28">
           
           {/* Logo */}
           <motion.a
@@ -83,13 +83,13 @@ export default function Header() {
             <img 
               src={casLogo} 
               alt="Canadian Amyloidosis Society"
-              className="h-12 w-auto group-hover:scale-105 transition-all duration-300"
+              className="h-20 w-auto group-hover:scale-105 transition-all duration-300 drop-shadow-lg"
             />
           </motion.a>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-1 bg-white/10 backdrop-blur-xl rounded-full px-2 py-2 border border-white/20">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-xl rounded-full px-4 py-3 border border-white/20">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -97,19 +97,19 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className="flex items-center gap-1 px-4 py-2 text-white/90 hover:text-white hover:bg-white/20 rounded-full transition-all duration-300 text-sm font-medium"
+                      className="flex items-center gap-2 px-6 py-3 text-white/90 hover:text-white hover:bg-white/20 rounded-full transition-all duration-300 text-base font-semibold"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                       onMouseEnter={() => setActiveDropdown(item.name)}
                     >
                       {item.name}
-                      <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
                     </motion.button>
                   ) : (
                     <motion.a
                       href={item.href}
-                      className="flex items-center gap-1 px-4 py-2 text-white/90 hover:text-white hover:bg-white/20 rounded-full transition-all duration-300 text-sm font-medium"
+                      className="flex items-center gap-2 px-6 py-3 text-white/90 hover:text-white hover:bg-white/20 rounded-full transition-all duration-300 text-base font-semibold"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -121,7 +121,7 @@ export default function Header() {
                   {/* Dropdown Menu */}
                   {item.hasDropdown && (
                     <div
-                      className="absolute top-full left-0 pt-1 w-56 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+                      className="absolute top-full left-0 pt-1 w-64 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
                       onMouseEnter={() => setActiveDropdown(item.name)}
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
@@ -139,7 +139,7 @@ export default function Header() {
                           <motion.a
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700/50 transition-all duration-200 text-sm"
+                            className="block px-5 py-3 text-gray-300 hover:text-white hover:bg-gray-700/50 transition-all duration-200 text-base font-medium"
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ 
                               opacity: activeDropdown === item.name ? 1 : 0,
@@ -168,23 +168,23 @@ export default function Header() {
             <LanguageSwitcher />
             <ThemeToggle />
             
-            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-2 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
+            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 rounded-full font-bold text-base hover:shadow-lg hover:scale-105 transition-all duration-300">
               {t('nav.getHelp')}
             </button>
           </motion.div>
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="lg:hidden p-2 rounded-xl bg-white/20 backdrop-blur-xl border border-white/20 hover:bg-white/30 transition-all duration-300"
+            className="lg:hidden p-3 rounded-xl bg-white/20 backdrop-blur-xl border border-white/20 hover:bg-white/30 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             {isMenuOpen ? (
-              <X className="w-5 h-5 text-white/90" />
+              <X className="w-6 h-6 text-white/90" />
             ) : (
-              <Menu className="w-5 h-5 text-white/90" />
+              <Menu className="w-6 h-6 text-white/90" />
             )}
           </motion.button>
         </div>
@@ -205,14 +205,14 @@ export default function Header() {
                 <div key={item.name} className="space-y-1">
                   {item.hasDropdown ? (
                     <>
-                      <div className="px-4 py-2 font-medium text-sm border-b border-white/20 text-white/90">
+                      <div className="px-4 py-3 font-semibold text-base border-b border-white/20 text-white/90">
                         {item.name}
                       </div>
                       {item.dropdownItems?.map((dropdownItem) => (
                         <a
                           key={dropdownItem.name}
                           href={dropdownItem.href}
-                          className="block px-6 py-2 rounded-lg transition-all duration-300 text-sm text-white/80 hover:text-white hover:bg-white/10"
+                          className="block px-6 py-3 rounded-lg transition-all duration-300 text-base text-white/80 hover:text-white hover:bg-white/10"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {dropdownItem.name}
@@ -222,7 +222,7 @@ export default function Header() {
                   ) : (
                     <a
                       href={item.href}
-                      className="block px-4 py-3 font-medium text-sm rounded-lg transition-all duration-300 text-white/90 hover:bg-white/10"
+                      className="block px-4 py-3 font-semibold text-base rounded-lg transition-all duration-300 text-white/90 hover:bg-white/10"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -240,7 +240,7 @@ export default function Header() {
                 <ThemeToggle />
               </div>
               <button 
-                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
+                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-xl font-bold text-base hover:shadow-lg transition-all duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Get Support

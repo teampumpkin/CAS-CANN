@@ -195,7 +195,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Overview Section */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      <section className="py-16 bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-16">
@@ -292,7 +292,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="py-16 bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -314,7 +314,7 @@ export default function JoinCANN() {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
+                      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm">
                         <CardContent className="p-8">
                           <div className={`w-16 h-16 bg-gradient-to-r ${benefit.color} rounded-2xl flex items-center justify-center mb-6`}>
                             <benefit.icon className="w-8 h-8 text-white" />
@@ -336,7 +336,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Join Section */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      <section className="py-16 bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -395,7 +395,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Login Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="py-16 bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -407,7 +407,7 @@ export default function JoinCANN() {
                     Access your CANN member portal to view exclusive resources, connect with colleagues, and manage your membership.
                   </p>
                   
-                  <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 border-0 shadow-xl">
+                  <Card className="bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm border-0 shadow-xl">
                     <CardContent className="p-12">
                       <div className="w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center mx-auto mb-8">
                         <Lock className="w-10 h-10 text-white" />
@@ -452,7 +452,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Resources Section */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      <section className="py-16 bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -474,7 +474,7 @@ export default function JoinCANN() {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
+                      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm">
                         <CardContent className="p-8">
                           <div className="flex items-start gap-4 mb-6">
                             <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -519,7 +519,7 @@ export default function JoinCANN() {
                   
                   <div className="grid md:grid-cols-3 gap-6">
                     {publicMaterials.map((material, index) => (
-                      <Card key={material.title} className="hover:shadow-lg transition-all duration-300">
+                      <Card key={material.title} className="hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm border-0">
                         <CardContent className="p-6">
                           <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                             <material.icon className="w-6 h-6 text-white" />
@@ -544,7 +544,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Governance Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="py-16 bg-gradient-to-br from-indigo-50/95 to-blue-50/95 dark:from-indigo-900/25 dark:to-blue-900/25">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -566,7 +566,7 @@ export default function JoinCANN() {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
+                      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm">
                         <CardContent className="p-8">
                           <div className="flex items-start gap-4 mb-6">
                             <div className="w-12 h-12 bg-gradient-to-r from-gray-600 to-gray-700 rounded-2xl flex items-center justify-center flex-shrink-0">

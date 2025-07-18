@@ -202,20 +202,20 @@ export default function AboutAmyloidosisSection() {
             </div>
             <div className="space-y-8">
               <motion.div 
-                className="relative bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-[#00AFE6]/25 dark:border-white/20 shadow-lg shadow-blue-100/40 dark:shadow-none"
+                className="relative bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#00AFE6]/20"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#0088CC] mb-3">{t('about.stats.diagnosisTime')}</div>
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89] mb-3">{t('about.stats.diagnosisTime')}</div>
                 <div className="text-gray-900 dark:text-white font-bold text-lg mb-2">{t('about.stats.diagnosisTimeLabel')}</div>
                 <div className="text-gray-700 dark:text-white/70">{t('about.stats.diagnosisTimeDesc')}</div>
               </motion.div>
               <motion.div 
-                className="relative bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-[#00DD89]/25 dark:border-white/20 shadow-lg shadow-green-100/40 dark:shadow-none"
+                className="relative bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 backdrop-blur-xl rounded-2xl p-8 border border-[#00DD89]/20 dark:border-[#00DD89]/30 hover:border-[#00DD89]/40 dark:hover:border-[#00DD89]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#00DD89]/20"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00DD89] to-[#00BB77] mb-3">{t('about.stats.canadiansAffected')}</div>
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00DD89] to-[#00AFE6] mb-3">{t('about.stats.canadiansAffected')}</div>
                 <div className="text-gray-900 dark:text-white font-bold text-lg mb-2">{t('about.stats.canadiansAffectedLabel')}</div>
                 <div className="text-gray-700 dark:text-white/70">{t('about.stats.canadiansAffectedDesc')}</div>
               </motion.div>

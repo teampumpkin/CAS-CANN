@@ -13,10 +13,10 @@ const features = [
       'Patient reviews and ratings',
       'Insurance and referral information'
     ],
-    color: 'from-[#00AFE6] to-blue-500',
-    bgColor: 'from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25',
-    borderColor: 'border-blue-200/50 dark:border-blue-400/30',
-    textColor: 'text-blue-900 dark:text-blue-100'
+    color: 'from-[#00AFE6] to-[#00DD89]',
+    bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15',
+    borderColor: 'border-[#00AFE6]/20 dark:border-[#00AFE6]/30',
+    textColor: 'text-gray-900 dark:text-white'
   },
   {
     id: 'tools',
@@ -29,10 +29,10 @@ const features = [
       'Clinical assessment tools',
       'Community-validated content'
     ],
-    color: 'from-[#00DD89] to-green-500',
-    bgColor: 'from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25',
-    borderColor: 'border-emerald-200/50 dark:border-emerald-400/30',
-    textColor: 'text-emerald-900 dark:text-emerald-100'
+    color: 'from-[#00DD89] to-[#00AFE6]',
+    bgColor: 'from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15',
+    borderColor: 'border-[#00DD89]/20 dark:border-[#00DD89]/30',
+    textColor: 'text-gray-900 dark:text-white'
   },
   {
     id: 'evidence',
@@ -45,10 +45,10 @@ const features = [
       'Clinical practice guidelines',
       'Peer-reviewed content'
     ],
-    color: 'from-purple-500 to-violet-500',
-    bgColor: 'from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25',
-    borderColor: 'border-purple-200/50 dark:border-purple-400/30',
-    textColor: 'text-purple-900 dark:text-purple-100'
+    color: 'from-[#00AFE6] to-[#00DD89]',
+    bgColor: 'from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15',
+    borderColor: 'border-[#00AFE6]/20 dark:border-[#00AFE6]/30',
+    textColor: 'text-gray-900 dark:text-white'
   }
 ];
 
@@ -128,7 +128,7 @@ export default function WhatYoullFindHere() {
                 {feature.title}
               </h3>
               
-              <p className={`leading-relaxed mb-6 ${feature.textColor.replace('900', '700').replace('100', '300')}`}>
+              <p className="leading-relaxed mb-6 text-gray-700 dark:text-gray-300">
                 {feature.description}
               </p>
 
@@ -140,10 +140,10 @@ export default function WhatYoullFindHere() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="pt-4 border-t border-gray-200/50 dark:border-white/10">
-                  <h4 className={`font-semibold mb-3 ${feature.textColor}`}>Key Features:</h4>
+                  <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">Key Features:</h4>
                   <ul className="space-y-2">
                     {feature.details.map((detail, idx) => (
-                      <li key={idx} className={`flex items-start gap-2 ${feature.textColor.replace('900', '600').replace('100', '400')}`}>
+                      <li key={idx} className="flex items-start gap-2 text-gray-600 dark:text-gray-400">
                         <Filter className="w-4 h-4 mt-0.5 flex-shrink-0" />
                         <span className="text-sm">{detail}</span>
                       </li>

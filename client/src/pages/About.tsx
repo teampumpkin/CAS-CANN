@@ -309,27 +309,27 @@ export default function About() {
                 title: "Tool Curation",
                 description: "Evidence-based clinical tools, protocols, and guidelines curated by expert clinicians for practical implementation.",
                 features: ["Clinical Assessment Tools", "Diagnostic Algorithms", "Treatment Protocols", "Quality Metrics"],
-                color: "from-[#00AFE6] to-blue-500",
-                bgColor: "from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25",
-                borderColor: "border-blue-200/50 dark:border-blue-400/30"
+                color: "from-[#00AFE6] to-[#00DD89]",
+                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30"
               },
               {
                 icon: Search,
                 title: "Diagnostic Support",
                 description: "Comprehensive diagnostic pathways and decision support tools to accelerate accurate amyloidosis diagnosis.",
                 features: ["Rapid Diagnostic Pathways", "Biomarker Interpretation", "Imaging Guidelines", "Biopsy Protocols"],
-                color: "from-[#00DD89] to-green-500",
-                bgColor: "from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25",
-                borderColor: "border-emerald-200/50 dark:border-emerald-400/30"
+                color: "from-[#00DD89] to-[#00AFE6]",
+                bgColor: "from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15",
+                borderColor: "border-[#00DD89]/20 dark:border-[#00DD89]/30"
               },
               {
                 icon: Network,
                 title: "Peer Learning",
                 description: "Collaborative networks connecting clinicians for case discussions, best practice sharing, and professional development.",
                 features: ["Case Consultations", "Best Practice Sharing", "Professional Development", "Multidisciplinary Teams"],
-                color: "from-purple-500 to-violet-500",
-                bgColor: "from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25",
-                borderColor: "border-purple-200/50 dark:border-purple-400/30"
+                color: "from-[#00AFE6] to-[#00DD89]",
+                bgColor: "from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15",
+                borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30"
               }
             ].map((service, index) => (
               <motion.div

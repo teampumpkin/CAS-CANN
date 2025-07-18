@@ -89,7 +89,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-1 bg-gray-900/90 backdrop-blur-xl rounded-full px-3 py-2 border border-gray-700/50 shadow-lg">
+            <div className="flex items-center gap-1 bg-gradient-to-r from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-full px-4 py-3 border border-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 shadow-xl shadow-[#00AFE6]/10">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -97,22 +97,26 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className="flex items-center gap-2 px-5 py-2.5 text-white hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-base font-semibold border border-transparent hover:border-white/20"
+                      className="flex items-center gap-2 px-6 py-3 text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 rounded-full transition-all duration-300 text-base font-bold border border-transparent hover:border-[#00AFE6]/40 hover:shadow-lg hover:shadow-[#00AFE6]/20 hover:scale-105"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                       onMouseEnter={() => setActiveDropdown(item.name)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       {item.name}
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 transition-all duration-300 ${activeDropdown === item.name ? 'rotate-180 text-[#00AFE6]' : ''}`} />
                     </motion.button>
                   ) : (
                     <motion.a
                       href={item.href}
-                      className="flex items-center gap-2 px-5 py-2.5 text-white hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-base font-semibold border border-transparent hover:border-white/20"
+                      className="flex items-center gap-2 px-6 py-3 text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 rounded-full transition-all duration-300 text-base font-bold border border-transparent hover:border-[#00AFE6]/40 hover:shadow-lg hover:shadow-[#00AFE6]/20 hover:scale-105"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       {item.name}
                     </motion.a>
@@ -121,33 +125,41 @@ export default function Header() {
                   {/* Dropdown Menu */}
                   {item.hasDropdown && (
                     <div
-                      className="absolute top-full left-0 pt-1 w-64 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+                      className="absolute top-full left-0 pt-2 w-72 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300"
                       onMouseEnter={() => setActiveDropdown(item.name)}
                       onMouseLeave={() => setActiveDropdown(null)}
                     >
                       <motion.div
-                        className="bg-gray-900/95 backdrop-blur-xl rounded-2xl border border-gray-700/50 shadow-2xl py-2"
-                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        className="bg-gradient-to-br from-gray-900/98 to-gray-800/98 backdrop-blur-xl rounded-2xl border border-[#00AFE6]/30 shadow-2xl shadow-[#00AFE6]/10 py-3 overflow-hidden"
+                        initial={{ opacity: 0, y: -20, scale: 0.9 }}
                         animate={{ 
                           opacity: activeDropdown === item.name ? 1 : 0, 
-                          y: activeDropdown === item.name ? 0 : -10,
-                          scale: activeDropdown === item.name ? 1 : 0.95
+                          y: activeDropdown === item.name ? 0 : -20,
+                          scale: activeDropdown === item.name ? 1 : 0.9
                         }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 20 }}
                       >
+                        {/* Gradient glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-2xl"></div>
+                        
                         {item.dropdownItems?.map((dropdownItem, dropdownIndex) => (
                           <motion.a
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="block px-5 py-3 text-gray-200 hover:text-white hover:bg-gray-700/50 transition-all duration-200 text-base font-medium"
-                            initial={{ opacity: 0, x: -10 }}
+                            className="relative block px-6 py-4 text-gray-200 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/15 hover:to-[#00DD89]/15 transition-all duration-300 text-base font-semibold border-l-2 border-transparent hover:border-[#00AFE6] hover:shadow-lg hover:shadow-[#00AFE6]/10 group/item"
+                            initial={{ opacity: 0, x: -20 }}
                             animate={{ 
                               opacity: activeDropdown === item.name ? 1 : 0,
-                              x: activeDropdown === item.name ? 0 : -10
+                              x: activeDropdown === item.name ? 0 : -20
                             }}
-                            transition={{ duration: 0.2, delay: dropdownIndex * 0.05 }}
+                            transition={{ duration: 0.3, delay: dropdownIndex * 0.1 }}
                           >
-                            {dropdownItem.name}
+                            <div className="flex items-center gap-3">
+                              <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-50 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+                              <span className="group-hover/item:translate-x-1 transition-transform duration-300">
+                                {dropdownItem.name}
+                              </span>
+                            </div>
                           </motion.a>
                         ))}
                       </motion.div>

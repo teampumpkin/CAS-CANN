@@ -1147,7 +1147,7 @@ export default function GetInvolved() {
       </section>
 
       {/* Events Section */}
-      <section className="py-24 bg-gray-900 border-t border-white/10 relative overflow-hidden">
+      <section id="events" className="py-24 bg-gray-900 border-t border-white/10 relative overflow-hidden">
         {/* Frost Background Effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-white/[0.01]"></div>
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>

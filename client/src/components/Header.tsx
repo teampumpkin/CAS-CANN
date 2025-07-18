@@ -29,17 +29,6 @@ export default function Header() {
 
   const navItems = [
     {
-      name: 'Clinical Tools',
-      href: '#clinical-tools',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Diagnostic Pathways', href: '/diagnostic-pathways' },
-        { name: 'Treatment Protocols', href: '/treatment-protocols' },
-        { name: 'Clinical Guidelines', href: '/clinical-guidelines' },
-        { name: 'Assessment Tools', href: '/assessment-tools' },
-      ]
-    },
-    {
       name: t('nav.resources'),
       href: '#resources',
       hasDropdown: true,
@@ -47,18 +36,22 @@ export default function Header() {
         { name: 'Resource Library', href: '/resources' },
         { name: 'Healthcare Directory', href: '/directory' },
         { name: 'Contribute Resource', href: '/upload-resource' },
-        { name: 'Evidence Base', href: '/evidence-base' },
       ]
     },
     {
-      name: 'Professional Network',
-      href: '#professional',
+      name: t('nav.directory'),
+      href: '/directory',
+      hasDropdown: false,
+    },
+    {
+      name: t('nav.community'),
+      href: '#community',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'Join Professional Network', href: '/join-cas' },
-        { name: 'CANN Nursing Network', href: '/join-cann' },
-        { name: 'Contributor Portal', href: '/contributor-portal' },
-        { name: 'Peer Consultation', href: '/peer-consultation' },
+        { name: 'Join CAS', href: '/join-cas' },
+        { name: 'Join CANN', href: '/join-cann' },
+        { name: 'Get Involved', href: '/get-involved' },
+        { name: 'Events', href: '/events' },
       ]
     },
     {
@@ -67,16 +60,13 @@ export default function Header() {
       hasDropdown: true,
       dropdownItems: [
         { name: 'About CAS', href: '/about' },
-        { name: 'Clinical Amyloidosis', href: '/about-amyloidosis' },
-        { name: 'Governance Documents', href: '/governance' },
-        { name: 'Research & Publications', href: '/research' },
+        { name: 'About Amyloidosis', href: '/about-amyloidosis' },
+        { name: 'AL Amyloidosis', href: '/al-amyloidosis' },
+        { name: 'ATTR Amyloidosis', href: '/attr-amyloidosis' },
+        { name: 'Other Types', href: '/other-amyloidosis' },
       ]
     },
-    {
-      name: t('nav.contact'),
-      href: '/contact',
-      hasDropdown: false,
-    },
+    { name: t('nav.contact'), href: '/contact' }
   ];
 
   useEffect(() => {

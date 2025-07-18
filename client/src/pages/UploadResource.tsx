@@ -9,7 +9,12 @@ import {
   AlertCircle,
   Info,
   Shield,
-  UserCheck
+  UserCheck,
+  Clock,
+  Users,
+  ExternalLink,
+  CheckCircle2,
+  AlertTriangle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,16 +35,18 @@ const uploadFormSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters").max(255, "Title too long"),
   description: z.string().min(20, "Description must be at least 20 characters").max(1000, "Description too long"),
   amyloidosisType: z.string().min(1, "Please select an amyloidosis type"),
-  resourceType: z.string().min(1, "Please select a resource type"),
+  resourceType: z.string().min(1, "Please select a document type"),
   category: z.string().min(1, "Please select a category"),
   audience: z.string().min(1, "Please select target audience"),
   language: z.string().min(1, "Please select language"),
-  region: z.string().min(1, "Please select region"),
-  submittedBy: z.string().optional(),
-  submitterRole: z.string().optional(),
-  submitterOrganization: z.string().optional(),
+  region: z.string().min(1, "Please select jurisdiction"),
+  tags: z.string().min(1, "Please provide relevant tags"),
+  submittedBy: z.string().min(1, "Please provide your name"),
+  submitterRole: z.string().min(1, "Please specify your role"),
+  submitterOrganization: z.string().min(1, "Please specify your organization"),
   consentAgreed: z.boolean().refine(val => val === true, "You must agree to the consent terms"),
   phiConfirmation: z.boolean().refine(val => val === true, "You must confirm no PHI is included"),
+  editorialCharter: z.boolean().refine(val => val === true, "You must acknowledge the editorial charter"),
 });
 
 type UploadFormData = z.infer<typeof uploadFormSchema>;
@@ -53,12 +60,12 @@ const amyloidosisTypes = [
 ];
 
 const resourceTypes = [
-  { value: "form", label: "Forms & Protocols" },
-  { value: "tool", label: "Clinical Tools" },
-  { value: "article", label: "Articles & Guidelines" },
-  { value: "pathway", label: "Care Pathways" },
-  { value: "visual", label: "Visual Resources" },
-  { value: "research", label: "Research Materials" }
+  { value: "diagnostic-tools", label: "Diagnostic Tools" },
+  { value: "referral-pathways", label: "Referral Pathways" },
+  { value: "sops", label: "Standard Operating Procedures" },
+  { value: "patient-handouts", label: "Patient Handouts" },
+  { value: "clinical-forms", label: "Clinical Forms" },
+  { value: "research-materials", label: "Research Materials" }
 ];
 
 const categories = [
@@ -138,11 +145,13 @@ export default function UploadResource() {
       audience: "",
       language: "en",
       region: "national",
+      tags: "",
       submittedBy: "",
       submitterRole: "",
       submitterOrganization: "",
       consentAgreed: false,
       phiConfirmation: false,
+      editorialCharter: false,
     }
   });
 
@@ -153,7 +162,7 @@ export default function UploadResource() {
         isPublic: true,
         requiresLogin: false,
         isApproved: false, // Requires moderation
-        tags: [data.amyloidosisType, data.resourceType, data.category, data.audience],
+        tags: [data.amyloidosisType, data.resourceType, data.category, data.audience, ...data.tags.split(',').map(tag => tag.trim()).filter(tag => tag)],
         downloadCount: 0
       });
     },
@@ -308,32 +317,160 @@ export default function UploadResource() {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             
-            {/* Accepted Resource Types */}
-            <Card className="bg-white/10 border-white/20 mb-8">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Info className="w-5 h-5 text-[#00AFE6]" />
-                  Accepted Resource Types
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-white/80">
-                  <div>• Referral forms and diagnostic protocols</div>
-                  <div>• Care pathways and navigation tools</div>
-                  <div>• Patient education handouts</div>
-                  <div>• Clinical trial information sheets</div>
-                  <div>• Research abstracts and summaries</div>
-                  <div>• Translation-ready documents</div>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  <Badge variant="outline" className="text-white/70 border-white/30">PDF</Badge>
-                  <Badge variant="outline" className="text-white/70 border-white/30">DOCX</Badge>
-                  <Badge variant="outline" className="text-white/70 border-white/30">XLSX</Badge>
-                  <Badge variant="outline" className="text-white/70 border-white/30">PNG</Badge>
-                  <Badge variant="outline" className="text-white/70 border-white/30">JPG</Badge>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Submission Guidelines */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              {/* Who Can Submit */}
+              <Card className="bg-white/10 border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Users className="w-5 h-5 text-[#00AFE6]" />
+                    Who Can Submit
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-2 text-sm text-white/80">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Healthcare professionals (physicians, nurses, allied health)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Researchers and academics</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Healthcare administrators</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Medical societies and organizations</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Patient advocacy groups</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* What's Accepted */}
+              <Card className="bg-white/10 border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-[#00AFE6]" />
+                    What Types Are Accepted
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-2 text-sm text-white/80">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Diagnostic tools and checklists</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Referral pathways and protocols</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Standard operating procedures</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Patient education materials</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
+                      <span>Clinical forms and templates</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <Badge variant="outline" className="text-white/70 border-white/30">PDF</Badge>
+                    <Badge variant="outline" className="text-white/70 border-white/30">DOCX</Badge>
+                    <Badge variant="outline" className="text-white/70 border-white/30">XLSX</Badge>
+                    <Badge variant="outline" className="text-white/70 border-white/30">PNG</Badge>
+                    <Badge variant="outline" className="text-white/70 border-white/30">JPG</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Review Process */}
+              <Card className="bg-white/10 border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-[#00AFE6]" />
+                    Review Process
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-3 text-sm text-white/80">
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-[#00AFE6] text-white rounded-full flex items-center justify-center text-xs font-bold">1</div>
+                      <div>
+                        <p className="font-medium text-white">Initial Review</p>
+                        <p className="text-white/70">Within 3-5 business days</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-[#00AFE6] text-white rounded-full flex items-center justify-center text-xs font-bold">2</div>
+                      <div>
+                        <p className="font-medium text-white">Clinical Review</p>
+                        <p className="text-white/70">7-14 business days</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-[#00DD89] text-white rounded-full flex items-center justify-center text-xs font-bold">3</div>
+                      <div>
+                        <p className="font-medium text-white">Publication</p>
+                        <p className="text-white/70">2-3 business days after approval</p>
+                      </div>
+                    </div>
+                  </div>
+                  <Alert className="bg-[#00AFE6]/10 border-[#00AFE6]/30">
+                    <Clock className="w-4 h-4 text-[#00AFE6]" />
+                    <AlertDescription className="text-white/90">
+                      <strong>Estimated Total Review Time: 2-3 weeks</strong>
+                    </AlertDescription>
+                  </Alert>
+                </CardContent>
+              </Card>
+
+              {/* Licensing Rules */}
+              <Card className="bg-white/10 border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Shield className="w-5 h-5 text-[#00AFE6]" />
+                    Licensing & Terms
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-2 text-sm text-white/80">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-yellow-500" />
+                      <span>Resources must be free of copyright restrictions</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-yellow-500" />
+                      <span>Must not contain personal health information (PHI)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-yellow-500" />
+                      <span>Resources will be published under Creative Commons</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-yellow-500" />
+                      <span>Must comply with Canadian health information standards</span>
+                    </div>
+                  </div>
+                  <div className="mt-4 p-3 bg-white/5 rounded-lg">
+                    <p className="text-xs text-white/70">
+                      By submitting, you confirm that you have the right to share this resource 
+                      and agree to make it available under open licensing terms.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -466,7 +603,7 @@ export default function UploadResource() {
                         name="resourceType"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Resource Type *</FormLabel>
+                            <FormLabel className="text-white/90">Document Type *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger className="bg-white/10 border-white/30 text-white">
@@ -566,7 +703,7 @@ export default function UploadResource() {
                         name="region"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Region *</FormLabel>
+                            <FormLabel className="text-white/90">Jurisdiction *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger className="bg-white/10 border-white/30 text-white">
@@ -605,6 +742,27 @@ export default function UploadResource() {
                         </FormItem>
                       )}
                     />
+
+                    <FormField
+                      control={form.control}
+                      name="tags"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white/90">Tags *</FormLabel>
+                          <FormControl>
+                            <Input 
+                              {...field}
+                              placeholder="e.g., diagnosis, cardiac, biopsy, screening, treatment"
+                              className="bg-white/10 border-white/30 text-white placeholder-white/50"
+                            />
+                          </FormControl>
+                          <p className="text-sm text-white/60">
+                            Enter relevant keywords separated by commas to help others find this resource
+                          </p>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </CardContent>
                 </Card>
 
@@ -613,7 +771,7 @@ export default function UploadResource() {
                   <CardHeader>
                     <CardTitle className="text-white flex items-center gap-2">
                       <UserCheck className="w-5 h-5 text-[#00AFE6]" />
-                      Contributor Information (Optional)
+                      Contributor Information *
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -623,11 +781,11 @@ export default function UploadResource() {
                         name="submittedBy"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Name</FormLabel>
+                            <FormLabel className="text-white/90">Name *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                placeholder="Your name"
+                                placeholder="Your full name"
                                 className="bg-white/10 border-white/30 text-white placeholder-white/50"
                               />
                             </FormControl>
@@ -641,11 +799,11 @@ export default function UploadResource() {
                         name="submitterRole"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90">Role/Title</FormLabel>
+                            <FormLabel className="text-white/90">Role/Title *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                placeholder="e.g., Cardiologist, Researcher"
+                                placeholder="e.g., Cardiologist, Researcher, Nurse"
                                 className="bg-white/10 border-white/30 text-white placeholder-white/50"
                               />
                             </FormControl>
@@ -659,11 +817,11 @@ export default function UploadResource() {
                         name="submitterOrganization"
                         render={({ field }) => (
                           <FormItem className="md:col-span-2">
-                            <FormLabel className="text-white/90">Organization</FormLabel>
+                            <FormLabel className="text-white/90">Organization *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                placeholder="e.g., Toronto General Hospital"
+                                placeholder="e.g., Toronto General Hospital, University of Toronto"
                                 className="bg-white/10 border-white/30 text-white placeholder-white/50"
                               />
                             </FormControl>
@@ -741,6 +899,41 @@ export default function UploadResource() {
                           </FormItem>
                         )}
                       />
+
+                      <FormField
+                        control={form.control}
+                        name="editorialCharter"
+                        render={({ field }) => (
+                          <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                                className="border-white/30"
+                              />
+                            </FormControl>
+                            <div className="space-y-1 leading-none">
+                              <FormLabel className="text-white/90">
+                                I acknowledge the Editorial Charter *
+                              </FormLabel>
+                              <p className="text-sm text-white/60">
+                                I have reviewed and agree to the{' '}
+                                <a 
+                                  href="/editorial-charter" 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-[#00AFE6] hover:text-[#00DD89] underline transition-colors"
+                                >
+                                  Editorial Charter
+                                  <ExternalLink className="w-3 h-3 ml-1 inline" />
+                                </a>
+                                {' '}and submission guidelines.
+                              </p>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
                   </CardContent>
                 </Card>
@@ -760,7 +953,7 @@ export default function UploadResource() {
                     ) : (
                       <>
                         <Check className="w-4 h-4 mr-2" />
-                        Submit for Review
+                        Submit Your Clinical Tool
                       </>
                     )}
                   </Button>

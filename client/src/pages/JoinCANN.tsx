@@ -195,7 +195,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Overview Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25">
+      <section className="py-16 bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-16">
@@ -292,7 +292,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25">
+      <section className="py-16 bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -336,7 +336,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Join Section */}
-      <section className="py-16 bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25">
+      <section className="py-16 bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -395,7 +395,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Login Section */}
-      <section className="py-16 bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25">
+      <section className="py-16 bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -452,7 +452,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Resources Section */}
-      <section className="py-16 bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25">
+      <section className="py-16 bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -544,7 +544,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Governance Section */}
-      <section className="py-16 bg-gradient-to-br from-indigo-50/95 to-blue-50/95 dark:from-indigo-900/25 dark:to-blue-900/25">
+      <section className="py-16 bg-gradient-to-br from-indigo-50/95 to-blue-50/95 dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">

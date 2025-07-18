@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Heart, Instagram, Linkedin, Twitter, Facebook, MapPin, Phone, Mail, FileText, Users, Calendar, Search, Globe, Shield, BookOpen, ExternalLink } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import casLogo from '@assets/image 1_1750236540297.png';
 
 export default function Footer() {
   const { language, setLanguage } = useLanguage();
@@ -63,40 +64,11 @@ export default function Footer() {
                 viewport={{ once: true }}
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center shadow-lg p-2">
-                    <svg 
-                      viewBox="0 0 100 100" 
-                      className="w-full h-full text-white"
-                      fill="currentColor"
-                    >
-                      {/* Medical cross with molecule structure */}
-                      <g>
-                        {/* Main cross */}
-                        <rect x="42" y="25" width="16" height="50" rx="2" />
-                        <rect x="25" y="42" width="50" height="16" rx="2" />
-                        
-                        {/* Molecular structure overlay */}
-                        <circle cx="30" cy="30" r="3" fillOpacity="0.8" />
-                        <circle cx="50" cy="20" r="2.5" fillOpacity="0.7" />
-                        <circle cx="70" cy="30" r="3" fillOpacity="0.8" />
-                        <circle cx="80" cy="50" r="2.5" fillOpacity="0.7" />
-                        <circle cx="70" cy="70" r="3" fillOpacity="0.8" />
-                        <circle cx="50" cy="80" r="2.5" fillOpacity="0.7" />
-                        <circle cx="30" cy="70" r="3" fillOpacity="0.8" />
-                        <circle cx="20" cy="50" r="2.5" fillOpacity="0.7" />
-                        
-                        {/* Connecting lines */}
-                        <line x1="30" y1="30" x2="45" y2="35" stroke="currentColor" strokeWidth="1" opacity="0.6" />
-                        <line x1="55" y1="35" x2="70" y2="30" stroke="currentColor" strokeWidth="1" opacity="0.6" />
-                        <line x1="70" y1="30" x2="75" y2="45" stroke="currentColor" strokeWidth="1" opacity="0.6" />
-                        <line x1="75" y1="55" x2="70" y2="70" stroke="currentColor" strokeWidth="1" opacity="0.6" />
-                        <line x1="70" y1="70" x2="55" y2="75" stroke="currentColor" strokeWidth="1" opacity="0.6" />
-                        <line x1="45" y1="75" x2="30" y2="70" stroke="currentColor" strokeWidth="1" opacity="0.6" />
-                        <line x1="30" y1="70" x2="25" y2="55" stroke="currentColor" strokeWidth="1" opacity="0.6" />
-                        <line x1="25" y1="45" x2="30" y2="30" stroke="currentColor" strokeWidth="1" opacity="0.6" />
-                      </g>
-                    </svg>
-                  </div>
+                  <img 
+                    src={casLogo} 
+                    alt="Canadian Amyloidosis Society"
+                    className="h-14 w-14 rounded-2xl shadow-lg"
+                  />
                   <div>
                     <span className="text-2xl font-bold font-rosarivo text-white">CAS</span>
                     <p className="text-white/70 text-sm">Canadian Amyloidosis Society</p>

@@ -23,11 +23,11 @@ const translations = {
     'nav.getHelp': 'Get Help',
     
     // Hero Section
-    'hero.badge': 'Transforming Amyloidosis Care in Canada',
+    'hero.badge': 'Clinical Excellence Platform',
     'hero.title.canadian': 'Canadian',
     'hero.title.amyloidosis': 'Amyloidosis',
     'hero.title.society': 'Society',
-    'hero.subtitle': 'Accelerating awareness, diagnosis, and care',
+    'hero.subtitle': 'Advancing evidence-based amyloidosis care through clinical excellence, professional collaboration, and structured knowledge sharing.',
     'hero.getStarted': 'Get Started',
     'hero.learnMore': 'Learn More',
     
@@ -449,11 +449,11 @@ const translations = {
     'nav.getHelp': 'Obtenir de l\'aide',
     
     // Hero Section
-    'hero.badge': 'Transformer les soins de l\'amylose au Canada',
+    'hero.badge': 'Plateforme d\'Excellence Clinique',
     'hero.title.canadian': 'Société',
     'hero.title.amyloidosis': 'Canadienne',
     'hero.title.society': 'd\'Amylose',
-    'hero.subtitle': 'Accélérer la sensibilisation, le diagnostic et les soins',
+    'hero.subtitle': 'Faire progresser les soins d\'amylose fondés sur des preuves grâce à l\'excellence clinique, la collaboration professionnelle et le partage structuré des connaissances.',
     'hero.getStarted': 'Commencer',
     'hero.learnMore': 'En savoir plus',
     

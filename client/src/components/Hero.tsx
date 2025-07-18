@@ -104,15 +104,42 @@ export default function Hero() {
               <span className="block">{t('hero.title.society')}</span>
             </motion.h1>
 
-            {/* Subtitle */}
+            {/* Clinician-focused subtitle */}
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-6 max-w-4xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
             >
-{t('hero.subtitle')}
+              {t('hero.subtitle')}
             </motion.p>
+
+            {/* Clinical Impact Metrics */}
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.8 }}
+            >
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
+                  6 weeks
+                </div>
+                <div className="text-sm text-white/80 mt-1">Average diagnostic time reduction</div>
+              </div>
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
+                  350+
+                </div>
+                <div className="text-sm text-white/80 mt-1">Healthcare professionals</div>
+              </div>
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
+                  1,400+
+                </div>
+                <div className="text-sm text-white/80 mt-1">Patients reached</div>
+              </div>
+            </motion.div>
 
             {/* Enhanced action buttons */}
             <motion.div

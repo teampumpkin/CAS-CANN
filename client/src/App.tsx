@@ -34,6 +34,7 @@ const OtherAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/OtherAmylo
 const CANN = lazy(() => import("@/pages/CANN"));
 const JoinCANN = lazy(() => import("@/pages/JoinCANN"));
 const AccessibilityStatement = lazy(() => import("@/pages/AccessibilityStatement"));
+const ContributorPortal = lazy(() => import("@/pages/ContributorPortal"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 // Loading component
@@ -69,6 +70,7 @@ function Router() {
         <Route path="/cann" component={CANN} />
         <Route path="/join-cann" component={JoinCANN} />
         <Route path="/accessibility" component={AccessibilityStatement} />
+        <Route path="/contributor-portal" component={ContributorPortal} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

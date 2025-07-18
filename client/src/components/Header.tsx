@@ -14,13 +14,14 @@ export default function Header() {
 
   const navItems = [
     {
-      name: t('nav.about'),
-      href: '#about',
+      name: 'Clinical Tools',
+      href: '#clinical-tools',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'About CAS', href: '/about' },
-        { name: 'About Amyloidosis', href: '/about-amyloidosis' },
-        { name: 'Governance & Strategy', href: '/governance' },
+        { name: 'Diagnostic Pathways', href: '/diagnostic-pathways' },
+        { name: 'Treatment Protocols', href: '/treatment-protocols' },
+        { name: 'Clinical Guidelines', href: '/clinical-guidelines' },
+        { name: 'Assessment Tools', href: '/assessment-tools' },
       ]
     },
     {
@@ -29,19 +30,31 @@ export default function Header() {
       hasDropdown: true,
       dropdownItems: [
         { name: 'Resource Library', href: '/resources' },
-        { name: 'Directory - Find Support', href: '/directory' },
-        { name: 'Upload Resource', href: '/upload-resource' },
+        { name: 'Healthcare Directory', href: '/directory' },
+        { name: 'Contribute Resource', href: '/upload-resource' },
+        { name: 'Evidence Base', href: '/evidence-base' },
       ]
     },
     {
-      name: t('nav.community'),
-      href: '#get-involved',
+      name: 'Professional Network',
+      href: '#professional',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'Get Involved', href: '/get-involved' },
-        { name: 'Join CAS', href: '/join' },
-        { name: 'Join CANN', href: '/join-cann' },
-        { name: 'Events', href: '/get-involved' },
+        { name: 'Join Professional Network', href: '/join-cas' },
+        { name: 'CANN Nursing Network', href: '/join-cann' },
+        { name: 'Contributor Portal', href: '/contributor-portal' },
+        { name: 'Peer Consultation', href: '/peer-consultation' },
+      ]
+    },
+    {
+      name: t('nav.about'),
+      href: '#about',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'About CAS', href: '/about' },
+        { name: 'Clinical Amyloidosis', href: '/about-amyloidosis' },
+        { name: 'Governance Documents', href: '/governance' },
+        { name: 'Research & Publications', href: '/research' },
       ]
     },
     {

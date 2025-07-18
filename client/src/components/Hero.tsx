@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { MapPin, Upload, BookOpen, Users } from 'lucide-react';
-import heroBackgroundImage from '@assets/shutterstock_2324709287_1750240360296.jpg';
+import heroBackgroundImage from '@assets/shutterstock_2066097218_1752824393843.jpg';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Hero() {
@@ -21,7 +21,7 @@ export default function Hero() {
         <div className="absolute inset-0">
           <img 
             src={heroBackgroundImage}
-            alt="Digital heart visualization representing cardiac amyloidosis research" 
+            alt="Neural network visualization representing amyloidosis research and treatment" 
             className="w-full h-full object-cover"
           />
           {/* Sophisticated overlay for text readability and brand enhancement */}

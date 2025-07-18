@@ -23,6 +23,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ Applied consistent theme-aware styling throughout all interactive elements
 - ✅ Maintained brand color integration (#00AFE6 and #00DD89) across both themes
 - ✅ Increased map section header text size from 30px to 48px for better visibility and prominence
+- ✅ Updated hero section background image to neural network visualization for better medical relevance to amyloidosis
 
 ## Recent Changes
 

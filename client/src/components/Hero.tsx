@@ -159,14 +159,15 @@ export default function Hero() {
                 <motion.a
                   key={tile.label}
                   href={tile.href}
-                  className="group relative overflow-hidden w-full max-w-[200px]"
+                  className="group relative overflow-hidden w-full max-w-[200px] cursor-pointer"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.4 + index * 0.2 }}
-                  whileHover={{ y: -12, scale: 1.05 }}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {/* Enhanced Glass morphism card */}
-                  <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-white/2 backdrop-blur-2xl rounded-3xl p-6 border border-white/20 transition-all duration-700 group-hover:bg-gradient-to-br group-hover:from-white/15 group-hover:via-white/8 group-hover:to-white/3 group-hover:border-white/40 group-hover:shadow-2xl group-hover:shadow-[#00AFE6]/20 overflow-hidden w-full h-full min-h-[160px]">
+                  {/* Enhanced Button-style card */}
+                  <div className="relative bg-gradient-to-br from-white/15 via-white/8 to-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/30 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#00AFE6]/20 group-hover:via-[#00DD89]/15 group-hover:to-[#00AFE6]/10 group-hover:border-[#00AFE6]/50 group-hover:shadow-xl group-hover:shadow-[#00AFE6]/30 overflow-hidden w-full h-full min-h-[160px] group-active:transform group-active:scale-95">
                     
                     {/* Dynamic Mesh Background */}
                     <div className="absolute inset-0 opacity-20">
@@ -176,7 +177,7 @@ export default function Hero() {
                     </div>
                     
                     {/* Animated border gradient */}
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/0 via-[#00DD89]/0 to-[#00AFE6]/0 group-hover:from-[#00AFE6]/60 group-hover:via-[#00DD89]/60 group-hover:to-[#00AFE6]/60 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 blur-sm" />
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/0 via-[#00DD89]/0 to-[#00AFE6]/0 group-hover:from-[#00AFE6]/80 group-hover:via-[#00DD89]/80 group-hover:to-[#00AFE6]/80 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm" />
                     
                     {/* Enhanced shimmer effect */}
                     <div className="absolute inset-0 rounded-3xl overflow-hidden">
@@ -193,11 +194,11 @@ export default function Hero() {
                     {/* Content */}
                     <div className="relative z-10 text-center">
                       {/* Enhanced icon container */}
-                      <div className="relative mx-auto mb-4 w-14 h-14 group-hover:scale-125 group-hover:-rotate-6 transition-all duration-500">
+                      <div className="relative mx-auto mb-4 w-16 h-16 group-hover:scale-110 transition-all duration-300">
                         {/* Main icon background */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl shadow-lg group-hover:shadow-2xl group-hover:shadow-[#00AFE6]/50 transition-all duration-300" />
                         {/* Glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl blur-lg opacity-40 group-hover:opacity-80 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl blur-md opacity-50 group-hover:opacity-90 transition-opacity duration-300" />
                         {/* Pulse rings */}
                         <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl opacity-0 group-hover:opacity-20 group-hover:scale-150 transition-all duration-700" />
                         <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl opacity-0 group-hover:opacity-10 group-hover:scale-200 transition-all duration-1000" />
@@ -208,7 +209,7 @@ export default function Hero() {
                       </div>
                       
                       {/* Enhanced title */}
-                      <h3 className="text-white font-bold text-sm mb-2 group-hover:text-white/95 transition-all duration-300 group-hover:scale-105 transform font-rosarivo">
+                      <h3 className="text-white font-bold text-base mb-2 group-hover:text-white transition-all duration-300 font-rosarivo">
                         {tile.label}
                       </h3>
                       
@@ -220,9 +221,14 @@ export default function Hero() {
                         {index === 3 && "Access educational resources"}
                       </p>
                       
-                      {/* Progress indicator */}
-                      <div className="mt-4 h-0.5 bg-white/10 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        <div className="h-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full transform -translate-x-full group-hover:translate-x-0 transition-transform duration-1000 ease-out" />
+                      {/* Button indicator */}
+                      <div className="mt-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="flex items-center gap-1 text-[#00AFE6] font-medium text-xs">
+                          <span>Click to explore</span>
+                          <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </div>
                       </div>
                     </div>
 

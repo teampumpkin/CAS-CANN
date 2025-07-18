@@ -478,6 +478,7 @@ const translations = {
     'about.badge': 'Information Médicale',
     'about.title.what': 'Qu\'est-ce que l\'',
     'about.title.amyloidosis': 'Amylose',
+
     'about.subtitle': 'L\'amylose est une maladie rare aux conséquences qui changent la vie—mais une détection précoce peut considérablement améliorer les résultats. La Société Canadienne d\'Amylose construit un hub national de confiance pour les cliniciens, chercheurs et familles cherchant des réponses.',
     'about.description': 'L\'amylose est une condition rare mais sérieuse où des protéines mal repliées (amyloïde) s\'accumulent dans les organes et tissus à travers le corps. Comprendre les différents types, reconnaître les symptômes précoces et accéder aux soins spécialisés sont cruciaux pour gérer cette condition efficacement.',
     'about.earlyDetection': 'La Détection Précoce Sauve des Vies',
@@ -594,10 +595,15 @@ const translations = {
     'spotlights.diagnosticImprovement': 'Amélioration Diagnostique',
     
     // About Page
-    'about.hero.badge': 'À Propos de SCA',
+    'about.hero.badge': 'À propos de la SCA',
     'about.hero.title': 'Société Canadienne d\'Amylose',
+    'about.hero.title.connecting': 'Connecter',
+    'about.hero.title.healthcare': 'les Soins de Santé',
+    'about.hero.title.canada': 'À Travers le Canada',
     'about.hero.subtitle': 'Construire une plateforme nationale pour le soutien de la pratique clinique',
     'about.hero.description': 'Fondée par des professionnels de la santé pour des professionnels de la santé. Nous unissons cliniciens, chercheurs et institutions pour faire progresser les soins d\'amylose grâce à la collaboration fondée sur des preuves.',
+    'about.hero.ourMission': 'Notre Mission',
+    'about.hero.getInvolved': 'Participez',
     'about.hero.stats.professionals': 'Professionnels de la Santé',
     'about.hero.stats.institutions': 'Institutions Partenaires',
     'about.hero.stats.resources': 'Ressources Cliniques',

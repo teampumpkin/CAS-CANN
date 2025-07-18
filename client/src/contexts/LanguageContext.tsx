@@ -117,6 +117,13 @@ const translations = {
     'directory.canadaWide': 'Canada-Wide Coverage',
     'directory.connectingHealthcare': 'Connecting healthcare across the nation',
     
+    // Map Legend
+    'map.legend.title': 'Legend',
+    'map.legend.hospitals': 'Hospitals',
+    'map.legend.specialty': 'Specialty Centers',
+    'map.legend.research': 'Research Centers',
+    'map.legend.clinics': 'Clinics',
+    
     // Quick Links Section
     'quickLinks.badge': 'Quick Access',
     'quickLinks.title.essential': 'Essential',
@@ -140,6 +147,16 @@ const translations = {
     'quickLinks.clinicalTrials': 'Clinical Trials',
     'quickLinks.clinicalTrialsDesc': 'Research participation opportunities',
     'quickLinks.explore': 'Explore',
+    'quickLinks.findSpecialists': 'Find Specialists',
+    'quickLinks.findSpecialistsDesc': 'Locate amyloidosis specialists in your area',
+    'quickLinks.getInvolved': 'Get Involved',
+    'quickLinks.getInvolvedDesc': 'Join our community and make a difference',
+    'quickLinks.accessNow': 'Access Now',
+    'quickLinks.events': 'Events',
+    'quickLinks.eventsDesc': 'Upcoming events and meetings',
+    'quickLinks.contactUs': 'Contact Us',
+    'quickLinks.contactUsDesc': 'Get in touch with our team',
+    'quickLinks.available': 'Available',
     
     // Featured Spotlights Section
     'spotlights.badge': 'Featured',
@@ -223,6 +240,17 @@ const translations = {
     'about.partnerships.viewAll': 'View All Partnerships',
     'about.joinNetwork': 'Join Our Network',
     'about.getInvolved': 'Get Involved',
+    
+    // Modal Translations
+    'modal.aboutThisCenter': 'About This Center',
+    'modal.specialties': 'Specialties',
+    'modal.services': 'Services',
+    'modal.contactInformation': 'Contact Information',
+    'modal.established': 'Established',
+    'modal.certifications': 'Certifications',
+    'modal.callNow': 'Call Now',
+    'modal.sendEmail': 'Send Email',
+    'modal.visitWebsite': 'Visit Website',
     'about.exploreResources': 'Explore Resources',
     'about.downloadDocument': 'Download Document',
     'about.viewDocument': 'View Document',
@@ -582,6 +610,13 @@ const translations = {
     'directory.canadaWide': 'Couverture Pancanadienne',
     'directory.connectingHealthcare': 'Connecter les soins de santé à travers la nation',
     
+    // Map Legend
+    'map.legend.title': 'Légende',
+    'map.legend.hospitals': 'Hôpitaux',
+    'map.legend.specialty': 'Centres Spécialisés',
+    'map.legend.research': 'Centres de Recherche',
+    'map.legend.clinics': 'Cliniques',
+    
     // Quick Links Section
     'quickLinks.badge': 'Accès Rapide',
     'quickLinks.title.essential': 'Ressources',
@@ -605,6 +640,16 @@ const translations = {
     'quickLinks.clinicalTrials': 'Essais Cliniques',
     'quickLinks.clinicalTrialsDesc': 'Opportunités de participation à la recherche',
     'quickLinks.explore': 'Explorer',
+    'quickLinks.findSpecialists': 'Trouver des Spécialistes',
+    'quickLinks.findSpecialistsDesc': 'Localiser des spécialistes de l\'amylose dans votre région',
+    'quickLinks.getInvolved': 'S\'impliquer',
+    'quickLinks.getInvolvedDesc': 'Rejoindre notre communauté et faire une différence',
+    'quickLinks.accessNow': 'Accéder Maintenant',
+    'quickLinks.events': 'Événements',
+    'quickLinks.eventsDesc': 'Événements et réunions à venir',
+    'quickLinks.contactUs': 'Nous Contacter',
+    'quickLinks.contactUsDesc': 'Entrer en contact avec notre équipe',
+    'quickLinks.available': 'Disponible',
     
     // Featured Spotlights Section
     'spotlights.badge': 'En Vedette',
@@ -688,6 +733,17 @@ const translations = {
     'about.partnerships.viewAll': 'Voir Tous les Partenariats',
     'about.joinNetwork': 'Rejoignez Notre Réseau',
     'about.getInvolved': 'S\'Impliquer',
+    
+    // Modal Translations
+    'modal.aboutThisCenter': 'À Propos de ce Centre',
+    'modal.specialties': 'Spécialités',
+    'modal.services': 'Services',
+    'modal.contactInformation': 'Informations de Contact',
+    'modal.established': 'Établi',
+    'modal.certifications': 'Certifications',
+    'modal.callNow': 'Appeler Maintenant',
+    'modal.sendEmail': 'Envoyer un Courriel',
+    'modal.visitWebsite': 'Visiter le Site Web',
     'about.exploreResources': 'Explorer les Ressources',
     'about.downloadDocument': 'Télécharger le Document',
     'about.viewDocument': 'Voir le Document',

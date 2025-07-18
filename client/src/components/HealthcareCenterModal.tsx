@@ -15,13 +15,8 @@ export default function HealthcareCenterModal({ center, isOpen, onClose }: Healt
   if (!center) return null;
 
   const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'hospital': return 'from-blue-500 to-blue-700';
-      case 'clinic': return 'from-green-500 to-green-700';
-      case 'research': return 'from-purple-500 to-purple-700';
-      case 'specialty': return 'from-orange-500 to-orange-700';
-      default: return 'from-gray-500 to-gray-700';
-    }
+    // All types now use brand colors for consistency
+    return 'from-[#00AFE6] to-[#00DD89]';
   };
 
   const getTypeIcon = (type: string) => {

@@ -185,16 +185,16 @@ export default function Directory() {
               </motion.p>
               
               <motion.div
-                className="bg-gradient-to-r from-blue-50/80 to-cyan-50/80 dark:from-blue-900/20 dark:to-cyan-900/20 backdrop-blur-xl rounded-2xl p-6 border border-blue-200/50 dark:border-blue-400/30 mb-8"
+                className="bg-gradient-to-r from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5 }}
               >
                 <div className="flex items-start gap-4">
-                  <UserCheck className="w-6 h-6 text-blue-500 flex-shrink-0 mt-1" />
+                  <UserCheck className="w-6 h-6 text-[#00AFE6] flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200 mb-2">Professional Directory</h3>
-                    <p className="text-blue-800 dark:text-blue-300 text-sm leading-relaxed">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Professional Directory</h3>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                       Vetted healthcare providers specializing in amyloidosis diagnosis and treatment, including referral requirements and program details.
                     </p>
                   </div>
@@ -245,31 +245,31 @@ export default function Directory() {
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Directory Statistics</h3>
                   
                   <div className="grid grid-cols-2 gap-6 mb-8">
-                    <div className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl p-6 border border-[#00AFE6]/30">
+                    <div className="bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                       <Building2 className="w-8 h-8 text-[#00AFE6] mx-auto mb-4" />
                       <div className="text-3xl font-bold text-[#00AFE6] mb-2">{healthcareCenters.length}</div>
                       <div className="text-sm text-gray-600 dark:text-white/60">Treatment Centers</div>
                     </div>
                     
-                    <div className="bg-gradient-to-br from-green-50/90 to-emerald-50/90 dark:from-green-900/30 dark:to-emerald-900/30 rounded-2xl p-6 border border-green-200/50 dark:border-green-400/30">
-                      <Heart className="w-8 h-8 text-green-500 mx-auto mb-4" />
-                      <div className="text-3xl font-bold text-green-500 mb-2">13</div>
-                      <div className="text-sm text-green-700 dark:text-green-300">Provinces/Territories</div>
+                    <div className="bg-gradient-to-br from-[#00DD89]/8 to-[#00AFE6]/8 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 rounded-2xl p-6 border border-[#00DD89]/20 dark:border-[#00DD89]/30">
+                      <Heart className="w-8 h-8 text-[#00DD89] mx-auto mb-4" />
+                      <div className="text-3xl font-bold text-[#00DD89] mb-2">13</div>
+                      <div className="text-sm text-gray-600 dark:text-white/60">Provinces/Territories</div>
                     </div>
                   </div>
                 </div>
                 
                 <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200/50 dark:border-gray-400/30">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-500 mb-1">95%</div>
+                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1">95%</div>
                     <div className="text-xs text-gray-600 dark:text-white/60">Coverage Rate</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-orange-500 mb-1">24/7</div>
+                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-1">24/7</div>
                     <div className="text-xs text-gray-600 dark:text-white/60">Support Available</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-red-500 mb-1">3.2K+</div>
+                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1">3.2K+</div>
                     <div className="text-xs text-gray-600 dark:text-white/60">Patients Served</div>
                   </div>
                 </div>
@@ -399,12 +399,7 @@ export default function Directory() {
                     {/* Header with metadata */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                          center.type === 'hospital' ? 'bg-gradient-to-r from-blue-500 to-cyan-500' :
-                          center.type === 'clinic' ? 'bg-gradient-to-r from-green-500 to-emerald-500' :
-                          center.type === 'research' ? 'bg-gradient-to-r from-purple-500 to-violet-500' :
-                          'bg-gradient-to-r from-orange-500 to-red-500'
-                        }`}>
+                        <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                           {center.type === 'hospital' ? <Hospital className="w-6 h-6 text-white" /> :
                            center.type === 'clinic' ? <Stethoscope className="w-6 h-6 text-white" /> :
                            center.type === 'research' ? <Microscope className="w-6 h-6 text-white" /> :

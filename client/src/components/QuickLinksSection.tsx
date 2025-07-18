@@ -105,19 +105,7 @@ export default function QuickLinksSection() {
             >
               <div className="group relative h-full overflow-hidden">
                 {/* Main Card Container */}
-                <div className={`relative h-full backdrop-blur-2xl rounded-3xl border transition-all duration-700 group-hover:shadow-2xl overflow-hidden ${
-                  index === 0 
-                    ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-200/60 dark:border-blue-400/30 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/35 dark:hover:to-cyan-800/35 hover:border-blue-300/70 dark:hover:border-blue-300/40 hover:shadow-blue-500/25 dark:hover:shadow-blue-400/20'
-                    : index === 1
-                    ? 'bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 border-emerald-200/60 dark:border-emerald-400/30 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/35 dark:hover:to-green-800/35 hover:border-emerald-300/70 dark:hover:border-emerald-300/40 hover:shadow-emerald-500/25 dark:hover:shadow-emerald-400/20'
-                    : index === 2
-                    ? 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-200/60 dark:border-purple-400/30 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/35 dark:hover:to-violet-800/35 hover:border-purple-300/70 dark:hover:border-purple-300/40 hover:shadow-purple-500/25 dark:hover:shadow-purple-400/20'
-                    : index === 3
-                    ? 'bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 border-pink-200/60 dark:border-pink-400/30 hover:from-pink-100/95 hover:to-rose-100/95 dark:hover:from-pink-800/35 dark:hover:to-rose-800/35 hover:border-pink-300/70 dark:hover:border-pink-300/40 hover:shadow-pink-500/25 dark:hover:shadow-pink-400/20'
-                    : index === 4
-                    ? 'bg-gradient-to-br from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25 border-orange-200/60 dark:border-orange-400/30 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/35 dark:hover:to-amber-800/35 hover:border-orange-300/70 dark:hover:border-orange-300/40 hover:shadow-orange-500/25 dark:hover:shadow-orange-400/20'
-                    : 'bg-gradient-to-br from-slate-50/95 to-gray-50/95 dark:from-slate-900/25 dark:to-gray-900/25 border-slate-200/60 dark:border-slate-400/30 hover:from-slate-100/95 hover:to-gray-100/95 dark:hover:from-slate-800/35 dark:hover:to-gray-800/35 hover:border-slate-300/70 dark:hover:border-slate-300/40 hover:shadow-slate-500/25 dark:hover:shadow-slate-400/20'
-                }`}>
+                <div className="relative h-full backdrop-blur-2xl rounded-3xl border transition-all duration-700 group-hover:shadow-2xl overflow-hidden bg-gradient-to-br from-[#00AFE6]/8 to-[#00DD89]/8 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
                   
                   {/* Dynamic Background Pattern */}
                   <div className="absolute inset-0 opacity-30">
@@ -154,32 +142,8 @@ export default function QuickLinksSection() {
                     
                     {/* Text Content */}
                     <div className="flex-1">
-                      <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 font-rosarivo ${
-                        index === 0 
-                          ? 'text-blue-900 dark:text-blue-100 group-hover:text-blue-800 dark:group-hover:text-blue-50'
-                          : index === 1
-                          ? 'text-emerald-900 dark:text-emerald-100 group-hover:text-emerald-800 dark:group-hover:text-emerald-50'
-                          : index === 2
-                          ? 'text-purple-900 dark:text-purple-100 group-hover:text-purple-800 dark:group-hover:text-purple-50'
-                          : index === 3
-                          ? 'text-pink-900 dark:text-pink-100 group-hover:text-pink-800 dark:group-hover:text-pink-50'
-                          : index === 4
-                          ? 'text-orange-900 dark:text-orange-100 group-hover:text-orange-800 dark:group-hover:text-orange-50'
-                          : 'text-slate-900 dark:text-slate-100 group-hover:text-slate-800 dark:group-hover:text-slate-50'
-                      }`}>{link.title}</h3>
-                      <p className={`leading-relaxed text-sm transition-colors duration-300 ${
-                        index === 0 
-                          ? 'text-blue-700 dark:text-blue-300 group-hover:text-blue-600 dark:group-hover:text-blue-200'
-                          : index === 1
-                          ? 'text-emerald-700 dark:text-emerald-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-200'
-                          : index === 2
-                          ? 'text-purple-700 dark:text-purple-300 group-hover:text-purple-600 dark:group-hover:text-purple-200'
-                          : index === 3
-                          ? 'text-pink-700 dark:text-pink-300 group-hover:text-pink-600 dark:group-hover:text-pink-200'
-                          : index === 4
-                          ? 'text-orange-700 dark:text-orange-300 group-hover:text-orange-600 dark:group-hover:text-orange-200'
-                          : 'text-slate-700 dark:text-slate-300 group-hover:text-slate-600 dark:group-hover:text-slate-200'
-                      }`}>
+                      <h3 className="text-xl font-bold mb-3 transition-colors duration-300 font-rosarivo text-gray-900 dark:text-white group-hover:text-gray-800 dark:group-hover:text-gray-100">{link.title}</h3>
+                      <p className="leading-relaxed text-sm transition-colors duration-300 text-gray-700 dark:text-gray-300 group-hover:text-gray-600 dark:group-hover:text-gray-200">
                         {link.description}
                       </p>
                     </div>

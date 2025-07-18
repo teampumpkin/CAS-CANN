@@ -145,7 +145,7 @@ export default function Header() {
                       style={{ zIndex: 9999 }}
                     >
                       <motion.div
-                        className="bg-gray-900/98 backdrop-blur-xl rounded-2xl border border-[#00AFE6]/30 shadow-2xl shadow-[#00AFE6]/10 py-3 overflow-hidden relative"
+                        className="bg-gray-900 backdrop-blur-xl rounded-2xl border border-[#00AFE6]/30 shadow-2xl shadow-[#00AFE6]/10 py-3 overflow-hidden relative"
                         initial={{ opacity: 0, y: -20, scale: 0.9 }}
                         animate={{ 
                           opacity: activeDropdown === item.name ? 1 : 0, 

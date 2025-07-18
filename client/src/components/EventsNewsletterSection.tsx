@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, Mail, Video, Heart, Users, ArrowRight } from 'lucide-react';
+import { Calendar, Mail, Video, Heart, Users, ArrowRight, UserCheck, Globe, Star, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import logoImage from '@assets/image 1_1750236540297.png';
 
@@ -188,10 +188,10 @@ export default function EventsNewsletterSection() {
               {/* Stats with animated counters */}
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { value: 5000, suffix: '+', label: t('events.stats.subscribers'), icon: '📧' },
-                  { value: 50, suffix: '+', label: t('events.stats.eventsYear'), icon: '📅' },
-                  { value: 13, suffix: '', label: t('events.stats.provinces'), icon: '🇨🇦' },
-                  { value: 95, suffix: '%', label: t('events.stats.satisfaction'), icon: '⭐' }
+                  { value: 5000, suffix: '+', label: t('events.stats.subscribers'), icon: Mail, color: 'from-blue-500 to-cyan-500', bgColor: 'from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20' },
+                  { value: 50, suffix: '+', label: t('events.stats.eventsYear'), icon: Calendar, color: 'from-emerald-500 to-green-500', bgColor: 'from-emerald-50/90 to-green-50/90 dark:from-emerald-900/20 dark:to-green-900/20' },
+                  { value: 13, suffix: '', label: t('events.stats.provinces'), icon: MapPin, color: 'from-purple-500 to-violet-500', bgColor: 'from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20' },
+                  { value: 95, suffix: '%', label: t('events.stats.satisfaction'), icon: Star, color: 'from-amber-500 to-orange-500', bgColor: 'from-amber-50/90 to-orange-50/90 dark:from-amber-900/20 dark:to-orange-900/20' }
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -201,18 +201,44 @@ export default function EventsNewsletterSection() {
                     transition={{ duration: 0.6, delay: 0.1 * index }}
                     whileHover={{ y: -5 }}
                   >
-                    <div className="backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
-                      <div className="text-2xl mb-2">{stat.icon}</div>
-                      <div className="text-3xl font-bold mb-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                        <motion.span
-                          initial={{ opacity: 0 }}
-                          whileInView={{ opacity: 1 }}
-                          transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
-                        >
-                          {stat.value}{stat.suffix}
-                        </motion.span>
+                    <div className={`relative backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl bg-gradient-to-br ${stat.bgColor} border-white/30 dark:border-white/20 hover:border-white/50 dark:hover:border-white/30 hover:shadow-2xl overflow-hidden`}>
+                      {/* Background gradient overlay */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl`} />
+                      
+                      {/* Animated accent line */}
+                      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                      
+                      {/* Floating particles */}
+                      <div className="absolute inset-0">
+                        <div className={`absolute top-2 right-2 w-1 h-1 bg-gradient-to-r ${stat.color} rounded-full opacity-0 group-hover:opacity-60 transition-all duration-500 group-hover:animate-pulse`} />
+                        <div className={`absolute bottom-3 left-3 w-0.5 h-0.5 bg-gradient-to-r ${stat.color} rounded-full opacity-0 group-hover:opacity-40 transition-all duration-700 group-hover:animate-pulse`} style={{ animationDelay: '0.3s' }} />
                       </div>
-                      <div className="text-sm font-medium text-gray-700 dark:text-gray-300">{stat.label}</div>
+                      
+                      <div className="relative z-10">
+                        {/* Enhanced icon */}
+                        <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                          {index === 0 && <Mail className="w-6 h-6 text-white" />}
+                          {index === 1 && <Calendar className="w-6 h-6 text-white" />}
+                          {index === 2 && <MapPin className="w-6 h-6 text-white" />}
+                          {index === 3 && <Star className="w-6 h-6 text-white" />}
+                        </div>
+                        
+                        {/* Value with enhanced gradient */}
+                        <div className={`text-3xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                          <motion.span
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
+                          >
+                            {stat.value}{stat.suffix}
+                          </motion.span>
+                        </div>
+                        
+                        {/* Label with enhanced styling */}
+                        <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
+                          {stat.label}
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 ))}

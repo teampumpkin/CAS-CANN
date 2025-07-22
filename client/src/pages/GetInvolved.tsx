@@ -853,9 +853,9 @@ export default function GetInvolved() {
       </section>
 
       {/* Membership Benefits */}
-      <section className="py-32 bg-gray-900 border-t border-white/10 relative overflow-hidden">
+      <section className="py-32 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Advanced Frost Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] via-transparent to-white/[0.02]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-white/[0.01] dark:via-transparent dark:to-white/[0.02]"></div>
         <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-gradient-to-r from-[#00AFE6]/3 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-gradient-to-l from-[#00DD89]/3 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.01),transparent)]"></div>
@@ -869,12 +869,12 @@ export default function GetInvolved() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 mb-8">
+              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
                 <Shield className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-white/90 font-medium">Membership</span>
+                <span className="text-gray-800 dark:text-white/90 font-medium">Membership</span>
               </div>
               <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
-                <span className="text-white">Why Join </span>
+                <span className="text-gray-800 dark:text-white">Why Join </span>
                 <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                   CAS?
                 </span>
@@ -889,14 +889,14 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,175,230,0.1)] transition-all duration-500 h-full group">
+                <Card className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,175,230,0.1)] transition-all duration-500 h-full group">
                   <CardContent className="p-10">
                     <div className="mb-8">
                       <div className="flex items-center gap-3 mb-6">
                         <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
                           <CheckCircle className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white font-rosarivo">Member Benefits</h3>
+                        <h3 className="text-2xl font-bold text-gray-800 dark:text-white font-rosarivo">Member Benefits</h3>
                       </div>
                       <div className="w-16 h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                     </div>
@@ -916,10 +916,10 @@ export default function GetInvolved() {
                           transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                           viewport={{ once: true }}
                         >
-                          <div className="w-10 h-10 bg-white/5 backdrop-blur-xl border border-white/20 rounded-xl flex items-center justify-center group-hover/item:bg-white/10 transition-all duration-300">
-                            <benefit.icon className="w-5 h-5 text-[#00AFE6] group-hover/item:text-white transition-colors duration-300" />
+                          <div className="w-10 h-10 bg-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-xl flex items-center justify-center group-hover/item:bg-blue-200/60 dark:group-hover/item:bg-white/10 transition-all duration-300">
+                            <benefit.icon className="w-5 h-5 text-[#00AFE6] group-hover/item:text-gray-700 dark:group-hover/item:text-white transition-colors duration-300" />
                           </div>
-                          <span className="text-white/80 group-hover/item:text-white transition-colors duration-300 leading-relaxed">
+                          <span className="text-gray-700 dark:text-white/80 group-hover/item:text-gray-900 dark:group-hover/item:text-white transition-colors duration-300 leading-relaxed">
                             {benefit.text}
                           </span>
                         </motion.div>
@@ -936,14 +936,14 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,221,137,0.1)] transition-all duration-500 h-full group">
+                <Card className="bg-gradient-to-br from-green-50/95 to-emerald-50/95 dark:bg-white/5 backdrop-blur-xl border border-[#00DD89]/20 dark:border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,221,137,0.1)] transition-all duration-500 h-full group">
                   <CardContent className="p-10">
                     <div className="mb-8">
                       <div className="flex items-center gap-3 mb-6">
                         <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
                           <Shield className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white font-rosarivo">Participation Notes</h3>
+                        <h3 className="text-2xl font-bold text-gray-800 dark:text-white font-rosarivo">Participation Notes</h3>
                       </div>
                       <div className="w-16 h-0.5 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full"></div>
                     </div>
@@ -956,13 +956,13 @@ export default function GetInvolved() {
                       ].map((note, index) => (
                         <motion.div
                           key={index}
-                          className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                          className="bg-green-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00DD89]/20 dark:border-white/10 rounded-2xl p-6 hover:bg-green-200/60 dark:hover:bg-white/10 hover:border-[#00DD89]/30 dark:hover:border-white/20 transition-all duration-300"
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                           viewport={{ once: true }}
                         >
-                          <p className="text-white/80 leading-relaxed">
+                          <p className="text-gray-700 dark:text-white/80 leading-relaxed">
                             {note}
                           </p>
                         </motion.div>
@@ -978,9 +978,9 @@ export default function GetInvolved() {
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <CheckCircle className="w-5 h-5 text-[#00AFE6]" />
-                        <span className="text-white font-semibold">Ready to Get Started?</span>
+                        <span className="text-gray-800 dark:text-white font-semibold">Ready to Get Started?</span>
                       </div>
-                      <p className="text-white/70 text-sm">
+                      <p className="text-gray-600 dark:text-white/70 text-sm">
                         Join our community of healthcare professionals, researchers, and advocates working together to advance amyloidosis awareness and care.
                       </p>
                     </motion.div>
@@ -993,8 +993,8 @@ export default function GetInvolved() {
       </section>
 
       {/* CANN Section */}
-      <section className="py-24 bg-gray-900 border-t border-white/10 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-emerald-50 to-green-50 dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-100/20 dark:via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="max-w-7xl mx-auto"
@@ -1011,13 +1011,13 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6 shadow-lg">
                   <Network className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="text-sm font-medium text-white/90">Professional Network</span>
+                  <span className="text-sm font-medium text-gray-800 dark:text-white/90">Professional Network</span>
                 </div>
                 
                 <h2 className="crawford-section-title mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                     Canadian Amyloidosis
                   </span>
                   <br />
@@ -1026,28 +1026,28 @@ export default function GetInvolved() {
                   </span>
                 </h2>
                 
-                <p className="text-lg text-white/70 leading-relaxed mb-8">
+                <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-8">
                   The field of amyloidosis has experienced tremendous growth in recent years. Within this multidisciplinary community, nurses play a vital role in enhancing the quality, accessibility, and coordination of healthcare services for amyloidosis patients.
                 </p>
                 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                    <p className="text-white/70">Unite amyloidosis nurses across the country through professional development</p>
+                    <p className="text-gray-600 dark:text-white/70">Unite amyloidosis nurses across the country through professional development</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                    <p className="text-white/70">Knowledge translation and best practice sharing</p>
+                    <p className="text-gray-600 dark:text-white/70">Knowledge translation and best practice sharing</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                    <p className="text-white/70">Facilitate collaboration while supporting patients with amyloidosis</p>
+                    <p className="text-gray-600 dark:text-white/70">Facilitate collaboration while supporting patients with amyloidosis</p>
                   </div>
                 </div>
                 
                 <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-2xl p-6">
-                  <h3 className="text-xl font-semibold text-white mb-3">Join the Movement</h3>
-                  <p className="text-white/80 mb-6">We invite you to join this exciting movement!</p>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Join the Movement</h3>
+                  <p className="text-gray-600 dark:text-white/80 mb-6">We invite you to join this exciting movement!</p>
                   <a href="/join-cann" className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2 inline-flex">
                     Learn About CANN
                     <ArrowRight className="w-4 h-4" />
@@ -1063,7 +1063,7 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
+                <div className="relative bg-emerald-50/80 dark:bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-[#00DD89]/20 dark:border-white/10 shadow-xl">
                   <div className="aspect-[4/5] relative">
                     <img 
                       src={healthcareProfessionalImg} 
@@ -1131,9 +1131,9 @@ export default function GetInvolved() {
       </section>
 
       {/* Events Section */}
-      <section id="events" className="py-24 bg-gray-900 border-t border-white/10 relative overflow-hidden">
+      <section id="events" className="py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Frost Background Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-white/[0.01]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-white/[0.02] dark:via-transparent dark:to-white/[0.01]"></div>
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
         
@@ -1145,30 +1145,30 @@ export default function GetInvolved() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 mb-8">
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
               <Calendar className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-white/90 font-medium">Community</span>
+              <span className="text-gray-800 dark:text-white/90 font-medium">Community</span>
             </div>
             <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
-              <span className="text-white">Events & </span>
+              <span className="text-gray-800 dark:text-white">Events & </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Community
               </span>
             </h2>
-            <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
               Join us at upcoming events and see highlights from our recent community gatherings.
             </p>
           </motion.div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
             <div className="flex justify-center mb-8">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-2 shadow-2xl inline-flex">
+              <div className="bg-gradient-to-r from-gray-100/80 to-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-2 shadow-2xl inline-flex">
                 <button
                   onClick={() => setActiveTab("overview")}
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     activeTab === "overview"
                       ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
+                      : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
                   }`}
                 >
                   Upcoming Events
@@ -1178,7 +1178,7 @@ export default function GetInvolved() {
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     activeTab === "recent"
                       ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
+                      : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
                   }`}
                 >
                   Recent Events
@@ -1188,7 +1188,7 @@ export default function GetInvolved() {
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     activeTab === "past"
                       ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
+                      : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
                   }`}
                 >
                   Past Events
@@ -1219,9 +1219,9 @@ export default function GetInvolved() {
                           </Badge>
                         </div>
                         
-                        <h3 className="text-lg font-semibold text-white mb-2">{event.title}</h3>
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{event.title}</h3>
                         
-                        <div className="space-y-2 mb-4 text-sm text-white/70">
+                        <div className="space-y-2 mb-4 text-sm text-gray-600 dark:text-white/70">
                           <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4" />
                             <span>{formatEventDate(event.date)}</span>
@@ -1236,7 +1236,7 @@ export default function GetInvolved() {
                           </div>
                         </div>
                         
-                        <p className="text-white/70 text-sm mb-6 line-clamp-3">
+                        <p className="text-gray-600 dark:text-white/70 text-sm mb-6 line-clamp-3">
                           {event.description}
                         </p>
                         
@@ -1272,17 +1272,17 @@ export default function GetInvolved() {
                       </div>
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between mb-3">
-                          <Badge variant="outline" className="text-white/70 border-white/30">
+                          <Badge variant="outline" className="text-gray-600 dark:text-white/70 border-gray-400 dark:border-white/30">
                             {formatEventDate(event.date)}
                           </Badge>
-                          <div className="flex items-center gap-1 text-sm text-white/60">
+                          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-white/60">
                             <Users className="w-4 h-4" />
                             <span>{event.attendees} attendees</span>
                           </div>
                         </div>
                         
-                        <h3 className="text-lg font-semibold text-white mb-3">{event.title}</h3>
-                        <p className="text-white/70 text-sm">{event.description}</p>
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">{event.title}</h3>
+                        <p className="text-gray-600 dark:text-white/70 text-sm">{event.description}</p>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -1311,15 +1311,15 @@ export default function GetInvolved() {
                           <Badge variant="outline" className="text-[#00AFE6] border-[#00AFE6]/30">
                             {event.type}
                           </Badge>
-                          <div className="flex items-center gap-1 text-sm text-white/60">
+                          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-white/60">
                             <Users className="w-4 h-4" />
                             <span>{event.attendees} attendees</span>
                           </div>
                         </div>
                         
-                        <h3 className="text-lg font-semibold text-white mb-2">{event.title}</h3>
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{event.title}</h3>
                         
-                        <div className="space-y-2 mb-4 text-sm text-white/70">
+                        <div className="space-y-2 mb-4 text-sm text-gray-600 dark:text-white/70">
                           <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4" />
                             <span>{formatEventDate(event.date)}</span>
@@ -1330,7 +1330,7 @@ export default function GetInvolved() {
                           </div>
                         </div>
                         
-                        <p className="text-white/70 text-sm line-clamp-3">
+                        <p className="text-gray-600 dark:text-white/70 text-sm line-clamp-3">
                           {event.description}
                         </p>
                       </CardContent>

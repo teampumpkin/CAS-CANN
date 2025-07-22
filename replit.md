@@ -10,6 +10,17 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Enhanced Hero Section Design Overhaul (July 22, 2025)
+- ✅ **AL Amyloidosis hero redesign** - Created full-screen hero with heart-themed animations, brand gradient backgrounds, and floating heart pulse elements
+- ✅ **ATTR Amyloidosis hero enhancement** - Implemented neural network-inspired design with brain icons, molecular nodes, and genetic theme branding
+- ✅ **Other/Rare Amyloidosis hero creation** - Designed molecular structure theme with multi-colored gradient patterns and research-focused elements
+- ✅ **Brand color integration** - Applied consistent #00AFE6 and #00DD89 branding throughout all hero sections with animated gradient text
+- ✅ **Interactive animations added** - Implemented floating elements, rotating molecular structures, and pulsing heart animations for engagement
+- ✅ **Enhanced typography** - Added large-scale animated gradient titles with premium badges and medical-themed iconography
+- ✅ **CTA button improvements** - Created interactive hover effects with scale animations and gradient color transitions
+- ✅ **Key statistics cards** - Added professional statistics displays with glassmorphism effects and hover animations
+- ✅ **Fixed missing imports** - Resolved ArrowRight, Users, and Heart icon compilation errors across all three amyloidosis detail pages
+
 ### Complete Sub-heading Punctuation Standardization (July 22, 2025)
 - ✅ **Comprehensive sub-heading audit completed** - Identified and catalogued exactly 47 sub-headings across entire website
 - ✅ **Sub-heading categorization established** - Organized into 4 categories: 15 hero sections, 18 section introductions, 8 feature explanations, 6 call-to-action subtitles

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Brain, AlertTriangle, Search, Target, ArrowLeft, ChevronDown, ChevronUp } from 'lucide-react';
+import { Brain, AlertTriangle, Search, Target, ArrowLeft, ChevronDown, ChevronUp, ArrowRight, Heart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import ParallaxBackground from '../../components/ParallaxBackground';

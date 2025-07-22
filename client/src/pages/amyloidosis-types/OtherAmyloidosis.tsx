@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Microscope, AlertTriangle, Search, Target, ArrowLeft } from 'lucide-react';
+import { Microscope, AlertTriangle, Search, Target, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
 import { Link } from 'wouter';
 import ParallaxBackground from '../../components/ParallaxBackground';

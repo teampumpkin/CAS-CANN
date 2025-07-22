@@ -17,7 +17,8 @@ import {
   UserPlus,
   Gift,
   Network,
-  Stethoscope
+  Stethoscope,
+  AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -123,36 +124,70 @@ const provinces = [
 const upcomingEvents = [
   {
     id: 1,
-    title: "Amyloidosis Research Symposium 2025",
-    date: "2025-08-15",
-    time: "9:00 AM - 5:00 PM",
-    location: "Toronto Convention Centre",
-    type: "Conference",
-    description: "Annual symposium bringing together leading researchers and clinicians to discuss latest advances in amyloidosis research and treatment.",
+    title: "CAS Journal Club",
+    date: "2025-09-25",
+    time: "3:00 PM - 4:00 PM MST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description: "National initiative launched May 8, 2025, fostering learning and discussion around recent research and publications in amyloidosis. One-hour virtual session designed for CAS members to deepen clinical and scientific knowledge through collaborative discussion. ✅ Confirmed session.",
     image: "/api/placeholder/400/250",
-    registrationUrl: "https://example.com/symposium-2025"
+    registrationUrl: "#",
+    confirmed: true
   },
   {
     id: 2,
-    title: "Patient & Caregiver Workshop",
-    date: "2025-07-20",
-    time: "1:00 PM - 4:00 PM",
-    location: "Virtual Event",
-    type: "Workshop",
-    description: "Interactive workshop focused on navigation tools, support resources, and connecting with other families affected by amyloidosis.",
+    title: "CANN Educational Series",
+    date: "2025-10-01",
+    time: "TBA",
+    location: "Virtual Event", 
+    type: "Educational Series",
+    description: "Organized by the Canadian Amyloidosis Nursing Network (CANN) in collaboration with the Prairie Amyloidosis Nursing Network (PANN). This educational series provides ongoing professional development opportunities for nurses and healthcare professionals engaged in amyloidosis care. Topic, speaker, and exact date to be announced in coordination with the PANN/CANN Executive Committee.",
     image: "/api/placeholder/400/250",
-    registrationUrl: "https://example.com/workshop-2025"
+    registrationUrl: "#"
   },
   {
     id: 3,
-    title: "Clinical Guidelines Update Webinar",
-    date: "2025-06-30",
-    time: "7:00 PM - 8:30 PM",
-    location: "Online",
-    type: "Webinar",
-    description: "Review of updated diagnostic and treatment guidelines for amyloidosis, featuring expert panel discussion and Q&A.",
+    title: "CAS Journal Club",
+    date: "2025-11-27",
+    time: "3:00 PM - 4:00 PM MST",
+    location: "Virtual Event",
+    type: "Journal Club", 
+    description: "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on recent amyloidosis research and publications. Registration and access details to be confirmed.",
     image: "/api/placeholder/400/250",
-    registrationUrl: "https://example.com/webinar-guidelines"
+    registrationUrl: "#"
+  },
+  {
+    id: 4,
+    title: "CAS Journal Club",
+    date: "2026-01-29",
+    time: "3:00 PM - 4:00 PM MST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description: "Virtual journal club session for CAS members continuing throughout 2026. One-hour session designed to deepen clinical and scientific knowledge through collaborative discussion of recent amyloidosis research.",
+    image: "/api/placeholder/400/250", 
+    registrationUrl: "#"
+  },
+  {
+    id: 5,
+    title: "CAS Journal Club",
+    date: "2026-04-09",
+    time: "3:00 PM - 4:00 PM MST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description: "Continuing national journal club series for CAS members. Virtual session focusing on collaborative discussion around recent research and publications in the field of amyloidosis.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "#"
+  },
+  {
+    id: 6,
+    title: "CAS Journal Club", 
+    date: "2026-06-04",
+    time: "3:00 PM - 4:00 PM MST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description: "Final scheduled session of the CAS Journal Club national initiative. One-hour virtual session for CAS members to foster learning and discussion around recent amyloidosis research and publications.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "#"
   }
 ];
 
@@ -1158,6 +1193,31 @@ export default function GetInvolved() {
             <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
               Join us at upcoming events and see highlights from our recent community gatherings.
             </p>
+            
+            {/* Event Registration Notice */}
+            <motion.div 
+              className="max-w-4xl mx-auto mt-8 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-6">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <AlertCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Registration & Access Information</h3>
+                    <div className="space-y-2 text-gray-600 dark:text-white/80 text-sm">
+                      <p><strong>CAS Journal Club:</strong> Sessions are designed for CAS members and aim to deepen clinical and scientific knowledge. Details on registration and access will be confirmed shortly - may be limited to members only.</p>
+                      <p><strong>CANN Educational Series:</strong> Historically open to healthcare professionals, but future sessions may be exclusive to CANN members. Access policy is currently under review.</p>
+                      <p><strong>Stay Updated:</strong> Please check back regularly or contact your CAS/CANN liaison for early details and registration information.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">

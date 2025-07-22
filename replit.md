@@ -10,6 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### CAS Journal Club & CANN Educational Series Events Integration (July 22, 2025)
+- ✅ **CAS Journal Club series added** - Integrated complete 5-session schedule (Sep 2025 - Jun 2026) with 3:00-4:00 PM MST timing
+- ✅ **CANN Educational Series integration** - Added October 2025 session with PANN collaboration details and professional development focus
+- ✅ **Member access notifications** - Created comprehensive registration notice explaining member-only access policies under review
+- ✅ **Event details enhancement** - Added proper categorization, virtual event locations, and detailed clinical/scientific focus descriptions
+- ✅ **Professional context emphasis** - Highlighted collaborative discussion, knowledge deepening, and continuing education objectives
+- ✅ **Contact guidance integration** - Clear instructions for users to contact CAS/CANN liaisons for early access and registration details
+- ✅ **Visual consistency maintained** - Applied existing event card styling with brand colors and professional design elements
+
 ### Enhanced Hero Section Design Overhaul (July 22, 2025)
 - ✅ **AL Amyloidosis hero redesign** - Created full-screen hero with heart-themed animations, brand gradient backgrounds, and floating heart pulse elements
 - ✅ **ATTR Amyloidosis hero enhancement** - Implemented neural network-inspired design with brain icons, molecular nodes, and genetic theme branding

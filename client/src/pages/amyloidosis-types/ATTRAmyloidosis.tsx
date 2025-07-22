@@ -166,15 +166,15 @@ export default function ATTRAmyloidosis() {
                 
                 <div className="space-y-6 text-gray-600 dark:text-white/70 leading-relaxed">
                   <p className="text-lg">
-                    ATTR amyloidosis has two main forms: hereditary (hATTR) caused by genetic mutations in the TTR gene, and wild-type (wtATTR) which occurs naturally with aging, primarily affecting men over 65.
+                    <strong>Hereditary ATTR (hATTR):</strong> Caused by over 120 TTR mutations. Common mutations include pV50M (Portugal, Sweden, Japan), pV142I (African descent), and pT80A (Irish descent).
                   </p>
                   
                   <p>
-                    The hereditary form often presents with neuropathy and can affect multiple organ systems. The wild-type form primarily causes cardiac amyloidosis and is increasingly recognized as a cause of heart failure in elderly patients.
+                    <strong>Wild-Type ATTR (ATTRwt):</strong> Non-inherited, develops with age. Primarily affects men over 60 and often causes heart failure and carpal tunnel syndrome.
                   </p>
                   
                   <p>
-                    Recent advances in treatment, including TTR stabilizers and gene silencing therapies, have significantly improved outcomes for patients with ATTR amyloidosis.
+                    Treatment includes TTR stabilizers like Tafamidis (Vyndaqel) and Acoramidis (Attruby), plus gene silencers like Patisiran (Onpattro) and Vutrisiran (Amvuttra).
                   </p>
                 </div>
                 

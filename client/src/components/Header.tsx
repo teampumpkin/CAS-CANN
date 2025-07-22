@@ -72,10 +72,10 @@ export default function Header() {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 bg-white dark:bg-gray-900 backdrop-blur-md border-b border-gray-200 dark:border-white/10 shadow-sm dark:shadow-none ${
         isScrolled 
-          ? 'bg-gray-900/95 backdrop-blur-xl border-b border-white/10' 
-          : 'bg-gray-900/80 backdrop-blur-xl'
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-b border-gray-300 dark:border-white/10 shadow-lg dark:shadow-none' 
+          : 'bg-white dark:bg-gray-900/80 backdrop-blur-xl'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -101,7 +101,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-2 bg-gray-900/95 backdrop-blur-xl rounded-full px-6 py-2 border border-gray-700/50 shadow-lg">
+            <div className="flex items-center gap-2 bg-gray-100/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-full px-6 py-2 border border-gray-300/50 dark:border-gray-700/50 shadow-lg">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -111,8 +111,8 @@ export default function Header() {
                     <motion.button
                       className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 text-sm font-semibold border ${
                         isPageActive(item.href, item.dropdownItems)
-                          ? 'text-white bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
-                          : 'text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
+                          ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
+                          : 'text-gray-700 dark:text-white/90 hover:text-gray-900 dark:hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
                       }`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -135,8 +135,8 @@ export default function Header() {
                       href={item.href}
                       className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative ${
                         isPageActive(item.href)
-                          ? 'text-white bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
-                          : 'text-white/90 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
+                          ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
+                          : 'text-gray-700 dark:text-white/90 hover:text-gray-900 dark:hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
                       }`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -160,7 +160,7 @@ export default function Header() {
                       style={{ zIndex: 9999 }}
                     >
                       <motion.div
-                        className="bg-gray-900 backdrop-blur-xl rounded-2xl border border-[#00AFE6]/30 shadow-2xl shadow-[#00AFE6]/10 py-3 overflow-hidden relative"
+                        className="bg-white dark:bg-gray-900 backdrop-blur-xl rounded-2xl border border-gray-300 dark:border-[#00AFE6]/30 shadow-2xl shadow-gray-500/10 dark:shadow-[#00AFE6]/10 py-3 overflow-hidden relative"
                         initial={{ opacity: 0, y: -20, scale: 0.9 }}
                         animate={{ 
                           opacity: activeDropdown === item.name ? 1 : 0, 
@@ -177,7 +177,7 @@ export default function Header() {
                           <motion.a
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="relative block px-6 py-4 text-gray-200 hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/15 hover:to-[#00DD89]/15 transition-all duration-300 text-base font-semibold border-l-2 border-transparent hover:border-[#00AFE6] hover:shadow-lg hover:shadow-[#00AFE6]/10 group/item"
+                            className="relative block px-6 py-4 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gradient-to-r hover:from-[#00AFE6]/15 hover:to-[#00DD89]/15 transition-all duration-300 text-base font-semibold border-l-2 border-transparent hover:border-[#00AFE6] hover:shadow-lg hover:shadow-[#00AFE6]/10 group/item"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ 
                               opacity: activeDropdown === item.name ? 1 : 0,

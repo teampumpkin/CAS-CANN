@@ -124,7 +124,7 @@ const provinces = [
 const upcomingEvents = [
   {
     id: 1,
-    title: "CAS Journal Club",
+    title: "CAS Journal Club - September Session",
     date: "2025-09-25",
     time: "3:00 PM - 4:00 PM MST",
     location: "Virtual Event",
@@ -147,45 +147,12 @@ const upcomingEvents = [
   },
   {
     id: 3,
-    title: "CAS Journal Club",
+    title: "CAS Journal Club - November Session",
     date: "2025-11-27",
     time: "3:00 PM - 4:00 PM MST",
     location: "Virtual Event",
     type: "Journal Club", 
     description: "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on recent amyloidosis research and publications. Registration and access details to be confirmed.",
-    image: "/api/placeholder/400/250",
-    registrationUrl: "#"
-  },
-  {
-    id: 4,
-    title: "CAS Journal Club",
-    date: "2026-01-29",
-    time: "3:00 PM - 4:00 PM MST",
-    location: "Virtual Event",
-    type: "Journal Club",
-    description: "Virtual journal club session for CAS members continuing throughout 2026. One-hour session designed to deepen clinical and scientific knowledge through collaborative discussion of recent amyloidosis research.",
-    image: "/api/placeholder/400/250", 
-    registrationUrl: "#"
-  },
-  {
-    id: 5,
-    title: "CAS Journal Club",
-    date: "2026-04-09",
-    time: "3:00 PM - 4:00 PM MST",
-    location: "Virtual Event",
-    type: "Journal Club",
-    description: "Continuing national journal club series for CAS members. Virtual session focusing on collaborative discussion around recent research and publications in the field of amyloidosis.",
-    image: "/api/placeholder/400/250",
-    registrationUrl: "#"
-  },
-  {
-    id: 6,
-    title: "CAS Journal Club", 
-    date: "2026-06-04",
-    time: "3:00 PM - 4:00 PM MST",
-    location: "Virtual Event",
-    type: "Journal Club",
-    description: "Final scheduled session of the CAS Journal Club national initiative. One-hour virtual session for CAS members to foster learning and discussion around recent amyloidosis research and publications.",
     image: "/api/placeholder/400/250",
     registrationUrl: "#"
   }

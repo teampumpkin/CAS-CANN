@@ -8,18 +8,18 @@ export const LanguageSwitcher = () => {
   return (
     <div className="relative">
       <motion.div
-        className="flex items-center gap-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-2 py-1.5 cursor-pointer hover:bg-white/20 transition-all duration-300"
+        className="flex items-center gap-1 bg-gray-100 backdrop-blur-sm border border-gray-300 rounded-full px-2 py-1.5 cursor-pointer hover:bg-gray-200 transition-all duration-300 shadow-sm"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
-        <Globe className="w-3 h-3 text-white" />
+        <Globe className="w-3 h-3 text-gray-700" />
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value as 'en' | 'fr')}
-          className="bg-transparent text-white text-xs font-medium cursor-pointer outline-none"
+          className="bg-transparent text-gray-700 text-xs font-medium cursor-pointer outline-none"
         >
-          <option value="en" className="bg-gray-800 text-white">EN</option>
-          <option value="fr" className="bg-gray-800 text-white">FR</option>
+          <option value="en" className="bg-white text-gray-700">EN</option>
+          <option value="fr" className="bg-white text-gray-700">FR</option>
         </select>
       </motion.div>
     </div>

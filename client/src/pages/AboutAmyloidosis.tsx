@@ -35,13 +35,13 @@ export default function AboutAmyloidosis() {
     {
       category: t('aboutAmyloidosis.genitourinarySymptoms'),
       icon: Droplets,
-      color: 'bg-purple-500/20 border-purple-500/30 text-purple-400',
+      color: 'bg-[#00AFE6]/20 border-[#00AFE6]/30 text-[#00AFE6]',
       signs: ['Proteinuria (protein in urine)', 'Decreased urine output', 'Kidney dysfunction', 'Urinary retention', 'Bladder problems']
     },
     {
       category: t('aboutAmyloidosis.systemicSymptoms'),
       icon: Microscope,
-      color: 'bg-orange-500/20 border-orange-500/30 text-orange-400',
+      color: 'bg-[#00DD89]/20 border-[#00DD89]/30 text-[#00DD89]',
       signs: ['Unexplained weight loss', 'Enlarged tongue', 'Easy bruising', 'Changes in skin texture', 'Chronic fatigue']
     }
   ];
@@ -52,8 +52,8 @@ export default function AboutAmyloidosis() {
       type: 'AL (Light-Chain) Amyloidosis',
       subtitle: 'Most common form affecting multiple organs',
       icon: Heart,
-      color: 'from-red-500 to-pink-500',
-      borderColor: 'border-red-500/30',
+      color: 'from-[#00AFE6] to-[#0088CC]',
+      borderColor: 'border-[#00AFE6]/30',
       prevalence: '70% of systemic amyloidosis cases',
       urgency: 'High - Progressive and potentially life-threatening',
       symptoms: ['Fatigue and weakness', 'Swelling in legs and ankles', 'Numbness in hands/feet', 'Irregular heartbeat', 'Enlarged tongue', 'Easy bruising'],
@@ -80,8 +80,8 @@ export default function AboutAmyloidosis() {
       type: 'Other Amyloidosis Types',
       subtitle: 'AA (Secondary), Localized, Dialysis-Related, and Rare Forms',
       icon: Microscope,
-      color: 'from-purple-500 to-violet-500',
-      borderColor: 'border-purple-500/30',
+      color: 'from-[#00DD89] to-[#00BB77]',
+      borderColor: 'border-[#00DD89]/30',
       prevalence: 'Variable depending on type (AA: 5% of systemic cases)',
       urgency: 'Variable - Depends on type and underlying condition',
       symptoms: ['AA: Kidney dysfunction, protein in urine', 'AA: Joint pain and swelling from chronic inflammation', 'Localized: Symptoms at specific affected sites', 'Dialysis-related: Joint stiffness, carpal tunnel', 'May be asymptomatic initially'],
@@ -207,19 +207,19 @@ export default function AboutAmyloidosis() {
                   
                   <div className="grid grid-cols-2 gap-6">
                     {/* AL Amyloidosis */}
-                    <div className="bg-gradient-to-br from-red-50/90 to-pink-50/90 dark:from-red-900/30 dark:to-pink-900/30 rounded-2xl p-6 border border-red-200/50 dark:border-red-400/30">
-                      <Heart className="w-8 h-8 text-red-500 mx-auto mb-4" />
-                      <h4 className="font-bold text-red-900 dark:text-red-200 mb-2">AL Amyloidosis</h4>
-                      <p className="text-sm text-red-700 dark:text-red-300">70% of cases</p>
-                      <p className="text-xs text-red-600 dark:text-red-400 mt-2">Plasma cell disorder</p>
+                    <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/30 dark:to-[#00DD89]/30 rounded-2xl p-6 border border-[#00AFE6]/50 dark:border-[#00AFE6]/30">
+                      <Heart className="w-8 h-8 text-[#00AFE6] mx-auto mb-4" />
+                      <h4 className="font-bold text-[#00AFE6] dark:text-[#00AFE6] mb-2">AL Amyloidosis</h4>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">70% of cases</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">Plasma cell disorder</p>
                     </div>
                     
                     {/* ATTR Amyloidosis */}
-                    <div className="bg-gradient-to-br from-blue-50/90 to-cyan-50/90 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-2xl p-6 border border-blue-200/50 dark:border-blue-400/30">
-                      <Brain className="w-8 h-8 text-blue-500 mx-auto mb-4" />
-                      <h4 className="font-bold text-blue-900 dark:text-blue-200 mb-2">ATTR Amyloidosis</h4>
-                      <p className="text-sm text-blue-700 dark:text-blue-300">25% of cases</p>
-                      <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">Transthyretin protein</p>
+                    <div className="bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/30 dark:to-[#00AFE6]/30 rounded-2xl p-6 border border-[#00DD89]/50 dark:border-[#00DD89]/30">
+                      <Brain className="w-8 h-8 text-[#00DD89] mx-auto mb-4" />
+                      <h4 className="font-bold text-[#00DD89] dark:text-[#00DD89] mb-2">ATTR Amyloidosis</h4>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">25% of cases</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">Transthyretin protein</p>
                     </div>
                   </div>
                 </div>
@@ -235,7 +235,7 @@ export default function AboutAmyloidosis() {
                     <div className="text-xs text-gray-600 dark:text-white/60">treatment centers</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-500 mb-1">1:100K</div>
+                    <div className="text-2xl font-bold text-[#00AFE6] mb-1">1:100K</div>
                     <div className="text-xs text-gray-600 dark:text-white/60">prevalence</div>
                   </div>
                 </div>
@@ -258,7 +258,7 @@ export default function AboutAmyloidosis() {
               </motion.div>
               
               <motion.div
-                className="absolute -bottom-6 -left-6 w-14 h-14 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center shadow-xl"
+                className="absolute -bottom-6 -left-6 w-14 h-14 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center shadow-xl"
                 animate={{
                   y: [0, 8, 0],
                   rotate: [0, -5, 0],
@@ -341,24 +341,24 @@ export default function AboutAmyloidosis() {
 
               <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center">
                     <AlertTriangle className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-orange-800 dark:text-orange-100">Misfolded Proteins</h3>
+                  <h3 className="text-xl font-bold text-[#00DD89] dark:text-[#00DD89]">Misfolded Proteins</h3>
                 </div>
-                <p className="text-orange-700 dark:text-orange-200 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
                   In amyloidosis, these protein workers get "misfolded"—like origami that's been folded wrong. When this happens, they can't do their jobs properly and start clumping together instead.
                 </p>
               </div>
 
               <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                     <Zap className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-purple-800 dark:text-purple-100">Amyloid Deposits</h3>
+                  <h3 className="text-xl font-bold text-[#00AFE6] dark:text-[#00AFE6]">Amyloid Deposits</h3>
                 </div>
-                <p className="text-purple-700 dark:text-purple-200 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
                   These clumps, called "amyloid deposits," build up in organs like your heart, kidneys, or nerves. This buildup interferes with how these organs work, causing the symptoms of amyloidosis.
                 </p>
               </div>

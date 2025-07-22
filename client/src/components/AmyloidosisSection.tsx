@@ -52,9 +52,9 @@ export default function AmyloidosisSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="crawford-card h-full">
-              <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl p-8 h-full flex flex-col justify-center">
+              <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 rounded-2xl p-8 h-full flex flex-col justify-center">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-red-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 47.478 47.478 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 47.478 47.478 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3 3-3"/>
                     </svg>

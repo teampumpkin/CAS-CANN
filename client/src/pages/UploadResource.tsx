@@ -119,10 +119,10 @@ const acceptedFileTypes = [
 
 const getFileIcon = (fileType: string) => {
   const type = fileType.toLowerCase();
-  if (type.includes('pdf')) return <FileText className="w-5 h-5 text-red-500" />;
-  if (type.includes('word') || type.includes('document')) return <FileText className="w-5 h-5 text-blue-500" />;
-  if (type.includes('excel') || type.includes('sheet')) return <FileText className="w-5 h-5 text-green-500" />;
-  if (type.includes('image')) return <FileText className="w-5 h-5 text-purple-500" />;
+  if (type.includes('pdf')) return <FileText className="w-5 h-5 text-[#00AFE6]" />;
+  if (type.includes('word') || type.includes('document')) return <FileText className="w-5 h-5 text-[#00DD89]" />;
+  if (type.includes('excel') || type.includes('sheet')) return <FileText className="w-5 h-5 text-[#00AFE6]" />;
+  if (type.includes('image')) return <FileText className="w-5 h-5 text-[#00DD89]" />;
   return <FileText className="w-5 h-5 text-gray-500" />;
 };
 
@@ -841,7 +841,7 @@ export default function UploadResource() {
                 </Card>
 
                 {/* Consent and Privacy */}
-                <Card className="bg-gradient-to-br from-pink-50/95 to-rose-50/95 dark:from-pink-900/25 dark:to-rose-900/25 backdrop-blur-xl border-pink-200/50 dark:border-white/20">
+                <Card className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl border-[#00AFE6]/50 dark:border-white/20">
                   <CardHeader>
                     <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                       <Shield className="w-5 h-5 text-[#00AFE6]" />

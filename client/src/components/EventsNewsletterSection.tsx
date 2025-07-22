@@ -31,7 +31,7 @@ export default function EventsNewsletterSection() {
       title: 'Support Group Meetings',
       description: 'Virtual and in-person meetings across Canada providing emotional support and practical guidance.',
       date: 'Weekly sessions available',
-      gradient: 'from-purple-500 to-purple-700',
+      gradient: 'from-[#00AFE6] to-[#00DD89]',
       bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
       attendees: '50+',
       type: 'Hybrid'

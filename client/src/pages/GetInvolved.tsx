@@ -330,11 +330,11 @@ export default function GetInvolved() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Header */}
-      <section className="py-24 bg-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent" />
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:bg-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/60 via-cyan-50/40 to-slate-100/60 dark:from-gray-800 dark:via-gray-900 dark:to-black" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-200/10 dark:via-white/5 to-transparent" />
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -343,13 +343,13 @@ export default function GetInvolved() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6 shadow-lg">
               <Users className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Get Involved</span>
+              <span className="text-sm font-medium text-gray-800 dark:text-white/90">Get Involved</span>
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Join Our Mission
               </span>
               <br />
@@ -358,7 +358,7 @@ export default function GetInvolved() {
               </span>
             </h1>
             
-            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
               The Canadian Amyloidosis Society is powered by people who care. Whether you're a clinician, researcher, patient, caregiver, or ally—you have a role to play in accelerating change.
             </p>
           </motion.div>
@@ -366,7 +366,7 @@ export default function GetInvolved() {
       </section>
 
       {/* Ways to Participate */}
-      <section className="py-24 bg-gray-900">
+      <section className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             className="text-center mb-16"
@@ -375,17 +375,17 @@ export default function GetInvolved() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 mb-8">
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
               <Users className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-white/90 font-medium">Get Involved</span>
+              <span className="text-gray-800 dark:text-white/90 font-medium">Get Involved</span>
             </div>
             <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
-              <span className="text-white">Ways to </span>
+              <span className="text-gray-800 dark:text-white">Ways to </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Participate
               </span>
             </h2>
-            <p className="text-lg text-white/70 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
               Choose how you'd like to contribute to our mission of improving amyloidosis care across Canada.
             </p>
           </motion.div>
@@ -414,8 +414,8 @@ export default function GetInvolved() {
                         <way.icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-semibold mb-3 text-white">{way.title}</h3>
-                        <p className="mb-6 leading-relaxed text-white/70">{way.description}</p>
+                        <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">{way.title}</h3>
+                        <p className="mb-6 leading-relaxed text-gray-600 dark:text-white/70">{way.description}</p>
                         
                         {way.title === "Join CAS" && (
                           <Dialog>

@@ -19,38 +19,25 @@ export default function ALAmyloidosis() {
 
   const detailedInfo = {
     symptoms: [
-      "Fatigue and weakness",
-      "Shortness of breath",
-      "Swelling in legs and ankles",
-      "Irregular heartbeat",
-      "Numbness or tingling in hands and feet",
-      "Weight loss",
-      "Easy bruising",
+      "Leg swelling",
+      "Fatigue",
+      "Irregular heartbeat", 
       "Enlarged tongue",
-      "Skin changes",
-      "Kidney problems"
+      "Skin changes (bruising, purple patches around eyes)"
     ],
     diagnosis: [
-      "Blood tests (free light chain assay)",
-      "Urine tests (protein levels)",
       "Tissue biopsy",
+      "Blood/urine tests for light chains",
       "Bone marrow biopsy",
-      "Heart imaging (echocardiogram, cardiac MRI)",
-      "Kidney function tests",
-      "SAP scan (amyloid imaging)",
-      "Genetic testing",
-      "Serum and urine immunofixation"
+      "Imaging tests (ECG, MRI, echocardiogram)"
     ],
     treatment: [
-      "Chemotherapy combinations (melphalan, cyclophosphamide)",
-      "Immunomodulatory drugs (lenalidomide, pomalidomide)",
-      "Proteasome inhibitors (bortezomib, carfilzomib)",
-      "Autologous stem cell transplant",
-      "Supportive care for organ dysfunction",
-      "Diuretics for fluid retention",
-      "Heart medications",
-      "Kidney support therapy",
-      "Regular monitoring and follow-up"
+      "Chemotherapy",
+      "Steroids",
+      "Proteasome inhibitors",
+      "Monoclonal antibodies",
+      "Stem cell transplant (in select cases)",
+      "Supportive care to manage symptoms and organ function"
     ],
     centers: [
       {
@@ -142,7 +129,7 @@ export default function ALAmyloidosis() {
               </h1>
               
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-                AL amyloidosis is the most common form of systemic amyloidosis. It occurs when plasma cells in the bone marrow produce abnormal antibody light chains that misfold and deposit as amyloid in organs and tissues.
+                Caused by abnormal plasma cells producing light chains that form amyloid. Often diagnosed after age 50; affects both men and women. Related to multiple myeloma (10-15% overlap).
               </p>
             </div>
           </motion.div>

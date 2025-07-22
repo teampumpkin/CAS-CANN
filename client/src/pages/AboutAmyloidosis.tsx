@@ -50,44 +50,44 @@ export default function AboutAmyloidosis() {
     {
       id: 'al',
       type: 'AL (Light-Chain) Amyloidosis',
-      subtitle: 'Most common form affecting multiple organs',
+      subtitle: 'Caused by abnormal plasma cells producing light chains',
       icon: Heart,
       color: 'from-[#00AFE6] to-[#0088CC]',
       borderColor: 'border-[#00AFE6]/30',
-      prevalence: '70% of systemic amyloidosis cases',
-      urgency: 'High - Progressive and potentially life-threatening',
-      symptoms: ['Fatigue and weakness', 'Swelling in legs and ankles', 'Numbness in hands/feet', 'Irregular heartbeat', 'Enlarged tongue', 'Easy bruising'],
-      diagnosis: ['Blood and urine free light chain tests', 'Tissue biopsy (fat pad, bone marrow)', 'Cardiac imaging (echo, MRI)', 'Congo red staining'],
-      treatment: ['Chemotherapy targeting plasma cells', 'Autologous stem cell transplant', 'Supportive organ care', 'Clinical trial participation'],
-      warningSign: 'Combination of heart and kidney symptoms with unexplained protein in urine'
+      prevalence: 'Often diagnosed after age 50; affects both men and women',
+      urgency: 'Related to multiple myeloma (10-15% overlap)',
+      symptoms: ['Leg swelling', 'Fatigue', 'Irregular heartbeat', 'Enlarged tongue', 'Skin changes (bruising, purple patches around eyes)'],
+      diagnosis: ['Tissue biopsy', 'Blood/urine tests for light chains', 'Bone marrow biopsy', 'Imaging tests (ECG, MRI, echocardiogram)'],
+      treatment: ['Chemotherapy', 'Steroids', 'Proteasome inhibitors', 'Monoclonal antibodies', 'Stem cell transplant (in select cases)', 'Supportive care to manage symptoms and organ function'],
+      warningSign: 'Target abnormal plasma cells with various therapies'
     },
     {
       id: 'attr',
       type: 'ATTR (Transthyretin) Amyloidosis',
-      subtitle: 'Hereditary (hATTR) and Wild-Type (wtATTR)',
+      subtitle: 'Two forms: Hereditary (hATTR) and Wild-type (ATTRwt)',
       icon: Brain,
-      color: 'from-blue-500 to-cyan-500',
-      borderColor: 'border-blue-500/30',
-      prevalence: '25% of systemic amyloidosis cases',
-      urgency: 'Moderate to High - Progressive with available treatments',
-      symptoms: ['Heart failure symptoms', 'Peripheral neuropathy', 'Carpal tunnel syndrome (often bilateral)', 'Gastrointestinal issues', 'Eye problems'],
-      diagnosis: ['Genetic testing (for hereditary form)', 'DPD or PYP scintigraphy', 'Cardiac MRI', 'Tissue biopsy if needed'],
-      treatment: ['TTR stabilizers (tafamidis)', 'Gene silencing therapy', 'Cardiac support therapies', 'Liver transplant (severe hereditary cases)'],
-      warningSign: 'Heart failure in elderly men or family history with neuropathy'
+      color: 'from-[#00AFE6] to-[#00DD89]',
+      borderColor: 'border-[#00AFE6]/30',
+      prevalence: 'hATTR: Over 120 TTR mutations known',
+      urgency: 'ATTRwt: Non-inherited, develops with age, primarily affects men over 60',
+      symptoms: ['Heart issues: palpitations, fainting, fatigue', 'Nerve issues: numbness, walking difficulty', 'GI symptoms: nausea, weight loss'],
+      diagnosis: ['Genetic testing for TTR mutations', 'Biopsies, imaging (MRI, scans)', 'Protein testing'],
+      treatment: ['TTR stabilizers: Tafamidis (Vyndaqel), Acoramidis (Attruby)', 'Gene silencers: Patisiran (Onpattro), Vutrisiran (Amvuttra)', 'Supportive care for symptoms and organ protection'],
+      warningSign: 'Wild-type often causes heart failure and carpal tunnel syndrome'
     },
     {
       id: 'other',
-      type: 'Other Amyloidosis Types',
-      subtitle: 'AA (Secondary), Localized, Dialysis-Related, and Rare Forms',
+      type: 'Rare Types of Amyloidosis',
+      subtitle: 'AA, ALECT2, Aβ2M, and other rare forms',
       icon: Microscope,
       color: 'from-[#00DD89] to-[#00BB77]',
       borderColor: 'border-[#00DD89]/30',
-      prevalence: 'Variable depending on type (AA: 5% of systemic cases)',
-      urgency: 'Variable - Depends on type and underlying condition',
-      symptoms: ['AA: Kidney dysfunction, protein in urine', 'AA: Joint pain and swelling from chronic inflammation', 'Localized: Symptoms at specific affected sites', 'Dialysis-related: Joint stiffness, carpal tunnel', 'May be asymptomatic initially'],
-      diagnosis: ['AA: SAA blood levels, kidney biopsy', 'Congo red staining for all types', 'Assessment of underlying inflammatory conditions', 'Imaging of affected organs', 'Genetic testing if familial'],
-      treatment: ['AA: Control underlying inflammatory disease', 'AA: Anti-inflammatory biologics, kidney support', 'Localized: Local treatments for affected areas', 'Dialysis-related: Improved dialysis management', 'Organ-specific supportive care'],
-      warningSign: 'AA: Kidney problems with chronic inflammatory diseases; Others: Unexplained organ dysfunction or family history'
+      prevalence: 'Variable prevalence by geographic and ethnic background',
+      urgency: 'Different underlying causes and affected organs',
+      symptoms: ['AA: Linked to long-standing inflammation, mostly affects kidneys', 'ALECT2: More common in Mexican, Punjabi, Native American, Middle Eastern descent', 'Aβ2M: Seen in long-term dialysis patients, affects bones and joints'],
+      diagnosis: ['Biopsies, blood and urine analysis', 'Imaging: ECG, MRI, echocardiograms', 'Genetic testing for hereditary types', 'Specialized testing: mass spectrometry, immunohistochemistry'],
+      treatment: ['AA: Treat underlying disease to reduce SAA protein', 'ALECT2: Often underdiagnosed, mainly affects kidneys', 'Aβ2M: Becoming rarer due to improved dialysis techniques', 'Supportive care and research ongoing for most types'],
+      warningSign: 'Early diagnosis is critical for better outcomes'
     }
   ];
 
@@ -165,7 +165,7 @@ export default function AboutAmyloidosis() {
               </h1>
               
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8">
-                {t('aboutAmyloidosis.hero.description')}
+                Amyloidosis refers to a group of rare diseases caused by abnormal protein deposits (called amyloid) building up in organs and tissues. These misfolded proteins disrupt normal body functions, leading to serious health complications.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -314,7 +314,7 @@ export default function AboutAmyloidosis() {
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto mb-12">
-              Understanding amyloidosis starts with understanding proteins and what happens when they don't work properly in your body.
+              What is Amyloid? Amyloid forms when proteins in the body misfold, clump together, and deposit in different organs. As amyloid builds up, it can lead to organ damage and reduced quality of life.
             </p>
           </motion.div>
 
@@ -433,6 +433,68 @@ export default function AboutAmyloidosis() {
         </div>
       </section>
 
+      {/* General Symptoms Section */}
+      <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                General
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Symptoms
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto mb-12">
+              Symptoms vary based on the type of amyloidosis and which organs are affected. Symptoms can often resemble other conditions, leading to delayed diagnosis.
+            </p>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              className="grid md:grid-cols-2 gap-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              {[
+                { icon: Heart, symptom: "Fatigue", description: "Persistent tiredness and lack of energy" },
+                { icon: TrendingUp, symptom: "Weight loss", description: "Unexplained loss of body weight" },
+                { icon: Droplets, symptom: "Swelling in legs/ankles", description: "Fluid retention causing visible swelling" },
+                { icon: Brain, symptom: "Shortness of breath", description: "Difficulty breathing during normal activities" },
+                { icon: Activity, symptom: "Numbness or tingling in hands/feet", description: "Loss of sensation or pins and needles feeling" }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/30"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-[#00AFE6] dark:text-[#00AFE6] mb-2">{item.symptom}</h3>
+                      <p className="text-gray-700 dark:text-gray-200 text-sm leading-relaxed">{item.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Amyloidosis Types - Collapsible Sections */}
       <section className="py-24 bg-white dark:bg-gray-900 relative">
         <div className="container mx-auto px-6 relative z-10">
@@ -454,7 +516,7 @@ export default function AboutAmyloidosis() {
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Understanding the different types helps guide diagnosis and treatment. Click on each type to learn more.
+              Each type is named with "A" followed by the protein responsible. For example: AL Amyloidosis (from light chain proteins), ATTR Amyloidosis (from transthyretin protein), AA, ALECT2, Aβ2M, and other rare forms.
             </p>
           </motion.div>
 
@@ -469,7 +531,7 @@ export default function AboutAmyloidosis() {
                     : index === 1
                     ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-400/30'
                     : 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-400/30'
-                }`}
+                } bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 border-[#00AFE6]/30`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}

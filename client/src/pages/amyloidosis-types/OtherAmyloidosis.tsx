@@ -14,39 +14,22 @@ export default function OtherAmyloidosis() {
   const detailedInfo = {
     symptoms: [
       "AA: Kidney dysfunction, protein in urine",
-      "AA: Joint pain and swelling from chronic inflammation",
-      "AA: Chronic fatigue and weakness",
-      "Localized: Symptoms at specific affected sites",
-      "Localized: Respiratory symptoms (tracheobronchial type)",
-      "Localized: Skin changes (cutaneous type)",
-      "Dialysis-related: Joint stiffness, carpal tunnel syndrome",
-      "Dialysis-related: Shoulder pain and mobility issues",
-      "Hereditary: Family history of similar symptoms",
+      "ALECT2: Mainly affects kidneys, also liver and spleen", 
+      "Aβ2M: Affects bones and joints",
       "May be asymptomatic initially"
     ],
     diagnosis: [
-      "AA: SAA blood levels and inflammatory markers",
-      "AA: Kidney biopsy with Congo red staining",
-      "Congo red staining for all types",
-      "Assessment of underlying inflammatory conditions",
-      "Imaging of affected organs (CT, MRI)",
-      "Tissue biopsy from affected sites",
-      "Genetic testing for familial forms",
-      "Dialysis duration assessment (β2M type)",
-      "Mass spectrometry for protein typing",
-      "Specialized testing based on presentation"
+      "Biopsies (tissue, bone marrow)",
+      "Blood and urine analysis",
+      "Imaging: ECG, MRI, echocardiograms",
+      "Genetic testing (for hereditary types)",
+      "Specialized testing: mass spectrometry, immunohistochemistry"
     ],
     treatment: [
-      "AA: Control underlying inflammatory disease",
-      "AA: Anti-inflammatory biologics (TNF inhibitors)",
-      "AA: Kidney support therapy and dialysis",
-      "AA: Treatment of rheumatoid arthritis, IBD, or infections",
-      "Localized: Local treatments for affected areas",
-      "Localized: Surgical resection if appropriate",
-      "Dialysis-related: Improved dialysis management",
-      "Dialysis-related: High-flux dialysis membranes",
-      "Hereditary: Genetic counseling and family screening",
-      "Organ-specific supportive care"
+      "AA: Treat underlying disease to reduce SAA protein",
+      "ALECT2: Often underdiagnosed, mainly affects kidneys",
+      "Aβ2M: Becoming rarer due to improved dialysis techniques",
+      "Supportive care and research ongoing for most types"
     ],
     centers: [
       {

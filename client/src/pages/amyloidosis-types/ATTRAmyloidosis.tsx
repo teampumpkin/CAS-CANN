@@ -19,38 +19,19 @@ export default function ATTRAmyloidosis() {
 
   const detailedInfo = {
     symptoms: [
-      "Heart failure symptoms",
-      "Peripheral neuropathy (numbness, tingling)",
-      "Gastrointestinal issues",
-      "Carpal tunnel syndrome",
-      "Orthostatic hypotension",
-      "Weight loss",
-      "Fatigue and weakness",
-      "Autonomic neuropathy",
-      "Eye involvement (vitreous opacities)",
-      "Kidney involvement (rare)"
+      "Heart issues: palpitations, fainting, fatigue",
+      "Nerve issues: numbness, walking difficulty", 
+      "GI symptoms: nausea, weight loss"
     ],
     diagnosis: [
-      "Genetic testing (for hereditary ATTR)",
-      "Technetium-99m scintigraphy (bone scan)",
-      "Cardiac MRI and echocardiogram",
-      "Tissue biopsy with Congo red staining",
-      "Nerve conduction studies",
-      "Autonomic function testing",
-      "Family history assessment",
-      "Biomarker testing (NT-proBNP, troponin)",
-      "Mass spectrometry typing"
+      "Genetic testing for TTR mutations",
+      "Biopsies, imaging (MRI, scans)",
+      "Protein testing"
     ],
     treatment: [
-      "TTR stabilizers (tafamidis, diflunisal)",
-      "Gene silencing therapies (patisiran, inotersen)",
-      "Supportive cardiac care",
-      "Neuropathy management",
-      "Liver transplantation (for hereditary ATTR)",
-      "Cardiac transplantation (selected cases)",
-      "Pain management for neuropathy",
-      "Physical therapy and rehabilitation",
-      "Nutritional support"
+      "TTR stabilizers: Tafamidis (Vyndaqel), Acoramidis (Attruby)",
+      "Gene silencers: Patisiran (Onpattro), Vutrisiran (Amvuttra)",
+      "Supportive care for symptoms and organ protection"
     ],
     centers: [
       {
@@ -142,7 +123,7 @@ export default function ATTRAmyloidosis() {
               </h1>
               
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-                ATTR amyloidosis is caused by misfolded transthyretin proteins. It includes both hereditary (genetic mutations) and wild-type (age-related) forms, primarily affecting the heart and nervous system.
+                Caused by abnormal transthyretin (TTR) protein. Two forms: Hereditary (hATTR) from inherited mutations in TTR gene, and Wild-type (ATTRwt) that develops with age, usually affecting the heart.
               </p>
             </div>
           </motion.div>

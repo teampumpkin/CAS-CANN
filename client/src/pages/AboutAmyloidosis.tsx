@@ -117,7 +117,7 @@ export default function AboutAmyloidosis() {
           }}
         />
         <motion.div
-          className="absolute top-1/3 right-1/3 w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-full opacity-20"
+          className="absolute top-1/3 right-1/3 w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full opacity-20"
           animate={{
             y: [0, 15, 0],
             rotate: [0, -180, -360],
@@ -596,12 +596,12 @@ export default function AboutAmyloidosis() {
                     </div>
 
                     {/* Warning Sign Callout */}
-                    <div className="bg-orange-100/80 dark:bg-orange-500/20 border border-orange-300/60 dark:border-orange-500/30 rounded-xl p-4">
+                    <div className="bg-[#00AFE6]/10 dark:bg-[#00AFE6]/20 border border-[#00AFE6]/30 dark:border-[#00AFE6]/30 rounded-xl p-4">
                       <div className="flex items-start gap-3">
-                        <AlertTriangle className="w-5 h-5 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
+                        <AlertTriangle className="w-5 h-5 text-[#00AFE6] dark:text-[#00AFE6] mt-0.5 flex-shrink-0" />
                         <div>
-                          <h4 className="text-orange-700 dark:text-orange-400 font-semibold mb-2">Key Warning Sign</h4>
-                          <p className="text-orange-800 dark:text-white/80 text-sm">{type.warningSign}</p>
+                          <h4 className="text-[#00AFE6] dark:text-[#00AFE6] font-semibold mb-2">Key Warning Sign</h4>
+                          <p className="text-gray-700 dark:text-white/80 text-sm">{type.warningSign}</p>
                         </div>
                       </div>
                     </div>
@@ -650,18 +650,18 @@ export default function AboutAmyloidosis() {
                       {/* Treatment */}
                       <div>
                         <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                          <Target className="w-5 h-5 text-purple-400" />
+                          <Target className="w-5 h-5 text-[#00AFE6]" />
                           Treatment
                         </h4>
                         <ul className="space-y-2 mb-4">
                           {type.treatment.map((treatment, idx) => (
                             <li key={idx} className="flex items-start gap-2">
-                              <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                              <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
                               <span className="text-gray-700 dark:text-white/80 text-sm">{treatment}</span>
                             </li>
                           ))}
                         </ul>
-                        <Link href="/resources?category=treatment" className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1 transition-colors">
+                        <Link href="/resources?category=treatment" className="text-[#00AFE6] hover:text-[#00DD89] text-sm flex items-center gap-1 transition-colors">
                           <Target className="w-3 h-3" />
                           Treatment Guides
                         </Link>
@@ -706,7 +706,7 @@ export default function AboutAmyloidosis() {
             </div>
             
             <h2 className="crawford-section-title mb-6">
-              <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 {t('aboutAmyloidosis.warningSignsSubtitle')}
               </span>
             </h2>
@@ -719,19 +719,19 @@ export default function AboutAmyloidosis() {
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* High-Risk Presentations */}
             <motion.div
-              className="bg-gradient-to-br from-red-50/95 to-orange-50/95 dark:from-red-900/25 dark:to-orange-900/25 backdrop-blur-xl rounded-2xl p-8 border border-red-200/50 dark:border-red-400/30"
+              className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 dark:border-[#00AFE6]/40"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                   <AlertTriangle className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-red-900 dark:text-red-200">High-Risk Presentations</h3>
-                  <p className="text-red-700 dark:text-red-300 text-sm">Immediate amyloidosis evaluation recommended</p>
+                  <h3 className="text-2xl font-bold text-[#00AFE6] dark:text-[#00AFE6]">High-Risk Presentations</h3>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">Immediate amyloidosis evaluation recommended</p>
                 </div>
               </div>
               
@@ -749,8 +749,8 @@ export default function AboutAmyloidosis() {
                   'Restrictive cardiomyopathy with granular sparkling on echo'
                 ].map((flag, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-red-800 dark:text-red-200 text-sm leading-relaxed">{flag}</span>
+                    <XCircle className="w-5 h-5 text-[#00AFE6] flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-200 text-sm leading-relaxed">{flag}</span>
                   </div>
                 ))}
               </div>
@@ -758,19 +758,19 @@ export default function AboutAmyloidosis() {
 
             {/* Supporting Clinical Features */}
             <motion.div
-              className="bg-gradient-to-br from-orange-50/95 to-yellow-50/95 dark:from-orange-900/25 dark:to-yellow-900/25 backdrop-blur-xl rounded-2xl p-8 border border-orange-200/50 dark:border-orange-400/30"
+              className="bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 dark:from-[#00DD89]/20 dark:to-[#00AFE6]/20 backdrop-blur-xl rounded-2xl p-8 border border-[#00DD89]/30 dark:border-[#00DD89]/40"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center">
                   <AlertCircle className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-orange-900 dark:text-orange-200">Supporting Features</h3>
-                  <p className="text-orange-700 dark:text-orange-300 text-sm">Consider amyloidosis in differential diagnosis</p>
+                  <h3 className="text-2xl font-bold text-[#00DD89] dark:text-[#00DD89]">Supporting Features</h3>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm">Consider amyloidosis in differential diagnosis</p>
                 </div>
               </div>
               
@@ -788,8 +788,8 @@ export default function AboutAmyloidosis() {
                   'Skin thickening (scleroderma-like) with cardiac symptoms'
                 ].map((feature, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <AlertCircle className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-orange-800 dark:text-orange-200 text-sm leading-relaxed">{feature}</span>
+                    <AlertCircle className="w-5 h-5 text-[#00DD89] flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 dark:text-gray-200 text-sm leading-relaxed">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -886,9 +886,9 @@ export default function AboutAmyloidosis() {
                 <thead className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800">
                   <tr>
                     <th className="px-6 py-4 text-left text-sm font-bold text-gray-900 dark:text-white">Clinical Feature</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-red-700 dark:text-red-300">AL Amyloidosis</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-blue-700 dark:text-blue-300">ATTR Hereditary</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold text-green-700 dark:text-green-300">ATTR Wild Type</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-[#00AFE6] dark:text-[#00AFE6]">AL Amyloidosis</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-[#00DD89] dark:text-[#00DD89]">ATTR Hereditary</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-[#00AFE6] dark:text-[#00AFE6]">ATTR Wild Type</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-600">
@@ -1364,39 +1364,39 @@ export default function AboutAmyloidosis() {
 
             {/* Support & Care */}
             <motion.div
-              className="bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 backdrop-blur-xl rounded-2xl p-6 border border-purple-200/50 dark:border-purple-400/30"
+              className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/30 dark:border-[#00AFE6]/40"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                   <Users className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-purple-800 dark:text-purple-100">Support & Care</h3>
+                <h3 className="text-lg font-bold text-[#00AFE6] dark:text-[#00AFE6]">Support & Care</h3>
               </div>
               <ul className="space-y-3 mb-6">
                 <li>
-                  <Link href="/resources?category=patient-support" className="text-sm text-purple-700 dark:text-white/80 hover:text-purple-400 flex items-center gap-2 transition-colors">
-                    <div className="w-1 h-1 bg-purple-400 rounded-full" />
+                  <Link href="/resources?category=patient-support" className="text-sm text-gray-700 dark:text-white/80 hover:text-[#00AFE6] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00AFE6] rounded-full" />
                     Patient Support Groups
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources?category=caregiver-guides" className="text-sm text-purple-700 dark:text-white/80 hover:text-purple-400 flex items-center gap-2 transition-colors">
-                    <div className="w-1 h-1 bg-purple-400 rounded-full" />
+                  <Link href="/resources?category=caregiver-guides" className="text-sm text-gray-700 dark:text-white/80 hover:text-[#00AFE6] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00AFE6] rounded-full" />
                     Caregiver Resources
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources?category=financial-assistance" className="text-sm text-purple-700 dark:text-white/80 hover:text-purple-400 flex items-center gap-2 transition-colors">
-                    <div className="w-1 h-1 bg-purple-400 rounded-full" />
+                  <Link href="/resources?category=financial-assistance" className="text-sm text-gray-700 dark:text-white/80 hover:text-[#00AFE6] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00AFE6] rounded-full" />
                     Financial Assistance
                   </Link>
                 </li>
               </ul>
-              <Link href="/contact" className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-600 dark:hover:text-white transition-colors text-sm font-medium">
+              <Link href="/contact" className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] dark:hover:text-white transition-colors text-sm font-medium">
                 <Users className="w-4 h-4" />
                 Get Connected
               </Link>
@@ -1404,39 +1404,39 @@ export default function AboutAmyloidosis() {
 
             {/* Research & Education */}
             <motion.div
-              className="bg-gradient-to-br from-orange-50/95 to-red-50/95 dark:from-orange-900/25 dark:to-red-900/25 backdrop-blur-xl rounded-2xl p-6 border border-orange-200/50 dark:border-orange-400/30"
+              className="bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 dark:from-[#00DD89]/20 dark:to-[#00AFE6]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00DD89]/30 dark:border-[#00DD89]/40"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center">
                   <Microscope className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-orange-800 dark:text-orange-100">Research & Education</h3>
+                <h3 className="text-lg font-bold text-[#00DD89] dark:text-[#00DD89]">Research & Education</h3>
               </div>
               <ul className="space-y-3 mb-6">
                 <li>
-                  <Link href="/resources?category=research-updates" className="text-sm text-orange-700 dark:text-white/80 hover:text-orange-400 flex items-center gap-2 transition-colors">
-                    <div className="w-1 h-1 bg-orange-400 rounded-full" />
+                  <Link href="/resources?category=research-updates" className="text-sm text-gray-700 dark:text-white/80 hover:text-[#00DD89] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00DD89] rounded-full" />
                     Latest Research Updates
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources?category=medical-publications" className="text-sm text-orange-700 dark:text-white/80 hover:text-orange-400 flex items-center gap-2 transition-colors">
-                    <div className="w-1 h-1 bg-orange-400 rounded-full" />
+                  <Link href="/resources?category=medical-publications" className="text-sm text-gray-700 dark:text-white/80 hover:text-[#00DD89] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00DD89] rounded-full" />
                     Medical Publications
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources?category=educational-materials" className="text-sm text-orange-700 dark:text-white/80 hover:text-orange-400 flex items-center gap-2 transition-colors">
-                    <div className="w-1 h-1 bg-orange-400 rounded-full" />
+                  <Link href="/resources?category=educational-materials" className="text-sm text-gray-700 dark:text-white/80 hover:text-[#00DD89] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00DD89] rounded-full" />
                     Educational Materials
                   </Link>
                 </li>
               </ul>
-              <Link href="/get-involved" className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-600 dark:hover:text-white transition-colors text-sm font-medium">
+              <Link href="/get-involved" className="inline-flex items-center gap-2 text-[#00DD89] hover:text-[#00AFE6] dark:hover:text-white transition-colors text-sm font-medium">
                 <Heart className="w-4 h-4" />
                 Support Research
               </Link>
@@ -1444,34 +1444,34 @@ export default function AboutAmyloidosis() {
 
             {/* Healthcare Professionals */}
             <motion.div
-              className="bg-gradient-to-br from-teal-50/95 to-blue-50/95 dark:from-teal-900/25 dark:to-blue-900/25 backdrop-blur-xl rounded-2xl p-6 border border-teal-200/50 dark:border-teal-400/30"
+              className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/30 dark:border-[#00AFE6]/40"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-blue-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                   <Stethoscope className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-teal-800 dark:text-teal-100">For Healthcare Professionals</h3>
+                <h3 className="text-lg font-bold text-[#00AFE6] dark:text-[#00AFE6]">For Healthcare Professionals</h3>
               </div>
               <ul className="space-y-3 mb-6">
                 <li>
-                  <Link href="/resources?category=clinical-guidelines" className="text-sm text-teal-700 dark:text-white/80 hover:text-teal-400 flex items-center gap-2 transition-colors">
-                    <div className="w-1 h-1 bg-teal-400 rounded-full" />
+                  <Link href="/resources?category=clinical-guidelines" className="text-sm text-gray-700 dark:text-white/80 hover:text-[#00AFE6] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00AFE6] rounded-full" />
                     Clinical Guidelines
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources?category=diagnostic-tools" className="text-sm text-teal-700 dark:text-white/80 hover:text-teal-400 flex items-center gap-2 transition-colors">
-                    <div className="w-1 h-1 bg-teal-400 rounded-full" />
+                  <Link href="/resources?category=diagnostic-tools" className="text-sm text-gray-700 dark:text-white/80 hover:text-[#00AFE6] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00AFE6] rounded-full" />
                     Diagnostic Tools
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources?category=continuing-education" className="text-sm text-teal-700 dark:text-white/80 hover:text-teal-400 flex items-center gap-2 transition-colors">
-                    <div className="w-1 h-1 bg-teal-400 rounded-full" />
+                  <Link href="/resources?category=continuing-education" className="text-sm text-gray-700 dark:text-white/80 hover:text-[#00AFE6] flex items-center gap-2 transition-colors">
+                    <div className="w-1 h-1 bg-[#00AFE6] rounded-full" />
                     Continuing Education
                   </Link>
                 </li>

@@ -1165,13 +1165,13 @@ export default function GetInvolved() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <Card className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-500 h-full group w-full max-w-none">
+                    <Card className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-500 h-full group w-full max-w-none flex flex-col">
                       <div className="aspect-[16/9] sm:aspect-[4/3] bg-gradient-to-br from-[#00AFE6]/10 via-transparent to-[#00DD89]/10 rounded-t-lg flex items-center justify-center relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent"></div>
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(0,175,230,0.1),transparent)]"></div>
                         <Calendar className="w-10 h-10 sm:w-12 sm:h-12 text-white/60 group-hover:text-white/80 transition-colors duration-300 relative z-10" />
                       </div>
-                      <CardContent className="p-4 sm:p-6">
+                      <CardContent className="p-4 sm:p-6 flex flex-col flex-1">
                         <div className="flex items-center gap-2 mb-3">
                           <Badge variant="outline" className="text-[#00AFE6] border-[#00AFE6]/30 text-xs">
                             {event.type}
@@ -1195,13 +1195,13 @@ export default function GetInvolved() {
                           </div>
                         </div>
                         
-                        <p className="text-gray-600 dark:text-white/70 text-xs sm:text-sm mb-4 sm:mb-6 line-clamp-3">
+                        <p className="text-gray-600 dark:text-white/70 text-xs sm:text-sm mb-4 sm:mb-6 line-clamp-3 flex-1">
                           {event.description}
                         </p>
                         
                         <Button 
                           onClick={() => window.open(event.registrationUrl, '_blank')}
-                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group/btn text-sm"
+                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group/btn text-sm mt-auto"
                         >
                           Register Now
                           <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />

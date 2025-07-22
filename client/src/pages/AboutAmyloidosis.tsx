@@ -700,9 +700,9 @@ export default function AboutAmyloidosis() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 bg-red-500/10 backdrop-blur-xl rounded-full px-4 py-2 border border-red-500/20 mb-6">
-              <AlertTriangle className="w-4 h-4 text-red-500" />
-              <span className="text-sm font-medium text-red-700 dark:text-red-400">{t('aboutAmyloidosis.warningSignsTitle')}</span>
+            <div className="inline-flex items-center gap-2 bg-[#00AFE6]/10 backdrop-blur-xl rounded-full px-4 py-2 border border-[#00AFE6]/20 mb-6">
+              <AlertTriangle className="w-4 h-4 text-[#00AFE6]" />
+              <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00AFE6]">{t('aboutAmyloidosis.warningSignsTitle')}</span>
             </div>
             
             <h2 className="crawford-section-title mb-6">

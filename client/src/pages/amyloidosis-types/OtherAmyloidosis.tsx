@@ -159,7 +159,7 @@ export default function OtherAmyloidosis() {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="group bg-gradient-to-r from-purple-500 via-[#00AFE6] to-orange-500 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-purple-400/30 transition-all duration-300 flex items-center gap-3 cursor-pointer">
+                <div className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-[#00AFE6]/30 transition-all duration-300 flex items-center gap-3 cursor-pointer">
                   <Microscope className="w-6 h-6 group-hover:scale-110 transition-transform" />
                   Research Updates
                   <motion.div
@@ -175,7 +175,7 @@ export default function OtherAmyloidosis() {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Link href="/directory" className="group bg-white/20 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-bold text-lg border-2 border-purple-400/30 hover:border-purple-400 transition-all duration-300 flex items-center gap-3">
+                <Link href="/directory" className="group bg-white/20 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-bold text-lg border-2 border-[#00AFE6]/30 hover:border-[#00AFE6] transition-all duration-300 flex items-center gap-3">
                   <Search className="w-6 h-6 group-hover:scale-110 transition-transform" />
                   Find Specialists
                 </Link>
@@ -190,9 +190,9 @@ export default function OtherAmyloidosis() {
               transition={{ delay: 1, duration: 0.8 }}
             >
               {[
-                { icon: Microscope, label: "Research Focus", value: "Ongoing Studies", color: "from-purple-400/20 to-violet-400/20 border-purple-400/40" },
-                { icon: Target, label: "Multiple Types", value: "7+ Variants", color: "from-[#00AFE6]/20 to-blue-400/20 border-[#00AFE6]/40" },
-                { icon: AlertTriangle, label: "Often Rare", value: "Specialized Care", color: "from-orange-400/20 to-amber-400/20 border-orange-400/40" }
+                { icon: Microscope, label: "Research Focus", value: "Ongoing Studies", color: "from-[#00AFE6]/20 to-[#00DD89]/20 border-[#00AFE6]/40" },
+                { icon: Target, label: "Multiple Types", value: "7+ Variants", color: "from-[#00DD89]/20 to-[#00AFE6]/20 border-[#00DD89]/40" },
+                { icon: AlertTriangle, label: "Often Rare", value: "Specialized Care", color: "from-[#00AFE6]/20 to-[#00DD89]/20 border-[#00AFE6]/40" }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -202,7 +202,7 @@ export default function OtherAmyloidosis() {
                   transition={{ delay: 1.2 + index * 0.1, duration: 0.6 }}
                   whileHover={{ scale: 1.05, y: -5 }}
                 >
-                  <stat.icon className="w-8 h-8 text-purple-500 mb-3 mx-auto" />
+                  <stat.icon className="w-8 h-8 text-[#00AFE6] mb-3 mx-auto" />
                   <h3 className="text-sm font-semibold text-gray-600 dark:text-white/70 mb-1">{stat.label}</h3>
                   <p className="text-lg font-bold text-gray-900 dark:text-white">{stat.value}</p>
                 </motion.div>

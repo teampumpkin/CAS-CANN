@@ -198,9 +198,9 @@ export default function ALAmyloidosis() {
               transition={{ delay: 1, duration: 0.8 }}
             >
               {[
-                { icon: Heart, label: "Most Common", value: "Systemic Type", color: "from-[#00AFE6]/20 to-blue-400/20 border-[#00AFE6]/40" },
-                { icon: Target, label: "Median Age", value: "65 Years", color: "from-[#00DD89]/20 to-green-400/20 border-[#00DD89]/40" },
-                { icon: Users, label: "Multiple Myeloma", value: "10-15% Overlap", color: "from-purple-400/20 to-pink-400/20 border-purple-400/40" }
+                { icon: Heart, label: "Most Common", value: "Systemic Type", color: "from-[#00AFE6]/20 to-[#00DD89]/20 border-[#00AFE6]/40" },
+                { icon: Target, label: "Median Age", value: "65 Years", color: "from-[#00DD89]/20 to-[#00AFE6]/20 border-[#00DD89]/40" },
+                { icon: Users, label: "Multiple Myeloma", value: "10-15% Overlap", color: "from-[#00AFE6]/20 to-[#00DD89]/20 border-[#00AFE6]/40" }
               ].map((stat, index) => (
                 <motion.div
                   key={index}

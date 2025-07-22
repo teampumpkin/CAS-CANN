@@ -192,9 +192,9 @@ export default function ATTRAmyloidosis() {
               transition={{ delay: 1, duration: 0.8 }}
             >
               {[
-                { icon: Brain, label: "Hereditary Mutations", value: "120+ Known", color: "from-[#00DD89]/20 to-green-400/20 border-[#00DD89]/40" },
-                { icon: Heart, label: "Wild-Type", value: "Age-Related", color: "from-[#00AFE6]/20 to-blue-400/20 border-[#00AFE6]/40" },
-                { icon: Target, label: "Primary Organs", value: "Heart & Nerves", color: "from-purple-400/20 to-pink-400/20 border-purple-400/40" }
+                { icon: Brain, label: "Hereditary Mutations", value: "120+ Known", color: "from-[#00DD89]/20 to-[#00AFE6]/20 border-[#00DD89]/40" },
+                { icon: Heart, label: "Wild-Type", value: "Age-Related", color: "from-[#00AFE6]/20 to-[#00DD89]/20 border-[#00AFE6]/40" },
+                { icon: Target, label: "Primary Organs", value: "Heart & Nerves", color: "from-[#00AFE6]/20 to-[#00DD89]/20 border-[#00AFE6]/40" }
               ].map((stat, index) => (
                 <motion.div
                   key={index}

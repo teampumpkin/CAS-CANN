@@ -69,69 +69,191 @@ export default function ALAmyloidosis() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      {/* Hero Section */}
-      <section className="py-32 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-800 dark:via-gray-900 dark:to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
+      {/* Enhanced Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Dynamic gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/20 via-white to-[#00DD89]/15 dark:from-[#00AFE6]/30 dark:via-gray-900 dark:to-[#00DD89]/25" />
         
-        {/* Floating accent elements */}
+        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(5)].map((_, i) => (
+          {/* Large floating circles */}
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-20"
+              className="absolute rounded-full opacity-10"
               style={{
-                left: `${20 + i * 15}%`,
-                top: `${30 + i * 10}%`,
+                width: `${120 + i * 40}px`,
+                height: `${120 + i * 40}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                background: i % 2 === 0 
+                  ? 'linear-gradient(135deg, #00AFE6, #0088CC)' 
+                  : 'linear-gradient(135deg, #00DD89, #00B366)',
               }}
               animate={{
-                y: [0, -20, 0],
-                x: [0, 10, 0],
-                scale: [1, 1.2, 1],
-                opacity: [0.2, 0.5, 0.2]
+                y: [0, -30, 0],
+                x: [0, 20, 0],
+                scale: [1, 1.1, 1],
+                rotate: [0, 360],
               }}
               transition={{
-                duration: 4 + i,
+                duration: 8 + i * 2,
                 repeat: Infinity,
                 ease: "easeInOut",
                 delay: i * 0.5
               }}
             />
           ))}
+          
+          {/* Heart pulse elements */}
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={`heart-${i}`}
+              className="absolute"
+              style={{
+                left: `${15 + i * 15}%`,
+                top: `${20 + (i % 3) * 20}%`,
+              }}
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.3, 0.7, 0.3],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: i * 0.5
+              }}
+            >
+              <Heart className="w-8 h-8 text-[#00AFE6]/30" fill="currentColor" />
+            </motion.div>
+          ))}
         </div>
+
+        {/* Mesh gradient overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,175,230,0.1),transparent_50%),radial-gradient(ellipse_at_80%_20%,rgba(0,221,137,0.1),transparent_50%)]" />
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            className="max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
+            className="max-w-5xl mx-auto text-center"
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
-            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white transition-colors mb-8">
-              <ArrowLeft className="w-4 h-4" />
+            {/* Back navigation */}
+            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-gray-600 dark:text-white/70 hover:text-[#00AFE6] transition-colors mb-12 group">
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
               Back to Amyloidosis Types
             </Link>
             
-            <div className="text-center">
-              <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
-                <Heart className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-gray-700 dark:text-white/90">AL Amyloidosis</span>
-              </div>
+            {/* Premium badge */}
+            <motion.div 
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-xl rounded-2xl px-8 py-4 border border-[#00AFE6]/30 mb-8 shadow-lg"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse" />
+              <span className="text-sm font-bold text-[#00AFE6] dark:text-[#00AFE6] tracking-wide uppercase">Light Chain Amyloidosis</span>
+              <Heart className="w-5 h-5 text-[#00AFE6]" />
+            </motion.div>
             
-              <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                  AL Amyloidosis
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Light Chain
-                </span>
-              </h1>
+            {/* Main title with enhanced typography */}
+            <motion.h1 
+              className="text-5xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/90 bg-clip-text text-transparent block">
+                AL Amyloidosis
+              </span>
+              <motion.span 
+                className="bg-gradient-to-r from-[#00AFE6] via-[#0099CC] to-[#00DD89] bg-clip-text text-transparent block mt-2"
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                style={{ backgroundSize: '200% 200%' }}
+              >
+                Light Chain
+              </motion.span>
+            </motion.h1>
+            
+            {/* Enhanced description */}
+            <motion.p 
+              className="text-xl lg:text-2xl text-gray-600 dark:text-white/80 leading-relaxed max-w-4xl mx-auto mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              Caused by abnormal plasma cells producing light chains that form amyloid. Often diagnosed after age 50; affects both men and women. Related to multiple myeloma (10-15% overlap).
+            </motion.p>
+            
+            {/* Enhanced CTA buttons */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-[#00AFE6]/30 transition-all duration-300 flex items-center gap-3 cursor-pointer">
+                  <Heart className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                  Learn Symptoms
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.div>
+                </div>
+              </motion.div>
               
-              <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-                Caused by abnormal plasma cells producing light chains that form amyloid. Often diagnosed after age 50; affects both men and women. Related to multiple myeloma (10-15% overlap).
-              </p>
-            </div>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Link href="/directory" className="group bg-white/20 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-bold text-lg border-2 border-[#00AFE6]/30 hover:border-[#00AFE6] transition-all duration-300 flex items-center gap-3">
+                  <Search className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                  Find AL Specialists
+                </Link>
+              </motion.div>
+            </motion.div>
+            
+            {/* Key stats with enhanced design */}
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.8 }}
+            >
+              {[
+                { icon: Heart, label: "Most Common", value: "Systemic Type", color: "from-[#00AFE6]/20 to-blue-400/20 border-[#00AFE6]/40" },
+                { icon: Target, label: "Median Age", value: "65 Years", color: "from-[#00DD89]/20 to-green-400/20 border-[#00DD89]/40" },
+                { icon: Users, label: "Multiple Myeloma", value: "10-15% Overlap", color: "from-purple-400/20 to-pink-400/20 border-purple-400/40" }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className={`bg-gradient-to-br ${stat.color} backdrop-blur-xl rounded-2xl p-6 border`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.2 + index * 0.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
+                  <stat.icon className="w-8 h-8 text-[#00AFE6] mb-3 mx-auto" />
+                  <h3 className="text-sm font-semibold text-gray-600 dark:text-white/70 mb-1">{stat.label}</h3>
+                  <p className="text-lg font-bold text-gray-900 dark:text-white">{stat.value}</p>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>

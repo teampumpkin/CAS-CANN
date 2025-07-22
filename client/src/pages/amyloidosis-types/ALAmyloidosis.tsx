@@ -74,63 +74,25 @@ export default function ALAmyloidosis() {
         {/* Dynamic gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/20 via-white to-[#00DD89]/15 dark:from-[#00AFE6]/30 dark:via-gray-900 dark:to-[#00DD89]/25" />
         
-        {/* Animated background elements */}
+        {/* Simplified brand accent elements */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Large floating circles */}
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full opacity-10"
-              style={{
-                width: `${120 + i * 40}px`,
-                height: `${120 + i * 40}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                background: i % 2 === 0 
-                  ? 'linear-gradient(135deg, #00AFE6, #0088CC)' 
-                  : 'linear-gradient(135deg, #00DD89, #00B366)',
-              }}
-              animate={{
-                y: [0, -30, 0],
-                x: [0, 20, 0],
-                scale: [1, 1.1, 1],
-                rotate: [0, 360],
-              }}
-              transition={{
-                duration: 8 + i * 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.5
-              }}
-            />
-          ))}
-          
-          {/* Heart pulse elements */}
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={`heart-${i}`}
-              className="absolute"
-              style={{
-                left: `${15 + i * 15}%`,
-                top: `${20 + (i % 3) * 20}%`,
-              }}
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.3, 0.7, 0.3],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: i * 0.5
-              }}
-            >
-              <Heart className="w-8 h-8 text-[#00AFE6]/30" fill="currentColor" />
-            </motion.div>
-          ))}
+          <motion.div
+            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1.2, 1, 1.2],
+              opacity: [0.15, 0.3, 0.15]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
-
-        {/* Mesh gradient overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,175,230,0.1),transparent_50%),radial-gradient(ellipse_at_80%_20%,rgba(0,221,137,0.1),transparent_50%)]" />
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div

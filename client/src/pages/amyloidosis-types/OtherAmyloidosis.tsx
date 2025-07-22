@@ -63,73 +63,28 @@ export default function OtherAmyloidosis() {
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Enhanced Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Molecular structure inspired gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-100/30 via-white to-orange-100/20 dark:from-purple-900/30 dark:via-gray-900 dark:to-orange-900/20" />
+        {/* Simplified brand gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/20 via-white to-[#00DD89]/15 dark:from-[#00AFE6]/30 dark:via-gray-900 dark:to-[#00DD89]/25" />
         
-        {/* Animated molecular structure pattern */}
+        {/* Simplified brand accent elements */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Molecular nodes */}
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full opacity-15"
-              style={{
-                width: `${40 + i * 15}px`,
-                height: `${40 + i * 15}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                background: i % 4 === 0 
-                  ? 'linear-gradient(135deg, #A855F7, #7C3AED)' 
-                  : i % 4 === 1
-                  ? 'linear-gradient(135deg, #00AFE6, #0088CC)'
-                  : i % 4 === 2
-                  ? 'linear-gradient(135deg, #00DD89, #00B366)'
-                  : 'linear-gradient(135deg, #F59E0B, #D97706)',
-              }}
-              animate={{
-                y: [0, -25, 0],
-                x: [0, 15, 0],
-                scale: [1, 1.15, 1],
-                rotate: [0, 270, 540],
-              }}
-              transition={{
-                duration: 12 + i * 1,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.6
-              }}
-            />
-          ))}
-          
-          {/* Research icons floating */}
-          {[...Array(10)].map((_, i) => (
-            <motion.div
-              key={`research-${i}`}
-              className="absolute"
-              style={{
-                left: `${8 + i * 10}%`,
-                top: `${10 + (i % 5) * 18}%`,
-              }}
-              animate={{
-                scale: [1, 1.4, 1],
-                opacity: [0.3, 0.9, 0.3],
-                rotate: [0, 180],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                delay: i * 0.8
-              }}
-            >
-              {i % 3 === 0 && <Microscope className="w-12 h-12 text-purple-400/40" />}
-              {i % 3 === 1 && <Search className="w-10 h-10 text-[#00AFE6]/40" />}
-              {i % 3 === 2 && <Target className="w-11 h-11 text-orange-400/40" />}
-            </motion.div>
-          ))}
+          <motion.div
+            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1.2, 1, 1.2],
+              opacity: [0.15, 0.3, 0.15]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
-
-        {/* Multi-gradient overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.1),transparent_50%),radial-gradient(ellipse_at_60%_40%,rgba(0,175,230,0.08),transparent_50%),radial-gradient(ellipse_at_90%_10%,rgba(245,158,11,0.08),transparent_50%)]" />
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -139,22 +94,22 @@ export default function OtherAmyloidosis() {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             {/* Back navigation */}
-            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-gray-600 dark:text-white/70 hover:text-purple-500 transition-colors mb-12 group">
+            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-gray-600 dark:text-white/70 hover:text-[#00AFE6] transition-colors mb-12 group">
               <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
               Back to Amyloidosis Types
             </Link>
             
             {/* Premium badge with research theme */}
             <motion.div 
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-400/20 via-[#00AFE6]/15 to-orange-400/20 backdrop-blur-xl rounded-2xl px-8 py-4 border border-purple-400/30 mb-8 shadow-lg"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-xl rounded-2xl px-8 py-4 border border-[#00AFE6]/30 mb-8 shadow-lg"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.6 }}
               whileHover={{ scale: 1.05 }}
             >
-              <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-orange-400 rounded-full animate-pulse" />
-              <span className="text-sm font-bold text-purple-600 dark:text-purple-400 tracking-wide uppercase">Rare Amyloidosis Types</span>
-              <Microscope className="w-5 h-5 text-purple-500" />
+              <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse" />
+              <span className="text-sm font-bold text-[#00AFE6] dark:text-[#00AFE6] tracking-wide uppercase">Rare Amyloidosis Types</span>
+              <Microscope className="w-5 h-5 text-[#00AFE6]" />
             </motion.div>
             
             {/* Main title with enhanced typography */}
@@ -168,7 +123,7 @@ export default function OtherAmyloidosis() {
                 Rare Types of
               </span>
               <motion.span 
-                className="bg-gradient-to-r from-purple-500 via-[#00AFE6] to-orange-500 bg-clip-text text-transparent block mt-2"
+                className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent block mt-2"
                 animate={{
                   backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
                 }}

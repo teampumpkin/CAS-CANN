@@ -68,66 +68,25 @@ export default function ATTRAmyloidosis() {
         {/* Neural network inspired gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#00DD89]/20 via-white to-[#00AFE6]/15 dark:from-[#00DD89]/30 dark:via-gray-900 dark:to-[#00AFE6]/25" />
         
-        {/* Animated neural network pattern */}
+        {/* Simplified brand accent elements */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Neural nodes */}
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full opacity-20"
-              style={{
-                width: `${60 + i * 20}px`,
-                height: `${60 + i * 20}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                background: i % 3 === 0 
-                  ? 'linear-gradient(135deg, #00DD89, #00B366)' 
-                  : i % 3 === 1
-                  ? 'linear-gradient(135deg, #00AFE6, #0088CC)'
-                  : 'linear-gradient(135deg, #6366F1, #8B5CF6)',
-              }}
-              animate={{
-                y: [0, -40, 0],
-                x: [0, 30, 0],
-                scale: [1, 1.2, 1],
-                rotate: [0, 180, 360],
-              }}
-              transition={{
-                duration: 10 + i * 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.8
-              }}
-            />
-          ))}
-          
-          {/* Brain/neural network icons */}
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={`brain-${i}`}
-              className="absolute"
-              style={{
-                left: `${10 + i * 12}%`,
-                top: `${15 + (i % 4) * 20}%`,
-              }}
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.4, 0.8, 0.4],
-                rotate: [0, 360],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                delay: i * 0.7
-              }}
-            >
-              <Brain className="w-10 h-10 text-[#00DD89]/30" />
-            </motion.div>
-          ))}
+          <motion.div
+            className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-[#00DD89]/20 to-[#00AFE6]/20 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 rounded-full blur-3xl"
+            animate={{ 
+              scale: [1.2, 1, 1.2],
+              opacity: [0.15, 0.3, 0.15]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
-
-        {/* DNA helix inspired overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,221,137,0.15),transparent_50%),radial-gradient(ellipse_at_70%_30%,rgba(0,175,230,0.15),transparent_50%)]" />
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -137,7 +96,7 @@ export default function ATTRAmyloidosis() {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             {/* Back navigation */}
-            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-gray-600 dark:text-white/70 hover:text-[#00DD89] transition-colors mb-12 group">
+            <Link href="/about-amyloidosis" className="inline-flex items-center gap-2 text-gray-600 dark:text-white/70 hover:text-[#00AFE6] transition-colors mb-12 group">
               <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
               Back to Amyloidosis Types
             </Link>
@@ -151,8 +110,8 @@ export default function ATTRAmyloidosis() {
               whileHover={{ scale: 1.05 }}
             >
               <div className="w-3 h-3 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full animate-pulse" />
-              <span className="text-sm font-bold text-[#00DD89] dark:text-[#00DD89] tracking-wide uppercase">Transthyretin Amyloidosis</span>
-              <Brain className="w-5 h-5 text-[#00DD89]" />
+              <span className="text-sm font-bold text-[#00AFE6] dark:text-[#00AFE6] tracking-wide uppercase">Transthyretin Amyloidosis</span>
+              <Brain className="w-5 h-5 text-[#00AFE6]" />
             </motion.div>
             
             {/* Main title with enhanced typography */}

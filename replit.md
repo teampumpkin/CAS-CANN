@@ -10,6 +10,17 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Complete Visual Design Overhaul - Amyloidosis Detail Pages Simplification (July 22, 2025)
+- ✅ **Background complexity removal** - Eliminated excessive floating animations, multiple color circles, and visual clutter from AL, ATTR, and Other/Rare amyloidosis pages
+- ✅ **Consistent brand color implementation** - Standardized all pages to use only #00AFE6 and #00DD89 brand colors, removing purple, orange, and other inconsistent color schemes
+- ✅ **Simplified hero section animations** - Replaced complex multi-element animations with clean, minimal brand accent elements (2 subtle gradient circles per page)
+- ✅ **Navigation consistency** - Standardized all back navigation hover states to use consistent #00AFE6 brand color across all three amyloidosis detail pages
+- ✅ **Badge color standardization** - Updated all premium badges to use consistent brand gradient colors instead of varied purple/orange/multi-color schemes
+- ✅ **Title gradient consistency** - Changed "Rare Types of Amyloidosis" title to use brand gradient (#00AFE6 to #00DD89) instead of multi-color rainbow gradient
+- ✅ **Visual hierarchy improvement** - Maintained professional medical aesthetic while eliminating distracting background elements that detracted from content focus
+- ✅ **Performance optimization** - Reduced animation complexity and DOM elements, improving page load and rendering performance
+- ✅ **Brand consistency achievement** - All three amyloidosis detail pages now follow identical visual design patterns with consistent color usage
+
 ### CAS Journal Club & CANN Educational Series Events Integration (July 22, 2025)
 - ✅ **CAS Journal Club series added** - Integrated complete 5-session schedule (Sep 2025 - Jun 2026) with 3:00-4:00 PM MST timing
 - ✅ **CANN Educational Series integration** - Added October 2025 session with PANN collaboration details and professional development focus

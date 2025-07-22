@@ -516,7 +516,7 @@ export default function ResourceModeration() {
                                   
                                   <div>
                                     <h4 className="font-medium text-white mb-2">Description</h4>
-                                    <p className="text-white/80 text-sm bg-white/5 p-3 rounded-lg">
+                                    <p className="text-white/80 text-sm bg-white/5 p-3 rounded-3xl">
                                       {selectedResource.description}
                                     </p>
                                   </div>

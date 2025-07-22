@@ -1234,7 +1234,7 @@ export default function About() {
                             <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/30 to-[#00DD89]/30 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-500 shadow-lg">
                               <span className="text-xl font-bold text-white drop-shadow-lg">{partner.shortName}</span>
                             </div>
-                            <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-[#00AFE6]/20 transition-all duration-300">
+                            <div className="w-8 h-8 bg-white/10 rounded-3xl flex items-center justify-center group-hover:bg-[#00AFE6]/20 transition-all duration-300">
                               <svg className="w-4 h-4 text-white/60 group-hover:text-[#00AFE6] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                               </svg>

@@ -145,7 +145,7 @@ export default function DirectoryPreviewSection() {
                   >
                     {/* Tooltip */}
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
-                      <div className="bg-gray-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+                      <div className="bg-gray-900 text-white px-3 py-2 rounded-3xl text-sm whitespace-nowrap shadow-lg">
                         <div className="font-semibold">{center.name}</div>
                         <div className="text-xs text-gray-300">{center.city}, {center.province}</div>
                         <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
@@ -157,7 +157,7 @@ export default function DirectoryPreviewSection() {
               </div>
               
               {/* Legend - Ultra Compact design */}
-              <div className="mt-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-2 text-xs max-w-md mx-auto">
+              <div className="mt-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl p-2 text-xs max-w-md mx-auto">
                 <div className="font-semibold text-gray-900 dark:text-white mb-1 text-center text-xs">{t('map.legend.title')}</div>
                 <div className="grid grid-cols-2 gap-1 text-xs">
                   <div className="flex items-center gap-1">

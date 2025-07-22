@@ -469,7 +469,7 @@ export default function UploadResource() {
                       <span>Must comply with Canadian health information standards</span>
                     </div>
                   </div>
-                  <div className="mt-4 p-3 bg-gray-100 dark:bg-white/5 rounded-lg">
+                  <div className="mt-4 p-3 bg-gray-100 dark:bg-white/5 rounded-3xl">
                     <p className="text-xs text-gray-600 dark:text-white/70">
                       By submitting, you confirm that you have the right to share this resource 
                       and agree to make it available under open licensing terms.

@@ -84,7 +84,7 @@ export default function Footer() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => setLanguage('en')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
+                      className={`px-3 py-1.5 rounded-3xl text-xs font-medium transition-all duration-300 ${
                         language === 'en' 
                           ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
                           : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
@@ -94,7 +94,7 @@ export default function Footer() {
                     </button>
                     <button
                       onClick={() => setLanguage('fr')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
+                      className={`px-3 py-1.5 rounded-3xl text-xs font-medium transition-all duration-300 ${
                         language === 'fr' 
                           ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
                           : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'

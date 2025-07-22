@@ -262,7 +262,7 @@ export default function Header() {
                         <a
                           key={dropdownItem.name}
                           href={dropdownItem.href}
-                          className={`block px-6 py-3 rounded-lg transition-all duration-300 text-base ${
+                          className={`block px-6 py-3 rounded-3xl transition-all duration-300 text-base ${
                             location === dropdownItem.href
                               ? 'text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
                               : 'text-white/80 hover:text-white hover:bg-white/10'
@@ -279,7 +279,7 @@ export default function Header() {
                   ) : (
                     <a
                       href={item.href}
-                      className={`block px-4 py-3 font-semibold text-base rounded-lg transition-all duration-300 ${
+                      className={`block px-4 py-3 font-semibold text-base rounded-3xl transition-all duration-300 ${
                         isPageActive(item.href)
                           ? 'text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
                           : 'text-white/90 hover:bg-white/10'

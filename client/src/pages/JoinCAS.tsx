@@ -361,7 +361,7 @@ export default function JoinCAS() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600 dark:text-white/70 mb-4">{category.description}</p>
-                    <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-lg">
+                    <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-3xl">
                       <p className="text-sm text-gray-600 dark:text-white/60">
                         <strong>Requirements:</strong> {category.requirements}
                       </p>

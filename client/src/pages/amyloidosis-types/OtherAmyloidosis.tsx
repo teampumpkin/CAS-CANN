@@ -224,7 +224,7 @@ export default function OtherAmyloidosis() {
                   
                   {/* Overlay content */}
                   <div className="absolute bottom-6 left-6 right-6">
-                    <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4">
                       <h3 className="text-gray-900 font-bold text-lg mb-2">Specialized Care Required</h3>
                       <p className="text-gray-700 text-sm">
                         Each type requires specific diagnostic approaches and personalized treatment strategies.

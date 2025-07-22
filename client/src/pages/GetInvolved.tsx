@@ -158,77 +158,9 @@ const upcomingEvents = [
   }
 ];
 
-const recentEvents = [
-  {
-    id: 1,
-    title: "World Amyloidosis Day 2024",
-    date: "2024-10-26",
-    description: "Global awareness campaign highlighting the importance of early diagnosis and access to care.",
-    image: "/api/placeholder/300/200",
-    attendees: 150
-  },
-  {
-    id: 2,
-    title: "Cross-Canada Clinical Network Meeting",
-    date: "2024-09-15",
-    description: "Healthcare providers from across Canada gathered to discuss regional care coordination strategies.",
-    image: "/api/placeholder/300/200",
-    attendees: 75
-  }
-];
+const recentEvents: any[] = [];
 
-const pastEvents = [
-  {
-    id: 1,
-    title: "Amyloidosis Research Symposium 2024",
-    date: "2024-08-20",
-    description: "Annual symposium brought together leading researchers and clinicians to discuss advances in amyloidosis research and treatment.",
-    image: "/api/placeholder/300/200",
-    attendees: 200,
-    location: "Vancouver Convention Centre",
-    type: "Conference"
-  },
-  {
-    id: 2,
-    title: "Patient & Caregiver Workshop Series",
-    date: "2024-06-15",
-    description: "Interactive workshop series focused on navigation tools, support resources, and connecting families affected by amyloidosis.",
-    image: "/api/placeholder/300/200",
-    attendees: 85,
-    location: "Virtual Event",
-    type: "Workshop"
-  },
-  {
-    id: 3,
-    title: "Clinical Guidelines Webinar",
-    date: "2024-05-30",
-    description: "Review of diagnostic and treatment guidelines for amyloidosis, featuring expert panel discussion and Q&A.",
-    image: "/api/placeholder/300/200",
-    attendees: 120,
-    location: "Online",
-    type: "Webinar"
-  },
-  {
-    id: 4,
-    title: "CAS Annual General Meeting",
-    date: "2024-03-12",
-    description: "Annual meeting featuring organizational updates, strategic planning, and member recognition.",
-    image: "/api/placeholder/300/200",
-    attendees: 65,
-    location: "Toronto, ON",
-    type: "Meeting"
-  },
-  {
-    id: 5,
-    title: "Rare Disease Awareness Month Event",
-    date: "2024-02-28",
-    description: "Special event highlighting amyloidosis as part of Rare Disease Awareness Month activities.",
-    image: "/api/placeholder/300/200",
-    attendees: 95,
-    location: "Calgary, AB",
-    type: "Awareness Event"
-  }
-];
+const pastEvents: any[] = [];
 
 export default function GetInvolved() {
   const [activeTab, setActiveTab] = useState("overview");

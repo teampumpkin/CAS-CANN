@@ -329,12 +329,12 @@ export default function AboutAmyloidosis() {
             >
               <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                     <Activity className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-blue-800 dark:text-blue-100">Normal Proteins</h3>
+                  <h3 className="text-xl font-bold text-[#00AFE6] dark:text-[#00AFE6]">Normal Proteins</h3>
                 </div>
-                <p className="text-blue-700 dark:text-blue-200 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
                   Think of proteins like tiny workers in your body. Normally, they have specific shapes that help them do their jobs—like carrying oxygen, fighting infections, or helping your heart pump blood.
                 </p>
               </div>
@@ -377,7 +377,7 @@ export default function AboutAmyloidosis() {
               <div className="space-y-8">
                 {/* Step 1 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-white font-bold text-lg">1</span>
                   </div>
                   <div>
@@ -393,7 +393,7 @@ export default function AboutAmyloidosis() {
                 
                 {/* Step 2 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-white font-bold text-lg">2</span>
                   </div>
                   <div>
@@ -409,7 +409,7 @@ export default function AboutAmyloidosis() {
                 
                 {/* Step 3 */}
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-white font-bold text-lg">3</span>
                   </div>
                   <div>

@@ -88,7 +88,7 @@ export default function OtherAmyloidosis() {
           {[...Array(5)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full opacity-20"
+              className="absolute w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-20"
               style={{
                 left: `${20 + i * 15}%`,
                 top: `${30 + i * 10}%`,
@@ -123,7 +123,7 @@ export default function OtherAmyloidosis() {
             
             <div className="text-center">
               <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
-                <Microscope className="w-5 h-5 text-purple-400" />
+                <Microscope className="w-5 h-5 text-[#00AFE6]" />
                 <span className="text-sm font-medium text-gray-700 dark:text-white/90">Other Amyloidosis Types</span>
               </div>
             
@@ -132,7 +132,7 @@ export default function OtherAmyloidosis() {
                   Other Amyloidosis
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                   Types
                 </span>
               </h1>
@@ -164,41 +164,41 @@ export default function OtherAmyloidosis() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
-                  <Microscope className="w-5 h-5 text-purple-400" />
-                  <span className="text-sm font-medium text-white/90">Overview</span>
+                <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
+                  <Microscope className="w-5 h-5 text-[#00AFE6]" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-white/90">Overview</span>
                 </div>
                 
                 <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                     Understanding Other
                   </span>
                   <br />
-                  <span className="bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                     Amyloidosis Forms
                   </span>
                 </h2>
                 
                 <div className="space-y-6">
-                  <div className="bg-white/10 backdrop-blur-xl rounded-xl p-6 border border-white/20">
-                    <h3 className="text-xl font-bold text-purple-100 mb-3">AA (Secondary) Amyloidosis</h3>
-                    <p className="text-white/70 leading-relaxed">
+                  <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
+                    <h3 className="text-xl font-bold text-[#00AFE6] dark:text-[#00AFE6] mb-3">AA (Secondary) Amyloidosis</h3>
+                    <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
                       Caused by chronic inflammatory conditions like rheumatoid arthritis, inflammatory bowel disease, or chronic infections. 
                       The key is controlling the underlying inflammatory disease.
                     </p>
                   </div>
                   
-                  <div className="bg-white/10 backdrop-blur-xl rounded-xl p-6 border border-white/20">
-                    <h3 className="text-xl font-bold text-purple-100 mb-3">Localized Amyloidosis</h3>
-                    <p className="text-white/70 leading-relaxed">
+                  <div className="bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 dark:to-[#00AFE6]/20 backdrop-blur-xl rounded-xl p-6 border border-[#00DD89]/20 dark:border-[#00DD89]/30">
+                    <h3 className="text-xl font-bold text-[#00DD89] dark:text-[#00DD89] mb-3">Localized Amyloidosis</h3>
+                    <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
                       Affects specific organs or tissues without systemic involvement. Common forms include tracheobronchial, 
                       cutaneous, and localized nodular amyloidosis.
                     </p>
                   </div>
                   
-                  <div className="bg-white/10 backdrop-blur-xl rounded-xl p-6 border border-white/20">
-                    <h3 className="text-xl font-bold text-purple-100 mb-3">Dialysis-Related Amyloidosis</h3>
-                    <p className="text-white/70 leading-relaxed">
+                  <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
+                    <h3 className="text-xl font-bold text-[#00AFE6] dark:text-[#00AFE6] mb-3">Dialysis-Related Amyloidosis</h3>
+                    <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
                       Develops in patients on long-term dialysis due to β2-microglobulin protein accumulation. 
                       Improved dialysis techniques have reduced its incidence.
                     </p>
@@ -214,19 +214,19 @@ export default function OtherAmyloidosis() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="relative bg-gradient-to-br from-purple-900/25 to-violet-900/25 backdrop-blur-xl rounded-2xl p-8 border border-purple-400/30">
+                <div className="relative bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30">
                   <img 
                     src={medicalResearchImg} 
                     alt="Medical Research" 
                     className="rounded-xl shadow-2xl w-full h-80 object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent rounded-xl" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#00AFE6]/30 to-transparent rounded-xl" />
                   
                   {/* Overlay content */}
                   <div className="absolute bottom-6 left-6 right-6">
-                    <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-4">
-                      <h3 className="text-gray-900 font-bold text-lg mb-2">Specialized Care Required</h3>
-                      <p className="text-gray-700 text-sm">
+                    <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-3xl p-4 border border-white/20 dark:border-gray-400/20">
+                      <h3 className="text-gray-900 dark:text-white font-bold text-lg mb-2">Specialized Care Required</h3>
+                      <p className="text-gray-700 dark:text-gray-200 text-sm">
                         Each type requires specific diagnostic approaches and personalized treatment strategies.
                       </p>
                     </div>
@@ -239,8 +239,8 @@ export default function OtherAmyloidosis() {
       </section>
 
       {/* Detailed Information Section */}
-      <section className="py-24 bg-gray-800 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+      <section className="py-24 bg-gray-50 dark:bg-gray-800 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="text-center mb-16"
@@ -250,11 +250,11 @@ export default function OtherAmyloidosis() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Detailed Information
               </span>
             </h2>
-            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
               Comprehensive information about symptoms, diagnosis, and treatment approaches for other amyloidosis types.
             </p>
           </motion.div>
@@ -262,7 +262,7 @@ export default function OtherAmyloidosis() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Symptoms */}
             <motion.div
-              className="bg-gradient-to-br from-red-900/25 to-pink-900/25 backdrop-blur-xl rounded-2xl border border-red-400/30"
+              className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl border border-[#00AFE6]/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -270,17 +270,17 @@ export default function OtherAmyloidosis() {
             >
               <div className="p-6">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                     <AlertTriangle className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-red-100">Symptoms</h3>
+                  <h3 className="text-xl font-bold text-[#00AFE6] dark:text-[#00AFE6]">Symptoms</h3>
                 </div>
                 
                 <ul className="space-y-3">
                   {detailedInfo.symptoms.map((symptom, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-white/80 text-sm">{symptom}</span>
+                      <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-200 text-sm">{symptom}</span>
                     </li>
                   ))}
                 </ul>
@@ -289,7 +289,7 @@ export default function OtherAmyloidosis() {
 
             {/* Diagnosis */}
             <motion.div
-              className="bg-gradient-to-br from-blue-900/25 to-cyan-900/25 backdrop-blur-xl rounded-2xl border border-blue-400/30"
+              className="bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/25 dark:to-[#00AFE6]/25 backdrop-blur-xl rounded-2xl border border-[#00DD89]/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -297,17 +297,17 @@ export default function OtherAmyloidosis() {
             >
               <div className="p-6">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center">
                     <Search className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-blue-100">Diagnosis</h3>
+                  <h3 className="text-xl font-bold text-[#00DD89] dark:text-[#00DD89]">Diagnosis</h3>
                 </div>
                 
                 <ul className="space-y-3">
                   {detailedInfo.diagnosis.map((test, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-white/80 text-sm">{test}</span>
+                      <div className="w-1.5 h-1.5 bg-[#00DD89] rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-200 text-sm">{test}</span>
                     </li>
                   ))}
                 </ul>
@@ -316,7 +316,7 @@ export default function OtherAmyloidosis() {
 
             {/* Treatment */}
             <motion.div
-              className="bg-gradient-to-br from-green-900/25 to-emerald-900/25 backdrop-blur-xl rounded-2xl border border-green-400/30"
+              className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl border border-[#00AFE6]/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -324,17 +324,17 @@ export default function OtherAmyloidosis() {
             >
               <div className="p-6">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                     <Target className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-green-100">Treatment</h3>
+                  <h3 className="text-xl font-bold text-[#00AFE6] dark:text-[#00AFE6]">Treatment</h3>
                 </div>
                 
                 <ul className="space-y-3">
                   {detailedInfo.treatment.map((treatment, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-white/80 text-sm">{treatment}</span>
+                      <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-200 text-sm">{treatment}</span>
                     </li>
                   ))}
                 </ul>
@@ -345,8 +345,8 @@ export default function OtherAmyloidosis() {
       </section>
 
       {/* Treatment Centers Section */}
-      <section className="py-24 bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+      <section className="py-24 bg-white dark:bg-gray-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="text-center mb-16"
@@ -356,11 +356,11 @@ export default function OtherAmyloidosis() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Treatment Centers
               </span>
             </h2>
-            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
               Specialized centers across Canada offering comprehensive care for other amyloidosis types.
             </p>
           </motion.div>
@@ -369,23 +369,23 @@ export default function OtherAmyloidosis() {
             {detailedInfo.centers.map((center, index) => (
               <motion.div
                 key={index}
-                className="bg-gradient-to-br from-purple-900/25 to-violet-900/25 backdrop-blur-xl rounded-2xl p-6 border border-purple-400/30"
+                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/30"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0">
                     <Target className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-purple-100 mb-2">{center.name}</h3>
-                    <p className="text-purple-300 text-sm mb-2">{center.location}</p>
-                    <div className="inline-flex items-center gap-2 bg-purple-500/20 rounded-full px-3 py-1 mb-3">
-                      <span className="text-xs font-medium text-purple-300">{center.type}</span>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{center.name}</h3>
+                    <p className="text-[#00AFE6] text-sm mb-2">{center.location}</p>
+                    <div className="inline-flex items-center gap-2 bg-[#00AFE6]/20 rounded-full px-3 py-1 mb-3">
+                      <span className="text-xs font-medium text-[#00AFE6]">{center.type}</span>
                     </div>
-                    <p className="text-white/70 text-sm">{center.specialty}</p>
+                    <p className="text-gray-700 dark:text-gray-200 text-sm">{center.specialty}</p>
                   </div>
                 </div>
               </motion.div>

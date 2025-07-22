@@ -309,7 +309,7 @@ export default function ALAmyloidosis() {
                   className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                       <AlertTriangle className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -335,7 +335,7 @@ export default function ALAmyloidosis() {
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.symptoms.map((symptom, index) => (
                           <div key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0" />
+                            <div className="w-2 h-2 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
                             <span className="text-gray-700 dark:text-white/80">{symptom}</span>
                           </div>
                         ))}
@@ -347,7 +347,7 @@ export default function ALAmyloidosis() {
 
               {/* Diagnosis */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden"
+                className="bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-gray-900/10 dark:border-white/10 overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -355,21 +355,21 @@ export default function ALAmyloidosis() {
               >
                 <button
                   onClick={() => toggleSection('diagnosis')}
-                  className="w-full p-8 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                  className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center">
                       <Search className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold font-rosarivo">Diagnosis & Testing</h3>
-                      <p className="text-white/70">Comprehensive diagnostic procedures and tests</p>
+                      <h3 className="text-2xl font-bold font-rosarivo text-gray-900 dark:text-white">Diagnosis & Testing</h3>
+                      <p className="text-gray-600 dark:text-white/70">Comprehensive diagnostic procedures and tests</p>
                     </div>
                   </div>
                   {openSection === 'diagnosis' ? (
-                    <ChevronUp className="w-6 h-6 text-white/70" />
+                    <ChevronUp className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-white/70" />
+                    <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   )}
                 </button>
                 
@@ -380,12 +380,12 @@ export default function ALAmyloidosis() {
                     animate={{ opacity: 1, height: 'auto' }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="bg-white/5 rounded-xl p-6">
+                    <div className="bg-gray-900/5 dark:bg-white/5 rounded-xl p-6">
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.diagnosis.map((test, index) => (
                           <div key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-white/80">{test}</span>
+                            <div className="w-2 h-2 bg-[#00DD89] rounded-full mt-2 flex-shrink-0" />
+                            <span className="text-gray-700 dark:text-white/80">{test}</span>
                           </div>
                         ))}
                       </div>
@@ -396,7 +396,7 @@ export default function ALAmyloidosis() {
 
               {/* Treatment */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden"
+                className="bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-gray-900/10 dark:border-white/10 overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -404,21 +404,21 @@ export default function ALAmyloidosis() {
               >
                 <button
                   onClick={() => toggleSection('treatment')}
-                  className="w-full p-8 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                  className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                       <Heart className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold font-rosarivo">Treatment Options</h3>
-                      <p className="text-white/70">Current therapies and treatment approaches</p>
+                      <h3 className="text-2xl font-bold font-rosarivo text-gray-900 dark:text-white">Treatment Options</h3>
+                      <p className="text-gray-600 dark:text-white/70">Current therapies and treatment approaches</p>
                     </div>
                   </div>
                   {openSection === 'treatment' ? (
-                    <ChevronUp className="w-6 h-6 text-white/70" />
+                    <ChevronUp className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-white/70" />
+                    <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   )}
                 </button>
                 
@@ -429,12 +429,12 @@ export default function ALAmyloidosis() {
                     animate={{ opacity: 1, height: 'auto' }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="bg-white/5 rounded-xl p-6">
+                    <div className="bg-gray-900/5 dark:bg-white/5 rounded-xl p-6">
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.treatment.map((treatment, index) => (
                           <div key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-white/80">{treatment}</span>
+                            <div className="w-2 h-2 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
+                            <span className="text-gray-700 dark:text-white/80">{treatment}</span>
                           </div>
                         ))}
                       </div>
@@ -445,7 +445,7 @@ export default function ALAmyloidosis() {
 
               {/* Treatment Centers & Clinical Trials */}
               <motion.div
-                className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden"
+                className="bg-gray-900/5 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-gray-900/10 dark:border-white/10 overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -453,21 +453,21 @@ export default function ALAmyloidosis() {
               >
                 <button
                   onClick={() => toggleSection('centers')}
-                  className="w-full p-8 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                  className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center">
                       <Target className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold font-rosarivo">Treatment Centers & Clinical Trials</h3>
-                      <p className="text-white/70">Specialized centers and research opportunities</p>
+                      <h3 className="text-2xl font-bold font-rosarivo text-gray-900 dark:text-white">Treatment Centers & Clinical Trials</h3>
+                      <p className="text-gray-600 dark:text-white/70">Specialized centers and research opportunities</p>
                     </div>
                   </div>
                   {openSection === 'centers' ? (
-                    <ChevronUp className="w-6 h-6 text-white/70" />
+                    <ChevronUp className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-white/70" />
+                    <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/70" />
                   )}
                 </button>
                 

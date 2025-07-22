@@ -309,7 +309,7 @@ export default function ATTRAmyloidosis() {
                   className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                       <AlertTriangle className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -335,7 +335,7 @@ export default function ATTRAmyloidosis() {
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.symptoms.map((symptom, index) => (
                           <div key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0" />
+                            <div className="w-2 h-2 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
                             <span className="text-gray-700 dark:text-white/80">{symptom}</span>
                           </div>
                         ))}
@@ -358,7 +358,7 @@ export default function ATTRAmyloidosis() {
                   className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center">
                       <Search className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -384,7 +384,7 @@ export default function ATTRAmyloidosis() {
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.diagnosis.map((test, index) => (
                           <div key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
+                            <div className="w-2 h-2 bg-[#00DD89] rounded-full mt-2 flex-shrink-0" />
                             <span className="text-gray-700 dark:text-white/80">{test}</span>
                           </div>
                         ))}
@@ -407,7 +407,7 @@ export default function ATTRAmyloidosis() {
                   className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                       <Brain className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -433,7 +433,7 @@ export default function ATTRAmyloidosis() {
                       <div className="grid md:grid-cols-2 gap-6">
                         {detailedInfo.treatment.map((treatment, index) => (
                           <div key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
+                            <div className="w-2 h-2 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
                             <span className="text-gray-700 dark:text-white/80">{treatment}</span>
                           </div>
                         ))}
@@ -456,7 +456,7 @@ export default function ATTRAmyloidosis() {
                   className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center">
                       <Target className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -483,12 +483,12 @@ export default function ATTRAmyloidosis() {
                         {detailedInfo.centers.map((center, index) => (
                           <div key={index} className="bg-gray-900/5 dark:bg-white/5 rounded-xl p-4">
                             <div className="flex items-start gap-3 mb-2">
-                              <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                              <div className="w-2 h-2 bg-[#00DD89] rounded-full mt-2 flex-shrink-0" />
                               <div>
                                 <h4 className="font-semibold text-gray-900 dark:text-white">{center.name}</h4>
                                 <p className="text-gray-600 dark:text-white/70 text-sm">{center.location}</p>
                                 <p className="text-gray-600 dark:text-white/60 text-xs mt-1">
-                                  <span className="bg-purple-500/20 text-purple-600 dark:text-purple-300 px-2 py-1 rounded-full text-xs">
+                                  <span className="bg-[#00DD89]/20 text-[#00DD89] dark:text-[#00DD89] px-2 py-1 rounded-full text-xs">
                                     {center.type}
                                   </span>
                                 </p>

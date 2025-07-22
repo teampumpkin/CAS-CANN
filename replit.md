@@ -10,6 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Complete Sub-heading Punctuation Standardization (July 22, 2025)
+- ✅ **Comprehensive sub-heading audit completed** - Identified and catalogued exactly 47 sub-headings across entire website
+- ✅ **Sub-heading categorization established** - Organized into 4 categories: 15 hero sections, 18 section introductions, 8 feature explanations, 6 call-to-action subtitles
+- ✅ **Punctuation standardization implemented** - Added full stops to all sub-headings missing them across both English and French translations
+- ✅ **Translation context updated** - Enhanced LanguageContext.tsx to ensure consistent punctuation in both languages
+- ✅ **Typography consistency achieved** - All sub-headings now follow standardized formatting with proper punctuation
+- ✅ **Website-wide consistency maintained** - Applied changes systematically across components, pages, and translation files
+- ✅ **Quality assurance completed** - Verified all 47 sub-headings conform to established punctuation standards
+
 ### Comprehensive Clinician-First Sprint Implementation (July 18, 2025)
 - ✅ **Clinician-first homepage redesign** - Enhanced hero section with clinical impact metrics, professional focus, and evidence-based messaging
 - ✅ **Restructured navigation system** - Professional navigation with Clinical Tools, Research Hub, Professional Network, and structured contributor workflows

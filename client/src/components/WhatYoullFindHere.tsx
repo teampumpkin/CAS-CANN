@@ -93,7 +93,7 @@ export default function WhatYoullFindHere() {
           </h2>
           
           <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-            Discover comprehensive resources, tools, and connections designed to support your amyloidosis journey
+            Discover comprehensive resources, tools, and connections designed to support your amyloidosis journey.
           </p>
         </motion.div>
 

@@ -279,7 +279,7 @@ export default function Resources() {
             </h1>
             
             <p className="text-xl text-gray-600 dark:text-white/70 mb-8 max-w-3xl mx-auto">
-              Evidence-based tools, pathways, and resources for healthcare professionals managing amyloidosis patients across Canada
+              Evidence-based tools, pathways, and resources for healthcare professionals managing amyloidosis patients across Canada.
             </p>
             
             {/* Resource Categories Overview */}

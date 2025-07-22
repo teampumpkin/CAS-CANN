@@ -297,7 +297,7 @@ export default function About() {
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Supporting clinical excellence through evidence-based tools, collaborative networks, and diagnostic pathways
+              Supporting clinical excellence through evidence-based tools, collaborative networks, and diagnostic pathways.
             </p>
           </motion.div>
 
@@ -518,7 +518,7 @@ export default function About() {
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Leading experts in amyloidosis care from across Canada, dedicated to advancing clinical practice and patient outcomes
+              Leading experts in amyloidosis care from across Canada, dedicated to advancing clinical practice and patient outcomes.
             </p>
           </motion.div>
 
@@ -631,7 +631,7 @@ export default function About() {
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Our commitment to transparency and accountability through comprehensive governance documentation
+              Our commitment to transparency and accountability through comprehensive governance documentation.
             </p>
           </motion.div>
 

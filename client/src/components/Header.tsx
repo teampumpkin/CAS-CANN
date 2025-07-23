@@ -1,18 +1,15 @@
 import { motion } from 'framer-motion';
-import { Menu, X, Phone, ChevronDown, Edit } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import casLogo from '@assets/l_cas_vert_rgb_1753253116732.png';
-import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ElementSelector } from '@/components/ElementSelector';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isElementSelectorActive, setIsElementSelectorActive] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [location] = useLocation();
   const { t } = useLanguage();
@@ -214,15 +211,6 @@ export default function Header() {
             <div className="flex items-center space-x-2">
               <LanguageSwitcher />
               <ThemeToggle />
-              <Button
-                variant={isElementSelectorActive ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setIsElementSelectorActive(!isElementSelectorActive)}
-                className="hidden md:flex"
-                title="Element Selector/Editor"
-              >
-                <Edit className="h-4 w-4" />
-              </Button>
             </div>
 
             <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20">
@@ -328,10 +316,6 @@ export default function Header() {
           </div>
         </motion.div>
       </div>
-      <ElementSelector 
-        isActive={isElementSelectorActive} 
-        onClose={() => setIsElementSelectorActive(false)} 
-      />
     </motion.header>
   );
 }

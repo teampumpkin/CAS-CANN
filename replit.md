@@ -14,6 +14,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ **Contact Page Complete Optimization** - Eliminated all non-brand colors (purple, blue, green, emerald, orange) from entire Contact page, using only #00AFE6 and #00DD89
 - ✅ **Directory Standards & Review Process Fixed** - Converted all purple, blue, and green colors in Backend Vetting Process section to brand colors only
 - ✅ **About CAS Governance & Transparency Section Fixed** - Updated all three governance cards to use only brand color gradients instead of blue/green/purple
+- ✅ **About Amyloidosis Types Section Updated** - Eliminated non-brand colors (#0088CC, #00BB77) from "Types of Amyloidosis" section and standardized to use only approved brand colors
 - ✅ **Hero sections light theme optimization** - Fixed background gradients, text visibility, and badge styling for proper light/dark theme adaptation across all pages
 - ✅ **Contact form comprehensive enhancement** - All form fields, labels, inputs, and error messages now properly styled for both themes with appropriate contrast ratios
 - ✅ **Sidebar and process cards standardization** - All informational cards across Contact, Directory, and About pages now use consistent brand color patterns

@@ -631,49 +631,49 @@ export default function Directory() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Inclusion Criteria */}
             <motion.div
-              className="bg-gradient-to-br from-blue-50/80 to-cyan-50/80 dark:from-blue-900/20 dark:to-cyan-900/20 backdrop-blur-xl rounded-2xl p-8 border border-blue-200/50 dark:border-blue-400/30"
+              className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                   <CheckCircle className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-blue-900 dark:text-blue-200">Inclusion Criteria</h3>
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Inclusion Criteria</h3>
               </div>
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-1">Clinical Expertise</h4>
-                    <p className="text-blue-800 dark:text-blue-300 text-sm">Healthcare providers with documented experience in amyloidosis diagnosis or treatment</p>
+                    <h4 className="font-semibold text-gray-800 dark:text-white mb-1">Clinical Expertise</h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">Healthcare providers with documented experience in amyloidosis diagnosis or treatment</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-1">Specialty Services</h4>
-                    <p className="text-blue-800 dark:text-blue-300 text-sm">Dedicated amyloidosis programs, multidisciplinary teams, or specialized diagnostic capabilities</p>
+                    <h4 className="font-semibold text-gray-800 dark:text-white mb-1">Specialty Services</h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">Dedicated amyloidosis programs, multidisciplinary teams, or specialized diagnostic capabilities</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-1">Geographic Coverage</h4>
-                    <p className="text-blue-800 dark:text-blue-300 text-sm">Representation across all Canadian provinces and territories</p>
+                    <h4 className="font-semibold text-gray-800 dark:text-white mb-1">Geographic Coverage</h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">Representation across all Canadian provinces and territories</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h4 className="font-semibold text-blue-900 dark:text-blue-200 mb-1">Verified Information</h4>
-                    <p className="text-blue-800 dark:text-blue-300 text-sm">Current contact details, services offered, and referral requirements</p>
+                    <h4 className="font-semibold text-gray-800 dark:text-white mb-1">Verified Information</h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">Current contact details, services offered, and referral requirements</p>
                   </div>
                 </div>
               </div>
@@ -681,49 +681,49 @@ export default function Directory() {
             
             {/* Review Cycle */}
             <motion.div
-              className="bg-gradient-to-br from-green-50/80 to-emerald-50/80 dark:from-green-900/20 dark:to-emerald-900/20 backdrop-blur-xl rounded-2xl p-8 border border-green-200/50 dark:border-green-400/30"
+              className="bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00DD89]/30"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center">
                   <Clock className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-green-900 dark:text-green-200">Review Cycle</h3>
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Review Cycle</h3>
               </div>
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-[#00DD89] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h4 className="font-semibold text-green-900 dark:text-green-200 mb-1">Quarterly Reviews</h4>
-                    <p className="text-green-800 dark:text-green-300 text-sm">Complete directory review every 3 months to ensure accuracy</p>
+                    <h4 className="font-semibold text-gray-800 dark:text-white mb-1">Quarterly Reviews</h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">Complete directory review every 3 months to ensure accuracy</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-[#00DD89] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h4 className="font-semibold text-green-900 dark:text-green-200 mb-1">Real-time Updates</h4>
-                    <p className="text-green-800 dark:text-green-300 text-sm">Immediate updates when centers report changes or new information</p>
+                    <h4 className="font-semibold text-gray-800 dark:text-white mb-1">Real-time Updates</h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">Immediate updates when centers report changes or new information</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-[#00DD89] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h4 className="font-semibold text-green-900 dark:text-green-200 mb-1">Professional Verification</h4>
-                    <p className="text-green-800 dark:text-green-300 text-sm">Direct contact with healthcare providers to verify services and expertise</p>
+                    <h4 className="font-semibold text-gray-800 dark:text-white mb-1">Professional Verification</h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">Direct contact with healthcare providers to verify services and expertise</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-[#00DD89] rounded-full mt-2 flex-shrink-0"></div>
                   <div>
-                    <h4 className="font-semibold text-green-900 dark:text-green-200 mb-1">Community Feedback</h4>
-                    <p className="text-green-800 dark:text-green-300 text-sm">Integration of feedback from patients, families, and healthcare professionals</p>
+                    <h4 className="font-semibold text-gray-800 dark:text-white mb-1">Community Feedback</h4>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">Integration of feedback from patients, families, and healthcare professionals</p>
                   </div>
                 </div>
               </div>
@@ -732,52 +732,52 @@ export default function Directory() {
           
           {/* Backend Process Documentation */}
           <motion.div
-            className="mt-12 bg-gradient-to-br from-purple-50/80 to-violet-50/80 dark:from-purple-900/20 dark:to-violet-900/20 backdrop-blur-xl rounded-2xl p-8 border border-purple-200/50 dark:border-purple-400/30"
+            className="mt-12 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                 <FileText className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-purple-900 dark:text-purple-200">Backend Vetting Process</h3>
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Backend Vetting Process</h3>
             </div>
             
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <h4 className="font-semibold text-purple-900 dark:text-purple-200 mb-3">Initial Vetting</h4>
+                <h4 className="font-semibold text-gray-800 dark:text-white mb-3">Initial Vetting</h4>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
-                    <span className="text-purple-800 dark:text-purple-300 text-sm">Medical license verification</span>
+                    <div className="w-6 h-6 bg-[#00AFE6] rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">Medical license verification</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
-                    <span className="text-purple-800 dark:text-purple-300 text-sm">Hospital/clinic accreditation check</span>
+                    <div className="w-6 h-6 bg-[#00AFE6] rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">Hospital/clinic accreditation check</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
-                    <span className="text-purple-800 dark:text-purple-300 text-sm">Specialty certification confirmation</span>
+                    <div className="w-6 h-6 bg-[#00AFE6] rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">Specialty certification confirmation</span>
                   </div>
                 </div>
               </div>
               
               <div className="space-y-4">
-                <h4 className="font-semibold text-purple-900 dark:text-purple-200 mb-3">Ongoing Maintenance</h4>
+                <h4 className="font-semibold text-gray-800 dark:text-white mb-3">Ongoing Maintenance</h4>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">4</div>
-                    <span className="text-purple-800 dark:text-purple-300 text-sm">Annual contact verification</span>
+                    <div className="w-6 h-6 bg-[#00DD89] rounded-full flex items-center justify-center text-white text-xs font-bold">4</div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">Annual contact verification</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">5</div>
-                    <span className="text-purple-800 dark:text-purple-300 text-sm">Service offering updates</span>
+                    <div className="w-6 h-6 bg-[#00DD89] rounded-full flex items-center justify-center text-white text-xs font-bold">5</div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">Service offering updates</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">6</div>
-                    <span className="text-purple-800 dark:text-purple-300 text-sm">Quality assurance reviews</span>
+                    <div className="w-6 h-6 bg-[#00DD89] rounded-full flex items-center justify-center text-white text-xs font-bold">6</div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">Quality assurance reviews</span>
                   </div>
                 </div>
               </div>

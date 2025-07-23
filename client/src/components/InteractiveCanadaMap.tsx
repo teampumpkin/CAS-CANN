@@ -218,7 +218,7 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
           <AnimatePresence>
             {zoomedProvince && centersByProvince[zoomedProvince] && (
               <motion.div
-                className="absolute inset-0 bg-white/96 dark:bg-gray-800/96 backdrop-blur-md rounded-lg border border-gray-200 dark:border-gray-600"
+                className="absolute inset-0 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-600 shadow-xl"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
@@ -226,15 +226,17 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
               >
                 <div className="p-4 h-full flex flex-col">
                   {/* Header with Back Button */}
-                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-200 dark:border-gray-600">
+                  <div className="flex items-center justify-between mb-4 pb-4 border-b-2 border-gray-200 dark:border-gray-700">
                     <div className="flex items-center gap-3">
-                      <Building className="w-6 h-6 text-[#00AFE6]" />
+                      <div className="p-2 bg-[#00AFE6]/10 dark:bg-[#00AFE6]/20 rounded-full">
+                        <Building className="w-6 h-6 text-[#00AFE6]" />
+                      </div>
                       <div>
-                        <h4 className="text-xl font-bold text-gray-900 dark:text-white">
+                        <h4 className="text-2xl font-bold text-gray-900 dark:text-white">
                           {getProvinceName(zoomedProvince)}
                         </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          {centersByProvince[zoomedProvince].length} Healthcare Centers
+                        <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                          {centersByProvince[zoomedProvince].length} Healthcare Centers Available
                         </p>
                       </div>
                     </div>
@@ -244,7 +246,7 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                         setShowClusters(true);
                         setSelectedProvince(null);
                       }}
-                      className="flex items-center gap-2 bg-[#00AFE6] text-white px-4 py-2 rounded-full hover:bg-[#00DD89] transition-colors duration-200 text-sm font-medium"
+                      className="flex items-center gap-2 bg-[#00AFE6] text-white px-5 py-2.5 rounded-full hover:bg-[#00DD89] transition-colors duration-200 text-sm font-semibold shadow-lg"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -260,11 +262,11 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                         <motion.button
                           key={center.id}
                           onClick={() => onCenterClick(center)}
-                          className="text-left p-4 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/20 hover:border-[#00AFE6]/50 transition-all duration-300 hover:shadow-lg group"
+                          className="text-left p-5 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 rounded-xl border-2 border-[#00AFE6]/30 hover:border-[#00AFE6]/60 transition-all duration-300 hover:shadow-xl group"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
-                          whileHover={{ scale: 1.02, y: -2 }}
+                          whileHover={{ scale: 1.02, y: -3 }}
                         >
                           <div className="flex items-start gap-4">
                             {/* Center Type Icon */}
@@ -283,36 +285,36 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                             
                             {/* Center Information */}
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between mb-2">
-                                <h5 className="font-semibold text-gray-900 dark:text-white text-lg leading-tight">
+                              <div className="flex items-start justify-between mb-3">
+                                <h5 className="font-bold text-gray-900 dark:text-white text-xl leading-tight">
                                   {center.name}
                                 </h5>
                                 <ZoomIn className="w-5 h-5 text-[#00AFE6] opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0 ml-2" />
                               </div>
                               
-                              <div className="space-y-2">
-                                <p className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-2">
-                                  <MapPin className="w-4 h-4 text-[#00DD89]" />
+                              <div className="space-y-3">
+                                <p className="text-base text-gray-700 dark:text-gray-200 flex items-center gap-2 font-medium">
+                                  <MapPin className="w-5 h-5 text-[#00DD89]" />
                                   {center.city}, {center.province}
                                 </p>
                                 
-                                <div className="flex flex-wrap gap-1">
+                                <div className="flex flex-wrap gap-2">
                                   {center.specialties.slice(0, 3).map((specialty, idx) => (
                                     <span
                                       key={idx}
-                                      className="inline-block px-2 py-1 bg-[#00AFE6]/20 text-[#00AFE6] dark:bg-[#00AFE6]/30 dark:text-[#00AFE6] rounded-full text-xs font-medium"
+                                      className="inline-block px-3 py-1.5 bg-[#00AFE6]/20 text-[#00AFE6] dark:bg-[#00AFE6]/40 dark:text-[#00AFE6] rounded-full text-sm font-semibold"
                                     >
                                       {specialty}
                                     </span>
                                   ))}
                                   {center.specialties.length > 3 && (
-                                    <span className="inline-block px-2 py-1 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 rounded-full text-xs">
+                                    <span className="inline-block px-3 py-1.5 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-full text-sm font-semibold">
                                       +{center.specialties.length - 3} more
                                     </span>
                                   )}
                                 </div>
                                 
-                                <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+                                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                                   {center.description}
                                 </p>
                               </div>

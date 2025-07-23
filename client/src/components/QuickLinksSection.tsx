@@ -10,7 +10,7 @@ export default function QuickLinksSection() {
       title: t('quickLinks.findSpecialists'),
       description: t('quickLinks.findSpecialistsDesc'),
       href: '#specialists',
-      gradient: 'from-[#00AFE6] to-[#0088CC]',
+      gradient: 'from-[#00AFE6] to-[#00DD89]',
       bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
@@ -18,7 +18,7 @@ export default function QuickLinksSection() {
       title: t('quickLinks.patientResources'),
       description: t('quickLinks.patientResourcesDesc'),
       href: '#resources',
-      gradient: 'from-[#00DD89] to-[#00BB77]',
+      gradient: 'from-[#00DD89] to-[#00AFE6]',
       bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
@@ -26,7 +26,7 @@ export default function QuickLinksSection() {
       title: t('quickLinks.supportGroups'),
       description: t('quickLinks.supportGroupsDesc'),
       href: '#support',
-      gradient: 'from-purple-500 to-purple-700',
+      gradient: 'from-[#00AFE6] to-[#00DD89]',
       bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
@@ -34,7 +34,7 @@ export default function QuickLinksSection() {
       title: t('quickLinks.getInvolved'),
       description: t('quickLinks.getInvolvedDesc'),
       href: '#get-involved',
-      gradient: 'from-pink-500 to-rose-600',
+      gradient: 'from-[#00DD89] to-[#00AFE6]',
       bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
@@ -42,7 +42,7 @@ export default function QuickLinksSection() {
       title: t('quickLinks.events'),
       description: t('quickLinks.eventsDesc'),
       href: '#events',
-      gradient: 'from-orange-500 to-amber-600',
+      gradient: 'from-[#00AFE6] to-[#00DD89]',
       bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     },
     {
@@ -50,7 +50,7 @@ export default function QuickLinksSection() {
       title: t('quickLinks.contactUs'),
       description: t('quickLinks.contactUsDesc'),
       href: '#contact',
-      gradient: 'from-slate-600 to-slate-800',
+      gradient: 'from-[#00DD89] to-[#00AFE6]',
       bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15'
     }
   ];

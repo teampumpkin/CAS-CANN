@@ -26,25 +26,25 @@ export default function DirectoryPreviewSection() {
       icon: Building2,
       title: "Treatment Centers",
       description: "Specialized amyloidosis treatment facilities across Canada",
-      gradient: "from-[#00AFE6] to-[#0088CC]"
+      gradient: "from-[#00AFE6] to-[#00DD89]"
     },
     {
       icon: Heart,
       title: "Clinical Experts",
       description: "Leading physicians and healthcare professionals",
-      gradient: "from-[#00DD89] to-[#00BB77]"
+      gradient: "from-[#00DD89] to-[#00AFE6]"
     },
     {
       icon: Users,
       title: "Support Networks",
       description: "Patient advocacy groups and community resources",
-      gradient: "from-purple-500 to-purple-700"
+      gradient: "from-[#00AFE6] to-[#00DD89]"
     },
     {
       icon: FileText,
       title: "Resources Library",
       description: "Medical protocols and educational materials",
-      gradient: "from-orange-500 to-orange-700"
+      gradient: "from-[#00DD89] to-[#00AFE6]"
     }
   ];
 
@@ -169,11 +169,11 @@ export default function DirectoryPreviewSection() {
                     <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.specialty')}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full border border-white shadow-sm flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-[#00AFE6] rounded-full border border-white shadow-sm flex-shrink-0"></div>
                     <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.research')}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full border border-white shadow-sm flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-[#00DD89] rounded-full border border-white shadow-sm flex-shrink-0"></div>
                     <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.clinics')}</span>
                   </div>
                 </div>
@@ -186,55 +186,55 @@ export default function DirectoryPreviewSection() {
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 font-rosarivo">{t('directory.networkReach')}</h3>
                 <div className="grid grid-cols-2 gap-2">
                   <motion.div
-                    className="group text-center p-4 bg-gradient-to-br from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20 backdrop-blur-xl rounded-xl border border-blue-200/50 dark:border-blue-400/20 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/30 dark:hover:to-cyan-800/30 hover:border-blue-300/60 dark:hover:border-blue-300/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 dark:hover:shadow-blue-400/20"
+                    className="group text-center p-4 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-xl border border-[#00AFE6]/30 dark:border-[#00AFE6]/40 hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 dark:hover:from-[#00AFE6]/25 dark:hover:to-[#00DD89]/25 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#0088CC] bg-clip-text text-transparent mb-1 group-hover:from-blue-600 group-hover:to-cyan-600 transition-all duration-300">
+                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1 group-hover:from-[#00AFE6] group-hover:to-[#00DD89] transition-all duration-300">
                       150+
                     </div>
-                    <div className="text-blue-700 dark:text-blue-300 text-xs font-medium">{t('directory.healthcareProviders')}</div>
+                    <div className="text-[#00AFE6] dark:text-[#00AFE6] text-xs font-medium">{t('directory.healthcareProviders')}</div>
                   </motion.div>
                   
                   <motion.div
-                    className="group text-center p-4 bg-gradient-to-br from-emerald-50/90 to-green-50/90 dark:from-emerald-900/20 dark:to-green-900/20 backdrop-blur-xl rounded-xl border border-emerald-200/50 dark:border-emerald-400/20 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/30 dark:hover:to-green-800/30 hover:border-emerald-300/60 dark:hover:border-emerald-300/30 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25 dark:hover:shadow-emerald-400/20"
+                    className="group text-center p-4 bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 dark:to-[#00AFE6]/20 backdrop-blur-xl rounded-xl border border-[#00DD89]/30 dark:border-[#00DD89]/40 hover:from-[#00DD89]/20 hover:to-[#00AFE6]/20 dark:hover:from-[#00DD89]/25 dark:hover:to-[#00AFE6]/25 hover:border-[#00DD89]/50 dark:hover:border-[#00DD89]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#00DD89]/25 dark:hover:shadow-[#00DD89]/20"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00BB77] bg-clip-text text-transparent mb-1 group-hover:from-emerald-600 group-hover:to-green-600 transition-all duration-300">
+                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-1 group-hover:from-[#00DD89] group-hover:to-[#00AFE6] transition-all duration-300">
                       13
                     </div>
-                    <div className="text-emerald-700 dark:text-emerald-300 text-xs font-medium">{t('directory.provincesAndTerritories')}</div>
+                    <div className="text-[#00DD89] dark:text-[#00DD89] text-xs font-medium">{t('directory.provincesAndTerritories')}</div>
                   </motion.div>
                   
                   <motion.div
-                    className="group text-center p-4 bg-gradient-to-br from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20 backdrop-blur-xl rounded-xl border border-purple-200/50 dark:border-purple-400/20 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/30 dark:hover:to-violet-800/30 hover:border-purple-300/60 dark:hover:border-purple-300/30 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 dark:hover:shadow-purple-400/20"
+                    className="group text-center p-4 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-xl border border-[#00AFE6]/30 dark:border-[#00AFE6]/40 hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 dark:hover:from-[#00AFE6]/25 dark:hover:to-[#00DD89]/25 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-purple-700 bg-clip-text text-transparent mb-1 group-hover:from-purple-600 group-hover:to-violet-600 transition-all duration-300">
+                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1 group-hover:from-[#00AFE6] group-hover:to-[#00DD89] transition-all duration-300">
                       25+
                     </div>
-                    <div className="text-purple-700 dark:text-purple-300 text-xs font-medium">{t('directory.majorCities')}</div>
+                    <div className="text-[#00AFE6] dark:text-[#00AFE6] text-xs font-medium">{t('directory.majorCities')}</div>
                   </motion.div>
                   
                   <motion.div
-                    className="group text-center p-4 bg-gradient-to-br from-orange-50/90 to-amber-50/90 dark:from-orange-900/20 dark:to-amber-900/20 backdrop-blur-xl rounded-xl border border-orange-200/50 dark:border-orange-400/20 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/30 dark:hover:to-amber-800/30 hover:border-orange-300/60 dark:hover:border-orange-300/30 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/25 dark:hover:shadow-orange-400/20"
+                    className="group text-center p-4 bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 dark:to-[#00AFE6]/20 backdrop-blur-xl rounded-xl border border-[#00DD89]/30 dark:border-[#00DD89]/40 hover:from-[#00DD89]/20 hover:to-[#00AFE6]/20 dark:hover:from-[#00DD89]/25 dark:hover:to-[#00AFE6]/25 hover:border-[#00DD89]/50 dark:hover:border-[#00DD89]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#00DD89]/25 dark:hover:shadow-[#00DD89]/20"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent mb-1 group-hover:from-orange-600 group-hover:to-amber-600 transition-all duration-300">
+                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-1 group-hover:from-[#00DD89] group-hover:to-[#00AFE6] transition-all duration-300">
                       500+
                     </div>
-                    <div className="text-orange-700 dark:text-orange-300 text-xs font-medium">{t('directory.resourcesAvailable')}</div>
+                    <div className="text-[#00DD89] dark:text-[#00DD89] text-xs font-medium">{t('directory.resourcesAvailable')}</div>
                   </motion.div>
                 </div>
               </div>
@@ -284,15 +284,7 @@ export default function DirectoryPreviewSection() {
               {directoryFeatures.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  className={`group backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl ${
-                    index === 0 
-                      ? 'bg-gradient-to-br from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200/50 dark:border-blue-400/20 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/30 dark:hover:to-cyan-800/30 hover:border-blue-300/60 dark:hover:border-blue-300/30 hover:shadow-blue-500/25 dark:hover:shadow-blue-400/20'
-                      : index === 1
-                      ? 'bg-gradient-to-br from-emerald-50/90 to-green-50/90 dark:from-emerald-900/20 dark:to-green-900/20 border-emerald-200/50 dark:border-emerald-400/20 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/30 dark:hover:to-green-800/30 hover:border-emerald-300/60 dark:hover:border-emerald-300/30 hover:shadow-emerald-500/25 dark:hover:shadow-emerald-400/20'
-                      : index === 2
-                      ? 'bg-gradient-to-br from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20 border-purple-200/50 dark:border-purple-400/20 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/30 dark:hover:to-violet-800/30 hover:border-purple-300/60 dark:hover:border-purple-300/30 hover:shadow-purple-500/25 dark:hover:shadow-purple-400/20'
-                      : 'bg-gradient-to-br from-orange-50/90 to-amber-50/90 dark:from-orange-900/20 dark:to-amber-900/20 border-orange-200/50 dark:border-orange-400/20 hover:from-orange-100/95 hover:to-amber-100/95 dark:hover:from-orange-800/30 dark:hover:to-amber-800/30 hover:border-orange-300/60 dark:hover:border-orange-300/30 hover:shadow-orange-500/25 dark:hover:shadow-orange-400/20'
-                  }`}
+                  className="group backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 dark:hover:from-[#00AFE6]/25 dark:hover:to-[#00DD89]/25 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
@@ -303,24 +295,8 @@ export default function DirectoryPreviewSection() {
                       <feature.icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className={`font-semibold mb-2 text-lg ${
-                        index === 0 
-                          ? 'text-blue-900 dark:text-blue-100'
-                          : index === 1
-                          ? 'text-emerald-900 dark:text-emerald-100'
-                          : index === 2
-                          ? 'text-purple-900 dark:text-purple-100'
-                          : 'text-orange-900 dark:text-orange-100'
-                      }`}>{feature.title}</h4>
-                      <p className={`text-sm ${
-                        index === 0 
-                          ? 'text-blue-700 dark:text-blue-300'
-                          : index === 1
-                          ? 'text-emerald-700 dark:text-emerald-300'
-                          : index === 2
-                          ? 'text-purple-700 dark:text-purple-300'
-                          : 'text-orange-700 dark:text-orange-300'
-                      }`}>{feature.description}</p>
+                      <h4 className="font-semibold mb-2 text-lg text-gray-900 dark:text-white">{feature.title}</h4>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">{feature.description}</p>
                     </div>
                   </div>
                 </motion.div>

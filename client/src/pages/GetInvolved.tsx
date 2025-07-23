@@ -788,9 +788,9 @@ export default function GetInvolved() {
       </section>
 
       {/* Membership Benefits */}
-      <section className="py-32 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+      <section className="py-32 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Advanced Frost Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-white/[0.01] dark:via-transparent dark:to-white/[0.02]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/50 dark:via-transparent dark:to-gray-700/30"></div>
         <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-gradient-to-r from-[#00AFE6]/3 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-gradient-to-l from-[#00DD89]/3 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.01),transparent)]"></div>
@@ -824,7 +824,7 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,175,230,0.1)] transition-all duration-500 h-full group">
+                <Card className="bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-gray-800/95 dark:to-gray-700/95 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,175,230,0.1)] transition-all duration-500 h-full group">
                   <CardContent className="p-10">
                     <div className="mb-8">
                       <div className="flex items-center gap-3 mb-6">
@@ -871,7 +871,7 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-gradient-to-br from-green-50/95 to-emerald-50/95 dark:bg-white/5 backdrop-blur-xl border border-[#00DD89]/20 dark:border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,221,137,0.1)] transition-all duration-500 h-full group">
+                <Card className="bg-gradient-to-br from-green-50/95 to-emerald-50/95 dark:from-gray-800/95 dark:to-gray-700/95 backdrop-blur-xl border border-[#00DD89]/20 dark:border-white/20 shadow-2xl hover:shadow-[0_0_60px_rgba(0,221,137,0.1)] transition-all duration-500 h-full group">
                   <CardContent className="p-10">
                     <div className="mb-8">
                       <div className="flex items-center gap-3 mb-6">
@@ -928,8 +928,8 @@ export default function GetInvolved() {
       </section>
 
       {/* CANN Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 via-emerald-50 to-green-50 dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-100/20 dark:via-white/5 to-transparent" />
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-emerald-50 to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-100/20 dark:via-gray-700/20 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="max-w-7xl mx-auto"
@@ -998,7 +998,7 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="relative bg-emerald-50/80 dark:bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-[#00DD89]/20 dark:border-white/10 shadow-xl">
+                <div className="relative bg-emerald-50/80 dark:bg-gray-700/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-[#00DD89]/20 dark:border-white/10 shadow-xl">
                   <div className="aspect-[4/5] relative">
                     <img 
                       src={healthcareProfessionalImg} 
@@ -1066,9 +1066,9 @@ export default function GetInvolved() {
       </section>
 
       {/* 2025 Canadian Amyloidosis Summit Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:bg-gray-800 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-white/[0.02] dark:via-transparent dark:to-white/[0.01]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/50 dark:via-transparent dark:to-gray-700/30"></div>
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
         
@@ -1170,7 +1170,7 @@ export default function GetInvolved() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-white/10 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
+              <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
                 <div className="text-center">
                   <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">Event Details</h3>
                   
@@ -1219,7 +1219,7 @@ export default function GetInvolved() {
       {/* Events Section */}
       <section id="events" className="py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Frost Background Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-white/[0.02] dark:via-transparent dark:to-white/[0.01]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/30 dark:via-transparent dark:to-gray-700/20"></div>
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
         

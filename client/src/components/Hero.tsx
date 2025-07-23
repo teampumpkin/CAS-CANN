@@ -15,7 +15,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Sophisticated background with neural network visualization */}
       <div className="absolute inset-0">
         {/* Neural network background image */}
@@ -29,10 +29,10 @@ export default function Hero() {
             quality={70}
             sizes="100vw"
           />
-          {/* Sophisticated overlay for text readability and brand enhancement */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/85 via-gray-900/80 to-gray-900/85"></div>
+          {/* Light overlay for text readability and brand enhancement */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/75 via-gray-50/80 to-white/75 dark:from-gray-900/85 dark:via-gray-900/80 dark:to-gray-900/85"></div>
           {/* Brand color accent overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/8 to-[#00AFE6]/12"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/15 via-[#00DD89]/12 to-[#00AFE6]/18 dark:from-[#00AFE6]/10 dark:via-[#00DD89]/8 dark:to-[#00AFE6]/12"></div>
         </div>
         
         {/* Animated brand accent elements */}
@@ -68,18 +68,18 @@ export default function Hero() {
           <div className="max-w-7xl mx-auto text-center">
             {/* Decorative badge */}
             <motion.div
-              className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-4"
+              className="inline-flex items-center gap-3 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-gray-200/50 dark:border-white/20 rounded-full px-6 py-3 mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
               <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
-              <span className="text-white/90 font-medium tracking-wide">{t('hero.badge')}</span>
+              <span className="text-gray-800 dark:text-white/90 font-medium tracking-wide">{t('hero.badge')}</span>
             </motion.div>
 
             {/* Main headline */}
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 relative leading-none tracking-tight font-rosarivo"
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-4 relative leading-none tracking-tight font-rosarivo"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -106,7 +106,7 @@ export default function Hero() {
 
             {/* Clinician-focused subtitle */}
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 dark:text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
@@ -121,23 +121,23 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8 }}
             >
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+              <div className="text-center bg-white/80 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/50 dark:border-white/20">
                 <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                   6 weeks
                 </div>
-                <div className="text-sm text-white/80 mt-1">Average diagnostic time reduction</div>
+                <div className="text-sm text-gray-600 dark:text-white/80 mt-1">Average diagnostic time reduction</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+              <div className="text-center bg-white/80 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/50 dark:border-white/20">
                 <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                   350+
                 </div>
-                <div className="text-sm text-white/80 mt-1">Healthcare professionals</div>
+                <div className="text-sm text-gray-600 dark:text-white/80 mt-1">Healthcare professionals</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+              <div className="text-center bg-white/80 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/50 dark:border-white/20">
                 <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                   1,400+
                 </div>
-                <div className="text-sm text-white/80 mt-1">Patients reached</div>
+                <div className="text-sm text-gray-600 dark:text-white/80 mt-1">Patients reached</div>
               </div>
             </motion.div>
 
@@ -167,7 +167,7 @@ export default function Hero() {
                   whileTap={{ scale: 0.98 }}
                 >
                   {/* Enhanced Button-style card */}
-                  <div className="relative bg-gradient-to-br from-white/15 via-white/8 to-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/30 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#00AFE6]/20 group-hover:via-[#00DD89]/15 group-hover:to-[#00AFE6]/10 group-hover:border-[#00AFE6]/50 group-hover:shadow-xl group-hover:shadow-[#00AFE6]/30 overflow-hidden w-full h-full min-h-[160px] group-active:transform group-active:scale-95">
+                  <div className="relative bg-gradient-to-br from-white/90 via-white/80 to-white/75 dark:from-white/15 dark:via-white/8 dark:to-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-gray-200/50 dark:border-white/30 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#00AFE6]/20 group-hover:via-[#00DD89]/15 group-hover:to-[#00AFE6]/10 group-hover:border-[#00AFE6]/50 group-hover:shadow-xl group-hover:shadow-[#00AFE6]/30 overflow-hidden w-full h-full min-h-[160px] group-active:transform group-active:scale-95">
                     
                     {/* Dynamic Mesh Background */}
                     <div className="absolute inset-0 opacity-20">
@@ -209,12 +209,12 @@ export default function Hero() {
                       </div>
                       
                       {/* Enhanced title */}
-                      <h3 className="text-white font-bold text-base mb-2 group-hover:text-white transition-all duration-300 font-rosarivo">
+                      <h3 className="text-gray-900 dark:text-white font-bold text-base mb-2 group-hover:text-gray-800 dark:group-hover:text-white transition-all duration-300 font-rosarivo">
                         {tile.label}
                       </h3>
                       
                       {/* Enhanced subtitle */}
-                      <p className="text-white/60 text-xs font-light leading-relaxed group-hover:text-white/80 transition-all duration-300 transform group-hover:translate-y-0.5">
+                      <p className="text-gray-600 dark:text-white/60 text-xs font-light leading-relaxed group-hover:text-gray-700 dark:group-hover:text-white/80 transition-all duration-300 transform group-hover:translate-y-0.5">
                         {index === 0 && "Connect with our community"}
                         {index === 1 && "Find healthcare providers and support"}
                         {index === 2 && "Share your experience and stories"}
@@ -255,12 +255,12 @@ export default function Hero() {
             transition={{ duration: 1, delay: 2 }}
           >
             <motion.div
-              className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center"
+              className="w-6 h-10 border-2 border-gray-400 dark:border-white/50 rounded-full flex justify-center"
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
               <motion.div
-                className="w-1 h-3 bg-white rounded-full mt-2"
+                className="w-1 h-3 bg-gray-600 dark:bg-white rounded-full mt-2"
                 animate={{ opacity: [1, 0.3, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />

@@ -82,7 +82,7 @@ export default function Header() {
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20 md:h-28 gap-8 xl:gap-12">
+        <div className="flex items-center justify-between h-20 md:h-28">
           
           {/* Logo */}
           <motion.a
@@ -95,13 +95,13 @@ export default function Header() {
             <img 
               src={casLogo} 
               alt="Canadian Amyloidosis Society"
-              className="h-16 w-auto md:h-18 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
+              className="h-16 w-auto md:h-20 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
             />
           </motion.a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center flex-1 justify-center">
-            <div className="flex items-center gap-3 bg-gray-100/95 backdrop-blur-xl rounded-full px-8 py-2 border border-gray-300/50 shadow-lg">
+          <nav className="hidden lg:flex items-center">
+            <div className="flex items-center gap-2 bg-gray-100/95 backdrop-blur-xl rounded-full px-6 py-2 border border-gray-300/50 shadow-lg">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -109,7 +109,7 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className={`flex items-center gap-2 px-5 py-2 rounded-full transition-all duration-300 text-sm font-semibold border ${
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 text-sm font-semibold border ${
                         isPageActive(item.href, item.dropdownItems)
                           ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
                           : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
@@ -133,7 +133,7 @@ export default function Header() {
                   ) : (
                     <motion.a
                       href={item.href}
-                      className={`flex items-center gap-2 px-5 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative ${
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative ${
                         isPageActive(item.href)
                           ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
                           : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
@@ -203,17 +203,17 @@ export default function Header() {
 
           {/* Theme Toggle & CTA Section */}
           <motion.div
-            className="hidden md:flex items-center gap-6"
+            className="hidden md:flex items-center gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <LanguageSwitcher />
               <ThemeToggle />
             </div>
             
-            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-5 py-2 rounded-full font-semibold text-sm hover:shadow-lg hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 border border-white/10 hover:border-white/20">
+            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20">
               {t('nav.getHelp')}
             </button>
           </motion.div>

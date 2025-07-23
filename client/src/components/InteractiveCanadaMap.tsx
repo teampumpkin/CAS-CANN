@@ -226,55 +226,37 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                       <motion.button
                         key={center.id}
                         onClick={() => handleCenterSelect(center)}
-                        className="w-full text-left p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-600/30 hover:border-[#00AFE6]/30 group min-h-[100px]"
+                        className="w-full text-left p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-600/30 hover:border-[#00AFE6]/30 group"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
-                        <div className="flex items-start gap-3 h-full">
+                        <div className="flex items-center gap-3">
                           {/* Icon */}
                           <div className={`
-                            w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md flex-shrink-0
+                            w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md flex-shrink-0
                             ${center.type === 'hospital' ? 'bg-gradient-to-br from-[#00AFE6] to-[#0088CC]' : 
                               center.type === 'specialty' ? 'bg-gradient-to-br from-[#00DD89] to-[#00BB77]' :
                               center.type === 'research' ? 'bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]' : 
                               'bg-gradient-to-br from-[#F59E0B] to-[#D97706]'}
                           `}>
                             {center.type === 'hospital' ? (
-                              <Hospital className="w-6 h-6" />
+                              <Hospital className="w-5 h-5" />
                             ) : (
-                              <Stethoscope className="w-6 h-6" />
+                              <Stethoscope className="w-5 h-5" />
                             )}
                           </div>
                           
                           {/* Content */}
-                          <div className="flex-1 min-w-0 flex flex-col justify-start h-full">
-                            <div className="text-left">
-                              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm leading-tight line-clamp-2 text-left">
-                                {center.name}
-                              </h4>
-                              <div className="flex items-center gap-1 mb-3 justify-start">
-                                <MapPin className="w-3 h-3 text-[#00DD89] flex-shrink-0" />
-                                <p className="text-xs text-gray-600 dark:text-gray-300 truncate text-left">
-                                  {center.city}
-                                </p>
-                              </div>
-                            </div>
-                            {/* Specialties - Fixed at bottom */}
-                            <div className="flex flex-wrap gap-1 justify-start mt-auto">
-                              {center.specialties.slice(0, 2).map((specialty, idx) => (
-                                <span
-                                  key={idx}
-                                  className="inline-block px-2 py-0.5 bg-[#00AFE6]/15 dark:bg-[#00AFE6]/25 text-[#00AFE6] rounded text-xs font-medium max-w-20 truncate"
-                                >
-                                  {specialty}
-                                </span>
-                              ))}
-                              {center.specialties.length > 2 && (
-                                <span className="inline-block px-2 py-0.5 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 rounded text-xs font-medium">
-                                  +{center.specialties.length - 2}
-                                </span>
-                              )}
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-semibold text-gray-900 dark:text-white mb-1 text-sm leading-tight line-clamp-2">
+                              {center.name}
+                            </h4>
+                            <div className="flex items-center gap-1">
+                              <MapPin className="w-3 h-3 text-[#00DD89] flex-shrink-0" />
+                              <p className="text-xs text-gray-600 dark:text-gray-300 truncate">
+                                {center.city}
+                              </p>
                             </div>
                           </div>
                         </div>

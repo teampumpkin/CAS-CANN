@@ -226,12 +226,12 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                       <motion.button
                         key={center.id}
                         onClick={() => handleCenterSelect(center)}
-                        className="w-full text-left p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-600/30 hover:border-[#00AFE6]/30 group"
+                        className="w-full text-left p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-600/30 hover:border-[#00AFE6]/30 group min-h-[100px]"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-start gap-3 h-full">
                           {/* Icon */}
                           <div className={`
                             w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md flex-shrink-0
@@ -248,17 +248,19 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                           </div>
                           
                           {/* Content */}
-                          <div className="flex-1 min-w-0">
-                            <h4 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-2 text-sm leading-tight">
-                              {center.name}
-                            </h4>
-                            <div className="flex items-center gap-1 mb-2">
-                              <MapPin className="w-3 h-3 text-[#00DD89] flex-shrink-0" />
-                              <p className="text-xs text-gray-600 dark:text-gray-300 truncate">
-                                {center.city}
-                              </p>
+                          <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
+                            <div>
+                              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm leading-tight line-clamp-2">
+                                {center.name}
+                              </h4>
+                              <div className="flex items-center gap-1 mb-3">
+                                <MapPin className="w-3 h-3 text-[#00DD89] flex-shrink-0" />
+                                <p className="text-xs text-gray-600 dark:text-gray-300 truncate">
+                                  {center.city}
+                                </p>
+                              </div>
                             </div>
-                            {/* Specialties */}
+                            {/* Specialties - Fixed at bottom */}
                             <div className="flex flex-wrap gap-1">
                               {center.specialties.slice(0, 2).map((specialty, idx) => (
                                 <span

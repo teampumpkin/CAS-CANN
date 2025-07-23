@@ -190,29 +190,14 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
             Healthcare Network Map
           </h3>
           <div className="flex items-center gap-2">
-            {zoomedProvince && (
-              <motion.button
-                onClick={() => {
-                  setZoomedProvince(null);
-                  setShowClusters(true);
-                  setSelectedProvince(null);
-                  setIsZoomedView(false);
-                }}
-                className="text-sm bg-[#00AFE6] text-white px-3 py-1 rounded-full hover:bg-[#00DD89] transition-colors duration-200"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-              >
-                Back to Canada
-              </motion.button>
-            )}
-            <div className="text-xs text-gray-600 dark:text-gray-300">
-              {zoomedProvince ? `${getProvinceName(zoomedProvince)} Region` : 'Click provinces to zoom'}
+            <div className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+              {zoomedProvince ? `${getProvinceName(zoomedProvince)} Region - ${centersByProvince[zoomedProvince].length} Centers` : 'Click provinces to zoom'}
             </div>
           </div>
         </div>
         
-        {/* Map Container - Properly Scaled */}
-        <div className="relative h-64 md:h-80 overflow-hidden rounded-lg">
+        {/* Map Container - Expanded Size */}
+        <div className="relative h-80 md:h-96 lg:h-[28rem] overflow-hidden rounded-lg">
           <div className="w-full h-full flex items-center justify-center">
             <CanadaMap
               customize={provinceStyles}
@@ -278,95 +263,43 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
           <AnimatePresence>
             {zoomedProvince && centersByProvince[zoomedProvince] && isZoomedView && (
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 rounded-lg overflow-hidden"
-                initial={{ opacity: 0, scale: 0.3 }}
+                className="absolute inset-0 bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/90 dark:to-cyan-900/90 rounded-lg overflow-hidden border-2 border-[#00AFE6]/20"
+                initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.3 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
               >
-                {/* Province Region Background */}
-                <div className="absolute inset-0">
-                  {/* Render simplified province shape */}
-                  <svg 
-                    className="w-full h-full" 
-                    viewBox="0 0 400 300" 
-                    preserveAspectRatio="xMidYMid meet"
-                  >
-                    <defs>
-                      <linearGradient id="provinceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style={{stopColor: '#00AFE6', stopOpacity: 0.1}} />
-                        <stop offset="100%" style={{stopColor: '#00DD89', stopOpacity: 0.1}} />
-                      </linearGradient>
-                      <pattern id="provinceGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#00AFE6" strokeWidth="0.5" opacity="0.3"/>
-                      </pattern>
-                    </defs>
-                    
-                    {/* Province Shape Approximation */}
-                    {zoomedProvince === 'ON' && (
-                      <path 
-                        d="M50,80 Q100,60 200,80 Q280,90 350,120 L350,200 Q300,220 200,210 Q100,200 50,180 Z" 
-                        fill="url(#provinceGradient)" 
-                        stroke="#00AFE6" 
-                        strokeWidth="2" 
-                        opacity="0.7"
-                      />
-                    )}
-                    {zoomedProvince === 'QC' && (
-                      <path 
-                        d="M80,50 Q150,40 280,60 Q350,80 380,120 Q370,180 320,200 Q200,210 100,190 Q60,150 80,50 Z" 
-                        fill="url(#provinceGradient)" 
-                        stroke="#00AFE6" 
-                        strokeWidth="2" 
-                        opacity="0.7"
-                      />
-                    )}
-                    {zoomedProvince === 'BC' && (
-                      <path 
-                        d="M50,60 Q120,40 200,70 Q250,100 280,150 Q260,200 200,220 Q120,210 80,180 Q40,120 50,60 Z" 
-                        fill="url(#provinceGradient)" 
-                        stroke="#00AFE6" 
-                        strokeWidth="2" 
-                        opacity="0.7"
-                      />
-                    )}
-                    {zoomedProvince === 'AB' && (
-                      <path 
-                        d="M80,70 Q150,60 250,80 Q300,100 320,150 Q310,200 250,210 Q150,200 100,180 Q70,130 80,70 Z" 
-                        fill="url(#provinceGradient)" 
-                        stroke="#00AFE6" 
-                        strokeWidth="2" 
-                        opacity="0.7"
-                      />
-                    )}
-                    {/* Default shape for other provinces */}
-                    {!['ON', 'QC', 'BC', 'AB'].includes(zoomedProvince) && (
-                      <path 
-                        d="M100,100 Q200,80 300,120 Q320,180 280,220 Q200,240 120,210 Q80,160 100,100 Z" 
-                        fill="url(#provinceGradient)" 
-                        stroke="#00AFE6" 
-                        strokeWidth="2" 
-                        opacity="0.7"
-                      />
-                    )}
-                    
-                    {/* Grid overlay */}
-                    <rect width="100%" height="100%" fill="url(#provinceGrid)" />
-                  </svg>
+                {/* Realistic Province Map Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5">
+                  {/* Topographic-style background pattern */}
+                  <div className="absolute inset-0 opacity-20">
+                    <svg className="w-full h-full" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+                      <defs>
+                        <pattern id="topo" width="40" height="40" patternUnits="userSpaceOnUse">
+                          <circle cx="20" cy="20" r="15" fill="none" stroke="#00AFE6" strokeWidth="0.5" opacity="0.3"/>
+                          <circle cx="20" cy="20" r="8" fill="none" stroke="#00DD89" strokeWidth="0.3" opacity="0.4"/>
+                        </pattern>
+                      </defs>
+                      <rect width="100%" height="100%" fill="url(#topo)"/>
+                    </svg>
+                  </div>
+                  
+                  {/* Province boundary indicator */}
+                  <div className="absolute inset-4 border-2 border-dashed border-[#00AFE6]/30 rounded-xl"></div>
                 </div>
 
-                {/* Province Header */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
-                  <div className="flex items-center gap-3 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-xl border border-gray-200 dark:border-gray-600">
-                    <div className="w-10 h-10 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center shadow-lg">
-                      <Building className="w-5 h-5 text-white" />
+                {/* Province Header - Simplified */}
+                <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
+                  <div className="flex items-center gap-4 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl px-6 py-4 shadow-2xl border border-gray-200 dark:border-gray-600">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center shadow-lg">
+                      <Building className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">
-                        {getProvinceName(zoomedProvince)} Region
+                      <h4 className="text-2xl font-bold text-gray-900 dark:text-white">
+                        {getProvinceName(zoomedProvince)}
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                        {centersByProvince[zoomedProvince].length} Healthcare Centers Available
+                        {centersByProvince[zoomedProvince].length} Healthcare Centers
                       </p>
                     </div>
                   </div>
@@ -378,91 +311,99 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                       setSelectedProvince(null);
                       setIsZoomedView(false);
                     }}
-                    className="flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-2xl hover:shadow-lg transition-all duration-200 text-sm font-bold shadow-xl"
-                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="flex items-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-3xl hover:shadow-2xl transition-all duration-300 text-base font-bold shadow-xl"
+                    whileHover={{ scale: 1.05, y: -3 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <MapPin className="w-4 h-4" />
+                    <MapPin className="w-5 h-5" />
                     Back to Canada
                   </motion.button>
                 </div>
                 
-                {/* Individual Healthcare Center Dots */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-full h-full">
+                {/* Individual Healthcare Center Dots - Better Spacing */}
+                <div className="absolute inset-0 flex items-center justify-center pt-24 pb-8">
+                  <div className="relative w-full h-full max-w-4xl">
                     {getProvinceDetailedCoordinates(zoomedProvince).map((center, index) => (
                       <motion.button
                         key={center.id}
                         onClick={() => onCenterClick(center)}
                         className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-10"
                         style={{
-                          left: `${20 + (center.detailCoordinates.x * 0.6)}%`,
-                          top: `${15 + (center.detailCoordinates.y * 0.7)}%`
+                          left: `${15 + (center.detailCoordinates.x * 0.7)}%`,
+                          top: `${10 + (center.detailCoordinates.y * 0.8)}%`
                         }}
-                        initial={{ opacity: 0, scale: 0, rotate: 180 }}
+                        initial={{ opacity: 0, scale: 0, rotate: 360 }}
                         animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
-                        whileHover={{ scale: 1.5, y: -5 }}
+                        transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
+                        whileHover={{ scale: 1.4, y: -8 }}
                         whileTap={{ scale: 0.9 }}
                       >
-                        {/* Healthcare Center Dot with Enhanced Design */}
+                        {/* Healthcare Center Dot - Enhanced */}
                         <div className="relative">
                           <div className={`
-                            w-12 h-12 rounded-full border-4 border-white shadow-2xl flex items-center justify-center relative overflow-hidden
-                            ${center.type === 'hospital' ? 'bg-gradient-to-br from-[#00AFE6] to-[#0088CC]' : 
-                              center.type === 'specialty' ? 'bg-gradient-to-br from-[#00DD89] to-[#00BB77]' :
-                              center.type === 'research' ? 'bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]' : 
-                              'bg-gradient-to-br from-[#F59E0B] to-[#D97706]'}
+                            w-16 h-16 rounded-full border-4 border-white shadow-2xl flex items-center justify-center relative overflow-hidden backdrop-blur-sm
+                            ${center.type === 'hospital' ? 'bg-gradient-to-br from-[#00AFE6] via-[#0099DD] to-[#0088CC]' : 
+                              center.type === 'specialty' ? 'bg-gradient-to-br from-[#00DD89] via-[#00CC88] to-[#00BB77]' :
+                              center.type === 'research' ? 'bg-gradient-to-br from-[#8B5CF6] via-[#8855EE] to-[#7C3AED]' : 
+                              'bg-gradient-to-br from-[#F59E0B] via-[#EE8800] to-[#D97706]'}
                           `}>
                             {center.type === 'hospital' ? (
-                              <Hospital className="w-6 h-6 text-white drop-shadow-lg" />
+                              <Hospital className="w-8 h-8 text-white drop-shadow-xl" />
                             ) : (
-                              <Stethoscope className="w-6 h-6 text-white drop-shadow-lg" />
+                              <Stethoscope className="w-8 h-8 text-white drop-shadow-xl" />
                             )}
                             
-                            {/* Shimmer effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+                            {/* Enhanced shimmer effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
                           </div>
                           
-                          {/* Multiple pulsing rings */}
+                          {/* Triple pulsing rings with different timings */}
                           <div className={`
-                            absolute inset-0 rounded-full opacity-40 animate-ping
+                            absolute inset-0 rounded-full opacity-50 animate-ping
                             ${center.type === 'hospital' ? 'bg-[#00AFE6]' : 
                               center.type === 'specialty' ? 'bg-[#00DD89]' :
                               center.type === 'research' ? 'bg-[#8B5CF6]' : 'bg-[#F59E0B]'}
-                          `} style={{ animationDelay: '0s' }} />
+                          `} style={{ animationDelay: '0s', animationDuration: '2s' }} />
                           <div className={`
-                            absolute inset-0 rounded-full opacity-30 animate-ping
+                            absolute inset-0 rounded-full opacity-35 animate-ping
                             ${center.type === 'hospital' ? 'bg-[#00AFE6]' : 
                               center.type === 'specialty' ? 'bg-[#00DD89]' :
                               center.type === 'research' ? 'bg-[#8B5CF6]' : 'bg-[#F59E0B]'}
-                          `} style={{ animationDelay: '0.5s' }} />
+                          `} style={{ animationDelay: '0.7s', animationDuration: '2s' }} />
+                          <div className={`
+                            absolute inset-0 rounded-full opacity-25 animate-ping
+                            ${center.type === 'hospital' ? 'bg-[#00AFE6]' : 
+                              center.type === 'specialty' ? 'bg-[#00DD89]' :
+                              center.type === 'research' ? 'bg-[#8B5CF6]' : 'bg-[#F59E0B]'}
+                          `} style={{ animationDelay: '1.4s', animationDuration: '2s' }} />
                         </div>
                         
-                        {/* Enhanced tooltip */}
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-40">
-                          <div className="bg-gray-900/95 backdrop-blur-sm text-white px-5 py-4 rounded-2xl text-sm shadow-2xl border border-gray-700 min-w-max max-w-sm">
-                            <div className="font-bold text-lg mb-2 text-[#00AFE6]">{center.name}</div>
-                            <div className="flex items-center gap-2 text-gray-300 mb-3">
-                              <MapPin className="w-4 h-4 text-[#00DD89]" />
-                              <span>{center.city}, {center.province}</span>
+                        {/* Professional tooltip */}
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-6 opacity-0 group-hover:opacity-100 transition-all duration-400 pointer-events-none z-50">
+                          <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg text-gray-900 dark:text-white px-6 py-5 rounded-3xl text-sm shadow-2xl border-2 border-gray-200 dark:border-gray-700 min-w-max max-w-sm">
+                            <div className="font-bold text-xl mb-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                              {center.name}
                             </div>
-                            <div className="flex flex-wrap gap-1 mb-3">
+                            <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300 mb-4">
+                              <MapPin className="w-5 h-5 text-[#00DD89]" />
+                              <span className="font-medium">{center.city}, {center.province}</span>
+                            </div>
+                            <div className="flex flex-wrap gap-2 mb-4">
                               {center.specialties.slice(0, 3).map((specialty, idx) => (
-                                <span key={idx} className="text-xs bg-[#00AFE6]/30 text-[#00AFE6] px-2 py-1.5 rounded-full font-medium">
+                                <span key={idx} className="text-xs bg-[#00AFE6]/20 dark:bg-[#00AFE6]/30 text-[#00AFE6] px-3 py-2 rounded-full font-semibold">
                                   {specialty}
                                 </span>
                               ))}
                               {center.specialties.length > 3 && (
-                                <span className="text-xs bg-gray-600 text-gray-300 px-2 py-1.5 rounded-full font-medium">
+                                <span className="text-xs bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-2 rounded-full font-semibold">
                                   +{center.specialties.length - 3} more
                                 </span>
                               )}
                             </div>
-                            <p className="text-xs text-gray-400 leading-relaxed">
+                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                               {center.description}
                             </p>
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-900/95"></div>
+                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-10 border-transparent border-t-white/95 dark:border-t-gray-900/95"></div>
                           </div>
                         </div>
                       </motion.button>

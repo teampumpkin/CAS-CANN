@@ -83,19 +83,19 @@ function SimpleCaptcha({ onVerify }: { onVerify: (token: string) => void }) {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-3 p-4 bg-white/5 border border-white/20 rounded-xl">
+      <div className="flex items-center gap-3 p-4 bg-gray-100/80 dark:bg-white/5 border border-gray-300 dark:border-white/20 rounded-xl">
         <Shield className="w-5 h-5 text-[#00AFE6]" />
         <div className="flex-1">
-          <span className="text-white text-sm">Security verification: What is </span>
+          <span className="text-gray-700 dark:text-white text-sm">Security verification: What is </span>
           <span className="text-[#00AFE6] font-mono font-bold">{captchaQuestion}</span>
-          <span className="text-white text-sm"> ?</span>
+          <span className="text-gray-700 dark:text-white text-sm"> ?</span>
         </div>
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={generateCaptcha}
-          className="text-white/60 hover:text-white hover:bg-white/10"
+          className="text-gray-600 dark:text-white/60 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-white/10"
         >
           <RefreshCw className="w-4 h-4" />
         </Button>
@@ -108,10 +108,10 @@ function SimpleCaptcha({ onVerify }: { onVerify: (token: string) => void }) {
             setTimeout(() => verifyCaptcha(), 100);
           }}
           placeholder="Enter answer"
-          className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20 w-24"
+          className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20 w-24"
         />
         {isVerified && (
-          <div className="flex items-center gap-2 text-green-400 text-sm">
+          <div className="flex items-center gap-2 text-green-600 dark:text-green-400 text-sm">
             <Shield className="w-4 h-4" />
             Verified
           </div>
@@ -498,9 +498,9 @@ export default function Contact() {
       </section>
 
       {/* Contact Form Section */}
-      <section id="contact-form" className="py-16 bg-gray-900 relative overflow-hidden">
+      <section id="contact-form" className="py-16 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
         <div className="absolute top-0 right-0 w-72 h-72 bg-[#00DD89]/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#00AFE6]/10 rounded-full blur-3xl" />
         
@@ -513,13 +513,13 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+            <div className="inline-flex items-center gap-3 bg-gray-100/80 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-300 dark:border-white/20 mb-6">
               <MessageCircle className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Start the Conversation</span>
+              <span className="text-sm font-medium text-gray-800 dark:text-white/90">Start the Conversation</span>
             </div>
             
             <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Share Your
               </span>
               <br />
@@ -528,7 +528,7 @@ export default function Contact() {
               </span>
             </h2>
             
-            <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
               Whether you're a researcher with breakthrough insights, a clinician seeking collaboration, or someone with questions about amyloidosis—we're here to listen and connect.
             </p>
           </motion.div>
@@ -542,16 +542,16 @@ export default function Contact() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-xl rounded-3xl p-10 border border-white/20 shadow-2xl">
+              <div className="bg-gradient-to-br from-white/95 via-gray-50/95 to-white/95 dark:from-white/10 dark:via-white/5 dark:to-white/10 backdrop-blur-xl rounded-3xl p-10 border border-gray-300 dark:border-white/20 shadow-2xl">
                 <div className="flex items-center gap-4 mb-10">
                   <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center shadow-lg">
                     <Send className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold font-rosarivo text-white mb-2">
+                    <h3 className="text-3xl font-bold font-rosarivo text-gray-800 dark:text-white mb-2">
                       Send us a Message
                     </h3>
-                    <p className="text-white/70">
+                    <p className="text-gray-600 dark:text-white/70">
                       We'll respond within 24-48 hours with thoughtful insights
                     </p>
                   </div>
@@ -565,15 +565,15 @@ export default function Contact() {
                         name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90 font-medium">Name *</FormLabel>
+                            <FormLabel className="text-gray-800 dark:text-white/90 font-medium">Name *</FormLabel>
                             <FormControl>
                               <Input
                                 {...field}
                                 placeholder="Your full name"
-                                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20"
+                                className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20"
                               />
                             </FormControl>
-                            <FormMessage className="text-red-400" />
+                            <FormMessage className="text-red-500 dark:text-red-400" />
                           </FormItem>
                         )}
                       />
@@ -583,16 +583,16 @@ export default function Contact() {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white/90 font-medium">Email *</FormLabel>
+                            <FormLabel className="text-gray-800 dark:text-white/90 font-medium">Email *</FormLabel>
                             <FormControl>
                               <Input
                                 {...field}
                                 type="email"
                                 placeholder="your.email@example.com"
-                                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20"
+                                className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20"
                               />
                             </FormControl>
-                            <FormMessage className="text-red-400" />
+                            <FormMessage className="text-red-500 dark:text-red-400" />
                           </FormItem>
                         )}
                       />
@@ -603,15 +603,15 @@ export default function Contact() {
                       name="organization"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/90 font-medium">Organization</FormLabel>
+                          <FormLabel className="text-gray-800 dark:text-white/90 font-medium">Organization</FormLabel>
                           <FormControl>
                             <Input
                               {...field}
                               placeholder="Your organization or institution"
-                              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20"
+                              className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20"
                             />
                           </FormControl>
-                          <FormMessage className="text-red-400" />
+                          <FormMessage className="text-red-500 dark:text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -621,20 +621,20 @@ export default function Contact() {
                       name="inquiryType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/90 font-medium">Message Type *</FormLabel>
+                          <FormLabel className="text-gray-800 dark:text-white/90 font-medium">Message Type *</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
-                              <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-[#00AFE6] focus:ring-[#00AFE6]/20">
+                              <SelectTrigger className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/20 text-gray-900 dark:text-white focus:border-[#00AFE6] focus:ring-[#00AFE6]/20">
                                 <SelectValue placeholder="Select message type" />
                               </SelectTrigger>
                             </FormControl>
-                            <SelectContent className="bg-gray-800 border-white/20">
+                            <SelectContent className="bg-white dark:bg-gray-800 border-gray-300 dark:border-white/20">
                               <SelectItem value="general">General Inquiry</SelectItem>
                               <SelectItem value="upload-followup">Upload Follow-up</SelectItem>
                               <SelectItem value="technical">Technical Support</SelectItem>
                             </SelectContent>
                           </Select>
-                          <FormMessage className="text-red-400" />
+                          <FormMessage className="text-red-500 dark:text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -644,15 +644,15 @@ export default function Contact() {
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/90 font-medium">Subject *</FormLabel>
+                          <FormLabel className="text-gray-800 dark:text-white/90 font-medium">Subject *</FormLabel>
                           <FormControl>
                             <Input
                               {...field}
                               placeholder="Brief subject line"
-                              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20"
+                              className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20"
                             />
                           </FormControl>
-                          <FormMessage className="text-red-400" />
+                          <FormMessage className="text-red-500 dark:text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -662,16 +662,16 @@ export default function Contact() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/90 font-medium">Message *</FormLabel>
+                          <FormLabel className="text-gray-800 dark:text-white/90 font-medium">Message *</FormLabel>
                           <FormControl>
                             <Textarea
                               {...field}
                               placeholder="Please provide details about your inquiry..."
                               rows={6}
-                              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20 resize-none"
+                              className="bg-white dark:bg-white/10 border-gray-300 dark:border-white/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-white/50 focus:border-[#00AFE6] focus:ring-[#00AFE6]/20 resize-none"
                             />
                           </FormControl>
-                          <FormMessage className="text-red-400" />
+                          <FormMessage className="text-red-500 dark:text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -682,7 +682,7 @@ export default function Contact() {
                       name="captchaToken"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/90 font-medium">Security Verification *</FormLabel>
+                          <FormLabel className="text-gray-800 dark:text-white/90 font-medium">Security Verification *</FormLabel>
                           <FormControl>
                             <SimpleCaptcha 
                               onVerify={(token) => {
@@ -690,7 +690,7 @@ export default function Contact() {
                               }}
                             />
                           </FormControl>
-                          <FormMessage className="text-red-400" />
+                          <FormMessage className="text-red-500 dark:text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -706,11 +706,11 @@ export default function Contact() {
                               <Checkbox
                                 checked={field.value}
                                 onCheckedChange={field.onChange}
-                                className="border-white/20 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                                className="border-gray-400 dark:border-white/20 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
                               />
                             </FormControl>
                             <div className="space-y-1 leading-none">
-                              <FormLabel className="text-white/90 text-sm leading-relaxed">
+                              <FormLabel className="text-gray-800 dark:text-white/90 text-sm leading-relaxed">
                                 I agree to the collection and processing of my personal data as outlined in the{' '}
                                 <a 
                                   href="/privacy-policy" 
@@ -724,17 +724,17 @@ export default function Contact() {
                               </FormLabel>
                             </div>
                           </div>
-                          <FormMessage className="text-red-400" />
+                          <FormMessage className="text-red-500 dark:text-red-400" />
                         </FormItem>
                       )}
                     />
 
                     {/* Privacy Notice */}
-                    <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+                    <div className="bg-gray-100/80 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-xl p-4">
                       <div className="flex items-start gap-3">
                         <Shield className="w-5 h-5 text-[#00AFE6] mt-0.5 flex-shrink-0" />
-                        <div className="text-sm text-white/80 leading-relaxed">
-                          <p className="font-medium text-white mb-2">Your Privacy Matters</p>
+                        <div className="text-sm text-gray-700 dark:text-white/80 leading-relaxed">
+                          <p className="font-medium text-gray-800 dark:text-white mb-2">Your Privacy Matters</p>
                           <p>
                             We collect only the information necessary to respond to your inquiry. Your data is stored securely, 
                             used solely for communication purposes, and never shared without your explicit consent. 

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Search, FileText, Heart, Users, MapPin, Building2, Phone, Mail } from 'lucide-react';
 import { useState } from 'react';
-import canadaMapPath from '@assets/Canada Map_1750069387234.png';
+import InteractiveCanadaMap from './InteractiveCanadaMap';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { healthcareCenters, HealthcareCenter } from '@/data/healthcareCenters';
 import HealthcareCenterModal from './HealthcareCenterModal';
@@ -93,91 +93,12 @@ export default function DirectoryPreviewSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <div className="grid lg:grid-cols-5 gap-4 items-center justify-items-center">
-            {/* Map Visualization - Compact */}
+            {/* Interactive Map Visualization */}
             <div className="lg:col-span-3 relative w-full">
-              <div className="relative w-full max-w-2xl mx-auto">
-                <img 
-                  src={canadaMapPath}
-                  alt="Canada Map showing healthcare network coverage"
-                  className="w-full h-auto rounded-xl"
-                />
-                
-                {/* Interactive Healthcare Centers */}
-                {healthcareCenters.map((center, index) => (
-                  <motion.button
-                    key={center.id}
-                    className="absolute cursor-pointer transition-all duration-300 z-10 group flex items-center justify-center"
-                    style={{
-                      left: `${center.coordinates.x}%`,
-                      top: `${center.coordinates.y}%`,
-                      width: '20px',
-                      height: '20px',
-                      transform: 'translate(-50%, -50%)',
-                      backgroundColor: center.type === 'hospital' ? '#00AFE6' : 
-                                     center.type === 'specialty' ? '#00DD89' :
-                                     center.type === 'research' ? '#8B5CF6' : '#F59E0B',
-                      borderRadius: '50%',
-                      border: '3px solid white',
-                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)'
-                    }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ 
-                      opacity: 1, 
-                      scale: 1,
-                      boxShadow: [
-                        '0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(0, 175, 230, 0.7)',
-                        '0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 15px rgba(0, 175, 230, 0)',
-                        '0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(0, 175, 230, 0)'
-                      ]
-                    }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: index * 0.1,
-                      boxShadow: {
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: index * 0.5
-                      }
-                    }}
-                    onClick={() => handleCenterClick(center)}
-                    whileHover={{ scale: 1.3 }}
-                    whileTap={{ scale: 1.1 }}
-                  >
-                    {/* Tooltip */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
-                      <div className="bg-gray-900 text-white px-3 py-2 rounded-3xl text-sm whitespace-nowrap shadow-lg">
-                        <div className="font-semibold">{center.name}</div>
-                        <div className="text-xs text-gray-300">{center.city}, {center.province}</div>
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-                      </div>
-                    </div>
-                  </motion.button>
-                ))}
-                
-              </div>
-              
-              {/* Legend - Ultra Compact design */}
-              <div className="mt-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl p-2 text-xs max-w-md mx-auto">
-                <div className="font-semibold text-gray-900 dark:text-white mb-1 text-center text-xs">{t('map.legend.title')}</div>
-                <div className="grid grid-cols-2 gap-1 text-xs">
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 bg-[#00AFE6] rounded-full border border-white shadow-sm flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.hospitals')}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 bg-[#00DD89] rounded-full border border-white shadow-sm flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.specialty')}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 bg-[#00AFE6] rounded-full border border-white shadow-sm flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.research')}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 bg-[#00DD89] rounded-full border border-white shadow-sm flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300 text-xs">{t('map.legend.clinics')}</span>
-                  </div>
-                </div>
-              </div>
+              <InteractiveCanadaMap 
+                healthcareCenters={healthcareCenters}
+                onCenterClick={handleCenterClick}
+              />
             </div>
 
             {/* Statistics Display - Ultra Compact Layout */}

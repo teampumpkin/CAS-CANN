@@ -1074,102 +1074,144 @@ export default function GetInvolved() {
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
-              <Calendar className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-gray-800 dark:text-white/90 font-medium">Featured Event</span>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 shadow-lg">
+                <Calendar className="w-5 h-5 text-[#00AFE6]" />
+                <span className="text-gray-800 dark:text-white/90 font-medium">Featured Event</span>
+              </div>
+              
+              {/* Status Badge */}
+              <motion.div 
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-4 py-2"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
+                <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00AFE6]">Registration Opening Soon</span>
+              </motion.div>
             </div>
             
-            {/* Status Badge */}
-            <motion.div 
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-4 py-2 mb-6"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00AFE6]">Registration Opening Soon</span>
-            </motion.div>
-            
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight">
               <span className="text-gray-800 dark:text-white">2025 Canadian </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Amyloidosis Summit
               </span>
             </h2>
             
-            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4 mb-8">
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-white/70 max-w-4xl mx-auto leading-relaxed px-4">
               Stay tuned for details and registration info!
             </p>
           </motion.div>
 
-          <div className="max-w-5xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Save the Date Image */}
-              <motion.div
-                className="relative"
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/30 shadow-2xl">
-                  <img 
-                    src={summitSaveTheDateImg} 
-                    alt="Save the Date - 2025 Canadian Amyloidosis Summit"
-                    className="w-full h-auto rounded-xl shadow-lg"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#00AFE6]/10 to-transparent rounded-xl pointer-events-none" />
-                </div>
-              </motion.div>
+          <div className="max-w-7xl mx-auto">
+            {/* Larger, Centered Save the Date Image */}
+            <motion.div
+              className="relative mb-16 flex justify-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/30 shadow-2xl max-w-4xl w-full">
+                <img 
+                  src={summitSaveTheDateImg} 
+                  alt="Save the Date - 2025 Canadian Amyloidosis Summit"
+                  className="w-full h-auto rounded-2xl shadow-2xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#00AFE6]/5 to-transparent rounded-3xl pointer-events-none" />
+                
+                {/* Floating accent elements around the image */}
+                <motion.div
+                  className="absolute -top-6 -right-6 w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-3xl flex items-center justify-center shadow-2xl"
+                  animate={{ 
+                    y: [0, -12, 0],
+                    rotate: [0, 8, 0]
+                  }}
+                  transition={{ 
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <Calendar className="w-8 h-8 text-white" />
+                </motion.div>
+                
+                <motion.div
+                  className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-3xl flex items-center justify-center shadow-2xl"
+                  animate={{ 
+                    y: [0, 12, 0],
+                    rotate: [0, -8, 0]
+                  }}
+                  transition={{ 
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 2.5
+                  }}
+                >
+                  <MapPin className="w-8 h-8 text-white" />
+                </motion.div>
+              </div>
+            </motion.div>
 
-              {/* Summit Information */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-white/5 dark:to-gray-900/50 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-white/10 shadow-xl">
-                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Event Details</h3>
+            {/* Summit Information Card - Centered Below Image */}
+            <motion.div
+              className="flex justify-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-white/10 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
+                <div className="text-center">
+                  <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">Event Details</h3>
                   
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center gap-3">
-                      <Calendar className="w-5 h-5 text-[#00AFE6]" />
-                      <span className="text-gray-700 dark:text-white/80">October 31 - November 2, 2025</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+                    <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
+                      <Calendar className="w-8 h-8 text-[#00AFE6]" />
+                      <div className="text-center">
+                        <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">Dates</p>
+                        <p className="text-gray-800 dark:text-white font-semibold">October 31 - November 2, 2025</p>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <MapPin className="w-5 h-5 text-[#00AFE6]" />
-                      <span className="text-gray-700 dark:text-white/80">Toronto, ON</span>
+                    
+                    <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 rounded-2xl border border-[#00DD89]/20">
+                      <MapPin className="w-8 h-8 text-[#00DD89]" />
+                      <div className="text-center">
+                        <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">Location</p>
+                        <p className="text-gray-800 dark:text-white font-semibold">Toronto, ON</p>
+                      </div>
                     </div>
                   </div>
                   
-                  <p className="text-gray-600 dark:text-white/70 mb-8 leading-relaxed">
+                  <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
                     Join us for the 2025 Canadian Amyloidosis Summit, hosted by CAS. Registration will be available through the Transthyretin Amyloidosis Canada (TAC) website soon.
                   </p>
                   
                   <div className="space-y-4">
                     <Button 
                       onClick={() => window.open('https://madhattr.ca/events/', '_blank')}
-                      className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                      className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group px-8 py-4 text-lg font-semibold rounded-2xl"
                     >
                       Visit TAC Website
-                      <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                      <ExternalLink className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
                     </Button>
                     
-                    <p className="text-sm text-gray-500 dark:text-white/50 text-center">
+                    <p className="text-sm text-gray-500 dark:text-white/50">
                       Registration not yet open
                     </p>
                   </div>
                 </div>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

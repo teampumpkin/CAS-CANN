@@ -101,7 +101,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-4 bg-gray-100/95 backdrop-blur-xl rounded-full px-8 py-3 border border-gray-300/50 shadow-lg">
+            <div className="flex items-center gap-3 bg-gray-100/95 backdrop-blur-xl rounded-full px-8 py-3 border border-gray-300/50 shadow-lg">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}

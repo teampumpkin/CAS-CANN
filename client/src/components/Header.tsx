@@ -3,6 +3,7 @@ import { Menu, X, Phone, ChevronDown, Edit } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import casLogo from '@assets/l_cas_vert_rgb_1753253116732.png';
+import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLanguage } from '@/contexts/LanguageContext';

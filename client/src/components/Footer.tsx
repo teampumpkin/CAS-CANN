@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Heart, Instagram, Linkedin, Twitter, Facebook, MapPin, Phone, Mail, FileText, Users, Calendar, Search, Globe, Shield, BookOpen, ExternalLink } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import casLogo from '@assets/l_cas_vert_rgb_1753253116732.png';
+import casLogo from '@assets/l_cas_vert_ko_1753253840024.png';
 
 export default function Footer() {
   const { language, setLanguage } = useLanguage();
@@ -67,7 +67,7 @@ export default function Footer() {
                   <img 
                     src={casLogo} 
                     alt="Canadian Amyloidosis Society"
-                    className="h-24 w-auto rounded-xl shadow-2xl bg-white/15 backdrop-blur-xl p-4 hover:scale-105 transition-all duration-300"
+                    className="h-32 w-auto hover:scale-105 transition-all duration-300"
                   />
                 </div>
                 

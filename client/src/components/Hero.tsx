@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { MapPin, Upload, BookOpen, Users } from 'lucide-react';
-import heroBackgroundImage from '@assets/shutterstock_2066097218_1752824393843.jpg';
+import heroBackgroundImage from '@assets/shutterstock_2447944539_1753253167377.jpg';
 import { useLanguage } from '@/contexts/LanguageContext';
 import OptimizedImage from '@/components/OptimizedImage';
 
@@ -16,13 +16,13 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Sophisticated background with medical heart visualization */}
+      {/* Sophisticated background with neural network visualization */}
       <div className="absolute inset-0">
-        {/* Medical heart background image */}
+        {/* Neural network background image */}
         <div className="absolute inset-0">
           <OptimizedImage
             src={heroBackgroundImage}
-            alt="Neural network visualization representing amyloidosis research and treatment" 
+            alt="Neural network and synapses visualization representing amyloidosis research and neurological connections" 
             className="w-full h-full object-cover"
             loading="eager"
             priority={true}

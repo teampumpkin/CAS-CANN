@@ -14,8 +14,8 @@ export default function Home() {
       <WelcomeSection />
       <AboutAmyloidosisSection />
       <WhatYoullFindHere />
-      <EventsNewsletterSection />
       <DirectoryPreviewSection />
+      <EventsNewsletterSection />
       <QuickLinksSection />
       <FeaturedSpotlights />
     </main>

@@ -95,7 +95,7 @@ export default function Header() {
             <img 
               src={casLogo} 
               alt="Canadian Amyloidosis Society"
-              className="h-14 w-auto md:h-16 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
+              className="h-16 w-auto md:h-18 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
             />
           </motion.a>
 

@@ -167,7 +167,7 @@ export default function Hero() {
                   whileTap={{ scale: 0.98 }}
                 >
                   {/* Enhanced Button-style card */}
-                  <div className="relative bg-gradient-to-br from-white/15 via-white/8 to-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/30 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#00AFE6]/20 group-hover:via-[#00DD89]/15 group-hover:to-[#00AFE6]/10 group-hover:border-[#00AFE6]/50 group-hover:shadow-xl group-hover:shadow-[#00AFE6]/30 overflow-hidden w-full h-full min-h-[160px] group-active:transform group-active:scale-95">
+                  <div className="relative bg-gradient-to-br from-white/15 via-white/8 to-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/30 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#00AFE6]/90 group-hover:via-[#00DD89]/85 group-hover:to-[#00AFE6]/90 group-hover:border-[#00AFE6]/80 group-hover:shadow-xl group-hover:shadow-[#00AFE6]/50 overflow-hidden w-full h-full min-h-[160px] group-active:transform group-active:scale-95">
                     
                     {/* Dynamic Mesh Background */}
                     <div className="absolute inset-0 opacity-20">
@@ -209,12 +209,12 @@ export default function Hero() {
                       </div>
                       
                       {/* Enhanced title */}
-                      <h3 className="text-white font-bold text-base mb-2 group-hover:text-white transition-all duration-300 font-rosarivo">
+                      <h3 className="text-white font-bold text-base mb-2 group-hover:text-white transition-all duration-300 font-rosarivo drop-shadow-lg group-hover:drop-shadow-xl">
                         {tile.label}
                       </h3>
                       
                       {/* Enhanced subtitle */}
-                      <p className="text-white/60 text-xs font-light leading-relaxed group-hover:text-white/80 transition-all duration-300 transform group-hover:translate-y-0.5">
+                      <p className="text-white/70 text-xs font-medium leading-relaxed group-hover:text-white group-hover:font-semibold transition-all duration-300 transform group-hover:translate-y-0.5 drop-shadow-md group-hover:drop-shadow-lg">
                         {index === 0 && "Connect with our community"}
                         {index === 1 && "Find healthcare providers and support"}
                         {index === 2 && "Share your experience and stories"}
@@ -223,7 +223,7 @@ export default function Hero() {
                       
                       {/* Button indicator */}
                       <div className="mt-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="flex items-center gap-1 text-[#00AFE6] font-medium text-xs">
+                        <div className="flex items-center gap-1 text-white font-bold text-xs bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
                           <span>Click to explore</span>
                           <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

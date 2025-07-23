@@ -248,20 +248,20 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                           </div>
                           
                           {/* Content */}
-                          <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
-                            <div>
-                              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm leading-tight line-clamp-2">
+                          <div className="flex-1 min-w-0 flex flex-col justify-start h-full">
+                            <div className="text-left">
+                              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm leading-tight line-clamp-2 text-left">
                                 {center.name}
                               </h4>
-                              <div className="flex items-center gap-1 mb-3">
+                              <div className="flex items-center gap-1 mb-3 justify-start">
                                 <MapPin className="w-3 h-3 text-[#00DD89] flex-shrink-0" />
-                                <p className="text-xs text-gray-600 dark:text-gray-300 truncate">
+                                <p className="text-xs text-gray-600 dark:text-gray-300 truncate text-left">
                                   {center.city}
                                 </p>
                               </div>
                             </div>
                             {/* Specialties - Fixed at bottom */}
-                            <div className="flex flex-wrap gap-1">
+                            <div className="flex flex-wrap gap-1 justify-start mt-auto">
                               {center.specialties.slice(0, 2).map((specialty, idx) => (
                                 <span
                                   key={idx}

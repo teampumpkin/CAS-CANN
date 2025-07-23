@@ -9,25 +9,25 @@ export default function AboutAmyloidosisSection() {
       name: t('about.types.al.name'),
       description: t('about.types.al.description'),
       prevalence: t('about.types.al.prevalence'),
-      gradient: 'from-[#00AFE6] to-[#0088CC]'
+      gradient: 'from-[#00AFE6] to-[#00DD89]'
     },
     {
       name: t('about.types.aa.name'), 
       description: t('about.types.aa.description'),
       prevalence: t('about.types.aa.prevalence'),
-      gradient: 'from-[#00DD89] to-[#00BB77]'
+      gradient: 'from-[#00DD89] to-[#00AFE6]'
     },
     {
       name: t('about.types.hereditary.name'),
       description: t('about.types.hereditary.description'),
       prevalence: t('about.types.hereditary.prevalence'),
-      gradient: 'from-[#00AFE6] to-[#0088CC]'
+      gradient: 'from-[#00AFE6] to-[#00DD89]'
     },
     {
       name: t('about.types.other.name'),
       description: t('about.types.other.description'),
       prevalence: t('about.types.other.prevalence'),
-      gradient: 'from-[#00DD89] to-[#00BB77]'
+      gradient: 'from-[#00DD89] to-[#00AFE6]'
     }
   ];
 

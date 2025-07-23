@@ -49,9 +49,9 @@ export default function DirectoryPreviewSection() {
   ];
 
   const quickStats = [
-    { number: "1.2K+", label: "Active Patients", gradient: "from-[#00AFE6] to-[#0088CC]" },
-    { number: "45+", label: "Research Studies", gradient: "from-[#00DD89] to-[#00BB77]" },
-    { number: "8", label: "Clinical Trials", gradient: "from-purple-500 to-purple-700" }
+    { number: "1.2K+", label: "Active Patients", gradient: "from-[#00AFE6] to-[#00DD89]" },
+    { number: "45+", label: "Research Studies", gradient: "from-[#00DD89] to-[#00AFE6]" },
+    { number: "8", label: "Clinical Trials", gradient: "from-[#00AFE6] to-[#00DD89]" }
   ];
 
   return (
@@ -242,7 +242,7 @@ export default function DirectoryPreviewSection() {
               {/* Call to Action */}
               <div className="pt-2">
                 <motion.button 
-                  className="w-full bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg transition-all duration-300"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -266,7 +266,7 @@ export default function DirectoryPreviewSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="flex items-start gap-8 mb-8">
-              <div className="w-20 h-20 bg-gradient-to-br from-[#00AFE6] to-[#0088CC] rounded-2xl flex items-center justify-center shadow-xl">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center shadow-xl">
                 <Search className="w-10 h-10 text-white" />
               </div>
               <div className="flex-1">
@@ -331,13 +331,7 @@ export default function DirectoryPreviewSection() {
               {quickStats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  className={`group text-center p-6 backdrop-blur-xl rounded-2xl border transition-all duration-300 hover:shadow-xl ${
-                    index === 0 
-                      ? 'bg-gradient-to-br from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200/50 dark:border-blue-400/20 hover:from-blue-100/95 hover:to-cyan-100/95 dark:hover:from-blue-800/30 dark:hover:to-cyan-800/30 hover:border-blue-300/60 dark:hover:border-blue-300/30 hover:shadow-blue-500/25 dark:hover:shadow-blue-400/20'
-                      : index === 1
-                      ? 'bg-gradient-to-br from-emerald-50/90 to-green-50/90 dark:from-emerald-900/20 dark:to-green-900/20 border-emerald-200/50 dark:border-emerald-400/20 hover:from-emerald-100/95 hover:to-green-100/95 dark:hover:from-emerald-800/30 dark:hover:to-green-800/30 hover:border-emerald-300/60 dark:hover:border-emerald-300/30 hover:shadow-emerald-500/25 dark:hover:shadow-emerald-400/20'
-                      : 'bg-gradient-to-br from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20 border-purple-200/50 dark:border-purple-400/20 hover:from-purple-100/95 hover:to-violet-100/95 dark:hover:from-purple-800/30 dark:hover:to-violet-800/30 hover:border-purple-300/60 dark:hover:border-purple-300/30 hover:shadow-purple-500/25 dark:hover:shadow-purple-400/20'
-                  }`}
+                  className="group text-center p-6 backdrop-blur-xl rounded-2xl border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 dark:hover:from-[#00AFE6]/25 dark:hover:to-[#00DD89]/25 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
@@ -346,41 +340,21 @@ export default function DirectoryPreviewSection() {
                   <div className={`text-3xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300`}>
                     {stat.number}
                   </div>
-                  <div className={`text-sm font-medium ${
-                    index === 0 
-                      ? 'text-blue-700 dark:text-blue-300'
-                      : index === 1
-                      ? 'text-emerald-700 dark:text-emerald-300'
-                      : 'text-purple-700 dark:text-purple-300'
-                  }`}>{stat.label}</div>
+                  <div className="text-sm font-medium text-gray-700 dark:text-gray-300">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
-
-            {/* Contact Info */}
-            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
-              <h4 className="text-gray-900 dark:text-white font-semibold mb-4">Need Help Finding Care?</h4>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 text-gray-700 dark:text-white/70 text-sm">
-                  <Phone className="w-4 h-4" />
-                  <span>1-800-AMYLOID</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-700 dark:text-white/70 text-sm">
-                  <Mail className="w-4 h-4" />
-                  <span>directory@cas.ca</span>
-                </div>
-              </div>
-            </div>
           </motion.div>
         </div>
+
+        {isModalOpen && selectedCenter && (
+          <HealthcareCenterModal
+            center={selectedCenter}
+            isOpen={isModalOpen}
+            onClose={closeModal}
+          />
+        )}
       </div>
-      
-      {/* Healthcare Center Modal */}
-      <HealthcareCenterModal
-        center={selectedCenter}
-        isOpen={isModalOpen}
-        onClose={closeModal}
-      />
     </section>
   );
 }

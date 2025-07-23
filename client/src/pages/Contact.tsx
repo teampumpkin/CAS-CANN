@@ -349,16 +349,16 @@ export default function Contact() {
                   whileHover={{ y: -5 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative bg-white/20 backdrop-blur-xl rounded-2xl p-4 border border-white/30 group-hover:border-white/50 transition-all duration-300 shadow-xl h-full">
+                  <div className="relative bg-white/90 dark:bg-white/20 backdrop-blur-xl rounded-2xl p-4 border border-gray-300 dark:border-white/30 group-hover:border-[#00AFE6]/50 transition-all duration-300 shadow-xl h-full">
                     <div className="flex flex-col items-center text-center mb-3">
                       <div className={`w-10 h-10 bg-gradient-to-br ${section.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 mb-2`}>
                         <section.icon className="w-5 h-5 text-white" />
                       </div>
-                      <h3 className="text-base font-bold text-white drop-shadow-lg group-hover:text-[#00AFE6] transition-colors duration-300">
+                      <h3 className="text-base font-bold text-gray-800 dark:text-white drop-shadow-lg group-hover:text-[#00AFE6] transition-colors duration-300">
                         {section.title}
                       </h3>
                     </div>
-                    <p className="text-white/90 text-xs leading-relaxed mb-3 drop-shadow-sm text-center">
+                    <p className="text-gray-700 dark:text-white/90 text-xs leading-relaxed mb-3 text-center">
                       {section.description}
                     </p>
                     
@@ -776,7 +776,7 @@ export default function Contact() {
             >
               {/* Direct Contact */}
               <motion.div
-                className="bg-gradient-to-br from-blue-900/25 to-indigo-900/25 backdrop-blur-xl rounded-2xl p-8 border border-blue-400/30 shadow-xl"
+                className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 shadow-xl"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
@@ -784,41 +784,41 @@ export default function Contact() {
                   <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <Mail className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-blue-100 mb-2">
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
                     Direct Contact
                   </h3>
-                  <p className="text-white/70 text-sm">
+                  <p className="text-gray-600 dark:text-white/70 text-sm">
                     For immediate assistance
                   </p>
                 </div>
                 
                 <motion.a
                   href="mailto:info@amyloidosis.ca"
-                  className="flex items-center justify-center gap-3 bg-white/10 rounded-xl px-6 py-4 hover:bg-white/20 transition-all duration-300 group"
+                  className="flex items-center justify-center gap-3 bg-gray-200/80 dark:bg-white/10 rounded-xl px-6 py-4 hover:bg-gray-300/80 dark:hover:bg-white/20 transition-all duration-300 group"
                   whileHover={{ y: -2 }}
                 >
-                  <span className="text-white font-medium">info@amyloidosis.ca</span>
-                  <ExternalLink className="w-4 h-4 text-white/60 group-hover:text-[#00AFE6] transition-colors duration-300" />
+                  <span className="text-gray-800 dark:text-white font-medium">info@amyloidosis.ca</span>
+                  <ExternalLink className="w-4 h-4 text-gray-600 dark:text-white/60 group-hover:text-[#00AFE6] transition-colors duration-300" />
                 </motion.a>
               </motion.div>
 
               {/* Response Time */}
               <motion.div
-                className="bg-gradient-to-br from-emerald-900/25 to-green-900/25 backdrop-blur-xl rounded-2xl p-6 border border-emerald-400/30"
+                className="bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 backdrop-blur-xl rounded-2xl p-6 border border-[#00DD89]/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#00DD89] to-[#00AFE6] rounded-xl flex items-center justify-center flex-shrink-0">
                     <MessageCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-emerald-100 mb-2">
+                    <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-2">
                       Quick Response
                     </h4>
-                    <p className="text-emerald-300 text-sm leading-relaxed">
+                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed">
                       We typically respond within 24-48 hours during business days. Urgent matters receive priority attention.
                     </p>
                   </div>
@@ -827,21 +827,21 @@ export default function Contact() {
 
               {/* Office Hours */}
               <motion.div
-                className="bg-gradient-to-br from-purple-900/25 to-violet-900/25 backdrop-blur-xl rounded-2xl p-6 border border-purple-400/30"
+                className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 viewport={{ once: true }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-[#00AFE6] rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0">
                     <Building2 className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-purple-100 mb-2">
+                    <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-2">
                       Based in Canada
                     </h4>
-                    <p className="text-purple-300 text-sm leading-relaxed">
+                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed">
                       Operating across all provinces and territories, with team members from coast to coast.
                     </p>
                   </div>
@@ -850,7 +850,7 @@ export default function Contact() {
 
               {/* Community Note */}
               <motion.div
-                className="bg-gradient-to-br from-orange-900/25 to-amber-900/25 backdrop-blur-xl rounded-2xl p-6 border border-orange-400/30"
+                className="bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 backdrop-blur-xl rounded-2xl p-6 border border-[#00DD89]/30"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
@@ -860,10 +860,10 @@ export default function Contact() {
                   <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center mx-auto mb-4">
                     <Users className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="text-lg font-bold text-orange-100 mb-3">
+                  <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-3">
                     Join Our Community
                   </h4>
-                  <p className="text-orange-300 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed mb-4">
                     Connect with healthcare professionals, researchers, and advocates working together to advance amyloidosis care.
                   </p>
                   <motion.a

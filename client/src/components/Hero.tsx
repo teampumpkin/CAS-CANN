@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { MapPin, Upload, BookOpen, Users } from 'lucide-react';
-import heroBackgroundImage from '@assets/shutterstock_2447944539_1753253167377.jpg';
+import heroBackgroundImage from '@assets/shutterstock_2447944539_1753254859154.jpg';
 import { useLanguage } from '@/contexts/LanguageContext';
 import OptimizedImage from '@/components/OptimizedImage';
 

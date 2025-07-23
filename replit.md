@@ -22,7 +22,8 @@ Preferred communication style: Simple, everyday language.
 - ✅ **Mobile Language & Theme Controls** - Added both LanguageSwitcher and ThemeToggle to mobile menu footer for complete feature parity
 - ✅ **Cross-Device Navigation Consistency** - Ensured consistent brand color usage and interaction patterns across desktop and mobile views
 - ✅ **Footer Logo Enhancement** - Updated footer to use prominent CAS symbol logo with enhanced styling, hover effects, and improved visual hierarchy
-- ✅ **Homepage Hero Background Enhancement** - Updated hero section to use neural network/synapses background image representing scientific research and neurological connections relevant to amyloidosis
+- ✅ **Homepage Hero Background Enhancement** - Updated hero section to use high-quality neural network/synapses background image with beautiful blue tones and pink synaptic connections representing scientific research and neurological connections relevant to amyloidosis
+- ✅ **Hero Section Light Theme Optimization** - Reduced overlay opacity significantly (from 75% to 40%) to make neural network background image clearly visible while maintaining text readability through enhanced contrast and text shadows
 
 ### Complete Brand Color Enforcement Across Contact, Directory & About Pages (July 23, 2025)
 - ✅ **Contact Page Complete Optimization** - Eliminated all non-brand colors (purple, blue, green, emerald, orange) from entire Contact page, using only #00AFE6 and #00DD89

@@ -525,13 +525,7 @@ export default function AboutAmyloidosis() {
               <motion.div
                 id={`${type.id}-amyloidosis`}
                 key={type.id}
-                className={`backdrop-blur-xl rounded-2xl border ${type.borderColor} overflow-hidden ${
-                  index === 0 
-                    ? 'bg-gradient-to-br from-red-50/95 to-pink-50/95 dark:from-red-900/25 dark:to-pink-900/25 border-red-400/30'
-                    : index === 1
-                    ? 'bg-gradient-to-br from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25 border-blue-400/30'
-                    : 'bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 border-purple-400/30'
-                } bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 border-[#00AFE6]/30`}
+                className="backdrop-blur-xl rounded-2xl border overflow-hidden bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 border-[#00AFE6]/30"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -548,20 +542,8 @@ export default function AboutAmyloidosis() {
                         <type.icon className="w-7 h-7 text-white" />
                       </div>
                       <div>
-                        <h3 className={`text-xl font-bold mb-1 ${
-                          index === 0 
-                            ? 'text-red-800 dark:text-red-100'
-                            : index === 1
-                            ? 'text-blue-800 dark:text-blue-100'
-                            : 'text-purple-800 dark:text-purple-100'
-                        }`}>{type.type}</h3>
-                        <p className={`text-sm ${
-                          index === 0 
-                            ? 'text-red-600 dark:text-red-300'
-                            : index === 1
-                            ? 'text-blue-600 dark:text-blue-300'
-                            : 'text-purple-600 dark:text-purple-300'
-                        }`}>{type.subtitle}</p>
+                        <h3 className="text-xl font-bold mb-1 text-gray-800 dark:text-white">{type.type}</h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">{type.subtitle}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-4">

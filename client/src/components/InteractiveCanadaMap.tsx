@@ -185,67 +185,111 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
             </div>
           )}
           
-          {/* Centers List Popup */}
+          {/* Centers List Popup - Enhanced Design */}
           <AnimatePresence>
             {showCentersList && (
               <motion.div
-                className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-lg flex items-center justify-center z-40"
+                className="absolute inset-0 bg-black/60 backdrop-blur-md rounded-lg flex items-center justify-center z-40"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setShowCentersList(null)}
               >
                 <motion.div
-                  className="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl border border-gray-200 dark:border-gray-700 max-h-[80vh] overflow-y-auto"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
+                  className="bg-white dark:bg-gray-900/95 backdrop-blur-lg rounded-3xl p-8 max-w-xl w-full mx-4 shadow-2xl border border-gray-200 dark:border-gray-700/50 max-h-[85vh] overflow-hidden"
+                  initial={{ scale: 0.8, opacity: 0, y: 50 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  exit={{ scale: 0.8, opacity: 0, y: 50 }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* List Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                      {getProvinceName(showCentersList)} Centers
-                    </h3>
+                  {/* Enhanced Header with Gradient */}
+                  <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-200 dark:border-gray-700/50">
+                    <div>
+                      <h3 className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-2">
+                        {getProvinceName(showCentersList)}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                        {centersByProvince[showCentersList]?.length} Healthcare Centers Available
+                      </p>
+                    </div>
                     <button
                       onClick={() => setShowCentersList(null)}
-                      className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      className="w-12 h-12 bg-gray-100 dark:bg-gray-700/50 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 hover:scale-105"
                     >
-                      <X className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+                      <X className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                     </button>
                   </div>
 
-                  {/* Centers List */}
-                  <div className="space-y-3">
+                  {/* Scrollable Centers List */}
+                  <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
                     {centersByProvince[showCentersList]?.map((center, index) => (
-                      <button
+                      <motion.button
                         key={center.id}
                         onClick={() => handleCenterSelect(center)}
-                        className="w-full text-left p-4 bg-gray-50 dark:bg-gray-700 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors border border-gray-200 dark:border-gray-600"
+                        className="w-full text-left p-5 bg-gradient-to-r from-gray-50/80 to-gray-100/60 dark:from-gray-800/50 dark:to-gray-700/30 rounded-2xl hover:from-[#00AFE6]/5 hover:to-[#00DD89]/5 dark:hover:from-[#00AFE6]/10 dark:hover:to-[#00DD89]/10 transition-all duration-300 border border-gray-200/50 dark:border-gray-600/30 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-lg group"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        whileHover={{ scale: 1.02, y: -2 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-4">
+                          {/* Enhanced Icon with Gradient Background */}
                           <div className={`
-                            w-10 h-10 rounded-full flex items-center justify-center text-white
-                            ${center.type === 'hospital' ? 'bg-[#00AFE6]' : 
-                              center.type === 'specialty' ? 'bg-[#00DD89]' :
-                              center.type === 'research' ? 'bg-[#8B5CF6]' : 'bg-[#F59E0B]'}
+                            w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300 relative overflow-hidden
+                            ${center.type === 'hospital' ? 'bg-gradient-to-br from-[#00AFE6] to-[#0088CC]' : 
+                              center.type === 'specialty' ? 'bg-gradient-to-br from-[#00DD89] to-[#00BB77]' :
+                              center.type === 'research' ? 'bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]' : 
+                              'bg-gradient-to-br from-[#F59E0B] to-[#D97706]'}
                           `}>
                             {center.type === 'hospital' ? (
-                              <Hospital className="w-5 h-5" />
+                              <Hospital className="w-7 h-7 drop-shadow-sm" />
                             ) : (
-                              <Stethoscope className="w-5 h-5" />
+                              <Stethoscope className="w-7 h-7 drop-shadow-sm" />
                             )}
+                            {/* Subtle shimmer effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -skew-x-12 animate-pulse" />
                           </div>
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-gray-900 dark:text-white">
+                          
+                          {/* Enhanced Content Layout */}
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-1 group-hover:text-[#00AFE6] dark:group-hover:text-[#00AFE6] transition-colors duration-200 truncate">
                               {center.name}
                             </h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">
-                              {center.city}
-                            </p>
+                            <div className="flex items-center gap-2 mb-2">
+                              <MapPin className="w-4 h-4 text-[#00DD89] flex-shrink-0" />
+                              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                                {center.city}
+                              </p>
+                            </div>
+                            {/* Add specialty preview */}
+                            <div className="flex items-center gap-2">
+                              <div className="flex flex-wrap gap-1">
+                                {center.specialties.slice(0, 2).map((specialty, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="inline-block px-2 py-1 bg-[#00AFE6]/15 dark:bg-[#00AFE6]/25 text-[#00AFE6] rounded-lg text-xs font-semibold"
+                                  >
+                                    {specialty}
+                                  </span>
+                                ))}
+                                {center.specialties.length > 2 && (
+                                  <span className="inline-block px-2 py-1 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 rounded-lg text-xs font-semibold">
+                                    +{center.specialties.length - 2}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Hover Arrow Indicator */}
+                          <div className="opacity-0 group-hover:opacity-100 transition-all duration-200 transform translate-x-2 group-hover:translate-x-0">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] flex items-center justify-center">
+                              <MapPin className="w-4 h-4 text-white" />
+                            </div>
                           </div>
                         </div>
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 </motion.div>

@@ -29,10 +29,10 @@ export default function Hero() {
             quality={70}
             sizes="100vw"
           />
-          {/* Minimal overlay to show background image clearly */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-gray-50/15 to-white/20 dark:from-gray-900/60 dark:via-gray-900/55 dark:to-gray-900/60"></div>
-          {/* Very subtle brand color accent overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-[#00DD89]/3 to-[#00AFE6]/5 dark:from-[#00AFE6]/8 dark:via-[#00DD89]/6 dark:to-[#00AFE6]/8"></div>
+          {/* Balanced overlay for background visibility and text readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-gray-50/25 to-white/30 dark:from-gray-900/65 dark:via-gray-900/60 dark:to-gray-900/65"></div>
+          {/* Brand color accent overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/6 via-[#00DD89]/4 to-[#00AFE6]/6 dark:from-[#00AFE6]/8 dark:via-[#00DD89]/6 dark:to-[#00AFE6]/8"></div>
         </div>
         
         {/* Animated brand accent elements */}
@@ -80,7 +80,7 @@ export default function Hero() {
             {/* Main headline */}
             <motion.h1
               className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-4 relative leading-none tracking-tight font-rosarivo"
-              style={{ textShadow: '3px 3px 6px rgba(255, 255, 255, 0.8), 1px 1px 3px rgba(0, 0, 0, 0.2)' }}
+              style={{ textShadow: '1px 1px 2px rgba(255, 255, 255, 0.5)' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -107,8 +107,8 @@ export default function Hero() {
 
             {/* Clinician-focused subtitle */}
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl font-light text-gray-900 dark:text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
-              style={{ textShadow: '2px 2px 4px rgba(255, 255, 255, 0.9), 1px 1px 2px rgba(0, 0, 0, 0.1)' }}
+              className="text-xl md:text-2xl lg:text-3xl font-light text-gray-800 dark:text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
+              style={{ textShadow: '1px 1px 2px rgba(255, 255, 255, 0.6)' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}

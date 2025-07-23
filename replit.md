@@ -21,6 +21,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ **Mobile Menu Layout Improvements** - Enhanced spacing, rounded corners, and shadow effects for professional mobile navigation experience
 - ✅ **Mobile Language & Theme Controls** - Added both LanguageSwitcher and ThemeToggle to mobile menu footer for complete feature parity
 - ✅ **Cross-Device Navigation Consistency** - Ensured consistent brand color usage and interaction patterns across desktop and mobile views
+- ✅ **Footer Logo Enhancement** - Updated footer to use the complete CAS logo with "Canadian Amyloidosis Society" text for better brand recognition and professional appearance
 
 ### Complete Brand Color Enforcement Across Contact, Directory & About Pages (July 23, 2025)
 - ✅ **Contact Page Complete Optimization** - Eliminated all non-brand colors (purple, blue, green, emerald, orange) from entire Contact page, using only #00AFE6 and #00DD89

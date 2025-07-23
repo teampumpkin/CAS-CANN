@@ -29,10 +29,10 @@ export default function Hero() {
             quality={70}
             sizes="100vw"
           />
-          {/* Light overlay for text readability and brand enhancement */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/75 via-gray-50/80 to-white/75 dark:from-gray-900/85 dark:via-gray-900/80 dark:to-gray-900/85"></div>
+          {/* Very light overlay for text readability while keeping image visible */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-gray-50/35 to-white/40 dark:from-gray-900/70 dark:via-gray-900/65 dark:to-gray-900/70"></div>
           {/* Brand color accent overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/15 via-[#00DD89]/12 to-[#00AFE6]/18 dark:from-[#00AFE6]/10 dark:via-[#00DD89]/8 dark:to-[#00AFE6]/12"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/8 via-[#00DD89]/6 to-[#00AFE6]/8 dark:from-[#00AFE6]/10 dark:via-[#00DD89]/8 dark:to-[#00AFE6]/12"></div>
         </div>
         
         {/* Animated brand accent elements */}
@@ -80,6 +80,7 @@ export default function Hero() {
             {/* Main headline */}
             <motion.h1
               className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-4 relative leading-none tracking-tight font-rosarivo"
+              style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -106,7 +107,8 @@ export default function Hero() {
 
             {/* Clinician-focused subtitle */}
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl font-light text-gray-700 dark:text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl lg:text-3xl font-light text-gray-800 dark:text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
+              style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.1)' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
@@ -121,19 +123,19 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8 }}
             >
-              <div className="text-center bg-white/80 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/50 dark:border-white/20">
+              <div className="text-center bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/60 dark:border-white/20">
                 <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                   6 weeks
                 </div>
                 <div className="text-sm text-gray-600 dark:text-white/80 mt-1">Average diagnostic time reduction</div>
               </div>
-              <div className="text-center bg-white/80 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/50 dark:border-white/20">
+              <div className="text-center bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/60 dark:border-white/20">
                 <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                   350+
                 </div>
                 <div className="text-sm text-gray-600 dark:text-white/80 mt-1">Healthcare professionals</div>
               </div>
-              <div className="text-center bg-white/80 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/50 dark:border-white/20">
+              <div className="text-center bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/60 dark:border-white/20">
                 <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                   1,400+
                 </div>

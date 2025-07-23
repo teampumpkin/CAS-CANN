@@ -221,47 +221,50 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                   </div>
 
                   {/* Scrollable Centers List */}
-                  <div className="flex-1 overflow-y-auto pr-2 space-y-3">
-                    {centersByProvince[showCentersList]?.map((center, index) => (
-                      <motion.button
-                        key={center.id}
-                        onClick={() => handleCenterSelect(center)}
-                        className="w-full text-left p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-600/30 hover:border-[#00AFE6]/30 group"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="flex items-start gap-3">
-                          {/* Icon */}
-                          <div className={`
-                            w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md flex-shrink-0
-                            ${center.type === 'hospital' ? 'bg-gradient-to-br from-[#00AFE6] to-[#0088CC]' : 
-                              center.type === 'specialty' ? 'bg-gradient-to-br from-[#00DD89] to-[#00BB77]' :
-                              center.type === 'research' ? 'bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]' : 
-                              'bg-gradient-to-br from-[#F59E0B] to-[#D97706]'}
-                          `}>
-                            {center.type === 'hospital' ? (
-                              <Hospital className="w-5 h-5" />
-                            ) : (
-                              <Stethoscope className="w-5 h-5" />
-                            )}
-                          </div>
-                          
-                          {/* Content */}
-                          <div className="flex-1 min-w-0">
-                            <div className="font-semibold text-gray-900 dark:text-white mb-1 text-sm leading-tight">
-                              {center.name}
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <MapPin className="w-3 h-3 text-[#00DD89] flex-shrink-0" />
-                              <div className="text-xs text-gray-600 dark:text-gray-300 truncate">
-                                {center.city}
+                  <div className="flex-1 overflow-y-auto pr-2">
+                    <div className="space-y-3">
+                      {centersByProvince[showCentersList]?.map((center, index) => (
+                        <div key={center.id} className="w-full">
+                          <motion.button
+                            onClick={() => handleCenterSelect(center)}
+                            className="w-full text-left p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-600/30 hover:border-[#00AFE6]/30 group"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <div className="flex items-center gap-3 h-14">
+                              {/* Icon */}
+                              <div className={`
+                                w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md flex-shrink-0
+                                ${center.type === 'hospital' ? 'bg-gradient-to-br from-[#00AFE6] to-[#0088CC]' : 
+                                  center.type === 'specialty' ? 'bg-gradient-to-br from-[#00DD89] to-[#00BB77]' :
+                                  center.type === 'research' ? 'bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]' : 
+                                  'bg-gradient-to-br from-[#F59E0B] to-[#D97706]'}
+                              `}>
+                                {center.type === 'hospital' ? (
+                                  <Hospital className="w-5 h-5" />
+                                ) : (
+                                  <Stethoscope className="w-5 h-5" />
+                                )}
+                              </div>
+                              
+                              {/* Content */}
+                              <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                <div className="font-semibold text-gray-900 dark:text-white text-sm leading-tight line-clamp-2">
+                                  {center.name}
+                                </div>
+                                <div className="flex items-center gap-1 mt-1">
+                                  <MapPin className="w-3 h-3 text-[#00DD89] flex-shrink-0" />
+                                  <div className="text-xs text-gray-600 dark:text-gray-300 truncate">
+                                    {center.city}
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          </motion.button>
                         </div>
-                      </motion.button>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>

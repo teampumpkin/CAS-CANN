@@ -22,18 +22,19 @@ Preferred communication style: Simple, everyday language.
 - ✅ **Responsive Design Enhancement** - Better spacing and layout optimization across all device sizes
 - ✅ **Motion Design Integration** - Staggered animations, smooth transitions, and interactive micro-animations
 
-### Simplified Healthcare Center Popup System (July 23, 2025)
-- ✅ **Removed Complex Zoom Functionality** - Eliminated problematic geographic zoom features per user request for simpler interaction
-- ✅ **Simple Click-to-View Popups** - Healthcare center clusters now open detailed popup modals instead of zooming into geographic regions
-- ✅ **Professional Popup Design** - Clean modal with center icon, name, location, specialties, description, and action buttons
-- ✅ **Light/Dark Theme Support** - Popup modal adapts to both light and dark themes with proper contrast and brand colors
-- ✅ **Enhanced Map Container** - Increased map size to h-80 md:h-96 lg:h-[28rem] for better visibility and space utilization
-- ✅ **Simplified Navigation** - Clean map header with clear instruction "Click clusters to view center details"
-- ✅ **Professional Modal Animation** - Smooth fade-in/scale animations with backdrop blur for modern user experience
-- ✅ **Comprehensive Center Details** - Popup shows specialties as branded badges, detailed descriptions, and "View Full Details" action
-- ✅ **Fixed JSX Errors** - Resolved all undefined variable references and import issues from zoom functionality removal
-- ✅ **Brand Color Integration** - All popup elements use consistent #00AFE6 and #00DD89 brand colors with proper opacity levels
-- ✅ **Enhanced User Experience** - Simplified interaction model focusing on essential healthcare center information display
+### Two-Level Healthcare Center Popup System (July 23, 2025)
+- ✅ **Two-Level Interaction Design** - Cluster click shows list of centers, then individual center click shows detailed popup
+- ✅ **Centers List Popup** - Clean light/dark themed list showing all healthcare centers in the selected province with icons and names
+- ✅ **Enhanced Detailed Popup** - Dark themed detailed popup matching old design with gradient titles, better contrast, and professional styling
+- ✅ **Improved Visual Hierarchy** - Centers list shows facility type icons, names, and cities for easy selection
+- ✅ **Single Center Direct Access** - Provinces with only one center open detailed popup directly, bypassing the list
+- ✅ **Professional Dark Theme Popup** - Dark gray background with backdrop blur, gradient text, and enhanced visual effects
+- ✅ **Enhanced Animation System** - Smooth transitions between list popup and detailed popup with proper z-index layering
+- ✅ **Better User Flow** - Intuitive progression from cluster → list → details for multi-center provinces
+- ✅ **Brand Color Integration** - Consistent #00AFE6 and #00DD89 colors throughout both popup levels
+- ✅ **Improved Typography** - Gradient text for center names, better contrast, and enhanced readability
+- ✅ **Professional Medical Icons** - Hospital and Stethoscope icons with proper color coding by facility type
+- ✅ **Enhanced Close Functionality** - Clear close buttons on both popup levels with hover effects
 
 ### Professional Map Scaling & Enhanced State-Level Zoom Experience (July 23, 2025)
 - ✅ **Fixed Map Container Scaling** - Resolved oversized map display by implementing proper container constraints with max-width/max-height containment

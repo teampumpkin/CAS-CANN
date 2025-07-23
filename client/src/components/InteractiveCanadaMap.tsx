@@ -13,6 +13,7 @@ interface InteractiveCanadaMapProps {
 
 export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick }: InteractiveCanadaMapProps) {
   const [selectedCenter, setSelectedCenter] = useState<HealthcareCenter | null>(null);
+  const [showCentersList, setShowCentersList] = useState<string | null>(null);
   const { t } = useLanguage();
 
   // Group healthcare centers by province
@@ -68,16 +69,22 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
     return codeMap[provinceCode] || provinceCode;
   }
 
-  // Handle cluster click - show detailed popup
+  // Handle cluster click - show list of centers
   const handleClusterClick = (province: string) => {
     const provinceCenters = centersByProvince[province];
     if (provinceCenters && provinceCenters.length === 1) {
       // If only one center, open it directly
       setSelectedCenter(provinceCenters[0]);
     } else if (provinceCenters && provinceCenters.length > 1) {
-      // Show first center (could be enhanced to show a list)
-      setSelectedCenter(provinceCenters[0]);
+      // Show list of centers for selection
+      setShowCentersList(province);
     }
+  };
+
+  // Handle center selection from list
+  const handleCenterSelect = (center: HealthcareCenter) => {
+    setShowCentersList(null);
+    setSelectedCenter(center);
   };
 
   // Color provinces based on healthcare center density
@@ -178,51 +185,119 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
             </div>
           )}
           
-          {/* Healthcare Center Detail Popup */}
+          {/* Centers List Popup */}
+          <AnimatePresence>
+            {showCentersList && (
+              <motion.div
+                className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-lg flex items-center justify-center z-40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowCentersList(null)}
+              >
+                <motion.div
+                  className="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl border border-gray-200 dark:border-gray-700 max-h-[80vh] overflow-y-auto"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* List Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                      {getProvinceName(showCentersList)} Centers
+                    </h3>
+                    <button
+                      onClick={() => setShowCentersList(null)}
+                      className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    >
+                      <X className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+                    </button>
+                  </div>
+
+                  {/* Centers List */}
+                  <div className="space-y-3">
+                    {centersByProvince[showCentersList]?.map((center, index) => (
+                      <button
+                        key={center.id}
+                        onClick={() => handleCenterSelect(center)}
+                        className="w-full text-left p-4 bg-gray-50 dark:bg-gray-700 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors border border-gray-200 dark:border-gray-600"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`
+                            w-10 h-10 rounded-full flex items-center justify-center text-white
+                            ${center.type === 'hospital' ? 'bg-[#00AFE6]' : 
+                              center.type === 'specialty' ? 'bg-[#00DD89]' :
+                              center.type === 'research' ? 'bg-[#8B5CF6]' : 'bg-[#F59E0B]'}
+                          `}>
+                            {center.type === 'hospital' ? (
+                              <Hospital className="w-5 h-5" />
+                            ) : (
+                              <Stethoscope className="w-5 h-5" />
+                            )}
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-gray-900 dark:text-white">
+                              {center.name}
+                            </h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-300">
+                              {center.city}
+                            </p>
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Healthcare Center Detail Popup - Enhanced Design */}
           <AnimatePresence>
             {selectedCenter && (
               <motion.div
-                className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-lg flex items-center justify-center z-50"
+                className="absolute inset-0 bg-black/60 backdrop-blur-md rounded-lg flex items-center justify-center z-50"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedCenter(null)}
               >
                 <motion.div
-                  className="bg-white dark:bg-gray-800 rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl border border-gray-200 dark:border-gray-700"
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.5, opacity: 0 }}
+                  className="bg-gray-900/95 backdrop-blur-lg text-white rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl border border-gray-700"
+                  initial={{ scale: 0.5, opacity: 0, y: 50 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  exit={{ scale: 0.5, opacity: 0, y: 50 }}
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Close Button */}
                   <button
                     onClick={() => setSelectedCenter(null)}
-                    className="absolute top-4 right-4 w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    className="absolute top-4 right-4 w-10 h-10 bg-gray-700/80 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors"
                   >
-                    <X className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+                    <X className="w-5 h-5 text-gray-300" />
                   </button>
 
                   {/* Center Header */}
                   <div className="flex items-start gap-4 mb-6">
                     <div className={`
-                      w-16 h-16 rounded-full border-4 border-white shadow-lg flex items-center justify-center
+                      w-16 h-16 rounded-full border-4 border-white shadow-xl flex items-center justify-center
                       ${selectedCenter.type === 'hospital' ? 'bg-gradient-to-br from-[#00AFE6] to-[#0088CC]' : 
                         selectedCenter.type === 'specialty' ? 'bg-gradient-to-br from-[#00DD89] to-[#00BB77]' :
                         selectedCenter.type === 'research' ? 'bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]' : 
                         'bg-gradient-to-br from-[#F59E0B] to-[#D97706]'}
                     `}>
                       {selectedCenter.type === 'hospital' ? (
-                        <Hospital className="w-8 h-8 text-white" />
+                        <Hospital className="w-8 h-8 text-white drop-shadow-lg" />
                       ) : (
-                        <Stethoscope className="w-8 h-8 text-white" />
+                        <Stethoscope className="w-8 h-8 text-white drop-shadow-lg" />
                       )}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                      <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                         {selectedCenter.name}
                       </h3>
-                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+                      <div className="flex items-center gap-2 text-gray-300">
                         <MapPin className="w-5 h-5 text-[#00DD89]" />
                         <span className="font-medium">{selectedCenter.city}, {selectedCenter.province}</span>
                       </div>
@@ -233,14 +308,14 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                   <div className="space-y-6">
                     {/* Specialties */}
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                      <h4 className="text-lg font-semibold mb-3 text-white">
                         Specialties
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedCenter.specialties.map((specialty, idx) => (
                           <span
                             key={idx}
-                            className="px-3 py-2 bg-[#00AFE6]/20 dark:bg-[#00AFE6]/30 text-[#00AFE6] rounded-full text-sm font-semibold"
+                            className="px-3 py-2 bg-[#00AFE6]/30 text-[#00AFE6] rounded-full text-sm font-semibold border border-[#00AFE6]/20"
                           >
                             {specialty}
                           </span>
@@ -250,10 +325,10 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
 
                     {/* Description */}
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                      <h4 className="text-lg font-semibold mb-3 text-white">
                         About This Center
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                      <p className="text-gray-300 leading-relaxed">
                         {selectedCenter.description}
                       </p>
                     </div>
@@ -262,7 +337,7 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                     <div className="flex gap-3 pt-4">
                       <button
                         onClick={() => onCenterClick(selectedCenter)}
-                        className="flex-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-200"
+                        className="flex-1 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-200"
                       >
                         View Full Details
                       </button>

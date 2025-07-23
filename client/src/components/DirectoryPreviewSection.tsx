@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Search, FileText, Heart, Users, MapPin, Building2, Phone, Mail } from 'lucide-react';
+import { Search, FileText, Heart, Users, MapPin, Building2, Phone, Mail, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 import InteractiveCanadaMap from './InteractiveCanadaMap';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -101,78 +101,111 @@ export default function DirectoryPreviewSection() {
               />
             </div>
 
-            {/* Statistics Display - Ultra Compact Layout */}
-            <div className="lg:col-span-2 space-y-4 w-full">
+            {/* Enhanced Statistics Display */}
+            <div className="lg:col-span-2 space-y-6 w-full">
               <div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 font-rosarivo">{t('directory.networkReach')}</h3>
-                <div className="grid grid-cols-2 gap-2">
+                <motion.div
+                  className="flex items-center gap-3 mb-6"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center shadow-lg">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white font-rosarivo">{t('directory.networkReach')}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Comprehensive healthcare coverage across Canada</p>
+                  </div>
+                </motion.div>
+
+                <div className="grid grid-cols-2 gap-4">
                   <motion.div
-                    className="group text-center p-4 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-xl border border-[#00AFE6]/30 dark:border-[#00AFE6]/40 hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 dark:hover:from-[#00AFE6]/25 dark:hover:to-[#00DD89]/25 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20"
+                    className="group relative overflow-hidden text-center p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl rounded-3xl border-2 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/15 hover:to-[#00DD89]/15 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 transition-all duration-500 hover:shadow-2xl hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/15"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1 group-hover:from-[#00AFE6] group-hover:to-[#00DD89] transition-all duration-300">
-                      150+
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="relative z-10">
+                      <div className="text-4xl font-black bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                        150+
+                      </div>
+                      <div className="text-[#00AFE6] dark:text-[#00AFE6] text-sm font-semibold tracking-wide">{t('directory.healthcareProviders')}</div>
                     </div>
-                    <div className="text-[#00AFE6] dark:text-[#00AFE6] text-xs font-medium">{t('directory.healthcareProviders')}</div>
                   </motion.div>
                   
                   <motion.div
-                    className="group text-center p-4 bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 dark:to-[#00AFE6]/20 backdrop-blur-xl rounded-xl border border-[#00DD89]/30 dark:border-[#00DD89]/40 hover:from-[#00DD89]/20 hover:to-[#00AFE6]/20 dark:hover:from-[#00DD89]/25 dark:hover:to-[#00AFE6]/25 hover:border-[#00DD89]/50 dark:hover:border-[#00DD89]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#00DD89]/25 dark:hover:shadow-[#00DD89]/20"
+                    className="group relative overflow-hidden text-center p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 backdrop-blur-xl rounded-3xl border-2 border-[#00DD89]/20 dark:border-[#00DD89]/30 hover:from-[#00DD89]/15 hover:to-[#00AFE6]/15 dark:hover:from-[#00DD89]/20 dark:hover:to-[#00AFE6]/20 hover:border-[#00DD89]/40 dark:hover:border-[#00DD89]/50 transition-all duration-500 hover:shadow-2xl hover:shadow-[#00DD89]/20 dark:hover:shadow-[#00DD89]/15"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-1 group-hover:from-[#00DD89] group-hover:to-[#00AFE6] transition-all duration-300">
-                      13
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00DD89]/5 to-[#00AFE6]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="relative z-10">
+                      <div className="text-4xl font-black bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                        13
+                      </div>
+                      <div className="text-[#00DD89] dark:text-[#00DD89] text-sm font-semibold tracking-wide">{t('directory.provincesAndTerritories')}</div>
                     </div>
-                    <div className="text-[#00DD89] dark:text-[#00DD89] text-xs font-medium">{t('directory.provincesAndTerritories')}</div>
                   </motion.div>
                   
                   <motion.div
-                    className="group text-center p-4 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-xl border border-[#00AFE6]/30 dark:border-[#00AFE6]/40 hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 dark:hover:from-[#00AFE6]/25 dark:hover:to-[#00DD89]/25 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20"
+                    className="group relative overflow-hidden text-center p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/15 dark:to-[#00DD89]/15 backdrop-blur-xl rounded-3xl border-2 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/15 hover:to-[#00DD89]/15 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 transition-all duration-500 hover:shadow-2xl hover:shadow-[#00AFE6]/20 dark:hover:shadow-[#00AFE6]/15"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1 group-hover:from-[#00AFE6] group-hover:to-[#00DD89] transition-all duration-300">
-                      25+
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="relative z-10">
+                      <div className="text-4xl font-black bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                        25+
+                      </div>
+                      <div className="text-[#00AFE6] dark:text-[#00AFE6] text-sm font-semibold tracking-wide">{t('directory.majorCities')}</div>
                     </div>
-                    <div className="text-[#00AFE6] dark:text-[#00AFE6] text-xs font-medium">{t('directory.majorCities')}</div>
                   </motion.div>
                   
                   <motion.div
-                    className="group text-center p-4 bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 dark:to-[#00AFE6]/20 backdrop-blur-xl rounded-xl border border-[#00DD89]/30 dark:border-[#00DD89]/40 hover:from-[#00DD89]/20 hover:to-[#00AFE6]/20 dark:hover:from-[#00DD89]/25 dark:hover:to-[#00AFE6]/25 hover:border-[#00DD89]/50 dark:hover:border-[#00DD89]/60 transition-all duration-300 hover:shadow-lg hover:shadow-[#00DD89]/25 dark:hover:shadow-[#00DD89]/20"
+                    className="group relative overflow-hidden text-center p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 dark:from-[#00DD89]/15 dark:to-[#00AFE6]/15 backdrop-blur-xl rounded-3xl border-2 border-[#00DD89]/20 dark:border-[#00DD89]/30 hover:from-[#00DD89]/15 hover:to-[#00AFE6]/15 dark:hover:from-[#00DD89]/20 dark:hover:to-[#00AFE6]/20 hover:border-[#00DD89]/40 dark:hover:border-[#00DD89]/50 transition-all duration-500 hover:shadow-2xl hover:shadow-[#00DD89]/20 dark:hover:shadow-[#00DD89]/15"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-1 group-hover:from-[#00DD89] group-hover:to-[#00AFE6] transition-all duration-300">
-                      500+
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00DD89]/5 to-[#00AFE6]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="relative z-10">
+                      <div className="text-4xl font-black bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-3 group-hover:scale-110 transition-transform duration-300">
+                        500+
+                      </div>
+                      <div className="text-[#00DD89] dark:text-[#00DD89] text-sm font-semibold tracking-wide">{t('directory.resourcesAvailable')}</div>
                     </div>
-                    <div className="text-[#00DD89] dark:text-[#00DD89] text-xs font-medium">{t('directory.resourcesAvailable')}</div>
                   </motion.div>
                 </div>
               </div>
               
-              {/* Call to Action */}
-              <div className="pt-2">
+              {/* Enhanced Call to Action */}
+              <motion.div
+                className="pt-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+              >
                 <motion.button 
-                  className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg transition-all duration-300"
-                  whileHover={{ scale: 1.02 }}
+                  className="relative overflow-hidden w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-3xl font-bold text-lg shadow-2xl hover:shadow-[#00AFE6]/30 transition-all duration-500 group"
+                  whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <div className="flex items-center justify-center gap-2">
-                    <span>Browse Directory</span>
-                    <Search className="w-3 h-3" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative z-10 flex items-center justify-center gap-3">
+                    <Search className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                    <span className="tracking-wide">Browse Directory</span>
+                    <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                   </div>
                 </motion.button>
-              </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>

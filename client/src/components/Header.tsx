@@ -95,7 +95,7 @@ export default function Header() {
             <img 
               src={casLogo} 
               alt="Canadian Amyloidosis Society"
-              className="h-20 w-auto md:h-24 group-hover:scale-105 transition-all duration-300 drop-shadow-lg"
+              className="h-14 w-auto md:h-16 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
             />
           </motion.a>
 
@@ -213,7 +213,7 @@ export default function Header() {
               <ThemeToggle />
             </div>
             
-            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-7 py-3 rounded-full font-bold text-base hover:shadow-xl hover:shadow-[#00AFE6]/30 hover:scale-105 transition-all duration-300 border border-white/10 hover:border-white/30 backdrop-blur-sm">
+            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-5 py-2 rounded-full font-semibold text-sm hover:shadow-lg hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 border border-white/10 hover:border-white/20">
               {t('nav.getHelp')}
             </button>
           </motion.div>

@@ -641,7 +641,7 @@ export default function About() {
                 title: "Bylaws & Constitution",
                 description: "Foundational governance documents outlining our mission, structure, and operating principles.",
                 icon: FileText,
-                color: "from-[#00AFE6] to-blue-500",
+                color: "from-[#00AFE6] to-[#00DD89]",
                 bgColor: "from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20",
                 borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30",
                 documents: ["Articles of Incorporation", "Organizational Bylaws", "Mission Statement", "Code of Ethics"]
@@ -650,7 +650,7 @@ export default function About() {
                 title: "Clinical Governance",
                 description: "Policies and procedures ensuring high-quality clinical practice and patient safety standards.",
                 icon: Shield,
-                color: "from-[#00DD89] to-green-500",
+                color: "from-[#00DD89] to-[#00AFE6]",
                 bgColor: "from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20",
                 borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30",
                 documents: ["Clinical Practice Guidelines", "Quality Assurance Framework", "Patient Safety Protocols", "Ethics Review Board"]
@@ -659,7 +659,7 @@ export default function About() {
                 title: "Financial Transparency",
                 description: "Annual reports, financial statements, and accountability measures for public transparency.",
                 icon: Globe,
-                color: "from-purple-500 to-violet-500",
+                color: "from-[#00AFE6] to-[#00DD89]",
                 bgColor: "from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20",
                 borderColor: "border-[#00AFE6]/20 dark:border-[#00AFE6]/30",
                 documents: ["Annual Financial Report", "Audit Results", "Funding Sources", "Impact Metrics"]

@@ -29,10 +29,10 @@ export default function Hero() {
             quality={70}
             sizes="100vw"
           />
-          {/* Very light overlay for text readability while keeping image visible */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-gray-50/35 to-white/40 dark:from-gray-900/70 dark:via-gray-900/65 dark:to-gray-900/70"></div>
-          {/* Brand color accent overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/8 via-[#00DD89]/6 to-[#00AFE6]/8 dark:from-[#00AFE6]/10 dark:via-[#00DD89]/8 dark:to-[#00AFE6]/12"></div>
+          {/* Minimal overlay to show background image clearly */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-gray-50/15 to-white/20 dark:from-gray-900/60 dark:via-gray-900/55 dark:to-gray-900/60"></div>
+          {/* Very subtle brand color accent overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-[#00DD89]/3 to-[#00AFE6]/5 dark:from-[#00AFE6]/8 dark:via-[#00DD89]/6 dark:to-[#00AFE6]/8"></div>
         </div>
         
         {/* Animated brand accent elements */}
@@ -68,19 +68,19 @@ export default function Hero() {
           <div className="max-w-7xl mx-auto text-center">
             {/* Decorative badge */}
             <motion.div
-              className="inline-flex items-center gap-3 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-gray-200/50 dark:border-white/20 rounded-full px-6 py-3 mb-4"
+              className="inline-flex items-center gap-3 bg-white/95 dark:bg-white/10 backdrop-blur-sm border border-gray-200/70 dark:border-white/20 rounded-full px-6 py-3 mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
               <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
-              <span className="text-gray-800 dark:text-white/90 font-medium tracking-wide">{t('hero.badge')}</span>
+              <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">{t('hero.badge')}</span>
             </motion.div>
 
             {/* Main headline */}
             <motion.h1
               className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-4 relative leading-none tracking-tight font-rosarivo"
-              style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' }}
+              style={{ textShadow: '3px 3px 6px rgba(255, 255, 255, 0.8), 1px 1px 3px rgba(0, 0, 0, 0.2)' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -107,8 +107,8 @@ export default function Hero() {
 
             {/* Clinician-focused subtitle */}
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl font-light text-gray-800 dark:text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
-              style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.1)' }}
+              className="text-xl md:text-2xl lg:text-3xl font-light text-gray-900 dark:text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
+              style={{ textShadow: '2px 2px 4px rgba(255, 255, 255, 0.9), 1px 1px 2px rgba(0, 0, 0, 0.1)' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
@@ -123,23 +123,23 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8 }}
             >
-              <div className="text-center bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/60 dark:border-white/20">
+              <div className="text-center bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-300/70 dark:border-white/20">
                 <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                   6 weeks
                 </div>
-                <div className="text-sm text-gray-600 dark:text-white/80 mt-1">Average diagnostic time reduction</div>
+                <div className="text-sm text-gray-700 dark:text-white/80 mt-1">Average diagnostic time reduction</div>
               </div>
-              <div className="text-center bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/60 dark:border-white/20">
+              <div className="text-center bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-300/70 dark:border-white/20">
                 <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                   350+
                 </div>
-                <div className="text-sm text-gray-600 dark:text-white/80 mt-1">Healthcare professionals</div>
+                <div className="text-sm text-gray-700 dark:text-white/80 mt-1">Healthcare professionals</div>
               </div>
-              <div className="text-center bg-white/90 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/60 dark:border-white/20">
+              <div className="text-center bg-white/95 dark:bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-300/70 dark:border-white/20">
                 <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
                   1,400+
                 </div>
-                <div className="text-sm text-gray-600 dark:text-white/80 mt-1">Patients reached</div>
+                <div className="text-sm text-gray-700 dark:text-white/80 mt-1">Patients reached</div>
               </div>
             </motion.div>
 

@@ -15,6 +15,7 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [zoomedProvince, setZoomedProvince] = useState<string | null>(null);
   const [showClusters, setShowClusters] = useState(true);
+  const [isZoomedView, setIsZoomedView] = useState(false);
   const { t } = useLanguage();
 
   // Group healthcare centers by province
@@ -84,16 +85,74 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
     }
   };
 
-  // Handle cluster click
+  // Handle cluster click - zoom into province geographically
   const handleClusterClick = (province: string) => {
     const provinceCenters = centersByProvince[province];
     if (provinceCenters && provinceCenters.length === 1) {
       // If only one center, open it directly
       onCenterClick(provinceCenters[0]);
     } else if (provinceCenters && provinceCenters.length > 1) {
-      // If multiple centers, zoom to province
-      handleProvinceClick(province);
+      // If multiple centers, zoom into geographic region
+      setZoomedProvince(province);
+      setShowClusters(false);
+      setSelectedProvince(province);
+      setIsZoomedView(true);
     }
+  };
+
+  // Get individual center coordinates for zoomed province
+  const getProvinceDetailedCoordinates = (provinceCode: string) => {
+    const centers = centersByProvince[provinceCode] || [];
+    
+    // Define detailed coordinates for healthcare centers within each province
+    const provinceDetailCoords: Record<string, Array<{x: number, y: number}>> = {
+      'ON': [
+        { x: 72, y: 45 }, // Toronto area
+        { x: 68, y: 42 }, // London area  
+        { x: 75, y: 41 }, // Hamilton area
+        { x: 71, y: 38 }, // Kitchener area
+        { x: 76, y: 35 }, // Ottawa area
+      ],
+      'QC': [
+        { x: 85, y: 50 }, // Montreal area
+        { x: 88, y: 58 }, // Quebec City area
+        { x: 82, y: 45 }, // Sherbrooke area
+      ],
+      'BC': [
+        { x: 25, y: 52 }, // Vancouver area
+        { x: 28, y: 48 }, // Victoria area
+        { x: 32, y: 55 }, // Kamloops area
+      ],
+      'AB': [
+        { x: 42, y: 48 }, // Calgary area
+        { x: 45, y: 42 }, // Edmonton area
+      ],
+      'MB': [
+        { x: 55, y: 48 }, // Winnipeg area
+      ],
+      'SK': [
+        { x: 52, y: 45 }, // Saskatoon area
+        { x: 50, y: 50 }, // Regina area
+      ],
+      'NS': [
+        { x: 92, y: 62 }, // Halifax area
+      ],
+      'NB': [
+        { x: 90, y: 58 }, // Fredericton area
+      ],
+      'NL': [
+        { x: 95, y: 55 }, // St. John's area
+      ],
+      'PE': [
+        { x: 94, y: 60 }, // Charlottetown area
+      ]
+    };
+
+    const coords = provinceDetailCoords[provinceCode] || [];
+    return centers.map((center, index) => ({
+      ...center,
+      detailCoordinates: coords[index] || coords[0] || { x: 50, y: 50 }
+    }));
   };
 
   // Color provinces based on healthcare center density
@@ -137,6 +196,7 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                   setZoomedProvince(null);
                   setShowClusters(true);
                   setSelectedProvince(null);
+                  setIsZoomedView(false);
                 }}
                 className="text-sm bg-[#00AFE6] text-white px-3 py-1 rounded-full hover:bg-[#00DD89] transition-colors duration-200"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -214,116 +274,121 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
             </div>
           )}
           
-          {/* Province Zoom Detail View */}
+          {/* Geographic Province Zoom View */}
           <AnimatePresence>
-            {zoomedProvince && centersByProvince[zoomedProvince] && (
+            {zoomedProvince && centersByProvince[zoomedProvince] && isZoomedView && (
               <motion.div
-                className="absolute inset-0 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-600 shadow-xl"
-                initial={{ opacity: 0, scale: 0.9 }}
+                className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:to-[#00DD89]/10 rounded-lg border-2 border-[#00AFE6]/30 dark:border-[#00AFE6]/40"
+                initial={{ opacity: 0, scale: 1.2 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
               >
-                <div className="p-4 h-full flex flex-col">
-                  {/* Header with Back Button */}
-                  <div className="flex items-center justify-between mb-4 pb-4 border-b-2 border-gray-200 dark:border-gray-700">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-[#00AFE6]/10 dark:bg-[#00AFE6]/20 rounded-full">
-                        <Building className="w-6 h-6 text-[#00AFE6]" />
-                      </div>
-                      <div>
-                        <h4 className="text-2xl font-bold text-gray-900 dark:text-white">
-                          {getProvinceName(zoomedProvince)}
-                        </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                          {centersByProvince[zoomedProvince].length} Healthcare Centers Available
-                        </p>
-                      </div>
+                {/* Province Map Header */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
+                  <div className="flex items-center gap-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-gray-200 dark:border-gray-600">
+                    <div className="w-8 h-8 bg-[#00AFE6] rounded-full flex items-center justify-center">
+                      <Building className="w-4 h-4 text-white" />
                     </div>
-                    <motion.button
-                      onClick={() => {
-                        setZoomedProvince(null);
-                        setShowClusters(true);
-                        setSelectedProvince(null);
-                      }}
-                      className="flex items-center gap-2 bg-[#00AFE6] text-white px-5 py-2.5 rounded-full hover:bg-[#00DD89] transition-colors duration-200 text-sm font-semibold shadow-lg"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <MapPin className="w-4 h-4" />
-                      Back to Map
-                    </motion.button>
+                    <div>
+                      <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                        {getProvinceName(zoomedProvince)}
+                      </h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
+                        {centersByProvince[zoomedProvince].length} Healthcare Centers
+                      </p>
+                    </div>
                   </div>
                   
-                  {/* Scrollable Centers Grid */}
-                  <div className="flex-1 overflow-y-auto">
-                    <div className="grid gap-3">
-                      {centersByProvince[zoomedProvince].map((center, index) => (
-                        <motion.button
-                          key={center.id}
-                          onClick={() => onCenterClick(center)}
-                          className="text-left p-5 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 rounded-xl border-2 border-[#00AFE6]/30 hover:border-[#00AFE6]/60 transition-all duration-300 hover:shadow-xl group"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
-                          whileHover={{ scale: 1.02, y: -3 }}
-                        >
-                          <div className="flex items-start gap-4">
-                            {/* Center Type Icon */}
-                            <div className={`
-                              w-12 h-12 rounded-full border-2 border-white shadow-md flex items-center justify-center flex-shrink-0
-                              ${center.type === 'hospital' ? 'bg-[#00AFE6]' : 
-                                center.type === 'specialty' ? 'bg-[#00DD89]' :
-                                center.type === 'research' ? 'bg-[#8B5CF6]' : 'bg-[#F59E0B]'}
-                            `}>
-                              {center.type === 'hospital' ? (
-                                <Hospital className="w-6 h-6 text-white" />
-                              ) : (
-                                <Stethoscope className="w-6 h-6 text-white" />
-                              )}
+                  <motion.button
+                    onClick={() => {
+                      setZoomedProvince(null);
+                      setShowClusters(true);
+                      setSelectedProvince(null);
+                      setIsZoomedView(false);
+                    }}
+                    className="flex items-center gap-2 bg-[#00AFE6] text-white px-4 py-2 rounded-full hover:bg-[#00DD89] transition-all duration-200 text-sm font-semibold shadow-lg"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MapPin className="w-4 h-4" />
+                    Back to Map
+                  </motion.button>
+                </div>
+                
+                {/* Individual Healthcare Center Dots - Geographic Spread */}
+                <div className="absolute inset-0 flex items-center justify-center p-8">
+                  <div className="relative w-full h-full max-w-[500px] max-h-[300px]">
+                    {getProvinceDetailedCoordinates(zoomedProvince).map((center, index) => (
+                      <motion.button
+                        key={center.id}
+                        onClick={() => onCenterClick(center)}
+                        className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-10"
+                        style={{
+                          left: `${center.detailCoordinates.x}%`,
+                          top: `${center.detailCoordinates.y}%`
+                        }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+                        whileHover={{ scale: 1.4, z: 20 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        {/* Individual Center Dot */}
+                        <div className={`
+                          w-8 h-8 rounded-full border-3 border-white shadow-xl flex items-center justify-center relative
+                          ${center.type === 'hospital' ? 'bg-[#00AFE6]' : 
+                            center.type === 'specialty' ? 'bg-[#00DD89]' :
+                            center.type === 'research' ? 'bg-[#8B5CF6]' : 'bg-[#F59E0B]'}
+                        `}>
+                          {center.type === 'hospital' ? (
+                            <Hospital className="w-4 h-4 text-white" />
+                          ) : (
+                            <Stethoscope className="w-4 h-4 text-white" />
+                          )}
+                          
+                          {/* Pulsing Ring Animation */}
+                          <div className={`
+                            absolute inset-0 rounded-full opacity-75 animate-ping
+                            ${center.type === 'hospital' ? 'bg-[#00AFE6]' : 
+                              center.type === 'specialty' ? 'bg-[#00DD89]' :
+                              center.type === 'research' ? 'bg-[#8B5CF6]' : 'bg-[#F59E0B]'}
+                          `} />
+                        </div>
+                        
+                        {/* Enhanced Tooltip on Hover */}
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-30">
+                          <div className="bg-gray-900 text-white px-4 py-3 rounded-xl text-sm whitespace-nowrap shadow-2xl border border-gray-700 max-w-xs">
+                            <div className="font-bold text-base mb-1">{center.name}</div>
+                            <div className="text-xs text-gray-300 mb-2">{center.city}, {center.province}</div>
+                            <div className="flex flex-wrap gap-1 mb-2">
+                              {center.specialties.slice(0, 2).map((specialty, idx) => (
+                                <span key={idx} className="text-xs bg-[#00AFE6]/30 text-[#00AFE6] px-2 py-0.5 rounded-full">
+                                  {specialty}
+                                </span>
+                              ))}
                             </div>
-                            
-                            {/* Center Information */}
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between mb-3">
-                                <h5 className="font-bold text-gray-900 dark:text-white text-xl leading-tight">
-                                  {center.name}
-                                </h5>
-                                <ZoomIn className="w-5 h-5 text-[#00AFE6] opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0 ml-2" />
-                              </div>
-                              
-                              <div className="space-y-3">
-                                <p className="text-base text-gray-700 dark:text-gray-200 flex items-center gap-2 font-medium">
-                                  <MapPin className="w-5 h-5 text-[#00DD89]" />
-                                  {center.city}, {center.province}
-                                </p>
-                                
-                                <div className="flex flex-wrap gap-2">
-                                  {center.specialties.slice(0, 3).map((specialty, idx) => (
-                                    <span
-                                      key={idx}
-                                      className="inline-block px-3 py-1.5 bg-[#00AFE6]/20 text-[#00AFE6] dark:bg-[#00AFE6]/40 dark:text-[#00AFE6] rounded-full text-sm font-semibold"
-                                    >
-                                      {specialty}
-                                    </span>
-                                  ))}
-                                  {center.specialties.length > 3 && (
-                                    <span className="inline-block px-3 py-1.5 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-full text-sm font-semibold">
-                                      +{center.specialties.length - 3} more
-                                    </span>
-                                  )}
-                                </div>
-                                
-                                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                                  {center.description}
-                                </p>
-                              </div>
+                            <div className="text-xs text-gray-400 leading-relaxed max-w-xs truncate">
+                              {center.description}
                             </div>
+                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-6 border-transparent border-t-gray-900"></div>
                           </div>
-                        </motion.button>
-                      ))}
-                    </div>
+                        </div>
+                      </motion.button>
+                    ))}
                   </div>
+                </div>
+                
+                {/* Province Background Overlay */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <svg className="w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                      <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                      </pattern>
+                    </defs>
+                    <rect width="100" height="100" fill="url(#grid)" className="text-[#00AFE6]" />
+                  </svg>
                 </div>
               </motion.div>
             )}

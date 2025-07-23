@@ -36,6 +36,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { z } from "zod";
 import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
+import summitSaveTheDateImg from '@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg';
 
 const membershipFormSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -1061,6 +1062,115 @@ export default function GetInvolved() {
               </motion.div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* 2025 Canadian Amyloidosis Summit Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:bg-gray-800 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-white/[0.02] dark:via-transparent dark:to-white/[0.01]"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
+              <Calendar className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-gray-800 dark:text-white/90 font-medium">Featured Event</span>
+            </div>
+            
+            {/* Status Badge */}
+            <motion.div 
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-4 py-2 mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
+              <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00AFE6]">Registration Opening Soon</span>
+            </motion.div>
+            
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+              <span className="text-gray-800 dark:text-white">2025 Canadian </span>
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Amyloidosis Summit
+              </span>
+            </h2>
+            
+            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4 mb-8">
+              Stay tuned for details and registration info!
+            </p>
+          </motion.div>
+
+          <div className="max-w-5xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Save the Date Image */}
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/30 shadow-2xl">
+                  <img 
+                    src={summitSaveTheDateImg} 
+                    alt="Save the Date - 2025 Canadian Amyloidosis Summit"
+                    className="w-full h-auto rounded-xl shadow-lg"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#00AFE6]/10 to-transparent rounded-xl pointer-events-none" />
+                </div>
+              </motion.div>
+
+              {/* Summit Information */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-white/5 dark:to-gray-900/50 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-white/10 shadow-xl">
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Event Details</h3>
+                  
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-center gap-3">
+                      <Calendar className="w-5 h-5 text-[#00AFE6]" />
+                      <span className="text-gray-700 dark:text-white/80">October 31 - November 2, 2025</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <MapPin className="w-5 h-5 text-[#00AFE6]" />
+                      <span className="text-gray-700 dark:text-white/80">Toronto, ON</span>
+                    </div>
+                  </div>
+                  
+                  <p className="text-gray-600 dark:text-white/70 mb-8 leading-relaxed">
+                    Join us for the 2025 Canadian Amyloidosis Summit, hosted by CAS. Registration will be available through the Transthyretin Amyloidosis Canada (TAC) website soon.
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <Button 
+                      onClick={() => window.open('https://madhattr.ca/events/', '_blank')}
+                      className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+                    >
+                      Visit TAC Website
+                      <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Button>
+                    
+                    <p className="text-sm text-gray-500 dark:text-white/50 text-center">
+                      Registration not yet open
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 

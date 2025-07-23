@@ -1012,9 +1012,9 @@ export default function AboutAmyloidosis() {
                   'Age and gender considerations',
                   'Characteristic symptom complex'
                 ],
-                color: 'from-red-500 to-orange-500',
-                bgColor: 'from-red-50/95 to-orange-50/95 dark:from-red-900/25 dark:to-orange-900/25',
-                borderColor: 'border-red-200/50 dark:border-red-400/30'
+                color: 'from-[#00AFE6] to-[#00DD89]',
+                bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25',
+                borderColor: 'border-[#00AFE6]/30'
               },
               {
                 step: '2',
@@ -1026,9 +1026,9 @@ export default function AboutAmyloidosis() {
                   'Immunofixation electrophoresis',
                   'Complete blood count, chemistry panel'
                 ],
-                color: 'from-blue-500 to-cyan-500',
-                bgColor: 'from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25',
-                borderColor: 'border-blue-200/50 dark:border-blue-400/30'
+                color: 'from-[#00DD89] to-[#00AFE6]',
+                bgColor: 'from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/25 dark:to-[#00AFE6]/25',
+                borderColor: 'border-[#00DD89]/30'
               },
               {
                 step: '3',
@@ -1040,9 +1040,9 @@ export default function AboutAmyloidosis() {
                   'Cardiac biomarkers (NT-proBNP, troponin)',
                   'Consider cardiac MRI if available'
                 ],
-                color: 'from-green-500 to-emerald-500',
-                bgColor: 'from-green-50/95 to-emerald-50/95 dark:from-green-900/25 dark:to-emerald-900/25',
-                borderColor: 'border-green-200/50 dark:border-green-400/30'
+                color: 'from-[#00AFE6] to-[#00DD89]',
+                bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25',
+                borderColor: 'border-[#00AFE6]/30'
               },
               {
                 step: '4',
@@ -1054,9 +1054,9 @@ export default function AboutAmyloidosis() {
                   'Organ biopsy if fat pad negative',
                   'Mass spectrometry for typing'
                 ],
-                color: 'from-purple-500 to-violet-500',
-                bgColor: 'from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25',
-                borderColor: 'border-purple-200/50 dark:border-purple-400/30'
+                color: 'from-[#00DD89] to-[#00AFE6]',
+                bgColor: 'from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/25 dark:to-[#00AFE6]/25',
+                borderColor: 'border-[#00DD89]/30'
               },
               {
                 step: '5',
@@ -1068,9 +1068,9 @@ export default function AboutAmyloidosis() {
                   'DPD/PYP scintigraphy for ATTR',
                   'Specialist center consultation'
                 ],
-                color: 'from-orange-500 to-amber-500',
-                bgColor: 'from-orange-50/95 to-amber-50/95 dark:from-orange-900/25 dark:to-amber-900/25',
-                borderColor: 'border-orange-200/50 dark:border-orange-400/30'
+                color: 'from-[#00AFE6] to-[#00DD89]',
+                bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25',
+                borderColor: 'border-[#00AFE6]/30'
               }
             ].map((step, index) => (
               <motion.div
@@ -1145,27 +1145,27 @@ export default function AboutAmyloidosis() {
                 description: 'Canadian guidelines for cardiac amyloidosis diagnosis and management',
                 url: 'https://www.ccs.ca',
                 icon: Heart,
-                color: 'from-red-500 to-pink-500',
-                bgColor: 'from-red-50/95 to-pink-50/95 dark:from-red-900/25 dark:to-pink-900/25',
-                borderColor: 'border-red-200/50 dark:border-red-400/30'
+                color: 'from-[#00AFE6] to-[#00DD89]',
+                bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25',
+                borderColor: 'border-[#00AFE6]/30'
               },
               {
                 title: 'Mayo Clinic Guidelines',
                 description: 'Comprehensive amyloidosis diagnostic and treatment protocols',
                 url: 'https://www.mayoclinic.org',
                 icon: Microscope,
-                color: 'from-blue-500 to-cyan-500',
-                bgColor: 'from-blue-50/95 to-cyan-50/95 dark:from-blue-900/25 dark:to-cyan-900/25',
-                borderColor: 'border-blue-200/50 dark:border-blue-400/30'
+                color: 'from-[#00DD89] to-[#00AFE6]',
+                bgColor: 'from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/25 dark:to-[#00AFE6]/25',
+                borderColor: 'border-[#00DD89]/30'
               },
               {
                 title: 'NHS Clinical Guidelines',
                 description: 'UK National Health Service amyloidosis management guidelines',
                 url: 'https://www.nhs.uk',
                 icon: FileText,
-                color: 'from-green-500 to-emerald-500',
-                bgColor: 'from-green-50/95 to-emerald-50/95 dark:from-green-900/25 dark:to-emerald-900/25',
-                borderColor: 'border-green-200/50 dark:border-green-400/30'
+                color: 'from-[#00AFE6] to-[#00DD89]',
+                bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25',
+                borderColor: 'border-[#00AFE6]/30'
               }
             ].map((guideline, index) => (
               <motion.div

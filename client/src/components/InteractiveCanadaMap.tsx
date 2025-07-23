@@ -196,85 +196,83 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                 onClick={() => setShowCentersList(null)}
               >
                 <motion.div
-                  className="bg-white dark:bg-gray-900/95 backdrop-blur-lg rounded-3xl p-8 max-w-xl w-full mx-4 shadow-2xl border border-gray-200 dark:border-gray-700/50 max-h-[85vh] overflow-hidden"
+                  className="bg-white dark:bg-gray-900/95 backdrop-blur-lg rounded-3xl p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-md lg:max-w-xl mx-4 shadow-2xl border border-gray-200 dark:border-gray-700/50 max-h-[90vh] sm:max-h-[85vh] overflow-hidden"
                   initial={{ scale: 0.8, opacity: 0, y: 50 }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   exit={{ scale: 0.8, opacity: 0, y: 50 }}
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Enhanced Header with Gradient */}
-                  <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-200 dark:border-gray-700/50">
-                    <div>
-                      <h3 className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-2">
+                  <div className="flex items-start justify-between mb-4 sm:mb-6 lg:mb-8 pb-4 sm:pb-6 border-b border-gray-200 dark:border-gray-700/50">
+                    <div className="flex-1 min-w-0 pr-4">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1 sm:mb-2 truncate">
                         {getProvinceName(showCentersList)}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium">
                         {centersByProvince[showCentersList]?.length} Healthcare Centers Available
                       </p>
                     </div>
                     <button
                       onClick={() => setShowCentersList(null)}
-                      className="w-12 h-12 bg-gray-100 dark:bg-gray-700/50 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 hover:scale-105"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-100 dark:bg-gray-700/50 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 hover:scale-105 flex-shrink-0"
                     >
-                      <X className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                      <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-300" />
                     </button>
                   </div>
 
                   {/* Scrollable Centers List */}
-                  <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
+                  <div className="space-y-3 sm:space-y-4 max-h-[65vh] sm:max-h-[60vh] overflow-y-auto pr-1 sm:pr-2">
                     {centersByProvince[showCentersList]?.map((center, index) => (
                       <motion.button
                         key={center.id}
                         onClick={() => handleCenterSelect(center)}
-                        className="w-full text-left p-5 bg-gradient-to-r from-gray-50/80 to-gray-100/60 dark:from-gray-800/50 dark:to-gray-700/30 rounded-2xl hover:from-[#00AFE6]/5 hover:to-[#00DD89]/5 dark:hover:from-[#00AFE6]/10 dark:hover:to-[#00DD89]/10 transition-all duration-300 border border-gray-200/50 dark:border-gray-600/30 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-lg group"
+                        className="w-full text-left p-3 sm:p-4 lg:p-5 bg-gradient-to-r from-gray-50/80 to-gray-100/60 dark:from-gray-800/50 dark:to-gray-700/30 rounded-xl sm:rounded-2xl hover:from-[#00AFE6]/5 hover:to-[#00DD89]/5 dark:hover:from-[#00AFE6]/10 dark:hover:to-[#00DD89]/10 transition-all duration-300 border border-gray-200/50 dark:border-gray-600/30 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 hover:shadow-lg group"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: 1.01, y: -1 }}
+                        whileTap={{ scale: 0.99 }}
                       >
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-start gap-3 sm:gap-4">
                           {/* Enhanced Icon with Gradient Background */}
                           <div className={`
-                            w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300 relative overflow-hidden
+                            w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300 relative overflow-hidden flex-shrink-0
                             ${center.type === 'hospital' ? 'bg-gradient-to-br from-[#00AFE6] to-[#0088CC]' : 
                               center.type === 'specialty' ? 'bg-gradient-to-br from-[#00DD89] to-[#00BB77]' :
                               center.type === 'research' ? 'bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED]' : 
                               'bg-gradient-to-br from-[#F59E0B] to-[#D97706]'}
                           `}>
                             {center.type === 'hospital' ? (
-                              <Hospital className="w-7 h-7 drop-shadow-sm" />
+                              <Hospital className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 drop-shadow-sm" />
                             ) : (
-                              <Stethoscope className="w-7 h-7 drop-shadow-sm" />
+                              <Stethoscope className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 drop-shadow-sm" />
                             )}
-                            {/* Subtle shimmer effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -skew-x-12 animate-pulse" />
                           </div>
                           
                           {/* Enhanced Content Layout */}
                           <div className="flex-1 min-w-0">
-                            <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-1 group-hover:text-[#00AFE6] dark:group-hover:text-[#00AFE6] transition-colors duration-200 truncate">
+                            <h4 className="font-bold text-sm sm:text-base lg:text-lg text-gray-900 dark:text-white mb-1 group-hover:text-[#00AFE6] dark:group-hover:text-[#00AFE6] transition-colors duration-200 line-clamp-2">
                               {center.name}
                             </h4>
                             <div className="flex items-center gap-2 mb-2">
-                              <MapPin className="w-4 h-4 text-[#00DD89] flex-shrink-0" />
-                              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                              <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-[#00DD89] flex-shrink-0" />
+                              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300 truncate">
                                 {center.city}
                               </p>
                             </div>
                             {/* Add specialty preview */}
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1 sm:gap-2">
                               <div className="flex flex-wrap gap-1">
                                 {center.specialties.slice(0, 2).map((specialty, idx) => (
                                   <span
                                     key={idx}
-                                    className="inline-block px-2 py-1 bg-[#00AFE6]/15 dark:bg-[#00AFE6]/25 text-[#00AFE6] rounded-lg text-xs font-semibold"
+                                    className="inline-block px-2 py-1 bg-[#00AFE6]/15 dark:bg-[#00AFE6]/25 text-[#00AFE6] rounded-md text-xs font-semibold truncate max-w-24 sm:max-w-32"
                                   >
                                     {specialty}
                                   </span>
                                 ))}
                                 {center.specialties.length > 2 && (
-                                  <span className="inline-block px-2 py-1 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 rounded-lg text-xs font-semibold">
+                                  <span className="inline-block px-2 py-1 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 rounded-md text-xs font-semibold">
                                     +{center.specialties.length - 2}
                                   </span>
                                 )}
@@ -282,10 +280,10 @@ export default function InteractiveCanadaMap({ healthcareCenters, onCenterClick 
                             </div>
                           </div>
                           
-                          {/* Hover Arrow Indicator */}
-                          <div className="opacity-0 group-hover:opacity-100 transition-all duration-200 transform translate-x-2 group-hover:translate-x-0">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] flex items-center justify-center">
-                              <MapPin className="w-4 h-4 text-white" />
+                          {/* Hover Arrow Indicator - Hidden on mobile */}
+                          <div className="hidden sm:block opacity-0 group-hover:opacity-100 transition-all duration-200 transform translate-x-2 group-hover:translate-x-0">
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] flex items-center justify-center">
+                              <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                             </div>
                           </div>
                         </div>

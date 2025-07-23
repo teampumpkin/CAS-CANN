@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
-import casLogo from '@assets/image 1_1750236540297.png';
+import casLogo from '@assets/l_cas_vert_rgb_1753253116732.png';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -82,7 +82,7 @@ export default function Header() {
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-28">
+        <div className="flex items-center justify-between h-20 md:h-28">
           
           {/* Logo */}
           <motion.a
@@ -95,7 +95,7 @@ export default function Header() {
             <img 
               src={casLogo} 
               alt="Canadian Amyloidosis Society"
-              className="h-20 w-auto group-hover:scale-105 transition-all duration-300 drop-shadow-lg rounded-xl"
+              className="h-16 w-auto md:h-20 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
             />
           </motion.a>
 
@@ -220,16 +220,16 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="lg:hidden p-3 rounded-xl bg-white/20 backdrop-blur-xl border border-white/20 hover:bg-white/30 transition-all duration-300"
+            className="lg:hidden p-2 md:p-3 rounded-xl bg-gray-100 hover:bg-gray-200 border border-gray-300 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6 text-white/90" />
+              <X className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
             ) : (
-              <Menu className="w-6 h-6 text-white/90" />
+              <Menu className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
             )}
           </motion.button>
         </div>
@@ -244,14 +244,14 @@ export default function Header() {
           }}
           transition={{ duration: 0.3 }}
         >
-          <div className="py-6 bg-gray-800/90 backdrop-blur-xl rounded-2xl mt-4 border border-white/20">
+          <div className="py-4 md:py-6 bg-white/95 backdrop-blur-xl rounded-2xl mt-2 md:mt-4 border border-gray-200 shadow-xl">
             <div className="space-y-2 px-4">
               {navItems.map((item) => (
                 <div key={item.name} className="space-y-1">
                   {item.hasDropdown ? (
                     <>
-                      <div className={`px-4 py-3 font-semibold text-base border-b border-white/20 ${
-                        isPageActive(item.href, item.dropdownItems) ? 'text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20' : 'text-white/90'
+                      <div className={`px-4 py-3 font-semibold text-base border-b border-gray-200 ${
+                        isPageActive(item.href, item.dropdownItems) ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20' : 'text-gray-700'
                       }`}>
                         {item.name}
                         {isPageActive(item.href, item.dropdownItems) && (
@@ -262,10 +262,10 @@ export default function Header() {
                         <a
                           key={dropdownItem.name}
                           href={dropdownItem.href}
-                          className={`block px-6 py-3 rounded-3xl transition-all duration-300 text-base ${
+                          className={`block px-6 py-3 rounded-xl transition-all duration-300 text-base ${
                             location === dropdownItem.href
-                              ? 'text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
-                              : 'text-white/80 hover:text-white hover:bg-white/10'
+                              ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
+                              : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
                           }`}
                           onClick={() => setIsMenuOpen(false)}
                         >
@@ -279,10 +279,10 @@ export default function Header() {
                   ) : (
                     <a
                       href={item.href}
-                      className={`block px-4 py-3 font-semibold text-base rounded-3xl transition-all duration-300 ${
+                      className={`block px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
                         isPageActive(item.href)
-                          ? 'text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
-                          : 'text-white/90 hover:bg-white/10'
+                          ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
+                          : 'text-gray-700 hover:bg-gray-100'
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -295,19 +295,22 @@ export default function Header() {
                 </div>
               ))}
             </div>
-            <div className="px-4 pt-4 border-t border-white/20 mt-4">
+            <div className="px-4 pt-4 border-t border-gray-200 mt-4">
               <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2 text-sm text-white/70">
+                <div className="flex items-center gap-2 text-sm text-gray-600">
                   <Phone className="w-4 h-4" />
                   <span>1-800-AMYLOID</span>
                 </div>
-                <ThemeToggle />
+                <div className="flex items-center gap-2">
+                  <LanguageSwitcher />
+                  <ThemeToggle />
+                </div>
               </div>
               <button 
-                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-xl font-bold text-base hover:shadow-lg transition-all duration-300"
+                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 md:py-4 rounded-xl font-bold text-base hover:shadow-lg hover:scale-105 transition-all duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Get Support
+                {t('nav.getHelp')}
               </button>
             </div>
           </div>

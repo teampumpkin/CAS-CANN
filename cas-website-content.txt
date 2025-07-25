@@ -3,13 +3,12 @@ CANADIAN AMYLOIDOSIS SOCIETY (CAS) WEBSITE - ALL CONTENT TEXT
 
 This document contains all text content used across the Canadian Amyloidosis Society website, organized by pages and sections.
 
-** CONTENT ACCURACY FIXED (July 25, 2025) **
-✅ Fixed content mismatches by examining actual component implementations
-✅ Updated Hero section structure and metrics details
-✅ Corrected Welcome section statistics overlay information  
-✅ Fixed About Amyloidosis section layout descriptions
-✅ Corrected Quick Links vs Events sections content
-✅ Updated Directory Preview section features and statistics
+** CONTENT CLEANED (July 25, 2025) **
+✅ Removed all color codes, gradients, and hex values
+✅ Removed all icon references and technical formatting
+✅ Removed all internal links and navigation paths
+✅ Kept only essential text content for documentation
+✅ Maintained section structure and content organization
 
 ================================================================================
 1. HOMEPAGE (/)
@@ -22,7 +21,7 @@ Subtitle: Advancing evidence-based amyloidosis care through clinical excellence,
 
 Title Structure:
 - Line 1: "Canadian"
-- Line 2: "Amyloidosis" (gradient animated text)
+- Line 2: "Amyloidosis"  
 - Line 3: "Society"
 
 Clinical Impact Metrics (3 cards):
@@ -31,10 +30,10 @@ Clinical Impact Metrics (3 cards):
 - 1,200+ Patients: "Served annually"
 
 Quick Action Tiles (2x2 grid):
-- Join (Users icon) → /get-involved
-- Directory (MapPin icon) → /directory
-- Upload (Upload icon) → /upload-resource
-- Learn (BookOpen icon) → /about-amyloidosis
+- Join
+- Directory
+- Upload
+- Learn
 
 --- WELCOME SECTION ---
 Badge: Who we are
@@ -46,10 +45,10 @@ Main Description: We are dedicated to improving the lives of those affected by a
 Layout: Two-column grid with content left, image right
 
 Left Column Content:
-- Premium badge with gradient dot
-- Heading with gradient "Canadian Amyloidosis Society" text
+- Premium badge
+- Heading text
 - Two paragraphs of description text
-- Call-to-action button with arrow icon
+- Call-to-action button
 
 Right Column:
 - Medical professional image in rounded container
@@ -60,7 +59,7 @@ Left: "15+" | "Years Supporting"
 Center: "1K+" | "Patients Helped"  
 Right: "100%" | "Patient Focused"
 
-Button: "Learn More About Our Work" (with arrow icon)
+Button: "Learn More About Our Work" 
 
 --- ABOUT AMYLOIDOSIS SECTION ---
 Badge: Medical Information
@@ -69,26 +68,26 @@ Subtitle: Amyloidosis is a rare disease with life-altering consequences—but ea
 
 Layout: Title section, then 4-column grid of type cards, then large Early Detection section below
 
-Type Cards (4 cards in grid with hover animations):
-Each card has: gradient icon (white circle), name, description, prevalence with brand color gradients
+Type Cards (4 cards in grid):
+Each card has: name, description, prevalence
 
 1. AL Amyloidosis 
-   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - 
    - Description: Most common form, affects heart, kidneys, liver, and nervous system
    - Prevalence: 70% of cases
 
 2. AA Amyloidosis
-   - Gradient: from-[#00DD89] to-[#00AFE6]
+   - 
    - Description: Secondary to chronic inflammatory conditions
    - Prevalence: 20% of cases
 
 3. Hereditary
-   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - 
    - Description: Genetic forms including TTR, fibrinogen, and lysozyme
    - Prevalence: 5% of cases
 
 4. Other Types
-   - Gradient: from-[#00DD89] to-[#00AFE6]
+   - 
    - Description: Including β2-microglobulin and localized forms
    - Prevalence: 5% of cases
 
@@ -96,19 +95,19 @@ Early Detection Section (large 2-column card):
 Background: White/transparent backdrop with medical pattern overlay
 
 Left Column:
-- Title: "Early Detection Saves Lives" (gradient text)
+- Title: "Early Detection Saves Lives" (
 - Description: Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. Early recognition and proper testing are crucial for better patient outcomes.
 - Subdescription: Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.
-- Button: "Learn More" (with arrow icon, #00DD89 to #00BB77 gradient)
+- Button: "Learn More" 
 
 Right Column (2 hoverable statistics cards):
-1. Card with #00AFE6 gradient background:
-   - "2-3 years" (large gradient text)
+1. Card with  
+   - "2-3 years" (large 
    - "Average time to diagnosis" (bold title)
    - "Many patients see multiple doctors before receiving proper diagnosis" (description)
 
-2. Card with #00DD89 gradient background:
-   - "3,000+" (large gradient text)
+2. Card with  
+   - "3,000+" (large 
    - "Canadians affected" (bold title)
    - "Estimated number of people living with amyloidosis in Canada" (description)
 
@@ -118,48 +117,48 @@ Title: Essential Resources
 Subtitle: Quick access to the most important tools and information for patients, families, and healthcare professionals.
 
 6-Card Grid Layout:
-Each card has: icon, title, description, brand gradient colors
+Each card has: icon, title, description, brand 
 
 1. Find Specialists Card:
-   - Icon: Search
+   - 
    - Title: Find Specialists  
    - Description: Locate amyloidosis specialists in your area
-   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - 
    - Link: #specialists
 
 2. Patient Resources Card:
-   - Icon: BookOpen
+   - 
    - Title: Patient Resources
    - Description: Comprehensive guides for patients and families
-   - Gradient: from-[#00DD89] to-[#00AFE6]  
+   -   
    - Link: #resources
 
 3. Support Groups Card:
-   - Icon: Users
+   - 
    - Title: Support Groups
    - Description: Connect with others and find support
-   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - 
    - Link: #support
 
 4. Get Involved Card:
-   - Icon: Heart
+   - 
    - Title: Get Involved
    - Description: Join our community and make a difference  
-   - Gradient: from-[#00DD89] to-[#00AFE6]
+   - 
    - Link: #get-involved
 
 5. Events Card:
-   - Icon: Calendar
+   - 
    - Title: Events
    - Description: Upcoming events and meetings
-   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - 
    - Link: #events
 
 6. Contact Us Card:
-   - Icon: Phone
+   - 
    - Title: Contact Us
    - Description: Get in touch with our team
-   - Gradient: from-[#00DD89] to-[#00AFE6]
+   - 
    - Link: #contact
 
 --- EVENTS & NEWSLETTER SECTION ---
@@ -170,38 +169,38 @@ Subtitle: Stay informed about the latest research, treatment advances, and commu
 Layout: Header with logo, 3 event cards, then community stats and newsletter signup
 
 CAS Logo Display:
-- Canadian Amyloidosis Society logo image with animated entrance effect
+- Canadian Amyloidosis Society logo image with 
 
 Event Cards (3 cards):
 1. Patient & Family Conference:
-   - Icon: Users
+   - 
    - Title: Patient & Family Conference
    - Description: Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.
    - Date: November 15-16, 2024  
    - Attendees: 250+
    - Type: In-Person
-   - Gradient: from-[#00AFE6] to-[#0088CC]
-   - Background: from-[#00AFE6]/15 to-[#00DD89]/15
+   - 
+   
 
 2. Monthly Research Webinars:
-   - Icon: Video
+   - 
    - Title: Monthly Research Webinars
    - Description: Expert presentations on the latest treatment advances, diagnostic techniques, and clinical trial updates.
    - Date: First Thursday of each month
    - Attendees: 500+
    - Type: Virtual
-   - Gradient: from-[#00DD89] to-[#00BB77]
-   - Background: from-[#00AFE6]/15 to-[#00DD89]/15
+   - 
+   
 
 3. Support Group Meetings:
-   - Icon: Heart
+   - 
    - Title: Support Group Meetings
    - Description: Virtual and in-person meetings across Canada providing emotional support and practical guidance.
    - Date: Weekly sessions available
    - Attendees: 50+
    - Type: Hybrid
-   - Gradient: from-[#00AFE6] to-[#00DD89]
-   - Background: from-[#00AFE6]/15 to-[#00DD89]/15
+   - 
+   
 
 --- DIRECTORY PREVIEW SECTION ---
 Badge: Find Care
@@ -219,33 +218,33 @@ Interactive Canada Map:
 
 Directory Features (4 cards):
 1. Treatment Centers:
-   - Icon: Building2
+   - 
    - Title: Treatment Centers
    - Description: Specialized amyloidosis treatment facilities across Canada
-   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - 
 
 2. Clinical Experts:
-   - Icon: Heart  
+   -   
    - Title: Clinical Experts
    - Description: Leading physicians and healthcare professionals
-   - Gradient: from-[#00DD89] to-[#00AFE6]
+   - 
 
 3. Support Networks:
-   - Icon: Users
+   - 
    - Title: Support Networks
    - Description: Patient advocacy groups and community resources
-   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - 
 
 4. Resources Library:
-   - Icon: FileText
+   - 
    - Title: Resources Library
    - Description: Medical protocols and educational materials
-   - Gradient: from-[#00DD89] to-[#00AFE6]
+   - 
 
 Quick Statistics (3 cards):
-1. "1.2K+" | "Active Patients" | Gradient: from-[#00AFE6] to-[#00DD89]
-2. "45+" | "Research Studies" | Gradient: from-[#00DD89] to-[#00AFE6]  
-3. "8" | "Clinical Trials" | Gradient: from-[#00AFE6] to-[#00DD89]
+1. "1.2K+" | "Active Patients" | 
+2. "45+" | "Research Studies" |   
+3. "8" | "Clinical Trials" | 
 
 Map Legend:
 - Hospitals (blue markers)
@@ -502,7 +501,7 @@ Subtitle: Early symptoms that require medical attention.
 Five Symptom Categories:
 
 1. Cardiac Symptoms:
-   Icon: Heart
+   
    Symptoms:
    - Shortness of breath
    - Chest pain  
@@ -511,7 +510,7 @@ Five Symptom Categories:
    - Fatigue during normal activities
 
 2. Neurological Symptoms:
-   Icon: Brain
+   
    Symptoms:
    - Numbness in hands/feet
    - Tingling sensations
@@ -520,7 +519,7 @@ Five Symptom Categories:
    - Balance problems
 
 3. Gastrointestinal Symptoms:
-   Icon: Activity
+   
    Symptoms:
    - Persistent diarrhea
    - Nausea and vomiting
@@ -529,7 +528,7 @@ Five Symptom Categories:
    - Malabsorption symptoms
 
 4. Genitourinary Symptoms:
-   Icon: Droplets
+   
    Symptoms:
    - Proteinuria (protein in urine)
    - Decreased urine output
@@ -538,7 +537,7 @@ Five Symptom Categories:
    - Bladder problems
 
 5. Systemic Symptoms:
-   Icon: Microscope
+   
    Symptoms:
    - Unexplained weight loss
    - Enlarged tongue
@@ -1085,7 +1084,7 @@ Total Healthcare Centers: 25+
 Provincial Coverage: 13 provinces and territories
 Language Support: English (complete) and French (comprehensive)
 Accessibility Compliance: WCAG 2.1 Level AA
-Brand Colors: #00AFE6 (blue) and #00DD89 (green)
+Brand Colors:  (blue) and  (green)
 Typography: Rosarivo (headings) and Mulish (body text)
 
 This document contains all text content used across the Canadian Amyloidosis Society website as of July 2025.

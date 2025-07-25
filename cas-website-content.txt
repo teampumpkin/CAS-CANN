@@ -1076,6 +1076,276 @@ Subtitle: Accélérer la sensibilisation, faire progresser les soins et soutenir
 [Comprehensive French translations available for all major sections]
 
 ================================================================================
+2. RESOURCES PAGE (/resources)
+================================================================================
+
+--- HERO SECTION ---
+Badge: Professional Resources
+Title: Clinical Resources Library
+Subtitle: Access evidence-based tools, protocols, and educational materials curated by medical professionals for the Canadian amyloidosis community.
+
+Description: Our comprehensive resource library provides healthcare professionals, patients, and caregivers with access to the latest clinical guidelines, diagnostic tools, patient education materials, and professional development resources.
+
+--- SEARCH AND FILTERING SYSTEM ---
+Search Features:
+- Full-text search across all resources
+- Advanced filtering by multiple criteria
+- Real-time results updating
+- Resource type categorization
+
+Filter Categories:
+1. Amyloidosis Type: All Types, AL, ATTR, AA, ALect2, General
+2. Resource Type: All Types, Forms, Tools, Articles, Pathways, Visuals, Research
+3. Category: All Categories, Diagnostic Tools, Referral Pathways, SOPs, Patient Handouts
+4. Audience: All Audiences, Clinicians, Patients, Caregivers, Researchers
+5. Language: All Languages, English, French, Bilingual
+6. Region: All Regions, National, plus all Canadian provinces and territories
+
+--- RESOURCE CATEGORIES ---
+Main Categories:
+1. Diagnostic Tools
+   - Clinical assessment forms
+   - Screening questionnaires
+   - Laboratory protocols
+   - Imaging guidelines
+
+2. Referral Pathways
+   - Referral criteria
+   - Process workflows
+   - Contact directories
+   - Timeline expectations
+
+3. Standard Operating Procedures
+   - Clinical protocols
+   - Treatment guidelines
+   - Quality assurance procedures
+   - Safety protocols
+
+4. Patient Handouts
+   - Educational materials
+   - Treatment explanations
+   - Support resources
+   - Care instructions
+
+================================================================================
+3. GET INVOLVED PAGE (/get-involved)
+================================================================================
+
+--- HERO SECTION ---
+Badge: Get Involved
+Title: Join Our Mission To Improve Awareness, Diagnosis, and Care
+Subtitle: The Canadian Amyloidosis Society is powered by people who care. Whether you're a clinician, researcher, patient, caregiver, or ally—you have a role to play in accelerating change.
+
+--- WAYS TO PARTICIPATE SECTION ---
+Four Main Participation Options:
+
+1. Join CAS
+   Description: Become a member of our growing community. Clinicians, researchers, and health system leaders are especially encouraged to register.
+
+2. Contribute Resources
+   Description: Upload clinical tools or patient education materials through our structured portal to help the community.
+
+3. Share Your Story
+   Description: Help raise awareness by sharing a lived experience, reflection, or clinical journey with the community.
+
+4. Support the Mission
+   Description: We welcome support from aligned organizations, philanthropic partners, and volunteers. Donations support CAS initiatives.
+
+--- MEMBERSHIP BENEFITS ---
+Why Join CAS:
+
+1. Professional Network Access
+   - Connect with leading clinicians and researchers
+   - Participate in expert discussions
+   - Access exclusive professional content
+
+2. Educational Opportunities
+   - Continuing education credits
+   - Webinar and conference access
+   - Research update notifications
+
+3. Resource Sharing Platform
+   - Submit and access clinical tools
+   - Peer review opportunities
+   - Quality assured content
+
+4. Advocacy and Impact
+   - Policy development participation
+   - Public awareness campaigns
+   - Healthcare system improvements
+
+--- EVENTS SECTION ---
+Three Event Categories:
+
+1. Upcoming Events
+   - CAS Journal Club Sessions
+   - CANN Educational Series
+   - Annual Summit
+   - Regional Workshops
+
+2. Recent Events
+   - Past 6 months activities
+   - Recorded sessions
+   - Summary reports
+
+3. Past Events
+   - Historical event archive
+   - Attendee testimonials
+   - Impact metrics
+
+================================================================================
+4. DETAILED AMYLOIDOSIS PAGES
+================================================================================
+
+--- AL AMYLOIDOSIS PAGE (/amyloidosis-types/al) ---
+
+Hero Section:
+Badge: Light Chain Amyloidosis
+Title: AL Amyloidosis
+Subtitle: AL amyloidosis is caused by abnormal plasma cells producing light chains. It's the most common form of amyloidosis, often diagnosed after age 50 and affects both men and women.
+
+Detailed Overview Paragraphs:
+AL amyloidosis affects approximately 3,000-4,000 people in North America each year. The "AL" stands for "Amyloid Light chain," referring to the misfolded light chain proteins that form amyloid deposits.
+
+This condition most commonly affects the heart, kidneys, liver, and nervous system. Early diagnosis is crucial as treatment can prevent further organ damage and improve quality of life.
+
+The median age at diagnosis is 65 years, and it affects men slightly more often than women. Unlike other forms of amyloidosis, AL amyloidosis is not hereditary.
+
+Key Statistics:
+- Most common form of amyloidosis (70% of cases)
+- Related to multiple myeloma (10-15% overlap)
+- Prevalence: ~8-12 per million
+- Median Age: 65 years
+- Heart Involvement: 70%
+- Kidney Involvement: 60%
+
+Clinical Presentation:
+Symptoms:
+- Leg swelling
+- Fatigue
+- Irregular heartbeat
+- Enlarged tongue
+- Skin changes (bruising, purple patches around eyes)
+
+Diagnostic Approach:
+- Tissue biopsy
+- Blood/urine tests for light chains
+- Bone marrow biopsy
+- Imaging tests (ECG, MRI, echocardiogram)
+
+Treatment Options:
+- Chemotherapy
+- Steroids
+- Proteasome inhibitors
+- Monoclonal antibodies
+- Stem cell transplant (in select cases)
+- Supportive care to manage symptoms and organ function
+
+Treatment Centers:
+- Princess Margaret Cancer Centre (Toronto, ON) - Comprehensive amyloidosis program
+- Vancouver General Hospital (Vancouver, BC) - Hematology and stem cell transplant
+- CHUM Centre hospitalier de l'Université de Montréal (Montreal, QC) - Amyloidosis clinic
+- Clinical Trial: Daratumumab in AL Amyloidosis (Multiple Centers) - Phase III study
+
+--- ATTR AMYLOIDOSIS PAGE (/amyloidosis-types/attr) ---
+
+Hero Section:
+Badge: Transthyretin Amyloidosis
+Title: ATTR Amyloidosis
+Subtitle: ATTR amyloidosis has two forms: Hereditary (hATTR) with over 120 TTR mutations known, and Wild-type (ATTRwt) which is non-inherited, develops with age, and primarily affects men over 60.
+
+Two Main Forms:
+1. Hereditary ATTR (hATTR)
+   - Over 120 TTR mutations known
+   - Genetic inheritance pattern
+   - Variable age of onset
+   - Family history present
+
+2. Wild-type ATTR (ATTRwt)
+   - Non-inherited form
+   - Develops with age
+   - Primarily affects men over 60
+   - No family history
+
+Symptoms:
+- Heart issues: palpitations, fainting, fatigue
+- Nerve issues: numbness, walking difficulty
+- GI symptoms: nausea, weight loss
+
+Diagnosis:
+- Genetic testing for TTR mutations
+- Biopsies, imaging (MRI, scans)
+- Protein testing
+
+Treatment:
+- TTR stabilizers: Tafamidis (Vyndaqel), Acoramidis (Attruby)
+- Gene silencers: Patisiran (Onpattro), Vutrisiran (Amvuttra)
+- Supportive care for symptoms and organ protection
+
+Treatment Centers:
+- Toronto General Hospital (Toronto, ON) - Comprehensive ATTR amyloidosis program
+- Montreal Heart Institute (Montreal, QC) - Cardiac amyloidosis clinic
+- University of Alberta Hospital (Edmonton, AB) - Hereditary amyloidosis program
+
+--- OTHER AMYLOIDOSIS TYPES PAGE (/amyloidosis-types/other) ---
+
+Hero Section:
+Badge: Other Amyloidosis Forms
+Title: Understanding Other Amyloidosis Forms
+Subtitle: Beyond AL and ATTR, several other forms of amyloidosis exist, each with unique characteristics, causes, and treatment approaches.
+
+Comprehensive Overview Paragraphs:
+While AL and ATTR amyloidosis are the most common forms, several other types of amyloidosis exist, each with distinct characteristics and treatment approaches. Understanding these various forms is crucial for accurate diagnosis and appropriate management.
+
+These less common forms include AA amyloidosis (secondary amyloidosis), localized forms that affect specific organs, and dialysis-related amyloidosis. Each type has unique underlying causes and requires specialized approaches to diagnosis and treatment.
+
+The key to managing these conditions lies in understanding their specific pathophysiology and addressing the underlying causes when possible. Early recognition and appropriate intervention can significantly improve patient outcomes.
+
+AA (Secondary) Amyloidosis:
+Description: Caused by chronic inflammatory conditions like rheumatoid arthritis, inflammatory bowel disease, or chronic infections. The key is controlling the underlying inflammatory disease.
+
+Key Features:
+- Secondary to chronic inflammation
+- Primarily affects kidneys
+- Treatment focuses on underlying condition
+- Better prognosis when inflammation controlled
+
+Localized Amyloidosis:
+Description: Amyloid deposits that remain confined to specific organs or tissues without systemic involvement.
+
+Common Forms:
+- Cutaneous (skin) amyloidosis
+- Laryngeal amyloidosis
+- Bladder amyloidosis
+- Conjunctival amyloidosis
+
+Dialysis-related Amyloidosis:
+Description: Develops in patients on long-term dialysis due to accumulation of β2-microglobulin protein.
+
+Characteristics:
+- Associated with chronic kidney disease
+- Joint and bone involvement
+- Carpal tunnel syndrome common
+- Improved with kidney transplant
+
+Rare Variant Presentations:
+Additional rare forms including:
+- AH amyloidosis (heavy chain)
+- AFib amyloidosis (fibrinogen)
+- ALys amyloidosis (lysozyme)
+- AGel amyloidosis (gelsolin)
+- ALECT2: More common in Mexican, Punjabi, Native American, Middle Eastern descent
+- Aβ2M: Seen in long-term dialysis patients, affects bones and joints
+
+Treatment Approaches:
+- AA: Treat underlying disease to reduce SAA protein
+- ALECT2: Often underdiagnosed, mainly affects kidneys
+- Aβ2M: Becoming rarer due to improved dialysis techniques
+- Supportive care and research ongoing for most types
+
+Clinical Note: Early diagnosis is critical for better outcomes across all amyloidosis types.
+
+================================================================================
 END OF CONTENT DOCUMENTATION
 ================================================================================
 
@@ -1084,7 +1354,5 @@ Total Healthcare Centers: 25+
 Provincial Coverage: 13 provinces and territories
 Language Support: English (complete) and French (comprehensive)
 Accessibility Compliance: WCAG 2.1 Level AA
-Brand Colors:  (blue) and  (green)
-Typography: Rosarivo (headings) and Mulish (body text)
 
 This document contains all text content used across the Canadian Amyloidosis Society website as of July 2025.

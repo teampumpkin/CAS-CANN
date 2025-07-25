@@ -25,82 +25,121 @@ Quick Action Tiles:
 
 --- WELCOME SECTION ---
 Badge: Who we are
-Title: Welcome to the Canadian Amyloidosis Society
+Title: Welcome to the Canadian Amyloidosis Society (CAS)
 Subtitle: Your trusted partner in amyloidosis care, connecting patients, families, and healthcare professionals across Canada.
 
-Description: We are dedicated to improving the lives of those affected by amyloidosis through education, support, and advocacy. Our comprehensive platform provides essential resources, connects you with specialized care, and builds a supportive community for patients and families nationwide.
+Main Description: We are dedicated to improving the lives of those affected by amyloidosis through education, support, and advocacy. Our comprehensive platform provides essential resources, connects you with specialized care, and builds a supportive community for patients and families nationwide.
 
-Mission: To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support.
+Statistics Overlay Content:
+- Mission Statement: To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support.
+- Vision Statement: A future where every Canadian affected by amyloidosis receives timely diagnosis, optimal treatment, and comprehensive support.
 
-Vision: A future where every Canadian affected by amyloidosis receives timely diagnosis, optimal treatment, and comprehensive support.
+Two-Column Statistics Display:
+Left Column:
+- Our Mission
+- Mission Description: To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support.
 
+Right Column:
+- Our Vision  
+- Vision Description: A future where every Canadian affected by amyloidosis receives timely diagnosis, optimal treatment, and comprehensive support.
+
+Image: Medical professional working with healthcare technology
 Button: Learn More About Our Work
 
 --- ABOUT AMYLOIDOSIS SECTION ---
-Badge: Medical Information
+Badge: Medical Information  
 Title: What is Amyloidosis
 Subtitle: Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
 
-Description: Amyloidosis is a rare but serious condition where misfolded proteins (amyloid) accumulate in organs and tissues throughout the body. Understanding the different types, recognizing early symptoms, and accessing specialized care are crucial for managing this condition effectively.
+Main Description: Amyloidosis is a rare but serious condition where misfolded proteins (amyloid) accumulate in organs and tissues throughout the body. Understanding the different types, recognizing early symptoms, and accessing specialized care are crucial for managing this condition effectively.
 
-Early Detection Section:
+Early Detection Card:
 Title: Early Detection
-Subtitle: Saves Lives
+Subtitle: Saves Lives  
 Description: Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. Early recognition and proper testing are crucial for better patient outcomes.
-Sub-description: Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.
+Additional Text: Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.
 
-Types of Amyloidosis:
-1. AL Amyloidosis
-   - Most common form, affects heart, kidneys, liver, and nervous system
-   - 70% of cases
+Types of Amyloidosis Cards:
 
-2. AA Amyloidosis  
-   - Secondary to chronic inflammatory conditions
-   - 20% of cases
+1. AL Amyloidosis Card:
+   - Title: AL Amyloidosis
+   - Description: Most common form, affects heart, kidneys, liver, and nervous system
+   - Prevalence: 70% of cases
+   - Color: Blue gradient background
 
-3. Hereditary
-   - Genetic forms including TTR, fibrinogen, and lysozyme
-   - 5% of cases
+2. AA Amyloidosis Card:
+   - Title: AA Amyloidosis  
+   - Description: Secondary to chronic inflammatory conditions
+   - Prevalence: 20% of cases
+   - Color: Green gradient background
 
-4. Other Types
-   - Including β2-microglobulin and localized forms
-   - 5% of cases
+3. Hereditary Amyloidosis Card:
+   - Title: Hereditary
+   - Description: Genetic forms including TTR, fibrinogen, and lysozyme
+   - Prevalence: 5% of cases
+   - Color: Purple gradient background
 
-Statistics:
-- 2-3 years: Average time to diagnosis
-- Many patients see multiple doctors before receiving proper diagnosis
-- 3,000+ Canadians affected
-- Estimated number of people living with amyloidosis in Canada
+4. Other Types Card:
+   - Title: Other Types
+   - Description: Including β2-microglobulin and localized forms
+   - Prevalence: 5% of cases
+   - Color: Orange gradient background
 
-Button: Learn More
+Statistical Information Cards:
+1. Diagnosis Time Card:
+   - Number: 2-3 years
+   - Label: Average time to diagnosis
+   - Description: Many patients see multiple doctors before receiving proper diagnosis
+
+2. Affected Canadians Card:
+   - Number: 3,000+
+   - Label: Canadians affected
+   - Description: Estimated number of people living with amyloidosis in Canada
+
+Call-to-Action Button: Learn More
 
 --- WHAT YOU'LL FIND HERE SECTION ---
 Badge: Platform Features
 Title: What You'll Find Here
 Subtitle: Comprehensive resources designed for healthcare professionals and patients seeking evidence-based amyloidosis information.
 
-Three Main Features:
+Three Main Feature Cards:
 
-1. Filterable Clinic Directory
+1. Filterable Clinic Directory Card:
+   Title: Filterable Clinic Directory
+   Description: Comprehensive geographic healthcare center listings with verified provider credentials
+   Features List:
    - Geographic healthcare center listings
-   - Specialty services mapping
+   - Specialty services mapping  
    - Contact information and services
    - Verified provider credentials
    - Provincial coverage mapping
+   Button: Browse Directory
+   Background: Blue gradient
 
-2. Peer-Submitted Tools
+2. Peer-Submitted Tools Card:
+   Title: Peer-Submitted Tools  
+   Description: Clinical resources developed and validated by healthcare professionals
+   Features List:
    - Clinical assessment tools
    - Diagnostic decision aids
    - Treatment protocols
    - Evidence-based resources
    - Peer-reviewed content
+   Button: Access Tools
+   Background: Green gradient
 
-3. Evidence Summaries
+3. Evidence Summaries Card:
+   Title: Evidence Summaries
+   Description: Curated clinical research and practice guidelines for informed decision-making
+   Features List:
    - Treatment efficacy data
    - Clinical practice guidelines
    - Research findings
    - Professional consensus statements
    - Updated clinical protocols
+   Button: View Summaries
+   Background: Purple gradient
 
 --- DIRECTORY PREVIEW SECTION ---
 Badge: Find Care
@@ -356,56 +395,181 @@ Final CTAs:
 ================================================================================
 
 --- HERO SECTION ---
-Title: About Amyloidosis
+Badge: Medical Information
+Title: Understanding Amyloidosis
 Subtitle: Learn the signs, understand the types, and take action early.
+Description: Amyloidosis is a rare but serious disease where misfolded proteins accumulate in organs. Early detection and appropriate treatment can significantly improve outcomes.
 Target Audience: PCPs, cardiologists, neurologists, nephrologists, hematologists
-Badge: Professional Resource
-Professional Disclaimer: Clear marking as professional resource, not public health advice
+Buttons: Get Started, Browse Directory
 
---- OVERVIEW SECTION ---
-Simplified Pathophysiology:
-- Protein misfolding explanation
-- Organ involvement patterns
-- Disease progression timeline
+--- SIMPLIFIED PATHOPHYSIOLOGY SECTION ---
+Title: Pathophysiology
+Description: Amyloidosis occurs when proteins misfold and accumulate in tissues.
+Detailed Explanation: When proteins misfold, they can form fibril deposits called amyloid that accumulate in various organs and tissues, disrupting normal function and potentially leading to organ failure if left untreated.
+
+--- WARNING SIGNS SECTION ---
+Title: Warning Signs
+Subtitle: Early symptoms that require medical attention.
+
+Five Symptom Categories:
+
+1. Cardiac Symptoms:
+   Icon: Heart
+   Symptoms:
+   - Shortness of breath
+   - Chest pain  
+   - Irregular heartbeat
+   - Swelling in legs/ankles
+   - Fatigue during normal activities
+
+2. Neurological Symptoms:
+   Icon: Brain
+   Symptoms:
+   - Numbness in hands/feet
+   - Tingling sensations
+   - Muscle weakness
+   - Carpal tunnel syndrome
+   - Balance problems
+
+3. Gastrointestinal Symptoms:
+   Icon: Activity
+   Symptoms:
+   - Persistent diarrhea
+   - Nausea and vomiting
+   - Abdominal pain
+   - Loss of appetite
+   - Malabsorption symptoms
+
+4. Genitourinary Symptoms:
+   Icon: Droplets
+   Symptoms:
+   - Proteinuria (protein in urine)
+   - Decreased urine output
+   - Kidney dysfunction
+   - Urinary retention
+   - Bladder problems
+
+5. Systemic Symptoms:
+   Icon: Microscope
+   Symptoms:
+   - Unexplained weight loss
+   - Enlarged tongue
+   - Easy bruising
+   - Changes in skin texture
+   - Chronic fatigue
 
 --- TYPES OF AMYLOIDOSIS SECTION ---
-Three Main Categories:
+Title: Types of Amyloidosis
+Subtitle: Major forms and their characteristics.
 
-1. AL Amyloidosis (Light Chain)
-   - Hematologic origin
-   - Multi-organ involvement
-   - Treatment approaches
+Three Expandable Type Cards:
 
-2. ATTR Amyloidosis (Transthyretin)
-   - Hereditary and wild-type variants
-   - Cardiac and neurologic manifestations
-   - Therapeutic options
+1. AL (Light-Chain) Amyloidosis:
+   Subtitle: Caused by abnormal plasma cells producing light chains
+   Prevalence: Often diagnosed after age 50; affects both men and women
+   Disease Context: Related to multiple myeloma (10-15% overlap)
+   
+   Symptoms:
+   - Leg swelling
+   - Fatigue
+   - Irregular heartbeat
+   - Enlarged tongue
+   - Skin changes (bruising, purple patches around eyes)
+   
+   Diagnosis Methods:
+   - Tissue biopsy
+   - Blood/urine tests for light chains
+   - Bone marrow biopsy
+   - Imaging tests (ECG, MRI, echocardiogram)
+   
+   Treatment Options:
+   - Chemotherapy
+   - Steroids
+   - Proteasome inhibitors
+   - Monoclonal antibodies
+   - Stem cell transplant (in select cases)
+   - Supportive care to manage symptoms and organ function
+   
+   Key Point: Target abnormal plasma cells with various therapies
 
-3. Other/Rare Types
-   - AA Amyloidosis
-   - Localized forms
-   - Dialysis-related amyloidosis
+2. ATTR (Transthyretin) Amyloidosis:
+   Subtitle: Two forms: Hereditary (hATTR) and Wild-type (ATTRwt)
+   Prevalence: hATTR: Over 120 TTR mutations known
+   Disease Context: ATTRwt: Non-inherited, develops with age, primarily affects men over 60
+   
+   Symptoms:
+   - Heart issues: palpitations, fainting, fatigue
+   - Nerve issues: numbness, walking difficulty
+   - GI symptoms: nausea, weight loss
+   
+   Diagnosis Methods:
+   - Genetic testing for TTR mutations
+   - Biopsies, imaging (MRI, scans)
+   - Protein testing
+   
+   Treatment Options:
+   - TTR stabilizers: Tafamidis (Vyndaqel), Acoramidis (Attruby)
+   - Gene silencers: Patisiran (Onpattro), Vutrisiran (Amvuttra)
+   - Supportive care for symptoms and organ protection
+   
+   Key Point: Wild-type often causes heart failure and carpal tunnel syndrome
 
---- CLINICAL RED FLAGS SECTION ---
-High-Risk Presentations vs Supporting Features:
-- Unexplained heart failure
-- Peripheral neuropathy
-- Proteinuria and kidney dysfunction
-- Gastrointestinal symptoms
+3. Rare Types of Amyloidosis:
+   Subtitle: AA, ALECT2, Aβ2M, and other rare forms
+   Prevalence: Variable prevalence by geographic and ethnic background
+   Disease Context: Different underlying causes and affected organs
+   
+   Symptoms:
+   - AA: Linked to long-standing inflammation, mostly affects kidneys
+   - ALECT2: More common in Mexican, Punjabi, Native American, Middle Eastern descent
+   - Aβ2M: Seen in long-term dialysis patients, affects bones and joints
+   
+   Diagnosis Methods:
+   - Biopsies, blood and urine analysis
+   - Imaging: ECG, MRI, echocardiograms
+   - Genetic testing for hereditary types
+   - Specialized testing: mass spectrometry, immunohistochemistry
+   
+   Treatment Options:
+   - AA: Treat underlying disease to reduce SAA protein
+   - ALECT2: Often underdiagnosed, mainly affects kidneys
+   - Aβ2M: Becoming rarer due to improved dialysis techniques
+   - Supportive care and research ongoing for most types
+   
+   Key Point: Early diagnosis is critical for better outcomes
 
 --- DIAGNOSTIC PATHWAY SECTION ---
+Title: Diagnostic Pathway
+Subtitle: Systematic approach to diagnosis.
+
 5-Step Evidence-Based Approach:
-1. Clinical suspicion
-2. Initial screening
-3. Confirmatory testing
-4. Typing studies
-5. Subtype classification
+1. Clinical suspicion based on symptoms and presentation
+2. Initial screening with appropriate blood tests and imaging
+3. Confirmatory testing including tissue biopsy
+4. Typing studies to determine specific amyloid protein
+5. Subtype classification for targeted treatment planning
 
 --- CLINICAL GUIDELINES SECTION ---
+Title: Clinical Guidelines
+Subtitle: Professional resources for clinicians.
+
 External Resources:
 - Canadian Cardiovascular Society (CCS) Guidelines
-- Mayo Clinic Protocols
+- Mayo Clinic Protocols  
 - NHS Treatment Standards
+
+--- PROFESSIONAL DISCLAIMER SECTION ---
+Title: Professional Disclaimer
+Content: This information is intended for healthcare professionals and educational purposes. It does not replace professional medical advice.
+Emergency Notice: For medical emergencies, call 911
+
+Call-to-Action Buttons:
+- Find a Specialist
+- Download Resources
+- View Complete Directory
+- Explore Resources
+- Learn more about types
+- Access Clinical Tools
 
 ================================================================================
 4. DIRECTORY PAGE (/directory)

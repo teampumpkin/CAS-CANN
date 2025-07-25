@@ -12,16 +12,21 @@ Badge: Clinical Excellence Platform
 Main Title: Canadian Amyloidosis Society
 Subtitle: Advancing evidence-based amyloidosis care through clinical excellence, professional collaboration, and structured knowledge sharing.
 
-Clinical Impact Metrics:
+Title Structure:
+- Line 1: "Canadian"
+- Line 2: "Amyloidosis" (gradient animated text)
+- Line 3: "Society"
+
+Clinical Impact Metrics (3 cards):
 - 6-Week Diagnosis: "Reduced diagnostic timeline"
 - 25+ Centers: "Network coverage"  
 - 1,200+ Patients: "Served annually"
 
-Quick Action Tiles:
-- Join
-- Directory
-- Upload
-- Learn
+Quick Action Tiles (2x2 grid):
+- Join (Users icon) → /get-involved
+- Directory (MapPin icon) → /directory
+- Upload (Upload icon) → /upload-resource
+- Learn (BookOpen icon) → /about-amyloidosis
 
 --- WELCOME SECTION ---
 Badge: Who we are
@@ -30,140 +35,215 @@ Subtitle: Your trusted partner in amyloidosis care, connecting patients, familie
 
 Main Description: We are dedicated to improving the lives of those affected by amyloidosis through education, support, and advocacy. Our comprehensive platform provides essential resources, connects you with specialized care, and builds a supportive community for patients and families nationwide.
 
-Statistics Overlay Content:
-- Mission Statement: To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support.
-- Vision Statement: A future where every Canadian affected by amyloidosis receives timely diagnosis, optimal treatment, and comprehensive support.
+Layout: Two-column grid with content left, image right
 
-Two-Column Statistics Display:
-Left Column:
-- Our Mission
-- Mission Description: To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support.
+Left Column Content:
+- Premium badge with gradient dot
+- Heading with gradient "Canadian Amyloidosis Society" text
+- Two paragraphs of description text
+- Call-to-action button with arrow icon
 
 Right Column:
-- Our Vision  
-- Vision Description: A future where every Canadian affected by amyloidosis receives timely diagnosis, optimal treatment, and comprehensive support.
+- Medical professional image in rounded container
+- Stats overlay on bottom of image with mission/vision
 
-Image: Medical professional working with healthcare technology
-Button: Learn More About Our Work
+Stats Overlay on Image (3 columns with dividers):
+Left: "15+" | "Years Supporting"
+Center: "1K+" | "Patients Helped"  
+Right: "100%" | "Patient Focused"
+
+Button: "Learn More About Our Work" (with arrow icon)
 
 --- ABOUT AMYLOIDOSIS SECTION ---
-Badge: Medical Information  
-Title: What is Amyloidosis
+Badge: Medical Information
+Title: What is Amyloidosis?
 Subtitle: Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
 
-Main Description: Amyloidosis is a rare but serious condition where misfolded proteins (amyloid) accumulate in organs and tissues throughout the body. Understanding the different types, recognizing early symptoms, and accessing specialized care are crucial for managing this condition effectively.
+Layout: Title section, then 4-column grid of type cards, then large Early Detection section below
 
-Early Detection Card:
-Title: Early Detection
-Subtitle: Saves Lives  
-Description: Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. Early recognition and proper testing are crucial for better patient outcomes.
-Additional Text: Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.
+Type Cards (4 cards in grid with hover animations):
+Each card has: gradient icon (white circle), name, description, prevalence with brand color gradients
 
-Types of Amyloidosis Cards:
-
-1. AL Amyloidosis Card:
-   - Title: AL Amyloidosis
+1. AL Amyloidosis 
+   - Gradient: from-[#00AFE6] to-[#00DD89]
    - Description: Most common form, affects heart, kidneys, liver, and nervous system
    - Prevalence: 70% of cases
-   - Color: Blue gradient background
 
-2. AA Amyloidosis Card:
-   - Title: AA Amyloidosis  
+2. AA Amyloidosis
+   - Gradient: from-[#00DD89] to-[#00AFE6]
    - Description: Secondary to chronic inflammatory conditions
    - Prevalence: 20% of cases
-   - Color: Green gradient background
 
-3. Hereditary Amyloidosis Card:
-   - Title: Hereditary
+3. Hereditary
+   - Gradient: from-[#00AFE6] to-[#00DD89]
    - Description: Genetic forms including TTR, fibrinogen, and lysozyme
    - Prevalence: 5% of cases
-   - Color: Purple gradient background
 
-4. Other Types Card:
-   - Title: Other Types
+4. Other Types
+   - Gradient: from-[#00DD89] to-[#00AFE6]
    - Description: Including β2-microglobulin and localized forms
    - Prevalence: 5% of cases
-   - Color: Orange gradient background
 
-Statistical Information Cards:
-1. Diagnosis Time Card:
-   - Number: 2-3 years
-   - Label: Average time to diagnosis
-   - Description: Many patients see multiple doctors before receiving proper diagnosis
+Early Detection Section (large 2-column card):
+Background: White/transparent backdrop with medical pattern overlay
 
-2. Affected Canadians Card:
-   - Number: 3,000+
-   - Label: Canadians affected
-   - Description: Estimated number of people living with amyloidosis in Canada
+Left Column:
+- Title: "Early Detection Saves Lives" (gradient text)
+- Description: Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. Early recognition and proper testing are crucial for better patient outcomes.
+- Subdescription: Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.
+- Button: "Learn More" (with arrow icon, #00DD89 to #00BB77 gradient)
 
-Call-to-Action Button: Learn More
+Right Column (2 hoverable statistics cards):
+1. Card with #00AFE6 gradient background:
+   - "2-3 years" (large gradient text)
+   - "Average time to diagnosis" (bold title)
+   - "Many patients see multiple doctors before receiving proper diagnosis" (description)
 
---- WHAT YOU'LL FIND HERE SECTION ---
-Badge: Platform Features
-Title: What You'll Find Here
-Subtitle: Comprehensive resources designed for healthcare professionals and patients seeking evidence-based amyloidosis information.
+2. Card with #00DD89 gradient background:
+   - "3,000+" (large gradient text)
+   - "Canadians affected" (bold title)
+   - "Estimated number of people living with amyloidosis in Canada" (description)
 
-Three Main Feature Cards:
+--- QUICK LINKS SECTION ---
+Badge: Quick Access
+Title: Essential Resources
+Subtitle: Quick access to the most important tools and information for patients, families, and healthcare professionals.
 
-1. Filterable Clinic Directory Card:
-   Title: Filterable Clinic Directory
-   Description: Comprehensive geographic healthcare center listings with verified provider credentials
-   Features List:
-   - Geographic healthcare center listings
-   - Specialty services mapping  
-   - Contact information and services
-   - Verified provider credentials
-   - Provincial coverage mapping
-   Button: Browse Directory
-   Background: Blue gradient
+6-Card Grid Layout:
+Each card has: icon, title, description, brand gradient colors
 
-2. Peer-Submitted Tools Card:
-   Title: Peer-Submitted Tools  
-   Description: Clinical resources developed and validated by healthcare professionals
-   Features List:
-   - Clinical assessment tools
-   - Diagnostic decision aids
-   - Treatment protocols
-   - Evidence-based resources
-   - Peer-reviewed content
-   Button: Access Tools
-   Background: Green gradient
+1. Find Specialists Card:
+   - Icon: Search
+   - Title: Find Specialists  
+   - Description: Locate amyloidosis specialists in your area
+   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - Link: #specialists
 
-3. Evidence Summaries Card:
-   Title: Evidence Summaries
-   Description: Curated clinical research and practice guidelines for informed decision-making
-   Features List:
-   - Treatment efficacy data
-   - Clinical practice guidelines
-   - Research findings
-   - Professional consensus statements
-   - Updated clinical protocols
-   Button: View Summaries
-   Background: Purple gradient
+2. Patient Resources Card:
+   - Icon: BookOpen
+   - Title: Patient Resources
+   - Description: Comprehensive guides for patients and families
+   - Gradient: from-[#00DD89] to-[#00AFE6]  
+   - Link: #resources
+
+3. Support Groups Card:
+   - Icon: Users
+   - Title: Support Groups
+   - Description: Connect with others and find support
+   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - Link: #support
+
+4. Get Involved Card:
+   - Icon: Heart
+   - Title: Get Involved
+   - Description: Join our community and make a difference  
+   - Gradient: from-[#00DD89] to-[#00AFE6]
+   - Link: #get-involved
+
+5. Events Card:
+   - Icon: Calendar
+   - Title: Events
+   - Description: Upcoming events and meetings
+   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - Link: #events
+
+6. Contact Us Card:
+   - Icon: Phone
+   - Title: Contact Us
+   - Description: Get in touch with our team
+   - Gradient: from-[#00DD89] to-[#00AFE6]
+   - Link: #contact
+
+--- EVENTS & NEWSLETTER SECTION ---
+Badge: Stay Connected
+Title: Events & Newsletter
+Subtitle: Stay informed about the latest research, treatment advances, and community events in amyloidosis care.
+
+Layout: Header with logo, 3 event cards, then community stats and newsletter signup
+
+CAS Logo Display:
+- Canadian Amyloidosis Society logo image with animated entrance effect
+
+Event Cards (3 cards):
+1. Patient & Family Conference:
+   - Icon: Users
+   - Title: Patient & Family Conference
+   - Description: Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.
+   - Date: November 15-16, 2024  
+   - Attendees: 250+
+   - Type: In-Person
+   - Gradient: from-[#00AFE6] to-[#0088CC]
+   - Background: from-[#00AFE6]/15 to-[#00DD89]/15
+
+2. Monthly Research Webinars:
+   - Icon: Video
+   - Title: Monthly Research Webinars
+   - Description: Expert presentations on the latest treatment advances, diagnostic techniques, and clinical trial updates.
+   - Date: First Thursday of each month
+   - Attendees: 500+
+   - Type: Virtual
+   - Gradient: from-[#00DD89] to-[#00BB77]
+   - Background: from-[#00AFE6]/15 to-[#00DD89]/15
+
+3. Support Group Meetings:
+   - Icon: Heart
+   - Title: Support Group Meetings
+   - Description: Virtual and in-person meetings across Canada providing emotional support and practical guidance.
+   - Date: Weekly sessions available
+   - Attendees: 50+
+   - Type: Hybrid
+   - Gradient: from-[#00AFE6] to-[#00DD89]
+   - Background: from-[#00AFE6]/15 to-[#00DD89]/15
 
 --- DIRECTORY PREVIEW SECTION ---
 Badge: Find Care
-Title: Find Specialized Care
+Title: Find Specialized Care  
 Subtitle: Connecting healthcare across the nation.
 
-Interactive Map Features:
-- Network Reach
-- Healthcare Providers
-- Provinces & Territories
-- Major Cities
-- Resources Available
+Layout: Header, Interactive Map, Feature Cards, Statistics
 
-Button: Browse Directory
+Interactive Canada Map:
+- Compact map display (h-64 md:h-80)
+- Healthcare center markers with clustering
+- Clickable provinces showing center details
+- Color-coded legend for center types
+- Hover tooltips with province names
 
-Searchable Healthcare Directory:
-Description: Find specialized amyloidosis treatment centers, experienced physicians, and clinical experts across all Canadian provinces and territories.
-Button: Explore Full Directory
+Directory Features (4 cards):
+1. Treatment Centers:
+   - Icon: Building2
+   - Title: Treatment Centers
+   - Description: Specialized amyloidosis treatment facilities across Canada
+   - Gradient: from-[#00AFE6] to-[#00DD89]
 
-Live Stats:
-- Directory Insights
-- Need Help Finding Care?
-- National Network
-- Canada-Wide Coverage
+2. Clinical Experts:
+   - Icon: Heart  
+   - Title: Clinical Experts
+   - Description: Leading physicians and healthcare professionals
+   - Gradient: from-[#00DD89] to-[#00AFE6]
+
+3. Support Networks:
+   - Icon: Users
+   - Title: Support Networks
+   - Description: Patient advocacy groups and community resources
+   - Gradient: from-[#00AFE6] to-[#00DD89]
+
+4. Resources Library:
+   - Icon: FileText
+   - Title: Resources Library
+   - Description: Medical protocols and educational materials
+   - Gradient: from-[#00DD89] to-[#00AFE6]
+
+Quick Statistics (3 cards):
+1. "1.2K+" | "Active Patients" | Gradient: from-[#00AFE6] to-[#00DD89]
+2. "45+" | "Research Studies" | Gradient: from-[#00DD89] to-[#00AFE6]  
+3. "8" | "Clinical Trials" | Gradient: from-[#00AFE6] to-[#00DD89]
+
+Map Legend:
+- Hospitals (blue markers)
+- Specialty Centers (green markers)  
+- Research Centers (purple markers)
+- Clinics (orange markers)
 - Connecting healthcare across the nation
 
 Map Legend:

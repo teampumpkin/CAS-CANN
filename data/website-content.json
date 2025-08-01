@@ -9,9 +9,9 @@
     "detailedContentSections": ["about", "events", "directory", "resources", "contact", "accessibility", "joinCAS", "CANN"],
     "contentCompleteness": "Full - includes big paragraphs, detailed descriptions, and comprehensive FAQ content"
   },
-  "translations": {
-    "en": {
-      "navigation": {
+  "content": {
+    "english": {
+      "1_navigation": {
         "home": "Home",
         "about": "About",
         "resources": "Resources",

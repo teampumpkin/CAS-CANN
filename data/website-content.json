@@ -1,0 +1,1065 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-08-01",
+    "description": "Complete website content for Canadian Amyloidosis Society",
+    "languages": ["en", "fr"],
+    "totalTranslationKeys": 200,
+    "totalHealthcareCenters": 25
+  },
+  "translations": {
+    "en": {
+      "navigation": {
+        "home": "Home",
+        "about": "About",
+        "resources": "Resources",
+        "directory": "Directory",
+        "community": "Community",
+        "contact": "Contact",
+        "getHelp": "Get Help"
+      },
+      "hero": {
+        "badge": "Clinical Excellence Platform",
+        "title": {
+          "canadian": "Canadian",
+          "amyloidosis": "Amyloidosis",
+          "society": "Society"
+        },
+        "subtitle": "Advancing evidence-based amyloidosis care through clinical excellence, professional collaboration, and structured knowledge sharing.",
+        "getStarted": "Get Started",
+        "learnMore": "Learn More"
+      },
+      "welcome": {
+        "badge": "Who we are",
+        "title": {
+          "welcome": "Welcome to the",
+          "cas": "Canadian Amyloidosis Society"
+        },
+        "subtitle": "Your trusted partner in amyloidosis care, connecting patients, families, and healthcare professionals across Canada.",
+        "description": "We are dedicated to improving the lives of those affected by amyloidosis through education, support, and advocacy. Our comprehensive platform provides essential resources, connects you with specialized care, and builds a supportive community for patients and families nationwide.",
+        "mission": "Our Mission",
+        "missionText": "To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support.",
+        "vision": "Our Vision",
+        "visionText": "A future where every Canadian affected by amyloidosis receives timely diagnosis, optimal treatment, and comprehensive support.",
+        "exploreResources": "Learn More About Our Work"
+      },
+      "aboutAmyloidosis": {
+        "badge": "Medical Information",
+        "title": {
+          "what": "What is",
+          "amyloidosis": "Amyloidosis"
+        },
+        "subtitle": "Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.",
+        "description": "Amyloidosis is a rare but serious condition where misfolded proteins (amyloid) accumulate in organs and tissues throughout the body. Understanding the different types, recognizing early symptoms, and accessing specialized care are crucial for managing this condition effectively.",
+        "earlyDetection": {
+          "title": "Early Detection",
+          "subtitle": "Saves Lives",
+          "description": "Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. Early recognition and proper testing are crucial for better patient outcomes.",
+          "subdescription": "Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada."
+        },
+        "types": {
+          "al": {
+            "name": "AL Amyloidosis",
+            "description": "Most common form, affects heart, kidneys, liver, and nervous system",
+            "prevalence": "70% of cases"
+          },
+          "aa": {
+            "name": "AA Amyloidosis",
+            "description": "Secondary to chronic inflammatory conditions",
+            "prevalence": "20% of cases"
+          },
+          "hereditary": {
+            "name": "Hereditary",
+            "description": "Genetic forms including TTR, fibrinogen, and lysozyme",
+            "prevalence": "5% of cases"
+          },
+          "other": {
+            "name": "Other Types",
+            "description": "Including β2-microglobulin and localized forms",
+            "prevalence": "5% of cases"
+          }
+        },
+        "stats": {
+          "diagnosisTime": "2-3 years",
+          "diagnosisTimeLabel": "Average time to diagnosis",
+          "diagnosisTimeDesc": "Many patients see multiple doctors before receiving proper diagnosis",
+          "canadiansAffected": "3,000+",
+          "canadiansAffectedLabel": "Canadians affected",
+          "canadiansAffectedDesc": "Estimated number of people living with amyloidosis in Canada"
+        },
+        "hero": {
+          "badge": "Medical Information",
+          "title": {
+            "understanding": "Understanding",
+            "amyloidosis": "Amyloidosis"
+          },
+          "subtitle": "Learn the signs, understand the types, and take action early.",
+          "description": "Amyloidosis is a rare but serious disease where misfolded proteins accumulate in organs. Early detection and appropriate treatment can significantly improve outcomes.",
+          "getStarted": "Get Started",
+          "browseDirectory": "Browse Directory"
+        },
+        "pathophysiology": {
+          "title": "Pathophysiology",
+          "description": "Amyloidosis occurs when proteins misfold and accumulate in tissues."
+        },
+        "warningSignsTitle": "Warning Signs",
+        "warningSignsSubtitle": "Early symptoms that require medical attention.",
+        "cardiacSymptoms": "Cardiac Symptoms",
+        "neurologicalSymptoms": "Neurological Symptoms",
+        "gastrointestinalSymptoms": "Gastrointestinal Symptoms",
+        "genitourinarySymptoms": "Genitourinary Symptoms",
+        "systemicSymptoms": "Systemic Symptoms",
+        "typesTitle": "Types of Amyloidosis",
+        "typesSubtitle": "Major forms and their characteristics.",
+        "diagnosticPathway": "Diagnostic Pathway",
+        "diagnosticPathwaySubtitle": "Systematic approach to diagnosis.",
+        "clinicalGuidelines": "Clinical Guidelines",
+        "clinicalGuidelinesSubtitle": "Professional resources for clinicians.",
+        "disclaimer": "Professional Disclaimer",
+        "disclaimerText": "This information is intended for healthcare professionals and educational purposes. It does not replace professional medical advice.",
+        "emergencyText": "For medical emergencies, call 911",
+        "findSpecialist": "Find a Specialist",
+        "downloadResources": "Download Resources",
+        "viewCompleteDirectory": "View Complete Directory",
+        "exploreResources": "Explore Resources",
+        "learnMoreAboutTypes": "Learn more about types",
+        "accessClinicalTools": "Access Clinical Tools"
+      },
+      "events": {
+        "badge": "Stay Connected",
+        "title": {
+          "events": "Events",
+          "newsletter": "& Newsletter"
+        },
+        "subtitle": "Stay informed about the latest research, treatment advances, and community events in amyloidosis care.",
+        "description": "Join our community to receive regular updates, educational content, and information about upcoming events, webinars, and support group meetings.",
+        "upcomingEvents": "Upcoming Events",
+        "latestNews": "Latest News & Updates",
+        "emailPlaceholder": "Enter your email address",
+        "subscribe": "Subscribe to Newsletter",
+        "stayConnected": "Stay Connected",
+        "joinCommunity": "Join Our Community",
+        "joinCommunityDesc": "Get exclusive access to research updates, community events, and expert insights delivered monthly.",
+        "joinMembers": "Join 5,000+ community members",
+        "stats": {
+          "subscribers": "Subscribers",
+          "eventsYear": "Events/Year",
+          "provinces": "Provinces",
+          "satisfaction": "Satisfaction"
+        },
+        "communityCalendar": "Community Calendar",
+        "communityCalendarDesc": "Connect with experts, patients, and researchers through our comprehensive event program."
+      },
+      "directory": {
+        "badge": "Find Care",
+        "title": {
+          "find": "Find",
+          "specialized": "Specialized Care"
+        },
+        "subtitle": "Connecting healthcare across the nation.",
+        "networkReach": "Network Reach",
+        "healthcareProviders": "Healthcare Providers",
+        "provincesAndTerritories": "Provinces & Territories",
+        "majorCities": "Major Cities",
+        "resourcesAvailable": "Resources Available",
+        "browseDirectory": "Browse Directory",
+        "searchableDirectory": "Searchable Healthcare Directory",
+        "searchableDescription": "Find specialized amyloidosis treatment centers, experienced physicians, and clinical experts across all Canadian provinces and territories.",
+        "exploreDirectory": "Explore Full Directory",
+        "liveStats": "Live Stats",
+        "directoryInsights": "Directory Insights",
+        "needHelp": "Need Help Finding Care?",
+        "nationalNetwork": "National Network",
+        "canadaWide": "Canada-Wide Coverage",
+        "connectingHealthcare": "Connecting healthcare across the nation",
+        "hero": {
+          "title": "Healthcare Directory",
+          "subtitle": "Find specialized amyloidosis care across Canada",
+          "description": "Connect with healthcare providers, treatment centers, and specialists experienced in amyloidosis diagnosis and care."
+        },
+        "search": {
+          "placeholder": "Search by location, specialty, or provider name...",
+          "filters": "Filters",
+          "province": "Province/Territory",
+          "specialty": "Specialty",
+          "centerType": "Center Type",
+          "clearFilters": "Clear All Filters"
+        },
+        "map": {
+          "title": "Healthcare Centers Map",
+          "subtitle": "Interactive map of amyloidosis treatment centers across Canada",
+          "legend": {
+            "title": "Center Types",
+            "hospital": "Hospitals",
+            "specialty": "Specialty Centers",
+            "research": "Research Centers",
+            "clinic": "Clinics"
+          }
+        },
+        "stats": {
+          "title": "Network Statistics",
+          "centers": "Healthcare Centers",
+          "provinces": "Provinces & Territories",
+          "specialists": "Specialists",
+          "programs": "Programs"
+        }
+      },
+      "quickLinks": {
+        "badge": "Quick Access",
+        "title": {
+          "essential": "Essential",
+          "resources": "Resources"
+        },
+        "subtitle": "Quick access to the most important tools and information for patients, families, and healthcare professionals.",
+        "patientResources": "Patient Resources",
+        "patientResourcesDesc": "Comprehensive guides for patients and families",
+        "getAccess": "Get Access",
+        "healthcareDirectory": "Healthcare Directory",
+        "healthcareDirectoryDesc": "Specialized centers and experts",
+        "browse": "Browse",
+        "supportGroups": "Support Groups",
+        "supportGroupsDesc": "Connect with others and find support",
+        "connect": "Connect",
+        "researchUpdates": "Research Updates",
+        "researchUpdatesDesc": "Latest advances and research",
+        "stayInformed": "Stay Informed",
+        "emergencyContacts": "Emergency Contacts",
+        "emergencyContactsDesc": "Urgent help resources",
+        "getHelp": "Get Help",
+        "clinicalTrials": "Clinical Trials",
+        "clinicalTrialsDesc": "Research participation opportunities",
+        "explore": "Explore",
+        "findSpecialists": "Find Specialists",
+        "findSpecialistsDesc": "Locate amyloidosis specialists in your area",
+        "getInvolved": "Get Involved",
+        "getInvolvedDesc": "Join our community and make a difference",
+        "accessNow": "Access Now",
+        "events": "Events",
+        "eventsDesc": "Upcoming events and meetings",
+        "contactUs": "Contact Us",
+        "contactUsDesc": "Get in touch with our team",
+        "available": "Available"
+      },
+      "spotlights": {
+        "badge": "Featured",
+        "title": {
+          "featured": "Featured",
+          "spotlights": "Spotlights"
+        },
+        "subtitle": "Latest updates, success stories, and amyloidosis research breakthroughs from our community.",
+        "latestNews": "Latest News",
+        "patientStories": "Patient Stories",
+        "researchUpdates": "Research Updates",
+        "readMore": "Read More",
+        "viewAll": "View All",
+        "author": "Author",
+        "date": "Date",
+        "category": "Category",
+        "shareStory": "Share Story",
+        "newsUpdates": "News Updates",
+        "researchHighlights": "Research Highlights",
+        "communityNews": "Community News",
+        "patientJourney": "Patient Journey",
+        "treatmentBreakthrough": "Treatment Breakthrough",
+        "diagnosticImprovement": "Diagnostic Improvement"
+      },
+      "about": {
+        "hero": {
+          "badge": "About CAS",
+          "title": "Canadian Amyloidosis Society",
+          "connecting": "Connecting",
+          "healthcare": "Healthcare",
+          "canada": "Across Canada",
+          "subtitle": "Building a national platform for clinical practice support",
+          "description": "Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through evidence-based collaboration.",
+          "ourMission": "Our Mission",
+          "getInvolved": "Get Involved",
+          "stats": {
+            "professionals": "Healthcare Professionals",
+            "institutions": "Partner Institutions",
+            "resources": "Clinical Resources",
+            "provinces": "Provinces/Territories"
+          }
+        },
+        "whatWeDo": {
+          "title": "What We Do",
+          "toolCuration": {
+            "title": "Tool Curation",
+            "description": "Evidence-based clinical tools, protocols, and diagnostic pathways developed by practicing specialists."
+          },
+          "diagnosticSupport": {
+            "title": "Diagnostic Support",
+            "description": "Rapid diagnostic pathways, decision support tools, and consultation networks for complex cases."
+          },
+          "peerLearning": {
+            "title": "Peer Learning",
+            "description": "Collaborative professional networks, case discussions, and continuous medical education opportunities."
+          }
+        },
+        "values": {
+          "patientCentered": {
+            "title": "Patient-Centered",
+            "description": "Every decision and resource is designed with patient outcomes as the primary focus."
+          },
+          "collaborative": {
+            "title": "Collaborative",
+            "description": "We bring together diverse expertise to solve complex clinical challenges."
+          },
+          "evidenceInformed": {
+            "title": "Evidence-Informed",
+            "description": "All resources are grounded in current research and clinical best practices."
+          },
+          "transparent": {
+            "title": "Transparent",
+            "description": "Open access to information, clear governance, and accountable stewardship."
+          }
+        },
+        "services": {
+          "directory": "Comprehensive healthcare provider directory",
+          "diagnosis": "Rapid diagnostic pathway tools",
+          "information": "Clinical information resources",
+          "resources": "Professional development materials",
+          "committee": "Expert committee guidance"
+        },
+        "committee": {
+          "title": "Executive Committee",
+          "subtitle": "Leading healthcare professionals dedicated to advancing amyloidosis care",
+          "joinCta": {
+            "title": "Join Our Clinical Network",
+            "subtitle": "Contribute to advancing amyloidosis care in Canada",
+            "description": "Whether you're a clinician, researcher, or healthcare professional, there are multiple ways to contribute to our mission.",
+            "clinician": {
+              "title": "Clinician Contributors",
+              "description": "Share expertise through case studies, tool validation, and peer review."
+            },
+            "researcher": {
+              "title": "Research Collaborators",
+              "description": "Contribute to evidence base through studies, publications, and data sharing."
+            },
+            "institutional": {
+              "title": "Institutional Partners",
+              "description": "Healthcare organizations supporting infrastructure and resources."
+            }
+          }
+        },
+        "governance": {
+          "title": "Governance & Documents",
+          "subtitle": "Transparent governance and organizational documents",
+          "corporate": {
+            "title": "Corporate Governance",
+            "description": "Articles of incorporation, by-laws, and board meeting minutes."
+          },
+          "financial": {
+            "title": "Financial Transparency",
+            "description": "Annual financial reports, audited statements, and funding sources."
+          },
+          "clinical": {
+            "title": "Clinical Governance",
+            "description": "Evidence review processes, clinical advisory guidelines, and quality standards."
+          }
+        },
+        "partnerships": {
+          "title": "Strategic Partnerships",
+          "subtitle": "Collaborative relationships that strengthen our impact",
+          "description": "We work with leading organizations to advance amyloidosis care, research, and patient support across Canada and internationally.",
+          "contactUs": "Contact Us",
+          "learnMore": "Learn More",
+          "viewAll": "View All Partnerships"
+        },
+        "joinNetwork": "Join Our Network",
+        "getInvolved": "Get Involved",
+        "exploreResources": "Explore Resources",
+        "downloadDocument": "Download Document",
+        "viewDocument": "View Document"
+      },
+      "modal": {
+        "aboutThisCenter": "About This Center",
+        "specialties": "Specialties",
+        "services": "Services",
+        "contactInformation": "Contact Information",
+        "established": "Established",
+        "certifications": "Certifications",
+        "callNow": "Call Now",
+        "sendEmail": "Send Email",
+        "visitWebsite": "Visit Website"
+      },
+      "contact": {
+        "hero": {
+          "title": "Contact Us",
+          "subtitle": "Get in touch with our team",
+          "description": "We're here to help with your questions, resource needs, and collaboration opportunities."
+        },
+        "quickContact": {
+          "title": "Quick Contact",
+          "generalInquiries": "General Inquiries",
+          "generalInquiries.email": "info@canadianamyloidosis.ca",
+          "generalInquiries.description": "General questions about CAS, membership, and services",
+          "generalInquiries.responseTime": "24-48 hours",
+          "resourceSupport": "Resource Support",
+          "resourceSupport.email": "resources@canadianamyloidosis.ca",
+          "resourceSupport.description": "Help with accessing or contributing clinical resources",
+          "resourceSupport.responseTime": "1-2 business days",
+          "patientSupport": "Patient Support",
+          "patientSupport.email": "support@canadianamyloidosis.ca",
+          "patientSupport.description": "Patient and family support questions",
+          "patientSupport.responseTime": "24-48 hours",
+          "professionalInquiries": "Professional Inquiries",
+          "professionalInquiries.email": "professionals@canadianamyloidosis.ca",
+          "professionalInquiries.description": "Healthcare provider and researcher collaboration",
+          "professionalInquiries.responseTime": "3-5 business days"
+        },
+        "contactForm": {
+          "title": "Send us a Message",
+          "subtitle": "Fill out the form below and we'll get back to you promptly"
+        },
+        "form": {
+          "name": "Name",
+          "email": "Email",
+          "organization": "Organization (Optional)",
+          "inquiryType": "Inquiry Type",
+          "subject": "Subject",
+          "message": "Message",
+          "privacyConsent": "I agree to the privacy policy and terms of service",
+          "captcha": "Security Verification",
+          "inquiryTypes": {
+            "general": "General Question",
+            "resource": "Resource Request",
+            "support": "Support Needed",
+            "professional": "Professional Collaboration",
+            "media": "Media Inquiry",
+            "other": "Other"
+          },
+          "submit": "Send Message",
+          "submitting": "Sending..."
+        },
+        "faq": {
+          "title": "Frequently Asked Questions",
+          "subtitle": "Quick answers to common questions",
+          "questions": {
+            "resources": {
+              "question": "How can I access clinical resources?",
+              "answer": "Healthcare professionals can access our clinical resources through the Resources section. Some materials require registration to ensure appropriate use in clinical settings."
+            },
+            "membership": {
+              "question": "Is there a membership fee for CAS?",
+              "answer": "CAS membership is free for all healthcare professionals and researchers. Patient and family access to support resources is also provided at no cost."
+            },
+            "support": {
+              "question": "Do you provide direct patient care?",
+              "answer": "CAS does not provide direct patient care. We connect patients with specialized healthcare providers and provide educational resources to support informed healthcare decisions."
+            },
+            "collaboration": {
+              "question": "How can my organization partner with CAS?",
+              "answer": "We welcome partnerships with healthcare institutions, research organizations, and professional societies. Contact us at professionals@canadianamyloidosis.ca to discuss collaboration opportunities."
+            },
+            "resourcesContribute": {
+              "question": "Can I contribute clinical resources to CAS?",
+              "answer": "Yes! We encourage healthcare professionals to share evidence-based resources. All submissions undergo peer review to ensure clinical accuracy and relevance."
+            },
+            "updates": {
+              "question": "How do I stay updated on CAS activities?",
+              "answer": "Join our newsletter, follow our social media channels, or register for our professional network to receive regular updates on research, resources, and events."
+            }
+          }
+        },
+        "office": {
+          "title": "Office Information",
+          "address": "National Office",
+          "addressLine1": "Canadian Amyloidosis Society",
+          "addressLine2": "Canada",
+          "phone": "Phone: (555) 123-4567",
+          "email": "Email: info@canadianamyloidosis.ca",
+          "hours": "Office Hours",
+          "hours.weekdays": "Monday - Friday: 9:00 AM - 5:00 PM EST",
+          "hours.weekends": "Saturday - Sunday: Closed"
+        },
+        "emergencyNote": "For medical emergencies, please contact your healthcare provider or call 911",
+        "languageNote": "Services available in English and French",
+        "responseTime": "Response Time"
+      },
+      "resources": {
+        "hero": {
+          "title": "Clinical Resources",
+          "subtitle": "Evidence-based tools for healthcare professionals",
+          "description": "Access comprehensive clinical resources, diagnostic tools, and educational materials developed by amyloidosis specialists."
+        },
+        "types": {
+          "all": "All Types",
+          "al": "AL Amyloidosis",
+          "attr": "ATTR Amyloidosis",
+          "aa": "AA Amyloidosis",
+          "alect2": "ALect2 Amyloidosis",
+          "general": "General Amyloidosis"
+        },
+        "filters": {
+          "search": "Search resources...",
+          "amyloidosisType": "Amyloidosis Type",
+          "resourceType": "Resource Type",
+          "category": "Category",
+          "audience": "Audience",
+          "language": "Language",
+          "region": "Region",
+          "clearAll": "Clear All"
+        },
+        "results": {
+          "showing": "Showing",
+          "of": "of",
+          "resources": "resources",
+          "noResults": "No resources found",
+          "tryDifferent": "Try adjusting your search criteria"
+        },
+        "card": {
+          "download": "Download",
+          "view": "View",
+          "downloads": "downloads",
+          "updated": "Updated",
+          "category": "Category",
+          "audience": "Audience",
+          "language": "Language"
+        },
+        "upload": {
+          "title": "Upload Resource",
+          "description": "Share your clinical resources with the community",
+          "button": "Upload Resource"
+        }
+      },
+      "joinCAS": {
+        "hero": {
+          "title": "Join CAS",
+          "subtitle": "Become part of Canada's leading amyloidosis society.",
+          "description": "Join healthcare professionals, researchers, and advocates dedicated to advancing amyloidosis care across Canada."
+        },
+        "form": {
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "email": "Email Address",
+          "phone": "Phone Number",
+          "city": "City",
+          "province": "Province",
+          "role": "Role",
+          "specialty": "Specialty (Optional)",
+          "organization": "Organization (Optional)",
+          "interests": "Areas of Interest",
+          "howHeard": "How did you hear about CAS?",
+          "message": "Message (Optional)",
+          "newsletter": "Subscribe to newsletter",
+          "termsOfParticipation": "I accept the Terms of Participation",
+          "privacyPolicy": "I accept the Privacy Policy",
+          "submit": "Submit Application",
+          "submitting": "Submitting..."
+        },
+        "benefits": {
+          "title": "Membership Benefits",
+          "subtitle": "What you get as a CAS member.",
+          "access": "Access to clinical resources",
+          "networking": "Professional networking opportunities",
+          "education": "Continuing education programs",
+          "advocacy": "Voice in healthcare policy",
+          "research": "Research collaboration opportunities",
+          "support": "Patient and family support resources"
+        }
+      },
+      "accessibility": {
+        "hero": {
+          "title": "Accessibility Statement",
+          "subtitle": "Our commitment to inclusive digital experiences.",
+          "description": "We are committed to ensuring our website is accessible to all users, including those with disabilities."
+        },
+        "wcag": {
+          "title": "WCAG 2.1 Level AA Compliance",
+          "subtitle": "We follow the Web Content Accessibility Guidelines.",
+          "perceivable": "Perceivable",
+          "operable": "Operable",
+          "understandable": "Understandable",
+          "robust": "Robust"
+        },
+        "features": {
+          "title": "Accessibility Features",
+          "subtitle": "Built-in accessibility tools and features.",
+          "keyboardNavigation": "Keyboard Navigation",
+          "screenReader": "Screen Reader Support",
+          "highContrast": "High Contrast Mode",
+          "textResize": "Text Resize Options",
+          "reducedMotion": "Reduced Motion Support",
+          "alternativeText": "Alternative Text for Images"
+        },
+        "contact": {
+          "title": "Accessibility Support",
+          "subtitle": "Get help with accessibility issues.",
+          "description": "If you experience any accessibility barriers, please contact us.",
+          "email": "Email: accessibility@canadianamyloidosis.ca",
+          "phone": "Phone: (555) 123-4567",
+          "response": "We aim to respond within 2 business days"
+        },
+        "lastUpdated": "Last Updated",
+        "reviewDate": "Next Review Date"
+      },
+      "footer": {
+        "aboutUs": "About Us",
+        "ourMission": "Our Mission",
+        "boardOfDirectors": "Board of Directors",
+        "annualReports": "Annual Reports",
+        "resources": "Resources",
+        "patientResources": "Patient Resources",
+        "educationalMaterials": "Educational Materials",
+        "researchLibrary": "Research Library",
+        "support": "Support",
+        "supportGroups": "Support Groups",
+        "events": "Events",
+        "newsletter": "Newsletter",
+        "getInvolved": "Get Involved",
+        "contact": "Contact",
+        "getHelp": "Get Help",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "copyright": "© 2025 Canadian Amyloidosis Society. All rights reserved.",
+        "registeredCharity": "Registered Charity #123456789RR0001"
+      },
+      "map": {
+        "legend": {
+          "title": "Legend",
+          "hospitals": "Hospitals",
+          "specialty": "Specialty Centers",
+          "research": "Research Centers",
+          "clinics": "Clinics"
+        }
+      }
+    },
+    "fr": {
+      "navigation": {
+        "home": "Accueil",
+        "about": "À propos",
+        "resources": "Ressources",
+        "directory": "Répertoire",
+        "community": "Communauté",
+        "contact": "Contact",
+        "getHelp": "Obtenir de l'aide"
+      },
+      "hero": {
+        "badge": "Plateforme d'Excellence Clinique",
+        "title": {
+          "canadian": "Société",
+          "amyloidosis": "Canadienne",
+          "society": "d'Amylose"
+        },
+        "subtitle": "Faire progresser les soins d'amylose fondés sur des preuves grâce à l'excellence clinique, la collaboration professionnelle et le partage structuré des connaissances.",
+        "getStarted": "Commencer",
+        "learnMore": "En savoir plus"
+      },
+      "welcome": {
+        "badge": "Qui nous sommes",
+        "title": {
+          "welcome": "Bienvenue à la",
+          "cas": "Société Canadienne d'Amylose"
+        },
+        "subtitle": "Votre partenaire de confiance en soins d'amylose, connectant patients, familles et professionnels de la santé à travers le Canada.",
+        "description": "Nous nous consacrons à améliorer la vie de ceux touchés par l'amylose par l'éducation, le soutien et l'advocacy. Notre plateforme complète fournit des ressources essentielles, vous connecte avec des soins spécialisés et construit une communauté de soutien pour les patients et familles à travers le pays.",
+        "mission": "Notre Mission",
+        "missionText": "Accélérer la sensibilisation, améliorer le diagnostic et optimiser les soins pour les patients atteints d'amylose à travers le Canada par l'éducation, l'advocacy et le soutien communautaire.",
+        "vision": "Notre Vision",
+        "visionText": "Un avenir où chaque Canadien touché par l'amylose reçoit un diagnostic précoce, un traitement optimal et un soutien complet.",
+        "exploreResources": "En savoir plus sur notre travail"
+      },
+      "aboutAmyloidosis": {
+        "badge": "Information Médicale",
+        "title": {
+          "what": "Qu'est-ce que l'",
+          "amyloidosis": "Amylose"
+        },
+        "subtitle": "L'amylose est une maladie rare aux conséquences qui changent la vie—mais une détection précoce peut considérablement améliorer les résultats. La Société Canadienne d'Amylose construit un hub national de confiance pour les cliniciens, chercheurs et familles cherchant des réponses.",
+        "description": "L'amylose est une condition rare mais sérieuse où des protéines mal repliées (amyloïde) s'accumulent dans les organes et tissus à travers le corps. Comprendre les différents types, reconnaître les symptômes précoces et accéder aux soins spécialisés sont cruciaux pour gérer cette condition efficacement.",
+        "earlyDetection": {
+          "title": "Détection Précoce",
+          "subtitle": "Sauve des Vies",
+          "description": "L'amylose est souvent mal diagnostiquée ou diagnostiquée tardivement car ses symptômes imitent d'autres conditions. La reconnaissance précoce et les tests appropriés sont cruciaux pour de meilleurs résultats patients.",
+          "subdescription": "Notre répertoire connecte les patients avec des centres spécialisés et des fournisseurs de soins de santé expérimentés dans le diagnostic et le traitement de l'amylose à travers le Canada."
+        },
+        "types": {
+          "al": {
+            "name": "Amylose AL",
+            "description": "Forme la plus commune, affecte le cœur, les reins, le foie et le système nerveux",
+            "prevalence": "70% des cas"
+          },
+          "aa": {
+            "name": "Amylose AA",
+            "description": "Secondaire aux conditions inflammatoires chroniques",
+            "prevalence": "20% des cas"
+          },
+          "hereditary": {
+            "name": "Héréditaire",
+            "description": "Formes génétiques incluant TTR, fibrinogène et lysozyme",
+            "prevalence": "5% des cas"
+          },
+          "other": {
+            "name": "Autres Types",
+            "description": "Incluant β2-microglobuline et formes localisées",
+            "prevalence": "5% des cas"
+          }
+        },
+        "stats": {
+          "diagnosisTime": "2-3 ans",
+          "diagnosisTimeLabel": "Temps moyen pour le diagnostic",
+          "diagnosisTimeDesc": "Beaucoup de patients voient plusieurs médecins avant de recevoir un diagnostic approprié",
+          "canadiansAffected": "3 000+",
+          "canadiansAffectedLabel": "Canadiens affectés",
+          "canadiansAffectedDesc": "Nombre estimé de personnes vivant avec l'amylose au Canada"
+        },
+        "hero": {
+          "badge": "Information Médicale",
+          "title": {
+            "understanding": "Comprendre l'",
+            "amyloidosis": "Amylose"
+          },
+          "subtitle": "Apprenez les signes, comprenez les types et agissez rapidement.",
+          "description": "L'amylose est une maladie rare mais grave où les protéines mal repliées s'accumulent dans les organes. La détection précoce et le traitement approprié peuvent considérablement améliorer les résultats.",
+          "getStarted": "Commencer",
+          "browseDirectory": "Parcourir le Répertoire"
+        },
+        "pathophysiology": {
+          "title": "Pathophysiologie",
+          "description": "L'amylose survient quand les protéines se replient incorrectement et s'accumulent dans les tissus."
+        },
+        "warningSignsTitle": "Signes d'Alerte",
+        "warningSignsSubtitle": "Symptômes précoces qui nécessitent une attention médicale.",
+        "cardiacSymptoms": "Symptômes Cardiaques",
+        "neurologicalSymptoms": "Symptômes Neurologiques",
+        "gastrointestinalSymptoms": "Symptômes Gastro-intestinaux",
+        "genitourinarySymptoms": "Symptômes Génito-urinaires",
+        "systemicSymptoms": "Symptômes Systémiques",
+        "typesTitle": "Types d'Amylose",
+        "typesSubtitle": "Principales formes et leurs caractéristiques.",
+        "diagnosticPathway": "Voie Diagnostique",
+        "diagnosticPathwaySubtitle": "Approche systématique pour le diagnostic.",
+        "clinicalGuidelines": "Directives Cliniques",
+        "clinicalGuidelinesSubtitle": "Ressources professionnelles pour les cliniciens.",
+        "disclaimer": "Avertissement Professionnel",
+        "disclaimerText": "Ces informations sont destinées aux professionnels de la santé et à des fins éducatives. Elles ne remplacent pas les conseils médicaux professionnels.",
+        "emergencyText": "Pour les urgences médicales, appelez le 911",
+        "findSpecialist": "Trouver un Spécialiste",
+        "downloadResources": "Télécharger les Ressources",
+        "viewCompleteDirectory": "Voir le Répertoire Complet",
+        "exploreResources": "Explorer les Ressources",
+        "learnMoreAboutTypes": "En savoir plus sur les types",
+        "accessClinicalTools": "Accéder aux Outils Cliniques"
+      }
+    }
+  },
+  "pageContent": {
+    "homepage": {
+      "sections": [
+        "hero",
+        "welcome",
+        "aboutAmyloidosis",
+        "whatYoullFindHere",
+        "directoryPreview",
+        "eventsNewsletter",
+        "quickLinks",
+        "featuredSpotlights"
+      ]
+    },
+    "about": {
+      "sections": [
+        "hero",
+        "whatWeDo",
+        "values",
+        "services",
+        "committee",
+        "governance",
+        "partnerships"
+      ]
+    },
+    "aboutAmyloidosis": {
+      "sections": [
+        "hero",
+        "pathophysiology",
+        "warningigns",
+        "types",
+        "diagnosticPathway",
+        "clinicalGuidelines"
+      ]
+    },
+    "resources": {
+      "sections": [
+        "hero",
+        "searchFilters",
+        "resourceCategories",
+        "resourceGrid",
+        "uploadSystem"
+      ]
+    },
+    "directory": {
+      "sections": [
+        "hero",
+        "searchFilters",
+        "interactiveMap",
+        "healthcareCenters",
+        "networkStats"
+      ]
+    },
+    "getInvolved": {
+      "sections": [
+        "hero",
+        "participationWays",
+        "membershipBenefits",
+        "events",
+        "cannNetwork"
+      ]
+    },
+    "contact": {
+      "sections": [
+        "hero",
+        "quickContact",
+        "contactForm",
+        "faq",
+        "officeInfo"
+      ]
+    }
+  },
+  "amyloidosisTypes": {
+    "al": {
+      "title": "AL Amyloidosis",
+      "subtitle": "Light Chain Amyloidosis",
+      "description": "AL amyloidosis is caused by abnormal plasma cells producing light chains. It's the most common form of amyloidosis, often diagnosed after age 50 and affects both men and women.",
+      "keyFacts": {
+        "prevalence": "Most common form (70% of cases)",
+        "medianAge": "65 years",
+        "heartInvolvement": "70%",
+        "kidneyInvolvement": "60%",
+        "relatedToMyeloma": "10-15% overlap"
+      },
+      "symptoms": [
+        "Leg swelling",
+        "Fatigue",
+        "Irregular heartbeat",
+        "Enlarged tongue",
+        "Skin changes (bruising, purple patches around eyes)"
+      ],
+      "diagnosis": [
+        "Tissue biopsy",
+        "Blood/urine tests for light chains",
+        "Bone marrow biopsy",
+        "Imaging tests (ECG, MRI, echocardiogram)"
+      ],
+      "treatment": [
+        "Chemotherapy",
+        "Steroids",
+        "Proteasome inhibitors",
+        "Monoclonal antibodies",
+        "Stem cell transplant (in select cases)",
+        "Supportive care to manage symptoms and organ function"
+      ],
+      "treatmentCenters": [
+        {
+          "name": "Princess Margaret Cancer Centre",
+          "location": "Toronto, ON",
+          "specialty": "Comprehensive amyloidosis program"
+        },
+        {
+          "name": "Vancouver General Hospital",
+          "location": "Vancouver, BC",
+          "specialty": "Hematology and stem cell transplant"
+        },
+        {
+          "name": "CHUM - Centre hospitalier de l'Université de Montréal",
+          "location": "Montreal, QC",
+          "specialty": "Amyloidosis clinic"
+        }
+      ]
+    },
+    "attr": {
+      "title": "ATTR Amyloidosis",
+      "subtitle": "Transthyretin Amyloidosis",
+      "description": "ATTR amyloidosis has two forms: Hereditary (hATTR) with over 120 TTR mutations known, and Wild-type (ATTRwt) which is non-inherited, develops with age, and primarily affects men over 60.",
+      "forms": {
+        "hereditary": {
+          "name": "Hereditary ATTR (hATTR)",
+          "features": [
+            "Over 120 TTR mutations known",
+            "Genetic inheritance pattern",
+            "Variable age of onset",
+            "Family history present"
+          ]
+        },
+        "wildType": {
+          "name": "Wild-type ATTR (ATTRwt)",
+          "features": [
+            "Non-inherited form",
+            "Develops with age",
+            "Primarily affects men over 60",
+            "No family history"
+          ]
+        }
+      },
+      "symptoms": [
+        "Heart issues: palpitations, fainting, fatigue",
+        "Nerve issues: numbness, walking difficulty",
+        "GI symptoms: nausea, weight loss"
+      ],
+      "diagnosis": [
+        "Genetic testing for TTR mutations",
+        "Biopsies, imaging (MRI, scans)",
+        "Protein testing"
+      ],
+      "treatment": [
+        "TTR stabilizers: Tafamidis (Vyndaqel), Acoramidis (Attruby)",
+        "Gene silencers: Patisiran (Onpattro), Vutrisiran (Amvuttra)",
+        "Supportive care for symptoms and organ protection"
+      ],
+      "treatmentCenters": [
+        {
+          "name": "Toronto General Hospital",
+          "location": "Toronto, ON",
+          "specialty": "Comprehensive ATTR amyloidosis program"
+        },
+        {
+          "name": "Montreal Heart Institute",
+          "location": "Montreal, QC",
+          "specialty": "Cardiac amyloidosis clinic"
+        },
+        {
+          "name": "University of Alberta Hospital",
+          "location": "Edmonton, AB",
+          "specialty": "Hereditary amyloidosis program"
+        }
+      ]
+    },
+    "other": {
+      "title": "Other Amyloidosis Types",
+      "subtitle": "AA, ALECT2, Dialysis-related, and Rare Forms",
+      "description": "Beyond AL and ATTR, several other forms of amyloidosis exist, each with unique characteristics, causes, and treatment approaches.",
+      "types": {
+        "aa": {
+          "name": "AA (Secondary) Amyloidosis",
+          "description": "Caused by chronic inflammatory conditions like rheumatoid arthritis, inflammatory bowel disease, or chronic infections.",
+          "keyFeatures": [
+            "Secondary to chronic inflammation",
+            "Primarily affects kidneys",
+            "Treatment focuses on underlying condition",
+            "Better prognosis when inflammation controlled"
+          ]
+        },
+        "localized": {
+          "name": "Localized Amyloidosis",
+          "description": "Amyloid deposits that remain confined to specific organs or tissues without systemic involvement.",
+          "commonForms": [
+            "Cutaneous (skin) amyloidosis",
+            "Laryngeal amyloidosis",
+            "Bladder amyloidosis",
+            "Conjunctival amyloidosis"
+          ]
+        },
+        "dialysisRelated": {
+          "name": "Dialysis-related Amyloidosis",
+          "description": "Develops in patients on long-term dialysis due to accumulation of β2-microglobulin protein.",
+          "characteristics": [
+            "Associated with chronic kidney disease",
+            "Joint and bone involvement",
+            "Carpal tunnel syndrome common",
+            "Improved with kidney transplant"
+          ]
+        },
+        "rareVariants": {
+          "name": "Rare Variant Presentations",
+          "forms": [
+            "AH amyloidosis (heavy chain)",
+            "AFib amyloidosis (fibrinogen)",
+            "ALys amyloidosis (lysozyme)",
+            "AGel amyloidosis (gelsolin)",
+            "ALECT2: More common in Mexican, Punjabi, Native American, Middle Eastern descent",
+            "Aβ2M: Seen in long-term dialysis patients, affects bones and joints"
+          ]
+        }
+      },
+      "treatmentApproaches": [
+        "AA: Treat underlying disease to reduce SAA protein",
+        "ALECT2: Often underdiagnosed, mainly affects kidneys",
+        "Aβ2M: Becoming rarer due to improved dialysis techniques",
+        "Supportive care and research ongoing for most types"
+      ]
+    }
+  },
+  "partnerships": {
+    "national": [
+      {
+        "name": "Transthyretin Amyloidosis Canada (TAC)",
+        "shortName": "TAC",
+        "url": "https://madhattr.ca/",
+        "description": "Patient and family support network for transthyretin amyloidosis"
+      },
+      {
+        "name": "Canadian Amyloidosis Nursing Network (CANN)",
+        "shortName": "CANN",
+        "description": "National network for connecting amyloidosis nurses"
+      }
+    ],
+    "international": [
+      {
+        "name": "Amyloidosis Research Consortium (ARC)",
+        "shortName": "ARC",
+        "url": "https://arci.org/about-amyloidosis/al-amyloidosis/",
+        "description": "International amyloidosis research network"
+      },
+      {
+        "name": "International Society of Amyloidosis (ISA)",
+        "shortName": "ISA",
+        "url": "https://www.isaamyloidosis.org/",
+        "description": "Global amyloidosis medical society"
+      }
+    ]
+  },
+  "healthcareCenters": {
+    "totalCenters": 25,
+    "coverageArea": "All Canadian provinces and territories",
+    "centerTypes": [
+      "Hospitals",
+      "Specialty Centers",
+      "Research Centers",
+      "Clinics"
+    ],
+    "provinces": [
+      "British Columbia",
+      "Alberta",
+      "Saskatchewan",
+      "Manitoba",
+      "Ontario",
+      "Quebec",
+      "New Brunswick",
+      "Nova Scotia",
+      "Prince Edward Island",
+      "Newfoundland and Labrador",
+      "Northwest Territories",
+      "Nunavut",
+      "Yukon"
+    ]
+  },
+  "contactInfo": {
+    "general": "info@canadianamyloidosis.ca",
+    "resources": "resources@canadianamyloidosis.ca",
+    "support": "support@canadianamyloidosis.ca",
+    "professional": "professionals@canadianamyloidosis.ca",
+    "accessibility": "accessibility@canadianamyloidosis.ca",
+    "phone": "(555) 123-4567",
+    "officeHours": {
+      "weekdays": "Monday - Friday: 9:00 AM - 5:00 PM EST",
+      "weekends": "Saturday - Sunday: Closed"
+    }
+  },
+  "legalInfo": {
+    "copyright": "© 2025 Canadian Amyloidosis Society. All rights reserved.",
+    "registeredCharity": "Registered Charity #123456789RR0001",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "accessibilityStatement": "Accessibility Statement"
+  },
+  "statistics": {
+    "canadiansAffected": "3,000+",
+    "diagnosisTime": "2-3 years average",
+    "healthcareProviders": "100+",
+    "provinces": "13",
+    "clinicalResources": "200+",
+    "translationKeys": "200+",
+    "subscribers": "5,000+",
+    "eventsPerYear": "50+",
+    "satisfaction": "95%"
+  }
+}

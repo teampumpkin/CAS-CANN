@@ -744,6 +744,415 @@
       }
     }
   },
+  "cann": {
+    "mission": {
+      "title": "Connecting Healthcare Professionals",
+      "description": "The Canadian Amyloidosis Network (CANN) is a collaborative initiative that brings together healthcare professionals, researchers, and institutions across Canada to improve amyloidosis care and research.",
+      "keyPoints": [
+        "Multidisciplinary approach to amyloidosis care",
+        "Knowledge sharing and best practice development",
+        "Collaborative research initiatives and clinical trials",
+        "Professional development and training programs"
+      ]
+    },
+    "objectives": [
+      {
+        "title": "Enhance Care Quality",
+        "description": "Standardize and improve amyloidosis care across Canada through evidence-based protocols and shared expertise.",
+        "icon": "Heart",
+        "color": "from-red-500 to-pink-500"
+      },
+      {
+        "title": "Accelerate Research", 
+        "description": "Facilitate collaborative research projects and clinical trials to advance understanding and treatment options.",
+        "icon": "Search",
+        "color": "from-blue-500 to-cyan-500"
+      },
+      {
+        "title": "Build Capacity",
+        "description": "Develop healthcare professional capacity through training, education, and knowledge exchange programs.",
+        "icon": "Users",
+        "color": "from-green-500 to-emerald-500"
+      },
+      {
+        "title": "Improve Outcomes",
+        "description": "Create measurable improvements in patient outcomes through coordinated care and research efforts.",
+        "icon": "Target",
+        "color": "from-purple-500 to-violet-500"
+      }
+    ],
+    "network": {
+      "coverage": "National Coverage",
+      "centers": "25+ Healthcare Centers",
+      "provinces": "All 10 Provinces",
+      "territories": "3 Territories"
+    },
+    "achievements": [
+      {
+        "title": "Research Excellence",
+        "description": "Leading 12 active research projects and clinical trials across multiple amyloidosis types.",
+        "stat": "12+",
+        "label": "Active Studies"
+      },
+      {
+        "title": "Professional Training",
+        "description": "Trained over 200 healthcare professionals in specialized amyloidosis care and diagnosis.",
+        "stat": "200+",
+        "label": "Professionals Trained"
+      },
+      {
+        "title": "Patient Impact",
+        "description": "Improved care pathways have reduced average diagnosis time by 40% in network centers.",
+        "stat": "40%",
+        "label": "Faster Diagnosis"
+      },
+      {
+        "title": "Knowledge Sharing",
+        "description": "Published 35+ peer-reviewed articles and clinical guidelines through network collaboration.",
+        "stat": "35+",
+        "label": "Publications"
+      }
+    ]
+  },
+  "joinCANN": {
+    "membershipBenefits": [
+      {
+        "title": "Professional Network",
+        "description": "Connect with amyloidosis nursing professionals across Canada",
+        "icon": "Network",
+        "color": "from-blue-400 to-cyan-400"
+      },
+      {
+        "title": "Educational Resources",
+        "description": "Access exclusive educational materials and training recordings",
+        "icon": "GraduationCap",
+        "color": "from-emerald-400 to-green-400"
+      },
+      {
+        "title": "Knowledge Sharing",
+        "description": "Share best practices and learn from experienced colleagues",
+        "icon": "Users",
+        "color": "from-purple-400 to-violet-400"
+      },
+      {
+        "title": "Professional Development",
+        "description": "Advance your career with specialized amyloidosis expertise",
+        "icon": "Award",
+        "color": "from-orange-400 to-amber-400"
+      },
+      {
+        "title": "National Coverage",
+        "description": "Part of a network spanning all provinces and territories",
+        "icon": "Globe",
+        "color": "from-pink-400 to-rose-400"
+      },
+      {
+        "title": "Patient Impact",
+        "description": "Improve patient outcomes through collaborative care",
+        "icon": "Heart",
+        "color": "from-red-400 to-pink-400"
+      }
+    ],
+    "educationalResources": [
+      {
+        "title": "Amyloidosis Fundamentals",
+        "type": "Video Series",
+        "duration": "2.5 hours",
+        "icon": "Play",
+        "description": "Comprehensive introduction to amyloidosis pathophysiology and nursing care"
+      },
+      {
+        "title": "Patient Assessment Guidelines",
+        "type": "Document",
+        "pages": "24 pages",
+        "icon": "FileText",
+        "description": "Evidence-based assessment protocols for amyloidosis patients"
+      },
+      {
+        "title": "Medication Management",
+        "type": "Interactive Module",
+        "duration": "1.5 hours",
+        "icon": "BookOpen",
+        "description": "Best practices for amyloidosis medication administration and monitoring"
+      },
+      {
+        "title": "Family Education Resources",
+        "type": "Resource Kit",
+        "items": "12 resources",
+        "icon": "Users",
+        "description": "Materials to support patient and family education"
+      }
+    ],
+    "governanceDocuments": [
+      {
+        "title": "CANN Charter",
+        "description": "Official charter establishing the Canadian Amyloidosis Nursing Network",
+        "icon": "FileText",
+        "date": "Updated 2024"
+      },
+      {
+        "title": "Membership Guidelines",
+        "description": "Requirements and expectations for CANN membership",
+        "icon": "Users",
+        "date": "Updated 2024"
+      },
+      {
+        "title": "Code of Conduct",
+        "description": "Professional standards and ethical guidelines for members",
+        "icon": "Shield",
+        "date": "Updated 2024"
+      },
+      {
+        "title": "Annual Report",
+        "description": "CANN's annual activities and impact report",
+        "icon": "Award",
+        "date": "Updated 2024"
+      }
+    ]
+  },
+  "governance": {
+    "documents": [
+      {
+        "id": "articles-incorporation",
+        "title": "Articles of Incorporation",
+        "titleFr": "Statuts Constitutifs",
+        "description": "Legal founding documents establishing CAS as a federal not-for-profit corporation",
+        "descriptionFr": "Documents juridiques de fondation établissant SCA comme corporation fédérale à but non lucratif",
+        "category": "corporate",
+        "type": "charter",
+        "lastUpdated": "2024-01-15",
+        "version": "2.0",
+        "status": "current",
+        "accessLevel": "public",
+        "language": "EN/FR",
+        "pageCount": 12,
+        "approvedBy": "Corporations Canada",
+        "effectiveDate": "2024-01-15",
+        "reviewDate": "2029-01-15"
+      },
+      {
+        "id": "bylaws",
+        "title": "Corporate Bylaws",
+        "titleFr": "Règlements Généraux",
+        "description": "Governing rules and procedures for CAS operations, board governance, and membership",
+        "descriptionFr": "Règles et procédures régissant les opérations de SCA, la gouvernance du conseil et l'adhésion",
+        "category": "corporate",
+        "type": "policy",
+        "lastUpdated": "2024-06-20",
+        "version": "3.1",
+        "status": "current",
+        "accessLevel": "public",
+        "language": "EN/FR",
+        "pageCount": 28,
+        "approvedBy": "Board of Directors",
+        "effectiveDate": "2024-07-01",
+        "reviewDate": "2025-07-01"
+      },
+      {
+        "id": "strategic-plan",
+        "title": "2024-2027 Strategic Plan",
+        "titleFr": "Plan Stratégique 2024-2027",
+        "description": "Three-year strategic roadmap for advancing amyloidosis care and research in Canada",
+        "descriptionFr": "Feuille de route stratégique triennale pour faire progresser les soins et la recherche sur l'amylose au Canada",
+        "category": "strategic",
+        "type": "framework",
+        "lastUpdated": "2024-03-15",
+        "version": "1.0",
+        "status": "current",
+        "accessLevel": "public",
+        "language": "EN/FR",
+        "pageCount": 45,
+        "approvedBy": "Board of Directors",
+        "effectiveDate": "2024-01-01",
+        "reviewDate": "2026-01-01"
+      },
+      {
+        "id": "clinical-governance",
+        "title": "Clinical Governance Framework",
+        "titleFr": "Cadre de Gouvernance Clinique",
+        "description": "Framework for evidence-based clinical resource development and quality assurance",
+        "descriptionFr": "Cadre pour le développement de ressources cliniques fondées sur des preuves et l'assurance qualité",
+        "category": "clinical",
+        "type": "framework",
+        "lastUpdated": "2024-09-10",
+        "version": "2.2",
+        "status": "current",
+        "accessLevel": "member",
+        "language": "EN/FR",
+        "pageCount": 35,
+        "approvedBy": "Clinical Advisory Committee",
+        "effectiveDate": "2024-10-01",
+        "reviewDate": "2025-10-01"
+      }
+    ]
+  },
+  "contributorPortal": {
+    "workflows": [
+      {
+        "id": "clinical-resource-contributor",
+        "title": "Clinical Resource Contributor",
+        "titleFr": "Contributeur de Ressources Cliniques",
+        "description": "Develop and share evidence-based clinical tools, protocols, and diagnostic pathways",
+        "descriptionFr": "Développer et partager des outils cliniques, protocoles et voies diagnostiques fondés sur des preuves",
+        "category": "clinical",
+        "difficulty": "intermediate",
+        "timeCommitment": "5-10 hours/month",
+        "requirements": [
+          "Licensed healthcare professional",
+          "Minimum 3 years clinical experience",
+          "Experience with amyloidosis diagnosis/treatment",
+          "Commitment to evidence-based practice"
+        ],
+        "steps": [
+          {
+            "title": "Professional Registration",
+            "description": "Complete professional verification and background check",
+            "estimatedTime": "30 minutes",
+            "resources": ["Professional registration form", "License verification", "Reference contacts"]
+          },
+          {
+            "title": "Clinical Orientation",
+            "description": "Attend orientation session on CAS clinical governance and quality standards",
+            "estimatedTime": "2 hours",
+            "resources": ["Clinical governance framework", "Quality standards guide", "Orientation materials"]
+          },
+          {
+            "title": "Resource Development",
+            "description": "Create clinical resources following CAS template and evidence standards",
+            "estimatedTime": "3-8 hours",
+            "resources": ["Resource templates", "Evidence requirements", "Style guide"]
+          },
+          {
+            "title": "Peer Review Process",
+            "description": "Submit resources for peer review by clinical advisory committee",
+            "estimatedTime": "2-3 weeks",
+            "resources": ["Peer review guidelines", "Feedback forms", "Revision templates"]
+          },
+          {
+            "title": "Publication & Maintenance",
+            "description": "Resources published to platform with ongoing maintenance responsibilities",
+            "estimatedTime": "Ongoing",
+            "resources": ["Publication guidelines", "Maintenance schedules", "Update procedures"]
+          }
+        ],
+        "benefits": [
+          "Professional recognition and attribution",
+          "Continuing education credits",
+          "Network with national experts",
+          "Contribute to improved patient outcomes",
+          "Access to exclusive clinical resources"
+        ],
+        "examples": [
+          "Diagnostic pathway for cardiac amyloidosis",
+          "Treatment protocol for AL amyloidosis", 
+          "Patient assessment tools",
+          "Clinical decision support algorithms"
+        ],
+        "contactPerson": "Dr. Sarah Chen, Clinical Director",
+        "contactEmail": "clinical@canadianamyloidosis.ca"
+      }
+    ]
+  },
+  "getInvolved": {
+    "participationWays": [
+      {
+        "title": "Join CAS",
+        "description": "Become a member of our growing community. Clinicians, researchers, and health system leaders are especially encouraged to register.",
+        "action": "Register Now",
+        "icon": "UserPlus",
+        "color": "from-[#00AFE6] to-[#00DD89]"
+      },
+      {
+        "title": "Contribute Resources",
+        "description": "Upload clinical tools or patient education materials through our structured portal to help the community.",
+        "action": "Upload Resource",
+        "icon": "Upload",
+        "color": "from-[#00AFE6] to-[#00DD89]"
+      },
+      {
+        "title": "Share Your Story",
+        "description": "Help raise awareness by sharing a lived experience, reflection, or clinical journey with the community.",
+        "action": "Share Story",
+        "icon": "MessageSquare",
+        "color": "from-[#00AFE6] to-[#00DD89]"
+      },
+      {
+        "title": "Support the Mission",
+        "description": "We welcome support from aligned organizations, philanthropic partners, and volunteers. Donations support CAS initiatives.",
+        "action": "Donate Now",
+        "icon": "Gift",
+        "color": "from-[#00AFE6] to-[#00DD89]"
+      }
+    ],
+    "membershipInterests": [
+      "Clinical Research",
+      "Patient Education",
+      "Resource Development",
+      "Policy Advocacy",
+      "Event Organization",
+      "Fundraising",
+      "Awareness Campaigns",
+      "Professional Development"
+    ],
+    "upcomingEvents": [
+      {
+        "title": "2025 Amyloidosis Summit",
+        "date": "March 15-17, 2025",
+        "location": "Toronto, ON",
+        "type": "Conference",
+        "description": "Annual summit bringing together healthcare professionals, researchers, and patients",
+        "registrationOpen": true
+      }
+    ]
+  },
+  "resourcesPage": {
+    "resourceTypes": [
+      { "value": "all", "label": "All Types" },
+      { "value": "form", "label": "Forms" },
+      { "value": "tool", "label": "Tools" },
+      { "value": "article", "label": "Articles" },
+      { "value": "pathway", "label": "Pathways" },
+      { "value": "visual", "label": "Visuals" },
+      { "value": "research", "label": "Research" }
+    ],
+    "categories": [
+      { "value": "all", "label": "All Categories" },
+      { "value": "diagnostic-tools", "label": "Diagnostic Tools", "icon": "Stethoscope" },
+      { "value": "referral-pathways", "label": "Referral Pathways", "icon": "ArrowRight" },
+      { "value": "sops", "label": "SOPs", "icon": "ClipboardList" },
+      { "value": "patient-handouts", "label": "Patient Handouts", "icon": "FileUserIcon" }
+    ],
+    "audiences": [
+      { "value": "all", "label": "All Audiences" },
+      { "value": "clinician", "label": "Clinicians" },
+      { "value": "patient", "label": "Patients" },
+      { "value": "caregiver", "label": "Caregivers" },
+      { "value": "researcher", "label": "Researchers" }
+    ],
+    "languages": [
+      { "value": "all", "label": "All Languages" },
+      { "value": "en", "label": "English" },
+      { "value": "fr", "label": "French" },
+      { "value": "bilingual", "label": "Bilingual (EN/FR)" }
+    ],
+    "regions": [
+      { "value": "all", "label": "All Regions" },
+      { "value": "national", "label": "National" },
+      { "value": "BC", "label": "British Columbia" },
+      { "value": "AB", "label": "Alberta" },
+      { "value": "SK", "label": "Saskatchewan" },
+      { "value": "MB", "label": "Manitoba" },
+      { "value": "ON", "label": "Ontario" },
+      { "value": "QC", "label": "Quebec" },
+      { "value": "NB", "label": "New Brunswick" },
+      { "value": "NS", "label": "Nova Scotia" },
+      { "value": "PE", "label": "Prince Edward Island" },
+      { "value": "NL", "label": "Newfoundland and Labrador" },
+      { "value": "YT", "label": "Yukon" },
+      { "value": "NT", "label": "Northwest Territories" },
+      { "value": "NU", "label": "Nunavut" }
+    ]
+  },
   "pageContent": {
     "homepage": {
       "sections": [
@@ -819,7 +1228,7 @@
     "al": {
       "title": "AL Amyloidosis",
       "subtitle": "Light Chain Amyloidosis",
-      "description": "AL amyloidosis is caused by abnormal plasma cells producing light chains. It's the most common form of amyloidosis, often diagnosed after age 50 and affects both men and women.",
+      "description": "Caused by abnormal plasma cells producing light chains that form amyloid. Often diagnosed after age 50; affects both men and women. Related to multiple myeloma (10-15% overlap).",
       "keyFacts": {
         "prevalence": "Most common form (70% of cases)",
         "medianAge": "65 years",
@@ -852,17 +1261,26 @@
         {
           "name": "Princess Margaret Cancer Centre",
           "location": "Toronto, ON",
+          "type": "Treatment Center",
           "specialty": "Comprehensive amyloidosis program"
         },
         {
           "name": "Vancouver General Hospital",
           "location": "Vancouver, BC",
+          "type": "Treatment Center",
           "specialty": "Hematology and stem cell transplant"
         },
         {
           "name": "CHUM - Centre hospitalier de l'Université de Montréal",
           "location": "Montreal, QC",
+          "type": "Treatment Center",
           "specialty": "Amyloidosis clinic"
+        },
+        {
+          "name": "Clinical Trial: Daratumumab in AL Amyloidosis",
+          "location": "Multiple Centers",
+          "type": "Clinical Trial",
+          "specialty": "Phase III study"
         }
       ]
     },
@@ -921,6 +1339,82 @@
           "location": "Edmonton, AB",
           "specialty": "Hereditary amyloidosis program"
         }
+      ]
+    },
+    "aa": {
+      "title": "AA Amyloidosis",
+      "subtitle": "Secondary Amyloidosis",
+      "description": "AA amyloidosis is caused by chronic inflammatory conditions like rheumatoid arthritis, inflammatory bowel disease, or chronic infections.",
+      "keyFeatures": [
+        "Secondary to chronic inflammation",
+        "Primarily affects kidneys",
+        "Treatment focuses on underlying condition",
+        "Better prognosis when inflammation controlled"
+      ],
+      "underlyingConditions": [
+        "Rheumatoid arthritis",
+        "Inflammatory bowel disease (Crohn's, ulcerative colitis)",
+        "Chronic infections (tuberculosis, osteomyelitis)",
+        "Familial Mediterranean fever",
+        "Ankylosing spondylitis"
+      ],
+      "symptoms": [
+        "Proteinuria (protein in urine)",
+        "Kidney dysfunction",
+        "Edema (swelling)",
+        "Fatigue",
+        "Weight loss"
+      ],
+      "diagnosis": [
+        "Congo red staining of tissue biopsy",
+        "SAA protein levels in blood",
+        "Kidney function tests",
+        "Assessment of underlying inflammatory condition"
+      ],
+      "treatment": [
+        "Control underlying inflammatory disease",
+        "Anti-inflammatory medications",
+        "Kidney supportive care",
+        "Dialysis if kidney failure occurs",
+        "Kidney transplant in severe cases"
+      ]
+    },
+    "alect2": {
+      "title": "ALect2 Amyloidosis",
+      "subtitle": "Leukocyte chemotactic factor 2 Amyloidosis",
+      "description": "ALect2 amyloidosis is more common in Mexican, Punjabi, Native American, and Middle Eastern populations. Often underdiagnosed and mainly affects kidneys.",
+      "keyFeatures": [
+        "More common in specific ethnic populations",
+        "Often underdiagnosed",
+        "Mainly affects kidneys",
+        "Usually presents in older adults"
+      ],
+      "riskFactors": [
+        "Mexican ancestry",
+        "Punjabi ancestry", 
+        "Native American ancestry",
+        "Middle Eastern ancestry",
+        "Advanced age (typically >60 years)"
+      ],
+      "symptoms": [
+        "Kidney dysfunction",
+        "Proteinuria",
+        "High blood pressure",
+        "Edema",
+        "Fatigue"
+      ],
+      "diagnosis": [
+        "Kidney biopsy with Congo red staining",
+        "Mass spectrometry for protein identification",
+        "Kidney function tests",
+        "Genetic testing may be considered"
+      ],
+      "treatment": [
+        "Supportive kidney care",
+        "Blood pressure management",
+        "Proteinuria reduction",
+        "Kidney transplant in severe cases",
+        "Research ongoing for specific treatments"
       ]
     },
     "other": {

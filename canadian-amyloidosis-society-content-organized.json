@@ -13,8 +13,7 @@
     "1.1_Hero_Section": {
       "heading": "Canadian Amyloidosis Society",
       "subheading": "Clinical Excellence Platform",
-      "description": "Advancing evidence-based amyloidosis care through clinical excellence, professional collaboration, and structured knowledge sharing.",
-      "call_to_action": ["Get Started", "Learn More"]
+      "description": "Advancing evidence-based amyloidosis care through clinical excellence, professional collaboration, and structured knowledge sharing."
     },
     
     "1.2_Welcome_Section": {
@@ -48,13 +47,7 @@
       "heading": "Find Specialized Care",
       "subheading": "Find Care",
       "description": "Connecting healthcare across the nation.",
-      "detailed_content": "Find specialized amyloidosis treatment centers, experienced physicians, and clinical experts across all Canadian provinces and territories.",
-      "statistics": {
-        "network_reach": "National Coverage",
-        "healthcare_providers": "25+ Centers",
-        "provinces_territories": "All 13 Provinces & Territories",
-        "major_cities": "15+ Major Cities"
-      }
+      "detailed_content": "Find specialized amyloidosis treatment centers, experienced physicians, and clinical experts across all Canadian provinces and territories."
     },
 
     "1.5_Events_Newsletter_Section": {
@@ -64,8 +57,7 @@
       "detailed_content": "Join our community to receive regular updates, educational content, and information about upcoming events, webinars, and support group meetings.",
       "community_benefits": {
         "title": "Join Our Community",
-        "description": "Get exclusive access to research updates, community events, and expert insights delivered monthly.",
-        "member_count": "Join 5,000+ community members"
+        "description": "Get exclusive access to research updates, community events, and expert insights delivered monthly."
       }
     }
   },
@@ -154,18 +146,15 @@
       "subheading": "Major forms and their characteristics",
       "al_amyloidosis": {
         "name": "AL Amyloidosis",
-        "description": "Most common form, affects heart, kidneys, liver, and nervous system",
-        "prevalence": "70% of cases"
+        "description": "Most common form, affects heart, kidneys, liver, and nervous system"
       },
       "aa_amyloidosis": {
         "name": "AA Amyloidosis", 
-        "description": "Secondary to chronic inflammatory conditions",
-        "prevalence": "20% of cases"
+        "description": "Secondary to chronic inflammatory conditions"
       },
       "hereditary": {
         "name": "Hereditary",
-        "description": "Genetic forms including TTR, fibrinogen, and lysozyme",
-        "prevalence": "5% of cases"
+        "description": "Genetic forms including TTR, fibrinogen, and lysozyme"
       }
     }
   },
@@ -207,23 +196,19 @@
       "heading": "Network Achievements",
       "research_excellence": {
         "title": "Research Excellence",
-        "description": "Leading 12 active research projects and clinical trials across multiple amyloidosis types.",
-        "statistic": "12+ Active Studies"
+        "description": "Leading active research projects and clinical trials across multiple amyloidosis types."
       },
       "professional_training": {
         "title": "Professional Training",
-        "description": "Trained over 200 healthcare professionals in specialized amyloidosis care and diagnosis.",
-        "statistic": "200+ Professionals Trained"
+        "description": "Training healthcare professionals in specialized amyloidosis care and diagnosis."
       },
       "patient_impact": {
         "title": "Patient Impact",
-        "description": "Improved care pathways have reduced average diagnosis time by 40% in network centers.",
-        "statistic": "40% Faster Diagnosis"
+        "description": "Improved care pathways have reduced average diagnosis time in network centers."
       },
       "knowledge_sharing": {
         "title": "Knowledge Sharing",
-        "description": "Published 35+ peer-reviewed articles and clinical guidelines through network collaboration.",
-        "statistic": "35+ Publications"
+        "description": "Publishing peer-reviewed articles and clinical guidelines through network collaboration."
       }
     }
   },
@@ -257,27 +242,19 @@
       "heading": "Quick Contact",
       "general_inquiries": {
         "title": "General Inquiries",
-        "email": "info@canadianamyloidosis.ca",
-        "description": "General questions about CAS, membership, and services",
-        "response_time": "24-48 hours"
+        "description": "General questions about CAS, membership, and services"
       },
       "resource_support": {
         "title": "Resource Support",
-        "email": "resources@canadianamyloidosis.ca", 
-        "description": "Help with accessing or contributing clinical resources",
-        "response_time": "1-2 business days"
+        "description": "Help with accessing or contributing clinical resources"
       },
       "patient_support": {
         "title": "Patient Support",
-        "email": "support@canadianamyloidosis.ca",
-        "description": "Patient and family support questions",
-        "response_time": "24-48 hours"
+        "description": "Patient and family support questions"
       },
       "professional_inquiries": {
         "title": "Professional Inquiries",
-        "email": "professionals@canadianamyloidosis.ca",
-        "description": "Healthcare provider and researcher collaboration", 
-        "response_time": "3-5 business days"
+        "description": "Healthcare provider and researcher collaboration"
       }
     },
 
@@ -306,13 +283,7 @@
   "7_HEALTHCARE_DIRECTORY": {
     "7.1_Overview": {
       "heading": "Healthcare Centers Directory",
-      "total_centers": 25,
-      "provinces_covered": "All 13 Provinces & Territories",
-      "center_types": ["Hospitals", "Specialty Centers", "Research Centers", "Clinics"]
-    },
-
-    "7.2_Sample_Centers": {
-      "note": "This section would contain all 25+ healthcare centers with complete contact information, specialties, and services"
+      "description": "Directory of healthcare centers across Canada specializing in amyloidosis care"
     }
   },
 

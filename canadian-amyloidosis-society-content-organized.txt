@@ -1,0 +1,339 @@
+CANADIAN AMYLOIDOSIS SOCIETY - COMPLETE WEBSITE CONTENT
+=====================================================
+
+Document Information:
+- Title: Canadian Amyloidosis Society - Complete Website Content
+- Version: 2.0.0
+- Date: 2025-08-01
+- Description: Organized website content with clear headings and subheadings
+- Total Size: 14KB
+- Languages: English & French
+- Content Sections: 8
+
+TABLE OF CONTENTS:
+1. HOMEPAGE CONTENT
+2. ABOUT CAS PAGE
+3. ABOUT AMYLOIDOSIS PAGE
+4. CANN NETWORK PAGE
+5. RESOURCES PAGE
+6. CONTACT PAGE
+7. HEALTHCARE DIRECTORY
+8. FRENCH TRANSLATIONS
+
+=====================================================
+
+1. HOMEPAGE CONTENT
+===================
+
+1.1 Hero Section
+----------------
+Heading: Canadian Amyloidosis Society
+Subheading: Clinical Excellence Platform
+Description: Advancing evidence-based amyloidosis care through clinical excellence, professional collaboration, and structured knowledge sharing.
+
+1.2 Welcome Section
+-------------------
+Heading: Welcome to the Canadian Amyloidosis Society
+Subheading: Who we are
+Description: Your trusted partner in amyloidosis care, connecting patients, families, and healthcare professionals across Canada.
+
+Detailed Content: We are dedicated to improving the lives of those affected by amyloidosis through education, support, and advocacy. Our comprehensive platform provides essential resources, connects you with specialized care, and builds a supportive community for patients and families nationwide.
+
+Mission:
+Title: Our Mission
+Content: To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support.
+
+Vision:
+Title: Our Vision
+Content: A future where every Canadian affected by amyloidosis receives timely diagnosis, optimal treatment, and comprehensive support.
+
+1.3 About Amyloidosis Section
+-----------------------------
+Heading: What is Amyloidosis
+Subheading: Medical Information
+Description: Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
+
+Detailed Content: Amyloidosis is a rare but serious condition where misfolded proteins (amyloid) accumulate in organs and tissues throughout the body. Understanding the different types, recognizing early symptoms, and accessing specialized care are crucial for managing this condition effectively.
+
+Early Detection:
+Title: Early Detection Saves Lives
+Content: Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. Early recognition and proper testing are crucial for better patient outcomes.
+Additional Info: Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.
+
+1.4 Directory Section
+---------------------
+Heading: Find Specialized Care
+Subheading: Find Care
+Description: Connecting healthcare across the nation.
+Detailed Content: Find specialized amyloidosis treatment centers, experienced physicians, and clinical experts across all Canadian provinces and territories.
+
+1.5 Events & Newsletter Section
+-------------------------------
+Heading: Events & Newsletter
+Subheading: Stay Connected
+Description: Stay informed about the latest research, treatment advances, and community events in amyloidosis care.
+Detailed Content: Join our community to receive regular updates, educational content, and information about upcoming events, webinars, and support group meetings.
+
+Community Benefits:
+Title: Join Our Community
+Description: Get exclusive access to research updates, community events, and expert insights delivered monthly.
+
+=====================================================
+
+2. ABOUT CAS PAGE
+=================
+
+2.1 Hero Section
+----------------
+Heading: Canadian Amyloidosis Society
+Subheading: Connecting Healthcare Across Canada
+Description: Building a national platform for clinical practice support
+Detailed Content: Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through evidence-based collaboration.
+
+2.2 What We Do
+--------------
+Heading: What We Do
+
+Tool Curation:
+Title: Tool Curation
+Description: Evidence-based clinical tools, protocols, and diagnostic pathways developed by practicing specialists.
+
+Diagnostic Support:
+Title: Diagnostic Support
+Description: Rapid diagnostic pathways, decision support tools, and consultation networks for complex cases.
+
+Peer Learning:
+Title: Peer Learning
+Description: Collaborative professional networks, case discussions, and continuous medical education opportunities.
+
+2.3 Our Values
+--------------
+Heading: Our Values
+
+Patient-Centered:
+Title: Patient-Centered
+Description: Every decision and resource is designed with patient outcomes as the primary focus.
+
+Collaborative:
+Title: Collaborative
+Description: We bring together diverse expertise to solve complex clinical challenges.
+
+Evidence-Informed:
+Title: Evidence-Informed
+Description: All resources are grounded in current research and clinical best practices.
+
+Transparent:
+Title: Transparent
+Description: Open access to information, clear governance, and accountable stewardship.
+
+2.4 Governance
+--------------
+Heading: Governance & Documents
+
+Corporate Governance:
+Title: Corporate Governance
+Description: Articles of incorporation, by-laws, and board meeting minutes.
+
+Financial Transparency:
+Title: Financial Transparency
+Description: Annual financial reports, audited statements, and funding sources.
+
+Clinical Governance:
+Title: Clinical Governance
+Description: Evidence review processes, clinical advisory guidelines, and quality standards.
+
+=====================================================
+
+3. ABOUT AMYLOIDOSIS PAGE
+=========================
+
+3.1 Hero Section
+----------------
+Heading: Understanding Amyloidosis
+Subheading: Medical Information
+Description: Learn the signs, understand the types, and take action early.
+Detailed Content: Amyloidosis is a rare but serious disease where misfolded proteins accumulate in organs. Early detection and appropriate treatment can significantly improve outcomes.
+
+3.2 Warning Signs
+-----------------
+Heading: Warning Signs
+Subheading: Early symptoms that require medical attention
+- Cardiac Symptoms
+- Neurological Symptoms
+- Gastrointestinal Symptoms
+- Genitourinary Symptoms
+- Systemic Symptoms
+
+3.3 Types of Amyloidosis
+------------------------
+Heading: Types of Amyloidosis
+Subheading: Major forms and their characteristics
+
+AL Amyloidosis:
+Name: AL Amyloidosis
+Description: Most common form, affects heart, kidneys, liver, and nervous system
+
+AA Amyloidosis:
+Name: AA Amyloidosis
+Description: Secondary to chronic inflammatory conditions
+
+Hereditary:
+Name: Hereditary
+Description: Genetic forms including TTR, fibrinogen, and lysozyme
+
+=====================================================
+
+4. CANN NETWORK PAGE
+====================
+
+4.1 Mission
+-----------
+Heading: Connecting Healthcare Professionals
+Description: The Canadian Amyloidosis Network (CANN) is a collaborative initiative that brings together healthcare professionals, researchers, and institutions across Canada to improve amyloidosis care and research.
+
+Mission Statement: CANN represents a transformative approach to amyloidosis care in Canada, fostering collaboration between specialists, researchers, and healthcare institutions nationwide.
+
+Key Points:
+- Multidisciplinary approach to amyloidosis care
+- Knowledge sharing and best practice development
+- Collaborative research initiatives and clinical trials
+- Professional development and training programs
+
+4.2 Objectives
+--------------
+Heading: Network Objectives
+
+Enhance Care Quality:
+Title: Enhance Care Quality
+Description: Standardize and improve amyloidosis care across Canada through evidence-based protocols and shared expertise.
+
+Accelerate Research:
+Title: Accelerate Research
+Description: Facilitate collaborative research projects and clinical trials to advance understanding and treatment options.
+
+Build Capacity:
+Title: Build Capacity
+Description: Develop healthcare professional capacity through training, education, and knowledge exchange programs.
+
+Improve Outcomes:
+Title: Improve Outcomes
+Description: Create measurable improvements in patient outcomes through coordinated care and research efforts.
+
+4.3 Achievements
+----------------
+Heading: Network Achievements
+
+Research Excellence:
+Title: Research Excellence
+Description: Leading active research projects and clinical trials across multiple amyloidosis types.
+
+Professional Training:
+Title: Professional Training
+Description: Training healthcare professionals in specialized amyloidosis care and diagnosis.
+
+Patient Impact:
+Title: Patient Impact
+Description: Improved care pathways have reduced average diagnosis time in network centers.
+
+Knowledge Sharing:
+Title: Knowledge Sharing
+Description: Publishing peer-reviewed articles and clinical guidelines through network collaboration.
+
+=====================================================
+
+5. RESOURCES PAGE
+=================
+
+5.1 Hero Section
+----------------
+Heading: Clinical Resources
+Subheading: Evidence-based tools for healthcare professionals
+Description: Access comprehensive clinical resources, diagnostic tools, and educational materials developed by amyloidosis specialists.
+
+5.2 Resource Types
+------------------
+Heading: Resource Categories
+- All Types
+- AL Amyloidosis
+- ATTR Amyloidosis
+- AA Amyloidosis
+- ALect2 Amyloidosis
+- General Amyloidosis
+
+=====================================================
+
+6. CONTACT PAGE
+===============
+
+6.1 Hero Section
+----------------
+Heading: Contact Us
+Subheading: Get in touch with our team
+Description: We're here to help with your questions, resource needs, and collaboration opportunities.
+
+6.2 Quick Contact
+-----------------
+Heading: Quick Contact
+
+General Inquiries:
+Title: General Inquiries
+Description: General questions about CAS, membership, and services
+
+Resource Support:
+Title: Resource Support
+Description: Help with accessing or contributing clinical resources
+
+Patient Support:
+Title: Patient Support
+Description: Patient and family support questions
+
+Professional Inquiries:
+Title: Professional Inquiries
+Description: Healthcare provider and researcher collaboration
+
+6.3 FAQ
+-------
+Heading: Frequently Asked Questions
+Subheading: Quick answers to common questions
+
+Resource Access:
+Question: How can I access clinical resources?
+Answer: Healthcare professionals can access our clinical resources through the Resources section. Some materials require registration to ensure appropriate use in clinical settings.
+
+Membership:
+Question: Is there a membership fee for CAS?
+Answer: CAS membership is free for all healthcare professionals and researchers. Patient and family access to support resources is also provided at no cost.
+
+Patient Care:
+Question: Do you provide direct patient care?
+Answer: CAS does not provide direct patient care. We connect patients with specialized healthcare providers and provide educational resources to support informed healthcare decisions.
+
+Collaboration:
+Question: How can my organization partner with CAS?
+Answer: We welcome partnerships with healthcare institutions, research organizations, and professional societies. Contact us at professionals@canadianamyloidosis.ca to discuss collaboration opportunities.
+
+=====================================================
+
+7. HEALTHCARE DIRECTORY
+========================
+
+7.1 Overview
+------------
+Heading: Healthcare Centers Directory
+Description: Directory of healthcare centers across Canada specializing in amyloidosis care
+
+=====================================================
+
+8. FRENCH TRANSLATIONS
+=======================
+
+8.1 Overview
+------------
+Heading: French Language Content
+Description: Complete French translations for all English content above
+Coverage: 100% of English content translated
+Note: All headings, subheadings, descriptions, and detailed content have French equivalents
+
+=====================================================
+
+END OF DOCUMENT

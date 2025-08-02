@@ -188,10 +188,10 @@ Description: Genetic forms including TTR, fibrinogen, and lysozyme
 
 4.1 Mission
 -----------
-Heading: Connecting Healthcare Professionals
-Description: The Canadian Amyloidosis Network (CANN) is a collaborative initiative that brings together healthcare professionals, researchers, and institutions across Canada to improve amyloidosis care and research.
+Heading: Canadian Amyloidosis Nursing Network
+Description: The field of amyloidosis has experienced tremendous growth in recent years. Within this multidisciplinary community, nurses play a vital role in enhancing the quality, accessibility, and coordination of healthcare services for amyloidosis patients. This evolving landscape generates enthusiasm for the development of a national nursing network to unite amyloidosis nurses across the country. The Canadian Amyloidosis Nursing Network (CANN) is proudly developing as an affiliate of the Canadian Amyloidosis Society (CAS). This purpose-driven network aims to meet the dynamic educational needs of amyloidosis nurses through professional development, knowledge translation, and best practice sharing and to facilitate collaboration amongst this community of nursing professionals while supporting individuals with amyloidosis.
 
-Mission Statement: CANN represents a transformative approach to amyloidosis care in Canada, fostering collaboration between specialists, researchers, and healthcare institutions nationwide.
+Mission Statement: CANN represents a specialized nursing network dedicated to advancing amyloidosis care through professional development, knowledge translation, and collaborative practice among nursing professionals nationwide.
 
 Key Points:
 - Multidisciplinary approach to amyloidosis care

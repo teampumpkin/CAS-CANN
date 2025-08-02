@@ -218,7 +218,7 @@ export default function JoinCANN() {
                       About CANN
                     </h2>
                     <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-                      The Canadian Amyloidosis Nursing Network (CANN) is a specialized professional network dedicated to advancing nursing care for amyloidosis patients across Canada. We bring together experienced nurses, educators, and healthcare professionals who share a commitment to excellence in amyloidosis care.
+                      The field of amyloidosis has experienced tremendous growth in recent years. Within this multidisciplinary community, nurses play a vital role in enhancing the quality, accessibility, and coordination of healthcare services for amyloidosis patients. This evolving landscape generates enthusiasm for the development of a national nursing network to unite amyloidosis nurses across the country. The Canadian Amyloidosis Nursing Network (CANN) is proudly developing as an affiliate of the Canadian Amyloidosis Society (CAS). This purpose-driven network aims to meet the dynamic educational needs of amyloidosis nurses through professional development, knowledge translation, and best practice sharing and to facilitate collaboration amongst this community of nursing professionals while supporting individuals with amyloidosis. We invite you to join this exciting movement!
                     </p>
                     
                     <div className="space-y-6">

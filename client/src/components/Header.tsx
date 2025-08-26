@@ -87,9 +87,8 @@ export default function Header() {
       href: '#nursing-network',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'About/Join CANN', href: '/nursing-network' },
-        { name: 'Resources/Events', href: '/join-nursing-network#resources-events' },
-        { name: 'CANN Member Login', href: '/join-nursing-network#member-login' },
+        { name: 'About', href: '/nursing-network' },
+        { name: 'Join CANN', href: '/join-nursing-network' },
       ]
     },
     { name: t('nav.joinCAS'), href: '/join-cas' },

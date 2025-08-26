@@ -82,7 +82,7 @@ const translations = {
     'events.badge': 'Stay Connected',
     'events.title.events': 'Events',
     'events.title.newsletter': '& Newsletter',
-    'events.subtitle': 'Stay informed about the latest research, treatment advances, and community events in amyloidosis care.',
+    'events.subtitle': 'Stay informed about the latest updates research, treatment advances, and events in amyloidosis care in Canada and internationally.',
     'events.description': 'Join our community to receive regular updates, educational content, and information about upcoming events, webinars, and support group meetings.',
     'events.upcomingEvents': 'Upcoming Events',
     'events.latestNews': 'Latest News & Updates',

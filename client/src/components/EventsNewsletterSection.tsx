@@ -321,22 +321,7 @@ export default function EventsNewsletterSection() {
                         </p>
 
                         {/* Footer */}
-                        <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-white/10 mt-auto">
-                          <div className={`flex items-center gap-2 text-sm ${
-                            index === 0 
-                              ? 'text-blue-600 dark:text-blue-400'
-                              : index === 1
-                              ? 'text-emerald-600 dark:text-emerald-400'
-                              : index === 2
-                              ? 'text-purple-600 dark:text-purple-400'
-                              : index === 3
-                              ? 'text-pink-600 dark:text-pink-400'
-                              : 'text-orange-600 dark:text-orange-400'
-                          }`}>
-                            <Users className="w-4 h-4" />
-                            <span>{event.attendees}</span>
-                          </div>
-                          
+                        <div className="flex justify-center pt-6 border-t border-gray-200 dark:border-white/10 mt-auto">
                           <motion.button
                             className="group/btn inline-flex items-center gap-2 bg-[#00AFE6] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#0088CC] transition-all duration-300"
                             whileHover={{ scale: 1.05 }}

@@ -201,36 +201,7 @@ export default function Directory() {
                 </div>
               </motion.div>
               
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.6 }}
-              >
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`group px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 ${
-                    viewMode === 'list' 
-                      ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-2xl shadow-[#00AFE6]/25' 
-                      : 'bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/20 dark:hover:bg-white/20'
-                  }`}
-                >
-                  <Hospital className="w-5 h-5" />
-                  Browse Directory
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button
-                  onClick={() => setViewMode('map')}
-                  className={`group px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 ${
-                    viewMode === 'map' 
-                      ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-2xl shadow-[#00AFE6]/25' 
-                      : 'bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/20 dark:hover:bg-white/20'
-                  }`}
-                >
-                  <MapPin className="w-5 h-5" />
-                  Map View
-                </button>
-              </motion.div>
+
             </motion.div>
             
             {/* Hero Visual */}
@@ -349,29 +320,30 @@ export default function Directory() {
                 <Clock className="w-4 h-4 text-gray-400" />
               </div>
               
-              {/* View Mode Toggle */}
-              <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-3xl p-1">
+              {/* Enhanced View Mode Toggle */}
+              <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-3xl text-sm font-medium transition-colors ${
+                  className={`group px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 ${
                     viewMode === 'list' 
-                      ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm' 
-                      : 'text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white'
+                      ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-2xl shadow-[#00AFE6]/25' 
+                      : 'bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/20 dark:hover:bg-white/20'
                   }`}
                 >
-                  <List className="w-4 h-4" />
-                  List
+                  <Hospital className="w-4 h-4" />
+                  Browse Directory
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button
                   onClick={() => setViewMode('map')}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-3xl text-sm font-medium transition-colors ${
+                  className={`group px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 ${
                     viewMode === 'map' 
-                      ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm' 
-                      : 'text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white'
+                      ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-2xl shadow-[#00AFE6]/25' 
+                      : 'bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/20 dark:hover:bg-white/20'
                   }`}
                 >
-                  <Map className="w-4 h-4" />
-                  Map
+                  <MapPin className="w-4 h-4" />
+                  Map View
                 </button>
               </div>
             </div>

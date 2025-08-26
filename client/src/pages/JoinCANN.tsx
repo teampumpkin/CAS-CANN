@@ -33,43 +33,76 @@ export default function JoinCANN() {
     window.scrollTo(0, 0);
   }, []);
 
+  const keyPillars = [
+    {
+      icon: GraduationCap,
+      title: 'Professional Development',
+      description: 'Advance your knowledge and expertise in amyloidosis nursing through curated training sessions and resources.',
+      color: 'from-pink-400 to-rose-400'
+    },
+    {
+      icon: Globe,
+      title: 'National Collaboration',
+      description: 'Connect with nursing colleagues across Canada to share knowledge and best practices.',
+      color: 'from-purple-400 to-pink-400'
+    },
+    {
+      icon: Heart,
+      title: 'Patient Impact',
+      description: 'Improve patient outcomes through advocacy and collaborative support.',
+      color: 'from-fuchsia-400 to-purple-400'
+    }
+  ];
+
   const membershipBenefits = [
     {
       icon: Network,
       title: 'Professional Network',
-      description: 'Connect with amyloidosis nursing professionals across Canada',
+      description: 'Connect with amyloidosis nursing professionals across Canada.',
       color: 'from-pink-400 to-rose-400'
     },
     {
-      icon: GraduationCap,
+      icon: BookOpen,
       title: 'Educational Resources',
-      description: 'Access exclusive educational materials and training recordings',
+      description: 'Access to educational materials, live virtual educational sessions and recordings.',
       color: 'from-purple-400 to-pink-400'
     },
     {
       icon: Users,
       title: 'Knowledge Sharing',
-      description: 'Share best practices and learn from experienced colleagues',
+      description: 'Share best practices and learn from experienced colleagues.',
       color: 'from-fuchsia-400 to-purple-400'
     },
     {
       icon: Award,
       title: 'Professional Development',
-      description: 'Advance your career with specialized amyloidosis expertise',
+      description: 'Benefit from a network dedicated to meeting the unique learning needs of its nursing members.',
       color: 'from-violet-400 to-fuchsia-400'
     },
     {
       icon: Globe,
       title: 'National Coverage',
-      description: 'Part of a network spanning all provinces and territories',
+      description: 'Be part of a network spanning all provinces and territories.',
       color: 'from-pink-400 to-rose-400'
     },
     {
       icon: Heart,
       title: 'Patient Impact',
-      description: 'Improve patient outcomes through collaborative care',
+      description: 'Unite with Canadian nursing colleagues to improve patient outcomes through collaborative care.',
       color: 'from-rose-400 to-pink-400'
     }
+  ];
+
+  const membershipRequirements = [
+    'Active nursing license in Canada',
+    'Interest and/or expertise in amyloidosis care',
+    'Commitment to professional development'
+  ];
+
+  const portalFeatures = [
+    'Access educational materials',
+    'Connect with network members',
+    'View upcoming events'
   ];
 
   const educationalResources = [
@@ -212,7 +245,7 @@ export default function JoinCANN() {
         </div>
       </section>
 
-      {/* Overview Section */}
+      {/* About CANN Section */}
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
@@ -228,7 +261,7 @@ export default function JoinCANN() {
                       About CANN
                     </h2>
                     <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-                      The field of amyloidosis has experienced tremendous growth in recent years. Within this multidisciplinary community, nurses play a vital role in enhancing the quality, accessibility, and coordination of healthcare services for amyloidosis patients. This evolving landscape generates enthusiasm for the development of a national nursing network to unite amyloidosis nurses across the country. The Canadian Amyloidosis Nursing Network (CANN) is proudly developing as an affiliate of the Canadian Amyloidosis Society (CAS). This purpose-driven network aims to meet the dynamic educational needs of amyloidosis nurses through professional development, knowledge translation, and best practice sharing and to facilitate collaboration amongst this community of nursing professionals while supporting individuals with amyloidosis. We invite you to join this exciting movement!
+                      The Canadian Amyloidosis Nursing Network (CANN) is a purpose driven professional network dedicated to supporting amyloidosis nurses and advancing nursing care for amyloidosis patients across Canada. As an affiliate of the Canadian Amyloidosis Society, we bring together nurses with interest and expertise in amyloidosis, united in our commitment to excellence in amyloidosis care.
                     </p>
                     
                     <div className="space-y-6">

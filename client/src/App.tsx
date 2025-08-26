@@ -31,7 +31,7 @@ const AAAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/AAAmyloidosis
 const ALect2Amyloidosis = lazy(() => import("@/pages/amyloidosis-types/ALect2Amyloidosis"));
 const OtherAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/OtherAmyloidosis"));
 const CANN = lazy(() => import("@/pages/CANN"));
-const JoinCANN = lazy(() => import("@/pages/JoinCANN"));
+const JoinCANN = lazy(() => import("@/pages/JoinCANN_new"));
 
 const AccessibilityStatement = lazy(() => import("@/pages/AccessibilityStatement"));
 const ContributorPortal = lazy(() => import("@/pages/ContributorPortal"));

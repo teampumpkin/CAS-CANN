@@ -968,6 +968,10 @@ export default function GetInvolved() {
                 <div className="space-y-4 mb-8">
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                    <p className="text-gray-600 dark:text-white/70">CANN is an affiliate of the Canadian Amyloidosis Society (CAS)</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
                     <p className="text-gray-600 dark:text-white/70">Unite amyloidosis nurses across the country through professional development</p>
                   </div>
                   <div className="flex items-start gap-3">
@@ -1006,7 +1010,7 @@ export default function GetInvolved() {
                       className="w-full h-full object-cover"
                     />
                     
-                    {/* Stats Overlay */}
+                    {/* Network Info Overlay */}
                     <motion.div
                       className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
                       initial={{ opacity: 0, y: 40 }}
@@ -1014,29 +1018,16 @@ export default function GetInvolved() {
                       transition={{ duration: 0.8, delay: 0.5 }}
                     >
                       <div className="px-6 py-4">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center">
                           <motion.div
-                            className="text-center"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.6 }}
                           >
-                            <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                              50+
+                            <div className="text-lg font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1">
+                              Dedicated Nursing Network
                             </div>
-                            <div className="text-xs text-white/80">Nursing Professionals</div>
-                          </motion.div>
-                          
-                          <motion.div
-                            className="text-center"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.7 }}
-                          >
-                            <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
-                              10
-                            </div>
-                            <div className="text-xs text-white/80">Provinces Connected</div>
+                            <div className="text-sm text-white/80">Connecting nurses across Canada</div>
                           </motion.div>
                         </div>
                       </div>

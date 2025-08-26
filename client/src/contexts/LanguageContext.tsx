@@ -76,7 +76,7 @@ const translations = {
     'about.stats.diagnosisTimeDesc': 'Many patients see multiple doctors before receiving proper diagnosis',
     'about.stats.canadiansAffected': 'Thousands of',
     'about.stats.canadiansAffectedLabel': 'Canadians affected',
-    'about.stats.canadiansAffectedDesc': 'Estimated number of people living with amyloidosis in Canada',
+    'about.stats.canadiansAffectedDesc': 'The number of people living with amyloidosis in Canada is still uncertain, but estimated in the thousands',
     
     // Events & Newsletter Section
     'events.badge': 'Stay Connected',

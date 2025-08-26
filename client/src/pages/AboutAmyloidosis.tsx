@@ -599,55 +599,7 @@ export default function AboutAmyloidosis() {
             </motion.div>
           </div>
 
-          {/* Clinical Pearls */}
-          <motion.div
-            className="mt-12 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
-                <Lightbulb className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Clinical Pearls</h3>
-                <p className="text-gray-600 dark:text-white/70 text-sm">Key diagnostic considerations</p>
-              </div>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00AFE6] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 dark:text-white/80 text-sm">
-                    <strong>Think amyloidosis</strong> when multiple organ systems are affected simultaneously
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00DD89] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 dark:text-white/80 text-sm">
-                    <strong>Age matters:</strong> ATTR more common &gt;60 years, AL can occur at any age
-                  </span>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00AFE6] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 dark:text-white/80 text-sm">
-                    <strong>Gender patterns:</strong> Wild-type ATTR predominantly affects elderly men
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00DD89] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 dark:text-white/80 text-sm">
-                    <strong>Early referral</strong> to specialist centers improves outcomes significantly
-                  </span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+
         </div>
       </section>
 

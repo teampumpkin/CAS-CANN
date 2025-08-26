@@ -6,6 +6,11 @@ This project is a modern, patient-focused website for the Canadian Amyloidosis S
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
+## Content References
+
+### About CAS Page Hero Description
+"Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through evidence-based collaboration."
+
 ## System Architecture
 
 ### Frontend Architecture

@@ -886,7 +886,7 @@ export default function GetInvolved() {
                     <div className="space-y-6">
                       {[
                         "Membership in CAS is voluntary and non-financial. There are no membership fees or obligations.",
-                        "Participation is governed by our Membership Policy and Code of Conduct, which ensure respectful and professional collaboration.",
+                        "CAS is governed by an Executive Committee – a dedicated group of Canadian amyloidosis experts collaborating in a leadership role to advance the mission of CAS and serve its members.",
                         "Your privacy is protected - we only use your information for CAS communications and activities, and you can unsubscribe at any time."
                       ].map((note, index) => (
                         <motion.div

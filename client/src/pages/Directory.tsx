@@ -311,6 +311,84 @@ export default function Directory() {
 
           {viewMode === 'list' ? (
             <>
+              {/* Filter Controls */}
+              <div className="mb-8 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-400/30">
+                <div className="flex flex-col lg:flex-row gap-4">
+                  {/* Search Input */}
+                  <div className="flex-1">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                      <input
+                        type="text"
+                        placeholder="Search centers by name, city, or specialty..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-3xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300"
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Province Filter */}
+                  <div className="lg:w-64">
+                    <select
+                      value={selectedProvince || ''}
+                      onChange={(e) => setSelectedProvince(e.target.value || null)}
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-3xl text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300"
+                    >
+                      <option value="">All Provinces</option>
+                      {provinces.map((province) => (
+                        <option key={province.code} value={province.code}>
+                          {province.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  {/* Center Type Filter */}
+                  <div className="lg:w-48">
+                    <select
+                      value={selectedProgramType || ''}
+                      onChange={(e) => setSelectedProgramType(e.target.value || null)}
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-3xl text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300"
+                    >
+                      <option value="">All Types</option>
+                      <option value="hospital">Hospital</option>
+                      <option value="clinic">Clinic</option>
+                      <option value="research">Research</option>
+                      <option value="specialty">Specialty</option>
+                    </select>
+                  </div>
+                  
+                  {/* Clear Filters Button */}
+                  {(searchTerm || selectedProvince || selectedProgramType) && (
+                    <button
+                      onClick={() => {
+                        setSearchTerm('');
+                        setSelectedProvince(null);
+                        setSelectedProgramType(null);
+                      }}
+                      className="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white rounded-3xl text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 flex items-center gap-2"
+                    >
+                      <Filter className="w-4 h-4" />
+                      Clear Filters
+                    </button>
+                  )}
+                </div>
+                
+                {/* Results Summary */}
+                <div className="mt-4 flex items-center justify-between text-sm text-gray-600 dark:text-white/70">
+                  <span>
+                    Showing {filteredCenters.length} of {healthcareCenters.length} healthcare centers
+                  </span>
+                  {filteredCenters.length === 0 && (searchTerm || selectedProvince || selectedProgramType) && (
+                    <span className="text-orange-600 dark:text-orange-400 flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4" />
+                      No centers match your filters
+                    </span>
+                  )}
+                </div>
+              </div>
+              
               <div className="grid lg:grid-cols-2 gap-8">
                 {paginatedCenters.map((center, index) => (
                   <motion.div

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, Upload, BookOpen, Users } from 'lucide-react';
+import { MapPin, BookOpen, Users } from 'lucide-react';
 import heroBackgroundImage from '@assets/shutterstock_2447944539_1753254859154.jpg';
 import { useLanguage } from '@/contexts/LanguageContext';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -10,7 +10,6 @@ export default function Hero() {
   const quickTiles = [
     { icon: Users, label: 'Join', href: '/get-involved' },
     { icon: MapPin, label: t('nav.directory'), href: '/directory' },
-    { icon: Upload, label: 'Upload', href: '/upload-resource' },
     { icon: BookOpen, label: 'Learn', href: '/about-amyloidosis' }
   ];
 
@@ -129,7 +128,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10 justify-items-center max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 xl:gap-10 justify-items-center max-w-4xl mx-auto">
               {quickTiles.map((tile, index) => (
                 <motion.a
                   key={tile.label}
@@ -192,8 +191,7 @@ export default function Hero() {
                       <p className="text-white/70 text-xs font-medium leading-relaxed group-hover:text-white group-hover:font-semibold transition-all duration-300 transform group-hover:translate-y-0.5 drop-shadow-md group-hover:drop-shadow-lg">
                         {index === 0 && "Connect with our community"}
                         {index === 1 && "Find healthcare providers and support"}
-                        {index === 2 && "Share your experience and stories"}
-                        {index === 3 && "Access educational resources"}
+                        {index === 2 && "Access educational resources"}
                       </p>
                       
                       {/* Button indicator */}

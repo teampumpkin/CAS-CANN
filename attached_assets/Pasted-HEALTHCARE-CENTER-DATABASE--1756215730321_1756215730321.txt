@@ -1,0 +1,102 @@
+HEALTHCARE CENTER DATABASE
+================================================================================
+ 
+--- COVERAGE STATISTICS ---
+- Total Centers: 25+ facilities
+- Provincial Coverage: All 13 provinces/territories
+- Center Types: Hospitals, Specialty Centers, Research Facilities, Clinics
+ 
+--- FACILITY INFORMATION STRUCTURE ---
+Standardized Data Points for Each Center:
+- Center name and location
+- Contact information (phone, email, website, address)
+- Specialties and services offered
+- Center type and certifications
+- Establishment year
+- Detailed descriptions
+ 
+--- MAJOR CENTERS BY PROVINCE ---
+ 
+BRITISH COLUMBIA (2 centers):
+1. Vancouver General Hospital
+   - Vancouver, BC
+   - Phone: (604) 875-4111
+   - Email: amyloidosis@vch.ca
+   - Specialties: AL Amyloidosis, ATTR Amyloidosis, Cardiac Amyloidosis
+   - Services: Diagnosis, Treatment, Clinical Trials, Cardiac Care
+   - Description: Leading comprehensive amyloidosis treatment center in Western Canada with specialized cardiac unit.
+ 
+2. St. Paul's Hospital
+   - Vancouver, BC
+   - Phone: (604) 682-2344
+   - Email: cardiology@sth.ca
+   - Specialties: Cardiac Amyloidosis, Heart Failure
+   - Services: Cardiac Assessment, Specialized Imaging, Treatment
+   - Description: Specialized cardiac amyloidosis center with advanced imaging capabilities.
+ 
+ALBERTA (1 center):
+1. Foothills Medical Centre
+   - Calgary, AB
+   - Phone: (403) 944-1110
+   - Email: amyloidosis@ahs.ca
+   - Specialties: AL Amyloidosis, Multi-organ Care, Hematology
+   - Services: Diagnosis, Chemotherapy, Stem Cell Transplant, Monitoring
+   - Description: Alberta's primary amyloidosis treatment center with comprehensive care.
+ 
+ONTARIO (4 centers):
+1. Toronto General Hospital
+   - Toronto, ON
+   - Phone: (416) 340-4800
+   - Email: amyloidosis@uhn.ca
+   - Specialties: AL Amyloidosis, ATTR Amyloidosis, Cardiac Amyloidosis
+   - Services: Comprehensive Care, Transplant, Research, Clinical Trials
+   - Description: Canada's largest amyloidosis program with comprehensive multidisciplinary care.
+ 
+2. Princess Margaret Cancer Centre
+   - Toronto, ON
+   - Phone: (416) 946-4501
+   - Email: hematology@uhn.ca
+   - Specialties: AL Amyloidosis, Hematology, Stem Cell Transplant
+   - Services: Hematology, Stem Cell Transplant, Clinical Trials
+   - Description: Leading cancer center specializing in AL amyloidosis treatment.
+ 
+3. University of Ottawa Heart Institute
+   - Ottawa, ON
+   - Phone: (613) 696-7000
+   - Email: cardiology@ottawaheart.ca
+   - Specialties: Cardiac Amyloidosis, ATTR Amyloidosis
+   - Services: Cardiac Assessment, Specialized Imaging, Treatment
+   - Description: Specialized cardiac amyloidosis center with advanced diagnostic capabilities.
+ 
+4. Hamilton General Hospital
+   - Hamilton, ON
+   - Phone: (905) 527-4322
+   - Email: nephrology@hhsc.ca
+   - Specialties: AL Amyloidosis, Nephrology
+   - Services: Diagnosis, Treatment, Kidney Care
+   - Description: Regional amyloidosis center serving southwestern Ontario.
+ 
+QUEBEC (3 centers):
+1. Montreal Heart Institute
+   - Montreal, QC
+   - Phone: (514) 376-3330
+   - Email: amyloidosis@icm-mhi.org
+   - Specialties: Cardiac Amyloidosis, ATTR Amyloidosis, Research
+   - Services: Cardiac Care, Research, Clinical Trials, Genetic Testing
+   - Description: Leading cardiac amyloidosis research and treatment center in Quebec.
+ 
+2. Centre Hospitalier de l'Université de Montréal
+   - Montreal, QC
+   - Phone: (514) 890-8000
+   - Email: hematologie@chum.qc.ca
+   - Specialties: AL Amyloidosis, Hematology
+   - Services: Hematology, Diagnosis, Treatment
+   - Description: University hospital with specialized hematology-oncology amyloidosis program.
+ 
+3. Institut Universitaire de Cardiologie et de Pneumologie de Québec
+   - Quebec City, QC
+   - Phone: (418) 656-8711
+   - Email: cardiologie@criucpq.ulaval.ca
+   - Specialties: Cardiac Amyloidosis, Pulmonary Care
+   - Services: Cardiac Care, Pulmonary Assessment, Treatment
+   - Description: Specialized cardiac and pulmonary amyloidosis program.

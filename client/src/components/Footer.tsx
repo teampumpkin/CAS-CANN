@@ -231,9 +231,7 @@ export default function Footer() {
               <a href="/terms" className="text-white/70 hover:text-white transition-colors">
                 Terms of Service
               </a>
-              <div className="text-white/50">
-                Website by <span className="text-[#00AFE6] font-medium">Astient Labrador</span>
-              </div>
+
             </div>
           </div>
         </motion.div>

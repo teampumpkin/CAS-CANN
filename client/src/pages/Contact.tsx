@@ -45,7 +45,7 @@ export default function Contact() {
 
           {/* Email Section */}
           <motion.div
-            className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-200/50 dark:border-gray-400/30 shadow-2xl"
+            className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-200/50 dark:border-gray-400/30 shadow-2xl mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -73,6 +73,74 @@ export default function Contact() {
                 <Mail className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
                 <span className="text-xl">cas@amyloid.ca</span>
               </motion.a>
+            </div>
+          </motion.div>
+
+          {/* FAQ Section */}
+          <motion.div
+            className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-200/50 dark:border-gray-400/30 shadow-2xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+              Frequently Asked Questions
+            </h3>
+            
+            <div className="space-y-6">
+              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  How do I submit a new resource to the directory?
+                </h4>
+                <p className="text-gray-600 dark:text-white/70">
+                  You can submit resources by contacting us at cas@amyloid.ca with details about the resource you'd like to add. All submissions undergo review by our editorial team.
+                </p>
+              </div>
+
+              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  Can I update information in the healthcare directory/map?
+                </h4>
+                <p className="text-gray-600 dark:text-white/70">
+                  Yes! Healthcare professionals can update their directory information by contacting cas@amyloid.ca with their current details and credentials.
+                </p>
+              </div>
+
+              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  How do I join CAS as a healthcare professional? Is there a fee to join?
+                </h4>
+                <p className="text-gray-600 dark:text-white/70">
+                  Contact us at cas@amyloid.ca to submit a membership application and learn about membership fees.
+                </p>
+              </div>
+
+              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  Do you provide direct patient care?
+                </h4>
+                <p className="text-gray-600 dark:text-white/70">
+                  No, CAS does not provide direct patient care. We are a professional organization that supports healthcare providers and connects patients with appropriate care resources.
+                </p>
+              </div>
+
+              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  What information do you collect and how is it used?
+                </h4>
+                <p className="text-gray-600 dark:text-white/70">
+                  We collect only necessary information to provide our services. All data is handled according to our Privacy Policy and Canadian privacy laws. We never share personal information with third parties without consent.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  Can patients or family members/supports join the CAS?
+                </h4>
+                <p className="text-gray-600 dark:text-white/70">
+                  Yes, we welcome patients, family members, and support persons as part of the CAS community. Contact us at cas@amyloid.ca for information about involvement opportunities.
+                </p>
+              </div>
             </div>
           </motion.div>
         </motion.div>

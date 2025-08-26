@@ -450,31 +450,15 @@ export default function Directory() {
           ) : (
             <div className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-400/30">
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Clustered Geospatial Map View</h3>
-                <p className="text-gray-600 dark:text-white/70">Interactive map showing healthcare centers across Canada</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Interactive Healthcare Directory Map</h3>
+                <p className="text-gray-600 dark:text-white/70">Click on any location marker to view detailed healthcare center information</p>
               </div>
               
               <div className="relative w-full max-w-4xl mx-auto">
-                <img 
-                  src={canadaMapPath}
-                  alt="Canada Map showing healthcare centers"
-                  className="w-full h-auto rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-400/30"
+                <InteractiveCanadaMap 
+                  healthcareCenters={healthcareCenters}
+                  onCenterClick={handleCenterClick}
                 />
-                
-                {healthcareCenters.map((center) => (
-                  <motion.div
-                    key={center.id}
-                    className="absolute w-6 h-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full shadow-lg cursor-pointer hover:scale-125 transition-transform duration-300 z-10"
-                    style={{
-                      left: `${center.coordinates.x}%`,
-                      top: `${center.coordinates.y}%`
-                    }}
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 3, repeat: Infinity, delay: Math.random() * 2 }}
-                    onClick={() => handleCenterClick(center)}
-                    whileHover={{ scale: 1.3 }}
-                  />
-                ))}
               </div>
             </div>
           )}

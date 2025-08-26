@@ -165,7 +165,7 @@ export default function AboutAmyloidosisSection() {
                 </p>
               </div>
               <motion.a
-                href="#about-amyloidosis"
+                href="/about-amyloidosis"
                 className="group relative bg-gradient-to-r from-[#00DD89] to-[#00BB77] text-white px-10 py-4 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 inline-flex items-center gap-2"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

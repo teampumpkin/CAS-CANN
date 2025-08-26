@@ -72,7 +72,15 @@ export default function Header() {
       ]
     },
     { name: t('nav.directory'), href: '/directory' },
-    { name: t('nav.community'), href: '/community' },
+    {
+      name: t('nav.community'),
+      href: '#community',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'Community', href: '/community' },
+        { name: 'Get Involved', href: '/get-involved' },
+      ]
+    },
     { name: t('nav.events'), href: '/events' },
     { name: t('nav.cann'), href: '/cann' },
     { name: t('nav.joinCAS'), href: '/join-cas' },

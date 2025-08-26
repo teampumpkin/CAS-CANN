@@ -197,17 +197,17 @@ export default function Header() {
 
           {/* Theme Toggle & CTA Section */}
           <motion.div
-            className="hidden md:flex items-center gap-4"
+            className="hidden md:flex items-center gap-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1">
               <LanguageSwitcher />
               <ThemeToggle />
             </div>
 
-            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20">
+            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-3 py-2 rounded-full font-semibold text-xs hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20">
               {t('nav.getHelp')}
             </button>
           </motion.div>

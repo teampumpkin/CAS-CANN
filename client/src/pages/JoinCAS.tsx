@@ -640,12 +640,15 @@ export default function JoinCAS() {
                             }`}
                             onClick={() => handleInterestToggle(interest)}
                           >
-                            <input
-                              type="checkbox"
-                              checked={selectedInterests.includes(interest)}
-                              onChange={() => {}}
-                              className="w-4 h-4 text-[#00AFE6] bg-gray-100 border-gray-300 rounded focus:ring-[#00AFE6] focus:ring-2"
-                            />
+                            <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
+                              selectedInterests.includes(interest)
+                                ? 'bg-[#00AFE6] border-[#00AFE6]'
+                                : 'border-gray-300 dark:border-gray-500'
+                            }`}>
+                              {selectedInterests.includes(interest) && (
+                                <Check className="w-3 h-3 text-white" />
+                              )}
+                            </div>
                             <span className="text-sm font-medium">{interest}</span>
                           </label>
                         ))}
@@ -691,11 +694,21 @@ export default function JoinCAS() {
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <input
-                        type="checkbox"
-                        {...register("termsOfParticipation")}
-                        className="w-4 h-4 mt-0.5 text-[#00AFE6] bg-gray-100 border-gray-300 rounded focus:ring-[#00AFE6] focus:ring-2"
-                      />
+                      <div 
+                        className={`w-5 h-5 mt-0.5 rounded border-2 flex items-center justify-center cursor-pointer transition-all ${
+                          watch("termsOfParticipation")
+                            ? 'bg-[#00AFE6] border-[#00AFE6]'
+                            : 'border-gray-300 dark:border-gray-500'
+                        }`}
+                        onClick={() => {
+                          const current = watch("termsOfParticipation");
+                          setValue("termsOfParticipation", !current);
+                        }}
+                      >
+                        {watch("termsOfParticipation") && (
+                          <Check className="w-3 h-3 text-white" />
+                        )}
+                      </div>
                       <div>
                         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
                           I agree to the Terms of Participation <span className="text-red-500">*</span>
@@ -713,11 +726,21 @@ export default function JoinCAS() {
                     )}
 
                     <div className="flex items-start gap-3">
-                      <input
-                        type="checkbox"
-                        {...register("privacyPolicy")}
-                        className="w-4 h-4 mt-0.5 text-[#00AFE6] bg-gray-100 border-gray-300 rounded focus:ring-[#00AFE6] focus:ring-2"
-                      />
+                      <div 
+                        className={`w-5 h-5 mt-0.5 rounded border-2 flex items-center justify-center cursor-pointer transition-all ${
+                          watch("privacyPolicy")
+                            ? 'bg-[#00AFE6] border-[#00AFE6]'
+                            : 'border-gray-300 dark:border-gray-500'
+                        }`}
+                        onClick={() => {
+                          const current = watch("privacyPolicy");
+                          setValue("privacyPolicy", !current);
+                        }}
+                      >
+                        {watch("privacyPolicy") && (
+                          <Check className="w-3 h-3 text-white" />
+                        )}
+                      </div>
                       <div>
                         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
                           I agree to the Privacy Policy <span className="text-red-500">*</span>
@@ -735,11 +758,21 @@ export default function JoinCAS() {
                     )}
 
                     <div className="flex items-start gap-3">
-                      <input
-                        type="checkbox"
-                        {...register("newsletter")}
-                        className="w-4 h-4 mt-0.5 text-[#00AFE6] bg-gray-100 border-gray-300 rounded focus:ring-[#00AFE6] focus:ring-2"
-                      />
+                      <div 
+                        className={`w-5 h-5 mt-0.5 rounded border-2 flex items-center justify-center cursor-pointer transition-all ${
+                          watch("newsletter")
+                            ? 'bg-[#00AFE6] border-[#00AFE6]'
+                            : 'border-gray-300 dark:border-gray-500'
+                        }`}
+                        onClick={() => {
+                          const current = watch("newsletter");
+                          setValue("newsletter", !current);
+                        }}
+                      >
+                        {watch("newsletter") && (
+                          <Check className="w-3 h-3 text-white" />
+                        )}
+                      </div>
                       <div>
                         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
                           Subscribe to CAS Newsletter <span className="text-gray-500">(optional)</span>

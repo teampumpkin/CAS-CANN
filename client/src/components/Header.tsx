@@ -273,7 +273,7 @@ export default function Header() {
                             </button>
                           </div>
 
-                          <div className="space-y-4">
+                          <div className="space-y-4 max-h-96 overflow-y-auto">
                             {/* Font Size */}
                             <div className="space-y-2">
                               <div className="flex items-center justify-between">
@@ -307,6 +307,93 @@ export default function Header() {
                                   aria-label="Increase font size"
                                 >
                                   <Plus className="w-3 h-3" />
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* High Contrast */}
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <Contrast className="w-4 h-4 text-[#00AFE6]" />
+                                  <span className="text-sm font-medium text-gray-900 dark:text-white">High Contrast</span>
+                                </div>
+                                <button
+                                  onClick={() => document.documentElement.classList.toggle('accessibility-high-contrast')}
+                                  className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
+                                >
+                                  Toggle
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Focus Indicators */}
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <Eye className="w-4 h-4 text-[#00AFE6]" />
+                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Focus Indicators</span>
+                                </div>
+                                <button
+                                  onClick={() => document.documentElement.classList.toggle('accessibility-focus-visible')}
+                                  className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
+                                >
+                                  Toggle
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Dyslexia Font */}
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <Type className="w-4 h-4 text-[#00AFE6]" />
+                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Dyslexia Font</span>
+                                </div>
+                                <button
+                                  onClick={() => document.documentElement.classList.toggle('accessibility-dyslexia-font')}
+                                  className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
+                                >
+                                  Toggle
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Cursor Size */}
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <MousePointer className="w-4 h-4 text-[#00AFE6]" />
+                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Cursor Size</span>
+                                </div>
+                                <select 
+                                  className="px-2 py-1 text-xs border rounded bg-white dark:bg-gray-800"
+                                  onChange={(e) => {
+                                    document.documentElement.classList.remove('accessibility-cursor-large', 'accessibility-cursor-extra-large');
+                                    if (e.target.value !== 'normal') {
+                                      document.documentElement.classList.add(`accessibility-cursor-${e.target.value}`);
+                                    }
+                                  }}
+                                >
+                                  <option value="normal">Normal</option>
+                                  <option value="large">Large</option>
+                                  <option value="extra-large">Extra Large</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            {/* Reduced Motion */}
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <EyeOff className="w-4 h-4 text-[#00AFE6]" />
+                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Reduce Motion</span>
+                                </div>
+                                <button
+                                  onClick={() => document.documentElement.classList.toggle('accessibility-reduced-motion')}
+                                  className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
+                                >
+                                  Toggle
                                 </button>
                               </div>
                             </div>

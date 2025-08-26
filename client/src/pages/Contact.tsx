@@ -127,7 +127,7 @@ export default function Contact() {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-4 max-w-4xl mx-auto">
               {faqData.map((faq, index) => (
                 <motion.div
                   key={index}
@@ -138,22 +138,22 @@ export default function Contact() {
                 >
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors duration-200 group"
+                    className="w-full p-6 text-left flex items-start justify-between hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors duration-200 group"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                    <div className="flex items-start gap-4 flex-1">
+                      <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-1">
                         {index + 1}
                       </div>
-                      <h4 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-[#00AFE6] transition-colors duration-200">
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-[#00AFE6] transition-colors duration-200 leading-relaxed">
                         {faq.question}
                       </h4>
                     </div>
                     <motion.div
                       animate={{ rotate: openFAQ === index ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
-                      className="flex-shrink-0 ml-4"
+                      className="flex-shrink-0 ml-4 mt-1"
                     >
-                      <ChevronDown className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-[#00AFE6] transition-colors duration-200" />
+                      <ChevronDown className="w-6 h-6 text-gray-400 dark:text-gray-500 group-hover:text-[#00AFE6] transition-colors duration-200" />
                     </motion.div>
                   </button>
                   
@@ -166,9 +166,9 @@ export default function Contact() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6">
-                      <div className="pl-12">
-                        <p className="text-gray-600 dark:text-white/70 leading-relaxed">
+                    <div className="px-6 pb-6 border-t border-gray-200/50 dark:border-gray-600/30">
+                      <div className="pt-6 pl-12 pr-10">
+                        <p className="text-gray-600 dark:text-white/70 leading-relaxed text-base">
                           {faq.answer}
                         </p>
                       </div>

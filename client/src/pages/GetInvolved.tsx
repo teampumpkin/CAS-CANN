@@ -68,7 +68,7 @@ const participationWays = [
   {
     icon: UserPlus,
     title: "Join CAS",
-    description: "Become a member of our growing community. Clinicians, researchers, and health system leaders are especially encouraged to register.",
+    description: "CAS membership is exclusively for healthcare professionals including clinicians, researchers, and health system leaders. Patients and family members are valued community participants and can contribute through other ways listed here.",
     action: "Register Now",
     color: "from-[#00AFE6] to-[#00DD89]"
   },

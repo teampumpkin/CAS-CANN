@@ -543,10 +543,6 @@ export default function AboutAmyloidosis() {
                             </li>
                           ))}
                         </ul>
-                        <Link href="/resources?category=symptoms" className="text-[#00AFE6] hover:text-[#00DD89] text-sm flex items-center gap-1 transition-colors">
-                          <BookOpen className="w-3 h-3" />
-                          Symptom Resources
-                        </Link>
                       </div>
 
                       {/* Diagnosis */}
@@ -563,10 +559,6 @@ export default function AboutAmyloidosis() {
                             </li>
                           ))}
                         </ul>
-                        <Link href="/directory" className="text-[#00DD89] hover:text-[#00AFE6] text-sm flex items-center gap-1 transition-colors">
-                          <MapPin className="w-3 h-3" />
-                          Find Testing Centers
-                        </Link>
                       </div>
 
                       {/* Treatment */}
@@ -583,10 +575,6 @@ export default function AboutAmyloidosis() {
                             </li>
                           ))}
                         </ul>
-                        <Link href="/resources?category=treatment" className="text-[#00AFE6] hover:text-[#00DD89] text-sm flex items-center gap-1 transition-colors">
-                          <Target className="w-3 h-3" />
-                          Treatment Guides
-                        </Link>
                       </div>
                     </div>
 

@@ -192,7 +192,7 @@ export default function AboutAmyloidosisSection() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00DD89] to-[#00AFE6] mb-3">{t('about.stats.canadiansAffected')}</div>
-                <div className="text-gray-900 dark:text-white font-bold text-lg mb-2">{t('about.stats.canadiansAffectedLabel')}</div>
+                <div className="text-gray-900 dark:text-white font-extrabold text-xl mb-2">{t('about.stats.canadiansAffectedLabel')}</div>
                 <div className="text-gray-700 dark:text-white/70">{t('about.stats.canadiansAffectedDesc')}</div>
               </motion.div>
             </div>

@@ -61,6 +61,7 @@ function Router() {
         <Route path="/governance" component={Governance} />
         <Route path="/directory" component={Directory} />
         <Route path="/resources" component={Resources} />
+        <Route path="/resource-library" component={Resources} />
         <Route path="/partnerships" component={Partnerships} />
         <Route path="/news" component={News} />
         <Route path="/newsletter" component={Newsletter} />

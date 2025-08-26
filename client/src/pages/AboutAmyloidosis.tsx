@@ -86,7 +86,7 @@ export default function AboutAmyloidosis() {
       urgency: 'Different underlying causes and affected organs',
       symptoms: ['AA: Linked to long-standing inflammation, mostly affects kidneys', 'ALECT2: More common in Mexican, Punjabi, Native American, Middle Eastern descent', 'Aβ2M: Seen in long-term dialysis patients, affects bones and joints'],
       diagnosis: ['Biopsies, blood and urine analysis', 'Imaging: ECG, MRI, echocardiograms', 'Genetic testing for hereditary types', 'Specialized testing: mass spectrometry, immunohistochemistry'],
-      treatment: ['AA: Treat underlying disease to reduce SAA protein', 'ALECT2: Often underdiagnosed, mainly affects kidneys', 'Aβ2M: Becoming rarer due to improved dialysis techniques', 'Supportive care and research ongoing for most types'],
+      treatment: ['AA: Treat underlying disease to reduce SAA protein', 'ALECT2: Often under diagnosed, mainly affects kidneys', 'Aβ2M: Becoming rarer due to improved dialysis techniques', 'Supportive care and research ongoing for most types'],
       warningSign: 'Early diagnosis is critical for better outcomes'
     }
   ];

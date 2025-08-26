@@ -220,17 +220,17 @@ export default function Header() {
 
           {/* Theme Toggle & CTA Section */}
           <motion.div
-            className="hidden md:flex items-center gap-2"
+            className="hidden md:flex items-center gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-2">
               <LanguageSwitcher />
               <ThemeToggle />
               <button
                 onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                className="h-10 px-4 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center justify-center"
+                className="h-10 px-4 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center justify-center border border-gray-300 shadow-sm"
                 aria-label="Open accessibility tools"
                 aria-expanded={isAccessibilityOpen}
               >

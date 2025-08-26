@@ -74,7 +74,7 @@ const translations = {
     'about.stats.diagnosisTime': 'Can be up to 2-3 years',
     'about.stats.diagnosisTimeLabel': 'Average time to diagnosis',
     'about.stats.diagnosisTimeDesc': 'Many patients see multiple doctors before receiving proper diagnosis',
-    'about.stats.canadiansAffected': '3,000+',
+    'about.stats.canadiansAffected': 'Thousands of',
     'about.stats.canadiansAffectedLabel': 'Canadians affected',
     'about.stats.canadiansAffectedDesc': 'Estimated number of people living with amyloidosis in Canada',
     

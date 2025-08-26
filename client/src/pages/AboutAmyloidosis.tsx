@@ -599,8 +599,8 @@ export default function AboutAmyloidosis() {
           </div>
         </div>
       </section>
-      {/* Clinical Red Flags Checklist */}
-      <section id="clinical-red-flags" className="py-24 bg-gray-50 dark:bg-gray-900 relative">
+      {/* Clinical Red Flags Checklist - Hidden for now */}
+      {/* <section id="clinical-red-flags" className="py-24 bg-gray-50 dark:bg-gray-900 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -627,7 +627,6 @@ export default function AboutAmyloidosis() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* High-Risk Presentations */}
             <motion.div
               className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 dark:border-[#00AFE6]/40"
               initial={{ opacity: 0, x: -30 }}
@@ -666,7 +665,6 @@ export default function AboutAmyloidosis() {
               </div>
             </motion.div>
 
-            {/* Supporting Clinical Features */}
             <motion.div
               className="bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 dark:from-[#00DD89]/20 dark:to-[#00AFE6]/20 backdrop-blur-xl rounded-2xl p-8 border border-[#00DD89]/30 dark:border-[#00DD89]/40"
               initial={{ opacity: 0, x: 30 }}
@@ -708,7 +706,7 @@ export default function AboutAmyloidosis() {
 
 
         </div>
-      </section>
+      </section> */}
 
       {/* Comparison Table Section */}
       <section className="py-24 bg-white dark:bg-gray-900">

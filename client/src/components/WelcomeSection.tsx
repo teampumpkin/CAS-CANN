@@ -68,10 +68,7 @@ export default function WelcomeSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <p className="text-gray-600 dark:text-white/70 font-light">
-                {t('welcome.subtitle')}
-              </p>
-              
+
               <p className="text-gray-600 dark:text-white/70 font-light">
                 {t('welcome.description')}
               </p>

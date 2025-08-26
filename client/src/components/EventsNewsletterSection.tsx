@@ -248,13 +248,8 @@ export default function EventsNewsletterSection() {
             </p>
           </div>
 
-          {/* Horizontal Events Carousel */}
-          <div className="relative">
-            {/* Horizontal timeline line */}
-            <div className="absolute top-8 left-8 right-8 h-0.5 bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] rounded-full opacity-40"></div>
-            
-            {/* Events grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
+          {/* Events grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {events.map((event, index) => (
                 <motion.div
                   key={index}
@@ -264,18 +259,8 @@ export default function EventsNewsletterSection() {
                   transition={{ duration: 0.8, delay: index * 0.15 }}
                   viewport={{ once: true, margin: "-50px" }}
                 >
-                  {/* Timeline node - positioned at the top */}
-                  <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full border-2 border-gray-900 z-10">
-                    <motion.div
-                      className="w-full h-full bg-white rounded-full scale-50"
-                      animate={{ scale: [0.5, 0.8, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                    />
-                  </div>
-
-                  {/* Event card - positioned below timeline */}
+                  {/* Event card */}
                   <motion.div
-                    className="mt-12"
                     whileHover={{ scale: 1.02, y: -8 }}
                   >
                     <div className="group relative backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 hover:shadow-2xl overflow-hidden min-h-[400px] bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
@@ -367,9 +352,6 @@ export default function EventsNewsletterSection() {
                 </motion.div>
               ))}
             </div>
-
-
-          </div>
         </motion.div>
       </div>
     </section>

@@ -11,7 +11,6 @@ import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import AccessibilityTools from "@/components/AccessibilityTools";
 import { lazy, Suspense } from "react";
 import { Loader2 } from "lucide-react";
 
@@ -109,7 +108,6 @@ function App() {
               <Footer />
               <EnhancedScrollIndicator />
               <PerformanceOptimizer />
-              <AccessibilityTools />
             </div>
           <Toaster />
         </TooltipProvider>

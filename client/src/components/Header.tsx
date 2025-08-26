@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Menu, X, Phone, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Phone, ChevronDown, Accessibility, Type, Contrast, MousePointer, Eye, EyeOff, Keyboard, Volume2, Monitor, Sun, Moon, Minus, Plus, RotateCcw } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import casLogo from '@assets/l_cas_vert_rgb_1753253116732.png';
@@ -11,8 +11,31 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
+  const [fontSize, setFontSize] = useState(16);
   const [location] = useLocation();
   const { t } = useLanguage();
+
+  const increaseFontSize = () => {
+    if (fontSize < 24) {
+      const newSize = fontSize + 2;
+      setFontSize(newSize);
+      document.documentElement.style.fontSize = `${newSize}px`;
+    }
+  };
+
+  const decreaseFontSize = () => {
+    if (fontSize > 12) {
+      const newSize = fontSize - 2;
+      setFontSize(newSize);
+      document.documentElement.style.fontSize = `${newSize}px`;
+    }
+  };
+
+  const resetSettings = () => {
+    setFontSize(16);
+    document.documentElement.style.fontSize = '16px';
+  };
 
   // Function to check if current page matches navigation item
   const isPageActive = (href: string, dropdownItems?: any[]) => {
@@ -205,6 +228,14 @@ export default function Header() {
             <div className="flex items-center space-x-1">
               <LanguageSwitcher />
               <ThemeToggle />
+              <button
+                onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
+                className="p-2 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700"
+                aria-label="Open accessibility tools"
+                aria-expanded={isAccessibilityOpen}
+              >
+                <Accessibility className="w-4 h-4" />
+              </button>
             </div>
 
             <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-3 py-2 rounded-full font-semibold text-xs hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20">
@@ -310,6 +341,102 @@ export default function Header() {
           </div>
         </motion.div>
       </div>
+
+      {/* Accessibility Panel */}
+      <AnimatePresence>
+        {isAccessibilityOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[120] flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsAccessibilityOpen(false)}
+          >
+            <motion.div
+              className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#00AFE6] rounded-full flex items-center justify-center">
+                      <Accessibility className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                        Accessibility Tools
+                      </h2>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Customize your browsing experience
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setIsAccessibilityOpen(false)}
+                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    aria-label="Close accessibility tools"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <div className="space-y-6">
+                  {/* Font Size */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Type className="w-5 h-5 text-[#00AFE6]" />
+                        <span className="font-medium text-gray-900 dark:text-white">Text Size</span>
+                      </div>
+                      <span className="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                        {fontSize}px
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={decreaseFontSize}
+                        disabled={fontSize <= 12}
+                        className="p-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
+                        aria-label="Decrease font size"
+                      >
+                        <Minus className="w-4 h-4" />
+                      </button>
+                      <div className="flex-1 bg-gray-100 dark:bg-gray-800 rounded-lg h-2 relative">
+                        <div 
+                          className="bg-[#00AFE6] h-2 rounded-lg transition-all duration-300"
+                          style={{ width: `${((fontSize - 12) / 12) * 100}%` }}
+                        />
+                      </div>
+                      <button
+                        onClick={increaseFontSize}
+                        disabled={fontSize >= 24}
+                        className="p-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
+                        aria-label="Increase font size"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Reset Button */}
+                  <div className="pt-4 border-t dark:border-gray-800">
+                    <button
+                      onClick={resetSettings}
+                      className="w-full p-3 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center justify-center gap-2"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                      Reset to Default
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }

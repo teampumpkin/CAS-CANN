@@ -82,7 +82,7 @@ export default function Header() {
       ]
     },
     { name: t('nav.events'), href: '/events' },
-    { name: t('nav.cann'), href: '/cann' },
+    { name: t('nav.cann'), href: '/nursing-network' },
     { name: t('nav.joinCAS'), href: '/join-cas' },
     { name: t('nav.contact'), href: '/contact' }
   ];

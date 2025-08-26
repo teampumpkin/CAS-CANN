@@ -394,31 +394,31 @@ export default function About() {
             {[
               {
                 name: "Dr. Sarah Chen",
-                title: "Chair, Executive Committee",
+                title: "Medical Director",
                 institution: "Toronto General Hospital",
                 specialty: "Cardiology & Amyloidosis",
                 image: leadershipImage,
                 bio: "Leading expert in cardiac amyloidosis with 15+ years of experience in diagnosis and treatment."
               },
               {
-                name: "Dr. Michael Roberts",
-                title: "Vice-Chair",
+                name: "Dr. Michael Thompson",
+                title: "Clinical Research Lead",
                 institution: "Vancouver General Hospital",
                 specialty: "Hematology & Oncology",
                 image: collaborationImage,
                 bio: "Specializes in AL amyloidosis and plasma cell disorders, active researcher in novel therapies."
               },
               {
-                name: "Dr. Emma Thompson",
-                title: "Research Director",
+                name: "Dr. Jennifer Walsh",
+                title: "Patient Care Coordinator",
                 institution: "McGill University Health Centre",
                 specialty: "Nephrology & Research",
                 image: diagnosticImage,
                 bio: "Expert in renal amyloidosis and biomarker development, leads national research initiatives."
               },
               {
-                name: "Dr. James Wilson",
-                title: "Clinical Guidelines Chair",
+                name: "Dr. David Kumar",
+                title: "Technology Integration",
                 institution: "Calgary Foothills Hospital",
                 specialty: "Internal Medicine",
                 image: facilityImage,
@@ -426,15 +426,15 @@ export default function About() {
               },
               {
                 name: "Dr. Lisa Martinez",
-                title: "Education Committee Chair",
+                title: "Community Outreach",
                 institution: "The Ottawa Hospital",
                 specialty: "Pathology & Diagnostics",
                 image: partnershipImage,
                 bio: "Leads educational initiatives and professional development programs for clinicians."
               },
               {
-                name: "Dr. Robert Kim",
-                title: "Technology & Innovation",
+                name: "Dr. Robert Fraser",
+                title: "Quality Assurance",
                 institution: "Health Sciences Centre, Winnipeg",
                 specialty: "Digital Health & AI",
                 image: leadershipImage,

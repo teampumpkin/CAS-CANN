@@ -87,7 +87,7 @@ const translations = {
     'events.upcomingEvents': 'Upcoming Events',
     'events.latestNews': 'Latest News & Updates',
     'events.emailPlaceholder': 'Enter your email address',
-    'events.subscribe': 'Subscribe to Newsletter',
+    'events.joinCAS': 'Join CAS',
     'events.stayConnected': 'Stay Connected',
     'events.joinCommunity': 'Join Our Community',
     'events.joinCommunityDesc': 'Get exclusive access to research updates, community events, and expert insights delivered monthly.',

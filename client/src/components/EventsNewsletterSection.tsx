@@ -152,36 +152,17 @@ export default function EventsNewsletterSection() {
                   {t('events.joinCommunityDesc')}
                 </p>
 
-                <div className="space-y-4">
-                  <motion.div
-                    className="relative group"
-                    whileHover={{ scale: 1.02 }}
+                <div className="flex justify-center">
+                  <motion.button
+                    className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-12 py-4 rounded-2xl font-semibold text-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-3"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <input
-                      type="email"
-                      placeholder={t('events.emailPlaceholder')}
-                      className="w-full px-6 py-4 bg-white/90 dark:bg-white/10 backdrop-blur-sm border border-[#00AFE6]/30 dark:border-white/20 rounded-2xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 focus:outline-none focus:border-[#00AFE6] focus:bg-white/95 dark:focus:bg-white/20 transition-all duration-300"
-                    />
-                    <motion.button
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#00AFE6] text-white px-6 py-2 rounded-xl font-semibold hover:bg-[#0088CC] transition-colors duration-300"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {t('events.subscribe')}
-                    </motion.button>
-                  </motion.div>
-
-                  <div className="flex items-center gap-3 text-gray-600 dark:text-white/70 text-sm">
-                    <div className="flex -space-x-2">
-                      {[...Array(3)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="w-8 h-8 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-full border-2 border-gray-200 dark:border-white/20"
-                        />
-                      ))}
-                    </div>
-                    <span>{t('events.joinMembers')}</span>
-                  </div>
+                    <span>Join CAS</span>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </motion.button>
                 </div>
               </div>
 

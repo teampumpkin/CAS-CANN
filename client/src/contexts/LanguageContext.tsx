@@ -71,7 +71,7 @@ const translations = {
     'about.types.other.name': 'Other Types',
     'about.types.other.description': 'There are many other types of amyloidosis including systemic and localized forms, inherited and acquired',
     'about.types.other.prevalence': '5% of cases',
-    'about.stats.diagnosisTime': '2-3 years',
+    'about.stats.diagnosisTime': 'Can be up to 2-3 years',
     'about.stats.diagnosisTimeLabel': 'Average time to diagnosis',
     'about.stats.diagnosisTimeDesc': 'Many patients see multiple doctors before receiving proper diagnosis',
     'about.stats.canadiansAffected': '3,000+',

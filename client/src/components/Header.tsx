@@ -417,9 +417,7 @@ export default function Header() {
               </div>
             </div>
 
-            <button className="h-10 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-4 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20 flex items-center justify-center">
-              {t('nav.getHelp')}
-            </button>
+
           </motion.div>
 
           {/* Mobile Menu Button */}
@@ -510,12 +508,7 @@ export default function Header() {
                   <ThemeToggle />
                 </div>
               </div>
-              <button 
-                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-3 md:py-4 rounded-xl font-bold text-base hover:shadow-lg hover:scale-105 transition-all duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('nav.getHelp')}
-              </button>
+
             </div>
           </div>
         </motion.div>

@@ -279,39 +279,158 @@ export default function AboutAmyloidosis() {
             </p>
           </motion.div>
 
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              className="grid md:grid-cols-2 gap-8"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              {[
-                { icon: Heart, symptom: "Fatigue", description: "Persistent tiredness and lack of energy" },
-                { icon: TrendingUp, symptom: "Weight loss", description: "Unexplained loss of body weight" },
-                { icon: Droplets, symptom: "Swelling in legs/ankles", description: "Fluid retention causing visible swelling" },
-                { icon: Brain, symptom: "Shortness of breath", description: "Difficulty breathing during normal activities" },
-                { icon: Activity, symptom: "Numbness or tingling in hands/feet", description: "Loss of sensation or pins and needles feeling" }
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/30"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-[#00AFE6] dark:text-[#00AFE6] mb-2">{item.symptom}</h3>
-                      <p className="text-gray-700 dark:text-gray-200 text-sm leading-relaxed">{item.description}</p>
-                    </div>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Cardiac Symptoms */}
+              <motion.div
+                className="bg-gradient-to-br from-red-50/95 to-pink-50/95 dark:from-red-900/25 dark:to-pink-900/25 backdrop-blur-xl rounded-2xl p-6 border border-red-200/50 dark:border-red-400/30"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
+                    <Heart className="w-6 h-6 text-white" />
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  <h3 className="text-xl font-bold text-red-700 dark:text-red-300">Cardiac Symptoms</h3>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    'Shortness of breath',
+                    'Chest pain',
+                    'Irregular heartbeat',
+                    'Swelling in legs/ankles',
+                    'Fatigue during normal activities'
+                  ].map((symptom, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-200 text-sm">{symptom}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Neurological Symptoms */}
+              <motion.div
+                className="bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 backdrop-blur-xl rounded-2xl p-6 border border-blue-200/50 dark:border-blue-400/30"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center">
+                    <Brain className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-blue-700 dark:text-blue-300">Neurological Symptoms</h3>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    'Numbness in hands/feet',
+                    'Tingling sensations',
+                    'Muscle weakness',
+                    'Carpal tunnel syndrome',
+                    'Balance problems'
+                  ].map((symptom, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-200 text-sm">{symptom}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Gastrointestinal Symptoms */}
+              <motion.div
+                className="bg-gradient-to-br from-green-50/95 to-emerald-50/95 dark:from-green-900/25 dark:to-emerald-900/25 backdrop-blur-xl rounded-2xl p-6 border border-green-200/50 dark:border-green-400/30"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                    <Activity className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-green-700 dark:text-green-300">Gastrointestinal Symptoms</h3>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    'Persistent diarrhea',
+                    'Nausea and vomiting',
+                    'Abdominal pain',
+                    'Loss of appetite',
+                    'Malabsorption symptoms'
+                  ].map((symptom, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-200 text-sm">{symptom}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Renal-urinary Symptoms */}
+              <motion.div
+                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/30"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
+                    <Droplets className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#00AFE6] dark:text-[#00AFE6]">Renal-urinary Symptoms</h3>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    'Proteinuria (protein in urine)',
+                    'Decreased urine output',
+                    'Kidney dysfunction',
+                    'Urinary retention',
+                    'Bladder problems'
+                  ].map((symptom, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-200 text-sm">{symptom}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Systemic Symptoms */}
+              <motion.div
+                className="bg-gradient-to-br from-purple-50/95 to-violet-50/95 dark:from-purple-900/25 dark:to-violet-900/25 backdrop-blur-xl rounded-2xl p-6 border border-purple-200/50 dark:border-purple-400/30"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-purple-700 dark:text-purple-300">Systemic Symptoms</h3>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    'Unexplained weight loss',
+                    'Enlarged tongue',
+                    'Easy bruising',
+                    'Changes in skin texture',
+                    'Chronic fatigue'
+                  ].map((symptom, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-200 text-sm">{symptom}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

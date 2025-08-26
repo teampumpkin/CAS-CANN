@@ -17,11 +17,11 @@ export default function Footer() {
 
   const sitemapLinks = [
     { name: "Homepage", href: "/", icon: Heart, status: "available" },
-    { name: "Patient Resources", href: "/resources", icon: FileText, status: "available" },
+    { name: "About Amyloidosis", href: "/about-amyloidosis", icon: FileText, status: "available" },
     { name: "Healthcare Directory", href: "/directory", icon: MapPin, status: "available" },
-    { name: "Join CAS", href: "/join-cas", icon: Users, status: "available" },
-    { name: "Upload Resource", href: "/upload-resource", icon: BookOpen, status: "available" },
-    { name: "Support Groups", href: "/get-involved", icon: Users, status: "available" }
+    { name: "About CAS", href: "/about", icon: Users, status: "available" },
+    { name: "Resources", href: "/resources", icon: BookOpen, status: "available" },
+    { name: "Contact Us", href: "/contact", icon: Mail, status: "available" }
   ];
 
   const legalLinks = [

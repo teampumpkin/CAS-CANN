@@ -222,21 +222,7 @@ export default function AboutAmyloidosis() {
                   </div>
                 </div>
                 
-                {/* Key Statistics */}
-                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200/50 dark:border-gray-400/30">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-[#00AFE6] mb-1">6-24</div>
-                    <div className="text-xs text-gray-600 dark:text-white/60">months survival (untreated AL)</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-[#00DD89] mb-1">25+</div>
-                    <div className="text-xs text-gray-600 dark:text-white/60">treatment centers</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-[#00AFE6] mb-1">1:100K</div>
-                    <div className="text-xs text-gray-600 dark:text-white/60">prevalence</div>
-                  </div>
-                </div>
+
               </div>
               
               {/* Floating Medical Icons */}

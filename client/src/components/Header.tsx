@@ -95,7 +95,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-3 bg-gray-100/95 backdrop-blur-xl rounded-full px-8 py-3 border border-gray-300/50 shadow-lg">
+            <div className="flex items-center gap-1 bg-gray-100/95 backdrop-blur-xl rounded-full px-4 py-2 border border-gray-300/50 shadow-lg">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -103,7 +103,7 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap ${
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-xs font-semibold border whitespace-nowrap ${
                         isPageActive(item.href, item.dropdownItems)
                           ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
                           : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
@@ -116,7 +116,7 @@ export default function Header() {
                       whileTap={{ scale: 0.98 }}
                     >
                       {item.name}
-                      <ChevronDown className={`w-3 h-3 transition-all duration-300 ${
+                      <ChevronDown className={`w-2.5 h-2.5 transition-all duration-300 ${
                         activeDropdown === item.name ? 'rotate-180 text-[#00AFE6]' : 
                         isPageActive(item.href, item.dropdownItems) ? 'text-[#00AFE6]' : ''
                       }`} />
@@ -127,7 +127,7 @@ export default function Header() {
                   ) : (
                     <motion.a
                       href={item.href}
-                      className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 text-sm font-semibold border relative whitespace-nowrap ${
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-xs font-semibold border relative whitespace-nowrap ${
                         isPageActive(item.href)
                           ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
                           : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'

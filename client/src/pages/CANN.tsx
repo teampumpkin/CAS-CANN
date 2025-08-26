@@ -88,7 +88,7 @@ export default function CANN() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <ParallaxBackground />
+      <ParallaxBackground>{null}</ParallaxBackground>
       
       {/* Hero Section */}
       <section className="py-32 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
@@ -100,7 +100,7 @@ export default function CANN() {
           {[...Array(5)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-96 h-96 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full"
+              className="absolute w-96 h-96 bg-gradient-to-r from-pink-500/10 to-purple-600/10 rounded-full"
               style={{
                 left: `${20 + i * 20}%`,
                 top: `${10 + i * 15}%`,
@@ -199,7 +199,7 @@ export default function CANN() {
                   <div className="space-y-4">
                     {networkData.mission.keyPoints.map((point, index) => (
                       <div key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-[#00AFE6] rounded-full mt-2 flex-shrink-0" />
+                        <div className="w-2 h-2 bg-pink-600 rounded-full mt-2 flex-shrink-0" />
                         <span className="text-gray-700 dark:text-white/80">{point}</span>
                       </div>
                     ))}
@@ -318,7 +318,7 @@ export default function CANN() {
                 <div className={`w-12 h-12 bg-gradient-to-r ${objective.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <objective.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-[#00AFE6] transition-colors duration-300">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-pink-600 transition-colors duration-300">
                   {objective.title}
                 </h3>
                 <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed">
@@ -372,7 +372,7 @@ export default function CANN() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-[#00AFE6] transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-pink-600 transition-colors duration-300">
                       {achievement.title}
                     </h3>
                     <p className="text-gray-600 dark:text-white/70 leading-relaxed">

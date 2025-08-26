@@ -253,12 +253,12 @@ export default function EventsNewsletterSection() {
             {/* Horizontal timeline line */}
             <div className="absolute top-8 left-8 right-8 h-0.5 bg-gradient-to-r from-[#00AFE6] via-[#00DD89] to-[#00AFE6] rounded-full opacity-40"></div>
             
-            {/* Events grid with horizontal scroll */}
-            <div className="flex gap-8 overflow-x-auto pb-8 px-8 scrollbar-hide">
+            {/* Events grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
               {events.map((event, index) => (
                 <motion.div
                   key={index}
-                  className="relative flex-shrink-0 w-96"
+                  className="relative"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.15 }}
@@ -368,34 +368,7 @@ export default function EventsNewsletterSection() {
               ))}
             </div>
 
-            {/* Scroll indicators */}
-            <div className="flex justify-center mt-8 gap-2">
-              {events.map((_, index) => (
-                <motion.div
-                  key={index}
-                  className="w-2 h-2 bg-gray-400 dark:bg-white/30 rounded-full transition-all duration-300 hover:bg-gray-600 dark:hover:bg-white/60 cursor-pointer"
-                  whileHover={{ scale: 1.5 }}
-                />
-              ))}
-            </div>
 
-            {/* Navigation hint */}
-            <div className="flex justify-center mt-6">
-              <motion.div 
-                className="inline-flex items-center gap-2 text-gray-600 dark:text-white/60 text-sm"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
-                <span>Scroll horizontally to view more events</span>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-4 h-4" />
-                </motion.div>
-              </motion.div>
-            </div>
           </div>
         </motion.div>
       </div>

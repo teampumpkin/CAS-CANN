@@ -250,109 +250,44 @@ export default function Directory() {
         </div>
       </section>
       
-      {/* Enhanced Filters and Search Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      {/* Interactive Map Section */}
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">
-              Filter & Search Directory
-            </h2>
-            <p className="text-gray-600 dark:text-white/70 text-center max-w-2xl mx-auto">
-              Use advanced filters to find the right healthcare providers for your needs
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            {/* Search Bar */}
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search centers, cities, or specialties..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl pl-12 pr-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-[#00AFE6] transition-colors"
+          <div className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-400/30">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Interactive Healthcare Directory Map</h3>
+              <p className="text-gray-600 dark:text-white/70">Click on any location marker to view detailed healthcare center information</p>
+            </div>
+            
+            <div className="relative w-full max-w-4xl mx-auto">
+              <img 
+                src={canadaMapPath}
+                alt="Canada Map showing healthcare centers"
+                className="w-full h-auto rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-400/30"
               />
-            </div>
-            
-            {/* Province Filter */}
-            <div>
-              <select
-                value={selectedProvince || ''}
-                onChange={(e) => setSelectedProvince(e.target.value || null)}
-                className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-[#00AFE6] transition-colors"
-              >
-                <option value="">All Provinces/Territories</option>
-                {provinces.map(province => (
-                  <option key={province.code} value={province.code}>
-                    {province.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            
-            {/* Program Type Filter */}
-            <div>
-              <select
-                value={selectedProgramType || ''}
-                onChange={(e) => setSelectedProgramType(e.target.value || null)}
-                className="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-[#00AFE6] transition-colors"
-              >
-                <option value="">All Program Types</option>
-                {programTypes.map(type => (
-                  <option key={type.name} value={type.name}>
-                    {type.name} ({type.count})
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          
-          {/* Results Summary with View Mode Toggle */}
-          <div className="flex justify-between items-center mb-6">
-            <div className="text-gray-600 dark:text-white/70">
-              Showing {startIndex + 1}-{Math.min(endIndex, filteredCenters.length)} of {filteredCenters.length} centers
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500 dark:text-white/50">Last Reviewed:</span>
-                <span className="text-sm text-gray-900 dark:text-white font-medium">December 2024</span>
-                <Clock className="w-4 h-4 text-gray-400" />
-              </div>
               
-              {/* Enhanced View Mode Toggle */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`group px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 ${
-                    viewMode === 'list' 
-                      ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-2xl shadow-[#00AFE6]/25' 
-                      : 'bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/20 dark:hover:bg-white/20'
-                  }`}
-                >
-                  <Hospital className="w-4 h-4" />
-                  Browse Directory
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button
-                  onClick={() => setViewMode('map')}
-                  className={`group px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 ${
-                    viewMode === 'map' 
-                      ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-2xl shadow-[#00AFE6]/25' 
-                      : 'bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/20 dark:hover:bg-white/20'
-                  }`}
-                >
-                  <MapPin className="w-4 h-4" />
-                  Map View
-                </button>
-              </div>
+              {/* Interactive Map Points */}
+              {healthcareCenters.map((center) => (
+                <motion.div
+                  key={center.id}
+                  className="absolute w-6 h-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full shadow-lg cursor-pointer hover:scale-125 transition-transform duration-300 z-10"
+                  style={{
+                    left: `${center.coordinates.x}%`,
+                    top: `${center.coordinates.y}%`
+                  }}
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 3, repeat: Infinity, delay: Math.random() * 2 }}
+                  onClick={() => handleCenterClick(center)}
+                  whileHover={{ scale: 1.3 }}
+                />
+              ))}
             </div>
           </div>
         </div>
       </section>
       
-      {/* Enhanced Directory Listing */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      {/* Enhanced Directory Listing - Hidden for now */}
+      {/* <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           {viewMode === 'list' ? (
             <>
@@ -368,7 +303,6 @@ export default function Directory() {
                     onClick={() => handleCenterClick(center)}
                     whileHover={{ scale: 1.02 }}
                   >
-                    {/* Header with metadata */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r from-[#00AFE6] to-[#00DD89]">
@@ -394,7 +328,6 @@ export default function Directory() {
                       </div>
                     </div>
                     
-                    {/* Subspecialty */}
                     <div className="mb-4">
                       <h4 className="text-sm font-semibold text-gray-700 dark:text-white/80 mb-2">Primary Subspecialty</h4>
                       <div className="flex flex-wrap gap-2">
@@ -406,7 +339,6 @@ export default function Directory() {
                       </div>
                     </div>
                     
-                    {/* Services */}
                     <div className="mb-4">
                       <h4 className="text-sm font-semibold text-gray-700 dark:text-white/80 mb-2">Services Available</h4>
                       <div className="flex flex-wrap gap-2">
@@ -418,7 +350,6 @@ export default function Directory() {
                       </div>
                     </div>
                     
-                    {/* Referral Status */}
                     <div className="mb-4">
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-600 dark:text-white/70">Referral Status:</span>
@@ -426,7 +357,6 @@ export default function Directory() {
                       </div>
                     </div>
                     
-                    {/* Contact Quick Actions */}
                     <div className="flex gap-2 pt-4 border-t border-gray-200 dark:border-gray-600">
                       <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white rounded-3xl text-sm font-medium hover:shadow-lg transition-all duration-300">
                         <Phone className="w-4 h-4" />
@@ -445,7 +375,6 @@ export default function Directory() {
                 ))}
               </div>
               
-              {/* Pagination */}
               {totalPages > 1 && (
                 <div className="flex justify-center items-center gap-2 mt-12">
                   <button
@@ -481,7 +410,6 @@ export default function Directory() {
               )}
             </>
           ) : (
-            /* Map View */
             <div className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl p-8 border border-gray-200/50 dark:border-gray-400/30">
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Clustered Geospatial Map View</h3>
@@ -495,7 +423,6 @@ export default function Directory() {
                   className="w-full h-auto rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-400/30"
                 />
                 
-                {/* Interactive Map Points */}
                 {healthcareCenters.map((center) => (
                   <motion.div
                     key={center.id}
@@ -514,65 +441,9 @@ export default function Directory() {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
       
-      {/* Contributor CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:to-[#00DD89]/10">
-        <div className="container mx-auto px-6">
-          <div className="text-center">
-            <motion.div
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/30 mb-6"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Upload className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 tracking-wide">CONTRIBUTE TO DIRECTORY</span>
-            </motion.div>
-            
-            <motion.h2
-              className="text-4xl lg:text-5xl font-bold font-rosarivo mb-8 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Know a clinic we're missing?
-              </span>
-            </motion.h2>
-            
-            <motion.p
-              className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              Help us maintain the most comprehensive directory of amyloidosis care providers. Suggest new clinics or update existing information.
-            </motion.p>
-            
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <button className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-3">
-                <Upload className="w-5 h-5" />
-                Suggest a Clinic
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white px-8 py-4 rounded-xl font-semibold border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/20 dark:hover:bg-white/20 transition-all duration-300 flex items-center gap-3">
-                <FileText className="w-5 h-5" />
-                Update Information
-              </button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+
       
       {/* Inclusion Criteria & Review Cycle Documentation - Hidden for now */}
       {/* <section className="py-16 bg-white dark:bg-gray-900">

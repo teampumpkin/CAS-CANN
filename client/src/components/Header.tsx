@@ -230,7 +230,7 @@ export default function Header() {
               <ThemeToggle />
               <button
                 onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                className="px-3 py-2 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700"
+                className="h-10 px-4 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center justify-center"
                 aria-label="Open accessibility tools"
                 aria-expanded={isAccessibilityOpen}
               >
@@ -238,7 +238,7 @@ export default function Header() {
               </button>
             </div>
 
-            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-3 py-2 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20">
+            <button className="h-10 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-4 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20 flex items-center justify-center">
               {t('nav.getHelp')}
             </button>
           </motion.div>

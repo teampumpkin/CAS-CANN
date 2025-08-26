@@ -172,7 +172,7 @@ export default function JoinCANN() {
                 <img 
                   src={cannLogoImg}
                   alt="Canadian Amyloidosis Nursing Network Logo"
-                  className="h-20 mx-auto"
+                  className="h-14 sm:h-16 md:h-20 lg:h-24 xl:h-28 mx-auto"
                 />
               </div>
               

@@ -251,24 +251,6 @@ export default function Directory() {
         </div>
       </section>
       
-      {/* Interactive Map Section */}
-      <section className="py-12 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-400/30">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Interactive Healthcare Directory Map</h3>
-              <p className="text-gray-600 dark:text-white/70">Click on any location marker to view detailed healthcare center information</p>
-            </div>
-            
-            <div className="relative w-full max-w-4xl mx-auto">
-              <InteractiveCanadaMap 
-                healthcareCenters={healthcareCenters}
-                onCenterClick={handleCenterClick}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
       
       {/* Enhanced Directory Listing */}
       <section className="py-16 bg-white dark:bg-gray-900">

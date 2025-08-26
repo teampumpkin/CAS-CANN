@@ -60,7 +60,7 @@ const translations = {
     'about.earlyDetection.subdescription': 'Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.',
     'about.learnMore': 'Learn More',
     'about.types.al.name': 'AL Amyloidosis',
-    'about.types.al.description': 'Most common form, affects heart, kidneys, liver, and nervous system',
+    'about.types.al.description': 'Hematologic malignancy, affects heart, kidneys, and nervous system and other organs',
     'about.types.al.prevalence': '70% of cases',
     'about.types.aa.name': 'AA Amyloidosis',
     'about.types.aa.description': 'Secondary to chronic inflammatory conditions',

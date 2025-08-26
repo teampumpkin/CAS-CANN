@@ -259,7 +259,7 @@ export default function JoinCAS() {
                 onClick={() => document.getElementById('join-form')?.scrollIntoView({ behavior: 'smooth' })}
                 className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-10 py-6 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group"
               >
-                <span>Apply for Membership</span>
+                <span>Register for Membership</span>
                 <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
               

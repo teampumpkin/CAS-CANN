@@ -162,12 +162,21 @@ export default function About() {
               </motion.h1>
               
               <motion.p
-                className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-10 max-w-lg"
+                className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-6 max-w-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                {t('about.hero.description')}
+                Building a national platform for clinical practice support.
+              </motion.p>
+              
+              <motion.p
+                className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-10 max-w-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through evidence-based collaboration.
               </motion.p>
               
 

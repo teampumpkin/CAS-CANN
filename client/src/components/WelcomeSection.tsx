@@ -92,57 +92,7 @@ export default function WelcomeSection() {
                   alt="Medical professional working with healthcare technology"
                   className="w-full h-full object-cover"
                 />
-                
-                {/* Stats Overlay ON the image - Crawford Style */}
-                <motion.div
-                  className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                >
-                  <div className="px-8 py-6">
-                    <div className="flex">
-                      {/* First Stat */}
-                      <motion.div
-                        className="flex-1 text-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.6 }}
-                      >
-                        <div className="text-3xl lg:text-4xl font-bold text-white mb-1">15+</div>
-                        <div className="text-xs text-white/90 font-medium">Years Supporting</div>
-                      </motion.div>
-                      
-                      {/* Vertical Divider */}
-                      <div className="w-px bg-white/30 mx-6"></div>
-                      
-                      {/* Second Stat */}
-                      <motion.div
-                        className="flex-1 text-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.7 }}
-                      >
-                        <div className="text-3xl lg:text-4xl font-bold text-white mb-1">1K+</div>
-                        <div className="text-xs text-white/90 font-medium">Patients Helped</div>
-                      </motion.div>
-                      
-                      {/* Vertical Divider */}
-                      <div className="w-px bg-white/30 mx-6"></div>
-                      
-                      {/* Third Stat */}
-                      <motion.div
-                        className="flex-1 text-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.8 }}
-                      >
-                        <div className="text-3xl lg:text-4xl font-bold text-white mb-1">100%</div>
-                        <div className="text-xs text-white/90 font-medium">Patient Focused</div>
-                      </motion.div>
-                    </div>
-                  </div>
-                </motion.div>
+
               </div>
               
               {/* Premium floating accent elements */}

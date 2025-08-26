@@ -176,23 +176,7 @@ export default function Footer() {
                   ))}
                 </div>
 
-                {/* Social Links */}
-                <div className="mt-6">
-                  <h4 className="text-white font-medium mb-3 text-sm">Follow Us</h4>
-                  <div className="flex gap-2">
-                    {socialLinks.map((social, index) => (
-                      <a
-                        key={index}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center transition-all duration-300 hover:bg-white/20 ${social.color} hover:scale-105`}
-                      >
-                        <social.icon className="w-4 h-4" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
+
               </motion.div>
             </div>
 

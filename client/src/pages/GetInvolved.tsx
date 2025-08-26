@@ -1012,7 +1012,7 @@ export default function GetInvolved() {
                     
                     {/* Network Info Overlay */}
                     <motion.div
-                      className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-2xl shadow-2xl"
+                      className="absolute bottom-6 left-6 right-6 bg-gray-900/90 backdrop-blur-xl border border-gray-700/50 text-white rounded-2xl shadow-2xl"
                       initial={{ opacity: 0, y: 40 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.5 }}
@@ -1024,10 +1024,10 @@ export default function GetInvolved() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.6 }}
                           >
-                            <div className="text-lg font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1">
+                            <div className="text-lg font-bold text-white mb-1">
                               Dedicated Nursing Network
                             </div>
-                            <div className="text-sm text-white/80">Connecting nurses across Canada</div>
+                            <div className="text-sm text-gray-300">Connecting nurses across Canada</div>
                           </motion.div>
                         </div>
                       </div>

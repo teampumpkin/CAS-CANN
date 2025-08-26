@@ -171,9 +171,7 @@ export default function EventsNewsletterSection() {
               <div className="grid grid-cols-2 gap-6">
                 {[
                   { value: 5000, suffix: '+', label: t('events.stats.subscribers'), icon: Mail, color: 'from-blue-500 to-cyan-500', bgColor: 'from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20' },
-                  { value: 50, suffix: '+', label: t('events.stats.eventsYear'), icon: Calendar, color: 'from-emerald-500 to-green-500', bgColor: 'from-emerald-50/90 to-green-50/90 dark:from-emerald-900/20 dark:to-green-900/20' },
-                  { value: 13, suffix: '', label: t('events.stats.provinces'), icon: MapPin, color: 'from-purple-500 to-violet-500', bgColor: 'from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20' },
-                  { value: 95, suffix: '%', label: t('events.stats.satisfaction'), icon: Star, color: 'from-amber-500 to-orange-500', bgColor: 'from-amber-50/90 to-orange-50/90 dark:from-amber-900/20 dark:to-orange-900/20' }
+                  { value: 13, suffix: '', label: t('events.stats.provinces'), icon: MapPin, color: 'from-purple-500 to-violet-500', bgColor: 'from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20' }
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -200,9 +198,7 @@ export default function EventsNewsletterSection() {
                         {/* Enhanced icon */}
                         <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                           {index === 0 && <Mail className="w-6 h-6 text-white" />}
-                          {index === 1 && <Calendar className="w-6 h-6 text-white" />}
-                          {index === 2 && <MapPin className="w-6 h-6 text-white" />}
-                          {index === 3 && <Star className="w-6 h-6 text-white" />}
+                          {index === 1 && <MapPin className="w-6 h-6 text-white" />}
                         </div>
                         
                         {/* Value with enhanced gradient */}

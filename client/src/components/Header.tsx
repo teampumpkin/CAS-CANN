@@ -126,7 +126,7 @@ export default function Header() {
                 >
                   {item.hasDropdown ? (
                     <motion.button
-                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-xs font-semibold border whitespace-nowrap ${
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap ${
                         isPageActive(item.href, item.dropdownItems)
                           ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
                           : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
@@ -150,7 +150,7 @@ export default function Header() {
                   ) : (
                     <motion.a
                       href={item.href}
-                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-xs font-semibold border relative whitespace-nowrap ${
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative whitespace-nowrap ${
                         isPageActive(item.href)
                           ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
                           : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
@@ -238,7 +238,7 @@ export default function Header() {
               </button>
             </div>
 
-            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-3 py-2 rounded-full font-semibold text-xs hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20">
+            <button className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-3 py-2 rounded-full font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 border border-transparent hover:border-white/20">
               {t('nav.getHelp')}
             </button>
           </motion.div>

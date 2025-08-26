@@ -44,21 +44,16 @@ export default function Header() {
       hasDropdown: true,
       dropdownItems: [
         { name: 'Resource Library', href: '/resources' },
-        { name: 'Upload Resource', href: '/upload-resource' },
+        { name: 'Partnerships And Other Amyloidosis Organizations', href: '/partnerships' },
+        { name: 'News and updates', href: '/news' },
+        { name: 'Newsletter', href: '/newsletter' },
       ]
     },
     { name: t('nav.directory'), href: '/directory' },
-    {
-      name: t('nav.community'),
-      href: '#community',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Join CAS', href: '/join-cas' },
-        { name: 'Join CANN', href: '/join-cann' },
-        { name: 'Get Involved', href: '/get-involved' },
-        { name: 'Events', href: '/get-involved#events' },
-      ]
-    },
+    { name: t('nav.community'), href: '/community' },
+    { name: t('nav.events'), href: '/events' },
+    { name: t('nav.cann'), href: '/cann' },
+    { name: t('nav.joinCAS'), href: '/join-cas' },
     { name: t('nav.contact'), href: '/contact' }
   ];
 

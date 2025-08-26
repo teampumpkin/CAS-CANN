@@ -19,6 +19,9 @@ const translations = {
     'nav.resources': 'Resources',
     'nav.directory': 'Directory',
     'nav.community': 'Community',
+    'nav.events': 'Events',
+    'nav.cann': 'CANN',
+    'nav.joinCAS': 'Join CAS',
     'nav.contact': 'Contact',
     'nav.getHelp': 'Get Help',
     
@@ -511,6 +514,9 @@ const translations = {
     'nav.resources': 'Ressources',
     'nav.directory': 'Répertoire',
     'nav.community': 'Communauté',
+    'nav.events': 'Événements',
+    'nav.cann': 'CANN',
+    'nav.joinCAS': 'Rejoindre CAS',
     'nav.contact': 'Contact',
     'nav.getHelp': 'Obtenir de l\'aide',
     

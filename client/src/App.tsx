@@ -36,6 +36,11 @@ const JoinCANN = lazy(() => import("@/pages/JoinCANN"));
 const AccessibilityStatement = lazy(() => import("@/pages/AccessibilityStatement"));
 const ContributorPortal = lazy(() => import("@/pages/ContributorPortal"));
 const NotFound = lazy(() => import("@/pages/not-found"));
+const Partnerships = lazy(() => import("@/pages/Partnerships"));
+const News = lazy(() => import("@/pages/News"));
+const Newsletter = lazy(() => import("@/pages/Newsletter"));
+const Community = lazy(() => import("@/pages/Community"));
+const Events = lazy(() => import("@/pages/Events"));
 
 // Loading component
 const PageLoader = () => (
@@ -57,7 +62,12 @@ function Router() {
         <Route path="/governance" component={Governance} />
         <Route path="/directory" component={Directory} />
         <Route path="/resources" component={Resources} />
+        <Route path="/partnerships" component={Partnerships} />
+        <Route path="/news" component={News} />
+        <Route path="/newsletter" component={Newsletter} />
         <Route path="/upload-resource" component={UploadResource} />
+        <Route path="/community" component={Community} />
+        <Route path="/events" component={Events} />
         <Route path="/get-involved" component={GetInvolved} />
         <Route path="/join" component={JoinCAS} />
         <Route path="/join-cas" component={JoinCAS} />

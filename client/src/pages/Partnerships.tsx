@@ -1,0 +1,358 @@
+import { motion } from 'framer-motion';
+import { ExternalLink, Globe, Heart, Users, Handshake, ArrowRight, Building2, Stethoscope, GraduationCap, Network } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import ParallaxBackground from '../components/ParallaxBackground';
+import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
+
+export default function Partnerships() {
+  const { t } = useLanguage();
+
+  const partnerships = [
+    {
+      category: "International Organizations",
+      icon: Globe,
+      organizations: [
+        {
+          name: "Amyloidosis Support Groups",
+          description: "Global network of patient support organizations",
+          website: "https://amyloidosis.org",
+          country: "International"
+        },
+        {
+          name: "International Society of Amyloidosis",
+          description: "Worldwide scientific organization for amyloidosis research",
+          website: "https://isa-amyloidosis.org",
+          country: "International"
+        },
+        {
+          name: "Amyloidosis Research Consortium",
+          description: "Collaborative research initiative",
+          website: "https://amyloidosisresearch.org",
+          country: "International"
+        }
+      ]
+    },
+    {
+      category: "North American Partners",
+      icon: Heart,
+      organizations: [
+        {
+          name: "Amyloidosis Foundation",
+          description: "Leading US-based amyloidosis patient organization",
+          website: "https://amyloidosis.org",
+          country: "United States"
+        },
+        {
+          name: "AL Amyloidosis Foundation",
+          description: "Specialized support for AL amyloidosis patients",
+          website: "https://alamyloidosis.org",
+          country: "United States"
+        },
+        {
+          name: "TTR Amyloidosis Support Network",
+          description: "Focus on hereditary transthyretin amyloidosis",
+          website: "https://ttramyloidosis.org",
+          country: "United States"
+        }
+      ]
+    },
+    {
+      category: "Healthcare Institutions",
+      icon: Building2,
+      organizations: [
+        {
+          name: "Mayo Clinic Amyloidosis Program",
+          description: "Comprehensive amyloidosis care and research",
+          website: "https://mayoclinic.org/amyloidosis",
+          country: "United States"
+        },
+        {
+          name: "Boston University Amyloidosis Center",
+          description: "Leading research and treatment center",
+          website: "https://bu.edu/amyloidosis",
+          country: "United States"
+        },
+        {
+          name: "Princess Margaret Cancer Centre",
+          description: "Canadian amyloidosis treatment excellence",
+          website: "https://uhn.ca",
+          country: "Canada"
+        }
+      ]
+    },
+    {
+      category: "Research Networks",
+      icon: GraduationCap,
+      organizations: [
+        {
+          name: "Canadian Amyloidosis Research Network",
+          description: "Collaborative research across Canada",
+          website: "#",
+          country: "Canada"
+        },
+        {
+          name: "European Amyloidosis Network",
+          description: "Pan-European research collaboration",
+          website: "https://europeanamyloidosis.org",
+          country: "Europe"
+        },
+        {
+          name: "Global Amyloidosis Registry",
+          description: "International patient data collaboration",
+          website: "https://globalamyloidosis.org",
+          country: "International"
+        }
+      ]
+    }
+  ];
+
+  const collaborationTypes = [
+    {
+      icon: Users,
+      title: "Patient Support",
+      description: "Collaborative patient advocacy and support programs"
+    },
+    {
+      icon: Stethoscope,
+      title: "Clinical Guidelines",
+      description: "Joint development of evidence-based treatment protocols"
+    },
+    {
+      icon: Network,
+      title: "Research Collaboration",
+      description: "Shared research initiatives and data exchange"
+    },
+    {
+      icon: GraduationCap,
+      title: "Education Programs",
+      description: "Joint educational initiatives for healthcare professionals"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+      {/* Hero Section */}
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        <ParallaxBackground className="absolute inset-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"
+            style={{ backgroundImage: `url(${healthcareProfessionalImg})` }}
+          />
+        </ParallaxBackground>
+        
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/20 via-white/50 to-[#00DD89]/15 dark:from-[#00AFE6]/30 dark:via-gray-900/50 dark:to-[#00DD89]/25" />
+        
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-sm border border-[#00AFE6]/30 rounded-full px-6 py-2 mb-6"
+          >
+            <Handshake className="w-4 h-4 text-[#00AFE6]" />
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Strategic Partnerships</span>
+          </motion.div>
+          
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-4xl md:text-6xl font-bold mb-6"
+          >
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+              Partnerships &
+            </span>
+            <br />
+            <span className="text-gray-800 dark:text-white">
+              Amyloidosis Organizations
+            </span>
+          </motion.h1>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
+          >
+            Building bridges across the global amyloidosis community through strategic partnerships, 
+            collaborative research, and shared patient advocacy initiatives.
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Button size="lg" className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 rounded-3xl px-8 py-3">
+              Explore Partnerships
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+            <Button variant="outline" size="lg" className="border-[#00AFE6] text-[#00AFE6] hover:bg-[#00AFE6]/10 rounded-3xl px-8 py-3">
+              Contact Us
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Collaboration Types Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
+              Types of Collaboration
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Our partnerships span multiple areas of focus to maximize impact for the amyloidosis community
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {collaborationTypes.map((type, index) => (
+              <motion.div
+                key={type.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-900 rounded-3xl">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <type.icon className="w-8 h-8 text-[#00AFE6]" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-white">
+                      {type.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                      {type.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partner Organizations Section */}
+      <section className="py-20 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
+              Partner Organizations
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Working together with leading organizations worldwide to advance amyloidosis care and research
+            </p>
+          </motion.div>
+
+          <div className="space-y-16">
+            {partnerships.map((category, categoryIndex) => (
+              <motion.div
+                key={category.category}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-xl flex items-center justify-center">
+                    <category.icon className="w-6 h-6 text-[#00AFE6]" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+                    {category.category}
+                  </h3>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {category.organizations.map((org, orgIndex) => (
+                    <motion.div
+                      key={org.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: orgIndex * 0.1 }}
+                      viewport={{ once: true }}
+                      whileHover={{ y: -5 }}
+                    >
+                      <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-800 rounded-3xl group">
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-lg font-semibold text-gray-800 dark:text-white group-hover:text-[#00AFE6] transition-colors">
+                            {org.name}
+                          </CardTitle>
+                          <div className="text-sm text-[#00AFE6] font-medium">
+                            {org.country}
+                          </div>
+                        </CardHeader>
+                        <CardContent className="pt-0">
+                          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+                            {org.description}
+                          </p>
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="p-0 h-auto text-[#00AFE6] hover:text-[#00AFE6]/80 hover:bg-transparent"
+                            asChild
+                          >
+                            <a href={org.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                              Visit Website
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partnership CTA Section */}
+      <section className="py-20 bg-gradient-to-br from-[#00AFE6]/10 via-white to-[#00DD89]/10 dark:from-[#00AFE6]/20 dark:via-gray-900 dark:to-[#00DD89]/20">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800 dark:text-white">
+              Partner With Us
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+              Join our network of organizations working to improve outcomes for amyloidosis patients worldwide. 
+              Together, we can accelerate research, improve care, and support patients and families.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 rounded-3xl px-8 py-3">
+                Explore Partnership Opportunities
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+              <Button variant="outline" size="lg" className="border-[#00AFE6] text-[#00AFE6] hover:bg-[#00AFE6]/10 rounded-3xl px-8 py-3">
+                Contact Partnership Team
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}

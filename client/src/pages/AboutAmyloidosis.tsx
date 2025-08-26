@@ -168,17 +168,7 @@ export default function AboutAmyloidosis() {
                 Amyloidosis refers to a group of rare diseases caused by abnormal protein deposits (called amyloid) building up in organs and tissues. These misfolded proteins disrupt normal body functions, leading to serious health complications.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Link href="#clinical-red-flags" className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-3">
-                  <AlertTriangle className="w-5 h-5" />
-                  Clinical Red Flags
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link href="/directory" className="bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white px-8 py-4 rounded-xl font-semibold border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/20 dark:hover:bg-white/20 transition-all duration-300 flex items-center gap-3">
-                  <MapPin className="w-5 h-5" />
-                  Find Specialists
-                </Link>
-              </div>
+
               
               <div className="bg-red-50/80 dark:bg-red-900/20 backdrop-blur-xl rounded-xl p-6 border border-red-200/50 dark:border-red-400/30">
                 <div className="flex items-start gap-4">

@@ -82,7 +82,16 @@ export default function Header() {
       ]
     },
     { name: t('nav.events'), href: '/events' },
-    { name: t('nav.cann'), href: '/nursing-network' },
+    {
+      name: t('nav.cann'),
+      href: '#nursing-network',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'About/Join CANN', href: '/nursing-network' },
+        { name: 'Resources/Events', href: '/join-nursing-network' },
+        { name: 'CANN Member Login', href: '/cann-member-login' },
+      ]
+    },
     { name: t('nav.joinCAS'), href: '/join-cas' },
     { name: t('nav.contact'), href: '/contact' }
   ];

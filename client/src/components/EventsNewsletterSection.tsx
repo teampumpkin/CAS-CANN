@@ -153,7 +153,8 @@ export default function EventsNewsletterSection() {
                 </p>
 
                 <div className="flex justify-center">
-                  <motion.button
+                  <motion.a
+                    href="/join-cas"
                     className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-12 py-4 rounded-2xl font-semibold text-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-3"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
@@ -162,7 +163,7 @@ export default function EventsNewsletterSection() {
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </motion.button>
+                  </motion.a>
                 </div>
               </div>
 

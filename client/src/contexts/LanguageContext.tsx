@@ -98,7 +98,7 @@ const translations = {
     'events.stats.disciplines': 'Disciplines',
     'events.stats.satisfaction': 'Satisfaction',
     'events.communityCalendar': 'Community Calendar',
-    'events.communityCalendarDesc': 'Connect with experts, patients, and researchers through our comprehensive event program.',
+    'events.communityCalendarDesc': 'Learn about different events and programs for the amyloidosis community within the CAS, Canada and abroad.',
     
     // Directory Section
     'directory.badge': 'Find Care',

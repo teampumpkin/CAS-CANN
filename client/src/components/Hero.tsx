@@ -65,16 +65,7 @@ export default function Hero() {
         {/* Top spacer */}
         <div className="flex-1 flex items-center justify-center pt-12 pb-12">
           <div className="max-w-7xl mx-auto text-center">
-            {/* Decorative badge */}
-            <motion.div
-              className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
-              <span className="text-white/90 font-medium tracking-wide">{t('hero.badge')}</span>
-            </motion.div>
+
 
             {/* Main headline */}
             <motion.h1

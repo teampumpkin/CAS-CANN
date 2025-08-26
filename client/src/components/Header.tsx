@@ -28,7 +28,6 @@ export default function Header() {
   };
 
   const navItems = [
-    { name: t('nav.home'), href: '/' },
     {
       name: t('nav.about'),
       href: '#about',

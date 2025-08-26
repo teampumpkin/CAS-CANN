@@ -38,7 +38,7 @@ Preferred communication style: Simple, everyday language.
 - **Contact & Footer Enhancement**: Professional contact system with dedicated email addresses, comprehensive FAQ, and bilingual UX.
 - **About Pages Redesign**: Medical professional focus for "About Amyloidosis" (clinical red flags, comparison tables, diagnostic pathways) and clinical practice focus for "About CAS" (tool curation, diagnostic support, peer learning, clinical impact metrics).
 - **Performance Optimization**: Comprehensive image compression using an `OptimizedImage` component with lazy loading, bundle optimization, and query optimization.
-- **Navigation**: Enhanced design with prominent CAS logo, mobile optimization, and fixed scroll behavior.
+- **Navigation**: Enhanced design with prominent CAS logo serving as home link (removed separate Home navigation item), mobile optimization, and fixed scroll behavior.
 - **Interactive Healthcare Directory Map**: Features 25+ real facilities across Canada with clickable markers, detailed modals, and color-coded center types.
 - **CANN (Canadian Amyloidosis Network) Integration**: Dedicated page with network information, statistics, and professional objectives.
 

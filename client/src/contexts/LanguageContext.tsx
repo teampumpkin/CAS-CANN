@@ -92,7 +92,7 @@ const translations = {
     'events.joinCommunity': 'Join Our Community',
     'events.joinCommunityDesc': 'Get exclusive access to research updates, community events, and expert insights delivered monthly.',
     'events.joinMembers': 'Join 5,000+ community members',
-    'events.stats.subscribers': 'Subscribers',
+    'events.stats.members': 'Members',
     'events.stats.eventsYear': 'Events/Year',
     'events.stats.provinces': 'Provinces',
     'events.stats.satisfaction': 'Satisfaction',

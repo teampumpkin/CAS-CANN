@@ -170,7 +170,7 @@ export default function EventsNewsletterSection() {
               {/* Stats with animated counters */}
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { value: 5000, suffix: '+', label: t('events.stats.subscribers'), icon: Mail, color: 'from-blue-500 to-cyan-500', bgColor: 'from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20' },
+                  { value: 180, suffix: '', label: t('events.stats.members'), icon: Users, color: 'from-blue-500 to-cyan-500', bgColor: 'from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20' },
                   { value: 13, suffix: '', label: t('events.stats.provinces'), icon: MapPin, color: 'from-purple-500 to-violet-500', bgColor: 'from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20' }
                 ].map((stat, index) => (
                   <motion.div
@@ -197,7 +197,7 @@ export default function EventsNewsletterSection() {
                       <div className="relative z-10">
                         {/* Enhanced icon */}
                         <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                          {index === 0 && <Mail className="w-6 h-6 text-white" />}
+                          {index === 0 && <Users className="w-6 h-6 text-white" />}
                           {index === 1 && <MapPin className="w-6 h-6 text-white" />}
                         </div>
                         

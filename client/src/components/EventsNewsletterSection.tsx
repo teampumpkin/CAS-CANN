@@ -258,76 +258,44 @@ export default function EventsNewsletterSection() {
                 >
                   {/* Event card */}
                   <motion.div
-                    whileHover={{ scale: 1.02, y: -8 }}
+                    whileHover={{ scale: 1.02, y: -4 }}
                   >
-                    <div className="group relative backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 hover:shadow-2xl overflow-hidden min-h-[400px] bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:from-[#00AFE6]/12 hover:to-[#00DD89]/12 dark:hover:from-[#00AFE6]/20 dark:hover:to-[#00DD89]/20 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-[#00AFE6]/25 dark:hover:shadow-[#00AFE6]/20">
-                      {/* Animated glow effect */}
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/20 via-[#00DD89]/20 to-[#00AFE6]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                      
-                      {/* Shimmer effect */}
-                      <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out skew-x-12" />
+                    <div className="group relative rounded-3xl p-6 border transition-all duration-300 hover:shadow-xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50">
+                      {/* Header with Icon and Badge */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className={`w-12 h-12 bg-gradient-to-br ${event.gradient} rounded-xl flex items-center justify-center shadow-md`}>
+                          <event.icon className="w-6 h-6 text-white" />
+                        </div>
+                        <span className="px-3 py-1 bg-[#00AFE6] text-white text-xs font-semibold rounded-full">
+                          {event.type}
+                        </span>
                       </div>
 
-                      {/* Background effects */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} opacity-0 group-hover:opacity-8 transition-opacity duration-500 rounded-3xl`} />
-                      
-                      {/* Micro animations */}
-                      <motion.div
-                        className="absolute top-3 right-3 w-2 h-2 bg-[#00AFE6] rounded-full"
-                        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
-                      />
+                      {/* Title */}
+                      <h4 className="text-lg font-bold font-rosarivo leading-tight text-gray-900 dark:text-white mb-3">
+                        {event.title}
+                      </h4>
 
-                      <div className="relative z-10 h-full flex flex-col">
-                        {/* Header */}
-                        <div className="flex items-start gap-4 mb-6">
-                          <div className={`w-14 h-14 bg-gradient-to-br ${event.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                            <event.icon className="w-7 h-7 text-white" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-3">
-                              <span className="px-3 py-1 bg-[#00AFE6] text-white text-xs font-semibold rounded-full">
-                                {event.type}
-                              </span>
-                            </div>
-                            <h4 className="text-xl font-bold font-rosarivo leading-tight text-gray-900 dark:text-white">
-                              {event.title}
-                            </h4>
-                          </div>
-                        </div>
+                      {/* Date */}
+                      <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">
+                        {event.date}
+                      </div>
 
-                        {/* Date */}
-                        <div className="text-sm mb-4 font-medium text-gray-600 dark:text-gray-400">
-                          {event.date}
-                        </div>
+                      {/* Description */}
+                      <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
+                        {event.description}
+                      </p>
 
-                        {/* Description */}
-                        <p className={`text-sm leading-relaxed mb-8 flex-1 ${
-                          index === 0 
-                            ? 'text-blue-700 dark:text-blue-300'
-                            : index === 1
-                            ? 'text-emerald-700 dark:text-emerald-300'
-                            : index === 2
-                            ? 'text-purple-700 dark:text-purple-300'
-                            : index === 3
-                            ? 'text-pink-700 dark:text-pink-300'
-                            : 'text-orange-700 dark:text-orange-300'
-                        }`}>
-                          {event.description}
-                        </p>
-
-                        {/* Footer */}
-                        <div className="flex justify-center pt-6 border-t border-gray-200 dark:border-white/10 mt-auto">
-                          <motion.button
-                            className="group/btn inline-flex items-center gap-2 bg-[#00AFE6] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#0088CC] transition-all duration-300"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <span>Join Event</span>
-                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform duration-300" />
-                          </motion.button>
-                        </div>
+                      {/* Footer */}
+                      <div className="mt-auto">
+                        <motion.button
+                          className="w-full inline-flex items-center justify-center gap-2 bg-[#00AFE6] text-white px-4 py-3 rounded-2xl text-sm font-semibold hover:bg-[#0088CC] transition-all duration-300"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <span>Join Event</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </motion.button>
                       </div>
                     </div>
                   </motion.div>

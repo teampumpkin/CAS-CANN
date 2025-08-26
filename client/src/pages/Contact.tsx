@@ -167,10 +167,13 @@ export default function Contact() {
                     className="overflow-hidden"
                   >
                     <div className="px-6 pb-6 border-t border-gray-200/50 dark:border-gray-600/30">
-                      <div className="pt-6 pl-12 pr-10">
-                        <p className="text-gray-600 dark:text-white/70 leading-relaxed text-base">
-                          {faq.answer}
-                        </p>
+                      <div className="pt-6">
+                        <div className="flex gap-4">
+                          <div className="w-8 flex-shrink-0"></div>
+                          <p className="text-gray-600 dark:text-white/70 leading-relaxed text-base text-left">
+                            {faq.answer}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </motion.div>

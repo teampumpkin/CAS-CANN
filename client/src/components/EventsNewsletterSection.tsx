@@ -8,33 +8,30 @@ export default function EventsNewsletterSection() {
   const events = [
     {
       icon: Users,
-      title: 'Patient & Family Conference',
+      title: 'Canadian Amyloidosis Summit',
       description: 'Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.',
-      date: 'November 15-16, 2024',
+      date: 'October 31 – November 2, 2025',
       gradient: 'from-[#00AFE6] to-[#0088CC]',
       bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
-      attendees: '250+',
-      type: 'In-Person'
+      type: 'Hybrid'
     },
     {
       icon: Video,
-      title: 'Monthly Research Webinars',
-      description: 'Expert presentations on the latest treatment advances, diagnostic techniques, and clinical trial updates.',
-      date: 'First Thursday of each month',
+      title: 'CAS Journal Club',
+      description: 'Expert presentations of clinical cases and related discussion, journal review and/or clinical trial updates.',
+      date: 'Five times per year, Thursday afternoons',
       gradient: 'from-[#00DD89] to-[#00BB77]',
       bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
-      attendees: '500+',
       type: 'Virtual'
     },
     {
-      icon: Heart,
-      title: 'Support Group Meetings',
-      description: 'Virtual and in-person meetings across Canada providing emotional support and practical guidance.',
-      date: 'Weekly sessions available',
+      icon: Globe,
+      title: 'International and Other Amyloidosis Events',
+      description: 'Different events and programs related to amyloidosis around the world.',
+      date: 'Various dates throughout the year',
       gradient: 'from-[#00AFE6] to-[#00DD89]',
       bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
-      attendees: '50+',
-      type: 'Hybrid'
+      type: 'Support'
     }
   ];
 

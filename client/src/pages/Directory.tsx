@@ -270,9 +270,63 @@ export default function Directory() {
         </div>
       </section>
       
-      {/* Enhanced Directory Listing - Hidden for now */}
-      {/* <section className="py-16 bg-white dark:bg-gray-900">
+      {/* Enhanced Directory Listing */}
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/30 mb-6">
+              <Hospital className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 tracking-wide">HEALTHCARE CENTERS</span>
+            </div>
+            
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Complete Directory of
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Amyloidosis Centers
+              </span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Browse our comprehensive database of {healthcareCenters.length} verified healthcare centers across Canada specializing in amyloidosis care.
+            </p>
+          </motion.div>
+
+          <div className="flex justify-center mb-8">
+            <div className="flex bg-gray-100 dark:bg-gray-800 rounded-3xl p-1">
+              <button
+                onClick={() => setViewMode('list')}
+                className={`px-6 py-3 rounded-3xl text-sm font-medium transition-all duration-300 ${
+                  viewMode === 'list'
+                    ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg'
+                    : 'text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white'
+                }`}
+              >
+                <List className="w-4 h-4 inline mr-2" />
+                List View
+              </button>
+              <button
+                onClick={() => setViewMode('map')}
+                className={`px-6 py-3 rounded-3xl text-sm font-medium transition-all duration-300 ${
+                  viewMode === 'map'
+                    ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg'
+                    : 'text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white'
+                }`}
+              >
+                <Map className="w-4 h-4 inline mr-2" />
+                Map View
+              </button>
+            </div>
+          </div>
+
           {viewMode === 'list' ? (
             <>
               <div className="grid lg:grid-cols-2 gap-8">
@@ -425,7 +479,7 @@ export default function Directory() {
             </div>
           )}
         </div>
-      </section> */}
+      </section>
       
 
       

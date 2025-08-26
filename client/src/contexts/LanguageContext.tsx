@@ -69,7 +69,7 @@ const translations = {
     'about.types.hereditary.description': 'Infiltrative condition with both hereditary and wild-type (age-related) forms',
     'about.types.hereditary.prevalence': '5% of cases',
     'about.types.other.name': 'Other Types',
-    'about.types.other.description': 'Including β2-microglobulin and localized forms',
+    'about.types.other.description': 'There are many other types of amyloidosis including systemic and localized forms, inherited and acquired',
     'about.types.other.prevalence': '5% of cases',
     'about.stats.diagnosisTime': '2-3 years',
     'about.stats.diagnosisTimeLabel': 'Average time to diagnosis',

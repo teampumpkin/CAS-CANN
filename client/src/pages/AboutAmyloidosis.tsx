@@ -864,62 +864,31 @@ export default function AboutAmyloidosis() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Canadian Cardiovascular Society',
-                description: 'Canadian guidelines for cardiac amyloidosis diagnosis and management',
-                url: 'https://www.ccs.ca',
-                icon: Heart,
-                color: 'from-[#00AFE6] to-[#00DD89]',
-                bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25',
-                borderColor: 'border-[#00AFE6]/30'
-              },
-              {
-                title: 'Mayo Clinic Guidelines',
-                description: 'Comprehensive amyloidosis diagnostic and treatment protocols',
-                url: 'https://www.mayoclinic.org',
-                icon: Microscope,
-                color: 'from-[#00DD89] to-[#00AFE6]',
-                bgColor: 'from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/25 dark:to-[#00AFE6]/25',
-                borderColor: 'border-[#00DD89]/30'
-              },
-              {
-                title: 'NHS Clinical Guidelines',
-                description: 'UK National Health Service amyloidosis management guidelines',
-                url: 'https://www.nhs.uk',
-                icon: FileText,
-                color: 'from-[#00AFE6] to-[#00DD89]',
-                bgColor: 'from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25',
-                borderColor: 'border-[#00AFE6]/30'
-              }
-            ].map((guideline, index) => (
-              <motion.div
-                key={index}
-                className={`bg-gradient-to-br ${guideline.bgColor} backdrop-blur-xl rounded-2xl p-8 border ${guideline.borderColor} hover:scale-105 transition-all duration-300 group`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
+          <div className="max-w-2xl mx-auto">
+            <motion.div
+              className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 hover:scale-105 transition-all duration-300 group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-6">
+                <Heart className="w-8 h-8 text-white" />
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Canadian Cardiovascular Society</h3>
+              <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6">Canadian guidelines for cardiac amyloidosis diagnosis and management</p>
+              
+              <a
+                href="https://www.ccs.ca"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300"
               >
-                <div className={`w-16 h-16 bg-gradient-to-r ${guideline.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-6`}>
-                  <guideline.icon className="w-8 h-8 text-white" />
-                </div>
-                
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{guideline.title}</h3>
-                <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6">{guideline.description}</p>
-                
-                <a
-                  href={guideline.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 bg-gradient-to-r ${guideline.color} text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300`}
-                >
-                  <span>Access Guidelines</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </motion.div>
-            ))}
+                <span>Access Guidelines</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </motion.div>
           </div>
         </div>
       </section>

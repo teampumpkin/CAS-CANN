@@ -50,15 +50,15 @@ export default function AboutAmyloidosis() {
     {
       id: 'al',
       type: 'AL (Light-Chain) Amyloidosis',
-      subtitle: 'Caused by abnormal plasma cells producing light chains',
+      subtitle: 'Caused by abnormal plasma cells producing light chain fragments of antibodies',
       icon: Heart,
       color: 'from-[#00AFE6] to-[#00DD89]',
       borderColor: 'border-[#00AFE6]/30',
       prevalence: 'Often diagnosed after age 50; affects both men and women',
       urgency: 'Related to multiple myeloma (10-15% overlap)',
-      symptoms: ['Leg swelling', 'Fatigue', 'Irregular heartbeat', 'Enlarged tongue', 'Skin changes (bruising, purple patches around eyes)'],
-      diagnosis: ['Tissue biopsy', 'Blood/urine tests for light chains', 'Bone marrow biopsy', 'Imaging tests (ECG, MRI, echocardiogram)'],
-      treatment: ['Chemotherapy', 'Steroids', 'Proteasome inhibitors', 'Monoclonal antibodies', 'Stem cell transplant (in select cases)', 'Supportive care to manage symptoms and organ function'],
+      symptoms: ['Leg swelling', 'Fatigue', 'Shortness of breath', 'Enlarged tongue (sometimes)', 'Skin changes (sometimes, i.e., bruising, purple patches around eyes)'],
+      diagnosis: ['Bone marrow or other tissue biopsy', 'Blood/urine tests for protein/light chains', 'Imaging tests (MRI, ultrasound, others)'],
+      treatment: ['Steroids', 'Proteasome inhibitors', 'Monoclonal antibodies', 'Stem cell transplant (in select cases)', 'Supportive care to manage symptoms and organ function'],
       warningSign: 'Target abnormal plasma cells with various therapies'
     },
     {

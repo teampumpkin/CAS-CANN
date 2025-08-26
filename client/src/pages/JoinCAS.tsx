@@ -39,7 +39,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Checkbox } from "@/components/ui/checkbox";
+
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -720,9 +720,11 @@ export default function JoinCAS() {
                             onClick={() => handleInterestToggle(interest)}
                           >
                             <div className="flex items-center">
-                              <Checkbox
+                              <input
+                                type="checkbox"
                                 checked={selectedInterests.includes(interest)}
-                                className="!h-4 !w-4 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                                onChange={() => {}} // Handled by parent onClick
+                                className="h-4 w-4 rounded border-gray-300 text-[#00AFE6] focus:ring-[#00AFE6] focus:ring-2"
                               />
                             </div>
                             <span className={`font-medium transition-colors ${
@@ -797,9 +799,10 @@ export default function JoinCAS() {
                 <CardContent className="p-8">
                   <div className="space-y-6">
                     <div className="flex items-start gap-4 p-6 bg-white dark:bg-white/5 rounded-2xl border-2 border-gray-100 dark:border-white/10">
-                      <Checkbox
+                      <input
+                        type="checkbox"
                         {...register("termsOfParticipation")}
-                        className="mt-1 !h-4 !w-4 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                        className="mt-1 h-4 w-4 rounded border-gray-300 text-[#00AFE6] focus:ring-[#00AFE6] focus:ring-2"
                       />
                       <div className="flex-1">
                         <label className="text-base font-semibold text-gray-700 dark:text-white/80">
@@ -822,9 +825,10 @@ export default function JoinCAS() {
                     )}
 
                     <div className="flex items-start gap-4 p-6 bg-white dark:bg-white/5 rounded-2xl border-2 border-gray-100 dark:border-white/10">
-                      <Checkbox
+                      <input
+                        type="checkbox"
                         {...register("privacyPolicy")}
-                        className="mt-1 !h-4 !w-4 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                        className="mt-1 h-4 w-4 rounded border-gray-300 text-[#00AFE6] focus:ring-[#00AFE6] focus:ring-2"
                       />
                       <div className="flex-1">
                         <label className="text-base font-semibold text-gray-700 dark:text-white/80">
@@ -847,9 +851,10 @@ export default function JoinCAS() {
                     )}
 
                     <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:to-[#00DD89]/10 rounded-2xl border-2 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
-                      <Checkbox
+                      <input
+                        type="checkbox"
                         {...register("newsletter")}
-                        className="mt-1 !h-4 !w-4 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                        className="mt-1 h-4 w-4 rounded border-gray-300 text-[#00AFE6] focus:ring-[#00AFE6] focus:ring-2"
                       />
                       <div className="flex-1">
                         <label className="text-base font-semibold text-gray-700 dark:text-white/80">

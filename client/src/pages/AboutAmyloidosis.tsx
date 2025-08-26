@@ -924,71 +924,7 @@ export default function AboutAmyloidosis() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-white dark:bg-gray-900 relative border-t border-gray-200 dark:border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Take Action
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Today
-              </span>
-            </h2>
-            
-            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto mb-12">
-              Early detection and proper care can make a significant difference. Connect with specialists and access resources to support your journey.
-            </p>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <motion.div
-                className="bg-gradient-to-br from-blue-50/95 to-indigo-50/95 dark:from-blue-900/25 dark:to-indigo-900/25 backdrop-blur-xl rounded-2xl p-8 border border-blue-200/50 dark:border-blue-400/30"
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <MapPin className="w-12 h-12 text-[#00AFE6] mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-blue-800 dark:text-blue-100 mb-4">Find Expert Care</h3>
-                <p className="text-blue-600 dark:text-blue-300 mb-6">
-                  Connect with amyloidosis specialists and treatment centers across Canada.
-                </p>
-                <Link href="/directory" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                  Find a Clinic
-                  <ExternalLink className="w-4 h-4" />
-                </Link>
-              </motion.div>
-
-              <motion.div
-                className="bg-gradient-to-br from-emerald-50/95 to-green-50/95 dark:from-emerald-900/25 dark:to-green-900/25 backdrop-blur-xl rounded-2xl p-8 border border-emerald-200/50 dark:border-emerald-400/30"
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <BookOpen className="w-12 h-12 text-[#00DD89] mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-emerald-800 dark:text-emerald-100 mb-4">Access Resources</h3>
-                <p className="text-emerald-600 dark:text-emerald-300 mb-6">
-                  Explore educational materials, treatment guides, and support resources.
-                </p>
-                <Link href="/resources" className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 border border-gray-900/20 dark:border-white/20 text-gray-900 dark:text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-900/20 dark:hover:bg-white/20 transition-all duration-300">
-                  View Resources
-                  <ExternalLink className="w-4 h-4" />
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
       {/* Related Resources & Detailed Links Section */}
       <section className="py-16 bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-white/10">
         <div className="container mx-auto px-6">

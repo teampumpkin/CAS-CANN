@@ -258,44 +258,52 @@ export default function EventsNewsletterSection() {
                 >
                   {/* Event card */}
                   <motion.div
-                    whileHover={{ scale: 1.02, y: -4 }}
+                    whileHover={{ scale: 1.02, y: -6 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                   >
-                    <div className="group relative rounded-3xl p-6 border transition-all duration-300 hover:shadow-xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50">
-                      {/* Header with Icon and Badge */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div className={`w-12 h-12 bg-gradient-to-br ${event.gradient} rounded-xl flex items-center justify-center shadow-md`}>
-                          <event.icon className="w-6 h-6 text-white" />
+                    <div className="group relative h-full rounded-3xl p-8 border transition-all duration-500 hover:shadow-2xl bg-gradient-to-br from-white via-gray-50/50 to-white dark:from-gray-800 dark:via-gray-800/80 dark:to-gray-900 border-gray-200/60 dark:border-gray-700/60 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 backdrop-blur-sm">
+                      {/* Subtle gradient overlay on hover */}
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#00AFE6]/3 to-[#00DD89]/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      {/* Content */}
+                      <div className="relative z-10 flex flex-col h-full">
+                        {/* Header with Icon and Badge */}
+                        <div className="flex items-start justify-between mb-6">
+                          <div className={`w-16 h-16 bg-gradient-to-br ${event.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                            <event.icon className="w-8 h-8 text-white" />
+                          </div>
+                          <span className="px-4 py-2 bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white text-xs font-bold rounded-full uppercase tracking-wide shadow-md">
+                            {event.type}
+                          </span>
                         </div>
-                        <span className="px-3 py-1 bg-[#00AFE6] text-white text-xs font-semibold rounded-full">
-                          {event.type}
-                        </span>
-                      </div>
 
-                      {/* Title */}
-                      <h4 className="text-lg font-bold font-rosarivo leading-tight text-gray-900 dark:text-white mb-3">
-                        {event.title}
-                      </h4>
+                        {/* Title */}
+                        <h4 className="text-xl font-bold font-rosarivo leading-tight text-gray-900 dark:text-white mb-4 group-hover:text-[#00AFE6] dark:group-hover:text-[#00AFE6] transition-colors duration-300">
+                          {event.title}
+                        </h4>
 
-                      {/* Date */}
-                      <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4">
-                        {event.date}
-                      </div>
+                        {/* Date */}
+                        <div className="flex items-center gap-2 text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6] mb-5">
+                          <Calendar className="w-4 h-4" />
+                          <span>{event.date}</span>
+                        </div>
 
-                      {/* Description */}
-                      <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
-                        {event.description}
-                      </p>
+                        {/* Description */}
+                        <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 mb-8 flex-1">
+                          {event.description}
+                        </p>
 
-                      {/* Footer */}
-                      <div className="mt-auto">
-                        <motion.button
-                          className="w-full inline-flex items-center justify-center gap-2 bg-[#00AFE6] text-white px-4 py-3 rounded-2xl text-sm font-semibold hover:bg-[#0088CC] transition-all duration-300"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <span>Join Event</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </motion.button>
+                        {/* Footer */}
+                        <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+                          <motion.button
+                            className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <span>Join Event</span>
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                          </motion.button>
+                        </div>
                       </div>
                     </div>
                   </motion.div>

@@ -1,7 +1,41 @@
 import { motion } from 'framer-motion';
-import { Mail } from 'lucide-react';
+import { Mail, ChevronDown, Plus, Minus } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Contact() {
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index);
+  };
+
+  const faqData = [
+    {
+      question: "How do I submit a new resource to the directory?",
+      answer: "You can submit resources by contacting us at cas@amyloid.ca with details about the resource you'd like to add. All submissions undergo review by our editorial team."
+    },
+    {
+      question: "Can I update information in the healthcare directory/map?",
+      answer: "Yes! Healthcare professionals can update their directory information by contacting cas@amyloid.ca with their current details and credentials."
+    },
+    {
+      question: "How do I join CAS as a healthcare professional? Is there a fee to join?",
+      answer: "Contact us at cas@amyloid.ca to submit a membership application and learn about membership fees."
+    },
+    {
+      question: "Do you provide direct patient care?",
+      answer: "No, CAS does not provide direct patient care. We are a professional organization that supports healthcare providers and connects patients with appropriate care resources."
+    },
+    {
+      question: "What information do you collect and how is it used?",
+      answer: "We collect only necessary information to provide our services. All data is handled according to our Privacy Policy and Canadian privacy laws. We never share personal information with third parties without consent."
+    },
+    {
+      question: "Can patients or family members/supports join the CAS?",
+      answer: "Yes, we welcome patients, family members, and support persons as part of the CAS community. Contact us at cas@amyloid.ca for information about involvement opportunities."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white flex items-center justify-center">
       <div className="container mx-auto px-6 py-16">
@@ -83,64 +117,65 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-              Frequently Asked Questions
-            </h3>
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold mb-3">
+                <span className="text-gray-900 dark:text-white">Frequently Asked </span>
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Questions</span>
+              </h3>
+              <p className="text-gray-600 dark:text-white/70">
+                Quick answers to common questions about CAS, resources, and membership.
+              </p>
+            </div>
             
-            <div className="space-y-6">
-              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                  How do I submit a new resource to the directory?
-                </h4>
-                <p className="text-gray-600 dark:text-white/70">
-                  You can submit resources by contacting us at cas@amyloid.ca with details about the resource you'd like to add. All submissions undergo review by our editorial team.
-                </p>
-              </div>
-
-              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                  Can I update information in the healthcare directory/map?
-                </h4>
-                <p className="text-gray-600 dark:text-white/70">
-                  Yes! Healthcare professionals can update their directory information by contacting cas@amyloid.ca with their current details and credentials.
-                </p>
-              </div>
-
-              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                  How do I join CAS as a healthcare professional? Is there a fee to join?
-                </h4>
-                <p className="text-gray-600 dark:text-white/70">
-                  Contact us at cas@amyloid.ca to submit a membership application and learn about membership fees.
-                </p>
-              </div>
-
-              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                  Do you provide direct patient care?
-                </h4>
-                <p className="text-gray-600 dark:text-white/70">
-                  No, CAS does not provide direct patient care. We are a professional organization that supports healthcare providers and connects patients with appropriate care resources.
-                </p>
-              </div>
-
-              <div className="border-b border-gray-200 dark:border-gray-600 pb-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                  What information do you collect and how is it used?
-                </h4>
-                <p className="text-gray-600 dark:text-white/70">
-                  We collect only necessary information to provide our services. All data is handled according to our Privacy Policy and Canadian privacy laws. We never share personal information with third parties without consent.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                  Can patients or family members/supports join the CAS?
-                </h4>
-                <p className="text-gray-600 dark:text-white/70">
-                  Yes, we welcome patients, family members, and support persons as part of the CAS community. Contact us at cas@amyloid.ca for information about involvement opportunities.
-                </p>
-              </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              {faqData.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white/50 dark:bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-600/30 overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                >
+                  <button
+                    onClick={() => toggleFAQ(index)}
+                    className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors duration-200 group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                        {index + 1}
+                      </div>
+                      <h4 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-[#00AFE6] transition-colors duration-200">
+                        {faq.question}
+                      </h4>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: openFAQ === index ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex-shrink-0 ml-4"
+                    >
+                      <ChevronDown className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-[#00AFE6] transition-colors duration-200" />
+                    </motion.div>
+                  </button>
+                  
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: openFAQ === index ? "auto" : 0,
+                      opacity: openFAQ === index ? 1 : 0
+                    }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6">
+                      <div className="pl-12">
+                        <p className="text-gray-600 dark:text-white/70 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </motion.div>

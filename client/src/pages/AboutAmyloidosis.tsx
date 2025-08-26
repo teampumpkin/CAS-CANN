@@ -249,22 +249,7 @@ export default function AboutAmyloidosis() {
           </div>
         </div>
         
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <div className="w-8 h-12 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-gray-400 dark:bg-gray-600 rounded-full mt-2"></div>
-          </div>
-        </motion.div>
+
       </section>
       
       {/* Simplified Pathophysiology Section */}

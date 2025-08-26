@@ -86,7 +86,7 @@ export default function WelcomeSection() {
             viewport={{ once: true }}
           >
             <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
-              <div className="aspect-[4/5] relative">
+              <div className="aspect-[3/2] relative">
                 <img 
                   src={medicalProfessionalImg} 
                   alt="Medical professional working with healthcare technology"

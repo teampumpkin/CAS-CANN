@@ -57,7 +57,7 @@ const translations = {
     'about.earlyDetection.title': 'Early Detection',
     'about.earlyDetection.subtitle': 'Saves Lives',
     'about.earlyDetection.description': 'Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. Early recognition and proper testing are crucial for better patient outcomes.',
-    'about.earlyDetection.subdescription': 'Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.',
+    'about.earlyDetection.subdescription': 'Our directory lists specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.',
     'about.learnMore': 'Learn More',
     'about.types.al.name': 'AL Amyloidosis',
     'about.types.al.description': 'Hematologic malignancy, affects heart, kidneys, and nervous system and other organs',

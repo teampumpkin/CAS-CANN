@@ -170,21 +170,7 @@ export default function About() {
                 {t('about.hero.description')}
               </motion.p>
               
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-              >
-                <button className="group bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2 hover:scale-105 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="relative z-10">{t('about.hero.ourMission')}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
-                </button>
-                <button className="bg-gradient-to-r from-gray-200/20 to-gray-300/10 dark:from-white/10 dark:to-white/5 backdrop-blur-xl text-gray-700 dark:text-white px-8 py-4 rounded-full font-medium border border-[#00AFE6]/30 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 hover:border-[#00AFE6]/50 transition-all duration-300 hover:scale-105 shadow-lg shadow-[#00AFE6]/5">
-                  {t('about.hero.getInvolved')}
-                </button>
-              </motion.div>
+
             </motion.div>
             
             {/* Hero Visual */}

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, Mail, Video, Heart, Users, ArrowRight, UserCheck, Globe, Star, MapPin, Stethoscope } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import logoImage from '@assets/image 1_1750236540297.png';
+import casLogo from '@assets/l_cas_vert_rgb_1753253116732.png';
 
 export default function EventsNewsletterSection() {
   const { t } = useLanguage();
@@ -131,7 +131,7 @@ export default function EventsNewsletterSection() {
                   viewport={{ once: true }}
                 >
                   <img 
-                    src={logoImage} 
+                    src={casLogo} 
                     alt="Canadian Amyloidosis Society Logo" 
                     className="h-16 w-auto drop-shadow-lg"
                   />

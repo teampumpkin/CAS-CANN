@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Link } from 'wouter';
 import ParallaxBackground from '../components/ParallaxBackground';
 import medicalResearchImg from '@assets/DSC02841_1750068895454.jpg';
+import cannLogoImg from '@assets/CANN-RGB-dark-theme_1756219144378.png';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function CANN() {
@@ -30,25 +31,25 @@ export default function CANN() {
         title: "Enhance Care Quality",
         description: "Standardize and improve amyloidosis care across Canada through evidence-based protocols and shared expertise.",
         icon: Heart,
-        color: "from-red-500 to-pink-500"
+        color: "from-pink-500 to-rose-500"
       },
       {
         title: "Accelerate Research",
         description: "Facilitate collaborative research projects and clinical trials to advance understanding and treatment options.",
         icon: Search,
-        color: "from-blue-500 to-cyan-500"
+        color: "from-purple-500 to-pink-500"
       },
       {
         title: "Build Capacity",
         description: "Develop healthcare professional capacity through training, education, and knowledge exchange programs.",
         icon: Users,
-        color: "from-green-500 to-emerald-500"
+        color: "from-fuchsia-500 to-purple-500"
       },
       {
         title: "Improve Outcomes",
         description: "Create measurable improvements in patient outcomes through coordinated care and research efforts.",
         icon: Target,
-        color: "from-purple-500 to-violet-500"
+        color: "from-violet-500 to-fuchsia-500"
       }
     ],
     network: {
@@ -128,8 +129,17 @@ export default function CANN() {
 
             
             <div className="text-center">
-              <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
-                <Network className="w-5 h-5 text-[#00AFE6]" />
+              {/* CANN Logo */}
+              <div className="mb-8">
+                <img 
+                  src={cannLogoImg}
+                  alt="Canadian Amyloidosis Nursing Network Logo"
+                  className="h-24 mx-auto"
+                />
+              </div>
+              
+              <div className="inline-flex items-center gap-3 bg-pink-500/10 dark:bg-pink-400/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 dark:border-pink-400/20 mb-6">
+                <Network className="w-5 h-5 text-pink-600" />
                 <span className="text-sm font-medium text-gray-700 dark:text-white/90">Professional Network</span>
               </div>
             
@@ -138,8 +148,8 @@ export default function CANN() {
                   Canadian Amyloidosis
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Network
+                <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                  Nursing Network
                 </span>
               </h1>
               
@@ -170,8 +180,8 @@ export default function CANN() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
-                  <Network className="w-5 h-5 text-[#00AFE6]" />
+                <div className="inline-flex items-center gap-3 bg-pink-500/10 dark:bg-pink-400/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 dark:border-pink-400/20 mb-6">
+                  <Network className="w-5 h-5 text-pink-600" />
                   <span className="text-sm font-medium text-gray-700 dark:text-white/90">Our Mission</span>
                 </div>
                 
@@ -196,15 +206,15 @@ export default function CANN() {
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-2xl p-6 mt-8">
+                <div className="bg-gradient-to-r from-pink-500/10 to-purple-600/10 border border-pink-500/20 rounded-2xl p-6 mt-8">
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Network Impact</h3>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="text-[#00AFE6] font-medium">Coverage:</span>
+                      <span className="text-pink-600 font-medium">Coverage:</span>
                       <div className="text-gray-700 dark:text-white/80">{networkData.network.coverage}</div>
                     </div>
                     <div>
-                      <span className="text-[#00AFE6] font-medium">Centers:</span>
+                      <span className="text-pink-600 font-medium">Centers:</span>
                       <div className="text-gray-700 dark:text-white/80">{networkData.network.centers}</div>
                     </div>
                   </div>
@@ -236,13 +246,13 @@ export default function CANN() {
                       <div className="px-6 py-4">
                         <div className="grid grid-cols-2 gap-4">
                           <div className="text-center">
-                            <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                            <div className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                               {networkData.network.provinces}
                             </div>
                             <div className="text-xs text-gray-700 dark:text-white/80">Provinces</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
+                            <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                               {networkData.network.territories}
                             </div>
                             <div className="text-xs text-gray-700 dark:text-white/80">Territories</div>
@@ -253,7 +263,7 @@ export default function CANN() {
                   </div>
                   
                   <motion.div
-                    className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center"
+                    className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center"
                     animate={{ 
                       y: [0, -8, 0],
                       rotate: [0, 5, 0]
@@ -354,7 +364,7 @@ export default function CANN() {
               >
                 <div className="flex items-start gap-6">
                   <div className="text-center">
-                    <div className="text-4xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-2">
+                    <div className="text-4xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2">
                       {achievement.stat}
                     </div>
                     <div className="text-sm text-gray-600 dark:text-white/60 font-medium">
@@ -387,8 +397,8 @@ export default function CANN() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
-              <Users className="w-5 h-5 text-[#00AFE6]" />
+            <div className="inline-flex items-center gap-3 bg-pink-500/10 dark:bg-pink-400/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 dark:border-pink-400/20 mb-6">
+              <Users className="w-5 h-5 text-pink-600" />
               <span className="text-sm font-medium text-gray-700 dark:text-white/90">Join the Network</span>
             </div>
             
@@ -397,7 +407,7 @@ export default function CANN() {
                 Become Part of
               </span>
               <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                 CANN
               </span>
             </h2>
@@ -407,7 +417,7 @@ export default function CANN() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <Link href="/join-nursing-network" className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
                 Join CANN
                 <Network className="w-5 h-5" />
               </Link>

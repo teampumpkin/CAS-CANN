@@ -26,6 +26,7 @@ import { Button } from '@/components/ui/button';
 
 import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
 import medicalTeamImg from '@assets/DSC02841_1750068895454.jpg';
+import cannLogoImg from '@assets/CANN-RGB-dark-theme_1756219144378.png';
 
 export default function JoinCANN() {
   useEffect(() => {
@@ -37,25 +38,25 @@ export default function JoinCANN() {
       icon: Network,
       title: 'Professional Network',
       description: 'Connect with amyloidosis nursing professionals across Canada',
-      color: 'from-blue-400 to-cyan-400'
+      color: 'from-pink-400 to-rose-400'
     },
     {
       icon: GraduationCap,
       title: 'Educational Resources',
       description: 'Access exclusive educational materials and training recordings',
-      color: 'from-emerald-400 to-green-400'
+      color: 'from-purple-400 to-pink-400'
     },
     {
       icon: Users,
       title: 'Knowledge Sharing',
       description: 'Share best practices and learn from experienced colleagues',
-      color: 'from-purple-400 to-violet-400'
+      color: 'from-fuchsia-400 to-purple-400'
     },
     {
       icon: Award,
       title: 'Professional Development',
       description: 'Advance your career with specialized amyloidosis expertise',
-      color: 'from-orange-400 to-amber-400'
+      color: 'from-violet-400 to-fuchsia-400'
     },
     {
       icon: Globe,
@@ -67,7 +68,7 @@ export default function JoinCANN() {
       icon: Heart,
       title: 'Patient Impact',
       description: 'Improve patient outcomes through collaborative care',
-      color: 'from-red-400 to-pink-400'
+      color: 'from-rose-400 to-pink-400'
     }
   ];
 
@@ -155,9 +156,9 @@ export default function JoinCANN() {
       {/* Hero Section */}
       <section className="relative py-24 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
         {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/10 via-transparent to-[#00DD89]/10"></div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-transparent to-purple-600/10"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/5 rounded-full blur-3xl"></div>
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -166,8 +167,17 @@ export default function JoinCANN() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center gap-3 bg-white/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-200/50 dark:border-white/20 mb-8">
-                <Network className="w-5 h-5 text-[#00AFE6]" />
+              {/* CANN Logo */}
+              <div className="mb-8">
+                <img 
+                  src={cannLogoImg}
+                  alt="Canadian Amyloidosis Nursing Network Logo"
+                  className="h-20 mx-auto"
+                />
+              </div>
+              
+              <div className="inline-flex items-center gap-3 bg-pink-500/10 dark:bg-pink-400/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 dark:border-pink-400/20 mb-8">
+                <Network className="w-5 h-5 text-pink-600" />
                 <span className="text-sm font-medium text-gray-700 dark:text-white/90">Professional Network</span>
               </div>
               
@@ -176,7 +186,7 @@ export default function JoinCANN() {
                   Join the Canadian
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                   Amyloidosis Nursing Network
                 </span>
               </h1>
@@ -192,7 +202,7 @@ export default function JoinCANN() {
                     joinSection.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 cursor-pointer"
+                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 cursor-pointer"
               >
                 <UserPlus className="w-5 h-5 mr-2" />
                 Join CANN Today

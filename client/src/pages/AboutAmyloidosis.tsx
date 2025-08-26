@@ -210,7 +210,6 @@ export default function AboutAmyloidosis() {
                     <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/30 dark:to-[#00DD89]/30 rounded-2xl p-6 border border-[#00AFE6]/50 dark:border-[#00AFE6]/30">
                       <Heart className="w-8 h-8 text-[#00AFE6] mx-auto mb-4" />
                       <h4 className="font-bold text-[#00AFE6] dark:text-[#00AFE6] mb-2">AL Amyloidosis</h4>
-                      <p className="text-sm text-gray-700 dark:text-gray-300">70% of cases</p>
                       <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">Plasma cell disorder</p>
                     </div>
                     
@@ -218,7 +217,6 @@ export default function AboutAmyloidosis() {
                     <div className="bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/30 dark:to-[#00AFE6]/30 rounded-2xl p-6 border border-[#00DD89]/50 dark:border-[#00DD89]/30">
                       <Brain className="w-8 h-8 text-[#00DD89] mx-auto mb-4" />
                       <h4 className="font-bold text-[#00DD89] dark:text-[#00DD89] mb-2">ATTR Amyloidosis</h4>
-                      <p className="text-sm text-gray-700 dark:text-gray-300">25% of cases</p>
                       <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">Transthyretin protein</p>
                     </div>
                   </div>

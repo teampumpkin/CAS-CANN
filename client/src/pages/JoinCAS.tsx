@@ -452,105 +452,157 @@ export default function JoinCAS() {
               </AlertDescription>
             </Alert>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
               {/* Personal Information */}
-              <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20">
-                <CardHeader>
-                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
-                    <Users className="w-5 h-5 text-[#00AFE6]" />
+              <Card className="bg-gradient-to-br from-white to-gray-50/50 dark:from-white/5 dark:to-white/10 border-gray-200/50 dark:border-white/10 shadow-xl shadow-gray-100/50 dark:shadow-black/20 rounded-3xl overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:to-[#00DD89]/10 border-b border-gray-100 dark:border-white/10">
+                  <CardTitle className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                    <div className="p-2 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl shadow-lg">
+                      <Users className="w-5 h-5 text-white" />
+                    </div>
                     Personal Information
                   </CardTitle>
+                  <p className="text-sm text-gray-600 dark:text-white/60 mt-2">
+                    Please provide your basic contact information
+                  </p>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">First Name *</label>
-                      <input
-                        {...register("firstName")}
-                        type="text"
-                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                        placeholder="Enter your first name"
-                      />
+                <CardContent className="p-8">
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        First Name <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          {...register("firstName")}
+                          type="text"
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-[#00AFE6] focus:shadow-lg focus:shadow-[#00AFE6]/20 transition-all duration-300 text-base"
+                          placeholder="Enter your first name"
+                        />
+                      </div>
                       {errors.firstName && (
-                        <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                          <span className="w-4 h-4 text-red-500">⚠</span>
+                          {errors.firstName.message}
+                        </p>
                       )}
                     </div>
 
-                    <div>
-                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Last Name *</label>
-                      <input
-                        {...register("lastName")}
-                        type="text"
-                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                        placeholder="Enter your last name"
-                      />
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        Last Name <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          {...register("lastName")}
+                          type="text"
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-[#00AFE6] focus:shadow-lg focus:shadow-[#00AFE6]/20 transition-all duration-300 text-base"
+                          placeholder="Enter your last name"
+                        />
+                      </div>
                       {errors.lastName && (
-                        <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                          <span className="w-4 h-4 text-red-500">⚠</span>
+                          {errors.lastName.message}
+                        </p>
                       )}
                     </div>
 
-                    <div>
-                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Email *</label>
-                      <input
-                        {...register("email")}
-                        type="email"
-                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                        placeholder="Enter your email address"
-                      />
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          {...register("email")}
+                          type="email"
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-[#00AFE6] focus:shadow-lg focus:shadow-[#00AFE6]/20 transition-all duration-300 text-base"
+                          placeholder="your.email@domain.com"
+                        />
+                      </div>
                       {errors.email && (
-                        <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                          <span className="w-4 h-4 text-red-500">⚠</span>
+                          {errors.email.message}
+                        </p>
                       )}
                     </div>
 
-                    <div>
-                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Phone *</label>
-                      <input
-                        {...register("phone")}
-                        type="tel"
-                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                        placeholder="Enter your phone number"
-                      />
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        Phone Number <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          {...register("phone")}
+                          type="tel"
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-[#00AFE6] focus:shadow-lg focus:shadow-[#00AFE6]/20 transition-all duration-300 text-base"
+                          placeholder="(555) 123-4567"
+                        />
+                      </div>
                       {errors.phone && (
-                        <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                          <span className="w-4 h-4 text-red-500">⚠</span>
+                          {errors.phone.message}
+                        </p>
                       )}
                     </div>
 
-                    <div>
-                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">City *</label>
-                      <input
-                        {...register("city")}
-                        type="text"
-                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                        placeholder="Enter your city"
-                      />
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        City <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          {...register("city")}
+                          type="text"
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-[#00AFE6] focus:shadow-lg focus:shadow-[#00AFE6]/20 transition-all duration-300 text-base"
+                          placeholder="Enter your city"
+                        />
+                      </div>
                       {errors.city && (
-                        <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                          <span className="w-4 h-4 text-red-500">⚠</span>
+                          {errors.city.message}
+                        </p>
                       )}
                     </div>
 
-                    <div>
-                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Province *</label>
-                      <select
-                        {...register("province")}
-                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      >
-                        <option value="">Select Province</option>
-                        <option value="AB">Alberta</option>
-                        <option value="BC">British Columbia</option>
-                        <option value="MB">Manitoba</option>
-                        <option value="NB">New Brunswick</option>
-                        <option value="NL">Newfoundland and Labrador</option>
-                        <option value="NS">Nova Scotia</option>
-                        <option value="ON">Ontario</option>
-                        <option value="PE">Prince Edward Island</option>
-                        <option value="QC">Quebec</option>
-                        <option value="SK">Saskatchewan</option>
-                        <option value="NT">Northwest Territories</option>
-                        <option value="NU">Nunavut</option>
-                        <option value="YT">Yukon</option>
-                      </select>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        Province <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          {...register("province")}
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-[#00AFE6] focus:shadow-lg focus:shadow-[#00AFE6]/20 transition-all duration-300 text-base appearance-none cursor-pointer"
+                        >
+                          <option value="">Select Province</option>
+                          <option value="AB">Alberta</option>
+                          <option value="BC">British Columbia</option>
+                          <option value="MB">Manitoba</option>
+                          <option value="NB">New Brunswick</option>
+                          <option value="NL">Newfoundland and Labrador</option>
+                          <option value="NS">Nova Scotia</option>
+                          <option value="ON">Ontario</option>
+                          <option value="PE">Prince Edward Island</option>
+                          <option value="QC">Quebec</option>
+                          <option value="SK">Saskatchewan</option>
+                          <option value="NT">Northwest Territories</option>
+                          <option value="NU">Nunavut</option>
+                          <option value="YT">Yukon</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
                       {errors.province && (
-                        <p className="text-red-500 text-sm mt-1">{errors.province.message}</p>
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                          <span className="w-4 h-4 text-red-500">⚠</span>
+                          {errors.province.message}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -558,143 +610,204 @@ export default function JoinCAS() {
               </Card>
 
               {/* Professional Information */}
-              <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20">
-                <CardHeader>
-                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
-                    <Stethoscope className="w-5 h-5 text-[#00AFE6]" />
+              <Card className="bg-gradient-to-br from-white to-gray-50/50 dark:from-white/5 dark:to-white/10 border-gray-200/50 dark:border-white/10 shadow-xl shadow-gray-100/50 dark:shadow-black/20 rounded-3xl overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-[#00DD89]/5 to-[#00AFE6]/5 dark:from-[#00DD89]/10 dark:to-[#00AFE6]/10 border-b border-gray-100 dark:border-white/10">
+                  <CardTitle className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                    <div className="p-2 bg-gradient-to-br from-[#00DD89] to-[#00AFE6] rounded-xl shadow-lg">
+                      <Stethoscope className="w-5 h-5 text-white" />
+                    </div>
                     Professional Information
                   </CardTitle>
+                  <p className="text-sm text-gray-600 dark:text-white/60 mt-2">
+                    Tell us about your professional background and expertise
+                  </p>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Role *</label>
-                      <select
-                        {...register("role")}
-                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      >
-                        <option value="">Select your role</option>
-                        <option value="clinician">Clinician/Healthcare Professional</option>
-                        <option value="researcher">Researcher/Academic</option>
-                        <option value="administrator">Healthcare Administrator</option>
-                        <option value="patient">Patient</option>
-                        <option value="caregiver">Caregiver/Family Member</option>
-                        <option value="advocate">Patient Advocate</option>
-                        <option value="other">Other</option>
-                      </select>
+                <CardContent className="p-8">
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        Professional Role <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          {...register("role")}
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-[#00DD89] focus:shadow-lg focus:shadow-[#00DD89]/20 transition-all duration-300 text-base appearance-none cursor-pointer"
+                        >
+                          <option value="">Select your role</option>
+                          <option value="clinician">Clinician/Healthcare Professional</option>
+                          <option value="researcher">Researcher/Academic</option>
+                          <option value="administrator">Healthcare Administrator</option>
+                          <option value="patient">Patient</option>
+                          <option value="caregiver">Caregiver/Family Member</option>
+                          <option value="advocate">Patient Advocate</option>
+                          <option value="other">Other</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
                       {errors.role && (
-                        <p className="text-red-500 text-sm mt-1">{errors.role.message}</p>
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                          <span className="w-4 h-4 text-red-500">⚠</span>
+                          {errors.role.message}
+                        </p>
                       )}
                     </div>
 
-                    <div>
-                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Specialty (if applicable)</label>
-                      <input
-                        {...register("specialty")}
-                        type="text"
-                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                        placeholder="e.g., Cardiology, Nephrology, etc."
-                      />
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        Medical Specialty
+                        <span className="text-gray-400 text-xs ml-1">(if applicable)</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          {...register("specialty")}
+                          type="text"
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-[#00DD89] focus:shadow-lg focus:shadow-[#00DD89]/20 transition-all duration-300 text-base"
+                          placeholder="e.g., Cardiology, Nephrology, Internal Medicine"
+                        />
+                      </div>
                     </div>
 
-                    <div className="md:col-span-2">
-                      <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Organization (if applicable)</label>
-                      <input
-                        {...register("organization")}
-                        type="text"
-                        className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                        placeholder="Hospital, clinic, research institution, etc."
-                      />
+                    <div className="md:col-span-2 space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        Organization/Institution
+                        <span className="text-gray-400 text-xs ml-1">(if applicable)</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          {...register("organization")}
+                          type="text"
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-[#00DD89] focus:shadow-lg focus:shadow-[#00DD89]/20 transition-all duration-300 text-base"
+                          placeholder="Hospital, clinic, research institution, university, etc."
+                        />
+                      </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Areas of Interest */}
-              <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20">
-                <CardHeader>
-                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
-                    <Heart className="w-5 h-5 text-[#00AFE6]" />
+              <Card className="bg-gradient-to-br from-white to-gray-50/50 dark:from-white/5 dark:to-white/10 border-gray-200/50 dark:border-white/10 shadow-xl shadow-gray-100/50 dark:shadow-black/20 rounded-3xl overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:to-[#00DD89]/10 border-b border-gray-100 dark:border-white/10">
+                  <CardTitle className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                    <div className="p-2 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl shadow-lg">
+                      <Heart className="w-5 h-5 text-white" />
+                    </div>
                     Areas of Interest
                   </CardTitle>
+                  <p className="text-sm text-gray-600 dark:text-white/60 mt-2">
+                    Choose areas where you'd like to contribute or collaborate
+                  </p>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div>
-                    <label className="block text-gray-700 dark:text-white/80 font-medium mb-3">Select all areas that apply to you *</label>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {interestAreas.map((interest) => (
-                        <label
-                          key={interest}
-                          className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all ${
-                            selectedInterests.includes(interest)
-                              ? 'bg-[#00AFE6]/10 border-[#00AFE6]/50 text-[#00AFE6] dark:text-[#00AFE6]'
-                              : 'bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/20 text-gray-700 dark:text-white/70 hover:bg-gray-100 dark:hover:bg-white/10'
-                          }`}
-                          onClick={() => handleInterestToggle(interest)}
-                        >
-                          <div className="flex items-center">
-                            <Checkbox
-                              checked={selectedInterests.includes(interest)}
-                              onChange={() => handleInterestToggle(interest)}
-                              className="data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
-                            />
-                          </div>
-                          <span className="text-sm font-medium">{interest}</span>
-                        </label>
-                      ))}
+                <CardContent className="p-8">
+                  <div className="space-y-8">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80 mb-4">
+                        Select all areas that apply to you <span className="text-red-500">*</span>
+                      </label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {interestAreas.map((interest) => (
+                          <label
+                            key={interest}
+                            className={`flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
+                              selectedInterests.includes(interest)
+                                ? 'bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border-[#00AFE6]/40 shadow-lg shadow-[#00AFE6]/20'
+                                : 'bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 hover:shadow-md'
+                            }`}
+                            onClick={() => handleInterestToggle(interest)}
+                          >
+                            <div className="flex items-center">
+                              <Checkbox
+                                checked={selectedInterests.includes(interest)}
+                                className="data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6] w-5 h-5"
+                              />
+                            </div>
+                            <span className={`font-medium transition-colors ${
+                              selectedInterests.includes(interest)
+                                ? 'text-[#00AFE6] dark:text-[#00AFE6]'
+                                : 'text-gray-700 dark:text-white/80'
+                            }`}>
+                              {interest}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                      {errors.interests && (
+                        <p className="text-red-500 text-sm mt-3 flex items-center gap-1">
+                          <span className="w-4 h-4 text-red-500">⚠</span>
+                          {errors.interests.message}
+                        </p>
+                      )}
                     </div>
-                    {errors.interests && (
-                      <p className="text-red-500 text-sm mt-1">{errors.interests.message}</p>
-                    )}
-                  </div>
 
-                  <div>
-                    <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">How did you hear about CAS? *</label>
-                    <input
-                      {...register("howHeard")}
-                      type="text"
-                      className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      placeholder="e.g., Healthcare provider, website, social media, colleague, etc."
-                    />
-                    {errors.howHeard && (
-                      <p className="text-red-500 text-sm mt-1">{errors.howHeard.message}</p>
-                    )}
-                  </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        How did you hear about CAS? <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <input
+                          {...register("howHeard")}
+                          type="text"
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-[#00AFE6] focus:shadow-lg focus:shadow-[#00AFE6]/20 transition-all duration-300 text-base"
+                          placeholder="e.g., Healthcare provider, website, social media, colleague"
+                        />
+                      </div>
+                      {errors.howHeard && (
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
+                          <span className="w-4 h-4 text-red-500">⚠</span>
+                          {errors.howHeard.message}
+                        </p>
+                      )}
+                    </div>
 
-                  <div>
-                    <label className="block text-gray-700 dark:text-white/80 font-medium mb-2">Additional Message (optional)</label>
-                    <textarea
-                      {...register("message")}
-                      rows={4}
-                      className="w-full bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20 rounded-xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]"
-                      placeholder="Tell us more about your interest in joining CAS..."
-                    />
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-white/80">
+                        Additional Message
+                        <span className="text-gray-400 text-xs ml-1">(optional)</span>
+                      </label>
+                      <div className="relative">
+                        <textarea
+                          {...register("message")}
+                          rows={5}
+                          className="w-full bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-2xl px-4 py-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40 focus:outline-none focus:border-[#00AFE6] focus:shadow-lg focus:shadow-[#00AFE6]/20 transition-all duration-300 text-base resize-none"
+                          placeholder="Tell us more about your interest in joining CAS, your experience with amyloidosis, or anything else you'd like us to know..."
+                        />
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Terms and Conditions */}
-              <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20">
-                <CardHeader>
-                  <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
-                    <Gavel className="w-5 h-5 text-[#00AFE6]" />
+              <Card className="bg-gradient-to-br from-white to-gray-50/50 dark:from-white/5 dark:to-white/10 border-gray-200/50 dark:border-white/10 shadow-xl shadow-gray-100/50 dark:shadow-black/20 rounded-3xl overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-[#00DD89]/5 to-[#00AFE6]/5 dark:from-[#00DD89]/10 dark:to-[#00AFE6]/10 border-b border-gray-100 dark:border-white/10">
+                  <CardTitle className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                    <div className="p-2 bg-gradient-to-br from-[#00DD89] to-[#00AFE6] rounded-xl shadow-lg">
+                      <Gavel className="w-5 h-5 text-white" />
+                    </div>
                     Terms and Conditions
                   </CardTitle>
+                  <p className="text-sm text-gray-600 dark:text-white/60 mt-2">
+                    Please review and accept our terms to complete your application
+                  </p>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
+                <CardContent className="p-8">
+                  <div className="space-y-6">
+                    <div className="flex items-start gap-4 p-6 bg-white dark:bg-white/5 rounded-2xl border-2 border-gray-100 dark:border-white/10">
                       <Checkbox
                         {...register("termsOfParticipation")}
-                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6] w-5 h-5"
                       />
                       <div className="flex-1">
-                        <label className="text-sm font-medium text-gray-700 dark:text-white/80">
-                          I agree to the Terms of Participation *
+                        <label className="text-base font-semibold text-gray-700 dark:text-white/80">
+                          I agree to the Terms of Participation <span className="text-red-500">*</span>
                         </label>
-                        <p className="text-sm text-gray-600 dark:text-white/60 mt-1">
+                        <p className="text-sm text-gray-600 dark:text-white/60 mt-2">
                           I understand and agree to abide by CAS professional standards, governance framework, and participation guidelines.{" "}
-                          <Link href="/terms-of-participation" className="text-[#00AFE6] hover:underline">
+                          <Link href="/terms-of-participation" className="text-[#00AFE6] hover:underline font-medium">
                             Read Terms of Participation
                             <ExternalLink className="w-3 h-3 inline ml-1" />
                           </Link>
@@ -702,21 +815,24 @@ export default function JoinCAS() {
                       </div>
                     </div>
                     {errors.termsOfParticipation && (
-                      <p className="text-red-500 text-sm">{errors.termsOfParticipation.message}</p>
+                      <p className="text-red-500 text-sm flex items-center gap-1">
+                        <span className="w-4 h-4 text-red-500">⚠</span>
+                        {errors.termsOfParticipation.message}
+                      </p>
                     )}
 
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-4 p-6 bg-white dark:bg-white/5 rounded-2xl border-2 border-gray-100 dark:border-white/10">
                       <Checkbox
                         {...register("privacyPolicy")}
-                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6] w-5 h-5"
                       />
                       <div className="flex-1">
-                        <label className="text-sm font-medium text-gray-700 dark:text-white/80">
-                          I agree to the Privacy Policy *
+                        <label className="text-base font-semibold text-gray-700 dark:text-white/80">
+                          I agree to the Privacy Policy <span className="text-red-500">*</span>
                         </label>
-                        <p className="text-sm text-gray-600 dark:text-white/60 mt-1">
+                        <p className="text-sm text-gray-600 dark:text-white/60 mt-2">
                           I understand how my personal information will be collected, used, and protected.{" "}
-                          <Link href="/privacy-policy" className="text-[#00AFE6] hover:underline">
+                          <Link href="/privacy-policy" className="text-[#00AFE6] hover:underline font-medium">
                             Read Privacy Policy
                             <ExternalLink className="w-3 h-3 inline ml-1" />
                           </Link>
@@ -724,20 +840,24 @@ export default function JoinCAS() {
                       </div>
                     </div>
                     {errors.privacyPolicy && (
-                      <p className="text-red-500 text-sm">{errors.privacyPolicy.message}</p>
+                      <p className="text-red-500 text-sm flex items-center gap-1">
+                        <span className="w-4 h-4 text-red-500">⚠</span>
+                        {errors.privacyPolicy.message}
+                      </p>
                     )}
 
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:to-[#00DD89]/10 rounded-2xl border-2 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                       <Checkbox
                         {...register("newsletter")}
-                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6] w-5 h-5"
                       />
                       <div className="flex-1">
-                        <label className="text-sm font-medium text-gray-700 dark:text-white/80">
-                          Subscribe to CAS Newsletter (optional)
+                        <label className="text-base font-semibold text-gray-700 dark:text-white/80">
+                          Subscribe to CAS Newsletter
+                          <span className="text-gray-400 text-sm ml-1">(optional)</span>
                         </label>
-                        <p className="text-sm text-gray-600 dark:text-white/60 mt-1">
-                          Receive updates about events, resources, and important announcements.
+                        <p className="text-sm text-gray-600 dark:text-white/60 mt-2">
+                          Receive updates about events, resources, and important announcements from the Canadian Amyloidosis Society.
                         </p>
                       </div>
                     </div>
@@ -775,27 +895,44 @@ export default function JoinCAS() {
               </Alert>
 
               {/* Submit Button */}
-              <div className="text-center">
-                <Button
-                  type="submit"
-                  disabled={joinMutation.isPending}
-                  className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-12 py-4 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {joinMutation.isPending ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
-                      Submitting Application...
-                    </>
-                  ) : (
-                    <>
-                      Submit Membership Application
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </>
-                  )}
-                </Button>
-                <p className="text-sm text-gray-600 dark:text-white/60 mt-4">
-                  We'll review your application and get back to you within 2-3 weeks.
-                </p>
+              <div className="text-center pt-8">
+                <div className="bg-gradient-to-br from-gray-50 to-white dark:from-white/5 dark:to-white/10 rounded-3xl p-8 border border-gray-200/50 dark:border-white/10 shadow-xl">
+                  <div className="mb-6">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      Ready to Submit Your Application?
+                    </h3>
+                    <p className="text-gray-600 dark:text-white/70">
+                      Join Canada's leading network of amyloidosis professionals and advocates
+                    </p>
+                  </div>
+                  
+                  <Button
+                    type="submit"
+                    disabled={joinMutation.isPending}
+                    className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-16 py-6 rounded-3xl font-bold text-xl hover:shadow-2xl hover:shadow-[#00AFE6]/30 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transform"
+                  >
+                    {joinMutation.isPending ? (
+                      <>
+                        <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin mr-3" />
+                        Submitting Application...
+                      </>
+                    ) : (
+                      <>
+                        Submit Membership Application
+                        <ArrowRight className="w-6 h-6 ml-3" />
+                      </>
+                    )}
+                  </Button>
+                  
+                  <div className="mt-6 space-y-2">
+                    <p className="text-sm text-gray-600 dark:text-white/60">
+                      ✓ We'll review your application and get back to you within 2-3 weeks
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-white/50">
+                      Submitted applications are processed by our membership committee
+                    </p>
+                  </div>
+                </div>
               </div>
             </form>
           </div>

@@ -230,7 +230,7 @@ export default function Header() {
               <ThemeToggle />
               <button
                 onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                className="p-2 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700"
+                className="px-3 py-2 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700"
                 aria-label="Open accessibility tools"
                 aria-expanded={isAccessibilityOpen}
               >

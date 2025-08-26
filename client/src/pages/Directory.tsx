@@ -602,8 +602,8 @@ export default function Directory() {
         </div>
       </section>
       
-      {/* Inclusion Criteria & Review Cycle Documentation */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      {/* Inclusion Criteria & Review Cycle Documentation - Hidden for now */}
+      {/* <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             className="text-center mb-12"
@@ -629,7 +629,6 @@ export default function Directory() {
           </motion.div>
           
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Inclusion Criteria */}
             <motion.div
               className="bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30"
               initial={{ opacity: 0, x: -30 }}
@@ -679,7 +678,6 @@ export default function Directory() {
               </div>
             </motion.div>
             
-            {/* Review Cycle */}
             <motion.div
               className="bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00DD89]/30"
               initial={{ opacity: 0, x: 30 }}
@@ -730,7 +728,6 @@ export default function Directory() {
             </motion.div>
           </div>
           
-          {/* Backend Process Documentation */}
           <motion.div
             className="mt-12 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30"
             initial={{ opacity: 0, y: 30 }}
@@ -784,7 +781,7 @@ export default function Directory() {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
       
       {/* Healthcare Center Modal */}
       <HealthcareCenterModal

@@ -313,9 +313,15 @@ export default function JoinCANN() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">
-                Member Login
-              </h2>
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <h2 className="text-4xl font-bold text-gray-900 dark:text-white font-rosarivo">
+                  Member Login
+                </h2>
+                <div className="inline-flex items-center gap-2 bg-pink-500/10 dark:bg-pink-400/10 backdrop-blur-xl rounded-full px-4 py-2 border border-pink-500/20 dark:border-pink-400/20">
+                  <div className="w-2 h-2 bg-pink-600 rounded-full"></div>
+                  <span className="text-sm font-medium text-pink-600 dark:text-pink-400">Coming Soon</span>
+                </div>
+              </div>
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8 max-w-3xl mx-auto">
                 Access your CANN member portal to view exclusive resources, connect with colleagues, and manage your membership.
               </p>
@@ -333,11 +339,18 @@ export default function JoinCANN() {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                <Button 
+                  disabled
+                  className="bg-gradient-to-r from-gray-400 to-gray-500 text-white px-8 py-4 rounded-xl font-semibold opacity-60 cursor-not-allowed"
+                >
                   <LogIn className="w-5 h-5 mr-2" />
                   Login to Member Portal
                 </Button>
-                <Button variant="outline" className="border-pink-500 text-pink-600 dark:text-pink-400 px-8 py-4 rounded-xl font-semibold hover:bg-pink-50 dark:hover:bg-pink-900/20 transition-all duration-300">
+                <Button 
+                  disabled
+                  variant="outline" 
+                  className="border-gray-400 text-gray-400 dark:text-gray-500 px-8 py-4 rounded-xl font-semibold opacity-60 cursor-not-allowed"
+                >
                   New here? Request access
                 </Button>
               </div>

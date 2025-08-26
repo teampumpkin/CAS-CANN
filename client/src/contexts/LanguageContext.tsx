@@ -39,7 +39,7 @@ const translations = {
     'welcome.title.welcome': 'Welcome to the',
     'welcome.title.cas': 'Canadian Amyloidosis Society',
     'welcome.subtitle': 'Your trusted partner in amyloidosis care, connecting patients, families, and healthcare professionals across Canada.',
-    'welcome.description': 'We are dedicated to improving the lives of those affected by amyloidosis through education, support, and advocacy. Our comprehensive platform provides essential resources, connects you with specialized care, and builds a supportive community for patients and families nationwide.',
+    'welcome.description': 'We are an organization of multidisciplinary healthcare providers dedicated to improving the lives of those affected by amyloidosis through education, improving awareness, clinical practice standards, and advocacy. Through our efforts, we aim to accelerate access to and quality of amyloidosis care across Canada.',
     'welcome.mission': 'Our Mission',
     'welcome.missionText': 'To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support.',
     'welcome.vision': 'Our Vision',

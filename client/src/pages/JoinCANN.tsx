@@ -401,7 +401,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Login Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section id="member-login" className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">
@@ -458,7 +458,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Resources Section */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      <section id="resources-events" className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-12">

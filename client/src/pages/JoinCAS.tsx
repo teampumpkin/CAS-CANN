@@ -722,7 +722,7 @@ export default function JoinCAS() {
                             <div className="flex items-center">
                               <Checkbox
                                 checked={selectedInterests.includes(interest)}
-                                className="data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                                className="!h-4 !w-4 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
                               />
                             </div>
                             <span className={`font-medium transition-colors ${
@@ -799,7 +799,7 @@ export default function JoinCAS() {
                     <div className="flex items-start gap-4 p-6 bg-white dark:bg-white/5 rounded-2xl border-2 border-gray-100 dark:border-white/10">
                       <Checkbox
                         {...register("termsOfParticipation")}
-                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                        className="mt-1 !h-4 !w-4 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
                       />
                       <div className="flex-1">
                         <label className="text-base font-semibold text-gray-700 dark:text-white/80">
@@ -824,7 +824,7 @@ export default function JoinCAS() {
                     <div className="flex items-start gap-4 p-6 bg-white dark:bg-white/5 rounded-2xl border-2 border-gray-100 dark:border-white/10">
                       <Checkbox
                         {...register("privacyPolicy")}
-                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                        className="mt-1 !h-4 !w-4 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
                       />
                       <div className="flex-1">
                         <label className="text-base font-semibold text-gray-700 dark:text-white/80">
@@ -849,7 +849,7 @@ export default function JoinCAS() {
                     <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:to-[#00DD89]/10 rounded-2xl border-2 border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                       <Checkbox
                         {...register("newsletter")}
-                        className="mt-1 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                        className="mt-1 !h-4 !w-4 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
                       />
                       <div className="flex-1">
                         <label className="text-base font-semibold text-gray-700 dark:text-white/80">

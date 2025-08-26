@@ -10,7 +10,7 @@ export default function Hero() {
   const quickTiles = [
     { icon: Users, label: 'Join', href: '/get-involved' },
     { icon: MapPin, label: t('nav.directory'), href: '/directory' },
-    { icon: BookOpen, label: 'Learn', href: '/about-amyloidosis' }
+    { icon: BookOpen, label: 'Learn', href: '/resource-library' }
   ];
 
   return (

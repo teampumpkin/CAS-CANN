@@ -95,6 +95,7 @@ const translations = {
     'events.stats.members': 'Members',
     'events.stats.eventsYear': 'Events/Year',
     'events.stats.provinces': 'Provinces',
+    'events.stats.disciplines': 'Disciplines',
     'events.stats.satisfaction': 'Satisfaction',
     'events.communityCalendar': 'Community Calendar',
     'events.communityCalendarDesc': 'Connect with experts, patients, and researchers through our comprehensive event program.',

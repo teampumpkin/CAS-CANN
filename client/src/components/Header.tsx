@@ -71,8 +71,7 @@ export default function Header() {
         { name: 'Newsletter', href: '/newsletter' },
       ]
     },
-    { name: t('nav.directory'), href: '/directory' },
-    { name: t('nav.community'), href: '/community' },
+
     { name: 'Get Involved', href: '/get-involved' },
     { name: t('nav.events'), href: '/events' },
     {

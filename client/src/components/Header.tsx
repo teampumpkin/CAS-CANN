@@ -84,7 +84,7 @@ export default function Header() {
       ]
     },
     { name: t('nav.joinCAS'), href: '/join-cas' },
-    { name: t('nav.contact'), href: '/contact' }
+    { name: 'Contact Us', href: '/contact' }
   ];
 
   useEffect(() => {

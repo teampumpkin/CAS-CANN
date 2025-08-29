@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Phone, ChevronDown, Accessibility, Type, Contrast, MousePointer, Eye, EyeOff, Keyboard, Volume2, Monitor, Sun, Moon, Minus, Plus, RotateCcw } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, Accessibility, Type, Contrast, MousePointer, Eye, EyeOff, Keyboard, Volume2, Monitor, Sun, Moon, Minus, Plus, RotateCcw, Settings } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import casLogo from '@assets/l_cas_vert_rgb_1753253116732.png';
@@ -247,11 +247,12 @@ export default function Header() {
               <div className="relative">
                 <button
                   onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                  className="h-10 px-4 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center justify-center border border-gray-300 shadow-sm"
+                  className="h-10 px-4 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center gap-2 border border-gray-300 shadow-sm"
                   aria-label="Open accessibility tools"
                   aria-expanded={isAccessibilityOpen}
                 >
-                  <Accessibility className="w-4 h-4" />
+                  <Settings className="w-4 h-4" />
+                  <span className="text-sm font-medium">Accessibility</span>
                 </button>
 
                 {/* Accessibility Dropdown */}
@@ -269,7 +270,7 @@ export default function Header() {
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-2">
                               <div className="w-8 h-8 bg-[#00AFE6] rounded-full flex items-center justify-center">
-                                <Accessibility className="w-4 h-4 text-white" />
+                                <Settings className="w-4 h-4 text-white" />
                               </div>
                               <div>
                                 <h3 className="text-base font-bold text-gray-900 dark:text-white">

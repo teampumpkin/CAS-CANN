@@ -135,7 +135,7 @@ export default function JoinCANN() {
                 <span className="text-sm font-medium text-gray-700 dark:text-white/90">Professional Network</span>
               </div>
               
-              <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+              <h1 className="text-[60px] font-bold font-rosarivo mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Join the Canadian
                 </span>

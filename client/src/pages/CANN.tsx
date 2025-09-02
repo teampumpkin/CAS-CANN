@@ -143,7 +143,7 @@ export default function CANN() {
                 <span className="text-sm font-medium text-gray-700 dark:text-white/90">Professional Network</span>
               </div>
             
-              <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+              <h1 className="text-[60px] font-bold font-rosarivo mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   Canadian Amyloidosis
                 </span>
@@ -185,7 +185,7 @@ export default function CANN() {
                   <span className="text-sm font-medium text-gray-700 dark:text-white/90">Our Mission</span>
                 </div>
                 
-                <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
+                <h2 className="text-[60px] font-bold font-rosarivo mb-6 leading-tight">
                   <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                     {networkData.mission.title}
                   </span>

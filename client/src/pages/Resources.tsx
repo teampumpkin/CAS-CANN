@@ -272,7 +272,7 @@ export default function Resources() {
               <span className="text-sm font-medium text-gray-800 dark:text-white/90">Professional Resources</span>
             </div>
             
-            <h1 className="text-5xl font-bold font-rosarivo mb-6 leading-tight">
+            <h1 className="text-[60px] font-bold font-rosarivo mb-6 leading-tight">
               <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Clinical Practice Resources
               </span>

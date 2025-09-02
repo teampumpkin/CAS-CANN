@@ -122,7 +122,7 @@ export default function ALAmyloidosis() {
             
             {/* Main title with enhanced typography */}
             <motion.h1 
-              className="text-5xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight"
+              className="text-[60px] font-bold font-rosarivo mb-8 leading-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}

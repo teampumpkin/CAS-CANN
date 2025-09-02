@@ -801,7 +801,7 @@ export default function JoinCAS() {
                       </>
                     ) : (
                       <>
-                        Submit Application
+                        Submit Registration Form
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </>
                     )}

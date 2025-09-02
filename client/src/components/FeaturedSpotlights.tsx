@@ -246,20 +246,7 @@ export default function FeaturedSpotlights() {
               </button>
             </div>
 
-            {/* Dots Indicator */}
-            <div className="flex items-center gap-1.5">
-              {spotlights.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                    index === currentIndex 
-                      ? 'bg-white w-6' 
-                      : 'bg-white/40 hover:bg-white/60'
-                  }`}
-                />
-              ))}
-            </div>
+
 
             {/* Counter */}
             <div className="text-white/60 text-sm font-medium">

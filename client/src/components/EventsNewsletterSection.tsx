@@ -63,8 +63,8 @@ export default function EventsNewsletterSection() {
           </motion.div>
           
           <h2 className="crawford-section-title mb-4">
-            <span className="text-gray-900 dark:text-white">{t('events.title.events')} </span>
-            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('events.title.newsletter')}</span>
+            <span className="text-gray-900 dark:text-white">Join CAS & </span>
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Get Involved</span>
           </h2>
           
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">

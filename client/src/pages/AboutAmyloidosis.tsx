@@ -518,7 +518,7 @@ export default function AboutAmyloidosis() {
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="p-6 space-y-8">
+                  <div className="p-6 space-y-6">
                     {/* Urgency Badge */}
                     <div className={`inline-flex items-center gap-2 bg-gradient-to-r ${type.color}/20 rounded-full px-4 py-2 border ${type.borderColor}`}>
                       <Clock className="w-4 h-4" />
@@ -584,21 +584,6 @@ export default function AboutAmyloidosis() {
                           ))}
                         </ul>
                       </div>
-                    </div>
-
-                    {/* Learn More Button for Detail Pages */}
-                    <div className="pt-8 border-t border-gray-200/40 dark:border-white/10 text-center">
-                      <Link 
-                        href={
-                          type.id === 'al' ? '/amyloidosis-types/al-light-chain-amyloidosis' :
-                          type.id === 'attr' ? '/amyloidosis-types/attr-transthyretin-amyloidosis' :
-                          '/amyloidosis-types/other-amyloidosis-types'
-                        }
-                        className={`inline-flex items-center gap-2 bg-gradient-to-r ${type.color} text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 group`}
-                      >
-                        Learn More About {type.type.split(' ')[0]}
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </Link>
                     </div>
                   </div>
                 </motion.div>

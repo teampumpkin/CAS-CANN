@@ -438,7 +438,7 @@ export default function JoinCAS() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                Complete Your <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Application</span>
+                Register for <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">CAS</span>
               </h2>
               <p className="text-gray-600 dark:text-white/70 max-w-2xl mx-auto">
                 Join Canada's leading professional network for amyloidosis care. Please provide accurate information to help us process your application efficiently.

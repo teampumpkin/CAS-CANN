@@ -175,31 +175,7 @@ export default function Footer() {
               </motion.div>
             </div>
 
-            {/* Legal & Privacy */}
-            <div className="lg:col-span-1">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="text-lg font-semibold text-white mb-6">Legal & Privacy</h3>
-                <ul className="space-y-2">
-                  {legalLinks.map((link, index) => (
-                    <li key={index}>
-                      <a
-                        href={link.href}
-                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
-                      >
-                        <link.icon className="w-4 h-4 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
-                        <span className="flex-1">{link.name}</span>
-                        <ExternalLink className="w-3 h-3 text-white/50 group-hover:text-white/70 transition-colors duration-300" />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </div>
+
           </div>
         </div>
 

@@ -191,7 +191,7 @@ export default function Partnerships() {
             className="crawford-section-title mb-6"
           >
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-              Partnerships &
+              Partnerships And Other
             </span>
             <br />
             <span className="text-gray-800 dark:text-white">

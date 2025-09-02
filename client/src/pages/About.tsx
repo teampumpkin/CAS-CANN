@@ -122,20 +122,21 @@ export default function About() {
         />
         
         <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-[2fr_1fr] gap-16 items-center justify-center max-w-7xl mx-auto">
+          <div className="max-w-6xl mx-auto text-center">
             {/* Hero Content */}
             <motion.div
+              className="text-center"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
             >
               <motion.div
-                className="inline-block mb-6"
+                className="inline-block mb-6 mx-auto"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <div className="flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-xl rounded-full px-4 py-2 border border-[#00AFE6]/30 shadow-lg shadow-[#00AFE6]/10">
+                <div className="flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-xl rounded-full px-4 py-2 border border-[#00AFE6]/30 shadow-lg shadow-[#00AFE6]/10 mx-auto">
                   <Heart className="w-4 h-4 text-[#00AFE6]" />
                   <span className="text-sm font-medium text-gray-700 dark:text-white/90">{t('about.hero.badge')}</span>
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse" />
@@ -162,7 +163,7 @@ export default function About() {
               </motion.h1>
               
               <motion.p
-                className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-6"
+                className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-6 mx-auto max-w-3xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
@@ -171,7 +172,7 @@ export default function About() {
               </motion.p>
               
               <motion.p
-                className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-10"
+                className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-10 mx-auto max-w-4xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -182,21 +183,7 @@ export default function About() {
 
             </motion.div>
             
-            {/* Hero Visual */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-            >
-              <div className="relative">
 
-                
-                {/* Floating elements */}
-                
-                
-              </div>
-            </motion.div>
           </div>
         </div>
       </ParallaxBackground>

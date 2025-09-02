@@ -242,11 +242,11 @@ export default function Partnerships() {
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Strategic Alliances</span>
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
+            <h2 className="crawford-section-title mb-4">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Global
               </span>
-              {' '}
+              <br />
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Partners
               </span>
@@ -317,8 +317,14 @@ export default function Partnerships() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
-              Types of Collaboration
+            <h2 className="crawford-section-title mb-4">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Types of
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Collaboration
+              </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Our partnerships span multiple areas of focus to maximize impact for the amyloidosis community
@@ -363,8 +369,14 @@ export default function Partnerships() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">
-              Partner Organizations
+            <h2 className="crawford-section-title mb-4">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Partner
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Organizations
+              </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Working together with leading organizations worldwide to advance amyloidosis care and research
@@ -445,8 +457,14 @@ export default function Partnerships() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800 dark:text-white">
-              Partner With Us
+            <h2 className="crawford-section-title mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Partner
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                With Us
+              </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
               Join our network of organizations working to improve outcomes for amyloidosis patients worldwide. 

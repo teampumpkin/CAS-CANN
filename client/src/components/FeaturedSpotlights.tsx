@@ -94,7 +94,7 @@ export default function FeaturedSpotlights() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Clinical Updates</span>
+            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Important Updates</span>
           </motion.div>
 
           <h2 className="crawford-section-title text-gray-900 dark:text-white mb-4">

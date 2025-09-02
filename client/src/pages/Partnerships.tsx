@@ -253,7 +253,7 @@ export default function Partnerships() {
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              We collaborate with leading organizations, research institutions, and healthcare networks to amplify our impact and accelerate progress in amyloidosis care across Canada and internationally.
+              Collaborating with leading organizations to advance amyloidosis care worldwide
             </p>
           </motion.div>
 

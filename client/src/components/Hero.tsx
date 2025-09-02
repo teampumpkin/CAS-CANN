@@ -8,7 +8,7 @@ export default function Hero() {
   const { t } = useLanguage();
   
   const quickTiles = [
-    { icon: Users, label: 'Join', href: '/get-involved' },
+    { icon: Users, label: 'Join', href: '/join-cas' },
     { icon: MapPin, label: t('nav.directory'), href: '/directory' },
     { icon: BookOpen, label: 'Learn', href: '/resource-library' }
   ];
@@ -180,7 +180,7 @@ export default function Hero() {
                       
                       {/* Enhanced subtitle */}
                       <p className="text-white/70 text-xs font-medium leading-relaxed group-hover:text-white group-hover:font-semibold transition-all duration-300 transform group-hover:translate-y-0.5 drop-shadow-md group-hover:drop-shadow-lg">
-                        {index === 0 && "Connect with our community"}
+                        {index === 0 && "Become a CAS member"}
                         {index === 1 && "Find healthcare providers and support"}
                         {index === 2 && "Access educational resources"}
                       </p>

@@ -154,7 +154,7 @@ export default function AboutAmyloidosis() {
                 <span className="text-sm font-semibold text-red-700 dark:text-red-400 tracking-wide">{t('aboutAmyloidosis.hero.badge')}</span>
               </div>
               
-              <h1 className="text-[60px] font-bold font-rosarivo mb-8 leading-tight">
+              <h1 className="text-[60px] font-bold font-rosarivo mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   {t('aboutAmyloidosis.hero.title.understanding')}
                 </span>
@@ -163,6 +163,10 @@ export default function AboutAmyloidosis() {
                   {t('aboutAmyloidosis.hero.title.amyloidosis')}
                 </span>
               </h1>
+              
+              <h2 className="text-2xl font-semibold text-gray-700 dark:text-white/80 mb-8 leading-relaxed">
+                Learn the signs, understand the types, and take action early.
+              </h2>
               
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8">
                 Amyloidosis refers to a group of rare diseases caused by abnormal protein deposits (called amyloid) building up in organs and tissues. These misfolded proteins disrupt normal body functions, leading to serious health complications.

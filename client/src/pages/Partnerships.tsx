@@ -188,7 +188,7 @@ export default function Partnerships() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold mb-6"
+            className="crawford-section-title mb-6"
           >
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
               Partnerships &

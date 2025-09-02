@@ -157,7 +157,7 @@ export default function Hero() {
                     </div>
                     
                     {/* Content */}
-                    <div className="relative z-10 text-center">
+                    <div className="relative z-10 text-center h-full flex flex-col">
                       {/* Enhanced icon container */}
                       <div className="relative mx-auto mb-4 w-16 h-16 group-hover:scale-110 transition-all duration-300">
                         {/* Main icon background */}
@@ -179,7 +179,7 @@ export default function Hero() {
                       </h3>
                       
                       {/* Enhanced subtitle */}
-                      <p className="text-white/70 text-xs font-medium leading-relaxed group-hover:text-white group-hover:font-semibold transition-all duration-300 transform group-hover:translate-y-0.5 drop-shadow-md group-hover:drop-shadow-lg">
+                      <p className="text-white/70 text-xs font-medium leading-relaxed group-hover:text-white group-hover:font-semibold transition-all duration-300 transform group-hover:translate-y-0.5 drop-shadow-md group-hover:drop-shadow-lg flex-grow">
                         {index === 0 && "Become a CAS member"}
                         {index === 1 && "Clinical services offering amyloidosis care"}
                         {index === 2 && "Access educational resources"}

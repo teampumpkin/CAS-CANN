@@ -101,7 +101,7 @@ export default function FeaturedSpotlights() {
             Important Updates & Featured Spotlights
           </h2>
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Latest clinical guidelines, research breakthroughs, and treatment advances from across Canada's amyloidosis care network.
+            Latest updates from the world of amyloidosis including clinical guidelines, research breakthroughs, treatment advances and other news from across Canada and internationally.
           </p>
         </motion.div>
 

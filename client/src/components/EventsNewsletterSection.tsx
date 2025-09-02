@@ -165,19 +165,19 @@ export default function EventsNewsletterSection() {
               </div>
 
               {/* Modern Stats Display */}
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {/* Stats Overview */}
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 font-rosarivo">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 font-rosarivo">
                     Growing Network
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
                     Join a thriving community of healthcare professionals
                   </p>
                 </div>
 
                 {/* Horizontal Stats Bar */}
-                <div className="relative bg-gradient-to-r from-white/90 via-[#00AFE6]/5 to-white/90 dark:from-gray-800/90 dark:via-[#00AFE6]/10 dark:to-gray-800/90 backdrop-blur-sm rounded-2xl py-8 px-6 border border-white/40 dark:border-gray-700/50">
+                <div className="relative bg-gradient-to-r from-white/90 via-[#00AFE6]/5 to-white/90 dark:from-gray-800/90 dark:via-[#00AFE6]/10 dark:to-gray-800/90 backdrop-blur-sm rounded-xl py-4 px-4 border border-white/40 dark:border-gray-700/50">
                   {/* Animated background pulse */}
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#00AFE6]/5 via-[#00DD89]/5 to-[#00AFE6]/5 opacity-0 animate-pulse" />
                   
@@ -197,28 +197,28 @@ export default function EventsNewsletterSection() {
                       >
                         {/* Icon with glow effect */}
                         <div 
-                          className="relative mb-3"
-                          style={{ filter: `drop-shadow(0 0 8px ${stat.color}40)` }}
+                          className="relative mb-2"
+                          style={{ filter: `drop-shadow(0 0 6px ${stat.color}40)` }}
                         >
                           <div 
-                            className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl"
+                            className="w-10 h-10 rounded-lg flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl"
                             style={{ 
                               background: `linear-gradient(135deg, ${stat.color}, ${stat.color}CC)`,
-                              boxShadow: `0 4px 15px ${stat.color}30`
+                              boxShadow: `0 3px 12px ${stat.color}30`
                             }}
                           >
-                            <stat.icon className="w-6 h-6 text-white" />
+                            <stat.icon className="w-5 h-5 text-white" />
                           </div>
                           {/* Pulse ring on hover */}
                           <div 
-                            className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-50 group-hover:scale-125 transition-all duration-500"
+                            className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-50 group-hover:scale-125 transition-all duration-500"
                             style={{ background: `linear-gradient(135deg, ${stat.color}40, transparent)` }}
                           />
                         </div>
                         
                         {/* Value with counter animation */}
                         <div 
-                          className="text-3xl font-black mb-1 transition-all duration-300"
+                          className="text-2xl font-black mb-1 transition-all duration-300"
                           style={{ color: stat.color }}
                         >
                           <motion.span
@@ -231,7 +231,7 @@ export default function EventsNewsletterSection() {
                         </div>
                         
                         {/* Label */}
-                        <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">
+                        <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
                           {stat.label}
                         </div>
                         

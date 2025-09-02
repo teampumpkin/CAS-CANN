@@ -13,7 +13,7 @@ export default function EventsNewsletterSection() {
       date: 'October 31 – November 2, 2025',
       gradient: 'from-[#00AFE6] to-[#0088CC]',
       bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
-      type: 'Hybrid'
+      type: 'In-person & Virtual'
     },
     {
       icon: Video,

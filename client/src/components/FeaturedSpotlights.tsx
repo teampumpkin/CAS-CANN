@@ -98,7 +98,7 @@ export default function FeaturedSpotlights() {
           </motion.div>
 
           <h2 className="crawford-section-title text-gray-900 dark:text-white mb-4">
-            Clinical Updates & Featured Spotlights
+            Important Updates & Featured Spotlights
           </h2>
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
             Latest clinical guidelines, research breakthroughs, and treatment advances from across Canada's amyloidosis care network.

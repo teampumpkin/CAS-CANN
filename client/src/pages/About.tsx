@@ -190,38 +190,7 @@ export default function About() {
               transition={{ duration: 1, delay: 0.4 }}
             >
               <div className="relative">
-                {/* Main visual card */}
-                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/20 shadow-2xl shadow-[#00AFE6]/10 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-2xl -translate-y-16 translate-x-16" />
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-xl translate-y-12 -translate-x-12" />
-                  <div className="relative z-10">
-                    <div className="grid grid-cols-2 gap-6 mb-8">
-                      <motion.div 
-                        className="bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl p-6 text-center border border-[#00AFE6]/30 hover:border-[#00AFE6]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00AFE6]/20"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <Stethoscope className="w-8 h-8 text-[#00AFE6] mx-auto mb-3" />
-                        <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">50+</div>
-                        <div className="text-sm text-gray-600 dark:text-white/70">Clinicians</div>
-                      </motion.div>
-                      <motion.div 
-                        className="bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 rounded-2xl p-6 text-center border border-[#00DD89]/30 hover:border-[#00DD89]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#00DD89]/20"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <Building2 className="w-8 h-8 text-[#00DD89] mx-auto mb-3" />
-                        <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">25+</div>
-                        <div className="text-sm text-gray-600 dark:text-white/70">Institutions</div>
-                      </motion.div>
-                    </div>
-                    <div className="text-center">
-                      <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-[#00AFE6]/30">
-                        <Award className="w-6 h-6 text-[#00AFE6]" />
-                      </div>
-                      <h3 className="text-lg font-semibold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent mb-2">National Platform</h3>
-                      <p className="text-gray-600 dark:text-white/60 text-sm">Connecting the amyloidosis community across Canada</p>
-                    </div>
-                  </div>
-                </div>
+
                 
                 {/* Floating elements */}
                 <motion.div

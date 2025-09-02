@@ -16,12 +16,14 @@ export default function Footer() {
   ];
 
   const sitemapLinks = [
-    { name: "Homepage", href: "/", icon: Heart, status: "available" },
-    { name: "About Amyloidosis", href: "/about-amyloidosis", icon: FileText, status: "available" },
-    { name: "Healthcare Directory", href: "/directory", icon: MapPin, status: "available" },
     { name: "About CAS", href: "/about", icon: Users, status: "available" },
+    { name: "About Amyloidosis", href: "/about-amyloidosis", icon: FileText, status: "available" },
     { name: "Resources", href: "/resources", icon: BookOpen, status: "available" },
-    { name: "Contact Us", href: "/contact", icon: Mail, status: "available" }
+    { name: "Get Involved", href: "/get-involved", icon: Heart, status: "available" },
+    { name: "Events", href: "/events", icon: Calendar, status: "available" },
+    { name: "CANN", href: "/nursing-network", icon: Users, status: "available" },
+    { name: "Join CAS", href: "/join-cas", icon: Users, status: "available" },
+    { name: "Contact Us", href: "/contact-us", icon: Mail, status: "available" }
   ];
 
   const legalLinks = [

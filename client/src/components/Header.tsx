@@ -67,7 +67,7 @@ export default function Header() {
       dropdownItems: [
         { name: 'Resource Library', href: '/resource-library' },
         { name: 'Partnerships and Other amyloidosis organizations', href: '/partnerships' },
-        { name: 'News and updates', href: '/news' },
+        { name: 'News and Updates', href: '/news' },
       ]
     },
 

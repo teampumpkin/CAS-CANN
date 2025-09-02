@@ -68,7 +68,6 @@ export default function Header() {
         { name: 'Resource Library', href: '/resource-library' },
         { name: 'Partnerships And Other Amyloidosis Organizations', href: '/partnerships' },
         { name: 'News and updates', href: '/news' },
-        { name: 'Newsletter', href: '/newsletter' },
       ]
     },
 

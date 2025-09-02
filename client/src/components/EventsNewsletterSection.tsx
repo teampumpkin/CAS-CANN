@@ -326,7 +326,7 @@ export default function EventsNewsletterSection() {
                               whileHover={{ scale: 1.02 }}
                               whileTap={{ scale: 0.98 }}
                             >
-                              <span>Stay Tuned</span>
+                              <span>{index === 2 ? 'Stay Tuned' : 'Join Event'}</span>
                               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                             </motion.button>
                           </Link>

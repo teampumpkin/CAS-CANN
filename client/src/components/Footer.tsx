@@ -130,13 +130,6 @@ export default function Footer() {
                       >
                         <link.icon className="w-4 h-4 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
                         <span className="flex-1">{link.name}</span>
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${
-                          link.status === 'available' 
-                            ? 'bg-green-500/20 text-green-300' 
-                            : 'bg-yellow-500/20 text-yellow-300'
-                        }`}>
-                          {link.status === 'available' ? 'Available' : 'Coming Soon'}
-                        </span>
                       </a>
                     </li>
                   ))}

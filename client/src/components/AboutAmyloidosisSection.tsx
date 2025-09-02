@@ -164,17 +164,6 @@ export default function AboutAmyloidosisSection() {
                   {t('about.earlyDetection.subdescription')}
                 </p>
               </div>
-              <motion.a
-                href="/about-amyloidosis"
-                className="group relative bg-gradient-to-r from-[#00DD89] to-[#00BB77] text-white px-10 py-4 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 inline-flex items-center gap-2"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="relative">{t('about.learnMore')}</span>
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </motion.a>
             </div>
             <div className="space-y-8">
               <motion.div 

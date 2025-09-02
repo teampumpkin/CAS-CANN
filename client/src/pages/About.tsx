@@ -162,7 +162,7 @@ export default function About() {
               </motion.h1>
               
               <motion.p
-                className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-6 max-w-lg"
+                className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
@@ -171,12 +171,12 @@ export default function About() {
               </motion.p>
               
               <motion.p
-                className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-10 max-w-lg"
+                className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through evidence-based collaboration.
+                Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through multidisciplinary collaboration.
               </motion.p>
               
 

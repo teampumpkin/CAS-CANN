@@ -449,7 +449,7 @@ export default function AboutAmyloidosis() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="crawford-section-title mb-6">
+            <h2 className="crawford-section-title mb-4">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Types of
               </span>
@@ -458,6 +458,10 @@ export default function AboutAmyloidosis() {
                 Amyloidosis
               </span>
             </h2>
+            
+            <h3 className="text-2xl font-semibold text-gray-700 dark:text-white/80 mb-8 leading-relaxed">
+              Major forms and their characteristics.
+            </h3>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
               Each type is named with "A" followed by the protein responsible. For example: AL Amyloidosis (from light chain proteins), ATTR Amyloidosis (from transthyretin protein), AA, ALECT2, Aβ2M, and other rare forms.

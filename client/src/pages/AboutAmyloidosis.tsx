@@ -169,7 +169,7 @@ export default function AboutAmyloidosis() {
               </h2>
               
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8">
-                Amyloidosis refers to a group of rare diseases caused by abnormal protein deposits (called amyloid) building up in organs and tissues. These misfolded proteins disrupt normal body functions, leading to serious health complications.
+                Amyloidosis is a rare but serious disease where misfolded proteins accumulate in organs. Early detection and appropriate treatment can significantly improve outcomes.
               </p>
               
 

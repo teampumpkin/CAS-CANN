@@ -177,7 +177,7 @@ export default function EventsNewsletterSection() {
                 </div>
 
                 {/* Horizontal Stats Bar */}
-                <div className="relative bg-gradient-to-r from-white/90 via-[#00AFE6]/5 to-white/90 dark:from-gray-800/90 dark:via-[#00AFE6]/10 dark:to-gray-800/90 backdrop-blur-sm rounded-2xl p-6 border border-white/40 dark:border-gray-700/50">
+                <div className="relative bg-gradient-to-r from-white/90 via-[#00AFE6]/5 to-white/90 dark:from-gray-800/90 dark:via-[#00AFE6]/10 dark:to-gray-800/90 backdrop-blur-sm rounded-2xl py-8 px-6 border border-white/40 dark:border-gray-700/50">
                   {/* Animated background pulse */}
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#00AFE6]/5 via-[#00DD89]/5 to-[#00AFE6]/5 opacity-0 animate-pulse" />
                   
@@ -243,20 +243,7 @@ export default function EventsNewsletterSection() {
                     ))}
                   </div>
                   
-                  {/* Progress bar visualization */}
-                  <div className="mt-6 pt-4 border-t border-gray-200/50 dark:border-gray-700/50">
-                    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                      <div className="flex-1 h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <motion.div 
-                          className="h-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: '75%' }}
-                          transition={{ duration: 2, delay: 0.5 }}
-                        />
-                      </div>
-                      <span className="font-medium">75% Growth YoY</span>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>

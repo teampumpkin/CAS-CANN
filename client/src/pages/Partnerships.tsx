@@ -214,8 +214,7 @@ export default function Partnerships() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            Building bridges across the global amyloidosis community through strategic partnerships, 
-            collaborative research, and shared patient advocacy initiatives.
+            We work with leading organizations to advance amyloidosis care, research, and patient support across Canada.
           </motion.p>
           
           <motion.div

@@ -68,7 +68,7 @@ export default function EventsNewsletterSection() {
           </h2>
           
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
-            {t('events.subtitle')}
+            Stay informed about the latest updates in research, treatment advances, and events in amyloidosis care in Canada and internationally.
           </p>
         </motion.div>
 

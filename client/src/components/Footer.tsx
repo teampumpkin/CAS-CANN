@@ -72,7 +72,7 @@ export default function Footer() {
                 </div>
                 
                 <p className="text-white/80 text-sm leading-relaxed mb-6">
-                  Advancing awareness, accelerating research, and improving outcomes for all Canadians affected by amyloidosis.
+                  Advancing awareness, enhancing patient care, and improving outcomes for all Canadians affected by amyloidosis.
                 </p>
 
                 {/* Language Toggle */}

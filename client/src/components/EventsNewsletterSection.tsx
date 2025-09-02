@@ -165,7 +165,7 @@ export default function EventsNewsletterSection() {
               </div>
 
               {/* Modern Stats Display */}
-              <div className="space-y-4">
+              <div className="flex flex-col justify-center h-full space-y-4">
                 {/* Stats Overview */}
                 <div className="text-center">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 font-rosarivo">

@@ -111,10 +111,10 @@ export default function Hero() {
         </div>
 
         {/* Bottom section with tiles and scroll indicator */}
-        <div className="pb-8">
+        <div className="py-8">
           {/* Quick Action Tiles - Premium Style */}
           <motion.div
-            className="w-full max-w-6xl mx-auto px-6 mb-8"
+            className="w-full max-w-6xl mx-auto px-6"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
@@ -186,7 +186,7 @@ export default function Hero() {
                       </p>
                       
                       {/* Button indicator */}
-                      <div className="mt-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="mt-4 flex items-center justify-center opacity-100 transition-opacity duration-300">
                         <div className="flex items-center gap-1 text-white font-bold text-xs bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
                           <span>Click to explore</span>
                           <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

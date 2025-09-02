@@ -79,7 +79,7 @@ export default function Header() {
       href: '#nursing-network',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'About', href: '/nursing-network' },
+        { name: 'About CANN', href: '/nursing-network' },
         { name: 'Join CANN', href: '/join-nursing-network' },
       ]
     },

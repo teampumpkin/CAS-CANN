@@ -193,38 +193,8 @@ export default function About() {
 
                 
                 {/* Floating elements */}
-                <motion.div
-                  className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center shadow-2xl shadow-[#00AFE6]/25 border border-[#00AFE6]/30"
-                  animate={{ 
-                    y: [0, -10, 0],
-                    rotate: [0, 5, 0],
-                    scale: [1, 1.05, 1]
-                  }}
-                  transition={{ 
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <Heart className="w-8 h-8 text-white" />
-                </motion.div>
                 
-                <motion.div
-                  className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 backdrop-blur-xl rounded-xl border border-[#00DD89]/30 flex items-center justify-center shadow-lg shadow-[#00DD89]/20"
-                  animate={{ 
-                    x: [0, 10, 0],
-                    y: [0, -5, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{ 
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1
-                  }}
-                >
-                  <Users className="w-6 h-6 text-[#00DD89]" />
-                </motion.div>
+                
               </div>
             </motion.div>
           </div>

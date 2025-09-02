@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, Mail, Video, Heart, Users, ArrowRight, UserCheck, Globe, Star, MapPin, Stethoscope } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Link } from 'wouter';
 import casLogo from '@assets/l_cas_vert_rgb_1753253116732.png';
 
 export default function EventsNewsletterSection() {
@@ -319,14 +320,16 @@ export default function EventsNewsletterSection() {
 
                         {/* Footer */}
                         <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
-                          <motion.button
-                            className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                          >
-                            <span>Join Event</span>
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                          </motion.button>
+                          <Link href="/journal-club">
+                            <motion.button
+                              className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              <span>Join Event</span>
+                              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                            </motion.button>
+                          </Link>
                         </div>
                       </div>
                     </div>

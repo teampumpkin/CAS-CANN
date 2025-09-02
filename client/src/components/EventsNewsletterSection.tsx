@@ -165,7 +165,7 @@ export default function EventsNewsletterSection() {
               </div>
 
               {/* Stats with animated counters */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
                   { value: 180, suffix: '', label: t('events.stats.members'), icon: Users, color: 'from-blue-500 to-cyan-500', bgColor: 'from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20' },
                   { value: 13, suffix: '', label: t('events.stats.provinces'), icon: MapPin, color: 'from-purple-500 to-violet-500', bgColor: 'from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20' },
@@ -179,7 +179,7 @@ export default function EventsNewsletterSection() {
                     transition={{ duration: 0.6, delay: 0.1 * index }}
                     whileHover={{ y: -5 }}
                   >
-                    <div className={`relative backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:shadow-xl bg-gradient-to-br ${stat.bgColor} border-white/30 dark:border-white/20 hover:border-white/50 dark:hover:border-white/30 hover:shadow-2xl overflow-hidden`}>
+                    <div className={`relative backdrop-blur-xl rounded-2xl p-4 border transition-all duration-300 hover:shadow-xl bg-gradient-to-br ${stat.bgColor} border-white/30 dark:border-white/20 hover:border-white/50 dark:hover:border-white/30 hover:shadow-2xl overflow-hidden`}>
                       {/* Background gradient overlay */}
                       <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl`} />
                       
@@ -194,14 +194,14 @@ export default function EventsNewsletterSection() {
                       
                       <div className="relative z-10">
                         {/* Enhanced icon */}
-                        <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                        <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-3 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                           {index === 0 && <Users className="w-6 h-6 text-white" />}
                           {index === 1 && <MapPin className="w-6 h-6 text-white" />}
                           {index === 2 && <Stethoscope className="w-6 h-6 text-white" />}
                         </div>
                         
                         {/* Value with enhanced gradient */}
-                        <div className={`text-3xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                        <div className={`text-2xl font-bold mb-1 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
                           <motion.span
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}

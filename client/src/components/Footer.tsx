@@ -40,9 +40,8 @@ export default function Footer() {
   ];
 
   const contactInfo = [
-    { type: 'email', value: 'info@canadianamyloidosis.ca', icon: Mail },
-    { type: 'phone', value: '1-800-CAS-INFO', icon: Phone },
-    { type: 'address', value: 'Toronto, Ontario, Canada', icon: MapPin }
+    { type: 'email', value: 'CAS@amyloid.ca', icon: Mail },
+    { type: 'email', value: 'CANN@amyloid.ca', icon: Mail }
   ];
 
   return (

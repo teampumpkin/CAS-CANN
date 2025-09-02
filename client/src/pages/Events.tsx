@@ -248,7 +248,6 @@ export default function Events() {
           </motion.div>
         </div>
       </section>
-
       {/* Event Stats */}
       <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4">
@@ -277,7 +276,6 @@ export default function Events() {
           </div>
         </div>
       </section>
-
       {/* Filters Section */}
       <section className="py-12 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4">
@@ -326,7 +324,6 @@ export default function Events() {
           </div>
         </div>
       </section>
-
       {/* Featured Events */}
       {featuredEvents.length > 0 && (
         <section className="py-16 bg-gray-50 dark:bg-gray-800">
@@ -425,7 +422,6 @@ export default function Events() {
           </div>
         </section>
       )}
-
       {/* All Events */}
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4">
@@ -436,7 +432,7 @@ export default function Events() {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-white">All Upcoming Events</h2>
+            <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-white">Upcoming Events</h2>
             <p className="text-gray-600 dark:text-gray-400">Complete schedule of educational opportunities</p>
           </motion.div>
 
@@ -505,7 +501,6 @@ export default function Events() {
           </div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-[#00AFE6]/10 via-white to-[#00DD89]/10 dark:from-[#00AFE6]/20 dark:via-gray-900 dark:to-[#00DD89]/20">
         <div className="max-w-4xl mx-auto px-4 text-center">

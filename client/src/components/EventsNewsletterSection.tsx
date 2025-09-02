@@ -242,8 +242,6 @@ export default function EventsNewsletterSection() {
                       </motion.div>
                     ))}
                   </div>
-                  
-
                 </div>
               </div>
             </div>

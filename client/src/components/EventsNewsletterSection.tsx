@@ -164,61 +164,100 @@ export default function EventsNewsletterSection() {
                 </div>
               </div>
 
-              {/* Stats with animated counters */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  { value: 180, suffix: '', label: t('events.stats.members'), icon: Users, color: 'from-blue-500 to-cyan-500', bgColor: 'from-blue-50/90 to-cyan-50/90 dark:from-blue-900/20 dark:to-cyan-900/20' },
-                  { value: 13, suffix: '', label: t('events.stats.provinces'), icon: MapPin, color: 'from-purple-500 to-violet-500', bgColor: 'from-purple-50/90 to-violet-50/90 dark:from-purple-900/20 dark:to-violet-900/20' },
-                  { value: 2, suffix: '+', label: t('events.stats.disciplines'), icon: Stethoscope, color: 'from-emerald-500 to-green-500', bgColor: 'from-emerald-50/90 to-green-50/90 dark:from-emerald-900/20 dark:to-green-900/20' }
-                ].map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    className="relative group"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 * index }}
-                    whileHover={{ y: -5 }}
-                  >
-                    <div className={`relative backdrop-blur-xl rounded-2xl p-4 border transition-all duration-300 hover:shadow-xl bg-gradient-to-br ${stat.bgColor} border-white/30 dark:border-white/20 hover:border-white/50 dark:hover:border-white/30 hover:shadow-2xl overflow-hidden`}>
-                      {/* Background gradient overlay */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl`} />
-                      
-                      {/* Animated accent line */}
-                      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                      
-                      {/* Floating particles */}
-                      <div className="absolute inset-0">
-                        <div className={`absolute top-2 right-2 w-1 h-1 bg-gradient-to-r ${stat.color} rounded-full opacity-0 group-hover:opacity-60 transition-all duration-500 group-hover:animate-pulse`} />
-                        <div className={`absolute bottom-3 left-3 w-0.5 h-0.5 bg-gradient-to-r ${stat.color} rounded-full opacity-0 group-hover:opacity-40 transition-all duration-700 group-hover:animate-pulse`} style={{ animationDelay: '0.3s' }} />
-                      </div>
-                      
-                      <div className="relative z-10">
-                        {/* Enhanced icon */}
-                        <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-3 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                          {index === 0 && <Users className="w-6 h-6 text-white" />}
-                          {index === 1 && <MapPin className="w-6 h-6 text-white" />}
-                          {index === 2 && <Stethoscope className="w-6 h-6 text-white" />}
+              {/* Modern Stats Display */}
+              <div className="space-y-6">
+                {/* Stats Overview */}
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 font-rosarivo">
+                    Growing Network
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Join a thriving community of healthcare professionals
+                  </p>
+                </div>
+
+                {/* Horizontal Stats Bar */}
+                <div className="relative bg-gradient-to-r from-white/90 via-[#00AFE6]/5 to-white/90 dark:from-gray-800/90 dark:via-[#00AFE6]/10 dark:to-gray-800/90 backdrop-blur-sm rounded-2xl p-6 border border-white/40 dark:border-gray-700/50">
+                  {/* Animated background pulse */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#00AFE6]/5 via-[#00DD89]/5 to-[#00AFE6]/5 opacity-0 animate-pulse" />
+                  
+                  <div className="relative z-10 flex items-center justify-between">
+                    {[
+                      { value: '180', label: 'Members', icon: Users, color: '#00AFE6' },
+                      { value: '13', label: 'Provinces', icon: MapPin, color: '#8B5CF6' },
+                      { value: '2+', label: 'Disciplines', icon: Stethoscope, color: '#00DD89' }
+                    ].map((stat, index) => (
+                      <motion.div
+                        key={stat.label}
+                        className="flex flex-col items-center group"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        {/* Icon with glow effect */}
+                        <div 
+                          className="relative mb-3"
+                          style={{ filter: `drop-shadow(0 0 8px ${stat.color}40)` }}
+                        >
+                          <div 
+                            className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl"
+                            style={{ 
+                              background: `linear-gradient(135deg, ${stat.color}, ${stat.color}CC)`,
+                              boxShadow: `0 4px 15px ${stat.color}30`
+                            }}
+                          >
+                            <stat.icon className="w-6 h-6 text-white" />
+                          </div>
+                          {/* Pulse ring on hover */}
+                          <div 
+                            className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-50 group-hover:scale-125 transition-all duration-500"
+                            style={{ background: `linear-gradient(135deg, ${stat.color}40, transparent)` }}
+                          />
                         </div>
                         
-                        {/* Value with enhanced gradient */}
-                        <div className={`text-2xl font-bold mb-1 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                        {/* Value with counter animation */}
+                        <div 
+                          className="text-3xl font-black mb-1 transition-all duration-300"
+                          style={{ color: stat.color }}
+                        >
                           <motion.span
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
                           >
-                            {stat.value}{stat.suffix}
+                            {stat.value}
                           </motion.span>
                         </div>
                         
-                        {/* Label with enhanced styling */}
-                        <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">
+                        {/* Label */}
+                        <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                           {stat.label}
                         </div>
+                        
+                        {/* Connecting line (except for last item) */}
+                        {index < 2 && (
+                          <div className="hidden sm:block absolute top-1/2 left-full w-8 h-px bg-gradient-to-r from-gray-300 to-transparent dark:from-gray-600 transform -translate-y-1/2 translate-x-4" />
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  {/* Progress bar visualization */}
+                  <div className="mt-6 pt-4 border-t border-gray-200/50 dark:border-gray-700/50">
+                    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                      <div className="flex-1 h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <motion.div 
+                          className="h-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '75%' }}
+                          transition={{ duration: 2, delay: 0.5 }}
+                        />
                       </div>
+                      <span className="font-medium">75% Growth YoY</span>
                     </div>
-                  </motion.div>
-                ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

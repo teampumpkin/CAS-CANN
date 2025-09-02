@@ -181,7 +181,7 @@ export default function Hero() {
                       {/* Enhanced subtitle */}
                       <p className="text-white/70 text-xs font-medium leading-relaxed group-hover:text-white group-hover:font-semibold transition-all duration-300 transform group-hover:translate-y-0.5 drop-shadow-md group-hover:drop-shadow-lg">
                         {index === 0 && "Become a CAS member"}
-                        {index === 1 && "Find healthcare providers and support"}
+                        {index === 1 && "Clinical services offering amyloidosis care"}
                         {index === 2 && "Access educational resources"}
                       </p>
                       

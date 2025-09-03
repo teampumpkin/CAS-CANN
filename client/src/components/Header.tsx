@@ -133,18 +133,18 @@ export default function Header() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              <div className="hidden md:flex items-center space-x-2">
+              <div className="hidden md:flex items-center space-x-1.5">
                 <LanguageSwitcher />
                 <ThemeToggle />
                 <div className="relative">
                   <button
                     onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                    className="h-10 px-4 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center gap-2 border border-gray-300 shadow-sm"
+                    className="h-8 px-3 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center gap-1.5 border border-gray-300 shadow-sm text-xs"
                     aria-label="Open accessibility tools"
                     aria-expanded={isAccessibilityOpen}
                   >
-                    <Settings className="w-4 h-4" />
-                    <span className="text-sm font-medium">Accessibility</span>
+                    <Settings className="w-3.5 h-3.5" />
+                    <span className="font-medium">Accessibility</span>
                   </button>
 
                   {/* Accessibility Dropdown */}

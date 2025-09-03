@@ -107,27 +107,249 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
     >
-      <div className="max-w-8xl mx-auto px-4 lg:px-6">
-        <div className="flex items-center justify-between h-20 md:h-28 min-w-0">
+      {/* Top Row - Logo and Controls */}
+      <div className="border-b border-gray-200">
+        <div className="max-w-8xl mx-auto px-4 lg:px-6">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Logo */}
+            <motion.a
+              href="/"
+              className="flex items-center group cursor-pointer"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <img 
+                src={casLogo} 
+                alt="Canadian Amyloidosis Society"
+                className="h-12 w-auto md:h-16 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
+              />
+            </motion.a>
 
-          {/* Logo */}
-          <motion.a
-            href="/"
-            className="flex items-center group cursor-pointer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <img 
-              src={casLogo} 
-              alt="Canadian Amyloidosis Society"
-              className="h-16 w-auto md:h-20 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
-            />
-          </motion.a>
+            {/* Controls Section */}
+            <motion.div
+              className="flex items-center gap-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <div className="hidden md:flex items-center space-x-2">
+                <LanguageSwitcher />
+                <ThemeToggle />
+                <div className="relative">
+                  <button
+                    onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
+                    className="h-10 px-4 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center gap-2 border border-gray-300 shadow-sm"
+                    aria-label="Open accessibility tools"
+                    aria-expanded={isAccessibilityOpen}
+                  >
+                    <Settings className="w-4 h-4" />
+                    <span className="text-sm font-medium">Accessibility</span>
+                  </button>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center">
-            <div className="flex items-center gap-1 bg-gray-100/95 backdrop-blur-xl rounded-full px-4 py-2 border border-gray-300/50 shadow-lg">
+                  {/* Accessibility Dropdown */}
+                  <AnimatePresence>
+                    {isAccessibilityOpen && (
+                      <motion.div
+                        className="absolute top-full right-0 mt-2 w-80 z-[120]"
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                          <div className="p-4">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 bg-[#00AFE6] rounded-full flex items-center justify-center">
+                                  <Settings className="w-4 h-4 text-white" />
+                                </div>
+                                <div>
+                                  <h3 className="text-base font-bold text-gray-900 dark:text-white">
+                                    Accessibility Tools
+                                  </h3>
+                                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                                    Customize your experience
+                                  </p>
+                                </div>
+                              </div>
+                              <button
+                                onClick={() => setIsAccessibilityOpen(false)}
+                                className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                aria-label="Close accessibility tools"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
+                            </div>
+
+                            <div className="space-y-4 max-h-96 overflow-y-auto">
+                              {/* Font Size */}
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <Type className="w-4 h-4 text-[#00AFE6]" />
+                                    <span className="text-sm font-medium text-gray-900 dark:text-white">Text Size</span>
+                                  </div>
+                                  <span className="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                                    {fontSize}px
+                                  </span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <button
+                                    onClick={decreaseFontSize}
+                                    disabled={fontSize <= 12}
+                                    className="p-1.5 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
+                                    aria-label="Decrease font size"
+                                  >
+                                    <Minus className="w-3 h-3" />
+                                  </button>
+                                  <div className="flex-1 bg-gray-100 dark:bg-gray-800 rounded-lg h-2 relative">
+                                    <div 
+                                      className="bg-[#00AFE6] h-2 rounded-lg transition-all duration-300"
+                                      style={{ width: `${((fontSize - 12) / 12) * 100}%` }}
+                                    />
+                                  </div>
+                                  <button
+                                    onClick={increaseFontSize}
+                                    disabled={fontSize >= 24}
+                                    className="p-1.5 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
+                                    aria-label="Increase font size"
+                                  >
+                                    <Plus className="w-3 h-3" />
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* High Contrast */}
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <Contrast className="w-4 h-4 text-[#00AFE6]" />
+                                    <span className="text-sm font-medium text-gray-900 dark:text-white">High Contrast</span>
+                                  </div>
+                                  <button
+                                    onClick={() => document.documentElement.classList.toggle('accessibility-high-contrast')}
+                                    className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
+                                  >
+                                    Toggle
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Focus Indicators */}
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <Eye className="w-4 h-4 text-[#00AFE6]" />
+                                    <span className="text-sm font-medium text-gray-900 dark:text-white">Focus Indicators</span>
+                                  </div>
+                                  <button
+                                    onClick={() => document.documentElement.classList.toggle('accessibility-focus-visible')}
+                                    className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
+                                  >
+                                    Toggle
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Dyslexia Font */}
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <Type className="w-4 h-4 text-[#00AFE6]" />
+                                    <span className="text-sm font-medium text-gray-900 dark:text-white">Dyslexia Font</span>
+                                  </div>
+                                  <button
+                                    onClick={() => document.documentElement.classList.toggle('accessibility-dyslexia-font')}
+                                    className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
+                                  >
+                                    Toggle
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Cursor Size */}
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <MousePointer className="w-4 h-4 text-[#00AFE6]" />
+                                    <span className="text-sm font-medium text-gray-900 dark:text-white">Cursor Size</span>
+                                  </div>
+                                  <select 
+                                    className="px-2 py-1 text-xs border rounded bg-white dark:bg-gray-800"
+                                    onChange={(e) => {
+                                      document.documentElement.classList.remove('accessibility-cursor-large', 'accessibility-cursor-extra-large');
+                                      if (e.target.value !== 'normal') {
+                                        document.documentElement.classList.add(`accessibility-cursor-${e.target.value}`);
+                                      }
+                                    }}
+                                  >
+                                    <option value="normal">Normal</option>
+                                    <option value="large">Large</option>
+                                    <option value="extra-large">Extra Large</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              {/* Reduced Motion */}
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <EyeOff className="w-4 h-4 text-[#00AFE6]" />
+                                    <span className="text-sm font-medium text-gray-900 dark:text-white">Reduce Motion</span>
+                                  </div>
+                                  <button
+                                    onClick={() => document.documentElement.classList.toggle('accessibility-reduced-motion')}
+                                    className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
+                                  >
+                                    Toggle
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Reset Button */}
+                              <div className="pt-3 border-t dark:border-gray-800">
+                                <button
+                                  onClick={resetSettings}
+                                  className="w-full p-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center justify-center gap-2 text-sm"
+                                >
+                                  <RotateCcw className="w-3 h-3" />
+                                  Reset to Default
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <motion.button
+                className="lg:hidden p-2 md:p-3 rounded-xl bg-gray-100 hover:bg-gray-200 border border-gray-300 transition-all duration-300"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                {isMenuOpen ? (
+                  <X className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+                ) : (
+                  <Menu className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+                )}
+              </motion.button>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Row - Navigation Links (Desktop) */}
+      <div className="hidden lg:block">
+        <div className="max-w-8xl mx-auto px-4 lg:px-6">
+          <nav className="flex items-center justify-center py-3">
+            <div className="flex items-center gap-1 bg-gray-50/90 backdrop-blur-xl rounded-full px-4 py-2 border border-gray-200/50 shadow-md">
               {navItems.map((item, index) => (
                 <div
                   key={item.name}
@@ -228,225 +450,8 @@ export default function Header() {
               ))}
             </div>
           </nav>
-
-          {/* Theme Toggle & CTA Section */}
-          <motion.div
-            className="hidden md:flex items-center gap-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <div className="flex items-center space-x-2">
-              <LanguageSwitcher />
-              <ThemeToggle />
-              <div className="relative">
-                <button
-                  onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                  className="h-10 px-4 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center gap-2 border border-gray-300 shadow-sm"
-                  aria-label="Open accessibility tools"
-                  aria-expanded={isAccessibilityOpen}
-                >
-                  <Settings className="w-4 h-4" />
-                  <span className="text-sm font-medium">Accessibility</span>
-                </button>
-
-                {/* Accessibility Dropdown */}
-                <AnimatePresence>
-                  {isAccessibilityOpen && (
-                    <motion.div
-                      className="absolute top-full right-0 mt-2 w-80 z-[120]"
-                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                        <div className="p-4">
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center gap-2">
-                              <div className="w-8 h-8 bg-[#00AFE6] rounded-full flex items-center justify-center">
-                                <Settings className="w-4 h-4 text-white" />
-                              </div>
-                              <div>
-                                <h3 className="text-base font-bold text-gray-900 dark:text-white">
-                                  Accessibility Tools
-                                </h3>
-                                <p className="text-xs text-gray-600 dark:text-gray-400">
-                                  Customize your experience
-                                </p>
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => setIsAccessibilityOpen(false)}
-                              className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                              aria-label="Close accessibility tools"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          </div>
-
-                          <div className="space-y-4 max-h-96 overflow-y-auto">
-                            {/* Font Size */}
-                            <div className="space-y-2">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <Type className="w-4 h-4 text-[#00AFE6]" />
-                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Text Size</span>
-                                </div>
-                                <span className="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
-                                  {fontSize}px
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <button
-                                  onClick={decreaseFontSize}
-                                  disabled={fontSize <= 12}
-                                  className="p-1.5 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
-                                  aria-label="Decrease font size"
-                                >
-                                  <Minus className="w-3 h-3" />
-                                </button>
-                                <div className="flex-1 bg-gray-100 dark:bg-gray-800 rounded-lg h-2 relative">
-                                  <div 
-                                    className="bg-[#00AFE6] h-2 rounded-lg transition-all duration-300"
-                                    style={{ width: `${((fontSize - 12) / 12) * 100}%` }}
-                                  />
-                                </div>
-                                <button
-                                  onClick={increaseFontSize}
-                                  disabled={fontSize >= 24}
-                                  className="p-1.5 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50"
-                                  aria-label="Increase font size"
-                                >
-                                  <Plus className="w-3 h-3" />
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* High Contrast */}
-                            <div className="space-y-2">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <Contrast className="w-4 h-4 text-[#00AFE6]" />
-                                  <span className="text-sm font-medium text-gray-900 dark:text-white">High Contrast</span>
-                                </div>
-                                <button
-                                  onClick={() => document.documentElement.classList.toggle('accessibility-high-contrast')}
-                                  className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
-                                >
-                                  Toggle
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* Focus Indicators */}
-                            <div className="space-y-2">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <Eye className="w-4 h-4 text-[#00AFE6]" />
-                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Focus Indicators</span>
-                                </div>
-                                <button
-                                  onClick={() => document.documentElement.classList.toggle('accessibility-focus-visible')}
-                                  className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
-                                >
-                                  Toggle
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* Dyslexia Font */}
-                            <div className="space-y-2">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <Type className="w-4 h-4 text-[#00AFE6]" />
-                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Dyslexia Font</span>
-                                </div>
-                                <button
-                                  onClick={() => document.documentElement.classList.toggle('accessibility-dyslexia-font')}
-                                  className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
-                                >
-                                  Toggle
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* Cursor Size */}
-                            <div className="space-y-2">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <MousePointer className="w-4 h-4 text-[#00AFE6]" />
-                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Cursor Size</span>
-                                </div>
-                                <select 
-                                  className="px-2 py-1 text-xs border rounded bg-white dark:bg-gray-800"
-                                  onChange={(e) => {
-                                    document.documentElement.classList.remove('accessibility-cursor-large', 'accessibility-cursor-extra-large');
-                                    if (e.target.value !== 'normal') {
-                                      document.documentElement.classList.add(`accessibility-cursor-${e.target.value}`);
-                                    }
-                                  }}
-                                >
-                                  <option value="normal">Normal</option>
-                                  <option value="large">Large</option>
-                                  <option value="extra-large">Extra Large</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            {/* Reduced Motion */}
-                            <div className="space-y-2">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <EyeOff className="w-4 h-4 text-[#00AFE6]" />
-                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Reduce Motion</span>
-                                </div>
-                                <button
-                                  onClick={() => document.documentElement.classList.toggle('accessibility-reduced-motion')}
-                                  className="px-3 py-1 text-xs border rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
-                                >
-                                  Toggle
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* Reset Button */}
-                            <div className="pt-3 border-t dark:border-gray-800">
-                              <button
-                                onClick={resetSettings}
-                                className="w-full p-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center justify-center gap-2 text-sm"
-                              >
-                                <RotateCcw className="w-3 h-3" />
-                                Reset to Default
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </div>
-
-
-          </motion.div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            className="lg:hidden p-2 md:p-3 rounded-xl bg-gray-100 hover:bg-gray-200 border border-gray-300 transition-all duration-300"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            {isMenuOpen ? (
-              <X className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
-            ) : (
-              <Menu className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
-            )}
-          </motion.button>
         </div>
+      </div>
 
         {/* Mobile Menu */}
         <motion.div
@@ -526,9 +531,6 @@ export default function Header() {
             </div>
           </div>
         </motion.div>
-      </div>
-
-
     </motion.header>
   );
 }

@@ -107,45 +107,148 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
     >
-      {/* Top Row - Logo and Controls */}
-      <div className="border-b border-gray-200">
-        <div className="max-w-8xl mx-auto px-4 lg:px-6">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
-            <motion.a
-              href="/"
-              className="flex items-center group cursor-pointer"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <img 
-                src={casLogo} 
-                alt="Canadian Amyloidosis Society"
-                className="h-12 w-auto md:h-16 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
-              />
-            </motion.a>
+      <div className="max-w-8xl mx-auto px-4 lg:px-6">
+        <div className="flex items-center justify-between h-20 md:h-24 min-w-0">
 
-            {/* Controls Section */}
-            <motion.div
-              className="flex items-center gap-3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              <div className="hidden md:flex items-center space-x-1.5">
-                <LanguageSwitcher />
-                <ThemeToggle />
-                <div className="relative">
-                  <button
-                    onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                    className="flex items-center gap-1.5 bg-gray-100 backdrop-blur-sm border border-gray-300 rounded-full px-2.5 py-1 cursor-pointer hover:bg-gray-200 transition-all duration-300 shadow-sm h-6 min-w-[100px] justify-center text-gray-700 text-xs font-medium"
-                    aria-label="Open accessibility tools"
-                    aria-expanded={isAccessibilityOpen}
-                  >
-                    <Settings className="w-3.5 h-3.5" />
-                    <span className="font-medium">Accessibility</span>
-                  </button>
+          {/* Logo */}
+          <motion.a
+            href="/"
+            className="flex items-center group cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <img 
+              src={casLogo} 
+              alt="Canadian Amyloidosis Society"
+              className="h-16 w-auto md:h-20 group-hover:scale-105 transition-all duration-300 drop-shadow-md"
+            />
+          </motion.a>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center">
+            <div className="flex items-center gap-1 bg-gray-100/95 backdrop-blur-xl rounded-full px-4 py-2 border border-gray-300/50 shadow-lg">
+              {navItems.map((item, index) => (
+                <div
+                  key={item.name}
+                  className="relative group"
+                >
+                  {item.hasDropdown ? (
+                    <motion.button
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap ${
+                        isPageActive(item.href, item.dropdownItems)
+                          ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
+                          : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
+                      }`}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                      onMouseEnter={() => setActiveDropdown(item.name)}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {item.name}
+                      <ChevronDown className={`w-2.5 h-2.5 transition-all duration-300 ${
+                        activeDropdown === item.name ? 'rotate-180 text-[#00AFE6]' : 
+                        isPageActive(item.href, item.dropdownItems) ? 'text-[#00AFE6]' : ''
+                      }`} />
+                      {isPageActive(item.href, item.dropdownItems) && (
+                        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                      )}
+                    </motion.button>
+                  ) : (
+                    <motion.a
+                      href={item.href}
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative whitespace-nowrap ${
+                        item.isPrimary
+                          ? 'text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] border-transparent shadow-lg shadow-[#00AFE6]/30 hover:shadow-xl hover:shadow-[#00AFE6]/40 hover:scale-105'
+                          : isPageActive(item.href)
+                            ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
+                            : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
+                      }`}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                      whileHover={{ scale: item.isPrimary ? 1.05 : 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {item.name}
+                      {!item.isPrimary && isPageActive(item.href) && (
+                        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                      )}
+                    </motion.a>
+                  )}
+
+                  {/* Dropdown Menu */}
+                  {item.hasDropdown && (
+                    <div
+                      className="dropdown-menu absolute top-full left-0 pt-2 w-72 z-[9999] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300"
+                      onMouseEnter={() => setActiveDropdown(item.name)}
+                      onMouseLeave={() => setActiveDropdown(null)}
+                      style={{ zIndex: 9999 }}
+                    >
+                      <motion.div
+                        className="bg-white backdrop-blur-xl rounded-2xl border border-gray-300 shadow-2xl shadow-gray-500/10 py-3 overflow-hidden relative"
+                        initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                        animate={{ 
+                          opacity: activeDropdown === item.name ? 1 : 0, 
+                          y: activeDropdown === item.name ? 0 : -20,
+                          scale: activeDropdown === item.name ? 1 : 0.9
+                        }}
+                        transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 20 }}
+                        style={{ zIndex: 9999 }}
+                      >
+                        {/* Gradient glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-2xl overflow-hidden"></div>
+
+                        {item.dropdownItems?.map((dropdownItem, dropdownIndex) => (
+                          <motion.a
+                            key={dropdownItem.name}
+                            href={dropdownItem.href}
+                            className="relative block px-6 py-4 text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/15 hover:to-[#00DD89]/15 transition-all duration-300 text-base font-semibold border-l-2 border-transparent hover:border-[#00AFE6] hover:shadow-lg hover:shadow-[#00AFE6]/10 group/item"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ 
+                              opacity: activeDropdown === item.name ? 1 : 0,
+                              x: activeDropdown === item.name ? 0 : -20
+                            }}
+                            transition={{ duration: 0.3, delay: dropdownIndex * 0.1 }}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-50 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+                              <span className="group-hover/item:translate-x-1 transition-transform duration-300">
+                                {dropdownItem.name}
+                              </span>
+                            </div>
+                          </motion.a>
+                        ))}
+                      </motion.div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </nav>
+
+          {/* Controls Section */}
+          <motion.div
+            className="flex items-center gap-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <div className="hidden md:flex items-center space-x-1.5">
+              <LanguageSwitcher />
+              <ThemeToggle />
+              <div className="relative">
+                <button
+                  onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
+                  className="flex items-center gap-1.5 bg-gray-100 backdrop-blur-sm border border-gray-300 rounded-full px-2.5 py-1 cursor-pointer hover:bg-gray-200 transition-all duration-300 shadow-sm h-6 min-w-[100px] justify-center text-gray-700 text-xs font-medium"
+                  aria-label="Open accessibility tools"
+                  aria-expanded={isAccessibilityOpen}
+                >
+                  <Settings className="w-3.5 h-3.5" />
+                  <span className="font-medium">Accessibility</span>
+                </button>
 
                   {/* Accessibility Dropdown */}
                   <AnimatePresence>
@@ -343,115 +446,6 @@ export default function Header() {
             </motion.div>
           </div>
         </div>
-      </div>
-
-      {/* Bottom Row - Navigation Links (Desktop) */}
-      <div className="hidden lg:block">
-        <div className="max-w-8xl mx-auto px-4 lg:px-6">
-          <nav className="flex items-center justify-center py-3">
-            <div className="flex items-center gap-1 bg-gray-50/90 backdrop-blur-xl rounded-full px-4 py-2 border border-gray-200/50 shadow-md">
-              {navItems.map((item, index) => (
-                <div
-                  key={item.name}
-                  className="relative group"
-                >
-                  {item.hasDropdown ? (
-                    <motion.button
-                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap ${
-                        isPageActive(item.href, item.dropdownItems)
-                          ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
-                          : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
-                      }`}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                      onMouseEnter={() => setActiveDropdown(item.name)}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      {item.name}
-                      <ChevronDown className={`w-2.5 h-2.5 transition-all duration-300 ${
-                        activeDropdown === item.name ? 'rotate-180 text-[#00AFE6]' : 
-                        isPageActive(item.href, item.dropdownItems) ? 'text-[#00AFE6]' : ''
-                      }`} />
-                      {isPageActive(item.href, item.dropdownItems) && (
-                        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                      )}
-                    </motion.button>
-                  ) : (
-                    <motion.a
-                      href={item.href}
-                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative whitespace-nowrap ${
-                        item.isPrimary
-                          ? 'text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] border-transparent shadow-lg shadow-[#00AFE6]/30 hover:shadow-xl hover:shadow-[#00AFE6]/40 hover:scale-105'
-                          : isPageActive(item.href)
-                            ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
-                            : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
-                      }`}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                      whileHover={{ scale: item.isPrimary ? 1.05 : 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      {item.name}
-                      {!item.isPrimary && isPageActive(item.href) && (
-                        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                      )}
-                    </motion.a>
-                  )}
-
-                  {/* Dropdown Menu */}
-                  {item.hasDropdown && (
-                    <div
-                      className="dropdown-menu absolute top-full left-0 pt-2 w-72 z-[9999] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300"
-                      onMouseEnter={() => setActiveDropdown(item.name)}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                      style={{ zIndex: 9999 }}
-                    >
-                      <motion.div
-                        className="bg-white backdrop-blur-xl rounded-2xl border border-gray-300 shadow-2xl shadow-gray-500/10 py-3 overflow-hidden relative"
-                        initial={{ opacity: 0, y: -20, scale: 0.9 }}
-                        animate={{ 
-                          opacity: activeDropdown === item.name ? 1 : 0, 
-                          y: activeDropdown === item.name ? 0 : -20,
-                          scale: activeDropdown === item.name ? 1 : 0.9
-                        }}
-                        transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 20 }}
-                        style={{ zIndex: 9999 }}
-                      >
-                        {/* Gradient glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-2xl overflow-hidden"></div>
-
-                        {item.dropdownItems?.map((dropdownItem, dropdownIndex) => (
-                          <motion.a
-                            key={dropdownItem.name}
-                            href={dropdownItem.href}
-                            className="relative block px-6 py-4 text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/15 hover:to-[#00DD89]/15 transition-all duration-300 text-base font-semibold border-l-2 border-transparent hover:border-[#00AFE6] hover:shadow-lg hover:shadow-[#00AFE6]/10 group/item"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ 
-                              opacity: activeDropdown === item.name ? 1 : 0,
-                              x: activeDropdown === item.name ? 0 : -20
-                            }}
-                            transition={{ duration: 0.3, delay: dropdownIndex * 0.1 }}
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-50 group-hover/item:opacity-100 transition-opacity duration-300"></div>
-                              <span className="group-hover/item:translate-x-1 transition-transform duration-300">
-                                {dropdownItem.name}
-                              </span>
-                            </div>
-                          </motion.a>
-                        ))}
-                      </motion.div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </nav>
-        </div>
-      </div>
 
         {/* Mobile Menu */}
         <motion.div

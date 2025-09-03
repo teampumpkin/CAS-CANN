@@ -139,7 +139,7 @@ export default function Header() {
                 <div className="relative">
                   <button
                     onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                    className="h-8 px-3 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center gap-1.5 border border-gray-300 shadow-sm text-xs"
+                    className="h-8 px-3 rounded-full bg-gray-100 hover:bg-[#00AFE6] hover:text-white transition-all duration-300 text-gray-700 flex items-center gap-1.5 border border-gray-300 shadow-sm text-xs min-w-[120px] justify-center"
                     aria-label="Open accessibility tools"
                     aria-expanded={isAccessibilityOpen}
                   >

@@ -84,8 +84,8 @@ export default function Header() {
         { name: 'CANN Membership Login', href: '/cann-login' },
       ]
     },
-    { name: t('nav.joinCAS'), href: '/join-cas' },
-    { name: 'Contact Us', href: '/contact-us' }
+    { name: 'Contact Us', href: '/contact-us' },
+    { name: t('nav.joinCAS'), href: '/join-cas', isPrimary: true }
   ];
 
   useEffect(() => {
@@ -160,18 +160,20 @@ export default function Header() {
                     <motion.a
                       href={item.href}
                       className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative whitespace-nowrap ${
-                        isPageActive(item.href)
-                          ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
-                          : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
+                        item.isPrimary
+                          ? 'text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] border-transparent shadow-lg shadow-[#00AFE6]/30 hover:shadow-xl hover:shadow-[#00AFE6]/40 hover:scale-105'
+                          : isPageActive(item.href)
+                            ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30'
+                            : 'text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20'
                       }`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ scale: item.isPrimary ? 1.05 : 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       {item.name}
-                      {isPageActive(item.href) && (
+                      {!item.isPrimary && isPageActive(item.href) && (
                         <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                       )}
                     </motion.a>
@@ -492,14 +494,16 @@ export default function Header() {
                     <a
                       href={item.href}
                       className={`block px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
-                        isPageActive(item.href)
-                          ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
-                          : 'text-gray-700 hover:bg-gray-100'
+                        item.isPrimary
+                          ? 'text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] shadow-lg shadow-[#00AFE6]/30 border border-transparent'
+                          : isPageActive(item.href)
+                            ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-2 border-[#00AFE6]'
+                            : 'text-gray-700 hover:bg-gray-100'
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
-                      {isPageActive(item.href) && (
+                      {!item.isPrimary && isPageActive(item.href) && (
                         <div className="inline-block ml-2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                       )}
                     </a>

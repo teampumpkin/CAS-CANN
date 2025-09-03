@@ -10,7 +10,7 @@ export const LanguageSwitcher = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-full px-2.5 py-0.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 shadow-sm h-6 min-w-[70px] justify-center text-gray-700 dark:text-gray-300 text-xs font-medium"
+        className="flex items-center gap-1.5 bg-gray-100 backdrop-blur-sm border border-gray-300 rounded-full px-2.5 py-0.5 cursor-pointer hover:bg-gray-200 transition-all duration-300 shadow-sm h-6 min-w-[70px] justify-center text-gray-700 text-xs font-medium"
       >
         <Globe className="w-3.5 h-3.5" />
         <span>{language.toUpperCase()}</span>
@@ -18,13 +18,13 @@ export const LanguageSwitcher = () => {
       </button>
       
       {isOpen && (
-        <div className="absolute top-full left-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg z-10">
+        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
           <button
             onClick={() => {
               setLanguage('en');
               setIsOpen(false);
             }}
-            className="block w-full text-left px-3 py-2 text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 first:rounded-t-lg"
+            className="block w-full text-left px-3 py-2 text-xs hover:bg-gray-100 first:rounded-t-lg"
           >
             EN
           </button>
@@ -33,7 +33,7 @@ export const LanguageSwitcher = () => {
               setLanguage('fr');
               setIsOpen(false);
             }}
-            className="block w-full text-left px-3 py-2 text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 last:rounded-b-lg"
+            className="block w-full text-left px-3 py-2 text-xs hover:bg-gray-100 last:rounded-b-lg"
           >
             FR
           </button>

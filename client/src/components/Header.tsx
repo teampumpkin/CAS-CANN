@@ -464,7 +464,7 @@ export default function Header() {
           transition={{ duration: 0.3 }}
           style={{ overflow: 'hidden' }}
         >
-          <div className="py-4 md:py-6 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-2xl mt-2 md:mt-4 mx-4 border border-gray-200 dark:border-gray-700 shadow-xl max-h-[70vh] overflow-y-auto">
+          <div className="py-4 md:py-6 bg-white/95 backdrop-blur-xl rounded-2xl mt-2 md:mt-4 mx-4 border border-gray-200 shadow-xl max-h-[70vh] overflow-y-auto">
             
             {/* Navigation Items */}
             <div className="space-y-1 px-4">
@@ -479,8 +479,8 @@ export default function Header() {
                         }))}
                         className={`w-full flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
                           isPageActive(item.href, item.dropdownItems) 
-                            ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15' 
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                            ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15' 
+                            : 'text-gray-700 hover:bg-gray-100'
                         }`}
                       >
                         <span>{item.name}</span>
@@ -507,8 +507,8 @@ export default function Header() {
                               href={dropdownItem.href}
                               className={`block px-8 py-3 rounded-xl transition-all duration-300 text-sm ${
                                 location === dropdownItem.href
-                                  ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-4 border-[#00AFE6]'
-                                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+                                  ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-4 border-[#00AFE6]'
+                                  : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
                               }`}
                               onClick={() => {
                                 setIsMenuOpen(false);
@@ -531,8 +531,8 @@ export default function Header() {
                         item.isPrimary
                           ? 'text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] shadow-lg shadow-[#00AFE6]/30'
                           : isPageActive(item.href)
-                            ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 border-l-4 border-[#00AFE6]'
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                            ? 'text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 border-l-4 border-[#00AFE6]'
+                            : 'text-gray-700 hover:bg-gray-100'
                       }`}
                       onClick={() => {
                         setIsMenuOpen(false);
@@ -550,13 +550,13 @@ export default function Header() {
             </div>
 
             {/* Control Buttons Section */}
-            <div className="px-4 pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="px-4 pt-4 mt-4 border-t border-gray-200">
               <div className="flex items-center justify-center gap-2 mb-3">
                 <LanguageSwitcher />
                 <ThemeToggle />
                 <button
                   onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                  className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-full px-2.5 py-0.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 shadow-sm h-6 min-w-[80px] justify-center text-gray-700 dark:text-gray-300 text-xs font-medium"
+                  className="flex items-center gap-1.5 bg-gray-100 backdrop-blur-sm border border-gray-300 rounded-full px-2.5 py-0.5 cursor-pointer hover:bg-gray-200 transition-all duration-300 shadow-sm h-6 min-w-[80px] justify-center text-gray-700 text-xs font-medium"
                 >
                   <Settings className="w-3.5 h-3.5" />
                   <span>Access</span>
@@ -570,13 +570,13 @@ export default function Header() {
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mt-3 border border-gray-200 dark:border-gray-700"
+                  className="bg-gray-50 rounded-xl p-4 mt-3 border border-gray-200"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-sm font-bold text-gray-900 dark:text-white">Accessibility Tools</h4>
+                    <h4 className="text-sm font-bold text-gray-900">Accessibility Tools</h4>
                     <button
                       onClick={() => setIsAccessibilityOpen(false)}
-                      className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+                      className="p-1 rounded-full hover:bg-gray-200"
                     >
                       <X className="w-4 h-4" />
                     </button>
@@ -585,22 +585,22 @@ export default function Header() {
                   <div className="space-y-3">
                     {/* Font Size */}
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-gray-700 dark:text-gray-300">Text Size</span>
+                      <span className="text-xs text-gray-700">Text Size</span>
                       <div className="flex items-center gap-1">
                         <button
                           onClick={decreaseFontSize}
                           disabled={fontSize <= 12}
-                          className="p-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
+                          className="p-1 border rounded hover:bg-gray-100 disabled:opacity-50"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded min-w-[40px] text-center">
+                        <span className="text-xs bg-gray-200 px-2 py-1 rounded min-w-[40px] text-center">
                           {fontSize}px
                         </span>
                         <button
                           onClick={increaseFontSize}
                           disabled={fontSize >= 24}
-                          className="p-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
+                          className="p-1 border rounded hover:bg-gray-100 disabled:opacity-50"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
@@ -611,13 +611,13 @@ export default function Header() {
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => document.documentElement.classList.toggle('accessibility-high-contrast')}
-                        className="text-xs px-2 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-center"
+                        className="text-xs px-2 py-1 border rounded hover:bg-gray-100 text-center"
                       >
                         High Contrast
                       </button>
                       <button
                         onClick={() => document.documentElement.classList.toggle('accessibility-dyslexia-font')}
-                        className="text-xs px-2 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-center"
+                        className="text-xs px-2 py-1 border rounded hover:bg-gray-100 text-center"
                       >
                         Dyslexia Font
                       </button>
@@ -625,7 +625,7 @@ export default function Header() {
 
                     <button
                       onClick={resetSettings}
-                      className="w-full text-xs px-2 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-center"
+                      className="w-full text-xs px-2 py-1 border rounded hover:bg-gray-100 text-center"
                     >
                       Reset Settings
                     </button>

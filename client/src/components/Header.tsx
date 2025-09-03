@@ -551,22 +551,16 @@ export default function Header() {
 
             {/* Control Buttons Section */}
             <div className="px-4 pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                  <Phone className="w-4 h-4 text-[#00AFE6]" />
-                  <span className="font-medium">1-800-AMYLOID</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <LanguageSwitcher />
-                  <ThemeToggle />
-                  <button
-                    onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                    className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-full px-2.5 py-0.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 shadow-sm h-6 min-w-[80px] justify-center text-gray-700 dark:text-gray-300 text-xs font-medium"
-                  >
-                    <Settings className="w-3.5 h-3.5" />
-                    <span>Access</span>
-                  </button>
-                </div>
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <LanguageSwitcher />
+                <ThemeToggle />
+                <button
+                  onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
+                  className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-full px-2.5 py-0.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 shadow-sm h-6 min-w-[80px] justify-center text-gray-700 dark:text-gray-300 text-xs font-medium"
+                >
+                  <Settings className="w-3.5 h-3.5" />
+                  <span>Access</span>
+                </button>
               </div>
 
               {/* Mobile Accessibility Panel */}

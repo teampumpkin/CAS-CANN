@@ -11,6 +11,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileDropdowns, setMobileDropdowns] = useState<{ [key: string]: boolean }>({});
   const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
   const [fontSize, setFontSize] = useState(16);
   const [location] = useLocation();
@@ -432,7 +433,12 @@ export default function Header() {
               {/* Mobile Menu Button */}
               <motion.button
                 className="lg:hidden p-2 md:p-3 rounded-xl bg-gray-100 hover:bg-gray-200 border border-gray-300 transition-all duration-300"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={() => {
+                  setIsMenuOpen(!isMenuOpen);
+                  if (isMenuOpen) {
+                    setMobileDropdowns({});
+                  }
+                }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -466,34 +472,57 @@ export default function Header() {
                 <div key={item.name} className="space-y-1">
                   {item.hasDropdown ? (
                     <>
-                      <div className={`flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl ${
-                        isPageActive(item.href, item.dropdownItems) 
-                          ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15' 
-                          : 'text-gray-700 dark:text-gray-300'
-                      }`}>
+                      <button
+                        onClick={() => setMobileDropdowns(prev => ({
+                          ...prev,
+                          [item.name]: !prev[item.name]
+                        }))}
+                        className={`w-full flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
+                          isPageActive(item.href, item.dropdownItems) 
+                            ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15' 
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        }`}
+                      >
                         <span>{item.name}</span>
-                        <ChevronDown className="w-4 h-4" />
-                        {isPageActive(item.href, item.dropdownItems) && (
-                          <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                        )}
-                      </div>
-                      {item.dropdownItems?.map((dropdownItem) => (
-                        <a
-                          key={dropdownItem.name}
-                          href={dropdownItem.href}
-                          className={`block px-8 py-3 rounded-xl transition-all duration-300 text-sm ${
-                            location === dropdownItem.href
-                              ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-4 border-[#00AFE6]'
-                              : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
-                          }`}
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {dropdownItem.name}
-                          {location === dropdownItem.href && (
-                            <div className="inline-block ml-2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                        <div className="flex items-center gap-2">
+                          {isPageActive(item.href, item.dropdownItems) && (
+                            <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                           )}
-                        </a>
-                      ))}
+                          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${
+                            mobileDropdowns[item.name] ? 'rotate-180' : ''
+                          }`} />
+                        </div>
+                      </button>
+                      {mobileDropdowns[item.name] && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          {item.dropdownItems?.map((dropdownItem) => (
+                            <a
+                              key={dropdownItem.name}
+                              href={dropdownItem.href}
+                              className={`block px-8 py-3 rounded-xl transition-all duration-300 text-sm ${
+                                location === dropdownItem.href
+                                  ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-4 border-[#00AFE6]'
+                                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+                              }`}
+                              onClick={() => {
+                                setIsMenuOpen(false);
+                                setMobileDropdowns({});
+                              }}
+                            >
+                              {dropdownItem.name}
+                              {location === dropdownItem.href && (
+                                <div className="inline-block ml-2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                              )}
+                            </a>
+                          ))}
+                        </motion.div>
+                      )}
                     </>
                   ) : (
                     <a
@@ -505,7 +534,10 @@ export default function Header() {
                             ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 border-l-4 border-[#00AFE6]'
                             : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                       }`}
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        setMobileDropdowns({});
+                      }}
                     >
                       <span>{item.name}</span>
                       {!item.isPrimary && isPageActive(item.href) && (

@@ -449,325 +449,77 @@ export default function Header() {
 
         {/* Mobile Menu */}
         <motion.div
-          className="lg:hidden overflow-hidden"
+          className="lg:hidden"
           initial={false}
           animate={{ 
             height: isMenuOpen ? 'auto' : 0,
             opacity: isMenuOpen ? 1 : 0
           }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
+          transition={{ duration: 0.3 }}
+          style={{ overflow: 'hidden' }}
         >
-          <div className="py-6 bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl rounded-3xl mt-4 mx-4 border border-gray-200 dark:border-gray-700 shadow-2xl">
+          <div className="py-4 md:py-6 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-2xl mt-2 md:mt-4 mx-4 border border-gray-200 dark:border-gray-700 shadow-xl max-h-[70vh] overflow-y-auto">
             
-            {/* Navigation Sections */}
-            <div className="px-6 space-y-6">
-              
-              {/* About Section */}
-              <div className="space-y-3">
-                <motion.div 
-                  className="flex items-center gap-3 mb-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                  <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
-                    <BookOpen className="w-4 h-4 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">About</h3>
-                </motion.div>
-                
-                <motion.a
-                  href="/about-cas"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/about-cas' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.15 }}
-                >
-                  <Shield className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">About CAS</span>
-                  {location === '/about-cas' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+            {/* Navigation Items */}
+            <div className="space-y-1 px-4">
+              {navItems.map((item, index) => (
+                <div key={item.name} className="space-y-1">
+                  {item.hasDropdown ? (
+                    <>
+                      <div className={`flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl ${
+                        isPageActive(item.href, item.dropdownItems) 
+                          ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15' 
+                          : 'text-gray-700 dark:text-gray-300'
+                      }`}>
+                        <span>{item.name}</span>
+                        <ChevronDown className="w-4 h-4" />
+                        {isPageActive(item.href, item.dropdownItems) && (
+                          <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                        )}
+                      </div>
+                      {item.dropdownItems?.map((dropdownItem) => (
+                        <a
+                          key={dropdownItem.name}
+                          href={dropdownItem.href}
+                          className={`block px-8 py-3 rounded-xl transition-all duration-300 text-sm ${
+                            location === dropdownItem.href
+                              ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-4 border-[#00AFE6]'
+                              : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+                          }`}
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {dropdownItem.name}
+                          {location === dropdownItem.href && (
+                            <div className="inline-block ml-2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                          )}
+                        </a>
+                      ))}
+                    </>
+                  ) : (
+                    <a
+                      href={item.href}
+                      className={`flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
+                        item.isPrimary
+                          ? 'text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] shadow-lg shadow-[#00AFE6]/30'
+                          : isPageActive(item.href)
+                            ? 'text-gray-800 dark:text-white bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 border-l-4 border-[#00AFE6]'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <span>{item.name}</span>
+                      {!item.isPrimary && isPageActive(item.href) && (
+                        <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                      )}
+                    </a>
                   )}
-                </motion.a>
-                
-                <motion.a
-                  href="/about-amyloidosis"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/about-amyloidosis' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <Heart className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">About Amyloidosis</span>
-                  {location === '/about-amyloidosis' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-              </div>
-
-              {/* Separator */}
-              <div className="border-t border-gray-200 dark:border-gray-700"></div>
-
-              {/* Resources Section */}
-              <div className="space-y-3">
-                <motion.div 
-                  className="flex items-center gap-3 mb-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.25 }}
-                >
-                  <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
-                    <FileText className="w-4 h-4 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Resources</h3>
-                </motion.div>
-                
-                <motion.a
-                  href="/resource-library"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/resource-library' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
-                  <FileText className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">Resource Library</span>
-                  {location === '/resource-library' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-
-                <motion.a
-                  href="/partnerships"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/partnerships' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.35 }}
-                >
-                  <Handshake className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">Partnerships</span>
-                  {location === '/partnerships' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-
-                <motion.a
-                  href="/news"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/news' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <Globe className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">News and Updates</span>
-                  {location === '/news' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-              </div>
-
-              {/* Separator */}
-              <div className="border-t border-gray-200 dark:border-gray-700"></div>
-
-              {/* Network Section */}
-              <div className="space-y-3">
-                <motion.div 
-                  className="flex items-center gap-3 mb-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.45 }}
-                >
-                  <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
-                    <Users className="w-4 h-4 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Professional Network</h3>
-                </motion.div>
-                
-                <motion.a
-                  href="/get-involved"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/get-involved' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                >
-                  <UserPlus className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">Get Involved</span>
-                  {location === '/get-involved' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-
-                <motion.a
-                  href="/events"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/events' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.55 }}
-                >
-                  <Calendar className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">Events</span>
-                  {location === '/events' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-
-                <motion.a
-                  href="/nursing-network"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/nursing-network' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                  <Stethoscope className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">Nursing Network</span>
-                  {location === '/nursing-network' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-              </div>
-
-              {/* Separator */}
-              <div className="border-t border-gray-200 dark:border-gray-700"></div>
-
-              {/* CANN Section */}
-              <div className="space-y-3">
-                <motion.div 
-                  className="flex items-center gap-3 mb-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.65 }}
-                >
-                  <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
-                    <Network className="w-4 h-4 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">CANN</h3>
-                </motion.div>
-                
-                <motion.a
-                  href="/about-cann"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/about-cann' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
-                >
-                  <Info className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">About CANN</span>
-                  {location === '/about-cann' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-
-                <motion.a
-                  href="/join-cann"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/join-cann' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.75 }}
-                >
-                  <UserCheck className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">Join CANN</span>
-                  {location === '/join-cann' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-              </div>
-
-              {/* Separator */}
-              <div className="border-t border-gray-200 dark:border-gray-700"></div>
-
-              {/* Contact and CTA */}
-              <div className="space-y-4">
-                <motion.a
-                  href="/contact"
-                  className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
-                    location === '/contact' 
-                      ? 'bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 text-gray-900 dark:text-white border-l-4 border-[#00AFE6]' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                >
-                  <Mail className="w-5 h-5 text-[#00AFE6]" />
-                  <span className="font-semibold">Contact Us</span>
-                  {location === '/contact' && (
-                    <div className="ml-auto w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                  )}
-                </motion.a>
-
-                <motion.a
-                  href="/join-cas"
-                  className="flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white rounded-2xl font-bold text-lg shadow-lg shadow-[#00AFE6]/30 hover:shadow-xl hover:shadow-[#00AFE6]/40 transition-all duration-300"
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: isMenuOpen ? 1 : 0, scale: isMenuOpen ? 1 : 0.9 }}
-                  transition={{ duration: 0.5, delay: 0.85 }}
-                >
-                  <UserPlus className="w-6 h-6" />
-                  <span>Join CAS</span>
-                  <ArrowRight className="w-5 h-5" />
-                </motion.a>
-              </div>
+                </div>
+              ))}
             </div>
 
-            {/* Footer Controls */}
-            <div className="px-6 pt-6 mt-6 border-t border-gray-200 dark:border-gray-700">
-              <motion.div 
-                className="flex items-center justify-between"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: isMenuOpen ? 1 : 0, y: isMenuOpen ? 0 : 20 }}
-                transition={{ duration: 0.5, delay: 0.9 }}
-              >
+            {/* Control Buttons Section */}
+            <div className="px-4 pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                   <Phone className="w-4 h-4 text-[#00AFE6]" />
                   <span className="font-medium">1-800-AMYLOID</span>
@@ -775,8 +527,85 @@ export default function Header() {
                 <div className="flex items-center gap-2">
                   <LanguageSwitcher />
                   <ThemeToggle />
+                  <button
+                    onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
+                    className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-full px-2.5 py-0.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 shadow-sm h-6 min-w-[80px] justify-center text-gray-700 dark:text-gray-300 text-xs font-medium"
+                  >
+                    <Settings className="w-3.5 h-3.5" />
+                    <span>Access</span>
+                  </button>
                 </div>
-              </motion.div>
+              </div>
+
+              {/* Mobile Accessibility Panel */}
+              {isAccessibilityOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mt-3 border border-gray-200 dark:border-gray-700"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="text-sm font-bold text-gray-900 dark:text-white">Accessibility Tools</h4>
+                    <button
+                      onClick={() => setIsAccessibilityOpen(false)}
+                      className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {/* Font Size */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-700 dark:text-gray-300">Text Size</span>
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={decreaseFontSize}
+                          disabled={fontSize <= 12}
+                          className="p-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded min-w-[40px] text-center">
+                          {fontSize}px
+                        </span>
+                        <button
+                          onClick={increaseFontSize}
+                          disabled={fontSize >= 24}
+                          className="p-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Quick toggles */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        onClick={() => document.documentElement.classList.toggle('accessibility-high-contrast')}
+                        className="text-xs px-2 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-center"
+                      >
+                        High Contrast
+                      </button>
+                      <button
+                        onClick={() => document.documentElement.classList.toggle('accessibility-dyslexia-font')}
+                        className="text-xs px-2 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-center"
+                      >
+                        Dyslexia Font
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={resetSettings}
+                      className="w-full text-xs px-2 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-center"
+                    >
+                      Reset Settings
+                    </button>
+                  </div>
+                </motion.div>
+              )}
             </div>
 
           </div>

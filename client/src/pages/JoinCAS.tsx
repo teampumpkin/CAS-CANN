@@ -366,28 +366,38 @@ export default function JoinCAS() {
                 </AlertDescription>
               </Alert>
 
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-8 text-center">
-                <div className="mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <FileText className="w-8 h-8 text-white" />
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                {/* Form Header */}
+                <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-6 text-center">
+                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <FileText className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                    Complete Your Registration
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    CAS Registration Form
                   </h3>
-                  <p className="text-gray-600 dark:text-white/70 mb-6">
-                    Click the button below to access our secure registration form. The form includes all required fields for your CAS membership application.
+                  <p className="text-white/90 text-sm">
+                    Complete your application below
                   </p>
                 </div>
 
-                <Button
-                  onClick={() => window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u', '_blank')}
-                  className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white py-4 px-8 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group"
-                >
-                  <span>Open Registration Form</span>
-                  <ExternalLink className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                {/* Embedded Form */}
+                <div className="bg-white dark:bg-gray-800">
+                  <iframe
+                    src="https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u&embed=true"
+                    width="100%"
+                    height="800"
+                    frameBorder="0"
+                    marginHeight={0}
+                    marginWidth={0}
+                    className="w-full"
+                    title="CAS Registration Form"
+                  >
+                    Loading...
+                  </iframe>
+                </div>
 
-                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                {/* Form Footer */}
+                <div className="p-6 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-2">
                       <Shield className="w-4 h-4 text-[#00AFE6]" />
@@ -401,6 +411,17 @@ export default function JoinCAS() {
                       <CheckCircle2 className="w-4 h-4 text-[#00AFE6]" />
                       <span>Review in 2-3 Weeks</span>
                     </div>
+                  </div>
+                  
+                  <div className="mt-4 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Having trouble with the form? <button 
+                        onClick={() => window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u', '_blank')}
+                        className="text-[#00AFE6] hover:underline"
+                      >
+                        Open in new window
+                      </button>
+                    </p>
                   </div>
                 </div>
               </div>

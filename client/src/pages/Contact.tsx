@@ -58,7 +58,7 @@ export default function Contact() {
 
           {/* Welcome Title */}
           <motion.h1
-            className="text-[60px] font-bold mb-8 leading-tight"
+            className="text-[60px] font-bold mb-8 leading-tight font-rosarivo"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -90,7 +90,7 @@ export default function Contact() {
               </div>
               
               <div className="text-center">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">
                   Get in Touch
                 </h2>
                 <p className="text-gray-600 dark:text-white/70 mb-6">
@@ -118,7 +118,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <div className="text-center mb-8">
-              <h3 className="text-2xl md:text-3xl font-bold mb-3">
+              <h3 className="text-2xl md:text-3xl font-bold mb-3 font-rosarivo">
                 <span className="text-gray-900 dark:text-white">Frequently Asked </span>
                 <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Questions</span>
               </h3>

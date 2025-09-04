@@ -22,7 +22,7 @@ export default function Footer() {
     { name: "Events", href: "/events", icon: Calendar, status: "available" },
     { name: "CANN", href: "/nursing-network", icon: Users, status: "available" },
     { name: "Join CAS", href: "/join-cas", icon: Users, status: "available" },
-    { name: "Contact Us", href: "/contact-us", icon: Mail, status: "available" }
+    { name: "Contact Us", href: "/contact", icon: Mail, status: "available" }
   ];
 
   const legalLinks = [

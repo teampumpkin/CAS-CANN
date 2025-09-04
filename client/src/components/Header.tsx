@@ -82,7 +82,7 @@ export default function Header() {
         { name: 'About CANN', href: '/nursing-network' },
         { name: 'Join CANN', href: '/join-nursing-network' },
         { name: 'Resources/Events', href: '/cann-resources' },
-        { name: 'CANN Membership Login', href: '/cann-login' },
+        { name: 'CANN Membership Login', href: '/join-nursing-network#login' },
       ]
     },
     { name: 'Contact Us', href: '/contact-us' },

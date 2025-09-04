@@ -210,7 +210,7 @@ export default function Events() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-[60px] font-bold mb-6"
+            className="text-[60px] font-bold mb-6 font-rosarivo"
           >
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
               Events &
@@ -335,7 +335,7 @@ export default function Events() {
               viewport={{ once: true }}
               className="mb-12"
             >
-              <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-white">Featured Events</h2>
+              <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-white font-rosarivo">Featured Events</h2>
               <p className="text-gray-600 dark:text-gray-400">Don't miss these important upcoming events</p>
             </motion.div>
 
@@ -432,7 +432,7 @@ export default function Events() {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-white">Upcoming Events</h2>
+            <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-white font-rosarivo">Upcoming Events</h2>
             <p className="text-gray-600 dark:text-gray-400">Complete schedule of educational opportunities</p>
           </motion.div>
 
@@ -510,7 +510,7 @@ export default function Events() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800 dark:text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800 dark:text-white font-rosarivo">
               Host an Event
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">

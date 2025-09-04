@@ -143,7 +143,7 @@ export default function EventsNewsletterSection() {
                   <span className="text-gray-900 dark:text-white/90 text-sm font-medium">{t('events.stayConnected')}</span>
                 </motion.div>
 
-                <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-cardo text-center">
+                <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo text-center">
                   {t('events.joinCommunity')}
                 </h3>
                 <p className="text-gray-700 dark:text-white/80 text-lg mb-8 leading-relaxed text-center">

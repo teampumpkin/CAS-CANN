@@ -179,15 +179,6 @@ export default function ALAmyloidosis() {
                 </div>
               </motion.div>
               
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Link href="/directory" className="group bg-white/20 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-bold text-lg border-2 border-[#00AFE6]/30 hover:border-[#00AFE6] transition-all duration-300 flex items-center gap-3">
-                  <Search className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                  Find AL Specialists
-                </Link>
-              </motion.div>
             </motion.div>
             
             {/* Key stats with enhanced design */}

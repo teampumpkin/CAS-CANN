@@ -10,7 +10,6 @@ export default function Footer() {
     { name: "About CAS", href: "/about", status: "available" },
     { name: "About Amyloidosis", href: "/about-amyloidosis", status: "available" },
     { name: "Resources", href: "/resources", status: "available" },
-    { name: "Directory", href: "/directory", status: "available" },
     { name: "Contact Us", href: "/contact", status: "available" },
     { name: "Get Involved", href: "/get-involved", status: "available" }
   ];

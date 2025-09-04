@@ -171,15 +171,6 @@ export default function OtherAmyloidosis() {
                 </div>
               </motion.div>
               
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Link href="/directory" className="group bg-white/20 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-bold text-lg border-2 border-[#00AFE6]/30 hover:border-[#00AFE6] transition-all duration-300 flex items-center gap-3">
-                  <Search className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                  Find Specialists
-                </Link>
-              </motion.div>
             </motion.div>
             
             {/* Key stats with enhanced design */}
@@ -459,18 +450,6 @@ export default function OtherAmyloidosis() {
             ))}
           </div>
           
-          <motion.div
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <Link href="/directory" className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-              View Complete Directory
-              <Search className="w-5 h-5" />
-            </Link>
-          </motion.div>
         </div>
       </section>
     </div>

@@ -173,15 +173,6 @@ export default function ATTRAmyloidosis() {
                 </div>
               </motion.div>
               
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Link href="/directory" className="group bg-white/20 dark:bg-white/10 backdrop-blur-xl text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-bold text-lg border-2 border-[#00DD89]/30 hover:border-[#00DD89] transition-all duration-300 flex items-center gap-3">
-                  <Search className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                  Find ATTR Specialists
-                </Link>
-              </motion.div>
             </motion.div>
             
             {/* Key stats with enhanced design */}

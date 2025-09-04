@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, BookOpen, Users } from 'lucide-react';
+import { Calendar, BookOpen, Users } from 'lucide-react';
 import heroBackgroundImage from '@assets/shutterstock_2447944539_1753254859154.jpg';
 import { useLanguage } from '@/contexts/LanguageContext';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -9,7 +9,7 @@ export default function Hero() {
   
   const quickTiles = [
     { icon: Users, label: 'Join', href: '/join-cas' },
-    { icon: MapPin, label: t('nav.directory'), href: '/directory' },
+    { icon: Calendar, label: 'Events', href: '/events' },
     { icon: BookOpen, label: 'Learn', href: '/resource-library' }
   ];
 
@@ -181,7 +181,7 @@ export default function Hero() {
                       {/* Enhanced subtitle */}
                       <p className="text-white/70 text-xs font-medium leading-relaxed group-hover:text-white group-hover:font-semibold transition-all duration-300 transform group-hover:translate-y-0.5 drop-shadow-md group-hover:drop-shadow-lg flex-grow">
                         {index === 0 && "Become a CAS member"}
-                        {index === 1 && "Clinical services offering amyloidosis care"}
+                        {index === 1 && "Upcoming events and educational sessions"}
                         {index === 2 && "Access educational resources"}
                       </p>
                       

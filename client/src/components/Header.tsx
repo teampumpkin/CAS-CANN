@@ -85,7 +85,7 @@ export default function Header() {
         { name: 'CANN Membership Login', href: '/join-nursing-network#login' },
       ]
     },
-    { name: 'Contact Us', href: '/contact-us' },
+    { name: 'Contact Us', href: '/contact' },
     { name: t('nav.joinCAS'), href: '/join-cas', isPrimary: true }
   ];
 

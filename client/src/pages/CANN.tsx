@@ -416,14 +416,10 @@ export default function CANN() {
               Healthcare professionals, researchers, and institutions are invited to join CANN and contribute to advancing amyloidosis care across Canada.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <Link href="/join-nursing-network" className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
                 Join CANN
                 <Network className="w-5 h-5" />
-              </Link>
-              <Link href="/directory" className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 text-gray-900 dark:text-white px-8 py-4 rounded-xl font-semibold hover:bg-gray-900/20 dark:hover:bg-white/20 transition-all duration-300">
-                View Directory
-                <MapPin className="w-5 h-5" />
               </Link>
             </div>
           </motion.div>

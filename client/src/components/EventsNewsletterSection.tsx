@@ -320,7 +320,7 @@ export default function EventsNewsletterSection() {
 
                         {/* Footer */}
                         <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
-                          <Link href="/journal-club">
+                          <Link href={index === 2 ? '/join-cas' : '/journal-club'}>
                             <motion.button
                               className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
                               whileHover={{ scale: 1.02 }}

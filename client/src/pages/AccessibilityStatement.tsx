@@ -179,7 +179,7 @@ export default function AccessibilityStatement() {
               </span>
             </div>
             
-            <h1 className="text-[60px] font-bold font-rosarivo mb-6 leading-tight text-gray-900 dark:text-white">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight text-gray-900 dark:text-white">
               {language === 'en' 
                 ? 'Accessibility Statement' 
                 : 'Déclaration d\'accessibilité'

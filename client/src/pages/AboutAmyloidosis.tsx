@@ -154,7 +154,7 @@ export default function AboutAmyloidosis() {
                 <span className="text-sm font-semibold text-red-700 dark:text-red-400 tracking-wide">{t('aboutAmyloidosis.hero.badge')}</span>
               </div>
               
-              <h1 className="text-[60px] font-bold font-rosarivo mb-6 leading-tight">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                   {t('aboutAmyloidosis.hero.title.understanding')}
                 </span>

@@ -145,7 +145,7 @@ export default function JoinCAS() {
               <span className="text-sm font-medium text-gray-900 dark:text-white/90">Professional Membership</span>
             </div>
             
-            <h1 className="text-[60px] font-bold font-rosarivo mb-6 leading-tight text-gray-900 dark:text-white">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight text-gray-900 dark:text-white">
               Join the{" "}
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Canadian Amyloidosis Society

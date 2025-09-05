@@ -116,7 +116,7 @@ export default function ATTRAmyloidosis() {
             
             {/* Main title with enhanced typography */}
             <motion.h1 
-              className="text-[60px] font-bold font-rosarivo mb-8 leading-tight"
+              className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-8 leading-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}

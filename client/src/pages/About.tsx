@@ -118,7 +118,7 @@ export default function About() {
               </motion.div>
               
               <motion.h1
-                className="text-[60px] font-bold font-rosarivo mb-8 leading-[1.2]"
+                className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-8 leading-[1.2]"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}

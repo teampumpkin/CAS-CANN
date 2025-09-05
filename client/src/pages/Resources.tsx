@@ -272,7 +272,7 @@ export default function Resources() {
               <span className="text-sm font-medium text-gray-800 dark:text-white/90">Professional Resources</span>
             </div>
             
-            <h1 className="text-[60px] font-bold font-rosarivo mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight">
               <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Clinical Practice Resources
               </span>
@@ -285,7 +285,7 @@ export default function Resources() {
             {/* Resource Categories Overview */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
               {categories.filter(cat => cat.value !== 'all').map((category, index) => {
-                const Icon = category.icon;
+                const Icon = category.icon!;
                 return (
                   <motion.div
                     key={category.value}

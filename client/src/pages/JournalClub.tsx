@@ -56,7 +56,7 @@ export default function JournalClub() {
           >
             <div className="flex items-center gap-3 mb-4">
               <BookOpen className="w-8 h-8" />
-              <h1 className="text-[60px] font-bold font-rosarivo">CAS Journal Club</h1>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo">CAS Journal Club</h1>
             </div>
             <p className="text-xl text-white/90 max-w-3xl">
               Join our monthly Journal Club sessions where healthcare professionals discuss 

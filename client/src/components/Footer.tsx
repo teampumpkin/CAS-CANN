@@ -53,10 +53,10 @@ export default function Footer() {
       <div className="container mx-auto px-6 relative z-10">
         {/* Main Content */}
         <div className="py-12">
-          <div className="grid lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            {/* Brand Section - Enhanced */}
-            <div className="lg:col-span-1">
+            {/* Brand & Contact Section */}
+            <div className="md:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -67,7 +67,7 @@ export default function Footer() {
                   <img 
                     src={casLogo} 
                     alt="Canadian Amyloidosis Society"
-                    className="h-32 w-auto hover:scale-105 transition-all duration-300"
+                    className="h-28 w-auto hover:scale-105 transition-all duration-300"
                   />
                 </div>
                 
@@ -75,43 +75,28 @@ export default function Footer() {
                   Advancing awareness, enhancing patient care, and improving outcomes for all Canadians affected by amyloidosis.
                 </p>
 
-                {/* Language Toggle */}
-                <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Globe className="w-4 h-4 text-[#00AFE6]" />
-                    <span className="text-white font-medium text-sm">Language</span>
+                {/* Contact Information */}
+                <div className="mb-6">
+                  <h4 className="text-white font-semibold mb-3 text-sm">Contact Us</h4>
+                  <div className="space-y-2">
+                    {contactInfo.map((contact, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <contact.icon className="w-4 h-4 text-[#00AFE6]" />
+                        <a
+                          href={`mailto:${contact.value}`}
+                          className="text-white/70 hover:text-white transition-colors duration-300 text-sm"
+                        >
+                          {contact.value}
+                        </a>
+                      </div>
+                    ))}
                   </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setLanguage('en')}
-                      className={`px-3 py-1.5 rounded-3xl text-xs font-medium transition-all duration-300 ${
-                        language === 'en' 
-                          ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
-                          : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
-                      }`}
-                    >
-                      English
-                    </button>
-                    <button
-                      onClick={() => setLanguage('fr')}
-                      className={`px-3 py-1.5 rounded-3xl text-xs font-medium transition-all duration-300 ${
-                        language === 'fr' 
-                          ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
-                          : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
-                      }`}
-                    >
-                      Français
-                    </button>
-                  </div>
-                  <p className="text-white/50 text-xs mt-2">
-                    {language === 'en' ? 'Content available in both languages' : 'Contenu disponible dans les deux langues'}
-                  </p>
                 </div>
               </motion.div>
             </div>
 
             {/* Quick Links */}
-            <div className="lg:col-span-1">
+            <div className="md:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -119,12 +104,12 @@ export default function Footer() {
                 viewport={{ once: true }}
               >
                 <h3 className="text-lg font-semibold text-white mb-6">Quick Links</h3>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {sitemapLinks.map((link, index) => (
                     <li key={index}>
                       <a
                         href={link.href}
-                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
+                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-3 group hover:translate-x-1"
                       >
                         <link.icon className="w-4 h-4 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
                         <span className="flex-1">{link.name}</span>
@@ -135,41 +120,64 @@ export default function Footer() {
               </motion.div>
             </div>
 
-            {/* Contact Information */}
-            <div className="lg:col-span-1">
+            {/* Language & Legal */}
+            <div className="md:col-span-2 lg:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-lg font-semibold text-white mb-6">Contact Info</h3>
-                <div className="space-y-3">
-                  {contactInfo.map((contact, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <contact.icon className="w-4 h-4 text-[#00AFE6]" />
-                      {contact.type === 'email' ? (
-                        <a
-                          href={`mailto:${contact.value}`}
-                          className="text-white/70 hover:text-white transition-colors duration-300 text-sm"
-                        >
-                          {contact.value}
-                        </a>
-                      ) : contact.type === 'phone' ? (
-                        <a
-                          href={`tel:${contact.value}`}
-                          className="text-white/70 hover:text-white transition-colors duration-300 text-sm"
-                        >
-                          {contact.value}
-                        </a>
-                      ) : (
-                        <span className="text-white/70 text-sm">{contact.value}</span>
-                      )}
-                    </div>
-                  ))}
+                {/* Language Toggle */}
+                <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10 mb-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Globe className="w-4 h-4 text-[#00AFE6]" />
+                    <span className="text-white font-medium text-sm">Language</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setLanguage('en')}
+                      className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 flex-1 ${
+                        language === 'en' 
+                          ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
+                          : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
+                      }`}
+                    >
+                      English
+                    </button>
+                    <button
+                      onClick={() => setLanguage('fr')}
+                      className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 flex-1 ${
+                        language === 'fr' 
+                          ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
+                          : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
+                      }`}
+                    >
+                      Français
+                    </button>
+                  </div>
+                  <p className="text-white/50 text-xs mt-2 text-center">
+                    {language === 'en' ? 'Content available in both languages' : 'Contenu disponible dans les deux langues'}
+                  </p>
                 </div>
 
-
+                {/* Legal Links */}
+                <div>
+                  <h4 className="text-white font-semibold mb-3 text-sm">Legal & Policies</h4>
+                  <ul className="space-y-2">
+                    {legalLinks.map((link, index) => (
+                      <li key={index}>
+                        <a
+                          href={link.href}
+                          className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
+                        >
+                          <link.icon className="w-3 h-3 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                          <span>{link.name}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             </div>
 
@@ -190,17 +198,11 @@ export default function Footer() {
               © 2025 Canadian Amyloidosis Society. All rights reserved.
             </div>
             
-            <div className="flex flex-wrap items-center gap-8 text-sm">
-              <a href="/privacy" className="text-white/70 hover:text-white transition-colors">
-                Privacy Policy
+            <div className="flex flex-wrap items-center gap-6 text-sm">
+              <a href="/accessibility" className="text-white/70 hover:text-white transition-colors flex items-center gap-1">
+                <Shield className="w-3 h-3" />
+                Accessibility Statement
               </a>
-              <a href="/cookies" className="text-white/70 hover:text-white transition-colors">
-                Cookie Policy
-              </a>
-              <a href="/terms" className="text-white/70 hover:text-white transition-colors">
-                Terms of Service
-              </a>
-
             </div>
           </div>
         </motion.div>

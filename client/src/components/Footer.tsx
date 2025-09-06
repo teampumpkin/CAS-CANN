@@ -52,39 +52,39 @@ export default function Footer() {
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Main Content */}
-        <div className="py-12">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="py-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            {/* Brand & Contact Section */}
-            <div className="md:col-span-1">
+            {/* Brand Section */}
+            <div className="md:col-span-1 lg:col-span-2">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="mb-6">
+                <div className="mb-4">
                   <img 
                     src={casLogo} 
                     alt="Canadian Amyloidosis Society"
-                    className="h-28 w-auto hover:scale-105 transition-all duration-300"
+                    className="h-20 w-auto hover:scale-105 transition-all duration-300"
                   />
                 </div>
                 
-                <p className="text-white/80 text-sm leading-relaxed mb-6">
+                <p className="text-white/80 text-sm leading-relaxed mb-4">
                   Advancing awareness, enhancing patient care, and improving outcomes for all Canadians affected by amyloidosis.
                 </p>
 
                 {/* Contact Information */}
-                <div className="mb-6">
-                  <h4 className="text-white font-semibold mb-3 text-sm">Contact Us</h4>
-                  <div className="space-y-2">
+                <div>
+                  <h4 className="text-white font-semibold mb-2 text-sm">Contact</h4>
+                  <div className="space-y-1">
                     {contactInfo.map((contact, index) => (
                       <div key={index} className="flex items-center gap-2">
-                        <contact.icon className="w-4 h-4 text-[#00AFE6]" />
+                        <contact.icon className="w-3 h-3 text-[#00AFE6]" />
                         <a
                           href={`mailto:${contact.value}`}
-                          className="text-white/70 hover:text-white transition-colors duration-300 text-sm"
+                          className="text-white/70 hover:text-white transition-colors duration-300 text-xs"
                         >
                           {contact.value}
                         </a>
@@ -103,15 +103,15 @@ export default function Footer() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-lg font-semibold text-white mb-6">Quick Links</h3>
-                <ul className="space-y-3">
-                  {sitemapLinks.map((link, index) => (
+                <h3 className="text-base font-semibold text-white mb-3">Quick Links</h3>
+                <ul className="space-y-1">
+                  {sitemapLinks.slice(0, 6).map((link, index) => (
                     <li key={index}>
                       <a
                         href={link.href}
-                        className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-3 group hover:translate-x-1"
+                        className="text-white/70 hover:text-white transition-colors duration-300 text-xs flex items-center gap-2 group hover:translate-x-1"
                       >
-                        <link.icon className="w-4 h-4 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                        <link.icon className="w-3 h-3 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
                         <span className="flex-1">{link.name}</span>
                       </a>
                     </li>
@@ -120,64 +120,67 @@ export default function Footer() {
               </motion.div>
             </div>
 
-            {/* Language & Legal */}
-            <div className="md:col-span-2 lg:col-span-1">
+            {/* Language Toggle */}
+            <div className="md:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                {/* Language Toggle */}
-                <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10 mb-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Globe className="w-4 h-4 text-[#00AFE6]" />
-                    <span className="text-white font-medium text-sm">Language</span>
+                <div className="bg-white/5 backdrop-blur-xl rounded-lg p-3 border border-white/10">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Globe className="w-3 h-3 text-[#00AFE6]" />
+                    <span className="text-white font-medium text-xs">Language</span>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-1">
                     <button
                       onClick={() => setLanguage('en')}
-                      className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 flex-1 ${
+                      className={`px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 flex-1 ${
                         language === 'en' 
                           ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
                           : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
                       }`}
                     >
-                      English
+                      EN
                     </button>
                     <button
                       onClick={() => setLanguage('fr')}
-                      className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 flex-1 ${
+                      className={`px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 flex-1 ${
                         language === 'fr' 
                           ? 'bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg' 
                           : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
                       }`}
                     >
-                      Français
+                      FR
                     </button>
                   </div>
-                  <p className="text-white/50 text-xs mt-2 text-center">
-                    {language === 'en' ? 'Content available in both languages' : 'Contenu disponible dans les deux langues'}
-                  </p>
                 </div>
+              </motion.div>
+            </div>
 
-                {/* Legal Links */}
-                <div>
-                  <h4 className="text-white font-semibold mb-3 text-sm">Legal & Policies</h4>
-                  <ul className="space-y-2">
-                    {legalLinks.map((link, index) => (
-                      <li key={index}>
-                        <a
-                          href={link.href}
-                          className="text-white/70 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
-                        >
-                          <link.icon className="w-3 h-3 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
-                          <span>{link.name}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            {/* Legal Links */}
+            <div className="md:col-span-1">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="text-white font-semibold mb-2 text-sm">Legal</h4>
+                <ul className="space-y-1">
+                  {legalLinks.map((link, index) => (
+                    <li key={index}>
+                      <a
+                        href={link.href}
+                        className="text-white/70 hover:text-white transition-colors duration-300 text-xs flex items-center gap-2 group"
+                      >
+                        <link.icon className="w-3 h-3 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                        <span>{link.name}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             </div>
 
@@ -187,18 +190,18 @@ export default function Footer() {
 
         {/* Bottom Section - Enhanced */}
         <motion.div 
-          className="border-t border-white/10 py-8"
+          className="border-t border-white/10 py-4"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-            <div className="text-white/50 text-sm">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+            <div className="text-white/50 text-xs">
               © 2025 Canadian Amyloidosis Society. All rights reserved.
             </div>
             
-            <div className="flex flex-wrap items-center gap-6 text-sm">
+            <div className="flex flex-wrap items-center gap-4 text-xs">
               <a href="/accessibility" className="text-white/70 hover:text-white transition-colors flex items-center gap-1">
                 <Shield className="w-3 h-3" />
                 Accessibility Statement

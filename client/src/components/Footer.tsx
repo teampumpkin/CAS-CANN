@@ -27,8 +27,7 @@ export default function Footer() {
 
   const legalLinks = [
     { name: "Privacy Policy", href: "/privacy-policy", icon: Shield },
-    { name: "Terms of Use", href: "/terms-of-use", icon: FileText },
-    { name: "Accessibility", href: "/accessibility", icon: Globe }
+    { name: "Terms of Use", href: "/terms-of-use", icon: FileText }
   ];
 
   const socialLinks = [
@@ -190,9 +189,15 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <div className="text-center">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
             <div className="text-white/50 text-xs">
               © 2025 Canadian Amyloidosis Society. All rights reserved.
+            </div>
+            <div>
+              <a href="/accessibility" className="text-white/70 hover:text-white transition-colors text-xs flex items-center gap-1">
+                <Globe className="w-3 h-3" />
+                Accessibility Statement
+              </a>
             </div>
           </div>
         </motion.div>

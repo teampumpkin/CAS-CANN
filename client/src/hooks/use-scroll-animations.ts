@@ -29,7 +29,7 @@ export function useScrollAnimations() {
   }, []);
 
   useEffect(() => {
-    // Smooth scrolling for anchor links
+    // Smooth scrolling for anchor links with header offset
     const handleAnchorClick = (e: Event) => {
       const target = e.target as HTMLAnchorElement;
       if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
@@ -37,9 +37,12 @@ export function useScrollAnimations() {
         const targetId = target.getAttribute('href');
         const targetElement = document.querySelector(targetId!);
         if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          // Account for fixed header height
+          const headerHeight = 96;
+          const elementPosition = (targetElement as HTMLElement).offsetTop - headerHeight;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
           });
         }
       }

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
+import { useScrollAnimations } from '@/hooks/use-scroll-animations';
 import { 
   Network, 
   Users, 
@@ -29,15 +30,23 @@ import medicalTeamImg from '@assets/DSC02841_1750068895454.jpg';
 import cannLogoImg from '@assets/CANN-RGB-dark-theme_1756219144378.png';
 
 export default function JoinCANN() {
+  useScrollAnimations();
+  
   useEffect(() => {
     // Handle hash-based navigation
     if (window.location.hash) {
       setTimeout(() => {
         const element = document.getElementById(window.location.hash.substring(1));
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          // Calculate offset for fixed header (header is about 96px tall)
+          const headerHeight = 96;
+          const elementPosition = element.offsetTop - headerHeight;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
         }
-      }, 100);
+      }, 300); // Increased timeout to ensure page is fully loaded
     } else {
       window.scrollTo(0, 0);
     }

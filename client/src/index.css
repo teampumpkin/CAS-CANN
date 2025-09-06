@@ -20,6 +20,7 @@
   
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 96px; /* Account for fixed header height */
   }
   
   /* Fix text overlapping for headings */

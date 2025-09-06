@@ -30,7 +30,17 @@ import cannLogoImg from '@assets/CANN-RGB-dark-theme_1756219144378.png';
 
 export default function JoinCANN() {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Handle hash-based navigation
+    if (window.location.hash) {
+      setTimeout(() => {
+        const element = document.getElementById(window.location.hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   const keyPillars = [
@@ -304,7 +314,7 @@ export default function JoinCANN() {
       </section>
 
       {/* Member Login Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section id="login" className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div

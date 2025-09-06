@@ -3,6 +3,7 @@ import { ExternalLink, Globe, Heart, Users, Handshake, ArrowRight, Building2, St
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Link } from 'wouter';
 import ParallaxBackground from '../components/ParallaxBackground';
 import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
 import partnershipImage from '@assets/DSC02841_1750068895454.jpg';
@@ -227,9 +228,11 @@ export default function Partnerships() {
               Explore Partnerships
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
-            <Button variant="outline" size="lg" className="border-[#00AFE6] text-[#00AFE6] hover:bg-[#00AFE6]/10 rounded-3xl px-8 py-3">
-              Contact Us
-              <ExternalLink className="w-4 h-4 ml-2" />
+            <Button variant="outline" size="lg" className="border-[#00AFE6] text-[#00AFE6] hover:bg-[#00AFE6]/10 rounded-3xl px-8 py-3" asChild>
+              <Link href="/contact">
+                Contact Us
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Link>
             </Button>
           </motion.div>
         </div>
@@ -483,8 +486,10 @@ export default function Partnerships() {
                 Explore Partnership Opportunities
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
-              <Button variant="outline" size="lg" className="border-[#00AFE6] text-[#00AFE6] hover:bg-[#00AFE6]/10 rounded-3xl px-8 py-3">
-                Contact Partnership Team
+              <Button variant="outline" size="lg" className="border-[#00AFE6] text-[#00AFE6] hover:bg-[#00AFE6]/10 rounded-3xl px-8 py-3" asChild>
+                <Link href="/contact">
+                  Contact Partnership Team
+                </Link>
               </Button>
             </div>
           </motion.div>

@@ -165,10 +165,9 @@ export default function Footer() {
                       <li key={index}>
                         <a
                           href={link.href}
-                          className="text-white/70 hover:text-white transition-colors duration-300 text-xs flex items-start gap-2 group"
+                          className="text-white/70 hover:text-white transition-colors duration-300 text-xs block group"
                         >
-                          <link.icon className="w-3 h-3 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
-                          <span>{link.name}</span>
+                          {link.name}
                         </a>
                       </li>
                     ))}

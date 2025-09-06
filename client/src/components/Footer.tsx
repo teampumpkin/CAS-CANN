@@ -53,10 +53,10 @@ export default function Footer() {
       <div className="container mx-auto px-6 relative z-10">
         {/* Main Content */}
         <div className="py-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             {/* Brand Section */}
-            <div className="md:col-span-1 lg:col-span-2">
+            <div className="md:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ export default function Footer() {
               </motion.div>
             </div>
 
-            {/* Language Toggle */}
+            {/* Language & Legal */}
             <div className="md:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -128,7 +128,8 @@ export default function Footer() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <div className="bg-white/5 backdrop-blur-xl rounded-lg p-3 border border-white/10">
+                {/* Language Toggle */}
+                <div className="bg-white/5 backdrop-blur-xl rounded-lg p-3 border border-white/10 mb-4">
                   <div className="flex items-center gap-2 mb-2">
                     <Globe className="w-3 h-3 text-[#00AFE6]" />
                     <span className="text-white font-medium text-xs">Language</span>
@@ -156,31 +157,24 @@ export default function Footer() {
                     </button>
                   </div>
                 </div>
-              </motion.div>
-            </div>
 
-            {/* Legal Links */}
-            <div className="md:col-span-1">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <h4 className="text-white font-semibold mb-2 text-sm">Legal</h4>
-                <ul className="space-y-1">
-                  {legalLinks.map((link, index) => (
-                    <li key={index}>
-                      <a
-                        href={link.href}
-                        className="text-white/70 hover:text-white transition-colors duration-300 text-xs flex items-center gap-2 group"
-                      >
-                        <link.icon className="w-3 h-3 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
-                        <span>{link.name}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                {/* Legal Links */}
+                <div>
+                  <h4 className="text-white font-semibold mb-2 text-sm">Legal</h4>
+                  <ul className="space-y-1">
+                    {legalLinks.map((link, index) => (
+                      <li key={index}>
+                        <a
+                          href={link.href}
+                          className="text-white/70 hover:text-white transition-colors duration-300 text-xs flex items-center gap-2 group"
+                        >
+                          <link.icon className="w-3 h-3 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                          <span>{link.name}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             </div>
 
@@ -188,24 +182,17 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Section - Enhanced */}
+        {/* Bottom Section */}
         <motion.div 
-          className="border-t border-white/10 py-4"
+          className="border-t border-white/10 py-3"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+          <div className="text-center">
             <div className="text-white/50 text-xs">
               © 2025 Canadian Amyloidosis Society. All rights reserved.
-            </div>
-            
-            <div className="flex flex-wrap items-center gap-4 text-xs">
-              <a href="/accessibility" className="text-white/70 hover:text-white transition-colors flex items-center gap-1">
-                <Shield className="w-3 h-3" />
-                Accessibility Statement
-              </a>
             </div>
           </div>
         </motion.div>

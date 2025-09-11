@@ -224,53 +224,19 @@ export default function CANNResources() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {educationalResources.map((resource, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
+          <div className="flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Badge 
+                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white text-lg px-8 py-4 rounded-2xl border-0 font-semibold"
               >
-                <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-gray-50/50 dark:from-gray-900 dark:to-gray-800/50 rounded-2xl group">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-start justify-between mb-3">
-                      <Badge 
-                        variant="secondary" 
-                        className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 text-pink-600 border-0"
-                      >
-                        {resource.category}
-                      </Badge>
-                      <div className="text-right text-sm text-gray-500 dark:text-gray-400">
-                        <div className="font-medium">{resource.format}</div>
-                        <div>{resource.size}</div>
-                      </div>
-                    </div>
-                    <CardTitle className="text-xl group-hover:text-pink-600 transition-colors duration-300">
-                      {resource.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 dark:text-white/70 mb-4 leading-relaxed">
-                      {resource.description}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        Updated: {resource.updated}
-                      </span>
-                      <Button 
-                        size="sm" 
-                        className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl"
-                      >
-                        <Download className="w-4 h-4 mr-2" />
-                        Download
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                Coming Soon
+              </Badge>
+            </motion.div>
           </div>
         </div>
       </section>

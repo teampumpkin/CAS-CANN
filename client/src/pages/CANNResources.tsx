@@ -261,6 +261,36 @@ export default function CANNResources() {
             </p>
           </motion.div>
 
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-pink-500/20 max-w-md mx-auto">
+              <div className="flex items-center justify-center mb-4">
+                <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-3">
+                  <Users className="w-6 h-6 text-pink-600" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                Members Only Events
+              </h3>
+              <p className="text-gray-600 dark:text-white/70 mb-6 text-sm">
+                Join CANN to access exclusive professional development opportunities
+              </p>
+              <Button 
+                onClick={() => window.location.href = '/join-nursing-network'}
+                size="lg" 
+                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 w-full"
+              >
+                <Users className="w-4 h-4 mr-2" />
+                Join CANN
+              </Button>
+            </div>
+          </motion.div>
+
           <div className="space-y-8">
             {upcomingEvents.map((event, index) => (
               <motion.div
@@ -335,26 +365,6 @@ export default function CANNResources() {
               </motion.div>
             ))}
           </div>
-          
-          <motion.div
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-lg text-gray-600 dark:text-white/70 mb-6">
-              Members Only Event
-            </p>
-            <Button 
-              onClick={() => window.location.href = '/join-nursing-network'}
-              size="lg" 
-              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8"
-            >
-              <Users className="w-4 h-4 mr-2" />
-              Join CANN
-            </Button>
-          </motion.div>
         </div>
       </section>
 

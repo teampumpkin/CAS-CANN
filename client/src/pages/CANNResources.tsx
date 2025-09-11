@@ -94,8 +94,8 @@ export default function CANNResources() {
     {
       title: "Canadian Amyloidosis Summit",
       date: "October 31 – November 2, 2025",
-      time: "TBD",
-      location: "In-person & Virtual",
+      time: "2025-10-31 to 2025-11-02",
+      location: "Toronto Airport Marriott Hotel",
       format: "In-person & Virtual",
       description: "Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.",
       registrationDeadline: "Registration TBD",
@@ -343,8 +343,8 @@ export default function CANNResources() {
                           </div>
                         </div>
                       </div>
-                      <div className="flex flex-col justify-center">
-                        <div>
+                      <div className="flex flex-col justify-between">
+                        <div className="mb-4">
                           <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
                             Registration:
                           </div>
@@ -352,6 +352,20 @@ export default function CANNResources() {
                             {event.registrationDeadline}
                           </div>
                         </div>
+                        {index === 2 && (
+                          <a 
+                            href="https://madhattr.ca/events/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                          >
+                            <Button 
+                              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl"
+                            >
+                              Register Now
+                              <ExternalLink className="w-4 h-4 ml-2" />
+                            </Button>
+                          </a>
+                        )}
                       </div>
                     </div>
                   </CardContent>

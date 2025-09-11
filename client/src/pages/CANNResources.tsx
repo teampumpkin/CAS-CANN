@@ -275,22 +275,96 @@ export default function CANNResources() {
 
           <div className="flex justify-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
-              className="relative"
+              className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-3xl blur-xl"></div>
-              <Badge 
-                className="relative bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xl px-12 py-6 rounded-3xl border-0 font-bold shadow-2xl hover:shadow-pink-500/25 transition-all duration-300"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-white/80 rounded-full animate-pulse"></div>
-                  <span>Coming Soon</span>
-                  <div className="w-3 h-3 bg-white/80 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+              {/* Outer glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/30 to-purple-600/30 rounded-3xl blur-2xl animate-pulse"></div>
+              
+              {/* Main container */}
+              <div className="relative bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/90 dark:to-gray-900/90 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-gray-600/30 shadow-2xl">
+                
+                {/* Animated background pattern */}
+                <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                  <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-pink-500/10 to-transparent rounded-full blur-xl animate-pulse"></div>
+                  <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-purple-600/10 to-transparent rounded-full blur-xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
                 </div>
-              </Badge>
+
+                {/* Content */}
+                <div className="relative z-10 flex flex-col items-center gap-4">
+                  
+                  {/* Icon with spinning animation */}
+                  <motion.div 
+                    className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full shadow-lg"
+                    animate={{ 
+                      rotate: [0, 360],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{ 
+                      rotate: { duration: 4, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                  >
+                    <GraduationCap className="w-8 h-8 text-white" />
+                  </motion.div>
+
+                  {/* Main text */}
+                  <div className="text-center">
+                    <motion.h3 
+                      className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2"
+                      animate={{ opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      Coming Soon
+                    </motion.h3>
+                    
+                    <p className="text-gray-600 dark:text-white/70 text-sm max-w-xs">
+                      Exciting educational programs and certifications are being developed
+                    </p>
+                  </div>
+
+                  {/* Animated dots */}
+                  <div className="flex items-center gap-2">
+                    {[0, 0.3, 0.6].map((delay, index) => (
+                      <motion.div
+                        key={index}
+                        className="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full"
+                        animate={{
+                          scale: [0.8, 1.2, 0.8],
+                          opacity: [0.5, 1, 0.5]
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          delay: delay,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="w-full max-w-xs">
+                    <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
+                      <span>In Development</span>
+                      <span>75%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <motion.div 
+                        className="bg-gradient-to-r from-pink-500 to-purple-600 h-2 rounded-full"
+                        initial={{ width: "0%" }}
+                        whileInView={{ width: "75%" }}
+                        transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
+                        viewport={{ once: true }}
+                      />
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>

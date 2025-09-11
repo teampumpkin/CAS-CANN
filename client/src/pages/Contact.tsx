@@ -20,7 +20,7 @@ export default function Contact() {
     },
     {
       question: "How do I join CAS as a healthcare professional? Is there a fee to join?",
-      answer: "Contact us at cas@amyloid.ca to submit a membership application and learn about membership fees."
+      answer: "Visit Join CAS page and fill the form to join CAS, and there is no fee."
     },
     {
       question: "Do you provide direct patient care?",

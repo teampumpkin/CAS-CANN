@@ -295,8 +295,9 @@ export default function Partnerships() {
                       {partner.description}
                     </p>
 
-                    <div className="mt-4 flex items-center justify-center">
-                      <div className="w-6 h-6 bg-[#00AFE6]/10 rounded-full flex items-center justify-center group-hover:bg-[#00AFE6]/20 transition-all duration-300">
+                    <div className="mt-6 flex items-center justify-center">
+                      <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border border-[#00AFE6]/30 hover:border-[#00AFE6]/50 rounded-full px-4 py-2 transition-all duration-300 group-hover:shadow-md">
+                        <span className="text-xs font-semibold text-[#00AFE6] group-hover:text-[#00AFE6]">Visit</span>
                         <svg className="w-3 h-3 text-[#00AFE6] group-hover:text-[#00AFE6] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>

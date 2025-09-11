@@ -16,9 +16,6 @@ export default function Footer() {
     { name: "Contact Us", href: "/contact", icon: Mail, status: "available" }
   ];
 
-  const legalLinks = [
-    { name: "Terms of Use", href: "/terms-of-use" }
-  ];
 
   const contactInfo = [
     { type: 'email', value: 'CAS@amyloid.ca', icon: Mail },
@@ -109,23 +106,6 @@ export default function Footer() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                {/* Legal Links */}
-                <div className="mb-6">
-                  <h4 className="text-white font-semibold mb-4 text-sm">Legal</h4>
-                  <ul className="space-y-2">
-                    {legalLinks.map((link, index) => (
-                      <li key={index}>
-                        <a
-                          href={link.href}
-                          className="text-white/70 hover:text-white transition-colors duration-300 text-sm block"
-                        >
-                          {link.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
                 {/* Language Toggle */}
                 <div>
                   <h4 className="text-white font-semibold mb-3 text-sm">Language</h4>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, Instagram, Linkedin, Twitter, Facebook, MapPin, Phone, Mail, FileText, Users, Calendar, Search, Globe, Shield, BookOpen, ExternalLink } from 'lucide-react';
+import { Heart, Instagram, Linkedin, Twitter, Facebook, MapPin, Phone, Mail, FileText, Users, Calendar, Search, Globe, Shield, BookOpen, ExternalLink, UserPlus } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import casLogo from '@assets/l_cas_vert_ko_1753253840024.png';
 
@@ -55,7 +55,7 @@ export default function Footer() {
                 </p>
 
                 {/* Contact Information */}
-                <div>
+                <div className="mb-6">
                   <h4 className="text-white font-semibold mb-3 text-sm">Contact Us</h4>
                   <div className="space-y-2">
                     {contactInfo.map((contact, index) => (
@@ -70,6 +70,17 @@ export default function Footer() {
                       </div>
                     ))}
                   </div>
+                </div>
+
+                {/* JOIN CAS Button */}
+                <div>
+                  <a
+                    href="/join-cas"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-full font-semibold text-sm hover:shadow-lg hover:shadow-[#00AFE6]/25 transition-all duration-300 hover:scale-105"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    JOIN CAS
+                  </a>
                 </div>
               </motion.div>
             </div>

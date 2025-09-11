@@ -1,4 +1,8 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { 
   Heart, 
   Users, 
@@ -27,12 +31,23 @@ import {
   Award,
   Gavel,
   Languages,
-  Info
+  Info,
+  MapPin,
+  Building,
+  GraduationCap,
+  Send
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/hooks/use-toast";
 
 const membershipBenefits = [
   {
@@ -121,7 +136,87 @@ const approvalProcess = [
   }
 ];
 
+// Form validation schema
+const membershipFormSchema = z.object({
+  wantsMembership: z.enum(["yes", "no"], {
+    required_error: "Please indicate if you want to become a member.",
+  }),
+  fullName: z.string().min(2, "Full name must be at least 2 characters."),
+  email: z.string().email("Please enter a valid email address."),
+  phone: z.string().optional(),
+  discipline: z.string().min(2, "Please specify your professional discipline."),
+  position: z.string().min(2, "Please specify your current position."),
+  institution: z.string().min(2, "Please specify your institution/workplace."),
+  address: z.string().min(5, "Please provide your complete address."),
+  city: z.string().min(2, "Please specify your city."),
+  province: z.string().min(2, "Please select your province."),
+  postalCode: z.string().min(5, "Please provide a valid postal code."),
+  yearsExperience: z.string().min(1, "Please specify your years of experience."),
+  amyloidosisExperience: z.string().optional(),
+  includeInMap: z.enum(["yes", "no"], {
+    required_error: "Please indicate if you want to be included in the services map.",
+  }),
+  specializations: z.array(z.string()).optional(),
+  additionalInfo: z.string().optional(),
+  agreeToTerms: z.boolean().refine((val) => val === true, {
+    message: "You must agree to the terms and conditions.",
+  }),
+});
+
+type MembershipFormData = z.infer<typeof membershipFormSchema>;
+
 export default function JoinCAS() {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<MembershipFormData>({
+    resolver: zodResolver(membershipFormSchema),
+    defaultValues: {
+      wantsMembership: undefined,
+      fullName: "",
+      email: "",
+      phone: "",
+      discipline: "",
+      position: "",
+      institution: "",
+      address: "",
+      city: "",
+      province: "",
+      postalCode: "",
+      yearsExperience: "",
+      amyloidosisExperience: "",
+      includeInMap: undefined,
+      specializations: [],
+      additionalInfo: "",
+      agreeToTerms: false,
+    },
+  });
+
+  const onSubmit = async (data: MembershipFormData) => {
+    setIsSubmitting(true);
+    try {
+      // Here you would typically submit to your backend
+      console.log("Form Data:", data);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      toast({
+        title: "Application Submitted Successfully!",
+        description: "Thank you for your membership application. We'll review it within 2-3 weeks and contact you with updates.",
+      });
+      
+      form.reset();
+    } catch (error) {
+      toast({
+        title: "Submission Error",
+        description: "There was an error submitting your application. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -402,32 +497,385 @@ export default function JoinCAS() {
                   </div>
                 </div>
 
-                {/* Embedded Form with improved styling */}
+                {/* Custom Registration Form */}
                 <div className="relative bg-white dark:bg-gray-800">
                   {/* Form frame decoration */}
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent dark:from-gray-700/50 pointer-events-none" />
                   
-                  <div className="p-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-inner">
-                      <iframe
-                        src="https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u&embed=true"
-                        width="100%"
-                        height="800"
-                        frameBorder="0"
-                        marginHeight={0}
-                        marginWidth={0}
-                        className="w-full transition-all duration-300"
-                        title="CAS Registration Form"
-                      >
-                        {/* Enhanced loading state */}
-                        <div className="flex items-center justify-center h-full bg-gray-50 dark:bg-gray-800">
-                          <div className="text-center">
-                            <div className="w-8 h-8 border-4 border-[#00AFE6]/20 border-t-[#00AFE6] rounded-full animate-spin mx-auto mb-4" />
-                            <p className="text-gray-600 dark:text-gray-400">Loading registration form...</p>
+                  <div className="p-8">
+                    <Form {...form}>
+                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                        
+                        {/* Section 1: Membership Interest */}
+                        <div className="space-y-6">
+                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Membership Interest</h4>
+                          </div>
+                          
+                          <FormField
+                            control={form.control}
+                            name="wantsMembership"
+                            render={({ field }) => (
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-base font-medium">I would like to become a member of the Canadian Amyloidosis Society (CAS) *</FormLabel>
+                                <FormControl>
+                                  <RadioGroup
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                    className="flex gap-6"
+                                  >
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="yes" id="yes" />
+                                      <label htmlFor="yes" className="cursor-pointer">Yes</label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="no" id="no" />
+                                      <label htmlFor="no" className="cursor-pointer">No</label>
+                                    </div>
+                                  </RadioGroup>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        {/* Section 2: Personal Information */}
+                        <div className="space-y-6">
+                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h4>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <FormField
+                              control={form.control}
+                              name="fullName"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Full Name (first and last) *</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="Enter your full name" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={form.control}
+                              name="email"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Email Address *</FormLabel>
+                                  <FormControl>
+                                    <Input type="email" placeholder="your.email@example.com" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={form.control}
+                              name="phone"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Phone Number</FormLabel>
+                                  <FormControl>
+                                    <Input type="tel" placeholder="(555) 123-4567" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
                           </div>
                         </div>
-                      </iframe>
-                    </div>
+
+                        {/* Section 3: Professional Information */}
+                        <div className="space-y-6">
+                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Professional Information</h4>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <FormField
+                              control={form.control}
+                              name="discipline"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Discipline (physician, nursing, genetic counsellor, etc) *</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="e.g., Physician, Nurse, Genetic Counsellor" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={form.control}
+                              name="position"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Current Position *</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="e.g., Cardiologist, Clinical Nurse" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={form.control}
+                              name="institution"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Institution/Workplace *</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="Hospital, clinic, or organization name" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={form.control}
+                              name="yearsExperience"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Years of Experience *</FormLabel>
+                                  <FormControl>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                      <SelectTrigger>
+                                        <SelectValue placeholder="Select experience level" />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="0-2">0-2 years</SelectItem>
+                                        <SelectItem value="3-5">3-5 years</SelectItem>
+                                        <SelectItem value="6-10">6-10 years</SelectItem>
+                                        <SelectItem value="11-15">11-15 years</SelectItem>
+                                        <SelectItem value="16-20">16-20 years</SelectItem>
+                                        <SelectItem value="20+">20+ years</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Section 4: Location Information */}
+                        <div className="space-y-6">
+                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">4</div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Location Information</h4>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <FormField
+                              control={form.control}
+                              name="address"
+                              render={({ field }) => (
+                                <FormItem className="md:col-span-3">
+                                  <FormLabel>Address *</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="Street address" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={form.control}
+                              name="city"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>City *</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="City" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={form.control}
+                              name="province"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Province/Territory *</FormLabel>
+                                  <FormControl>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                      <SelectTrigger>
+                                        <SelectValue placeholder="Select province" />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="AB">Alberta</SelectItem>
+                                        <SelectItem value="BC">British Columbia</SelectItem>
+                                        <SelectItem value="MB">Manitoba</SelectItem>
+                                        <SelectItem value="NB">New Brunswick</SelectItem>
+                                        <SelectItem value="NL">Newfoundland and Labrador</SelectItem>
+                                        <SelectItem value="NS">Nova Scotia</SelectItem>
+                                        <SelectItem value="ON">Ontario</SelectItem>
+                                        <SelectItem value="PE">Prince Edward Island</SelectItem>
+                                        <SelectItem value="QC">Quebec</SelectItem>
+                                        <SelectItem value="SK">Saskatchewan</SelectItem>
+                                        <SelectItem value="NT">Northwest Territories</SelectItem>
+                                        <SelectItem value="NU">Nunavut</SelectItem>
+                                        <SelectItem value="YT">Yukon</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={form.control}
+                              name="postalCode"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Postal Code *</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="A1A 1A1" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                          
+                          <FormField
+                            control={form.control}
+                            name="includeInMap"
+                            render={({ field }) => (
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-base font-medium">I would like my center/clinic to be included in the Canadian Amyloidosis Services Map *</FormLabel>
+                                <FormControl>
+                                  <RadioGroup
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                    className="flex gap-6"
+                                  >
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="yes" id="map-yes" />
+                                      <label htmlFor="map-yes" className="cursor-pointer">Yes</label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="no" id="map-no" />
+                                      <label htmlFor="map-no" className="cursor-pointer">No</label>
+                                    </div>
+                                  </RadioGroup>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        {/* Section 5: Additional Information */}
+                        <div className="space-y-6">
+                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">5</div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Additional Information</h4>
+                          </div>
+                          
+                          <FormField
+                            control={form.control}
+                            name="amyloidosisExperience"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Experience with Amyloidosis Patients</FormLabel>
+                                <FormControl>
+                                  <Textarea 
+                                    placeholder="Briefly describe your experience with amyloidosis patients, research, or related work (optional)"
+                                    rows={4}
+                                    {...field} 
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          
+                          <FormField
+                            control={form.control}
+                            name="additionalInfo"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Additional Information</FormLabel>
+                                <FormControl>
+                                  <Textarea 
+                                    placeholder="Any additional information you'd like to share about your interest in CAS membership (optional)"
+                                    rows={3}
+                                    {...field} 
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        {/* Terms Agreement */}
+                        <div className="space-y-6">
+                          <FormField
+                            control={form.control}
+                            name="agreeToTerms"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-gray-50 dark:bg-gray-900">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                  />
+                                </FormControl>
+                                <div className="space-y-1 leading-none">
+                                  <FormLabel className="cursor-pointer">
+                                    I agree to the terms and conditions *
+                                  </FormLabel>
+                                  <FormDescription>
+                                    By submitting this application, I agree to abide by CAS professional standards and governance framework. All personal information will be handled according to our privacy policy.
+                                  </FormDescription>
+                                  <FormMessage />
+                                </div>
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="pt-6">
+                          <Button 
+                            type="submit" 
+                            disabled={isSubmitting}
+                            className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold py-6 px-8 rounded-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 transform hover:scale-105"
+                          >
+                            {isSubmitting ? (
+                              <div className="flex items-center justify-center gap-3">
+                                <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                Processing Application...
+                              </div>
+                            ) : (
+                              <div className="flex items-center justify-center gap-3">
+                                <Send className="w-5 h-5" />
+                                Submit CAS Membership Application
+                              </div>
+                            )}
+                          </Button>
+                        </div>
+                      </form>
+                    </Form>
                   </div>
                 </div>
 

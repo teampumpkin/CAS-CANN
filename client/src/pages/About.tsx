@@ -369,9 +369,6 @@ export default function About() {
                 <div className="text-center">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{member.name}</h3>
                   <p className="text-[#00AFE6] font-semibold text-sm mb-2">{member.title}</p>
-                  <p className="text-gray-600 dark:text-white/70 text-sm mb-2">{member.institution}</p>
-                  <p className="text-gray-500 dark:text-white/60 text-xs font-medium mb-3">{member.specialty}</p>
-                  <p className="text-gray-600 dark:text-white/70 text-xs leading-relaxed">{member.bio}</p>
                 </div>
               </motion.div>
             ))}

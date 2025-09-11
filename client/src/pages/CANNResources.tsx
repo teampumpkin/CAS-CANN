@@ -92,15 +92,15 @@ export default function CANNResources() {
       type: "Virtual Workshop"
     },
     {
-      title: "Nursing Excellence Series",
-      date: "January 25, 2025",
-      time: "7:00 PM - 8:30 PM",
-      location: "Virtual",
-      format: "Webinar",
-      description: "Monthly series focusing on nursing best practices in amyloidosis care.",
-      registrationDeadline: "January 23, 2025",
-      cmeCredits: "1.5 hours",
-      type: "Webinar"
+      title: "Canadian Amyloidosis Summit",
+      date: "October 31 – November 2, 2025",
+      time: "TBD",
+      location: "In-person & Virtual",
+      format: "In-person & Virtual",
+      description: "Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.",
+      registrationDeadline: "Registration TBD",
+      cmeCredits: "TBD",
+      type: "Conference"
     }
   ];
 

@@ -221,7 +221,7 @@ export default function CANNResources() {
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Professional development and certification programs for healthcare professionals.
+              Past CANN Educational Series – Access previously recorded sessions
             </p>
           </motion.div>
 

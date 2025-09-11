@@ -100,12 +100,6 @@ const whoCanJoin = [
     title: "Healthcare Administrators",
     description: "Healthcare system leaders and administrators managing amyloidosis programs",
     requirements: "Must hold leadership role in healthcare organization"
-  },
-  {
-    icon: Users,
-    title: "Patient Advocates",
-    description: "Patient representatives and advocacy group leaders",
-    requirements: "Must represent patient community or advocacy organization"
   }
 ];
 

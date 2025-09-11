@@ -335,6 +335,26 @@ export default function CANNResources() {
               </motion.div>
             ))}
           </div>
+          
+          <motion.div
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-lg text-gray-600 dark:text-white/70 mb-6">
+              Members Only Event
+            </p>
+            <Button 
+              onClick={() => window.location.href = '/join-nursing-network'}
+              size="lg" 
+              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8"
+            >
+              <Users className="w-4 h-4 mr-2" />
+              Join CANN
+            </Button>
+          </motion.div>
         </div>
       </section>
 

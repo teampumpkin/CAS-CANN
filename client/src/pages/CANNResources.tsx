@@ -371,7 +371,7 @@ export default function CANNResources() {
 
           <div className="flex justify-center">
             <motion.div
-              className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/30 shadow-2xl max-w-sm mx-auto"
+              className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/90 dark:to-gray-900/90 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-gray-700/30 shadow-2xl max-w-sm mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}

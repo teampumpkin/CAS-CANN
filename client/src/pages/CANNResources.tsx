@@ -81,15 +81,15 @@ export default function CANNResources() {
       type: "Webinar"
     },
     {
-      title: "AL Amyloidosis Workshop",
-      date: "February 8, 2025",
-      time: "2:00 PM - 4:00 PM",
+      title: "CANN Townhall – Ideation Workshop",
+      date: "Date TBD",
+      time: "5:00 PM - 6:00 PM (MST)",
       location: "Virtual",
-      format: "Online",
-      description: "Interactive workshop on AL amyloidosis diagnosis and management strategies.",
-      registrationDeadline: "February 5, 2025",
-      cmeCredits: "2 hours",
-      type: "Workshop"
+      format: "Virtual Workshop",
+      description: "We want to hear from you! This live session will be professionally facilitated, designed to understand the needs of new/current CANN members and shape future direction.",
+      registrationDeadline: "Registration coming soon!",
+      cmeCredits: "1.5 - 2 hours",
+      type: "Virtual Workshop"
     },
     {
       title: "Nursing Excellence Series",

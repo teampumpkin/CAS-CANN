@@ -95,7 +95,7 @@ export default function Footer() {
               >
                 <h3 className="text-white font-semibold mb-4 text-sm">Quick Links</h3>
                 <ul className="space-y-2">
-                  {sitemapLinks.slice(0, 6).map((link, index) => (
+                  {sitemapLinks.map((link, index) => (
                     <li key={index}>
                       <a
                         href={link.href}

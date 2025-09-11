@@ -381,7 +381,7 @@ export default function JoinCAS() {
                 Register for <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">CAS</span>
               </h2>
               <p className="text-gray-600 dark:text-white/70 max-w-2xl mx-auto mb-8">
-                Join Canada's leading professional network for amyloidosis care. Please provide accurate information to help us process your application efficiently.
+                Join Canada's leading professional network for amyloidosis care by submitting the registration form below.
               </p>
             </motion.div>
 

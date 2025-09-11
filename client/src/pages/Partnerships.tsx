@@ -148,12 +148,6 @@ export default function Partnerships() {
       url: "https://amyloidosis.org"
     },
     {
-      name: "European Amyloidosis Network", 
-      shortName: "EAN",
-      description: "European clinical collaboration platform",
-      url: "https://europeanamyloidosis.org"
-    },
-    {
       name: "Canadian Amyloidosis Research Network",
       shortName: "CARN",
       description: "National research collaboration initiative",

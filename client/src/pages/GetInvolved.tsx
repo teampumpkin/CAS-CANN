@@ -757,7 +757,7 @@ export default function GetInvolved() {
                   </div>
                   
                   <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
-                    Join us for the 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). Registration will be available through the TAC website soon.
+                    Join us for the 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). Registration is open through the TAC website.
                   </p>
                   
                   <div className="space-y-4">

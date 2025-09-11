@@ -343,21 +343,15 @@ export default function CANNResources() {
                           </div>
                         </div>
                       </div>
-                      <div className="flex flex-col justify-between">
-                        <div className="mb-4">
+                      <div className="flex flex-col justify-center">
+                        <div>
                           <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                            Registration Deadline:
+                            Registration:
                           </div>
                           <div className="font-semibold text-pink-600">
                             {event.registrationDeadline}
                           </div>
                         </div>
-                        <Button 
-                          className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl"
-                        >
-                          Register Now
-                          <ExternalLink className="w-4 h-4 ml-2" />
-                        </Button>
                       </div>
                     </div>
                   </CardContent>

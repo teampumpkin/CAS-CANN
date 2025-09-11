@@ -420,7 +420,7 @@ export default function CANNResources() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
                   <CardContent className="p-8">
                     <div className="grid lg:grid-cols-3 gap-6">
                       <div className="lg:col-span-2">

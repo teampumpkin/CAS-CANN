@@ -371,16 +371,57 @@ export default function CANNResources() {
 
           <div className="flex justify-center">
             <motion.div
+              className="bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/30 shadow-2xl max-w-sm mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Badge 
-                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white text-lg px-8 py-4 rounded-2xl border-0 font-semibold"
-              >
-                Coming Soon
-              </Badge>
+              <div className="flex flex-col items-center gap-4">
+                {/* Spinning Icon */}
+                <motion.div 
+                  className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full shadow-lg"
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ 
+                    rotate: { duration: 4, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                >
+                  <BookOpen className="w-8 h-8 text-white" />
+                </motion.div>
+
+                {/* Coming Soon Text */}
+                <motion.h3 
+                  className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent"
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  Coming Soon
+                </motion.h3>
+
+                {/* Animated Dots */}
+                <div className="flex items-center gap-2">
+                  {[0, 0.3, 0.6].map((delay, index) => (
+                    <motion.div
+                      key={index}
+                      className="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full"
+                      animate={{
+                        scale: [0.8, 1.2, 0.8],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        delay: delay,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>

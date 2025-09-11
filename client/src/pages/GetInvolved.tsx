@@ -659,7 +659,7 @@ export default function GetInvolved() {
                 viewport={{ once: true }}
               >
                 <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00AFE6]">Registration Opening Soon</span>
+                <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00AFE6]">Registration is open</span>
               </motion.div>
             </div>
             

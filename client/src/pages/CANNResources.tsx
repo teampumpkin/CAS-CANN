@@ -99,7 +99,7 @@ export default function CANNResources() {
       format: "In-person & Virtual",
       description: "Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.",
       registrationDeadline: "Registration TBD",
-      cmeCredits: "TBD",
+      cmeCredits: "3 days",
       type: "Conference"
     }
   ];

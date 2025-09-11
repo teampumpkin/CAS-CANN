@@ -25,7 +25,7 @@ export default function Partnerships() {
         {
           name: "International Society of Amyloidosis",
           description: "Worldwide scientific organization for amyloidosis research",
-          website: "https://isa-amyloidosis.org",
+          website: "https://www.isaamyloidosis.org/",
           country: "International"
         },
         {

@@ -765,7 +765,7 @@ export default function GetInvolved() {
                       onClick={() => window.open('https://madhattr.ca/events/', '_blank')}
                       className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group px-8 py-4 text-lg font-semibold rounded-2xl"
                     >
-                      Visit TAC Website
+                      Register Now
                       <ExternalLink className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
                     </Button>
                     

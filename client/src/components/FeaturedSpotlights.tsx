@@ -141,20 +141,20 @@ export default function FeaturedSpotlights() {
                           })()}
                         </div>
                         <div>
-                          <span className="text-white/70 text-sm font-medium uppercase tracking-wide">
+                          <span className="text-gray-900 dark:text-white/70 text-sm font-medium uppercase tracking-wide">
                             {spotlights[currentIndex].category}
                           </span>
                           <div className="flex items-center gap-2 mt-1">
-                            <div className="w-1 h-1 bg-white/40 rounded-full"></div>
-                            <span className="text-white/60 text-sm">{spotlights[currentIndex].readTime}</span>
-                            <div className="w-1 h-1 bg-white/40 rounded-full"></div>
-                            <span className="text-white/60 text-sm">{spotlights[currentIndex].date}</span>
+                            <div className="w-1 h-1 bg-gray-600 dark:bg-white/40 rounded-full"></div>
+                            <span className="text-gray-700 dark:text-white/60 text-sm">{spotlights[currentIndex].readTime}</span>
+                            <div className="w-1 h-1 bg-gray-600 dark:bg-white/40 rounded-full"></div>
+                            <span className="text-gray-700 dark:text-white/60 text-sm">{spotlights[currentIndex].date}</span>
                           </div>
                         </div>
                       </motion.div>
 
                       <motion.h3
-                        className="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight font-cardo"
+                        className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6 leading-tight font-cardo"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
@@ -163,7 +163,7 @@ export default function FeaturedSpotlights() {
                       </motion.h3>
 
                       <motion.p
-                        className="text-xl text-white/80 leading-relaxed mb-6"
+                        className="text-xl text-gray-800 dark:text-white/80 leading-relaxed mb-6"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
@@ -181,7 +181,7 @@ export default function FeaturedSpotlights() {
                         {spotlights[currentIndex].tags.map((tag, index) => (
                           <span
                             key={index}
-                            className="bg-white/10 backdrop-blur-sm text-white/90 px-3 py-1 rounded-full text-sm font-medium border border-white/20"
+                            className="bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm text-gray-900 dark:text-white/90 px-3 py-1 rounded-full text-sm font-medium border border-gray-900/20 dark:border-white/20"
                           >
                             {tag}
                           </span>
@@ -189,7 +189,7 @@ export default function FeaturedSpotlights() {
                       </motion.div>
 
                       <motion.button
-                        className="group inline-flex items-center gap-3 bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-semibold border border-white/20 hover:bg-white/30 transition-all duration-300"
+                        className="group inline-flex items-center gap-3 bg-gradient-to-r from-gray-900/20 to-gray-900/10 dark:from-white/20 dark:to-white/10 backdrop-blur-sm text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-semibold border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/30 dark:hover:bg-white/30 transition-all duration-300"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
@@ -234,13 +234,13 @@ export default function FeaturedSpotlights() {
             <div className="flex items-center gap-4">
               <button
                 onClick={prevSlide}
-                className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+                className="w-12 h-12 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm border border-gray-900/20 dark:border-white/20 rounded-xl flex items-center justify-center text-gray-900 dark:text-white hover:bg-gray-900/20 dark:hover:bg-white/20 transition-all duration-300"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+                className="w-12 h-12 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm border border-gray-900/20 dark:border-white/20 rounded-xl flex items-center justify-center text-gray-900 dark:text-white hover:bg-gray-900/20 dark:hover:bg-white/20 transition-all duration-300"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -249,7 +249,7 @@ export default function FeaturedSpotlights() {
 
 
             {/* Counter */}
-            <div className="text-white/60 text-sm font-medium">
+            <div className="text-gray-700 dark:text-white/60 text-sm font-medium">
               {String(currentIndex + 1).padStart(2, '0')} / {String(spotlights.length).padStart(2, '0')}
             </div>
           </div>

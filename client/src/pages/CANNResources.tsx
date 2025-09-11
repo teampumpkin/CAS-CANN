@@ -70,15 +70,15 @@ export default function CANNResources() {
 
   const upcomingEvents = [
     {
-      title: "CANN Annual Conference 2025",
-      date: "March 15-16, 2025",
-      time: "9:00 AM - 5:00 PM",
-      location: "Toronto Convention Centre",
-      format: "Hybrid",
-      description: "Annual gathering featuring latest research, clinical updates, and networking opportunities.",
-      registrationDeadline: "February 28, 2025",
-      cmeCredits: "12 hours",
-      type: "Conference"
+      title: "CANN Educational Series",
+      date: "October 7, 2025",
+      time: "2:00 – 3:00 PM (MST)",
+      location: "Virtual – login to CANN member portal for access details",
+      format: "Webinar",
+      description: "Occurring 3-4 times per year, topics and speakers are tailored toward the needs of CANN members.",
+      registrationDeadline: "Registration not required",
+      cmeCredits: "1 hour",
+      type: "Webinar"
     },
     {
       title: "AL Amyloidosis Workshop",

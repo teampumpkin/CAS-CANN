@@ -388,26 +388,30 @@ export default function CANNResources() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border border-pink-500/20 max-w-md mx-auto">
-              <div className="flex items-center justify-center mb-4">
-                <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-3">
-                  <Users className="w-6 h-6 text-pink-600" />
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 shadow-lg border border-pink-500/20 max-w-3xl mx-auto">
+              <div className="flex items-center justify-between gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-2 flex-shrink-0">
+                    <Users className="w-5 h-5 text-pink-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                      Members Only Events
+                    </h3>
+                    <p className="text-gray-600 dark:text-white/70 text-sm">
+                      Join CANN to access exclusive professional development opportunities
+                    </p>
+                  </div>
                 </div>
+                <Button 
+                  onClick={() => window.location.href = '/join-nursing-network'}
+                  size="lg" 
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 flex-shrink-0"
+                >
+                  <Users className="w-4 h-4 mr-2" />
+                  Join CANN
+                </Button>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                Members Only Events
-              </h3>
-              <p className="text-gray-600 dark:text-white/70 mb-6 text-sm">
-                Join CANN to access exclusive professional development opportunities
-              </p>
-              <Button 
-                onClick={() => window.location.href = '/join-nursing-network'}
-                size="lg" 
-                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 w-full"
-              >
-                <Users className="w-4 h-4 mr-2" />
-                Join CANN
-              </Button>
             </div>
           </motion.div>
 

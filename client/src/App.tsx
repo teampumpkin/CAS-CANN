@@ -63,7 +63,7 @@ function Router() {
         <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
         <Route path="/governance" component={Governance} />
         <Route path="/directory" component={Directory} />
-        <Route path="/resource-library" component={Resources} />
+        {/* <Route path="/resource-library" component={Resources} /> */}
         <Route path="/partnerships" component={Partnerships} />
         <Route path="/news" component={News} />
 

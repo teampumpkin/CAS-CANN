@@ -148,7 +148,7 @@ export default function AboutAmyloidosis() {
       color: "from-[#00AFE6] to-[#00DD89]",
       borderColor: "border-[#00AFE6]/30",
       prevalence:
-        "ATTR amyloidosis includes hereditary (hATTR) with 120+ mutations and wild-type (ATTRwt) affecting older men.",
+        "ATTR amyloidosis includes hATTR (120+ mutations) and ATTRwt, which affects men over 70.",
       urgency:
         "ATTR amyloidosis is caused by abnormal transthyretin buildup, damaging organs over time.",
       symptoms: [

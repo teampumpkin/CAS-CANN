@@ -20,10 +20,14 @@ import {
   UserPlus,
   Star,
   Heart,
-  Shield
+  Shield,
+  Info,
+  Clock,
+  CheckCircle2
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
 import medicalTeamImg from '@assets/DSC02841_1750068895454.jpg';
@@ -301,22 +305,72 @@ export default function JoinCANN() {
                 Become part of Canada's dedicated amyloidosis nursing network. Membership is free and open to all nursing professionals engaged in the field of amyloidosis.
               </p>
               
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 mb-8">
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Membership Requirements</h3>
-                <div className="space-y-4">
-                  {membershipRequirements.map((requirement, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-pink-600" />
-                      <span className="text-gray-700 dark:text-gray-300">{requirement}</span>
+              <Alert className="bg-pink-600/10 border-pink-600/30 mb-8">
+                <Info className="w-4 h-4 text-pink-600" />
+                <AlertDescription className="text-gray-900 dark:text-white/90">
+                  <strong>Terms of Participation:</strong> By applying, you agree to abide by our nursing professional standards. Membership is free and all personal information is handled confidentially according to our privacy policy.
+                </AlertDescription>
+              </Alert>
+
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                {/* Form Header */}
+                <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-6 text-center">
+                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <UserPlus className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    CANN Registration Form
+                  </h3>
+                  <p className="text-white/90 text-sm">
+                    Join the Canadian Amyloidosis Nursing Network
+                  </p>
+                </div>
+
+                {/* Embedded Form */}
+                <div className="bg-white dark:bg-gray-800">
+                  <iframe
+                    src="https://forms.office.com/Pages/ResponsePage.aspx?id=YOUR_CANN_FORM_ID&embed=true"
+                    width="100%"
+                    height="800"
+                    frameBorder="0"
+                    marginHeight={0}
+                    marginWidth={0}
+                    className="w-full"
+                    title="CANN Registration Form"
+                  >
+                    Loading...
+                  </iframe>
+                </div>
+
+                {/* Form Footer */}
+                <div className="p-6 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center gap-2">
+                      <Shield className="w-4 h-4 text-pink-600" />
+                      <span>Secure Form</span>
                     </div>
-                  ))}
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-pink-600" />
+                      <span>3-5 Minutes</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-pink-600" />
+                      <span>Instant Access</span>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Having trouble with the form? <button 
+                        onClick={() => window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=YOUR_CANN_FORM_ID', '_blank')}
+                        className="text-pink-600 hover:underline"
+                      >
+                        Open in new window
+                      </button>
+                    </p>
+                  </div>
                 </div>
               </div>
-              
-              <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300">
-                <UserPlus className="w-5 h-5 mr-2" />
-                Register for CANN membership
-              </Button>
             </motion.div>
           </div>
         </div>

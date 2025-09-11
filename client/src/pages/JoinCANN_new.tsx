@@ -123,9 +123,9 @@ export default function JoinCANN() {
   ];
 
   const portalFeatures = [
-    'Access educational materials',
-    'Connect with network members',
-    'View upcoming events'
+    'Access live and recorded educational sessions and other materials',
+    'Connect with network members, share tools and resources',
+    'View upcoming events, obtain schedules and access details for virtual CANN meetings and educational sessions'
   ];
 
   return (

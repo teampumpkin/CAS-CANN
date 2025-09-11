@@ -121,7 +121,7 @@ const upcomingEvents = [
     time: "2:00 – 3:00 PM MST",
     location: "Virtual Event", 
     type: "Educational Series",
-    description: "Organized by the Canadian Amyloidosis Nursing Network (CANN) in collaboration with the Prairie Amyloidosis Nursing Network (PANN). This educational series provides ongoing professional development opportunities for nurses and healthcare professionals engaged in amyloidosis care. Topic, speaker, and exact date to be announced in coordination with the PANN/CANN Executive Committee.",
+    description: "Organized by the Canadian Amyloidosis Nursing Network (CANN), these events occur regularly 3-4 times per year.This educational series provides ongoing professional development opportunities for nurses and healthcare professionals engaged in amyloidosis care. Topic, speaker, and exact date are coordinated by the CANN Executive Committee. Visit the CANN Events page for more details.",
     image: "/api/placeholder/400/250",
     registrationUrl: "#"
   },

@@ -268,7 +268,7 @@ export default function CANNResources() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl">
+                <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl flex flex-col">
                   <CardHeader>
                     <div className="flex items-center justify-between mb-3">
                       <Badge 
@@ -283,7 +283,7 @@ export default function CANNResources() {
                       {program.title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex-1 flex flex-col">
                     <p className="text-gray-600 dark:text-white/70 mb-4 leading-relaxed">
                       {program.description}
                     </p>
@@ -301,7 +301,7 @@ export default function CANNResources() {
                         <span className="font-medium text-pink-600">{program.nextStart}</span>
                       </div>
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-6 flex-1">
                       <div className="text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Modules:</div>
                       <div className="flex flex-wrap gap-1">
                         {program.modules.map((module, idx) => (
@@ -312,7 +312,7 @@ export default function CANNResources() {
                       </div>
                     </div>
                     <Button 
-                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl"
+                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl mt-auto"
                     >
                       Learn More
                     </Button>

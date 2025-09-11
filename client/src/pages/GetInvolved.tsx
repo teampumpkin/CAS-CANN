@@ -849,7 +849,7 @@ export default function GetInvolved() {
             </div>
 
             <TabsContent value="overview" className="mt-0">
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 max-w-none">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {upcomingEvents.map((event, index) => (
                   <motion.div
                     key={event.id}
@@ -857,56 +857,59 @@ export default function GetInvolved() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="flex"
+                    className="h-full"
                   >
-                    <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 group w-full flex flex-col rounded-3xl overflow-hidden min-h-[520px]">
+                    <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden">
                       
-                      {/* Enhanced Header with Better Visual Hierarchy */}
-                      <div className="relative p-10 pb-8 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
-                        <div className="absolute top-6 right-6">
-                          <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-4 py-2 text-xs font-medium rounded-full shadow-lg">
+                      {/* Header */}
+                      <div className="relative p-6 pb-3 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
+                        <div className="absolute top-4 right-4">
+                          <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
                             {event.type}
                           </Badge>
                         </div>
                         
-                        <div className="w-18 h-18 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
-                          <Calendar className="w-9 h-9 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                        <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                          <Calendar className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
                         </div>
                         
-                        <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 leading-tight group-hover:text-[#00AFE6] transition-colors duration-300 pr-8">
+                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug pr-6">
                           {event.title}
                         </h3>
                       </div>
 
-                      <CardContent className="p-10 pt-0 flex flex-col flex-1">
-                        {/* Event Details with Better Spacing */}
-                        <div className="space-y-5 mb-8">
-                          <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-xl border border-[#00AFE6]/10">
-                            <Calendar className="w-5 h-5 text-[#00AFE6] flex-shrink-0" />
-                            <span className="text-sm font-medium text-gray-700 dark:text-white/80">{formatEventDate(event.date)}</span>
+                      {/* Content */}
+                      <CardContent className="p-6 pt-0 flex flex-col flex-1">
+                        <div className="space-y-2 mb-4">
+                          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                            <Calendar className="w-4 h-4" />
+                            <span>{formatEventDate(event.date)}</span>
                           </div>
-                          <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-[#00DD89]/5 to-[#00AFE6]/5 rounded-xl border border-[#00DD89]/10">
-                            <Clock className="w-5 h-5 text-[#00DD89] flex-shrink-0" />
-                            <span className="text-sm font-medium text-gray-700 dark:text-white/80">{event.time}</span>
+                          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                            <Clock className="w-4 h-4" />
+                            <span>{event.time}</span>
                           </div>
-                          <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-xl border border-[#00AFE6]/10">
-                            <MapPin className="w-5 h-5 text-[#00AFE6] flex-shrink-0" />
-                            <span className="text-sm font-medium text-gray-700 dark:text-white/80">{event.location}</span>
+                          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                            <MapPin className="w-4 h-4" />
+                            <span>{event.location}</span>
                           </div>
                         </div>
                         
-                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed mb-10 flex-1 line-clamp-4">
+                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 line-clamp-3">
                           {event.description}
                         </p>
-                        
+                      </CardContent>
+
+                      {/* Footer */}
+                      <div className="p-6 pt-4 mt-auto border-t border-gray-200/50 dark:border-white/10">
                         <Button 
                           onClick={() => window.open(event.registrationUrl, '_blank')}
-                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-4 rounded-2xl font-semibold text-sm mt-auto"
+                          className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm"
                         >
                           Register Now
                           <ExternalLink className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
                         </Button>
-                      </CardContent>
+                      </div>
                     </Card>
                   </motion.div>
                 ))}

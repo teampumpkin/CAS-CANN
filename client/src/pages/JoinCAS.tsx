@@ -365,63 +365,6 @@ export default function JoinCAS() {
         </div>
       </section>
 
-      {/* What Happens Next Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold font-rosarivo text-gray-900 dark:text-white mb-4">
-              What Happens <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Next?</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
-              Our comprehensive review process ensures that all members meet professional standards while providing a streamlined approval experience.
-            </p>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto">
-            <Alert className="bg-[#00AFE6]/10 border-[#00AFE6]/30 mb-8">
-              <Clock className="w-4 h-4 text-[#00AFE6]" />
-              <AlertDescription className="text-gray-900 dark:text-white/90">
-                <strong>Total Review Time: 2-3 weeks</strong> - We aim to process applications as quickly as possible while maintaining high standards.
-              </AlertDescription>
-            </Alert>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {approvalProcess.map((process, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="bg-white dark:bg-white/10 border-gray-200 dark:border-white/20 hover:shadow-lg transition-all duration-300">
-                    <CardHeader>
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white font-bold">
-                          {process.step}
-                        </div>
-                        <CardTitle className="text-gray-900 dark:text-white">{process.title}</CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-600 dark:text-white/70 mb-3">{process.description}</p>
-                      <Badge variant="secondary" className="bg-[#00AFE6]/10 text-[#00AFE6] border-[#00AFE6]/30">
-                        {process.timeline}
-                      </Badge>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Registration Form Section */}
       <section id="join-form" className="py-16 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10">

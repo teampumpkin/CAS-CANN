@@ -283,7 +283,7 @@ export default function Partnerships() {
                   <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Content */}
-                  <div className="relative z-10 text-center">
+                  <div className="relative z-10 text-center h-full flex flex-col">
                     <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg group-hover:from-[#00AFE6]/30 group-hover:to-[#00DD89]/30">
                       <span className="text-2xl font-bold text-[#00AFE6] group-hover:text-white transition-colors duration-300">{partner.shortName}</span>
                     </div>
@@ -291,7 +291,7 @@ export default function Partnerships() {
                     <h4 className="text-gray-800 dark:text-white font-bold text-lg group-hover:text-[#00AFE6] transition-colors duration-300 leading-tight mb-3">
                       {partner.name}
                     </h4>
-                    <p className="text-gray-600 dark:text-white/80 text-sm leading-relaxed group-hover:text-gray-800 dark:group-hover:text-white transition-colors duration-300">
+                    <p className="text-gray-600 dark:text-white/80 text-sm leading-relaxed group-hover:text-gray-800 dark:group-hover:text-white transition-colors duration-300 flex-1">
                       {partner.description}
                     </p>
 

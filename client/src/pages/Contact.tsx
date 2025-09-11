@@ -128,7 +128,7 @@ export default function Contact() {
             </div>
             
             <div className="space-y-4 max-w-4xl mx-auto">
-              {faqData.map((faq, index) => (
+              {faqData.slice(2).map((faq, index) => (
                 <motion.div
                   key={index}
                   className="bg-white/50 dark:bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-600/30 overflow-hidden"

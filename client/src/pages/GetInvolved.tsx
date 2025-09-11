@@ -893,9 +893,20 @@ export default function GetInvolved() {
                         </div>
                         
                         {/* Description */}
-                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 line-clamp-3">
+                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-6 line-clamp-3">
                           {event.description}
                         </p>
+                        
+                        {/* Button - Show for all cards except the first one */}
+                        {index !== 0 && (
+                          <Button 
+                            onClick={() => window.open(event.registrationUrl, '_blank')}
+                            className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm"
+                          >
+                            Register Now
+                            <ExternalLink className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                          </Button>
+                        )}
                       </div>
                     </Card>
                   </motion.div>

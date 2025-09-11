@@ -423,7 +423,7 @@ export default function JoinCAS() {
                     CAS Registration Form
                   </h3>
                   <p className="text-white/90 text-sm max-w-md mx-auto">
-                    Complete your professional application below. All fields are secure and confidential.
+                    Complete the registration form below. All fields are secure and confidential.
                   </p>
                   
                   {/* Progress indicators */}

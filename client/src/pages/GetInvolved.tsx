@@ -800,9 +800,8 @@ export default function GetInvolved() {
               <span className="text-gray-800 dark:text-white/90 font-medium">Events</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-              <span className="text-gray-800 dark:text-white">Events & </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Community
+                Events
               </span>
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">

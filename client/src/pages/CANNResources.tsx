@@ -217,7 +217,7 @@ export default function CANNResources() {
           >
             <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Training Programs
+                CANN Educational Series
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">

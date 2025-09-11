@@ -77,10 +77,10 @@ function Router() {
         <Route path="/amyloidosis-types/aa-inflammatory-amyloidosis" component={AAAmyloidosis} />
         <Route path="/amyloidosis-types/alect2-amyloidosis" component={ALect2Amyloidosis} />
         <Route path="/amyloidosis-types/other-amyloidosis-types" component={OtherAmyloidosis} />
-        <Route path="/nursing-network" component={CANN} />
-        <Route path="/nursing-network/resources" component={CANNResources} />
+        <Route path="/cann" component={CANN} />
+        <Route path="/cann/resources" component={CANNResources} />
         <Route path="/cann-resources" component={CANNResources} />
-        <Route path="/join-nursing-network" component={JoinCANN} />
+        <Route path="/join-cann" component={JoinCANN} />
         <Route path="/journal-club" component={JournalClub} />
         <Route path="/accessibility" component={AccessibilityStatement} />
         <Route path="/contributor-portal" component={ContributorPortal} />

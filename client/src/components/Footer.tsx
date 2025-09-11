@@ -12,7 +12,7 @@ export default function Footer() {
     { name: "Resources", href: "/resources", icon: BookOpen, status: "available" },
     { name: "Get Involved", href: "/get-involved", icon: Heart, status: "available" },
     { name: "Events", href: "/events", icon: Calendar, status: "available" },
-    { name: "CANN", href: "/nursing-network", icon: Users, status: "available" },
+    { name: "CANN", href: "/cann", icon: Users, status: "available" },
     { name: "Contact Us", href: "/contact", icon: Mail, status: "available" }
   ];
 

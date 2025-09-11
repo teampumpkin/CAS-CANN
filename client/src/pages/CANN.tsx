@@ -417,7 +417,7 @@ export default function CANN() {
             </p>
             
             <div className="flex justify-center">
-              <Link href="/join-nursing-network" className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <Link href="/join-cann" className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
                 Join CANN
                 <Network className="w-5 h-5" />
               </Link>

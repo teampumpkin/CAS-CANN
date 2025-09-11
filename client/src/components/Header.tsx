@@ -73,13 +73,13 @@ export default function Header() {
     { name: 'Get Involved', href: '/get-involved' },
     {
       name: 'CANN',
-      href: '#nursing-network',
+      href: '#cann',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'About CANN', href: '/nursing-network' },
-        { name: 'Join CANN', href: '/join-nursing-network#join-section' },
-        { name: 'CANN Membership Login', href: '/join-nursing-network#login' },
-        { name: 'Resources/Events', href: '/cann-resources' },
+        { name: 'About CANN', href: '/cann' },
+        { name: 'Join CANN', href: '/join-cann#join-section' },
+        { name: 'CANN Membership Login', href: '/join-cann#login' },
+        { name: 'Resources/Events', href: '/cann/resources' },
       ]
     },
     { name: 'Contact Us', href: '/contact' },

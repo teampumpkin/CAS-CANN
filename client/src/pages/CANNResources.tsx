@@ -522,8 +522,13 @@ export default function CANNResources() {
 
 
       {/* Contact Section */}
-      <section className="py-24 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-6">
+      <section className="py-24 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl translate-x-48 translate-y-48" />
+        
+        <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -531,60 +536,83 @@ export default function CANNResources() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Need More Information?
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8">
-              Contact the CANN team for additional resources, collaboration opportunities, or specific questions about our programs.
-            </p>
-            <div className="flex flex-col gap-6 items-center">
-              {/* Contact CANN Section */}
-              <div className="flex flex-col items-center gap-4">
-                {/* Contact CANN Button */}
-                <motion.a
-                  href="mailto:CANN@amyloid.ca"
-                  className="group inline-flex items-center gap-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  data-testid="button-contact-cann"
-                >
-                  <Mail className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
-                  <span className="text-xl">Contact CANN</span>
-                </motion.a>
+            <div className="bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-900/80 dark:to-gray-800/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-200/50 dark:border-gray-400/30 shadow-2xl">
+              {/* Header Badge */}
+              <motion.div
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-500/10 to-purple-600/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 dark:border-pink-500/30 mb-8"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <Mail className="w-5 h-5 text-pink-500" />
+                <span className="text-sm font-medium text-gray-800 dark:text-white/90">Get in Touch</span>
+              </motion.div>
 
-                {/* Email with Copy Feature */}
-                <div className="flex items-center gap-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-xl px-4 py-3 border border-gray-200/50 dark:border-gray-600/30">
-                  <span className="text-gray-800 dark:text-white/90 font-medium" data-testid="text-cann-email">
-                    CANN@amyloid.ca
-                  </span>
-                  <motion.button
-                    onClick={copyEmail}
-                    className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    data-testid="button-copy-cann-email"
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+                <span className="text-gray-900 dark:text-white">Need More </span>
+                <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Information?</span>
+              </h2>
+              
+              <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-12">
+                Contact the CANN team for additional resources, collaboration opportunities, or specific questions about our programs.
+              </p>
+              
+              <div className="flex flex-col gap-8 items-center">
+                {/* Contact CANN Section */}
+                <div className="flex flex-col items-center gap-6">
+                  {/* Contact CANN Button */}
+                  <motion.a
+                    href="mailto:CANN@amyloid.ca"
+                    className="group inline-flex items-center gap-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    data-testid="button-contact-cann"
                   >
-                    {isCopied ? (
-                      <Check className="w-4 h-4 text-green-600" />
-                    ) : (
-                      <Copy className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                    )}
-                  </motion.button>
-                </div>
-              </div>
+                    <Mail className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-xl">Contact CANN</span>
+                  </motion.a>
 
-              {/* Join CANN Button */}
-              <Link href="/join-nursing-network">
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8"
-                >
-                  <Users className="w-4 h-4 mr-2" />
-                  Join CANN
-                </Button>
-              </Link>
+                  {/* Email with Copy Feature */}
+                  <div className="flex items-center gap-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-xl px-5 py-4 border border-gray-200/50 dark:border-gray-600/30 shadow-lg">
+                    <span className="text-gray-800 dark:text-white/90 font-medium text-lg" data-testid="text-cann-email">
+                      CANN@amyloid.ca
+                    </span>
+                    <motion.button
+                      onClick={copyEmail}
+                      className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-pink-500/10 to-purple-600/10 hover:from-pink-500/20 hover:to-purple-600/20 border border-pink-500/20 hover:border-pink-500/30 transition-all duration-200"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      data-testid="button-copy-cann-email"
+                    >
+                      {isCopied ? (
+                        <Check className="w-5 h-5 text-green-600" />
+                      ) : (
+                        <Copy className="w-5 h-5 text-pink-500" />
+                      )}
+                    </motion.button>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="w-24 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+
+                {/* Join CANN Button */}
+                <Link href="/join-nursing-network">
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button 
+                      size="lg" 
+                      className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-10 py-4 text-lg font-bold shadow-xl hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
+                    >
+                      <Users className="w-6 h-6 mr-3" />
+                      Join CANN Network
+                    </Button>
+                  </motion.div>
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>

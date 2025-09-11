@@ -302,7 +302,7 @@ export default function JoinCANN() {
                 Join CANN Today
               </h2>
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8 max-w-3xl mx-auto">
-                Become part of Canada's dedicated amyloidosis nursing network. Membership is free and open to all nursing professionals engaged in the field of amyloidosis.
+                Become part of Canada's first dedicated amyloidosis nursing network. Membership is free and open to all nursing professionals engaged in the field of amyloidosis.
               </p>
               
               <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 mb-8">

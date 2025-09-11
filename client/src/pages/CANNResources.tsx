@@ -76,6 +76,7 @@ export default function CANNResources() {
       location: "Virtual – login to CANN member portal for access details",
       format: "Webinar",
       description: "Occurring 3-4 times per year, topics and speakers are tailored toward the needs of CANN members.",
+      topic: "My Journey with Amyloidosis: A Patient's Perspective",
       registrationDeadline: "Registration not required",
       cmeCredits: "1 hour",
       type: "Webinar"
@@ -324,6 +325,12 @@ export default function CANNResources() {
                         <p className="text-gray-600 dark:text-white/70 mb-4 leading-relaxed">
                           {event.description}
                         </p>
+                        {index === 0 && event.topic && (
+                          <div className="mb-4 p-4 bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 border border-pink-200 dark:border-pink-800 rounded-xl">
+                            <div className="text-sm font-medium text-pink-600 dark:text-pink-400 mb-1">Session Topic:</div>
+                            <div className="text-gray-800 dark:text-white font-medium italic">"{event.topic}"</div>
+                          </div>
+                        )}
                         <div className="grid md:grid-cols-2 gap-4 text-sm">
                           <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4 text-pink-500" />

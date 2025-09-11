@@ -71,13 +71,6 @@ const participationWays = [
     description: "CAS membership is exclusively for healthcare professionals including clinicians, researchers, and health system leaders. Patients and family members are valued community participants and can contribute through other ways listed here.",
     action: "Register Now",
     color: "from-[#00AFE6] to-[#00DD89]"
-  },
-  {
-    icon: Gift,
-    title: "Support the Mission",
-    description: "We welcome support from aligned organizations, philanthropic partners, and volunteers. Donations support CAS initiatives.",
-    action: "Donate Now",
-    color: "from-[#00AFE6] to-[#00DD89]"
   }
 ];
 
@@ -348,15 +341,6 @@ export default function GetInvolved() {
                           </Button>
                         )}
 
-                        {way.title === "Support the Mission" && (
-                          <Button 
-                            onClick={() => window.open('https://www.ucalgary.ca/medicine/ways-give', '_blank')}
-                            className={`bg-gradient-to-r ${way.color} hover:opacity-90 text-white border-0`}
-                          >
-                            {way.action}
-                            <ExternalLink className="w-4 h-4 ml-2" />
-                          </Button>
-                        )}
                       </div>
                     </div>
                   </CardContent>

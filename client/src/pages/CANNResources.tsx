@@ -320,10 +320,6 @@ export default function CANNResources() {
                     >
                       Coming Soon
                     </motion.h3>
-                    
-                    <p className="text-gray-600 dark:text-white/70 text-sm max-w-xs">
-                      Exciting educational programs and certifications are being developed
-                    </p>
                   </div>
 
                   {/* Animated dots */}
@@ -344,23 +340,6 @@ export default function CANNResources() {
                         }}
                       />
                     ))}
-                  </div>
-
-                  {/* Progress bar */}
-                  <div className="w-full max-w-xs">
-                    <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
-                      <span>In Development</span>
-                      <span>75%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                      <motion.div 
-                        className="bg-gradient-to-r from-pink-500 to-purple-600 h-2 rounded-full"
-                        initial={{ width: "0%" }}
-                        whileInView={{ width: "75%" }}
-                        transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
-                        viewport={{ once: true }}
-                      />
-                    </div>
                   </div>
 
                 </div>

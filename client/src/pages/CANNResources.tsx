@@ -388,7 +388,7 @@ export default function CANNResources() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="bg-gray-800 dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-700/50 max-w-4xl mx-auto">
+            <div className="bg-slate-900 dark:bg-slate-900 rounded-2xl p-6 shadow-lg border border-slate-700/50 max-w-4xl mx-auto">
               <div className="flex items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
                   <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-3 flex-shrink-0">

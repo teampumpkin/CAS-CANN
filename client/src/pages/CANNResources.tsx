@@ -220,7 +220,7 @@ export default function CANNResources() {
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Evidence-based guidelines, protocols, and educational resources for healthcare professionals.
+              Educational resources for amyloidosis nurses, healthcare professionals and patients.
             </p>
           </motion.div>
 

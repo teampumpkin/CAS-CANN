@@ -68,7 +68,7 @@ export default function AboutAmyloidosis() {
       icon: Brain,
       color: 'from-[#00AFE6] to-[#00DD89]',
       borderColor: 'border-[#00AFE6]/30',
-      prevalence: 'hATTR: Over 120 TTR mutations known',
+      prevalence: 'ATTR amyloidosis includes hereditary (hATTR) with 120+ mutations and wild-type (ATTRwt) affecting older men.',
       urgency: 'ATTRwt: Non-inherited, develops with age, primarily affects men over 70',
       symptoms: ['Heart issues: shortness of breath, swelling, palpitations, fainting, fatigue', 'Nerve issues: numbness, walking difficulty', 'GI symptoms: nausea, weight loss'],
       diagnosis: ['Genetic testing for TTR mutations', 'Imaging (nuclear scan, MRI, echocardiogram)', 'Biopsies, imaging (MRI, scans)'],

@@ -671,7 +671,7 @@ export default function GetInvolved() {
             </h2>
             
             <p className="text-lg sm:text-xl text-gray-600 dark:text-white/70 max-w-4xl mx-auto leading-relaxed px-4">
-              Stay tuned for details and registration info!
+              Registration is open
             </p>
           </motion.div>
 

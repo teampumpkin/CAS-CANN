@@ -560,7 +560,7 @@ export default function GetInvolved() {
                 <div className="bg-gradient-to-r from-pink-500/10 to-purple-600/10 border border-pink-500/20 rounded-2xl p-6">
                   <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Join the Movement</h3>
                   <p className="text-gray-600 dark:text-white/80 mb-6">We invite you to join this exciting movement!</p>
-                  <a href="/join-nursing-network" className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 flex items-center gap-2 inline-flex">
+                  <a href="/nursing-network" className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 flex items-center gap-2 inline-flex">
                     Learn About CANN
                     <ArrowRight className="w-4 h-4" />
                   </a>

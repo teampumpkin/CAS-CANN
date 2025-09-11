@@ -273,67 +273,25 @@ export default function CANNResources() {
             </div>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {trainingPrograms.map((program, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
+          <div className="flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-3xl blur-xl"></div>
+              <Badge 
+                className="relative bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xl px-12 py-6 rounded-3xl border-0 font-bold shadow-2xl hover:shadow-pink-500/25 transition-all duration-300"
               >
-                <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl flex flex-col">
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-3">
-                      <Badge 
-                        variant="secondary"
-                        className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 text-pink-600 border-0"
-                      >
-                        {program.level}
-                      </Badge>
-                      <GraduationCap className="w-6 h-6 text-pink-500" />
-                    </div>
-                    <CardTitle className="text-xl">
-                      {program.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex-1 flex flex-col">
-                    <p className="text-gray-600 dark:text-white/70 mb-4 leading-relaxed">
-                      {program.description}
-                    </p>
-                    <div className="space-y-2 mb-4 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-gray-500 dark:text-gray-400">Duration:</span>
-                        <span className="font-medium">{program.duration}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-500 dark:text-gray-400">Format:</span>
-                        <span className="font-medium">{program.format}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-500 dark:text-gray-400">Next Start:</span>
-                        <span className="font-medium text-pink-600">{program.nextStart}</span>
-                      </div>
-                    </div>
-                    <div className="mb-6 flex-1">
-                      <div className="text-sm font-medium text-gray-700 dark:text-white/90 mb-2">Modules:</div>
-                      <div className="flex flex-wrap gap-1">
-                        {program.modules.map((module, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {module}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    <Button 
-                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl mt-auto"
-                    >
-                      Learn More
-                    </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 bg-white/80 rounded-full animate-pulse"></div>
+                  <span>Coming Soon</span>
+                  <div className="w-3 h-3 bg-white/80 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                </div>
+              </Badge>
+            </motion.div>
           </div>
         </div>
       </section>

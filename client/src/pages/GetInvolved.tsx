@@ -501,8 +501,8 @@ export default function GetInvolved() {
       </section>
 
       {/* CANN Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 via-emerald-50 to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-100/20 dark:via-gray-700/20 to-transparent" />
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-pink-50 to-rose-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-100/20 dark:via-gray-700/20 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="max-w-7xl mx-auto"
@@ -519,8 +519,8 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6 shadow-lg">
-                  <Network className="w-5 h-5 text-[#00AFE6]" />
+                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-500/10 to-purple-600/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 mb-6 shadow-lg">
+                  <Network className="w-5 h-5 text-pink-600" />
                   <span className="text-sm font-medium text-gray-800 dark:text-white/90">Professional Network</span>
                 </div>
                 
@@ -529,7 +529,7 @@ export default function GetInvolved() {
                     Canadian Amyloidosis
                   </span>
                   <br />
-                  <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                     Nursing Network
                   </span>
                 </h2>
@@ -540,27 +540,27 @@ export default function GetInvolved() {
                 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                    <div className="w-2 h-2 bg-pink-600 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-gray-600 dark:text-white/70">CANN is an affiliate of the Canadian Amyloidosis Society (CAS)</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                    <div className="w-2 h-2 bg-pink-600 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-gray-600 dark:text-white/70">Unite amyloidosis nurses across the country through professional development</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                    <div className="w-2 h-2 bg-pink-600 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-gray-600 dark:text-white/70">Knowledge translation and best practice sharing</p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
+                    <div className="w-2 h-2 bg-pink-600 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-gray-600 dark:text-white/70">Facilitate collaboration while supporting patients with amyloidosis</p>
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-2xl p-6">
+                <div className="bg-gradient-to-r from-pink-500/10 to-purple-600/10 border border-pink-500/20 rounded-2xl p-6">
                   <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Join the Movement</h3>
                   <p className="text-gray-600 dark:text-white/80 mb-6">We invite you to join this exciting movement!</p>
-                  <a href="/join-nursing-network" className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 flex items-center gap-2 inline-flex">
+                  <a href="/join-nursing-network" className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 flex items-center gap-2 inline-flex">
                     Learn About CANN
                     <ArrowRight className="w-4 h-4" />
                   </a>
@@ -575,7 +575,7 @@ export default function GetInvolved() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="relative bg-emerald-50/80 dark:bg-gray-700/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-[#00DD89]/20 dark:border-white/10 shadow-xl">
+                <div className="relative bg-pink-50/80 dark:bg-gray-700/50 backdrop-blur-xl rounded-3xl overflow-hidden border border-pink-500/20 dark:border-white/10 shadow-xl">
                   <div className="aspect-[4/5] relative">
                     <img 
                       src={healthcareProfessionalImg} 
@@ -609,7 +609,7 @@ export default function GetInvolved() {
                   
                   {/* Floating accent elements */}
                   <motion.div
-                    className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center"
+                    className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center"
                     animate={{ 
                       y: [0, -8, 0],
                       rotate: [0, 5, 0]

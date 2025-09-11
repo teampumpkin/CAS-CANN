@@ -860,26 +860,23 @@ export default function GetInvolved() {
                     className="h-full"
                   >
                     <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden">
-                      
-                      {/* Header */}
-                      <div className="relative p-6 pb-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
-                        <div className="absolute top-4 right-4">
+                      <div className="p-6 flex flex-col flex-1">
+                        {/* Badge */}
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center">
+                            <Calendar className="w-8 h-8 text-[#00AFE6]" />
+                          </div>
                           <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
                             {event.type}
                           </Badge>
                         </div>
                         
-                        <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
-                          <Calendar className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
-                        </div>
-                        
-                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug pr-6">
+                        {/* Title */}
+                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug mb-6">
                           {event.title}
                         </h3>
-                      </div>
-
-                      {/* Content */}
-                      <CardContent className="p-6 pt-0 flex flex-col flex-1">
+                        
+                        {/* Event Details */}
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
                             <Calendar className="w-4 h-4" />
@@ -895,13 +892,12 @@ export default function GetInvolved() {
                           </div>
                         </div>
                         
-                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 line-clamp-3">
+                        {/* Description */}
+                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-6 line-clamp-3">
                           {event.description}
                         </p>
-                      </CardContent>
-
-                      {/* Footer */}
-                      <div className="p-6 pt-4 mt-auto border-t border-gray-200/50 dark:border-white/10">
+                        
+                        {/* Button */}
                         <Button 
                           onClick={() => window.open(event.registrationUrl, '_blank')}
                           className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm"

@@ -304,7 +304,7 @@ export default function GetInvolved() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="flex justify-center max-w-4xl mx-auto">
             {participationWays.map((way, index) => (
               <motion.div
                 key={way.title}
@@ -312,6 +312,7 @@ export default function GetInvolved() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                className="w-full max-w-lg"
               >
                 <Card className={`backdrop-blur-xl border transition-all duration-300 h-full group hover:shadow-2xl ${
                   index === 0 

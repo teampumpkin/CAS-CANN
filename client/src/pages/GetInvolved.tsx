@@ -797,7 +797,7 @@ export default function GetInvolved() {
           >
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
               <Calendar className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-gray-800 dark:text-white/90 font-medium">Community</span>
+              <span className="text-gray-800 dark:text-white/90 font-medium">Events</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
               <span className="text-gray-800 dark:text-white">Events & </span>

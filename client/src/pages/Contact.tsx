@@ -20,7 +20,7 @@ export default function Contact() {
     },
     {
       question: "How do I join CAS as a healthcare professional? Is there a fee to join?",
-      answer: "Simply visit our Join CAS page and complete the registration form. Membership is completely free for all healthcare professionals."
+      answer: "Simply visit our <a href='/join-cas' class='text-[#00AFE6] hover:text-[#00DD89] underline transition-colors duration-200'>Join CAS page</a> and complete the registration form. Membership is completely free for all healthcare professionals."
     },
     {
       question: "Do you provide direct patient care?",
@@ -170,9 +170,10 @@ export default function Contact() {
                       <div className="pt-6">
                         <div className="flex gap-4">
                           <div className="w-8 flex-shrink-0"></div>
-                          <p className="text-gray-600 dark:text-white/70 leading-relaxed text-base text-left">
-                            {faq.answer}
-                          </p>
+                          <p 
+                            className="text-gray-600 dark:text-white/70 leading-relaxed text-base text-left"
+                            dangerouslySetInnerHTML={{ __html: faq.answer }}
+                          />
                         </div>
                       </div>
                     </div>

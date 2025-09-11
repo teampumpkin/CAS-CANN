@@ -20,7 +20,7 @@ export default function Contact() {
     },
     {
       question: "How do I join CAS as a healthcare professional? Is there a fee to join?",
-      answer: "Visit Join CAS page and fill the form to join CAS, and there is no fee."
+      answer: "Simply visit our Join CAS page and complete the registration form. Membership is completely free for all healthcare professionals."
     },
     {
       question: "Do you provide direct patient care?",

@@ -1,12 +1,23 @@
 import { motion } from 'framer-motion';
-import { Mail, ChevronDown, Plus, Minus } from 'lucide-react';
+import { Mail, ChevronDown, Plus, Minus, Copy, Check } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [isCopied, setIsCopied] = useState(false);
 
   const toggleFAQ = (index: number) => {
     setOpenFAQ(openFAQ === index ? null : index);
+  };
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText('cas@amyloid.ca');
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
   };
 
   const faqData = [
@@ -98,15 +109,39 @@ export default function Contact() {
                 </p>
               </div>
 
-              <motion.a
-                href="mailto:cas@amyloid.ca"
-                className="group inline-flex items-center gap-4 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Mail className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
-                <span className="text-xl">cas@amyloid.ca</span>
-              </motion.a>
+              <div className="flex flex-col items-center gap-4">
+                {/* Contact Us Button */}
+                <motion.a
+                  href="mailto:cas@amyloid.ca"
+                  className="group inline-flex items-center gap-4 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  data-testid="button-contact-us"
+                >
+                  <Mail className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-xl">Contact Us</span>
+                </motion.a>
+
+                {/* Email with Copy Feature */}
+                <div className="flex items-center gap-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-xl px-4 py-3 border border-gray-200/50 dark:border-gray-600/30">
+                  <span className="text-gray-800 dark:text-white/90 font-medium" data-testid="text-email">
+                    cas@amyloid.ca
+                  </span>
+                  <motion.button
+                    onClick={copyEmail}
+                    className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    data-testid="button-copy-email"
+                  >
+                    {isCopied ? (
+                      <Check className="w-4 h-4 text-green-600" />
+                    ) : (
+                      <Copy className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    )}
+                  </motion.button>
+                </div>
+              </div>
             </div>
           </motion.div>
 

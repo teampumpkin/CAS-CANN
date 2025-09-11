@@ -14,9 +14,11 @@ import {
   Mail,
   Clock,
   MapPin,
-  Video
+  Video,
+  Copy,
+  Check
 } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import ParallaxBackground from '../components/ParallaxBackground';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -25,9 +27,21 @@ import { Badge } from '@/components/ui/badge';
 import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
 
 export default function CANNResources() {
+  const [isCopied, setIsCopied] = useState(false);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText('CANN@amyloid.ca');
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
+  };
 
   const educationalResources = [
     {
@@ -525,22 +539,50 @@ export default function CANNResources() {
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8">
               Contact the CANN team for additional resources, collaboration opportunities, or specific questions about our programs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8"
-              >
-                <Mail className="w-4 h-4 mr-2" />
-                Contact CANN
-              </Button>
+            <div className="flex flex-col gap-6 items-center">
+              {/* Contact CANN Section */}
+              <div className="flex flex-col items-center gap-4">
+                {/* Contact CANN Button */}
+                <motion.a
+                  href="mailto:CANN@amyloid.ca"
+                  className="group inline-flex items-center gap-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  data-testid="button-contact-cann"
+                >
+                  <Mail className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-xl">Contact CANN</span>
+                </motion.a>
+
+                {/* Email with Copy Feature */}
+                <div className="flex items-center gap-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-xl px-4 py-3 border border-gray-200/50 dark:border-gray-600/30">
+                  <span className="text-gray-800 dark:text-white/90 font-medium" data-testid="text-cann-email">
+                    CANN@amyloid.ca
+                  </span>
+                  <motion.button
+                    onClick={copyEmail}
+                    className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    data-testid="button-copy-cann-email"
+                  >
+                    {isCopied ? (
+                      <Check className="w-4 h-4 text-green-600" />
+                    ) : (
+                      <Copy className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    )}
+                  </motion.button>
+                </div>
+              </div>
+
+              {/* Join CANN Button */}
               <Link href="/join-nursing-network">
                 <Button 
-                  variant="outline" 
                   size="lg" 
-                  className="border-pink-500 text-pink-500 hover:bg-pink-500/10 rounded-2xl px-8"
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8"
                 >
                   <Users className="w-4 h-4 mr-2" />
-                  Join Network
+                  Join CANN
                 </Button>
               </Link>
             </div>

@@ -60,7 +60,7 @@ export default function JoinCANN() {
     {
       icon: GraduationCap,
       title: 'Professional Development',
-      description: 'Advance your knowledge and expertise in amyloidosis nursing through curated training sessions and resources.',
+      description: 'Advance your knowledge and expertise in amyloidosis nursing through curated educational sessions and resources.',
       color: 'from-pink-400 to-rose-400'
     },
     {

@@ -72,7 +72,7 @@ export default function Header() {
 
     { name: 'Get Involved', href: '/get-involved' },
     {
-      name: t('nav.cann'),
+      name: 'CANN',
       href: '#nursing-network',
       hasDropdown: true,
       dropdownItems: [

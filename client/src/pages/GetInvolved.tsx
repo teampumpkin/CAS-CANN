@@ -73,13 +73,6 @@ const participationWays = [
     color: "from-[#00AFE6] to-[#00DD89]"
   },
   {
-    icon: Upload,
-    title: "Contribute Resources",
-    description: "Upload clinical tools or patient education materials through our structured portal to help the community.",
-    action: "Upload Resource",
-    color: "from-[#00AFE6] to-[#00DD89]"
-  },
-  {
     icon: MessageSquare,
     title: "Share Your Story",
     description: "Help raise awareness by sharing a lived experience, reflection, or clinical journey with the community.",
@@ -355,16 +348,6 @@ export default function GetInvolved() {
                         {way.title === "Join CAS" && (
                           <Button 
                             onClick={() => window.location.href = '/join-cas'}
-                            className={`bg-gradient-to-r ${way.color} hover:opacity-90 text-white border-0`}
-                          >
-                            {way.action}
-                            <ArrowRight className="w-4 h-4 ml-2" />
-                          </Button>
-                        )}
-
-                        {way.title === "Contribute Resources" && (
-                          <Button 
-                            onClick={() => window.location.href = '/upload-resource'}
                             className={`bg-gradient-to-r ${way.color} hover:opacity-90 text-white border-0`}
                           >
                             {way.action}

@@ -67,7 +67,6 @@ export default function Header() {
       hasDropdown: true,
       dropdownItems: [
         { name: 'Partnerships and Other Amyloidosis Organizations', href: '/partnerships' },
-        { name: 'News and Updates', href: '/news' },
       ]
     },
 

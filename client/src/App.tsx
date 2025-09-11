@@ -39,7 +39,6 @@ const AccessibilityStatement = lazy(() => import("@/pages/AccessibilityStatement
 const ContributorPortal = lazy(() => import("@/pages/ContributorPortal"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Partnerships = lazy(() => import("@/pages/Partnerships"));
-const News = lazy(() => import("@/pages/News"));
 
 const Community = lazy(() => import("@/pages/Community"));
 const Events = lazy(() => import("@/pages/Events"));
@@ -65,7 +64,6 @@ function Router() {
         <Route path="/directory" component={Directory} />
         {/* <Route path="/resource-library" component={Resources} /> */}
         <Route path="/partnerships" component={Partnerships} />
-        <Route path="/news" component={News} />
 
         <Route path="/upload-resource" component={UploadResource} />
         <Route path="/community" component={Community} />

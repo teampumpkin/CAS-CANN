@@ -194,7 +194,7 @@ export default function About() {
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Leading experts in amyloidosis care from across Canada, dedicated to advancing clinical practice and patient outcomes.
+              The CAS Executive Committee is composed of clinical leaders, researchers, strategic partners, and lived-experience advisors from across Canada. This group guides platform strategy, ensures ethical oversight, and supports resource curation while advancing clinical practice and patient outcomes.
             </p>
           </motion.div>
 
@@ -512,129 +512,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Executive Committee Section */}
-      <section className="py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Content Column - Left Side */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <motion.div
-                className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <UserCheck className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-sm font-medium text-gray-700 dark:text-white/90">Leadership</span>
-              </motion.div>
-              
-              <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                  Executive
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Committee
-                </span>
-              </h2>
-              
-              <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-8">
-                The CAS Executive Committee is composed of clinical leaders, researchers, strategic partners, and lived-experience advisors. This group guides platform strategy, ensures ethical oversight, and supports resource curation.
-              </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-white/70">Clinical leaders from across Canada</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
-                  <p className="text-gray-600 dark:text-white/70">Research specialists and academic partners</p>
-                </div>
-                
-              </div>
-            </motion.div>
-            
-            {/* Image Column - Right Side */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
-                <div className="aspect-[4/5] relative">
-                  <img 
-                    src={leadershipImage} 
-                    alt="Healthcare professionals collaborating, representing the Executive Committee's leadership and expertise"
-                    className="w-full h-full object-cover"
-                  />
-                  
-                  {/* Leadership Stats Overlay */}
-                  <motion.div
-                    className="absolute bottom-6 left-6 right-6 bg-white/90 dark:bg-white/10 backdrop-blur-xl border border-gray-200 dark:border-white/20 rounded-2xl shadow-2xl"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                  >
-                    <div className="px-6 py-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <motion.div
-                          className="text-center"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: 0.6 }}
-                        >
-                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                            12
-                          </div>
-                          <div className="text-xs text-gray-600 dark:text-white/80">Committee Members</div>
-                        </motion.div>
-                        
-                        <motion.div
-                          className="text-center"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: 0.7 }}
-                        >
-                          <div className="text-2xl font-bold bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent">
-                            5
-                          </div>
-                          <div className="text-xs text-gray-600 dark:text-white/80">Specialties</div>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-                
-                {/* Floating accent elements */}
-                <motion.div
-                  className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-purple-500 to-[#00AFE6] rounded-2xl flex items-center justify-center"
-                  animate={{ 
-                    y: [0, -8, 0],
-                    rotate: [0, 5, 0]
-                  }}
-                  transition={{ 
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1
-                  }}
-                >
-                  <Award className="w-6 h-6 text-white" />
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
 
     </div>

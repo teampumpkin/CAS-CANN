@@ -93,7 +93,7 @@ export default function JoinCANN() {
     {
       icon: Users,
       title: 'Knowledge Sharing',
-      description: 'Share best practices and learn from experienced colleagues.',
+      description: 'Share best practices, clinical resources and learn from experienced colleagues.',
       color: 'from-fuchsia-400 to-purple-400'
     },
     {

@@ -2,9 +2,15 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, Users, BookOpen, ArrowLeft, MapPin } from 'lucide-react';
 import { Link } from 'wouter';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useEffect } from 'react';
 
 export default function JournalClub() {
   const { t } = useLanguage();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, []);
 
   const upcomingClubs = [
     {

@@ -67,7 +67,7 @@ function Router() {
 
         <Route path="/upload-resource" component={UploadResource} />
         <Route path="/community" component={Community} />
-        <Route path="/events" component={Events} />
+        {/* <Route path="/events" component={Events} /> */}
         <Route path="/get-involved" component={GetInvolved} />
         <Route path="/join" component={JoinCAS} />
         <Route path="/join-cas" component={JoinCAS} />

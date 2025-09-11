@@ -71,7 +71,6 @@ export default function Header() {
     },
 
     { name: 'Get Involved', href: '/get-involved' },
-    { name: t('nav.events'), href: '/events' },
     {
       name: t('nav.cann'),
       href: '#nursing-network',

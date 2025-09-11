@@ -770,7 +770,7 @@ export default function GetInvolved() {
                     </Button>
                     
                     <p className="text-sm text-gray-500 dark:text-white/50">
-                      Registration not yet open
+                      Registration is open
                     </p>
                   </div>
                 </div>

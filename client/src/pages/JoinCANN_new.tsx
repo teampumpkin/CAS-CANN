@@ -305,69 +305,207 @@ export default function JoinCANN() {
                 Become part of Canada's dedicated amyloidosis nursing network. Membership is free and open to all nursing professionals engaged in the field of amyloidosis.
               </p>
               
-              <Alert className="bg-pink-600/10 border-pink-600/30 mb-8">
-                <Info className="w-4 h-4 text-pink-600" />
-                <AlertDescription className="text-gray-900 dark:text-white/90">
-                  <strong>Terms of Participation:</strong> By applying, you agree to abide by our nursing professional standards. Membership is free and all personal information is handled confidentially according to our privacy policy.
-                </AlertDescription>
-              </Alert>
-
+              {/* Custom CANN Registration Form */}
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                 {/* Form Header */}
-                <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-6 text-center">
-                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <UserPlus className="w-6 h-6 text-white" />
+                <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-6 text-center">
+                  <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <UserPlus className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    CANN Registration Form
+                  <h3 className="text-2xl font-bold text-white mb-2 font-rosarivo">
+                    Join CANN Network
                   </h3>
                   <p className="text-white/90 text-sm">
-                    Join the Canadian Amyloidosis Nursing Network
+                    Complete your registration below - it only takes 3 minutes
                   </p>
                 </div>
 
-                {/* Embedded Form */}
-                <div className="bg-white dark:bg-gray-800">
-                  <iframe
-                    src="https://forms.office.com/Pages/ResponsePage.aspx?id=YOUR_CANN_FORM_ID&embed=true"
-                    width="100%"
-                    height="800"
-                    frameBorder="0"
-                    marginHeight={0}
-                    marginWidth={0}
-                    className="w-full"
-                    title="CANN Registration Form"
-                  >
-                    Loading...
-                  </iframe>
+                {/* Custom Form */}
+                <div className="p-8 space-y-6">
+                  {/* Personal Information Section */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                      <div className="w-6 h-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
+                      Personal Information
+                    </h4>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          First Name *
+                        </label>
+                        <input 
+                          type="text" 
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                          placeholder="Enter your first name"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          Last Name *
+                        </label>
+                        <input 
+                          type="text" 
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                          placeholder="Enter your last name"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          Email Address *
+                        </label>
+                        <input 
+                          type="email" 
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                          placeholder="your.email@example.com"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          Phone Number
+                        </label>
+                        <input 
+                          type="tel" 
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                          placeholder="(555) 123-4567"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Professional Information Section */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                      <div className="w-6 h-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
+                      Professional Information
+                    </h4>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          Nursing License Number *
+                        </label>
+                        <input 
+                          type="text" 
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                          placeholder="Enter your license number"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          Province/Territory *
+                        </label>
+                        <select className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200">
+                          <option value="">Select Province/Territory</option>
+                          <option value="AB">Alberta</option>
+                          <option value="BC">British Columbia</option>
+                          <option value="MB">Manitoba</option>
+                          <option value="NB">New Brunswick</option>
+                          <option value="NL">Newfoundland and Labrador</option>
+                          <option value="NS">Nova Scotia</option>
+                          <option value="ON">Ontario</option>
+                          <option value="PE">Prince Edward Island</option>
+                          <option value="QC">Quebec</option>
+                          <option value="SK">Saskatchewan</option>
+                          <option value="NT">Northwest Territories</option>
+                          <option value="NU">Nunavut</option>
+                          <option value="YT">Yukon</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          Current Position *
+                        </label>
+                        <input 
+                          type="text" 
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                          placeholder="e.g., Staff Nurse, Nurse Practitioner"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          Healthcare Facility
+                        </label>
+                        <input 
+                          type="text" 
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                          placeholder="Hospital or clinic name"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Experience Section */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                      <div className="w-6 h-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
+                      Amyloidosis Experience
+                    </h4>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          Years of Nursing Experience *
+                        </label>
+                        <select className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200">
+                          <option value="">Select experience level</option>
+                          <option value="0-2">0-2 years</option>
+                          <option value="3-5">3-5 years</option>
+                          <option value="6-10">6-10 years</option>
+                          <option value="11-15">11-15 years</option>
+                          <option value="16+">16+ years</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          Experience with Amyloidosis Patients
+                        </label>
+                        <textarea 
+                          rows={3}
+                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#00AFE6] focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                          placeholder="Briefly describe your experience with amyloidosis patients (optional)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Terms and Agreement */}
+                  <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-6">
+                    <div className="flex items-start gap-3">
+                      <input 
+                        type="checkbox" 
+                        className="mt-1 w-5 h-5 text-[#00AFE6] border-2 border-gray-300 rounded focus:ring-[#00AFE6] focus:ring-2"
+                        id="terms-agreement"
+                      />
+                      <label htmlFor="terms-agreement" className="text-sm text-gray-700 dark:text-gray-300">
+                        I confirm that I hold an active nursing license in Canada and agree to abide by CANN's professional standards. I understand that membership is free and my personal information will be handled confidentially according to the privacy policy.
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="pt-4">
+                    <button className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold py-4 px-8 rounded-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 transform hover:scale-105">
+                      <div className="flex items-center justify-center gap-3">
+                        <UserPlus className="w-5 h-5" />
+                        Complete Registration
+                      </div>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Form Footer */}
-                <div className="p-6 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+                <div className="px-8 py-6 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-2">
-                      <Shield className="w-4 h-4 text-pink-600" />
-                      <span>Secure Form</span>
+                      <Shield className="w-4 h-4 text-[#00AFE6]" />
+                      <span>Secure & Confidential</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-pink-600" />
+                      <Clock className="w-4 h-4 text-[#00AFE6]" />
                       <span>3-5 Minutes</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-pink-600" />
+                      <CheckCircle2 className="w-4 h-4 text-[#00AFE6]" />
                       <span>Instant Access</span>
                     </div>
-                  </div>
-                  
-                  <div className="mt-4 text-center">
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      Having trouble with the form? <button 
-                        onClick={() => window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=YOUR_CANN_FORM_ID', '_blank')}
-                        className="text-pink-600 hover:underline"
-                      >
-                        Open in new window
-                      </button>
-                    </p>
                   </div>
                 </div>
               </div>

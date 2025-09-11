@@ -139,7 +139,7 @@ export default function Partnerships() {
       name: "International Society of Amyloidosis",
       shortName: "ISA",
       description: "International amyloidosis research network",
-      url: "https://isa-amyloidosis.org"
+      url: "https://www.isaamyloidosis.org"
     },
     {
       name: "Amyloidosis Foundation",

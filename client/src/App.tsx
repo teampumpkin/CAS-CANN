@@ -31,6 +31,7 @@ const AAAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/AAAmyloidosis
 const ALect2Amyloidosis = lazy(() => import("@/pages/amyloidosis-types/ALect2Amyloidosis"));
 const OtherAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/OtherAmyloidosis"));
 const CANN = lazy(() => import("@/pages/CANN"));
+const AboutCANN = lazy(() => import("@/pages/AboutCANN"));
 const CANNResources = lazy(() => import("@/pages/CANNResources"));
 const JoinCANN = lazy(() => import("@/pages/JoinCANN_new"));
 const JournalClub = lazy(() => import("@/pages/JournalClub"));
@@ -77,6 +78,7 @@ function Router() {
         <Route path="/amyloidosis-types/aa-inflammatory-amyloidosis" component={AAAmyloidosis} />
         <Route path="/amyloidosis-types/alect2-amyloidosis" component={ALect2Amyloidosis} />
         <Route path="/amyloidosis-types/other-amyloidosis-types" component={OtherAmyloidosis} />
+        <Route path="/about-cann" component={AboutCANN} />
         <Route path="/cann" component={CANN} />
         <Route path="/cann/resources" component={CANNResources} />
         <Route path="/cann-resources" component={CANNResources} />

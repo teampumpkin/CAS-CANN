@@ -336,14 +336,30 @@ export default function EventsNewsletterSection() {
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                               </motion.button>
                             </a>
-                          ) : (
-                            <Link href={index === 2 ? '/join-cas' : '/journal-club'}>
+                          ) : index === 2 ? (
+                            <a 
+                              href="https://www.isaamyloidosis.org" 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="block"
+                            >
                               <motion.button
                                 className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                               >
-                                <span>{index === 2 ? 'Stay Tuned' : 'Join Event'}</span>
+                                <span>Stay Tuned</span>
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                              </motion.button>
+                            </a>
+                          ) : (
+                            <Link href='/journal-club'>
+                              <motion.button
+                                className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                              >
+                                <span>Join Event</span>
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                               </motion.button>
                             </Link>

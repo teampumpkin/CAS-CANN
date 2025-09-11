@@ -242,7 +242,7 @@ export default function CANNResources() {
                 Members Only Access
               </h3>
               <p className="text-gray-600 dark:text-white/70 mb-6 text-sm">
-                Join CANN to access exclusive training programs and professional certification opportunities
+                Join CANN to access exclusive recorded training sessions and educational resources
               </p>
               <Button 
                 onClick={() => window.location.href = '/join-nursing-network'}

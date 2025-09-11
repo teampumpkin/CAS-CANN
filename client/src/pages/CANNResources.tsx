@@ -96,7 +96,7 @@ export default function CANNResources() {
       date: "October 31 – November 2, 2025",
       time: "2025-10-31 to 2025-11-02",
       location: "Toronto Airport Marriott Hotel",
-      format: "In-person & Virtual",
+      format: "In-person",
       description: "Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.",
       registrationDeadline: "Registration TBD",
       cmeCredits: "3 days",

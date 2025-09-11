@@ -32,7 +32,7 @@ export default function Contact() {
     },
     {
       question: "Can patients or family members/supports join the CAS?",
-      answer: "Yes, we welcome patients, family members, and support persons as part of the CAS community. Contact us at cas@amyloid.ca for information about involvement opportunities."
+      answer: "Patients, family members and support persons are an important part of the CAS community. While membership is currently offered for healthcare professionals, there are many ways for patients and supports to get involved. Contact us at cas@amyloid.ca for more information."
     }
   ];
 

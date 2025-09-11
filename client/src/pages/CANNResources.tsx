@@ -200,17 +200,6 @@ export default function CANNResources() {
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8 max-w-3xl mx-auto">
               Access comprehensive educational materials, training programs, research publications, and professional development opportunities for amyloidosis healthcare professionals.
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8">
-                Browse Resources
-                <BookOpen className="w-4 h-4 ml-2" />
-              </Button>
-              <Button variant="outline" size="lg" className="border-pink-500 text-pink-500 hover:bg-pink-500/10 rounded-2xl px-8">
-                Upcoming Events
-                <Calendar className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
           </motion.div>
         </div>
       </section>

@@ -366,62 +366,139 @@ export default function JoinCAS() {
                 </AlertDescription>
               </Alert>
 
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                {/* Background decoration */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5" />
+                
                 {/* Form Header */}
-                <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-6 text-center">
-                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <FileText className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2">
+                <div className="relative bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-8 text-center">
+                  {/* Floating elements */}
+                  <div className="absolute top-4 left-4 w-8 h-8 bg-white/10 rounded-full blur-sm animate-pulse" />
+                  <div className="absolute bottom-4 right-4 w-6 h-6 bg-white/10 rounded-full blur-sm animate-pulse delay-1000" />
+                  
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ type: "spring", duration: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6">
+                      <FileText className="w-8 h-8 text-white" />
+                    </div>
+                  </motion.div>
+                  
+                  <h3 className="text-2xl font-bold text-white mb-3 font-rosarivo">
                     CAS Registration Form
                   </h3>
-                  <p className="text-white/90 text-sm">
-                    Complete your application below
+                  <p className="text-white/90 text-sm max-w-md mx-auto">
+                    Complete your professional application below. All fields are secure and confidential.
                   </p>
+                  
+                  {/* Progress indicators */}
+                  <div className="flex justify-center gap-2 mt-6">
+                    <div className="w-2 h-2 bg-white/40 rounded-full" />
+                    <div className="w-8 h-2 bg-white/60 rounded-full" />
+                    <div className="w-2 h-2 bg-white/40 rounded-full" />
+                  </div>
                 </div>
 
-                {/* Embedded Form */}
-                <div className="bg-white dark:bg-gray-800">
-                  <iframe
-                    src="https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u&embed=true"
-                    width="100%"
-                    height="800"
-                    frameBorder="0"
-                    marginHeight={0}
-                    marginWidth={0}
-                    className="w-full"
-                    title="CAS Registration Form"
-                  >
-                    Loading...
-                  </iframe>
-                </div>
-
-                {/* Form Footer */}
-                <div className="p-6 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-                  <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex items-center gap-2">
-                      <Shield className="w-4 h-4 text-[#00AFE6]" />
-                      <span>Secure Form</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-[#00AFE6]" />
-                      <span>5-10 Minutes</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#00AFE6]" />
-                      <span>Review in 2-3 Weeks</span>
+                {/* Embedded Form with improved styling */}
+                <div className="relative bg-white dark:bg-gray-800">
+                  {/* Form frame decoration */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent dark:from-gray-700/50 pointer-events-none" />
+                  
+                  <div className="p-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-inner">
+                      <iframe
+                        src="https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u&embed=true"
+                        width="100%"
+                        height="800"
+                        frameBorder="0"
+                        marginHeight={0}
+                        marginWidth={0}
+                        className="w-full transition-all duration-300"
+                        title="CAS Registration Form"
+                      >
+                        {/* Enhanced loading state */}
+                        <div className="flex items-center justify-center h-full bg-gray-50 dark:bg-gray-800">
+                          <div className="text-center">
+                            <div className="w-8 h-8 border-4 border-[#00AFE6]/20 border-t-[#00AFE6] rounded-full animate-spin mx-auto mb-4" />
+                            <p className="text-gray-600 dark:text-gray-400">Loading registration form...</p>
+                          </div>
+                        </div>
+                      </iframe>
                     </div>
                   </div>
+                </div>
+
+                {/* Enhanced Form Footer */}
+                <div className="relative p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 border-t border-gray-200 dark:border-gray-700">
+                  {/* Trust indicators with enhanced design */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <motion.div 
+                      className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
+                        <Shield className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 dark:text-white text-sm">Secure & Encrypted</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">SSL protected</p>
+                      </div>
+                    </motion.div>
+                    
+                    <motion.div 
+                      className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
+                        <Clock className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 dark:text-white text-sm">5-10 Minutes</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Average completion</p>
+                      </div>
+                    </motion.div>
+                    
+                    <motion.div 
+                      className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
+                        <CheckCircle2 className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 dark:text-white text-sm">Review in 2-3 Weeks</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Professional review</p>
+                      </div>
+                    </motion.div>
+                  </div>
                   
-                  <div className="mt-4 text-center">
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      Having trouble with the form? <button 
+                  {/* Help section */}
+                  <div className="text-center p-4 bg-[#00AFE6]/5 rounded-xl border border-[#00AFE6]/20">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      Need assistance with your application?
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <button 
                         onClick={() => window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u', '_blank')}
-                        className="text-[#00AFE6] hover:underline"
+                        className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-medium transition-colors duration-200"
                       >
+                        <ExternalLink className="w-4 h-4" />
                         Open in new window
                       </button>
-                    </p>
+                      <a 
+                        href="mailto:info@amyloid.ca"
+                        className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-medium transition-colors duration-200"
+                      >
+                        <Mail className="w-4 h-4" />
+                        Email support
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

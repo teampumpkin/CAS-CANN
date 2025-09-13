@@ -65,16 +65,10 @@ import { useToast } from "@/hooks/use-toast";
 
 const membershipBenefits = [
   {
-    icon: Upload,
-    title: "Resource Upload Rights",
-    description:
-      "Submit and share clinical tools, protocols, and educational materials with the entire CAS community",
-  },
-  {
     icon: Vote,
-    title: "Governance Voice",
+    title: "Amyloidosis Updates",
     description:
-      "Participate in CAS governance decisions and vote on important policy matters affecting amyloidosis care",
+      "Updates from important news and developments from the world of amyloidosis in Canada and internationally.",
   },
   {
     icon: Network,
@@ -84,21 +78,15 @@ const membershipBenefits = [
   },
   {
     icon: Gift,
-    title: "Premium Tools Access",
+    title: "Cinical Tools Access",
     description:
-      "Early access to new clinical tools, research findings, and professional development resources",
+      "Access to new clinical tools, research findings, and professional development resources",
   },
   {
     icon: Calendar,
-    title: "Priority Event Access",
+    title: "Event Access",
     description:
-      "Priority registration for conferences, webinars, and professional development events",
-  },
-  {
-    icon: Award,
-    title: "Recognition & Listing",
-    description:
-      "Professional recognition and listing in the CAS member directory with your specialization",
+      "Notification and registration for conferences, webinars, and professional development events",
   },
 ];
 
@@ -372,8 +360,8 @@ export default function JoinCAS() {
               </span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
-              CAS membership is open to qualified professionals who contribute
-              to amyloidosis care, research, and patient advocacy in Canada.
+              CAS membership is open to professionals who contribute to
+              amyloidosis care, research, and patient advocacy in Canada.
             </p>
           </motion.div>
 

@@ -77,7 +77,7 @@ export default function Header() {
       href: '#cann',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'About CANN', href: '/about-cann' },
+        { name: 'Join CANN', href: '/join-cann' },
         { name: 'Resources/Events', href: '/cann/resources' },
       ]
     },

@@ -357,7 +357,8 @@ export default function Partnerships() {
         </div>
       </section>
 
-      {/* Collaboration Types Section */}
+      {/* Collaboration Types Section - Hidden */}
+      {/* 
       <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
@@ -409,6 +410,7 @@ export default function Partnerships() {
           </div>
         </div>
       </section>
+      */}
 
       {/* Partner Organizations Section */}
       <section className="py-20 bg-white dark:bg-gray-900">

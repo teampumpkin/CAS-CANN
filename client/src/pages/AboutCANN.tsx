@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useScrollAnimations } from "@/hooks/use-scroll-animations";
 import {
   Network,
@@ -16,9 +16,18 @@ import {
   Search,
   Target,
   MapPin,
+  X,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import medicalTeamImg from "@assets/DSC02841_1750068895454.jpg";
@@ -28,6 +37,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function AboutCANN() {
   const { language } = useLanguage();
+  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
   useScrollAnimations();
 
   // Scroll to top when component mounts
@@ -598,10 +608,102 @@ export default function AboutCANN() {
                 </div>
               </div>
 
-              <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300">
-                <UserPlus className="w-5 h-5 mr-2" />
-                Register for CANN membership
-              </Button>
+              <Dialog open={isJoinModalOpen} onOpenChange={setIsJoinModalOpen}>
+                <DialogTrigger asChild>
+                  <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300">
+                    <UserPlus className="w-5 h-5 mr-2" />
+                    Register for CANN membership
+                  </Button>
+                </DialogTrigger>
+                
+                <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700">
+                  <DialogHeader className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                          <UserPlus className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                            Join CANN Today
+                          </DialogTitle>
+                          <DialogDescription className="text-gray-600 dark:text-gray-400">
+                            Complete your registration for the Canadian Amyloidosis Nursing Network
+                          </DialogDescription>
+                        </div>
+                      </div>
+                    </div>
+                  </DialogHeader>
+
+                  <div className="mt-6">
+                    {/* Membership Benefits Summary */}
+                    <div className="bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 rounded-xl p-6 mb-6">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                        Membership Benefits
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-pink-600" />
+                          <span className="text-gray-700 dark:text-gray-300">Professional Network</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-pink-600" />
+                          <span className="text-gray-700 dark:text-gray-300">Educational Resources</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-pink-600" />
+                          <span className="text-gray-700 dark:text-gray-300">Knowledge Sharing</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-pink-600" />
+                          <span className="text-gray-700 dark:text-gray-300">National Coverage</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Form Container - Ready for fields */}
+                    <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                      {/* Form fields will go here */}
+                      <div className="text-center py-8 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl">
+                        <UserPlus className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                        <p className="text-gray-500 dark:text-gray-400 font-medium">
+                          Form fields will be added here
+                        </p>
+                        <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
+                          Ready for field configuration
+                        </p>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setIsJoinModalOpen(false)}
+                          className="flex-1 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          type="submit"
+                          className="flex-1 bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300"
+                        >
+                          <UserPlus className="w-4 h-4 mr-2" />
+                          Submit Registration
+                        </Button>
+                      </div>
+                    </form>
+
+                    {/* Footer Note */}
+                    <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
+                        By registering, you agree to join Canada's first dedicated amyloidosis nursing network. 
+                        Membership is free and designed for nursing professionals.
+                      </p>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </motion.div>
           </div>
         </div>

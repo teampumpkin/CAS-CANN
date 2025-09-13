@@ -1,0 +1,35 @@
+1. Full name (first and last) - Text Field
+
+2. Email address - Text Field
+
+3. Professional designation or nursing role (Ex: Nurse Practitioner, Nurse Clinician, educator, researcher, administrator, etc) - Text Field
+
+4. Sub-specialty area of focus (cardiology, hematology, neurology, etc) - Text Field
+
+5. In my nursing practice, I primarily care for patients with the following type of amylodosis - Radio Buttons - ATTR  - AL  - Both ATTR and AL
+
+6. Center or Clinic Name/Institution - Text Field
+
+7. I would like to receive communication from the Canadian Amyloidosis Nursing Network (email, newsletters, CANN educational sessions) - Radio Button  - Yes  - No
+
+8. The Canadian Amyloidosis Nursing Network hosts a regularly occurring Educational Series in support of professional development of CANN members.  Guest speakers with expertise in particular areas of amyloidosis are recruited to present at these sessions.  Please indicate potential areas of interest for future sessions (select all that apply). - Check boxes
+
+ - Mental health considerations for amyloidosis and heart failure patients
+ - Case presentations/discussion
+ - Understanding PYP in amyloidosis
+ - Genetic testing/counseling 
+ - Program start-up and multi-disciplinary engagement - how to start an amyloidosis program?
+ - Pathology and amyloidosis (mass spectrometry)
+ - Diet, exercise and/or cardiac rehab considerations for amyloidosis patients
+ - Multi-system involvement and clinical implications (neurological, G.I., others)
+ - Patient support groups: awareness, initiation and development, lessons learned
+ - Patient and Healthcare Professional Q&A - open forum for discussion
+ - ‘A Day in the Life' - multiple short presentations from various clinics to share local experience - process, flow, pearls and pitfalls
+ - Other (when check this Text Filed opens)
+
+9. I would be interested in presenting to CANN members at one of the Educational Series events - Radio Button  - Yes (when selected this field no. 10 appears)  - No
+
+10. I would be interested in presenting to CANN members on the following topic - Text Field
+
+
+

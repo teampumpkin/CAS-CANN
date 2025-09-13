@@ -80,6 +80,7 @@ export default function Header() {
         { name: 'CANN Network', href: '/cann' },
         { name: 'About CANN', href: '/about-cann' },
         { name: 'Join CANN', href: '/join-cann' },
+        { name: 'Join CANN (Old Design)', href: '/join-cann-old' },
         { name: 'Resources/Events', href: '/cann/resources' },
       ]
     },

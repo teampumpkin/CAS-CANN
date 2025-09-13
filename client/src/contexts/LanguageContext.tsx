@@ -209,7 +209,7 @@ const translations = {
     'about.values.collaborative.title': 'Collaborative',
     'about.values.collaborative.description': 'We bring together diverse expertise to solve complex clinical challenges.',
     'about.values.evidenceInformed.title': 'Evidence-Informed',
-    'about.values.evidenceInformed.description': 'All resources are grounded in current research and clinical best practices.',
+    'about.values.evidenceInformed.description': 'All resources are grounded in current research and best clinical practices.',
     'about.values.transparent.title': 'Transparent',
     'about.values.transparent.description': 'Open access to information, clear governance, and accountable stewardship.',
     'about.services.directory': 'Comprehensive healthcare provider directory',

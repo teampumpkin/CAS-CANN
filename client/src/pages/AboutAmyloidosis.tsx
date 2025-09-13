@@ -1071,7 +1071,7 @@ export default function AboutAmyloidosis() {
               </p>
 
               <a
-                href="/attached_assets/Cdn ATTRh-PN Guidelines_1757762257062.pdf"
+                href="/cdn-attr-polyneuropathy-guidelines.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300"
@@ -1102,7 +1102,7 @@ export default function AboutAmyloidosis() {
               </p>
 
               <a
-                href="/attached_assets/Cdn Cardiac Amyloid Guidelines_1757762257065.pdf"
+                href="/cdn-cardiac-amyloidosis-guidelines.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300"

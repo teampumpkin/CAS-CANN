@@ -20,14 +20,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+// Dialog components no longer needed for inline form
 import {
   Form,
   FormControl,
@@ -98,7 +91,7 @@ const areasOfInterestOptions = [
 
 export default function AboutCANN() {
   const { language } = useLanguage();
-  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   useScrollAnimations();
 
   // Form setup
@@ -122,8 +115,10 @@ export default function AboutCANN() {
   const onSubmit = (values: z.infer<typeof joinCANNSchema>) => {
     console.log("Form submitted:", values);
     // TODO: Handle form submission
-    setIsJoinModalOpen(false);
+    setShowRegistrationForm(false);
     form.reset();
+    // Show success message or redirect
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Scroll to top when component mounts
@@ -694,414 +689,428 @@ export default function AboutCANN() {
                 </div>
               </div>
 
-              <Dialog open={isJoinModalOpen} onOpenChange={setIsJoinModalOpen}>
-                <DialogTrigger asChild>
-                  <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300">
-                    <UserPlus className="w-5 h-5 mr-2" />
-                    Register for CANN membership
-                  </Button>
-                </DialogTrigger>
-                
-                <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700">
-                  <DialogHeader className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
-                          <UserPlus className="w-5 h-5 text-white" />
-                        </div>
-                        <div>
-                          <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-white">
-                            Join CANN Today
-                          </DialogTitle>
-                          <DialogDescription className="text-gray-600 dark:text-gray-400">
-                            Complete your registration for the Canadian Amyloidosis Nursing Network
-                          </DialogDescription>
-                        </div>
+              {!showRegistrationForm ? (
+                <Button 
+                  onClick={() => setShowRegistrationForm(true)}
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300"
+                >
+                  <UserPlus className="w-5 h-5 mr-2" />
+                  Register for CANN membership
+                </Button>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="mt-8 bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-xl"
+                >
+                  {/* Registration Form Header */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <UserPlus className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                          Join CANN Today
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                          Complete your registration for the Canadian Amyloidosis Nursing Network
+                        </p>
                       </div>
                     </div>
-                  </DialogHeader>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setShowRegistrationForm(false);
+                        form.reset();
+                      }}
+                      className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                    >
+                      <X className="w-5 h-5" />
+                    </Button>
+                  </div>
 
-                  <div className="mt-6">
-                    {/* Membership Benefits Summary */}
-                    <div className="bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 rounded-xl p-6 mb-6">
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                        Membership Benefits
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                        <div className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-pink-600" />
-                          <span className="text-gray-700 dark:text-gray-300">Professional Network</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-pink-600" />
-                          <span className="text-gray-700 dark:text-gray-300">Educational Resources</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-pink-600" />
-                          <span className="text-gray-700 dark:text-gray-300">Knowledge Sharing</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-pink-600" />
-                          <span className="text-gray-700 dark:text-gray-300">National Coverage</span>
-                        </div>
+                  {/* Membership Benefits Summary */}
+                  <div className="bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 rounded-xl p-6 mb-6">
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                      Membership Benefits
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-pink-600" />
+                        <span className="text-gray-700 dark:text-gray-300">Professional Network</span>
                       </div>
-                    </div>
-
-                    {/* Join CANN Registration Form */}
-                    <Form {...form}>
-                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                        {/* Personal Information */}
-                        <div className="space-y-4">
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-                            Personal Information
-                          </h4>
-                          
-                          {/* Full Name */}
-                          <FormField
-                            control={form.control}
-                            name="fullName"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">Full Name (First and Last) *</FormLabel>
-                                <FormControl>
-                                  <Input 
-                                    placeholder="Enter your full name" 
-                                    className="border-gray-300 dark:border-gray-600" 
-                                    {...field} 
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          {/* Email */}
-                          <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">Email Address *</FormLabel>
-                                <FormControl>
-                                  <Input 
-                                    type="email" 
-                                    placeholder="Enter your email address" 
-                                    className="border-gray-300 dark:border-gray-600" 
-                                    {...field} 
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-
-                        {/* Professional Information */}
-                        <div className="space-y-4">
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-                            Professional Information
-                          </h4>
-
-                          {/* Professional Designation */}
-                          <FormField
-                            control={form.control}
-                            name="professionalDesignation"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">Professional Designation or Nursing Role *</FormLabel>
-                                <FormControl>
-                                  <Input 
-                                    placeholder="e.g., Nurse Practitioner, Nurse Clinician, educator, researcher, administrator" 
-                                    className="border-gray-300 dark:border-gray-600" 
-                                    {...field} 
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          {/* Sub-specialty */}
-                          <FormField
-                            control={form.control}
-                            name="subspecialty"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">Sub-specialty Area of Focus *</FormLabel>
-                                <FormControl>
-                                  <Input 
-                                    placeholder="e.g., cardiology, hematology, neurology" 
-                                    className="border-gray-300 dark:border-gray-600" 
-                                    {...field} 
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          {/* Amyloidosis Type */}
-                          <FormField
-                            control={form.control}
-                            name="amyloidosisType"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">
-                                  In my nursing practice, I primarily care for patients with the following type of amyloidosis *
-                                </FormLabel>
-                                <FormControl>
-                                  <RadioGroup
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                    className="flex flex-col space-y-2"
-                                  >
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="ATTR" id="attr" />
-                                      <label htmlFor="attr" className="text-gray-700 dark:text-gray-300 cursor-pointer">ATTR</label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="AL" id="al" />
-                                      <label htmlFor="al" className="text-gray-700 dark:text-gray-300 cursor-pointer">AL</label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="Both" id="both" />
-                                      <label htmlFor="both" className="text-gray-700 dark:text-gray-300 cursor-pointer">Both ATTR and AL</label>
-                                    </div>
-                                  </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          {/* Institution */}
-                          <FormField
-                            control={form.control}
-                            name="institution"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">Center or Clinic Name/Institution *</FormLabel>
-                                <FormControl>
-                                  <Input 
-                                    placeholder="Enter your institution name" 
-                                    className="border-gray-300 dark:border-gray-600" 
-                                    {...field} 
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-
-                        {/* Communication Preferences */}
-                        <div className="space-y-4">
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-                            Communication Preferences
-                          </h4>
-
-                          {/* Communication Consent */}
-                          <FormField
-                            control={form.control}
-                            name="communicationConsent"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">
-                                  I would like to receive communication from the Canadian Amyloidosis Nursing Network (email, newsletters, CANN educational sessions) *
-                                </FormLabel>
-                                <FormControl>
-                                  <RadioGroup
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                    className="flex flex-col space-y-2"
-                                  >
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="yes" id="comm-yes" />
-                                      <label htmlFor="comm-yes" className="text-gray-700 dark:text-gray-300 cursor-pointer">Yes</label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="no" id="comm-no" />
-                                      <label htmlFor="comm-no" className="text-gray-700 dark:text-gray-300 cursor-pointer">No</label>
-                                    </div>
-                                  </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-
-                        {/* Educational Interests */}
-                        <div className="space-y-4">
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-                            Educational Interests
-                          </h4>
-
-                          {/* Areas of Interest */}
-                          <FormField
-                            control={form.control}
-                            name="areasOfInterest"
-                            render={() => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">
-                                  Please indicate potential areas of interest for future Educational Series sessions (select all that apply) *
-                                </FormLabel>
-                                <div className="space-y-3 max-h-60 overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-lg p-3">
-                                  {areasOfInterestOptions.map((option) => (
-                                    <FormField
-                                      key={option}
-                                      control={form.control}
-                                      name="areasOfInterest"
-                                      render={({ field }) => {
-                                        return (
-                                          <FormItem
-                                            key={option}
-                                            className="flex flex-row items-start space-x-3 space-y-0"
-                                          >
-                                            <FormControl>
-                                              <Checkbox
-                                                checked={field.value?.includes(option)}
-                                                onCheckedChange={(checked) => {
-                                                  return checked
-                                                    ? field.onChange([...field.value, option])
-                                                    : field.onChange(
-                                                        field.value?.filter(
-                                                          (value) => value !== option
-                                                        )
-                                                      )
-                                                }}
-                                              />
-                                            </FormControl>
-                                            <FormLabel className="text-sm font-normal text-gray-700 dark:text-gray-300 leading-relaxed cursor-pointer">
-                                              {option}
-                                            </FormLabel>
-                                          </FormItem>
-                                        )
-                                      }}
-                                    />
-                                  ))}
-                                </div>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          {/* Other Interest Field - Shows when "Other" is selected */}
-                          {watchAreasOfInterest?.includes("Other") && (
-                            <FormField
-                              control={form.control}
-                              name="otherInterest"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel className="text-gray-700 dark:text-gray-300">Please specify other area of interest</FormLabel>
-                                  <FormControl>
-                                    <Textarea 
-                                      placeholder="Describe your other area of interest..." 
-                                      className="border-gray-300 dark:border-gray-600" 
-                                      {...field} 
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-                          )}
-                        </div>
-
-                        {/* Presentation Interest */}
-                        <div className="space-y-4">
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-                            Presentation Opportunities
-                          </h4>
-
-                          {/* Presenting Interest */}
-                          <FormField
-                            control={form.control}
-                            name="presentingInterest"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">
-                                  I would be interested in presenting to CANN members at one of the Educational Series events *
-                                </FormLabel>
-                                <FormControl>
-                                  <RadioGroup
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                    className="flex flex-col space-y-2"
-                                  >
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="yes" id="present-yes" />
-                                      <label htmlFor="present-yes" className="text-gray-700 dark:text-gray-300 cursor-pointer">Yes</label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="no" id="present-no" />
-                                      <label htmlFor="present-no" className="text-gray-700 dark:text-gray-300 cursor-pointer">No</label>
-                                    </div>
-                                  </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          {/* Presentation Topic - Shows when presenting interest is "yes" */}
-                          {watchPresentingInterest === "yes" && (
-                            <FormField
-                              control={form.control}
-                              name="presentationTopic"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel className="text-gray-700 dark:text-gray-300">
-                                    I would be interested in presenting to CANN members on the following topic *
-                                  </FormLabel>
-                                  <FormControl>
-                                    <Textarea 
-                                      placeholder="Describe the topic you would like to present on..." 
-                                      className="border-gray-300 dark:border-gray-600" 
-                                      {...field} 
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-                          )}
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200 dark:border-gray-700">
-                          <Button
-                            type="button"
-                            variant="outline"
-                            onClick={() => {
-                              setIsJoinModalOpen(false);
-                              form.reset();
-                            }}
-                            className="flex-1 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
-                          >
-                            Cancel
-                          </Button>
-                          <Button
-                            type="submit"
-                            className="flex-1 bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300"
-                          >
-                            <UserPlus className="w-4 h-4 mr-2" />
-                            Submit Registration
-                          </Button>
-                        </div>
-                      </form>
-                    </Form>
-
-                    {/* Footer Note */}
-                    <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
-                        By registering, you agree to join Canada's first dedicated amyloidosis nursing network. 
-                        Membership is free and designed for nursing professionals.
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-pink-600" />
+                        <span className="text-gray-700 dark:text-gray-300">Educational Resources</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-pink-600" />
+                        <span className="text-gray-700 dark:text-gray-300">Knowledge Sharing</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-pink-600" />
+                        <span className="text-gray-700 dark:text-gray-300">National Coverage</span>
+                      </div>
                     </div>
                   </div>
-                </DialogContent>
-              </Dialog>
+
+                  {/* Join CANN Registration Form */}
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                      {/* Personal Information */}
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                          Personal Information
+                        </h4>
+                        
+                        {/* Full Name */}
+                        <FormField
+                          control={form.control}
+                          name="fullName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-gray-700 dark:text-gray-300">Full Name (First and Last) *</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder="Enter your full name" 
+                                  className="border-gray-300 dark:border-gray-600" 
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Email */}
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-gray-700 dark:text-gray-300">Email Address *</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  type="email" 
+                                  placeholder="Enter your email address" 
+                                  className="border-gray-300 dark:border-gray-600" 
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      {/* Professional Information */}
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                          Professional Information
+                        </h4>
+
+                        {/* Professional Designation */}
+                        <FormField
+                          control={form.control}
+                          name="professionalDesignation"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-gray-700 dark:text-gray-300">Professional Designation or Nursing Role *</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder="e.g., Nurse Practitioner, Nurse Clinician, educator, researcher, administrator" 
+                                  className="border-gray-300 dark:border-gray-600" 
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Sub-specialty */}
+                        <FormField
+                          control={form.control}
+                          name="subspecialty"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-gray-700 dark:text-gray-300">Sub-specialty Area of Focus *</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder="e.g., cardiology, hematology, neurology" 
+                                  className="border-gray-300 dark:border-gray-600" 
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Amyloidosis Type */}
+                        <FormField
+                          control={form.control}
+                          name="amyloidosisType"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-gray-700 dark:text-gray-300">
+                                In my nursing practice, I primarily care for patients with the following type of amyloidosis *
+                              </FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                  className="flex flex-col space-y-2"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="ATTR" id="attr" />
+                                    <label htmlFor="attr" className="text-gray-700 dark:text-gray-300 cursor-pointer">ATTR</label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="AL" id="al" />
+                                    <label htmlFor="al" className="text-gray-700 dark:text-gray-300 cursor-pointer">AL</label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Both" id="both" />
+                                    <label htmlFor="both" className="text-gray-700 dark:text-gray-300 cursor-pointer">Both ATTR and AL</label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Institution */}
+                        <FormField
+                          control={form.control}
+                          name="institution"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-gray-700 dark:text-gray-300">Center or Clinic Name/Institution *</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder="Enter your institution name" 
+                                  className="border-gray-300 dark:border-gray-600" 
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      {/* Communication Preferences */}
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                          Communication Preferences
+                        </h4>
+
+                        {/* Communication Consent */}
+                        <FormField
+                          control={form.control}
+                          name="communicationConsent"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-gray-700 dark:text-gray-300">
+                                I would like to receive communication from the Canadian Amyloidosis Nursing Network (email, newsletters, CANN educational sessions) *
+                              </FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                  className="flex flex-col space-y-2"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="yes" id="comm-yes" />
+                                    <label htmlFor="comm-yes" className="text-gray-700 dark:text-gray-300 cursor-pointer">Yes</label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="no" id="comm-no" />
+                                    <label htmlFor="comm-no" className="text-gray-700 dark:text-gray-300 cursor-pointer">No</label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      {/* Educational Interests */}
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                          Educational Interests
+                        </h4>
+
+                        {/* Areas of Interest */}
+                        <FormField
+                          control={form.control}
+                          name="areasOfInterest"
+                          render={() => (
+                            <FormItem>
+                              <FormLabel className="text-gray-700 dark:text-gray-300">
+                                Please indicate potential areas of interest for future Educational Series sessions (select all that apply) *
+                              </FormLabel>
+                              <div className="space-y-3 max-h-60 overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+                                {areasOfInterestOptions.map((option) => (
+                                  <FormField
+                                    key={option}
+                                    control={form.control}
+                                    name="areasOfInterest"
+                                    render={({ field }) => {
+                                      return (
+                                        <FormItem
+                                          key={option}
+                                          className="flex flex-row items-start space-x-3 space-y-0"
+                                        >
+                                          <FormControl>
+                                            <Checkbox
+                                              checked={field.value?.includes(option)}
+                                              onCheckedChange={(checked) => {
+                                                return checked
+                                                  ? field.onChange([...field.value, option])
+                                                  : field.onChange(
+                                                      field.value?.filter(
+                                                        (value) => value !== option
+                                                      )
+                                                    )
+                                              }}
+                                            />
+                                          </FormControl>
+                                          <FormLabel className="text-sm font-normal text-gray-700 dark:text-gray-300 leading-relaxed cursor-pointer">
+                                            {option}
+                                          </FormLabel>
+                                        </FormItem>
+                                      )
+                                    }}
+                                  />
+                                ))}
+                              </div>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Other Interest Field - Shows when "Other" is selected */}
+                        {watchAreasOfInterest?.includes("Other") && (
+                          <FormField
+                            control={form.control}
+                            name="otherInterest"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 dark:text-gray-300">Please specify other area of interest</FormLabel>
+                                <FormControl>
+                                  <Textarea 
+                                    placeholder="Describe your other area of interest..." 
+                                    className="border-gray-300 dark:border-gray-600" 
+                                    {...field} 
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        )}
+                      </div>
+
+                      {/* Presentation Interest */}
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                          Presentation Opportunities
+                        </h4>
+
+                        {/* Presenting Interest */}
+                        <FormField
+                          control={form.control}
+                          name="presentingInterest"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-gray-700 dark:text-gray-300">
+                                I would be interested in presenting to CANN members at one of the Educational Series events *
+                              </FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                  className="flex flex-col space-y-2"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="yes" id="present-yes" />
+                                    <label htmlFor="present-yes" className="text-gray-700 dark:text-gray-300 cursor-pointer">Yes</label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="no" id="present-no" />
+                                    <label htmlFor="present-no" className="text-gray-700 dark:text-gray-300 cursor-pointer">No</label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Presentation Topic - Shows when presenting interest is "yes" */}
+                        {watchPresentingInterest === "yes" && (
+                          <FormField
+                            control={form.control}
+                            name="presentationTopic"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 dark:text-gray-300">
+                                  I would be interested in presenting to CANN members on the following topic *
+                                </FormLabel>
+                                <FormControl>
+                                  <Textarea 
+                                    placeholder="Describe the topic you would like to present on..." 
+                                    className="border-gray-300 dark:border-gray-600" 
+                                    {...field} 
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        )}
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => {
+                            setShowRegistrationForm(false);
+                            form.reset();
+                          }}
+                          className="flex-1 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          type="submit"
+                          className="flex-1 bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300"
+                        >
+                          <UserPlus className="w-4 h-4 mr-2" />
+                          Submit Registration
+                        </Button>
+                      </div>
+                    </form>
+                  </Form>
+
+                  {/* Footer Note */}
+                  <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
+                      By registering, you agree to join Canada's first dedicated amyloidosis nursing network. 
+                      Membership is free and designed for nursing professionals.
+                    </p>
+                  </div>
+                </motion.div>
+              )}
             </motion.div>
           </div>
         </div>

@@ -159,7 +159,7 @@ export default function AboutAmyloidosis() {
       diagnosis: [
         "Genetic testing for TTR mutations",
         "Imaging (nuclear scan, MRI, echocardiogram)",
-        "Biopsies, imaging (MRI, scans)",
+        "Biopsies",
       ],
       treatment: [
         "TTR stabilizers",

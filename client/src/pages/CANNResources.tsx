@@ -557,7 +557,7 @@ export default function CANNResources() {
                               }}
                             >
                               <motion.div
-                                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold px-4 py-2 rounded-full text-center shadow-lg border-2 border-green-400/50"
+                                className="inline-block bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold px-3 py-1.5 rounded-full shadow-lg border-2 border-green-400/50"
                                 animate={{
                                   scale: [1, 1.05, 1],
                                   boxShadow: [

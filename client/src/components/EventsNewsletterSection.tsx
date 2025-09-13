@@ -147,7 +147,7 @@ export default function EventsNewsletterSection() {
                   {t('events.joinCommunity')}
                 </h3>
                 <p className="text-gray-700 dark:text-white/80 text-lg mb-8 leading-relaxed text-center">
-                  Get exclusive access to research updates, community events, and expert insights.
+                  Get access to research updates, community events, and expert insights.
                 </p>
 
                 <div className="flex justify-center">

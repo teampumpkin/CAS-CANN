@@ -153,12 +153,9 @@ export default function AboutAmyloidosisSection() {
                 <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('about.earlyDetection.title')}</span>
                 <span className="text-gray-900 dark:text-white"> {t('about.earlyDetection.subtitle')}</span>
               </h3>
-              <div className="space-y-6 mb-10">
+              <div className="mb-10">
                 <p className="text-xl text-gray-700 dark:text-white/80 leading-relaxed">
                   {t('about.earlyDetection.description')}
-                </p>
-                <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed">
-                  {t('about.earlyDetection.subdescription')}
                 </p>
               </div>
             </div>

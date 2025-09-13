@@ -1049,10 +1049,10 @@ export default function AboutAmyloidosis() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto h-full">
             {/* Neurological Guidelines Card */}
             <motion.div
-              className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 hover:scale-105 transition-all duration-300 group flex flex-col h-full"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -1065,13 +1065,13 @@ export default function AboutAmyloidosis() {
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Hereditary ATTR Polyneuropathy
               </h3>
-              <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6">
+              <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6 flex-grow">
                 Canadian guidelines for neurological manifestations and
                 polyneuropathy management
               </p>
 
               <a
-                href="/cdn-attr-polyneuropathy-guidelines.pdf"
+                href="/cdn-hereditary-attr-polyneuropathy-guidelines.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300"
@@ -1083,7 +1083,7 @@ export default function AboutAmyloidosis() {
 
             {/* Cardiac Guidelines Card */}
             <motion.div
-              className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 hover:scale-105 transition-all duration-300 group"
+              className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 hover:scale-105 transition-all duration-300 group flex flex-col h-full"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -1096,13 +1096,13 @@ export default function AboutAmyloidosis() {
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Cardiac Amyloidosis
               </h3>
-              <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6">
+              <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6 flex-grow">
                 CCS/CHFS joint position statement on evaluation and
                 management
               </p>
 
               <a
-                href="/cdn-cardiac-amyloidosis-guidelines.pdf"
+                href="/cdn-cardiac-amyloidosis-position-guidelines.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300"

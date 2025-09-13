@@ -437,11 +437,17 @@ export default function Events() {
                               onClick={() =>
                                 (window.location.href = "/join-cas")
                               }
-                              className="w-full bg-white dark:bg-gray-800 border-2 border-[#00AFE6] hover:bg-[#00AFE6] hover:border-[#00AFE6] text-[#00AFE6] hover:text-white dark:text-[#00AFE6] dark:hover:text-white shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm"
+                              className="w-full bg-[#00DD89] hover:bg-[#00DD89]/90 text-white border-2 border-[#00DD89] hover:border-[#00DD89]/90 shadow-xl hover:shadow-2xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-4 rounded-2xl font-bold text-base relative overflow-hidden"
                               data-testid="button-join-cas"
                             >
-                              Join CAS
-                              <Users className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                              {/* Animated background effect */}
+                              <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                              
+                              <div className="relative z-10 flex items-center justify-center">
+                                <Users className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
+                                Join CAS
+                                <div className="ml-2 w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                              </div>
                             </Button>
                           </div>
                         )}

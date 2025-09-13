@@ -807,7 +807,7 @@ export default function AboutAmyloidosis() {
               <div className="space-y-4">
                 {[
                   'Heart failure with preserved ejection fraction + proteinuria',
-                  'Bilateral carpal tunnel syndrome in patients &gt;50 years',
+                  'Bilateral carpal tunnel syndrome in patients >50 years',
                   'Unexplained cardiomyopathy with low-voltage ECG',
                   'Nephrotic syndrome with cardiac symptoms',
                   'Peripheral neuropathy + autonomic dysfunction',
@@ -844,7 +844,7 @@ export default function AboutAmyloidosis() {
               
               <div className="space-y-4">
                 {[
-                  'Unexplained weight loss &gt;10% in 6 months',
+                  'Unexplained weight loss >10% in 6 months',
                   'Chronic diarrhea with malabsorption',
                   'Orthostatic hypotension without clear cause',
                   'Hoarse voice with systemic symptoms',
@@ -927,7 +927,7 @@ export default function AboutAmyloidosis() {
                       feature: "Age of Onset",
                       al: "40-70 years (peak 60s)",
                       hattr: "20-70 years (variable)",
-                      wtattr: "&gt;60 years (usually &gt;70)",
+                      wtattr: ">60 years (usually >70)",
                     },
                     {
                       feature: "Gender",

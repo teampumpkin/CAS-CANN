@@ -442,61 +442,6 @@ export default function AboutCANN() {
         </div>
       </section>
 
-      {/* Achievements Section */}
-      <section className="py-24 bg-white dark:bg-gray-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/5 dark:via-white/5 to-transparent" />
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Network Achievements
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Measurable impact through collaboration and innovation in amyloidosis care.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {networkData.achievements.map((achievement, index) => (
-              <motion.div
-                key={index}
-                className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-900/50 backdrop-blur-xl rounded-2xl p-8 border border-gray-900/10 dark:border-white/10 hover:shadow-2xl transition-all duration-300 group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -8 }}
-              >
-                <div className="flex items-start gap-6">
-                  <div className="text-center">
-                    <div className="text-4xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2">
-                      {achievement.stat}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-white/60 font-medium">
-                      {achievement.label}
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-pink-600 transition-colors duration-300">
-                      {achievement.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-white/70 leading-relaxed">
-                      {achievement.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Membership Benefits Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-800 relative">

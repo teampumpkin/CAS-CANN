@@ -735,7 +735,7 @@ export default function AboutCANN() {
 
                   {/* Join CANN Registration Form */}
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 text-left">
                       {/* Personal Information */}
                       <div className="space-y-4">
                         <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">

@@ -968,7 +968,7 @@ export default function AboutAmyloidosis() {
                       feature: "Gastrointestinal symptoms",
                       al: "Diarrhea, malabsorption",
                       hattr: "Gastroparesis, diarrhea",
-                      wtattr: "Rare GI involvement",
+                      wtattr: "Rare",
                     },
                     {
                       feature: "Red Flag Signs",

@@ -572,7 +572,7 @@ export default function CANNResources() {
                                   ease: "easeInOut"
                                 }}
                               >
-                                🎯 {event.registrationDeadline}
+                                {event.registrationDeadline}
                               </motion.div>
                             </motion.div>
                           ) : (

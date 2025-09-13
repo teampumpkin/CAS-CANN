@@ -113,7 +113,7 @@ export default function CANNResources() {
       location: "Toronto Airport Marriott Hotel",
       format: "In-person",
       description: "Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.",
-      registrationDeadline: "Registration TBD",
+      registrationDeadline: "Registration is now open",
       cmeCredits: "3 days",
       type: "Conference"
     }
@@ -544,9 +544,20 @@ export default function CANNResources() {
                           <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
                             Registration:
                           </div>
-                          <div className="font-semibold text-pink-600">
+                          <motion.div 
+                            className="font-semibold text-pink-600"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ 
+                              duration: 0.6, 
+                              delay: 0.2,
+                              type: "spring",
+                              bounce: 0.4
+                            }}
+                            viewport={{ once: true }}
+                          >
                             {event.registrationDeadline}
-                          </div>
+                          </motion.div>
                         </div>
                         {index === 2 && (
                           <a 

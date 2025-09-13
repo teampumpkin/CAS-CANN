@@ -546,7 +546,7 @@ export default function CANNResources() {
                           </div>
                           {event.registrationDeadline === "Registration is now open" ? (
                             <motion.div 
-                              className="font-semibold text-pink-600 relative"
+                              className="relative"
                               initial={{ opacity: 0, scale: 0.8, y: 10 }}
                               animate={{ opacity: 1, scale: 1, y: 0 }}
                               transition={{ 
@@ -557,12 +557,13 @@ export default function CANNResources() {
                               }}
                             >
                               <motion.div
+                                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold px-4 py-2 rounded-full text-center shadow-lg border-2 border-green-400/50"
                                 animate={{
                                   scale: [1, 1.05, 1],
-                                  textShadow: [
-                                    "0 0 0px rgba(236, 72, 153, 0)",
-                                    "0 0 8px rgba(236, 72, 153, 0.3)",
-                                    "0 0 0px rgba(236, 72, 153, 0)"
+                                  boxShadow: [
+                                    "0 4px 15px rgba(34, 197, 94, 0.3)",
+                                    "0 6px 20px rgba(34, 197, 94, 0.5)",
+                                    "0 4px 15px rgba(34, 197, 94, 0.3)"
                                   ]
                                 }}
                                 transition={{
@@ -571,7 +572,7 @@ export default function CANNResources() {
                                   ease: "easeInOut"
                                 }}
                               >
-                                {event.registrationDeadline}
+                                ✅ {event.registrationDeadline}
                               </motion.div>
                             </motion.div>
                           ) : (

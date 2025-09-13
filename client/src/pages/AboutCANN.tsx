@@ -752,7 +752,7 @@ export default function AboutCANN() {
                               <FormControl>
                                 <Input 
                                   placeholder="Enter your full name" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
+                                  className="border-gray-300 dark:border-gray-600 text-lg" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -772,7 +772,7 @@ export default function AboutCANN() {
                                 <Input 
                                   type="email" 
                                   placeholder="Enter your email address" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
+                                  className="border-gray-300 dark:border-gray-600 text-lg" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -798,7 +798,7 @@ export default function AboutCANN() {
                               <FormControl>
                                 <Input 
                                   placeholder="e.g., Nurse Practitioner, Nurse Clinician, educator, researcher, administrator" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
+                                  className="border-gray-300 dark:border-gray-600 text-lg" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -817,7 +817,7 @@ export default function AboutCANN() {
                               <FormControl>
                                 <Input 
                                   placeholder="e.g., cardiology, hematology, neurology" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
+                                  className="border-gray-300 dark:border-gray-600 text-lg" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -870,7 +870,7 @@ export default function AboutCANN() {
                               <FormControl>
                                 <Input 
                                   placeholder="Enter your institution name" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
+                                  className="border-gray-300 dark:border-gray-600 text-lg" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -983,7 +983,7 @@ export default function AboutCANN() {
                                 <FormControl>
                                   <Textarea 
                                     placeholder="Describe your other area of interest..." 
-                                    className="border-gray-300 dark:border-gray-600 text-base" 
+                                    className="border-gray-300 dark:border-gray-600 text-lg" 
                                     {...field} 
                                   />
                                 </FormControl>
@@ -1043,7 +1043,7 @@ export default function AboutCANN() {
                                 <FormControl>
                                   <Textarea 
                                     placeholder="Describe the topic you would like to present on..." 
-                                    className="border-gray-300 dark:border-gray-600 text-base" 
+                                    className="border-gray-300 dark:border-gray-600 text-lg" 
                                     {...field} 
                                   />
                                 </FormControl>

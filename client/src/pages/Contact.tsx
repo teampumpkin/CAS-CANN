@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { Mail, ChevronDown, Plus, Minus, Copy, Check } from 'lucide-react';
-import { useState } from 'react';
+import { motion } from "framer-motion";
+import { Mail, ChevronDown, Plus, Minus, Copy, Check } from "lucide-react";
+import { useState } from "react";
 
 export default function Contact() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
@@ -12,39 +12,46 @@ export default function Contact() {
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText('cas@amyloid.ca');
+      await navigator.clipboard.writeText("cas@amyloid.ca");
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy email:', err);
+      console.error("Failed to copy email:", err);
     }
   };
 
   const faqData = [
     {
       question: "How do I submit a new resource to the directory?",
-      answer: "You can submit resources by contacting us at cas@amyloid.ca with details about the resource you'd like to add. All submissions undergo review by our editorial team."
+      answer:
+        "You can submit resources by contacting us at cas@amyloid.ca with details about the resource you'd like to add. All submissions undergo review by our editorial team.",
     },
     {
       question: "Can I update information in the healthcare directory/map?",
-      answer: "Yes! Healthcare professionals can update their directory information by contacting cas@amyloid.ca with their current details and credentials."
+      answer:
+        "Yes! Healthcare professionals can update their directory information by contacting cas@amyloid.ca with their current details and credentials.",
     },
     {
-      question: "How do I join CAS as a healthcare professional? Is there a fee to join?",
-      answer: "Simply visit our <a href='/join-cas' class='text-[#00AFE6] hover:text-[#00DD89] underline transition-colors duration-200'>Join CAS page</a> and complete the registration form. Membership is completely free for all healthcare professionals."
+      question:
+        "How do I join CAS as a healthcare professional? Is there a fee to join?",
+      answer:
+        "Simply visit our <a href='/join-cas' class='text-[#00AFE6] hover:text-[#00DD89] underline transition-colors duration-200'>Join CAS page</a> and complete the registration form. Membership is completely free for all healthcare professionals.",
     },
     {
       question: "Do you provide direct patient care?",
-      answer: "No, CAS does not provide direct patient care. We are a professional organization that supports healthcare providers and connects patients with appropriate care resources."
+      answer:
+        "No, CAS does not provide direct patient care. We are a professional organization that supports healthcare providers.",
     },
     {
       question: "What information do you collect and how is it used?",
-      answer: "We collect only necessary information to provide our services. All data is handled according to our Privacy Policy and Canadian privacy laws. We never share personal information with third parties without consent."
+      answer:
+        "We collect only information to help improve our services and resources. All data is handled according to our Privacy Policy and Canadian privacy laws. We never share personal information with third parties without consent.",
     },
     {
       question: "Can patients or family members/supports join the CAS?",
-      answer: "Patients, family members and support persons are an important part of the CAS community. While membership is currently offered for healthcare professionals, there are many ways for patients and supports to get involved. Contact us at cas@amyloid.ca for more information."
-    }
+      answer:
+        "Patients, family members and support persons are an important part of the CAS community. While membership is currently offered for healthcare professionals, there are other ways for patients and supports to get involved. Contact us at cas@amyloid.ca for more information.",
+    },
   ];
 
   return (
@@ -64,7 +71,9 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Mail className="w-5 h-5 text-[#00AFE6]" />
-            <span className="text-sm font-medium text-gray-800 dark:text-white/90">Contact Us</span>
+            <span className="text-sm font-medium text-gray-800 dark:text-white/90">
+              Contact Us
+            </span>
           </motion.div>
 
           {/* Welcome Title */}
@@ -75,7 +84,9 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <span className="text-gray-900 dark:text-white">Welcome to </span>
-            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">CAS</span>
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+              CAS
+            </span>
           </motion.h1>
 
           {/* Purpose Statement */}
@@ -85,7 +96,9 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            We welcome all questions and feedback. Whether you're a patient, caregiver, healthcare professional, or researcher, we're here to connect and support the amyloidosis community.
+            We welcome all questions and feedback. Whether you're a patient,
+            caregiver, healthcare professional, or researcher, we're here to
+            connect and support the amyloidosis community.
           </motion.p>
 
           {/* Email Section */}
@@ -99,7 +112,7 @@ export default function Contact() {
               <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-3xl flex items-center justify-center shadow-lg">
                 <Mail className="w-8 h-8 text-white" />
               </div>
-              
+
               <div className="text-center">
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">
                   Get in Touch
@@ -124,7 +137,10 @@ export default function Contact() {
 
                 {/* Email with Copy Feature */}
                 <div className="flex items-center gap-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-xl px-4 py-3 border border-gray-200/50 dark:border-gray-600/30">
-                  <span className="text-gray-800 dark:text-white/90 font-medium" data-testid="text-email">
+                  <span
+                    className="text-gray-800 dark:text-white/90 font-medium"
+                    data-testid="text-email"
+                  >
                     cas@amyloid.ca
                   </span>
                   <motion.button
@@ -154,14 +170,19 @@ export default function Contact() {
           >
             <div className="text-center mb-8">
               <h3 className="text-2xl md:text-3xl font-bold mb-3 font-rosarivo">
-                <span className="text-gray-900 dark:text-white">Frequently Asked </span>
-                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Questions</span>
+                <span className="text-gray-900 dark:text-white">
+                  Frequently Asked{" "}
+                </span>
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  Questions
+                </span>
               </h3>
               <p className="text-gray-600 dark:text-white/70">
-                Quick answers to common questions about CAS, resources, and membership.
+                Quick answers to common questions about CAS, resources, and
+                membership.
               </p>
             </div>
-            
+
             <div className="space-y-4 max-w-4xl mx-auto">
               {faqData.slice(2).map((faq, index) => (
                 <motion.div
@@ -191,12 +212,12 @@ export default function Contact() {
                       <ChevronDown className="w-6 h-6 text-gray-400 dark:text-gray-500 group-hover:text-[#00AFE6] transition-colors duration-200" />
                     </motion.div>
                   </button>
-                  
+
                   <motion.div
                     initial={false}
                     animate={{
                       height: openFAQ === index ? "auto" : 0,
-                      opacity: openFAQ === index ? 1 : 0
+                      opacity: openFAQ === index ? 1 : 0,
                     }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
@@ -205,7 +226,7 @@ export default function Contact() {
                       <div className="pt-6">
                         <div className="flex gap-4">
                           <div className="w-8 flex-shrink-0"></div>
-                          <p 
+                          <p
                             className="text-gray-600 dark:text-white/70 leading-relaxed text-base text-left"
                             dangerouslySetInnerHTML={{ __html: faq.answer }}
                           />

@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { 
-  Heart, 
-  Users, 
-  Mail, 
-  Phone, 
+import {
+  Heart,
+  Users,
+  Mail,
+  Phone,
   ArrowRight,
   Check,
   UserPlus,
@@ -35,17 +35,31 @@ import {
   MapPin,
   Building,
   GraduationCap,
-  Send
+  Send,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 
@@ -53,54 +67,54 @@ const membershipBenefits = [
   {
     icon: Upload,
     title: "Resource Upload Rights",
-    description: "Submit and share clinical tools, protocols, and educational materials with the entire CAS community"
+    description:
+      "Submit and share clinical tools, protocols, and educational materials with the entire CAS community",
   },
   {
     icon: Vote,
     title: "Governance Voice",
-    description: "Participate in CAS governance decisions and vote on important policy matters affecting amyloidosis care"
+    description:
+      "Participate in CAS governance decisions and vote on important policy matters affecting amyloidosis care",
   },
   {
     icon: Network,
     title: "Professional Network",
-    description: "Access to exclusive professional network of amyloidosis specialists across Canada"
+    description:
+      "Access to exclusive professional network of amyloidosis specialists across Canada",
   },
   {
     icon: Gift,
     title: "Premium Tools Access",
-    description: "Early access to new clinical tools, research findings, and professional development resources"
+    description:
+      "Early access to new clinical tools, research findings, and professional development resources",
   },
   {
     icon: Calendar,
     title: "Priority Event Access",
-    description: "Priority registration for conferences, webinars, and professional development events"
+    description:
+      "Priority registration for conferences, webinars, and professional development events",
   },
   {
     icon: Award,
     title: "Recognition & Listing",
-    description: "Professional recognition and listing in the CAS member directory with your specialization"
-  }
+    description:
+      "Professional recognition and listing in the CAS member directory with your specialization",
+  },
 ];
 
 const whoCanJoin = [
   {
     icon: Stethoscope,
     title: "Healthcare Professionals",
-    description: "Physicians, nurses, allied health professionals involved in amyloidosis care",
-    requirements: "Must have active healthcare license and clinical experience"
+    description:
+      "Physicians, nurses, allied health professionals involved in amyloidosis care",
   },
   {
     icon: BookOpen,
     title: "Researchers & Academics",
-    description: "Scientists, academics, and research professionals studying amyloidosis",
-    requirements: "Must be affiliated with recognized research institution"
+    description:
+      "Scientists, academics, and research professionals studying amyloidosis",
   },
-  {
-    icon: Shield,
-    title: "Healthcare Administrators",
-    description: "Healthcare system leaders and administrators managing amyloidosis programs",
-    requirements: "Must hold leadership role in healthcare organization"
-  }
 ];
 
 const approvalProcess = [
@@ -108,26 +122,27 @@ const approvalProcess = [
     step: 1,
     title: "Application Review",
     description: "Initial review of application and credentials verification",
-    timeline: "3-5 business days"
+    timeline: "3-5 business days",
   },
   {
     step: 2,
     title: "Credential Verification",
-    description: "Verification of professional credentials and organizational affiliation",
-    timeline: "5-7 business days"
+    description:
+      "Verification of professional credentials and organizational affiliation",
+    timeline: "5-7 business days",
   },
   {
     step: 3,
     title: "Committee Approval",
     description: "Final review by CAS membership committee",
-    timeline: "7-10 business days"
+    timeline: "7-10 business days",
   },
   {
     step: 4,
     title: "Welcome & Onboarding",
     description: "Welcome package and access to member resources",
-    timeline: "1-2 business days"
-  }
+    timeline: "1-2 business days",
+  },
 ];
 
 // Form validation schema
@@ -145,10 +160,13 @@ const membershipFormSchema = z.object({
   city: z.string().min(2, "Please specify your city."),
   province: z.string().min(2, "Please select your province."),
   postalCode: z.string().min(5, "Please provide a valid postal code."),
-  yearsExperience: z.string().min(1, "Please specify your years of experience."),
+  yearsExperience: z
+    .string()
+    .min(1, "Please specify your years of experience."),
   amyloidosisExperience: z.string().optional(),
   includeInMap: z.enum(["yes", "no"], {
-    required_error: "Please indicate if you want to be included in the services map.",
+    required_error:
+      "Please indicate if you want to be included in the services map.",
   }),
   specializations: z.array(z.string()).optional(),
   additionalInfo: z.string().optional(),
@@ -191,20 +209,22 @@ export default function JoinCAS() {
     try {
       // Here you would typically submit to your backend
       console.log("Form Data:", data);
-      
+
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       toast({
         title: "Application Submitted Successfully!",
-        description: "Thank you for your membership application. We'll review it within 2-3 weeks and contact you with updates.",
+        description:
+          "Thank you for your membership application. We'll review it within 2-3 weeks and contact you with updates.",
       });
-      
+
       form.reset();
     } catch (error) {
       toast({
         title: "Submission Error",
-        description: "There was an error submitting your application. Please try again.",
+        description:
+          "There was an error submitting your application. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -221,7 +241,7 @@ export default function JoinCAS() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00AFE6]/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#00DD89]/10 rounded-full blur-3xl animate-pulse delay-1000" />
         </div>
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
@@ -231,32 +251,45 @@ export default function JoinCAS() {
           >
             <div className="inline-flex items-center gap-3 bg-[#00AFE6]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6">
               <UserPlus className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-gray-900 dark:text-white/90">Professional Membership</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-white/90">
+                Professional Membership
+              </span>
             </div>
-            
+
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight text-gray-900 dark:text-white">
               Join the{" "}
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Canadian Amyloidosis Society
               </span>
             </h1>
-            
+
             <p className="text-xl text-gray-600 dark:text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Become part of Canada's premier professional network for amyloidosis care. Access exclusive clinical tools, contribute to governance decisions, and collaborate with leading experts across the country.
+              Become part of Canada's premier professional network for
+              amyloidosis care. Access clinical tools, contribute to governance
+              decisions, and collaborate with leading experts across the
+              country.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button
-                onClick={() => document.getElementById('join-form')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document
+                    .getElementById("join-form")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
                 className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-10 py-6 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group"
               >
                 <span>Register for Membership</span>
                 <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              
+
               <Button
                 variant="outline"
-                onClick={() => document.getElementById('why-join')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document
+                    .getElementById("why-join")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
                 className="border-[#00AFE6]/30 text-[#00AFE6] hover:bg-[#00AFE6]/10 px-8 py-6 rounded-2xl font-semibold text-lg"
               >
                 Learn More
@@ -265,7 +298,6 @@ export default function JoinCAS() {
             </div>
           </motion.div>
         </div>
-
       </section>
 
       {/* Why Join Section */}
@@ -279,10 +311,15 @@ export default function JoinCAS() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold font-rosarivo text-gray-900 dark:text-white mb-4">
-              Why Join <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">CAS?</span>
+              Why Join{" "}
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                CAS?
+              </span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
-              CAS membership provides exclusive access to professional tools, governance participation, and a network of Canada's leading amyloidosis experts.
+              CAS membership provides access to professional tools, governance
+              participation, and a network of Canada's leading amyloidosis
+              experts.
             </p>
           </motion.div>
 
@@ -301,11 +338,15 @@ export default function JoinCAS() {
                       <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                         <benefit.icon className="w-6 h-6 text-white" />
                       </div>
-                      <CardTitle className="text-gray-900 dark:text-white">{benefit.title}</CardTitle>
+                      <CardTitle className="text-gray-900 dark:text-white">
+                        {benefit.title}
+                      </CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 dark:text-white/70">{benefit.description}</p>
+                    <p className="text-gray-600 dark:text-white/70">
+                      {benefit.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -325,10 +366,14 @@ export default function JoinCAS() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold font-rosarivo text-gray-900 dark:text-white mb-4">
-              Who Can <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Join?</span>
+              Who Can{" "}
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                Join?
+              </span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
-              CAS membership is open to qualified professionals who contribute to amyloidosis care, research, and patient advocacy in Canada.
+              CAS membership is open to qualified professionals who contribute
+              to amyloidosis care, research, and patient advocacy in Canada.
             </p>
           </motion.div>
 
@@ -347,16 +392,15 @@ export default function JoinCAS() {
                       <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
                         <category.icon className="w-6 h-6 text-white" />
                       </div>
-                      <CardTitle className="text-gray-900 dark:text-white">{category.title}</CardTitle>
+                      <CardTitle className="text-gray-900 dark:text-white">
+                        {category.title}
+                      </CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 dark:text-white/70 mb-4">{category.description}</p>
-                    <div className="p-3 bg-gray-50 dark:bg-white/5 rounded-3xl">
-                      <p className="text-sm text-gray-600 dark:text-white/60">
-                        <strong>Requirements:</strong> {category.requirements}
-                      </p>
-                    </div>
+                    <p className="text-gray-600 dark:text-white/70 mb-4">
+                      {category.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -365,9 +409,11 @@ export default function JoinCAS() {
         </div>
       </section>
 
-
       {/* Registration Form Section */}
-      <section id="join-form" className="py-16 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10">
+      <section
+        id="join-form"
+        className="py-16 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10"
+      >
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div
@@ -378,10 +424,14 @@ export default function JoinCAS() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold font-rosarivo text-gray-900 dark:text-white mb-4">
-                Register for <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">CAS</span>
+                Register for{" "}
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  CAS
+                </span>
               </h2>
               <p className="text-gray-600 dark:text-white/70 max-w-2xl mx-auto mb-8">
-                Join Canada's leading professional network for amyloidosis care by submitting the registration form below.
+                Join Canada's leading professional network for amyloidosis care
+                by submitting the registration form below.
               </p>
             </motion.div>
 
@@ -394,20 +444,23 @@ export default function JoinCAS() {
               <Alert className="bg-[#00AFE6]/10 border-[#00AFE6]/30 mb-8">
                 <Info className="w-4 h-4 text-[#00AFE6]" />
                 <AlertDescription className="text-gray-900 dark:text-white/90">
-                  <strong>Terms of Participation & Privacy Policy:</strong> By applying, you agree to abide by our professional standards and governance framework. All personal information is handled according to our privacy policy.
+                  <strong>Terms of Participation & Privacy Policy:</strong> By
+                  applying, you agree to abide by our professional standards and
+                  governance framework. All personal information is handled
+                  according to our privacy policy.
                 </AlertDescription>
               </Alert>
 
               <div className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                 {/* Background decoration */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5" />
-                
+
                 {/* Form Header */}
                 <div className="relative bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-8 text-center">
                   {/* Floating elements */}
                   <div className="absolute top-4 left-4 w-8 h-8 bg-white/10 rounded-full blur-sm animate-pulse" />
                   <div className="absolute bottom-4 right-4 w-6 h-6 bg-white/10 rounded-full blur-sm animate-pulse delay-1000" />
-                  
+
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
@@ -418,14 +471,15 @@ export default function JoinCAS() {
                       <FileText className="w-8 h-8 text-white" />
                     </div>
                   </motion.div>
-                  
+
                   <h3 className="text-2xl font-bold text-white mb-3 font-rosarivo">
                     CAS Registration Form
                   </h3>
                   <p className="text-white/90 text-sm max-w-md mx-auto">
-                    Complete the registration form below. All fields are secure and confidential.
+                    Complete the registration form below. All fields are secure
+                    and confidential.
                   </p>
-                  
+
                   {/* Progress indicators */}
                   <div className="flex justify-center gap-2 mt-6">
                     <div className="w-2 h-2 bg-white/40 rounded-full" />
@@ -438,24 +492,33 @@ export default function JoinCAS() {
                 <div className="relative bg-white dark:bg-gray-800">
                   {/* Form frame decoration */}
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent dark:from-gray-700/50 pointer-events-none" />
-                  
+
                   <div className="p-8">
                     <Form {...form}>
-                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        
+                      <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-8"
+                      >
                         {/* Section 1: Membership Interest */}
                         <div className="space-y-6">
                           <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Membership Interest</h4>
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              1
+                            </div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                              Membership Interest
+                            </h4>
                           </div>
-                          
+
                           <FormField
                             control={form.control}
                             name="wantsMembership"
                             render={({ field }) => (
                               <FormItem className="space-y-3">
-                                <FormLabel className="text-base font-medium">I would like to become a member of the Canadian Amyloidosis Society (CAS) *</FormLabel>
+                                <FormLabel className="text-base font-medium">
+                                  I would like to become a member of the
+                                  Canadian Amyloidosis Society (CAS) *
+                                </FormLabel>
                                 <FormControl>
                                   <RadioGroup
                                     onValueChange={field.onChange}
@@ -464,11 +527,21 @@ export default function JoinCAS() {
                                   >
                                     <div className="flex items-center space-x-2">
                                       <RadioGroupItem value="yes" id="yes" />
-                                      <label htmlFor="yes" className="cursor-pointer">Yes</label>
+                                      <label
+                                        htmlFor="yes"
+                                        className="cursor-pointer"
+                                      >
+                                        Yes
+                                      </label>
                                     </div>
                                     <div className="flex items-center space-x-2">
                                       <RadioGroupItem value="no" id="no" />
-                                      <label htmlFor="no" className="cursor-pointer">No</label>
+                                      <label
+                                        htmlFor="no"
+                                        className="cursor-pointer"
+                                      >
+                                        No
+                                      </label>
                                     </div>
                                   </RadioGroup>
                                 </FormControl>
@@ -481,25 +554,34 @@ export default function JoinCAS() {
                         {/* Section 2: Personal Information */}
                         <div className="space-y-6">
                           <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h4>
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              2
+                            </div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                              Personal Information
+                            </h4>
                           </div>
-                          
+
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <FormField
                               control={form.control}
                               name="fullName"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>Full Name (first and last) *</FormLabel>
+                                  <FormLabel>
+                                    Full Name (first and last) *
+                                  </FormLabel>
                                   <FormControl>
-                                    <Input placeholder="Enter your full name" {...field} />
+                                    <Input
+                                      placeholder="Enter your full name"
+                                      {...field}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-                            
+
                             <FormField
                               control={form.control}
                               name="email"
@@ -507,13 +589,17 @@ export default function JoinCAS() {
                                 <FormItem>
                                   <FormLabel>Email Address *</FormLabel>
                                   <FormControl>
-                                    <Input type="email" placeholder="your.email@example.com" {...field} />
+                                    <Input
+                                      type="email"
+                                      placeholder="your.email@example.com"
+                                      {...field}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-                            
+
                             <FormField
                               control={form.control}
                               name="phone"
@@ -521,7 +607,11 @@ export default function JoinCAS() {
                                 <FormItem>
                                   <FormLabel>Phone Number</FormLabel>
                                   <FormControl>
-                                    <Input type="tel" placeholder="(555) 123-4567" {...field} />
+                                    <Input
+                                      type="tel"
+                                      placeholder="(555) 123-4567"
+                                      {...field}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -533,25 +623,35 @@ export default function JoinCAS() {
                         {/* Section 3: Professional Information */}
                         <div className="space-y-6">
                           <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Professional Information</h4>
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              3
+                            </div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                              Professional Information
+                            </h4>
                           </div>
-                          
+
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <FormField
                               control={form.control}
                               name="discipline"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>Discipline (physician, nursing, genetic counsellor, etc) *</FormLabel>
+                                  <FormLabel>
+                                    Discipline (physician, nursing, genetic
+                                    counsellor, etc) *
+                                  </FormLabel>
                                   <FormControl>
-                                    <Input placeholder="e.g., Physician, Nurse, Genetic Counsellor" {...field} />
+                                    <Input
+                                      placeholder="e.g., Physician, Nurse, Genetic Counsellor"
+                                      {...field}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-                            
+
                             <FormField
                               control={form.control}
                               name="position"
@@ -559,13 +659,16 @@ export default function JoinCAS() {
                                 <FormItem>
                                   <FormLabel>Current Position *</FormLabel>
                                   <FormControl>
-                                    <Input placeholder="e.g., Cardiologist, Clinical Nurse" {...field} />
+                                    <Input
+                                      placeholder="e.g., Cardiologist, Clinical Nurse"
+                                      {...field}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-                            
+
                             <FormField
                               control={form.control}
                               name="institution"
@@ -573,13 +676,16 @@ export default function JoinCAS() {
                                 <FormItem>
                                   <FormLabel>Institution/Workplace *</FormLabel>
                                   <FormControl>
-                                    <Input placeholder="Hospital, clinic, or organization name" {...field} />
+                                    <Input
+                                      placeholder="Hospital, clinic, or organization name"
+                                      {...field}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-                            
+
                             <FormField
                               control={form.control}
                               name="yearsExperience"
@@ -587,17 +693,32 @@ export default function JoinCAS() {
                                 <FormItem>
                                   <FormLabel>Years of Experience *</FormLabel>
                                   <FormControl>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <Select
+                                      onValueChange={field.onChange}
+                                      defaultValue={field.value}
+                                    >
                                       <SelectTrigger>
                                         <SelectValue placeholder="Select experience level" />
                                       </SelectTrigger>
                                       <SelectContent>
-                                        <SelectItem value="0-2">0-2 years</SelectItem>
-                                        <SelectItem value="3-5">3-5 years</SelectItem>
-                                        <SelectItem value="6-10">6-10 years</SelectItem>
-                                        <SelectItem value="11-15">11-15 years</SelectItem>
-                                        <SelectItem value="16-20">16-20 years</SelectItem>
-                                        <SelectItem value="20+">20+ years</SelectItem>
+                                        <SelectItem value="0-2">
+                                          0-2 years
+                                        </SelectItem>
+                                        <SelectItem value="3-5">
+                                          3-5 years
+                                        </SelectItem>
+                                        <SelectItem value="6-10">
+                                          6-10 years
+                                        </SelectItem>
+                                        <SelectItem value="11-15">
+                                          11-15 years
+                                        </SelectItem>
+                                        <SelectItem value="16-20">
+                                          16-20 years
+                                        </SelectItem>
+                                        <SelectItem value="20+">
+                                          20+ years
+                                        </SelectItem>
                                       </SelectContent>
                                     </Select>
                                   </FormControl>
@@ -611,10 +732,14 @@ export default function JoinCAS() {
                         {/* Section 4: Location Information */}
                         <div className="space-y-6">
                           <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">4</div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Location Information</h4>
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              4
+                            </div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                              Location Information
+                            </h4>
                           </div>
-                          
+
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <FormField
                               control={form.control}
@@ -623,13 +748,16 @@ export default function JoinCAS() {
                                 <FormItem className="md:col-span-3">
                                   <FormLabel>Address *</FormLabel>
                                   <FormControl>
-                                    <Input placeholder="Street address" {...field} />
+                                    <Input
+                                      placeholder="Street address"
+                                      {...field}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
                               )}
                             />
-                            
+
                             <FormField
                               control={form.control}
                               name="city"
@@ -643,7 +771,7 @@ export default function JoinCAS() {
                                 </FormItem>
                               )}
                             />
-                            
+
                             <FormField
                               control={form.control}
                               name="province"
@@ -651,24 +779,53 @@ export default function JoinCAS() {
                                 <FormItem>
                                   <FormLabel>Province/Territory *</FormLabel>
                                   <FormControl>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <Select
+                                      onValueChange={field.onChange}
+                                      defaultValue={field.value}
+                                    >
                                       <SelectTrigger>
                                         <SelectValue placeholder="Select province" />
                                       </SelectTrigger>
                                       <SelectContent>
-                                        <SelectItem value="AB">Alberta</SelectItem>
-                                        <SelectItem value="BC">British Columbia</SelectItem>
-                                        <SelectItem value="MB">Manitoba</SelectItem>
-                                        <SelectItem value="NB">New Brunswick</SelectItem>
-                                        <SelectItem value="NL">Newfoundland and Labrador</SelectItem>
-                                        <SelectItem value="NS">Nova Scotia</SelectItem>
-                                        <SelectItem value="ON">Ontario</SelectItem>
-                                        <SelectItem value="PE">Prince Edward Island</SelectItem>
-                                        <SelectItem value="QC">Quebec</SelectItem>
-                                        <SelectItem value="SK">Saskatchewan</SelectItem>
-                                        <SelectItem value="NT">Northwest Territories</SelectItem>
-                                        <SelectItem value="NU">Nunavut</SelectItem>
-                                        <SelectItem value="YT">Yukon</SelectItem>
+                                        <SelectItem value="AB">
+                                          Alberta
+                                        </SelectItem>
+                                        <SelectItem value="BC">
+                                          British Columbia
+                                        </SelectItem>
+                                        <SelectItem value="MB">
+                                          Manitoba
+                                        </SelectItem>
+                                        <SelectItem value="NB">
+                                          New Brunswick
+                                        </SelectItem>
+                                        <SelectItem value="NL">
+                                          Newfoundland and Labrador
+                                        </SelectItem>
+                                        <SelectItem value="NS">
+                                          Nova Scotia
+                                        </SelectItem>
+                                        <SelectItem value="ON">
+                                          Ontario
+                                        </SelectItem>
+                                        <SelectItem value="PE">
+                                          Prince Edward Island
+                                        </SelectItem>
+                                        <SelectItem value="QC">
+                                          Quebec
+                                        </SelectItem>
+                                        <SelectItem value="SK">
+                                          Saskatchewan
+                                        </SelectItem>
+                                        <SelectItem value="NT">
+                                          Northwest Territories
+                                        </SelectItem>
+                                        <SelectItem value="NU">
+                                          Nunavut
+                                        </SelectItem>
+                                        <SelectItem value="YT">
+                                          Yukon
+                                        </SelectItem>
                                       </SelectContent>
                                     </Select>
                                   </FormControl>
@@ -676,7 +833,7 @@ export default function JoinCAS() {
                                 </FormItem>
                               )}
                             />
-                            
+
                             <FormField
                               control={form.control}
                               name="postalCode"
@@ -691,13 +848,16 @@ export default function JoinCAS() {
                               )}
                             />
                           </div>
-                          
+
                           <FormField
                             control={form.control}
                             name="includeInMap"
                             render={({ field }) => (
                               <FormItem className="space-y-3">
-                                <FormLabel className="text-base font-medium">I would like my center/clinic to be included in the Canadian Amyloidosis Services Map *</FormLabel>
+                                <FormLabel className="text-base font-medium">
+                                  I would like my center/clinic to be included
+                                  in the Canadian Amyloidosis Services Map *
+                                </FormLabel>
                                 <FormControl>
                                   <RadioGroup
                                     onValueChange={field.onChange}
@@ -705,12 +865,25 @@ export default function JoinCAS() {
                                     className="flex gap-6"
                                   >
                                     <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="yes" id="map-yes" />
-                                      <label htmlFor="map-yes" className="cursor-pointer">Yes</label>
+                                      <RadioGroupItem
+                                        value="yes"
+                                        id="map-yes"
+                                      />
+                                      <label
+                                        htmlFor="map-yes"
+                                        className="cursor-pointer"
+                                      >
+                                        Yes
+                                      </label>
                                     </div>
                                     <div className="flex items-center space-x-2">
                                       <RadioGroupItem value="no" id="map-no" />
-                                      <label htmlFor="map-no" className="cursor-pointer">No</label>
+                                      <label
+                                        htmlFor="map-no"
+                                        className="cursor-pointer"
+                                      >
+                                        No
+                                      </label>
                                     </div>
                                   </RadioGroup>
                                 </FormControl>
@@ -723,28 +896,34 @@ export default function JoinCAS() {
                         {/* Section 5: Additional Information */}
                         <div className="space-y-6">
                           <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">5</div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Additional Information</h4>
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              5
+                            </div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                              Additional Information
+                            </h4>
                           </div>
-                          
+
                           <FormField
                             control={form.control}
                             name="amyloidosisExperience"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Experience with Amyloidosis Patients</FormLabel>
+                                <FormLabel>
+                                  Experience with Amyloidosis Patients
+                                </FormLabel>
                                 <FormControl>
-                                  <Textarea 
+                                  <Textarea
                                     placeholder="Briefly describe your experience with amyloidosis patients, research, or related work (optional)"
                                     rows={4}
-                                    {...field} 
+                                    {...field}
                                   />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
                             )}
                           />
-                          
+
                           <FormField
                             control={form.control}
                             name="additionalInfo"
@@ -752,10 +931,10 @@ export default function JoinCAS() {
                               <FormItem>
                                 <FormLabel>Additional Information</FormLabel>
                                 <FormControl>
-                                  <Textarea 
+                                  <Textarea
                                     placeholder="Any additional information you'd like to share about your interest in CAS membership (optional)"
                                     rows={3}
-                                    {...field} 
+                                    {...field}
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -782,7 +961,11 @@ export default function JoinCAS() {
                                     I agree to the terms and conditions *
                                   </FormLabel>
                                   <FormDescription>
-                                    By submitting this application, I agree to abide by CAS professional standards and governance framework. All personal information will be handled according to our privacy policy.
+                                    By submitting this application, I agree to
+                                    abide by CAS professional standards and
+                                    governance framework. All personal
+                                    information will be handled according to our
+                                    privacy policy.
                                   </FormDescription>
                                   <FormMessage />
                                 </div>
@@ -793,8 +976,8 @@ export default function JoinCAS() {
 
                         {/* Submit Button */}
                         <div className="pt-6">
-                          <Button 
-                            type="submit" 
+                          <Button
+                            type="submit"
                             disabled={isSubmitting}
                             className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold py-6 px-8 rounded-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 transform hover:scale-105"
                           >
@@ -820,7 +1003,7 @@ export default function JoinCAS() {
                 <div className="relative p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 border-t border-gray-200 dark:border-gray-700">
                   {/* Trust indicators with enhanced design */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                    <motion.div 
+                    <motion.div
                       className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
                       whileHover={{ scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 300 }}
@@ -829,12 +1012,16 @@ export default function JoinCAS() {
                         <Shield className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900 dark:text-white text-sm">Secure & Encrypted</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">SSL protected</p>
+                        <p className="font-semibold text-gray-900 dark:text-white text-sm">
+                          Secure & Encrypted
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          SSL protected
+                        </p>
                       </div>
                     </motion.div>
-                    
-                    <motion.div 
+
+                    <motion.div
                       className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
                       whileHover={{ scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 300 }}
@@ -843,12 +1030,16 @@ export default function JoinCAS() {
                         <Clock className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900 dark:text-white text-sm">5-10 Minutes</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Average completion</p>
+                        <p className="font-semibold text-gray-900 dark:text-white text-sm">
+                          5-10 Minutes
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          Average completion
+                        </p>
                       </div>
                     </motion.div>
-                    
-                    <motion.div 
+
+                    <motion.div
                       className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
                       whileHover={{ scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 300 }}
@@ -857,26 +1048,35 @@ export default function JoinCAS() {
                         <CheckCircle2 className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900 dark:text-white text-sm">Review in 2-3 Weeks</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Professional review</p>
+                        <p className="font-semibold text-gray-900 dark:text-white text-sm">
+                          Review in 2-3 Weeks
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          Professional review
+                        </p>
                       </div>
                     </motion.div>
                   </div>
-                  
+
                   {/* Help section */}
                   <div className="text-center p-4 bg-[#00AFE6]/5 rounded-xl border border-[#00AFE6]/20">
                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                       Need assistance with your application?
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <button 
-                        onClick={() => window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u', '_blank')}
+                      <button
+                        onClick={() =>
+                          window.open(
+                            "https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u",
+                            "_blank",
+                          )
+                        }
                         className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-medium transition-colors duration-200"
                       >
                         <ExternalLink className="w-4 h-4" />
                         Open in new window
                       </button>
-                      <a 
+                      <a
                         href="mailto:info@amyloid.ca"
                         className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-medium transition-colors duration-200"
                       >

@@ -545,18 +545,33 @@ export default function CANNResources() {
                             Registration:
                           </div>
                           <motion.div 
-                            className="font-semibold text-pink-600"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            className="font-semibold text-pink-600 relative"
+                            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
                             transition={{ 
-                              duration: 0.6, 
-                              delay: 0.2,
+                              duration: 0.8, 
+                              delay: 0.3,
                               type: "spring",
-                              bounce: 0.4
+                              bounce: 0.3
                             }}
-                            viewport={{ once: true }}
                           >
-                            {event.registrationDeadline}
+                            <motion.div
+                              animate={{
+                                scale: [1, 1.05, 1],
+                                textShadow: [
+                                  "0 0 0px rgba(236, 72, 153, 0)",
+                                  "0 0 8px rgba(236, 72, 153, 0.3)",
+                                  "0 0 0px rgba(236, 72, 153, 0)"
+                                ]
+                              }}
+                              transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                              }}
+                            >
+                              {event.registrationDeadline}
+                            </motion.div>
                           </motion.div>
                         </div>
                         {index === 2 && (

@@ -165,93 +165,74 @@ export default function EventsNewsletterSection() {
                 </div>
               </div>
 
-              {/* Modern Stats Display */}
+              {/* Network Overview */}
               <div className="flex flex-col justify-center h-full">
-                {/* Stats Overview */}
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 font-rosarivo">
+                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 font-rosarivo">
                     Growing Network
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
                     Join a thriving community of healthcare professionals
                   </p>
                 </div>
 
-                {/* Stats Grid */}
-                <ul role="list" className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                  {[
-                    { 
-                      value: 'Over 180', 
-                      label: 'Members', 
-                      icon: Users, 
-                      color: '#00AFE6',
-                      testId: 'members-count'
-                    },
-                    { 
-                      value: '13', 
-                      label: 'Provinces/\u00ADTerritories', 
-                      icon: MapPin, 
-                      color: '#8B5CF6',
-                      testId: 'provinces-count'
-                    },
-                    { 
-                      value: 'Multiple', 
-                      label: 'Disciplines', 
-                      icon: Stethoscope, 
-                      color: '#00DD89',
-                      testId: 'disciplines-count'
-                    }
-                  ].map((stat, index) => (
-                    <motion.li
-                      key={stat.label}
-                      role="listitem"
-                      className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200/60 dark:border-gray-700/60 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#00AFE6]/10 cursor-default sm:border-l-0 sm:first:border-l sm:first:rounded-l-2xl sm:last:rounded-r-2xl sm:not(:first-child):border-l sm:rounded-none"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      whileHover={{ y: -2, scale: 1.01 }}
-                      data-testid={stat.testId}
-                    >
-                      <div className="text-center space-y-3">
-                        {/* Icon */}
-                        <div className="flex justify-center">
-                          <div 
-                            className="w-12 h-12 rounded-full bg-white/70 dark:bg-gray-800/70 border-2 flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                            style={{ borderColor: `${stat.color}33` }}
-                          >
-                            <stat.icon 
-                              className="w-6 h-6 transition-colors duration-300" 
-                              style={{ color: stat.color }}
-                            />
-                          </div>
-                        </div>
-                        
+                {/* Professional KPI Band */}
+                <div className="rounded-2xl border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900 p-6 md:p-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 md:divide-x md:divide-gray-200/70 dark:md:divide-gray-700/70">
+                    {[
+                      { 
+                        value: '180+', 
+                        label: 'Members',
+                        testId: 'members-count'
+                      },
+                      { 
+                        value: '13', 
+                        label: 'Provinces & Territories',
+                        testId: 'provinces-count'
+                      },
+                      { 
+                        value: '5+', 
+                        label: 'Disciplines',
+                        testId: 'disciplines-count'
+                      }
+                    ].map((stat, index) => (
+                      <motion.div
+                        key={stat.label}
+                        className="text-center py-4 px-6"
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ 
+                          duration: 0.6, 
+                          delay: index * 0.1,
+                          ease: "easeOut"
+                        }}
+                        viewport={{ once: true }}
+                        data-testid={stat.testId}
+                      >
                         {/* Value */}
                         <div 
-                          className="text-3xl md:text-4xl font-extrabold leading-tight transition-all duration-300"
-                          style={{ color: stat.color }}
+                          className="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white mb-2 relative"
+                          aria-label={`${stat.value} ${stat.label.toLowerCase()}`}
                         >
                           <motion.span
-                            initial={{ opacity: 0, scale: 0.8 }}
+                            initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
                           >
                             {stat.value}
                           </motion.span>
-                          <span className="sr-only">
-                            {stat.value} {stat.label.toLowerCase()}
-                          </span>
+                          {/* Subtle brand accent */}
+                          <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-[#00AFE6] rounded-full opacity-60"></div>
                         </div>
                         
                         {/* Label */}
-                        <div className="text-sm md:text-base font-medium text-gray-700 dark:text-gray-300 leading-tight">
+                        <div className="text-sm md:text-base text-gray-600 dark:text-gray-300 font-medium">
                           {stat.label}
                         </div>
-                      </div>
-                    </motion.li>
-                  ))}
-                </ul>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

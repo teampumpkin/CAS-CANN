@@ -1044,12 +1044,13 @@ export default function AboutAmyloidosis() {
             </h2>
 
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Access authoritative clinical guidelines from leading
-              organizations
+              Access authoritative Canadian clinical guidelines from leading
+              medical organizations
             </p>
           </motion.div>
 
-          <div className="max-w-2xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {/* Neurological Guidelines Card */}
             <motion.div
               className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 hover:scale-105 transition-all duration-300 group"
               initial={{ opacity: 0, y: 20 }}
@@ -1058,25 +1059,56 @@ export default function AboutAmyloidosis() {
               viewport={{ once: true }}
             >
               <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-6">
-                <Heart className="w-8 h-8 text-white" />
+                <Brain className="w-8 h-8 text-white" />
               </div>
 
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Canadian Cardiovascular Society
+                Hereditary ATTR Polyneuropathy
               </h3>
               <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6">
-                Canadian guidelines for cardiac amyloidosis diagnosis and
-                management
+                Canadian guidelines for neurological manifestations and
+                polyneuropathy management
               </p>
 
               <a
-                href="https://www.ccs.ca"
+                href="/attached_assets/Cdn ATTRh-PN Guidelines_1757762257062.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300"
               >
-                <span>Access Guidelines</span>
-                <ExternalLink className="w-4 h-4" />
+                <span>View Guidelines</span>
+                <FileText className="w-4 h-4" />
+              </a>
+            </motion.div>
+
+            {/* Cardiac Guidelines Card */}
+            <motion.div
+              className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-2xl p-8 border border-[#00AFE6]/30 hover:scale-105 transition-all duration-300 group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mb-6">
+                <Heart className="w-8 h-8 text-white" />
+              </div>
+
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Cardiac Amyloidosis
+              </h3>
+              <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6">
+                CCS/CHFS joint position statement on evaluation and
+                management
+              </p>
+
+              <a
+                href="/attached_assets/Cdn Cardiac Amyloid Guidelines_1757762257065.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300"
+              >
+                <span>View Guidelines</span>
+                <FileText className="w-4 h-4" />
               </a>
             </motion.div>
           </div>

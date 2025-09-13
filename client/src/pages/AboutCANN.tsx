@@ -732,30 +732,6 @@ export default function AboutCANN() {
                     </Button>
                   </div>
 
-                  {/* Membership Benefits Summary */}
-                  <div className="bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 rounded-xl p-6 mb-6">
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                      Membership Benefits
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-pink-600" />
-                        <span className="text-gray-700 dark:text-gray-300">Professional Network</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-pink-600" />
-                        <span className="text-gray-700 dark:text-gray-300">Educational Resources</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-pink-600" />
-                        <span className="text-gray-700 dark:text-gray-300">Knowledge Sharing</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-pink-600" />
-                        <span className="text-gray-700 dark:text-gray-300">National Coverage</span>
-                      </div>
-                    </div>
-                  </div>
 
                   {/* Join CANN Registration Form */}
                   <Form {...form}>

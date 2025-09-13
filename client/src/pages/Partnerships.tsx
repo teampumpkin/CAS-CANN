@@ -28,9 +28,9 @@ export default function Partnerships() {
       icon: Globe,
       organizations: [
         {
-          name: "Amyloidosis Support Groups",
+          name: "Amyloidosis Alliance",
           description: "Global network of patient support organizations",
-          website: "https://amyloidosis.org",
+          website: "https://www.amyloidosisalliance.org/",
           country: "International",
         },
         {

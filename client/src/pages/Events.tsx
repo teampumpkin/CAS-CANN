@@ -437,16 +437,16 @@ export default function Events() {
                               onClick={() =>
                                 (window.location.href = "/join-cas")
                               }
-                              className="w-full bg-[#00DD89] hover:bg-[#00DD89]/90 text-white border-2 border-[#00DD89] hover:border-[#00DD89]/90 shadow-xl hover:shadow-2xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-4 rounded-2xl font-bold text-base relative overflow-hidden"
+                              className="w-full bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border-2 border-[#00DD89] hover:border-[#00DD89]/90 shadow-xl hover:shadow-2xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-4 rounded-2xl font-bold text-base relative overflow-hidden"
                               data-testid="button-join-cas"
                             >
                               {/* Animated background effect */}
                               <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                               
-                              <div className="relative z-10 flex items-center justify-center">
-                                <Users className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
+                              <div className="relative z-10 flex items-center justify-center text-gray-800">
+                                <Users className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
                                 Join CAS
-                                <div className="ml-2 w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                                <div className="ml-2 w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
                               </div>
                             </Button>
                           </div>

@@ -184,9 +184,9 @@ export default function EventsNewsletterSection() {
                   
                   <div className="relative z-10 flex items-center justify-between">
                     {[
-                      { value: '180', label: 'Members', icon: Users, color: '#00AFE6' },
-                      { value: '13', label: 'Provinces', icon: MapPin, color: '#8B5CF6' },
-                      { value: '2+', label: 'Disciplines', icon: Stethoscope, color: '#00DD89' }
+                      { value: 'Over 180', label: 'Members', icon: Users, color: '#00AFE6' },
+                      { value: '13', label: 'Provinces/Territories', icon: MapPin, color: '#8B5CF6' },
+                      { value: 'Multiple', label: 'Disciplines', icon: Stethoscope, color: '#00DD89' }
                     ].map((stat, index) => (
                       <motion.div
                         key={stat.label}

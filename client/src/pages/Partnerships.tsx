@@ -280,7 +280,7 @@ export default function Partnerships() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {partners.map((partner, index) => {
               const isClickable = partner.shortName !== "CARN";
               const Component = isClickable ? motion.a : motion.div;

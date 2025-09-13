@@ -116,12 +116,9 @@ export default function AboutAmyloidosisSection() {
                 <h3 className="text-xl font-bold mb-4 transition-colors duration-300 text-gray-900 dark:text-white group-hover:text-gray-800 dark:group-hover:text-gray-50">
                   {type.name}
                 </h3>
-                <p className="text-sm mb-6 leading-relaxed transition-colors duration-300 text-gray-600 dark:text-gray-300 group-hover:text-gray-700 dark:group-hover:text-gray-200">
+                <p className="text-sm leading-relaxed transition-colors duration-300 text-gray-600 dark:text-gray-300 group-hover:text-gray-700 dark:group-hover:text-gray-200">
                   {type.description}
                 </p>
-                <div className={`text-transparent bg-clip-text bg-gradient-to-r ${type.gradient} text-sm font-bold`}>
-                  {type.prevalence}
-                </div>
               </div>
 
 

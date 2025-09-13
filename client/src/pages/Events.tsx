@@ -415,40 +415,39 @@ export default function Events() {
 
                         {/* Membership info and Join button - Show for Journal Club sessions (index 0 and 2) */}
                         {(index === 0 || index === 2) && (
-                          <div className="space-y-4">
-                            <div className="text-center p-5 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-2xl border-2 border-[#00AFE6]/40 shadow-lg shadow-[#00AFE6]/10 relative overflow-hidden">
-                              {/* Subtle animated background effect */}
-                              <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
-                              
-                              <div className="relative z-10">
-                                <div className="flex items-center justify-center gap-2 mb-2">
-                                  <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
-                                  <p className="text-base font-bold text-[#00AFE6] dark:text-[#00AFE6]">
-                                    Registration not required.
-                                  </p>
-                                  <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
-                                </div>
-                                <p className="text-sm font-medium text-gray-700 dark:text-white/80">
-                                  Zoom details are sent to CAS members
+                          <div className="text-center p-5 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-2xl border-2 border-[#00AFE6]/40 shadow-lg shadow-[#00AFE6]/10 relative overflow-hidden space-y-4">
+                            {/* Subtle animated background effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
+                            
+                            <div className="relative z-10">
+                              <div className="flex items-center justify-center gap-2 mb-2">
+                                <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
+                                <p className="text-base font-bold text-[#00AFE6] dark:text-[#00AFE6]">
+                                  Registration not required.
                                 </p>
+                                <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
                               </div>
-                            </div>
-                            <Button
-                              onClick={() =>
-                                (window.location.href = "/join-cas")
-                              }
-                              className="w-full bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border-2 border-[#00DD89] hover:border-[#00DD89]/90 shadow-xl hover:shadow-2xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-4 rounded-2xl font-bold text-base relative overflow-hidden"
-                              data-testid="button-join-cas"
-                            >
-                              {/* Animated background effect */}
-                              <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                              <p className="text-sm font-medium text-gray-700 dark:text-white/80 mb-4">
+                                Zoom details are sent to CAS members
+                              </p>
                               
-                              <div className="relative z-10 flex items-center justify-center text-gray-800">
-                                <Users className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
-                                Join CAS
-                                <div className="ml-2 w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
-                              </div>
-                            </Button>
+                              <Button
+                                onClick={() =>
+                                  (window.location.href = "/join-cas")
+                                }
+                                className="bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border-2 border-[#00DD89] hover:border-[#00DD89]/90 shadow-xl hover:shadow-2xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-3 px-8 rounded-xl font-bold text-sm relative overflow-hidden"
+                                data-testid="button-join-cas"
+                              >
+                                {/* Animated background effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                                
+                                <div className="relative z-10 flex items-center justify-center text-gray-800">
+                                  <Users className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
+                                  Join CAS
+                                  <div className="ml-2 w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
+                                </div>
+                              </Button>
+                            </div>
                           </div>
                         )}
 

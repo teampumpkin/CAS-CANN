@@ -1115,7 +1115,7 @@ export default function GetInvolved() {
                 </div>
               </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

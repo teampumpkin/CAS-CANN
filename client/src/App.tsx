@@ -81,6 +81,7 @@ function Router() {
         <Route path="/amyloidosis-types/other-amyloidosis-types" component={OtherAmyloidosis} />
         <Route path="/about-cann" component={AboutCANN} />
         <Route path="/cann" component={CANN} />
+        <Route path="/cann_page" component={CANN} />
         <Route path="/cann/resources" component={CANNResources} />
         <Route path="/cann-resources" component={CANNResources} />
         <Route path="/join-cann" component={JoinCANN} />

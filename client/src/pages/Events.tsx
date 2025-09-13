@@ -56,22 +56,6 @@ export default function Events() {
             Join our community for educational conferences, expert webinars, support groups, 
             and professional development opportunities across Canada.
           </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button size="lg" className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 rounded-3xl px-8 py-3">
-              View Upcoming Events
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-            <Button variant="outline" size="lg" className="border-[#00AFE6] text-[#00AFE6] hover:bg-[#00AFE6]/10 rounded-3xl px-8 py-3">
-              Submit Event Proposal
-              <Plus className="w-4 h-4 ml-2" />
-            </Button>
-          </motion.div>
         </div>
       </section>
     </div>

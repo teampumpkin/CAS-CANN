@@ -185,7 +185,7 @@ export default function AboutAmyloidosis() {
       ],
       diagnosis: [
         "Biopsies, blood and urine analysis",
-        "Imaging: ECG, MRI, echocardiograms",
+        "Imaging: MRI, ultrasound",
         "Genetic testing for hereditary types",
         "Specialized testing: mass spectrometry, immunohistochemistry",
       ],

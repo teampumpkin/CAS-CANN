@@ -984,7 +984,7 @@ export default function AboutAmyloidosis() {
                     },
                     {
                       feature: "Treatment",
-                      al: "Chemotherapy, ASCT",
+                      al: "Chemotherapy, Autologous stem cell transplant",
                       hattr: "Tafamidis, gene therapy",
                       wtattr: "Tafamidis, supportive care",
                     },

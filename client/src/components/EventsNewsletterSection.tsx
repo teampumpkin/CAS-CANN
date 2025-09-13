@@ -166,84 +166,92 @@ export default function EventsNewsletterSection() {
               </div>
 
               {/* Modern Stats Display */}
-              <div className="flex flex-col justify-center h-full space-y-4">
+              <div className="flex flex-col justify-center h-full">
                 {/* Stats Overview */}
-                <div className="text-center">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 font-rosarivo">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 font-rosarivo">
                     Growing Network
                   </h3>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                     Join a thriving community of healthcare professionals
                   </p>
                 </div>
 
-                {/* Horizontal Stats Bar */}
-                <div className="relative bg-gradient-to-r from-white/90 via-[#00AFE6]/5 to-white/90 dark:from-gray-800/90 dark:via-[#00AFE6]/10 dark:to-gray-800/90 backdrop-blur-sm rounded-xl py-4 px-4 border border-white/40 dark:border-gray-700/50">
-                  {/* Animated background pulse */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#00AFE6]/5 via-[#00DD89]/5 to-[#00AFE6]/5 opacity-0 animate-pulse" />
-                  
-                  <div className="relative z-10 flex items-center justify-between">
-                    {[
-                      { value: 'Over 180', label: 'Members', icon: Users, color: '#00AFE6' },
-                      { value: '13', label: 'Provinces/Territories', icon: MapPin, color: '#8B5CF6' },
-                      { value: 'Multiple', label: 'Disciplines', icon: Stethoscope, color: '#00DD89' }
-                    ].map((stat, index) => (
-                      <motion.div
-                        key={stat.label}
-                        className="flex flex-col items-center group"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6, delay: index * 0.1 }}
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {/* Icon with glow effect */}
-                        <div 
-                          className="relative mb-2"
-                          style={{ filter: `drop-shadow(0 0 6px ${stat.color}40)` }}
-                        >
+                {/* Stats Grid */}
+                <ul role="list" className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                  {[
+                    { 
+                      value: 'Over 180', 
+                      label: 'Members', 
+                      icon: Users, 
+                      color: '#00AFE6',
+                      testId: 'members-count'
+                    },
+                    { 
+                      value: '13', 
+                      label: 'Provinces/\u00ADTerritories', 
+                      icon: MapPin, 
+                      color: '#8B5CF6',
+                      testId: 'provinces-count'
+                    },
+                    { 
+                      value: 'Multiple', 
+                      label: 'Disciplines', 
+                      icon: Stethoscope, 
+                      color: '#00DD89',
+                      testId: 'disciplines-count'
+                    }
+                  ].map((stat, index) => (
+                    <motion.li
+                      key={stat.label}
+                      role="listitem"
+                      className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200/60 dark:border-gray-700/60 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 transition-all duration-300 hover:shadow-lg hover:shadow-[#00AFE6]/10 cursor-default sm:border-l-0 sm:first:border-l sm:first:rounded-l-2xl sm:last:rounded-r-2xl sm:not(:first-child):border-l sm:rounded-none"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      whileHover={{ y: -2, scale: 1.01 }}
+                      data-testid={stat.testId}
+                    >
+                      <div className="text-center space-y-3">
+                        {/* Icon */}
+                        <div className="flex justify-center">
                           <div 
-                            className="w-10 h-10 rounded-lg flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl"
-                            style={{ 
-                              background: `linear-gradient(135deg, ${stat.color}, ${stat.color}CC)`,
-                              boxShadow: `0 3px 12px ${stat.color}30`
-                            }}
+                            className="w-12 h-12 rounded-full bg-white/70 dark:bg-gray-800/70 border-2 flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                            style={{ borderColor: `${stat.color}33` }}
                           >
-                            <stat.icon className="w-5 h-5 text-white" />
+                            <stat.icon 
+                              className="w-6 h-6 transition-colors duration-300" 
+                              style={{ color: stat.color }}
+                            />
                           </div>
-                          {/* Pulse ring on hover */}
-                          <div 
-                            className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-50 group-hover:scale-125 transition-all duration-500"
-                            style={{ background: `linear-gradient(135deg, ${stat.color}40, transparent)` }}
-                          />
                         </div>
                         
-                        {/* Value with counter animation */}
+                        {/* Value */}
                         <div 
-                          className="text-2xl font-black mb-1 transition-all duration-300"
+                          className="text-3xl md:text-4xl font-extrabold leading-tight transition-all duration-300"
                           style={{ color: stat.color }}
                         >
                           <motion.span
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
                           >
                             {stat.value}
                           </motion.span>
+                          <span className="sr-only">
+                            {stat.value} {stat.label.toLowerCase()}
+                          </span>
                         </div>
                         
                         {/* Label */}
-                        <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
+                        <div className="text-sm md:text-base font-medium text-gray-700 dark:text-gray-300 leading-tight">
                           {stat.label}
                         </div>
-                        
-                        {/* Connecting line (except for last item) */}
-                        {index < 2 && (
-                          <div className="hidden sm:block absolute top-1/2 left-full w-8 h-px bg-gradient-to-r from-gray-300 to-transparent dark:from-gray-600 transform -translate-y-1/2 translate-x-4" />
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
+                      </div>
+                    </motion.li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

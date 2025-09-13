@@ -950,7 +950,7 @@ export default function AboutAmyloidosis() {
                         </>
                       ),
                       hattr: "Conduction defects, arrhythmias",
-                      wtattr: "HF, conduction defects, AFib",
+                      wtattr: "Heart failure, conduction defects, atrial fibrillation",
                     },
                     {
                       feature: "Neurological",

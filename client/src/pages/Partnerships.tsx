@@ -41,9 +41,9 @@ export default function Partnerships() {
           country: "International",
         },
         {
-          name: "Amyloidosis Research Consortium",
-          description: "Collaborative research initiative",
-          website: "https://arci.org/",
+          name: "World Amyloidosis Day",
+          description: "Annual global event recognizing the fight against amyloidosis",
+          website: "https://www.worldamyloidosisday.org/",
           country: "International",
         },
       ],

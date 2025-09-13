@@ -3,7 +3,7 @@ import WelcomeSection from '@/components/WelcomeSection';
 import AboutAmyloidosisSection from '@/components/AboutAmyloidosisSection';
 
 import EventsNewsletterSection from '@/components/EventsNewsletterSection';
-import FeaturedSpotlights from '@/components/FeaturedSpotlights';
+// import FeaturedSpotlights from '@/components/FeaturedSpotlights';
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <WelcomeSection />
       <AboutAmyloidosisSection />
       <EventsNewsletterSection />
-      <FeaturedSpotlights />
+      {/* <FeaturedSpotlights /> */}
     </main>
   );
 }

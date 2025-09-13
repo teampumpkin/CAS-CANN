@@ -887,7 +887,7 @@ export default function AboutAmyloidosis() {
 
             <h2 className="crawford-section-title mb-6">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                AL vs ATTR vs Wild Type
+                AL vs Hereditary ATTR vs Wild Type ATTR
               </span>
             </h2>
 

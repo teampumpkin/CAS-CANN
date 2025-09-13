@@ -20,7 +20,7 @@ export default function EventsNewsletterSection() {
       icon: Video,
       title: 'CAS Journal Club',
       description: 'Expert presentations of clinical cases and related discussion, journal review and/or clinical trial updates.',
-      date: 'Five times per year, Thursday afternoons',
+      date: 'Four to five times per year, Thursday afternoon',
       gradient: 'from-[#00DD89] to-[#00BB77]',
       bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
       type: 'Virtual'

@@ -301,15 +301,6 @@ export default function AboutCANN() {
                   <p className="text-lg">
                     As an affiliate of the Canadian Amyloidosis Society, we bring together nurses with interest and expertise in amyloidosis, united in our commitment to excellence in amyloidosis care.
                   </p>
-                  
-                  <div className="space-y-4">
-                    {networkData.mission.keyPoints.map((point, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-pink-600 rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-gray-700 dark:text-white/80">{point}</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 mt-8">Key Pillars</h3>

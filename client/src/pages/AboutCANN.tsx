@@ -748,11 +748,11 @@ export default function AboutCANN() {
                           name="fullName"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300">Full Name (First and Last) *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Full Name (First and Last) *</FormLabel>
                               <FormControl>
                                 <Input 
                                   placeholder="Enter your full name" 
-                                  className="border-gray-300 dark:border-gray-600 text-lg" 
+                                  className="border-gray-300 dark:border-gray-600 text-base" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -767,12 +767,12 @@ export default function AboutCANN() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300">Email Address *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Email Address *</FormLabel>
                               <FormControl>
                                 <Input 
                                   type="email" 
                                   placeholder="Enter your email address" 
-                                  className="border-gray-300 dark:border-gray-600 text-lg" 
+                                  className="border-gray-300 dark:border-gray-600 text-base" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -794,11 +794,11 @@ export default function AboutCANN() {
                           name="professionalDesignation"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300">Professional Designation or Nursing Role *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Professional Designation or Nursing Role *</FormLabel>
                               <FormControl>
                                 <Input 
                                   placeholder="e.g., Nurse Practitioner, Nurse Clinician, educator, researcher, administrator" 
-                                  className="border-gray-300 dark:border-gray-600 text-lg" 
+                                  className="border-gray-300 dark:border-gray-600 text-base" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -813,11 +813,11 @@ export default function AboutCANN() {
                           name="subspecialty"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300">Sub-specialty Area of Focus *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Sub-specialty Area of Focus *</FormLabel>
                               <FormControl>
                                 <Input 
                                   placeholder="e.g., cardiology, hematology, neurology" 
-                                  className="border-gray-300 dark:border-gray-600 text-lg" 
+                                  className="border-gray-300 dark:border-gray-600 text-base" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -832,7 +832,7 @@ export default function AboutCANN() {
                           name="amyloidosisType"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300">
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
                                 In my nursing practice, I primarily care for patients with the following type of amyloidosis *
                               </FormLabel>
                               <FormControl>
@@ -866,11 +866,11 @@ export default function AboutCANN() {
                           name="institution"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300">Center or Clinic Name/Institution *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Center or Clinic Name/Institution *</FormLabel>
                               <FormControl>
                                 <Input 
                                   placeholder="Enter your institution name" 
-                                  className="border-gray-300 dark:border-gray-600 text-lg" 
+                                  className="border-gray-300 dark:border-gray-600 text-base" 
                                   {...field} 
                                 />
                               </FormControl>
@@ -882,7 +882,7 @@ export default function AboutCANN() {
 
                       {/* Communication Preferences */}
                       <div className="space-y-4">
-                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                        <h4 className="text-xl font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
                           Communication Preferences
                         </h4>
 
@@ -892,7 +892,7 @@ export default function AboutCANN() {
                           name="communicationConsent"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300">
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
                                 I would like to receive communication from the Canadian Amyloidosis Nursing Network (email, newsletters, CANN educational sessions) *
                               </FormLabel>
                               <FormControl>
@@ -929,7 +929,7 @@ export default function AboutCANN() {
                           name="areasOfInterest"
                           render={() => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300">
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
                                 Please indicate potential areas of interest for future Educational Series sessions (select all that apply) *
                               </FormLabel>
                               <div className="space-y-3 border border-gray-200 dark:border-gray-700 rounded-lg p-3">
@@ -979,11 +979,11 @@ export default function AboutCANN() {
                             name="otherInterest"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">Please specify other area of interest</FormLabel>
+                                <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Please specify other area of interest</FormLabel>
                                 <FormControl>
                                   <Textarea 
                                     placeholder="Describe your other area of interest..." 
-                                    className="border-gray-300 dark:border-gray-600 text-lg" 
+                                    className="border-gray-300 dark:border-gray-600 text-base" 
                                     {...field} 
                                   />
                                 </FormControl>
@@ -996,7 +996,7 @@ export default function AboutCANN() {
 
                       {/* Presentation Interest */}
                       <div className="space-y-4">
-                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                        <h4 className="text-xl font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
                           Presentation Opportunities
                         </h4>
 
@@ -1006,7 +1006,7 @@ export default function AboutCANN() {
                           name="presentingInterest"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300">
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
                                 I would be interested in presenting to CANN members at one of the Educational Series events *
                               </FormLabel>
                               <FormControl>
@@ -1037,13 +1037,13 @@ export default function AboutCANN() {
                             name="presentationTopic"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300">
+                                <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
                                   I would be interested in presenting to CANN members on the following topic *
                                 </FormLabel>
                                 <FormControl>
                                   <Textarea 
                                     placeholder="Describe the topic you would like to present on..." 
-                                    className="border-gray-300 dark:border-gray-600 text-lg" 
+                                    className="border-gray-300 dark:border-gray-600 text-base" 
                                     {...field} 
                                   />
                                 </FormControl>

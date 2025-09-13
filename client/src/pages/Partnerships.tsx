@@ -424,7 +424,7 @@ export default function Partnerships() {
           >
             <h2 className="crawford-section-title mb-4">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Partner
+                Amyloidosis
               </span>
               <br />
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">

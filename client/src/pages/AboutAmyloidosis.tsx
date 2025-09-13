@@ -974,7 +974,7 @@ export default function AboutAmyloidosis() {
                       feature: "Red Flag Signs",
                       al: "Macroglossia, periorbital purpura",
                       hattr: "Family history, early neuropathy",
-                      wtattr: "Elderly male, bilateral CTS",
+                      wtattr: "Elderly male, Carpal tunnel syndrome",
                     },
                     {
                       feature: "Key Diagnostic Test",

@@ -1,39 +1,54 @@
-import { motion } from 'framer-motion';
-import { Calendar, Mail, Video, Heart, Users, ArrowRight, UserCheck, Globe, Star, MapPin, Stethoscope } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { Link } from 'wouter';
-import casLogo from '@assets/l_cas_vert_rgb_1753253116732.png';
+import { motion } from "framer-motion";
+import {
+  Calendar,
+  Mail,
+  Video,
+  Heart,
+  Users,
+  ArrowRight,
+  UserCheck,
+  Globe,
+  Star,
+  MapPin,
+  Stethoscope,
+} from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "wouter";
+import casLogo from "@assets/l_cas_vert_rgb_1753253116732.png";
 
 export default function EventsNewsletterSection() {
   const { t } = useLanguage();
   const events = [
     {
       icon: Users,
-      title: 'Canadian Amyloidosis Summit',
-      description: 'Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.',
-      date: 'October 31 – November 2, 2025',
-      gradient: 'from-[#00AFE6] to-[#0088CC]',
-      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
-      type: 'In-person & Virtual'
+      title: "Canadian Amyloidosis Summit",
+      description:
+        "Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.",
+      date: "October 31 – November 2, 2025",
+      gradient: "from-[#00AFE6] to-[#0088CC]",
+      bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
+      type: "In-person & Virtual",
     },
     {
       icon: Video,
-      title: 'CAS Journal Club',
-      description: 'Expert presentations of clinical cases and related discussion, journal review and/or clinical trial updates.',
-      date: 'Four to five times per year, Thursday afternoon',
-      gradient: 'from-[#00DD89] to-[#00BB77]',
-      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
-      type: 'Virtual'
+      title: "CAS Journal Club",
+      description:
+        "Expert presentations of clinical cases and related discussion, journal review and/or clinical trial updates.",
+      date: "Four to five times per year, Thursday afternoons",
+      gradient: "from-[#00DD89] to-[#00BB77]",
+      bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
+      type: "Virtual",
     },
     {
       icon: Globe,
-      title: 'International and Other Amyloidosis Events',
-      description: 'Different events and programs related to amyloidosis around the world.',
-      date: 'Various dates throughout the year',
-      gradient: 'from-[#00AFE6] to-[#00DD89]',
-      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
-      type: 'Support'
-    }
+      title: "International and Other Amyloidosis Events",
+      description:
+        "Different events and programs related to amyloidosis around the world.",
+      date: "Various dates throughout the year",
+      gradient: "from-[#00AFE6] to-[#00DD89]",
+      bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
+      type: "Support",
+    },
   ];
 
   return (
@@ -46,7 +61,7 @@ export default function EventsNewsletterSection() {
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header matching amyloidosis section style */}
-        <motion.div 
+        <motion.div
           className="text-center mb-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,16 +75,22 @@ export default function EventsNewsletterSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">{t('events.badge')}</span>
+            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">
+              {t("events.badge")}
+            </span>
           </motion.div>
-          
+
           <h2 className="crawford-section-title mb-4">
             <span className="text-gray-900 dark:text-white">Join CAS & </span>
-            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Get Involved</span>
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+              Get Involved
+            </span>
           </h2>
-          
+
           <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
-            Stay informed about the latest updates in research, treatment advances, and events in amyloidosis care in Canada and internationally.
+            Stay informed about the latest updates in research, treatment
+            advances, and events in amyloidosis care in Canada and
+            internationally.
           </p>
         </motion.div>
 
@@ -90,11 +111,15 @@ export default function EventsNewsletterSection() {
                     "radial-gradient(circle at 20% 50%, #00AFE6 0%, transparent 50%)",
                     "radial-gradient(circle at 80% 50%, #00DD89 0%, transparent 50%)",
                     "radial-gradient(circle at 20% 50%, #00AFE6 0%, transparent 50%)",
-                  ]
+                  ],
                 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
-              
+
               {/* Floating particles */}
               {[...Array(6)].map((_, i) => (
                 <motion.div
@@ -128,9 +153,9 @@ export default function EventsNewsletterSection() {
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <img 
-                    src={casLogo} 
-                    alt="Canadian Amyloidosis Society Logo" 
+                  <img
+                    src={casLogo}
+                    alt="Canadian Amyloidosis Society Logo"
                     className="h-16 w-auto drop-shadow-lg"
                   />
                 </motion.div>
@@ -140,14 +165,17 @@ export default function EventsNewsletterSection() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="w-2 h-2 bg-[#00DD89] rounded-full animate-pulse"></div>
-                  <span className="text-gray-900 dark:text-white/90 text-sm font-medium">{t('events.stayConnected')}</span>
+                  <span className="text-gray-900 dark:text-white/90 text-sm font-medium">
+                    {t("events.stayConnected")}
+                  </span>
                 </motion.div>
 
                 <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo text-center">
-                  {t('events.joinCommunity')}
+                  {t("events.joinCommunity")}
                 </h3>
                 <p className="text-gray-700 dark:text-white/80 text-lg mb-8 leading-relaxed text-center">
-                  Get access to research updates, community events, and expert insights.
+                  Get access to research updates, community events, and expert
+                  insights.
                 </p>
 
                 <div className="flex justify-center">
@@ -158,8 +186,18 @@ export default function EventsNewsletterSection() {
                     whileTap={{ scale: 0.95 }}
                   >
                     <span>Join CAS</span>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </motion.a>
                 </div>
@@ -180,51 +218,54 @@ export default function EventsNewsletterSection() {
                 <div className="rounded-2xl border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900 p-6 md:p-8">
                   <div className="grid grid-cols-1 sm:grid-cols-3 md:divide-x md:divide-gray-200/70 dark:md:divide-gray-700/70">
                     {[
-                      { 
-                        value: '180+', 
-                        label: 'Members',
-                        testId: 'members-count'
+                      {
+                        value: "180+",
+                        label: "Members",
+                        testId: "members-count",
                       },
-                      { 
-                        value: '13', 
-                        label: 'Provinces & Territories',
-                        testId: 'provinces-count'
+                      {
+                        value: "13",
+                        label: "Provinces & Territories",
+                        testId: "provinces-count",
                       },
-                      { 
-                        value: '5+', 
-                        label: 'Disciplines',
-                        testId: 'disciplines-count'
-                      }
+                      {
+                        value: "5+",
+                        label: "Disciplines",
+                        testId: "disciplines-count",
+                      },
                     ].map((stat, index) => (
                       <motion.div
                         key={stat.label}
                         className="text-center py-4 px-6"
                         initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ 
-                          duration: 0.6, 
+                        transition={{
+                          duration: 0.6,
                           delay: index * 0.1,
-                          ease: "easeOut"
+                          ease: "easeOut",
                         }}
                         viewport={{ once: true }}
                         data-testid={stat.testId}
                       >
                         {/* Value */}
-                        <div 
+                        <div
                           className="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white mb-2 relative"
                           aria-label={`${stat.value} ${stat.label.toLowerCase()}`}
                         >
                           <motion.span
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
+                            transition={{
+                              duration: 0.8,
+                              delay: 0.2 + index * 0.1,
+                            }}
                           >
                             {stat.value}
                           </motion.span>
                           {/* Subtle brand accent */}
                           <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-[#00AFE6] rounded-full opacity-60"></div>
                         </div>
-                        
+
                         {/* Label */}
                         <div className="text-sm md:text-base text-gray-600 dark:text-gray-300 font-medium">
                           {stat.label}
@@ -251,118 +292,121 @@ export default function EventsNewsletterSection() {
               whileHover={{ scale: 1.05 }}
             >
               <Calendar className="w-4 h-4 text-[#00AFE6]" />
-              <span className="text-gray-900 dark:text-white/90 font-medium">{t('events.upcomingEvents')}</span>
+              <span className="text-gray-900 dark:text-white/90 font-medium">
+                {t("events.upcomingEvents")}
+              </span>
             </motion.div>
-            <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">{t('events.communityCalendar')}</h3>
+            <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">
+              {t("events.communityCalendar")}
+            </h3>
             <p className="text-gray-700 dark:text-white/80 text-lg max-w-2xl mx-auto">
-              {t('events.communityCalendarDesc')}
+              {t("events.communityCalendarDesc")}
             </p>
           </div>
 
           {/* Events grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {events.map((event, index) => (
+            {events.map((event, index) => (
+              <motion.div
+                key={index}
+                className="relative"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.15 }}
+                viewport={{ once: true, margin: "-50px" }}
+              >
+                {/* Event card */}
                 <motion.div
-                  key={index}
-                  className="relative"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.15 }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ scale: 1.02, y: -6 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                  {/* Event card */}
-                  <motion.div
-                    whileHover={{ scale: 1.02, y: -6 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                  >
-                    <div className="group relative h-full rounded-3xl p-8 border transition-all duration-500 hover:shadow-2xl bg-gradient-to-br from-white via-gray-50/50 to-white dark:from-gray-800 dark:via-gray-800/80 dark:to-gray-900 border-gray-200/60 dark:border-gray-700/60 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 backdrop-blur-sm">
-                      {/* Subtle gradient overlay on hover */}
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#00AFE6]/3 to-[#00DD89]/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      {/* Content */}
-                      <div className="relative z-10 flex flex-col h-full">
-                        {/* Header with Icon and Badge */}
-                        <div className="flex items-start justify-between mb-6">
-                          <div className={`w-16 h-16 bg-gradient-to-br ${event.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}>
-                            <event.icon className="w-8 h-8 text-white" />
-                          </div>
-                          <span className="px-4 py-2 bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white text-xs font-bold rounded-full uppercase tracking-wide shadow-md">
-                            {event.type}
-                          </span>
+                  <div className="group relative h-full rounded-3xl p-8 border transition-all duration-500 hover:shadow-2xl bg-gradient-to-br from-white via-gray-50/50 to-white dark:from-gray-800 dark:via-gray-800/80 dark:to-gray-900 border-gray-200/60 dark:border-gray-700/60 hover:border-[#00AFE6]/30 dark:hover:border-[#00AFE6]/40 backdrop-blur-sm">
+                    {/* Subtle gradient overlay on hover */}
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#00AFE6]/3 to-[#00DD89]/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    {/* Content */}
+                    <div className="relative z-10 flex flex-col h-full">
+                      {/* Header with Icon and Badge */}
+                      <div className="flex items-start justify-between mb-6">
+                        <div
+                          className={`w-16 h-16 bg-gradient-to-br ${event.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}
+                        >
+                          <event.icon className="w-8 h-8 text-white" />
                         </div>
+                        <span className="px-4 py-2 bg-gradient-to-r from-[#00AFE6] to-[#0088CC] text-white text-xs font-bold rounded-full uppercase tracking-wide shadow-md">
+                          {event.type}
+                        </span>
+                      </div>
 
-                        {/* Title */}
-                        <h4 className="text-xl font-bold font-rosarivo leading-tight text-gray-900 dark:text-white mb-4 group-hover:text-[#00AFE6] dark:group-hover:text-[#00AFE6] transition-colors duration-300">
-                          {event.title}
-                        </h4>
+                      {/* Title */}
+                      <h4 className="text-xl font-bold font-rosarivo leading-tight text-gray-900 dark:text-white mb-4 group-hover:text-[#00AFE6] dark:group-hover:text-[#00AFE6] transition-colors duration-300">
+                        {event.title}
+                      </h4>
 
-                        {/* Date */}
-                        <div className="flex items-center gap-2 text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6] mb-5">
-                          <Calendar className="w-4 h-4" />
-                          <span>{event.date}</span>
-                        </div>
+                      {/* Date */}
+                      <div className="flex items-center gap-2 text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6] mb-5">
+                        <Calendar className="w-4 h-4" />
+                        <span>{event.date}</span>
+                      </div>
 
-                        {/* Description */}
-                        <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 mb-8 flex-1">
-                          {event.description}
-                        </p>
+                      {/* Description */}
+                      <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 mb-8 flex-1">
+                        {event.description}
+                      </p>
 
-                        {/* Footer */}
-                        <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
-                          {index === 0 ? (
-                            <a 
-                              href="https://madhattr.ca/events/" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="block"
+                      {/* Footer */}
+                      <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+                        {index === 0 ? (
+                          <a
+                            href="https://madhattr.ca/events/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block"
+                          >
+                            <motion.button
+                              className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
                             >
-                              <motion.button
-                                className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                              >
-                                <span>Join Event</span>
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                              </motion.button>
-                            </a>
-                          ) : index === 2 ? (
-                            <a 
-                              href="https://www.isaamyloidosis.org" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="block"
+                              <span>Join Event</span>
+                              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                            </motion.button>
+                          </a>
+                        ) : index === 2 ? (
+                          <a
+                            href="https://www.isaamyloidosis.org"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block"
+                          >
+                            <motion.button
+                              className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
                             >
-                              <motion.button
-                                className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                              >
-                                <span>Stay Tuned</span>
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                              </motion.button>
-                            </a>
-                          ) : (
-                            <a 
-                              href="/journal-club" 
-                              className="block"
+                              <span>Stay Tuned</span>
+                              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                            </motion.button>
+                          </a>
+                        ) : (
+                          <a href="/journal-club" className="block">
+                            <motion.button
+                              className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
                             >
-                              <motion.button
-                                className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                              >
-                                <span>Join Event</span>
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                              </motion.button>
-                            </a>
-                          )}
-                        </div>
+                              <span>Join Event</span>
+                              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                            </motion.button>
+                          </a>
+                        )}
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </motion.div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

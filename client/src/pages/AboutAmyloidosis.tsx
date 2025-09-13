@@ -943,7 +943,7 @@ export default function AboutAmyloidosis() {
                     },
                     {
                       feature: "Cardiac Involvement",
-                      al: "HF, low voltage ECG, LV wall thickness",
+                      al: "Heart Failure, low voltage electrocardiogram, increased left ventricular wall thickeness",
                       hattr: "Conduction defects, arrhythmias",
                       wtattr: "HF, conduction defects, AFib",
                     },

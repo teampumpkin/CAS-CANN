@@ -413,8 +413,8 @@ export default function Events() {
                           {event.description}
                         </p>
 
-                        {/* Membership info and Join button - Show only for first card */}
-                        {index === 0 && (
+                        {/* Membership info and Join button - Show for Journal Club sessions (index 0 and 2) */}
+                        {(index === 0 || index === 2) && (
                           <div className="space-y-4">
                             <div className="text-center p-4 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-xl border border-[#00AFE6]/20">
                               <p className="text-sm font-medium text-gray-700 dark:text-white/90 mb-1">
@@ -437,8 +437,8 @@ export default function Events() {
                           </div>
                         )}
 
-                        {/* Register button - Show for all cards except the first one */}
-                        {index !== 0 && (
+                        {/* Register button - Show for CANN Educational Series (index 1) */}
+                        {index === 1 && (
                           <Button
                             onClick={() =>
                               window.open(event.registrationUrl, "_blank")

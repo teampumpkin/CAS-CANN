@@ -238,9 +238,9 @@ export default function CANNResources() {
             </h1>
 
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8 max-w-3xl mx-auto">
-              Access comprehensive educational materials, training programs,
-              research publications, and professional development opportunities
-              for amyloidosis healthcare professionals.
+              Access a variety of educational sessions and materials, patient
+              resources, and professional development opportunities for
+              amyloidosis nurses.
             </p>
           </motion.div>
         </div>

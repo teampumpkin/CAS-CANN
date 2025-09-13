@@ -1063,7 +1063,7 @@ export default function AboutAmyloidosis() {
               </div>
 
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Hereditary ATTR Polyneuropathy
+                Hereditary ATTR Polyneuropathy Guidelines
               </h3>
               <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6 flex-grow">
                 Canadian guidelines for neurological manifestations and
@@ -1094,7 +1094,7 @@ export default function AboutAmyloidosis() {
               </div>
 
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Cardiac Amyloidosis
+                Cardiac Amyloidosis Guidelines
               </h3>
               <p className="text-gray-600 dark:text-white/70 leading-relaxed mb-6 flex-grow">
                 CCS/CHFS joint position statement on evaluation and

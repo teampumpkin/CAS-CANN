@@ -328,6 +328,15 @@ html.accessibility-font-size * {
   font-size: calc(var(--accessibility-font-size) * 1px) !important;
 }
 
+/* Exclude form controls from font size scaling */
+html.accessibility-font-size [data-radix-collection-item],
+html.accessibility-font-size [role="radio"], 
+html.accessibility-font-size [role="checkbox"],
+html.accessibility-font-size [role="radio"] *,
+html.accessibility-font-size [role="checkbox"] * {
+  font-size: inherit !important;
+}
+
 /* High contrast mode */
 .accessibility-high-contrast {
   --background: #000000;

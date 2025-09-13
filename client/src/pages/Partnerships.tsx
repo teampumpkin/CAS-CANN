@@ -30,20 +30,21 @@ export default function Partnerships() {
         {
           name: "Amyloidosis Alliance",
           description: "Global network of patient support organizations",
-          website: "https://www.amyloidosisalliance.org/",
+          website: "https://www.amyloidosisalliance.org",
           country: "International",
         },
         {
           name: "International Society of Amyloidosis",
           description:
             "Worldwide scientific organization for amyloidosis research",
-          website: "https://www.isaamyloidosis.org/",
+          website: "https://www.isaamyloidosis.org",
           country: "International",
         },
         {
           name: "World Amyloidosis Day",
-          description: "Annual global event recognizing the fight against amyloidosis",
-          website: "https://www.worldamyloidosisday.org/",
+          description:
+            "Annual global event recognizing the fight against amyloidosis",
+          website: "https://www.worldamyloidosisday.org",
           country: "International",
         },
       ],
@@ -54,20 +55,20 @@ export default function Partnerships() {
       organizations: [
         {
           name: "Amyloidosis Foundation",
-          description: "Leading US-based amyloidosis patient organization",
+          description: "US-based amyloidosis patient organization",
           website: "https://amyloidosis.org",
           country: "United States",
         },
         {
-          name: "AL Amyloidosis Foundation",
-          description: "Specialized support for AL amyloidosis patients",
-          website: "https://alamyloidosis.org",
+          name: "Amyloidosis Research Consortium",
+          description: "Collaborative research initiative",
+          website: "https://arci.org",
           country: "United States",
         },
         {
-          name: "TTR Amyloidosis Support Network",
-          description: "Focus on hereditary transthyretin amyloidosis",
-          website: "https://ttramyloidosis.org",
+          name: "Amyloidosis Support Group",
+          description: "US-based amyloidosis patient orgnization",
+          website: "https://www.amyloidosissupport.org",
           country: "United States",
         },
       ],
@@ -88,12 +89,6 @@ export default function Partnerships() {
           website: "https://www.bu.edu/amyloid",
           country: "United States",
         },
-        {
-          name: "Princess Margaret Cancer Centre",
-          description: "Canadian amyloidosis treatment excellence",
-          website: "https://uhn.ca",
-          country: "Canada",
-        },
       ],
     },
     {
@@ -101,22 +96,10 @@ export default function Partnerships() {
       icon: GraduationCap,
       organizations: [
         {
-          name: "Canadian Amyloidosis Research Network",
-          description: "Collaborative research across Canada",
-          website: "#",
+          name: "Canadian Registry for Amyloidosis Research",
+          description: "Collaborative research registry across Canada",
+          website: "https://amyloidregistry.ca/home",
           country: "Canada",
-        },
-        {
-          name: "European Amyloidosis Network",
-          description: "Pan-European research collaboration",
-          website: "https://europeanamyloidosis.org",
-          country: "Europe",
-        },
-        {
-          name: "Global Amyloidosis Registry",
-          description: "International patient data collaboration",
-          website: "https://globalamyloidosis.org",
-          country: "International",
         },
       ],
     },
@@ -501,41 +484,6 @@ export default function Partnerships() {
         </div>
       </section>
 
-      {/* Partnership CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#00AFE6]/10 via-white to-[#00DD89]/10 dark:from-[#00AFE6]/20 dark:via-gray-900 dark:to-[#00DD89]/20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="crawford-section-title mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Partner
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                With Us
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              Join our network of organizations working to improve outcomes for
-              amyloidosis patients worldwide. Together, we can accelerate
-              research, improve care, and support patients and families.
-            </p>
-            <div className="flex justify-center">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 rounded-3xl px-8 py-3"
-                asChild
-              >
-                <Link href="/contact">Get in touch</Link>
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 }

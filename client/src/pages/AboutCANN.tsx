@@ -710,7 +710,7 @@ export default function AboutCANN() {
                       <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
                         <UserPlus className="w-5 h-5 text-white" />
                       </div>
-                      <div>
+                      <div className="text-left">
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                           Join CANN Today
                         </h3>

@@ -437,7 +437,7 @@ export default function Events() {
                               onClick={() =>
                                 (window.location.href = "/join-cas")
                               }
-                              className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm"
+                              className="w-full bg-white dark:bg-gray-800 border-2 border-[#00AFE6] hover:bg-[#00AFE6] hover:border-[#00AFE6] text-[#00AFE6] hover:text-white dark:text-[#00AFE6] dark:hover:text-white shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm"
                               data-testid="button-join-cas"
                             >
                               Join CAS

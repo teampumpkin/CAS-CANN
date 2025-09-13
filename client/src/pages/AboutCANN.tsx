@@ -641,7 +641,7 @@ export default function AboutCANN() {
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
                   Portal Features
                 </h3>
-                <div className="space-y-4">
+                <div className="space-y-4 text-left">
                   {portalFeatures.map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <ArrowRight className="w-5 h-5 text-pink-600 mt-0.5 flex-shrink-0" />

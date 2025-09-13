@@ -18,13 +18,13 @@ export const LanguageSwitcher = () => {
       </button>
       
       {isOpen && (
-        <div className="absolute top-full left-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg z-10">
+        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
           <button
             onClick={() => {
               setLanguage('en');
               setIsOpen(false);
             }}
-            className="block w-full text-left px-3 py-2 text-xs text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 first:rounded-t-lg"
+            className="block w-full text-left px-3 py-2 text-xs text-black hover:bg-gray-100 first:rounded-t-lg"
           >
             EN
           </button>
@@ -33,7 +33,7 @@ export const LanguageSwitcher = () => {
               setLanguage('fr');
               setIsOpen(false);
             }}
-            className="block w-full text-left px-3 py-2 text-xs text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 last:rounded-b-lg"
+            className="block w-full text-left px-3 py-2 text-xs text-black hover:bg-gray-100 last:rounded-b-lg"
           >
             FR
           </button>

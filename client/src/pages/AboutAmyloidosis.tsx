@@ -965,7 +965,7 @@ export default function AboutAmyloidosis() {
                       wtattr: "Minimal renal involvement",
                     },
                     {
-                      feature: "GI Symptoms",
+                      feature: "Gastrointestinal symptoms",
                       al: "Diarrhea, malabsorption",
                       hattr: "Gastroparesis, diarrhea",
                       wtattr: "Rare GI involvement",

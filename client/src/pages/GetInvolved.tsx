@@ -126,54 +126,6 @@ const interestAreas = [
   "Other",
 ];
 
-const upcomingEvents = [
-  {
-    id: 1,
-    title: "CAS Journal Club - September Session",
-    date: "2025-09-25",
-    time: "3:00 PM - 4:00 PM MST",
-    location: "Virtual Event",
-    type: "Journal Club",
-    description: "National initiative launched May 8, 2025, fostering learning and discussion around recent research and publications in amyloidosis. One-hour virtual session designed for CAS members to deepen clinical and scientific knowledge through collaborative discussion. ✅ Confirmed session.",
-    image: "/api/placeholder/400/250",
-    registrationUrl: "#",
-    confirmed: true
-  },
-  {
-    id: 2,
-    title: "CANN Educational Series",
-    date: "2025-10-07",
-    time: "2:00 – 3:00 PM MST",
-    location: "Virtual Event", 
-    type: "Educational Series",
-    description: "Organized by the Canadian Amyloidosis Nursing Network (CANN), these events occur regularly 3-4 times per year.This educational series provides ongoing professional development opportunities for nurses and healthcare professionals engaged in amyloidosis care. Topic, speaker, and exact date are coordinated by the CANN Executive Committee. Visit the CANN Events page for more details.",
-    image: "/api/placeholder/400/250",
-    registrationUrl: "#"
-  },
-  {
-    id: 3,
-    title: "CAS Journal Club - November Session",
-    date: "2025-11-27",
-    time: "3:00 PM - 4:00 PM MST",
-    location: "Virtual Event",
-    type: "Journal Club", 
-    description: "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on recent amyloidosis research and publications. Registration and access details to be confirmed.",
-    image: "/api/placeholder/400/250",
-    registrationUrl: "#"
-  }
-];
-
-const recentEvents: any[] = [];
-const pastEvents: any[] = [];
-
-const formatEventDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-};
 
 export default function GetInvolved() {
   const [activeTab, setActiveTab] = useState("overview");

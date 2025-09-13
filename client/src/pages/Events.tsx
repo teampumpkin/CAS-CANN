@@ -416,13 +416,22 @@ export default function Events() {
                         {/* Membership info and Join button - Show for Journal Club sessions (index 0 and 2) */}
                         {(index === 0 || index === 2) && (
                           <div className="space-y-4">
-                            <div className="text-center p-4 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-xl border border-[#00AFE6]/20">
-                              <p className="text-sm font-medium text-gray-700 dark:text-white/90 mb-1">
-                                Registration not required.
-                              </p>
-                              <p className="text-xs text-gray-600 dark:text-white/70">
-                                Zoom details are sent to CAS members
-                              </p>
+                            <div className="text-center p-5 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-2xl border-2 border-[#00AFE6]/40 shadow-lg shadow-[#00AFE6]/10 relative overflow-hidden">
+                              {/* Subtle animated background effect */}
+                              <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
+                              
+                              <div className="relative z-10">
+                                <div className="flex items-center justify-center gap-2 mb-2">
+                                  <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
+                                  <p className="text-base font-bold text-[#00AFE6] dark:text-[#00AFE6]">
+                                    Registration not required.
+                                  </p>
+                                  <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
+                                </div>
+                                <p className="text-sm font-medium text-gray-700 dark:text-white/80">
+                                  Zoom details are sent to CAS members
+                                </p>
+                              </div>
                             </div>
                             <Button
                               onClick={() =>

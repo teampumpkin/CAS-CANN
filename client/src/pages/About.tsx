@@ -608,7 +608,7 @@ export default function About() {
                   />
 
                   {/* Services Overlay */}
-                  <motion.div
+                  {/* <motion.div
                     className="absolute bottom-6 left-6 right-6 bg-white/90 dark:bg-white/10 backdrop-blur-xl border border-gray-200 dark:border-white/20 rounded-2xl shadow-2xl"
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -642,7 +642,7 @@ export default function About() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </motion.div> */}
                 </div>
 
                 {/* Floating accent elements */}

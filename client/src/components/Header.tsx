@@ -71,6 +71,7 @@ export default function Header() {
     },
 
     { name: 'Get Involved', href: '/get-involved' },
+    { name: 'Events', href: '/events' },
     {
       name: 'CANN',
       href: '#cann',

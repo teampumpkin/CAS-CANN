@@ -205,7 +205,7 @@ const translations = {
     'about.whatWeDo.peerLearning.title': 'Peer Learning',
     'about.whatWeDo.peerLearning.description': 'Collaborative professional networks, case discussions, and continuous medical education opportunities.',
     'about.values.patientCentered.title': 'Patient-Centered',
-    'about.values.patientCentered.description': 'Every decision and resource is designed with patient outcomes as the primary focus.',
+    'about.values.patientCentered.description': 'Every decision and resource is designed with improving patient outcomes as the primary focus.',
     'about.values.collaborative.title': 'Collaborative',
     'about.values.collaborative.description': 'We bring together diverse expertise to solve complex clinical challenges.',
     'about.values.evidenceInformed.title': 'Evidence-Informed',

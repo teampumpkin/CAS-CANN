@@ -290,7 +290,9 @@ export default function CANNResources() {
                   </div>
                 </div>
                 <Button
-                  onClick={() => (window.location.href = "/about-cann#join-section")}
+                  onClick={() =>
+                    (window.location.href = "/about-cann#join-section")
+                  }
                   size="lg"
                   className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 flex-shrink-0"
                 >
@@ -513,7 +515,9 @@ export default function CANNResources() {
                   </div>
                 </div>
                 <Button
-                  onClick={() => (window.location.href = "/join-cann")}
+                  onClick={() =>
+                    (window.location.href = "/about-cann#join-section")
+                  }
                   size="lg"
                   className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 flex-shrink-0"
                 >
@@ -734,7 +738,7 @@ export default function CANNResources() {
                 <div className="w-24 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
 
                 {/* Join CANN Button */}
-                <Link href="/join-cann">
+                <Link href="/about-cann#join-section">
                   <motion.div
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.98 }}

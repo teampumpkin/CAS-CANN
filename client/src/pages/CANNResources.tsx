@@ -17,6 +17,7 @@ import {
   Video,
   Copy,
   Check,
+  User,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
@@ -84,6 +85,34 @@ export default function CANNResources() {
       updated: "September 2024",
       category: "Diagnostics",
     },
+  ];
+
+  const educationalSeries = [
+    {
+      date: "December 13, 2023",
+      speaker: "Dr. Victor Jimenez Zepeda, Associate Professor, University of Calgary, Co-Director, Amyloidosis Program of Calgary",
+      topic: "AL Amyloidosis: Diagnosis and Treatment in 2024 – Unfolding the Fibrils"
+    },
+    {
+      date: "April 16, 2024",
+      speaker: "Dr. Nowell Fine, Associate Professor, University of Calgary, Director, Amyloidosis Program of Calgary",
+      topic: "Lab Evaluation and Monitoring of Cardiac Amyloidosis"
+    },
+    {
+      date: "October 8, 2024",
+      speaker: "Dr. Vidya Raj, Medical Director Hearts and Minds Clinic, Libin Cardiovascular Institute, Cumming School of Medicine, University of Calgary",
+      topic: "Mental Health and Amyloidosis – Insights on Psychiatric Management of Patients with Cardiac Amyloidosis"
+    },
+    {
+      date: "January 28, 2025",
+      speaker: "Marc Bains, Co-Founder, HeartLife Foundation",
+      topic: "Living with Heart Failure is About Life, Not Failure – HeartLife Story and Advancement of National Advocacy"
+    },
+    {
+      date: "May 13, 2025",
+      speaker: "Krista Jelisava, RN, BScN, Co-Chair, CANN; Rose Ramm, RN, BN, Co-Chair, CANN",
+      topic: "Interesting Case Presentation and Discussion"
+    }
   ];
 
   const upcomingEvents = [
@@ -315,7 +344,50 @@ export default function CANNResources() {
             </div>
           </motion.div>
 
-          {/* Educational Series Cards will go here */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {educationalSeries.map((session, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full">
+                  <CardContent className="p-6">
+                    <div className="flex flex-col h-full">
+                      <div className="mb-4">
+                        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20 mb-3">
+                          <Calendar className="w-4 h-4 text-pink-500" />
+                          <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
+                            {session.date}
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white leading-tight">
+                          {session.topic}
+                        </h3>
+                      </div>
+                      <div className="mt-auto">
+                        <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                          <div className="flex items-start gap-2">
+                            <User className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
+                                Speaker:
+                              </div>
+                              <div className="text-sm text-gray-600 dark:text-white/70">
+                                {session.speaker}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -214,65 +214,99 @@ export default function EventsNewsletterSection() {
                   </p>
                 </div>
 
-                {/* Professional KPI Band */}
-                <div className="rounded-2xl border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900 p-6 sm:p-8">
-                  <dl 
-                    role="group" 
-                    aria-label="Network statistics"
-                    className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-gray-200/70 dark:divide-gray-700/70"
-                  >
-                    {[
-                      {
-                        value: "Over 180",
-                        label: "Members",
-                        testId: "members-count",
-                      },
-                      {
-                        value: "13",
-                        label: "Provinces/Territories",
-                        testId: "provinces-count",
-                      },
-                      {
-                        value: "Multiple",
-                        label: "Disciplines",
-                        testId: "disciplines-count",
-                      },
-                    ].map((stat, index) => (
-                      <motion.div
-                        key={stat.label}
-                        className="flex flex-col items-center text-center py-6 px-4 sm:py-4 sm:px-6"
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 0.6,
-                          delay: index * 0.1,
-                          ease: "easeOut",
-                        }}
-                        viewport={{ once: true }}
-                        data-testid={stat.testId}
-                      >
-                        {/* Value */}
-                        <dt className="text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-white mb-3">
-                          <motion.span
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{
-                              duration: 0.8,
-                              delay: 0.2 + index * 0.1,
-                            }}
-                            aria-label={`${stat.value} ${stat.label.toLowerCase()}`}
-                          >
-                            {stat.value.replace(' ', '\u00A0')}
-                          </motion.span>
-                        </dt>
+                {/* Network Statistics Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                  {[
+                    {
+                      value: "Over 180",
+                      label: "Members",
+                      testId: "members-count",
+                      gradient: "from-[#00AFE6] to-[#0088CC]",
+                      bgGradient: "from-[#00AFE6]/5 to-[#0088CC]/10",
+                    },
+                    {
+                      value: "13",
+                      label: "Provinces/Territories", 
+                      testId: "provinces-count",
+                      gradient: "from-[#00DD89] to-[#00BB77]",
+                      bgGradient: "from-[#00DD89]/5 to-[#00BB77]/10",
+                    },
+                    {
+                      value: "Multiple",
+                      label: "Disciplines",
+                      testId: "disciplines-count", 
+                      gradient: "from-[#00AFE6] to-[#00DD89]",
+                      bgGradient: "from-[#00AFE6]/5 to-[#00DD89]/10",
+                    },
+                  ].map((stat, index) => (
+                    <motion.div
+                      key={stat.label}
+                      className="relative group"
+                      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{
+                        duration: 0.6,
+                        delay: index * 0.15,
+                        ease: "easeOut",
+                      }}
+                      viewport={{ once: true }}
+                      data-testid={stat.testId}
+                      whileHover={{ y: -4, scale: 1.02 }}
+                    >
+                      {/* Card */}
+                      <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${stat.bgGradient} dark:from-gray-800/80 dark:to-gray-900/80 border border-white/20 dark:border-gray-700/50 backdrop-blur-sm shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                        
+                        {/* Gradient overlay on hover */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                        
+                        {/* Subtle pattern overlay */}
+                        <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]" style={{
+                          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='currentColor'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
+                        }} />
+                        
+                        {/* Content */}
+                        <div className="relative z-10 p-6 sm:p-8 text-center">
+                          {/* Value */}
+                          <div className="mb-4">
+                            <motion.div 
+                              className={`text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2 leading-none`}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              transition={{
+                                duration: 0.8,
+                                delay: 0.3 + index * 0.15,
+                                ease: "easeOut"
+                              }}
+                            >
+                              {stat.value.replace(' ', '\u00A0')}
+                            </motion.div>
+                            
+                            {/* Accent line */}
+                            <motion.div 
+                              className={`h-1 w-16 bg-gradient-to-r ${stat.gradient} rounded-full mx-auto opacity-60`}
+                              initial={{ width: 0, opacity: 0 }}
+                              whileInView={{ width: 64, opacity: 0.6 }}
+                              transition={{
+                                duration: 0.8,
+                                delay: 0.5 + index * 0.15,
+                                ease: "easeOut"
+                              }}
+                            />
+                          </div>
 
-                        {/* Label */}
-                        <dd className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-300 font-medium tracking-wide uppercase">
-                          {stat.label}
-                        </dd>
-                      </motion.div>
-                    ))}
-                  </dl>
+                          {/* Label */}
+                          <p className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300 leading-tight">
+                            {stat.label}
+                          </p>
+                        </div>
+                        
+                        {/* Corner accent */}
+                        <div className="absolute top-3 right-3 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+                          <div className={`w-3 h-3 bg-gradient-to-br ${stat.gradient} rounded-full`} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </div>

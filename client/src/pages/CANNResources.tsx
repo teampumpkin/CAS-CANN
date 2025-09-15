@@ -290,7 +290,7 @@ export default function CANNResources() {
                   </div>
                 </div>
                 <Button
-                  onClick={() => (window.location.href = "/join-cann")}
+                  onClick={() => (window.location.href = "/about-cann#join-section")}
                   size="lg"
                   className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 flex-shrink-0"
                 >

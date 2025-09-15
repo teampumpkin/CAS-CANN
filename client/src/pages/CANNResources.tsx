@@ -640,6 +640,22 @@ export default function CANNResources() {
                               {event.registrationDeadline}
                             </div>
                           )}
+                          {event.location?.includes("Login to CANN member portal") && (
+                            <div className="mt-3 space-y-2">
+                              <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+                                <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
+                                  Coming Soon
+                                </span>
+                              </div>
+                              <Button 
+                                disabled 
+                                size="sm" 
+                                className="bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-lg cursor-not-allowed w-full"
+                              >
+                                Log in
+                              </Button>
+                            </div>
+                          )}
                         </div>
                         {index === 1 && (
                           <a

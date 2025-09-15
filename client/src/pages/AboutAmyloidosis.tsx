@@ -945,8 +945,8 @@ export default function AboutAmyloidosis() {
                       feature: "Cardiac Involvement",
                       al: (
                         <>
-                          Heart Failure, low voltage electrocardiogram,<br />
-                          increased left ventricular wall thickeness
+                          Heart Failure, low voltage electrocardiogram, <br />
+                          increased left ventricular wall thickness
                         </>
                       ),
                       hattr: "Conduction defects, arrhythmias",

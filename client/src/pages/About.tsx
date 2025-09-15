@@ -424,7 +424,7 @@ export default function About() {
               viewport={{ once: true }}
             >
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
-                <div className="aspect-[4/5] relative">
+                <div className="aspect-[3/2] relative">
                   <img
                     src={diagnosticImage}
                     alt="Healthcare professional using diagnostic equipment, representing our vision for timely and accurate diagnosis"

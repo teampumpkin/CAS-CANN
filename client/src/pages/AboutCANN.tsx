@@ -20,7 +20,13 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-// Dialog components no longer needed for inline form
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -106,6 +112,7 @@ const areasOfInterestOptions = [
 export default function AboutCANN() {
   const { language } = useLanguage();
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   useScrollAnimations();
 
   // Form setup
@@ -133,8 +140,7 @@ export default function AboutCANN() {
     // TODO: Handle form submission
     setShowRegistrationForm(false);
     form.reset();
-    // Show success message or redirect
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setShowConfirmationModal(true);
   };
 
   // Scroll to top when component mounts
@@ -1199,6 +1205,46 @@ export default function AboutCANN() {
           </div>
         </div>
       </section>
+
+      {/* Confirmation Modal */}
+      <Dialog open={showConfirmationModal} onOpenChange={setShowConfirmationModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader className="text-center">
+            <div className="mx-auto w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+              <CheckCircle className="w-8 h-8 text-white" />
+            </div>
+            <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+              Thank you for your interest in CANN!
+            </DialogTitle>
+            <DialogDescription className="text-gray-600 dark:text-gray-300 mt-4 text-base leading-relaxed">
+              Your registration form has been received! 
+              <br /><br />
+              Please continue to visit the website for new developments, updates and information on upcoming CANN quarterly meetings and educational sessions.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-3 mt-6">
+            <Button
+              onClick={() => {
+                setShowConfirmationModal(false);
+                // Navigate to CANN section of current page
+                const cannSection = document.getElementById('cann-section') || document.querySelector('body');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300"
+            >
+              <Globe className="w-4 h-4 mr-2" />
+              Continue to CANN Website
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => setShowConfirmationModal(false)}
+              className="border-gray-300 dark:border-gray-600"
+            >
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -579,10 +579,6 @@ export default function CANNResources() {
                             <MapPin className="w-4 h-4 text-pink-500" />
                             <span>{event.location}</span>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Award className="w-4 h-4 text-pink-500" />
-                            <span>{event.cmeCredits} CME</span>
-                          </div>
                         </div>
                       </div>
                       <div className="flex flex-col justify-between">

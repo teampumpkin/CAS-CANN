@@ -375,7 +375,7 @@ export default function CANNResources() {
                               <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
                                 Speaker:
                               </div>
-                              <div className="text-sm text-gray-600 dark:text-white/70">
+                              <div className="text-sm text-gray-600 dark:text-white/70 font-bold">
                                 {session.speaker}
                               </div>
                             </div>

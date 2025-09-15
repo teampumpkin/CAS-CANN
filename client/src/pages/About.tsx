@@ -600,11 +600,11 @@ export default function About() {
               viewport={{ once: true }}
             >
               <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10">
-                <div className="aspect-[4/5] relative">
+                <div className="aspect-[2/1] relative">
                   <img
                     src={collaborationImage}
                     alt="Healthcare professionals collaborating at workstations, representing our network of connections and coordinated care"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
 
                   {/* Services Overlay */}

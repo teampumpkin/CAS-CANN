@@ -484,7 +484,8 @@ export default function CANNResources() {
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Professional development opportunities, conferences, educational sessions and CANN events, including quarterly meetings.
+              Professional development opportunities, conferences, educational
+              sessions and CANN events, including quarterly meetings.
             </p>
           </motion.div>
 
@@ -743,7 +744,7 @@ export default function CANNResources() {
                       className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-10 py-4 text-lg font-bold shadow-xl hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
                     >
                       <Users className="w-6 h-6 mr-3" />
-                      Join CANN Network
+                      Join CANN
                     </Button>
                   </motion.div>
                 </Link>

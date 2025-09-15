@@ -348,14 +348,14 @@ export default function CANNResources() {
             {educationalSeries.map((session, index) => (
               <motion.div
                 key={index}
+                className="h-full"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col h-full">
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex flex-col">
+                  <CardContent className="p-6 flex-1 flex flex-col">
                       <div className="mb-4">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20">
@@ -396,7 +396,6 @@ export default function CANNResources() {
                           </Button>
                         </div>
                       </div>
-                    </div>
                   </CardContent>
                 </Card>
               </motion.div>

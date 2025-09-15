@@ -117,7 +117,7 @@ export default function CANNResources() {
     {
       date: "May 13, 2025",
       speaker:
-        "1. Krista Jelisava, RN, BScN, Co-Chair, CANN, 2. Rose Ramm, RN, BN, Co-Chair, CANN",
+        "1. Krista Jelisava, RN, BScN, Co-Chair, CANN 2. Rose Ramm, RN, BN, Co-Chair, CANN",
       topic: "Interesting Case Presentation and Discussion",
     },
   ];
@@ -390,14 +390,7 @@ export default function CANNResources() {
                               Speaker:
                             </div>
                             <div className="text-sm text-gray-600 dark:text-white/70 font-bold">
-                              {session.speaker.includes('1.') && session.speaker.includes('2.') ? (
-                                <div className="space-y-1">
-                                  <div>{session.speaker.split('2.')[0].replace('1.', '').trim()}</div>
-                                  <div>{session.speaker.split('2.')[1].trim()}</div>
-                                </div>
-                              ) : (
-                                session.speaker
-                              )}
+                              {session.speaker}
                             </div>
                           </div>
                         </div>

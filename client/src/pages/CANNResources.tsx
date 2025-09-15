@@ -640,7 +640,7 @@ export default function CANNResources() {
                               {event.registrationDeadline}
                             </div>
                           )}
-                          {event.location?.includes("Login to CANN member portal") && (
+                          {event.location?.toLowerCase().includes("login to cann member portal") && (
                             <div className="mt-3 space-y-2">
                               <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800">
                                 <span className="text-xs font-medium text-blue-600 dark:text-blue-400">

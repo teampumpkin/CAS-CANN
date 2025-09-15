@@ -90,29 +90,36 @@ export default function CANNResources() {
   const educationalSeries = [
     {
       date: "December 13, 2023",
-      speaker: "Dr. Victor Jimenez Zepeda, Associate Professor, University of Calgary, Co-Director, Amyloidosis Program of Calgary",
-      topic: "AL Amyloidosis: Diagnosis and Treatment in 2024 – Unfolding the Fibrils"
+      speaker:
+        "Dr. Victor Jimenez Zepeda, Associate Professor, University of Calgary, Co-Director, Amyloidosis Program of Calgary",
+      topic:
+        "AL Amyloidosis: Diagnosis and Treatment in 2024 – Unfolding the Fibrils",
     },
     {
       date: "April 16, 2024",
-      speaker: "Dr. Nowell Fine, Associate Professor, University of Calgary, Director, Amyloidosis Program of Calgary",
-      topic: "Lab Evaluation and Monitoring of Cardiac Amyloidosis"
+      speaker:
+        "Dr. Nowell Fine, Associate Professor, University of Calgary, Director, Amyloidosis Program of Calgary",
+      topic: "Lab Evaluation and Monitoring of Cardiac Amyloidosis",
     },
     {
       date: "October 8, 2024",
-      speaker: "Dr. Vidya Raj, Medical Director Hearts and Minds Clinic, Libin Cardiovascular Institute, Cumming School of Medicine, University of Calgary",
-      topic: "Mental Health and Amyloidosis – Insights on Psychiatric Management of Patients with Cardiac Amyloidosis"
+      speaker:
+        "Dr. Vidya Raj, Medical Director Hearts and Minds Clinic, Libin Cardiovascular Institute, Cumming School of Medicine, University of Calgary",
+      topic:
+        "Mental Health and Amyloidosis – Insights on Psychiatric Management of Patients with Cardiac Amyloidosis",
     },
     {
       date: "January 28, 2025",
       speaker: "Marc Bains, Co-Founder, HeartLife Foundation",
-      topic: "Living with Heart Failure is About Life, Not Failure – HeartLife Story and Advancement of National Advocacy"
+      topic:
+        "Living with Heart Failure is About Life, Not Failure – HeartLife Story and Advancement of National Advocacy",
     },
     {
       date: "May 13, 2025",
-      speaker: "Krista Jelisava, RN, BScN, Co-Chair, CANN; Rose Ramm, RN, BN, Co-Chair, CANN",
-      topic: "Interesting Case Presentation and Discussion"
-    }
+      speaker:
+        "1. Krista Jelisava, RN, BScN, Co-Chair, CANN, 2. Rose Ramm, RN, BN, Co-Chair, CANN",
+      topic: "Interesting Case Presentation and Discussion",
+    },
   ];
 
   const upcomingEvents = [
@@ -356,46 +363,53 @@ export default function CANNResources() {
               >
                 <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex flex-col">
                   <CardContent className="p-6 flex-1 flex flex-col">
-                      <div className="mb-4">
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20">
-                            <Calendar className="w-4 h-4 text-pink-500" />
-                            <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
-                              {session.date}
-                            </span>
-                          </div>
-                          <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800">
-                            <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
-                              Coming Soon
-                            </span>
-                          </div>
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20">
+                          <Calendar className="w-4 h-4 text-pink-500" />
+                          <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
+                            {session.date}
+                          </span>
                         </div>
-                        <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white leading-tight">
-                          {session.topic}
-                        </h3>
+                        <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+                          <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
+                            Coming Soon
+                          </span>
+                        </div>
                       </div>
-                      <div className="mt-auto">
-                        <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-                          <div className="flex items-start gap-2 mb-4">
-                            <User className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
-                            <div>
-                              <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
-                                Speaker:
-                              </div>
-                              <div className="text-sm text-gray-600 dark:text-white/70 font-bold">
-                                {session.speaker}
-                              </div>
+                      <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white leading-tight">
+                        {session.topic}
+                      </h3>
+                    </div>
+                    <div className="mt-auto">
+                      <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div className="flex items-start gap-2 mb-4">
+                          <User className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
+                              Speaker:
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-white/70 font-bold">
+                              {session.speaker.includes('1.') && session.speaker.includes('2.') ? (
+                                <div className="space-y-1">
+                                  <div>{session.speaker.split('2.')[0].replace('1.', '').trim()}</div>
+                                  <div>{session.speaker.split('2.')[1].trim()}</div>
+                                </div>
+                              ) : (
+                                session.speaker
+                              )}
                             </div>
                           </div>
-                          <Button 
-                            disabled 
-                            className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-xl cursor-not-allowed"
-                          >
-                            <PlayCircle className="w-4 h-4 mr-2" />
-                            Watch
-                          </Button>
                         </div>
+                        <Button
+                          disabled
+                          className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-xl cursor-not-allowed"
+                        >
+                          <PlayCircle className="w-4 h-4 mr-2" />
+                          Watch
+                        </Button>
                       </div>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -645,16 +659,18 @@ export default function CANNResources() {
                               {event.registrationDeadline}
                             </div>
                           )}
-                          {event.location?.toLowerCase().includes("login to cann member portal") && (
+                          {event.location
+                            ?.toLowerCase()
+                            .includes("login to cann member portal") && (
                             <div className="mt-3 space-y-2">
                               <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800">
                                 <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
                                   Coming Soon
                                 </span>
                               </div>
-                              <Button 
-                                disabled 
-                                size="sm" 
+                              <Button
+                                disabled
+                                size="sm"
                                 className="bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-lg cursor-not-allowed w-full"
                               >
                                 Log in

@@ -428,7 +428,7 @@ export default function About() {
                   <img
                     src={diagnosticImage}
                     alt="Healthcare professional using diagnostic equipment, representing our vision for timely and accurate diagnosis"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
 
                   {/* Floating accent elements */}

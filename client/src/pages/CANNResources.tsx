@@ -484,8 +484,7 @@ export default function CANNResources() {
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Professional development opportunities, conferences, and
-              educational sessions.
+              Professional development opportunities, conferences, educational sessions and CANN events, including quarterly meetings.
             </p>
           </motion.div>
 

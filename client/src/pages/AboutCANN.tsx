@@ -50,9 +50,10 @@ const joinCANNSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   professionalDesignation: z.string().min(2, "Please enter your professional designation"),
   subspecialty: z.string().min(2, "Please enter your subspecialty area"),
-  amyloidosisType: z.enum(["ATTR", "AL", "Both"], {
+  amyloidosisType: z.enum(["ATTR", "AL", "Both", "Other"], {
     required_error: "Please select an amyloidosis type",
   }),
+  otherAmyloidosisType: z.string().optional(),
   institution: z.string().min(2, "Please enter your institution name"),
   communicationConsent: z.enum(["yes", "no"], {
     required_error: "Please select your communication preference",
@@ -68,10 +69,23 @@ const joinCANNSchema = z.object({
   if (data.presentingInterest === "yes" && !data.presentationTopic?.trim()) {
     return false;
   }
+  // If amyloidosis type is "Other", description is required
+  if (data.amyloidosisType === "Other" && !data.otherAmyloidosisType?.trim()) {
+    return false;
+  }
   return true;
 }, {
-  message: "Please provide a presentation topic",
+  message: "Please provide a presentation topic or specify the other amyloidosis type",
   path: ["presentationTopic"],
+}).refine((data) => {
+  // Separate refine for other amyloidosis type
+  if (data.amyloidosisType === "Other" && !data.otherAmyloidosisType?.trim()) {
+    return false;
+  }
+  return true;
+}, {
+  message: "Please specify the other amyloidosis type",
+  path: ["otherAmyloidosisType"],
 });
 
 const areasOfInterestOptions = [
@@ -105,12 +119,14 @@ export default function AboutCANN() {
       institution: "",
       areasOfInterest: [],
       otherInterest: "",
+      otherAmyloidosisType: "",
       presentationTopic: "",
     },
   });
 
   const watchPresentingInterest = form.watch("presentingInterest");
   const watchAreasOfInterest = form.watch("areasOfInterest");
+  const watchAmyloidosisType = form.watch("amyloidosisType");
 
   const onSubmit = (values: z.infer<typeof joinCANNSchema>) => {
     console.log("Form submitted:", values);
@@ -188,7 +204,7 @@ export default function AboutCANN() {
     ],
     network: {
       coverage: "National Coverage",
-      centers: "Uniting  Healthcare Centers",
+      centers: "Uniting Canadian Healthcare Centers",
       provinces: "All 10 Provinces",
       territories: "3 Territories",
     },
@@ -603,7 +619,7 @@ export default function AboutCANN() {
                 </span>
               </h2>
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-                Join a network dedicated to advancing amyloidosis nursing care
+                Join a network dedicated to serving the needs of members and advancing amyloidosis nursing care
                 across Canada.
               </p>
             </motion.div>
@@ -853,12 +869,37 @@ export default function AboutCANN() {
                                     <RadioGroupItem value="Both" id="both" />
                                     <label htmlFor="both" className="text-gray-700 dark:text-gray-300 cursor-pointer">Both ATTR and AL</label>
                                   </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Other" id="other" />
+                                    <label htmlFor="other" className="text-gray-700 dark:text-gray-300 cursor-pointer">Other</label>
+                                  </div>
                                 </RadioGroup>
                               </FormControl>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
+
+                        {/* Other Amyloidosis Type Field - Shows when "Other" is selected */}
+                        {watchAmyloidosisType === "Other" && (
+                          <FormField
+                            control={form.control}
+                            name="otherAmyloidosisType"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Please specify the other amyloidosis type *</FormLabel>
+                                <FormControl>
+                                  <Input 
+                                    placeholder="Enter the specific amyloidosis type..." 
+                                    className="border-gray-300 dark:border-gray-600 text-base" 
+                                    {...field} 
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        )}
 
                         {/* Institution */}
                         <FormField

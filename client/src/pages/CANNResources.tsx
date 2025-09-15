@@ -357,11 +357,18 @@ export default function CANNResources() {
                   <CardContent className="p-6">
                     <div className="flex flex-col h-full">
                       <div className="mb-4">
-                        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20 mb-3">
-                          <Calendar className="w-4 h-4 text-pink-500" />
-                          <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
-                            {session.date}
-                          </span>
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20">
+                            <Calendar className="w-4 h-4 text-pink-500" />
+                            <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
+                              {session.date}
+                            </span>
+                          </div>
+                          <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+                            <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
+                              Coming Soon
+                            </span>
+                          </div>
                         </div>
                         <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white leading-tight">
                           {session.topic}
@@ -369,7 +376,7 @@ export default function CANNResources() {
                       </div>
                       <div className="mt-auto">
                         <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-                          <div className="flex items-start gap-2">
+                          <div className="flex items-start gap-2 mb-4">
                             <User className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
                             <div>
                               <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
@@ -380,6 +387,13 @@ export default function CANNResources() {
                               </div>
                             </div>
                           </div>
+                          <Button 
+                            disabled 
+                            className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-xl cursor-not-allowed"
+                          >
+                            <PlayCircle className="w-4 h-4 mr-2" />
+                            Watch
+                          </Button>
                         </div>
                       </div>
                     </div>

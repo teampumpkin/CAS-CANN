@@ -219,17 +219,17 @@ export default function EventsNewsletterSection() {
                   <div className="grid grid-cols-1 sm:grid-cols-3 md:divide-x md:divide-gray-200/70 dark:md:divide-gray-700/70">
                     {[
                       {
-                        value: "180+",
+                        value: "Over 180",
                         label: "Members",
                         testId: "members-count",
                       },
                       {
                         value: "13",
-                        label: "Provinces & Territories",
+                        label: "Provinces/Territories",
                         testId: "provinces-count",
                       },
                       {
-                        value: "5+",
+                        value: "Multiple",
                         label: "Disciplines",
                         testId: "disciplines-count",
                       },

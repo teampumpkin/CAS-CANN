@@ -101,6 +101,18 @@ export default function CANNResources() {
       type: "Webinar",
     },
     {
+      title: "Canadian Amyloidosis Summit",
+      date: "October 31 – November 2, 2025",
+      time: "2025-10-31 to 2025-11-02",
+      location: "Toronto Airport Marriott Hotel",
+      format: "In-person",
+      description:
+        "Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.",
+      registrationDeadline: "Registration is now open",
+      cmeCredits: "3 days",
+      type: "Conference",
+    },
+    {
       title: "CANN Quarterly Meeting",
       date: "November 25, 2025",
       time: "2:00 – 3:00 MST",
@@ -123,18 +135,6 @@ export default function CANNResources() {
       registrationDeadline: "Registration coming soon!",
       cmeCredits: "1.5 - 2 hours",
       type: "Virtual Workshop",
-    },
-    {
-      title: "Canadian Amyloidosis Summit",
-      date: "October 31 – November 2, 2025",
-      time: "2025-10-31 to 2025-11-02",
-      location: "Toronto Airport Marriott Hotel",
-      format: "In-person",
-      description:
-        "Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.",
-      registrationDeadline: "Registration is now open",
-      cmeCredits: "3 days",
-      type: "Conference",
     },
   ];
 
@@ -641,7 +641,7 @@ export default function CANNResources() {
                             </div>
                           )}
                         </div>
-                        {index === 3 && (
+                        {index === 1 && (
                           <a
                             href="https://madhattr.ca/events/"
                             target="_blank"

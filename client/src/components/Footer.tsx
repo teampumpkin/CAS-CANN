@@ -12,7 +12,7 @@ export default function Footer() {
     { name: "Partnership", href: "/partnerships", icon: BookOpen, status: "available" },
     { name: "Get Involved", href: "/get-involved", icon: Heart, status: "available" },
     { name: "About CANN", href: "/about-cann", icon: Users, status: "available" },
-    { name: "CANN Resources", href: "/cann/resources", icon: Calendar, status: "available" },
+    { name: "CANN Resources", href: "/cann-resources", icon: Calendar, status: "available" },
     { name: "Contact Us", href: "/contact", icon: Mail, status: "available" }
   ];
 

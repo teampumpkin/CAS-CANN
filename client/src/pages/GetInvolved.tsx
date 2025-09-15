@@ -652,7 +652,7 @@ export default function GetInvolved() {
                     We invite you to join this exciting movement!
                   </p>
                   <a
-                    href="/join-cann"
+                    href="/about-cann"
                     className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-medium hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 flex items-center gap-2 inline-flex"
                   >
                     Learn About CANN

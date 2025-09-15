@@ -269,7 +269,7 @@ export default function EventsNewsletterSection() {
                           {/* Value */}
                           <div className="mb-4">
                             <motion.div 
-                              className={`text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2 leading-none`}
+                              className={`text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2 leading-none`}
                               initial={{ opacity: 0, scale: 0.8 }}
                               whileInView={{ opacity: 1, scale: 1 }}
                               transition={{

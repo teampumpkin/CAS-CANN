@@ -188,7 +188,7 @@ export default function AboutCANN() {
     ],
     network: {
       coverage: "National Coverage",
-      centers: "25+ Healthcare Centers",
+      centers: "Uniting  Healthcare Centers",
       provinces: "All 10 Provinces",
       territories: "3 Territories",
     },

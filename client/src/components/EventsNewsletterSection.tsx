@@ -249,7 +249,7 @@ export default function EventsNewsletterSection() {
                       >
                         {/* Value */}
                         <div
-                          className="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white mb-2 relative"
+                          className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-2 relative"
                           aria-label={`${stat.value} ${stat.label.toLowerCase()}`}
                         >
                           <motion.span

@@ -215,8 +215,12 @@ export default function EventsNewsletterSection() {
                 </div>
 
                 {/* Professional KPI Band */}
-                <div className="rounded-2xl border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900 p-6 md:p-8">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 md:divide-x md:divide-gray-200/70 dark:md:divide-gray-700/70">
+                <div className="rounded-2xl border border-gray-200/60 dark:border-gray-700/60 bg-white dark:bg-gray-900 p-6 sm:p-8">
+                  <dl 
+                    role="group" 
+                    aria-label="Network statistics"
+                    className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-gray-200/70 dark:divide-gray-700/70"
+                  >
                     {[
                       {
                         value: "Over 180",
@@ -236,7 +240,7 @@ export default function EventsNewsletterSection() {
                     ].map((stat, index) => (
                       <motion.div
                         key={stat.label}
-                        className="text-center py-4 px-6"
+                        className="flex flex-col items-center text-center py-6 px-4 sm:py-4 sm:px-6"
                         initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{
@@ -248,10 +252,7 @@ export default function EventsNewsletterSection() {
                         data-testid={stat.testId}
                       >
                         {/* Value */}
-                        <div
-                          className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-2 relative"
-                          aria-label={`${stat.value} ${stat.label.toLowerCase()}`}
-                        >
+                        <dt className="text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-white mb-3">
                           <motion.span
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
@@ -259,20 +260,19 @@ export default function EventsNewsletterSection() {
                               duration: 0.8,
                               delay: 0.2 + index * 0.1,
                             }}
+                            aria-label={`${stat.value} ${stat.label.toLowerCase()}`}
                           >
-                            {stat.value}
+                            {stat.value.replace(' ', '\u00A0')}
                           </motion.span>
-                          {/* Subtle brand accent */}
-                          <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-[#00AFE6] rounded-full opacity-60"></div>
-                        </div>
+                        </dt>
 
                         {/* Label */}
-                        <div className="text-sm md:text-base text-gray-600 dark:text-gray-300 font-medium">
+                        <dd className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-300 font-medium tracking-wide uppercase">
                           {stat.label}
-                        </div>
+                        </dd>
                       </motion.div>
                     ))}
-                  </div>
+                  </dl>
                 </div>
               </div>
             </div>

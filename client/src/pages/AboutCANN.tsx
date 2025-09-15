@@ -51,48 +51,71 @@ import cannLogoImg from "@assets/CANN-RGB-dark-theme_1756219144378.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Form validation schema
-const joinCANNSchema = z.object({
-  fullName: z.string().min(2, "Please enter your full name"),
-  email: z.string().email("Please enter a valid email address"),
-  professionalDesignation: z.string().min(2, "Please enter your professional designation"),
-  subspecialty: z.string().min(2, "Please enter your subspecialty area"),
-  amyloidosisType: z.enum(["ATTR", "AL", "Both", "Other"], {
-    required_error: "Please select an amyloidosis type",
-  }),
-  otherAmyloidosisType: z.string().optional(),
-  institution: z.string().min(2, "Please enter your institution name"),
-  communicationConsent: z.enum(["yes", "no"], {
-    required_error: "Please select your communication preference",
-  }),
-  areasOfInterest: z.array(z.string()).min(1, "Please select at least one area of interest"),
-  otherInterest: z.string().optional(),
-  presentingInterest: z.enum(["yes", "no"], {
-    required_error: "Please indicate your presenting interest",
-  }),
-  presentationTopic: z.string().optional(),
-}).refine((data) => {
-  // If presenting interest is "yes", topic is required
-  if (data.presentingInterest === "yes" && !data.presentationTopic?.trim()) {
-    return false;
-  }
-  // If amyloidosis type is "Other", description is required
-  if (data.amyloidosisType === "Other" && !data.otherAmyloidosisType?.trim()) {
-    return false;
-  }
-  return true;
-}, {
-  message: "Please provide a presentation topic or specify the other amyloidosis type",
-  path: ["presentationTopic"],
-}).refine((data) => {
-  // Separate refine for other amyloidosis type
-  if (data.amyloidosisType === "Other" && !data.otherAmyloidosisType?.trim()) {
-    return false;
-  }
-  return true;
-}, {
-  message: "Please specify the other amyloidosis type",
-  path: ["otherAmyloidosisType"],
-});
+const joinCANNSchema = z
+  .object({
+    fullName: z.string().min(2, "Please enter your full name"),
+    email: z.string().email("Please enter a valid email address"),
+    professionalDesignation: z
+      .string()
+      .min(2, "Please enter your professional designation"),
+    subspecialty: z.string().min(2, "Please enter your subspecialty area"),
+    amyloidosisType: z.enum(["ATTR", "AL", "Both", "Other"], {
+      required_error: "Please select an amyloidosis type",
+    }),
+    otherAmyloidosisType: z.string().optional(),
+    institution: z.string().min(2, "Please enter your institution name"),
+    communicationConsent: z.enum(["yes", "no"], {
+      required_error: "Please select your communication preference",
+    }),
+    areasOfInterest: z
+      .array(z.string())
+      .min(1, "Please select at least one area of interest"),
+    otherInterest: z.string().optional(),
+    presentingInterest: z.enum(["yes", "no"], {
+      required_error: "Please indicate your presenting interest",
+    }),
+    presentationTopic: z.string().optional(),
+  })
+  .refine(
+    (data) => {
+      // If presenting interest is "yes", topic is required
+      if (
+        data.presentingInterest === "yes" &&
+        !data.presentationTopic?.trim()
+      ) {
+        return false;
+      }
+      // If amyloidosis type is "Other", description is required
+      if (
+        data.amyloidosisType === "Other" &&
+        !data.otherAmyloidosisType?.trim()
+      ) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message:
+        "Please provide a presentation topic or specify the other amyloidosis type",
+      path: ["presentationTopic"],
+    },
+  )
+  .refine(
+    (data) => {
+      // Separate refine for other amyloidosis type
+      if (
+        data.amyloidosisType === "Other" &&
+        !data.otherAmyloidosisType?.trim()
+      ) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Please specify the other amyloidosis type",
+      path: ["otherAmyloidosisType"],
+    },
+  );
 
 const areasOfInterestOptions = [
   "Mental health considerations for amyloidosis and heart failure patients",
@@ -106,7 +129,7 @@ const areasOfInterestOptions = [
   "Patient support groups: awareness, initiation and development, lessons learned",
   "Patient and Healthcare Professional Q&A - open forum for discussion",
   "'A Day in the Life' - multiple short presentations from various clinics to share local experience - process, flow, pearls and pitfalls",
-  "Other"
+  "Other",
 ];
 
 export default function AboutCANN() {
@@ -196,7 +219,7 @@ export default function AboutCANN() {
       {
         title: "Knowledge Translation",
         description:
-          "Unite nurses to share and develop best practices,tools and resources to improve care delivery and grow nursing expertise.",
+          "Unit nurses to share and develop best practices,tools and resources to improve care delivery and grow nursing expertise.",
         icon: BookOpen,
         color: "from-fuchsia-500 to-purple-500",
       },
@@ -625,8 +648,8 @@ export default function AboutCANN() {
                 </span>
               </h2>
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-                Join a network dedicated to serving the needs of members and advancing amyloidosis nursing care
-                across Canada.
+                Join a network dedicated to serving the needs of members and
+                advancing amyloidosis nursing care across Canada.
               </p>
             </motion.div>
 
@@ -712,7 +735,7 @@ export default function AboutCANN() {
               </div>
 
               {!showRegistrationForm ? (
-                <Button 
+                <Button
                   onClick={() => setShowRegistrationForm(true)}
                   className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300"
                 >
@@ -737,7 +760,8 @@ export default function AboutCANN() {
                           Join CANN Today
                         </h3>
                         <p className="text-gray-600 dark:text-gray-400">
-                          Complete your registration for the Canadian Amyloidosis Nursing Network
+                          Complete your registration for the Canadian
+                          Amyloidosis Nursing Network
                         </p>
                       </div>
                     </div>
@@ -754,28 +778,32 @@ export default function AboutCANN() {
                     </Button>
                   </div>
 
-
                   {/* Join CANN Registration Form */}
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 text-left">
+                    <form
+                      onSubmit={form.handleSubmit(onSubmit)}
+                      className="space-y-6 text-left"
+                    >
                       {/* Personal Information */}
                       <div className="space-y-4">
                         <h4 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
                           Personal Information
                         </h4>
-                        
+
                         {/* Full Name */}
                         <FormField
                           control={form.control}
                           name="fullName"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Full Name (First and Last) *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                                Full Name (First and Last) *
+                              </FormLabel>
                               <FormControl>
-                                <Input 
-                                  placeholder="Enter your full name" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
-                                  {...field} 
+                                <Input
+                                  placeholder="Enter your full name"
+                                  className="border-gray-300 dark:border-gray-600 text-base"
+                                  {...field}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -789,13 +817,15 @@ export default function AboutCANN() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Email Address *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                                Email Address *
+                              </FormLabel>
                               <FormControl>
-                                <Input 
-                                  type="email" 
-                                  placeholder="Enter your email address" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
-                                  {...field} 
+                                <Input
+                                  type="email"
+                                  placeholder="Enter your email address"
+                                  className="border-gray-300 dark:border-gray-600 text-base"
+                                  {...field}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -816,12 +846,14 @@ export default function AboutCANN() {
                           name="professionalDesignation"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Professional Designation or Nursing Role *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                                Professional Designation or Nursing Role *
+                              </FormLabel>
                               <FormControl>
-                                <Input 
-                                  placeholder="e.g., Nurse Practitioner, Nurse Clinician, educator, researcher, administrator" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
-                                  {...field} 
+                                <Input
+                                  placeholder="e.g., Nurse Practitioner, Nurse Clinician, educator, researcher, administrator"
+                                  className="border-gray-300 dark:border-gray-600 text-base"
+                                  {...field}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -835,12 +867,14 @@ export default function AboutCANN() {
                           name="subspecialty"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Sub-specialty Area of Focus *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                                Sub-specialty Area of Focus *
+                              </FormLabel>
                               <FormControl>
-                                <Input 
-                                  placeholder="e.g., cardiology, hematology, neurology" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
-                                  {...field} 
+                                <Input
+                                  placeholder="e.g., cardiology, hematology, neurology"
+                                  className="border-gray-300 dark:border-gray-600 text-base"
+                                  {...field}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -855,7 +889,9 @@ export default function AboutCANN() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
-                                In my nursing practice, I primarily care for patients with the following type of amyloidosis *
+                                In my nursing practice, I primarily care for
+                                patients with the following type of amyloidosis
+                                *
                               </FormLabel>
                               <FormControl>
                                 <RadioGroup
@@ -865,19 +901,39 @@ export default function AboutCANN() {
                                 >
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="ATTR" id="attr" />
-                                    <label htmlFor="attr" className="text-gray-700 dark:text-gray-300 cursor-pointer">ATTR</label>
+                                    <label
+                                      htmlFor="attr"
+                                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                                    >
+                                      ATTR
+                                    </label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="AL" id="al" />
-                                    <label htmlFor="al" className="text-gray-700 dark:text-gray-300 cursor-pointer">AL</label>
+                                    <label
+                                      htmlFor="al"
+                                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                                    >
+                                      AL
+                                    </label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Both" id="both" />
-                                    <label htmlFor="both" className="text-gray-700 dark:text-gray-300 cursor-pointer">Both ATTR and AL</label>
+                                    <label
+                                      htmlFor="both"
+                                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                                    >
+                                      Both ATTR and AL
+                                    </label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Other" id="other" />
-                                    <label htmlFor="other" className="text-gray-700 dark:text-gray-300 cursor-pointer">Other</label>
+                                    <label
+                                      htmlFor="other"
+                                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                                    >
+                                      Other
+                                    </label>
                                   </div>
                                 </RadioGroup>
                               </FormControl>
@@ -893,12 +949,14 @@ export default function AboutCANN() {
                             name="otherAmyloidosisType"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Please specify the other amyloidosis type *</FormLabel>
+                                <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                                  Please specify the other amyloidosis type *
+                                </FormLabel>
                                 <FormControl>
-                                  <Input 
-                                    placeholder="Enter the specific amyloidosis type..." 
-                                    className="border-gray-300 dark:border-gray-600 text-base" 
-                                    {...field} 
+                                  <Input
+                                    placeholder="Enter the specific amyloidosis type..."
+                                    className="border-gray-300 dark:border-gray-600 text-base"
+                                    {...field}
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -913,12 +971,14 @@ export default function AboutCANN() {
                           name="institution"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Center or Clinic Name/Institution *</FormLabel>
+                              <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                                Center or Clinic Name/Institution *
+                              </FormLabel>
                               <FormControl>
-                                <Input 
-                                  placeholder="Enter your institution name" 
-                                  className="border-gray-300 dark:border-gray-600 text-base" 
-                                  {...field} 
+                                <Input
+                                  placeholder="Enter your institution name"
+                                  className="border-gray-300 dark:border-gray-600 text-base"
+                                  {...field}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -940,7 +1000,9 @@ export default function AboutCANN() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
-                                I would like to receive communication from the Canadian Amyloidosis Nursing Network (email, newsletters, CANN educational sessions) *
+                                I would like to receive communication from the
+                                Canadian Amyloidosis Nursing Network (email,
+                                newsletters, CANN educational sessions) *
                               </FormLabel>
                               <FormControl>
                                 <RadioGroup
@@ -950,11 +1012,21 @@ export default function AboutCANN() {
                                 >
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="yes" id="comm-yes" />
-                                    <label htmlFor="comm-yes" className="text-gray-700 dark:text-gray-300 cursor-pointer">Yes</label>
+                                    <label
+                                      htmlFor="comm-yes"
+                                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                                    >
+                                      Yes
+                                    </label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="no" id="comm-no" />
-                                    <label htmlFor="comm-no" className="text-gray-700 dark:text-gray-300 cursor-pointer">No</label>
+                                    <label
+                                      htmlFor="comm-no"
+                                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                                    >
+                                      No
+                                    </label>
                                   </div>
                                 </RadioGroup>
                               </FormControl>
@@ -977,7 +1049,9 @@ export default function AboutCANN() {
                           render={() => (
                             <FormItem>
                               <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
-                                Please indicate potential areas of interest for future Educational Series sessions (select all that apply) *
+                                Please indicate potential areas of interest for
+                                future Educational Series sessions (select all
+                                that apply) *
                               </FormLabel>
                               <div className="space-y-3 border border-gray-200 dark:border-gray-700 rounded-lg p-3">
                                 {areasOfInterestOptions.map((option) => (
@@ -993,15 +1067,21 @@ export default function AboutCANN() {
                                         >
                                           <FormControl>
                                             <Checkbox
-                                              checked={field.value?.includes(option)}
+                                              checked={field.value?.includes(
+                                                option,
+                                              )}
                                               onCheckedChange={(checked) => {
                                                 return checked
-                                                  ? field.onChange([...field.value, option])
+                                                  ? field.onChange([
+                                                      ...field.value,
+                                                      option,
+                                                    ])
                                                   : field.onChange(
                                                       field.value?.filter(
-                                                        (value) => value !== option
-                                                      )
-                                                    )
+                                                        (value) =>
+                                                          value !== option,
+                                                      ),
+                                                    );
                                               }}
                                             />
                                           </FormControl>
@@ -1009,7 +1089,7 @@ export default function AboutCANN() {
                                             {option}
                                           </FormLabel>
                                         </FormItem>
-                                      )
+                                      );
                                     }}
                                   />
                                 ))}
@@ -1026,12 +1106,14 @@ export default function AboutCANN() {
                             name="otherInterest"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Please specify other area of interest</FormLabel>
+                                <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                                  Please specify other area of interest
+                                </FormLabel>
                                 <FormControl>
-                                  <Textarea 
-                                    placeholder="Describe your other area of interest..." 
-                                    className="border-gray-300 dark:border-gray-600 text-base" 
-                                    {...field} 
+                                  <Textarea
+                                    placeholder="Describe your other area of interest..."
+                                    className="border-gray-300 dark:border-gray-600 text-base"
+                                    {...field}
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -1054,7 +1136,9 @@ export default function AboutCANN() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
-                                I would be interested in presenting to CANN members at one of the Educational Series events *
+                                I would be interested in presenting to CANN
+                                members at one of the Educational Series events
+                                *
                               </FormLabel>
                               <FormControl>
                                 <RadioGroup
@@ -1063,12 +1147,28 @@ export default function AboutCANN() {
                                   className="flex flex-col space-y-2"
                                 >
                                   <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="yes" id="present-yes" />
-                                    <label htmlFor="present-yes" className="text-gray-700 dark:text-gray-300 cursor-pointer">Yes</label>
+                                    <RadioGroupItem
+                                      value="yes"
+                                      id="present-yes"
+                                    />
+                                    <label
+                                      htmlFor="present-yes"
+                                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                                    >
+                                      Yes
+                                    </label>
                                   </div>
                                   <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="no" id="present-no" />
-                                    <label htmlFor="present-no" className="text-gray-700 dark:text-gray-300 cursor-pointer">No</label>
+                                    <RadioGroupItem
+                                      value="no"
+                                      id="present-no"
+                                    />
+                                    <label
+                                      htmlFor="present-no"
+                                      className="text-gray-700 dark:text-gray-300 cursor-pointer"
+                                    >
+                                      No
+                                    </label>
                                   </div>
                                 </RadioGroup>
                               </FormControl>
@@ -1085,13 +1185,14 @@ export default function AboutCANN() {
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
-                                  I would be interested in presenting to CANN members on the following topic *
+                                  I would be interested in presenting to CANN
+                                  members on the following topic *
                                 </FormLabel>
                                 <FormControl>
-                                  <Textarea 
-                                    placeholder="Describe the topic you would like to present on..." 
-                                    className="border-gray-300 dark:border-gray-600 text-base" 
-                                    {...field} 
+                                  <Textarea
+                                    placeholder="Describe the topic you would like to present on..."
+                                    className="border-gray-300 dark:border-gray-600 text-base"
+                                    {...field}
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -1128,8 +1229,9 @@ export default function AboutCANN() {
                   {/* Footer Note */}
                   <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
                     <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
-                      By registering, you agree to join Canada's first dedicated amyloidosis nursing network. 
-                      Membership is free and designed for nursing professionals.
+                      By registering, you agree to join Canada's first dedicated
+                      amyloidosis nursing network. Membership is free and
+                      designed for nursing professionals.
                     </p>
                   </div>
                 </motion.div>
@@ -1207,7 +1309,10 @@ export default function AboutCANN() {
       </section>
 
       {/* Confirmation Modal */}
-      <Dialog open={showConfirmationModal} onOpenChange={setShowConfirmationModal}>
+      <Dialog
+        open={showConfirmationModal}
+        onOpenChange={setShowConfirmationModal}
+      >
         <DialogContent className="sm:max-w-md">
           <DialogHeader className="text-center">
             <div className="mx-auto w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
@@ -1217,9 +1322,12 @@ export default function AboutCANN() {
               Thank you for your interest in CANN!
             </DialogTitle>
             <DialogDescription className="text-gray-600 dark:text-gray-300 mt-4 text-base leading-relaxed">
-              Your registration form has been received! 
-              <br /><br />
-              Please continue to visit the website for new developments, updates and information on upcoming CANN quarterly meetings and educational sessions.
+              Your registration form has been received!
+              <br />
+              <br />
+              Please continue to visit the website for new developments, updates
+              and information on upcoming CANN quarterly meetings and
+              educational sessions.
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-3 mt-6">
@@ -1227,8 +1335,10 @@ export default function AboutCANN() {
               onClick={() => {
                 setShowConfirmationModal(false);
                 // Navigate to CANN section of current page
-                const cannSection = document.getElementById('cann-section') || document.querySelector('body');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const cannSection =
+                  document.getElementById("cann-section") ||
+                  document.querySelector("body");
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300"
             >

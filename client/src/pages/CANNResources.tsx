@@ -101,10 +101,22 @@ export default function CANNResources() {
       type: "Webinar",
     },
     {
+      title: "CANN Quarterly Meeting",
+      date: "November 25, 2025",
+      time: "2:00 – 3:00 MST",
+      location: "Virtual – Login to CANN member portal for access details",
+      format: "Virtual Meeting",
+      description:
+        "All members' welcome! Connect with CANN members and receive live communication and updates about the network.",
+      registrationDeadline: "Coming soon",
+      cmeCredits: "1 hour",
+      type: "Meeting",
+    },
+    {
       title: "CANN Townhall – Ideation Workshop",
-      date: "Date TBD",
-      time: "5:00 PM - 6:00 PM (MST)",
-      location: "Virtual",
+      date: "January 22, 2026",
+      time: "5:00 PM - 6:30 PM (MST)",
+      location: "Virtual - Login to CANN member portal for access details",
       format: "Virtual Workshop",
       description:
         "We want to hear from you! This live session will be professionally facilitated, designed to understand the needs of new/current CANN members and shape future direction.",

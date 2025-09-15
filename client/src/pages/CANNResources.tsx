@@ -120,7 +120,7 @@ export default function CANNResources() {
       format: "Virtual Meeting",
       description:
         "All members' welcome! Connect with CANN members and receive live communication and updates about the network.",
-      registrationDeadline: "Coming soon",
+      registrationDeadline: "Registration not required",
       cmeCredits: "1 hour",
       type: "Meeting",
     },
@@ -132,7 +132,7 @@ export default function CANNResources() {
       format: "Virtual Workshop",
       description:
         "We want to hear from you! This live session will be professionally facilitated, designed to understand the needs of new/current CANN members and shape future direction.",
-      registrationDeadline: "Registration coming soon!",
+      registrationDeadline: "Registration not required",
       cmeCredits: "1.5 - 2 hours",
       type: "Virtual Workshop",
     },

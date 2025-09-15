@@ -641,7 +641,7 @@ export default function CANNResources() {
                             </div>
                           )}
                         </div>
-                        {index === 2 && (
+                        {index === 3 && (
                           <a
                             href="https://madhattr.ca/events/"
                             target="_blank"

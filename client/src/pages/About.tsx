@@ -308,22 +308,6 @@ export default function About() {
                   </motion.div>
                 </div>
 
-                {/* Floating accent elements */}
-                <motion.div
-                  className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-purple-500 to-[#00AFE6] rounded-2xl flex items-center justify-center"
-                  animate={{
-                    y: [0, -8, 0],
-                    rotate: [0, 5, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1,
-                  }}
-                >
-                  <Award className="w-6 h-6 text-white" />
-                </motion.div>
               </div>
             </motion.div>
           </div>

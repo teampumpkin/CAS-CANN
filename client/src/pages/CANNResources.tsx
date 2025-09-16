@@ -34,6 +34,29 @@ export default function CANNResources() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  // Helper function to add ordinal suffix to day
+  const getOrdinalSuffix = (day: number): string => {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd'; 
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
+
+  // Format date to "Thursday, September 25th, 2025"
+  const formatEventDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const monthName = date.toLocaleDateString('en-US', { month: 'long' });
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const ordinalSuffix = getOrdinalSuffix(day);
+    
+    return `${dayName}, ${monthName} ${day}${ordinalSuffix}, ${year}`;
+  };
+
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText("CANN@amyloid.ca");
@@ -368,7 +391,7 @@ export default function CANNResources() {
                         <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20">
                           <Calendar className="w-4 h-4 text-pink-500" />
                           <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
-                            {session.date}
+                            {formatEventDate(session.date)}
                           </span>
                         </div>
                         <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800">

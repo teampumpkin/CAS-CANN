@@ -545,17 +545,17 @@ export default function CANNResources() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="bg-slate-900 dark:bg-slate-900 rounded-2xl p-6 shadow-lg border border-slate-700/50 max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-pink-50 to-purple-50 dark:bg-slate-900 rounded-2xl p-6 shadow-lg border border-pink-200/50 dark:border-slate-700/50 max-w-4xl mx-auto">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
                 <div className="flex items-center gap-4">
                   <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-3 flex-shrink-0">
-                    <Users className="w-6 h-6 text-pink-400" />
+                    <Users className="w-6 h-6 text-pink-600 dark:text-pink-400" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-1">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
                       Members Only Events
                     </h3>
-                    <p className="text-gray-300 text-sm">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">
                       Join CANN to access exclusive professional development
                       opportunities
                     </p>

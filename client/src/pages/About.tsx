@@ -312,72 +312,23 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Committee Members */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Nowell Fine, MD",
-                title: "CAS Director",
-                institution: "University of Calgary",
-                specialty: "Cardiology & Amyloidosis",
-                image: leadershipImage,
-                bio: "Leading expert in cardiac amyloidosis with 15+ years of experience in diagnosis and treatment.",
-              },
-              {
-                name: "Margo Davis, MD",
-                title: "Executive Committee Member",
-                institution: "University of British Columbia",
-                specialty: "Hematology & Oncology",
-                image: collaborationImage,
-                bio: "Specializes in AL amyloidosis and plasma cell disorders, active researcher in novel therapies.",
-              },
-              {
-                name: "Genevieve Matte, MD",
-                title: "Executive Committee Member",
-                institution: "Université de Montréal",
-                specialty: "Nephrology & Research",
-                image: diagnosticImage,
-                bio: "Expert in renal amyloidosis and biomarker development, leads national research initiatives.",
-              },
-              {
-                name: "Michelle Mezei, MD",
-                title: "Executive Committee Member",
-                institution: "University of British Columbia",
-                specialty: "Internal Medicine",
-                image: facilityImage,
-                bio: "Develops clinical practice guidelines and diagnostic pathways for amyloidosis care.",
-              },
-              {
-                name: "François Tournoux, MD",
-                title: "Executive Committee Member",
-                institution: "McGill University",
-                specialty: "Pathology & Diagnostics",
-                image: partnershipImage,
-                bio: "Leads educational initiatives and professional development programs for clinicians.",
-              },
-              {
-                name: "Christopher Venner, MD",
-                title: "Executive Committee Member",
-                institution: "University of British Columbia",
-                specialty: "Digital Health & AI",
-                image: leadershipImage,
-                bio: "Pioneers digital health solutions and AI applications in amyloidosis diagnosis.",
-              },
-              {
-                name: "Victor Jimenez-Zepeda, MD",
-                title: "Executive Committee Member",
-                institution: "University of Calgary",
-                specialty: "Hematology & Oncology",
-                image: collaborationImage,
-                bio: "Specializes in amyloidosis research and clinical care, advancing treatment protocols.",
-              },
-            ].map((member, index) => (
+          {/* CAS Director */}
+          <div className="mb-12">
+            <motion.h3 
+              className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              CAS Director
+            </motion.h3>
+            <div className="flex justify-center">
               <motion.div
-                key={index}
-                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 group"
+                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 group max-w-sm"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
                 <div className="relative mb-4">
@@ -390,15 +341,83 @@ export default function About() {
                 </div>
 
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                    {member.name}
-                  </h3>
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                    Nowell Fine, MD
+                  </h4>
                   <p className="text-[#00AFE6] font-semibold text-sm mb-2">
-                    {member.title}
+                    University of Calgary
                   </p>
                 </div>
               </motion.div>
-            ))}
+            </div>
+          </div>
+
+          {/* CAS Executive Committee Members */}
+          <div>
+            <motion.h3 
+              className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              CAS Executive Committee Members
+            </motion.h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  name: "Margo Davis, MD",
+                  institution: "University of British Columbia",
+                },
+                {
+                  name: "Genevieve Matte, MD",
+                  institution: "Université de Montréal",
+                },
+                {
+                  name: "Michelle Mezei, MD",
+                  institution: "University of British Columbia",
+                },
+                {
+                  name: "François Tournoux, MD",
+                  institution: "McGill University",
+                },
+                {
+                  name: "Christopher Venner, MD",
+                  institution: "University of British Columbia",
+                },
+                {
+                  name: "Victor Jimenez-Zepeda, MD",
+                  institution: "University of Calgary",
+                },
+              ].map((member, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 group"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="relative mb-4">
+                    <div className="w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                      <Users className="w-10 h-10 text-white" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
+                      <Award className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                      {member.name}
+                    </h4>
+                    <p className="text-[#00AFE6] font-semibold text-sm mb-2">
+                      {member.institution}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

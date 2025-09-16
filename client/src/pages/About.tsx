@@ -323,7 +323,7 @@ export default function About() {
             >
               CAS Director
             </motion.h3>
-            <div className="flex justify-center">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
               <motion.div
                 className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 group"
                 initial={{ opacity: 0, y: 20 }}

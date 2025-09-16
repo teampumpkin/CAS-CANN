@@ -31,17 +31,41 @@ import {
   UserCheck,
 } from "lucide-react";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ParallaxBackground from "../components/ParallaxBackground";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function AboutAmyloidosis() {
   const { t } = useLanguage();
   const [expandedType, setExpandedType] = useState<string | null>(null);
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleType = (type: string) => {
     setExpandedType(expandedType === type ? null : type);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past 100px
+        setIsDisclaimerVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up
+        setIsDisclaimerVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
 
   const warningSignsData = [
     {
@@ -1116,7 +1140,9 @@ export default function AboutAmyloidosis() {
       </section>
 
       {/* Persistent Disclaimer */}
-      <div className="bg-gray-200 dark:bg-gray-800 border-t border-gray-300 dark:border-white/10 py-6 sticky bottom-0 z-50">
+      <div className={`bg-gray-200 dark:bg-gray-800 border-t border-gray-300 dark:border-white/10 py-6 sticky bottom-0 z-50 transition-transform duration-300 ease-in-out ${
+        isDisclaimerVisible ? 'translate-y-0' : 'translate-y-full'
+      }`}>
         <div className="container mx-auto px-6">
           <div className="flex items-start gap-4">
             <Shield className="w-6 h-6 text-[#00AFE6] mt-0.5 flex-shrink-0" />

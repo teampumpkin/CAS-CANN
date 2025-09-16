@@ -450,7 +450,7 @@ export default function Events() {
                                 <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
                               </div>
                               <p className="text-sm font-medium text-gray-700 dark:text-white/80 mb-4">
-                                Zoom details are sent to CAS members
+                                {index === 1 ? "Zoom details are sent to CANN members" : "Zoom details are sent to CAS members"}
                               </p>
 
                               <Button

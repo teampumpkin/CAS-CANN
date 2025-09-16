@@ -65,14 +65,27 @@ export default function Events() {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("overview");
 
-  const formatEventDate = (dateString: string) => {
+  // Helper function to add ordinal suffix to day
+  const getOrdinalSuffix = (day: number): string => {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd'; 
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
+
+  // Format date to "Thursday, September 25th, 2025"
+  const formatEventDate = (dateString: string): string => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-CA", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+    const monthName = date.toLocaleDateString('en-US', { month: 'long' });
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const ordinalSuffix = getOrdinalSuffix(day);
+    
+    return `${dayName}, ${monthName} ${day}${ordinalSuffix}, ${year}`;
   };
 
   return (

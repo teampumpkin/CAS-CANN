@@ -387,18 +387,11 @@ export default function CANNResources() {
                 <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex flex-col">
                   <CardContent className="p-6 flex-1 flex flex-col">
                     <div className="mb-4">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20">
-                          <Calendar className="w-4 h-4 text-pink-500" />
-                          <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
-                            {formatEventDate(session.date)}
-                          </span>
-                        </div>
-                        <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800">
-                          <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
-                            Coming Soon
-                          </span>
-                        </div>
+                      <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20 mb-3">
+                        <Calendar className="w-4 h-4 text-pink-500" />
+                        <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
+                          {formatEventDate(session.date)}
+                        </span>
                       </div>
                       <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white leading-tight">
                         {session.topic}
@@ -417,13 +410,20 @@ export default function CANNResources() {
                             </div>
                           </div>
                         </div>
-                        <Button
-                          disabled
-                          className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-xl cursor-not-allowed"
-                        >
-                          <PlayCircle className="w-4 h-4 mr-2" />
-                          Watch
-                        </Button>
+                        <div className="flex flex-col gap-2">
+                          <div className="inline-flex items-center justify-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800 w-fit mx-auto">
+                            <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
+                              Coming Soon
+                            </span>
+                          </div>
+                          <Button
+                            disabled
+                            className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-xl cursor-not-allowed"
+                          >
+                            <PlayCircle className="w-4 h-4 mr-2" />
+                            Watch
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </CardContent>

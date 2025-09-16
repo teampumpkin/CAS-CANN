@@ -345,7 +345,7 @@ export default function CANNResources() {
             viewport={{ once: true }}
           >
             <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 shadow-lg border border-pink-500/20 max-w-3xl mx-auto">
-              <div className="flex items-center justify-between gap-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
                 <div className="flex items-center gap-4">
                   <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-2 flex-shrink-0">
                     <Users className="w-5 h-5 text-pink-600" />
@@ -365,7 +365,7 @@ export default function CANNResources() {
                     (window.location.href = "/about-cann#join-section")
                   }
                   size="lg"
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 flex-shrink-0"
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 w-full sm:w-auto sm:flex-shrink-0"
                 >
                   <Users className="w-4 h-4 mr-2" />
                   Join CANN
@@ -546,7 +546,7 @@ export default function CANNResources() {
             viewport={{ once: true }}
           >
             <div className="bg-slate-900 dark:bg-slate-900 rounded-2xl p-6 shadow-lg border border-slate-700/50 max-w-4xl mx-auto">
-              <div className="flex items-center justify-between gap-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
                 <div className="flex items-center gap-4">
                   <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-3 flex-shrink-0">
                     <Users className="w-6 h-6 text-pink-400" />
@@ -566,7 +566,7 @@ export default function CANNResources() {
                     (window.location.href = "/about-cann#join-section")
                   }
                   size="lg"
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 flex-shrink-0"
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 w-full sm:w-auto sm:flex-shrink-0"
                 >
                   <Users className="w-4 h-4 mr-2" />
                   Join CANN

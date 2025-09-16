@@ -457,16 +457,31 @@ export default function Events() {
                                 onClick={() =>
                                   (window.location.href = index === 1 ? "/about-cann#join-section" : "/join-cas")
                                 }
-                                className="bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border-2 border-[#00DD89] hover:border-[#00DD89]/90 shadow-xl hover:shadow-2xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-3 px-8 rounded-xl font-bold text-sm relative overflow-hidden"
+                                className={index === 1 
+                                  ? "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 shadow-xl hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 group/btn py-3 px-8 rounded-xl font-bold text-sm relative overflow-hidden"
+                                  : "bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border-2 border-[#00DD89] hover:border-[#00DD89]/90 shadow-xl hover:shadow-2xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-3 px-8 rounded-xl font-bold text-sm relative overflow-hidden"
+                                }
                                 data-testid={index === 1 ? "button-join-cann" : "button-join-cas"}
                               >
                                 {/* Animated background effect */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                                <div className={index === 1 
+                                  ? "absolute inset-0 bg-gradient-to-r from-pink-500/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
+                                  : "absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
+                                }></div>
 
-                                <div className="relative z-10 flex items-center justify-center text-gray-800">
-                                  <Users className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
+                                <div className={index === 1 
+                                  ? "relative z-10 flex items-center justify-center text-white"
+                                  : "relative z-10 flex items-center justify-center text-gray-800"
+                                }>
+                                  <Users className={index === 1 
+                                    ? "w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-white"
+                                    : "w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800"
+                                  } />
                                   {index === 1 ? "Join CANN" : "Join CAS"}
-                                  <div className="ml-2 w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
+                                  <div className={index === 1 
+                                    ? "ml-2 w-2 h-2 bg-white rounded-full animate-pulse"
+                                    : "ml-2 w-2 h-2 bg-gray-800 rounded-full animate-pulse"
+                                  }></div>
                                 </div>
                               </Button>
                             </div>

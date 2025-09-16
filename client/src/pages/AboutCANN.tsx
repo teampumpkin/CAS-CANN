@@ -219,7 +219,7 @@ export default function AboutCANN() {
       {
         title: "Knowledge Translation",
         description:
-          "Unit nurses to share and develop best practices,tools and resources to improve care delivery and grow nursing expertise.",
+          "Unit nurses to share and develop best practices, tools and resources to improve care delivery and grow nursing expertise.",
         icon: BookOpen,
         color: "from-fuchsia-500 to-purple-500",
       },

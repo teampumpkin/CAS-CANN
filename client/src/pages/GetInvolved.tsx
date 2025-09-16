@@ -341,8 +341,8 @@ export default function GetInvolved() {
               </span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
-              Choose how you'd like to contribute to our mission of improving
-              amyloidosis care across Canada.
+              Contribute to our mission of improving amyloidosis care across
+              Canada by joining CAS.
             </p>
           </motion.div>
 

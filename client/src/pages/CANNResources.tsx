@@ -168,7 +168,7 @@ export default function CANNResources() {
       format: "Virtual Workshop",
       description:
         "We want to hear from you! This live session will be professionally facilitated, designed to understand the needs of new/current CANN members and shape future direction.",
-      registrationDeadline: "Registration not required",
+      registrationDeadline: "Registration required",
       cmeCredits: "1.5 - 2 hours",
       type: "Virtual Workshop",
     },

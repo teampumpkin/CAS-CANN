@@ -1,14 +1,22 @@
 import { useState } from "react";
-import { motion } from 'framer-motion';
-import { Calendar, ArrowRight, Plus, MapPin, Clock, ExternalLink, Users } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
+import { motion } from "framer-motion";
+import {
+  Calendar,
+  ArrowRight,
+  Plus,
+  MapPin,
+  Clock,
+  ExternalLink,
+  Users,
+} from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import ParallaxBackground from '../components/ParallaxBackground';
-import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
-import summitSaveTheDateImg from '@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg';
+import ParallaxBackground from "../components/ParallaxBackground";
+import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
+import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
 
 const upcomingEvents = [
   {
@@ -19,7 +27,7 @@ const upcomingEvents = [
     location: "Virtual Event",
     type: "Journal Club",
     description:
-      "One-hour virtual session designed for CAS members to deepen clinical and scientific knowledge through collaborative case-based discussion.",
+      "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates.",
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
     confirmed: true,
@@ -44,7 +52,7 @@ const upcomingEvents = [
     location: "Virtual Event",
     type: "Journal Club",
     description:
-      "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on recent amyloidosis research and publications. Registration and access details to be confirmed.",
+      "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updated",
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
   },
@@ -72,14 +80,14 @@ export default function Events() {
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <ParallaxBackground className="absolute inset-0">
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"
             style={{ backgroundImage: `url(${healthcareProfessionalImg})` }}
           />
         </ParallaxBackground>
-        
+
         <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/20 via-white/50 to-[#00DD89]/15 dark:from-[#00AFE6]/30 dark:via-gray-900/50 dark:to-[#00DD89]/25" />
-        
+
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -88,9 +96,11 @@ export default function Events() {
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-sm border border-[#00AFE6]/30 rounded-full px-6 py-2 mb-6"
           >
             <Calendar className="w-4 h-4 text-[#00AFE6]" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Educational Events</span>
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Educational Events
+            </span>
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -101,19 +111,18 @@ export default function Events() {
               Events &
             </span>
             <br />
-            <span className="text-gray-800 dark:text-white">
-              Education
-            </span>
+            <span className="text-gray-800 dark:text-white">Education</span>
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            Join our community for educational conferences, expert webinars, support groups, 
-            and professional development opportunities across Canada.
+            Join our community for educational conferences, expert webinars,
+            support groups, and professional development opportunities across
+            Canada.
           </motion.p>
         </div>
       </section>
@@ -310,12 +319,12 @@ export default function Events() {
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
               <Calendar className="w-5 h-5 text-[#00AFE6]" />
               <span className="text-gray-800 dark:text-white/90 font-medium">
-                Events
+                Community
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Events
+                Events & Community
               </span>
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
@@ -418,7 +427,7 @@ export default function Events() {
                           <div className="text-center p-5 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-2xl border-2 border-[#00AFE6]/40 shadow-lg shadow-[#00AFE6]/10 relative overflow-hidden space-y-4">
                             {/* Subtle animated background effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
-                            
+
                             <div className="relative z-10">
                               <div className="flex items-center justify-center gap-2 mb-2">
                                 <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
@@ -430,7 +439,7 @@ export default function Events() {
                               <p className="text-sm font-medium text-gray-700 dark:text-white/80 mb-4">
                                 Zoom details are sent to CAS members
                               </p>
-                              
+
                               <Button
                                 onClick={() =>
                                   (window.location.href = "/join-cas")
@@ -440,7 +449,7 @@ export default function Events() {
                               >
                                 {/* Animated background effect */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                                
+
                                 <div className="relative z-10 flex items-center justify-center text-gray-800">
                                   <Users className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
                                   Join CAS

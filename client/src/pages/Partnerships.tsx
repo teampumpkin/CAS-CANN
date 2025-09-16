@@ -128,28 +128,6 @@ export default function Partnerships() {
     },
   ];
 
-  // Strategic Partners from About page
-  const partners = [
-    {
-      name: "International Society of Amyloidosis",
-      shortName: "ISA",
-      description: "International amyloidosis research network",
-      url: "https://www.isaamyloidosis.org",
-    },
-    {
-      name: "Amyloidosis Foundation",
-      shortName: "AF",
-      description: "Leading US patient advocacy organization",
-      url: "https://amyloidosis.org",
-    },
-    {
-      name: "Canadian Amyloidosis Research Network",
-      shortName: "CARN",
-      description: "National research collaboration initiative",
-      url: "#",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Hero Section */}
@@ -227,116 +205,6 @@ export default function Partnerships() {
               </Link>
             </Button>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Strategic Partnerships Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 backdrop-blur-sm border border-[#00AFE6]/30 rounded-full px-6 py-2 mb-6">
-              <Network className="w-4 h-4 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Strategic Alliances
-              </span>
-            </div>
-
-            <h2 className="crawford-section-title mb-4">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Global
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Partners
-              </span>
-            </h2>
-
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Collaborating with leading organizations to advance amyloidosis
-              care worldwide
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {partners.map((partner, index) => {
-              const isClickable = partner.shortName !== "CARN";
-              const Component = isClickable ? motion.a : motion.div;
-              const componentProps = isClickable
-                ? {
-                    href: partner.url,
-                    target: "_blank",
-                    rel: "noopener noreferrer",
-                  }
-                : {};
-
-              return (
-                <Component
-                  key={partner.shortName}
-                  {...componentProps}
-                  className="group"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -8 }}
-                >
-                  <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-6 border border-gray-200 dark:border-gray-700 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/50 transition-all duration-500 hover:shadow-xl group-hover:bg-gradient-to-br group-hover:from-[#00AFE6]/5 group-hover:to-[#00DD89]/5 overflow-hidden h-full">
-                    {/* Background Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                    {/* Content */}
-                    <div className="relative z-10 text-center h-full flex flex-col">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg group-hover:from-[#00AFE6]/30 group-hover:to-[#00DD89]/30">
-                        <span className="text-2xl font-bold text-[#00AFE6] group-hover:text-white transition-colors duration-300">
-                          {partner.shortName}
-                        </span>
-                      </div>
-
-                      <h4 className="text-gray-800 dark:text-white font-bold text-lg group-hover:text-[#00AFE6] transition-colors duration-300 leading-tight mb-3">
-                        {partner.name}
-                      </h4>
-                      <p className="text-gray-600 dark:text-white/80 text-sm leading-relaxed group-hover:text-gray-800 dark:group-hover:text-white transition-colors duration-300 flex-1">
-                        {partner.description}
-                      </p>
-
-                      {isClickable && (
-                        <div className="mt-6 flex items-center justify-center">
-                          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border border-[#00AFE6]/30 hover:border-[#00AFE6]/50 rounded-full px-4 py-2 transition-all duration-300 group-hover:shadow-md">
-                            <span className="text-xs font-semibold text-[#00AFE6] group-hover:text-[#00AFE6]">
-                              Visit
-                            </span>
-                            <svg
-                              className="w-3 h-3 text-[#00AFE6] group-hover:text-[#00AFE6] transition-colors duration-300"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Floating Elements */}
-                    <div className="absolute -top-2 -right-2 w-3 h-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200" />
-                    <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300" />
-                  </div>
-                </Component>
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -483,7 +351,6 @@ export default function Partnerships() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

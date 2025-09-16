@@ -651,24 +651,38 @@ export default function AboutAmyloidosis() {
                   className="p-6 cursor-pointer hover:bg-gray-900/5 dark:hover:bg-white/5 transition-colors duration-300"
                   onClick={() => toggleType(type.id)}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div
-                        className={`w-14 h-14 bg-gradient-to-r ${type.color} rounded-xl flex items-center justify-center shadow-lg`}
-                      >
-                        <type.icon className="w-7 h-7 text-white" />
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    {/* Icon, Title, and Chevron */}
+                    <div className="flex items-center justify-between sm:justify-start gap-4 flex-1">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`w-14 h-14 bg-gradient-to-r ${type.color} rounded-xl flex items-center justify-center shadow-lg`}
+                        >
+                          <type.icon className="w-7 h-7 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold mb-1 text-gray-800 dark:text-white">
+                            {type.type}
+                          </h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">
+                            {type.subtitle}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-xl font-bold mb-1 text-gray-800 dark:text-white">
-                          {type.type}
-                        </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          {type.subtitle}
-                        </p>
+                      
+                      {/* Chevron - visible on mobile, hidden on desktop */}
+                      <div className="sm:hidden">
+                        {expandedType === type.id ? (
+                          <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/60" />
+                        ) : (
+                          <ChevronRight className="w-6 h-6 text-gray-600 dark:text-white/60" />
+                        )}
                       </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                      <div className="text-right">
+
+                    {/* Prevalence - below on mobile, right side on desktop */}
+                    <div className="flex items-center justify-between sm:justify-end gap-4">
+                      <div className="text-left sm:text-right">
                         <p className="text-gray-500 dark:text-white/50 text-xs uppercase tracking-wide">
                           Prevalence
                         </p>
@@ -676,11 +690,15 @@ export default function AboutAmyloidosis() {
                           {type.prevalence}
                         </p>
                       </div>
-                      {expandedType === type.id ? (
-                        <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/60" />
-                      ) : (
-                        <ChevronRight className="w-6 h-6 text-gray-600 dark:text-white/60" />
-                      )}
+                      
+                      {/* Chevron - hidden on mobile, visible on desktop */}
+                      <div className="hidden sm:block">
+                        {expandedType === type.id ? (
+                          <ChevronDown className="w-6 h-6 text-gray-600 dark:text-white/60" />
+                        ) : (
+                          <ChevronRight className="w-6 h-6 text-gray-600 dark:text-white/60" />
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -435,8 +435,8 @@ export default function Events() {
                           {event.description}
                         </p>
 
-                        {/* Membership info and Join button - Show for Journal Club sessions (index 0 and 2) */}
-                        {(index === 0 || index === 2) && (
+                        {/* Membership info and Join button - Show for Journal Club sessions (index 0 and 2) and CANN Educational Series (index 1) */}
+                        {(index === 0 || index === 1 || index === 2) && (
                           <div className="text-center p-5 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-2xl border-2 border-[#00AFE6]/40 shadow-lg shadow-[#00AFE6]/10 relative overflow-hidden space-y-4">
                             {/* Subtle animated background effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
@@ -473,18 +473,6 @@ export default function Events() {
                           </div>
                         )}
 
-                        {/* Register button - Show for CANN Educational Series (index 1) */}
-                        {index === 1 && (
-                          <Button
-                            onClick={() =>
-                              window.open(event.registrationUrl, "_blank")
-                            }
-                            className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm"
-                          >
-                            Register Now
-                            <ExternalLink className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                          </Button>
-                        )}
                       </div>
                     </Card>
                   </motion.div>

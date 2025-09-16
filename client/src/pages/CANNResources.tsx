@@ -700,7 +700,7 @@ export default function CANNResources() {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl">
+                            <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl w-full sm:w-auto">
                               Register Now
                               <ExternalLink className="w-4 h-4 ml-2" />
                             </Button>

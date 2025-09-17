@@ -192,6 +192,9 @@ export default function JoinCAS() {
     },
   });
 
+  // Watch the membership interest field to conditionally show other sections
+  const wantsMembership = form.watch("wantsMembership");
+
   const onSubmit = async (data: MembershipFormData) => {
     setIsSubmitting(true);
     try {
@@ -539,7 +542,10 @@ export default function JoinCAS() {
                           />
                         </div>
 
-                        {/* Section 2: Personal Information */}
+                        {/* Only show remaining sections if user wants membership */}
+                        {wantsMembership === "yes" && (
+                          <>
+                            {/* Section 2: Personal Information */}
                         <div className="space-y-6">
                           <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
                             <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
@@ -962,26 +968,28 @@ export default function JoinCAS() {
                           />
                         </div>
 
-                        {/* Submit Button */}
-                        <div className="pt-6">
-                          <Button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold py-6 px-8 rounded-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 transform hover:scale-105"
-                          >
-                            {isSubmitting ? (
-                              <div className="flex items-center justify-center gap-3">
-                                <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                                Processing Application...
-                              </div>
-                            ) : (
-                              <div className="flex items-center justify-center gap-3">
-                                <Send className="w-5 h-5" />
-                                Submit CAS Membership Application
-                              </div>
-                            )}
-                          </Button>
-                        </div>
+                            {/* Submit Button */}
+                            <div className="pt-6">
+                              <Button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold py-6 px-8 rounded-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 transform hover:scale-105"
+                              >
+                                {isSubmitting ? (
+                                  <div className="flex items-center justify-center gap-3">
+                                    <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                    Processing Application...
+                                  </div>
+                                ) : (
+                                  <div className="flex items-center justify-center gap-3">
+                                    <Send className="w-5 h-5" />
+                                    Submit CAS Membership Application
+                                  </div>
+                                )}
+                              </Button>
+                            </div>
+                          </>
+                        )}
                       </form>
                     </Form>
                   </div>

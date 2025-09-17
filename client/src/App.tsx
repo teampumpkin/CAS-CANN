@@ -25,16 +25,28 @@ const UploadResource = lazy(() => import("@/pages/UploadResource"));
 const GetInvolved = lazy(() => import("@/pages/GetInvolved"));
 const JoinCAS = lazy(() => import("@/pages/JoinCAS"));
 const Contact = lazy(() => import("@/pages/Contact"));
-const ALAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/ALAmyloidosis"));
-const ATTRAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/ATTRAmyloidosis"));
-const AAAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/AAAmyloidosis"));
-const ALect2Amyloidosis = lazy(() => import("@/pages/amyloidosis-types/ALect2Amyloidosis"));
-const OtherAmyloidosis = lazy(() => import("@/pages/amyloidosis-types/OtherAmyloidosis"));
+const ALAmyloidosis = lazy(
+  () => import("@/pages/amyloidosis-types/ALAmyloidosis"),
+);
+const ATTRAmyloidosis = lazy(
+  () => import("@/pages/amyloidosis-types/ATTRAmyloidosis"),
+);
+const AAAmyloidosis = lazy(
+  () => import("@/pages/amyloidosis-types/AAAmyloidosis"),
+);
+const ALect2Amyloidosis = lazy(
+  () => import("@/pages/amyloidosis-types/ALect2Amyloidosis"),
+);
+const OtherAmyloidosis = lazy(
+  () => import("@/pages/amyloidosis-types/OtherAmyloidosis"),
+);
 const AboutCANN = lazy(() => import("@/pages/AboutCANN"));
 const CANNResources = lazy(() => import("@/pages/CANNResources"));
 const JournalClub = lazy(() => import("@/pages/JournalClub"));
 
-const AccessibilityStatement = lazy(() => import("@/pages/AccessibilityStatement"));
+const AccessibilityStatement = lazy(
+  () => import("@/pages/AccessibilityStatement"),
+);
 const ContributorPortal = lazy(() => import("@/pages/ContributorPortal"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Partnerships = lazy(() => import("@/pages/Partnerships"));
@@ -71,11 +83,26 @@ function Router() {
         <Route path="/join" component={JoinCAS} />
         <Route path="/join-cas" component={JoinCAS} />
         <Route path="/contact" component={Contact} />
-        <Route path="/amyloidosis-types/al-light-chain-amyloidosis" component={ALAmyloidosis} />
-        <Route path="/amyloidosis-types/attr-transthyretin-amyloidosis" component={ATTRAmyloidosis} />
-        <Route path="/amyloidosis-types/aa-inflammatory-amyloidosis" component={AAAmyloidosis} />
-        <Route path="/amyloidosis-types/alect2-amyloidosis" component={ALect2Amyloidosis} />
-        <Route path="/amyloidosis-types/other-amyloidosis-types" component={OtherAmyloidosis} />
+        <Route
+          path="/amyloidosis-types/al-light-chain-amyloidosis"
+          component={ALAmyloidosis}
+        />
+        <Route
+          path="/amyloidosis-types/attr-transthyretin-amyloidosis"
+          component={ATTRAmyloidosis}
+        />
+        <Route
+          path="/amyloidosis-types/aa-inflammatory-amyloidosis"
+          component={AAAmyloidosis}
+        />
+        <Route
+          path="/amyloidosis-types/alect2-amyloidosis"
+          component={ALect2Amyloidosis}
+        />
+        <Route
+          path="/amyloidosis-types/other-amyloidosis-types"
+          component={OtherAmyloidosis}
+        />
         <Route path="/about-cann" component={AboutCANN} />
         <Route path="/cann" component={AboutCANN} />
         <Route path="/cann_page" component={AboutCANN} />
@@ -98,13 +125,19 @@ function App() {
           <TooltipProvider>
             <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
               {/* Skip Links for Screen Readers */}
-              <a href="#main-content" className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:bg-[#00AFE6] focus:text-white focus:px-4 focus:py-2 focus:z-50 focus:rounded-br-lg">
+              <a
+                href="#main-content"
+                className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:bg-[#00AFE6] focus:text-white focus:px-4 focus:py-2 focus:z-50 focus:rounded-br-lg"
+              >
                 Skip to main content
               </a>
-              <a href="#navigation" className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-32 focus:bg-[#00AFE6] focus:text-white focus:px-4 focus:py-2 focus:z-50 focus:rounded-br-lg">
+              <a
+                href="#navigation"
+                className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-32 focus:bg-[#00AFE6] focus:text-white focus:px-4 focus:py-2 focus:z-50 focus:rounded-br-lg"
+              >
                 Skip to navigation
               </a>
-              
+
               <Header />
               <main id="main-content" className="pt-24">
                 <Router />
@@ -113,8 +146,8 @@ function App() {
               <EnhancedScrollIndicator />
               <PerformanceOptimizer />
             </div>
-          <Toaster />
-        </TooltipProvider>
+            <Toaster />
+          </TooltipProvider>
         </LanguageProvider>
       </ThemeProvider>
     </QueryClientProvider>

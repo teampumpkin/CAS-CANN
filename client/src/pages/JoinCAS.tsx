@@ -133,35 +133,82 @@ const approvalProcess = [
   },
 ];
 
-// Form validation schema
-const membershipFormSchema = z.object({
-  wantsMembership: z.enum(["yes", "no"], {
-    required_error: "Please indicate if you want to become a member.",
-  }),
-  fullName: z.string().min(2, "Full name must be at least 2 characters."),
-  email: z.string().email("Please enter a valid email address."),
-  phone: z.string().optional(),
-  discipline: z.string().min(2, "Please specify your professional discipline."),
-  position: z.string().min(2, "Please specify your current position."),
-  institution: z.string().min(2, "Please specify your institution/workplace."),
-  address: z.string().min(5, "Please provide your complete address."),
-  city: z.string().min(2, "Please specify your city."),
-  province: z.string().min(2, "Please select your province."),
-  postalCode: z.string().min(5, "Please provide a valid postal code."),
-  yearsExperience: z
-    .string()
-    .min(1, "Please specify your years of experience."),
-  amyloidosisExperience: z.string().optional(),
-  includeInMap: z.enum(["yes", "no"], {
-    required_error:
-      "Please indicate if you want to be included in the services map.",
-  }),
-  specializations: z.array(z.string()).optional(),
-  additionalInfo: z.string().optional(),
-  agreeToTerms: z.boolean().refine((val) => val === true, {
-    message: "You must agree to the terms and conditions.",
-  }),
-});
+// Form validation schema based on provided JSON structure
+const membershipFormSchema = z
+  .object({
+    // Main membership question
+    membershipRequest: z.enum(["Yes", "No"], {
+      required_error: "Please indicate if you want to become a member.",
+    }),
+    
+    // Membership-dependent fields
+    fullName: z.string().optional(),
+    emailAddress: z.string().optional(),
+    discipline: z.string().optional(),
+    subspecialty: z.string().optional(),
+    membershipInstitution: z.string().optional(),
+    communicationConsent: z.enum(["Yes", "No"]).optional(),
+    
+    // Services map question (independent)
+    servicesMapConsent: z.enum(["Yes", "No"], {
+      required_error: "Please indicate if you want to be included in the services map.",
+    }),
+    
+    // Services map-dependent fields
+    servicesMapInstitution: z.string().optional(),
+    servicesMapAddress: z.string().optional(),
+    servicesMapPhone: z.string().optional(),
+    servicesMapFax: z.string().optional(),
+    followUpConsent: z.enum(["Yes", "No"]).optional(),
+  })
+  .refine(
+    (data) => {
+      // If membership = Yes, then membership fields are required
+      if (data.membershipRequest === "Yes") {
+        return (
+          data.fullName &&
+          data.fullName.length >= 2 &&
+          data.emailAddress &&
+          data.emailAddress.includes("@") &&
+          data.discipline &&
+          data.discipline.length >= 2 &&
+          data.subspecialty &&
+          data.subspecialty.length >= 2 &&
+          data.membershipInstitution &&
+          data.membershipInstitution.length >= 2 &&
+          data.communicationConsent
+        );
+      }
+      return true;
+    },
+    {
+      message: "All membership fields are required when requesting membership.",
+      path: ["membershipRequest"],
+    }
+  )
+  .refine(
+    (data) => {
+      // If services map = Yes, then services map fields are required
+      if (data.servicesMapConsent === "Yes") {
+        return (
+          data.servicesMapInstitution &&
+          data.servicesMapInstitution.length >= 2 &&
+          data.servicesMapAddress &&
+          data.servicesMapAddress.length >= 5 &&
+          data.servicesMapPhone &&
+          data.servicesMapPhone.length >= 10 &&
+          data.servicesMapFax &&
+          data.servicesMapFax.length >= 10 &&
+          data.followUpConsent
+        );
+      }
+      return true;
+    },
+    {
+      message: "All services map fields are required when opting to be included in the map.",
+      path: ["servicesMapConsent"],
+    }
+  );
 
 type MembershipFormData = z.infer<typeof membershipFormSchema>;
 
@@ -172,28 +219,25 @@ export default function JoinCAS() {
   const form = useForm<MembershipFormData>({
     resolver: zodResolver(membershipFormSchema),
     defaultValues: {
-      wantsMembership: undefined,
+      membershipRequest: undefined,
       fullName: "",
-      email: "",
-      phone: "",
+      emailAddress: "",
       discipline: "",
-      position: "",
-      institution: "",
-      address: "",
-      city: "",
-      province: "",
-      postalCode: "",
-      yearsExperience: "",
-      amyloidosisExperience: "",
-      includeInMap: undefined,
-      specializations: [],
-      additionalInfo: "",
-      agreeToTerms: false,
+      subspecialty: "",
+      membershipInstitution: "",
+      communicationConsent: undefined,
+      servicesMapConsent: undefined,
+      servicesMapInstitution: "",
+      servicesMapAddress: "",
+      servicesMapPhone: "",
+      servicesMapFax: "",
+      followUpConsent: undefined,
     },
   });
 
-  // Watch the membership interest field to conditionally show other sections
-  const wantsMembership = form.watch("wantsMembership");
+  // Watch form fields for conditional logic
+  const membershipRequest = form.watch("membershipRequest");
+  const servicesMapConsent = form.watch("servicesMapConsent");
 
   const onSubmit = async (data: MembershipFormData) => {
     setIsSubmitting(true);
@@ -490,7 +534,7 @@ export default function JoinCAS() {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-8"
                       >
-                        {/* Section 1: Membership Interest */}
+                        {/* Section 1: Membership Request */}
                         <div className="space-y-6">
                           <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
                             <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
@@ -503,12 +547,11 @@ export default function JoinCAS() {
 
                           <FormField
                             control={form.control}
-                            name="wantsMembership"
+                            name="membershipRequest"
                             render={({ field }) => (
                               <FormItem className="space-y-3">
                                 <FormLabel className="text-base font-medium">
-                                  I would like to become a member of the
-                                  Canadian Amyloidosis Society (CAS) *
+                                  I would like to become a member of the Canadian Amyloidosis Society (CAS) *
                                 </FormLabel>
                                 <FormControl>
                                   <RadioGroup
@@ -517,18 +560,18 @@ export default function JoinCAS() {
                                     className="flex gap-6"
                                   >
                                     <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="yes" id="yes" />
+                                      <RadioGroupItem value="Yes" id="membership-yes" />
                                       <label
-                                        htmlFor="yes"
+                                        htmlFor="membership-yes"
                                         className="cursor-pointer"
                                       >
                                         Yes
                                       </label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="no" id="no" />
+                                      <RadioGroupItem value="No" id="membership-no" />
                                       <label
-                                        htmlFor="no"
+                                        htmlFor="membership-no"
                                         className="cursor-pointer"
                                       >
                                         No
@@ -542,10 +585,353 @@ export default function JoinCAS() {
                           />
                         </div>
 
-                        {/* Only show remaining sections if user wants membership */}
-                        {wantsMembership === "yes" && (
-                          <>
-                            {/* Section 2: Personal Information */}
+                        {/* Membership-dependent fields */}
+                        {membershipRequest === "Yes" && (
+                          <div className="space-y-6">
+                            <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                              <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                2
+                              </div>
+                              <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                Member Information
+                              </h4>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <FormField
+                                control={form.control}
+                                name="fullName"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Full name (first and last) *</FormLabel>
+                                    <FormControl>
+                                      <Input
+                                        placeholder="Enter your full name"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+
+                              <FormField
+                                control={form.control}
+                                name="emailAddress"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Email address *</FormLabel>
+                                    <FormControl>
+                                      <Input
+                                        type="email"
+                                        placeholder="your.email@example.com"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+
+                              <FormField
+                                control={form.control}
+                                name="discipline"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Discipline *</FormLabel>
+                                    <FormDescription>Physician, nursing, genetic counsellor, etc</FormDescription>
+                                    <FormControl>
+                                      <Input
+                                        placeholder="e.g., Physician, Nurse, Genetic Counsellor"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+
+                              <FormField
+                                control={form.control}
+                                name="subspecialty"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Sub-specialty area of focus *</FormLabel>
+                                    <FormDescription>Cardiology, hematology, neurology, etc</FormDescription>
+                                    <FormControl>
+                                      <Input
+                                        placeholder="e.g., Cardiology, Hematology, Neurology"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+                            </div>
+
+                            <FormField
+                              control={form.control}
+                              name="membershipInstitution"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Center or Clinic Name/Institution *</FormLabel>
+                                  <FormDescription>Clinic/Institution name</FormDescription>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="Enter your institution or clinic name"
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <FormField
+                              control={form.control}
+                              name="communicationConsent"
+                              render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base font-medium">
+                                    I would like to receive communication from the Canadian Amyloidosis Society (email, newsletters) *
+                                  </FormLabel>
+                                  <FormDescription>Consent for communication</FormDescription>
+                                  <FormControl>
+                                    <RadioGroup
+                                      onValueChange={field.onChange}
+                                      defaultValue={field.value}
+                                      className="flex gap-6"
+                                    >
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Yes" id="comm-yes" />
+                                        <label
+                                          htmlFor="comm-yes"
+                                          className="cursor-pointer"
+                                        >
+                                          Yes
+                                        </label>
+                                      </div>
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="No" id="comm-no" />
+                                        <label
+                                          htmlFor="comm-no"
+                                          className="cursor-pointer"
+                                        >
+                                          No
+                                        </label>
+                                      </div>
+                                    </RadioGroup>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        )}
+
+                        {/* Services Map Section (Independent) */}
+                        <div className="space-y-6">
+                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                              {membershipRequest === "Yes" ? "3" : "2"}
+                            </div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                              Services Map
+                            </h4>
+                          </div>
+
+                          <FormField
+                            control={form.control}
+                            name="servicesMapConsent"
+                            render={({ field }) => (
+                              <FormItem className="space-y-3">
+                                <FormLabel className="text-base font-medium">
+                                  I would like my center/clinic to be included in the Canadian Amyloidosis Services Map *
+                                </FormLabel>
+                                <FormDescription>Consent for services map inclusion</FormDescription>
+                                <FormControl>
+                                  <RadioGroup
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                    className="flex gap-6"
+                                  >
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="Yes" id="map-yes" />
+                                      <label
+                                        htmlFor="map-yes"
+                                        className="cursor-pointer"
+                                      >
+                                        Yes
+                                      </label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="No" id="map-no" />
+                                      <label
+                                        htmlFor="map-no"
+                                        className="cursor-pointer"
+                                      >
+                                        No
+                                      </label>
+                                    </div>
+                                  </RadioGroup>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        {/* Services Map-dependent fields */}
+                        {servicesMapConsent === "Yes" && (
+                          <div className="space-y-6">
+                            <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                              <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                {membershipRequest === "Yes" ? "4" : "3"}
+                              </div>
+                              <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                Clinic/Institution Details
+                              </h4>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <FormField
+                                control={form.control}
+                                name="servicesMapInstitution"
+                                render={({ field }) => (
+                                  <FormItem className="md:col-span-2">
+                                    <FormLabel>Center or Clinic Name/Institution *</FormLabel>
+                                    <FormDescription>Clinic/Institution name</FormDescription>
+                                    <FormControl>
+                                      <Input
+                                        placeholder="Enter clinic or institution name"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+
+                              <FormField
+                                control={form.control}
+                                name="servicesMapAddress"
+                                render={({ field }) => (
+                                  <FormItem className="md:col-span-2">
+                                    <FormLabel>Center or Clinic Address *</FormLabel>
+                                    <FormDescription>Clinic/Institution address</FormDescription>
+                                    <FormControl>
+                                      <Input
+                                        placeholder="Enter complete address"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+
+                              <FormField
+                                control={form.control}
+                                name="servicesMapPhone"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Center or Clinic Phone Number *</FormLabel>
+                                    <FormDescription>Clinic/Institution phone</FormDescription>
+                                    <FormControl>
+                                      <Input
+                                        type="tel"
+                                        placeholder="(555) 123-4567"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+
+                              <FormField
+                                control={form.control}
+                                name="servicesMapFax"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Center or Clinic Fax Number *</FormLabel>
+                                    <FormDescription>Clinic/Institution fax</FormDescription>
+                                    <FormControl>
+                                      <Input
+                                        type="tel"
+                                        placeholder="(555) 123-4567"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+                            </div>
+
+                            <FormField
+                              control={form.control}
+                              name="followUpConsent"
+                              render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base font-medium">
+                                    I may be contacted, if needed, by the CAS to provide information for the Canadian Amyloidosis Services Map *
+                                  </FormLabel>
+                                  <FormDescription>Consent for follow up</FormDescription>
+                                  <FormControl>
+                                    <RadioGroup
+                                      onValueChange={field.onChange}
+                                      defaultValue={field.value}
+                                      className="flex gap-6"
+                                    >
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Yes" id="followup-yes" />
+                                        <label
+                                          htmlFor="followup-yes"
+                                          className="cursor-pointer"
+                                        >
+                                          Yes
+                                        </label>
+                                      </div>
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="No" id="followup-no" />
+                                        <label
+                                          htmlFor="followup-no"
+                                          className="cursor-pointer"
+                                        >
+                                          No
+                                        </label>
+                                      </div>
+                                    </RadioGroup>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        )}
+
+                        {/* Submit Button */}
+                        <div className="pt-6">
+                          <Button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold py-6 px-8 rounded-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 transform hover:scale-105"
+                          >
+                            {isSubmitting ? (
+                              <div className="flex items-center justify-center gap-3">
+                                <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                Processing Application...
+                              </div>
+                            ) : (
+                              <div className="flex items-center justify-center gap-3">
+                                <Send className="w-5 h-5" />
+                                Submit CAS Application
+                              </div>
+                            )}
+                          </Button>
+                        </div>
                         <div className="space-y-6">
                           <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
                             <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">

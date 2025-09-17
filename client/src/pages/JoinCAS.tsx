@@ -4,42 +4,20 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
-  Heart,
-  Users,
-  Mail,
-  Phone,
   ArrowRight,
-  Check,
   UserPlus,
   BookOpen,
-  Shield,
-  Star,
-  Handshake,
-  Stethoscope,
-  Upload,
   Vote,
-  Clock,
-  CheckCircle2,
-  AlertCircle,
-  ExternalLink,
-  FileText,
   Network,
   Gift,
-  UserCheck,
-  Globe,
   Calendar,
-  Award,
-  Gavel,
-  Languages,
+  Stethoscope,
   Info,
-  MapPin,
-  Building,
-  GraduationCap,
+  FileText,
   Send,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Form,
@@ -51,16 +29,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 
 const membershipBenefits = [
@@ -78,7 +47,7 @@ const membershipBenefits = [
   },
   {
     icon: Gift,
-    title: "Cinical Tools Access",
+    title: "Clinical Tools Access",
     description:
       "Access to new clinical tools, research findings, and professional development resources",
   },
@@ -102,34 +71,6 @@ const whoCanJoin = [
     title: "Researchers & Academics",
     description:
       "Scientists, academics, and research professionals studying amyloidosis",
-  },
-];
-
-const approvalProcess = [
-  {
-    step: 1,
-    title: "Application Review",
-    description: "Initial review of application and credentials verification",
-    timeline: "3-5 business days",
-  },
-  {
-    step: 2,
-    title: "Credential Verification",
-    description:
-      "Verification of professional credentials and organizational affiliation",
-    timeline: "5-7 business days",
-  },
-  {
-    step: 3,
-    title: "Committee Approval",
-    description: "Final review by CAS membership committee",
-    timeline: "7-10 business days",
-  },
-  {
-    step: 4,
-    title: "Welcome & Onboarding",
-    description: "Welcome package and access to member resources",
-    timeline: "1-2 business days",
   },
 ];
 
@@ -313,6 +254,7 @@ export default function JoinCAS() {
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
                 className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-10 py-6 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group"
+                data-testid="button-register-membership"
               >
                 <span>Register for Membership</span>
                 <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -326,6 +268,7 @@ export default function JoinCAS() {
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
                 className="border-[#00AFE6]/30 text-[#00AFE6] hover:bg-[#00AFE6]/10 px-8 py-6 rounded-2xl font-semibold text-lg"
+                data-testid="button-learn-more"
               >
                 Learn More
                 <BookOpen className="w-5 h-5 ml-2" />
@@ -523,7 +466,7 @@ export default function JoinCAS() {
                   </div>
                 </div>
 
-                {/* Custom Registration Form */}
+                {/* Registration Form */}
                 <div className="relative bg-white dark:bg-gray-800">
                   {/* Form frame decoration */}
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent dark:from-gray-700/50 pointer-events-none" />
@@ -556,11 +499,11 @@ export default function JoinCAS() {
                                 <FormControl>
                                   <RadioGroup
                                     onValueChange={field.onChange}
-                                    defaultValue={field.value}
+                                    value={field.value}
                                     className="flex gap-6"
                                   >
                                     <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="Yes" id="membership-yes" />
+                                      <RadioGroupItem value="Yes" id="membership-yes" data-testid="radio-membership-yes" />
                                       <label
                                         htmlFor="membership-yes"
                                         className="cursor-pointer"
@@ -569,7 +512,7 @@ export default function JoinCAS() {
                                       </label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="No" id="membership-no" />
+                                      <RadioGroupItem value="No" id="membership-no" data-testid="radio-membership-no" />
                                       <label
                                         htmlFor="membership-no"
                                         className="cursor-pointer"
@@ -608,6 +551,7 @@ export default function JoinCAS() {
                                       <Input
                                         placeholder="Enter your full name"
                                         {...field}
+                                        data-testid="input-full-name"
                                       />
                                     </FormControl>
                                     <FormMessage />
@@ -626,6 +570,7 @@ export default function JoinCAS() {
                                         type="email"
                                         placeholder="your.email@example.com"
                                         {...field}
+                                        data-testid="input-email-address"
                                       />
                                     </FormControl>
                                     <FormMessage />
@@ -644,6 +589,7 @@ export default function JoinCAS() {
                                       <Input
                                         placeholder="e.g., Physician, Nurse, Genetic Counsellor"
                                         {...field}
+                                        data-testid="input-discipline"
                                       />
                                     </FormControl>
                                     <FormMessage />
@@ -662,6 +608,7 @@ export default function JoinCAS() {
                                       <Input
                                         placeholder="e.g., Cardiology, Hematology, Neurology"
                                         {...field}
+                                        data-testid="input-subspecialty"
                                       />
                                     </FormControl>
                                     <FormMessage />
@@ -681,6 +628,7 @@ export default function JoinCAS() {
                                     <Input
                                       placeholder="Enter your institution or clinic name"
                                       {...field}
+                                      data-testid="input-membership-institution"
                                     />
                                   </FormControl>
                                   <FormMessage />
@@ -694,28 +642,27 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem className="space-y-3">
                                   <FormLabel className="text-base font-medium">
-                                    I would like to receive communication from the Canadian Amyloidosis Society (email, newsletters) *
+                                    I consent to receive communications from CAS regarding membership updates, events, and professional development opportunities *
                                   </FormLabel>
-                                  <FormDescription>Consent for communication</FormDescription>
                                   <FormControl>
                                     <RadioGroup
                                       onValueChange={field.onChange}
-                                      defaultValue={field.value}
+                                      value={field.value}
                                       className="flex gap-6"
                                     >
                                       <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="Yes" id="comm-yes" />
+                                        <RadioGroupItem value="Yes" id="communication-yes" data-testid="radio-communication-yes" />
                                         <label
-                                          htmlFor="comm-yes"
+                                          htmlFor="communication-yes"
                                           className="cursor-pointer"
                                         >
                                           Yes
                                         </label>
                                       </div>
                                       <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="No" id="comm-no" />
+                                        <RadioGroupItem value="No" id="communication-no" data-testid="radio-communication-no" />
                                         <label
-                                          htmlFor="comm-no"
+                                          htmlFor="communication-no"
                                           className="cursor-pointer"
                                         >
                                           No
@@ -730,11 +677,11 @@ export default function JoinCAS() {
                           </div>
                         )}
 
-                        {/* Services Map Section (Independent) */}
+                        {/* Section 3: Services Map */}
                         <div className="space-y-6">
                           <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
                             <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                              {membershipRequest === "Yes" ? "3" : "2"}
+                              3
                             </div>
                             <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
                               Services Map
@@ -749,26 +696,25 @@ export default function JoinCAS() {
                                 <FormLabel className="text-base font-medium">
                                   I would like my center/clinic to be included in the Canadian Amyloidosis Services Map *
                                 </FormLabel>
-                                <FormDescription>Consent for services map inclusion</FormDescription>
                                 <FormControl>
                                   <RadioGroup
                                     onValueChange={field.onChange}
-                                    defaultValue={field.value}
+                                    value={field.value}
                                     className="flex gap-6"
                                   >
                                     <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="Yes" id="map-yes" />
+                                      <RadioGroupItem value="Yes" id="services-map-yes" data-testid="radio-services-map-yes" />
                                       <label
-                                        htmlFor="map-yes"
+                                        htmlFor="services-map-yes"
                                         className="cursor-pointer"
                                       >
                                         Yes
                                       </label>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="No" id="map-no" />
+                                      <RadioGroupItem value="No" id="services-map-no" data-testid="radio-services-map-no" />
                                       <label
-                                        htmlFor="map-no"
+                                        htmlFor="services-map-no"
                                         className="cursor-pointer"
                                       >
                                         No
@@ -782,15 +728,15 @@ export default function JoinCAS() {
                           />
                         </div>
 
-                        {/* Services Map-dependent fields */}
+                        {/* Services map-dependent fields */}
                         {servicesMapConsent === "Yes" && (
                           <div className="space-y-6">
                             <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
                               <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                                {membershipRequest === "Yes" ? "4" : "3"}
+                                4
                               </div>
                               <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                Clinic/Institution Details
+                                Services Map Information
                               </h4>
                             </div>
 
@@ -800,12 +746,12 @@ export default function JoinCAS() {
                                 name="servicesMapInstitution"
                                 render={({ field }) => (
                                   <FormItem className="md:col-span-2">
-                                    <FormLabel>Center or Clinic Name/Institution *</FormLabel>
-                                    <FormDescription>Clinic/Institution name</FormDescription>
+                                    <FormLabel>Institution Name *</FormLabel>
                                     <FormControl>
                                       <Input
-                                        placeholder="Enter clinic or institution name"
+                                        placeholder="Enter institution name for services map"
                                         {...field}
+                                        data-testid="input-services-map-institution"
                                       />
                                     </FormControl>
                                     <FormMessage />
@@ -818,12 +764,12 @@ export default function JoinCAS() {
                                 name="servicesMapAddress"
                                 render={({ field }) => (
                                   <FormItem className="md:col-span-2">
-                                    <FormLabel>Center or Clinic Address *</FormLabel>
-                                    <FormDescription>Clinic/Institution address</FormDescription>
+                                    <FormLabel>Address *</FormLabel>
                                     <FormControl>
                                       <Input
-                                        placeholder="Enter complete address"
+                                        placeholder="Full address for services map"
                                         {...field}
+                                        data-testid="input-services-map-address"
                                       />
                                     </FormControl>
                                     <FormMessage />
@@ -836,13 +782,12 @@ export default function JoinCAS() {
                                 name="servicesMapPhone"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Center or Clinic Phone Number *</FormLabel>
-                                    <FormDescription>Clinic/Institution phone</FormDescription>
+                                    <FormLabel>Phone Number *</FormLabel>
                                     <FormControl>
                                       <Input
-                                        type="tel"
                                         placeholder="(555) 123-4567"
                                         {...field}
+                                        data-testid="input-services-map-phone"
                                       />
                                     </FormControl>
                                     <FormMessage />
@@ -855,13 +800,12 @@ export default function JoinCAS() {
                                 name="servicesMapFax"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Center or Clinic Fax Number *</FormLabel>
-                                    <FormDescription>Clinic/Institution fax</FormDescription>
+                                    <FormLabel>Fax Number *</FormLabel>
                                     <FormControl>
                                       <Input
-                                        type="tel"
                                         placeholder="(555) 123-4567"
                                         {...field}
+                                        data-testid="input-services-map-fax"
                                       />
                                     </FormControl>
                                     <FormMessage />
@@ -876,28 +820,27 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem className="space-y-3">
                                   <FormLabel className="text-base font-medium">
-                                    I may be contacted, if needed, by the CAS to provide information for the Canadian Amyloidosis Services Map *
+                                    I consent to being contacted for follow-up regarding services map information *
                                   </FormLabel>
-                                  <FormDescription>Consent for follow up</FormDescription>
                                   <FormControl>
                                     <RadioGroup
                                       onValueChange={field.onChange}
-                                      defaultValue={field.value}
+                                      value={field.value}
                                       className="flex gap-6"
                                     >
                                       <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="Yes" id="followup-yes" />
+                                        <RadioGroupItem value="Yes" id="follow-up-yes" data-testid="radio-follow-up-yes" />
                                         <label
-                                          htmlFor="followup-yes"
+                                          htmlFor="follow-up-yes"
                                           className="cursor-pointer"
                                         >
                                           Yes
                                         </label>
                                       </div>
                                       <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="No" id="followup-no" />
+                                        <RadioGroupItem value="No" id="follow-up-no" data-testid="radio-follow-up-no" />
                                         <label
-                                          htmlFor="followup-no"
+                                          htmlFor="follow-up-no"
                                           className="cursor-pointer"
                                         >
                                           No
@@ -918,6 +861,7 @@ export default function JoinCAS() {
                             type="submit"
                             disabled={isSubmitting}
                             className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold py-6 px-8 rounded-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 transform hover:scale-105"
+                            data-testid="button-submit-application"
                           >
                             {isSubmitting ? (
                               <div className="flex items-center justify-center gap-3">
@@ -927,545 +871,13 @@ export default function JoinCAS() {
                             ) : (
                               <div className="flex items-center justify-center gap-3">
                                 <Send className="w-5 h-5" />
-                                Submit CAS Application
+                                Submit CAS Registration
                               </div>
                             )}
                           </Button>
                         </div>
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                              2
-                            </div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                              Personal Information
-                            </h4>
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <FormField
-                              control={form.control}
-                              name="fullName"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>
-                                    Full Name (first and last) *
-                                  </FormLabel>
-                                  <FormControl>
-                                    <Input
-                                      placeholder="Enter your full name"
-                                      {...field}
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-
-                            <FormField
-                              control={form.control}
-                              name="email"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Email Address *</FormLabel>
-                                  <FormControl>
-                                    <Input
-                                      type="email"
-                                      placeholder="your.email@example.com"
-                                      {...field}
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-
-                            <FormField
-                              control={form.control}
-                              name="phone"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Phone Number</FormLabel>
-                                  <FormControl>
-                                    <Input
-                                      type="tel"
-                                      placeholder="(555) 123-4567"
-                                      {...field}
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-                          </div>
-                        </div>
-
-                        {/* Section 3: Professional Information */}
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                              3
-                            </div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                              Professional Information
-                            </h4>
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <FormField
-                              control={form.control}
-                              name="discipline"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>
-                                    Discipline (physician, nursing, genetic
-                                    counsellor, etc) *
-                                  </FormLabel>
-                                  <FormControl>
-                                    <Input
-                                      placeholder="e.g., Physician, Nurse, Genetic Counsellor"
-                                      {...field}
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-
-                            <FormField
-                              control={form.control}
-                              name="position"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Current Position *</FormLabel>
-                                  <FormControl>
-                                    <Input
-                                      placeholder="e.g., Cardiologist, Clinical Nurse"
-                                      {...field}
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-
-                            <FormField
-                              control={form.control}
-                              name="institution"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Institution/Workplace *</FormLabel>
-                                  <FormControl>
-                                    <Input
-                                      placeholder="Hospital, clinic, or organization name"
-                                      {...field}
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-
-                            <FormField
-                              control={form.control}
-                              name="yearsExperience"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Years of Experience *</FormLabel>
-                                  <FormControl>
-                                    <Select
-                                      onValueChange={field.onChange}
-                                      defaultValue={field.value}
-                                    >
-                                      <SelectTrigger>
-                                        <SelectValue placeholder="Select experience level" />
-                                      </SelectTrigger>
-                                      <SelectContent>
-                                        <SelectItem value="0-2">
-                                          0-2 years
-                                        </SelectItem>
-                                        <SelectItem value="3-5">
-                                          3-5 years
-                                        </SelectItem>
-                                        <SelectItem value="6-10">
-                                          6-10 years
-                                        </SelectItem>
-                                        <SelectItem value="11-15">
-                                          11-15 years
-                                        </SelectItem>
-                                        <SelectItem value="16-20">
-                                          16-20 years
-                                        </SelectItem>
-                                        <SelectItem value="20+">
-                                          20+ years
-                                        </SelectItem>
-                                      </SelectContent>
-                                    </Select>
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-                          </div>
-                        </div>
-
-                        {/* Section 4: Location Information */}
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                              4
-                            </div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                              Location Information
-                            </h4>
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <FormField
-                              control={form.control}
-                              name="address"
-                              render={({ field }) => (
-                                <FormItem className="md:col-span-3">
-                                  <FormLabel>Address *</FormLabel>
-                                  <FormControl>
-                                    <Input
-                                      placeholder="Street address"
-                                      {...field}
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-
-                            <FormField
-                              control={form.control}
-                              name="city"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>City *</FormLabel>
-                                  <FormControl>
-                                    <Input placeholder="City" {...field} />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-
-                            <FormField
-                              control={form.control}
-                              name="province"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Province/Territory *</FormLabel>
-                                  <FormControl>
-                                    <Select
-                                      onValueChange={field.onChange}
-                                      defaultValue={field.value}
-                                    >
-                                      <SelectTrigger>
-                                        <SelectValue placeholder="Select province" />
-                                      </SelectTrigger>
-                                      <SelectContent>
-                                        <SelectItem value="AB">
-                                          Alberta
-                                        </SelectItem>
-                                        <SelectItem value="BC">
-                                          British Columbia
-                                        </SelectItem>
-                                        <SelectItem value="MB">
-                                          Manitoba
-                                        </SelectItem>
-                                        <SelectItem value="NB">
-                                          New Brunswick
-                                        </SelectItem>
-                                        <SelectItem value="NL">
-                                          Newfoundland and Labrador
-                                        </SelectItem>
-                                        <SelectItem value="NS">
-                                          Nova Scotia
-                                        </SelectItem>
-                                        <SelectItem value="ON">
-                                          Ontario
-                                        </SelectItem>
-                                        <SelectItem value="PE">
-                                          Prince Edward Island
-                                        </SelectItem>
-                                        <SelectItem value="QC">
-                                          Quebec
-                                        </SelectItem>
-                                        <SelectItem value="SK">
-                                          Saskatchewan
-                                        </SelectItem>
-                                        <SelectItem value="NT">
-                                          Northwest Territories
-                                        </SelectItem>
-                                        <SelectItem value="NU">
-                                          Nunavut
-                                        </SelectItem>
-                                        <SelectItem value="YT">
-                                          Yukon
-                                        </SelectItem>
-                                      </SelectContent>
-                                    </Select>
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-
-                            <FormField
-                              control={form.control}
-                              name="postalCode"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Postal Code *</FormLabel>
-                                  <FormControl>
-                                    <Input placeholder="A1A 1A1" {...field} />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-                          </div>
-
-                          <FormField
-                            control={form.control}
-                            name="includeInMap"
-                            render={({ field }) => (
-                              <FormItem className="space-y-3">
-                                <FormLabel className="text-base font-medium">
-                                  I would like my center/clinic to be included
-                                  in the Canadian Amyloidosis Services Map *
-                                </FormLabel>
-                                <FormControl>
-                                  <RadioGroup
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                    className="flex gap-6"
-                                  >
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem
-                                        value="yes"
-                                        id="map-yes"
-                                      />
-                                      <label
-                                        htmlFor="map-yes"
-                                        className="cursor-pointer"
-                                      >
-                                        Yes
-                                      </label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="no" id="map-no" />
-                                      <label
-                                        htmlFor="map-no"
-                                        className="cursor-pointer"
-                                      >
-                                        No
-                                      </label>
-                                    </div>
-                                  </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-
-                        {/* Section 5: Additional Information */}
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                              5
-                            </div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                              Additional Information
-                            </h4>
-                          </div>
-
-                          <FormField
-                            control={form.control}
-                            name="amyloidosisExperience"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>
-                                  Experience with Amyloidosis Patients
-                                </FormLabel>
-                                <FormControl>
-                                  <Textarea
-                                    placeholder="Briefly describe your experience with amyloidosis patients, research, or related work (optional)"
-                                    rows={4}
-                                    {...field}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          <FormField
-                            control={form.control}
-                            name="additionalInfo"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Additional Information</FormLabel>
-                                <FormControl>
-                                  <Textarea
-                                    placeholder="Any additional information you'd like to share about your interest in CAS membership (optional)"
-                                    rows={3}
-                                    {...field}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-
-                        {/* Terms Agreement */}
-                        <div className="space-y-6">
-                          <FormField
-                            control={form.control}
-                            name="agreeToTerms"
-                            render={({ field }) => (
-                              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-gray-50 dark:bg-gray-900">
-                                <FormControl>
-                                  <Checkbox
-                                    checked={field.value}
-                                    onCheckedChange={field.onChange}
-                                  />
-                                </FormControl>
-                                <div className="space-y-1 leading-none">
-                                  <FormLabel className="cursor-pointer">
-                                    I agree to the terms and conditions *
-                                  </FormLabel>
-                                  <FormDescription>
-                                    By submitting this application, I agree to
-                                    abide by CAS professional standards and
-                                    governance framework. All personal
-                                    information will be handled according to our
-                                    privacy policy.
-                                  </FormDescription>
-                                  <FormMessage />
-                                </div>
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-
-                            {/* Submit Button */}
-                            <div className="pt-6">
-                              <Button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold py-6 px-8 rounded-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 transform hover:scale-105"
-                              >
-                                {isSubmitting ? (
-                                  <div className="flex items-center justify-center gap-3">
-                                    <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                                    Processing Application...
-                                  </div>
-                                ) : (
-                                  <div className="flex items-center justify-center gap-3">
-                                    <Send className="w-5 h-5" />
-                                    Submit CAS Membership Application
-                                  </div>
-                                )}
-                              </Button>
-                            </div>
-                          </>
-                        )}
                       </form>
                     </Form>
-                  </div>
-                </div>
-
-                {/* Enhanced Form Footer */}
-                <div className="relative p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 border-t border-gray-200 dark:border-gray-700">
-                  {/* Trust indicators with enhanced design */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                    <motion.div
-                      className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <div className="w-10 h-10 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
-                        <Shield className="w-5 h-5 text-white" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-gray-900 dark:text-white text-sm">
-                          Secure & Encrypted
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          SSL protected
-                        </p>
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <div className="w-10 h-10 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
-                        <Clock className="w-5 h-5 text-white" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-gray-900 dark:text-white text-sm">
-                          5-10 Minutes
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          Average completion
-                        </p>
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <div className="w-10 h-10 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
-                        <CheckCircle2 className="w-5 h-5 text-white" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-gray-900 dark:text-white text-sm">
-                          Review in 2-3 Weeks
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          Professional review
-                        </p>
-                      </div>
-                    </motion.div>
-                  </div>
-
-                  {/* Help section */}
-                  <div className="text-center p-4 bg-[#00AFE6]/5 rounded-xl border border-[#00AFE6]/20">
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                      Need assistance with your application?
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <button
-                        onClick={() =>
-                          window.open(
-                            "https://forms.office.com/Pages/ResponsePage.aspx?id=7KAJxuOlMUaWhhkigL2RUV3g_7vFhtBCm2WYpb7e-YpUMUZNOTlCQ1dTNVJaV09NUzBJUFpCMzg5UC4u",
-                            "_blank",
-                          )
-                        }
-                        className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-medium transition-colors duration-200"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        Open in new window
-                      </button>
-                      <a
-                        href="mailto:info@amyloid.ca"
-                        className="inline-flex items-center gap-2 text-[#00AFE6] hover:text-[#00DD89] font-medium transition-colors duration-200"
-                      >
-                        <Mail className="w-4 h-4" />
-                        Email support
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>

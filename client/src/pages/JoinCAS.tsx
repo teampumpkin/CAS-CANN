@@ -124,7 +124,9 @@ export default function JoinCAS() {
       // Google Apps Script URL
       const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtL1jnoCRwZkx6jeURzoH8_hJqyjlGxQRNRKHGgw3kmMaCsutmymhe7dJOhC5MU8mFdQ/exec";
       
+      console.log("Form submission started!");
       console.log("Submitting form data:", data);
+      console.log("Form validation state:", form.formState.errors);
       
       // Submit to Google Sheets
       const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -1125,6 +1127,12 @@ export default function JoinCAS() {
                           <Button
                             type="submit"
                             disabled={isSubmitting}
+                            onClick={() => {
+                              console.log("Submit button clicked!");
+                              console.log("Form errors:", form.formState.errors);
+                              console.log("Form is valid:", form.formState.isValid);
+                              console.log("Form values:", form.getValues());
+                            }}
                             className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group min-w-[200px]"
                             data-testid="button-submit-form"
                           >

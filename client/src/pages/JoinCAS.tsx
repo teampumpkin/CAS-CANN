@@ -177,7 +177,8 @@ export default function JoinCAS() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <>
+      <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
       <section className="relative py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 overflow-hidden">
         {/* Background Elements */}
@@ -1210,6 +1211,7 @@ export default function JoinCAS() {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+      </div>
+    </>
   );
 }

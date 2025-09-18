@@ -443,8 +443,7 @@ export default function JoinCAS() {
                   <div className="p-8">
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                        <div className="space-y-6">
-                          {/* Question 1: Main membership question */}
+                        {/* Question 1: Main membership question */}
                           <FormField
                           control={form.control}
                           name="wantsMembership"
@@ -829,8 +828,9 @@ export default function JoinCAS() {
                             transition={{ duration: 0.3 }}
                             className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6"
                           >
-                            {/* Question 2: Services Map for Non-Members */}
-                            <FormField
+                            <div className="space-y-6">
+                              {/* Question 2: Services Map for Non-Members */}
+                              <FormField
                               control={form.control}
                               name="noMemberWantsServicesMap"
                               render={({ field }) => (
@@ -870,8 +870,8 @@ export default function JoinCAS() {
                               )}
                             />
 
-                            {/* Questions 3-6: Center Details (Always Required for Non-Members) */}
-                            <FormField
+                              {/* Questions 3-6: Center Details (Always Required for Non-Members) */}
+                              <FormField
                               control={form.control}
                               name="noMemberCenterName"
                               render={({ field }) => (
@@ -998,7 +998,7 @@ export default function JoinCAS() {
                               )}
                             />
 
-                            {/* Questions 8-12: Show only when noMemberAllowsContact is "Yes" */}
+                              {/* Questions 8-12: Show only when noMemberAllowsContact is "Yes" */}
                             {noMemberAllowsContact === "Yes" && (
                               <motion.div
                                 initial={{ opacity: 0, height: 0 }}
@@ -1133,6 +1133,7 @@ export default function JoinCAS() {
                                 />
                               </motion.div>
                             )}
+                            </div>
                           </motion.div>
                         )}
 
@@ -1160,7 +1161,6 @@ export default function JoinCAS() {
                               </>
                             )}
                           </Button>
-                        </div>
                         </div>
                       </form>
                     </Form>

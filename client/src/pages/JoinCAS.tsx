@@ -642,8 +642,8 @@ export default function JoinCAS() {
                               )}
                             />
 
-                            {/* Questions 9-13: Show only when wantsServicesMapInclusion is "No" */}
-                            {wantsServicesMapInclusion === "No" && (
+                            {/* Questions 9-13: Show only when wantsServicesMapInclusion is "Yes" */}
+                            {wantsServicesMapInclusion === "Yes" && (
                               <motion.div
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: "auto" }}

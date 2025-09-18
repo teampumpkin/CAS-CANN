@@ -141,8 +141,8 @@ export const casRegistrationSchema = z.object({
       });
     }
     
-    // Conditional validation for services map "No" path
-    if (data.wantsServicesMapInclusion === "No") {
+    // Conditional validation for services map "Yes" path
+    if (data.wantsServicesMapInclusion === "Yes") {
       if (!data.centerName || data.centerName.trim().length === 0) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,

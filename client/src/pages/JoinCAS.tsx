@@ -443,8 +443,9 @@ export default function JoinCAS() {
                   <div className="p-8">
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                        {/* Question 1: Main membership question */}
-                        <FormField
+                        <div className="space-y-6">
+                          {/* Question 1: Main membership question */}
+                          <FormField
                           control={form.control}
                           name="wantsMembership"
                           render={({ field }) => (
@@ -1159,6 +1160,7 @@ export default function JoinCAS() {
                               </>
                             )}
                           </Button>
+                        </div>
                         </div>
                       </form>
                     </Form>

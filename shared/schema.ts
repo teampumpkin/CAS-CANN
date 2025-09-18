@@ -61,7 +61,7 @@ export const casRegistrationSchema = z.object({
   
   // For "Yes" membership path (questions 2-7 from previous spec, then question 8 for services map)
   fullName: z.string().optional(),
-  email: z.string().email().optional(),
+  email: z.string().optional(),
   discipline: z.string().optional(),
   subspecialty: z.string().optional(),
   institution: z.string().optional(),

@@ -132,11 +132,11 @@ export default function JoinCAS() {
       // Google Apps Script URL
       const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtL1jnoCRwZkx6jeURzoH8_hJqyjlGxQRNRKHGgw3kmMaCsutmymhe7dJOhC5MU8mFdQ/exec";
       
-      // Submit to Google Sheets
+      // Submit to Google Sheets (using text/plain to avoid CORS issues)
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "text/plain;charset=utf-8",
         },
         body: JSON.stringify(data),
       });
@@ -159,9 +159,16 @@ export default function JoinCAS() {
       
     } catch (error) {
       console.error("Form submission error:", error);
+      
+      let errorMessage = "Please try again or contact us directly if the problem persists.";
+      
+      if (error instanceof TypeError && error.message === "Failed to fetch") {
+        errorMessage = "Unable to connect to Google Sheets. Please check your internet connection or try again later. You can also contact us directly via email.";
+      }
+      
       toast({
         title: "Submission Failed", 
-        description: "Please try again or contact us directly. If the problem persists, please email us.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

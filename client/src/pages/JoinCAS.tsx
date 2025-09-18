@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -90,10 +90,8 @@ const membershipFormSchema = z
     membershipInstitution: z.string().optional(),
     communicationConsent: z.enum(["Yes", "No"]).optional(),
     
-    // Services map question (independent)
-    servicesMapConsent: z.enum(["Yes", "No"], {
-      required_error: "Please indicate if you want to be included in the services map.",
-    }),
+    // Services map question (conditional - only when membershipRequest is "No")
+    servicesMapConsent: z.enum(["Yes", "No"]).optional(),
     
     // Services map-dependent fields
     servicesMapInstitution: z.string().optional(),
@@ -127,29 +125,57 @@ const membershipFormSchema = z
       path: ["membershipRequest"],
     }
   )
-  .refine(
-    (data) => {
-      // If services map = Yes, then services map fields are required
-      if (data.servicesMapConsent === "Yes") {
-        return (
-          data.servicesMapInstitution &&
-          data.servicesMapInstitution.length >= 2 &&
-          data.servicesMapAddress &&
-          data.servicesMapAddress.length >= 5 &&
-          data.servicesMapPhone &&
-          data.servicesMapPhone.length >= 10 &&
-          data.servicesMapFax &&
-          data.servicesMapFax.length >= 10 &&
-          data.followUpConsent
-        );
+  .superRefine((data, ctx) => {
+    // If membership request is "No", then services map consent is required
+    if (data.membershipRequest === "No") {
+      if (!data.servicesMapConsent) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please indicate if you want to be included in the services map.",
+          path: ["servicesMapConsent"],
+        });
       }
-      return true;
-    },
-    {
-      message: "All services map fields are required when opting to be included in the map.",
-      path: ["servicesMapConsent"],
+      
+      // If services map consent is "Yes", then services map fields are required
+      if (data.servicesMapConsent === "Yes") {
+        if (!data.servicesMapInstitution || data.servicesMapInstitution.length < 2) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Institution name is required.",
+            path: ["servicesMapInstitution"],
+          });
+        }
+        if (!data.servicesMapAddress || data.servicesMapAddress.length < 5) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Address is required.",
+            path: ["servicesMapAddress"],
+          });
+        }
+        if (!data.servicesMapPhone || data.servicesMapPhone.length < 10) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Phone number is required.",
+            path: ["servicesMapPhone"],
+          });
+        }
+        if (!data.servicesMapFax || data.servicesMapFax.length < 10) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Fax number is required.",
+            path: ["servicesMapFax"],
+          });
+        }
+        if (!data.followUpConsent) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Follow-up consent is required.",
+            path: ["followUpConsent"],
+          });
+        }
+      }
     }
-  );
+  });
 
 type MembershipFormData = z.infer<typeof membershipFormSchema>;
 
@@ -179,6 +205,30 @@ export default function JoinCAS() {
   // Watch form fields for conditional logic
   const membershipRequest = form.watch("membershipRequest");
   const servicesMapConsent = form.watch("servicesMapConsent");
+
+  // Clear hidden fields when toggling between options
+  useEffect(() => {
+    if (membershipRequest === "Yes") {
+      // Clear all services map fields when user selects membership
+      form.setValue("servicesMapConsent", undefined);
+      form.setValue("servicesMapInstitution", "");
+      form.setValue("servicesMapAddress", "");
+      form.setValue("servicesMapPhone", "");
+      form.setValue("servicesMapFax", "");
+      form.setValue("followUpConsent", undefined);
+    }
+  }, [membershipRequest, form]);
+
+  useEffect(() => {
+    if (servicesMapConsent === "No") {
+      // Clear services map detail fields when user opts out of services map
+      form.setValue("servicesMapInstitution", "");
+      form.setValue("servicesMapAddress", "");
+      form.setValue("servicesMapPhone", "");
+      form.setValue("servicesMapFax", "");
+      form.setValue("followUpConsent", undefined);
+    }
+  }, [servicesMapConsent, form]);
 
   const onSubmit = async (data: MembershipFormData) => {
     setIsSubmitting(true);
@@ -677,63 +727,65 @@ export default function JoinCAS() {
                           </div>
                         )}
 
-                        {/* Section 3: Services Map */}
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                              3
-                            </div>
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                              Services Map
-                            </h4>
-                          </div>
-
-                          <FormField
-                            control={form.control}
-                            name="servicesMapConsent"
-                            render={({ field }) => (
-                              <FormItem className="space-y-3">
-                                <FormLabel className="text-base font-medium">
-                                  I would like my center/clinic to be included in the Canadian Amyloidosis Services Map *
-                                </FormLabel>
-                                <FormControl>
-                                  <RadioGroup
-                                    onValueChange={field.onChange}
-                                    value={field.value}
-                                    className="flex gap-6"
-                                  >
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="Yes" id="services-map-yes" data-testid="radio-services-map-yes" />
-                                      <label
-                                        htmlFor="services-map-yes"
-                                        className="cursor-pointer"
-                                      >
-                                        Yes
-                                      </label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="No" id="services-map-no" data-testid="radio-services-map-no" />
-                                      <label
-                                        htmlFor="services-map-no"
-                                        className="cursor-pointer"
-                                      >
-                                        No
-                                      </label>
-                                    </div>
-                                  </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-
-                        {/* Services map-dependent fields */}
-                        {servicesMapConsent === "Yes" && (
+                        {/* Section 3: Services Map - Only show if user selects "No" for membership */}
+                        {membershipRequest === "No" && (
                           <div className="space-y-6">
                             <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
                               <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
-                                4
+                                2
+                              </div>
+                              <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                Services Map
+                              </h4>
+                            </div>
+
+                            <FormField
+                              control={form.control}
+                              name="servicesMapConsent"
+                              render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base font-medium">
+                                    I would like my center/clinic to be included in the Canadian Amyloidosis Services Map *
+                                  </FormLabel>
+                                  <FormControl>
+                                    <RadioGroup
+                                      onValueChange={field.onChange}
+                                      value={field.value}
+                                      className="flex gap-6"
+                                    >
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Yes" id="services-map-yes" data-testid="radio-services-map-yes" />
+                                        <label
+                                          htmlFor="services-map-yes"
+                                          className="cursor-pointer"
+                                        >
+                                          Yes
+                                        </label>
+                                      </div>
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="No" id="services-map-no" data-testid="radio-services-map-no" />
+                                        <label
+                                          htmlFor="services-map-no"
+                                          className="cursor-pointer"
+                                        >
+                                          No
+                                        </label>
+                                      </div>
+                                    </RadioGroup>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        )}
+
+                        {/* Services map-dependent fields */}
+                        {membershipRequest === "No" && servicesMapConsent === "Yes" && (
+                          <div className="space-y-6">
+                            <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
+                              <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                3
                               </div>
                               <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
                                 Services Map Information

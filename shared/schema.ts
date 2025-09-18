@@ -59,23 +59,41 @@ export const casRegistrationSchema = z.object({
     required_error: "Please select whether you want to become a CAS member",
   }),
   
-  // Questions 2-7: Only required when wantsMembership is "No"
+  // For "Yes" membership path (questions 2-7 from previous spec, then question 8 for services map)
   fullName: z.string().optional(),
   email: z.string().email().optional(),
   discipline: z.string().optional(),
   subspecialty: z.string().optional(),
   institution: z.string().optional(),
   wantsCommunications: z.enum(["Yes", "No"]).optional(),
-  
-  // Question 8: Services map inclusion
   wantsServicesMapInclusion: z.enum(["Yes", "No"]).optional(),
   
-  // Questions 9-13: Only required when wantsServicesMapInclusion is "No"
+  // For services map "Yes" path (questions 9-13 from previous spec)
   centerName: z.string().optional(),
   centerAddress: z.string().optional(),
   centerPhone: z.string().optional(),
   centerFax: z.string().optional(),
   allowsContact: z.enum(["Yes", "No"]).optional(),
+  
+  // For "No" membership path - new questions
+  // Question 2: Services map for non-members
+  noMemberWantsServicesMap: z.enum(["Yes", "No"]).optional(),
+  
+  // Questions 3-6: Center details for non-members (always required when wantsMembership = "No")
+  noMemberCenterName: z.string().optional(),
+  noMemberCenterAddress: z.string().optional(),
+  noMemberCenterPhone: z.string().optional(),
+  noMemberCenterFax: z.string().optional(),
+  
+  // Question 7: Allow contact for services map (required when wantsMembership = "No")
+  noMemberAllowsContact: z.enum(["Yes", "No"]).optional(),
+  
+  // Questions 8-12: Contact details for non-members (only when allowsContact = "Yes")
+  noMemberEmail: z.string().email().optional(),
+  noMemberDiscipline: z.string().optional(),
+  noMemberSubspecialty: z.string().optional(),
+  noMemberCenterNameForContact: z.string().optional(),
+  noMemberWantsCommunications: z.enum(["Yes", "No"]).optional(),
 }).superRefine((data, ctx) => {
   // Conditional validation for "Yes" membership path
   if (data.wantsMembership === "Yes") {
@@ -180,6 +198,106 @@ export const casRegistrationSchema = z.object({
           code: z.ZodIssueCode.custom,
           message: "Please select whether you may be contacted by CAS",
           path: ["allowsContact"],
+        });
+      }
+    }
+  }
+  
+  // Conditional validation for "No" membership path
+  if (data.wantsMembership === "No") {
+    if (!data.noMemberWantsServicesMap) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select whether you want your center included in the services map",
+        path: ["noMemberWantsServicesMap"],
+      });
+    }
+    
+    if (!data.noMemberCenterName || data.noMemberCenterName.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Center or Clinic Name/Institution is required",
+        path: ["noMemberCenterName"],
+      });
+    }
+    
+    if (!data.noMemberCenterAddress || data.noMemberCenterAddress.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Center or Clinic Address is required",
+        path: ["noMemberCenterAddress"],
+      });
+    }
+    
+    if (!data.noMemberCenterPhone || data.noMemberCenterPhone.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Center or Clinic Phone Number is required",
+        path: ["noMemberCenterPhone"],
+      });
+    }
+    
+    if (!data.noMemberCenterFax || data.noMemberCenterFax.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Center or Clinic Fax Number is required",
+        path: ["noMemberCenterFax"],
+      });
+    }
+    
+    if (!data.noMemberAllowsContact) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select whether you may be contacted by CAS",
+        path: ["noMemberAllowsContact"],
+      });
+    }
+    
+    // Conditional validation when non-member allows contact (Questions 8-12)
+    if (data.noMemberAllowsContact === "Yes") {
+      if (!data.noMemberEmail || data.noMemberEmail.trim().length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Email address is required",
+          path: ["noMemberEmail"],
+        });
+      } else if (!z.string().email().safeParse(data.noMemberEmail).success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please enter a valid email address",
+          path: ["noMemberEmail"],
+        });
+      }
+      
+      if (!data.noMemberDiscipline || data.noMemberDiscipline.trim().length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Discipline is required",
+          path: ["noMemberDiscipline"],
+        });
+      }
+      
+      if (!data.noMemberSubspecialty || data.noMemberSubspecialty.trim().length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Sub-specialty area is required",
+          path: ["noMemberSubspecialty"],
+        });
+      }
+      
+      if (!data.noMemberCenterNameForContact || data.noMemberCenterNameForContact.trim().length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Center or Clinic Name/Institution is required",
+          path: ["noMemberCenterNameForContact"],
+        });
+      }
+      
+      if (!data.noMemberWantsCommunications) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please select whether you want to receive communications",
+          path: ["noMemberWantsCommunications"],
         });
       }
     }

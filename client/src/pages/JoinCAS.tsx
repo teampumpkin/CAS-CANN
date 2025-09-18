@@ -84,6 +84,7 @@ export default function JoinCAS() {
     resolver: zodResolver(casRegistrationSchema),
     defaultValues: {
       wantsMembership: undefined,
+      // "Yes" membership path
       fullName: "",
       email: "",
       discipline: "",
@@ -96,12 +97,25 @@ export default function JoinCAS() {
       centerPhone: "",
       centerFax: "",
       allowsContact: undefined,
+      // "No" membership path
+      noMemberWantsServicesMap: undefined,
+      noMemberCenterName: "",
+      noMemberCenterAddress: "",
+      noMemberCenterPhone: "",
+      noMemberCenterFax: "",
+      noMemberAllowsContact: undefined,
+      noMemberEmail: "",
+      noMemberDiscipline: "",
+      noMemberSubspecialty: "",
+      noMemberCenterNameForContact: "",
+      noMemberWantsCommunications: undefined,
     },
   });
 
   // Watch form values for conditional rendering
   const wantsMembership = form.watch("wantsMembership");
   const wantsServicesMapInclusion = form.watch("wantsServicesMapInclusion");
+  const noMemberAllowsContact = form.watch("noMemberAllowsContact");
 
   const onSubmit = async (data: CASRegistrationForm) => {
     try {
@@ -440,7 +454,7 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Questions 2-7: Show only when wantsMembership is "Yes" */}
+                        {/* Show different questions based on membership choice */}
                         {wantsMembership === "Yes" && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
@@ -449,7 +463,7 @@ export default function JoinCAS() {
                             transition={{ duration: 0.3 }}
                             className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6"
                           >
-                            {/* Question 2: Full name */}
+                            {/* "Yes" Membership Path - Questions 2-7 */}
                             <FormField
                               control={form.control}
                               name="fullName"
@@ -471,7 +485,6 @@ export default function JoinCAS() {
                               )}
                             />
 
-                            {/* Question 3: Email address */}
                             <FormField
                               control={form.control}
                               name="email"
@@ -494,7 +507,6 @@ export default function JoinCAS() {
                               )}
                             />
 
-                            {/* Question 4: Discipline */}
                             <FormField
                               control={form.control}
                               name="discipline"
@@ -516,7 +528,6 @@ export default function JoinCAS() {
                               )}
                             />
 
-                            {/* Question 5: Sub-specialty */}
                             <FormField
                               control={form.control}
                               name="subspecialty"
@@ -538,7 +549,6 @@ export default function JoinCAS() {
                               )}
                             />
 
-                            {/* Question 6: Institution */}
                             <FormField
                               control={form.control}
                               name="institution"
@@ -560,7 +570,6 @@ export default function JoinCAS() {
                               )}
                             />
 
-                            {/* Question 7: Communications */}
                             <FormField
                               control={form.control}
                               name="wantsCommunications"
@@ -601,7 +610,6 @@ export default function JoinCAS() {
                               )}
                             />
 
-                            {/* Question 8: Services Map Inclusion */}
                             <FormField
                               control={form.control}
                               name="wantsServicesMapInclusion"
@@ -651,7 +659,6 @@ export default function JoinCAS() {
                                 transition={{ duration: 0.3 }}
                                 className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6 ml-4"
                               >
-                                {/* Question 9: Center Name */}
                                 <FormField
                                   control={form.control}
                                   name="centerName"
@@ -673,7 +680,6 @@ export default function JoinCAS() {
                                   )}
                                 />
 
-                                {/* Question 10: Center Address */}
                                 <FormField
                                   control={form.control}
                                   name="centerAddress"
@@ -695,7 +701,6 @@ export default function JoinCAS() {
                                   )}
                                 />
 
-                                {/* Question 11: Center Phone */}
                                 <FormField
                                   control={form.control}
                                   name="centerPhone"
@@ -718,7 +723,6 @@ export default function JoinCAS() {
                                   )}
                                 />
 
-                                {/* Question 12: Center Fax */}
                                 <FormField
                                   control={form.control}
                                   name="centerFax"
@@ -741,7 +745,6 @@ export default function JoinCAS() {
                                   )}
                                 />
 
-                                {/* Question 13: Allow Contact */}
                                 <FormField
                                   control={form.control}
                                   name="allowsContact"
@@ -770,6 +773,322 @@ export default function JoinCAS() {
                                             <RadioGroupItem value="No" id="contact-no" />
                                             <label
                                               htmlFor="contact-no"
+                                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-white/80"
+                                            >
+                                              No
+                                            </label>
+                                          </div>
+                                        </RadioGroup>
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+                              </motion.div>
+                            )}
+                          </motion.div>
+                        )}
+
+                        {/* "No" Membership Path - New Questions 2-12 */}
+                        {wantsMembership === "No" && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6"
+                          >
+                            {/* Question 2: Services Map for Non-Members */}
+                            <FormField
+                              control={form.control}
+                              name="noMemberWantsServicesMap"
+                              render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                    2. I would like my center/clinic to be included in the Canadian Amyloidosis Services Map
+                                  </FormLabel>
+                                  <FormControl>
+                                    <RadioGroup
+                                      onValueChange={field.onChange}
+                                      value={field.value}
+                                      className="flex flex-col space-y-2"
+                                      data-testid="radio-no-member-wants-services-map"
+                                    >
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Yes" id="no-member-services-map-yes" />
+                                        <label
+                                          htmlFor="no-member-services-map-yes"
+                                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-white/80"
+                                        >
+                                          Yes
+                                        </label>
+                                      </div>
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="No" id="no-member-services-map-no" />
+                                        <label
+                                          htmlFor="no-member-services-map-no"
+                                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-white/80"
+                                        >
+                                          No
+                                        </label>
+                                      </div>
+                                    </RadioGroup>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            {/* Questions 3-6: Center Details (Always Required for Non-Members) */}
+                            <FormField
+                              control={form.control}
+                              name="noMemberCenterName"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                    3. Center or Clinic Name/Institution
+                                  </FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="Enter your answer"
+                                      {...field}
+                                      className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                                      data-testid="input-no-member-center-name"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <FormField
+                              control={form.control}
+                              name="noMemberCenterAddress"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                    4. Center or Clinic Address
+                                  </FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="Enter your answer"
+                                      {...field}
+                                      className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                                      data-testid="input-no-member-center-address"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <FormField
+                              control={form.control}
+                              name="noMemberCenterPhone"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                    5. Center or Clinic Phone Number
+                                  </FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      type="tel"
+                                      placeholder="Enter your answer"
+                                      {...field}
+                                      className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                                      data-testid="input-no-member-center-phone"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <FormField
+                              control={form.control}
+                              name="noMemberCenterFax"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                    6. Center or Clinic Fax Number
+                                  </FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      type="tel"
+                                      placeholder="Enter your answer"
+                                      {...field}
+                                      className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                                      data-testid="input-no-member-center-fax"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            {/* Question 7: Allow Contact for Services Map */}
+                            <FormField
+                              control={form.control}
+                              name="noMemberAllowsContact"
+                              render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                    7. I may be contacted, if needed, by the CAS to provide information for the Canadian Amyloidosis Services Map
+                                  </FormLabel>
+                                  <FormControl>
+                                    <RadioGroup
+                                      onValueChange={field.onChange}
+                                      value={field.value}
+                                      className="flex flex-col space-y-2"
+                                      data-testid="radio-no-member-allows-contact"
+                                    >
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Yes" id="no-member-contact-yes" />
+                                        <label
+                                          htmlFor="no-member-contact-yes"
+                                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-white/80"
+                                        >
+                                          Yes
+                                        </label>
+                                      </div>
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="No" id="no-member-contact-no" />
+                                        <label
+                                          htmlFor="no-member-contact-no"
+                                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-white/80"
+                                        >
+                                          No
+                                        </label>
+                                      </div>
+                                    </RadioGroup>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            {/* Questions 8-12: Show only when noMemberAllowsContact is "Yes" */}
+                            {noMemberAllowsContact === "Yes" && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6 ml-4"
+                              >
+                                <FormField
+                                  control={form.control}
+                                  name="noMemberEmail"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                        8. Email address
+                                      </FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          type="email"
+                                          placeholder="Enter your answer"
+                                          {...field}
+                                          className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                                          data-testid="input-no-member-email"
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+
+                                <FormField
+                                  control={form.control}
+                                  name="noMemberDiscipline"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                        9. Discipline (physician, nursing, genetic counsellor, etc)
+                                      </FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          placeholder="Enter your answer"
+                                          {...field}
+                                          className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                                          data-testid="input-no-member-discipline"
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+
+                                <FormField
+                                  control={form.control}
+                                  name="noMemberSubspecialty"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                        10. Sub-specialty area of focus (cardiology, hematology, neurology, etc)
+                                      </FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          placeholder="Enter your answer"
+                                          {...field}
+                                          className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                                          data-testid="input-no-member-subspecialty"
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+
+                                <FormField
+                                  control={form.control}
+                                  name="noMemberCenterNameForContact"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                        11. Center or Clinic Name/Institution
+                                      </FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          placeholder="Enter your answer"
+                                          {...field}
+                                          className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                                          data-testid="input-no-member-center-name-contact"
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+
+                                <FormField
+                                  control={form.control}
+                                  name="noMemberWantsCommunications"
+                                  render={({ field }) => (
+                                    <FormItem className="space-y-3">
+                                      <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                        12. I would like to receive communication from the Canadian Amyloidosis Society (email, newsletters)
+                                      </FormLabel>
+                                      <FormControl>
+                                        <RadioGroup
+                                          onValueChange={field.onChange}
+                                          value={field.value}
+                                          className="flex flex-col space-y-2"
+                                          data-testid="radio-no-member-wants-communications"
+                                        >
+                                          <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="Yes" id="no-member-communications-yes" />
+                                            <label
+                                              htmlFor="no-member-communications-yes"
+                                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-white/80"
+                                            >
+                                              Yes
+                                            </label>
+                                          </div>
+                                          <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="No" id="no-member-communications-no" />
+                                            <label
+                                              htmlFor="no-member-communications-no"
                                               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-white/80"
                                             >
                                               No

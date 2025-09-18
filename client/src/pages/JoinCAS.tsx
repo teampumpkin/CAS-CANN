@@ -129,7 +129,10 @@ export default function JoinCAS() {
     try {
       setIsSubmitting(true);
       
-      // Form submitted successfully
+      // Debug: Check form validation and data
+      console.log("Form validation errors:", form.formState.errors);
+      console.log("Form data being submitted:", data);
+      console.log("Membership path:", data.wantsMembership);
       
       // Google Apps Script URL - the one connected to your Google Sheet
       const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyL3klzui210W0P7_cJctvsFxHIN-YBalzCbTRSDNnRr7RyX6FdMUPwz8jPMhBWVYRoPw/exec";

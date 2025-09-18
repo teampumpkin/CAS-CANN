@@ -121,25 +121,40 @@ export default function JoinCAS() {
     try {
       setIsSubmitting(true);
       
-      // Log the form data for now (will implement Google Sheets integration later)
-      console.log("Form submission:", data);
+      // Google Apps Script URL
+      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtL1jnoCRwZkx6jeURzoH8_hJqyjlGxQRNRKHGgw3kmMaCsutmymhe7dJOhC5MU8mFdQ/exec";
       
-      // Simulate submission delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log("Submitting form data:", data);
       
-      toast({
-        title: "Registration Submitted Successfully!",
-        description: "Thank you for your interest in the Canadian Amyloidosis Society.",
+      // Submit to Google Sheets
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(data),
       });
       
-      // Reset form after successful submission
-      form.reset();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        toast({
+          title: "Registration Submitted Successfully!",
+          description: "Thank you for your interest in the Canadian Amyloidosis Society. Your information has been saved.",
+        });
+        
+        // Reset form after successful submission
+        form.reset();
+      } else {
+        throw new Error(result.error || "Submission failed");
+      }
       
     } catch (error) {
       console.error("Form submission error:", error);
       toast({
-        title: "Submission Failed",
-        description: "Please try again or contact us directly.",
+        title: "Submission Failed", 
+        description: "Please try again or contact us directly. If the problem persists, please email us.",
         variant: "destructive",
       });
     } finally {

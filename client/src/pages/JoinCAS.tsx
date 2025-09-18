@@ -1145,12 +1145,21 @@ export default function JoinCAS() {
                         <div className="flex justify-center gap-4 pt-4">
                           <Button
                             type="button"
-                            onClick={() => {
+                            onClick={async () => {
                               console.log("=== FORM DEBUG ===");
                               console.log("Form errors:", form.formState.errors);
                               console.log("Form values:", form.getValues());
                               console.log("Form valid:", form.formState.isValid);
                               console.log("Membership path:", form.getValues().wantsMembership);
+                              
+                              // Try to validate manually to see hidden errors
+                              try {
+                                const result = await form.trigger();
+                                console.log("Manual validation result:", result);
+                                console.log("Form errors after trigger:", form.formState.errors);
+                              } catch (error) {
+                                console.log("Validation error:", error);
+                              }
                             }}
                             variant="outline"
                             className="px-6 py-2 text-sm"

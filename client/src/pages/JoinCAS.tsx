@@ -129,19 +129,10 @@ export default function JoinCAS() {
     try {
       setIsSubmitting(true);
       
-      // Google Apps Script URL - use environment variable or fallback
-      const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbwtL1jnoCRwZkx6jeURzoH8_hJqyjlGxQRNRKHGgw3kmMaCsutmymhe7dJOhC5MU8mFdQ/exec";
+      // Google Apps Script URL - the one connected to your Google Sheet
+      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtL1jnoCRwZkx6jeURzoH8_hJqyjlGxQRNRKHGgw3kmMaCsutmymhe7dJOhC5MU8mFdQ/exec";
       
-      console.log("Attempting to submit to:", GOOGLE_SCRIPT_URL);
-      
-      // For testing: if no custom URL is provided, simulate success
-      if (!import.meta.env.VITE_GOOGLE_SCRIPT_URL) {
-        console.log("Using fallback mock response for testing");
-        // Simulate successful submission for testing
-        setShowConfirmationModal(true);
-        form.reset();
-        return;
-      }
+      console.log("Submitting form data to Google Sheet:", GOOGLE_SCRIPT_URL);
       
       // Submit to Google Sheets (using text/plain to avoid CORS issues)
       const response = await fetch(GOOGLE_SCRIPT_URL, {

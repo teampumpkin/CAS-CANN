@@ -51,3 +51,139 @@ export const insertResourceSchema = createInsertSchema(resources).omit({
 
 export type InsertResource = z.infer<typeof insertResourceSchema>;
 export type Resource = typeof resources.$inferSelect;
+
+// CAS Registration Form Schema
+export const casRegistrationSchema = z.object({
+  // Question 1: Main membership question
+  wantsMembership: z.enum(["Yes", "No"], {
+    required_error: "Please select whether you want to become a CAS member",
+  }),
+  
+  // Questions 2-7: Only required when wantsMembership is "No"
+  fullName: z.string().optional(),
+  email: z.string().email().optional(),
+  discipline: z.string().optional(),
+  subspecialty: z.string().optional(),
+  institution: z.string().optional(),
+  wantsCommunications: z.enum(["Yes", "No"]).optional(),
+  
+  // Question 8: Services map inclusion
+  wantsServicesMapInclusion: z.enum(["Yes", "No"]).optional(),
+  
+  // Questions 9-13: Only required when wantsServicesMapInclusion is "No"
+  centerName: z.string().optional(),
+  centerAddress: z.string().optional(),
+  centerPhone: z.string().optional(),
+  centerFax: z.string().optional(),
+  allowsContact: z.enum(["Yes", "No"]).optional(),
+}).superRefine((data, ctx) => {
+  // Conditional validation for "No" membership path
+  if (data.wantsMembership === "No") {
+    if (!data.fullName || data.fullName.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Full name is required",
+        path: ["fullName"],
+      });
+    }
+    
+    if (!data.email || data.email.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Email address is required",
+        path: ["email"],
+      });
+    } else if (!z.string().email().safeParse(data.email).success) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please enter a valid email address",
+        path: ["email"],
+      });
+    }
+    
+    if (!data.discipline || data.discipline.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Discipline is required",
+        path: ["discipline"],
+      });
+    }
+    
+    if (!data.subspecialty || data.subspecialty.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Sub-specialty area is required",
+        path: ["subspecialty"],
+      });
+    }
+    
+    if (!data.institution || data.institution.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Center or Clinic Name/Institution is required",
+        path: ["institution"],
+      });
+    }
+    
+    if (!data.wantsCommunications) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select whether you want to receive communications",
+        path: ["wantsCommunications"],
+      });
+    }
+    
+    if (!data.wantsServicesMapInclusion) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select whether you want your center included in the services map",
+        path: ["wantsServicesMapInclusion"],
+      });
+    }
+    
+    // Conditional validation for services map "No" path
+    if (data.wantsServicesMapInclusion === "No") {
+      if (!data.centerName || data.centerName.trim().length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Center or Clinic Name is required",
+          path: ["centerName"],
+        });
+      }
+      
+      if (!data.centerAddress || data.centerAddress.trim().length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Center or Clinic Address is required",
+          path: ["centerAddress"],
+        });
+      }
+      
+      if (!data.centerPhone || data.centerPhone.trim().length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Center or Clinic Phone Number is required",
+          path: ["centerPhone"],
+        });
+      }
+      
+      if (!data.centerFax || data.centerFax.trim().length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Center or Clinic Fax Number is required",
+          path: ["centerFax"],
+        });
+      }
+      
+      if (!data.allowsContact) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Please select whether you may be contacted by CAS",
+          path: ["allowsContact"],
+        });
+      }
+    }
+  }
+});
+
+export type CASRegistrationForm = z.infer<typeof casRegistrationSchema>;

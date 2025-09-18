@@ -129,8 +129,15 @@ export default function JoinCAS() {
     try {
       setIsSubmitting(true);
       
+      // Debug: Check form validation and data
+      console.log("Form validation errors:", form.formState.errors);
+      console.log("Form data being submitted:", data);
+      console.log("Membership path:", data.wantsMembership);
+      
       // Google Apps Script URL - the one connected to your Google Sheet
       const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyL3klzui210W0P7_cJctvsFxHIN-YBalzCbTRSDNnRr7RyX6FdMUPwz8jPMhBWVYRoPw/exec";
+      
+      console.log("Submitting form data to Google Sheet:", GOOGLE_SCRIPT_URL);
       
       // Submit to Google Sheets (using text/plain to avoid CORS issues)
       const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -177,8 +184,7 @@ export default function JoinCAS() {
   };
 
   return (
-    <>
-      <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
       <section className="relative py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 overflow-hidden">
         {/* Background Elements */}
@@ -444,7 +450,7 @@ export default function JoinCAS() {
                     <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                         {/* Question 1: Main membership question */}
-                          <FormField
+                        <FormField
                           control={form.control}
                           name="wantsMembership"
                           render={({ field }) => (
@@ -828,9 +834,8 @@ export default function JoinCAS() {
                             transition={{ duration: 0.3 }}
                             className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6"
                           >
-                            <div className="space-y-6">
-                              {/* Question 2: Services Map for Non-Members */}
-                              <FormField
+                            {/* Question 2: Services Map for Non-Members */}
+                            <FormField
                               control={form.control}
                               name="noMemberWantsServicesMap"
                               render={({ field }) => (
@@ -870,8 +875,8 @@ export default function JoinCAS() {
                               )}
                             />
 
-                              {/* Questions 3-6: Center Details (Always Required for Non-Members) */}
-                              <FormField
+                            {/* Questions 3-6: Center Details (Always Required for Non-Members) */}
+                            <FormField
                               control={form.control}
                               name="noMemberCenterName"
                               render={({ field }) => (
@@ -998,7 +1003,7 @@ export default function JoinCAS() {
                               )}
                             />
 
-                              {/* Questions 8-12: Show only when noMemberAllowsContact is "Yes" */}
+                            {/* Questions 8-12: Show only when noMemberAllowsContact is "Yes" */}
                             {noMemberAllowsContact === "Yes" && (
                               <motion.div
                                 initial={{ opacity: 0, height: 0 }}
@@ -1136,7 +1141,34 @@ export default function JoinCAS() {
                           </motion.div>
                         )}
 
-                        {/* Submit Button */
+                        {/* Debug Button - Remove after fixing */}
+                        <div className="flex justify-center gap-4 pt-4">
+                          <Button
+                            type="button"
+                            onClick={async () => {
+                              console.log("=== FORM DEBUG ===");
+                              console.log("Form errors:", form.formState.errors);
+                              console.log("Form values:", form.getValues());
+                              console.log("Form valid:", form.formState.isValid);
+                              console.log("Membership path:", form.getValues().wantsMembership);
+                              
+                              // Try to validate manually to see hidden errors
+                              try {
+                                const result = await form.trigger();
+                                console.log("Manual validation result:", result);
+                                console.log("Form errors after trigger:", form.formState.errors);
+                              } catch (error) {
+                                console.log("Validation error:", error);
+                              }
+                            }}
+                            variant="outline"
+                            className="px-6 py-2 text-sm"
+                          >
+                            Debug Form
+                          </Button>
+                        </div>
+
+                        {/* Submit Button */}
                         <div className="flex justify-center pt-8">
                           <Button
                             type="submit"
@@ -1212,7 +1244,6 @@ export default function JoinCAS() {
           </div>
         </DialogContent>
       </Dialog>
-      </div>
-    </>
+    </div>
   );
 }

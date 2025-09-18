@@ -130,7 +130,7 @@ export default function JoinCAS() {
       setIsSubmitting(true);
       
       // Google Apps Script URL - the one connected to your Google Sheet
-      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxli-q7X6RLxKHZas1MPVnZ10LbkeSUDR3IjTcwEM0MfTEkjhgPtWFfpvpgwVusuOTIyA/exec";
+      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAsk_BFUfZIITjwfdkkkiXcWXIkAu8adJi8QUm-4X32N2o47REEgPmNcUmgGZe5eBJ6A/exec";
       
       console.log("Submitting form data to Google Sheet:", GOOGLE_SCRIPT_URL);
       

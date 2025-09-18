@@ -434,10 +434,10 @@ export default function JoinCAS() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5" />
 
                 {/* Form Header */}
-                <div className="relative bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-8 text-center">
+                <div className="relative bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-4 text-center">
                   {/* Floating elements */}
-                  <div className="absolute top-4 left-4 w-8 h-8 bg-white/10 rounded-full blur-sm animate-pulse" />
-                  <div className="absolute bottom-4 right-4 w-6 h-6 bg-white/10 rounded-full blur-sm animate-pulse delay-1000" />
+                  <div className="absolute top-3 left-3 w-6 h-6 bg-white/10 rounded-full blur-sm animate-pulse" />
+                  <div className="absolute bottom-3 right-3 w-4 h-4 bg-white/10 rounded-full blur-sm animate-pulse delay-1000" />
 
                   <motion.div
                     initial={{ scale: 0 }}
@@ -445,24 +445,24 @@ export default function JoinCAS() {
                     transition={{ type: "spring", duration: 0.6 }}
                     viewport={{ once: true }}
                   >
-                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6">
-                      <FileText className="w-8 h-8 text-white" />
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-3">
+                      <FileText className="w-6 h-6 text-white" />
                     </div>
                   </motion.div>
 
-                  <h3 className="text-2xl font-bold text-white mb-3 font-rosarivo">
+                  <h3 className="text-xl font-bold text-white mb-2 font-rosarivo">
                     CAS Registration Form
                   </h3>
-                  <p className="text-white/90 text-sm max-w-md mx-auto">
+                  <p className="text-white/90 text-sm max-w-sm mx-auto leading-relaxed">
                     Complete the registration form below. All fields are secure
                     and confidential.
                   </p>
 
                   {/* Progress indicators */}
-                  <div className="flex justify-center gap-2 mt-6">
-                    <div className="w-2 h-2 bg-white/40 rounded-full" />
-                    <div className="w-8 h-2 bg-white/60 rounded-full" />
-                    <div className="w-2 h-2 bg-white/40 rounded-full" />
+                  <div className="flex justify-center gap-1.5 mt-4">
+                    <div className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                    <div className="w-6 h-1.5 bg-white/60 rounded-full" />
+                    <div className="w-1.5 h-1.5 bg-white/40 rounded-full" />
                   </div>
                 </div>
 

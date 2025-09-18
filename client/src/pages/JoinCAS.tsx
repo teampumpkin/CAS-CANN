@@ -440,8 +440,8 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Questions 2-7: Show only when wantsMembership is "No" */}
-                        {wantsMembership === "No" && (
+                        {/* Questions 2-7: Show only when wantsMembership is "Yes" */}
+                        {wantsMembership === "Yes" && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}

@@ -77,8 +77,8 @@ export const casRegistrationSchema = z.object({
   centerFax: z.string().optional(),
   allowsContact: z.enum(["Yes", "No"]).optional(),
 }).superRefine((data, ctx) => {
-  // Conditional validation for "No" membership path
-  if (data.wantsMembership === "No") {
+  // Conditional validation for "Yes" membership path
+  if (data.wantsMembership === "Yes") {
     if (!data.fullName || data.fullName.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

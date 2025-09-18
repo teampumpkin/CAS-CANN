@@ -205,7 +205,16 @@ export const casRegistrationSchema = z.object({
   
   // Conditional validation for "No" membership path
   if (data.wantsMembership === "No") {
-    // Questions 2-7 are always required for "No" path
+    // Question 2: Services map selection is required
+    if (!data.noMemberWantsServicesMap) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select whether you want your center included in the services map",
+        path: ["noMemberWantsServicesMap"],
+      });
+    }
+    
+    // Questions 3-7 are always required for "No" path
     if (!data.noMemberCenterName || data.noMemberCenterName.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

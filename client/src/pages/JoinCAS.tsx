@@ -30,6 +30,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { casRegistrationSchema, type CASRegistrationForm } from "@shared/schema";
 
@@ -79,6 +86,7 @@ const whoCanJoin = [
 export default function JoinCAS() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const form = useForm<CASRegistrationForm>({
     resolver: zodResolver(casRegistrationSchema),
@@ -124,13 +132,12 @@ export default function JoinCAS() {
       // Google Apps Script URL
       const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtL1jnoCRwZkx6jeURzoH8_hJqyjlGxQRNRKHGgw3kmMaCsutmymhe7dJOhC5MU8mFdQ/exec";
       
-      console.log("Form submission started!");
-      console.log("Submitting form data:", data);
-      console.log("Form validation state:", form.formState.errors);
-      
       // Submit to Google Sheets
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       });
       
@@ -141,10 +148,8 @@ export default function JoinCAS() {
       const result = await response.json();
       
       if (result.success) {
-        toast({
-          title: "Registration Submitted Successfully!",
-          description: "Thank you for your interest in the Canadian Amyloidosis Society. Your information has been saved.",
-        });
+        // Show confirmation modal instead of toast
+        setShowConfirmationModal(true);
         
         // Reset form after successful submission
         form.reset();
@@ -1127,12 +1132,6 @@ export default function JoinCAS() {
                           <Button
                             type="submit"
                             disabled={isSubmitting}
-                            onClick={() => {
-                              console.log("Submit button clicked!");
-                              console.log("Form errors:", form.formState.errors);
-                              console.log("Form is valid:", form.formState.isValid);
-                              console.log("Form values:", form.getValues());
-                            }}
                             className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group min-w-[200px]"
                             data-testid="button-submit-form"
                           >
@@ -1162,6 +1161,48 @@ export default function JoinCAS() {
           </div>
         </div>
       </section>
+
+      {/* Confirmation Modal */}
+      <Dialog
+        open={showConfirmationModal}
+        onOpenChange={setShowConfirmationModal}
+      >
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader className="text-center">
+            <div className="mx-auto w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center mb-4">
+              <CheckCircle className="w-8 h-8 text-white" />
+            </div>
+            <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+              Thank you for your registration!
+            </DialogTitle>
+            <DialogDescription className="text-gray-600 dark:text-gray-300 mt-4 text-base leading-relaxed">
+              Your registration form has been successfully submitted to the Canadian Amyloidosis Society.
+              <br />
+              <br />
+              Thank you for your interest in joining our professional community. We will review your application and be in touch soon.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-3 mt-6">
+            <Button
+              onClick={() => {
+                setShowConfirmationModal(false);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white hover:shadow-lg hover:shadow-[#00AFE6]/25 transition-all duration-300"
+            >
+              <CheckCircle className="w-4 h-4 mr-2" />
+              Continue to CAS Website
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => setShowConfirmationModal(false)}
+              className="border-gray-300 dark:border-gray-600"
+            >
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

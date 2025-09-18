@@ -89,7 +89,7 @@ export const casRegistrationSchema = z.object({
   noMemberAllowsContact: z.enum(["Yes", "No"]).optional(),
   
   // Questions 8-12: Contact details for non-members (only when allowsContact = "Yes")
-  noMemberEmail: z.string().email().optional(),
+  noMemberEmail: z.string().optional(),
   noMemberDiscipline: z.string().optional(),
   noMemberSubspecialty: z.string().optional(),
   noMemberCenterNameForContact: z.string().optional(),
@@ -261,7 +261,7 @@ export const casRegistrationSchema = z.object({
           message: "Email address is required",
           path: ["noMemberEmail"],
         });
-      } else if (!z.string().email().safeParse(data.noMemberEmail).success) {
+      } else if (data.noMemberEmail && !z.string().email().safeParse(data.noMemberEmail).success) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Please enter a valid email address",

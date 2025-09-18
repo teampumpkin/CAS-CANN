@@ -1141,6 +1141,24 @@ export default function JoinCAS() {
                           </motion.div>
                         )}
 
+                        {/* Debug Button - Remove after fixing */}
+                        <div className="flex justify-center gap-4 pt-4">
+                          <Button
+                            type="button"
+                            onClick={() => {
+                              console.log("=== FORM DEBUG ===");
+                              console.log("Form errors:", form.formState.errors);
+                              console.log("Form values:", form.getValues());
+                              console.log("Form valid:", form.formState.isValid);
+                              console.log("Membership path:", form.getValues().wantsMembership);
+                            }}
+                            variant="outline"
+                            className="px-6 py-2 text-sm"
+                          >
+                            Debug Form
+                          </Button>
+                        </div>
+
                         {/* Submit Button */}
                         <div className="flex justify-center pt-8">
                           <Button

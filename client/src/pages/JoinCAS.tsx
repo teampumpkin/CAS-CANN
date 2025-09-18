@@ -1133,7 +1133,6 @@ export default function JoinCAS() {
                                 />
                               </motion.div>
                             )}
-                            </div>
                           </motion.div>
                         )}
 

@@ -253,8 +253,8 @@ export default function EventsNewsletterSection() {
                       data-testid={stat.testId}
                     >
                       <motion.div
-                        className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl px-8 py-5 border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-300"
-                        whileHover={{ x: 4 }}
+                        className="relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl px-8 py-6 border-2 border-gray-200/60 dark:border-gray-600/60 shadow-2xl hover:shadow-3xl transition-all duration-300"
+                        whileHover={{ x: 6, scale: 1.02 }}
                       >
                         {/* Background Pattern */}
                         <div className="absolute inset-0 rounded-2xl opacity-5 dark:opacity-10">
@@ -263,16 +263,22 @@ export default function EventsNewsletterSection() {
                           }} />
                         </div>
 
-                        {/* Stat Content - Horizontal Layout */}
-                        <div className="relative z-10 flex items-center gap-4">
+                        {/* Stat Content - Prominent Design */}
+                        <div className="relative z-10 flex items-center gap-6">
                           {/* Icon */}
-                          <div className="text-2xl opacity-70">
+                          <div className={`text-4xl p-3 rounded-2xl ${
+                            stat.color === 'blue' 
+                              ? 'bg-[#00AFE6]/10' 
+                              : stat.color === 'green' 
+                              ? 'bg-[#00DD89]/10' 
+                              : 'bg-[#00AFE6]/10'
+                          }`}>
                             {stat.icon}
                           </div>
 
                           {/* Value and Label */}
                           <div className="flex-1">
-                            <div className={`text-2xl font-medium mb-0.5 ${
+                            <div className={`text-4xl font-bold mb-1 ${
                               stat.color === 'blue' 
                                 ? 'text-[#00AFE6]' 
                                 : stat.color === 'green' 
@@ -281,19 +287,19 @@ export default function EventsNewsletterSection() {
                             } dark:text-white`}>
                               {stat.value}
                             </div>
-                            <p className="text-sm font-normal text-gray-600 dark:text-gray-400">
+                            <p className="text-lg font-semibold text-gray-700 dark:text-gray-200 tracking-wide">
                               {stat.label}
                             </p>
                           </div>
 
-                          {/* Side Accent */}
-                          <div className={`w-1 h-12 rounded-full ${
+                          {/* Prominent Side Accent */}
+                          <div className={`w-2 h-16 rounded-full ${
                             stat.color === 'blue' 
-                              ? 'bg-[#00AFE6]/30' 
+                              ? 'bg-gradient-to-b from-[#00AFE6] to-[#0088CC]' 
                               : stat.color === 'green' 
-                              ? 'bg-[#00DD89]/30' 
-                              : 'bg-[#00AFE6]/30'
-                          }`} />
+                              ? 'bg-gradient-to-b from-[#00DD89] to-[#00BB77]' 
+                              : 'bg-gradient-to-b from-[#00AFE6] to-[#00DD89]'
+                          } shadow-lg`} />
                         </div>
                       </motion.div>
                     </motion.div>

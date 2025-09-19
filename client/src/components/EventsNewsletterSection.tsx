@@ -11,6 +11,8 @@ import {
   Star,
   MapPin,
   Stethoscope,
+  GraduationCap,
+  Building2,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
@@ -221,89 +223,92 @@ export default function EventsNewsletterSection() {
                       value: "Over 180",
                       label: "Members",
                       testId: "members-count",
-                      icon: "👥",
+                      icon: Users,
                       color: "blue"
                     },
                     {
                       value: "13",
                       label: "Provinces/Territories", 
                       testId: "provinces-count",
-                      icon: "🍁",
+                      icon: MapPin,
                       color: "green"
                     },
                     {
                       value: "Multiple",
                       label: "Disciplines",
                       testId: "disciplines-count", 
-                      icon: "🔬",
+                      icon: GraduationCap,
                       color: "teal"
                     },
-                  ].map((stat, index) => (
-                    <motion.div
-                      key={stat.label}
-                      className="relative group"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.6,
-                        delay: index * 0.15,
-                        ease: "easeOut",
-                      }}
-                      viewport={{ once: true }}
-                      data-testid={stat.testId}
-                    >
+                  ].map((stat, index) => {
+                    const IconComponent = stat.icon;
+                    return (
                       <motion.div
-                        className="relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl px-8 py-6 border-2 border-gray-200/60 dark:border-gray-600/60 shadow-2xl hover:shadow-3xl transition-all duration-300"
-                        whileHover={{ x: 6, scale: 1.02 }}
+                        key={stat.label}
+                        className="relative group"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.6,
+                          delay: index * 0.15,
+                          ease: "easeOut",
+                        }}
+                        viewport={{ once: true }}
+                        data-testid={stat.testId}
                       >
-                        {/* Background Pattern */}
-                        <div className="absolute inset-0 rounded-2xl opacity-5 dark:opacity-10">
-                          <div className="absolute inset-0" style={{
-                            backgroundImage: `radial-gradient(circle at 10% 50%, ${stat.color === 'blue' ? '#00AFE6' : stat.color === 'green' ? '#00DD89' : '#00AFE6'} 0%, transparent 40%)`
-                          }} />
-                        </div>
-
-                        {/* Stat Content - Prominent Design */}
-                        <div className="relative z-10 flex items-center gap-6">
-                          {/* Icon */}
-                          <div className={`text-4xl p-3 rounded-2xl ${
-                            stat.color === 'blue' 
-                              ? 'bg-[#00AFE6]/10' 
-                              : stat.color === 'green' 
-                              ? 'bg-[#00DD89]/10' 
-                              : 'bg-[#00AFE6]/10'
-                          }`}>
-                            {stat.icon}
+                        <motion.div
+                          className="relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl px-8 py-6 border-2 border-gray-200/60 dark:border-gray-600/60 shadow-2xl hover:shadow-3xl transition-all duration-300"
+                          whileHover={{ x: 6, scale: 1.02 }}
+                        >
+                          {/* Background Pattern */}
+                          <div className="absolute inset-0 rounded-2xl opacity-5 dark:opacity-10">
+                            <div className="absolute inset-0" style={{
+                              backgroundImage: `radial-gradient(circle at 10% 50%, ${stat.color === 'blue' ? '#00AFE6' : stat.color === 'green' ? '#00DD89' : '#00AFE6'} 0%, transparent 40%)`
+                            }} />
                           </div>
 
-                          {/* Value and Label */}
-                          <div className="flex-1">
-                            <div className={`text-4xl font-bold mb-1 ${
+                          {/* Stat Content - Prominent Design */}
+                          <div className="relative z-10 flex items-center gap-6">
+                            {/* Icon */}
+                            <div className={`p-4 rounded-2xl ${
                               stat.color === 'blue' 
-                                ? 'text-[#00AFE6]' 
+                                ? 'bg-[#00AFE6]/10 text-[#00AFE6]' 
                                 : stat.color === 'green' 
-                                ? 'text-[#00DD89]' 
-                                : 'text-[#00AFE6]'
-                            } dark:text-white`}>
-                              {stat.value}
+                                ? 'bg-[#00DD89]/10 text-[#00DD89]' 
+                                : 'bg-[#00AFE6]/10 text-[#00AFE6]'
+                            }`}>
+                              <IconComponent className="w-10 h-10" />
                             </div>
-                            <p className="text-lg font-semibold text-gray-700 dark:text-gray-200 tracking-wide">
-                              {stat.label}
-                            </p>
-                          </div>
 
-                          {/* Prominent Side Accent */}
-                          <div className={`w-2 h-16 rounded-full ${
-                            stat.color === 'blue' 
-                              ? 'bg-gradient-to-b from-[#00AFE6] to-[#0088CC]' 
-                              : stat.color === 'green' 
-                              ? 'bg-gradient-to-b from-[#00DD89] to-[#00BB77]' 
-                              : 'bg-gradient-to-b from-[#00AFE6] to-[#00DD89]'
-                          } shadow-lg`} />
-                        </div>
+                            {/* Value and Label */}
+                            <div className="flex-1">
+                              <div className={`text-4xl font-bold mb-1 ${
+                                stat.color === 'blue' 
+                                  ? 'text-[#00AFE6]' 
+                                  : stat.color === 'green' 
+                                  ? 'text-[#00DD89]' 
+                                  : 'text-[#00AFE6]'
+                              } dark:text-white`}>
+                                {stat.value}
+                              </div>
+                              <p className="text-lg font-semibold text-gray-700 dark:text-gray-200 tracking-wide">
+                                {stat.label}
+                              </p>
+                            </div>
+
+                            {/* Prominent Side Accent */}
+                            <div className={`w-2 h-16 rounded-full ${
+                              stat.color === 'blue' 
+                                ? 'bg-gradient-to-b from-[#00AFE6] to-[#0088CC]' 
+                                : stat.color === 'green' 
+                                ? 'bg-gradient-to-b from-[#00DD89] to-[#00BB77]' 
+                                : 'bg-gradient-to-b from-[#00AFE6] to-[#00DD89]'
+                            } shadow-lg`} />
+                          </div>
+                        </motion.div>
                       </motion.div>
-                    </motion.div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>

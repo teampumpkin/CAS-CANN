@@ -27,7 +27,7 @@ export default function Hero() {
   const Tile = ({ icon: Icon, label, description, href }: { icon: any, label: string, description: string, href: string }) => (
     <motion.a
       href={href}
-      className="group w-[200px] h-[180px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-lg text-center cursor-pointer relative"
+      className="group w-[200px] h-[200px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-lg text-center cursor-pointer relative"
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
     >

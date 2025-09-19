@@ -35,6 +35,7 @@ export default function JournalClub() {
       presenter: "Dr. Edgar Da Silva, Cardiology Fellow, University of Ottawa",
       location: "Virtual",
       registrationNotRequired: true,
+      comingSoon: true,
     },
   ];
 
@@ -158,6 +159,11 @@ export default function JournalClub() {
                       <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-4 py-2 rounded-full text-sm font-bold">
                         {club.date}
                       </div>
+                      {club.comingSoon && (
+                        <div className="bg-gradient-to-r from-orange-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                          Coming Soon
+                        </div>
+                      )}
                       <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                         <Clock className="w-4 h-4" />
                         <span className="text-sm">{club.time}</span>

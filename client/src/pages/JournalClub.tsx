@@ -38,31 +38,6 @@ export default function JournalClub() {
     },
   ];
 
-  // Helper function to add ordinal suffix to day
-  const getOrdinalSuffix = (day: number): string => {
-    if (day > 3 && day < 21) return 'th';
-    switch (day % 10) {
-      case 1: return 'st';
-      case 2: return 'nd'; 
-      case 3: return 'rd';
-      default: return 'th';
-    }
-  };
-
-  // Fixed to handle dates as local dates instead of UTC to prevent timezone issues
-  const formatEventDate = (dateString: string): string => {
-    // Parse date as local date by splitting and using Date constructor to avoid UTC conversion
-    const [year, month, day] = dateString.split("-").map(Number);
-    const date = new Date(year, month - 1, day); // month is 0-indexed
-
-    const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
-    const monthName = date.toLocaleDateString("en-US", { month: "long" });
-    const dayNumber = date.getDate();
-    const yearNumber = date.getFullYear();
-    const ordinalSuffix = getOrdinalSuffix(dayNumber);
-
-    return `${dayName}, ${monthName} ${dayNumber}${ordinalSuffix}, ${yearNumber}`;
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">

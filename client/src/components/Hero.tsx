@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, BookOpen, Users } from 'lucide-react';
+import { Calendar, Users } from 'lucide-react';
 import heroBackgroundImage from '@assets/shutterstock_2447944539_1753254859154.jpg';
 import { useLanguage } from '@/contexts/LanguageContext';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -9,8 +9,7 @@ export default function Hero() {
   
   const quickTiles = [
     { icon: Users, label: 'Join', href: '/join-cas' },
-    { icon: Calendar, label: 'Events', href: '/events' },
-    // { icon: BookOpen, label: 'Learn', href: '/resource-library' }
+    { icon: Calendar, label: 'Events', href: '/events' }
   ];
 
   return (
@@ -147,7 +146,6 @@ export default function Hero() {
                     <p className="text-white/80 text-xs mb-3 group-hover:text-white transition-colors duration-300 leading-relaxed">
                       {index === 0 && "Become a CAS member"}
                       {index === 1 && "Upcoming events and educational sessions"}
-                      {index === 2 && "Access educational resources"}
                     </p>
                     
                     {/* Call to action */}

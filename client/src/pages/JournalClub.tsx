@@ -49,7 +49,6 @@ export default function JournalClub() {
     }
   };
 
-  // Format date to "Thursday, September 25th, 2025"
   // Fixed to handle dates as local dates instead of UTC to prevent timezone issues
   const formatEventDate = (dateString: string): string => {
     // Parse date as local date by splitting and using Date constructor to avoid UTC conversion

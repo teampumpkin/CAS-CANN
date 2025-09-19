@@ -37,7 +37,7 @@ export default function Hero() {
   }) => (
     <motion.a
       href={href}
-      className="group w-[200px] h-[200px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-lg text-center cursor-pointer relative"
+      className="group w-[200px] h-[220px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-lg text-center cursor-pointer relative"
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
     >
@@ -47,21 +47,21 @@ export default function Hero() {
       </div>
 
       {/* Title - Fixed position */}
-      <h3 className="absolute top-[82px] left-0 right-0 text-white font-bold text-lg font-rosarivo">
+      <h2 className="absolute top-[88px] left-0 right-0 text-white font-bold text-xl font-rosarivo">
         {label}
-      </h3>
+      </h2>
 
       {/* Description - Fixed position with consistent height for 2 lines */}
-      <div className="absolute top-[110px] left-0 right-0 h-[40px] px-4 flex items-center justify-center">
-        <p className="text-white/80 text-xs group-hover:text-white transition-colors duration-300 leading-[1.3] text-center">
+      <div className="absolute top-[128px] left-0 right-0 h-[40px] px-4 flex items-center justify-center">
+        <p className="text-white/80 text-s group-hover:text-white transition-colors duration-300 leading-[1.3] text-center">
           {description}
         </p>
       </div>
 
       {/* Call to action - Fixed position at bottom */}
-      <div className="absolute bottom-4 left-0 right-0 text-white/90 text-xs font-semibold group-hover:text-[#00DD89] transition-colors duration-300 flex items-center justify-center gap-1">
+      <div className="absolute bottom-4 left-0 right-0 text-[#00AFE6] text-m font-semibold group-hover:text-[#00DD89] transition-colors duration-300 flex items-center justify-center gap-2">
         <span>Click to explore</span>
-        <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
+        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
       </div>
     </motion.a>
   );

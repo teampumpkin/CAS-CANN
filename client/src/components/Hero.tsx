@@ -41,9 +41,9 @@ export default function Hero() {
         {label}
       </h3>
       
-      {/* Description - Fixed position with consistent height */}
-      <div className="absolute top-[110px] left-0 right-0 h-[32px] px-4 flex items-center justify-center">
-        <p className="text-white/80 text-xs group-hover:text-white transition-colors duration-300 leading-relaxed">
+      {/* Description - Fixed position with consistent height for 2 lines */}
+      <div className="absolute top-[110px] left-0 right-0 h-[40px] px-4 flex items-center justify-center">
+        <p className="text-white/80 text-xs group-hover:text-white transition-colors duration-300 leading-[1.3] text-center">
           {description}
         </p>
       </div>

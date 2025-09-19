@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, Users } from 'lucide-react';
+import { Calendar, Users, ArrowRight } from 'lucide-react';
 import heroBackgroundImage from '@assets/shutterstock_2447944539_1753254859154.jpg';
 import { useLanguage } from '@/contexts/LanguageContext';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -7,10 +7,52 @@ import OptimizedImage from '@/components/OptimizedImage';
 export default function Hero() {
   const { t } = useLanguage();
   
-  const quickTiles = [
-    { icon: Users, label: 'Join', href: '/join-cas' },
-    { icon: Calendar, label: 'Events', href: '/events' }
+  // Simplified tile data
+  const tiles = [
+    { 
+      icon: Users, 
+      label: 'Join', 
+      description: 'Become a CAS member',
+      href: '/join-cas'
+    },
+    { 
+      icon: Calendar, 
+      label: 'Events', 
+      description: 'Upcoming events and educational sessions',
+      href: '/events'
+    }
   ];
+
+  // Simple Tile component
+  const Tile = ({ icon: Icon, label, description, href }: { icon: any, label: string, description: string, href: string }) => (
+    <motion.a
+      href={href}
+      className="group w-[200px] h-[160px] p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-lg text-center flex flex-col justify-center items-center cursor-pointer"
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      {/* Icon */}
+      <div className="w-12 h-12 mb-3 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+        <Icon className="w-6 h-6 text-white" />
+      </div>
+      
+      {/* Title */}
+      <h3 className="text-white font-bold text-lg mb-2 font-rosarivo">
+        {label}
+      </h3>
+      
+      {/* Description */}
+      <p className="text-white/80 text-xs mb-3 group-hover:text-white transition-colors duration-300 leading-relaxed">
+        {description}
+      </p>
+      
+      {/* Call to action */}
+      <div className="text-white/90 text-xs font-semibold group-hover:text-[#00DD89] transition-colors duration-300 flex items-center gap-1">
+        <span>Click to explore</span>
+        <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
+      </div>
+    </motion.a>
+  );
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -118,46 +160,12 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 justify-items-center max-w-lg mx-auto">
-              {quickTiles.map((tile, index) => (
-                <motion.a
-                  key={tile.label}
-                  href={tile.href}
-                  className="group w-full max-w-[200px] cursor-pointer"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 1.4 + index * 0.2 }}
-                  whileHover={{ y: -4 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-xl text-center min-h-[160px] flex flex-col justify-center">
-                    
-                    {/* Icon */}
-                    <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                      <tile.icon className="w-6 h-6 text-white" />
-                    </div>
-                    
-                    {/* Title */}
-                    <h3 className="text-white font-bold text-lg mb-2 font-rosarivo">
-                      {tile.label}
-                    </h3>
-                    
-                    {/* Description */}
-                    <p className="text-white/80 text-xs mb-3 group-hover:text-white transition-colors duration-300 leading-relaxed">
-                      {index === 0 && "Become a CAS member"}
-                      {index === 1 && "Upcoming events and educational sessions"}
-                    </p>
-                    
-                    {/* Call to action */}
-                    <div className="text-white/90 text-xs font-semibold group-hover:text-[#00DD89] transition-colors duration-300 flex items-center justify-center gap-1">
-                      <span>Click to explore</span>
-                      <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </div>
-                </motion.a>
-              ))}
+            <div className="mx-auto w-fit">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {tiles.map((tile) => (
+                  <Tile key={tile.label} {...tile} />
+                ))}
+              </div>
             </div>
           </motion.div>
 

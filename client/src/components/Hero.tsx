@@ -27,27 +27,29 @@ export default function Hero() {
   const Tile = ({ icon: Icon, label, description, href }: { icon: any, label: string, description: string, href: string }) => (
     <motion.a
       href={href}
-      className="group w-[200px] h-[180px] p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-lg text-center flex flex-col items-center cursor-pointer"
+      className="group w-[200px] h-[180px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-lg text-center cursor-pointer relative"
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
     >
-      {/* Icon */}
-      <div className="w-12 h-12 mb-3 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-lg flex-shrink-0">
+      {/* Icon - Fixed position from top */}
+      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-lg">
         <Icon className="w-6 h-6 text-white" strokeWidth={2} />
       </div>
       
-      {/* Title */}
-      <h3 className="text-white font-bold text-lg mb-2 font-rosarivo flex-shrink-0">
+      {/* Title - Fixed position */}
+      <h3 className="absolute top-[82px] left-0 right-0 text-white font-bold text-lg font-rosarivo">
         {label}
       </h3>
       
-      {/* Description */}
-      <p className="text-white/80 text-xs mb-4 group-hover:text-white transition-colors duration-300 leading-relaxed flex-grow text-center">
-        {description}
-      </p>
+      {/* Description - Fixed position with consistent height */}
+      <div className="absolute top-[110px] left-0 right-0 h-[32px] px-4 flex items-center justify-center">
+        <p className="text-white/80 text-xs group-hover:text-white transition-colors duration-300 leading-relaxed">
+          {description}
+        </p>
+      </div>
       
-      {/* Call to action */}
-      <div className="text-white/90 text-xs font-semibold group-hover:text-[#00DD89] transition-colors duration-300 flex items-center gap-1 flex-shrink-0">
+      {/* Call to action - Fixed position at bottom */}
+      <div className="absolute bottom-6 left-0 right-0 text-white/90 text-xs font-semibold group-hover:text-[#00DD89] transition-colors duration-300 flex items-center justify-center gap-1">
         <span>Click to explore</span>
         <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
       </div>

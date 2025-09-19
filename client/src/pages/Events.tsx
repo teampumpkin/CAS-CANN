@@ -77,15 +77,19 @@ export default function Events() {
   };
 
   // Format date to "Thursday, September 25th, 2025"
+  // Fixed to handle dates as local dates instead of UTC to prevent timezone issues
   const formatEventDate = (dateString: string): string => {
-    const date = new Date(dateString);
+    // Parse date as local date by splitting and using Date constructor to avoid UTC conversion
+    const [year, month, day] = dateString.split('-').map(Number);
+    const date = new Date(year, month - 1, day); // month is 0-indexed
+    
     const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
     const monthName = date.toLocaleDateString('en-US', { month: 'long' });
-    const day = date.getDate();
-    const year = date.getFullYear();
-    const ordinalSuffix = getOrdinalSuffix(day);
+    const dayNumber = date.getDate();
+    const yearNumber = date.getFullYear();
+    const ordinalSuffix = getOrdinalSuffix(dayNumber);
     
-    return `${dayName}, ${monthName} ${day}${ordinalSuffix}, ${year}`;
+    return `${dayName}, ${monthName} ${dayNumber}${ordinalSuffix}, ${yearNumber}`;
   };
 
   return (

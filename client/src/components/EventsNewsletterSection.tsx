@@ -214,8 +214,8 @@ export default function EventsNewsletterSection() {
                   </p>
                 </div>
 
-                {/* Network Statistics Cards - Redesigned */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Network Statistics Cards - Fixed Layout */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   {[
                     {
                       value: "Over 180",
@@ -241,7 +241,7 @@ export default function EventsNewsletterSection() {
                   ].map((stat, index) => (
                     <motion.div
                       key={stat.label}
-                      className="relative group"
+                      className="relative group min-w-[200px]"
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{
@@ -253,8 +253,8 @@ export default function EventsNewsletterSection() {
                       data-testid={stat.testId}
                     >
                       <motion.div
-                        className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-105"
-                        whileHover={{ y: -8 }}
+                        className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500"
+                        whileHover={{ y: -4, scale: 1.02 }}
                       >
                         {/* Background Pattern */}
                         <div className="absolute inset-0 rounded-3xl opacity-5 dark:opacity-10">
@@ -266,18 +266,18 @@ export default function EventsNewsletterSection() {
                         {/* Stat Content */}
                         <div className="relative z-10 text-center">
                           {/* Icon */}
-                          <div className="text-4xl mb-4 opacity-80">
+                          <div className="text-3xl sm:text-4xl mb-3 opacity-80">
                             {stat.icon}
                           </div>
 
                           {/* Value */}
                           <motion.div
-                            className="mb-4"
+                            className="mb-3"
                             initial={{ scale: 0.8, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
                             transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
                           >
-                            <div className={`text-4xl lg:text-5xl font-bold mb-2 ${
+                            <div className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 whitespace-nowrap ${
                               stat.color === 'blue' 
                                 ? 'text-[#00AFE6]' 
                                 : stat.color === 'green' 
@@ -289,7 +289,7 @@ export default function EventsNewsletterSection() {
                             
                             {/* Accent line */}
                             <motion.div 
-                              className={`h-1.5 w-20 rounded-full mx-auto ${
+                              className={`h-1 w-16 sm:w-20 rounded-full mx-auto ${
                                 stat.color === 'blue' 
                                   ? 'bg-[#00AFE6]' 
                                   : stat.color === 'green' 
@@ -302,13 +302,13 @@ export default function EventsNewsletterSection() {
                             />
                           </motion.div>
 
-                          {/* Label */}
+                          {/* Label - with proper word breaking */}
                           <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                           >
-                            <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 leading-tight px-2">
+                            <p className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300 leading-tight px-2 break-words hyphens-auto">
                               {stat.label}
                             </p>
                           </motion.div>

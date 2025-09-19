@@ -119,92 +119,44 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 xl:gap-10 justify-items-center max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center max-w-2xl mx-auto">
               {quickTiles.map((tile, index) => (
                 <motion.a
                   key={tile.label}
                   href={tile.href}
-                  className="group relative overflow-hidden w-full max-w-[200px] cursor-pointer"
+                  className="group w-full max-w-sm cursor-pointer"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.4 + index * 0.2 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
+                  whileHover={{ y: -4 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {/* Enhanced Button-style card */}
-                  <div className="relative bg-gradient-to-br from-white/15 via-white/8 to-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/30 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-[#00AFE6]/90 group-hover:via-[#00DD89]/85 group-hover:to-[#00AFE6]/90 group-hover:border-[#00AFE6]/80 group-hover:shadow-xl group-hover:shadow-[#00AFE6]/50 overflow-hidden w-full h-full min-h-[160px] group-active:transform group-active:scale-95">
+                  <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-xl text-center min-h-[200px] flex flex-col justify-center">
                     
-                    {/* Dynamic Mesh Background */}
-                    <div className="absolute inset-0 opacity-20">
-                      <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-transparent rounded-full blur-xl" />
-                      <div className="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-tl from-[#00DD89]/20 to-transparent rounded-full blur-lg" />
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-md" />
+                    {/* Icon */}
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <tile.icon className="w-8 h-8 text-white" />
                     </div>
                     
-                    {/* Animated border gradient */}
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00AFE6]/0 via-[#00DD89]/0 to-[#00AFE6]/0 group-hover:from-[#00AFE6]/80 group-hover:via-[#00DD89]/80 group-hover:to-[#00AFE6]/80 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm" />
+                    {/* Title */}
+                    <h3 className="text-white font-bold text-xl mb-3 font-rosarivo">
+                      {tile.label}
+                    </h3>
                     
-                    {/* Enhanced shimmer effect */}
-                    <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out opacity-0 group-hover:opacity-100" />
-                    </div>
+                    {/* Description */}
+                    <p className="text-white/80 text-sm mb-4 group-hover:text-white transition-colors duration-300">
+                      {index === 0 && "Become a CAS member"}
+                      {index === 1 && "Upcoming events and educational sessions"}
+                      {index === 2 && "Access educational resources"}
+                    </p>
                     
-                    {/* Floating particles effect */}
-                    <div className="absolute inset-0">
-                      <div className="absolute top-4 right-4 w-1 h-1 bg-[#00AFE6] rounded-full opacity-0 group-hover:opacity-60 transition-all duration-500 group-hover:animate-pulse" />
-                      <div className="absolute top-8 right-8 w-0.5 h-0.5 bg-[#00DD89] rounded-full opacity-0 group-hover:opacity-40 transition-all duration-700 group-hover:animate-pulse" style={{ animationDelay: '0.2s' }} />
-                      <div className="absolute bottom-6 left-4 w-1 h-1 bg-white/60 rounded-full opacity-0 group-hover:opacity-30 transition-all duration-600 group-hover:animate-pulse" style={{ animationDelay: '0.4s' }} />
+                    {/* Call to action */}
+                    <div className="text-white/90 text-xs font-semibold group-hover:text-[#00DD89] transition-colors duration-300 flex items-center justify-center gap-1">
+                      <span>Click to explore</span>
+                      <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
                     </div>
-                    
-                    {/* Content */}
-                    <div className="relative z-10 text-center h-full flex flex-col">
-                      {/* Enhanced icon container */}
-                      <div className="relative mx-auto mb-4 w-16 h-16 group-hover:scale-110 transition-all duration-300">
-                        {/* Main icon background */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl shadow-lg group-hover:shadow-2xl group-hover:shadow-[#00AFE6]/50 transition-all duration-300" />
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl blur-md opacity-50 group-hover:opacity-90 transition-opacity duration-300" />
-                        {/* Pulse rings */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl opacity-0 group-hover:opacity-20 group-hover:scale-150 transition-all duration-700" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl opacity-0 group-hover:opacity-10 group-hover:scale-200 transition-all duration-1000" />
-                        {/* Icon */}
-                        <div className="relative flex items-center justify-center w-full h-full">
-                          <tile.icon className="w-7 h-7 text-white group-hover:scale-110 transition-transform duration-300" />
-                        </div>
-                      </div>
-                      
-                      {/* Enhanced title */}
-                      <h3 className="text-white font-bold text-base mb-2 group-hover:text-white transition-all duration-300 font-rosarivo drop-shadow-lg group-hover:drop-shadow-xl">
-                        {tile.label}
-                      </h3>
-                      
-                      {/* Enhanced subtitle */}
-                      <p className="text-white/70 text-xs font-medium leading-relaxed group-hover:text-white group-hover:font-semibold transition-all duration-300 transform group-hover:translate-y-0.5 drop-shadow-md group-hover:drop-shadow-lg flex-grow">
-                        {index === 0 && "Become a CAS member"}
-                        {index === 1 && "Upcoming events and educational sessions"}
-                        {index === 2 && "Access educational resources"}
-                      </p>
-                      
-                      {/* Button indicator */}
-                      <div className="mt-4 flex items-center justify-center opacity-100 transition-opacity duration-300">
-                        <div className="flex items-center gap-1 text-white font-bold text-xs bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
-                          <span>Click to explore</span>
-                          <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Enhanced corner accents */}
-                    <div className="absolute top-3 right-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="w-1 h-1 bg-[#00AFE6] rounded-full animate-pulse" />
-                      <div className="w-0.5 h-0.5 bg-[#00DD89] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-                    </div>
-                    <div className="absolute bottom-3 left-3 w-2 h-2 border border-white/30 rounded-full opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
-                    
-                    {/* Subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/0 via-transparent to-[#00DD89]/0 group-hover:from-[#00AFE6]/5 group-hover:to-[#00DD89]/5 transition-all duration-700 rounded-3xl" />
                   </div>
                 </motion.a>
               ))}

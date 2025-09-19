@@ -214,8 +214,8 @@ export default function EventsNewsletterSection() {
                   </p>
                 </div>
 
-                {/* Network Statistics Cards - Fixed Layout */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                {/* Network Statistics Cards - Vertical Layout */}
+                <div className="flex flex-col gap-3 max-w-xs mx-auto">
                   {[
                     {
                       value: "Over 180",
@@ -241,43 +241,38 @@ export default function EventsNewsletterSection() {
                   ].map((stat, index) => (
                     <motion.div
                       key={stat.label}
-                      className="relative group min-w-[200px]"
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      className="relative group"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       transition={{
-                        duration: 0.8,
-                        delay: index * 0.2,
+                        duration: 0.6,
+                        delay: index * 0.15,
                         ease: "easeOut",
                       }}
                       viewport={{ once: true }}
                       data-testid={stat.testId}
                     >
                       <motion.div
-                        className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-xl hover:shadow-2xl transition-all duration-500"
-                        whileHover={{ y: -4, scale: 1.02 }}
+                        className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl px-6 py-4 border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-300"
+                        whileHover={{ x: 4 }}
                       >
                         {/* Background Pattern */}
-                        <div className="absolute inset-0 rounded-3xl opacity-5 dark:opacity-10">
+                        <div className="absolute inset-0 rounded-2xl opacity-5 dark:opacity-10">
                           <div className="absolute inset-0" style={{
-                            backgroundImage: `radial-gradient(circle at 20% 50%, ${stat.color === 'blue' ? '#00AFE6' : stat.color === 'green' ? '#00DD89' : '#00AFE6'} 0%, transparent 50%), radial-gradient(circle at 80% 20%, ${stat.color === 'green' ? '#00DD89' : '#00AFE6'} 0%, transparent 50%)`
+                            backgroundImage: `radial-gradient(circle at 10% 50%, ${stat.color === 'blue' ? '#00AFE6' : stat.color === 'green' ? '#00DD89' : '#00AFE6'} 0%, transparent 40%)`
                           }} />
                         </div>
 
-                        {/* Stat Content */}
-                        <div className="relative z-10 text-center">
+                        {/* Stat Content - Horizontal Layout */}
+                        <div className="relative z-10 flex items-center gap-4">
                           {/* Icon */}
-                          <div className="text-3xl sm:text-4xl mb-3 opacity-80">
+                          <div className="text-2xl opacity-70">
                             {stat.icon}
                           </div>
 
-                          {/* Value */}
-                          <motion.div
-                            className="mb-3"
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            whileInView={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                          >
-                            <div className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 whitespace-nowrap ${
+                          {/* Value and Label */}
+                          <div className="flex-1">
+                            <div className={`text-2xl font-medium mb-0.5 ${
                               stat.color === 'blue' 
                                 ? 'text-[#00AFE6]' 
                                 : stat.color === 'green' 
@@ -286,42 +281,20 @@ export default function EventsNewsletterSection() {
                             } dark:text-white`}>
                               {stat.value}
                             </div>
-                            
-                            {/* Accent line */}
-                            <motion.div 
-                              className={`h-1 w-16 sm:w-20 rounded-full mx-auto ${
-                                stat.color === 'blue' 
-                                  ? 'bg-[#00AFE6]' 
-                                  : stat.color === 'green' 
-                                  ? 'bg-[#00DD89]' 
-                                  : 'bg-[#00AFE6]'
-                              }`}
-                              initial={{ width: 0 }}
-                              whileInView={{ width: 80 }}
-                              transition={{ duration: 1, delay: 0.5 + index * 0.2 }}
-                            />
-                          </motion.div>
-
-                          {/* Label - with proper word breaking */}
-                          <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                          >
-                            <p className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300 leading-tight px-2 break-words hyphens-auto">
+                            <p className="text-sm font-normal text-gray-600 dark:text-gray-400">
                               {stat.label}
                             </p>
-                          </motion.div>
-                        </div>
+                          </div>
 
-                        {/* Hover Effect */}
-                        <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity duration-500 ${
-                          stat.color === 'blue' 
-                            ? 'bg-[#00AFE6]' 
-                            : stat.color === 'green' 
-                            ? 'bg-[#00DD89]' 
-                            : 'bg-[#00AFE6]'
-                        }`} />
+                          {/* Side Accent */}
+                          <div className={`w-1 h-12 rounded-full ${
+                            stat.color === 'blue' 
+                              ? 'bg-[#00AFE6]/30' 
+                              : stat.color === 'green' 
+                              ? 'bg-[#00DD89]/30' 
+                              : 'bg-[#00AFE6]/30'
+                          }`} />
+                        </div>
                       </motion.div>
                     </motion.div>
                   ))}

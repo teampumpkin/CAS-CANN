@@ -441,19 +441,19 @@ export default function Events() {
 
                         {/* Membership info and Join button - Show for Journal Club sessions (index 0 and 2) and CANN Educational Series (index 1) */}
                         {(index === 0 || index === 1 || index === 2) && (
-                          <div className="text-center p-5 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-2xl border-2 border-[#00AFE6]/40 shadow-lg shadow-[#00AFE6]/10 relative overflow-hidden space-y-4">
+                          <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden space-y-2">
                             {/* Subtle animated background effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
 
                             <div className="relative z-10">
-                              <div className="flex items-center justify-center gap-2 mb-2">
-                                <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
-                                <p className="text-base font-bold text-[#00AFE6] dark:text-[#00AFE6]">
+                              <div className="flex items-center justify-center gap-1 mb-1">
+                                <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
+                                <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
                                   {index === 1 ? "Registration Required." : "Registration not required."}
                                 </p>
-                                <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse"></div>
+                                <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                               </div>
-                              <p className="text-sm font-medium text-gray-700 dark:text-white/80 mb-4">
+                              <p className="text-xs font-medium text-gray-700 dark:text-white/80 mb-2">
                                 {index === 1 ? "Zoom details are sent to CANN members" : "Zoom details are sent to CAS members"}
                               </p>
 
@@ -462,8 +462,8 @@ export default function Events() {
                                   (window.location.href = index === 1 ? "/about-cann#join-section" : "/join-cas")
                                 }
                                 className={index === 1 
-                                  ? "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 shadow-xl hover:shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 group/btn py-3 px-8 rounded-xl font-bold text-sm relative overflow-hidden"
-                                  : "bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border-2 border-[#00DD89] hover:border-[#00DD89]/90 shadow-xl hover:shadow-2xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-3 px-8 rounded-xl font-bold text-sm relative overflow-hidden"
+                                  ? "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
+                                  : "bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
                                 }
                                 data-testid={index === 1 ? "button-join-cann" : "button-join-cas"}
                               >
@@ -478,13 +478,13 @@ export default function Events() {
                                   : "relative z-10 flex items-center justify-center text-gray-800"
                                 }>
                                   <Users className={index === 1 
-                                    ? "w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-white"
-                                    : "w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800"
+                                    ? "w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-white"
+                                    : "w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800"
                                   } />
                                   {index === 1 ? "Join CANN" : "Join CAS"}
                                   <div className={index === 1 
-                                    ? "ml-2 w-2 h-2 bg-white rounded-full animate-pulse"
-                                    : "ml-2 w-2 h-2 bg-gray-800 rounded-full animate-pulse"
+                                    ? "ml-1 w-1.5 h-1.5 bg-white rounded-full animate-pulse"
+                                    : "ml-1 w-1.5 h-1.5 bg-gray-800 rounded-full animate-pulse"
                                   }></div>
                                 </div>
                               </Button>

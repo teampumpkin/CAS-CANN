@@ -261,7 +261,7 @@ export default function EventsNewsletterSection() {
                           whileHover={{ x: 6, scale: 1.02 }}
                         >
                           {/* Background Pattern */}
-                          <div className="absolute inset-0 rounded-2xl opacity-5 dark:opacity-10">
+                          <div className="absolute inset-0 rounded-3xl opacity-5 dark:opacity-10">
                             <div className="absolute inset-0" style={{
                               backgroundImage: `radial-gradient(circle at 10% 50%, ${stat.color === 'blue' ? '#00AFE6' : stat.color === 'green' ? '#00DD89' : '#00AFE6'} 0%, transparent 40%)`
                             }} />

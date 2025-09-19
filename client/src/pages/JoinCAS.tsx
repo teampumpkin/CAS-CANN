@@ -129,15 +129,9 @@ export default function JoinCAS() {
     try {
       setIsSubmitting(true);
       
-      // Debug: Check form validation and data
-      console.log("Form validation errors:", form.formState.errors);
-      console.log("Form data being submitted:", data);
-      console.log("Membership path:", data.wantsMembership);
-      
       // Google Apps Script URL - the one connected to your Google Sheet
       const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyL3klzui210W0P7_cJctvsFxHIN-YBalzCbTRSDNnRr7RyX6FdMUPwz8jPMhBWVYRoPw/exec";
       
-      console.log("Submitting form data to Google Sheet:", GOOGLE_SCRIPT_URL);
       
       // Submit to Google Sheets (using text/plain to avoid CORS issues)
       const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -1141,32 +1135,6 @@ export default function JoinCAS() {
                           </motion.div>
                         )}
 
-                        {/* Debug Button - Remove after fixing */}
-                        <div className="flex justify-center gap-4 pt-4">
-                          <Button
-                            type="button"
-                            onClick={async () => {
-                              console.log("=== FORM DEBUG ===");
-                              console.log("Form errors:", form.formState.errors);
-                              console.log("Form values:", form.getValues());
-                              console.log("Form valid:", form.formState.isValid);
-                              console.log("Membership path:", form.getValues().wantsMembership);
-                              
-                              // Try to validate manually to see hidden errors
-                              try {
-                                const result = await form.trigger();
-                                console.log("Manual validation result:", result);
-                                console.log("Form errors after trigger:", form.formState.errors);
-                              } catch (error) {
-                                console.log("Validation error:", error);
-                              }
-                            }}
-                            variant="outline"
-                            className="px-6 py-2 text-sm"
-                          >
-                            Debug Form
-                          </Button>
-                        </div>
 
                         {/* Submit Button */}
                         <div className="flex justify-center pt-8">

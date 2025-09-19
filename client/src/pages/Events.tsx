@@ -391,7 +391,7 @@ export default function Events() {
             </div>
 
             <TabsContent value="overview" className="mt-0">
-              <div className="grid grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {upcomingEvents.map((event, index) => (
                   <motion.div
                     key={event.id}

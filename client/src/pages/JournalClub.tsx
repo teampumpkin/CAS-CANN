@@ -184,15 +184,21 @@ export default function JournalClub() {
 
                   <div className="flex-shrink-0">
                     {club.registrationNotRequired ? (
-                      <motion.button
-                        className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300"
+                      <motion.div
+                        className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 text-center"
                         whileHover={{ scale: 1.02 }}
                       >
-                        Registration Not Required
-                      </motion.button>
+                        <div>Registration Not Required</div>
+                        <div className="text-sm font-normal mt-1 opacity-90">
+                          Zoom access details sent to CAS members
+                        </div>
+                      </motion.div>
                     ) : (
-                      <div className="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-xl font-bold">
-                        Registration Not Required
+                      <div className="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-xl font-bold text-center">
+                        <div>Registration Not Required</div>
+                        <div className="text-sm font-normal mt-1 opacity-75">
+                          Zoom access details sent to CAS members
+                        </div>
                       </div>
                     )}
                   </div>

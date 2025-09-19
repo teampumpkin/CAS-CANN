@@ -435,7 +435,7 @@ export default function Events() {
                         </div>
 
                         {/* Description */}
-                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-6 line-clamp-3">
+                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-6">
                           {event.description}
                         </p>
 

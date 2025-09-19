@@ -137,7 +137,7 @@ export default function Hero() {
 
             {/* Clinician-focused subtitle */}
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
@@ -145,32 +145,26 @@ export default function Hero() {
               {t('hero.subtitle')}
             </motion.p>
 
-
-
+            {/* Quick Action Tiles */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            >
+              <div className="mx-auto w-fit">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {tiles.map((tile) => (
+                    <Tile key={tile.label} {...tile} />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
             
           </div>
         </div>
 
-        {/* Bottom section with tiles and scroll indicator */}
-        <div className="py-8">
-          {/* Quick Action Tiles - Premium Style */}
-          <motion.div
-            className="w-full max-w-6xl mx-auto px-6"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-          >
-            <div className="mx-auto w-fit">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {tiles.map((tile) => (
-                  <Tile key={tile.label} {...tile} />
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-
-        </div>
+        {/* Bottom spacer */}
+        <div className="py-8"></div>
       </div>
     </section>
   );

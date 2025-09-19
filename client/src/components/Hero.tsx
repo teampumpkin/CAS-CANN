@@ -119,32 +119,32 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 justify-items-center max-w-lg mx-auto">
               {quickTiles.map((tile, index) => (
                 <motion.a
                   key={tile.label}
                   href={tile.href}
-                  className="group w-full max-w-sm cursor-pointer"
+                  className="group w-full max-w-[200px] cursor-pointer"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.4 + index * 0.2 }}
                   whileHover={{ y: -4 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-xl text-center min-h-[200px] flex flex-col justify-center">
+                  <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:border-[#00AFE6]/50 hover:bg-gradient-to-br hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 transition-all duration-300 hover:shadow-xl text-center min-h-[160px] flex flex-col justify-center">
                     
                     {/* Icon */}
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                      <tile.icon className="w-8 h-8 text-white" />
+                    <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <tile.icon className="w-6 h-6 text-white" />
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-white font-bold text-xl mb-3 font-rosarivo">
+                    <h3 className="text-white font-bold text-lg mb-2 font-rosarivo">
                       {tile.label}
                     </h3>
                     
                     {/* Description */}
-                    <p className="text-white/80 text-sm mb-4 group-hover:text-white transition-colors duration-300">
+                    <p className="text-white/80 text-xs mb-3 group-hover:text-white transition-colors duration-300 leading-relaxed">
                       {index === 0 && "Become a CAS member"}
                       {index === 1 && "Upcoming events and educational sessions"}
                       {index === 2 && "Access educational resources"}

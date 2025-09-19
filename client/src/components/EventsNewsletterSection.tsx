@@ -215,7 +215,7 @@ export default function EventsNewsletterSection() {
                 </div>
 
                 {/* Network Statistics Cards - Vertical Layout */}
-                <div className="flex flex-col gap-3 max-w-xs mx-auto">
+                <div className="flex flex-col gap-3 max-w-md mx-auto w-full">
                   {[
                     {
                       value: "Over 180",
@@ -253,7 +253,7 @@ export default function EventsNewsletterSection() {
                       data-testid={stat.testId}
                     >
                       <motion.div
-                        className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl px-6 py-4 border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl px-8 py-5 border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-300"
                         whileHover={{ x: 4 }}
                       >
                         {/* Background Pattern */}

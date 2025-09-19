@@ -52,7 +52,7 @@ const upcomingEvents = [
     location: "Virtual Event",
     type: "Journal Club",
     description:
-      "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updated",
+      "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updated.",
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
   },
@@ -67,12 +67,16 @@ export default function Events() {
 
   // Helper function to add ordinal suffix to day
   const getOrdinalSuffix = (day: number): string => {
-    if (day > 3 && day < 21) return 'th';
+    if (day > 3 && day < 21) return "th";
     switch (day % 10) {
-      case 1: return 'st';
-      case 2: return 'nd'; 
-      case 3: return 'rd';
-      default: return 'th';
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
     }
   };
 
@@ -80,15 +84,15 @@ export default function Events() {
   // Fixed to handle dates as local dates instead of UTC to prevent timezone issues
   const formatEventDate = (dateString: string): string => {
     // Parse date as local date by splitting and using Date constructor to avoid UTC conversion
-    const [year, month, day] = dateString.split('-').map(Number);
+    const [year, month, day] = dateString.split("-").map(Number);
     const date = new Date(year, month - 1, day); // month is 0-indexed
-    
-    const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
-    const monthName = date.toLocaleDateString('en-US', { month: 'long' });
+
+    const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
+    const monthName = date.toLocaleDateString("en-US", { month: "long" });
     const dayNumber = date.getDate();
     const yearNumber = date.getFullYear();
     const ordinalSuffix = getOrdinalSuffix(dayNumber);
-    
+
     return `${dayName}, ${monthName} ${dayNumber}${ordinalSuffix}, ${yearNumber}`;
   };
 
@@ -449,49 +453,72 @@ export default function Events() {
                               <div className="flex items-center justify-center gap-1 mb-1">
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                                 <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
-                                  {index === 1 ? "Registration Required." : "Registration not required."}
+                                  {index === 1
+                                    ? "Registration Required."
+                                    : "Registration not required."}
                                 </p>
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                               </div>
                               <p className="text-xs font-medium text-gray-700 dark:text-white/80 mb-2">
-                                {index === 1 ? "Zoom details are sent to CANN members" : "Zoom details are sent to CAS members"}
+                                {index === 1
+                                  ? "Zoom details are sent to CANN members"
+                                  : "Zoom details are sent to CAS members"}
                               </p>
 
                               <Button
                                 onClick={() =>
-                                  (window.location.href = index === 1 ? "/about-cann#join-section" : "/join-cas")
+                                  (window.location.href =
+                                    index === 1
+                                      ? "/about-cann#join-section"
+                                      : "/join-cas")
                                 }
-                                className={index === 1 
-                                  ? "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
-                                  : "bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
+                                className={
+                                  index === 1
+                                    ? "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
+                                    : "bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
                                 }
-                                data-testid={index === 1 ? "button-join-cann" : "button-join-cas"}
+                                data-testid={
+                                  index === 1
+                                    ? "button-join-cann"
+                                    : "button-join-cas"
+                                }
                               >
                                 {/* Animated background effect */}
-                                <div className={index === 1 
-                                  ? "absolute inset-0 bg-gradient-to-r from-pink-500/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
-                                  : "absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
-                                }></div>
+                                <div
+                                  className={
+                                    index === 1
+                                      ? "absolute inset-0 bg-gradient-to-r from-pink-500/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
+                                      : "absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
+                                  }
+                                ></div>
 
-                                <div className={index === 1 
-                                  ? "relative z-10 flex items-center justify-center text-white"
-                                  : "relative z-10 flex items-center justify-center text-gray-800"
-                                }>
-                                  <Users className={index === 1 
-                                    ? "w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-white"
-                                    : "w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800"
-                                  } />
+                                <div
+                                  className={
+                                    index === 1
+                                      ? "relative z-10 flex items-center justify-center text-white"
+                                      : "relative z-10 flex items-center justify-center text-gray-800"
+                                  }
+                                >
+                                  <Users
+                                    className={
+                                      index === 1
+                                        ? "w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-white"
+                                        : "w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800"
+                                    }
+                                  />
                                   {index === 1 ? "Join CANN" : "Join CAS"}
-                                  <div className={index === 1 
-                                    ? "ml-1 w-1.5 h-1.5 bg-white rounded-full animate-pulse"
-                                    : "ml-1 w-1.5 h-1.5 bg-gray-800 rounded-full animate-pulse"
-                                  }></div>
+                                  <div
+                                    className={
+                                      index === 1
+                                        ? "ml-1 w-1.5 h-1.5 bg-white rounded-full animate-pulse"
+                                        : "ml-1 w-1.5 h-1.5 bg-gray-800 rounded-full animate-pulse"
+                                    }
+                                  ></div>
                                 </div>
                               </Button>
                             </div>
                           </div>
                         )}
-
                       </div>
                     </Card>
                   </motion.div>

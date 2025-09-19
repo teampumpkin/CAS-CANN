@@ -32,8 +32,8 @@ export default function Hero() {
       whileTap={{ scale: 0.98 }}
     >
       {/* Icon */}
-      <div className="w-12 h-12 mb-3 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-        <Icon className="w-6 h-6 text-white" />
+      <div className="w-14 h-14 mb-4 bg-gradient-to-br from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-lg">
+        <Icon className="w-7 h-7 text-white" />
       </div>
       
       {/* Title */}

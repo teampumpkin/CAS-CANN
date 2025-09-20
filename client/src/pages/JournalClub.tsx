@@ -30,9 +30,7 @@ export default function JournalClub() {
     },
     {
       date: "November 27, 2025",
-      time: "12:00 PM EST",
-      topic: "Cardiac Amyloidosis",
-      presenter: "Dr. Edgar Da Silva, Cardiology Fellow, University of Ottawa",
+      time: "3-4 PM EST",
       location: "Virtual",
       registrationNotRequired: true,
       comingSoon: true,

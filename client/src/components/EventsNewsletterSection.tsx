@@ -36,7 +36,7 @@ export default function EventsNewsletterSection() {
       title: "CAS Journal Club",
       description:
         "Expert presentations of clinical cases and related discussion, journal review and/or clinical trial updates.",
-      date: "4 - five times per year, Thursday afternoons",
+      date: "4-5 times per year, Thursday afternoons, 3-4 PM MST",
       gradient: "from-[#00DD89] to-[#00BB77]",
       bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
       type: "Virtual",

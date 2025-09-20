@@ -23,8 +23,14 @@ export default function JournalClub() {
     {
       date: "September 25, 2025",
       time: "3-4 PM MST",
-      topic: "An Interesting Case of ATTR-neuropathy",
-      presenter: "Dr. Genevieve Matte, University of Montreal",
+      topics: [
+        "An Interesting Case of ATTR-neuropathy",
+        "Cardiac Amyloidosis"
+      ],
+      presenters: [
+        "Dr. Genevieve Matte, University of Montreal",
+        "Dr. Edgar Da Silva, Cardiology Fellow, University of Ottawa"
+      ],
       location: "Virtual",
       registrationNotRequired: true,
     },
@@ -169,17 +175,42 @@ export default function JournalClub() {
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                      {club.topic}
-                    </h3>
+                    {/* Topics */}
+                    <div className="mb-3">
+                      {club.topics ? (
+                        <div className="space-y-2">
+                          {club.topics.map((topic, topicIndex) => (
+                            <h3 key={topicIndex} className="text-xl font-bold text-gray-900 dark:text-white">
+                              {topic}
+                            </h3>
+                          ))}
+                        </div>
+                      ) : (
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                          {club.topic}
+                        </h3>
+                      )}
+                    </div>
 
                     <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-[#00AFE6]" />
-                        <span className="text-sm">
-                          Presenter: {club.presenter}
-                        </span>
-                      </div>
+                      {/* Presenters */}
+                      {club.presenters ? (
+                        club.presenters.map((presenter, presenterIndex) => (
+                          <div key={presenterIndex} className="flex items-center gap-2">
+                            <Users className="w-4 h-4 text-[#00AFE6]" />
+                            <span className="text-sm">
+                              Presenter: {presenter}
+                            </span>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4 text-[#00AFE6]" />
+                          <span className="text-sm">
+                            Presenter: {club.presenter}
+                          </span>
+                        </div>
+                      )}
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-[#00AFE6]" />
                         <span className="text-sm">{club.location}</span>

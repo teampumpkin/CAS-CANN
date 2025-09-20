@@ -213,19 +213,19 @@ export default function JournalClub() {
                   </div>
 
                   <div className="flex-shrink-0">
-                    <div className="space-y-3 text-right">
+                    <div className="space-y-3">
                       {/* Location */}
-                      <div className="flex items-center justify-end gap-2 text-gray-700 dark:text-gray-300">
-                        <span className="text-sm">{club.location}</span>
+                      <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                         <MapPin className="w-4 h-4 text-[#00AFE6]" />
+                        <span className="text-sm">{club.location}</span>
                       </div>
                       
                       {/* Zoom Details */}
-                      <div className="flex items-center justify-end gap-2 text-gray-700 dark:text-gray-300">
+                      <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                        <Calendar className="w-4 h-4 text-[#00DD89]" />
                         <span className="text-sm italic text-[#00DD89]">
                           Zoom access details sent to CAS members
                         </span>
-                        <Calendar className="w-4 h-4 text-[#00DD89]" />
                       </div>
                       
                       {/* Registration Button */}

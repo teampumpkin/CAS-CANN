@@ -184,14 +184,12 @@ export default function JournalClub() {
                         <MapPin className="w-4 h-4 text-[#00AFE6]" />
                         <span className="text-sm">{club.location}</span>
                       </div>
-                      {club.comingSoon && (
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-[#00DD89]" />
-                          <span className="text-sm italic text-[#00DD89]">
-                            Zoom access details sent to CAS members
-                          </span>
-                        </div>
-                      )}
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-[#00DD89]" />
+                        <span className="text-sm italic text-[#00DD89]">
+                          Zoom access details sent to CAS members
+                        </span>
+                      </div>
                     </div>
                   </div>
 

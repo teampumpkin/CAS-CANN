@@ -225,11 +225,11 @@ export default function JournalClub() {
                       {/* Registration Badge */}
                       <div className="pt-2">
                         {club.registrationNotRequired ? (
-                          <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-3 py-1 rounded-full text-xs font-bold inline-block">
+                          <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] px-3 py-2 rounded-full text-xs font-bold inline-block" style={{ color: '#2a2a2a' }}>
                             Registration Not Required
                           </div>
                         ) : (
-                          <div className="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-3 py-1 rounded-full text-xs font-bold inline-block">
+                          <div className="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-3 py-2 rounded-full text-xs font-bold inline-block">
                             Registration Not Required
                           </div>
                         )}

@@ -175,42 +175,38 @@ export default function JournalClub() {
                       </div>
                     </div>
 
-                    {/* Topics */}
-                    <div className="mb-3">
+                    {/* Topics and Presenters grouped together */}
+                    <div className="mb-3 space-y-3">
                       {club.topics ? (
-                        <div className="space-y-2">
-                          {club.topics.map((topic, topicIndex) => (
-                            <h3 key={topicIndex} className="text-xl font-bold text-gray-900 dark:text-white">
+                        club.topics.map((topic, index) => (
+                          <div key={index}>
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                               {topic}
                             </h3>
-                          ))}
-                        </div>
+                            <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                              <Users className="w-4 h-4 text-[#00AFE6]" />
+                              <span className="text-sm">
+                                Presenter: {club.presenters[index]}
+                              </span>
+                            </div>
+                          </div>
+                        ))
                       ) : (
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                          {club.topic}
-                        </h3>
+                        <div>
+                          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                            {club.topic}
+                          </h3>
+                          <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                            <Users className="w-4 h-4 text-[#00AFE6]" />
+                            <span className="text-sm">
+                              Presenter: {club.presenter}
+                            </span>
+                          </div>
+                        </div>
                       )}
                     </div>
 
                     <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                      {/* Presenters */}
-                      {club.presenters ? (
-                        club.presenters.map((presenter, presenterIndex) => (
-                          <div key={presenterIndex} className="flex items-center gap-2">
-                            <Users className="w-4 h-4 text-[#00AFE6]" />
-                            <span className="text-sm">
-                              Presenter: {presenter}
-                            </span>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4 text-[#00AFE6]" />
-                          <span className="text-sm">
-                            Presenter: {club.presenter}
-                          </span>
-                        </div>
-                      )}
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-[#00AFE6]" />
                         <span className="text-sm">{club.location}</span>

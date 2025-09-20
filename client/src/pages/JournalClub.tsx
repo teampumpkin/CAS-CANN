@@ -31,6 +31,8 @@ export default function JournalClub() {
     {
       date: "November 27, 2025",
       time: "3-4 PM EST",
+      topic: "COMING SOON",
+      presenter: "COMING SOON",
       location: "Virtual",
       registrationNotRequired: true,
       comingSoon: true,

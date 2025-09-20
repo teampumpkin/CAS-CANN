@@ -102,8 +102,7 @@ export default function JournalClub() {
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   Each session features expert presentations, interactive
                   discussions, and opportunities to connect with colleagues
-                  working in amyloidosis care. Sessions are available both
-                  in-person and virtually.
+                  working in amyloidosis care. Sessions are available virtually.
                 </p>
               </div>
             </div>

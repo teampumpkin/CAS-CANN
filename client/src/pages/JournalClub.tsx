@@ -210,33 +210,40 @@ export default function JournalClub() {
                       )}
                     </div>
 
-                    <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-[#00AFE6]" />
-                        <span className="text-sm">{club.location}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-[#00DD89]" />
-                        <span className="text-sm italic text-[#00DD89]">
-                          Zoom access details sent to CAS members
-                        </span>
-                      </div>
-                    </div>
                   </div>
 
                   <div className="flex-shrink-0">
-                    {club.registrationNotRequired ? (
-                      <motion.button
-                        className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300"
-                        whileHover={{ scale: 1.02 }}
-                      >
-                        Registration Not Required
-                      </motion.button>
-                    ) : (
-                      <div className="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-xl font-bold">
-                        Registration Not Required
+                    <div className="space-y-3 text-right">
+                      {/* Location */}
+                      <div className="flex items-center justify-end gap-2 text-gray-700 dark:text-gray-300">
+                        <span className="text-sm">{club.location}</span>
+                        <MapPin className="w-4 h-4 text-[#00AFE6]" />
                       </div>
-                    )}
+                      
+                      {/* Zoom Details */}
+                      <div className="flex items-center justify-end gap-2 text-gray-700 dark:text-gray-300">
+                        <span className="text-sm italic text-[#00DD89]">
+                          Zoom access details sent to CAS members
+                        </span>
+                        <Calendar className="w-4 h-4 text-[#00DD89]" />
+                      </div>
+                      
+                      {/* Registration Button */}
+                      <div className="pt-2">
+                        {club.registrationNotRequired ? (
+                          <motion.button
+                            className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300"
+                            whileHover={{ scale: 1.02 }}
+                          >
+                            Registration Not Required
+                          </motion.button>
+                        ) : (
+                          <div className="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-xl font-bold">
+                            Registration Not Required
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </motion.div>

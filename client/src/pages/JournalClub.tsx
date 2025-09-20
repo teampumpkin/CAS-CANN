@@ -180,7 +180,7 @@ export default function JournalClub() {
                       {club.topics ? (
                         club.topics.map((topic, index) => (
                           <div key={index}>
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                               {topic}
                             </h3>
                             <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
@@ -195,7 +195,7 @@ export default function JournalClub() {
                         ))
                       ) : (
                         <div>
-                          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                             {club.topic}
                           </h3>
                           <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">

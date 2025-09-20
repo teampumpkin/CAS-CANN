@@ -183,11 +183,8 @@ export default function JournalClub() {
                             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                               {topic}
                             </h3>
-                            <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-                              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] flex items-center justify-center">
-                                <Users className="w-4 h-4 text-white" />
-                              </div>
-                              <span className="text-base font-semibold">
+                            <div className="text-gray-700 dark:text-gray-300">
+                              <span className="text-lg font-semibold">
                                 Presenter: {club.presenters[index]}
                               </span>
                             </div>
@@ -198,11 +195,8 @@ export default function JournalClub() {
                           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                             {club.topic}
                           </h3>
-                          <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-                            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] flex items-center justify-center">
-                              <Users className="w-4 h-4 text-white" />
-                            </div>
-                            <span className="text-base font-semibold">
+                          <div className="text-gray-700 dark:text-gray-300">
+                            <span className="text-lg font-semibold">
                               Presenter: {club.presenter}
                             </span>
                           </div>

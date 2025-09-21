@@ -54,6 +54,7 @@ const Partnerships = lazy(() => import("@/pages/Partnerships"));
 const Community = lazy(() => import("@/pages/Community"));
 const Events = lazy(() => import("@/pages/Events"));
 const TestForms = lazy(() => import("@/pages/TestForms"));
+const CANNMembershipForm = lazy(() => import("@/pages/CANNMembershipForm"));
 
 // Loading component
 const PageLoader = () => (
@@ -113,6 +114,7 @@ function Router() {
         <Route path="/accessibility" component={AccessibilityStatement} />
         <Route path="/contributor-portal" component={ContributorPortal} />
         <Route path="/test-forms" component={TestForms} />
+        <Route path="/join-cann" component={CANNMembershipForm} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

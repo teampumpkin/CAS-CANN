@@ -105,7 +105,7 @@ export default function CANNMembershipForm() {
           timestamp: new Date().toISOString(),
         }
       });
-      return response as SubmissionResponse;
+      return response as unknown as SubmissionResponse;
     },
     onSuccess: (data) => {
       setSubmissionId(data.submissionId);

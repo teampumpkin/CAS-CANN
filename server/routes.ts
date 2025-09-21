@@ -715,6 +715,152 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Setup endpoint for CANN form configuration
+  app.post("/api/setup-cann-form", async (req, res) => {
+    try {
+      console.log("[Setup] Setting up CANN Membership Form Configuration...");
+
+      // Check if configuration already exists
+      const existingConfig = await storage.getFormConfiguration("Join CANN Today");
+      
+      if (existingConfig) {
+        console.log("[Setup] CANN form configuration already exists:", existingConfig.id);
+        return res.json({
+          success: true,
+          message: "CANN form configuration already exists",
+          configId: existingConfig.id,
+          config: existingConfig
+        });
+      }
+
+      // Create CANN form configuration
+      const cannFormConfig = {
+        formName: "Join CANN Today",
+        zohoModule: "Leads", // Map to Leads module in Zoho CRM
+        description: "Canadian Amyloidosis Nursing Network membership application form",
+        isActive: true,
+        fieldMappings: {
+          // Basic membership info
+          "membershipRequest": {
+            "zohoField": "membershipRequest",
+            "fieldType": "picklist",
+            "isRequired": true,
+            "description": "Whether user wants CAS membership"
+          },
+          "fullName": {
+            "zohoField": "fullName", 
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Full name of the applicant"
+          },
+          "emailAddress": {
+            "zohoField": "emailAddress",
+            "fieldType": "email", 
+            "isRequired": false,
+            "description": "Email address of the applicant"
+          },
+          "discipline": {
+            "zohoField": "discipline",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Professional discipline (nurse, physician, etc.)"
+          },
+          "subspecialty": {
+            "zohoField": "subspecialty",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Sub-specialty area of focus"
+          },
+          "institutionName": {
+            "zohoField": "institutionName",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Center or clinic name/institution"
+          },
+          "communicationConsent": {
+            "zohoField": "communicationConsent",
+            "fieldType": "picklist",
+            "isRequired": false,
+            "description": "Consent for communication from CAS"
+          },
+          // Services map related fields
+          "servicesMapConsent": {
+            "zohoField": "servicesMapConsent",
+            "fieldType": "picklist",
+            "isRequired": true,
+            "description": "Consent for including center in services map"
+          },
+          "mapInstitutionName": {
+            "zohoField": "mapInstitutionName",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Institution name for services map"
+          },
+          "institutionAddress": {
+            "zohoField": "institutionAddress",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Full address of institution"
+          },
+          "institutionPhone": {
+            "zohoField": "institutionPhone",
+            "fieldType": "phone",
+            "isRequired": false,
+            "description": "Institution phone number"
+          },
+          "institutionFax": {
+            "zohoField": "institutionFax",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Institution fax number"
+          },
+          "followUpConsent": {
+            "zohoField": "followUpConsent",
+            "fieldType": "picklist",
+            "isRequired": false,
+            "description": "Consent for follow-up contact by CAS"
+          }
+        },
+        settings: {
+          "autoCreateFields": true,
+          "enableRetries": true,
+          "maxRetries": 3,
+          "syncRequired": true,
+          "trackingEnabled": true,
+          "notificationEmail": "admin@amyloid.ca"
+        }
+      };
+
+      // Create the configuration
+      const createdConfig = await storage.createFormConfiguration(cannFormConfig);
+      console.log("[Setup] CANN form configuration created successfully!");
+      console.log("[Setup] Configuration ID:", createdConfig.id);
+      console.log("[Setup] Zoho Module:", createdConfig.zohoModule);
+      console.log("[Setup] Field Mappings Count:", Object.keys(createdConfig.fieldMappings).length);
+
+      res.json({
+        success: true,
+        message: "CANN form configuration created successfully!",
+        configId: createdConfig.id,
+        config: createdConfig,
+        summary: {
+          formName: createdConfig.formName,
+          zohoModule: createdConfig.zohoModule,
+          fieldCount: Object.keys(createdConfig.fieldMappings).length,
+          isActive: createdConfig.isActive
+        }
+      });
+
+    } catch (error) {
+      console.error("[Setup] Error setting up CANN form configuration:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to setup CANN form configuration",
+        error: error.message
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

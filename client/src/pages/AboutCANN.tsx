@@ -162,34 +162,39 @@ export default function AboutCANN() {
   const onSubmit = async (values: z.infer<typeof joinCANNSchema>) => {
     setIsSubmitting(true);
     try {
-      // Prepare form data for Google Sheets
+      // Prepare form data for Zoho CRM integration
       const formData = {
-        timestamp: new Date().toISOString(),
-        fullName: values.fullName,
-        email: values.email,
-        professionalDesignation: values.professionalDesignation,
-        subspecialty: values.subspecialty,
-        amyloidosisType: values.amyloidosisType,
-        otherAmyloidosisType: values.otherAmyloidosisType || '',
-        institution: values.institution,
-        communicationConsent: values.communicationConsent,
-        areasOfInterest: values.areasOfInterest.join(', '),
-        otherInterest: values.otherInterest || '',
-        presentingInterest: values.presentingInterest,
-        presentationTopic: values.presentationTopic || ''
+        form_name: "Join CANN Today",
+        data: {
+          membershipRequest: "Yes, I want to join CAS",
+          fullName: values.fullName,
+          emailAddress: values.email,
+          discipline: values.professionalDesignation,
+          subspecialty: values.subspecialty,
+          institutionName: values.institution,
+          communicationConsent: values.communicationConsent === "yes" ? "Yes" : "No",
+          servicesMapConsent: "Yes", // Default to Yes for CANN members
+          mapInstitutionName: values.institution,
+          institutionAddress: "", // Not collected in this form
+          institutionPhone: "", // Not collected in this form
+          institutionFax: "", // Not collected in this form
+          followUpConsent: values.communicationConsent === "yes" ? "Yes" : "No",
+          // Additional CANN-specific fields
+          amyloidosisType: values.amyloidosisType,
+          otherAmyloidosisType: values.otherAmyloidosisType || '',
+          areasOfInterest: values.areasOfInterest.join(', '),
+          otherInterest: values.otherInterest || '',
+          presentingInterest: values.presentingInterest,
+          presentationTopic: values.presentationTopic || ''
+        }
       };
 
-      // Google Apps Script Web App URL (you'll need to replace this with your deployed URL)
-      const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || 'YOUR_GOOGLE_SCRIPT_URL_HERE';
-      
-      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
-        throw new Error('Google Script URL not configured. Please set VITE_GOOGLE_SCRIPT_URL environment variable.');
-      }
-
-      // Submit to Google Sheets via Apps Script
-      // Note: No custom headers to avoid CORS preflight issues
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      // Submit to our integrated CRM system
+      const response = await fetch('/api/submit-form', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(formData),
       });
 
@@ -199,16 +204,16 @@ export default function AboutCANN() {
 
       const result = await response.json();
       
-      if (result.result === 'success') {
-        console.log('Form submitted successfully:', result);
+      if (result.success) {
+        console.log('CANN registration submitted successfully:', result);
         setShowRegistrationForm(false);
         form.reset();
         setShowConfirmationModal(true);
       } else {
-        throw new Error(result.error || 'Submission failed');
+        throw new Error(result.message || 'Submission failed');
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error submitting CANN registration:', error);
       // Show error message to user
       alert(`Registration submission failed: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again or contact support.`);
     } finally {

@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, varchar, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, varchar, timestamp, json, jsonb, pgEnum, unique, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -307,3 +307,130 @@ export const casRegistrationSchema = z.object({
 });
 
 export type CASRegistrationForm = z.infer<typeof casRegistrationSchema>;
+
+// Dynamic Multi-Form Lead Capture System Tables
+
+// Enums for status values
+export const processingStatusEnum = pgEnum("processing_status", ["pending", "processing", "completed", "failed"]);
+export const syncStatusEnum = pgEnum("sync_status", ["pending", "synced", "failed"]);
+export const logStatusEnum = pgEnum("log_status", ["success", "failed", "in_progress"]);
+export const operationEnum = pgEnum("operation", ["received", "field_sync", "crm_push", "retry_attempt"]);
+
+// Form submissions table - stores all incoming form data dynamically
+export const formSubmissions = pgTable("form_submissions", {
+  id: serial("id").primaryKey(),
+  formName: varchar("form_name", { length: 255 }).notNull(), // Unique identifier for the form
+  submissionData: jsonb("submission_data").notNull(), // Dynamic form fields as JSONB for better performance
+  sourceForm: varchar("source_form", { length: 255 }).notNull(), // Tracking field for CRM
+  zohoModule: varchar("zoho_module", { length: 100 }).notNull().default("Leads"), // Target Zoho module
+  zohoCrmId: varchar("zoho_crm_id", { length: 100 }), // Zoho record ID after successful sync
+  processingStatus: processingStatusEnum("processing_status").notNull().default("pending"),
+  syncStatus: syncStatusEnum("sync_status").notNull().default("pending"),
+  errorMessage: text("error_message"), // Error details if sync failed
+  retryCount: integer("retry_count").notNull().default(0),
+  lastRetryAt: timestamp("last_retry_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_form_submissions_form_name").on(table.formName),
+  index("idx_form_submissions_zoho_module").on(table.zohoModule),
+  index("idx_form_submissions_sync_status").on(table.syncStatus),
+  index("idx_form_submissions_processing_status").on(table.processingStatus),
+  index("idx_form_submissions_zoho_crm_id").on(table.zohoCrmId),
+]);
+
+// Submission logs table - tracks all submission attempts and operations
+export const submissionLogs = pgTable("submission_logs", {
+  id: serial("id").primaryKey(),
+  submissionId: integer("submission_id").notNull().references(() => formSubmissions.id, { onDelete: "cascade" }),
+  operation: operationEnum("operation").notNull(),
+  status: logStatusEnum("status").notNull(),
+  details: jsonb("details"), // Additional operation details
+  errorMessage: text("error_message"),
+  duration: integer("duration"), // Operation duration in milliseconds
+  createdAt: timestamp("created_at").defaultNow(),
+}, (table) => [
+  index("idx_submission_logs_submission_id").on(table.submissionId),
+]);
+
+// Field mappings table - tracks CRM field mappings and types
+export const fieldMappings = pgTable("field_mappings", {
+  id: serial("id").primaryKey(),
+  zohoModule: varchar("zoho_module", { length: 100 }).notNull(), // Leads, Contacts, etc.
+  fieldName: varchar("field_name", { length: 255 }).notNull(), // Field name in Zoho CRM
+  fieldType: varchar("field_type", { length: 50 }).notNull(), // text, email, phone, picklist, multi_select, boolean
+  isCustomField: boolean("is_custom_field").notNull().default(false),
+  picklistValues: jsonb("picklist_values"), // Array of allowed values for picklist fields
+  isRequired: boolean("is_required").notNull().default(false),
+  maxLength: integer("max_length"), // For text fields
+  lastSyncedAt: timestamp("last_synced_at").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  unique("unique_zoho_module_field").on(table.zohoModule, table.fieldName),
+  index("idx_field_mappings_zoho_module").on(table.zohoModule),
+]);
+
+// Form configurations table - optional form-to-module mappings and settings
+export const formConfigurations = pgTable("form_configurations", {
+  id: serial("id").primaryKey(),
+  formName: varchar("form_name", { length: 255 }).notNull().unique(),
+  zohoModule: varchar("zoho_module", { length: 100 }).notNull().default("Leads"),
+  fieldMappings: jsonb("field_mappings"), // Custom field name mappings
+  isActive: boolean("is_active").notNull().default(true),
+  description: text("description"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Insert schemas for form submission system
+export const insertFormSubmissionSchema = createInsertSchema(formSubmissions).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  zohoCrmId: true,
+  processingStatus: true,
+  syncStatus: true,
+  errorMessage: true,
+  retryCount: true,
+  lastRetryAt: true,
+});
+
+export const insertSubmissionLogSchema = createInsertSchema(submissionLogs).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertFieldMappingSchema = createInsertSchema(fieldMappings).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  lastSyncedAt: true,
+});
+
+export const insertFormConfigurationSchema = createInsertSchema(formConfigurations).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+// Types for form submission system
+export type FormSubmission = typeof formSubmissions.$inferSelect;
+export type InsertFormSubmission = z.infer<typeof insertFormSubmissionSchema>;
+export type SubmissionLog = typeof submissionLogs.$inferSelect;
+export type InsertSubmissionLog = z.infer<typeof insertSubmissionLogSchema>;
+export type FieldMapping = typeof fieldMappings.$inferSelect;
+export type InsertFieldMapping = z.infer<typeof insertFieldMappingSchema>;
+export type FormConfiguration = typeof formConfigurations.$inferSelect;
+export type InsertFormConfiguration = z.infer<typeof insertFormConfigurationSchema>;
+
+// Dynamic form submission schema - validates the API request format
+export const dynamicFormSubmissionSchema = z.object({
+  form_name: z.string().min(1, "Form name is required"),
+  data: z.record(z.string(), z.any()).refine(
+    (data) => Object.keys(data).length > 0,
+    "Form data cannot be empty"
+  ),
+});
+
+export type DynamicFormSubmission = z.infer<typeof dynamicFormSubmissionSchema>;

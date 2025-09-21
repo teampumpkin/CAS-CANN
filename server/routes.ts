@@ -1,7 +1,9 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage, type ResourceFilters } from "./storage";
-import { insertResourceSchema } from "@shared/schema";
+import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission } from "@shared/schema";
+import { fieldSyncEngine } from "./field-sync-engine";
+import { zohoCRMService } from "./zoho-crm-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -290,6 +292,267 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       res.status(500).json({ message: "Failed to process application" });
+    }
+  });
+
+  // Dynamic Multi-Form Lead Capture API endpoint
+  app.post("/api/submit-form", async (req, res) => {
+    const startTime = Date.now();
+    let submissionId: number | null = null;
+
+    try {
+      console.log("[Form Submission] Received form submission:", req.body);
+
+      // Step 1: Validate the incoming request
+      const validatedData = dynamicFormSubmissionSchema.parse(req.body);
+      const { form_name, data } = validatedData;
+
+      // Step 2: Check for form configuration (optional)
+      let targetModule = "Leads"; // Default module
+      let fieldMappings = null;
+
+      const formConfig = await storage.getFormConfiguration(form_name);
+      if (formConfig) {
+        targetModule = formConfig.zohoModule;
+        fieldMappings = formConfig.fieldMappings;
+        console.log(`[Form Submission] Using configuration for form "${form_name}": module=${targetModule}`);
+      } else {
+        console.log(`[Form Submission] No configuration found for form "${form_name}", using default module: ${targetModule}`);
+      }
+
+      // Step 3: Create form submission record
+      const submissionData: InsertFormSubmission = {
+        formName: form_name,
+        submissionData: data,
+        sourceForm: form_name,
+        zohoModule: targetModule,
+        processingStatus: "pending" as any,
+        syncStatus: "pending" as any
+      };
+
+      const submission = await storage.createFormSubmission(submissionData);
+      submissionId = submission.id;
+
+      console.log(`[Form Submission] Created submission record with ID: ${submissionId}`);
+
+      // Step 4: Log the receipt
+      await storage.createSubmissionLog({
+        submissionId: submission.id,
+        operation: "received",
+        status: "success",
+        details: {
+          formName: form_name,
+          fieldCount: Object.keys(data).length,
+          targetModule
+        },
+        duration: Date.now() - startTime
+      });
+
+      // Step 5: Start processing asynchronously
+      setImmediate(async () => {
+        try {
+          console.log(`[Form Submission] Starting async processing for submission ${submissionId}`);
+          
+          // Update status to processing
+          await storage.updateFormSubmission(submission.id, {
+            processingStatus: "processing" as any
+          });
+
+          // Step 5a: Sync fields with Zoho CRM
+          console.log(`[Form Submission] Starting field sync for submission ${submissionId}`);
+          const fieldSyncResult = await fieldSyncEngine.syncFieldsForSubmission(submission);
+          
+          if (!fieldSyncResult.success) {
+            console.error(`[Form Submission] Field sync failed for submission ${submissionId}:`, fieldSyncResult.errors);
+            await storage.updateFormSubmission(submission.id, {
+              processingStatus: "failed" as any,
+              syncStatus: "failed" as any,
+              errorMessage: `Field sync failed: ${fieldSyncResult.errors.join("; ")}`
+            });
+            return;
+          }
+
+          // Step 5b: Push data to Zoho CRM
+          console.log(`[Form Submission] Starting CRM push for submission ${submissionId}`);
+          const pushStartTime = Date.now();
+          
+          try {
+            // Get updated field mappings after sync
+            const updatedMappings = await storage.getFieldMappings({ zohoModule: targetModule });
+            
+            // Format data for Zoho CRM
+            const zohoData = zohoCRMService.formatFieldDataForZoho(data, updatedMappings);
+            
+            // Add Source_Form field
+            zohoData.Source_Form = form_name;
+            
+            console.log(`[Form Submission] Pushing data to Zoho ${targetModule}:`, zohoData);
+            
+            // Create record in Zoho CRM
+            const zohoRecord = await zohoCRMService.createRecord(targetModule, zohoData);
+            
+            // Update submission with success
+            await storage.updateFormSubmission(submission.id, {
+              processingStatus: "completed" as any,
+              syncStatus: "synced" as any,
+              zohoCrmId: zohoRecord.id || null
+            });
+
+            // Log successful CRM push
+            await storage.createSubmissionLog({
+              submissionId: submission.id,
+              operation: "crm_push",
+              status: "success",
+              details: {
+                zohoRecordId: zohoRecord.id,
+                targetModule,
+                fieldsSubmitted: Object.keys(zohoData).length
+              },
+              duration: Date.now() - pushStartTime
+            });
+
+            console.log(`[Form Submission] Successfully completed processing for submission ${submissionId}, Zoho record ID: ${zohoRecord.id}`);
+
+          } catch (crmError) {
+            console.error(`[Form Submission] CRM push failed for submission ${submissionId}:`, crmError);
+            
+            await storage.updateFormSubmission(submission.id, {
+              processingStatus: "failed" as any,
+              syncStatus: "failed" as any,
+              errorMessage: `CRM push failed: ${crmError instanceof Error ? crmError.message : 'Unknown error'}`
+            });
+
+            // Log failed CRM push
+            await storage.createSubmissionLog({
+              submissionId: submission.id,
+              operation: "crm_push",
+              status: "failed",
+              details: { error: crmError instanceof Error ? crmError.message : 'Unknown error' },
+              duration: Date.now() - pushStartTime,
+              errorMessage: crmError instanceof Error ? crmError.message : 'Unknown error'
+            });
+          }
+
+        } catch (processingError) {
+          console.error(`[Form Submission] Processing failed for submission ${submissionId}:`, processingError);
+          
+          if (submissionId) {
+            await storage.updateFormSubmission(submissionId, {
+              processingStatus: "failed" as any,
+              syncStatus: "failed" as any,
+              errorMessage: `Processing failed: ${processingError instanceof Error ? processingError.message : 'Unknown error'}`
+            });
+          }
+        }
+      });
+
+      // Step 6: Return immediate response to the client
+      res.status(201).json({
+        success: true,
+        message: "Form submission received successfully",
+        submissionId: submission.id,
+        formName: form_name,
+        status: "processing",
+        timestamp: new Date().toISOString(),
+        targetModule,
+        estimatedProcessingTime: "30-60 seconds"
+      });
+
+    } catch (error) {
+      console.error("[Form Submission] Error processing form submission:", error);
+
+      // Log the error if we have a submission ID
+      if (submissionId) {
+        try {
+          await storage.createSubmissionLog({
+            submissionId,
+            operation: "received",
+            status: "failed",
+            details: { error: error instanceof Error ? error.message : 'Unknown error' },
+            duration: Date.now() - startTime,
+            errorMessage: error instanceof Error ? error.message : 'Unknown error'
+          });
+        } catch (logError) {
+          console.error("[Form Submission] Failed to log error:", logError);
+        }
+      }
+
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid form submission data",
+          errors: error.errors.map(e => ({
+            field: e.path.join('.'),
+            message: e.message
+          }))
+        });
+      }
+
+      res.status(500).json({
+        success: false,
+        message: "Failed to process form submission",
+        error: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString()
+      });
+    }
+  });
+
+  // Get form submission status endpoint
+  app.get("/api/submit-form/:id", async (req, res) => {
+    try {
+      const submissionId = parseInt(req.params.id);
+      
+      if (isNaN(submissionId)) {
+        return res.status(400).json({ message: "Invalid submission ID" });
+      }
+
+      const submission = await storage.getFormSubmission(submissionId);
+      
+      if (!submission) {
+        return res.status(404).json({ message: "Submission not found" });
+      }
+
+      // Get logs for this submission
+      const logs = await storage.getLogsBySubmissionId(submissionId);
+
+      res.json({
+        id: submission.id,
+        formName: submission.formName,
+        processingStatus: submission.processingStatus,
+        syncStatus: submission.syncStatus,
+        zohoModule: submission.zohoModule,
+        zohoCrmId: submission.zohoCrmId,
+        errorMessage: submission.errorMessage,
+        retryCount: submission.retryCount,
+        createdAt: submission.createdAt,
+        updatedAt: submission.updatedAt,
+        logs: logs.map(log => ({
+          operation: log.operation,
+          status: log.status,
+          details: log.details,
+          duration: log.duration,
+          createdAt: log.createdAt,
+          errorMessage: log.errorMessage
+        }))
+      });
+
+    } catch (error) {
+      console.error("Error fetching submission status:", error);
+      res.status(500).json({ message: "Failed to fetch submission status" });
+    }
+  });
+
+  // Zoho CRM connection test endpoint
+  app.get("/api/zoho/test-connection", async (req, res) => {
+    try {
+      const result = await zohoCRMService.testConnection();
+      res.json(result);
+    } catch (error) {
+      console.error("Zoho connection test failed:", error);
+      res.status(500).json({
+        success: false,
+        message: `Connection test failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      });
     }
   });
 

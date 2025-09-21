@@ -159,7 +159,7 @@ export class DatabaseStorage implements IStorage {
     let query = db.select().from(resources);
     
     if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+      query = query.where(and(...conditions)) as any;
     }
 
     return await query.orderBy(desc(resources.createdAt));
@@ -235,7 +235,7 @@ export class DatabaseStorage implements IStorage {
     let query = db.select().from(formSubmissions);
     
     if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+      query = query.where(and(...conditions)) as any;
     }
 
     return await query.orderBy(desc(formSubmissions.createdAt));
@@ -320,7 +320,7 @@ export class DatabaseStorage implements IStorage {
     let query = db.select().from(submissionLogs);
     
     if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+      query = query.where(and(...conditions)) as any;
     }
 
     return await query.orderBy(desc(submissionLogs.createdAt));
@@ -364,7 +364,7 @@ export class DatabaseStorage implements IStorage {
     let query = db.select().from(fieldMappings);
     
     if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+      query = query.where(and(...conditions)) as any;
     }
 
     return await query.orderBy(desc(fieldMappings.createdAt));

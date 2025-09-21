@@ -861,6 +861,65 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // OAuth callback endpoint for Zoho authorization
+  app.get("/oauth/zoho/callback", async (req, res) => {
+    try {
+      const { code } = req.query;
+      
+      if (!code) {
+        return res.status(400).send("Authorization code not provided");
+      }
+
+      console.log("Received Zoho authorization code:", code);
+      
+      // Exchange code for access token
+      const tokenResponse = await fetch("https://accounts.zoho.com/oauth/v2/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          grant_type: "authorization_code",
+          client_id: process.env.ZOHO_CLIENT_ID!,
+          client_secret: process.env.ZOHO_CLIENT_SECRET!,
+          redirect_uri: `${req.protocol}://${req.get('host')}/oauth/zoho/callback`,
+          code: code as string,
+        }),
+      });
+
+      const tokenData = await tokenResponse.json();
+      
+      if (tokenData.error) {
+        console.error("Token exchange error:", tokenData);
+        return res.status(400).json({ error: tokenData.error, details: tokenData });
+      }
+
+      console.log("Successfully obtained access token!");
+      
+      // Display the token for manual configuration
+      res.send(`
+        <html>
+          <head><title>Zoho OAuth Success</title></head>
+          <body style="font-family: Arial, sans-serif; padding: 20px;">
+            <h2>✅ Zoho Authorization Successful!</h2>
+            <p>Your access token has been generated. Add this to your Replit secrets:</p>
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 15px 0;">
+              <strong>ZOHO_ACCESS_TOKEN:</strong><br>
+              <code style="font-size: 12px; word-break: break-all;">${tokenData.access_token}</code>
+            </div>
+            <p><strong>Token expires in:</strong> ${tokenData.expires_in} seconds (${Math.floor(tokenData.expires_in / 3600)} hours)</p>
+            <p><strong>API Domain:</strong> ${tokenData.api_domain}</p>
+            <p>Your CANN membership form will now sync automatically with Zoho CRM!</p>
+          </body>
+        </html>
+      `);
+
+    } catch (error) {
+      console.error("OAuth callback error:", error);
+      res.status(500).json({ error: "Failed to process OAuth callback", details: error.message });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

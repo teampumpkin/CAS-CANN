@@ -115,6 +115,7 @@ function Router() {
         <Route path="/contributor-portal" component={ContributorPortal} />
         <Route path="/test-forms" component={TestForms} />
         <Route path="/join-cann" component={CANNMembershipForm} />
+        <Route path="/join-cann-today" component={CANNMembershipForm} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

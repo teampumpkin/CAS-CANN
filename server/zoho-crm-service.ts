@@ -60,7 +60,7 @@ export class ZohoCRMService {
     // Get configuration from environment variables
     this.accessToken = process.env.ZOHO_ACCESS_TOKEN || "";
     this.orgId = process.env.ZOHO_ORG_ID || "";
-    this.baseUrl = "https://www.zohoapis.com/crm/v2";
+    this.baseUrl = "https://www.zohoapis.com/crm/v8";
 
     if (!this.accessToken) {
       console.warn("ZOHO_ACCESS_TOKEN not found in environment variables");
@@ -73,7 +73,8 @@ export class ZohoCRMService {
   private async makeRequest<T>(
     endpoint: string,
     method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" = "GET",
-    body?: any
+    body?: any,
+    retryCount: number = 0
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
     
@@ -87,7 +88,7 @@ export class ZohoCRMService {
     }
 
     try {
-      console.log(`[Zoho API] ${method} ${url}`);
+      console.log(`[Zoho API v8] ${method} ${url}`);
       
       const response = await fetch(url, {
         method,
@@ -97,16 +98,43 @@ export class ZohoCRMService {
 
       const responseData = await response.json();
 
+      // Handle rate limiting (429) with exponential backoff
+      if (response.status === 429 && retryCount < 3) {
+        const retryAfter = response.headers.get('Retry-After');
+        const delay = retryAfter ? parseInt(retryAfter) * 1000 : Math.pow(2, retryCount) * 1000;
+        console.log(`[Zoho API] Rate limited, retrying after ${delay}ms`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return this.makeRequest(endpoint, method, body, retryCount + 1);
+      }
+
       if (!response.ok) {
-        console.error(`[Zoho API Error] ${response.status}:`, responseData);
-        throw new Error(`Zoho API Error ${response.status}: ${responseData.message || 'Unknown error'}`);
+        const errorDetails = this.extractErrorDetails(responseData, response.status);
+        console.error(`[Zoho API v8 Error] ${response.status}:`, errorDetails);
+        throw new Error(`Zoho API v8 Error ${response.status}: ${errorDetails.message}`);
       }
 
       return responseData as T;
     } catch (error) {
-      console.error(`[Zoho API Request Failed] ${method} ${url}:`, error);
+      console.error(`[Zoho API v8 Request Failed] ${method} ${url}:`, error);
       throw error;
     }
+  }
+
+  private extractErrorDetails(responseData: any, statusCode: number): { message: string; code?: string } {
+    // v8 API error response structure
+    if (responseData.data && Array.isArray(responseData.data) && responseData.data[0]) {
+      const errorData = responseData.data[0];
+      return {
+        message: errorData.message || errorData.details?.api_name || 'Unknown error',
+        code: errorData.code
+      };
+    }
+    
+    // Fallback for other error formats
+    return {
+      message: responseData.message || responseData.error || `HTTP ${statusCode} Error`,
+      code: responseData.code
+    };
   }
 
   // Metadata API methods
@@ -117,13 +145,18 @@ export class ZohoCRMService {
       );
       return response.data || [];
     } catch (error) {
-      console.error(`Failed to fetch fields for module ${moduleName}:`, error);
+      console.error(`Failed to fetch fields for module ${moduleName} using v8 API:`, error);
       throw error;
     }
   }
 
   async createCustomField(moduleName: string, fieldData: ZohoFieldCreateRequest): Promise<ZohoField> {
     try {
+      // v8 API best practice: validate required fields before sending
+      if (!fieldData.api_name || !fieldData.field_label || !fieldData.data_type) {
+        throw new Error("Missing required field data: api_name, field_label, and data_type are required");
+      }
+
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
         `/settings/fields?module=${moduleName}`,
         "POST",
@@ -133,10 +166,10 @@ export class ZohoCRMService {
       if (response.data && response.data.length > 0) {
         return response.data[0];
       } else {
-        throw new Error("Failed to create field - no data returned");
+        throw new Error("Failed to create field - no data returned from v8 API");
       }
     } catch (error) {
-      console.error(`Failed to create field ${fieldData.api_name} in module ${moduleName}:`, error);
+      console.error(`Failed to create field ${fieldData.api_name} in module ${moduleName} using v8 API:`, error);
       throw error;
     }
   }
@@ -144,6 +177,11 @@ export class ZohoCRMService {
   // Core API methods
   async createRecord(moduleName: string, recordData: ZohoRecord): Promise<ZohoRecord> {
     try {
+      // v8 API best practice: validate record data
+      if (!recordData || Object.keys(recordData).length === 0) {
+        throw new Error("Record data cannot be empty");
+      }
+
       const response = await this.makeRequest<ZohoApiResponse<ZohoRecord>>(
         `/${moduleName}`,
         "POST",
@@ -151,18 +189,28 @@ export class ZohoCRMService {
       );
 
       if (response.data && response.data.length > 0) {
-        return response.data[0];
+        const createdRecord = response.data[0];
+        console.log(`[Zoho v8] Successfully created record in ${moduleName}:`, createdRecord.id);
+        return createdRecord;
       } else {
-        throw new Error("Failed to create record - no data returned");
+        throw new Error("Failed to create record - no data returned from v8 API");
       }
     } catch (error) {
-      console.error(`Failed to create record in module ${moduleName}:`, error);
+      console.error(`Failed to create record in module ${moduleName} using v8 API:`, error);
       throw error;
     }
   }
 
   async updateRecord(moduleName: string, recordId: string, recordData: ZohoRecord): Promise<ZohoRecord> {
     try {
+      // v8 API best practice: validate inputs
+      if (!recordId) {
+        throw new Error("Record ID is required for update");
+      }
+      if (!recordData || Object.keys(recordData).length === 0) {
+        throw new Error("Update data cannot be empty");
+      }
+
       const response = await this.makeRequest<ZohoApiResponse<ZohoRecord>>(
         `/${moduleName}/${recordId}`,
         "PUT",
@@ -170,12 +218,13 @@ export class ZohoCRMService {
       );
 
       if (response.data && response.data.length > 0) {
+        console.log(`[Zoho v8] Successfully updated record ${recordId} in ${moduleName}`);
         return response.data[0];
       } else {
-        throw new Error("Failed to update record - no data returned");
+        throw new Error("Failed to update record - no data returned from v8 API");
       }
     } catch (error) {
-      console.error(`Failed to update record ${recordId} in module ${moduleName}:`, error);
+      console.error(`Failed to update record ${recordId} in module ${moduleName} using v8 API:`, error);
       throw error;
     }
   }
@@ -288,18 +337,19 @@ export class ZohoCRMService {
   }
 
   // Test connection method
-  async testConnection(): Promise<{ success: boolean; message: string }> {
+  async testConnection(): Promise<{ success: boolean; message: string; apiVersion?: string }> {
     try {
-      // Try to fetch user info as a simple test
-      await this.makeRequest("/users?type=CurrentUser");
+      // Try to fetch user info as a simple test for v8 API
+      const response = await this.makeRequest<ZohoApiResponse<any>>("/users?type=CurrentUser");
       return { 
         success: true, 
-        message: "Successfully connected to Zoho CRM" 
+        message: "Successfully connected to Zoho CRM v8 API",
+        apiVersion: "v8"
       };
     } catch (error) {
       return { 
         success: false, 
-        message: `Failed to connect to Zoho CRM: ${error instanceof Error ? error.message : 'Unknown error'}` 
+        message: `Failed to connect to Zoho CRM v8: ${error instanceof Error ? error.message : 'Unknown error'}` 
       };
     }
   }

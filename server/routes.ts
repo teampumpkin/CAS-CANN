@@ -4,6 +4,7 @@ import { storage, type ResourceFilters } from "./storage";
 import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission } from "@shared/schema";
 import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
+import { retryService } from "./retry-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -552,6 +553,164 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         message: `Connection test failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      });
+    }
+  });
+
+  // Retry failed submission endpoint
+  app.post("/api/retry/submission/:id", async (req, res) => {
+    try {
+      const submissionId = parseInt(req.params.id);
+      
+      if (isNaN(submissionId)) {
+        return res.status(400).json({ message: "Invalid submission ID" });
+      }
+
+      const result = await retryService.retrySubmission(submissionId);
+      
+      if (result.success) {
+        res.json({
+          success: true,
+          message: `Submission ${submissionId} retried successfully`,
+          retryCount: result.retryCount,
+          finalStatus: result.finalStatus
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: `Retry failed: ${result.errorMessage}`,
+          retryCount: result.retryCount,
+          finalStatus: result.finalStatus
+        });
+      }
+
+    } catch (error) {
+      console.error("Error retrying submission:", error);
+      res.status(500).json({ 
+        success: false,
+        message: `Failed to retry submission: ${error instanceof Error ? error.message : 'Unknown error'}` 
+      });
+    }
+  });
+
+  // Retry all failed submissions endpoint
+  app.post("/api/retry/all", async (req, res) => {
+    try {
+      if (retryService.isRetryProcessing()) {
+        return res.status(409).json({
+          success: false,
+          message: "Retry process is already running"
+        });
+      }
+
+      const stats = await retryService.retryAllFailedSubmissions();
+      
+      res.json({
+        success: true,
+        message: "Bulk retry completed",
+        stats
+      });
+
+    } catch (error) {
+      console.error("Error during bulk retry:", error);
+      res.status(500).json({ 
+        success: false,
+        message: `Bulk retry failed: ${error instanceof Error ? error.message : 'Unknown error'}` 
+      });
+    }
+  });
+
+  // System monitoring and statistics endpoint
+  app.get("/api/monitor/stats", async (req, res) => {
+    try {
+      // Get form submission statistics
+      const allSubmissions = await storage.getAllFormSubmissions();
+      const pendingSubmissions = await storage.getFormSubmissionsByStatus("pending", "pending");
+      const processingSubmissions = await storage.getFormSubmissionsByStatus("processing", "processing");
+      const completedSubmissions = await storage.getFormSubmissionsByStatus("completed", "synced");
+      const failedSubmissions = await storage.getFormSubmissionsByStatus("failed", "failed");
+
+      // Get retry statistics
+      const retryStats = await retryService.getRetryStatistics();
+
+      // Get recent logs (last 50)
+      const recentLogs = await storage.getAllSubmissionLogs();
+      const lastLogs = recentLogs.slice(-50).reverse();
+
+      // Calculate success rate
+      const totalProcessed = completedSubmissions.length + failedSubmissions.length;
+      const successRate = totalProcessed > 0 ? (completedSubmissions.length / totalProcessed) * 100 : 0;
+
+      // Get field mappings count
+      const fieldMappings = await storage.getAllFieldMappings();
+      const formConfigurations = await storage.getAllFormConfigurations();
+
+      res.json({
+        systemStatus: {
+          totalSubmissions: allSubmissions.length,
+          pendingSubmissions: pendingSubmissions.length,
+          processingSubmissions: processingSubmissions.length,
+          completedSubmissions: completedSubmissions.length,
+          failedSubmissions: failedSubmissions.length,
+          successRate: Math.round(successRate * 100) / 100,
+          retryProcessing: retryService.isRetryProcessing()
+        },
+        retryStatistics: retryStats,
+        configurationStatus: {
+          fieldMappings: fieldMappings.length,
+          formConfigurations: formConfigurations.length
+        },
+        recentActivity: lastLogs.map(log => ({
+          submissionId: log.submissionId,
+          operation: log.operation,
+          status: log.status,
+          duration: log.duration,
+          createdAt: log.createdAt,
+          errorMessage: log.errorMessage
+        }))
+      });
+
+    } catch (error) {
+      console.error("Error getting system statistics:", error);
+      res.status(500).json({ 
+        message: `Failed to get statistics: ${error instanceof Error ? error.message : 'Unknown error'}` 
+      });
+    }
+  });
+
+  // Health check endpoint
+  app.get("/api/health", async (req, res) => {
+    try {
+      // Test database connection
+      const testSubmissions = await storage.getAllFormSubmissions();
+      
+      // Test Zoho connection
+      const zohoTest = await zohoCRMService.testConnection();
+
+      res.json({
+        status: "healthy",
+        timestamp: new Date().toISOString(),
+        services: {
+          database: {
+            status: "connected",
+            submissionCount: testSubmissions.length
+          },
+          zoho: {
+            status: zohoTest.success ? "connected" : "disconnected",
+            message: zohoTest.message
+          },
+          retryService: {
+            status: retryService.isRetryProcessing() ? "processing" : "idle"
+          }
+        }
+      });
+
+    } catch (error) {
+      console.error("Health check failed:", error);
+      res.status(503).json({
+        status: "unhealthy",
+        timestamp: new Date().toISOString(),
+        error: error instanceof Error ? error.message : 'Unknown error'
       });
     }
   });

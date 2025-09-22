@@ -52,7 +52,7 @@ const upcomingEvents = [
     location: "Virtual Event",
     type: "Journal Club",
     description:
-      "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updated.",
+      "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updates.",
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
   },

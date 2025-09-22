@@ -23,20 +23,17 @@ export default function JournalClub() {
     {
       date: "September 25, 2025",
       time: "3-4 PM MST",
-      topics: [
-        "An Interesting Case of ATTR-neuropathy",
-        "Cardiac Amyloidosis"
-      ],
+      topics: ["An Interesting Case of ATTR-neuropathy", "Cardiac Amyloidosis"],
       presenters: [
         "Dr. Genevieve Matte, University of Montreal",
-        "Dr. Edgar Da Silva, Cardiology Fellow, University of Ottawa"
+        "Dr. Edgar Da Silva, Cardiology Fellow, University of Ottawa",
       ],
       location: "Virtual",
       registrationNotRequired: true,
     },
     {
       date: "November 27, 2025",
-      time: "3-4 PM EST",
+      time: "3-4 PM MST",
       topic: "COMING SOON",
       presenter: "COMING SOON",
       location: "Virtual",
@@ -203,7 +200,6 @@ export default function JournalClub() {
                         </div>
                       )}
                     </div>
-
                   </div>
 
                   <div className="flex-shrink-0">
@@ -213,7 +209,7 @@ export default function JournalClub() {
                         <MapPin className="w-4 h-4 text-[#00AFE6]" />
                         <span className="text-sm">{club.location}</span>
                       </div>
-                      
+
                       {/* Zoom Details */}
                       <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                         <Calendar className="w-4 h-4 text-[#00DD89]" />
@@ -221,11 +217,14 @@ export default function JournalClub() {
                           Zoom access details sent to CAS members
                         </span>
                       </div>
-                      
+
                       {/* Registration Badge */}
                       <div className="pt-2">
                         {club.registrationNotRequired ? (
-                          <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] px-3 py-2 rounded-full text-xs font-bold inline-block" style={{ color: '#2a2a2a' }}>
+                          <div
+                            className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] px-3 py-2 rounded-full text-xs font-bold inline-block"
+                            style={{ color: "#2a2a2a" }}
+                          >
                             Registration Not Required
                           </div>
                         ) : (

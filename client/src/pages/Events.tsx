@@ -454,7 +454,7 @@ export default function Events() {
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                                 <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
                                   {index === 1
-                                    ? "Registration Required."
+                                    ? "Registration not required."
                                     : "Registration not required."}
                                 </p>
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>

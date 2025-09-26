@@ -868,14 +868,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Zoho OAuth connect endpoint - starts the authorization flow
   app.get("/oauth/zoho/connect", (req, res) => {
     try {
-      // Use production domain for OAuth callback to ensure tokens are stored properly
-      const baseUrl = process.env.NODE_ENV === 'production' || req.get('host') === 'amyloid.ca' 
-        ? 'https://amyloid.ca'
-        : `${req.protocol}://${req.get('host')}`;
+      // Use production domain for OAuth callback - check proxy headers for production detection
+      const forwardedHost = req.get('x-forwarded-host') || req.get('host');
+      const isProduction = forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production';
+      const baseUrl = isProduction ? 'https://amyloid.ca' : `${req.protocol}://${req.get('host')}`;
       const redirectUri = `${baseUrl}/oauth/zoho/callback`;
       
-      console.log(`[OAuth Connect] Host: ${req.get('host')}, NODE_ENV: ${process.env.NODE_ENV}`);
-      console.log(`[OAuth Connect] Using base URL: ${baseUrl}`);
+      console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}, NODE_ENV: ${process.env.NODE_ENV}`);
+      console.log(`[OAuth Connect] Detected production: ${isProduction}, Using base URL: ${baseUrl}`);
       console.log(`[OAuth Connect] Generated redirect URI: ${redirectUri}`);
       
       const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
@@ -942,7 +942,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           grant_type: "authorization_code",
           client_id: process.env.ZOHO_CLIENT_ID!,
           client_secret: process.env.ZOHO_CLIENT_SECRET!,
-          redirect_uri: process.env.NODE_ENV === 'production' || req.get('host') === 'amyloid.ca' 
+          redirect_uri: (req.get('x-forwarded-host') === 'amyloid.ca' || process.env.NODE_ENV === 'production')
             ? 'https://amyloid.ca/oauth/zoho/callback'
             : `${req.protocol}://${req.get('host')}/oauth/zoho/callback`,
           code: code as string,

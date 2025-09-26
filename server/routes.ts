@@ -883,8 +883,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { code } = req.query;
       
+      // Log debug info for troubleshooting
+      console.log("[OAuth Callback] Full query parameters:", req.query);
+      console.log("[OAuth Callback] Request URL:", req.url);
+      
+      const { error, error_description } = req.query;
+      
+      // Handle OAuth errors from Zoho
+      if (error) {
+        console.error("[OAuth Callback] Zoho OAuth error:", error, error_description);
+        return res.status(400).send(`
+          <html>
+            <head><title>OAuth Error</title></head>
+            <body style="font-family: Arial, sans-serif; padding: 20px;">
+              <h2>❌ OAuth Authorization Failed</h2>
+              <p><strong>Error:</strong> ${error}</p>
+              <p><strong>Description:</strong> ${error_description || 'No description provided'}</p>
+              <p><a href="/oauth/zoho/connect">← Try Again</a></p>
+            </body>
+          </html>
+        `);
+      }
+      
       if (!code) {
-        return res.status(400).send("Authorization code not provided");
+        console.error("[OAuth Callback] No authorization code provided. Query params:", req.query);
+        return res.status(400).send(`
+          <html>
+            <head><title>OAuth Error</title></head>
+            <body style="font-family: Arial, sans-serif; padding: 20px;">
+              <h2>❌ Authorization code not provided</h2>
+              <p>Zoho did not provide an authorization code. Please check your OAuth configuration.</p>
+              <p><strong>Query parameters received:</strong> ${JSON.stringify(req.query)}</p>
+              <p><a href="/oauth/zoho/connect">← Try Again</a></p>
+            </body>
+          </html>
+        `);
       }
 
       console.log("Received Zoho authorization code:", code);

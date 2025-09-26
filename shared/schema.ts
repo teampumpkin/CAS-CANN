@@ -434,3 +434,31 @@ export const dynamicFormSubmissionSchema = z.object({
 });
 
 export type DynamicFormSubmission = z.infer<typeof dynamicFormSubmissionSchema>;
+
+// OAuth Token Management for Zoho CRM
+export const oauthTokens = pgTable("oauth_tokens", {
+  id: serial("id").primaryKey(),
+  provider: varchar("provider", { length: 50 }).notNull(), // "zoho_crm"
+  accessToken: text("access_token"), // Encrypted access token
+  refreshToken: text("refresh_token"), // Encrypted refresh token  
+  expiresAt: timestamp("expires_at"), // Token expiration timestamp
+  scope: text("scope"), // OAuth scopes granted
+  tokenType: varchar("token_type", { length: 50 }).default("Bearer"), 
+  isActive: boolean("is_active").notNull().default(true),
+  lastRefreshed: timestamp("last_refreshed").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_oauth_tokens_provider").on(table.provider),
+  index("idx_oauth_tokens_active").on(table.isActive),
+]);
+
+export const insertOAuthTokenSchema = createInsertSchema(oauthTokens).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  lastRefreshed: true,
+});
+
+export type OAuthToken = typeof oauthTokens.$inferSelect;
+export type InsertOAuthToken = z.infer<typeof insertOAuthTokenSchema>;

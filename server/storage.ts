@@ -5,6 +5,7 @@ import {
   submissionLogs,
   fieldMappings,
   formConfigurations,
+  oauthTokens,
   type User,
   type InsertUser,
   type Resource,
@@ -17,6 +18,8 @@ import {
   type InsertFieldMapping,
   type FormConfiguration,
   type InsertFormConfiguration,
+  type OAuthToken,
+  type InsertOAuthToken,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, like, desc, gte, lte } from "drizzle-orm";
@@ -100,6 +103,13 @@ export interface IStorage {
   createFormConfiguration(config: InsertFormConfiguration): Promise<FormConfiguration>;
   updateFormConfiguration(id: number, updates: Partial<FormConfiguration>): Promise<FormConfiguration | undefined>;
   deleteFormConfiguration(id: number): Promise<boolean>;
+
+  // OAuth token operations
+  getOAuthTokens(filters?: { provider?: string; isActive?: boolean }): Promise<OAuthToken[]>;
+  getOAuthToken(id: number): Promise<OAuthToken | undefined>;
+  createOAuthToken(token: InsertOAuthToken): Promise<OAuthToken>;
+  updateOAuthToken(id: number, updates: Partial<OAuthToken>): Promise<OAuthToken | undefined>;
+  deleteOAuthToken(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -450,6 +460,56 @@ export class DatabaseStorage implements IStorage {
 
   async deleteFormConfiguration(id: number): Promise<boolean> {
     const result = await db.delete(formConfigurations).where(eq(formConfigurations.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  // OAuth token operations
+  async getOAuthTokens(filters?: { provider?: string; isActive?: boolean }): Promise<OAuthToken[]> {
+    const conditions = [];
+    
+    if (filters) {
+      if (filters.provider) {
+        conditions.push(eq(oauthTokens.provider, filters.provider));
+      }
+      if (filters.isActive !== undefined) {
+        conditions.push(eq(oauthTokens.isActive, filters.isActive));
+      }
+    }
+
+    return await db
+      .select()
+      .from(oauthTokens)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(oauthTokens.createdAt));
+  }
+
+  async getOAuthToken(id: number): Promise<OAuthToken | undefined> {
+    const [token] = await db
+      .select()
+      .from(oauthTokens)
+      .where(eq(oauthTokens.id, id));
+    return token || undefined;
+  }
+
+  async createOAuthToken(token: InsertOAuthToken): Promise<OAuthToken> {
+    const [newToken] = await db
+      .insert(oauthTokens)
+      .values(token)
+      .returning();
+    return newToken;
+  }
+
+  async updateOAuthToken(id: number, updates: Partial<OAuthToken>): Promise<OAuthToken | undefined> {
+    const [updatedToken] = await db
+      .update(oauthTokens)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(oauthTokens.id, id))
+      .returning();
+    return updatedToken || undefined;
+  }
+
+  async deleteOAuthToken(id: number): Promise<boolean> {
+    const result = await db.delete(oauthTokens).where(eq(oauthTokens.id, id));
     return (result.rowCount || 0) > 0;
   }
 }

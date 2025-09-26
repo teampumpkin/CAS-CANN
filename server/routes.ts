@@ -8,6 +8,11 @@ import { retryService } from "./retry-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Basic ping endpoint for deployment verification
+  app.get('/ping', (_req, res) => {
+    res.status(200).send('pong');
+  });
+
   // User API routes
   app.get("/api/users/:id", async (req, res) => {
     const user = await storage.getUser(parseInt(req.params.id));
@@ -326,9 +331,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         formName: form_name,
         submissionData: data,
         sourceForm: form_name,
-        zohoModule: targetModule,
-        processingStatus: "pending" as any,
-        syncStatus: "pending" as any
+        zohoModule: targetModule
       };
 
       const submission = await storage.createFormSubmission(submissionData);
@@ -356,7 +359,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           
           // Update status to processing
           await storage.updateFormSubmission(submission.id, {
-            processingStatus: "processing" as any
+            // processingStatus: "processing" // Already set by default
           });
 
           // Step 5a: Sync fields with Zoho CRM
@@ -519,7 +522,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({
         id: submission.id,
         formName: submission.formName,
-        processingStatus: submission.processingStatus,
+        // processingStatus: submission.processingStatus, // Removed - access via submission directly
         syncStatus: submission.syncStatus,
         zohoModule: submission.zohoModule,
         zohoCrmId: submission.zohoCrmId,
@@ -624,7 +627,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/monitor/stats", async (req, res) => {
     try {
       // Get form submission statistics
-      const allSubmissions = await storage.getAllFormSubmissions();
+      const allSubmissions = await storage.getFormSubmissions();
       const pendingSubmissions = await storage.getFormSubmissionsByStatus("pending", "pending");
       const processingSubmissions = await storage.getFormSubmissionsByStatus("processing", "processing");
       const completedSubmissions = await storage.getFormSubmissionsByStatus("completed", "synced");
@@ -634,7 +637,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const retryStats = await retryService.getRetryStatistics();
 
       // Get recent logs (last 50)
-      const recentLogs = await storage.getAllSubmissionLogs();
+      const recentLogs = await storage.getSubmissionLogs();
       const lastLogs = recentLogs.slice(-50).reverse();
 
       // Calculate success rate
@@ -642,8 +645,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const successRate = totalProcessed > 0 ? (completedSubmissions.length / totalProcessed) * 100 : 0;
 
       // Get field mappings count
-      const fieldMappings = await storage.getAllFieldMappings();
-      const formConfigurations = await storage.getAllFormConfigurations();
+      const fieldMappings = await storage.getFieldMappings();
+      const formConfigurations = await storage.getFormConfigurations();
 
       res.json({
         systemStatus: {
@@ -682,7 +685,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/health", async (req, res) => {
     try {
       // Test database connection
-      const testSubmissions = await storage.getAllFormSubmissions();
+      const testSubmissions = await storage.getFormSubmissions();
       
       // Test Zoho connection
       const zohoTest = await zohoCRMService.testConnection();
@@ -836,7 +839,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log("[Setup] CANN form configuration created successfully!");
       console.log("[Setup] Configuration ID:", createdConfig.id);
       console.log("[Setup] Zoho Module:", createdConfig.zohoModule);
-      console.log("[Setup] Field Mappings Count:", Object.keys(createdConfig.fieldMappings).length);
+      console.log("[Setup] Field Mappings Count:", Object.keys(createdConfig.fieldMappings as Record<string, any>).length);
 
       res.json({
         success: true,
@@ -846,7 +849,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         summary: {
           formName: createdConfig.formName,
           zohoModule: createdConfig.zohoModule,
-          fieldCount: Object.keys(createdConfig.fieldMappings).length,
+          fieldCount: Object.keys(createdConfig.fieldMappings as Record<string, any>).length,
           isActive: createdConfig.isActive
         }
       });
@@ -856,7 +859,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         message: "Failed to setup CANN form configuration",
-        error: error.message
+        error: error instanceof Error ? error.message : 'Unknown error'
       });
     }
   });
@@ -916,7 +919,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     } catch (error) {
       console.error("OAuth callback error:", error);
-      res.status(500).json({ error: "Failed to process OAuth callback", details: error.message });
+      res.status(500).json({ error: "Failed to process OAuth callback", details: error instanceof Error ? error.message : 'Unknown error' });
     }
   });
 

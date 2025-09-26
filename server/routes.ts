@@ -869,8 +869,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/oauth/zoho/connect", (req, res) => {
     try {
       const redirectUri = `${req.protocol}://${req.get('host')}/oauth/zoho/callback`;
+      console.log(`[OAuth Connect] Protocol: ${req.protocol}, Host: ${req.get('host')}`);
+      console.log(`[OAuth Connect] Generated redirect URI: ${redirectUri}`);
+      
       const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
-      console.log(`[OAuth] Redirecting to Zoho authorization: ${authUrl}`);
+      console.log(`[OAuth Connect] Full authorization URL: ${authUrl}`);
+      
       res.redirect(authUrl);
     } catch (error) {
       console.error("OAuth connect error:", error);

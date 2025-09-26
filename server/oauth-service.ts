@@ -303,15 +303,20 @@ export class OAuthService {
    */
   getAuthorizationUrl(provider: string, redirectUri: string): string {
     if (provider === 'zoho_crm') {
-      const params = new URLSearchParams({
-        scope: 'ZohoCRM.modules.ALL,ZohoCRM.settings.ALL',
-        client_id: process.env.ZOHO_CLIENT_ID!,
-        response_type: 'code',
-        access_type: 'offline',
-        redirect_uri: redirectUri,
-      });
+      // Build URL manually to ensure proper encoding
+      const baseUrl = 'https://accounts.zoho.com/oauth/v2/auth';
+      const params = [
+        `scope=${encodeURIComponent('ZohoCRM.modules.ALL,ZohoCRM.settings.ALL')}`,
+        `client_id=${encodeURIComponent(process.env.ZOHO_CLIENT_ID!)}`,
+        `response_type=code`,
+        `access_type=offline`,
+        `redirect_uri=${encodeURIComponent(redirectUri)}`
+      ];
       
-      return `https://accounts.zoho.com/oauth/v2/auth?${params.toString()}`;
+      const fullUrl = `${baseUrl}?${params.join('&')}`;
+      console.log(`[OAuth Service] Generated authorization URL: ${fullUrl}`);
+      
+      return fullUrl;
     }
     
     throw new Error(`Unknown provider: ${provider}`);

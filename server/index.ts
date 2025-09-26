@@ -37,6 +37,10 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Initialize OAuth service on startup
+  const { oauthService } = await import("./oauth-service");
+  await oauthService.initialize();
+
   const server = await registerRoutes(app);
 
   // Add health endpoint BEFORE Vite middleware to ensure it's handled by Express

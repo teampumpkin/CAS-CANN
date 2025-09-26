@@ -5,6 +5,7 @@ import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission
 import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
+import { oauthService } from "./oauth-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -864,6 +865,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Zoho OAuth connect endpoint - starts the authorization flow
+  app.get("/oauth/zoho/connect", (req, res) => {
+    try {
+      const redirectUri = `${req.protocol}://${req.get('host')}/oauth/zoho/callback`;
+      const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
+      console.log(`[OAuth] Redirecting to Zoho authorization: ${authUrl}`);
+      res.redirect(authUrl);
+    } catch (error) {
+      console.error("OAuth connect error:", error);
+      res.status(500).json({ error: "Failed to initiate OAuth flow", details: error instanceof Error ? error.message : 'Unknown error' });
+    }
+  });
+
   // OAuth callback endpoint for Zoho authorization
   app.get("/oauth/zoho/callback", async (req, res) => {
     try {
@@ -899,23 +913,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log("Successfully obtained access token!");
       
-      // Display the token for manual configuration
-      res.send(`
-        <html>
-          <head><title>Zoho OAuth Success</title></head>
-          <body style="font-family: Arial, sans-serif; padding: 20px;">
-            <h2>✅ Zoho Authorization Successful!</h2>
-            <p>Your access token has been generated. Add this to your Replit secrets:</p>
-            <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 15px 0;">
-              <strong>ZOHO_ACCESS_TOKEN:</strong><br>
-              <code style="font-size: 12px; word-break: break-all;">${tokenData.access_token}</code>
-            </div>
-            <p><strong>Token expires in:</strong> ${tokenData.expires_in} seconds (${Math.floor(tokenData.expires_in / 3600)} hours)</p>
-            <p><strong>API Domain:</strong> ${tokenData.api_domain}</p>
-            <p>Your CANN membership form will now sync automatically with Zoho CRM!</p>
-          </body>
-        </html>
-      `);
+      // Store tokens automatically using the OAuth service
+      const stored = await oauthService.storeTokens('zoho_crm', tokenData);
+      
+      if (stored) {
+        console.log("✅ Tokens stored automatically in database");
+        
+        res.send(`
+          <html>
+            <head><title>Zoho OAuth Success</title></head>
+            <body style="font-family: Arial, sans-serif; padding: 20px;">
+              <h2>✅ Zoho Authorization Successful!</h2>
+              <p>Your Zoho CRM integration is now <strong>automatically configured</strong>!</p>
+              <div style="background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #28a745;">
+                <h3>✅ Automatic Token Management Active</h3>
+                <ul>
+                  <li>Access tokens will automatically refresh before expiring</li>
+                  <li>Your CANN membership forms will sync continuously with Zoho CRM</li>
+                  <li>No manual token management required</li>
+                </ul>
+              </div>
+              <p><strong>Token expires in:</strong> ${tokenData.expires_in} seconds (${Math.floor(tokenData.expires_in / 3600)} hours)</p>
+              <p><strong>API Domain:</strong> ${tokenData.api_domain}</p>
+              <p><strong>Next Steps:</strong> Your integration is ready! Test your membership forms - they will automatically sync to Zoho CRM.</p>
+              <p><a href="/">← Return to Website</a></p>
+            </body>
+          </html>
+        `);
+      } else {
+        console.error("❌ Failed to store tokens automatically");
+        res.status(500).send(`
+          <html>
+            <head><title>Token Storage Error</title></head>
+            <body style="font-family: Arial, sans-serif; padding: 20px;">
+              <h2>❌ Error Storing Tokens</h2>
+              <p>Authentication succeeded but token storage failed. Please try again.</p>
+              <p><a href="/oauth/zoho/connect">← Retry Authentication</a></p>
+            </body>
+          </html>
+        `);
+      }
 
     } catch (error) {
       console.error("OAuth callback error:", error);

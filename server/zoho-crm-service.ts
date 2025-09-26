@@ -1,4 +1,5 @@
 import { FieldMapping, InsertFieldMapping } from "@shared/schema";
+import { oauthService } from "./oauth-service";
 
 // Zoho CRM API types
 export interface ZohoField {
@@ -53,21 +54,27 @@ export interface ZohoErrorResponse {
 
 export class ZohoCRMService {
   private baseUrl: string;
-  private accessToken: string;
   private orgId: string;
 
   constructor() {
     // Get configuration from environment variables
-    this.accessToken = process.env.ZOHO_ACCESS_TOKEN || "";
     this.orgId = process.env.ZOHO_ORG_ID || "";
     this.baseUrl = "https://www.zohoapis.com/crm/v8";
 
-    if (!this.accessToken) {
-      console.warn("ZOHO_ACCESS_TOKEN not found in environment variables");
-    }
     if (!this.orgId) {
       console.warn("ZOHO_ORG_ID not found in environment variables");
     }
+  }
+
+  /**
+   * Get a valid access token, automatically refreshing if needed
+   */
+  private async getAccessToken(): Promise<string> {
+    const token = await oauthService.getValidToken('zoho_crm');
+    if (!token) {
+      throw new Error("No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect");
+    }
+    return token;
   }
 
   private async makeRequest<T>(
@@ -78,8 +85,11 @@ export class ZohoCRMService {
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
     
+    // Get a valid access token (auto-refreshes if needed)
+    const accessToken = await this.getAccessToken();
+    
     const headers: Record<string, string> = {
-      "Authorization": `Bearer ${this.accessToken}`,
+      "Authorization": `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     };
 

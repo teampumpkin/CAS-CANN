@@ -106,8 +106,18 @@ export async function proxyOAuthRequest(req: Request, res: Response, next: NextF
 
 export function createOAuthProxyMiddleware() {
   return (req: Request, res: Response, next: NextFunction) => {
-    // Only proxy OAuth-related requests
-    if (req.path.startsWith('/oauth/') || req.path.startsWith('/api/oauth/')) {
+    // Only proxy OAuth-related requests that aren't handled by the API router
+    if (req.path.startsWith('/oauth/') && !req.path.startsWith('/api/oauth/')) {
+      // Prevent infinite loop by checking if we're proxying to ourselves
+      const currentHost = req.get('host');
+      const backendUrl = getBackendUrl();
+      
+      // If backend URL is localhost:5000 and current host is localhost:5000, skip proxy
+      if (backendUrl.includes('localhost:5000') && currentHost?.includes('localhost:5000')) {
+        console.log(`[OAuth Proxy] Skipping self-proxy for ${req.originalUrl}`);
+        return next();
+      }
+      
       return proxyOAuthRequest(req, res, next);
     }
     next();

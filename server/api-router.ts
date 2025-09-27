@@ -6,19 +6,20 @@ import { retryService } from "./retry-service";
 export async function createAPIRouter() {
   const router = Router();
 
-  // OAuth endpoints
-  router.get("/oauth/zoho/auth", (req, res) => {
+  // OAuth endpoints (mounted at /api/oauth so paths are relative)
+  router.get("/zoho/auth", (req, res) => {
     console.log("[OAuth Auth] Endpoint hit, redirecting to connect");
-    res.redirect("/oauth/zoho/connect");
+    return res.redirect("/oauth/zoho/connect");
   });
 
-  router.get("/oauth/test", (req, res) => {
+  router.get("/test", (req, res) => {
     console.log("[OAuth Test] Test endpoint hit");
-    res.json({
+    return res.json({
       message: "OAuth backend is working!",
       timestamp: new Date().toISOString(),
       host: req.get('host'),
-      forwardedHost: req.get('x-forwarded-host')
+      forwardedHost: req.get('x-forwarded-host'),
+      server: 'api-router'
     });
   });
 
@@ -27,20 +28,22 @@ export async function createAPIRouter() {
       const healthCheck = await oauthService.checkTokenHealth();
       const tokenCount = await storage.getOAuthTokens({ provider: 'zoho_crm', isActive: true });
       
-      res.status(200).json({
+      return res.status(200).json({
         status: 'healthy',
         oauth: {
           isValid: healthCheck.isValid,
           needsRefresh: healthCheck.needsRefresh,
           activeTokens: tokenCount.length
         },
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        server: 'api-router'
       });
     } catch (error) {
-      res.status(503).json({
+      return res.status(503).json({
         status: 'oauth_error',
         error: error instanceof Error ? error.message : 'Unknown error',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        server: 'api-router'
       });
     }
   });

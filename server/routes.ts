@@ -865,6 +865,61 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // API endpoint for OAuth flow (redirect to main connect endpoint)
+  app.get("/api/oauth/zoho/auth", (req, res) => {
+    res.redirect("/oauth/zoho/connect");
+  });
+
+  // OAuth health check endpoint
+  app.get('/api/health-check', async (_req, res) => {
+    try {
+      const healthCheck = await oauthService.checkTokenHealth();
+      const tokenCount = await storage.getOAuthTokens({ provider: 'zoho_crm', isActive: true });
+      
+      res.status(200).json({
+        status: 'healthy',
+        oauth: {
+          isValid: healthCheck.isValid,
+          needsRefresh: healthCheck.needsRefresh,
+          activeTokens: tokenCount.length
+        },
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      res.status(503).json({
+        status: 'oauth_error',
+        error: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString()
+      });
+    }
+  });
+
+  // Alias for retry failed submissions endpoint
+  app.post("/api/retry-failed-submissions", async (req, res) => {
+    try {
+      if (retryService.isRetryProcessing()) {
+        return res.status(409).json({
+          success: false,
+          message: "Retry operation already in progress"
+        });
+      }
+
+      const result = await retryService.retryAllFailedSubmissions();
+      res.json({
+        success: true,
+        message: "Retry operation completed",
+        stats: result
+      });
+    } catch (error) {
+      console.error("Retry all failed submissions error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to retry submissions",
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
   // Zoho OAuth connect endpoint - starts the authorization flow
   app.get("/oauth/zoho/connect", (req, res) => {
     try {

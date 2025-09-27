@@ -51,13 +51,12 @@ app.use((req, res, next) => {
     });
   });
 
-  // Create and mount API routes BEFORE Vite middleware
-  const { createAPIRouter } = await import("./api-router");
-  const apiRouter = await createAPIRouter();
+  // Setup OAuth proxy middleware BEFORE Vite middleware
+  const { createOAuthProxyMiddleware } = await import("./oauth-proxy");
+  const oauthProxy = createOAuthProxyMiddleware();
   
-  // Mount API routes first (priority over Vite catch-all)
-  app.use('/api', apiRouter);
-  app.use('/oauth', apiRouter);
+  // Mount OAuth proxy middleware (priority over Vite catch-all)
+  app.use(oauthProxy);
   
   const server = await registerRoutes(app);
 

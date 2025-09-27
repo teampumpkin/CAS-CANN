@@ -51,17 +51,14 @@ app.use((req, res, next) => {
     });
   });
 
-  // Add a middleware to ensure API routes are handled by Express first
-  app.use('/api/*', (req, res, next) => {
-    console.log(`[API Route] Handling ${req.method} ${req.originalUrl}`);
-    next();
-  });
-
-  app.use('/oauth/*', (req, res, next) => {
-    console.log(`[OAuth Route] Handling ${req.method} ${req.originalUrl}`);
-    next();
-  });
-
+  // Create and mount API routes BEFORE Vite middleware
+  const { createAPIRouter } = await import("./api-router");
+  const apiRouter = await createAPIRouter();
+  
+  // Mount API routes first (priority over Vite catch-all)
+  app.use('/api', apiRouter);
+  app.use('/oauth', apiRouter);
+  
   const server = await registerRoutes(app);
 
   // Add a temporary override for root path to test if changes are reaching Replit domain

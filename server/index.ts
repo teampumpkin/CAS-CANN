@@ -41,9 +41,7 @@ app.use((req, res, next) => {
   const { oauthService } = await import("./oauth-service");
   await oauthService.initialize();
 
-  const server = await registerRoutes(app);
-
-  // Add health endpoint BEFORE Vite middleware to ensure it's handled by Express
+  // Add health endpoint BEFORE routes registration
   app.get('/health', (_req, res) => {
     res.status(200).json({ 
       status: 'healthy', 
@@ -52,6 +50,19 @@ app.use((req, res, next) => {
       environment: process.env.NODE_ENV || 'development'
     });
   });
+
+  // Add a middleware to ensure API routes are handled by Express first
+  app.use('/api/*', (req, res, next) => {
+    console.log(`[API Route] Handling ${req.method} ${req.originalUrl}`);
+    next();
+  });
+
+  app.use('/oauth/*', (req, res, next) => {
+    console.log(`[OAuth Route] Handling ${req.method} ${req.originalUrl}`);
+    next();
+  });
+
+  const server = await registerRoutes(app);
 
   // Add a temporary override for root path to test if changes are reaching Replit domain
   app.get('/', (req, res, next) => {

@@ -867,7 +867,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // API endpoint for OAuth flow (redirect to main connect endpoint)
   app.get("/api/oauth/zoho/auth", (req, res) => {
+    console.log("[OAuth Auth] Endpoint hit, redirecting to connect");
     res.redirect("/oauth/zoho/connect");
+  });
+
+  // Test endpoint to verify backend is working
+  app.get("/api/oauth/test", (req, res) => {
+    console.log("[OAuth Test] Test endpoint hit");
+    res.json({
+      message: "OAuth backend is working!",
+      timestamp: new Date().toISOString(),
+      host: req.get('host'),
+      forwardedHost: req.get('x-forwarded-host')
+    });
   });
 
   // OAuth health check endpoint

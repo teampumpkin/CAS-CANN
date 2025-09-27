@@ -630,7 +630,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Get form submission statistics
       const allSubmissions = await storage.getFormSubmissions();
       const pendingSubmissions = await storage.getFormSubmissionsByStatus("pending", "pending");
-      const processingSubmissions = await storage.getFormSubmissionsByStatus("processing", "processing");
+      const processingSubmissions = await storage.getFormSubmissionsByStatus("processing", "pending");
       const completedSubmissions = await storage.getFormSubmissionsByStatus("completed", "synced");
       const failedSubmissions = await storage.getFormSubmissionsByStatus("failed", "failed");
 

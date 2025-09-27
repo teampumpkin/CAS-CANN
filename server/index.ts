@@ -61,10 +61,13 @@ app.use((req, res, next) => {
   
   // Mount OAuth routes BEFORE Vite middleware (priority over catch-all)
   app.use('/api/oauth', apiRouter);
+  
+  // Register all other API routes BEFORE Vite middleware
+  const server = await registerRoutes(app);
+  
+  // Add OAuth proxy middleware for frontend requests
   app.use(oauthProxy);
   
-  const server = await registerRoutes(app);
-
   // Add a temporary override for root path to test if changes are reaching Replit domain
   app.get('/', (req, res, next) => {
     const host = req.get('host') || req.get('x-forwarded-host');

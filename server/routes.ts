@@ -865,48 +865,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // API endpoint for OAuth flow (redirect to main connect endpoint)
-  app.get("/api/oauth/zoho/auth", (req, res) => {
-    console.log("[OAuth Auth] Endpoint hit, redirecting to connect");
-    res.redirect("/oauth/zoho/connect");
-  });
-
-  // Test endpoint to verify backend is working
-  app.get("/api/oauth/test", (req, res) => {
-    console.log("[OAuth Test] Test endpoint hit");
-    res.json({
-      message: "OAuth backend is working!",
-      timestamp: new Date().toISOString(),
-      host: req.get('host'),
-      forwardedHost: req.get('x-forwarded-host')
-    });
-  });
-
-  // OAuth health check endpoint
-  app.get('/api/health-check', async (_req, res) => {
+  // Non-OAuth API endpoints (OAuth routes handled by proxy)
+  
+  // System health check endpoint (non-OAuth)
+  app.get('/api/system-health', async (_req, res) => {
     try {
-      const healthCheck = await oauthService.checkTokenHealth();
-      const tokenCount = await storage.getOAuthTokens({ provider: 'zoho_crm', isActive: true });
-      
       res.status(200).json({
         status: 'healthy',
-        oauth: {
-          isValid: healthCheck.isValid,
-          needsRefresh: healthCheck.needsRefresh,
-          activeTokens: tokenCount.length
-        },
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        server: 'frontend'
       });
     } catch (error) {
       res.status(503).json({
-        status: 'oauth_error',
+        status: 'error',
         error: error instanceof Error ? error.message : 'Unknown error',
         timestamp: new Date().toISOString()
       });
     }
   });
 
-  // Alias for retry failed submissions endpoint
+  // Retry failed submissions endpoint (preserved for direct calls)
   app.post("/api/retry-failed-submissions", async (req, res) => {
     try {
       if (retryService.isRetryProcessing()) {
@@ -932,170 +910,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Zoho OAuth connect endpoint - starts the authorization flow
-  app.get("/oauth/zoho/connect", (req, res) => {
-    try {
-      // Use ZOHO_REDIRECT_URI if available, otherwise detect production environment
-      let redirectUri: string;
-      
-      if (process.env.ZOHO_REDIRECT_URI) {
-        redirectUri = process.env.ZOHO_REDIRECT_URI;
-        console.log(`[OAuth Connect] Using environment ZOHO_REDIRECT_URI: ${redirectUri}`);
-      } else {
-        // Fallback to environment detection
-        const forwardedHost = req.get('x-forwarded-host') || req.get('host');
-        const isProduction = forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production';
-        const isReplitDev = forwardedHost === 'cas-website-prod-connect11.replit.app';
-        
-        let baseUrl: string;
-        if (isProduction) {
-          baseUrl = 'https://amyloid.ca';
-        } else if (isReplitDev) {
-          baseUrl = 'https://cas-website-prod-connect11.replit.app';
-        } else {
-          baseUrl = `${req.protocol}://${req.get('host')}`;
-        }
-        redirectUri = `${baseUrl}/oauth/zoho/callback`;
-        
-        console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}, NODE_ENV: ${process.env.NODE_ENV}`);
-        console.log(`[OAuth Connect] Detected production: ${isProduction}, Using base URL: ${baseUrl}`);
-      }
-      
-      console.log(`[OAuth Connect] Final redirect URI: ${redirectUri}`);
-      
-      const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
-      console.log(`[OAuth Connect] Full authorization URL: ${authUrl}`);
-      
-      res.redirect(authUrl);
-    } catch (error) {
-      console.error("OAuth connect error:", error);
-      res.status(500).json({ error: "Failed to initiate OAuth flow", details: error instanceof Error ? error.message : 'Unknown error' });
-    }
-  });
-
-  // OAuth callback endpoint for Zoho authorization
-  app.get("/oauth/zoho/callback", async (req, res) => {
-    try {
-      const { code } = req.query;
-      
-      // Log debug info for troubleshooting
-      console.log("[OAuth Callback] Full query parameters:", req.query);
-      console.log("[OAuth Callback] Request URL:", req.url);
-      
-      const { error, error_description } = req.query;
-      
-      // Handle OAuth errors from Zoho
-      if (error) {
-        console.error("[OAuth Callback] Zoho OAuth error:", error, error_description);
-        return res.status(400).send(`
-          <html>
-            <head><title>OAuth Error</title></head>
-            <body style="font-family: Arial, sans-serif; padding: 20px;">
-              <h2>❌ OAuth Authorization Failed</h2>
-              <p><strong>Error:</strong> ${error}</p>
-              <p><strong>Description:</strong> ${error_description || 'No description provided'}</p>
-              <p><a href="/oauth/zoho/connect">← Try Again</a></p>
-            </body>
-          </html>
-        `);
-      }
-      
-      if (!code) {
-        console.error("[OAuth Callback] No authorization code provided. Query params:", req.query);
-        return res.status(400).send(`
-          <html>
-            <head><title>OAuth Error</title></head>
-            <body style="font-family: Arial, sans-serif; padding: 20px;">
-              <h2>❌ Authorization code not provided</h2>
-              <p>Zoho did not provide an authorization code. Please check your OAuth configuration.</p>
-              <p><strong>Query parameters received:</strong> ${JSON.stringify(req.query)}</p>
-              <p><a href="/oauth/zoho/connect">← Try Again</a></p>
-            </body>
-          </html>
-        `);
-      }
-
-      console.log("Received Zoho authorization code:", code);
-      
-      // Exchange code for access token
-      const tokenResponse = await fetch("https://accounts.zoho.com/oauth/v2/token", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          grant_type: "authorization_code",
-          client_id: process.env.ZOHO_CLIENT_ID!,
-          client_secret: process.env.ZOHO_CLIENT_SECRET!,
-          redirect_uri: (() => {
-            const forwardedHost = req.get('x-forwarded-host') || req.get('host');
-            if (forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production') {
-              return 'https://amyloid.ca/oauth/zoho/callback';
-            } else if (forwardedHost === 'cas-website-prod-connect11.replit.app') {
-              return 'https://cas-website-prod-connect11.replit.app/oauth/zoho/callback';
-            } else {
-              return `${req.protocol}://${req.get('host')}/oauth/zoho/callback`;
-            }
-          })(),
-          code: code as string,
-        }),
-      });
-
-      const tokenData = await tokenResponse.json();
-      
-      if (tokenData.error) {
-        console.error("Token exchange error:", tokenData);
-        return res.status(400).json({ error: tokenData.error, details: tokenData });
-      }
-
-      console.log("Successfully obtained access token!");
-      
-      // Store tokens automatically using the OAuth service
-      const stored = await oauthService.storeTokens('zoho_crm', tokenData);
-      
-      if (stored) {
-        console.log("✅ Tokens stored automatically in database");
-        
-        res.send(`
-          <html>
-            <head><title>Zoho OAuth Success</title></head>
-            <body style="font-family: Arial, sans-serif; padding: 20px;">
-              <h2>✅ Zoho Authorization Successful!</h2>
-              <p>Your Zoho CRM integration is now <strong>automatically configured</strong>!</p>
-              <div style="background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #28a745;">
-                <h3>✅ Automatic Token Management Active</h3>
-                <ul>
-                  <li>Access tokens will automatically refresh before expiring</li>
-                  <li>Your CANN membership forms will sync continuously with Zoho CRM</li>
-                  <li>No manual token management required</li>
-                </ul>
-              </div>
-              <p><strong>Token expires in:</strong> ${tokenData.expires_in} seconds (${Math.floor(tokenData.expires_in / 3600)} hours)</p>
-              <p><strong>API Domain:</strong> ${tokenData.api_domain}</p>
-              <p><strong>Next Steps:</strong> Your integration is ready! Test your membership forms - they will automatically sync to Zoho CRM.</p>
-              <p><a href="/">← Return to Website</a></p>
-            </body>
-          </html>
-        `);
-      } else {
-        console.error("❌ Failed to store tokens automatically");
-        res.status(500).send(`
-          <html>
-            <head><title>Token Storage Error</title></head>
-            <body style="font-family: Arial, sans-serif; padding: 20px;">
-              <h2>❌ Error Storing Tokens</h2>
-              <p>Authentication succeeded but token storage failed. Please try again.</p>
-              <p><a href="/oauth/zoho/connect">← Retry Authentication</a></p>
-            </body>
-          </html>
-        `);
-      }
-
-    } catch (error) {
-      console.error("OAuth callback error:", error);
-      res.status(500).json({ error: "Failed to process OAuth callback", details: error instanceof Error ? error.message : 'Unknown error' });
-    }
-  });
+  // OAuth endpoints removed - now handled by proxy middleware
 
   const httpServer = createServer(app);
   return httpServer;

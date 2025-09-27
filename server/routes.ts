@@ -871,7 +871,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Use production domain for OAuth callback - check proxy headers for production detection
       const forwardedHost = req.get('x-forwarded-host') || req.get('host');
       const isProduction = forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production';
-      const baseUrl = isProduction ? 'https://amyloid.ca' : `${req.protocol}://${req.get('host')}`;
+      const isReplitDev = forwardedHost === 'cas-website-prod-connect11.replit.app';
+      
+      let baseUrl: string;
+      if (isProduction) {
+        baseUrl = 'https://amyloid.ca';
+      } else if (isReplitDev) {
+        baseUrl = 'https://cas-website-prod-connect11.replit.app';
+      } else {
+        baseUrl = `${req.protocol}://${req.get('host')}`;
+      }
       const redirectUri = `${baseUrl}/oauth/zoho/callback`;
       
       console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}, NODE_ENV: ${process.env.NODE_ENV}`);
@@ -942,9 +951,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
           grant_type: "authorization_code",
           client_id: process.env.ZOHO_CLIENT_ID!,
           client_secret: process.env.ZOHO_CLIENT_SECRET!,
-          redirect_uri: (req.get('x-forwarded-host') === 'amyloid.ca' || process.env.NODE_ENV === 'production')
-            ? 'https://amyloid.ca/oauth/zoho/callback'
-            : `${req.protocol}://${req.get('host')}/oauth/zoho/callback`,
+          redirect_uri: (() => {
+            const forwardedHost = req.get('x-forwarded-host') || req.get('host');
+            if (forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production') {
+              return 'https://amyloid.ca/oauth/zoho/callback';
+            } else if (forwardedHost === 'cas-website-prod-connect11.replit.app') {
+              return 'https://cas-website-prod-connect11.replit.app/oauth/zoho/callback';
+            } else {
+              return `${req.protocol}://${req.get('host')}/oauth/zoho/callback`;
+            }
+          })(),
           code: code as string,
         }),
       });

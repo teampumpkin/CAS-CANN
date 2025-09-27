@@ -868,24 +868,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Zoho OAuth connect endpoint - starts the authorization flow
   app.get("/oauth/zoho/connect", (req, res) => {
     try {
-      // Use production domain for OAuth callback - check proxy headers for production detection
-      const forwardedHost = req.get('x-forwarded-host') || req.get('host');
-      const isProduction = forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production';
-      const isReplitDev = forwardedHost === 'cas-website-prod-connect11.replit.app';
+      // Use ZOHO_REDIRECT_URI if available, otherwise detect production environment
+      let redirectUri: string;
       
-      let baseUrl: string;
-      if (isProduction) {
-        baseUrl = 'https://amyloid.ca';
-      } else if (isReplitDev) {
-        baseUrl = 'https://cas-website-prod-connect11.replit.app';
+      if (process.env.ZOHO_REDIRECT_URI) {
+        redirectUri = process.env.ZOHO_REDIRECT_URI;
+        console.log(`[OAuth Connect] Using environment ZOHO_REDIRECT_URI: ${redirectUri}`);
       } else {
-        baseUrl = `${req.protocol}://${req.get('host')}`;
+        // Fallback to environment detection
+        const forwardedHost = req.get('x-forwarded-host') || req.get('host');
+        const isProduction = forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production';
+        const isReplitDev = forwardedHost === 'cas-website-prod-connect11.replit.app';
+        
+        let baseUrl: string;
+        if (isProduction) {
+          baseUrl = 'https://amyloid.ca';
+        } else if (isReplitDev) {
+          baseUrl = 'https://cas-website-prod-connect11.replit.app';
+        } else {
+          baseUrl = `${req.protocol}://${req.get('host')}`;
+        }
+        redirectUri = `${baseUrl}/oauth/zoho/callback`;
+        
+        console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}, NODE_ENV: ${process.env.NODE_ENV}`);
+        console.log(`[OAuth Connect] Detected production: ${isProduction}, Using base URL: ${baseUrl}`);
       }
-      const redirectUri = `${baseUrl}/oauth/zoho/callback`;
       
-      console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}, NODE_ENV: ${process.env.NODE_ENV}`);
-      console.log(`[OAuth Connect] Detected production: ${isProduction}, Using base URL: ${baseUrl}`);
-      console.log(`[OAuth Connect] Generated redirect URI: ${redirectUri}`);
+      console.log(`[OAuth Connect] Final redirect URI: ${redirectUri}`);
       
       const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
       console.log(`[OAuth Connect] Full authorization URL: ${authUrl}`);

@@ -53,6 +53,15 @@ app.use((req, res, next) => {
     });
   });
 
+  // Add a temporary override for root path to test if changes are reaching Replit domain
+  app.get('/', (req, res, next) => {
+    const host = req.get('host') || req.get('x-forwarded-host');
+    console.log(`[ROOT] Request from host: ${host}, forwarded-host: ${req.get('x-forwarded-host')}`);
+    
+    // Let Vite handle it by passing to next middleware
+    next();
+  });
+
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -64,7 +73,8 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
+  const isProduction = process.env.NODE_ENV === "production";
+  if (!isProduction) {
     await setupVite(app, server);
   } else {
     serveStatic(app);

@@ -8,6 +8,7 @@ import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
 import { zohoTokenManager, ZohoTokenManager } from "./zoho-token-manager";
 import { zohoCRMLeadService } from "./zoho-crm-lead-service";
+import { zohoFlowWebhookService } from "./zoho-flow-webhook-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -749,74 +750,71 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const logDuration = Date.now() - logStartTime;
       console.log(`[${requestId}] ✅ Receipt log created (${logDuration}ms)`);
 
-      // Step 6: Process Zoho CRM lead creation if configured
-      if (zohoCRMLeadService.isConfigured()) {
-        console.log(`[${requestId}] Starting Zoho CRM lead creation...`);
+      // Step 6: Process Zoho Flow webhook submission if configured
+      if (zohoFlowWebhookService.isConfigured()) {
+        console.log(`[${requestId}] Starting Zoho Flow webhook submission...`);
         
         setImmediate(async () => {
-          const asyncProcessId = `zoho_${submissionId}_${Math.random().toString(36).substr(2, 6)}`;
+          const asyncProcessId = `webhook_${submissionId}_${Math.random().toString(36).substr(2, 6)}`;
           
           try {
-            console.log(`[${asyncProcessId}] Creating lead in Zoho CRM for submission ${submissionId}`);
+            console.log(`[${asyncProcessId}] Submitting to Zoho Flow webhook for submission ${submissionId}`);
             
-            // Create lead in Zoho CRM
-            const zohoResult = await zohoCRMLeadService.createLead(data);
+            // Submit to Zoho Flow webhook
+            const webhookResult = await zohoFlowWebhookService.submitToWebhook(data);
             
-            if (zohoResult.success) {
-              console.log(`[${asyncProcessId}] ✅ Lead created successfully:`, {
-                leadId: zohoResult.leadId,
-                createdTime: zohoResult.createdTime
+            if (webhookResult.success) {
+              console.log(`[${asyncProcessId}] ✅ Webhook submission successful:`, {
+                response: webhookResult.response
               });
               
               // Update submission with success
               await storage.updateFormSubmission(submission.id, {
                 processingStatus: "completed" as any,
-                syncStatus: "synced" as any,
-                zohoCrmId: zohoResult.leadId || null
+                syncStatus: "synced" as any
               });
               
-              // Log successful CRM push
+              // Log successful webhook push
               await storage.createSubmissionLog({
                 submissionId: submission.id,
                 operation: "crm_push",
                 status: "success",
                 details: {
-                  zohoRecordId: zohoResult.leadId,
-                  createdTime: zohoResult.createdTime,
+                  webhookResponse: webhookResult.response,
                   processId: asyncProcessId
                 },
                 duration: 0
               });
             } else {
-              console.error(`[${asyncProcessId}] ❌ Lead creation failed:`, zohoResult.error);
+              console.error(`[${asyncProcessId}] ❌ Webhook submission failed:`, webhookResult.error);
               
               await storage.updateFormSubmission(submission.id, {
                 processingStatus: "failed" as any,
                 syncStatus: "failed" as any,
-                errorMessage: zohoResult.error || "Failed to create lead in Zoho CRM"
+                errorMessage: webhookResult.error || "Failed to submit to Zoho Flow webhook"
               });
               
-              // Log failed CRM push
+              // Log failed webhook push
               await storage.createSubmissionLog({
                 submissionId: submission.id,
                 operation: "crm_push",
                 status: "failed",
                 details: { 
-                  error: zohoResult.error,
+                  error: webhookResult.error,
                   processId: asyncProcessId
                 },
                 duration: 0,
-                errorMessage: zohoResult.error || "Failed to create lead"
+                errorMessage: webhookResult.error || "Failed to submit to webhook"
               });
             }
           } catch (error) {
-            console.error(`[${asyncProcessId}] ❌ Exception during lead creation:`, error);
+            console.error(`[${asyncProcessId}] ❌ Exception during webhook submission:`, error);
             
             if (submissionId) {
               await storage.updateFormSubmission(submissionId, {
                 processingStatus: "failed" as any,
                 syncStatus: "failed" as any,
-                errorMessage: `Lead creation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+                errorMessage: `Webhook submission failed: ${error instanceof Error ? error.message : 'Unknown error'}`
               });
               
               await storage.createSubmissionLog({
@@ -834,7 +832,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           }
         });
       } else {
-        console.log(`[${requestId}] Zoho CRM not configured, saving form submission only`);
+        console.log(`[${requestId}] Zoho Flow webhook not configured, saving form submission only`);
         
         // Update submission status as pending
         await storage.updateFormSubmission(submission.id, {

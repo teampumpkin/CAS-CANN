@@ -172,8 +172,7 @@ export default function AboutCANN() {
           discipline: values.professionalDesignation,
           subspecialty: values.subspecialty,
           institutionName: values.institution,
-          communicationConsent:
-            values.communicationConsent === "yes" ? "Yes" : "No",
+          communicationConsent: values.communicationConsent === "yes" ? "Yes" : "No",
           servicesMapConsent: "Yes", // Default to Yes for CANN members
           mapInstitutionName: values.institution,
           institutionAddress: "", // Not collected in this form
@@ -182,48 +181,41 @@ export default function AboutCANN() {
           followUpConsent: values.communicationConsent === "yes" ? "Yes" : "No",
           // Additional CANN-specific fields
           amyloidosisType: values.amyloidosisType,
-          otherAmyloidosisType: values.otherAmyloidosisType || "",
-          areasOfInterest: values.areasOfInterest.join(", "),
-          otherInterest: values.otherInterest || "",
+          otherAmyloidosisType: values.otherAmyloidosisType || '',
+          areasOfInterest: values.areasOfInterest.join(', '),
+          otherInterest: values.otherInterest || '',
           presentingInterest: values.presentingInterest,
-          presentationTopic: values.presentationTopic || "",
-        },
+          presentationTopic: values.presentationTopic || ''
+        }
       };
 
-      try {
-        // Submit form data
-        const response = await fetch(
-          "https://flow.zoho.com/901092237/flow/webhook/incoming?zapikey=1001.ee26b33a57c3f893a6cd34d8543ee2e5.404ba90e8591278f2c5833f0011b3822&isdebug=false",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-          },
-        );
+      // Submit to our integrated CRM system
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-        console.log("-response-", response);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-        if (response.ok) {
-          console.log("CANN registration submitted successfully:", response);
-          setShowRegistrationForm(false);
-          form.reset();
-          setShowConfirmationModal(true);
-        } else {
-          alert("Failed to submit lead.");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Something went wrong.");
+      const result = await response.json();
+      
+      if (result.success) {
+        console.log('CANN registration submitted successfully:', result);
+        setShowRegistrationForm(false);
+        form.reset();
+        setShowConfirmationModal(true);
+      } else {
+        throw new Error(result.message || 'Submission failed');
       }
     } catch (error) {
-      console.error("Error submitting CANN registration:", error);
-
-      // Provide error feedback
-      const errorMessage =
-        error instanceof Error ? error.message : "Unknown error";
-      alert(
-        `Registration submission failed: ${errorMessage}. Please try again or contact support.`,
-      );
+      console.error('Error submitting CANN registration:', error);
+      // Show error message to user
+      alert(`Registration submission failed: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again or contact support.`);
     } finally {
       setIsSubmitting(false);
     }

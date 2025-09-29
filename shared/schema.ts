@@ -322,6 +322,8 @@ export const formSubmissions = pgTable("form_submissions", {
   formName: varchar("form_name", { length: 255 }).notNull(), // Unique identifier for the form
   submissionData: jsonb("submission_data").notNull(), // Dynamic form fields as JSONB for better performance
   sourceForm: varchar("source_form", { length: 255 }).notNull(), // Tracking field for CRM
+  zohoModule: varchar("zoho_module", { length: 100 }).notNull().default("Leads"), // Target Zoho module
+  zohoCrmId: varchar("zoho_crm_id", { length: 100 }), // Zoho record ID after successful sync
   processingStatus: processingStatusEnum("processing_status").notNull().default("pending"),
   syncStatus: syncStatusEnum("sync_status").notNull().default("pending"),
   errorMessage: text("error_message"), // Error details if sync failed
@@ -331,8 +333,10 @@ export const formSubmissions = pgTable("form_submissions", {
   updatedAt: timestamp("updated_at").defaultNow(),
 }, (table) => [
   index("idx_form_submissions_form_name").on(table.formName),
+  index("idx_form_submissions_zoho_module").on(table.zohoModule),
   index("idx_form_submissions_sync_status").on(table.syncStatus),
   index("idx_form_submissions_processing_status").on(table.processingStatus),
+  index("idx_form_submissions_zoho_crm_id").on(table.zohoCrmId),
 ]);
 
 // Submission logs table - tracks all submission attempts and operations
@@ -352,6 +356,7 @@ export const submissionLogs = pgTable("submission_logs", {
 // Field mappings table - tracks CRM field mappings and types
 export const fieldMappings = pgTable("field_mappings", {
   id: serial("id").primaryKey(),
+  zohoModule: varchar("zoho_module", { length: 100 }).notNull(), // Leads, Contacts, etc.
   fieldName: varchar("field_name", { length: 255 }).notNull(), // Field name in Zoho CRM
   fieldType: varchar("field_type", { length: 50 }).notNull(), // text, email, phone, picklist, multi_select, boolean
   isCustomField: boolean("is_custom_field").notNull().default(false),
@@ -362,12 +367,15 @@ export const fieldMappings = pgTable("field_mappings", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 }, (table) => [
+  unique("unique_zoho_module_field").on(table.zohoModule, table.fieldName),
+  index("idx_field_mappings_zoho_module").on(table.zohoModule),
 ]);
 
 // Form configurations table - optional form-to-module mappings and settings
 export const formConfigurations = pgTable("form_configurations", {
   id: serial("id").primaryKey(),
   formName: varchar("form_name", { length: 255 }).notNull().unique(),
+  zohoModule: varchar("zoho_module", { length: 100 }).notNull().default("Leads"),
   fieldMappings: jsonb("field_mappings"), // Custom field name mappings
   isActive: boolean("is_active").notNull().default(true),
   description: text("description"),
@@ -380,6 +388,7 @@ export const insertFormSubmissionSchema = createInsertSchema(formSubmissions).om
   id: true,
   createdAt: true,
   updatedAt: true,
+  zohoCrmId: true,
   processingStatus: true,
   syncStatus: true,
   errorMessage: true,
@@ -426,4 +435,30 @@ export const dynamicFormSubmissionSchema = z.object({
 
 export type DynamicFormSubmission = z.infer<typeof dynamicFormSubmissionSchema>;
 
+// OAuth Token Management for Zoho CRM
+export const oauthTokens = pgTable("oauth_tokens", {
+  id: serial("id").primaryKey(),
+  provider: varchar("provider", { length: 50 }).notNull(), // "zoho_crm"
+  accessToken: text("access_token"), // Encrypted access token
+  refreshToken: text("refresh_token"), // Encrypted refresh token  
+  expiresAt: timestamp("expires_at"), // Token expiration timestamp
+  scope: text("scope"), // OAuth scopes granted
+  tokenType: varchar("token_type", { length: 50 }).default("Bearer"), 
+  isActive: boolean("is_active").notNull().default(true),
+  lastRefreshed: timestamp("last_refreshed").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_oauth_tokens_provider").on(table.provider),
+  index("idx_oauth_tokens_active").on(table.isActive),
+]);
 
+export const insertOAuthTokenSchema = createInsertSchema(oauthTokens).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  lastRefreshed: true,
+});
+
+export type OAuthToken = typeof oauthTokens.$inferSelect;
+export type InsertOAuthToken = z.infer<typeof insertOAuthTokenSchema>;

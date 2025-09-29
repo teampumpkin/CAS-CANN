@@ -2,6 +2,10 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage, type ResourceFilters } from "./storage";
 import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission } from "@shared/schema";
+import { fieldSyncEngine } from "./field-sync-engine";
+import { zohoCRMService } from "./zoho-crm-service";
+import { retryService } from "./retry-service";
+import { oauthService } from "./oauth-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -9,10 +13,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get('/ping', (_req, res) => {
     res.status(200).send('pong');
   });
-
-
-
-
 
   // User API routes
   app.get("/api/users/:id", async (req, res) => {
@@ -305,97 +305,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Dynamic Multi-Form Lead Capture API endpoint
   app.post("/api/submit-form", async (req, res) => {
     const startTime = Date.now();
-    const requestId = `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     let submissionId: number | null = null;
 
-    console.log(`\n=== [FORM SUBMISSION START] Request ID: ${requestId} ===`);
-    console.log(`[${requestId}] Timestamp: ${new Date().toISOString()}`);
-    console.log(`[${requestId}] User Agent: ${req.get('User-Agent')}`);
-    console.log(`[${requestId}] IP: ${req.ip}`);
-    console.log(`[${requestId}] Content-Type: ${req.get('Content-Type')}`);
-
     try {
-      // Step 1: Log and sanitize incoming request data
-      console.log(`[${requestId}] Raw request body structure:`, {
-        hasFormName: !!req.body?.form_name,
-        formName: req.body?.form_name,
-        hasData: !!req.body?.data,
-        dataKeys: req.body?.data ? Object.keys(req.body.data) : [],
-        dataFieldCount: req.body?.data ? Object.keys(req.body.data).length : 0,
-        bodySize: JSON.stringify(req.body).length
-      });
+      console.log("[Form Submission] Received form submission:", req.body);
 
-      // Sanitize sensitive data for logging
-      const sanitizedData = req.body?.data ? Object.fromEntries(
-        Object.entries(req.body.data).map(([key, value]) => [
-          key, 
-          key.toLowerCase().includes('email') ? 
-            (typeof value === 'string' ? value.replace(/(.{2}).*(@.*)/, '$1***$2') : value) :
-            key.toLowerCase().includes('phone') ? 
-              (typeof value === 'string' ? value.replace(/(\d{3}).*(\d{4})/, '$1***$2') : value) :
-              value
-        ])
-      ) : {};
-
-      console.log(`[${requestId}] Sanitized form data:`, {
-        form_name: req.body?.form_name,
-        data: sanitizedData
-      });
-
-      // Step 2: Validate the incoming request
-      console.log(`[${requestId}] Starting validation with dynamicFormSubmissionSchema...`);
-      const validationStartTime = Date.now();
-      
+      // Step 1: Validate the incoming request
       const validatedData = dynamicFormSubmissionSchema.parse(req.body);
       const { form_name, data } = validatedData;
-      
-      const validationDuration = Date.now() - validationStartTime;
-      console.log(`[${requestId}] ✅ Validation successful (${validationDuration}ms)`, {
-        formName: form_name,
-        validatedFieldCount: Object.keys(data).length,
-        validatedFields: Object.keys(data).map(key => ({
-          field: key,
-          type: typeof data[key],
-          hasValue: !!data[key],
-          length: typeof data[key] === 'string' ? data[key].length : null
-        }))
-      });
 
-      // Step 3: Check for form configuration (optional)
-      console.log(`[${requestId}] Looking up form configuration for: "${form_name}"`);
-      const configLookupStartTime = Date.now();
-      
+      // Step 2: Check for form configuration (optional)
       let targetModule = "Leads"; // Default module
       let fieldMappings = null;
 
       const formConfig = await storage.getFormConfiguration(form_name);
-      const configLookupDuration = Date.now() - configLookupStartTime;
-      
       if (formConfig) {
         targetModule = formConfig.zohoModule;
         fieldMappings = formConfig.fieldMappings;
-        console.log(`[${requestId}] ✅ Form configuration found (${configLookupDuration}ms):`, {
-          formName: form_name,
-          targetModule: targetModule,
-          hasMappings: !!fieldMappings,
-          mappingCount: fieldMappings ? Object.keys(fieldMappings).length : 0,
-          configDetails: {
-            id: formConfig.id,
-            isActive: formConfig.isActive,
-            createdAt: formConfig.createdAt
-          }
-        });
+        console.log(`[Form Submission] Using configuration for form "${form_name}": module=${targetModule}`);
       } else {
-        console.log(`[${requestId}] ⚠️ No configuration found (${configLookupDuration}ms) for form "${form_name}", using defaults:`, {
-          defaultModule: targetModule,
-          willCreateDynamicMappings: true
-        });
+        console.log(`[Form Submission] No configuration found for form "${form_name}", using default module: ${targetModule}`);
       }
 
-      // Step 4: Create form submission record
-      console.log(`[${requestId}] Creating submission record in database...`);
-      const dbInsertStartTime = Date.now();
-      
+      // Step 3: Create form submission record
       const submissionData: InsertFormSubmission = {
         formName: form_name,
         submissionData: data,
@@ -403,30 +335,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         zohoModule: targetModule
       };
 
-      console.log(`[${requestId}] Submission data prepared:`, {
-        formName: submissionData.formName,
-        sourceForm: submissionData.sourceForm,
-        zohoModule: submissionData.zohoModule,
-        dataFields: Object.keys(submissionData.submissionData as any),
-        dataSize: JSON.stringify(submissionData.submissionData).length
-      });
-
       const submission = await storage.createFormSubmission(submissionData);
       submissionId = submission.id;
-      const dbInsertDuration = Date.now() - dbInsertStartTime;
 
-      console.log(`[${requestId}] ✅ Submission record created (${dbInsertDuration}ms):`, {
-        submissionId: submissionId,
-        databaseId: submission.id,
-        status: submission.processingStatus,
-        syncStatus: submission.syncStatus,
-        createdAt: submission.createdAt
-      });
+      console.log(`[Form Submission] Created submission record with ID: ${submissionId}`);
 
-      // Step 5: Log the receipt operation
-      console.log(`[${requestId}] Creating receipt log entry...`);
-      const logStartTime = Date.now();
-      
+      // Step 4: Log the receipt
       await storage.createSubmissionLog({
         submissionId: submission.id,
         operation: "received",
@@ -434,31 +348,111 @@ export async function registerRoutes(app: Express): Promise<Server> {
         details: {
           formName: form_name,
           fieldCount: Object.keys(data).length,
-          targetModule,
-          requestId: requestId,
-          userAgent: req.get('User-Agent'),
-          ip: req.ip
+          targetModule
         },
         duration: Date.now() - startTime
       });
-      
-      const logDuration = Date.now() - logStartTime;
-      console.log(`[${requestId}] ✅ Receipt log created (${logDuration}ms)`);
 
-      // Step 6: Update submission status as completed
-      console.log(`[${requestId}] Form submission completed successfully`);
-      
-      // Update submission status as completed (no external integration)
-      await storage.updateFormSubmission(submission.id, {
-        processingStatus: "completed" as any,
-        syncStatus: "completed" as any
+      // Step 5: Start processing asynchronously
+      setImmediate(async () => {
+        try {
+          console.log(`[Form Submission] Starting async processing for submission ${submissionId}`);
+          
+          // Update status to processing
+          await storage.updateFormSubmission(submission.id, {
+            // processingStatus: "processing" // Already set by default
+          });
+
+          // Step 5a: Sync fields with Zoho CRM
+          console.log(`[Form Submission] Starting field sync for submission ${submissionId}`);
+          const fieldSyncResult = await fieldSyncEngine.syncFieldsForSubmission(submission);
+          
+          if (!fieldSyncResult.success) {
+            console.error(`[Form Submission] Field sync failed for submission ${submissionId}:`, fieldSyncResult.errors);
+            await storage.updateFormSubmission(submission.id, {
+              processingStatus: "failed" as any,
+              syncStatus: "failed" as any,
+              errorMessage: `Field sync failed: ${fieldSyncResult.errors.join("; ")}`
+            });
+            return;
+          }
+
+          // Step 5b: Push data to Zoho CRM
+          console.log(`[Form Submission] Starting CRM push for submission ${submissionId}`);
+          const pushStartTime = Date.now();
+          
+          try {
+            // Get updated field mappings after sync
+            const updatedMappings = await storage.getFieldMappings({ zohoModule: targetModule });
+            
+            // Format data for Zoho CRM
+            const zohoData = zohoCRMService.formatFieldDataForZoho(data, updatedMappings);
+            
+            // Add Source_Form field
+            zohoData.Source_Form = form_name;
+            
+            console.log(`[Form Submission] Pushing data to Zoho ${targetModule}:`, zohoData);
+            
+            // Create record in Zoho CRM
+            const zohoRecord = await zohoCRMService.createRecord(targetModule, zohoData);
+            
+            // Update submission with success
+            await storage.updateFormSubmission(submission.id, {
+              processingStatus: "completed" as any,
+              syncStatus: "synced" as any,
+              zohoCrmId: zohoRecord.id || null
+            });
+
+            // Log successful CRM push
+            await storage.createSubmissionLog({
+              submissionId: submission.id,
+              operation: "crm_push",
+              status: "success",
+              details: {
+                zohoRecordId: zohoRecord.id,
+                targetModule,
+                fieldsSubmitted: Object.keys(zohoData).length
+              },
+              duration: Date.now() - pushStartTime
+            });
+
+            console.log(`[Form Submission] Successfully completed processing for submission ${submissionId}, Zoho record ID: ${zohoRecord.id}`);
+
+          } catch (crmError) {
+            console.error(`[Form Submission] CRM push failed for submission ${submissionId}:`, crmError);
+            
+            await storage.updateFormSubmission(submission.id, {
+              processingStatus: "failed" as any,
+              syncStatus: "failed" as any,
+              errorMessage: `CRM push failed: ${crmError instanceof Error ? crmError.message : 'Unknown error'}`
+            });
+
+            // Log failed CRM push
+            await storage.createSubmissionLog({
+              submissionId: submission.id,
+              operation: "crm_push",
+              status: "failed",
+              details: { error: crmError instanceof Error ? crmError.message : 'Unknown error' },
+              duration: Date.now() - pushStartTime,
+              errorMessage: crmError instanceof Error ? crmError.message : 'Unknown error'
+            });
+          }
+
+        } catch (processingError) {
+          console.error(`[Form Submission] Processing failed for submission ${submissionId}:`, processingError);
+          
+          if (submissionId) {
+            await storage.updateFormSubmission(submissionId, {
+              processingStatus: "failed" as any,
+              syncStatus: "failed" as any,
+              errorMessage: `Processing failed: ${processingError instanceof Error ? processingError.message : 'Unknown error'}`
+            });
+          }
+        }
       });
 
-      // Step 8: Return immediate response to the client
-      const responseTime = Date.now() - startTime;
-      console.log(`[${requestId}] 📤 Sending success response to client (${responseTime}ms)`);
-      
-      const responseData = {
+      // Step 6: Return immediate response to the client
+      res.status(201).json({
         success: true,
         message: "Form submission received successfully",
         submissionId: submission.id,
@@ -466,29 +460,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         status: "processing",
         timestamp: new Date().toISOString(),
         targetModule,
-        estimatedProcessingTime: "30-60 seconds",
-        requestId: requestId
-      };
-
-      console.log(`[${requestId}] Response data:`, {
-        submissionId: responseData.submissionId,
-        targetModule: responseData.targetModule,
-        status: responseData.status,
-        processingTime: `${responseTime}ms`
+        estimatedProcessingTime: "30-60 seconds"
       });
-
-      res.status(201).json(responseData);
-      console.log(`[${requestId}] ✅ FORM SUBMISSION REQUEST COMPLETED (${responseTime}ms)`);
-      console.log(`=== [FORM SUBMISSION END] Request ID: ${requestId} ===\n`);
 
     } catch (error) {
-      const errorResponseTime = Date.now() - startTime;
-      console.error(`[${requestId}] ❌ FORM SUBMISSION REQUEST FAILED (${errorResponseTime}ms):`, {
-        error: error instanceof Error ? error.message : 'Unknown error',
-        stack: error instanceof Error ? error.stack : undefined,
-        submissionId: submissionId,
-        hasSubmissionId: !!submissionId
-      });
+      console.error("[Form Submission] Error processing form submission:", error);
 
       // Log the error if we have a submission ID
       if (submissionId) {
@@ -571,8 +547,82 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Zoho CRM connection test endpoint
+  app.get("/api/zoho/test-connection", async (req, res) => {
+    try {
+      const result = await zohoCRMService.testConnection();
+      res.json(result);
+    } catch (error) {
+      console.error("Zoho connection test failed:", error);
+      res.status(500).json({
+        success: false,
+        message: `Connection test failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      });
+    }
+  });
 
+  // Retry failed submission endpoint
+  app.post("/api/retry/submission/:id", async (req, res) => {
+    try {
+      const submissionId = parseInt(req.params.id);
+      
+      if (isNaN(submissionId)) {
+        return res.status(400).json({ message: "Invalid submission ID" });
+      }
 
+      const result = await retryService.retrySubmission(submissionId);
+      
+      if (result.success) {
+        res.json({
+          success: true,
+          message: `Submission ${submissionId} retried successfully`,
+          retryCount: result.retryCount,
+          finalStatus: result.finalStatus
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: `Retry failed: ${result.errorMessage}`,
+          retryCount: result.retryCount,
+          finalStatus: result.finalStatus
+        });
+      }
+
+    } catch (error) {
+      console.error("Error retrying submission:", error);
+      res.status(500).json({ 
+        success: false,
+        message: `Failed to retry submission: ${error instanceof Error ? error.message : 'Unknown error'}` 
+      });
+    }
+  });
+
+  // Retry all failed submissions endpoint
+  app.post("/api/retry/all", async (req, res) => {
+    try {
+      if (retryService.isRetryProcessing()) {
+        return res.status(409).json({
+          success: false,
+          message: "Retry process is already running"
+        });
+      }
+
+      const stats = await retryService.retryAllFailedSubmissions();
+      
+      res.json({
+        success: true,
+        message: "Bulk retry completed",
+        stats
+      });
+
+    } catch (error) {
+      console.error("Error during bulk retry:", error);
+      res.status(500).json({ 
+        success: false,
+        message: `Bulk retry failed: ${error instanceof Error ? error.message : 'Unknown error'}` 
+      });
+    }
+  });
 
   // System monitoring and statistics endpoint
   app.get("/api/monitor/stats", async (req, res) => {
@@ -584,6 +634,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const completedSubmissions = await storage.getFormSubmissionsByStatus("completed", "synced");
       const failedSubmissions = await storage.getFormSubmissionsByStatus("failed", "failed");
 
+      // Get retry statistics
+      const retryStats = await retryService.getRetryStatistics();
 
       // Get recent logs (last 50)
       const recentLogs = await storage.getSubmissionLogs();
@@ -605,8 +657,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           completedSubmissions: completedSubmissions.length,
           failedSubmissions: failedSubmissions.length,
           successRate: Math.round(successRate * 100) / 100,
-          retryProcessing: false
+          retryProcessing: retryService.isRetryProcessing()
         },
+        retryStatistics: retryStats,
         configurationStatus: {
           fieldMappings: fieldMappings.length,
           formConfigurations: formConfigurations.length
@@ -635,6 +688,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Test database connection
       const testSubmissions = await storage.getFormSubmissions();
       
+      // Test Zoho connection
+      const zohoTest = await zohoCRMService.testConnection();
 
       res.json({
         status: "healthy",
@@ -644,6 +699,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
             status: "connected",
             submissionCount: testSubmissions.length
           },
+          zoho: {
+            status: zohoTest.success ? "connected" : "disconnected",
+            message: zohoTest.message
+          },
+          retryService: {
+            status: retryService.isRetryProcessing() ? "processing" : "idle"
+          }
         }
       });
 
@@ -657,6 +719,151 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Setup endpoint for CANN form configuration
+  app.post("/api/setup-cann-form", async (req, res) => {
+    try {
+      console.log("[Setup] Setting up CANN Membership Form Configuration...");
+
+      // Check if configuration already exists
+      const existingConfig = await storage.getFormConfiguration("Join CANN Today");
+      
+      if (existingConfig) {
+        console.log("[Setup] CANN form configuration already exists:", existingConfig.id);
+        return res.json({
+          success: true,
+          message: "CANN form configuration already exists",
+          configId: existingConfig.id,
+          config: existingConfig
+        });
+      }
+
+      // Create CANN form configuration
+      const cannFormConfig = {
+        formName: "Join CANN Today",
+        zohoModule: "Leads", // Map to Leads module in Zoho CRM
+        description: "Canadian Amyloidosis Nursing Network membership application form",
+        isActive: true,
+        fieldMappings: {
+          // Basic membership info
+          "membershipRequest": {
+            "zohoField": "membershipRequest",
+            "fieldType": "picklist",
+            "isRequired": true,
+            "description": "Whether user wants CAS membership"
+          },
+          "fullName": {
+            "zohoField": "fullName", 
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Full name of the applicant"
+          },
+          "emailAddress": {
+            "zohoField": "emailAddress",
+            "fieldType": "email", 
+            "isRequired": false,
+            "description": "Email address of the applicant"
+          },
+          "discipline": {
+            "zohoField": "discipline",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Professional discipline (nurse, physician, etc.)"
+          },
+          "subspecialty": {
+            "zohoField": "subspecialty",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Sub-specialty area of focus"
+          },
+          "institutionName": {
+            "zohoField": "institutionName",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Center or clinic name/institution"
+          },
+          "communicationConsent": {
+            "zohoField": "communicationConsent",
+            "fieldType": "picklist",
+            "isRequired": false,
+            "description": "Consent for communication from CAS"
+          },
+          // Services map related fields
+          "servicesMapConsent": {
+            "zohoField": "servicesMapConsent",
+            "fieldType": "picklist",
+            "isRequired": true,
+            "description": "Consent for including center in services map"
+          },
+          "mapInstitutionName": {
+            "zohoField": "mapInstitutionName",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Institution name for services map"
+          },
+          "institutionAddress": {
+            "zohoField": "institutionAddress",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Full address of institution"
+          },
+          "institutionPhone": {
+            "zohoField": "institutionPhone",
+            "fieldType": "phone",
+            "isRequired": false,
+            "description": "Institution phone number"
+          },
+          "institutionFax": {
+            "zohoField": "institutionFax",
+            "fieldType": "text",
+            "isRequired": false,
+            "description": "Institution fax number"
+          },
+          "followUpConsent": {
+            "zohoField": "followUpConsent",
+            "fieldType": "picklist",
+            "isRequired": false,
+            "description": "Consent for follow-up contact by CAS"
+          }
+        },
+        settings: {
+          "autoCreateFields": true,
+          "enableRetries": true,
+          "maxRetries": 3,
+          "syncRequired": true,
+          "trackingEnabled": true,
+          "notificationEmail": "admin@amyloid.ca"
+        }
+      };
+
+      // Create the configuration
+      const createdConfig = await storage.createFormConfiguration(cannFormConfig);
+      console.log("[Setup] CANN form configuration created successfully!");
+      console.log("[Setup] Configuration ID:", createdConfig.id);
+      console.log("[Setup] Zoho Module:", createdConfig.zohoModule);
+      console.log("[Setup] Field Mappings Count:", Object.keys(createdConfig.fieldMappings as Record<string, any>).length);
+
+      res.json({
+        success: true,
+        message: "CANN form configuration created successfully!",
+        configId: createdConfig.id,
+        config: createdConfig,
+        summary: {
+          formName: createdConfig.formName,
+          zohoModule: createdConfig.zohoModule,
+          fieldCount: Object.keys(createdConfig.fieldMappings as Record<string, any>).length,
+          isActive: createdConfig.isActive
+        }
+      });
+
+    } catch (error) {
+      console.error("[Setup] Error setting up CANN form configuration:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to setup CANN form configuration",
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
 
   // Non-OAuth API endpoints (OAuth routes handled by proxy)
   
@@ -677,12 +884,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Retry failed submissions endpoint (preserved for direct calls)
+  app.post("/api/retry-failed-submissions", async (req, res) => {
+    try {
+      if (retryService.isRetryProcessing()) {
+        return res.status(409).json({
+          success: false,
+          message: "Retry operation already in progress"
+        });
+      }
 
+      const result = await retryService.retryAllFailedSubmissions();
+      res.json({
+        success: true,
+        message: "Retry operation completed",
+        stats: result
+      });
+    } catch (error) {
+      console.error("Retry all failed submissions error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to retry submissions",
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // OAuth endpoints for backend server
+  app.get("/api/oauth/test", (req, res) => {
+    console.log("[OAuth Test] Test endpoint hit");
+    res.json({
+      message: "OAuth backend is working!",
+      timestamp: new Date().toISOString(),
+      host: req.get('host'),
+      forwardedHost: req.get('x-forwarded-host'),
+      server: 'backend'
+    });
+  });
 
   app.get('/api/health-check', async (_req, res) => {
     try {
+      const healthCheck = await oauthService.checkTokenHealth();
+      const tokenCount = await storage.getOAuthTokens({ provider: 'zoho_crm', isActive: true });
+      
       res.status(200).json({
         status: 'healthy',
+        oauth: {
+          isValid: healthCheck.isValid,
+          needsRefresh: healthCheck.needsRefresh,
+          activeTokens: tokenCount.length
+        },
         timestamp: new Date().toISOString(),
         server: 'backend'
       });
@@ -729,7 +980,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log(`[OAuth Connect] Final redirect URI: ${redirectUri}`);
       
-      // OAuth integration removed - endpoint disabled
+      const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
       console.log(`[OAuth Connect] Full authorization URL: ${authUrl}`);
       
       res.redirect(authUrl);
@@ -807,8 +1058,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log("Successfully obtained access token!");
       
-      // OAuth integration removed - token storage disabled
-      const stored = false;
+      const stored = await oauthService.storeTokens('zoho_crm', tokenData);
       
       if (stored) {
         console.log("✅ Tokens stored automatically in database");

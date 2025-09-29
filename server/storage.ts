@@ -5,6 +5,7 @@ import {
   submissionLogs,
   fieldMappings,
   formConfigurations,
+  oauthTokens,
   type User,
   type InsertUser,
   type Resource,
@@ -17,6 +18,8 @@ import {
   type InsertFieldMapping,
   type FormConfiguration,
   type InsertFormConfiguration,
+  type OAuthToken,
+  type InsertOAuthToken,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, like, desc, gte, lte } from "drizzle-orm";
@@ -35,8 +38,10 @@ export interface ResourceFilters {
 
 export interface FormSubmissionFilters {
   formName?: string;
+  zohoModule?: string;
   processingStatus?: string;
   syncStatus?: string;
+  zohoCrmId?: string;
   dateFrom?: Date;
   dateTo?: Date;
 }
@@ -50,6 +55,7 @@ export interface SubmissionLogFilters {
 }
 
 export interface FieldMappingFilters {
+  zohoModule?: string;
   fieldType?: string;
   isCustomField?: boolean;
   isRequired?: boolean;
@@ -85,7 +91,7 @@ export interface IStorage {
 
   // Field mapping operations
   getFieldMappings(filters?: FieldMappingFilters): Promise<FieldMapping[]>;
-  getFieldMapping(fieldName: string): Promise<FieldMapping | undefined>;
+  getFieldMapping(zohoModule: string, fieldName: string): Promise<FieldMapping | undefined>;
   createFieldMapping(mapping: InsertFieldMapping): Promise<FieldMapping>;
   updateFieldMapping(id: number, updates: Partial<FieldMapping>): Promise<FieldMapping | undefined>;
   deleteFieldMapping(id: number): Promise<boolean>;
@@ -98,6 +104,12 @@ export interface IStorage {
   updateFormConfiguration(id: number, updates: Partial<FormConfiguration>): Promise<FormConfiguration | undefined>;
   deleteFormConfiguration(id: number): Promise<boolean>;
 
+  // OAuth token operations
+  getOAuthTokens(filters?: { provider?: string; isActive?: boolean }): Promise<OAuthToken[]>;
+  getOAuthToken(id: number): Promise<OAuthToken | undefined>;
+  createOAuthToken(token: InsertOAuthToken): Promise<OAuthToken>;
+  updateOAuthToken(id: number, updates: Partial<OAuthToken>): Promise<OAuthToken | undefined>;
+  deleteOAuthToken(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {

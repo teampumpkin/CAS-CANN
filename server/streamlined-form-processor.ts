@@ -139,16 +139,16 @@ export class StreamlinedFormProcessor {
       zohoModule: this.determineZohoModule(formName, submissionData),
     };
 
-    const submissionId = await storage.createFormSubmission(submission);
+    const createdSubmission = await storage.createFormSubmission(submission);
+    console.log(`[Form Processor] Created submission with ID: ${createdSubmission.id}`);
     
-    // Get the created submission by ID
-    const submissions = await storage.getFormSubmissions({});
-    const createdSubmission = submissions.find(s => s.id === parseInt(String(submissionId)));
-    
-    if (!createdSubmission) {
-      throw new Error('Failed to retrieve created submission');
+    // Verify the submission was created successfully
+    if (!createdSubmission || !createdSubmission.id) {
+      console.error(`[Form Processor] Failed to create submission properly`);
+      throw new Error(`Failed to create submission properly`);
     }
 
+    // Return the created submission directly (no need to retrieve again)
     return {
       id: createdSubmission.id,
       formName: createdSubmission.formName, 

@@ -6,6 +6,7 @@ import {
   fieldMappings,
   formConfigurations,
   oauthTokens,
+  fieldMetadataCache,
   type User,
   type InsertUser,
   type Resource,
@@ -20,9 +21,11 @@ import {
   type InsertFormConfiguration,
   type OAuthToken,
   type InsertOAuthToken,
+  type FieldMetadataCache,
+  type InsertFieldMetadataCache,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, and, like, desc, gte, lte } from "drizzle-orm";
+import { eq, and, like, desc, gte, lte, notInArray } from "drizzle-orm";
 
 export interface ResourceFilters {
   amyloidosisType?: string;
@@ -59,6 +62,13 @@ export interface FieldMappingFilters {
   fieldType?: string;
   isCustomField?: boolean;
   isRequired?: boolean;
+}
+
+export interface FieldMetadataCacheFilters {
+  zohoModule?: string;
+  isCustomField?: boolean;
+  isRequired?: boolean;
+  lastSyncedBefore?: Date;
 }
 
 export interface IStorage {
@@ -110,6 +120,16 @@ export interface IStorage {
   createOAuthToken(token: InsertOAuthToken): Promise<OAuthToken>;
   updateOAuthToken(id: number, updates: Partial<OAuthToken>): Promise<OAuthToken | undefined>;
   deleteOAuthToken(id: number): Promise<boolean>;
+
+  // Field metadata cache operations
+  getFieldMetadataCache(filters?: FieldMetadataCacheFilters): Promise<FieldMetadataCache[]>;
+  getFieldMetadata(zohoModule: string, fieldApiName: string): Promise<FieldMetadataCache | undefined>;
+  createFieldMetadata(metadata: InsertFieldMetadataCache): Promise<FieldMetadataCache>;
+  updateFieldMetadata(id: number, updates: Partial<FieldMetadataCache>): Promise<FieldMetadataCache | undefined>;
+  upsertFieldMetadata(metadata: InsertFieldMetadataCache): Promise<FieldMetadataCache>;
+  deleteFieldMetadata(id: number): Promise<boolean>;
+  deleteStaleFieldMetadata(zohoModule: string, keepFieldNames: string[]): Promise<number>;
+  refreshFieldMetadataSync(zohoModule: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -511,6 +531,115 @@ export class DatabaseStorage implements IStorage {
   async deleteOAuthToken(id: number): Promise<boolean> {
     const result = await db.delete(oauthTokens).where(eq(oauthTokens.id, id));
     return (result.rowCount || 0) > 0;
+  }
+
+  // Field metadata cache operations
+  async getFieldMetadataCache(filters?: FieldMetadataCacheFilters): Promise<FieldMetadataCache[]> {
+    const conditions = [];
+
+    if (filters?.zohoModule) {
+      conditions.push(eq(fieldMetadataCache.zohoModule, filters.zohoModule));
+    }
+    if (filters?.isCustomField !== undefined) {
+      conditions.push(eq(fieldMetadataCache.isCustomField, filters.isCustomField));
+    }
+    if (filters?.isRequired !== undefined) {
+      conditions.push(eq(fieldMetadataCache.isRequired, filters.isRequired));
+    }
+    if (filters?.lastSyncedBefore) {
+      conditions.push(lte(fieldMetadataCache.lastSynced, filters.lastSyncedBefore));
+    }
+
+    return await db
+      .select()
+      .from(fieldMetadataCache)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(fieldMetadataCache.lastSynced));
+  }
+
+  async getFieldMetadata(zohoModule: string, fieldApiName: string): Promise<FieldMetadataCache | undefined> {
+    const [metadata] = await db
+      .select()
+      .from(fieldMetadataCache)
+      .where(and(
+        eq(fieldMetadataCache.zohoModule, zohoModule),
+        eq(fieldMetadataCache.fieldApiName, fieldApiName)
+      ));
+    return metadata || undefined;
+  }
+
+  async createFieldMetadata(metadata: InsertFieldMetadataCache): Promise<FieldMetadataCache> {
+    const [created] = await db.insert(fieldMetadataCache).values(metadata).returning();
+    return created;
+  }
+
+  async updateFieldMetadata(id: number, updates: Partial<FieldMetadataCache>): Promise<FieldMetadataCache | undefined> {
+    const [updated] = await db
+      .update(fieldMetadataCache)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(fieldMetadataCache.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async upsertFieldMetadata(metadata: InsertFieldMetadataCache): Promise<FieldMetadataCache> {
+    // Try to find existing metadata
+    const existing = await this.getFieldMetadata(metadata.zohoModule, metadata.fieldApiName);
+    
+    if (existing) {
+      // Update existing record
+      const updated = await this.updateFieldMetadata(existing.id, {
+        fieldLabel: metadata.fieldLabel,
+        dataType: metadata.dataType,
+        isCustomField: metadata.isCustomField,
+        isRequired: metadata.isRequired,
+        maxLength: metadata.maxLength,
+        picklistValues: metadata.picklistValues,
+        fieldMetadata: metadata.fieldMetadata,
+        lastSynced: new Date(),
+      });
+      return updated!;
+    } else {
+      // Create new record
+      return await this.createFieldMetadata({
+        ...metadata,
+        lastSynced: new Date(),
+      });
+    }
+  }
+
+  async deleteFieldMetadata(id: number): Promise<boolean> {
+    const result = await db.delete(fieldMetadataCache).where(eq(fieldMetadataCache.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  async deleteStaleFieldMetadata(zohoModule: string, keepFieldNames: string[]): Promise<number> {
+    if (keepFieldNames.length === 0) {
+      // Delete all metadata for this module if no fields to keep
+      const result = await db
+        .delete(fieldMetadataCache)
+        .where(eq(fieldMetadataCache.zohoModule, zohoModule));
+      return result.rowCount || 0;
+    }
+
+    // Use notInArray for proper SQL generation
+    
+    // Delete metadata not in the keepFieldNames list
+    const result = await db
+      .delete(fieldMetadataCache)
+      .where(and(
+        eq(fieldMetadataCache.zohoModule, zohoModule),
+        notInArray(fieldMetadataCache.fieldApiName, keepFieldNames)
+      ));
+    
+    return result.rowCount || 0;
+  }
+
+  async refreshFieldMetadataSync(zohoModule: string): Promise<void> {
+    await db
+      .update(fieldMetadataCache)
+      .set({ lastSynced: new Date(), updatedAt: new Date() })
+      .where(eq(fieldMetadataCache.zohoModule, zohoModule));
   }
 }
 

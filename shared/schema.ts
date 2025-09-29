@@ -414,6 +414,33 @@ export const insertFormConfigurationSchema = createInsertSchema(formConfiguratio
   updatedAt: true,
 });
 
+// Field Metadata Cache for Zoho CRM fields - enables efficient dynamic field mapping
+export const fieldMetadataCache = pgTable("field_metadata_cache", {
+  id: serial("id").primaryKey(),
+  zohoModule: varchar("zoho_module", { length: 100 }).notNull(), // Leads, Contacts, etc
+  fieldApiName: varchar("field_api_name", { length: 255 }).notNull(),
+  fieldLabel: varchar("field_label", { length: 255 }).notNull(),
+  dataType: varchar("data_type", { length: 50 }).notNull(),
+  isCustomField: boolean("is_custom_field").notNull().default(false),
+  isRequired: boolean("is_required").notNull().default(false),
+  maxLength: integer("max_length"),
+  picklistValues: jsonb("picklist_values"), // For dropdown fields
+  fieldMetadata: jsonb("field_metadata"), // Full Zoho field object
+  lastSynced: timestamp("last_synced").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  unique("unique_module_field_api").on(table.zohoModule, table.fieldApiName),
+  index("idx_field_metadata_module").on(table.zohoModule),
+  index("idx_field_metadata_last_synced").on(table.lastSynced),
+]);
+
+export const insertFieldMetadataCacheSchema = createInsertSchema(fieldMetadataCache).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 // Types for form submission system
 export type FormSubmission = typeof formSubmissions.$inferSelect;
 export type InsertFormSubmission = z.infer<typeof insertFormSubmissionSchema>;
@@ -423,6 +450,8 @@ export type FieldMapping = typeof fieldMappings.$inferSelect;
 export type InsertFieldMapping = z.infer<typeof insertFieldMappingSchema>;
 export type FormConfiguration = typeof formConfigurations.$inferSelect;
 export type InsertFormConfiguration = z.infer<typeof insertFormConfigurationSchema>;
+export type FieldMetadataCache = typeof fieldMetadataCache.$inferSelect;
+export type InsertFieldMetadataCache = z.infer<typeof insertFieldMetadataCacheSchema>;
 
 // Dynamic form submission schema - validates the API request format
 export const dynamicFormSubmissionSchema = z.object({

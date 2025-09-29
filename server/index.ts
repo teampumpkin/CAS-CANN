@@ -41,6 +41,10 @@ app.use((req, res, next) => {
   const { oauthService } = await import("./oauth-service");
   await oauthService.initialize();
 
+  // Initialize field metadata cache service
+  const { fieldMetadataCacheService } = await import("./field-metadata-cache-service");
+  await fieldMetadataCacheService.initialize();
+
   const server = await registerRoutes(app);
 
   // Add health endpoint BEFORE Vite middleware to ensure it's handled by Express

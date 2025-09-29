@@ -276,6 +276,21 @@ export class ZohoCRMService {
     }
   }
 
+  /**
+   * Get all fields for a specific module (for metadata caching)
+   */
+  async getFieldsForModule(moduleName: string): Promise<ZohoField[]> {
+    try {
+      const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
+        `/settings/fields?module=${moduleName}`
+      );
+      return response.data || [];
+    } catch (error) {
+      console.error(`Failed to fetch fields for module ${moduleName}:`, error);
+      throw error;
+    }
+  }
+
   // Helper methods for field type mapping
   detectFieldType(value: any, fieldName: string): "text" | "email" | "phone" | "picklist" | "multiselectpicklist" | "boolean" {
     // Check for email pattern

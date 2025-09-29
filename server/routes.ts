@@ -6,12 +6,150 @@ import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
+import { zohoTokenManager, ZohoTokenManager } from "./zoho-token-manager";
+import { zohoCRMLeadService } from "./zoho-crm-lead-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Basic ping endpoint for deployment verification
   app.get('/ping', (_req, res) => {
     res.status(200).send('pong');
+  });
+
+  // Zoho OAuth Authorization Endpoint
+  app.get('/api/oauth/zoho/authorize', (req, res) => {
+    try {
+      const authUrl = ZohoTokenManager.getAuthorizationUrl();
+      console.log('[Zoho OAuth] Redirecting to authorization URL');
+      res.redirect(authUrl);
+    } catch (error) {
+      console.error('[Zoho OAuth] Failed to generate auth URL:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate authorization URL',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Zoho OAuth Callback Endpoint
+  app.get('/api/oauth/zoho/callback', async (req, res) => {
+    const { code, error } = req.query;
+    
+    if (error) {
+      console.error('[Zoho OAuth] Authorization denied:', error);
+      return res.status(400).send(`
+        <html>
+          <body style="font-family: Arial; padding: 40px; text-align: center;">
+            <h2 style="color: #d32f2f;">Authorization Failed</h2>
+            <p>${error}</p>
+            <button onclick="window.close()">Close Window</button>
+          </body>
+        </html>
+      `);
+    }
+    
+    if (!code || typeof code !== 'string') {
+      return res.status(400).send('No authorization code received');
+    }
+    
+    try {
+      console.log('[Zoho OAuth] Exchanging authorization code for tokens');
+      
+      // Exchange code for tokens (must be done within 1 minute!)
+      const tokens = await ZohoTokenManager.exchangeCodeForTokens(code);
+      
+      console.log('[Zoho OAuth] Successfully obtained tokens');
+      console.log('=================================');
+      console.log('IMPORTANT: Save this refresh token as ZOHO_REFRESH_TOKEN:');
+      console.log(tokens.refreshToken);
+      console.log('=================================');
+      
+      // Return success page with refresh token
+      res.send(`
+        <html>
+          <head>
+            <title>Zoho Authorization Successful</title>
+            <style>
+              body { font-family: Arial; padding: 40px; max-width: 800px; margin: 0 auto; }
+              .success { color: #4caf50; }
+              .token-box { 
+                background: #f5f5f5; 
+                padding: 20px; 
+                border-radius: 8px; 
+                margin: 20px 0;
+                word-break: break-all;
+              }
+              .copy-btn { 
+                background: #2196f3; 
+                color: white; 
+                border: none; 
+                padding: 10px 20px; 
+                border-radius: 4px; 
+                cursor: pointer; 
+              }
+              .copy-btn:hover { background: #1976d2; }
+              .instruction { 
+                background: #fff3cd; 
+                border: 1px solid #ffc107; 
+                padding: 15px; 
+                border-radius: 4px; 
+                margin: 20px 0;
+              }
+            </style>
+          </head>
+          <body>
+            <h2 class="success">✓ Authorization Successful!</h2>
+            
+            <div class="instruction">
+              <h3>Next Step: Save Your Refresh Token</h3>
+              <p>Add the refresh token below to your environment variables as <strong>ZOHO_REFRESH_TOKEN</strong></p>
+            </div>
+            
+            <div class="token-box">
+              <strong>Refresh Token:</strong><br>
+              <code id="refreshToken">${tokens.refreshToken}</code>
+            </div>
+            
+            <button class="copy-btn" onclick="copyToken()">Copy Refresh Token</button>
+            
+            <div style="margin-top: 30px;">
+              <p><strong>Access Token Valid For:</strong> ${tokens.expiresIn} seconds</p>
+              <p style="color: #666;">You can now close this window. The refresh token will be used to automatically obtain new access tokens.</p>
+            </div>
+            
+            <script>
+              function copyToken() {
+                const token = document.getElementById('refreshToken').innerText;
+                navigator.clipboard.writeText(token).then(() => {
+                  alert('Refresh token copied to clipboard!');
+                });
+              }
+              
+              // Try to close the window after 10 seconds
+              setTimeout(() => {
+                if (window.opener) {
+                  window.close();
+                }
+              }, 10000);
+            </script>
+          </body>
+        </html>
+      `);
+    } catch (error) {
+      console.error('[Zoho OAuth] Token exchange failed:', error);
+      res.status(500).send(`
+        <html>
+          <body style="font-family: Arial; padding: 40px; text-align: center;">
+            <h2 style="color: #d32f2f;">Token Exchange Failed</h2>
+            <p>${error instanceof Error ? error.message : 'Unknown error'}</p>
+            <p style="color: #666; margin-top: 20px;">
+              Note: Authorization codes expire in 1 minute. Please try again and exchange the code immediately.
+            </p>
+            <a href="/api/oauth/zoho/authorize">Try Again</a>
+          </body>
+        </html>
+      `);
+    }
   });
 
   // User API routes
@@ -445,14 +583,97 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const logDuration = Date.now() - logStartTime;
       console.log(`[${requestId}] ✅ Receipt log created (${logDuration}ms)`);
 
-      // Step 6: Mark submission as saved (no CRM integration)
-      console.log(`[${requestId}] Form submission saved to database successfully`);
-      
-      // Update submission status
-      await storage.updateFormSubmission(submission.id, {
-        processingStatus: "completed" as any,
-        syncStatus: "pending" as any
-      });
+      // Step 6: Process Zoho CRM lead creation if configured
+      if (zohoCRMLeadService.isConfigured()) {
+        console.log(`[${requestId}] Starting Zoho CRM lead creation...`);
+        
+        setImmediate(async () => {
+          const asyncProcessId = `zoho_${submissionId}_${Math.random().toString(36).substr(2, 6)}`;
+          
+          try {
+            console.log(`[${asyncProcessId}] Creating lead in Zoho CRM for submission ${submissionId}`);
+            
+            // Create lead in Zoho CRM
+            const zohoResult = await zohoCRMLeadService.createLead(data);
+            
+            if (zohoResult.success) {
+              console.log(`[${asyncProcessId}] ✅ Lead created successfully:`, {
+                leadId: zohoResult.leadId,
+                createdTime: zohoResult.createdTime
+              });
+              
+              // Update submission with success
+              await storage.updateFormSubmission(submission.id, {
+                processingStatus: "completed" as any,
+                syncStatus: "synced" as any,
+                zohoCrmId: zohoResult.leadId || null
+              });
+              
+              // Log successful CRM push
+              await storage.createSubmissionLog({
+                submissionId: submission.id,
+                operation: "crm_push",
+                status: "success",
+                details: {
+                  zohoRecordId: zohoResult.leadId,
+                  createdTime: zohoResult.createdTime,
+                  processId: asyncProcessId
+                },
+                duration: 0
+              });
+            } else {
+              console.error(`[${asyncProcessId}] ❌ Lead creation failed:`, zohoResult.error);
+              
+              await storage.updateFormSubmission(submission.id, {
+                processingStatus: "failed" as any,
+                syncStatus: "failed" as any,
+                errorMessage: zohoResult.error || "Failed to create lead in Zoho CRM"
+              });
+              
+              // Log failed CRM push
+              await storage.createSubmissionLog({
+                submissionId: submission.id,
+                operation: "crm_push",
+                status: "failed",
+                details: { 
+                  error: zohoResult.error,
+                  processId: asyncProcessId
+                },
+                duration: 0,
+                errorMessage: zohoResult.error || "Failed to create lead"
+              });
+            }
+          } catch (error) {
+            console.error(`[${asyncProcessId}] ❌ Exception during lead creation:`, error);
+            
+            await storage.updateFormSubmission(submissionId, {
+              processingStatus: "failed" as any,
+              syncStatus: "failed" as any,
+              errorMessage: `Lead creation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+            });
+            
+            await storage.createSubmissionLog({
+              submissionId: submissionId,
+              operation: "crm_push",
+              status: "failed",
+              details: { 
+                error: error instanceof Error ? error.message : 'Unknown error',
+                processId: asyncProcessId
+              },
+              duration: 0,
+              errorMessage: error instanceof Error ? error.message : 'Unknown error'
+            });
+          }
+        });
+      } else {
+        console.log(`[${requestId}] Zoho CRM not configured, saving form submission only`);
+        
+        // Update submission status as pending
+        await storage.updateFormSubmission(submission.id, {
+          processingStatus: "completed" as any,
+          syncStatus: "pending" as any
+        });
+      }
 
       // Step 8: Return immediate response to the client
       const responseTime = Date.now() - startTime;

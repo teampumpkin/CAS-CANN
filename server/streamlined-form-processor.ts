@@ -141,9 +141,9 @@ export class StreamlinedFormProcessor {
 
     const submissionId = await storage.createFormSubmission(submission);
     
-    // Get the created submission
+    // Get the created submission by ID
     const submissions = await storage.getFormSubmissions({});
-    const createdSubmission = submissions.find(s => s.id === submissionId);
+    const createdSubmission = submissions.find(s => s.id === parseInt(String(submissionId)));
     
     if (!createdSubmission) {
       throw new Error('Failed to retrieve created submission');

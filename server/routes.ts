@@ -6,53 +6,12 @@ import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
-import { simpleZohoService } from "./simple-zoho-service";
-import { generateRefreshToken } from "./generate-refresh-token";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Basic ping endpoint for deployment verification
   app.get('/ping', (_req, res) => {
     res.status(200).send('pong');
-  });
-
-  // Utility endpoint to generate Zoho refresh token
-  app.post('/api/generate-zoho-token', async (req, res) => {
-    try {
-      const { code } = req.body;
-      
-      if (!code) {
-        return res.status(400).json({
-          success: false,
-          error: 'Authorization code is required'
-        });
-      }
-      
-      console.log('[API] Generating Zoho refresh token from authorization code...');
-      const result = await generateRefreshToken(code);
-      
-      if (result.success) {
-        console.log('[API] ✅ Refresh token generated successfully');
-        return res.json({
-          success: true,
-          message: 'Refresh token generated successfully',
-          refreshToken: result.refreshToken,
-          instruction: 'Save this refresh token as ZOHO_REFRESH_TOKEN environment variable'
-        });
-      } else {
-        console.error('[API] Failed to generate refresh token:', result.error);
-        return res.status(400).json({
-          success: false,
-          error: result.error
-        });
-      }
-    } catch (error) {
-      console.error('[API] Error generating refresh token:', error);
-      return res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
   });
 
   // User API routes
@@ -486,130 +445,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const logDuration = Date.now() - logStartTime;
       console.log(`[${requestId}] ✅ Receipt log created (${logDuration}ms)`);
 
-      // Step 6: Use simple Zoho service for direct lead creation
-      console.log(`[${requestId}] Starting direct Zoho CRM lead creation...`);
+      // Step 6: Mark submission as saved (no CRM integration)
+      console.log(`[${requestId}] Form submission saved to database successfully`);
       
-      // Check if Zoho credentials are configured
-      if (!simpleZohoService.isConfigured()) {
-        console.error(`[${requestId}] Zoho credentials not configured`);
-        await storage.updateFormSubmission(submission.id, {
-          processingStatus: "failed" as any,
-          syncStatus: "failed" as any,
-          errorMessage: "Zoho CRM credentials not configured"
-        });
-        
-        await storage.createSubmissionLog({
-          submissionId: submission.id,
-          operation: "crm_push",
-          status: "failed",
-          details: { error: "Missing Zoho credentials" },
-          duration: Date.now() - startTime,
-          errorMessage: "Zoho CRM credentials not configured"
-        });
-      } else {
-        // Start async Zoho lead creation
-        setImmediate(async () => {
-          const asyncStartTime = Date.now();
-          const asyncProcessId = `async_${submissionId}_${Math.random().toString(36).substr(2, 6)}`;
-          
-          try {
-            console.log(`\n=== [ASYNC ZOHO LEAD CREATION START] Process ID: ${asyncProcessId} ===`);
-            console.log(`[${asyncProcessId}] Submission ID: ${submissionId}`);
-            console.log(`[${asyncProcessId}] Form: ${form_name}`);
-            console.log(`[${asyncProcessId}] Data fields: ${Object.keys(data).join(', ')}`);
-            
-            // Create lead using simple Zoho service
-            const zohoResult = await simpleZohoService.createLead(req.body);
-            const fieldSyncDuration = Date.now() - asyncStartTime;
-          
-            
-            if (zohoResult.success) {
-              console.log(`[${asyncProcessId}] ✅ Lead created successfully:`, {
-                leadId: zohoResult.leadId,
-                duration: fieldSyncDuration
-              });
-              
-              // Update submission with success
-              await storage.updateFormSubmission(submission.id, {
-                processingStatus: "completed" as any,
-                syncStatus: "synced" as any,
-                zohoCrmId: zohoResult.leadId || null
-              });
-              
-              // Log successful CRM push
-              await storage.createSubmissionLog({
-                submissionId: submission.id,
-                operation: "crm_push",
-                status: "success",
-                details: {
-                  zohoRecordId: zohoResult.leadId,
-                  processId: asyncProcessId
-                },
-                duration: fieldSyncDuration
-              });
-              
-              console.log(`[${asyncProcessId}] 🎉 LEAD CREATION COMPLETED SUCCESSFULLY!`);
-            } else {
-              console.error(`[${asyncProcessId}] ❌ Lead creation failed:`, zohoResult.error);
-              
-              await storage.updateFormSubmission(submission.id, {
-                processingStatus: "failed" as any,
-                syncStatus: "failed" as any,
-                errorMessage: zohoResult.error || "Failed to create lead in Zoho CRM"
-              });
-              
-              // Log failed CRM push
-              await storage.createSubmissionLog({
-                submissionId: submission.id,
-                operation: "crm_push",
-                status: "failed",
-                details: { 
-                  error: zohoResult.error,
-                  processId: asyncProcessId
-                },
-                duration: fieldSyncDuration,
-                errorMessage: zohoResult.error || "Failed to create lead"
-              });
-            }
-
-          } catch (processingError) {
-            const totalErrorDuration = Date.now() - asyncStartTime;
-            console.error(`[${asyncProcessId}] ❌ PROCESSING FAILED (${totalErrorDuration}ms):`, {
-              error: processingError instanceof Error ? processingError.message : 'Unknown error',
-              stack: processingError instanceof Error ? processingError.stack : undefined,
-              submissionId: submissionId,
-              processId: asyncProcessId,
-              originalRequestId: requestId
-            });
-            
-            if (submissionId) {
-              await storage.updateFormSubmission(submissionId, {
-                processingStatus: "failed" as any,
-                syncStatus: "failed" as any,
-                errorMessage: `Processing failed: ${processingError instanceof Error ? processingError.message : 'Unknown error'}`
-              });
-
-              // Log overall processing failure
-              await storage.createSubmissionLog({
-                submissionId: submissionId,
-                operation: "crm_push",
-                status: "failed",
-                details: { 
-                  error: processingError instanceof Error ? processingError.message : 'Unknown error',
-                  errorType: processingError instanceof Error ? processingError.constructor.name : 'Unknown',
-                  processId: asyncProcessId,
-                  originalRequestId: requestId,
-                  failureStage: 'general_processing'
-                },
-                duration: totalErrorDuration,
-                errorMessage: processingError instanceof Error ? processingError.message : 'Unknown error'
-              });
-            }
-            
-            console.log(`[${asyncProcessId}] ⏹️ ASYNC PROCESSING TERMINATED DUE TO ERROR`);
-          }
-        });
-      }
+      // Update submission status
+      await storage.updateFormSubmission(submission.id, {
+        processingStatus: "completed" as any,
+        syncStatus: "pending" as any
+      });
 
       // Step 8: Return immediate response to the client
       const responseTime = Date.now() - startTime;

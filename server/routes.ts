@@ -16,10 +16,107 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.status(200).send('pong');
   });
 
+  // Zoho OAuth Setup Page - Shows public authorization URL
+  app.get('/api/oauth/zoho/setup', (req, res) => {
+    try {
+      // Determine the public base URL for this request
+      const protocol = req.get('x-forwarded-proto') || (req.secure ? 'https' : 'http');
+      const host = req.get('x-forwarded-host') || req.get('host') || 'localhost:5000';
+      const baseUrl = `${protocol}://${host}`;
+      const authUrl = `${baseUrl}/api/oauth/zoho/authorize`;
+      
+      res.send(`
+        <html>
+          <head>
+            <title>Zoho CRM OAuth Setup</title>
+            <style>
+              body { font-family: Arial; padding: 40px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+              .header { color: #00AFE6; border-bottom: 2px solid #00AFE6; padding-bottom: 20px; margin-bottom: 30px; }
+              .auth-button { 
+                display: inline-block;
+                background: #00AFE6; 
+                color: white; 
+                padding: 15px 30px; 
+                text-decoration: none; 
+                border-radius: 8px; 
+                font-size: 18px;
+                font-weight: bold;
+                margin: 20px 0;
+              }
+              .auth-button:hover { background: #0095c7; }
+              .step { 
+                background: #f8f9fa; 
+                padding: 20px; 
+                border-radius: 8px; 
+                margin: 15px 0;
+                border-left: 4px solid #00AFE6;
+              }
+              .warning { 
+                background: #fff3cd; 
+                border: 1px solid #ffc107; 
+                padding: 15px; 
+                border-radius: 4px; 
+                margin: 20px 0;
+              }
+              code { background: #f1f1f1; padding: 2px 6px; border-radius: 3px; }
+            </style>
+          </head>
+          <body>
+            <div class="header">
+              <h1>🔐 Zoho CRM Integration Setup</h1>
+              <p>Canadian Amyloidosis Society - OAuth Authorization</p>
+            </div>
+            
+            <div class="warning">
+              <strong>⚠️ Important:</strong> Authorization codes expire in 1 minute! Complete the process quickly.
+            </div>
+            
+            <div class="step">
+              <h3>Step 1: Click to Authorize</h3>
+              <p>Click the button below to authorize CAS with your Zoho CRM:</p>
+              <a href="${authUrl}" class="auth-button" target="_blank">🚀 Authorize Zoho CRM Access</a>
+            </div>
+            
+            <div class="step">
+              <h3>Step 2: Complete Authorization</h3>
+              <p>You will:</p>
+              <ul>
+                <li>Be redirected to Zoho to log in</li>
+                <li>Grant permissions for CRM access</li>
+                <li>Return to a success page with your refresh token</li>
+              </ul>
+            </div>
+            
+            <div class="step">
+              <h3>Step 3: Save Refresh Token</h3>
+              <p>Copy the refresh token and add it as <code>ZOHO_REFRESH_TOKEN</code> environment variable.</p>
+            </div>
+            
+            <div style="margin-top: 40px; padding: 20px; background: #e8f5e8; border-radius: 8px;">
+              <h3>✅ After Setup</h3>
+              <p>Your "Join CANN Today" form will automatically sync to Zoho CRM leads!</p>
+            </div>
+          </body>
+        </html>
+      `);
+    } catch (error) {
+      console.error('[Zoho OAuth Setup] Error:', error);
+      res.status(500).send('Error generating setup page');
+    }
+  });
+
   // Zoho OAuth Authorization Endpoint
   app.get('/api/oauth/zoho/authorize', (req, res) => {
     try {
-      const authUrl = ZohoTokenManager.getAuthorizationUrl();
+      // Determine the public base URL for this request
+      const protocol = req.get('x-forwarded-proto') || (req.secure ? 'https' : 'http');
+      const host = req.get('x-forwarded-host') || req.get('host') || 'localhost:5000';
+      const baseUrl = `${protocol}://${host}`;
+      const redirectUri = `${baseUrl}/api/oauth/zoho/callback`;
+      
+      console.log('[Zoho OAuth] Using redirect URI:', redirectUri);
+      
+      const authUrl = ZohoTokenManager.getAuthorizationUrl(redirectUri);
       console.log('[Zoho OAuth] Redirecting to authorization URL');
       res.redirect(authUrl);
     } catch (error) {

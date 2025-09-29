@@ -141,13 +141,16 @@ export class ZohoTokenManager {
   /**
    * Generate the OAuth authorization URL
    */
-  static getAuthorizationUrl(): string {
+  static getAuthorizationUrl(customRedirectUri?: string): string {
     const authUrl = process.env.ZOHO_AUTH_URL || 'https://accounts.zoho.com';
     const clientId = process.env.ZOHO_CLIENT_ID;
-    const redirectUri = process.env.ZOHO_REDIRECT_URI || 
-      (process.env.NODE_ENV === 'production' 
+    
+    let redirectUri = customRedirectUri || process.env.ZOHO_REDIRECT_URI;
+    if (!redirectUri) {
+      redirectUri = process.env.NODE_ENV === 'production' 
         ? 'https://amyloid.ca/api/oauth/zoho/callback'
-        : 'http://localhost:5000/api/oauth/zoho/callback');
+        : 'http://localhost:5000/api/oauth/zoho/callback';
+    }
 
     if (!clientId) {
       throw new Error('ZOHO_CLIENT_ID is not configured');

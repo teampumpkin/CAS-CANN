@@ -16,6 +16,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.status(200).send('pong');
   });
 
+  // Test endpoint to manually store Zoho tokens for debugging
+  app.post('/api/oauth/zoho/test-store', async (req, res) => {
+    try {
+      const { accessToken, refreshToken } = req.body;
+      
+      if (!accessToken || !refreshToken) {
+        return res.status(400).json({ 
+          error: 'Missing accessToken or refreshToken in request body' 
+        });
+      }
+
+      // Store test tokens in database
+      const expiresAt = new Date(Date.now() + 3600 * 1000); // 1 hour
+      const tokenRecord = await storage.createOAuthToken({
+        provider: 'zoho_crm',
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        expiresAt: expiresAt,
+        scope: 'ZohoCRM.modules.leads.ALL,ZohoCRM.settings.fields.ALL',
+        tokenType: 'Bearer',
+        isActive: true
+      });
+
+      console.log('[Test Store] ✅ Test tokens stored successfully:', {
+        id: tokenRecord.id,
+        hasAccessToken: !!tokenRecord.accessToken,
+        hasRefreshToken: !!tokenRecord.refreshToken,
+        expiresAt: tokenRecord.expiresAt
+      });
+
+      res.json({ 
+        success: true, 
+        message: 'Test tokens stored successfully',
+        tokenId: tokenRecord.id
+      });
+    } catch (error) {
+      console.error('[Test Store] Error storing test tokens:', error);
+      res.status(500).json({ 
+        error: 'Failed to store test tokens',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
   // Zoho OAuth Setup Page - Shows public authorization URL
   app.get('/api/oauth/zoho/setup', (req, res) => {
     try {

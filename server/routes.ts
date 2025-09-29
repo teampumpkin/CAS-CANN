@@ -10,9 +10,9 @@ import { dedicatedTokenManager } from "./dedicated-token-manager";
 import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
 // import { notificationService, notificationConfigSchema } from "./notification-service"; // Disabled for production
-import { formScalabilityService, formConfigSchema } from "./form-scalability-service";
+// REMOVED: formScalabilityService - No longer used after endpoint consolidation
 import { errorHandlingService, errorClassificationSchema } from "./error-handling-service";
-import { streamlinedFormProcessor } from "./streamlined-form-processor";
+// REMOVED: streamlinedFormProcessor - No longer used after endpoint consolidation
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -1247,214 +1247,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   */
 
-  // Form Scalability System API endpoints
-  app.post("/api/forms/process", async (req, res) => {
-    try {
-      const { formName, submissionData } = req.body;
-      
-      if (!formName || !submissionData) {
-        return res.status(400).json({
-          success: false,
-          error: 'formName and submissionData are required',
-        });
-      }
+  // Form Scalability System API endpoints - REMOVED: Duplicate of /api/submit-form
 
-      console.log(`[API] Processing form submission: ${formName}`);
-      const result = await formScalabilityService.processFormSubmission(formName, submissionData);
-      
-      res.json({
-        success: result.success,
-        result,
-        processedAt: new Date().toISOString(),
-      });
+  // REMOVED: /api/forms/analyze - Management endpoint not needed for production
 
-    } catch (error) {
-      console.error('[API] Form processing error:', error);
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Form processing failed',
-      });
-    }
-  });
+  // REMOVED: /api/forms/configure - Management endpoint not needed for production
 
-  app.post("/api/forms/analyze", async (req, res) => {
-    try {
-      const { formName, sampleData } = req.body;
-      
-      if (!formName || !sampleData) {
-        return res.status(400).json({
-          success: false,
-          error: 'formName and sampleData are required',
-        });
-      }
+  // REMOVED: /api/forms/configs - Management endpoint not needed for production
 
-      console.log(`[API] Analyzing form: ${formName}`);
-      const analysis = await formScalabilityService.analyzeNewForm(formName, sampleData);
-      
-      res.json({
-        success: true,
-        analysis,
-        analyzedAt: new Date().toISOString(),
-      });
+  // REMOVED: /api/forms/configs/:formName GET - Management endpoint not needed
 
-    } catch (error) {
-      console.error('[API] Form analysis error:', error);
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Form analysis failed',
-      });
-    }
-  });
+  // REMOVED: /api/forms/configs/:formName PUT - Management endpoint not needed
 
-  app.post("/api/forms/configure", async (req, res) => {
-    try {
-      const config = formConfigSchema.parse(req.body);
-      
-      const result = await formScalabilityService.createFormConfig(config);
-      
-      res.json({
-        success: true,
-        config: result,
-        createdAt: new Date().toISOString(),
-      });
+  // REMOVED: /api/forms/configs/:formName DELETE - Management endpoint not needed
 
-    } catch (error) {
-      console.error('[API] Form configuration error:', error);
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({
-          success: false,
-          error: 'Invalid configuration data',
-          details: error.errors,
-        });
-      }
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Configuration failed',
-      });
-    }
-  });
-
-  app.get("/api/forms/configs", async (req, res) => {
-    try {
-      const configs = formScalabilityService.getAllFormConfigs();
-      
-      res.json({
-        success: true,
-        configs,
-        count: configs.length,
-        retrievedAt: new Date().toISOString(),
-      });
-
-    } catch (error) {
-      console.error('[API] Get form configs error:', error);
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Failed to get configurations',
-      });
-    }
-  });
-
-  app.get("/api/forms/configs/:formName", async (req, res) => {
-    try {
-      const { formName } = req.params;
-      const config = formScalabilityService.getFormConfig(formName);
-      
-      if (!config) {
-        return res.status(404).json({
-          success: false,
-          error: `Configuration not found for form: ${formName}`,
-        });
-      }
-
-      res.json({
-        success: true,
-        config,
-        retrievedAt: new Date().toISOString(),
-      });
-
-    } catch (error) {
-      console.error('[API] Get form config error:', error);
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Failed to get configuration',
-      });
-    }
-  });
-
-  app.put("/api/forms/configs/:formName", async (req, res) => {
-    try {
-      const { formName } = req.params;
-      const updates = formConfigSchema.partial().parse(req.body);
-      
-      const updatedConfig = await formScalabilityService.updateFormConfig(formName, updates);
-      
-      res.json({
-        success: true,
-        config: updatedConfig,
-        updatedAt: new Date().toISOString(),
-      });
-
-    } catch (error) {
-      console.error('[API] Update form config error:', error);
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({
-          success: false,
-          error: 'Invalid update data',
-          details: error.errors,
-        });
-      }
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Update failed',
-      });
-    }
-  });
-
-  app.delete("/api/forms/configs/:formName", async (req, res) => {
-    try {
-      const { formName } = req.params;
-      const deleted = await formScalabilityService.deleteFormConfig(formName);
-      
-      if (!deleted) {
-        return res.status(404).json({
-          success: false,
-          error: `Configuration not found for form: ${formName}`,
-        });
-      }
-
-      res.json({
-        success: true,
-        message: `Configuration deleted for form: ${formName}`,
-        deletedAt: new Date().toISOString(),
-      });
-
-    } catch (error) {
-      console.error('[API] Delete form config error:', error);
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Delete failed',
-      });
-    }
-  });
-
-  app.get("/api/forms/stats", async (req, res) => {
-    try {
-      const stats = await formScalabilityService.getProcessingStats();
-      
-      res.json({
-        success: true,
-        stats,
-        retrievedAt: new Date().toISOString(),
-      });
-
-    } catch (error) {
-      console.error('[API] Get processing stats error:', error);
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Failed to get stats',
-      });
-    }
-  });
+  // REMOVED: /api/forms/stats - Management endpoint not needed for production
 
   // Error Handling & Retry System API endpoints
   app.post("/api/errors/handle", async (req, res) => {
@@ -1569,60 +1376,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Streamlined Form Processing API - Focus on direct form-to-CRM sync
-  app.post("/api/form/submit", async (req, res) => {
-    try {
-      const { formName, submissionData, sourceUrl } = req.body;
-      
-      if (!formName || !submissionData) {
-        return res.status(400).json({
-          success: false,
-          error: 'formName and submissionData are required',
-        });
-      }
-
-      console.log(`[API] Processing form submission: ${formName}`);
-      const result = await streamlinedFormProcessor.processFormSubmission(
-        formName, 
-        submissionData, 
-        sourceUrl
-      );
-      
-      res.json({
-        ...result,
-        message: result.success 
-          ? `Form "${formName}" processed successfully and synced to Zoho CRM` 
-          : `Form "${formName}" processing failed`,
-        processedAt: new Date().toISOString(),
-      });
-
-    } catch (error) {
-      console.error('[API] Form submission error:', error);
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Form processing failed',
-      });
-    }
-  });
-
-  app.get("/api/form/stats", async (req, res) => {
-    try {
-      const stats = await streamlinedFormProcessor.getProcessingStats();
-      
-      res.json({
-        success: true,
-        stats,
-        retrievedAt: new Date().toISOString(),
-      });
-
-    } catch (error) {
-      console.error('[API] Form stats error:', error);
-      res.status(500).json({
-        success: false,
-        error: error instanceof Error ? error.message : 'Failed to get stats',
-      });
-    }
-  });
+  // REMOVED: All duplicate form processing endpoints
+  // Only /api/submit-form is the canonical form submission endpoint
 
   const httpServer = createServer(app);
   return httpServer;

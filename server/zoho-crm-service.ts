@@ -70,6 +70,18 @@ export class ZohoCRMService {
    * Get a valid access token, automatically refreshing if needed
    */
   private async getAccessToken(): Promise<string> {
+    // Proactive token health check before API calls
+    const health = await oauthService.checkTokenHealth('zoho_crm');
+    
+    if (health.needsRefresh && health.isValid) {
+      console.log('[Zoho CRM] Proactively refreshing token before API call');
+      const token = await oauthService.getValidToken('zoho_crm');
+      if (!token) {
+        throw new Error("Failed to refresh Zoho CRM access token. Please re-authenticate via /oauth/zoho/connect");
+      }
+      return token;
+    }
+    
     const token = await oauthService.getValidToken('zoho_crm');
     if (!token) {
       throw new Error("No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect");
@@ -114,6 +126,14 @@ export class ZohoCRMService {
         const delay = retryAfter ? parseInt(retryAfter) * 1000 : Math.pow(2, retryCount) * 1000;
         console.log(`[Zoho API] Rate limited, retrying after ${delay}ms`);
         await new Promise(resolve => setTimeout(resolve, delay));
+        return this.makeRequest(endpoint, method, body, retryCount + 1);
+      }
+
+      // Handle OAuth errors (401) with token refresh retry
+      if (response.status === 401 && retryCount < 2) {
+        console.log(`[Zoho API] OAuth error (401), attempting token refresh and retry`);
+        // Force token refresh by clearing cache
+        await oauthService.getValidToken('zoho_crm');
         return this.makeRequest(endpoint, method, body, retryCount + 1);
       }
 

@@ -13,6 +13,7 @@ export class OAuthService {
   private static instance: OAuthService;
   private tokenCache: Map<string, TokenInfo> = new Map();
   private refreshPromises: Map<string, Promise<TokenInfo | null>> = new Map();
+  private backgroundRefreshTimer: NodeJS.Timeout | null = null;
 
   static getInstance(): OAuthService {
     if (!OAuthService.instance) {
@@ -112,6 +113,9 @@ export class OAuthService {
 
       console.log(`[OAuth] Successfully stored tokens for ${provider}`);
       console.log(`[OAuth] Token expires at: ${expiresAt.toISOString()}`);
+      
+      // Start background refresh timer when we have valid tokens
+      this.startBackgroundTokenRefresh();
       
       return true;
 
@@ -265,10 +269,53 @@ export class OAuthService {
       if (!health.isValid) {
         console.log('[OAuth] No valid token found - manual authentication required');
         console.log('[OAuth] Visit: http://localhost:5000/oauth/zoho/connect to authenticate');
+      } else {
+        // Start background token refresh if we have valid tokens
+        this.startBackgroundTokenRefresh();
       }
 
     } catch (error) {
       console.error('[OAuth] Error during initialization:', error);
+    }
+  }
+
+  /**
+   * Start background token refresh timer
+   */
+  private startBackgroundTokenRefresh(): void {
+    // Clear existing timer if any
+    if (this.backgroundRefreshTimer) {
+      clearInterval(this.backgroundRefreshTimer);
+    }
+
+    // Check and refresh tokens every 15 minutes
+    this.backgroundRefreshTimer = setInterval(async () => {
+      try {
+        console.log('[OAuth] Background token health check...');
+        const health = await this.checkTokenHealth('zoho_crm');
+        
+        if (health.needsRefresh && health.isValid) {
+          console.log('[OAuth] Background token refresh triggered');
+          await this.getValidToken('zoho_crm');
+        } else if (!health.isValid) {
+          console.log('[OAuth] Background check: Token invalid, manual authentication required');
+        }
+      } catch (error) {
+        console.error('[OAuth] Background token refresh error:', error);
+      }
+    }, 15 * 60 * 1000); // 15 minutes
+
+    console.log('[OAuth] Background token refresh timer started (15min interval)');
+  }
+
+  /**
+   * Stop background token refresh timer
+   */
+  private stopBackgroundTokenRefresh(): void {
+    if (this.backgroundRefreshTimer) {
+      clearInterval(this.backgroundRefreshTimer);
+      this.backgroundRefreshTimer = null;
+      console.log('[OAuth] Background token refresh timer stopped');
     }
   }
 

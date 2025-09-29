@@ -29,9 +29,21 @@ export class ZohoTokenManager {
    * Get a valid access token, refreshing if necessary
    */
   async getValidAccessToken(): Promise<string> {
-    // Check if we have a refresh token
+    // Try OAuth service first (database-stored tokens)
+    try {
+      const { oauthService } = await import('./oauth-service');
+      const token = await oauthService.getValidToken('zoho_crm');
+      if (token) {
+        console.log('[ZohoTokenManager] Using database-stored OAuth token');
+        return token;
+      }
+    } catch (error) {
+      console.log('[ZohoTokenManager] OAuth service not available, falling back to env vars');
+    }
+
+    // Fallback to environment variable method
     if (!process.env.ZOHO_REFRESH_TOKEN) {
-      throw new Error('No refresh token available. Please complete OAuth authorization first.');
+      throw new Error('No refresh token available. Please complete OAuth authorization first via /api/oauth/zoho/setup');
     }
 
     // Check if current token is valid (with 5-minute buffer)
@@ -232,11 +244,26 @@ export class ZohoTokenManager {
    * Check if the service is properly configured
    */
   isConfigured(): boolean {
-    return !!(
+    // Check for basic credentials
+    const hasCredentials = !!(
       process.env.ZOHO_CLIENT_ID &&
-      process.env.ZOHO_CLIENT_SECRET &&
-      process.env.ZOHO_REFRESH_TOKEN
+      process.env.ZOHO_CLIENT_SECRET
     );
+    
+    if (!hasCredentials) {
+      return false;
+    }
+    
+    // Check for refresh token in environment variables
+    if (process.env.ZOHO_REFRESH_TOKEN) {
+      return true;
+    }
+    
+    // Check for database-stored tokens (OAuth service)
+    // We can't make this async, so we'll return true if credentials exist
+    // The actual token check will happen in getValidAccessToken()
+    console.log('[ZohoTokenManager] Basic credentials available, checking for stored tokens...');
+    return true; // Let getValidAccessToken() handle the actual token validation
   }
 }
 

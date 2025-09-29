@@ -6,6 +6,7 @@ import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
+import { simpleZohoService } from "./simple-zoho-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -445,257 +446,130 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const logDuration = Date.now() - logStartTime;
       console.log(`[${requestId}] ✅ Receipt log created (${logDuration}ms)`);
 
-      // Step 6: Prepare for async processing
-      console.log(`[${requestId}] Preparing async processing pipeline...`);
-
-      // Step 7: Start processing asynchronously
-      setImmediate(async () => {
-        const asyncStartTime = Date.now();
-        const asyncProcessId = `async_${submissionId}_${Math.random().toString(36).substr(2, 6)}`;
+      // Step 6: Use simple Zoho service for direct lead creation
+      console.log(`[${requestId}] Starting direct Zoho CRM lead creation...`);
+      
+      // Check if Zoho credentials are configured
+      if (!simpleZohoService.isConfigured()) {
+        console.error(`[${requestId}] Zoho credentials not configured`);
+        await storage.updateFormSubmission(submission.id, {
+          processingStatus: "failed" as any,
+          syncStatus: "failed" as any,
+          errorMessage: "Zoho CRM credentials not configured"
+        });
         
-        try {
-          console.log(`\n=== [ASYNC PROCESSING START] Process ID: ${asyncProcessId} ===`);
-          console.log(`[${asyncProcessId}] Submission ID: ${submissionId}`);
-          console.log(`[${asyncProcessId}] Original Request ID: ${requestId}`);
-          console.log(`[${asyncProcessId}] Form: ${form_name} → ${targetModule}`);
-          console.log(`[${asyncProcessId}] Data fields: ${Object.keys(data).join(', ')}`);
-          
-          // Update status to processing (if needed)
-          await storage.updateFormSubmission(submission.id, {
-            // processingStatus: "processing" // Already set by default
-          });
-
-          // Step 7a: Sync fields with Zoho CRM
-          console.log(`[${asyncProcessId}] 🔄 Starting field sync phase...`);
-          const fieldSyncStartTime = Date.now();
-          
-          const fieldSyncResult = await fieldSyncEngine.syncFieldsForSubmission(submission);
-          const fieldSyncDuration = Date.now() - fieldSyncStartTime;
-          
-          console.log(`[${asyncProcessId}] Field sync completed (${fieldSyncDuration}ms):`, {
-            success: fieldSyncResult.success,
-            fieldsProcessed: fieldSyncResult.fieldsProcessed,
-            fieldsCreated: fieldSyncResult.fieldsCreated,
-            fieldsSynced: fieldSyncResult.fieldsSynced,
-            errorCount: fieldSyncResult.errors.length,
-            details: fieldSyncResult.details
-          });
-          
-          if (!fieldSyncResult.success) {
-            console.error(`[${asyncProcessId}] ❌ Field sync failed:`, fieldSyncResult.errors);
-            await storage.updateFormSubmission(submission.id, {
-              processingStatus: "failed" as any,
-              syncStatus: "failed" as any,
-              errorMessage: `Field sync failed: ${fieldSyncResult.errors.join("; ")}`
-            });
-
-            // Log field sync failure
-            await storage.createSubmissionLog({
-              submissionId: submission.id,
-              operation: "field_sync",
-              status: "failed",
-              details: {
-                errors: fieldSyncResult.errors,
-                processId: asyncProcessId,
-                fieldsProcessed: fieldSyncResult.fieldsProcessed
-              },
-              duration: fieldSyncDuration,
-              errorMessage: fieldSyncResult.errors.join("; ")
-            });
-            
-            console.log(`[${asyncProcessId}] ⏹️ Processing stopped due to field sync failure`);
-            return;
-          }
-
-          // Log successful field sync
-          await storage.createSubmissionLog({
-            submissionId: submission.id,
-            operation: "field_sync",
-            status: "success",
-            details: {
-              fieldsCreated: fieldSyncResult.fieldsCreated,
-              fieldsSynced: fieldSyncResult.fieldsSynced,
-              processId: asyncProcessId
-            },
-            duration: fieldSyncDuration
-          });
-
-          console.log(`[${asyncProcessId}] ✅ Field sync successful, proceeding to CRM push...`);
-
-          // Step 7b: Push data to Zoho CRM
-          console.log(`[${asyncProcessId}] 🚀 Starting CRM push phase...`);
-          const pushStartTime = Date.now();
+        await storage.createSubmissionLog({
+          submissionId: submission.id,
+          operation: "crm_push",
+          status: "failed",
+          details: { error: "Missing Zoho credentials" },
+          duration: Date.now() - startTime,
+          errorMessage: "Zoho CRM credentials not configured"
+        });
+      } else {
+        // Start async Zoho lead creation
+        setImmediate(async () => {
+          const asyncStartTime = Date.now();
+          const asyncProcessId = `async_${submissionId}_${Math.random().toString(36).substr(2, 6)}`;
           
           try {
-            // Get updated field mappings after sync
-            console.log(`[${asyncProcessId}] Retrieving updated field mappings for module: ${targetModule}`);
-            const mappingStartTime = Date.now();
+            console.log(`\n=== [ASYNC ZOHO LEAD CREATION START] Process ID: ${asyncProcessId} ===`);
+            console.log(`[${asyncProcessId}] Submission ID: ${submissionId}`);
+            console.log(`[${asyncProcessId}] Form: ${form_name}`);
+            console.log(`[${asyncProcessId}] Data fields: ${Object.keys(data).join(', ')}`);
             
-            const updatedMappings = await storage.getFieldMappings({ zohoModule: targetModule });
-            const mappingDuration = Date.now() - mappingStartTime;
-            
-            console.log(`[${asyncProcessId}] Field mappings retrieved (${mappingDuration}ms):`, {
-              mappingCount: updatedMappings.length,
-              availableFields: updatedMappings.map(m => ({
-                formField: m.fieldName,
-                zohoField: m.fieldName, // Note: this might need adjustment based on schema
-                type: m.fieldType
-              }))
-            });
-            
-            // Format data for Zoho CRM
-            console.log(`[${asyncProcessId}] Formatting data for Zoho CRM...`);
-            const formatStartTime = Date.now();
-            
-            const zohoData = zohoCRMService.formatFieldDataForZoho(data, updatedMappings);
-            zohoData.Source_Form = form_name; // Add source tracking
-            
-            const formatDuration = Date.now() - formatStartTime;
-            
-            // Create sanitized version for logging (hide sensitive data)
-            const sanitizedZohoData = Object.fromEntries(
-              Object.entries(zohoData).map(([key, value]) => [
-                key, 
-                key.toLowerCase().includes('email') ? 
-                  (typeof value === 'string' ? value.replace(/(.{2}).*(@.*)/, '$1***$2') : value) : 
-                  value
-              ])
-            );
-            
-            console.log(`[${asyncProcessId}] Data formatted for Zoho (${formatDuration}ms):`, {
-              targetModule: targetModule,
-              fieldCount: Object.keys(zohoData).length,
-              zohoFields: Object.keys(sanitizedZohoData),
-              sanitizedData: sanitizedZohoData
-            });
-            
-            // Create record in Zoho CRM
-            console.log(`[${asyncProcessId}] 📤 Creating record in Zoho ${targetModule}...`);
-            const createRecordStartTime = Date.now();
-            
-            const zohoRecord = await zohoCRMService.createRecord(targetModule, zohoData);
-            const createRecordDuration = Date.now() - createRecordStartTime;
-            
-            console.log(`[${asyncProcessId}] ✅ Zoho record created (${createRecordDuration}ms):`, {
-              zohoRecordId: zohoRecord.id,
-              module: targetModule,
-              status: zohoRecord.status || 'Created'
-            });
-            
-            // Update submission with success
-            console.log(`[${asyncProcessId}] Updating submission status to completed...`);
-            const statusUpdateStartTime = Date.now();
-            
-            await storage.updateFormSubmission(submission.id, {
-              processingStatus: "completed" as any,
-              syncStatus: "synced" as any,
-              zohoCrmId: zohoRecord.id || null
-            });
-            
-            const statusUpdateDuration = Date.now() - statusUpdateStartTime;
-            console.log(`[${asyncProcessId}] ✅ Status updated to completed (${statusUpdateDuration}ms)`);
-
-            // Log successful CRM push
-            await storage.createSubmissionLog({
-              submissionId: submission.id,
-              operation: "crm_push",
-              status: "success",
-              details: {
-                zohoRecordId: zohoRecord.id,
-                targetModule,
-                fieldsSubmitted: Object.keys(zohoData).length,
-                processId: asyncProcessId,
-                timings: {
-                  fieldMapping: mappingDuration,
-                  dataFormatting: formatDuration,
-                  recordCreation: createRecordDuration,
-                  statusUpdate: statusUpdateDuration
-                }
-              },
-              duration: Date.now() - pushStartTime
-            });
-
-            const totalProcessingTime = Date.now() - asyncStartTime;
-            console.log(`[${asyncProcessId}] 🎉 PROCESSING COMPLETED SUCCESSFULLY!`);
-            console.log(`[${asyncProcessId}] Summary:`, {
-              submissionId: submissionId,
-              zohoRecordId: zohoRecord.id,
-              totalTime: `${totalProcessingTime}ms`,
-              fieldsSynced: fieldSyncResult.fieldsCreated,
-              fieldsSubmitted: Object.keys(zohoData).length
-            });
-
-          } catch (crmError) {
-            const pushErrorDuration = Date.now() - pushStartTime;
-            console.error(`[${asyncProcessId}] ❌ CRM push failed (${pushErrorDuration}ms):`, {
-              error: crmError instanceof Error ? crmError.message : 'Unknown error',
-              stack: crmError instanceof Error ? crmError.stack : undefined,
-              submissionId: submissionId,
-              targetModule: targetModule
-            });
-            
-            await storage.updateFormSubmission(submission.id, {
-              processingStatus: "failed" as any,
-              syncStatus: "failed" as any,
-              errorMessage: `CRM push failed: ${crmError instanceof Error ? crmError.message : 'Unknown error'}`
-            });
-
-            // Log failed CRM push with detailed error info
-            await storage.createSubmissionLog({
-              submissionId: submission.id,
-              operation: "crm_push",
-              status: "failed",
-              details: { 
-                error: crmError instanceof Error ? crmError.message : 'Unknown error',
-                errorType: crmError instanceof Error ? crmError.constructor.name : 'Unknown',
-                processId: asyncProcessId,
-                targetModule: targetModule,
-                submissionData: Object.keys(data)
-              },
-              duration: pushErrorDuration,
-              errorMessage: crmError instanceof Error ? crmError.message : 'Unknown error'
-            });
-            
-            console.log(`[${asyncProcessId}] ⏹️ Processing stopped due to CRM push failure`);
-          }
-
-        } catch (processingError) {
-          const totalErrorDuration = Date.now() - asyncStartTime;
-          console.error(`[${asyncProcessId}] ❌ PROCESSING FAILED (${totalErrorDuration}ms):`, {
-            error: processingError instanceof Error ? processingError.message : 'Unknown error',
-            stack: processingError instanceof Error ? processingError.stack : undefined,
-            submissionId: submissionId,
-            processId: asyncProcessId,
-            originalRequestId: requestId
-          });
+            // Create lead using simple Zoho service
+            const zohoResult = await simpleZohoService.createLead(req.body);
+            const fieldSyncDuration = Date.now() - asyncStartTime;
           
-          if (submissionId) {
-            await storage.updateFormSubmission(submissionId, {
-              processingStatus: "failed" as any,
-              syncStatus: "failed" as any,
-              errorMessage: `Processing failed: ${processingError instanceof Error ? processingError.message : 'Unknown error'}`
-            });
+            
+            if (zohoResult.success) {
+              console.log(`[${asyncProcessId}] ✅ Lead created successfully:`, {
+                leadId: zohoResult.leadId,
+                duration: fieldSyncDuration
+              });
+              
+              // Update submission with success
+              await storage.updateFormSubmission(submission.id, {
+                processingStatus: "completed" as any,
+                syncStatus: "synced" as any,
+                zohoCrmId: zohoResult.leadId || null
+              });
+              
+              // Log successful CRM push
+              await storage.createSubmissionLog({
+                submissionId: submission.id,
+                operation: "crm_push",
+                status: "success",
+                details: {
+                  zohoRecordId: zohoResult.leadId,
+                  processId: asyncProcessId
+                },
+                duration: fieldSyncDuration
+              });
+              
+              console.log(`[${asyncProcessId}] 🎉 LEAD CREATION COMPLETED SUCCESSFULLY!`);
+            } else {
+              console.error(`[${asyncProcessId}] ❌ Lead creation failed:`, zohoResult.error);
+              
+              await storage.updateFormSubmission(submission.id, {
+                processingStatus: "failed" as any,
+                syncStatus: "failed" as any,
+                errorMessage: zohoResult.error || "Failed to create lead in Zoho CRM"
+              });
+              
+              // Log failed CRM push
+              await storage.createSubmissionLog({
+                submissionId: submission.id,
+                operation: "crm_push",
+                status: "failed",
+                details: { 
+                  error: zohoResult.error,
+                  processId: asyncProcessId
+                },
+                duration: fieldSyncDuration,
+                errorMessage: zohoResult.error || "Failed to create lead"
+              });
+            }
 
-            // Log overall processing failure
-            await storage.createSubmissionLog({
+          } catch (processingError) {
+            const totalErrorDuration = Date.now() - asyncStartTime;
+            console.error(`[${asyncProcessId}] ❌ PROCESSING FAILED (${totalErrorDuration}ms):`, {
+              error: processingError instanceof Error ? processingError.message : 'Unknown error',
+              stack: processingError instanceof Error ? processingError.stack : undefined,
               submissionId: submissionId,
-              operation: "crm_push", // Using valid operation type
-              status: "failed",
-              details: { 
-                error: processingError instanceof Error ? processingError.message : 'Unknown error',
-                errorType: processingError instanceof Error ? processingError.constructor.name : 'Unknown',
-                processId: asyncProcessId,
-                originalRequestId: requestId,
-                failureStage: 'general_processing'
-              },
-              duration: totalErrorDuration,
-              errorMessage: processingError instanceof Error ? processingError.message : 'Unknown error'
+              processId: asyncProcessId,
+              originalRequestId: requestId
             });
+            
+            if (submissionId) {
+              await storage.updateFormSubmission(submissionId, {
+                processingStatus: "failed" as any,
+                syncStatus: "failed" as any,
+                errorMessage: `Processing failed: ${processingError instanceof Error ? processingError.message : 'Unknown error'}`
+              });
+
+              // Log overall processing failure
+              await storage.createSubmissionLog({
+                submissionId: submissionId,
+                operation: "crm_push",
+                status: "failed",
+                details: { 
+                  error: processingError instanceof Error ? processingError.message : 'Unknown error',
+                  errorType: processingError instanceof Error ? processingError.constructor.name : 'Unknown',
+                  processId: asyncProcessId,
+                  originalRequestId: requestId,
+                  failureStage: 'general_processing'
+                },
+                duration: totalErrorDuration,
+                errorMessage: processingError instanceof Error ? processingError.message : 'Unknown error'
+              });
+            }
+            
+            console.log(`[${asyncProcessId}] ⏹️ ASYNC PROCESSING TERMINATED DUE TO ERROR`);
           }
-          
-          console.log(`[${asyncProcessId}] ⏹️ ASYNC PROCESSING TERMINATED DUE TO ERROR`);
-        }
-      });
+        });
+      }
 
       // Step 8: Return immediate response to the client
       const responseTime = Date.now() - startTime;

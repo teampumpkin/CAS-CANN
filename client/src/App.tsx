@@ -56,6 +56,7 @@ const Events = lazy(() => import("@/pages/Events"));
 const TestForms = lazy(() => import("@/pages/TestForms"));
 const CANNMembershipForm = lazy(() => import("@/pages/CANNMembershipForm"));
 const OAuthTest = lazy(() => import("@/pages/OAuthTest"));
+const GenerateToken = lazy(() => import("@/pages/GenerateToken"));
 
 // Loading component
 const PageLoader = () => (
@@ -118,6 +119,7 @@ function Router() {
         <Route path="/join-cann" component={CANNMembershipForm} />
         <Route path="/join-cann-today" component={CANNMembershipForm} />
         <Route path="/oauth-test" component={OAuthTest} />
+        <Route path="/generate-token" component={GenerateToken} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

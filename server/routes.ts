@@ -7,12 +7,52 @@ import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
 import { simpleZohoService } from "./simple-zoho-service";
+import { generateRefreshToken } from "./generate-refresh-token";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Basic ping endpoint for deployment verification
   app.get('/ping', (_req, res) => {
     res.status(200).send('pong');
+  });
+
+  // Utility endpoint to generate Zoho refresh token
+  app.post('/api/generate-zoho-token', async (req, res) => {
+    try {
+      const { code } = req.body;
+      
+      if (!code) {
+        return res.status(400).json({
+          success: false,
+          error: 'Authorization code is required'
+        });
+      }
+      
+      console.log('[API] Generating Zoho refresh token from authorization code...');
+      const result = await generateRefreshToken(code);
+      
+      if (result.success) {
+        console.log('[API] ✅ Refresh token generated successfully');
+        return res.json({
+          success: true,
+          message: 'Refresh token generated successfully',
+          refreshToken: result.refreshToken,
+          instruction: 'Save this refresh token as ZOHO_REFRESH_TOKEN environment variable'
+        });
+      } else {
+        console.error('[API] Failed to generate refresh token:', result.error);
+        return res.status(400).json({
+          success: false,
+          error: result.error
+        });
+      }
+    } catch (error) {
+      console.error('[API] Error generating refresh token:', error);
+      return res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
   });
 
   // User API routes

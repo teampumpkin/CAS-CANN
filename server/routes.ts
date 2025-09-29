@@ -305,29 +305,97 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Dynamic Multi-Form Lead Capture API endpoint
   app.post("/api/submit-form", async (req, res) => {
     const startTime = Date.now();
+    const requestId = `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     let submissionId: number | null = null;
 
-    try {
-      console.log("[Form Submission] Received form submission:", req.body);
+    console.log(`\n=== [FORM SUBMISSION START] Request ID: ${requestId} ===`);
+    console.log(`[${requestId}] Timestamp: ${new Date().toISOString()}`);
+    console.log(`[${requestId}] User Agent: ${req.get('User-Agent')}`);
+    console.log(`[${requestId}] IP: ${req.ip}`);
+    console.log(`[${requestId}] Content-Type: ${req.get('Content-Type')}`);
 
-      // Step 1: Validate the incoming request
+    try {
+      // Step 1: Log and sanitize incoming request data
+      console.log(`[${requestId}] Raw request body structure:`, {
+        hasFormName: !!req.body?.form_name,
+        formName: req.body?.form_name,
+        hasData: !!req.body?.data,
+        dataKeys: req.body?.data ? Object.keys(req.body.data) : [],
+        dataFieldCount: req.body?.data ? Object.keys(req.body.data).length : 0,
+        bodySize: JSON.stringify(req.body).length
+      });
+
+      // Sanitize sensitive data for logging
+      const sanitizedData = req.body?.data ? Object.fromEntries(
+        Object.entries(req.body.data).map(([key, value]) => [
+          key, 
+          key.toLowerCase().includes('email') ? 
+            (typeof value === 'string' ? value.replace(/(.{2}).*(@.*)/, '$1***$2') : value) :
+            key.toLowerCase().includes('phone') ? 
+              (typeof value === 'string' ? value.replace(/(\d{3}).*(\d{4})/, '$1***$2') : value) :
+              value
+        ])
+      ) : {};
+
+      console.log(`[${requestId}] Sanitized form data:`, {
+        form_name: req.body?.form_name,
+        data: sanitizedData
+      });
+
+      // Step 2: Validate the incoming request
+      console.log(`[${requestId}] Starting validation with dynamicFormSubmissionSchema...`);
+      const validationStartTime = Date.now();
+      
       const validatedData = dynamicFormSubmissionSchema.parse(req.body);
       const { form_name, data } = validatedData;
+      
+      const validationDuration = Date.now() - validationStartTime;
+      console.log(`[${requestId}] ✅ Validation successful (${validationDuration}ms)`, {
+        formName: form_name,
+        validatedFieldCount: Object.keys(data).length,
+        validatedFields: Object.keys(data).map(key => ({
+          field: key,
+          type: typeof data[key],
+          hasValue: !!data[key],
+          length: typeof data[key] === 'string' ? data[key].length : null
+        }))
+      });
 
-      // Step 2: Check for form configuration (optional)
+      // Step 3: Check for form configuration (optional)
+      console.log(`[${requestId}] Looking up form configuration for: "${form_name}"`);
+      const configLookupStartTime = Date.now();
+      
       let targetModule = "Leads"; // Default module
       let fieldMappings = null;
 
       const formConfig = await storage.getFormConfiguration(form_name);
+      const configLookupDuration = Date.now() - configLookupStartTime;
+      
       if (formConfig) {
         targetModule = formConfig.zohoModule;
         fieldMappings = formConfig.fieldMappings;
-        console.log(`[Form Submission] Using configuration for form "${form_name}": module=${targetModule}`);
+        console.log(`[${requestId}] ✅ Form configuration found (${configLookupDuration}ms):`, {
+          formName: form_name,
+          targetModule: targetModule,
+          hasMappings: !!fieldMappings,
+          mappingCount: fieldMappings ? Object.keys(fieldMappings).length : 0,
+          configDetails: {
+            id: formConfig.id,
+            isActive: formConfig.isActive,
+            createdAt: formConfig.createdAt
+          }
+        });
       } else {
-        console.log(`[Form Submission] No configuration found for form "${form_name}", using default module: ${targetModule}`);
+        console.log(`[${requestId}] ⚠️ No configuration found (${configLookupDuration}ms) for form "${form_name}", using defaults:`, {
+          defaultModule: targetModule,
+          willCreateDynamicMappings: true
+        });
       }
 
-      // Step 3: Create form submission record
+      // Step 4: Create form submission record
+      console.log(`[${requestId}] Creating submission record in database...`);
+      const dbInsertStartTime = Date.now();
+      
       const submissionData: InsertFormSubmission = {
         formName: form_name,
         submissionData: data,
@@ -335,12 +403,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
         zohoModule: targetModule
       };
 
+      console.log(`[${requestId}] Submission data prepared:`, {
+        formName: submissionData.formName,
+        sourceForm: submissionData.sourceForm,
+        zohoModule: submissionData.zohoModule,
+        dataFields: Object.keys(submissionData.submissionData as any),
+        dataSize: JSON.stringify(submissionData.submissionData).length
+      });
+
       const submission = await storage.createFormSubmission(submissionData);
       submissionId = submission.id;
+      const dbInsertDuration = Date.now() - dbInsertStartTime;
 
-      console.log(`[Form Submission] Created submission record with ID: ${submissionId}`);
+      console.log(`[${requestId}] ✅ Submission record created (${dbInsertDuration}ms):`, {
+        submissionId: submissionId,
+        databaseId: submission.id,
+        status: submission.processingStatus,
+        syncStatus: submission.syncStatus,
+        createdAt: submission.createdAt
+      });
 
-      // Step 4: Log the receipt
+      // Step 5: Log the receipt operation
+      console.log(`[${requestId}] Creating receipt log entry...`);
+      const logStartTime = Date.now();
+      
       await storage.createSubmissionLog({
         submissionId: submission.id,
         operation: "received",
@@ -348,60 +434,166 @@ export async function registerRoutes(app: Express): Promise<Server> {
         details: {
           formName: form_name,
           fieldCount: Object.keys(data).length,
-          targetModule
+          targetModule,
+          requestId: requestId,
+          userAgent: req.get('User-Agent'),
+          ip: req.ip
         },
         duration: Date.now() - startTime
       });
+      
+      const logDuration = Date.now() - logStartTime;
+      console.log(`[${requestId}] ✅ Receipt log created (${logDuration}ms)`);
 
-      // Step 5: Start processing asynchronously
+      // Step 6: Prepare for async processing
+      console.log(`[${requestId}] Preparing async processing pipeline...`);
+
+      // Step 7: Start processing asynchronously
       setImmediate(async () => {
+        const asyncStartTime = Date.now();
+        const asyncProcessId = `async_${submissionId}_${Math.random().toString(36).substr(2, 6)}`;
+        
         try {
-          console.log(`[Form Submission] Starting async processing for submission ${submissionId}`);
+          console.log(`\n=== [ASYNC PROCESSING START] Process ID: ${asyncProcessId} ===`);
+          console.log(`[${asyncProcessId}] Submission ID: ${submissionId}`);
+          console.log(`[${asyncProcessId}] Original Request ID: ${requestId}`);
+          console.log(`[${asyncProcessId}] Form: ${form_name} → ${targetModule}`);
+          console.log(`[${asyncProcessId}] Data fields: ${Object.keys(data).join(', ')}`);
           
-          // Update status to processing
+          // Update status to processing (if needed)
           await storage.updateFormSubmission(submission.id, {
             // processingStatus: "processing" // Already set by default
           });
 
-          // Step 5a: Sync fields with Zoho CRM
-          console.log(`[Form Submission] Starting field sync for submission ${submissionId}`);
+          // Step 7a: Sync fields with Zoho CRM
+          console.log(`[${asyncProcessId}] 🔄 Starting field sync phase...`);
+          const fieldSyncStartTime = Date.now();
+          
           const fieldSyncResult = await fieldSyncEngine.syncFieldsForSubmission(submission);
+          const fieldSyncDuration = Date.now() - fieldSyncStartTime;
+          
+          console.log(`[${asyncProcessId}] Field sync completed (${fieldSyncDuration}ms):`, {
+            success: fieldSyncResult.success,
+            fieldsProcessed: fieldSyncResult.fieldsProcessed,
+            fieldsCreated: fieldSyncResult.fieldsCreated,
+            fieldsSynced: fieldSyncResult.fieldsSynced,
+            errorCount: fieldSyncResult.errors.length,
+            details: fieldSyncResult.details
+          });
           
           if (!fieldSyncResult.success) {
-            console.error(`[Form Submission] Field sync failed for submission ${submissionId}:`, fieldSyncResult.errors);
+            console.error(`[${asyncProcessId}] ❌ Field sync failed:`, fieldSyncResult.errors);
             await storage.updateFormSubmission(submission.id, {
               processingStatus: "failed" as any,
               syncStatus: "failed" as any,
               errorMessage: `Field sync failed: ${fieldSyncResult.errors.join("; ")}`
             });
+
+            // Log field sync failure
+            await storage.createSubmissionLog({
+              submissionId: submission.id,
+              operation: "field_sync",
+              status: "failed",
+              details: {
+                errors: fieldSyncResult.errors,
+                processId: asyncProcessId,
+                fieldsProcessed: fieldSyncResult.fieldsProcessed
+              },
+              duration: fieldSyncDuration,
+              errorMessage: fieldSyncResult.errors.join("; ")
+            });
+            
+            console.log(`[${asyncProcessId}] ⏹️ Processing stopped due to field sync failure`);
             return;
           }
 
-          // Step 5b: Push data to Zoho CRM
-          console.log(`[Form Submission] Starting CRM push for submission ${submissionId}`);
+          // Log successful field sync
+          await storage.createSubmissionLog({
+            submissionId: submission.id,
+            operation: "field_sync",
+            status: "success",
+            details: {
+              fieldsCreated: fieldSyncResult.fieldsCreated,
+              fieldsSynced: fieldSyncResult.fieldsSynced,
+              processId: asyncProcessId
+            },
+            duration: fieldSyncDuration
+          });
+
+          console.log(`[${asyncProcessId}] ✅ Field sync successful, proceeding to CRM push...`);
+
+          // Step 7b: Push data to Zoho CRM
+          console.log(`[${asyncProcessId}] 🚀 Starting CRM push phase...`);
           const pushStartTime = Date.now();
           
           try {
             // Get updated field mappings after sync
+            console.log(`[${asyncProcessId}] Retrieving updated field mappings for module: ${targetModule}`);
+            const mappingStartTime = Date.now();
+            
             const updatedMappings = await storage.getFieldMappings({ zohoModule: targetModule });
+            const mappingDuration = Date.now() - mappingStartTime;
+            
+            console.log(`[${asyncProcessId}] Field mappings retrieved (${mappingDuration}ms):`, {
+              mappingCount: updatedMappings.length,
+              availableFields: updatedMappings.map(m => ({
+                formField: m.fieldName,
+                zohoField: m.fieldName, // Note: this might need adjustment based on schema
+                type: m.fieldType
+              }))
+            });
             
             // Format data for Zoho CRM
+            console.log(`[${asyncProcessId}] Formatting data for Zoho CRM...`);
+            const formatStartTime = Date.now();
+            
             const zohoData = zohoCRMService.formatFieldDataForZoho(data, updatedMappings);
+            zohoData.Source_Form = form_name; // Add source tracking
             
-            // Add Source_Form field
-            zohoData.Source_Form = form_name;
+            const formatDuration = Date.now() - formatStartTime;
             
-            console.log(`[Form Submission] Pushing data to Zoho ${targetModule}:`, zohoData);
+            // Create sanitized version for logging (hide sensitive data)
+            const sanitizedZohoData = Object.fromEntries(
+              Object.entries(zohoData).map(([key, value]) => [
+                key, 
+                key.toLowerCase().includes('email') ? 
+                  (typeof value === 'string' ? value.replace(/(.{2}).*(@.*)/, '$1***$2') : value) : 
+                  value
+              ])
+            );
+            
+            console.log(`[${asyncProcessId}] Data formatted for Zoho (${formatDuration}ms):`, {
+              targetModule: targetModule,
+              fieldCount: Object.keys(zohoData).length,
+              zohoFields: Object.keys(sanitizedZohoData),
+              sanitizedData: sanitizedZohoData
+            });
             
             // Create record in Zoho CRM
+            console.log(`[${asyncProcessId}] 📤 Creating record in Zoho ${targetModule}...`);
+            const createRecordStartTime = Date.now();
+            
             const zohoRecord = await zohoCRMService.createRecord(targetModule, zohoData);
+            const createRecordDuration = Date.now() - createRecordStartTime;
+            
+            console.log(`[${asyncProcessId}] ✅ Zoho record created (${createRecordDuration}ms):`, {
+              zohoRecordId: zohoRecord.id,
+              module: targetModule,
+              status: zohoRecord.status || 'Created'
+            });
             
             // Update submission with success
+            console.log(`[${asyncProcessId}] Updating submission status to completed...`);
+            const statusUpdateStartTime = Date.now();
+            
             await storage.updateFormSubmission(submission.id, {
               processingStatus: "completed" as any,
               syncStatus: "synced" as any,
               zohoCrmId: zohoRecord.id || null
             });
+            
+            const statusUpdateDuration = Date.now() - statusUpdateStartTime;
+            console.log(`[${asyncProcessId}] ✅ Status updated to completed (${statusUpdateDuration}ms)`);
 
             // Log successful CRM push
             await storage.createSubmissionLog({
@@ -411,15 +603,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
               details: {
                 zohoRecordId: zohoRecord.id,
                 targetModule,
-                fieldsSubmitted: Object.keys(zohoData).length
+                fieldsSubmitted: Object.keys(zohoData).length,
+                processId: asyncProcessId,
+                timings: {
+                  fieldMapping: mappingDuration,
+                  dataFormatting: formatDuration,
+                  recordCreation: createRecordDuration,
+                  statusUpdate: statusUpdateDuration
+                }
               },
               duration: Date.now() - pushStartTime
             });
 
-            console.log(`[Form Submission] Successfully completed processing for submission ${submissionId}, Zoho record ID: ${zohoRecord.id}`);
+            const totalProcessingTime = Date.now() - asyncStartTime;
+            console.log(`[${asyncProcessId}] 🎉 PROCESSING COMPLETED SUCCESSFULLY!`);
+            console.log(`[${asyncProcessId}] Summary:`, {
+              submissionId: submissionId,
+              zohoRecordId: zohoRecord.id,
+              totalTime: `${totalProcessingTime}ms`,
+              fieldsSynced: fieldSyncResult.fieldsCreated,
+              fieldsSubmitted: Object.keys(zohoData).length
+            });
 
           } catch (crmError) {
-            console.error(`[Form Submission] CRM push failed for submission ${submissionId}:`, crmError);
+            const pushErrorDuration = Date.now() - pushStartTime;
+            console.error(`[${asyncProcessId}] ❌ CRM push failed (${pushErrorDuration}ms):`, {
+              error: crmError instanceof Error ? crmError.message : 'Unknown error',
+              stack: crmError instanceof Error ? crmError.stack : undefined,
+              submissionId: submissionId,
+              targetModule: targetModule
+            });
             
             await storage.updateFormSubmission(submission.id, {
               processingStatus: "failed" as any,
@@ -427,19 +640,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
               errorMessage: `CRM push failed: ${crmError instanceof Error ? crmError.message : 'Unknown error'}`
             });
 
-            // Log failed CRM push
+            // Log failed CRM push with detailed error info
             await storage.createSubmissionLog({
               submissionId: submission.id,
               operation: "crm_push",
               status: "failed",
-              details: { error: crmError instanceof Error ? crmError.message : 'Unknown error' },
-              duration: Date.now() - pushStartTime,
+              details: { 
+                error: crmError instanceof Error ? crmError.message : 'Unknown error',
+                errorType: crmError instanceof Error ? crmError.constructor.name : 'Unknown',
+                processId: asyncProcessId,
+                targetModule: targetModule,
+                submissionData: Object.keys(data)
+              },
+              duration: pushErrorDuration,
               errorMessage: crmError instanceof Error ? crmError.message : 'Unknown error'
             });
+            
+            console.log(`[${asyncProcessId}] ⏹️ Processing stopped due to CRM push failure`);
           }
 
         } catch (processingError) {
-          console.error(`[Form Submission] Processing failed for submission ${submissionId}:`, processingError);
+          const totalErrorDuration = Date.now() - asyncStartTime;
+          console.error(`[${asyncProcessId}] ❌ PROCESSING FAILED (${totalErrorDuration}ms):`, {
+            error: processingError instanceof Error ? processingError.message : 'Unknown error',
+            stack: processingError instanceof Error ? processingError.stack : undefined,
+            submissionId: submissionId,
+            processId: asyncProcessId,
+            originalRequestId: requestId
+          });
           
           if (submissionId) {
             await storage.updateFormSubmission(submissionId, {
@@ -447,12 +675,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
               syncStatus: "failed" as any,
               errorMessage: `Processing failed: ${processingError instanceof Error ? processingError.message : 'Unknown error'}`
             });
+
+            // Log overall processing failure
+            await storage.createSubmissionLog({
+              submissionId: submissionId,
+              operation: "crm_push", // Using valid operation type
+              status: "failed",
+              details: { 
+                error: processingError instanceof Error ? processingError.message : 'Unknown error',
+                errorType: processingError instanceof Error ? processingError.constructor.name : 'Unknown',
+                processId: asyncProcessId,
+                originalRequestId: requestId,
+                failureStage: 'general_processing'
+              },
+              duration: totalErrorDuration,
+              errorMessage: processingError instanceof Error ? processingError.message : 'Unknown error'
+            });
           }
+          
+          console.log(`[${asyncProcessId}] ⏹️ ASYNC PROCESSING TERMINATED DUE TO ERROR`);
         }
       });
 
-      // Step 6: Return immediate response to the client
-      res.status(201).json({
+      // Step 8: Return immediate response to the client
+      const responseTime = Date.now() - startTime;
+      console.log(`[${requestId}] 📤 Sending success response to client (${responseTime}ms)`);
+      
+      const responseData = {
         success: true,
         message: "Form submission received successfully",
         submissionId: submission.id,
@@ -460,11 +709,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
         status: "processing",
         timestamp: new Date().toISOString(),
         targetModule,
-        estimatedProcessingTime: "30-60 seconds"
+        estimatedProcessingTime: "30-60 seconds",
+        requestId: requestId
+      };
+
+      console.log(`[${requestId}] Response data:`, {
+        submissionId: responseData.submissionId,
+        targetModule: responseData.targetModule,
+        status: responseData.status,
+        processingTime: `${responseTime}ms`
       });
 
+      res.status(201).json(responseData);
+      console.log(`[${requestId}] ✅ FORM SUBMISSION REQUEST COMPLETED (${responseTime}ms)`);
+      console.log(`=== [FORM SUBMISSION END] Request ID: ${requestId} ===\n`);
+
     } catch (error) {
-      console.error("[Form Submission] Error processing form submission:", error);
+      const errorResponseTime = Date.now() - startTime;
+      console.error(`[${requestId}] ❌ FORM SUBMISSION REQUEST FAILED (${errorResponseTime}ms):`, {
+        error: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined,
+        submissionId: submissionId,
+        hasSubmissionId: !!submissionId
+      });
 
       // Log the error if we have a submission ID
       if (submissionId) {

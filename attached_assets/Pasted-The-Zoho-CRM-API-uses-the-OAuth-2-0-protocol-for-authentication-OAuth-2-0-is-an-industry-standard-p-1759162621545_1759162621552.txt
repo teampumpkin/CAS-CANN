@@ -1,0 +1,46 @@
+The Zoho CRM API uses the OAuth 2.0 protocol for authentication. OAuth 2.0 is an industry-standard protocol specification that enables third-party applications (clients) to gain delegated access to protected resources in Zoho via an API.
+
+Why should we use OAuth 2.0?
+How OAuth 2.0 works?
+Key Terminologies in OAuth 2.0
+Tokens
+Why should we use OAuth 2.0?
+Clients are not required to support password authentication or store user credentials.
+Clients gain delegated access, i.e., access only to resources authenticated by the user.
+Users can revoke the client's delegated access anytime.
+OAuth 2.0 access tokens expire after a set time. If the client faces a security breach, user data will be compromised only until the access token is valid.
+How OAuth 2.0 works?
+OAuth 2.0 Workflow
+Key Terminologies in OAuth 2.0
+The following are some terms you need to know before you start using the Zoho CRM APIs.
+
+Protected resources
+The Zoho CRM resources, such as Leads, Contacts, Deals, etc.
+
+Resource server
+The Zoho CRM server that hosts protected resources.
+
+Resource owner
+Any end-user of your account, who can grant access to the protected resources.
+
+Client
+An application that sends requests to the resource server to access the protected resources on behalf of the end-user.
+
+Client ID
+The consumer key generated from the connected application.
+
+Client Secret
+The consumer secret generated from the connected application.
+
+Authentication server
+Authorization server provides the necessary credentials (such as Access and Refresh tokens) to the client. In this case, it will be the Zoho CRM authorization server.
+
+Authentication code
+The authorization server creates a temporary token and sends it to the client via the browser. The client will send this code to the authorization server to obtain access and refresh tokens.
+
+Tokens
+Access Token
+A token that is sent to the resource server to access the protected resources of the user. The Access token provides secure and temporary access to the protected resources and is used by the applications to make requests to the connected app. Each access token will be valid only for an hour and can be used only for the set of operations that are described in the scope.
+
+Refresh Token
+A token that can be used to obtain new access tokens. This token has an unlimited lifetime until it is revoked by the end-user.

@@ -152,8 +152,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       console.log('[Zoho OAuth] Exchanging authorization code for tokens');
       
+      // Get the same redirect URI that was used for authorization
+      const protocol = req.get('x-forwarded-proto') || (req.secure ? 'https' : 'http');
+      const host = req.get('x-forwarded-host') || req.get('host') || 'localhost:5000';
+      const baseUrl = `${protocol}://${host}`;
+      const redirectUri = `${baseUrl}/api/oauth/zoho/callback`;
+      
+      console.log('[Zoho OAuth] Using redirect URI for token exchange:', redirectUri);
+      
       // Exchange code for tokens (must be done within 1 minute!)
-      const tokens = await ZohoTokenManager.exchangeCodeForTokens(code);
+      const tokens = await ZohoTokenManager.exchangeCodeForTokens(code, redirectUri);
       
       console.log('[Zoho OAuth] Successfully obtained tokens');
       

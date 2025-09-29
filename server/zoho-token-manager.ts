@@ -275,7 +275,7 @@ export class ZohoTokenManager {
   /**
    * Exchange authorization code for tokens
    */
-  static async exchangeCodeForTokens(code: string): Promise<{ 
+  static async exchangeCodeForTokens(code: string, customRedirectUri?: string): Promise<{ 
     accessToken: string; 
     refreshToken: string; 
     expiresIn: number 
@@ -283,7 +283,9 @@ export class ZohoTokenManager {
     const authUrl = process.env.ZOHO_AUTH_URL || 'https://accounts.zoho.com';
     const clientId = process.env.ZOHO_CLIENT_ID;
     const clientSecret = process.env.ZOHO_CLIENT_SECRET;
-    const redirectUri = process.env.ZOHO_REDIRECT_URI || 
+    
+    // Use provided redirect URI or fallback to configured ones
+    const redirectUri = customRedirectUri || process.env.ZOHO_REDIRECT_URI || 
       (process.env.NODE_ENV === 'production' 
         ? 'https://amyloid.ca/api/oauth/zoho/callback'
         : 'http://localhost:5000/api/oauth/zoho/callback');

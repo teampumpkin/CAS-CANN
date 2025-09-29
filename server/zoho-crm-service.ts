@@ -84,6 +84,8 @@ export class ZohoCRMService {
     retryCount: number = 0
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
+    const requestId = `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const startTime = Date.now();
     
     // Get a valid access token (auto-refreshes if needed)
     const accessToken = await this.getAccessToken();
@@ -97,9 +99,23 @@ export class ZohoCRMService {
       headers["orgId"] = this.orgId;
     }
 
+    console.log(`[${requestId}] 🔄 Zoho API ${method} ${endpoint}`, {
+      url,
+      method,
+      hasBody: !!body,
+      bodySize: body ? JSON.stringify(body).length : 0,
+      retryCount,
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken.substring(0, 10)}...` // Mask token for security
+      }
+    });
+
+    if (body && Object.keys(body).length > 0) {
+      console.log(`[${requestId}] 📤 Request payload:`, JSON.stringify(body, null, 2));
+    }
+
     try {
-      console.log(`[Zoho API v8] ${method} ${url}`);
-      
       const response = await fetch(url, {
         method,
         headers,
@@ -107,25 +123,57 @@ export class ZohoCRMService {
       });
 
       const responseData = await response.json();
+      const duration = Date.now() - startTime;
 
       // Handle rate limiting (429) with exponential backoff
       if (response.status === 429 && retryCount < 3) {
         const retryAfter = response.headers.get('Retry-After');
         const delay = retryAfter ? parseInt(retryAfter) * 1000 : Math.pow(2, retryCount) * 1000;
-        console.log(`[Zoho API] Rate limited, retrying after ${delay}ms`);
+        console.log(`[${requestId}] ⏱️ Rate limited, retrying after ${delay}ms (attempt ${retryCount + 1}/3)`);
         await new Promise(resolve => setTimeout(resolve, delay));
         return this.makeRequest(endpoint, method, body, retryCount + 1);
       }
 
+      console.log(`[${requestId}] 📥 Response received (${response.status}) in ${duration}ms:`, {
+        status: response.status,
+        statusText: response.statusText,
+        duration,
+        responseSize: JSON.stringify(responseData).length,
+        contentType: response.headers.get('content-type'),
+        hasData: !!responseData.data,
+        dataCount: Array.isArray(responseData.data) ? responseData.data.length : 0
+      });
+
       if (!response.ok) {
         const errorDetails = this.extractErrorDetails(responseData, response.status);
-        console.error(`[Zoho API v8 Error] ${response.status}:`, errorDetails);
+        console.error(`[${requestId}] ❌ Zoho API Error ${response.status}:`, {
+          ...errorDetails,
+          fullResponse: responseData,
+          endpoint,
+          method,
+          duration
+        });
         throw new Error(`Zoho API v8 Error ${response.status}: ${errorDetails.message}`);
       }
 
+      console.log(`[${requestId}] ✅ Success:`, {
+        endpoint,
+        method,
+        duration,
+        success: true,
+        dataType: responseData.data ? (Array.isArray(responseData.data) ? 'array' : 'object') : 'none'
+      });
+
       return responseData as T;
     } catch (error) {
-      console.error(`[Zoho API v8 Request Failed] ${method} ${url}:`, error);
+      const duration = Date.now() - startTime;
+      console.error(`[${requestId}] 💥 Request failed after ${duration}ms:`, {
+        endpoint,
+        method,
+        error: error instanceof Error ? error.message : String(error),
+        duration,
+        retryCount
+      });
       throw error;
     }
   }
@@ -149,23 +197,73 @@ export class ZohoCRMService {
 
   // Metadata API methods
   async getModuleFields(moduleName: string): Promise<ZohoField[]> {
+    const operationId = `fields_${moduleName}_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+    const startTime = Date.now();
+    
+    console.log(`[${operationId}] 🔍 Fetching fields for module: ${moduleName}`);
+    
     try {
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
         `/settings/fields?module=${moduleName}`
       );
-      return response.data || [];
+      
+      const fields = response.data || [];
+      const duration = Date.now() - startTime;
+      
+      console.log(`[${operationId}] ✅ Fields retrieved successfully (${duration}ms):`, {
+        module: moduleName,
+        totalFields: fields.length,
+        customFields: fields.filter(f => f.custom_field).length,
+        standardFields: fields.filter(f => !f.custom_field).length,
+        requiredFields: fields.filter(f => f.required).length,
+        duration,
+        fieldTypes: {
+          text: fields.filter(f => f.data_type === 'text').length,
+          email: fields.filter(f => f.data_type === 'email').length,
+          phone: fields.filter(f => f.data_type === 'phone').length,
+          picklist: fields.filter(f => f.data_type === 'picklist').length,
+          other: fields.filter(f => !['text', 'email', 'phone', 'picklist'].includes(f.data_type)).length
+        }
+      });
+      
+      return fields;
     } catch (error) {
-      console.error(`Failed to fetch fields for module ${moduleName} using v8 API:`, error);
+      const duration = Date.now() - startTime;
+      console.error(`[${operationId}] 💥 Failed to fetch fields (${duration}ms):`, {
+        module: moduleName,
+        error: error instanceof Error ? error.message : String(error),
+        duration
+      });
       throw error;
     }
   }
 
   async createCustomField(moduleName: string, fieldData: ZohoFieldCreateRequest): Promise<ZohoField> {
+    const operationId = `field_${moduleName}_${fieldData.api_name}_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+    const startTime = Date.now();
+    
+    console.log(`[${operationId}] 🔧 Creating custom field in ${moduleName}:`, {
+      module: moduleName,
+      fieldName: fieldData.api_name,
+      fieldLabel: fieldData.field_label,
+      dataType: fieldData.data_type,
+      required: fieldData.required,
+      hasPicklistValues: !!(fieldData.pick_list_values && fieldData.pick_list_values.length > 0),
+      picklistValueCount: fieldData.pick_list_values?.length || 0
+    });
+    
     try {
       // v8 API best practice: validate required fields before sending
       if (!fieldData.api_name || !fieldData.field_label || !fieldData.data_type) {
+        console.error(`[${operationId}] ❌ Validation failed: Missing required field data`, {
+          hasApiName: !!fieldData.api_name,
+          hasFieldLabel: !!fieldData.field_label,
+          hasDataType: !!fieldData.data_type
+        });
         throw new Error("Missing required field data: api_name, field_label, and data_type are required");
       }
+
+      console.log(`[${operationId}] ✅ Validation passed, creating field in Zoho...`);
 
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
         `/settings/fields?module=${moduleName}`,
@@ -173,24 +271,71 @@ export class ZohoCRMService {
         { fields: [fieldData] }
       );
 
+      const duration = Date.now() - startTime;
+
       if (response.data && response.data.length > 0) {
-        return response.data[0];
+        const createdField = response.data[0];
+        console.log(`[${operationId}] 🎉 Field created successfully (${duration}ms):`, {
+          fieldId: createdField.id,
+          fieldName: createdField.api_name,
+          fieldLabel: createdField.field_label,
+          dataType: createdField.data_type,
+          module: moduleName,
+          duration,
+          isCustomField: createdField.custom_field
+        });
+        return createdField;
       } else {
+        console.error(`[${operationId}] ❌ No field data returned:`, {
+          response,
+          duration,
+          module: moduleName,
+          fieldName: fieldData.api_name
+        });
         throw new Error("Failed to create field - no data returned from v8 API");
       }
     } catch (error) {
-      console.error(`Failed to create field ${fieldData.api_name} in module ${moduleName} using v8 API:`, error);
+      const duration = Date.now() - startTime;
+      console.error(`[${operationId}] 💥 Field creation failed (${duration}ms):`, {
+        module: moduleName,
+        fieldName: fieldData.api_name,
+        error: error instanceof Error ? error.message : String(error),
+        duration,
+        fieldData: {
+          ...fieldData,
+          // Remove pick_list_values from error log to keep it concise
+          pick_list_values: fieldData.pick_list_values ? `[${fieldData.pick_list_values.length} values]` : undefined
+        }
+      });
       throw error;
     }
   }
 
   // Core API methods
   async createRecord(moduleName: string, recordData: ZohoRecord): Promise<ZohoRecord> {
+    const operationId = `create_${moduleName}_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+    const startTime = Date.now();
+    
+    console.log(`[${operationId}] 🚀 Creating record in ${moduleName}:`, {
+      module: moduleName,
+      fieldCount: Object.keys(recordData).length,
+      fields: Object.keys(recordData),
+      hasRequiredFields: {
+        hasLastName: !!recordData.Last_Name,
+        hasEmail: !!recordData.Email,
+        hasPhone: !!recordData.Phone,
+        hasSourceForm: !!recordData.Source_Form
+      }
+    });
+
     try {
       // v8 API best practice: validate record data
       if (!recordData || Object.keys(recordData).length === 0) {
+        console.error(`[${operationId}] ❌ Validation failed: Record data cannot be empty`);
         throw new Error("Record data cannot be empty");
       }
+
+      console.log(`[${operationId}] ✅ Validation passed, sending to Zoho API...`);
 
       const response = await this.makeRequest<ZohoApiResponse<ZohoRecord>>(
         `/${moduleName}`,
@@ -198,15 +343,44 @@ export class ZohoCRMService {
         { data: [recordData] }
       );
 
+      const duration = Date.now() - startTime;
+
       if (response.data && response.data.length > 0) {
         const createdRecord = response.data[0];
-        console.log(`[Zoho v8] Successfully created record in ${moduleName}:`, createdRecord.id);
+        console.log(`[${operationId}] 🎉 Record created successfully (${duration}ms):`, {
+          recordId: createdRecord.id,
+          module: moduleName,
+          duration,
+          fieldsCreated: Object.keys(recordData).length,
+          leadDetails: {
+            name: recordData.Last_Name || recordData.First_Name,
+            email: recordData.Email,
+            source: recordData.Source_Form
+          }
+        });
         return createdRecord;
       } else {
+        console.error(`[${operationId}] ❌ No data returned from API:`, {
+          response,
+          duration,
+          module: moduleName
+        });
         throw new Error("Failed to create record - no data returned from v8 API");
       }
     } catch (error) {
-      console.error(`Failed to create record in module ${moduleName} using v8 API:`, error);
+      const duration = Date.now() - startTime;
+      console.error(`[${operationId}] 💥 Record creation failed (${duration}ms):`, {
+        module: moduleName,
+        error: error instanceof Error ? error.message : String(error),
+        duration,
+        fieldCount: Object.keys(recordData).length,
+        recordData: {
+          ...recordData,
+          // Mask sensitive data in logs
+          Email: recordData.Email ? `${recordData.Email.substring(0, 3)}***` : undefined,
+          Phone: recordData.Phone ? `***${recordData.Phone.slice(-4)}` : undefined
+        }
+      });
       throw error;
     }
   }

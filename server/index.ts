@@ -45,8 +45,8 @@ app.use((req, res, next) => {
   const { fieldMetadataCacheService } = await import("./field-metadata-cache-service");
   await fieldMetadataCacheService.initialize();
 
-  // Initialize notification service
-  const { notificationService } = await import("./notification-service");
+  // Initialize notification service (DISABLED for production)
+  // const { notificationService } = await import("./notification-service");
   // Note: notificationService initializes automatically via its constructor
 
   const server = await registerRoutes(app);

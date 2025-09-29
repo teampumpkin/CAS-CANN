@@ -8,7 +8,7 @@ import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
 import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
-import { notificationService, notificationConfigSchema } from "./notification-service";
+// import { notificationService, notificationConfigSchema } from "./notification-service"; // Disabled for production
 import { formScalabilityService, formConfigSchema } from "./form-scalability-service";
 import { errorHandlingService, errorClassificationSchema } from "./error-handling-service";
 import { z } from "zod";
@@ -1132,10 +1132,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Notification System API endpoints
+  // Notification System API endpoints (DISABLED for production)
+  /*
   app.get("/api/notifications/config", async (req, res) => {
     try {
-      const config = notificationService.getConfiguration();
+      // const config = notificationService.getConfiguration();
       
       res.json({
         success: true,
@@ -1242,6 +1243,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     }
   });
+  */
 
   // Form Scalability System API endpoints
   app.post("/api/forms/process", async (req, res) => {

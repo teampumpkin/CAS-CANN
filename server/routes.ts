@@ -11,6 +11,7 @@ import { fieldMetadataCacheService } from "./field-metadata-cache-service";
 // import { notificationService, notificationConfigSchema } from "./notification-service"; // Disabled for production
 import { formScalabilityService, formConfigSchema } from "./form-scalability-service";
 import { errorHandlingService, errorClassificationSchema } from "./error-handling-service";
+import { streamlinedFormProcessor } from "./streamlined-form-processor";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -1563,6 +1564,62 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         error: error instanceof Error ? error.message : 'Manual retry failed',
+      });
+    }
+  });
+
+  // Streamlined Form Processing API - Focus on direct form-to-CRM sync
+  app.post("/api/form/submit", async (req, res) => {
+    try {
+      const { formName, submissionData, sourceUrl } = req.body;
+      
+      if (!formName || !submissionData) {
+        return res.status(400).json({
+          success: false,
+          error: 'formName and submissionData are required',
+        });
+      }
+
+      console.log(`[API] Processing form submission: ${formName}`);
+      const result = await streamlinedFormProcessor.processFormSubmission(
+        formName, 
+        submissionData, 
+        sourceUrl
+      );
+      
+      res.json({
+        success: result.success,
+        ...result,
+        message: result.success 
+          ? `Form "${formName}" processed successfully and synced to Zoho CRM` 
+          : `Form "${formName}" processing failed`,
+        processedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Form submission error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Form processing failed',
+      });
+    }
+  });
+
+  app.get("/api/form/stats", async (req, res) => {
+    try {
+      const stats = await streamlinedFormProcessor.getProcessingStats();
+      
+      res.json({
+        success: true,
+        stats,
+        retrievedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Form stats error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to get stats',
       });
     }
   });

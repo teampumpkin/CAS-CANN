@@ -2,6 +2,8 @@
  * Zoho Token Manager - Handles access token refresh and caching
  */
 
+import { storage } from './storage';
+
 interface TokenData {
   accessToken: string;
   tokenExpiry: Date;
@@ -29,16 +31,35 @@ export class ZohoTokenManager {
    * Get a valid access token, refreshing if necessary
    */
   async getValidAccessToken(): Promise<string> {
-    // Try OAuth service first (database-stored tokens)
+    // Try database-stored tokens first
     try {
-      const { oauthService } = await import('./oauth-service');
-      const token = await oauthService.getValidToken('zoho_crm');
-      if (token) {
-        console.log('[ZohoTokenManager] Using database-stored OAuth token');
-        return token;
+      console.log('[ZohoTokenManager] Checking for database-stored tokens...');
+      const dbTokens = await storage.getOAuthTokens({ provider: 'zoho_crm' });
+      
+      if (dbTokens && dbTokens.length > 0) {
+        const latestToken = dbTokens[0]; // Get the most recent token
+        console.log('[ZohoTokenManager] Found database token, checking validity...');
+        
+        // Check if token is still valid (with 5-minute buffer)
+        const now = new Date();
+        const bufferTime = 5 * 60 * 1000; // 5 minutes
+        const expiryTime = new Date(latestToken.expiresAt || now);
+        
+        if (latestToken.accessToken && expiryTime > new Date(now.getTime() + bufferTime)) {
+          console.log('[ZohoTokenManager] Using valid database-stored access token');
+          return latestToken.accessToken;
+        } else {
+          console.log('[ZohoTokenManager] Database token expired, refreshing...');
+          // TODO: Implement refresh using database refresh token
+          if (latestToken.refreshToken) {
+            return await this.refreshWithDatabaseToken(latestToken.refreshToken);
+          }
+        }
+      } else {
+        console.log('[ZohoTokenManager] No database tokens found');
       }
     } catch (error) {
-      console.log('[ZohoTokenManager] OAuth service not available, falling back to env vars');
+      console.log('[ZohoTokenManager] Error checking database tokens:', error);
     }
 
     // Fallback to environment variable method
@@ -71,6 +92,78 @@ export class ZohoTokenManager {
       return token;
     } finally {
       this.refreshPromise = null;
+    }
+  }
+
+  /**
+   * Refresh access token using database-stored refresh token
+   */
+  private async refreshWithDatabaseToken(refreshToken: string): Promise<string> {
+    const clientId = process.env.ZOHO_CLIENT_ID;
+    const clientSecret = process.env.ZOHO_CLIENT_SECRET;
+
+    if (!clientId || !clientSecret) {
+      throw new Error('Missing required credentials for token refresh');
+    }
+
+    // Determine the correct auth URL based on region
+    const authUrl = process.env.ZOHO_AUTH_URL || 'https://accounts.zoho.com';
+    const tokenEndpoint = `${authUrl}/oauth/v2/token`;
+
+    try {
+      console.log(`[ZohoTokenManager] Refreshing token using database refresh token`);
+      
+      const params = new URLSearchParams({
+        refresh_token: refreshToken,
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: 'refresh_token'
+      });
+
+      const response = await fetch(tokenEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: params.toString()
+      });
+
+      const responseText = await response.text();
+
+      if (!response.ok) {
+        console.error('[ZohoTokenManager] Token refresh failed:', {
+          status: response.status,
+          response: responseText
+        });
+        throw new Error(`Token refresh failed: ${response.status} ${responseText}`);
+      }
+
+      const data = JSON.parse(responseText);
+
+      if (!data.access_token) {
+        console.error('[ZohoTokenManager] No access token in response:', data);
+        throw new Error('No access token received from Zoho');
+      }
+
+      // Update database with new token
+      const expiresAt = new Date(Date.now() + (data.expires_in || 3600) * 1000);
+      
+      // Get the current token record to find its ID
+      const tokens = await storage.getOAuthTokens({ provider: 'zoho_crm' });
+      if (tokens && tokens.length > 0) {
+        const tokenId = tokens[0].id;
+        await storage.updateOAuthToken(tokenId, {
+          accessToken: data.access_token,
+          expiresAt: expiresAt
+        });
+      }
+
+      console.log('[ZohoTokenManager] Access token refreshed and updated in database');
+      return data.access_token;
+
+    } catch (error) {
+      console.error('[ZohoTokenManager] Error refreshing database token:', error);
+      throw error;
     }
   }
 

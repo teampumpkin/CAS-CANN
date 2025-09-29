@@ -156,9 +156,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const tokens = await ZohoTokenManager.exchangeCodeForTokens(code);
       
       console.log('[Zoho OAuth] Successfully obtained tokens');
+      
+      // Store tokens in database
+      try {
+        const expiresAt = new Date(Date.now() + tokens.expiresIn * 1000);
+        await storage.createOAuthToken({
+          provider: 'zoho_crm',
+          accessToken: tokens.accessToken,
+          refreshToken: tokens.refreshToken,
+          expiresAt: expiresAt,
+          scope: 'ZohoCRM.modules.leads.ALL,ZohoCRM.settings.fields.ALL',
+          tokenType: 'Bearer',
+          isActive: true
+        });
+        console.log('[Zoho OAuth] ✅ Tokens successfully stored in database');
+      } catch (dbError) {
+        console.error('[Zoho OAuth] Failed to store tokens in database:', dbError);
+      }
+      
       console.log('=================================');
-      console.log('IMPORTANT: Save this refresh token as ZOHO_REFRESH_TOKEN:');
-      console.log(tokens.refreshToken);
+      console.log('✅ Integration Ready! Tokens stored in database.');
       console.log('=================================');
       
       // Return success page with refresh token

@@ -6,6 +6,8 @@ import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
+import { reportingService, reportFiltersSchema } from "./reporting-service";
+import { fieldMetadataCacheService } from "./field-metadata-cache-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -1002,6 +1004,128 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("OAuth callback error:", error);
       res.status(500).json({ error: "Failed to process OAuth callback", details: error instanceof Error ? error.message : 'Unknown error' });
+    }
+  });
+
+  // Comprehensive Reporting API endpoints
+  app.get("/api/reports", async (req, res) => {
+    try {
+      const filters = reportFiltersSchema.parse({
+        formName: req.query.formName as string,
+        zohoModule: req.query.zohoModule as string,
+        processingStatus: req.query.processingStatus as string,
+        syncStatus: req.query.syncStatus as string,
+        dateFrom: req.query.dateFrom as string,
+        dateTo: req.query.dateTo as string,
+        includeCustomFields: req.query.includeCustomFields === 'true',
+        groupBy: req.query.groupBy as string,
+        limit: req.query.limit ? parseInt(req.query.limit as string) : undefined,
+      });
+
+      console.log('[API] Generating report with filters:', filters);
+      const report = await reportingService.generateReport(filters);
+      
+      res.json({
+        success: true,
+        report,
+        generatedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Reports endpoint error:', error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid query parameters',
+          details: error.errors,
+        });
+      }
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+      });
+    }
+  });
+
+  // Export report as CSV
+  app.get("/api/reports/export/csv", async (req, res) => {
+    try {
+      const filters = reportFiltersSchema.parse({
+        formName: req.query.formName as string,
+        zohoModule: req.query.zohoModule as string,
+        processingStatus: req.query.processingStatus as string,
+        syncStatus: req.query.syncStatus as string,
+        dateFrom: req.query.dateFrom as string,
+        dateTo: req.query.dateTo as string,
+        includeCustomFields: req.query.includeCustomFields === 'true',
+        groupBy: req.query.groupBy as string,
+        limit: req.query.limit ? parseInt(req.query.limit as string) : undefined,
+      });
+
+      console.log('[API] Exporting report as CSV:', filters);
+      const csvContent = await reportingService.exportReportAsCSV(filters);
+      
+      const timestamp = new Date().toISOString().split('T')[0];
+      const filename = `form_submissions_report_${timestamp}.csv`;
+      
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      res.send(csvContent);
+
+    } catch (error) {
+      console.error('[API] CSV export error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Export failed',
+      });
+    }
+  });
+
+  // Get CRM lead summary using COQL
+  app.get("/api/reports/crm-summary", async (req, res) => {
+    try {
+      const filters = {
+        dateFrom: req.query.dateFrom as string,
+        dateTo: req.query.dateTo as string,
+        sourceForm: req.query.sourceForm as string,
+      };
+
+      console.log('[API] Fetching CRM summary:', filters);
+      const summary = await reportingService.getLeadSummaryFromCRM(filters);
+      
+      res.json({
+        success: true,
+        summary,
+        generatedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] CRM summary error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'CRM summary failed',
+        suggestion: 'Ensure OAuth tokens are valid and CRM access is working',
+      });
+    }
+  });
+
+  // Field metadata cache management endpoints
+  app.get("/api/metadata/cache-stats", async (req, res) => {
+    try {
+      const stats = await fieldMetadataCacheService.getCacheStats();
+      
+      res.json({
+        success: true,
+        stats,
+        retrievedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Cache stats error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to get cache stats',
+      });
     }
   });
 

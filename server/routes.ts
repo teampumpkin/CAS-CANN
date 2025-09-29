@@ -965,8 +965,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log("Successfully obtained access token!");
       
-      // Store tokens automatically using the OAuth service
-      const stored = await oauthService.storeTokens('zoho_crm', tokenData);
+      // Store tokens automatically using the dedicated token manager
+      const stored = await dedicatedTokenManager.storeToken('zoho_crm', tokenData);
       
       if (stored) {
         console.log("✅ Tokens stored automatically in database");

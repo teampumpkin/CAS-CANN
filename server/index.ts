@@ -41,7 +41,9 @@ app.use((req, res, next) => {
   const { oauthService } = await import("./oauth-service");
   await oauthService.initialize();
 
-  // Add health endpoint BEFORE routes registration
+  const server = await registerRoutes(app);
+
+  // Add health endpoint BEFORE Vite middleware to ensure it's handled by Express
   app.get('/health', (_req, res) => {
     res.status(200).json({ 
       status: 'healthy', 
@@ -49,32 +51,6 @@ app.use((req, res, next) => {
       port: process.env.PORT ? parseInt(process.env.PORT) : 5000,
       environment: process.env.NODE_ENV || 'development'
     });
-  });
-
-  // Setup OAuth proxy middleware with self-proxy protection
-  const { createOAuthProxyMiddleware } = await import("./oauth-proxy");
-  const oauthProxy = createOAuthProxyMiddleware();
-  
-  // Setup OAuth API router for direct handling
-  const { createAPIRouter } = await import("./api-router");
-  const apiRouter = await createAPIRouter();
-  
-  // Mount OAuth routes BEFORE Vite middleware (priority over catch-all)
-  app.use('/api/oauth', apiRouter);
-  
-  // Register all other API routes BEFORE Vite middleware
-  const server = await registerRoutes(app);
-  
-  // Add OAuth proxy middleware for frontend requests
-  app.use(oauthProxy);
-  
-  // Add a temporary override for root path to test if changes are reaching Replit domain
-  app.get('/', (req, res, next) => {
-    const host = req.get('host') || req.get('x-forwarded-host');
-    console.log(`[ROOT] Request from host: ${host}, forwarded-host: ${req.get('x-forwarded-host')}`);
-    
-    // Let Vite handle it by passing to next middleware
-    next();
   });
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -88,8 +64,7 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  const isProduction = process.env.NODE_ENV === "production";
-  if (!isProduction) {
+  if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);

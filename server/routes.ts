@@ -630,7 +630,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Get form submission statistics
       const allSubmissions = await storage.getFormSubmissions();
       const pendingSubmissions = await storage.getFormSubmissionsByStatus("pending", "pending");
-      const processingSubmissions = await storage.getFormSubmissionsByStatus("processing", "pending");
+      const processingSubmissions = await storage.getFormSubmissionsByStatus("processing", "processing");
       const completedSubmissions = await storage.getFormSubmissionsByStatus("completed", "synced");
       const failedSubmissions = await storage.getFormSubmissionsByStatus("failed", "failed");
 
@@ -865,120 +865,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Non-OAuth API endpoints (OAuth routes handled by proxy)
-  
-  // System health check endpoint (non-OAuth)
-  app.get('/api/system-health', async (_req, res) => {
-    try {
-      res.status(200).json({
-        status: 'healthy',
-        timestamp: new Date().toISOString(),
-        server: 'frontend'
-      });
-    } catch (error) {
-      res.status(503).json({
-        status: 'error',
-        error: error instanceof Error ? error.message : 'Unknown error',
-        timestamp: new Date().toISOString()
-      });
-    }
-  });
-
-  // Retry failed submissions endpoint (preserved for direct calls)
-  app.post("/api/retry-failed-submissions", async (req, res) => {
-    try {
-      if (retryService.isRetryProcessing()) {
-        return res.status(409).json({
-          success: false,
-          message: "Retry operation already in progress"
-        });
-      }
-
-      const result = await retryService.retryAllFailedSubmissions();
-      res.json({
-        success: true,
-        message: "Retry operation completed",
-        stats: result
-      });
-    } catch (error) {
-      console.error("Retry all failed submissions error:", error);
-      res.status(500).json({
-        success: false,
-        message: "Failed to retry submissions",
-        error: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
-
-  // OAuth endpoints for backend server
-  app.get("/api/oauth/test", (req, res) => {
-    console.log("[OAuth Test] Test endpoint hit");
-    res.json({
-      message: "OAuth backend is working!",
-      timestamp: new Date().toISOString(),
-      host: req.get('host'),
-      forwardedHost: req.get('x-forwarded-host'),
-      server: 'backend'
-    });
-  });
-
-  app.get('/api/health-check', async (_req, res) => {
-    try {
-      const healthCheck = await oauthService.checkTokenHealth();
-      const tokenCount = await storage.getOAuthTokens({ provider: 'zoho_crm', isActive: true });
-      
-      res.status(200).json({
-        status: 'healthy',
-        oauth: {
-          isValid: healthCheck.isValid,
-          needsRefresh: healthCheck.needsRefresh,
-          activeTokens: tokenCount.length
-        },
-        timestamp: new Date().toISOString(),
-        server: 'backend'
-      });
-    } catch (error) {
-      res.status(503).json({
-        status: 'oauth_error',
-        error: error instanceof Error ? error.message : 'Unknown error',
-        timestamp: new Date().toISOString(),
-        server: 'backend'
-      });
-    }
-  });
-
-  app.get("/api/oauth/zoho/auth", (req, res) => {
-    console.log("[OAuth Auth] Endpoint hit, redirecting to connect");
-    res.redirect("/oauth/zoho/connect");
-  });
-
+  // Zoho OAuth connect endpoint - starts the authorization flow
   app.get("/oauth/zoho/connect", (req, res) => {
     try {
-      let redirectUri: string;
+      // Use production domain for OAuth callback - check proxy headers for production detection
+      const forwardedHost = req.get('x-forwarded-host') || req.get('host');
+      const isProduction = forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production';
+      const baseUrl = isProduction ? 'https://amyloid.ca' : `${req.protocol}://${req.get('host')}`;
+      const redirectUri = `${baseUrl}/oauth/zoho/callback`;
       
-      if (process.env.ZOHO_REDIRECT_URI) {
-        redirectUri = process.env.ZOHO_REDIRECT_URI;
-        console.log(`[OAuth Connect] Using environment ZOHO_REDIRECT_URI: ${redirectUri}`);
-      } else {
-        const forwardedHost = req.get('x-forwarded-host') || req.get('host');
-        const isProduction = forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production';
-        const isReplitDev = forwardedHost === 'cas-website-prod-connect11.replit.app';
-        
-        let baseUrl: string;
-        if (isProduction) {
-          baseUrl = 'https://amyloid.ca';
-        } else if (isReplitDev) {
-          baseUrl = 'https://cas-website-prod-connect11.replit.app';
-        } else {
-          baseUrl = `${req.protocol}://${req.get('host')}`;
-        }
-        redirectUri = `${baseUrl}/oauth/zoho/callback`;
-        
-        console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}, NODE_ENV: ${process.env.NODE_ENV}`);
-        console.log(`[OAuth Connect] Detected production: ${isProduction}, Using base URL: ${baseUrl}`);
-      }
-      
-      console.log(`[OAuth Connect] Final redirect URI: ${redirectUri}`);
+      console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}, NODE_ENV: ${process.env.NODE_ENV}`);
+      console.log(`[OAuth Connect] Detected production: ${isProduction}, Using base URL: ${baseUrl}`);
+      console.log(`[OAuth Connect] Generated redirect URI: ${redirectUri}`);
       
       const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
       console.log(`[OAuth Connect] Full authorization URL: ${authUrl}`);
@@ -990,10 +888,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // OAuth callback endpoint for Zoho authorization
   app.get("/oauth/zoho/callback", async (req, res) => {
     try {
-      const { code, error, error_description } = req.query;
+      const { code } = req.query;
       
+      // Log debug info for troubleshooting
+      console.log("[OAuth Callback] Full query parameters:", req.query);
+      console.log("[OAuth Callback] Request URL:", req.url);
+      
+      const { error, error_description } = req.query;
+      
+      // Handle OAuth errors from Zoho
       if (error) {
         console.error("[OAuth Callback] Zoho OAuth error:", error, error_description);
         return res.status(400).send(`
@@ -1026,6 +932,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log("Received Zoho authorization code:", code);
       
+      // Exchange code for access token
       const tokenResponse = await fetch("https://accounts.zoho.com/oauth/v2/token", {
         method: "POST",
         headers: {
@@ -1035,16 +942,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           grant_type: "authorization_code",
           client_id: process.env.ZOHO_CLIENT_ID!,
           client_secret: process.env.ZOHO_CLIENT_SECRET!,
-          redirect_uri: (() => {
-            const forwardedHost = req.get('x-forwarded-host') || req.get('host');
-            if (forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production') {
-              return 'https://amyloid.ca/oauth/zoho/callback';
-            } else if (forwardedHost === 'cas-website-prod-connect11.replit.app') {
-              return 'https://cas-website-prod-connect11.replit.app/oauth/zoho/callback';
-            } else {
-              return `${req.protocol}://${req.get('host')}/oauth/zoho/callback`;
-            }
-          })(),
+          redirect_uri: (req.get('x-forwarded-host') === 'amyloid.ca' || process.env.NODE_ENV === 'production')
+            ? 'https://amyloid.ca/oauth/zoho/callback'
+            : `${req.protocol}://${req.get('host')}/oauth/zoho/callback`,
           code: code as string,
         }),
       });
@@ -1058,6 +958,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log("Successfully obtained access token!");
       
+      // Store tokens automatically using the OAuth service
       const stored = await oauthService.storeTokens('zoho_crm', tokenData);
       
       if (stored) {
@@ -1071,10 +972,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
               <p>Your Zoho CRM integration is now <strong>automatically configured</strong>!</p>
               <div style="background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #28a745;">
                 <h3>✅ Automatic Token Management Active</h3>
-                <p>Form submissions will now automatically sync to Zoho CRM.</p>
+                <ul>
+                  <li>Access tokens will automatically refresh before expiring</li>
+                  <li>Your CANN membership forms will sync continuously with Zoho CRM</li>
+                  <li>No manual token management required</li>
+                </ul>
               </div>
-              <p><a href="/oauth-test" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">View Integration Status</a></p>
-              <p><a href="/" style="background: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">← Return to Website</a></p>
+              <p><strong>Token expires in:</strong> ${tokenData.expires_in} seconds (${Math.floor(tokenData.expires_in / 3600)} hours)</p>
+              <p><strong>API Domain:</strong> ${tokenData.api_domain}</p>
+              <p><strong>Next Steps:</strong> Your integration is ready! Test your membership forms - they will automatically sync to Zoho CRM.</p>
+              <p><a href="/">← Return to Website</a></p>
             </body>
           </html>
         `);

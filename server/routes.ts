@@ -8,6 +8,7 @@ import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
 import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
+import { notificationService, notificationConfigSchema } from "./notification-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -1125,6 +1126,117 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         error: error instanceof Error ? error.message : 'Failed to get cache stats',
+      });
+    }
+  });
+
+  // Notification System API endpoints
+  app.get("/api/notifications/config", async (req, res) => {
+    try {
+      const config = notificationService.getConfiguration();
+      
+      res.json({
+        success: true,
+        config,
+        retrievedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Get notification config error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to get config',
+      });
+    }
+  });
+
+  app.post("/api/notifications/config", async (req, res) => {
+    try {
+      const newConfig = notificationConfigSchema.partial().parse(req.body);
+      
+      await notificationService.updateConfiguration(newConfig);
+      
+      res.json({
+        success: true,
+        config: notificationService.getConfiguration(),
+        updatedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Update notification config error:', error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid configuration data',
+          details: error.errors,
+        });
+      }
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to update config',
+      });
+    }
+  });
+
+  app.post("/api/notifications/test-weekly-report", async (req, res) => {
+    try {
+      console.log('[API] Manual weekly report generation requested');
+      const report = await notificationService.generateWeeklyReportNow();
+      
+      res.json({
+        success: true,
+        report,
+        message: 'Weekly report generated successfully (check server logs for email content)',
+        generatedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Test weekly report error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to generate report',
+      });
+    }
+  });
+
+  app.post("/api/notifications/test-alerts", async (req, res) => {
+    try {
+      console.log('[API] Manual alert check requested');
+      await notificationService.checkAlertsNow();
+      
+      res.json({
+        success: true,
+        message: 'Alert check completed (check server logs for any alerts)',
+        checkedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Test alerts error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to check alerts',
+      });
+    }
+  });
+
+  app.post("/api/notifications/send-csv-report", async (req, res) => {
+    try {
+      const filters = req.body.filters || {};
+      
+      console.log('[API] CSV report email requested');
+      await notificationService.sendCSVReport(filters);
+      
+      res.json({
+        success: true,
+        message: 'CSV report prepared for email delivery (check server logs)',
+        sentAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Send CSV report error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to send CSV report',
       });
     }
   });

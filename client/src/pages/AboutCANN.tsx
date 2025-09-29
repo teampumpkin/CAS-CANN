@@ -189,6 +189,8 @@ export default function AboutCANN() {
         }
       };
 
+      console.log('Submitting form to Zoho CRM...', { formName: formData.form_name });
+
       // Submit to our integrated CRM system
       const response = await fetch('/api/submit-form', {
         method: 'POST',
@@ -198,24 +200,38 @@ export default function AboutCANN() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
       const result = await response.json();
+
+      if (!response.ok) {
+        console.error('Form submission failed:', result);
+        throw new Error(result.message || `Server error: ${response.status}`);
+      }
       
       if (result.success) {
         console.log('CANN registration submitted successfully:', result);
         setShowRegistrationForm(false);
         form.reset();
         setShowConfirmationModal(true);
+        
+        // Show success in console for debugging
+        console.log('✅ Lead created in Zoho CRM:', {
+          submissionId: result.submissionId,
+          status: result.status,
+          formName: result.formName
+        });
       } else {
         throw new Error(result.message || 'Submission failed');
       }
     } catch (error) {
       console.error('Error submitting CANN registration:', error);
-      // Show error message to user
-      alert(`Registration submission failed: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again or contact support.`);
+      
+      // Provide more detailed error feedback
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      const userMessage = errorMessage.includes('Zoho') 
+        ? 'We are experiencing issues with our CRM system. Your submission has been saved and will be processed shortly. Please contact support if you need immediate assistance.'
+        : `Registration submission failed: ${errorMessage}. Please try again or contact support.`;
+      
+      alert(userMessage);
     } finally {
       setIsSubmitting(false);
     }

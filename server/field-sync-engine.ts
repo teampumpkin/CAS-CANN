@@ -37,6 +37,7 @@ export class FieldSyncEngine {
    */
   async syncFieldsForSubmission(submission: FormSubmission): Promise<FieldSyncResult> {
     const startTime = Date.now();
+    const syncId = `fieldsync_${submission.id}_${Math.random().toString(36).substr(2, 6)}`;
     
     const result: FieldSyncResult = {
       success: false,
@@ -52,7 +53,11 @@ export class FieldSyncEngine {
     };
 
     try {
-      console.log(`[FieldSync] Starting field sync for submission ${submission.id} (${submission.formName})`);
+      console.log(`\n=== [FIELD SYNC START] Sync ID: ${syncId} ===`);
+      console.log(`[${syncId}] Submission: ${submission.id} (${submission.formName})`);
+      console.log(`[${syncId}] Target Module: ${submission.zohoModule}`);
+      console.log(`[${syncId}] Form Data Fields: ${Object.keys(submission.submissionData as any).join(', ')}`);
+      console.log(`[${syncId}] Total Fields to Process: ${Object.keys(submission.submissionData as any).length}`);
       
       // Log the operation start
       await storage.createSubmissionLog({
@@ -62,44 +67,107 @@ export class FieldSyncEngine {
         details: {
           module: submission.zohoModule,
           formName: submission.formName,
-          fieldCount: Object.keys(submission.submissionData as any).length
+          fieldCount: Object.keys(submission.submissionData as any).length,
+          syncId: syncId
         }
       });
 
       // Step 1: Get current field mappings from database
+      console.log(`[${syncId}] 📋 Step 1: Retrieving existing field mappings from database...`);
+      const mappingLookupStartTime = Date.now();
+      
       const existingMappings = await storage.getFieldMappings({
         zohoModule: submission.zohoModule
       });
+      
+      const mappingLookupDuration = Date.now() - mappingLookupStartTime;
+      console.log(`[${syncId}] ✅ Field mappings retrieved (${mappingLookupDuration}ms):`, {
+        mappingCount: existingMappings.length,
+        existingFields: existingMappings.map(m => ({
+          field: m.fieldName,
+          type: m.fieldType,
+          isCustom: m.isCustomField,
+          lastSynced: m.lastSyncedAt
+        }))
+      });
 
       // Step 2: Compare form fields against existing mappings
+      console.log(`[${syncId}] 🔍 Step 2: Analyzing field differences...`);
+      const comparisonStartTime = Date.now();
+      
       const comparison = await this.compareFields(
         submission.submissionData as Record<string, any>,
         existingMappings,
-        submission.zohoModule
+        submission.zohoModule,
+        syncId
       );
+      
+      const comparisonDuration = Date.now() - comparisonStartTime;
+      console.log(`[${syncId}] ✅ Field comparison completed (${comparisonDuration}ms):`, {
+        existingFields: comparison.existing.length,
+        missingFields: comparison.missing.length,
+        fieldsNeedingUpdate: comparison.needsUpdate.length,
+        missingFieldNames: comparison.missing.map(f => f.fieldName),
+        existingFieldNames: comparison.existing.map(f => f.fieldName)
+      });
 
       result.fieldsProcessed = comparison.existing.length + comparison.missing.length;
 
       // Step 3: Create missing fields in Zoho CRM
       if (comparison.missing.length > 0) {
-        console.log(`[FieldSync] Creating ${comparison.missing.length} missing fields in Zoho CRM`);
+        console.log(`[${syncId}] 🔧 Step 3: Creating ${comparison.missing.length} missing fields in Zoho CRM...`);
         
-        for (const missingField of comparison.missing) {
+        for (let i = 0; i < comparison.missing.length; i++) {
+          const missingField = comparison.missing[i];
+          const fieldCreateStartTime = Date.now();
+          
+          console.log(`[${syncId}] Creating field ${i + 1}/${comparison.missing.length}: ${missingField.fieldName}`, {
+            fieldType: missingField.fieldType,
+            sampleValue: missingField.sampleValue,
+            targetModule: submission.zohoModule
+          });
+          
           try {
-            await this.createFieldInZohoCRM(missingField, submission.zohoModule);
+            await this.createFieldInZohoCRM(missingField, submission.zohoModule, syncId);
+            const fieldCreateDuration = Date.now() - fieldCreateStartTime;
+            
             result.fieldsCreated++;
             result.details.created.push(missingField.fieldName);
+            
+            console.log(`[${syncId}] ✅ Field created successfully (${fieldCreateDuration}ms): ${missingField.fieldName}`);
+            
           } catch (error) {
+            const fieldCreateDuration = Date.now() - fieldCreateStartTime;
             const errorMsg = `Failed to create field ${missingField.fieldName}: ${error instanceof Error ? error.message : 'Unknown error'}`;
+            
             result.errors.push(errorMsg);
             result.details.failed.push(missingField.fieldName);
-            console.error(`[FieldSync] ${errorMsg}`);
+            
+            console.error(`[${syncId}] ❌ Field creation failed (${fieldCreateDuration}ms): ${missingField.fieldName}`, {
+              error: error instanceof Error ? error.message : 'Unknown error',
+              stack: error instanceof Error ? error.stack : undefined,
+              fieldType: missingField.fieldType
+            });
           }
         }
+        
+        console.log(`[${syncId}] Field creation phase completed:`, {
+          attempted: comparison.missing.length,
+          successful: result.fieldsCreated,
+          failed: result.details.failed.length,
+          successRate: `${((result.fieldsCreated / comparison.missing.length) * 100).toFixed(1)}%`
+        });
+      } else {
+        console.log(`[${syncId}] ✅ No missing fields detected, all form fields already exist in CRM`);
       }
 
       // Step 4: Update field mappings in database
-      await this.updateFieldMappingsFromZoho(submission.zohoModule);
+      console.log(`[${syncId}] 🔄 Step 4: Refreshing field mappings from Zoho...`);
+      const mappingUpdateStartTime = Date.now();
+      
+      await this.updateFieldMappingsFromZoho(submission.zohoModule, syncId);
+      const mappingUpdateDuration = Date.now() - mappingUpdateStartTime;
+      
       result.fieldsSynced = result.fieldsCreated + comparison.existing.length;
 
       // Mark existing fields as still valid
@@ -110,6 +178,18 @@ export class FieldSyncEngine {
 
       const duration = Date.now() - startTime;
       
+      console.log(`[${syncId}] ✅ Field mappings refreshed (${mappingUpdateDuration}ms)`);
+      console.log(`[${syncId}] 🎉 FIELD SYNC COMPLETED (${duration}ms):`, {
+        success: result.success,
+        fieldsProcessed: result.fieldsProcessed,
+        fieldsCreated: result.fieldsCreated,
+        fieldsSynced: result.fieldsSynced,
+        errorCount: result.errors.length,
+        existingFields: result.details.existing.length,
+        createdFields: result.details.created,
+        failedFields: result.details.failed
+      });
+      
       // Log the operation completion
       await storage.createSubmissionLog({
         submissionId: submission.id,
@@ -119,13 +199,19 @@ export class FieldSyncEngine {
           ...result.details,
           duration,
           fieldsProcessed: result.fieldsProcessed,
-          fieldsCreated: result.fieldsCreated
+          fieldsCreated: result.fieldsCreated,
+          syncId: syncId,
+          timings: {
+            mappingLookup: mappingLookupDuration,
+            fieldComparison: comparisonDuration,
+            mappingUpdate: mappingUpdateDuration
+          }
         },
         duration,
         errorMessage: result.errors.length > 0 ? result.errors.join("; ") : undefined
       });
 
-      console.log(`[FieldSync] Completed field sync for submission ${submission.id} in ${duration}ms: ${result.fieldsCreated} created, ${result.errors.length} errors`);
+      console.log(`=== [FIELD SYNC END] Sync ID: ${syncId} ===\n`);
 
     } catch (error) {
       const errorMsg = `Field sync failed: ${error instanceof Error ? error.message : 'Unknown error'}`;
@@ -154,7 +240,8 @@ export class FieldSyncEngine {
   private async compareFields(
     formData: Record<string, any>,
     existingMappings: FieldMapping[],
-    zohoModule: string
+    zohoModule: string,
+    syncId: string
   ): Promise<FieldComparisonResult> {
     const existingFieldNames = new Set(existingMappings.map(m => m.fieldName));
     const missing: FieldComparisonResult["missing"] = [];
@@ -204,7 +291,8 @@ export class FieldSyncEngine {
    */
   private async createFieldInZohoCRM(
     fieldInfo: FieldComparisonResult["missing"][0],
-    zohoModule: string
+    zohoModule: string,
+    syncId: string
   ): Promise<void> {
     const fieldRequest: ZohoFieldCreateRequest = {
       api_name: fieldInfo.fieldName,
@@ -246,11 +334,20 @@ export class FieldSyncEngine {
   /**
    * Update field mappings from Zoho CRM (refresh our local cache)
    */
-  async updateFieldMappingsFromZoho(zohoModule: string): Promise<void> {
+  async updateFieldMappingsFromZoho(zohoModule: string, syncId: string): Promise<void> {
     try {
-      console.log(`[FieldSync] Refreshing field mappings for module ${zohoModule}`);
+      console.log(`[${syncId}] 🔄 Refreshing field mappings for module: ${zohoModule}`);
+      const fetchStartTime = Date.now();
       
       const zohoFields = await zohoCRMService.getModuleFields(zohoModule);
+      const fetchDuration = Date.now() - fetchStartTime;
+      
+      console.log(`[${syncId}] ✅ Retrieved ${zohoFields.length} fields from Zoho (${fetchDuration}ms):`, {
+        module: zohoModule,
+        fieldCount: zohoFields.length,
+        customFields: zohoFields.filter(f => f.custom_field).length,
+        standardFields: zohoFields.filter(f => !f.custom_field).length
+      });
       const existingMappings = await storage.getFieldMappings({ zohoModule });
       const existingFieldNames = new Set(existingMappings.map(m => m.fieldName));
 

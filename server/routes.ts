@@ -9,6 +9,7 @@ import { oauthService } from "./oauth-service";
 import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
 import { notificationService, notificationConfigSchema } from "./notification-service";
+import { formScalabilityService, formConfigSchema } from "./form-scalability-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -1237,6 +1238,215 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         error: error instanceof Error ? error.message : 'Failed to send CSV report',
+      });
+    }
+  });
+
+  // Form Scalability System API endpoints
+  app.post("/api/forms/process", async (req, res) => {
+    try {
+      const { formName, submissionData } = req.body;
+      
+      if (!formName || !submissionData) {
+        return res.status(400).json({
+          success: false,
+          error: 'formName and submissionData are required',
+        });
+      }
+
+      console.log(`[API] Processing form submission: ${formName}`);
+      const result = await formScalabilityService.processFormSubmission(formName, submissionData);
+      
+      res.json({
+        success: result.success,
+        result,
+        processedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Form processing error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Form processing failed',
+      });
+    }
+  });
+
+  app.post("/api/forms/analyze", async (req, res) => {
+    try {
+      const { formName, sampleData } = req.body;
+      
+      if (!formName || !sampleData) {
+        return res.status(400).json({
+          success: false,
+          error: 'formName and sampleData are required',
+        });
+      }
+
+      console.log(`[API] Analyzing form: ${formName}`);
+      const analysis = await formScalabilityService.analyzeNewForm(formName, sampleData);
+      
+      res.json({
+        success: true,
+        analysis,
+        analyzedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Form analysis error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Form analysis failed',
+      });
+    }
+  });
+
+  app.post("/api/forms/configure", async (req, res) => {
+    try {
+      const config = formConfigSchema.parse(req.body);
+      
+      const result = await formScalabilityService.createFormConfig(config);
+      
+      res.json({
+        success: true,
+        config: result,
+        createdAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Form configuration error:', error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid configuration data',
+          details: error.errors,
+        });
+      }
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Configuration failed',
+      });
+    }
+  });
+
+  app.get("/api/forms/configs", async (req, res) => {
+    try {
+      const configs = formScalabilityService.getAllFormConfigs();
+      
+      res.json({
+        success: true,
+        configs,
+        count: configs.length,
+        retrievedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Get form configs error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to get configurations',
+      });
+    }
+  });
+
+  app.get("/api/forms/configs/:formName", async (req, res) => {
+    try {
+      const { formName } = req.params;
+      const config = formScalabilityService.getFormConfig(formName);
+      
+      if (!config) {
+        return res.status(404).json({
+          success: false,
+          error: `Configuration not found for form: ${formName}`,
+        });
+      }
+
+      res.json({
+        success: true,
+        config,
+        retrievedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Get form config error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to get configuration',
+      });
+    }
+  });
+
+  app.put("/api/forms/configs/:formName", async (req, res) => {
+    try {
+      const { formName } = req.params;
+      const updates = formConfigSchema.partial().parse(req.body);
+      
+      const updatedConfig = await formScalabilityService.updateFormConfig(formName, updates);
+      
+      res.json({
+        success: true,
+        config: updatedConfig,
+        updatedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Update form config error:', error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid update data',
+          details: error.errors,
+        });
+      }
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Update failed',
+      });
+    }
+  });
+
+  app.delete("/api/forms/configs/:formName", async (req, res) => {
+    try {
+      const { formName } = req.params;
+      const deleted = await formScalabilityService.deleteFormConfig(formName);
+      
+      if (!deleted) {
+        return res.status(404).json({
+          success: false,
+          error: `Configuration not found for form: ${formName}`,
+        });
+      }
+
+      res.json({
+        success: true,
+        message: `Configuration deleted for form: ${formName}`,
+        deletedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Delete form config error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Delete failed',
+      });
+    }
+  });
+
+  app.get("/api/forms/stats", async (req, res) => {
+    try {
+      const stats = await formScalabilityService.getProcessingStats();
+      
+      res.json({
+        success: true,
+        stats,
+        retrievedAt: new Date().toISOString(),
+      });
+
+    } catch (error) {
+      console.error('[API] Get processing stats error:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to get stats',
       });
     }
   });

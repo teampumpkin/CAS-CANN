@@ -646,23 +646,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
           } catch (error) {
             console.error(`[${asyncProcessId}] ❌ Exception during lead creation:`, error);
             
-            await storage.updateFormSubmission(submissionId, {
-              processingStatus: "failed" as any,
-              syncStatus: "failed" as any,
-              errorMessage: `Lead creation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
-            });
-            
-            await storage.createSubmissionLog({
-              submissionId: submissionId,
-              operation: "crm_push",
-              status: "failed",
-              details: { 
-                error: error instanceof Error ? error.message : 'Unknown error',
-                processId: asyncProcessId
-              },
-              duration: 0,
-              errorMessage: error instanceof Error ? error.message : 'Unknown error'
-            });
+            if (submissionId) {
+              await storage.updateFormSubmission(submissionId, {
+                processingStatus: "failed" as any,
+                syncStatus: "failed" as any,
+                errorMessage: `Lead creation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+              });
+              
+              await storage.createSubmissionLog({
+                submissionId: submissionId,
+                operation: "crm_push",
+                status: "failed",
+                details: { 
+                  error: error instanceof Error ? error.message : 'Unknown error',
+                  processId: asyncProcessId
+                },
+                duration: 0,
+                errorMessage: error instanceof Error ? error.message : 'Unknown error'
+              });
+            }
           }
         });
       } else {

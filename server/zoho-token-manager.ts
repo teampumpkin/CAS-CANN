@@ -122,6 +122,10 @@ export class ZohoTokenManager {
         expiryTime: this.tokenExpiry.toISOString()
       });
 
+      if (!this.accessToken) {
+        throw new Error('Failed to cache access token');
+      }
+
       return this.accessToken;
     } catch (error) {
       console.error('[ZohoTokenManager] Error refreshing token:', error);

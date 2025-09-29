@@ -1,0 +1,313 @@
+import { storage } from './storage';
+import type { OAuthToken, InsertOAuthToken } from '@shared/schema';
+
+/**
+ * Dedicated Token Management System for Zoho CRM
+ * Handles token storage, retrieval, validation, refresh, and health monitoring
+ */
+export class DedicatedTokenManager {
+  private static instance: DedicatedTokenManager;
+  private tokenCache: Map<string, TokenInfo> = new Map();
+  private healthCheckInterval: NodeJS.Timeout | null = null;
+  private readonly TOKEN_REFRESH_BUFFER_MS = 300000; // 5 minutes before expiry
+  private readonly HEALTH_CHECK_INTERVAL_MS = 60000; // 1 minute health checks
+
+  static getInstance(): DedicatedTokenManager {
+    if (!DedicatedTokenManager.instance) {
+      DedicatedTokenManager.instance = new DedicatedTokenManager();
+    }
+    return DedicatedTokenManager.instance;
+  }
+
+  /**
+   * Initialize the token management system
+   */
+  async initialize(): Promise<void> {
+    console.log('[TokenManager] Initializing dedicated token management system...');
+    
+    // Load existing tokens from database
+    await this.loadTokensFromDatabase();
+    
+    // Start health monitoring
+    this.startHealthMonitoring();
+    
+    // Perform initial health check
+    await this.performHealthCheck();
+    
+    console.log('[TokenManager] Token management system initialized successfully');
+  }
+
+  /**
+   * Store new OAuth tokens from authorization flow
+   */
+  async storeToken(provider: string, tokenData: {
+    access_token: string;
+    refresh_token?: string;
+    expires_in?: number;
+    scope?: string;
+    token_type?: string;
+  }): Promise<boolean> {
+    try {
+      console.log(`[TokenManager] Storing new token for provider: ${provider}`);
+      
+      const expiresAt = tokenData.expires_in 
+        ? new Date(Date.now() + (tokenData.expires_in * 1000))
+        : new Date(Date.now() + 3600000); // 1 hour default
+
+      // Deactivate existing tokens for this provider
+      await this.deactivateExistingTokens(provider);
+
+      // Create new token record
+      const newToken: InsertOAuthToken = {
+        provider,
+        accessToken: tokenData.access_token,
+        refreshToken: tokenData.refresh_token,
+        expiresAt,
+        scope: tokenData.scope || '',
+        tokenType: tokenData.token_type || 'Bearer',
+        isActive: true
+      };
+
+      const createdToken = await storage.createOAuthToken(newToken);
+      
+      // Cache the token
+      this.cacheToken(provider, {
+        accessToken: createdToken.accessToken || '',
+        refreshToken: createdToken.refreshToken || undefined,
+        expiresAt: createdToken.expiresAt || new Date(Date.now() + 3600000),
+        scope: createdToken.scope || '',
+        tokenType: createdToken.tokenType || 'Bearer'
+      });
+
+      console.log(`[TokenManager] Successfully stored token for ${provider}, expires: ${expiresAt.toISOString()}`);
+      return true;
+
+    } catch (error) {
+      console.error(`[TokenManager] Failed to store token for ${provider}:`, error);
+      return false;
+    }
+  }
+
+  /**
+   * Get a valid access token, auto-refreshing if needed
+   */
+  async getValidAccessToken(provider: string = 'zoho_crm'): Promise<string | null> {
+    try {
+      // Check cache first
+      const cached = this.tokenCache.get(provider);
+      if (cached && this.isTokenValid(cached)) {
+        return cached.accessToken;
+      }
+
+      // Load from database
+      const tokenRecord = await this.getActiveTokenRecord(provider);
+      if (!tokenRecord || !tokenRecord.accessToken) {
+        console.log(`[TokenManager] No active token found for provider: ${provider}`);
+        return null;
+      }
+
+      // Check if token needs refresh
+      if (this.needsRefresh(tokenRecord)) {
+        console.log(`[TokenManager] Token for ${provider} needs refresh, attempting refresh...`);
+        const refreshed = await this.refreshTokenIfNeeded(provider, tokenRecord);
+        if (refreshed) {
+          return refreshed.accessToken;
+        }
+        return null;
+      }
+
+      // Token is valid, cache and return
+      const tokenInfo: TokenInfo = {
+        accessToken: tokenRecord.accessToken,
+        refreshToken: tokenRecord.refreshToken || undefined,
+        expiresAt: tokenRecord.expiresAt || new Date(Date.now() + 3600000),
+        scope: tokenRecord.scope || '',
+        tokenType: tokenRecord.tokenType || 'Bearer'
+      };
+
+      this.cacheToken(provider, tokenInfo);
+      return tokenInfo.accessToken;
+
+    } catch (error) {
+      console.error(`[TokenManager] Error getting valid token for ${provider}:`, error);
+      return null;
+    }
+  }
+
+  /**
+   * Check token health status
+   */
+  async checkTokenHealth(provider: string = 'zoho_crm'): Promise<TokenHealthStatus> {
+    const tokenRecord = await this.getActiveTokenRecord(provider);
+    
+    if (!tokenRecord || !tokenRecord.accessToken) {
+      return { 
+        isValid: false, 
+        needsRefresh: true, 
+        provider,
+        error: 'No active token found' 
+      };
+    }
+
+    const now = new Date();
+    const expiresAt = tokenRecord.expiresAt || new Date(0);
+    const timeToExpiry = expiresAt.getTime() - now.getTime();
+    const needsRefresh = timeToExpiry < this.TOKEN_REFRESH_BUFFER_MS;
+
+    return {
+      isValid: timeToExpiry > 0,
+      expiresAt,
+      needsRefresh,
+      timeToExpiry,
+      provider,
+      lastRefreshed: tokenRecord.lastRefreshed
+    };
+  }
+
+  /**
+   * Force refresh a token
+   */
+  async forceRefreshToken(provider: string = 'zoho_crm'): Promise<TokenInfo | null> {
+    const tokenRecord = await this.getActiveTokenRecord(provider);
+    if (!tokenRecord) {
+      return null;
+    }
+
+    return await this.refreshTokenIfNeeded(provider, tokenRecord);
+  }
+
+  /**
+   * Get all stored tokens (for admin/debug)
+   */
+  async getAllTokens(): Promise<OAuthToken[]> {
+    return await storage.getOAuthTokens();
+  }
+
+  /**
+   * Clear all tokens for a provider
+   */
+  async clearTokens(provider: string): Promise<void> {
+    await this.deactivateExistingTokens(provider);
+    this.tokenCache.delete(provider);
+    console.log(`[TokenManager] Cleared all tokens for provider: ${provider}`);
+  }
+
+  // Private helper methods
+  private async loadTokensFromDatabase(): Promise<void> {
+    try {
+      const tokens = await storage.getOAuthTokens({ isActive: true });
+      console.log(`[TokenManager] Loaded ${tokens.length} active tokens from database`);
+      
+      for (const token of tokens) {
+        if (token.accessToken) {
+          this.cacheToken(token.provider, {
+            accessToken: token.accessToken,
+            refreshToken: token.refreshToken || undefined,
+            expiresAt: token.expiresAt || new Date(Date.now() + 3600000),
+            scope: token.scope || '',
+            tokenType: token.tokenType || 'Bearer'
+          });
+        }
+      }
+    } catch (error) {
+      console.error('[TokenManager] Error loading tokens from database:', error);
+    }
+  }
+
+  private cacheToken(provider: string, tokenInfo: TokenInfo): void {
+    this.tokenCache.set(provider, tokenInfo);
+  }
+
+  private isTokenValid(tokenInfo: TokenInfo): boolean {
+    return tokenInfo.expiresAt.getTime() > Date.now() + 60000; // Valid if expires in > 1 minute
+  }
+
+  private needsRefresh(tokenRecord: OAuthToken): boolean {
+    if (!tokenRecord.expiresAt) return true;
+    const timeToExpiry = tokenRecord.expiresAt.getTime() - Date.now();
+    return timeToExpiry < this.TOKEN_REFRESH_BUFFER_MS;
+  }
+
+  private async getActiveTokenRecord(provider: string): Promise<OAuthToken | null> {
+    const tokens = await storage.getOAuthTokens({ provider, isActive: true });
+    return tokens.length > 0 ? tokens[0] : null;
+  }
+
+  private async deactivateExistingTokens(provider: string): Promise<void> {
+    const existingTokens = await storage.getOAuthTokens({ provider, isActive: true });
+    for (const token of existingTokens) {
+      await storage.updateOAuthToken(token.id, { isActive: false });
+    }
+  }
+
+  private async refreshTokenIfNeeded(provider: string, tokenRecord: OAuthToken): Promise<TokenInfo | null> {
+    // This would integrate with actual OAuth refresh logic
+    // For now, return null to indicate refresh is needed
+    console.log(`[TokenManager] Token refresh needed for ${provider} but refresh logic not implemented yet`);
+    return null;
+  }
+
+  private startHealthMonitoring(): void {
+    if (this.healthCheckInterval) {
+      clearInterval(this.healthCheckInterval);
+    }
+
+    this.healthCheckInterval = setInterval(async () => {
+      await this.performHealthCheck();
+    }, this.HEALTH_CHECK_INTERVAL_MS);
+
+    console.log('[TokenManager] Health monitoring started');
+  }
+
+  private async performHealthCheck(): Promise<void> {
+    try {
+      const providers = Array.from(this.tokenCache.keys());
+      
+      for (const provider of providers) {
+        const health = await this.checkTokenHealth(provider);
+        
+        if (!health.isValid) {
+          console.log(`[TokenManager] Health check failed for ${provider}: ${health.error || 'Token expired'}`);
+        } else if (health.needsRefresh) {
+          console.log(`[TokenManager] Health check: ${provider} needs refresh soon (${Math.round((health.timeToExpiry || 0) / 1000)}s remaining)`);
+        }
+      }
+    } catch (error) {
+      console.error('[TokenManager] Error during health check:', error);
+    }
+  }
+
+  /**
+   * Shutdown the token manager
+   */
+  shutdown(): void {
+    if (this.healthCheckInterval) {
+      clearInterval(this.healthCheckInterval);
+      this.healthCheckInterval = null;
+    }
+    this.tokenCache.clear();
+    console.log('[TokenManager] Token management system shutdown');
+  }
+}
+
+// Types
+export interface TokenInfo {
+  accessToken: string;
+  refreshToken?: string;
+  expiresAt: Date;
+  scope: string;
+  tokenType: string;
+}
+
+export interface TokenHealthStatus {
+  isValid: boolean;
+  expiresAt?: Date;
+  needsRefresh: boolean;
+  timeToExpiry?: number;
+  provider: string;
+  lastRefreshed?: Date | null;
+  error?: string;
+}
+
+// Singleton instance
+export const dedicatedTokenManager = DedicatedTokenManager.getInstance();

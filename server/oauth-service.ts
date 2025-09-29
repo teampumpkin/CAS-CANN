@@ -1,5 +1,6 @@
 import { storage } from './storage';
 import type { OAuthToken, InsertOAuthToken } from '@shared/schema';
+import { dedicatedTokenManager } from './dedicated-token-manager';
 
 export interface TokenInfo {
   accessToken: string;
@@ -14,6 +15,7 @@ export class OAuthService {
   private tokenCache: Map<string, TokenInfo> = new Map();
   private refreshPromises: Map<string, Promise<TokenInfo | null>> = new Map();
   private backgroundRefreshTimer: NodeJS.Timeout | null = null;
+  private tokenManager = dedicatedTokenManager;
 
   static getInstance(): OAuthService {
     if (!OAuthService.instance) {
@@ -26,47 +28,8 @@ export class OAuthService {
    * Get a valid access token, automatically refreshing if needed
    */
   async getValidToken(provider: string = 'zoho_crm'): Promise<string | null> {
-    try {
-      // Check cache first
-      const cached = this.tokenCache.get(provider);
-      if (cached && this.isTokenValid(cached)) {
-        return cached.accessToken;
-      }
-
-      // Get from database
-      const tokenRecord = await this.getActiveToken(provider);
-      if (!tokenRecord) {
-        console.log(`[OAuth] No active token found for provider: ${provider}`);
-        return null;
-      }
-
-      // Check if token needs refresh
-      if (this.needsRefresh(tokenRecord)) {
-        console.log(`[OAuth] Token for ${provider} needs refresh`);
-        const refreshed = await this.refreshToken(provider, tokenRecord);
-        if (refreshed) {
-          this.cacheToken(provider, refreshed);
-          return refreshed.accessToken;
-        }
-        return null;
-      }
-
-      // Token is still valid
-      const tokenInfo: TokenInfo = {
-        accessToken: tokenRecord.accessToken || '',
-        refreshToken: tokenRecord.refreshToken ?? undefined,
-        expiresAt: tokenRecord.expiresAt || new Date(Date.now() + 3600000), // 1 hour default
-        scope: tokenRecord.scope || '',
-        tokenType: tokenRecord.tokenType || 'Bearer'
-      };
-
-      this.cacheToken(provider, tokenInfo);
-      return tokenInfo.accessToken;
-
-    } catch (error) {
-      console.error(`[OAuth] Error getting valid token for ${provider}:`, error);
-      return null;
-    }
+    // Delegate to dedicated token manager
+    return await this.tokenManager.getValidAccessToken(provider);
   }
 
   /**

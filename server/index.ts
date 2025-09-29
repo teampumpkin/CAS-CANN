@@ -37,6 +37,10 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Initialize dedicated token management system
+  const { dedicatedTokenManager } = await import("./dedicated-token-manager");
+  await dedicatedTokenManager.initialize();
+
   // Initialize OAuth service on startup
   const { oauthService } = await import("./oauth-service");
   await oauthService.initialize();

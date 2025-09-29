@@ -6,6 +6,7 @@ import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
+import { dedicatedTokenManager } from "./dedicated-token-manager";
 import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
 // import { notificationService, notificationConfigSchema } from "./notification-service"; // Disabled for production

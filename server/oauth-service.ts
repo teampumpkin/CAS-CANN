@@ -178,8 +178,8 @@ export class OAuthService {
     
     const params = new URLSearchParams({
       grant_type: "refresh_token",
-      client_id: process.env.ZOHO_CLIENT_ID!,
-      client_secret: process.env.ZOHO_CLIENT_SECRET!,
+      client_id: process.env.ZOHO_CLIENT_ID || '1000.1VOH5MB3GQNDX5HR8I4ZJPNSE8Q0IJ',
+      client_secret: process.env.ZOHO_CLIENT_SECRET || '11c516b273b52c006f5fa7a386dee19b4dd90c58c9',
       refresh_token: tokenRecord.refreshToken!,
     });
 
@@ -354,7 +354,7 @@ export class OAuthService {
       const baseUrl = 'https://accounts.zoho.com/oauth/v2/auth';
       const params = [
         `scope=${encodeURIComponent('ZohoCRM.modules.leads.ALL,ZohoCRM.modules.contacts.ALL,ZohoCRM.settings.fields.ALL')}`,
-        `client_id=${encodeURIComponent(process.env.ZOHO_CLIENT_ID!)}`,
+        `client_id=${encodeURIComponent(process.env.ZOHO_CLIENT_ID || '1000.1VOH5MB3GQNDX5HR8I4ZJPNSE8Q0IJ')}`,
         `response_type=code`,
         `access_type=offline`,
         `redirect_uri=${encodeURIComponent(redirectUri)}`

@@ -1588,7 +1588,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       );
       
       res.json({
-        success: result.success,
         ...result,
         message: result.success 
           ? `Form "${formName}" processed successfully and synced to Zoho CRM` 

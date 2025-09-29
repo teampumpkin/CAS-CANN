@@ -2,13 +2,6 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage, type ResourceFilters } from "./storage";
 import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission } from "@shared/schema";
-import { fieldSyncEngine } from "./field-sync-engine";
-import { zohoCRMService } from "./zoho-crm-service";
-import { retryService } from "./retry-service";
-import { oauthService } from "./oauth-service";
-import { zohoTokenManager, ZohoTokenManager } from "./zoho-token-manager";
-import { zohoCRMLeadService } from "./zoho-crm-lead-service";
-import { zohoFlowWebhookService } from "./zoho-flow-webhook-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -17,307 +10,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.status(200).send('pong');
   });
 
-  // Test endpoint to manually store Zoho tokens for debugging
-  app.post('/api/oauth/zoho/test-store', async (req, res) => {
-    try {
-      const { accessToken, refreshToken } = req.body;
-      
-      if (!accessToken || !refreshToken) {
-        return res.status(400).json({ 
-          error: 'Missing accessToken or refreshToken in request body' 
-        });
-      }
 
-      // Store test tokens in database
-      const expiresAt = new Date(Date.now() + 3600 * 1000); // 1 hour
-      const tokenRecord = await storage.createOAuthToken({
-        provider: 'zoho_crm',
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-        expiresAt: expiresAt,
-        scope: 'ZohoCRM.modules.leads.ALL,ZohoCRM.settings.fields.ALL',
-        tokenType: 'Bearer',
-        isActive: true
-      });
 
-      console.log('[Test Store] ✅ Test tokens stored successfully:', {
-        id: tokenRecord.id,
-        hasAccessToken: !!tokenRecord.accessToken,
-        hasRefreshToken: !!tokenRecord.refreshToken,
-        expiresAt: tokenRecord.expiresAt
-      });
 
-      res.json({ 
-        success: true, 
-        message: 'Test tokens stored successfully',
-        tokenId: tokenRecord.id
-      });
-    } catch (error) {
-      console.error('[Test Store] Error storing test tokens:', error);
-      res.status(500).json({ 
-        error: 'Failed to store test tokens',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
-
-  // Zoho OAuth Setup Page - Shows public authorization URL
-  app.get('/api/oauth/zoho/setup', (req, res) => {
-    try {
-      // Determine the public base URL for this request
-      const protocol = req.get('x-forwarded-proto') || (req.secure ? 'https' : 'http');
-      const host = req.get('x-forwarded-host') || req.get('host') || 'localhost:5000';
-      const baseUrl = `${protocol}://${host}`;
-      const authUrl = `${baseUrl}/api/oauth/zoho/authorize`;
-      
-      res.send(`
-        <html>
-          <head>
-            <title>Zoho CRM OAuth Setup</title>
-            <style>
-              body { font-family: Arial; padding: 40px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
-              .header { color: #00AFE6; border-bottom: 2px solid #00AFE6; padding-bottom: 20px; margin-bottom: 30px; }
-              .auth-button { 
-                display: inline-block;
-                background: #00AFE6; 
-                color: white; 
-                padding: 15px 30px; 
-                text-decoration: none; 
-                border-radius: 8px; 
-                font-size: 18px;
-                font-weight: bold;
-                margin: 20px 0;
-              }
-              .auth-button:hover { background: #0095c7; }
-              .step { 
-                background: #f8f9fa; 
-                padding: 20px; 
-                border-radius: 8px; 
-                margin: 15px 0;
-                border-left: 4px solid #00AFE6;
-              }
-              .warning { 
-                background: #fff3cd; 
-                border: 1px solid #ffc107; 
-                padding: 15px; 
-                border-radius: 4px; 
-                margin: 20px 0;
-              }
-              code { background: #f1f1f1; padding: 2px 6px; border-radius: 3px; }
-            </style>
-          </head>
-          <body>
-            <div class="header">
-              <h1>🔐 Zoho CRM Integration Setup</h1>
-              <p>Canadian Amyloidosis Society - OAuth Authorization</p>
-            </div>
-            
-            <div class="warning">
-              <strong>⚠️ Important:</strong> Authorization codes expire in 1 minute! Complete the process quickly.
-            </div>
-            
-            <div class="step">
-              <h3>Step 1: Click to Authorize</h3>
-              <p>Click the button below to authorize CAS with your Zoho CRM:</p>
-              <a href="${authUrl}" class="auth-button" target="_blank">🚀 Authorize Zoho CRM Access</a>
-            </div>
-            
-            <div class="step">
-              <h3>Step 2: Complete Authorization</h3>
-              <p>You will:</p>
-              <ul>
-                <li>Be redirected to Zoho to log in</li>
-                <li>Grant permissions for CRM access</li>
-                <li>Return to a success page with your refresh token</li>
-              </ul>
-            </div>
-            
-            <div class="step">
-              <h3>Step 3: Save Refresh Token</h3>
-              <p>Copy the refresh token and add it as <code>ZOHO_REFRESH_TOKEN</code> environment variable.</p>
-            </div>
-            
-            <div style="margin-top: 40px; padding: 20px; background: #e8f5e8; border-radius: 8px;">
-              <h3>✅ After Setup</h3>
-              <p>Your "Join CANN Today" form will automatically sync to Zoho CRM leads!</p>
-            </div>
-          </body>
-        </html>
-      `);
-    } catch (error) {
-      console.error('[Zoho OAuth Setup] Error:', error);
-      res.status(500).send('Error generating setup page');
-    }
-  });
-
-  // Zoho OAuth Authorization Endpoint
-  app.get('/api/oauth/zoho/authorize', (req, res) => {
-    try {
-      // Determine the public base URL for this request
-      const protocol = req.get('x-forwarded-proto') || (req.secure ? 'https' : 'http');
-      const host = req.get('x-forwarded-host') || req.get('host') || 'localhost:5000';
-      const baseUrl = `${protocol}://${host}`;
-      const redirectUri = `${baseUrl}/api/oauth/zoho/callback`;
-      
-      console.log('[Zoho OAuth] Using redirect URI:', redirectUri);
-      
-      const authUrl = ZohoTokenManager.getAuthorizationUrl(redirectUri);
-      console.log('[Zoho OAuth] Redirecting to authorization URL');
-      res.redirect(authUrl);
-    } catch (error) {
-      console.error('[Zoho OAuth] Failed to generate auth URL:', error);
-      res.status(500).json({ 
-        error: 'Failed to generate authorization URL',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
-
-  // Zoho OAuth Callback Endpoint
-  app.get('/api/oauth/zoho/callback', async (req, res) => {
-    const { code, error } = req.query;
-    
-    if (error) {
-      console.error('[Zoho OAuth] Authorization denied:', error);
-      return res.status(400).send(`
-        <html>
-          <body style="font-family: Arial; padding: 40px; text-align: center;">
-            <h2 style="color: #d32f2f;">Authorization Failed</h2>
-            <p>${error}</p>
-            <button onclick="window.close()">Close Window</button>
-          </body>
-        </html>
-      `);
-    }
-    
-    if (!code || typeof code !== 'string') {
-      return res.status(400).send('No authorization code received');
-    }
-    
-    try {
-      console.log('[Zoho OAuth] Exchanging authorization code for tokens');
-      
-      // Get the same redirect URI that was used for authorization
-      const protocol = req.get('x-forwarded-proto') || (req.secure ? 'https' : 'http');
-      const host = req.get('x-forwarded-host') || req.get('host') || 'localhost:5000';
-      const baseUrl = `${protocol}://${host}`;
-      const redirectUri = `${baseUrl}/api/oauth/zoho/callback`;
-      
-      console.log('[Zoho OAuth] Using redirect URI for token exchange:', redirectUri);
-      
-      // Exchange code for tokens (must be done within 1 minute!)
-      const tokens = await ZohoTokenManager.exchangeCodeForTokens(code, redirectUri);
-      
-      console.log('[Zoho OAuth] Successfully obtained tokens');
-      
-      // Store tokens in database
-      try {
-        const expiresAt = new Date(Date.now() + tokens.expiresIn * 1000);
-        await storage.createOAuthToken({
-          provider: 'zoho_crm',
-          accessToken: tokens.accessToken,
-          refreshToken: tokens.refreshToken,
-          expiresAt: expiresAt,
-          scope: 'ZohoCRM.modules.leads.ALL,ZohoCRM.settings.fields.ALL',
-          tokenType: 'Bearer',
-          isActive: true
-        });
-        console.log('[Zoho OAuth] ✅ Tokens successfully stored in database');
-      } catch (dbError) {
-        console.error('[Zoho OAuth] Failed to store tokens in database:', dbError);
-      }
-      
-      console.log('=================================');
-      console.log('✅ Integration Ready! Tokens stored in database.');
-      console.log('=================================');
-      
-      // Return success page with refresh token
-      res.send(`
-        <html>
-          <head>
-            <title>Zoho Authorization Successful</title>
-            <style>
-              body { font-family: Arial; padding: 40px; max-width: 800px; margin: 0 auto; }
-              .success { color: #4caf50; }
-              .token-box { 
-                background: #f5f5f5; 
-                padding: 20px; 
-                border-radius: 8px; 
-                margin: 20px 0;
-                word-break: break-all;
-              }
-              .copy-btn { 
-                background: #2196f3; 
-                color: white; 
-                border: none; 
-                padding: 10px 20px; 
-                border-radius: 4px; 
-                cursor: pointer; 
-              }
-              .copy-btn:hover { background: #1976d2; }
-              .instruction { 
-                background: #fff3cd; 
-                border: 1px solid #ffc107; 
-                padding: 15px; 
-                border-radius: 4px; 
-                margin: 20px 0;
-              }
-            </style>
-          </head>
-          <body>
-            <h2 class="success">✓ Authorization Successful!</h2>
-            
-            <div class="instruction">
-              <h3>Next Step: Save Your Refresh Token</h3>
-              <p>Add the refresh token below to your environment variables as <strong>ZOHO_REFRESH_TOKEN</strong></p>
-            </div>
-            
-            <div class="token-box">
-              <strong>Refresh Token:</strong><br>
-              <code id="refreshToken">${tokens.refreshToken}</code>
-            </div>
-            
-            <button class="copy-btn" onclick="copyToken()">Copy Refresh Token</button>
-            
-            <div style="margin-top: 30px;">
-              <p><strong>Access Token Valid For:</strong> ${tokens.expiresIn} seconds</p>
-              <p style="color: #666;">You can now close this window. The refresh token will be used to automatically obtain new access tokens.</p>
-            </div>
-            
-            <script>
-              function copyToken() {
-                const token = document.getElementById('refreshToken').innerText;
-                navigator.clipboard.writeText(token).then(() => {
-                  alert('Refresh token copied to clipboard!');
-                });
-              }
-              
-              // Try to close the window after 10 seconds
-              setTimeout(() => {
-                if (window.opener) {
-                  window.close();
-                }
-              }, 10000);
-            </script>
-          </body>
-        </html>
-      `);
-    } catch (error) {
-      console.error('[Zoho OAuth] Token exchange failed:', error);
-      res.status(500).send(`
-        <html>
-          <body style="font-family: Arial; padding: 40px; text-align: center;">
-            <h2 style="color: #d32f2f;">Token Exchange Failed</h2>
-            <p>${error instanceof Error ? error.message : 'Unknown error'}</p>
-            <p style="color: #666; margin-top: 20px;">
-              Note: Authorization codes expire in 1 minute. Please try again and exchange the code immediately.
-            </p>
-            <a href="/api/oauth/zoho/authorize">Try Again</a>
-          </body>
-        </html>
-      `);
-    }
-  });
 
   // User API routes
   app.get("/api/users/:id", async (req, res) => {
@@ -750,96 +445,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const logDuration = Date.now() - logStartTime;
       console.log(`[${requestId}] ✅ Receipt log created (${logDuration}ms)`);
 
-      // Step 6: Process Zoho Flow webhook submission if configured
-      if (zohoFlowWebhookService.isConfigured()) {
-        console.log(`[${requestId}] Starting Zoho Flow webhook submission...`);
-        
-        setImmediate(async () => {
-          const asyncProcessId = `webhook_${submissionId}_${Math.random().toString(36).substr(2, 6)}`;
-          
-          try {
-            console.log(`[${asyncProcessId}] Submitting to Zoho Flow webhook for submission ${submissionId}`);
-            
-            // Submit to Zoho Flow webhook
-            const webhookResult = await zohoFlowWebhookService.submitToWebhook(data);
-            
-            if (webhookResult.success) {
-              console.log(`[${asyncProcessId}] ✅ Webhook submission successful:`, {
-                response: webhookResult.response
-              });
-              
-              // Update submission with success
-              await storage.updateFormSubmission(submission.id, {
-                processingStatus: "completed" as any,
-                syncStatus: "synced" as any
-              });
-              
-              // Log successful webhook push
-              await storage.createSubmissionLog({
-                submissionId: submission.id,
-                operation: "crm_push",
-                status: "success",
-                details: {
-                  webhookResponse: webhookResult.response,
-                  processId: asyncProcessId
-                },
-                duration: 0
-              });
-            } else {
-              console.error(`[${asyncProcessId}] ❌ Webhook submission failed:`, webhookResult.error);
-              
-              await storage.updateFormSubmission(submission.id, {
-                processingStatus: "failed" as any,
-                syncStatus: "failed" as any,
-                errorMessage: webhookResult.error || "Failed to submit to Zoho Flow webhook"
-              });
-              
-              // Log failed webhook push
-              await storage.createSubmissionLog({
-                submissionId: submission.id,
-                operation: "crm_push",
-                status: "failed",
-                details: { 
-                  error: webhookResult.error,
-                  processId: asyncProcessId
-                },
-                duration: 0,
-                errorMessage: webhookResult.error || "Failed to submit to webhook"
-              });
-            }
-          } catch (error) {
-            console.error(`[${asyncProcessId}] ❌ Exception during webhook submission:`, error);
-            
-            if (submissionId) {
-              await storage.updateFormSubmission(submissionId, {
-                processingStatus: "failed" as any,
-                syncStatus: "failed" as any,
-                errorMessage: `Webhook submission failed: ${error instanceof Error ? error.message : 'Unknown error'}`
-              });
-              
-              await storage.createSubmissionLog({
-                submissionId: submissionId,
-                operation: "crm_push",
-                status: "failed",
-                details: { 
-                  error: error instanceof Error ? error.message : 'Unknown error',
-                  processId: asyncProcessId
-                },
-                duration: 0,
-                errorMessage: error instanceof Error ? error.message : 'Unknown error'
-              });
-            }
-          }
-        });
-      } else {
-        console.log(`[${requestId}] Zoho Flow webhook not configured, saving form submission only`);
-        
-        // Update submission status as pending
-        await storage.updateFormSubmission(submission.id, {
-          processingStatus: "completed" as any,
-          syncStatus: "pending" as any
-        });
-      }
+      // Step 6: Update submission status as completed
+      console.log(`[${requestId}] Form submission completed successfully`);
+      
+      // Update submission status as completed (no external integration)
+      await storage.updateFormSubmission(submission.id, {
+        processingStatus: "completed" as any,
+        syncStatus: "completed" as any
+      });
 
       // Step 8: Return immediate response to the client
       const responseTime = Date.now() - startTime;
@@ -958,82 +571,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Zoho CRM connection test endpoint
-  app.get("/api/zoho/test-connection", async (req, res) => {
-    try {
-      const result = await zohoCRMService.testConnection();
-      res.json(result);
-    } catch (error) {
-      console.error("Zoho connection test failed:", error);
-      res.status(500).json({
-        success: false,
-        message: `Connection test failed: ${error instanceof Error ? error.message : 'Unknown error'}`
-      });
-    }
-  });
 
-  // Retry failed submission endpoint
-  app.post("/api/retry/submission/:id", async (req, res) => {
-    try {
-      const submissionId = parseInt(req.params.id);
-      
-      if (isNaN(submissionId)) {
-        return res.status(400).json({ message: "Invalid submission ID" });
-      }
 
-      const result = await retryService.retrySubmission(submissionId);
-      
-      if (result.success) {
-        res.json({
-          success: true,
-          message: `Submission ${submissionId} retried successfully`,
-          retryCount: result.retryCount,
-          finalStatus: result.finalStatus
-        });
-      } else {
-        res.status(500).json({
-          success: false,
-          message: `Retry failed: ${result.errorMessage}`,
-          retryCount: result.retryCount,
-          finalStatus: result.finalStatus
-        });
-      }
-
-    } catch (error) {
-      console.error("Error retrying submission:", error);
-      res.status(500).json({ 
-        success: false,
-        message: `Failed to retry submission: ${error instanceof Error ? error.message : 'Unknown error'}` 
-      });
-    }
-  });
-
-  // Retry all failed submissions endpoint
-  app.post("/api/retry/all", async (req, res) => {
-    try {
-      if (retryService.isRetryProcessing()) {
-        return res.status(409).json({
-          success: false,
-          message: "Retry process is already running"
-        });
-      }
-
-      const stats = await retryService.retryAllFailedSubmissions();
-      
-      res.json({
-        success: true,
-        message: "Bulk retry completed",
-        stats
-      });
-
-    } catch (error) {
-      console.error("Error during bulk retry:", error);
-      res.status(500).json({ 
-        success: false,
-        message: `Bulk retry failed: ${error instanceof Error ? error.message : 'Unknown error'}` 
-      });
-    }
-  });
 
   // System monitoring and statistics endpoint
   app.get("/api/monitor/stats", async (req, res) => {
@@ -1045,8 +584,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const completedSubmissions = await storage.getFormSubmissionsByStatus("completed", "synced");
       const failedSubmissions = await storage.getFormSubmissionsByStatus("failed", "failed");
 
-      // Get retry statistics
-      const retryStats = await retryService.getRetryStatistics();
 
       // Get recent logs (last 50)
       const recentLogs = await storage.getSubmissionLogs();
@@ -1068,9 +605,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           completedSubmissions: completedSubmissions.length,
           failedSubmissions: failedSubmissions.length,
           successRate: Math.round(successRate * 100) / 100,
-          retryProcessing: retryService.isRetryProcessing()
+          retryProcessing: false
         },
-        retryStatistics: retryStats,
         configurationStatus: {
           fieldMappings: fieldMappings.length,
           formConfigurations: formConfigurations.length

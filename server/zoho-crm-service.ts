@@ -26,6 +26,25 @@ export interface ZohoFieldCreateRequest {
     display_value: string;
     actual_value: string;
   }>;
+  layouts?: Array<{
+    id: string;
+    section_id?: string;
+  }>;
+}
+
+// Zoho Layout API types
+export interface ZohoLayout {
+  id: string;
+  name: string;
+  sections: Array<{
+    id: string;
+    name: string;
+    display_label: string;
+  }>;
+}
+
+export interface ZohoLayoutResponse {
+  layouts: ZohoLayout[];
 }
 
 export interface ZohoRecord {
@@ -187,6 +206,17 @@ export class ZohoCRMService {
         throw new Error("Missing required field data: api_name, field_label, and data_type are required");
       }
 
+      // Get layout information if not provided
+      if (!fieldData.layouts) {
+        const layoutInfo = await this.getDefaultLayoutForModule(moduleName);
+        fieldData.layouts = [{
+          id: layoutInfo.layoutId,
+          section_id: layoutInfo.sectionId
+        }];
+      }
+
+      console.log(`[Zoho CRM] Creating field ${fieldData.api_name} with layout info:`, fieldData.layouts);
+
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
         `/settings/fields?module=${moduleName}`,
         "POST",
@@ -288,6 +318,45 @@ export class ZohoCRMService {
     } catch (error) {
       console.error(`Failed to fetch fields for module ${moduleName}:`, error);
       throw error;
+    }
+  }
+
+  /**
+   * Get default layout and section for a module (required for field creation)
+   */
+  private async getDefaultLayoutForModule(moduleName: string): Promise<{ layoutId: string; sectionId: string }> {
+    try {
+      const response = await this.makeRequest<ZohoLayoutResponse>(
+        `/settings/layouts?module=${moduleName}`
+      );
+
+      if (!response.layouts || response.layouts.length === 0) {
+        throw new Error(`No layouts found for module ${moduleName}`);
+      }
+
+      // Use the first layout (typically the default)
+      const layout = response.layouts[0];
+      
+      if (!layout.sections || layout.sections.length === 0) {
+        throw new Error(`No sections found in layout for module ${moduleName}`);
+      }
+
+      // Use the first section (typically a general information section)
+      const section = layout.sections[0];
+      
+      console.log(`[Zoho CRM] Using layout ${layout.id} (${layout.name}) section ${section.id} (${section.display_label}) for ${moduleName}`);
+      
+      return {
+        layoutId: layout.id,
+        sectionId: section.id
+      };
+    } catch (error) {
+      console.error(`Failed to get layout for module ${moduleName}:`, error);
+      // Fallback: try without section_id (some Zoho versions might work with just layout)
+      return {
+        layoutId: "default",
+        sectionId: "default"
+      };
     }
   }
 

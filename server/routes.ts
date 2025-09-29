@@ -635,8 +635,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Test database connection
       const testSubmissions = await storage.getFormSubmissions();
       
-      // Test Zoho connection
-      const zohoTest = await zohoCRMService.testConnection();
 
       res.json({
         status: "healthy",
@@ -646,13 +644,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
             status: "connected",
             submissionCount: testSubmissions.length
           },
-          zoho: {
-            status: zohoTest.success ? "connected" : "disconnected",
-            message: zohoTest.message
-          },
-          retryService: {
-            status: retryService.isRetryProcessing() ? "processing" : "idle"
-          }
         }
       });
 
@@ -666,151 +657,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Setup endpoint for CANN form configuration
-  app.post("/api/setup-cann-form", async (req, res) => {
-    try {
-      console.log("[Setup] Setting up CANN Membership Form Configuration...");
-
-      // Check if configuration already exists
-      const existingConfig = await storage.getFormConfiguration("Join CANN Today");
-      
-      if (existingConfig) {
-        console.log("[Setup] CANN form configuration already exists:", existingConfig.id);
-        return res.json({
-          success: true,
-          message: "CANN form configuration already exists",
-          configId: existingConfig.id,
-          config: existingConfig
-        });
-      }
-
-      // Create CANN form configuration
-      const cannFormConfig = {
-        formName: "Join CANN Today",
-        zohoModule: "Leads", // Map to Leads module in Zoho CRM
-        description: "Canadian Amyloidosis Nursing Network membership application form",
-        isActive: true,
-        fieldMappings: {
-          // Basic membership info
-          "membershipRequest": {
-            "zohoField": "membershipRequest",
-            "fieldType": "picklist",
-            "isRequired": true,
-            "description": "Whether user wants CAS membership"
-          },
-          "fullName": {
-            "zohoField": "fullName", 
-            "fieldType": "text",
-            "isRequired": false,
-            "description": "Full name of the applicant"
-          },
-          "emailAddress": {
-            "zohoField": "emailAddress",
-            "fieldType": "email", 
-            "isRequired": false,
-            "description": "Email address of the applicant"
-          },
-          "discipline": {
-            "zohoField": "discipline",
-            "fieldType": "text",
-            "isRequired": false,
-            "description": "Professional discipline (nurse, physician, etc.)"
-          },
-          "subspecialty": {
-            "zohoField": "subspecialty",
-            "fieldType": "text",
-            "isRequired": false,
-            "description": "Sub-specialty area of focus"
-          },
-          "institutionName": {
-            "zohoField": "institutionName",
-            "fieldType": "text",
-            "isRequired": false,
-            "description": "Center or clinic name/institution"
-          },
-          "communicationConsent": {
-            "zohoField": "communicationConsent",
-            "fieldType": "picklist",
-            "isRequired": false,
-            "description": "Consent for communication from CAS"
-          },
-          // Services map related fields
-          "servicesMapConsent": {
-            "zohoField": "servicesMapConsent",
-            "fieldType": "picklist",
-            "isRequired": true,
-            "description": "Consent for including center in services map"
-          },
-          "mapInstitutionName": {
-            "zohoField": "mapInstitutionName",
-            "fieldType": "text",
-            "isRequired": false,
-            "description": "Institution name for services map"
-          },
-          "institutionAddress": {
-            "zohoField": "institutionAddress",
-            "fieldType": "text",
-            "isRequired": false,
-            "description": "Full address of institution"
-          },
-          "institutionPhone": {
-            "zohoField": "institutionPhone",
-            "fieldType": "phone",
-            "isRequired": false,
-            "description": "Institution phone number"
-          },
-          "institutionFax": {
-            "zohoField": "institutionFax",
-            "fieldType": "text",
-            "isRequired": false,
-            "description": "Institution fax number"
-          },
-          "followUpConsent": {
-            "zohoField": "followUpConsent",
-            "fieldType": "picklist",
-            "isRequired": false,
-            "description": "Consent for follow-up contact by CAS"
-          }
-        },
-        settings: {
-          "autoCreateFields": true,
-          "enableRetries": true,
-          "maxRetries": 3,
-          "syncRequired": true,
-          "trackingEnabled": true,
-          "notificationEmail": "admin@amyloid.ca"
-        }
-      };
-
-      // Create the configuration
-      const createdConfig = await storage.createFormConfiguration(cannFormConfig);
-      console.log("[Setup] CANN form configuration created successfully!");
-      console.log("[Setup] Configuration ID:", createdConfig.id);
-      console.log("[Setup] Zoho Module:", createdConfig.zohoModule);
-      console.log("[Setup] Field Mappings Count:", Object.keys(createdConfig.fieldMappings as Record<string, any>).length);
-
-      res.json({
-        success: true,
-        message: "CANN form configuration created successfully!",
-        configId: createdConfig.id,
-        config: createdConfig,
-        summary: {
-          formName: createdConfig.formName,
-          zohoModule: createdConfig.zohoModule,
-          fieldCount: Object.keys(createdConfig.fieldMappings as Record<string, any>).length,
-          isActive: createdConfig.isActive
-        }
-      });
-
-    } catch (error) {
-      console.error("[Setup] Error setting up CANN form configuration:", error);
-      res.status(500).json({
-        success: false,
-        message: "Failed to setup CANN form configuration",
-        error: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
 
   // Non-OAuth API endpoints (OAuth routes handled by proxy)
   
@@ -831,56 +677,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Retry failed submissions endpoint (preserved for direct calls)
-  app.post("/api/retry-failed-submissions", async (req, res) => {
-    try {
-      if (retryService.isRetryProcessing()) {
-        return res.status(409).json({
-          success: false,
-          message: "Retry operation already in progress"
-        });
-      }
 
-      const result = await retryService.retryAllFailedSubmissions();
-      res.json({
-        success: true,
-        message: "Retry operation completed",
-        stats: result
-      });
-    } catch (error) {
-      console.error("Retry all failed submissions error:", error);
-      res.status(500).json({
-        success: false,
-        message: "Failed to retry submissions",
-        error: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
-
-  // OAuth endpoints for backend server
-  app.get("/api/oauth/test", (req, res) => {
-    console.log("[OAuth Test] Test endpoint hit");
-    res.json({
-      message: "OAuth backend is working!",
-      timestamp: new Date().toISOString(),
-      host: req.get('host'),
-      forwardedHost: req.get('x-forwarded-host'),
-      server: 'backend'
-    });
-  });
 
   app.get('/api/health-check', async (_req, res) => {
     try {
-      const healthCheck = await oauthService.checkTokenHealth();
-      const tokenCount = await storage.getOAuthTokens({ provider: 'zoho_crm', isActive: true });
-      
       res.status(200).json({
         status: 'healthy',
-        oauth: {
-          isValid: healthCheck.isValid,
-          needsRefresh: healthCheck.needsRefresh,
-          activeTokens: tokenCount.length
-        },
         timestamp: new Date().toISOString(),
         server: 'backend'
       });
@@ -927,7 +729,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log(`[OAuth Connect] Final redirect URI: ${redirectUri}`);
       
-      const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
+      // OAuth integration removed - endpoint disabled
       console.log(`[OAuth Connect] Full authorization URL: ${authUrl}`);
       
       res.redirect(authUrl);
@@ -1005,7 +807,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log("Successfully obtained access token!");
       
-      const stored = await oauthService.storeTokens('zoho_crm', tokenData);
+      // OAuth integration removed - token storage disabled
+      const stored = false;
       
       if (stored) {
         console.log("✅ Tokens stored automatically in database");

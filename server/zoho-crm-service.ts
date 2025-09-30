@@ -31,6 +31,10 @@ export interface ZohoFieldCreateRequest {
     id: string;
     section_id?: string;
   }>;
+  profiles?: Array<{
+    id: string;
+    permission_type: "read_write" | "read_only";
+  }>;
 }
 
 // Zoho Layout API types
@@ -46,6 +50,12 @@ export interface ZohoLayout {
 
 export interface ZohoLayoutResponse {
   layouts: ZohoLayout[];
+}
+
+export interface ZohoProfile {
+  id: string;
+  name: string;
+  category?: boolean;
 }
 
 export interface ZohoRecord {
@@ -221,7 +231,25 @@ export class ZohoCRMService {
         }];
       }
 
-      console.log(`[Zoho CRM] Creating field ${fieldData.api_name} with layout info:`, fieldData.layouts);
+      // Get profiles if not provided (REQUIRED by Zoho CRM v8 API)
+      if (!fieldData.profiles || fieldData.profiles.length === 0) {
+        const profiles = await this.getProfiles();
+        if (profiles.length > 0) {
+          // Add all profiles with read_write permission
+          fieldData.profiles = profiles.map(profile => ({
+            id: profile.id,
+            permission_type: "read_write" as const
+          }));
+          console.log(`[Zoho CRM] Auto-added ${profiles.length} profiles for field ${fieldData.api_name}`);
+        } else {
+          console.warn(`[Zoho CRM] No profiles found for field ${fieldData.api_name} - field creation may fail`);
+        }
+      }
+
+      console.log(`[Zoho CRM] Creating field ${fieldData.api_name} with layout and profile info:`, {
+        layouts: fieldData.layouts,
+        profiles: fieldData.profiles?.length || 0
+      });
 
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
         `/settings/fields?module=${moduleName}`,
@@ -363,6 +391,21 @@ export class ZohoCRMService {
         layoutId: "default",
         sectionId: "default"
       };
+    }
+  }
+
+  /**
+   * Get all profiles for the organization (required for field creation)
+   */
+  private async getProfiles(): Promise<ZohoProfile[]> {
+    try {
+      const response = await this.makeRequest<{ profiles: ZohoProfile[] }>(
+        `/settings/profiles`
+      );
+      return response.profiles || [];
+    } catch (error) {
+      console.error(`Failed to get profiles:`, error);
+      return [];
     }
   }
 

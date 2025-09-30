@@ -37,6 +37,16 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Detect and log environment
+  const isProduction = process.env.REPLIT_DEPLOYMENT === '1' || process.env.NODE_ENV === 'production';
+  const environment = isProduction ? 'PRODUCTION' : 'DEVELOPMENT';
+  console.log(`\n========================================`);
+  console.log(`🌍 Environment: ${environment}`);
+  console.log(`📦 NODE_ENV: ${process.env.NODE_ENV || 'not set'}`);
+  console.log(`🚀 REPLIT_DEPLOYMENT: ${process.env.REPLIT_DEPLOYMENT || 'not set'}`);
+  console.log(`🗄️  Database: ${process.env.DATABASE_URL ? process.env.DATABASE_URL.split('@')[1]?.split('/')[0] : 'not configured'}`);
+  console.log(`========================================\n`);
+
   // Initialize dedicated token management system
   const { dedicatedTokenManager } = await import("./dedicated-token-manager");
   await dedicatedTokenManager.initialize();
@@ -57,11 +67,14 @@ app.use((req, res, next) => {
 
   // Add health endpoint BEFORE Vite middleware to ensure it's handled by Express
   app.get('/health', (_req, res) => {
+    const isProduction = process.env.REPLIT_DEPLOYMENT === '1' || process.env.NODE_ENV === 'production';
     res.status(200).json({ 
       status: 'healthy', 
       timestamp: new Date().toISOString(),
       port: process.env.PORT ? parseInt(process.env.PORT) : 5000,
-      environment: process.env.NODE_ENV || 'development'
+      environment: isProduction ? 'production' : 'development',
+      replitDeployment: process.env.REPLIT_DEPLOYMENT === '1',
+      databaseHost: process.env.DATABASE_URL ? process.env.DATABASE_URL.split('@')[1]?.split('/')[0] : 'not configured'
     });
   });
 

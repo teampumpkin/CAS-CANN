@@ -251,6 +251,9 @@ export class ZohoCRMService {
         profiles: fieldData.profiles?.length || 0
       });
 
+      // Debug: Log the exact payload being sent
+      console.log(`[Zoho CRM DEBUG] Full field payload:`, JSON.stringify({ fields: [fieldData] }, null, 2));
+
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
         `/settings/fields?module=${moduleName}`,
         "POST",

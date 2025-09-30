@@ -1,0 +1,92 @@
+2025-09-30 13:38:36.95
+4210cd66
+User
+[OAuth Connect] Host: amyloid.ca, X-Forwarded-Host: amyloid.ca, NODE_ENV: production
+2025-09-30 13:38:36.95
+4210cd66
+User
+[OAuth Connect] Detected production: true, Using base URL: https://amyloid.ca
+2025-09-30 13:38:36.95
+4210cd66
+User
+[OAuth Connect] Generated redirect URI: https://amyloid.ca/oauth/zoho/callback
+2025-09-30 13:38:36.95
+4210cd66
+User
+[OAuth Service] Generated authorization URL: https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.leads.ALL%2CZohoCRM.modules.contacts.ALL%2CZohoCRM.settings.fields.ALL&client_id=1000.1VOH5MB3GQNDX5HR8I4ZJPNSE8Q0IJ&response_type=code&access_type=offline&redirect_uri=https%3A%2F%2Famyloid.ca%2Foauth%2Fzoho%2Fcallback
+2025-09-30 13:38:36.95
+4210cd66
+User
+[OAuth Connect] Full authorization URL: https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.leads.ALL%2CZohoCRM.modules.contacts.ALL%2CZohoCRM.settings.fields.ALL&client_id=1000.1VOH5MB3GQNDX5HR8I4ZJPNSE8Q0IJ&response_type=code&access_type=offline&redirect_uri=https%3A%2F%2Famyloid.ca%2Foauth%2Fzoho%2Fcallback
+2025-09-30 13:38:40.19
+4210cd66
+User
+[OAuth Callback] Full query parameters: {
+2025-09-30 13:38:40.19
+4210cd66
+User
+code: '1000.a65c78cca2812c45335c5959937efbcd.ccba6544702758a47efccbb6db3a68d1',
+2025-09-30 13:38:40.19
+4210cd66
+User
+location: 'us',
+2025-09-30 13:38:40.19
+4210cd66
+User
+'accounts-server': 'https://accounts.zoho.com'
+2025-09-30 13:38:40.19
+4210cd66
+User
+}
+2025-09-30 13:38:40.19
+4210cd66
+User
+[OAuth Callback] Request URL: /oauth/zoho/callback?code=1000.a65c78cca2812c45335c5959937efbcd.ccba6544702758a47efccbb6db3a68d1&location=us&accounts-server=https%3A%2F%2Faccounts.zoho.com
+2025-09-30 13:38:40.19
+4210cd66
+User
+Received Zoho authorization code: 1000.a65c78cca2812c45335c5959937efbcd.ccba6544702758a47efccbb6db3a68d1
+2025-09-30 13:38:40.35
+4210cd66
+User
+Successfully obtained access token!
+2025-09-30 13:38:40.35
+4210cd66
+User
+[TokenManager] 🔐 Starting token storage for provider: zoho_crm
+2025-09-30 13:38:40.35
+4210cd66
+User
+[TokenManager] Token data received: { has_access_token: true, has_refresh_token: true, expires_in: 3600 }
+2025-09-30 13:38:40.35
+4210cd66
+User
+[TokenManager] 📅 Token will expire at: 2025-09-30T09:08:40.359Z
+2025-09-30 13:38:40.35
+4210cd66
+User
+[TokenManager] 🔄 Deactivating existing tokens for zoho_crm...
+2025-09-30 13:38:40.54
+4210cd66
+User
+[TokenManager] 💾 Calling storage.createOAuthToken...
+2025-09-30 13:38:40.58
+4210cd66
+User
+[TokenManager] ✅ Database insert successful! Token ID: 40
+2025-09-30 13:38:40.61
+4210cd66
+User
+[TokenManager] ✅ Token verified in database with ID: 40
+2025-09-30 13:38:40.61
+4210cd66
+User
+[TokenManager] ✅ Token successfully stored and cached for zoho_crm
+2025-09-30 13:38:40.61
+4210cd66
+User
+[TokenManager] 📊 Expires: 2025-09-30T09:08:40.359Z
+2025-09-30 13:38:40.61
+4210cd66
+User
+✅ Tokens stored automatically in database

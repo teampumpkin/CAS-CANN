@@ -265,10 +265,79 @@ export class DedicatedTokenManager {
   }
 
   private async refreshTokenIfNeeded(provider: string, tokenRecord: OAuthToken): Promise<TokenInfo | null> {
-    // This would integrate with actual OAuth refresh logic
-    // For now, return null to indicate refresh is needed
-    console.log(`[TokenManager] Token refresh needed for ${provider} but refresh logic not implemented yet`);
-    return null;
+    if (!tokenRecord.refreshToken) {
+      console.error(`[TokenManager] No refresh token available for ${provider}`);
+      return null;
+    }
+
+    try {
+      console.log(`[TokenManager] Starting token refresh for ${provider}...`);
+
+      if (provider === 'zoho_crm') {
+        const refreshUrl = "https://accounts.zoho.com/oauth/v2/token";
+        
+        const params = new URLSearchParams({
+          grant_type: "refresh_token",
+          client_id: process.env.ZOHO_CLIENT_ID!,
+          client_secret: process.env.ZOHO_CLIENT_SECRET!,
+          refresh_token: tokenRecord.refreshToken!,
+        });
+
+        const response = await fetch(refreshUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: params,
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error(`[TokenManager] Zoho token refresh failed: ${response.status} ${errorText}`);
+          throw new Error(`Zoho token refresh failed: ${response.status} ${errorText}`);
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+          console.error(`[TokenManager] Zoho token refresh error: ${data.error}`);
+          throw new Error(`Zoho token refresh error: ${data.error}`);
+        }
+
+        // Update token in database
+        const expiresAt = new Date(Date.now() + (data.expires_in * 1000));
+        
+        await storage.updateOAuthToken(tokenRecord.id, {
+          accessToken: data.access_token,
+          expiresAt,
+          lastRefreshed: new Date(),
+        });
+
+        const tokenInfo: TokenInfo = {
+          accessToken: data.access_token,
+          refreshToken: tokenRecord.refreshToken,
+          expiresAt,
+          scope: tokenRecord.scope || '',
+          tokenType: data.token_type || 'Bearer'
+        };
+
+        // Update cache
+        this.cacheToken(provider, tokenInfo);
+
+        console.log(`[TokenManager] ✅ Successfully refreshed ${provider} token, expires at: ${expiresAt.toISOString()}`);
+        return tokenInfo;
+      }
+
+      console.error(`[TokenManager] Unknown provider for refresh: ${provider}`);
+      return null;
+
+    } catch (error) {
+      console.error(`[TokenManager] Failed to refresh token for ${provider}:`, error);
+      // Mark token as inactive if refresh fails
+      await storage.updateOAuthToken(tokenRecord.id, { isActive: false });
+      this.tokenCache.delete(provider);
+      return null;
+    }
   }
 
   private startHealthMonitoring(): void {

@@ -157,6 +157,13 @@ export class FieldSyncEngine {
     zohoModule: string
   ): Promise<FieldComparisonResult> {
     const existingFieldNames = new Set(existingMappings.map(m => m.fieldName));
+    
+    // Also check the field metadata cache (contains ALL Zoho fields including existing ones)
+    const cachedFields = await storage.getFieldMetadataCache({ zohoModule });
+    for (const cached of cachedFields) {
+      existingFieldNames.add(cached.fieldApiName);
+    }
+    
     const missing: FieldComparisonResult["missing"] = [];
     const needsUpdate: FieldMapping[] = [];
 
@@ -305,7 +312,7 @@ export class FieldSyncEngine {
   private getFieldLength(sampleValue: any): number {
     if (typeof sampleValue === "string") {
       // Add buffer for longer values, minimum 50, maximum 255
-      const length = Math.max(50, sampleValue.length * 1.5);
+      const length = Math.ceil(Math.max(50, sampleValue.length * 1.5));
       return Math.min(length, this.MAX_FIELD_LENGTH);
     }
     return 100; // Default length

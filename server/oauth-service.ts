@@ -231,7 +231,7 @@ export class OAuthService {
 
       if (!health.isValid) {
         console.log('[OAuth] No valid token found - manual authentication required');
-        console.log('[OAuth] Visit: http://localhost:5000/oauth/zoho/connect to authenticate');
+        console.log('[OAuth] Visit: https://amyloid.ca/oauth/zoho/connect to authenticate');
       } else {
         // Start background token refresh if we have valid tokens
         this.startBackgroundTokenRefresh();

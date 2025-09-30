@@ -875,18 +875,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Zoho OAuth connect endpoint - starts the authorization flow
   app.get("/oauth/zoho/connect", (req, res) => {
     try {
-      // Use production domain for OAuth callback - check proxy headers for production detection
-      const forwardedHost = req.get('x-forwarded-host') || req.get('host');
-      const isProduction = forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production';
-      const baseUrl = isProduction ? 'https://amyloid.ca' : `${req.protocol}://${req.get('host')}`;
-      const redirectUri = `${baseUrl}/oauth/zoho/callback`;
+      const { getOAuthRedirectUri } = require('./config');
+      const redirectUri = getOAuthRedirectUri();
       
-      console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}, NODE_ENV: ${process.env.NODE_ENV}`);
-      console.log(`[OAuth Connect] Detected production: ${isProduction}, Using base URL: ${baseUrl}`);
-      console.log(`[OAuth Connect] Generated redirect URI: ${redirectUri}`);
+      console.log(`[OAuth Connect] Using production redirect URI: ${redirectUri}`);
       
       const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
-      console.log(`[OAuth Connect] Full authorization URL: ${authUrl}`);
+      console.log(`[OAuth Connect] Authorization URL: ${authUrl}`);
       
       res.redirect(authUrl);
     } catch (error) {
@@ -939,7 +934,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log("Received Zoho authorization code:", code);
       
-      // Exchange code for access token
+      // Exchange code for access token using centralized config
+      const { getOAuthRedirectUri } = require('./config');
+      const redirectUri = getOAuthRedirectUri();
+      
       const tokenResponse = await fetch("https://accounts.zoho.com/oauth/v2/token", {
         method: "POST",
         headers: {
@@ -949,9 +947,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           grant_type: "authorization_code",
           client_id: process.env.ZOHO_CLIENT_ID!,
           client_secret: process.env.ZOHO_CLIENT_SECRET!,
-          redirect_uri: (req.get('x-forwarded-host') === 'amyloid.ca' || process.env.NODE_ENV === 'production')
-            ? 'https://amyloid.ca/oauth/zoho/callback'
-            : `${req.protocol}://${req.get('host')}/oauth/zoho/callback`,
+          redirect_uri: redirectUri,
           code: code as string,
         }),
       });

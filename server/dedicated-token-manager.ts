@@ -363,6 +363,18 @@ export class DedicatedTokenManager {
           console.log(`[TokenManager] Health check failed for ${provider}: ${health.error || 'Token expired'}`);
         } else if (health.needsRefresh) {
           console.log(`[TokenManager] Health check: ${provider} needs refresh soon (${Math.round((health.timeToExpiry || 0) / 1000)}s remaining)`);
+          
+          // ACTUALLY TRIGGER THE REFRESH!
+          const tokenRecord = await this.getActiveTokenRecord(provider);
+          if (tokenRecord && tokenRecord.refreshToken) {
+            console.log(`[TokenManager] 🔄 Auto-refreshing token for ${provider}...`);
+            const refreshed = await this.refreshTokenIfNeeded(provider, tokenRecord);
+            if (refreshed) {
+              console.log(`[TokenManager] ✅ Auto-refresh successful for ${provider}`);
+            } else {
+              console.error(`[TokenManager] ❌ Auto-refresh failed for ${provider}`);
+            }
+          }
         }
       }
     } catch (error) {

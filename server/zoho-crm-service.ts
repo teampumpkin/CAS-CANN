@@ -175,6 +175,7 @@ export class ZohoCRMService {
       if (!response.ok) {
         const errorDetails = this.extractErrorDetails(responseData, response.status);
         console.error(`[Zoho API v8 Error] ${response.status}:`, errorDetails);
+        console.error(`[Zoho API v8 Full Response]:`, JSON.stringify(responseData, null, 2));
         throw new Error(`Zoho API v8 Error ${response.status}: ${errorDetails.message}`);
       }
 
@@ -222,14 +223,15 @@ export class ZohoCRMService {
         throw new Error("Missing required field data: api_name, field_label, and data_type are required");
       }
 
-      // Get layout information if not provided
-      if (!fieldData.layouts) {
-        const layoutInfo = await this.getDefaultLayoutForModule(moduleName);
-        fieldData.layouts = [{
-          id: layoutInfo.layoutId,
-          section_id: layoutInfo.sectionId
-        }];
-      }
+      // Get layout information if not provided (OPTIONAL - omit for now to fix HTTP 400)
+      // Zoho v8 API may not require layouts for field creation
+      // if (!fieldData.layouts) {
+      //   const layoutInfo = await this.getDefaultLayoutForModule(moduleName);
+      //   fieldData.layouts = [{
+      //     id: layoutInfo.layoutId,
+      //     section_id: layoutInfo.sectionId
+      //   }];
+      // }
 
       // Get profiles if not provided (REQUIRED by Zoho CRM v8 API)
       if (!fieldData.profiles || fieldData.profiles.length === 0) {
@@ -254,16 +256,29 @@ export class ZohoCRMService {
       // Debug: Log the exact payload being sent
       console.log(`[Zoho CRM DEBUG] Full field payload:`, JSON.stringify({ fields: [fieldData] }, null, 2));
 
-      const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
+      const response = await this.makeRequest<any>(
         `/settings/fields?module=${moduleName}`,
         "POST",
         { fields: [fieldData] }
       );
 
-      if (response.data && response.data.length > 0) {
-        return response.data[0];
+      // Zoho field creation API returns {fields: [{code, details, message}]} not {data: [...]}
+      if (response.fields && response.fields.length > 0) {
+        const result = response.fields[0];
+        if (result.code === "SUCCESS" && result.details) {
+          console.log(`[Zoho CRM] Successfully created field ${fieldData.api_name} with ID: ${result.details.id}`);
+          // Return a ZohoField-like object
+          return {
+            id: result.details.id,
+            api_name: fieldData.api_name,
+            field_label: fieldData.field_label,
+            data_type: fieldData.data_type
+          } as ZohoField;
+        } else {
+          throw new Error(`Field creation failed: ${result.message || 'Unknown error'}`);
+        }
       } else {
-        throw new Error("Failed to create field - no data returned from v8 API");
+        throw new Error("Failed to create field - unexpected response structure from v8 API");
       }
     } catch (error) {
       console.error(`Failed to create field ${fieldData.api_name} in module ${moduleName} using v8 API:`, error);

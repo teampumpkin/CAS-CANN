@@ -37,6 +37,25 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Add health check endpoint FIRST - critical for deployment readiness
+  // This endpoint must respond quickly without waiting for any initialization
+  app.get('/health', (_req, res) => {
+    res.status(200).json({ 
+      status: 'ok',
+      timestamp: new Date().toISOString()
+    });
+  });
+
+  // Add readiness endpoint for more detailed health checks
+  app.get('/ready', (_req, res) => {
+    res.status(200).json({ 
+      status: 'ready', 
+      timestamp: new Date().toISOString(),
+      port: process.env.PORT ? parseInt(process.env.PORT) : 5000,
+      environment: process.env.NODE_ENV || 'development'
+    });
+  });
+
   // Initialize dedicated token management system
   const { dedicatedTokenManager } = await import("./dedicated-token-manager");
   await dedicatedTokenManager.initialize();
@@ -54,16 +73,6 @@ app.use((req, res, next) => {
   // Note: notificationService initializes automatically via its constructor
 
   const server = await registerRoutes(app);
-
-  // Add health endpoint BEFORE Vite middleware to ensure it's handled by Express
-  app.get('/health', (_req, res) => {
-    res.status(200).json({ 
-      status: 'healthy', 
-      timestamp: new Date().toISOString(),
-      port: process.env.PORT ? parseInt(process.env.PORT) : 5000,
-      environment: process.env.NODE_ENV || 'development'
-    });
-  });
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;

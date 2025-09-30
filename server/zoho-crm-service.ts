@@ -65,6 +65,7 @@ export interface ZohoRecord {
 
 export interface ZohoApiResponse<T> {
   data: T[];
+  fields?: T[]; // Zoho returns 'fields' for settings/fields API, 'data' for records
   info?: {
     count: number;
     page: number;
@@ -209,7 +210,7 @@ export class ZohoCRMService {
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
         `/settings/fields?module=${moduleName}`
       );
-      return response.data || [];
+      return response.fields || [];
     } catch (error) {
       console.error(`Failed to fetch fields for module ${moduleName} using v8 API:`, error);
       throw error;
@@ -366,7 +367,7 @@ export class ZohoCRMService {
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(
         `/settings/fields?module=${moduleName}`
       );
-      return response.data || [];
+      return response.fields || [];
     } catch (error) {
       console.error(`Failed to fetch fields for module ${moduleName}:`, error);
       throw error;

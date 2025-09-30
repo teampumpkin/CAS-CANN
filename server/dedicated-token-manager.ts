@@ -48,13 +48,21 @@ export class DedicatedTokenManager {
     token_type?: string;
   }): Promise<boolean> {
     try {
-      console.log(`[TokenManager] Storing new token for provider: ${provider}`);
+      console.log(`[TokenManager] 🔐 Starting token storage for provider: ${provider}`);
+      console.log(`[TokenManager] Token data received:`, {
+        has_access_token: !!tokenData.access_token,
+        has_refresh_token: !!tokenData.refresh_token,
+        expires_in: tokenData.expires_in
+      });
       
       const expiresAt = tokenData.expires_in 
         ? new Date(Date.now() + (tokenData.expires_in * 1000))
         : new Date(Date.now() + 3600000); // 1 hour default
 
+      console.log(`[TokenManager] 📅 Token will expire at: ${expiresAt.toISOString()}`);
+
       // Deactivate existing tokens for this provider
+      console.log(`[TokenManager] 🔄 Deactivating existing tokens for ${provider}...`);
       await this.deactivateExistingTokens(provider);
 
       // Create new token record
@@ -68,7 +76,17 @@ export class DedicatedTokenManager {
         isActive: true
       };
 
+      console.log(`[TokenManager] 💾 Calling storage.createOAuthToken...`);
       const createdToken = await storage.createOAuthToken(newToken);
+      console.log(`[TokenManager] ✅ Database insert successful! Token ID: ${createdToken.id}`);
+      
+      // Verify the token was actually stored
+      const verification = await storage.getOAuthToken(createdToken.id);
+      if (verification) {
+        console.log(`[TokenManager] ✅ Token verified in database with ID: ${verification.id}`);
+      } else {
+        console.error(`[TokenManager] ❌ WARNING: Token not found after insertion!`);
+      }
       
       // Cache the token
       this.cacheToken(provider, {
@@ -79,11 +97,17 @@ export class DedicatedTokenManager {
         tokenType: createdToken.tokenType || 'Bearer'
       });
 
-      console.log(`[TokenManager] Successfully stored token for ${provider}, expires: ${expiresAt.toISOString()}`);
+      console.log(`[TokenManager] ✅ Token successfully stored and cached for ${provider}`);
+      console.log(`[TokenManager] 📊 Expires: ${expiresAt.toISOString()}`);
       return true;
 
     } catch (error) {
-      console.error(`[TokenManager] Failed to store token for ${provider}:`, error);
+      console.error(`[TokenManager] ❌ FAILED to store token for ${provider}:`, error);
+      console.error(`[TokenManager] Error details:`, {
+        name: error instanceof Error ? error.name : 'Unknown',
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
+      });
       return false;
     }
   }

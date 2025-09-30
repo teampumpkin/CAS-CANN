@@ -40,6 +40,22 @@ app.use((req, res, next) => {
   // Detect and log environment
   const isProduction = process.env.REPLIT_DEPLOYMENT === '1' || process.env.NODE_ENV === 'production';
   const environment = isProduction ? 'PRODUCTION' : 'DEVELOPMENT';
+  
+  // BLOCK DEVELOPMENT MODE - Production only
+  if (!isProduction) {
+    console.log(`\n========================================`);
+    console.log(`⚠️  DEVELOPMENT SERVER DISABLED`);
+    console.log(`========================================`);
+    console.log(`\n❌ Development server has been disabled to prevent conflicts with production.`);
+    console.log(`\n✅ Use production deployment at: https://amyloid.ca`);
+    console.log(`\n💡 To make changes:`);
+    console.log(`   1. Edit code in workspace`);
+    console.log(`   2. Run: npm run build`);
+    console.log(`   3. Republish deployment\n`);
+    console.log(`========================================\n`);
+    process.exit(1);
+  }
+  
   console.log(`\n========================================`);
   console.log(`🌍 Environment: ${environment}`);
   console.log(`📦 NODE_ENV: ${process.env.NODE_ENV || 'not set'}`);

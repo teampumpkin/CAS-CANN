@@ -164,11 +164,17 @@ export class FieldSyncEngine {
       existingFieldNames.add(cached.fieldApiName);
     }
     
+    // Create case-insensitive lookup map (lowercase -> actual name)
+    const fieldNameMap = new Map<string, string>();
+    for (const fieldName of existingFieldNames) {
+      fieldNameMap.set(fieldName.toLowerCase(), fieldName);
+    }
+    
     const missing: FieldComparisonResult["missing"] = [];
     const needsUpdate: FieldMapping[] = [];
 
-    // Add Source_Form field if not exists
-    if (!existingFieldNames.has("Source_Form")) {
+    // Add Source_Form field if not exists (case-insensitive check)
+    if (!fieldNameMap.has("source_form")) {
       missing.push({
         fieldName: "Source_Form",
         formFieldName: "Source_Form",
@@ -181,7 +187,11 @@ export class FieldSyncEngine {
     for (const [formFieldName, value] of Object.entries(formData)) {
       const zohoFieldName = zohoCRMService.convertToZohoFieldName(formFieldName);
       
-      if (!existingFieldNames.has(zohoFieldName)) {
+      // Case-insensitive check: if field exists with any case variation, use the existing name
+      const existingFieldName = fieldNameMap.get(zohoFieldName.toLowerCase());
+      
+      if (!existingFieldName) {
+        // Field doesn't exist, need to create it
         const fieldType = zohoCRMService.detectFieldType(value, formFieldName);
         
         missing.push({
@@ -191,8 +201,8 @@ export class FieldSyncEngine {
           sampleValue: value
         });
       } else {
-        // Check if existing field needs update (e.g., new picklist values)
-        const existingMapping = existingMappings.find(m => m.fieldName === zohoFieldName);
+        // Field exists, check if it needs update
+        const existingMapping = existingMappings.find(m => m.fieldName.toLowerCase() === existingFieldName.toLowerCase());
         if (existingMapping && this.needsFieldUpdate(existingMapping, value)) {
           needsUpdate.push(existingMapping);
         }

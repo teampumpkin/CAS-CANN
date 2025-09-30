@@ -395,8 +395,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
             // Format data for Zoho CRM
             const zohoData = zohoCRMService.formatFieldDataForZoho(data, updatedMappings);
             
-            // Add Source_Form field
-            zohoData.Source_Form = form_name;
+            // Add Lead_Source field (standard Zoho field to track form source)
+            zohoData.Lead_Source = form_name;
             
             console.log(`[Form Submission] Pushing data to Zoho ${targetModule}:`, zohoData);
             

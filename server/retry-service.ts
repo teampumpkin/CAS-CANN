@@ -273,8 +273,8 @@ export class RetryService {
         fieldMappings
       );
       
-      // Add Source_Form field
-      zohoData.Source_Form = submission.formName;
+      // Add Lead_Source field (standard Zoho field to track form source)
+      zohoData.Lead_Source = submission.formName;
       
       console.log(`[Retry] Pushing data to Zoho ${submission.zohoModule}:`, zohoData);
       

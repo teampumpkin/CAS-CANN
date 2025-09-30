@@ -173,17 +173,8 @@ export class FieldSyncEngine {
     const missing: FieldComparisonResult["missing"] = [];
     const needsUpdate: FieldMapping[] = [];
 
-    // Add Source_Form field ONLY (to track which form submission came from)
-    if (!fieldNameMap.has("source_form")) {
-      missing.push({
-        fieldName: "Source_Form",
-        formFieldName: "Source_Form",
-        fieldType: "text",
-        sampleValue: "form_name"
-      });
-    }
-
-    // Check each form field (no other extra fields will be created)
+    // Check each form field (no extra fields will be created)
+    // Note: Lead_Source is a standard Zoho field, will be populated automatically
     for (const [formFieldName, value] of Object.entries(formData)) {
       const zohoFieldName = zohoCRMService.convertToZohoFieldName(formFieldName);
       

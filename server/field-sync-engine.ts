@@ -166,22 +166,12 @@ export class FieldSyncEngine {
     
     // Create case-insensitive lookup map (lowercase -> actual name)
     const fieldNameMap = new Map<string, string>();
-    for (const fieldName of existingFieldNames) {
+    for (const fieldName of Array.from(existingFieldNames)) {
       fieldNameMap.set(fieldName.toLowerCase(), fieldName);
     }
     
     const missing: FieldComparisonResult["missing"] = [];
     const needsUpdate: FieldMapping[] = [];
-
-    // Add Source_Form field if not exists (case-insensitive check)
-    if (!fieldNameMap.has("source_form")) {
-      missing.push({
-        fieldName: "Source_Form",
-        formFieldName: "Source_Form",
-        fieldType: "text",
-        sampleValue: "form_name"
-      });
-    }
 
     // Check each form field
     for (const [formFieldName, value] of Object.entries(formData)) {

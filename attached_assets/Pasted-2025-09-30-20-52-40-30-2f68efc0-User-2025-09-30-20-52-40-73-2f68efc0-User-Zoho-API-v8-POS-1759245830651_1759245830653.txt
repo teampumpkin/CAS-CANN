@@ -1,0 +1,128 @@
+2025-09-30 20:52:40.30
+2f68efc0
+User
+}
+2025-09-30 20:52:40.73
+2f68efc0
+User
+[Zoho API v8] POST https://www.zohoapis.com/crm/v8/Leads
+2025-09-30 20:52:41.80
+2f68efc0
+User
+[Zoho API v8 Error] 400: { message: 'required field not found', code: 'MANDATORY_NOT_FOUND' }
+2025-09-30 20:52:41.80
+2f68efc0
+User
+[Zoho API v8 Full Response]: {
+2025-09-30 20:52:41.80
+2f68efc0
+User
+"data": [
+2025-09-30 20:52:41.80
+2f68efc0
+User
+{
+2025-09-30 20:52:41.80
+2f68efc0
+User
+"code": "MANDATORY_NOT_FOUND",
+2025-09-30 20:52:41.80
+2f68efc0
+User
+"details": {
+2025-09-30 20:52:41.80
+2f68efc0
+User
+"api_name": "Last_Name",
+2025-09-30 20:52:41.80
+2f68efc0
+User
+"json_path": "$.data[0].Last_Name"
+2025-09-30 20:52:41.80
+2f68efc0
+User
+},
+2025-09-30 20:52:41.80
+2f68efc0
+User
+"message": "required field not found",
+2025-09-30 20:52:41.80
+2f68efc0
+User
+"status": "error"
+2025-09-30 20:52:41.80
+2f68efc0
+User
+}
+2025-09-30 20:52:41.80
+2f68efc0
+User
+]
+2025-09-30 20:52:41.80
+2f68efc0
+User
+}
+2025-09-30 20:52:41.80
+2f68efc0
+User
+[Zoho API v8 Request Failed] POST https://www.zohoapis.com/crm/v8/Leads: Error: Zoho API v8 Error 400: required field not found
+2025-09-30 20:52:41.80
+2f68efc0
+User
+at ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1447:19)
+2025-09-30 20:52:41.80
+2f68efc0
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-30 20:52:41.80
+2f68efc0
+User
+at async ZohoCRMService.createRecord (file:///home/runner/workspace/dist/index.js:1534:28)
+2025-09-30 20:52:41.80
+2f68efc0
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3745:32)
+2025-09-30 20:52:42.10
+2f68efc0
+User
+Failed to create record in module Leads using v8 API: Error: Zoho API v8 Error 400: required field not found
+2025-09-30 20:52:42.10
+2f68efc0
+User
+at ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1447:19)
+2025-09-30 20:52:42.10
+2f68efc0
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-30 20:52:42.10
+2f68efc0
+User
+at async ZohoCRMService.createRecord (file:///home/runner/workspace/dist/index.js:1534:28)
+2025-09-30 20:52:42.10
+2f68efc0
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3745:32)
+2025-09-30 20:52:42.10
+2f68efc0
+User
+[Form Submission] CRM push failed for submission 30: Error: Zoho API v8 Error 400: required field not found
+2025-09-30 20:52:42.10
+2f68efc0
+User
+at ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1447:19)
+2025-09-30 20:52:42.10
+2f68efc0
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-30 20:52:42.10
+2f68efc0
+User
+at async ZohoCRMService.createRecord (file:///home/runner/workspace/dist/index.js:1534:28)
+2025-09-30 20:52:42.10
+2f68efc0
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3745:32)
+
+Wrap
+
+Colors

@@ -461,8 +461,46 @@ export class ZohoCRMService {
   }
 
   convertToZohoFieldName(formFieldName: string): string {
-    // Convert form field names to Zoho API names
-    // Remove special characters and spaces, convert to camelCase
+    // Map common form field patterns to Zoho standard field names
+    const standardFieldMappings: Record<string, string> = {
+      // Name fields
+      'fullname': 'Last_Name',
+      'full_name': 'Last_Name',
+      'name': 'Last_Name',
+      'lastname': 'Last_Name',
+      'last_name': 'Last_Name',
+      'firstname': 'First_Name',
+      'first_name': 'First_Name',
+      
+      // Email fields
+      'email': 'Email',
+      'emailaddress': 'Email',
+      'email_address': 'Email',
+      
+      // Company fields
+      'company': 'Company',
+      'companyname': 'Company',
+      'company_name': 'Company',
+      'organization': 'Company',
+      
+      // Phone fields
+      'phone': 'Phone',
+      'phonenumber': 'Phone',
+      'phone_number': 'Phone',
+      'mobile': 'Mobile',
+      'mobilenumber': 'Mobile',
+      'mobile_number': 'Mobile',
+    };
+    
+    // Normalize input for lookup
+    const normalized = formFieldName.toLowerCase().replace(/[^a-z0-9]/g, '');
+    
+    // Check if we have a standard mapping
+    if (standardFieldMappings[normalized]) {
+      return standardFieldMappings[normalized];
+    }
+    
+    // Otherwise, convert to Zoho API naming convention (camelCase with first letter capitalized for multi-word)
     return formFieldName
       .replace(/[^a-zA-Z0-9\s]/g, '') // Remove special chars
       .split(/\s+/) // Split on whitespace

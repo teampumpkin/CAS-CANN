@@ -1,0 +1,124 @@
+2025-10-03 10:18:28.93
+b51aef45
+User
+presentationTopic: ''
+2025-10-03 10:18:28.93
+b51aef45
+User
+}
+2025-10-03 10:18:28.93
+b51aef45
+User
+}
+2025-10-03 10:18:28.97
+b51aef45
+User
+[Form Submission] No configuration found for form "Join CANN Today", using default module: Leads
+2025-10-03 10:18:29.04
+b51aef45
+User
+[Form Submission] Created submission record with ID: 38
+2025-10-03 10:18:29.09
+b51aef45
+User
+4:48:29 AM [express] POST /api/submit-form 201 in 167ms :: {"success":true,"message":"Form submissio…
+2025-10-03 10:18:29.09
+b51aef45
+User
+[Form Submission] Starting async processing for submission 38
+2025-10-03 10:18:29.13
+b51aef45
+User
+[Form Submission] Starting field sync for submission 38
+2025-10-03 10:18:29.13
+b51aef45
+User
+[FieldSync] Starting field sync for submission 38 (Join CANN Today)
+2025-10-03 10:18:29.34
+b51aef45
+User
+[FieldSync] Refreshing field mappings for module Leads
+2025-10-03 10:18:29.37
+b51aef45
+User
+[Zoho CRM] Token health check failed: Token is invalid or expired
+2025-10-03 10:18:29.37
+b51aef45
+User
+Failed to fetch fields for module Leads using v8 API: Error: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-10-03 10:18:29.37
+b51aef45
+User
+at ZohoCRMService.getAccessToken (file:///home/runner/workspace/dist/index.js:1462:17)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1479:29)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async ZohoCRMService.getModuleFields (file:///home/runner/workspace/dist/index.js:1535:28)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async FieldSyncEngine.updateFieldMappingsFromZoho (file:///home/runner/workspace/dist/index.js:2240:26)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async FieldSyncEngine.syncFieldsForSubmission (file:///home/runner/workspace/dist/index.js:2130:7)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3814:35)
+2025-10-03 10:18:29.37
+b51aef45
+User
+[FieldSync] Failed to update field mappings from Zoho: Error: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-10-03 10:18:29.37
+b51aef45
+User
+at ZohoCRMService.getAccessToken (file:///home/runner/workspace/dist/index.js:1462:17)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1479:29)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async ZohoCRMService.getModuleFields (file:///home/runner/workspace/dist/index.js:1535:28)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async FieldSyncEngine.updateFieldMappingsFromZoho (file:///home/runner/workspace/dist/index.js:2240:26)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async FieldSyncEngine.syncFieldsForSubmission (file:///home/runner/workspace/dist/index.js:2130:7)
+2025-10-03 10:18:29.37
+b51aef45
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3814:35)
+2025-10-03 10:18:29.37
+b51aef45
+User
+[FieldSync] Field sync failed: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-10-03 10:18:29.40
+b51aef45
+User
+[Form Submission] Field sync failed for submission 38: [
+2025-10-03 10:18:29.40
+b51aef45
+User
+'Field sync failed: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect'
+2025-10-03 10:18:29.40
+b51aef45
+User
+]

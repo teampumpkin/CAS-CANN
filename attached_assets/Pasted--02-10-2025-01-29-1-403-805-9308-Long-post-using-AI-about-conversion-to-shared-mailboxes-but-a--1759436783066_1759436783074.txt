@@ -1,0 +1,114 @@
+[02-10-2025 01:29] +1 (403) 805-9308: Long post using AI about conversion to shared mailboxes but a key question for you. 
+
+Yes — once you convert them to shared mailboxes, nothing breaks from the outside world’s perspective.
+
+Here’s how it works for cas@amyloid.ca and cann@amyloid.ca:
+
+Receiving
+
+The DNS (MX, SPF, etc.) already points to Microsoft 365.
+
+Shared mailboxes receive mail exactly like a normal account.
+
+So any email sent to cas@amyloid.ca or cann@amyloid.ca (from the website contact forms, or direct emails) will continue to land in their inboxes with no disruption.
+
+
+Sending
+
+A shared mailbox can’t “log in” by itself (no username/password once the license is removed).
+
+Instead, anyone with Send As or Send on Behalf permissions can send email that shows as cas@amyloid.ca or cann@amyloid.ca.
+
+So your 2 licensed user accounts (the actual people) would be configured with permissions to send as those shared addresses.
+
+
+Practical result
+
+The website can still show cas@amyloid.ca and cann@amyloid.ca as contact emails.
+
+Incoming email still arrives there.
+
+The designated staff can read and reply from those addresses, even though they log in under their own named accounts.
+
+
+
+---
+
+⚠ One caution:
+If Team Pumpkin’s website is sending outbound mail as cas@amyloid.ca (e.g., contact form auto-replies), you’ll want to check the configuration:
+
+If it uses SMTP login → that won’t work after you remove the license, since shared mailboxes can’t authenticate directly.
+
+If it uses Microsoft Graph API, SendGrid, or another relay tied to a licensed service account → you’ll want to keep one “service” license for that.
+[02-10-2025 01:43] +1 (403) 805-9308: One more thread...Got it — here are the options for handling the website mailer now that those addresses are moving to shared mailboxes:
+
+
+---
+
+Option 1: Keep a Dedicated Licensed Service Account (Safest)
+
+Keep one licensed account (e.g., mailer@amyloid.ca or reuse cas@amyloid.ca with a license).
+
+Configure the website contact forms to authenticate using that mailbox’s username/password (SMTP AUTH).
+
+Advantage: Works reliably, supports SMTP relay, nothing breaks when sending auto-replies or notifications.
+
+Disadvantage: Costs one Microsoft 365 license.
+
+
+
+---
+
+Option 2: Use a Relay Connector (No License, More Setup)
+
+Set up an Exchange Online connector that allows your web server / hosting provider to send emails on behalf of cas@amyloid.ca and cann@amyloid.ca.
+
+Authentication happens at the server level (IP allow-listing) instead of a mailbox login.
+
+Advantage: No license needed.
+
+Disadvantage: Requires admin setup in the Exchange Admin Center and sometimes cooperation from the hosting provider.
+
+
+
+---
+
+Option 3: Use “Send As” Through Licensed Users
+
+Website forms send mail to cas@amyloid.ca or cann@amyloid.ca only (no outbound sending).
+
+The actual staff reply manually from Outlook, using their own accounts with Send As CAS / Send As CANN permissions.
+
+Advantage: Zero extra licenses.
+
+Disadvantage: The website can’t send auto-replies as CAS or CANN — replies only happen when a person sends them.
+
+
+
+---
+
+Option 4: Third-Party Transactional Mail Service
+
+Route website form submissions through a service like SendGrid, Amazon SES, or Mailgun.
+
+Configure SPF/DKIM/DMARC so mail appears as coming from cas@amyloid.ca or cann@amyloid.ca.
+
+Advantage: High deliverability, doesn’t tie up M365 licenses.
+
+Disadvantage: Extra configuration, possible additional cost.
+
+
+
+---
+
+✅ Best practice:
+
+If the website must send auto-emails as cas@amyloid.ca or cann@amyloid.ca, you probably want Option 1 (keep one service license).
+
+If auto-sending isn’t critical, go with Option 3 (shared mailboxes only) and let staff handle replies.
+
+
+
+---
+
+Do you know if Team Pumpkin’s website is currently authenticating via SMTP login (username + password), or is it just sending contact form submissions to those addresses? That will determine whether you need to keep a service license.

@@ -1398,6 +1398,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Health monitoring status endpoint
+  app.get("/api/admin/monitoring-status", async (req, res) => {
+    try {
+      const status = dedicatedTokenManager.getMonitoringStatus();
+      const tokenHealth = await dedicatedTokenManager.checkTokenHealth('zoho_crm');
+      
+      res.json({
+        monitoring: status,
+        tokenHealth,
+        serverTime: new Date().toISOString(),
+        timeSinceLastCheck: status.lastCheckTime 
+          ? Math.round((Date.now() - new Date(status.lastCheckTime).getTime()) / 1000)
+          : null,
+      });
+    } catch (error) {
+      console.error('[Admin] Failed to get monitoring status:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to get monitoring status',
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

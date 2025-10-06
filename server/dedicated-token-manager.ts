@@ -11,6 +11,8 @@ export class DedicatedTokenManager {
   private healthCheckInterval: NodeJS.Timeout | null = null;
   private readonly TOKEN_REFRESH_BUFFER_MS = 300000; // 5 minutes before expiry
   private readonly HEALTH_CHECK_INTERVAL_MS = 60000; // 1 minute health checks
+  private lastHealthCheckTime: Date | null = null;
+  private healthCheckCount = 0;
 
   static getInstance(): DedicatedTokenManager {
     if (!DedicatedTokenManager.instance) {
@@ -354,15 +356,18 @@ export class DedicatedTokenManager {
 
   private async performHealthCheck(): Promise<void> {
     try {
+      this.lastHealthCheckTime = new Date();
+      this.healthCheckCount++;
+      
       const providers = Array.from(this.tokenCache.keys());
       
       for (const provider of providers) {
         const health = await this.checkTokenHealth(provider);
         
         if (!health.isValid) {
-          console.log(`[TokenManager] Health check failed for ${provider}: ${health.error || 'Token expired'}`);
+          console.log(`[TokenManager] Health check #${this.healthCheckCount} failed for ${provider}: ${health.error || 'Token expired'}`);
         } else if (health.needsRefresh) {
-          console.log(`[TokenManager] Health check: ${provider} needs refresh soon (${Math.round((health.timeToExpiry || 0) / 1000)}s remaining)`);
+          console.log(`[TokenManager] Health check #${this.healthCheckCount}: ${provider} needs refresh soon (${Math.round((health.timeToExpiry || 0) / 1000)}s remaining)`);
           
           // ACTUALLY TRIGGER THE REFRESH!
           const tokenRecord = await this.getActiveTokenRecord(provider);
@@ -380,6 +385,19 @@ export class DedicatedTokenManager {
     } catch (error) {
       console.error('[TokenManager] Error during health check:', error);
     }
+  }
+
+  /**
+   * Get health monitoring status
+   */
+  getMonitoringStatus() {
+    return {
+      isRunning: this.healthCheckInterval !== null,
+      lastCheckTime: this.lastHealthCheckTime,
+      totalChecks: this.healthCheckCount,
+      checkIntervalMs: this.HEALTH_CHECK_INTERVAL_MS,
+      activeProviders: Array.from(this.tokenCache.keys()),
+    };
   }
 
   /**

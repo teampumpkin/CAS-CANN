@@ -1379,6 +1379,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // REMOVED: All duplicate form processing endpoints
   // Only /api/submit-form is the canonical form submission endpoint
 
+  // Admin endpoint to reload tokens from database
+  app.post("/api/admin/reload-tokens", async (req, res) => {
+    try {
+      console.log('[Admin] Reloading tokens from database...');
+      await dedicatedTokenManager.initialize();
+      res.json({
+        success: true,
+        message: 'Tokens reloaded from database',
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error) {
+      console.error('[Admin] Failed to reload tokens:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to reload tokens',
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

@@ -525,9 +525,10 @@ export class ZohoCRMService {
         if (mapping.fieldType === "boolean") {
           zohoData[fieldName] = this.convertToBoolean(value);
         } else if (mapping.fieldType === "multiselectpicklist" && Array.isArray(value)) {
-          zohoData[fieldName] = value.join(";"); // Zoho uses semicolon separator
+          let formatted = value.join(";"); // Zoho uses semicolon separator
+          zohoData[fieldName] = this.truncateField(formatted, fieldName, mapping.maxLength);
         } else {
-          zohoData[fieldName] = value;
+          zohoData[fieldName] = this.truncateField(value, fieldName, mapping.maxLength);
         }
       } else {
         // New field - convert based on detected type
@@ -537,14 +538,33 @@ export class ZohoCRMService {
         if (fieldType === "boolean") {
           zohoData[zohoFieldName] = this.convertToBoolean(value);
         } else if (fieldType === "multiselectpicklist" && Array.isArray(value)) {
-          zohoData[zohoFieldName] = value.join(";");
+          let formatted = value.join(";");
+          zohoData[zohoFieldName] = this.truncateField(formatted, zohoFieldName, 255);
         } else {
-          zohoData[zohoFieldName] = value;
+          zohoData[zohoFieldName] = this.truncateField(value, zohoFieldName, 255);
         }
       }
     }
 
     return zohoData;
+  }
+
+  private truncateField(value: any, fieldName: string, maxLength?: number | null): any {
+    // Skip non-string values or null maxLength
+    if (typeof value !== "string" || !maxLength) {
+      return value;
+    }
+
+    // If value is within limit, return as-is
+    if (value.length <= maxLength) {
+      return value;
+    }
+
+    // Truncate and log
+    const truncated = value.substring(0, maxLength);
+    console.log(`[Zoho CRM] ⚠️ Truncated field "${fieldName}" from ${value.length} to ${maxLength} chars`);
+    
+    return truncated;
   }
 
   private convertToBoolean(value: any): boolean {

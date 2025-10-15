@@ -515,34 +515,49 @@ export class ZohoCRMService {
 
   formatFieldDataForZoho(formData: Record<string, any>, fieldMappings: FieldMapping[]): Record<string, any> {
     const zohoData: Record<string, any> = {};
-    const mappingLookup = new Map(fieldMappings.map(m => [m.fieldName, m]));
+    // Create case-insensitive lookup map
+    const mappingLookup = new Map(fieldMappings.map(m => [m.fieldName.toLowerCase(), m]));
+
+    // Standard Zoho fields that should always use standard mapping
+    const standardZohoFields = ['fullname', 'lastname', 'firstname', 'email', 'emailaddress', 'company', 'phone'];
 
     for (const [fieldName, value] of Object.entries(formData)) {
-      const mapping = mappingLookup.get(fieldName);
+      const fieldNameLower = fieldName.toLowerCase();
+      const normalizedFieldName = fieldNameLower.replace(/[^a-z0-9]/g, '');
       
-      if (mapping) {
-        // Use existing mapping
-        if (mapping.fieldType === "boolean") {
-          zohoData[fieldName] = this.convertToBoolean(value);
-        } else if (mapping.fieldType === "multiselectpicklist" && Array.isArray(value)) {
-          let formatted = value.join(";"); // Zoho uses semicolon separator
-          zohoData[fieldName] = this.truncateField(formatted, fieldName, mapping.maxLength);
-        } else {
-          zohoData[fieldName] = this.truncateField(value, fieldName, mapping.maxLength);
-        }
+      // Check if this should use standard Zoho field mapping
+      const useStandardMapping = standardZohoFields.some(stdField => normalizedFieldName === stdField);
+      
+      let zohoFieldName: string;
+      let fieldType: string;
+      let maxLength: number | null = 255;
+      
+      if (useStandardMapping) {
+        // Use standard Zoho field mapping (e.g., fullName → Last_Name)
+        zohoFieldName = this.convertToZohoFieldName(fieldName);
+        fieldType = this.detectFieldType(value, fieldName);
       } else {
-        // New field - convert based on detected type
-        const zohoFieldName = this.convertToZohoFieldName(fieldName);
-        const fieldType = this.detectFieldType(value, fieldName);
-        
-        if (fieldType === "boolean") {
-          zohoData[zohoFieldName] = this.convertToBoolean(value);
-        } else if (fieldType === "multiselectpicklist" && Array.isArray(value)) {
-          let formatted = value.join(";");
-          zohoData[zohoFieldName] = this.truncateField(formatted, zohoFieldName, 255);
+        // Check for custom field mapping
+        const mapping = mappingLookup.get(fieldNameLower);
+        if (mapping) {
+          zohoFieldName = mapping.fieldName;
+          fieldType = mapping.fieldType;
+          maxLength = mapping.maxLength;
         } else {
-          zohoData[zohoFieldName] = this.truncateField(value, zohoFieldName, 255);
+          // New custom field
+          zohoFieldName = this.convertToZohoFieldName(fieldName);
+          fieldType = this.detectFieldType(value, fieldName);
         }
+      }
+      
+      // Format value based on type
+      if (fieldType === "boolean") {
+        zohoData[zohoFieldName] = this.convertToBoolean(value);
+      } else if (fieldType === "multiselectpicklist" && Array.isArray(value)) {
+        let formatted = value.join(";");
+        zohoData[zohoFieldName] = this.truncateField(formatted, zohoFieldName, maxLength);
+      } else {
+        zohoData[zohoFieldName] = this.truncateField(value, zohoFieldName, maxLength);
       }
     }
 

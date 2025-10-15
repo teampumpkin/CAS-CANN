@@ -46,6 +46,7 @@ Preferred communication style: Simple, everyday language.
 - **Navigation**: Enhanced design with prominent CAS logo serving as home link (removed separate Home navigation item), mobile optimization, and fixed scroll behavior.
 - **Interactive Healthcare Directory Map**: Features 25+ real facilities across Canada with clickable markers, detailed modals, and color-coded center types.
 - **CANN (Canadian Amyloidosis Network) Integration**: Dedicated page with network information, statistics, and professional objectives.
+- **Dynamic Multi-Form Lead Capture System**: Production-ready Zoho CRM v8 API integration with automatic OAuth token refresh, intelligent field mapping, and 24/7 operation. Both CAS Registration and CANN Membership forms sync to Zoho Leads module with distinct Lead_Source attribution for reporting. Features include case-insensitive field lookup, standard Zoho field prioritization (fullName → Last_Name), automatic custom field creation, and proper handling of multiselectpicklist truncation (210-char limit).
 
 ## External Dependencies
 

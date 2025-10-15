@@ -513,6 +513,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Bulk Import API endpoint for historical data
+  app.post("/api/bulk-import", async (req, res) => {
+    try {
+      const { filePath, dataSource } = req.body;
+
+      if (!filePath || !dataSource) {
+        return res.status(400).json({
+          success: false,
+          message: "Both filePath and dataSource are required"
+        });
+      }
+
+      if (!['CANN Contacts', 'CAS Registration'].includes(dataSource)) {
+        return res.status(400).json({
+          success: false,
+          message: "dataSource must be either 'CANN Contacts' or 'CAS Registration'"
+        });
+      }
+
+      const { BulkImportService } = await import('./bulk-import-service');
+      const bulkImportService = new BulkImportService(storage);
+
+      const result = await bulkImportService.importFromExcel(filePath, dataSource as "CANN Contacts" | "CAS Registration");
+
+      res.json({
+        success: true,
+        message: "Bulk import completed",
+        ...result
+      });
+    } catch (error) {
+      console.error("[Bulk Import] Error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Bulk import failed",
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
   // Get form submission status endpoint
   app.get("/api/submit-form/:id", async (req, res) => {
     try {

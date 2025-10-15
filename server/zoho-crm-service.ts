@@ -543,26 +543,28 @@ export class ZohoCRMService {
         zohoFieldName = this.convertToZohoFieldName(fieldName);
         fieldType = this.detectFieldType(value, fieldName);
       } else {
-        // Check for custom field mapping
+        // Check for existing field mapping in Zoho
         const mapping = mappingLookup.get(fieldNameLower);
         if (mapping) {
+          // Use existing Zoho field definition - RESPECT THE EXISTING TYPE
           zohoFieldName = mapping.fieldName;
           fieldType = mapping.fieldType;
           maxLength = mapping.maxLength;
         } else {
-          // New custom field
+          // New custom field - detect type
           zohoFieldName = this.convertToZohoFieldName(fieldName);
           fieldType = this.detectFieldType(value, fieldName);
         }
       }
       
-      // Format value based on type
+      // Format value based on the ZOHO field type (not detected type)
       if (fieldType === "boolean") {
         zohoData[zohoFieldName] = this.convertToBoolean(value);
       } else if (fieldType === "multiselectpicklist" && Array.isArray(value)) {
         let formatted = value.join(";");
         zohoData[zohoFieldName] = this.truncateField(formatted, zohoFieldName, maxLength);
       } else {
+        // For text fields, keep the original value as-is (don't convert Yes/No to boolean)
         zohoData[zohoFieldName] = this.truncateField(value, zohoFieldName, maxLength);
       }
     }

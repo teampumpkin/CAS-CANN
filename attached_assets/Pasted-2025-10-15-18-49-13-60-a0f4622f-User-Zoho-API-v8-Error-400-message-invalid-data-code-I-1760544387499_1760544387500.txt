@@ -1,0 +1,116 @@
+2025-10-15 18:49:13.60
+a0f4622f
+User
+[Zoho API v8 Error] 400: { message: 'invalid data', code: 'INVALID_DATA' }
+2025-10-15 18:49:13.60
+a0f4622f
+User
+[Zoho API v8 Full Response]: {
+2025-10-15 18:49:13.60
+a0f4622f
+User
+"data": [
+2025-10-15 18:49:13.60
+a0f4622f
+User
+{
+2025-10-15 18:49:13.60
+a0f4622f
+User
+"code": "INVALID_DATA",
+2025-10-15 18:49:13.60
+a0f4622f
+User
+"details": {
+2025-10-15 18:49:13.60
+a0f4622f
+User
+"expected_data_type": "text",
+2025-10-15 18:49:13.60
+a0f4622f
+User
+"api_name": "membershiprequest",
+2025-10-15 18:49:13.60
+a0f4622f
+User
+"json_path": "$.data[0].membershiprequest"
+2025-10-15 18:49:13.60
+a0f4622f
+User
+},
+2025-10-15 18:49:13.60
+a0f4622f
+User
+"message": "invalid data",
+2025-10-15 18:49:13.60
+a0f4622f
+User
+"status": "error"
+2025-10-15 18:49:13.60
+a0f4622f
+User
+}
+2025-10-15 18:49:13.60
+a0f4622f
+User
+]
+2025-10-15 18:49:13.60
+a0f4622f
+User
+}
+2025-10-15 18:49:13.60
+a0f4622f
+User
+[Zoho API v8 Request Failed] POST https://www.zohoapis.com/crm/v8/Leads: Error: Zoho API v8 Error 400: invalid data
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1527:19)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at async ZohoCRMService.createRecord (file:///home/runner/workspace/dist/index.js:1614:28)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3860:32)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+Failed to create record in module Leads using v8 API: Error: Zoho API v8 Error 400: invalid data
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1527:19)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at async ZohoCRMService.createRecord (file:///home/runner/workspace/dist/index.js:1614:28)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3860:32)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+[Form Submission] CRM push failed for submission 59: Error: Zoho API v8 Error 400: invalid data
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1527:19)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-10-15 18:49:13.60
+a0f4622f
+User
+at async ZohoCRMService.createRecord (file:///home/runner/workspace/dist/index.js:1614:28)

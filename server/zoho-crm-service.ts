@@ -303,8 +303,14 @@ export class ZohoCRMService {
 
       if (response.data && response.data.length > 0) {
         const createdRecord = response.data[0];
-        console.log(`[Zoho v8] Successfully created record in ${moduleName}:`, createdRecord.id);
-        return createdRecord;
+        const recordId = createdRecord.details?.id || createdRecord.id;
+        console.log(`[Zoho v8] Successfully created record in ${moduleName}:`, recordId);
+        
+        // Return record with normalized ID field
+        return {
+          ...createdRecord,
+          id: recordId
+        };
       } else {
         throw new Error("Failed to create record - no data returned from v8 API");
       }

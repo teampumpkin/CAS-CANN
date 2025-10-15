@@ -39,6 +39,8 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { casRegistrationSchema, type CASRegistrationForm } from "@shared/schema";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 
 const membershipBenefits = [
   {
@@ -83,9 +85,15 @@ const whoCanJoin = [
 ];
 
 
+interface SubmissionResponse {
+  submissionId: string;
+  status: string;
+  message: string;
+}
+
 export default function JoinCAS() {
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const form = useForm<CASRegistrationForm>({
@@ -125,55 +133,44 @@ export default function JoinCAS() {
   const wantsServicesMapInclusion = form.watch("wantsServicesMapInclusion");
   const noMemberAllowsContact = form.watch("noMemberAllowsContact");
 
-  const onSubmit = async (data: CASRegistrationForm) => {
-    try {
-      setIsSubmitting(true);
-      
-      // Google Apps Script URL - the one connected to your Google Sheet
-      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyL3klzui210W0P7_cJctvsFxHIN-YBalzCbTRSDNnRr7RyX6FdMUPwz8jPMhBWVYRoPw/exec";
-      
-      
-      // Submit to Google Sheets (using text/plain to avoid CORS issues)
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify(data),
+  // Submit form mutation
+  const submitMutation = useMutation({
+    mutationFn: async (formData: CASRegistrationForm): Promise<SubmissionResponse> => {
+      const response = await apiRequest("/api/submit-form", "POST", {
+        formName: "CAS Registration",
+        formData: formData,
+        metadata: {
+          source: "CAS Registration Form",
+          userAgent: navigator.userAgent,
+          timestamp: new Date().toISOString(),
+        }
       });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        // Show confirmation modal instead of toast
-        setShowConfirmationModal(true);
-        
-        // Reset form after successful submission
-        form.reset();
-      } else {
-        throw new Error(result.error || "Submission failed");
-      }
-      
-    } catch (error) {
-      console.error("Form submission error:", error);
-      
-      let errorMessage = "Please try again or contact us directly if the problem persists.";
-      
-      if (error instanceof TypeError && error.message === "Failed to fetch") {
-        errorMessage = "Unable to connect to Google Sheets. Please check your internet connection or try again later. You can also contact us directly via email.";
-      }
-      
+      return response as unknown as SubmissionResponse;
+    },
+    onSuccess: (data) => {
+      setSubmissionId(data.submissionId);
+      setShowConfirmationModal(true);
       toast({
-        title: "Submission Failed", 
-        description: errorMessage,
+        title: "Application Submitted Successfully!",
+        description: "Your CAS membership application has been received and sent to our CRM system.",
+      });
+      form.reset();
+    },
+    onError: (error) => {
+      console.error("Form submission error:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your application. Please try again or contact us directly.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
+    },
+  });
+
+  const onSubmit = async (data: CASRegistrationForm) => {
+    try {
+      await submitMutation.mutateAsync(data);
+    } catch (error) {
+      console.error("Submit error:", error);
     }
   };
 
@@ -1140,11 +1137,11 @@ export default function JoinCAS() {
                         <div className="flex justify-center pt-8">
                           <Button
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={submitMutation.isPending}
                             className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group min-w-[200px]"
                             data-testid="button-submit-form"
                           >
-                            {isSubmitting ? (
+                            {submitMutation.isPending ? (
                               <>
                                 <motion.div
                                   animate={{ rotate: 360 }}

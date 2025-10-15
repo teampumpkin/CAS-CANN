@@ -563,6 +563,9 @@ export class ZohoCRMService {
       } else if (fieldType === "multiselectpicklist" && Array.isArray(value)) {
         let formatted = value.join(";");
         zohoData[zohoFieldName] = this.truncateField(formatted, zohoFieldName, maxLength);
+      } else if (fieldType === "phone" || fieldType === "email") {
+        // Phone and email fields must be strings in Zoho
+        zohoData[zohoFieldName] = this.truncateField(String(value), zohoFieldName, maxLength);
       } else {
         // For text fields, keep the original value as-is (don't convert Yes/No to boolean)
         zohoData[zohoFieldName] = this.truncateField(value, zohoFieldName, maxLength);

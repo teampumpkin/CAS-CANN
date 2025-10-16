@@ -1,0 +1,124 @@
+2025-10-16 23:02:57.59
+102b8a83
+User
+[FieldSync] Refreshing field mappings for module Leads
+2025-10-16 23:02:57.63
+102b8a83
+User
+[Zoho API v8] GET https://www.zohoapis.com/crm/v8/settings/fields?module=Leads
+2025-10-16 23:03:01.65
+102b8a83
+User
+[FieldSync] Updated 101 field mappings for Leads
+2025-10-16 23:03:01.69
+102b8a83
+User
+[FieldSync] Completed field sync for submission 88 in 4277ms: 0 created, 0 errors
+2025-10-16 23:03:01.69
+102b8a83
+User
+[Form Submission] Starting CRM push for submission 88
+2025-10-16 23:03:01.73
+102b8a83
+User
+[Zoho CRM] ⚠️ Truncated field "areasofinterest" from 745 to 210 chars
+2025-10-16 23:03:01.73
+102b8a83
+User
+[Form Submission] Pushing data to Zoho Leads: {
+2025-10-16 23:03:01.73
+102b8a83
+User
+membershiprequest: 'Yes, I want to join CAS',
+2025-10-16 23:03:01.73
+102b8a83
+User
+Last_Name: 'Jan Veenhuyzen',
+2025-10-16 23:03:01.73
+102b8a83
+User
+Email: 'jveenhuy@ucalgary.ca',
+2025-10-16 23:03:01.73
+102b8a83
+User
+discipline: 'Nurse - amyloidosis program administration',
+2025-10-16 23:03:01.73
+102b8a83
+User
+subspecialty: 'Cardiology ',
+2025-10-16 23:03:01.73
+102b8a83
+User
+institutionname: 'University of Calgary',
+2025-10-16 23:03:01.73
+102b8a83
+User
+communicationconsent: true,
+2025-10-16 23:03:01.73
+102b8a83
+User
+servicesmapconsent: true,
+2025-10-16 23:03:01.73
+102b8a83
+User
+mapinstitutionname: 'University of Calgary',
+2025-10-16 23:03:01.73
+102b8a83
+User
+institutionaddress: '',
+2025-10-16 23:03:01.73
+102b8a83
+User
+institutionphone: '',
+2025-10-16 23:03:01.73
+102b8a83
+User
+institutionfax: '',
+2025-10-16 23:03:01.73
+102b8a83
+User
+followupconsent: true,
+2025-10-16 23:03:01.73
+102b8a83
+User
+amyloidosistype: 'Both',
+2025-10-16 23:03:01.73
+102b8a83
+User
+otheramyloidosistype: '',
+2025-10-16 23:03:01.73
+102b8a83
+User
+areasofinterest: 'Mental health considerations for amyloidosis and heart failure patients, Case presentations/discussion, Understanding PYP in amyloidosis, Genetic testing/counseling, Program start-up and multi-disciplinary enga',
+2025-10-16 23:03:01.73
+102b8a83
+User
+otherinterest: '',
+2025-10-16 23:03:01.73
+102b8a83
+User
+presentinginterest: false,
+2025-10-16 23:03:01.73
+102b8a83
+User
+presentationtopic: '',
+2025-10-16 23:03:01.73
+102b8a83
+User
+Lead_Source: 'Website - CANN Membership'
+2025-10-16 23:03:01.73
+102b8a83
+User
+}
+2025-10-16 23:03:01.77
+102b8a83
+User
+[Zoho API v8] POST https://www.zohoapis.com/crm/v8/Leads
+2025-10-16 23:03:02.26
+102b8a83
+User
+[Zoho v8] Successfully created record in Leads: 6999043000000798011
+2025-10-16 23:03:02.33
+102b8a83
+User
+[Form Submission] Successfully completed processing for submission 88, Zoho record ID: 6999043000000798011

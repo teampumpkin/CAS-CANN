@@ -112,14 +112,16 @@ export class ImportHandler {
       // Step 5: Import to Zoho
       console.log(`Step 5: Importing to Zoho ${options.moduleName}...`);
       
-      const importOptions = {
+      // Create ZohoSyncAPI instance with correct dry-run setting
+      const { ZohoSyncAPI } = await import('../auth/zoho-sync-api');
+      const syncAPI = new ZohoSyncAPI({
         dryRun: options.dryRun,
         sourceTag: 'DataSyncService',
         excludeTags: ['WebForm'],
         batchSize: options.batchSize || 100
-      };
+      });
 
-      const upsertResult = await zohoSyncAPI.batchCreateRecords(
+      const upsertResult = await syncAPI.batchCreateRecords(
         options.moduleName,
         validRecords
       );

@@ -1,0 +1,183 @@
+You are my development agent.
+
+Your task: Build the Zoho CRM Data Integration Service (from Document 1) and execute the Directory Resource Project (from Document 2) — step by step, error-free.
+
+You must follow this checklist methodology strictly:
+Each phase must be fully saved, validated, and confirmed before you proceed to the next.
+
+---
+
+# 🎯 Objective
+Create a reliable, modular service called `zoho-data-sync-service` that:
+- Integrates with Zoho CRM API (v3)
+- Cleans, deduplicates, and imports structured data (CSV/XLSX)
+- Works independently from the existing live webform → Zoho CRM integration
+- Uses source tagging to prevent data conflicts (`DataSyncService` only)
+- Logs all operations
+- Returns JSON summaries
+- Is scalable for AI enrichment
+
+---
+
+# 🧩 Methodology and Checklist (No-Skip Rule)
+
+## ✅ PHASE 1 – Environment Setup
+**Goal:** Ensure a clean, working environment before coding.
+
+### Checklist
+- [ ] Create `/services/zoho-data-sync/` folder structure exactly as defined.
+- [ ] Create `.env` file with placeholders:
+      - ZOHO_CLIENT_ID
+      - ZOHO_CLIENT_SECRET
+      - ZOHO_REFRESH_TOKEN
+      - ZOHO_BASE_URL
+      - ZOHO_REDIRECT_URI
+- [ ] Install all required dependencies (`requests`, `pandas`, `openpyxl`, `python-dotenv` or Node equivalents).
+- [ ] Confirm environment variables load correctly (test by printing one key securely).
+- [ ] Save snapshot: `checkpoint_env_ready`.
+
+---
+
+## ✅ PHASE 2 – API Connection Layer
+**Goal:** Build stable Zoho OAuth2 connection.
+
+### Checklist
+- [ ] Create `/auth/zoho_auth.py` (or `auth/zoho_auth.js`).
+- [ ] Add functions:
+      - `get_access_token()`
+      - `refresh_token_if_needed()`
+      - `upload_records(module, data_batch)`
+      - `fetch_records(module, filters)`
+- [ ] Test: fetch records from one module (Accounts).
+- [ ] Confirm JSON response structure is valid.
+- [ ] Log success in `/logs/api_test.json`.
+- [ ] Save snapshot: `checkpoint_auth_ready`.
+
+---
+
+## ✅ PHASE 3 – Module Blueprints
+**Goal:** Define data schema for each module before any import logic.
+
+### Checklist
+- [ ] Create `/modules/accounts.py`, `/modules/contacts.py`, `/modules/resources.py`.
+- [ ] For each, define field dictionary (`field_map = {...}`) based on:
+      - `CAS_Field_Spec_Updated_May2025.xlsx`
+      - `CAS_Intake_Form_EN.xlsx`
+      - French equivalents for bilingual labels.
+- [ ] Verify each module can generate a blank “template CSV” with correct field headers.
+- [ ] Save test CSV to `/logs/templates/`.
+- [ ] Save snapshot: `checkpoint_module_blueprints_ready`.
+
+---
+
+## ✅ PHASE 4 – Data Cleanup + Validation
+**Goal:** Ensure imported files are clean and correctly structured.
+
+### Checklist
+- [ ] Create `/cleanup/data_cleaner.py`.
+- [ ] Implement:
+      - Null field handling
+      - Duplicate detection (by `Institution_ID` or `Email`)
+      - Standardization (title case, postal code normalization)
+      - Source tagging (`Source: DataSyncService`)
+- [ ] Log cleaning actions to `/logs/clean_logs.json`.
+- [ ] Save cleaned files to `/uploads/cleaned/`.
+- [ ] Validate sample import file passes schema check.
+- [ ] Save snapshot: `checkpoint_data_clean_ready`.
+
+---
+
+## ✅ PHASE 5 – Import Handlers
+**Goal:** Enable safe and structured data uploads.
+
+### Checklist
+- [ ] Create `/uploads/import_handler.py`.
+- [ ] Add methods:
+      - `import_accounts()`
+      - `import_contacts()`
+      - `import_resources()`
+- [ ] Each method:
+      - Reads cleaned CSV
+      - Uses batch upload (Zoho Bulk API)
+      - Skips existing `WebForm` records
+      - Returns summary JSON
+- [ ] Log imports in `/logs/import_summary.json`.
+- [ ] Test each with sample dataset (dummy 3–5 records).
+- [ ] Save snapshot: `checkpoint_import_ready`.
+
+---
+
+## ✅ PHASE 6 – Command & Automation Layer
+**Goal:** Enable conversational or CLI-based commands for Replit interaction.
+
+### Checklist
+- [ ] Create `main.py` (or `index.js`) with command listener.
+- [ ] Add commands:
+      - `/clean accounts`
+      - `/upload accounts`
+      - `/clean contacts`
+      - `/upload contacts`
+      - `/upload resources`
+      - `/check duplicates accounts`
+- [ ] Test each command returns a JSON result.
+- [ ] Log command activity to `/logs/command_log.json`.
+- [ ] Save snapshot: `checkpoint_command_ready`.
+
+---
+
+## ✅ PHASE 7 – Data Integrity & Relationship Testing
+**Goal:** Ensure module linking and referential integrity.
+
+### Checklist
+- [ ] Verify Contacts link correctly to Accounts (`Institution_ID` or lookup field).
+- [ ] Verify Resources link correctly to Accounts (`Linked_Institution_ID`).
+- [ ] Create validation report:
+      - Missing links
+      - Duplicate records
+      - Field mapping mismatches
+- [ ] Save validation summary as `/logs/data_integrity_report.json`.
+- [ ] Save snapshot: `checkpoint_integrity_ready`.
+
+---
+
+## ✅ PHASE 8 – Final Validation & Freeze
+**Goal:** Confirm full service readiness.
+
+### Checklist
+- [ ] Run all tests again in sequence.
+- [ ] Check `.env` values loaded and working.
+- [ ] Review import logs for errors or failed batches.
+- [ ] Review data integrity report (no broken links).
+- [ ] Freeze working state with snapshot: `final_build_ready`.
+- [ ] Export all logs and checkpoints to `/backups/`.
+
+---
+
+# 🧠 Operational Rules
+- No direct edits in live Zoho CRM — use batch mode only.
+- Never overwrite `WebForm`-tagged data.
+- Always test with small dataset before full import.
+- Auto-rollback on API failure (save error state).
+- Every phase must log output before proceeding.
+- Only proceed if last checkpoint = “success”.
+
+---
+
+# 📊 Expected Outputs
+1. `/logs/import_summary.json` – JSON log of all import stats.
+2. `/logs/data_integrity_report.json` – Validation of relationships.
+3. `/uploads/cleaned/` – Clean CSVs for future uploads.
+4. `/backups/` – All snapshots and .env-safe copies.
+5. `/main.py` – CLI & conversational command handler.
+
+---
+
+# ✅ Success Definition
+When finished:
+- All modules (Accounts, Contacts, Resources) are correctly mapped.
+- All imports succeed with clean logs.
+- System works independently of website pipeline.
+- Commands run without code errors.
+- Snapshots exist for rollback.
+- Architecture validated and saved as `final_build_ready`.
+

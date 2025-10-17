@@ -59,8 +59,8 @@ export class DataCleaner {
         // Clean the record
         const cleaned = this.cleanRecord(record, result.fieldsNormalized);
 
-        // Add source tag
-        cleaned.Tag = [sourceTag];
+        // Add source tag (Zoho v8 API format: array of objects)
+        cleaned.Tag = [{ name: sourceTag }];
         cleaned.Data_Source = sourceTag;
 
         // Check for duplicates (basic implementation)

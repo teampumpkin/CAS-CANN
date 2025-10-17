@@ -58,9 +58,10 @@ export class ZohoSyncAPI {
 
     try {
       // Add source tag to all records
+      // Zoho v8 API expects Tag as array of objects: [{name: "TagName"}]
       const taggedRecords = records.map(record => ({
         ...record,
-        Tag: [this.options.sourceTag] // Zoho uses Tag field for tagging
+        Tag: [{ name: this.options.sourceTag }]
       }));
 
       if (this.options.dryRun) {
@@ -157,9 +158,10 @@ export class ZohoSyncAPI {
       const batch = batches[i];
       
       // Add source tag to all records in batch
+      // Zoho v8 API expects Tag as array of objects: [{name: "TagName"}]
       const taggedBatch = batch.map(record => ({
         ...record,
-        Tag: [this.options.sourceTag]
+        Tag: [{ name: this.options.sourceTag }]
       }));
 
       if (this.options.dryRun) {

@@ -1464,6 +1464,143 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Data Sync Admin Routes
+  // Import the data sync services
+  const path = await import('path');
+  const fs = await import('fs');
+  const multer = (await import('multer')).default;
+  const { importHandler } = await import('../services/zoho-data-sync/import/import-handler');
+  const { fileParser } = await import('../services/zoho-data-sync/import/file-parser');
+
+  // Configure multer for file uploads
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      const uploadDir = path.join(process.cwd(), 'services/zoho-data-sync/uploads');
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+      cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+    }
+  });
+
+  const upload = multer({ 
+    storage,
+    fileFilter: (req, file, cb) => {
+      const allowedTypes = ['.csv', '.xlsx', '.xls'];
+      const ext = path.extname(file.originalname).toLowerCase();
+      if (allowedTypes.includes(ext)) {
+        cb(null, true);
+      } else {
+        cb(new Error('Only CSV and Excel files are allowed'));
+      }
+    }
+  });
+
+  // Upload file endpoint
+  app.post('/api/data-sync/upload', upload.single('file'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+
+      const moduleName = req.body.moduleName as 'Accounts' | 'Contacts' | 'Resources';
+      if (!moduleName || !['Accounts', 'Contacts', 'Resources'].includes(moduleName)) {
+        return res.status(400).json({ error: 'Invalid module name' });
+      }
+
+      const filePath = req.file.path;
+      const sheetName = req.body.sheetName;
+
+      // Get sheets if Excel
+      let sheets: string[] = [];
+      if (path.extname(req.file.originalname).toLowerCase() !== '.csv') {
+        sheets = fileParser.getExcelSheets(filePath);
+      }
+
+      // Preview the file
+      const preview = await importHandler.previewImport({
+        moduleName,
+        filePath,
+        sheetName
+      });
+
+      res.json({
+        fileId: path.basename(filePath),
+        fileName: req.file.originalname,
+        filePath,
+        moduleName,
+        sheets,
+        preview
+      });
+    } catch (error) {
+      console.error('Upload error:', error);
+      res.status(500).json({ 
+        error: error instanceof Error ? error.message : 'Upload failed' 
+      });
+    }
+  });
+
+  // Execute import endpoint
+  app.post('/api/data-sync/import', async (req, res) => {
+    try {
+      const { filePath, moduleName, sheetName, customMappings, dryRun } = req.body;
+
+      if (!filePath || !moduleName) {
+        return res.status(400).json({ error: 'Missing required fields' });
+      }
+
+      if (!['Accounts', 'Contacts', 'Resources'].includes(moduleName)) {
+        return res.status(400).json({ error: 'Invalid module name' });
+      }
+
+      const result = await importHandler.importFile({
+        moduleName: moduleName as 'Accounts' | 'Contacts' | 'Resources',
+        filePath,
+        sheetName,
+        customMappings,
+        dryRun: dryRun === true
+      });
+
+      res.json(result);
+    } catch (error) {
+      console.error('Import error:', error);
+      res.status(500).json({ 
+        error: error instanceof Error ? error.message : 'Import failed' 
+      });
+    }
+  });
+
+  // Get import history/checkpoints
+  app.get('/api/data-sync/history', async (req, res) => {
+    try {
+      const checkpointsDir = path.join(process.cwd(), 'services/zoho-data-sync/logs/checkpoints');
+      
+      if (!fs.existsSync(checkpointsDir)) {
+        return res.json({ checkpoints: [] });
+      }
+
+      const files = fs.readdirSync(checkpointsDir);
+      const checkpoints = files
+        .filter(f => f.endsWith('.json'))
+        .map(f => {
+          const content = fs.readFileSync(path.join(checkpointsDir, f), 'utf-8');
+          return JSON.parse(content);
+        })
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+
+      res.json({ checkpoints });
+    } catch (error) {
+      console.error('History error:', error);
+      res.status(500).json({ 
+        error: error instanceof Error ? error.message : 'Failed to fetch history' 
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

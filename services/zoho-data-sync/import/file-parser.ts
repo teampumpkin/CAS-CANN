@@ -6,7 +6,11 @@
 
 import Papa from 'papaparse';
 import * as fs from 'fs';
-import * as XLSX from 'xlsx';
+import { createRequire } from 'module';
+
+// Use createRequire to load CommonJS xlsx module
+const require = createRequire(import.meta.url);
+const XLSX = require('xlsx');
 
 export interface ParseResult {
   data: any[];

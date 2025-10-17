@@ -1,0 +1,385 @@
+{
+  "summary": {
+    "Accounts": {
+      "processed": 0,
+      "created": 0,
+      "skipped": 0,
+      "failed": 0
+    },
+    "Contacts": {
+      "processed": 0,
+      "created": 0,
+      "skipped": 0,
+      "failed": 0
+    },
+    "Resources": {
+      "processed": 0,
+      "created": 0,
+      "skipped": 0,
+      "failed": 0
+    }
+  },
+  "detailedLogs": [
+    {
+      "fileName": "Canadian Amyloidosis Society-Centers_for_Map-03-March-2025-English_1760708332637.xlsx",
+      "module": "Accounts",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.288Z"
+    },
+    {
+      "fileName": "Canadian Amyloidosis Society-Centers_for_Map-03-March-2025-English_1760708332637.xlsx",
+      "module": "Accounts",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.296Z"
+    },
+    {
+      "fileName": "Canadian Amyloidosis Society-Centers_for_Map-French-03-March-2025_1760708332638.xlsx",
+      "module": "Accounts",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.301Z"
+    },
+    {
+      "fileName": "Canadian Amyloidosis Society-Centers_for_Map-French-03-March-2025_1760708332638.xlsx",
+      "module": "Accounts",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.306Z"
+    },
+    {
+      "fileName": "CAS_Directory_Export_Populated_May2025_1760708332639.xlsx",
+      "module": "Accounts",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.310Z"
+    },
+    {
+      "fileName": "CAS_Directory_Export_Populated_May2025_1760708332639.xlsx",
+      "module": "Accounts",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.314Z"
+    },
+    {
+      "fileName": "CAS_Directory_Master_Reorganized_v2_1760708332639.xlsx",
+      "module": "Accounts",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.318Z"
+    },
+    {
+      "fileName": "CAS_Directory_Master_Reorganized_v2_1760708332639.xlsx",
+      "module": "Accounts",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.334Z"
+    },
+    {
+      "fileName": "CAS_Intake_Form_EN_1760708332640.xlsx",
+      "module": "Accounts",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.339Z"
+    },
+    {
+      "fileName": "CAS_Intake_Form_EN_1760708332640.xlsx",
+      "module": "Accounts",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.343Z"
+    },
+    {
+      "fileName": "Canadian Amyloidosis Society-Membership Registration-English-07-May-2025_1760708332638.xlsx",
+      "module": "Contacts",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.348Z"
+    },
+    {
+      "fileName": "Canadian Amyloidosis Society-Membership Registration-English-07-May-2025_1760708332638.xlsx",
+      "module": "Contacts",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.352Z"
+    },
+    {
+      "fileName": "CAS Membership Registration Form (French)-07-May-2025_1760708332639.xlsx",
+      "module": "Contacts",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.359Z"
+    },
+    {
+      "fileName": "CAS Membership Registration Form (French)-07-May-2025_1760708332639.xlsx",
+      "module": "Contacts",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.362Z"
+    },
+    {
+      "fileName": "CAS_Membership_Registration_Upgraded_EN_v2_1760708332640.xlsx",
+      "module": "Contacts",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.364Z"
+    },
+    {
+      "fileName": "CAS_Membership_Registration_Upgraded_EN_v2_1760708332640.xlsx",
+      "module": "Contacts",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.367Z"
+    },
+    {
+      "fileName": "CAS_Directory_Export_Populated_May2025_1760708332639.xlsx",
+      "module": "Resources",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.370Z"
+    },
+    {
+      "fileName": "CAS_Directory_Export_Populated_May2025_1760708332639.xlsx",
+      "module": "Resources",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.374Z"
+    },
+    {
+      "fileName": "CAS_Field_Spec_Updated_May2025_1760708332639.xlsx",
+      "module": "Resources",
+      "phase": "dry-run",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.379Z"
+    },
+    {
+      "fileName": "CAS_Field_Spec_Updated_May2025_1760708332639.xlsx",
+      "module": "Resources",
+      "phase": "live",
+      "status": "success",
+      "recordsProcessed": 0,
+      "recordsCreated": 0,
+      "recordsSkipped": 0,
+      "recordsFailed": 0,
+      "errors": [
+        {
+          "row": -1,
+          "record": {},
+          "error": "Parse errors: XLSX.readFile is not a function"
+        }
+      ],
+      "timestamp": "2025-10-17T13:45:42.388Z"
+    }
+  ],
+  "timestamp": "2025-10-17T13:45:42.392Z"
+}

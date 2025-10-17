@@ -15,12 +15,17 @@ interface ChatImportOptions {
 }
 
 export async function chatImport(options: ChatImportOptions) {
-  const assetsDir = path.join(process.cwd(), 'attached_assets');
-  const filePath = path.join(assetsDir, options.fileName);
+  // Handle path from both project root and zoho-data-sync directory
+  let filePath = path.join(process.cwd(), 'attached_assets', options.fileName);
+  
+  // If not found, try from parent directory (when running from zoho-data-sync)
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(process.cwd(), '..', '..', 'attached_assets', options.fileName);
+  }
 
   // Check if file exists
   if (!fs.existsSync(filePath)) {
-    throw new Error(`File not found: ${options.fileName}`);
+    throw new Error(`File not found: ${options.fileName}\nSearched in: ${filePath}`);
   }
 
   console.log(`\n🚀 Starting chat-based import...`);

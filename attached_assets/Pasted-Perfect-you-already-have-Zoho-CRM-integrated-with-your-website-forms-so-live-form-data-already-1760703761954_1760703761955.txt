@@ -1,0 +1,154 @@
+Perfect 👍 — you already have Zoho CRM integrated with your website forms (so live form data already flows into Zoho).
+Now you want to **create a *separate, non-breaking data integration service*** that:
+
+* Runs independently from the existing website form submission pipeline,
+* Interacts via **Replit Agent**,
+* Uses **Zoho CRM API** for **data cleanup, transformation, and uploading**,
+* And can evolve into a **standalone backend service** for future automation.
+
+Here’s a **ready-to-use structured prompt** for your **Replit Dev Agent** to set that up correctly:
+
+---
+
+### 🧠 Prompt for Replit Dev Agent — "Zoho Data Integration Service (Non-breaking)"
+
+````
+You are a development automation agent with access to my Replit workspace. 
+Your goal is to create an independent Zoho CRM API integration service for data import, cleanup, and upload — without interfering with the existing Zoho integration connected to my website forms.
+
+---
+
+## 🎯 Objective
+Set up a new **standalone service** (microservice or script) called `zoho-data-sync-service` that:
+- Connects to my existing **Zoho CRM API credentials** (OAuth2 access + refresh token).
+- Reads, cleans, and uploads structured datasets (CSV/Excel) into Zoho CRM.
+- Works in parallel with the current live form submission → Zoho CRM integration pipeline, **without overwriting or breaking it**.
+- Prepares foundation for future data cleanup, deduplication, and enrichment automation.
+
+---
+
+## 🧩 Key Functional Requirements
+
+1. **Architecture Setup**
+   - Create a separate service folder inside Replit: `/services/zoho-data-sync/`
+   - Use `Python` or `Node.js` depending on your setup preference.
+   - Load environment variables from `.env` file (tokens, keys, etc.)
+   - Maintain modular structure for future extensions:
+     ```
+     /services/zoho-data-sync/
+       ├── auth/
+       ├── modules/
+       ├── uploads/
+       ├── cleanup/
+       ├── utils/
+       ├── logs/
+       ├── main.py (or index.js)
+     ```
+
+2. **API Connection Layer**
+   - Reuse existing Zoho OAuth credentials.
+   - Use the **Zoho CRM v3 API** base URL:
+     ```
+     https://www.zohoapis.com/crm/v3/
+     ```
+   - Implement auto token refresh using stored refresh token.
+   - Use headers:
+     ```
+     Authorization: Zoho-oauthtoken <access_token>
+     Content-Type: application/json
+     ```
+
+3. **Pipeline Scope**
+   - Service should support these core modules:
+     - `Accounts` (Institutions)
+     - `Contacts` (Members)
+     - `Resources` (Custom Module)
+   - Include helper scripts for:
+     - **Data cleaning** (normalize fields, fix duplicates)
+     - **Bulk upload** using `/bulk/v2/write`
+     - **Upsert** logic (deduplication via `Institution_ID` or `Email`)
+     - **Record linking** (Contacts → Accounts, Resources → Accounts)
+
+4. **Non-Interference Rule**
+   - This pipeline must not alter or overwrite the existing CRM entries created via live form submissions.
+   - Implement safety logic:
+     - Only modify records with a tag `"DataSync"` or `"BatchImport"`.
+     - Never touch records with `"WebForm"` tag.
+     - Add `source_tag = "DataSyncService"` for tracking.
+
+5. **Data Import Handling**
+   - Accept structured `.csv` or `.xlsx` uploads.
+   - Read and clean using `pandas` (Python) or `csv-parser/xlsx` (Node.js).
+   - Generate logs and reports after each import.
+   - Maintain backup of imported data and responses.
+
+6. **Interaction with Replit Agent**
+   - Allow me to trigger actions using natural commands like:
+     - “Clean and upload membership data file.”
+     - “Check duplicates in Institutions.”
+     - “Push new Resources dataset to Zoho.”
+   - You should parse my intent, locate the right script, and execute the task.
+   - Return a summary report like:
+     ```json
+     {
+       "accounts_imported": 450,
+       "contacts_cleaned": 920,
+       "duplicates_skipped": 22,
+       "upload_status": "success",
+       "linked_records": 865
+     }
+     ```
+
+7. **Future Integration Hooks**
+   - Keep structure open for future connectors:
+     - HubSpot, Intercom, or RAG-based data enrichment.
+     - Breeze AI or internal enrichment services.
+   - Prepare a `/enrich/` module placeholder for AI-powered cleanup.
+
+---
+
+## 🧰 Tech Dependencies
+**Language:** Python 3.11+ (preferred) or Node.js 18+  
+**Libraries (Python):**
+````
+
+requests
+pandas
+python-dotenv
+openpyxl
+
+```
+
+**Libraries (Node.js):**
+```
+
+axios
+csv-parser
+xlsx
+dotenv
+
+```
+
+---
+
+## 🚀 Deployment Plan
+- Step 1: Create `.env` file with existing Zoho tokens (ACCESS + REFRESH).
+- Step 2: Build `auth/zoho_auth.py` (or `.js`) to handle token refresh.
+- Step 3: Create a module handler for each CRM module (Accounts, Contacts, Resources).
+- Step 4: Implement safe upsert + tag filtering.
+- Step 5: Test locally on sample CSV.
+- Step 6: Generate log reports and confirm no interference with live form flow.
+
+---
+
+## ✅ Success Criteria
+When complete, the service should:
+- Allow independent data upload & cleanup via command or Replit agent prompt.
+- Tag new/updated records distinctly (`DataSyncService`).
+- Keep form submission integration intact.
+- Be easily expandable for AI enrichment and cross-CRM data matching later.
+```
+
+---
+
+Would you like me to now add the **follow-up command set** you can use directly in Replit chat (like `/run import contacts`, `/run clean accounts`, etc.) — so your agent can interpret and execute actions conversationally?

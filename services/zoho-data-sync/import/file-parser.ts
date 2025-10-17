@@ -4,9 +4,9 @@
  * Handles CSV and Excel file parsing
  */
 
-import * as XLSX from 'xlsx';
 import Papa from 'papaparse';
 import * as fs from 'fs';
+import * as XLSX from 'xlsx';
 
 export interface ParseResult {
   data: any[];

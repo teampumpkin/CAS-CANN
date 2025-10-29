@@ -491,3 +491,109 @@ export const insertOAuthTokenSchema = createInsertSchema(oauthTokens).omit({
 
 export type OAuthToken = typeof oauthTokens.$inferSelect;
 export type InsertOAuthToken = z.infer<typeof insertOAuthTokenSchema>;
+
+export const workflowStatusEnum = pgEnum("workflow_status", ["active", "paused", "archived"]);
+export const triggerTypeEnum = pgEnum("trigger_type", ["crm_record_created", "crm_record_updated", "crm_field_changed", "manual", "scheduled"]);
+export const actionTypeEnum = pgEnum("action_type", ["add_to_campaign", "send_email", "update_crm_field", "create_crm_record", "wait", "http_request"]);
+export const executionStatusEnum = pgEnum("execution_status", ["pending", "running", "completed", "failed", "skipped"]);
+
+export const automationWorkflows = pgTable("automation_workflows", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  triggerType: triggerTypeEnum("trigger_type").notNull(),
+  triggerConfig: jsonb("trigger_config").notNull(),
+  conditions: jsonb("conditions"),
+  actions: jsonb("actions").notNull(),
+  status: workflowStatusEnum("status").notNull().default("active"),
+  executionCount: integer("execution_count").notNull().default(0),
+  lastExecutedAt: timestamp("last_executed_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_automation_workflows_status").on(table.status),
+  index("idx_automation_workflows_trigger_type").on(table.triggerType),
+]);
+
+export const insertAutomationWorkflowSchema = createInsertSchema(automationWorkflows).omit({
+  id: true,
+  executionCount: true,
+  lastExecutedAt: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type AutomationWorkflow = typeof automationWorkflows.$inferSelect;
+export type InsertAutomationWorkflow = z.infer<typeof insertAutomationWorkflowSchema>;
+
+export const workflowExecutions = pgTable("workflow_executions", {
+  id: serial("id").primaryKey(),
+  workflowId: integer("workflow_id").notNull().references(() => automationWorkflows.id, { onDelete: "cascade" }),
+  status: executionStatusEnum("status").notNull().default("pending"),
+  triggerData: jsonb("trigger_data"),
+  executionContext: jsonb("execution_context"),
+  errorMessage: text("error_message"),
+  startedAt: timestamp("started_at").defaultNow(),
+  completedAt: timestamp("completed_at"),
+  duration: integer("duration"),
+}, (table) => [
+  index("idx_workflow_executions_workflow_id").on(table.workflowId),
+  index("idx_workflow_executions_status").on(table.status),
+]);
+
+export const insertWorkflowExecutionSchema = createInsertSchema(workflowExecutions).omit({
+  id: true,
+  startedAt: true,
+  completedAt: true,
+  duration: true,
+});
+
+export type WorkflowExecution = typeof workflowExecutions.$inferSelect;
+export type InsertWorkflowExecution = z.infer<typeof insertWorkflowExecutionSchema>;
+
+export const actionExecutions = pgTable("action_executions", {
+  id: serial("id").primaryKey(),
+  executionId: integer("execution_id").notNull().references(() => workflowExecutions.id, { onDelete: "cascade" }),
+  actionType: actionTypeEnum("action_type").notNull(),
+  actionConfig: jsonb("action_config").notNull(),
+  status: executionStatusEnum("status").notNull().default("pending"),
+  result: jsonb("result"),
+  errorMessage: text("error_message"),
+  startedAt: timestamp("started_at").defaultNow(),
+  completedAt: timestamp("completed_at"),
+  duration: integer("duration"),
+}, (table) => [
+  index("idx_action_executions_execution_id").on(table.executionId),
+  index("idx_action_executions_status").on(table.status),
+]);
+
+export const insertActionExecutionSchema = createInsertSchema(actionExecutions).omit({
+  id: true,
+  startedAt: true,
+  completedAt: true,
+  duration: true,
+});
+
+export type ActionExecution = typeof actionExecutions.$inferSelect;
+export type InsertActionExecution = z.infer<typeof insertActionExecutionSchema>;
+
+export const campaignSyncs = pgTable("campaign_syncs", {
+  id: serial("id").primaryKey(),
+  zohoCampaignId: varchar("zoho_campaign_id", { length: 100 }).notNull(),
+  campaignName: varchar("campaign_name", { length: 255 }).notNull(),
+  listId: varchar("list_id", { length: 100 }),
+  metadata: jsonb("metadata"),
+  lastSyncedAt: timestamp("last_synced_at").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
+}, (table) => [
+  index("idx_campaign_syncs_zoho_id").on(table.zohoCampaignId),
+]);
+
+export const insertCampaignSyncSchema = createInsertSchema(campaignSyncs).omit({
+  id: true,
+  lastSyncedAt: true,
+  createdAt: true,
+});
+
+export type CampaignSync = typeof campaignSyncs.$inferSelect;
+export type InsertCampaignSync = z.infer<typeof insertCampaignSyncSchema>;

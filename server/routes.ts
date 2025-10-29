@@ -1601,6 +1601,290 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Automation Workflows API Routes
+  app.get("/api/workflows", async (req, res) => {
+    try {
+      const { status, triggerType } = req.query;
+      const workflows = await storage.getAutomationWorkflows({
+        status: status as string,
+        triggerType: triggerType as string,
+      });
+      res.json(workflows);
+    } catch (error) {
+      console.error("Error fetching workflows:", error);
+      res.status(500).json({ message: "Failed to fetch workflows" });
+    }
+  });
+
+  app.get("/api/workflows/:id", async (req, res) => {
+    try {
+      const workflow = await storage.getAutomationWorkflow(parseInt(req.params.id));
+      if (!workflow) {
+        return res.status(404).json({ message: "Workflow not found" });
+      }
+      res.json(workflow);
+    } catch (error) {
+      console.error("Error fetching workflow:", error);
+      res.status(500).json({ message: "Failed to fetch workflow" });
+    }
+  });
+
+  app.post("/api/workflows", async (req, res) => {
+    try {
+      const workflow = await storage.createAutomationWorkflow(req.body);
+      res.status(201).json(workflow);
+    } catch (error) {
+      console.error("Error creating workflow:", error);
+      res.status(500).json({ message: "Failed to create workflow" });
+    }
+  });
+
+  app.put("/api/workflows/:id", async (req, res) => {
+    try {
+      const workflow = await storage.updateAutomationWorkflow(parseInt(req.params.id), req.body);
+      if (!workflow) {
+        return res.status(404).json({ message: "Workflow not found" });
+      }
+      res.json(workflow);
+    } catch (error) {
+      console.error("Error updating workflow:", error);
+      res.status(500).json({ message: "Failed to update workflow" });
+    }
+  });
+
+  app.delete("/api/workflows/:id", async (req, res) => {
+    try {
+      const deleted = await storage.deleteAutomationWorkflow(parseInt(req.params.id));
+      if (!deleted) {
+        return res.status(404).json({ message: "Workflow not found" });
+      }
+      res.status(204).send();
+    } catch (error) {
+      console.error("Error deleting workflow:", error);
+      res.status(500).json({ message: "Failed to delete workflow" });
+    }
+  });
+
+  app.post("/api/workflows/:id/execute", async (req, res) => {
+    try {
+      const { workflowExecutionEngine } = await import("./workflow-execution-engine");
+      const executionId = await workflowExecutionEngine.executeWorkflow(
+        parseInt(req.params.id),
+        req.body.context || {}
+      );
+      res.json({ executionId, message: "Workflow execution started" });
+    } catch (error) {
+      console.error("Error executing workflow:", error);
+      res.status(500).json({ 
+        message: "Failed to execute workflow",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.get("/api/workflows/:id/executions", async (req, res) => {
+    try {
+      const executions = await storage.getWorkflowExecutions({
+        workflowId: parseInt(req.params.id)
+      });
+      res.json(executions);
+    } catch (error) {
+      console.error("Error fetching executions:", error);
+      res.status(500).json({ message: "Failed to fetch executions" });
+    }
+  });
+
+  app.get("/api/executions/:id", async (req, res) => {
+    try {
+      const execution = await storage.getWorkflowExecution(parseInt(req.params.id));
+      if (!execution) {
+        return res.status(404).json({ message: "Execution not found" });
+      }
+      const actions = await storage.getActionExecutions({ executionId: execution.id });
+      res.json({ ...execution, actions });
+    } catch (error) {
+      console.error("Error fetching execution:", error);
+      res.status(500).json({ message: "Failed to fetch execution" });
+    }
+  });
+
+  // Zoho Campaigns API Routes
+  app.get("/api/campaigns/lists", async (req, res) => {
+    try {
+      const { zohoCampaignsService } = await import("./zoho-campaigns-service");
+      const lists = await zohoCampaignsService.getLists();
+      res.json(lists);
+    } catch (error) {
+      console.error("Error fetching campaign lists:", error);
+      res.status(500).json({ 
+        message: "Failed to fetch campaign lists",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.post("/api/campaigns/lists", async (req, res) => {
+    try {
+      const { zohoCampaignsService } = await import("./zoho-campaigns-service");
+      const { listName, ...additionalInfo } = req.body;
+      const list = await zohoCampaignsService.createList(listName, additionalInfo);
+      res.status(201).json(list);
+    } catch (error) {
+      console.error("Error creating campaign list:", error);
+      res.status(500).json({ 
+        message: "Failed to create campaign list",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.post("/api/campaigns/lists/:listKey/subscribers", async (req, res) => {
+    try {
+      const { zohoCampaignsService } = await import("./zoho-campaigns-service");
+      const result = await zohoCampaignsService.addSubscriber(req.params.listKey, req.body);
+      res.status(201).json(result);
+    } catch (error) {
+      console.error("Error adding subscriber:", error);
+      res.status(500).json({ 
+        message: "Failed to add subscriber",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.post("/api/campaigns/lists/:listKey/subscribers/bulk", async (req, res) => {
+    try {
+      const { zohoCampaignsService } = await import("./zoho-campaigns-service");
+      const { contacts } = req.body;
+      const result = await zohoCampaignsService.addSubscribersBulk(req.params.listKey, contacts);
+      res.status(201).json(result);
+    } catch (error) {
+      console.error("Error adding subscribers in bulk:", error);
+      res.status(500).json({ 
+        message: "Failed to add subscribers in bulk",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.get("/api/campaigns", async (req, res) => {
+    try {
+      const { zohoCampaignsService } = await import("./zoho-campaigns-service");
+      const campaigns = await zohoCampaignsService.getCampaigns();
+      res.json(campaigns);
+    } catch (error) {
+      console.error("Error fetching campaigns:", error);
+      res.status(500).json({ 
+        message: "Failed to fetch campaigns",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.post("/api/campaigns", async (req, res) => {
+    try {
+      const { zohoCampaignsService } = await import("./zoho-campaigns-service");
+      const campaign = await zohoCampaignsService.createEmailCampaign(req.body);
+      res.status(201).json(campaign);
+    } catch (error) {
+      console.error("Error creating campaign:", error);
+      res.status(500).json({ 
+        message: "Failed to create campaign",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.post("/api/campaigns/:campaignKey/send", async (req, res) => {
+    try {
+      const { zohoCampaignsService } = await import("./zoho-campaigns-service");
+      const { scheduleTime } = req.body;
+      const result = await zohoCampaignsService.sendCampaign(
+        req.params.campaignKey,
+        scheduleTime ? new Date(scheduleTime) : undefined
+      );
+      res.json(result);
+    } catch (error) {
+      console.error("Error sending campaign:", error);
+      res.status(500).json({ 
+        message: "Failed to send campaign",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Chat Command API Routes - for easy manual control
+  app.post("/api/commands/crm/leads", async (req, res) => {
+    try {
+      const { limit = 20, ...filters } = req.body;
+      const records = await zohoCRMService.getRecords("Leads", filters, limit);
+      res.json({ 
+        module: "Leads", 
+        count: records.length, 
+        records 
+      });
+    } catch (error) {
+      console.error("Error fetching leads:", error);
+      res.status(500).json({ 
+        message: "Failed to fetch leads",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.post("/api/commands/crm/contacts", async (req, res) => {
+    try {
+      const { limit = 20, ...filters } = req.body;
+      const records = await zohoCRMService.getRecords("Contacts", filters, limit);
+      res.json({ 
+        module: "Contacts", 
+        count: records.length, 
+        records 
+      });
+    } catch (error) {
+      console.error("Error fetching contacts:", error);
+      res.status(500).json({ 
+        message: "Failed to fetch contacts",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.post("/api/commands/sync-to-campaign", async (req, res) => {
+    try {
+      const { zohoCampaignsService } = await import("./zoho-campaigns-service");
+      const { crmModule, listKey, filters, limit = 100 } = req.body;
+      
+      const records = await zohoCRMService.getRecords(crmModule, filters, limit);
+      
+      const contacts = records.map((record: any) => ({
+        email: record.Email,
+        firstName: record.First_Name,
+        lastName: record.Last_Name,
+      })).filter((c: any) => c.email);
+
+      if (contacts.length === 0) {
+        return res.json({ message: "No contacts with email addresses found", synced: 0 });
+      }
+
+      const result = await zohoCampaignsService.addSubscribersBulk(listKey, contacts);
+      
+      res.json({ 
+        message: `Synced ${contacts.length} contacts to campaign list`,
+        crmModule,
+        listKey,
+        synced: contacts.length,
+        result
+      });
+    } catch (error) {
+      console.error("Error syncing to campaign:", error);
+      res.status(500).json({ 
+        message: "Failed to sync to campaign",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

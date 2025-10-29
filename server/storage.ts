@@ -7,6 +7,10 @@ import {
   formConfigurations,
   oauthTokens,
   fieldMetadataCache,
+  automationWorkflows,
+  workflowExecutions,
+  actionExecutions,
+  campaignSyncs,
   type User,
   type InsertUser,
   type Resource,
@@ -23,6 +27,14 @@ import {
   type InsertOAuthToken,
   type FieldMetadataCache,
   type InsertFieldMetadataCache,
+  type AutomationWorkflow,
+  type InsertAutomationWorkflow,
+  type WorkflowExecution,
+  type InsertWorkflowExecution,
+  type ActionExecution,
+  type InsertActionExecution,
+  type CampaignSync,
+  type InsertCampaignSync,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, like, desc, gte, lte, notInArray } from "drizzle-orm";
@@ -130,6 +142,35 @@ export interface IStorage {
   deleteFieldMetadata(id: number): Promise<boolean>;
   deleteStaleFieldMetadata(zohoModule: string, keepFieldNames: string[]): Promise<number>;
   refreshFieldMetadataSync(zohoModule: string): Promise<void>;
+
+  // Automation workflow operations
+  getAutomationWorkflows(filters?: { status?: string; triggerType?: string }): Promise<AutomationWorkflow[]>;
+  getAutomationWorkflow(id: number): Promise<AutomationWorkflow | undefined>;
+  createAutomationWorkflow(workflow: InsertAutomationWorkflow): Promise<AutomationWorkflow>;
+  updateAutomationWorkflow(id: number, updates: Partial<AutomationWorkflow>): Promise<AutomationWorkflow | undefined>;
+  deleteAutomationWorkflow(id: number): Promise<boolean>;
+  incrementExecutionCount(id: number): Promise<void>;
+
+  // Workflow execution operations
+  getWorkflowExecutions(filters?: { workflowId?: number; status?: string }): Promise<WorkflowExecution[]>;
+  getWorkflowExecution(id: number): Promise<WorkflowExecution | undefined>;
+  createWorkflowExecution(execution: InsertWorkflowExecution): Promise<WorkflowExecution>;
+  updateWorkflowExecution(id: number, updates: Partial<WorkflowExecution>): Promise<WorkflowExecution | undefined>;
+  deleteWorkflowExecution(id: number): Promise<boolean>;
+
+  // Action execution operations
+  getActionExecutions(filters?: { executionId?: number; status?: string }): Promise<ActionExecution[]>;
+  getActionExecution(id: number): Promise<ActionExecution | undefined>;
+  createActionExecution(action: InsertActionExecution): Promise<ActionExecution>;
+  updateActionExecution(id: number, updates: Partial<ActionExecution>): Promise<ActionExecution | undefined>;
+  deleteActionExecution(id: number): Promise<boolean>;
+
+  // Campaign sync operations
+  getCampaignSyncs(filters?: { zohoCampaignId?: string }): Promise<CampaignSync[]>;
+  getCampaignSync(id: number): Promise<CampaignSync | undefined>;
+  createCampaignSync(sync: InsertCampaignSync): Promise<CampaignSync>;
+  updateCampaignSync(id: number, updates: Partial<CampaignSync>): Promise<CampaignSync | undefined>;
+  deleteCampaignSync(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -640,6 +681,185 @@ export class DatabaseStorage implements IStorage {
       .update(fieldMetadataCache)
       .set({ lastSynced: new Date(), updatedAt: new Date() })
       .where(eq(fieldMetadataCache.zohoModule, zohoModule));
+  }
+
+  // Automation workflow operations
+  async getAutomationWorkflows(filters?: { status?: string; triggerType?: string }): Promise<AutomationWorkflow[]> {
+    const conditions = [];
+    
+    if (filters?.status) {
+      conditions.push(eq(automationWorkflows.status, filters.status as any));
+    }
+    if (filters?.triggerType) {
+      conditions.push(eq(automationWorkflows.triggerType, filters.triggerType as any));
+    }
+
+    return await db
+      .select()
+      .from(automationWorkflows)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(automationWorkflows.createdAt));
+  }
+
+  async getAutomationWorkflow(id: number): Promise<AutomationWorkflow | undefined> {
+    const [workflow] = await db.select().from(automationWorkflows).where(eq(automationWorkflows.id, id));
+    return workflow || undefined;
+  }
+
+  async createAutomationWorkflow(workflow: InsertAutomationWorkflow): Promise<AutomationWorkflow> {
+    const [created] = await db.insert(automationWorkflows).values(workflow).returning();
+    return created;
+  }
+
+  async updateAutomationWorkflow(id: number, updates: Partial<AutomationWorkflow>): Promise<AutomationWorkflow | undefined> {
+    const [updated] = await db
+      .update(automationWorkflows)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(automationWorkflows.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteAutomationWorkflow(id: number): Promise<boolean> {
+    const result = await db.delete(automationWorkflows).where(eq(automationWorkflows.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  async incrementExecutionCount(id: number): Promise<void> {
+    const [current] = await db.select().from(automationWorkflows).where(eq(automationWorkflows.id, id));
+    if (current) {
+      await db
+        .update(automationWorkflows)
+        .set({
+          executionCount: current.executionCount + 1,
+          lastExecutedAt: new Date(),
+          updatedAt: new Date()
+        })
+        .where(eq(automationWorkflows.id, id));
+    }
+  }
+
+  // Workflow execution operations
+  async getWorkflowExecutions(filters?: { workflowId?: number; status?: string }): Promise<WorkflowExecution[]> {
+    const conditions = [];
+    
+    if (filters?.workflowId) {
+      conditions.push(eq(workflowExecutions.workflowId, filters.workflowId));
+    }
+    if (filters?.status) {
+      conditions.push(eq(workflowExecutions.status, filters.status as any));
+    }
+
+    return await db
+      .select()
+      .from(workflowExecutions)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(workflowExecutions.startedAt));
+  }
+
+  async getWorkflowExecution(id: number): Promise<WorkflowExecution | undefined> {
+    const [execution] = await db.select().from(workflowExecutions).where(eq(workflowExecutions.id, id));
+    return execution || undefined;
+  }
+
+  async createWorkflowExecution(execution: InsertWorkflowExecution): Promise<WorkflowExecution> {
+    const [created] = await db.insert(workflowExecutions).values(execution).returning();
+    return created;
+  }
+
+  async updateWorkflowExecution(id: number, updates: Partial<WorkflowExecution>): Promise<WorkflowExecution | undefined> {
+    const [updated] = await db
+      .update(workflowExecutions)
+      .set(updates)
+      .where(eq(workflowExecutions.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteWorkflowExecution(id: number): Promise<boolean> {
+    const result = await db.delete(workflowExecutions).where(eq(workflowExecutions.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  // Action execution operations
+  async getActionExecutions(filters?: { executionId?: number; status?: string }): Promise<ActionExecution[]> {
+    const conditions = [];
+    
+    if (filters?.executionId) {
+      conditions.push(eq(actionExecutions.executionId, filters.executionId));
+    }
+    if (filters?.status) {
+      conditions.push(eq(actionExecutions.status, filters.status as any));
+    }
+
+    return await db
+      .select()
+      .from(actionExecutions)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(actionExecutions.startedAt));
+  }
+
+  async getActionExecution(id: number): Promise<ActionExecution | undefined> {
+    const [action] = await db.select().from(actionExecutions).where(eq(actionExecutions.id, id));
+    return action || undefined;
+  }
+
+  async createActionExecution(action: InsertActionExecution): Promise<ActionExecution> {
+    const [created] = await db.insert(actionExecutions).values(action).returning();
+    return created;
+  }
+
+  async updateActionExecution(id: number, updates: Partial<ActionExecution>): Promise<ActionExecution | undefined> {
+    const [updated] = await db
+      .update(actionExecutions)
+      .set(updates)
+      .where(eq(actionExecutions.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteActionExecution(id: number): Promise<boolean> {
+    const result = await db.delete(actionExecutions).where(eq(actionExecutions.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  // Campaign sync operations
+  async getCampaignSyncs(filters?: { zohoCampaignId?: string }): Promise<CampaignSync[]> {
+    const conditions = [];
+    
+    if (filters?.zohoCampaignId) {
+      conditions.push(eq(campaignSyncs.zohoCampaignId, filters.zohoCampaignId));
+    }
+
+    return await db
+      .select()
+      .from(campaignSyncs)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(campaignSyncs.lastSyncedAt));
+  }
+
+  async getCampaignSync(id: number): Promise<CampaignSync | undefined> {
+    const [sync] = await db.select().from(campaignSyncs).where(eq(campaignSyncs.id, id));
+    return sync || undefined;
+  }
+
+  async createCampaignSync(sync: InsertCampaignSync): Promise<CampaignSync> {
+    const [created] = await db.insert(campaignSyncs).values(sync).returning();
+    return created;
+  }
+
+  async updateCampaignSync(id: number, updates: Partial<CampaignSync>): Promise<CampaignSync | undefined> {
+    const [updated] = await db
+      .update(campaignSyncs)
+      .set({ ...updates, lastSyncedAt: new Date() })
+      .where(eq(campaignSyncs.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteCampaignSync(id: number): Promise<boolean> {
+    const result = await db.delete(campaignSyncs).where(eq(campaignSyncs.id, id));
+    return (result.rowCount || 0) > 0;
   }
 }
 

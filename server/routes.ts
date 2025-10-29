@@ -322,18 +322,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = dynamicFormSubmissionSchema.parse(req.body);
       const { form_name, data } = validatedData;
 
-      // Step 2: Check for form configuration (optional)
-      let targetModule = "Leads"; // Default module
-      let fieldMappings = null;
-
-      const formConfig = await storage.getFormConfiguration(form_name);
-      if (formConfig) {
-        targetModule = formConfig.zohoModule;
-        fieldMappings = formConfig.fieldMappings;
-        console.log(`[Form Submission] Using configuration for form "${form_name}": module=${targetModule}`);
-      } else {
-        console.log(`[Form Submission] No configuration found for form "${form_name}", using default module: ${targetModule}`);
-      }
+      // Step 2: Set target module (all forms go to Leads)
+      const targetModule = "Leads";
+      console.log(`[Form Submission] Processing form "${form_name}" → Zoho ${targetModule}`);
 
       // Step 3: Create form submission record
       const submissionData: InsertFormSubmission = {

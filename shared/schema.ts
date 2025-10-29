@@ -52,51 +52,53 @@ export const insertResourceSchema = createInsertSchema(resources).omit({
 export type InsertResource = z.infer<typeof insertResourceSchema>;
 export type Resource = typeof resources.$inferSelect;
 
-// CAS Registration Form Schema
+// Unified CAS and CANN Registration Form Schema
 export const casRegistrationSchema = z.object({
-  // Question 1: Main membership question
+  // Question 1: CAS membership question
   wantsMembership: z.enum(["Yes", "No"], {
     required_error: "Please select whether you want to become a CAS member",
   }),
   
-  // For "Yes" membership path (questions 2-7 from previous spec, then question 8 for services map)
+  // Question 2: CANN membership question (NEW)
+  wantsCANNMembership: z.enum(["Yes", "No"]).optional(),
+  
+  // Questions 3-9: Core member information (required for CAS members or CANN members)
   fullName: z.string().optional(),
   email: z.string().optional(),
-  discipline: z.string().optional(),
+  discipline: z.string().optional(), // Note: Include nursing designation/role if also registering for CANN
   subspecialty: z.string().optional(),
-  institution: z.string().optional(),
+  institution: z.string().optional(), // Centre or Clinic Name/Institution
   wantsCommunications: z.enum(["Yes", "No"]).optional(),
   wantsServicesMapInclusion: z.enum(["Yes", "No"]).optional(),
   
-  // For services map "Yes" path (questions 9-13 from previous spec)
-  centerName: z.string().optional(),
-  centerAddress: z.string().optional(),
-  centerPhone: z.string().optional(),
-  centerFax: z.string().optional(),
+  // Services map details (shown when wantsServicesMapInclusion = "Yes")
+  centerName: z.string().optional(), // Centre or Clinic Name  
+  centerAddress: z.string().optional(), // Centre or Clinic Address
+  centerPhone: z.string().optional(), // Centre or Clinic Phone
+  centerFax: z.string().optional(), // Centre or Clinic Fax
   allowsContact: z.enum(["Yes", "No"]).optional(),
   
-  // For "No" membership path - new questions
-  // Question 2: Services map for non-members
-  noMemberWantsServicesMap: z.enum(["Yes", "No"]).optional(),
+  // CANN-specific fields (shown only when wantsCANNMembership = "Yes")
+  // Note: Centre Name already collected above in 'institution' field, so we don't duplicate it
   
-  // Questions 3-6: Center details for non-members (always required when wantsMembership = "No")
+  // For "No" membership path (neither CAS nor CANN)
+  noMemberWantsServicesMap: z.enum(["Yes", "No"]).optional(),
   noMemberCenterName: z.string().optional(),
   noMemberCenterAddress: z.string().optional(),
   noMemberCenterPhone: z.string().optional(),
   noMemberCenterFax: z.string().optional(),
-  
-  // Question 7: Allow contact for services map (required when wantsMembership = "No")
   noMemberAllowsContact: z.enum(["Yes", "No"]).optional(),
-  
-  // Questions 8-12: Contact details for non-members (only when allowsContact = "Yes")
   noMemberEmail: z.string().optional(),
   noMemberDiscipline: z.string().optional(),
   noMemberSubspecialty: z.string().optional(),
   noMemberCenterNameForContact: z.string().optional(),
   noMemberWantsCommunications: z.enum(["Yes", "No"]).optional(),
 }).superRefine((data, ctx) => {
-  // Conditional validation for "Yes" membership path
-  if (data.wantsMembership === "Yes") {
+  // If CANN membership is Yes, they automatically become CAS members too
+  const isMember = data.wantsMembership === "Yes" || data.wantsCANNMembership === "Yes";
+  
+  // Conditional validation for membership path (CAS or CANN)
+  if (isMember) {
     if (!data.fullName || data.fullName.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -138,7 +140,7 @@ export const casRegistrationSchema = z.object({
     if (!data.institution || data.institution.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Center or Clinic Name/Institution is required",
+        message: "Centre or Clinic Name/Institution is required",
         path: ["institution"],
       });
     }
@@ -164,7 +166,7 @@ export const casRegistrationSchema = z.object({
       if (!data.centerName || data.centerName.trim().length === 0) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Center or Clinic Name is required",
+          message: "Centre or Clinic Name is required",
           path: ["centerName"],
         });
       }
@@ -172,7 +174,7 @@ export const casRegistrationSchema = z.object({
       if (!data.centerAddress || data.centerAddress.trim().length === 0) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Center or Clinic Address is required",
+          message: "Centre or Clinic Address is required",
           path: ["centerAddress"],
         });
       }
@@ -180,7 +182,7 @@ export const casRegistrationSchema = z.object({
       if (!data.centerPhone || data.centerPhone.trim().length === 0) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Center or Clinic Phone Number is required",
+          message: "Centre or Clinic Phone Number is required",
           path: ["centerPhone"],
         });
       }
@@ -188,7 +190,7 @@ export const casRegistrationSchema = z.object({
       if (!data.centerFax || data.centerFax.trim().length === 0) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Center or Clinic Fax Number is required",
+          message: "Centre or Clinic Fax Number is required",
           path: ["centerFax"],
         });
       }
@@ -203,22 +205,22 @@ export const casRegistrationSchema = z.object({
     }
   }
   
-  // Conditional validation for "No" membership path
-  if (data.wantsMembership === "No") {
-    // Question 2: Services map selection is required
+  // Conditional validation for "No" membership path (neither CAS nor CANN)
+  if (!isMember) {
+    // Services map selection is required for non-members
     if (!data.noMemberWantsServicesMap) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Please select whether you want your center included in the services map",
+        message: "Please select whether you want your centre included in the services map",
         path: ["noMemberWantsServicesMap"],
       });
     }
     
-    // Questions 3-7 are always required for "No" path
+    // Centre details are always required for non-members
     if (!data.noMemberCenterName || data.noMemberCenterName.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Center or Clinic Name/Institution is required",
+        message: "Centre or Clinic Name/Institution is required",
         path: ["noMemberCenterName"],
       });
     }
@@ -226,7 +228,7 @@ export const casRegistrationSchema = z.object({
     if (!data.noMemberCenterAddress || data.noMemberCenterAddress.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Center or Clinic Address is required",
+        message: "Centre or Clinic Address is required",
         path: ["noMemberCenterAddress"],
       });
     }
@@ -234,7 +236,7 @@ export const casRegistrationSchema = z.object({
     if (!data.noMemberCenterPhone || data.noMemberCenterPhone.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Center or Clinic Phone Number is required",
+        message: "Centre or Clinic Phone Number is required",
         path: ["noMemberCenterPhone"],
       });
     }
@@ -242,7 +244,7 @@ export const casRegistrationSchema = z.object({
     if (!data.noMemberCenterFax || data.noMemberCenterFax.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Center or Clinic Fax Number is required",
+        message: "Centre or Clinic Fax Number is required",
         path: ["noMemberCenterFax"],
       });
     }
@@ -290,7 +292,7 @@ export const casRegistrationSchema = z.object({
       if (!data.noMemberCenterNameForContact || data.noMemberCenterNameForContact.trim().length === 0) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Center or Clinic Name/Institution is required",
+          message: "Centre or Clinic Name/Institution is required",
           path: ["noMemberCenterNameForContact"],
         });
       }

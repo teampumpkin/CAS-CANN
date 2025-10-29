@@ -117,12 +117,11 @@ export default function Header() {
       hasDropdown: true,
       dropdownItems: [
         { name: "About CANN", href: "/about-cann" },
-        { name: "Join CANN", href: "/about-cann#join-section" },
         { name: "Resources/Events", href: "/cann-resources" },
       ],
     },
     { name: "Contact Us", href: "/contact" },
-    { name: t("nav.joinCAS"), href: "/join-cas", isPrimary: true },
+    { name: "Join CAS / CANN", href: "/join-cas", isPrimary: true },
   ];
 
   useEffect(() => {

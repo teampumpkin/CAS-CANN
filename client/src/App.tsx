@@ -116,8 +116,9 @@ function Router() {
         <Route path="/accessibility" component={AccessibilityStatement} />
         <Route path="/contributor-portal" component={ContributorPortal} />
         <Route path="/test-forms" component={TestForms} />
-        <Route path="/join-cann" component={CANNMembershipForm} />
-        <Route path="/join-cann-today" component={CANNMembershipForm} />
+        <Route path="/join-cann" component={JoinCAS} />
+        <Route path="/join-cann-today" component={JoinCAS} />
+        <Route path="/cann-membership" component={JoinCAS} />
         <Route path="/admin/data-sync" component={DataSyncAdmin} />
         <Route path="/admin/automation" component={CommandDashboard} />
         <Route component={NotFound} />

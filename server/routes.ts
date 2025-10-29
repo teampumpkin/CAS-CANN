@@ -1601,6 +1601,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Workflow Templates API Routes
+  app.get("/api/workflow-templates", async (req, res) => {
+    try {
+      const { getAllTemplates } = await import("./workflow-templates");
+      const templates = getAllTemplates();
+      res.json(templates);
+    } catch (error) {
+      console.error("Error fetching workflow templates:", error);
+      res.status(500).json({ message: "Failed to fetch workflow templates" });
+    }
+  });
+
+  app.post("/api/workflow-templates/:templateName/create", async (req, res) => {
+    try {
+      const { getTemplate } = await import("./workflow-templates");
+      const template = getTemplate(req.params.templateName);
+      
+      if (!template) {
+        return res.status(404).json({ message: "Template not found" });
+      }
+
+      const customConfig = req.body.config || {};
+      const workflowData = { ...template, ...customConfig };
+      
+      const workflow = await storage.createAutomationWorkflow(workflowData);
+      res.status(201).json(workflow);
+    } catch (error) {
+      console.error("Error creating workflow from template:", error);
+      res.status(500).json({ message: "Failed to create workflow from template" });
+    }
+  });
+
   // Automation Workflows API Routes
   app.get("/api/workflows", async (req, res) => {
     try {

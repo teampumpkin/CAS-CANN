@@ -253,21 +253,71 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const { formData, formName } = req.body;
       
-      // Direct Zoho submission without storage layer
-      const Lead_Source = formName === "CAS & CANN Registration" 
-        ? "Website - CAS & CANN Registration"
-        : "Website - CAS Registration";
+      const isMember = formData.wantsMembership === "Yes" || formData.wantsCANNMembership === "Yes";
+      const isCANNMember = formData.wantsCANNMembership === "Yes";
       
+      // Build Zoho Lead data
       const zohoData: any = {
-        Last_Name: formData.fullName || "Unknown",
-        Email: formData.email,
-        Lead_Source: Lead_Source,
+        Lead_Source: formName === "CAS & CANN Registration" 
+          ? "Website - CAS & CANN Registration"
+          : "Website - CAS Registration",
       };
       
-      // Add optional fields if present
-      if (formData.discipline) zohoData.Industry = formData.discipline;
-      if (formData.subspecialty) zohoData.Description = formData.subspecialty;
-      if (formData.institution) zohoData.Company = formData.institution;
+      // Member fields (Q3-8) - when either CAS or CANN = Yes
+      if (isMember) {
+        zohoData.Last_Name = formData.fullName || "Unknown";
+        zohoData.Email = formData.email;
+        if (formData.discipline) zohoData.Industry = formData.discipline;
+        if (formData.subspecialty) zohoData.Description = formData.subspecialty;
+        if (formData.institution) zohoData.Company = formData.institution;
+        
+        // CAS Communications preference (Q8)
+        if (formData.wantsCommunications) {
+          zohoData.CAS_Communications = formData.wantsCommunications;
+        }
+      }
+      
+      // Non-member fallback (Q11) - when both CAS and CANN = No
+      if (!isMember) {
+        zohoData.Last_Name = formData.noMemberName || "Non-Member Contact";
+        zohoData.Email = formData.noMemberEmail;
+        if (formData.noMemberMessage) {
+          zohoData.Description = `Non-member contact: ${formData.noMemberMessage}`;
+        }
+      }
+      
+      // Services Map (Q9) - always asked
+      if (formData.wantsServicesMapInclusion) {
+        zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
+      }
+      
+      // CANN-specific fields (Q10a-10d) - only when CANN = Yes
+      if (isCANNMember) {
+        if (formData.amyloidosisType) {
+          zohoData.Amyloidosis_Type = formData.amyloidosisType;
+        }
+        
+        if (formData.cannCommunications) {
+          zohoData.CANN_Communications = formData.cannCommunications;
+        }
+        
+        // Educational interests (checkbox array)
+        if (formData.educationalInterests && formData.educationalInterests.length > 0) {
+          let interests = formData.educationalInterests.join("; ");
+          // Add "Other" if specified
+          if (formData.otherEducationalInterest) {
+            interests += `; Other: ${formData.otherEducationalInterest}`;
+          }
+          // Zoho has 210 char limit for multiselect fields
+          zohoData.Educational_Interests = interests.substring(0, 210);
+        } else if (formData.otherEducationalInterest) {
+          zohoData.Educational_Interests = `Other: ${formData.otherEducationalInterest}`.substring(0, 210);
+        }
+        
+        if (formData.interestedInPresenting) {
+          zohoData.Interested_in_Presenting = formData.interestedInPresenting;
+        }
+      }
       
       console.log("[CAS/CANN Registration] Submitting to Zoho:", zohoData);
       

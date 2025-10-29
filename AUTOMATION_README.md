@@ -16,9 +16,13 @@ You need to authenticate with Zoho first:
 
 All automation endpoints are protected with an API key. The default development key is: `dev-automation-key-change-in-production`
 
-**For production**: Set the `AUTOMATION_API_KEY` environment variable to a secure random key.
+**For production**: Set the following environment variables to a secure random key:
+- Backend: `AUTOMATION_API_KEY` - Server-side key for validating requests
+- Frontend: `VITE_AUTOMATION_API_KEY` - Client-side key for making requests
 
-When making API calls, include the key in one of two ways:
+**Important**: Both values should match. Generate a secure random key and set both variables.
+
+**API Request Methods** (for external integrations):
 - Header: `X-Automation-API-Key: your-api-key-here`
 - Query param: `?apiKey=your-api-key-here`
 

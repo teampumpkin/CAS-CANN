@@ -1,6 +1,6 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
-const AUTOMATION_API_KEY = "dev-automation-key-change-in-production";
+const AUTOMATION_API_KEY = import.meta.env.VITE_AUTOMATION_API_KEY || "dev-automation-key-change-in-production";
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {

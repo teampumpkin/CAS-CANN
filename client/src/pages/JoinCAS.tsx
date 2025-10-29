@@ -100,7 +100,8 @@ export default function JoinCAS() {
     resolver: zodResolver(casRegistrationSchema),
     defaultValues: {
       wantsMembership: undefined,
-      // "Yes" membership path
+      wantsCANNMembership: undefined, // NEW: CANN membership question
+      // "Yes" membership path (for CAS or CANN members)
       fullName: "",
       email: "",
       discipline: "",
@@ -130,17 +131,26 @@ export default function JoinCAS() {
 
   // Watch form values for conditional rendering
   const wantsMembership = form.watch("wantsMembership");
+  const wantsCANNMembership = form.watch("wantsCANNMembership");
   const wantsServicesMapInclusion = form.watch("wantsServicesMapInclusion");
   const noMemberAllowsContact = form.watch("noMemberAllowsContact");
+  
+  // Check if user is a member (either CAS or CANN)
+  const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
 
   // Submit form mutation
   const submitMutation = useMutation({
     mutationFn: async (formData: CASRegistrationForm): Promise<SubmissionResponse> => {
+      // Determine form name based on CANN membership selection
+      const isCANNMember = formData.wantsCANNMembership === "Yes";
+      const formName = isCANNMember ? "CAS & CANN Registration" : "CAS Registration";
+      const formSource = isCANNMember ? "CAS & CANN Registration Form" : "CAS Registration Form";
+      
       const response = await apiRequest("/api/submit-form", "POST", {
-        formName: "CAS Registration",
+        formName: formName,
         formData: formData,
         metadata: {
-          source: "CAS Registration Form",
+          source: formSource,
           userAgent: navigator.userAgent,
           timestamp: new Date().toISOString(),
         }
@@ -150,9 +160,12 @@ export default function JoinCAS() {
     onSuccess: (data) => {
       setSubmissionId(data.submissionId);
       setShowConfirmationModal(true);
+      const isCANNMember = form.getValues("wantsCANNMembership") === "Yes";
       toast({
         title: "Application Submitted Successfully!",
-        description: "Your CAS membership application has been received and sent to our CRM system.",
+        description: isCANNMember 
+          ? "Your CAS & CANN membership application has been received and sent to our CRM system."
+          : "Your CAS membership application has been received and sent to our CRM system.",
       });
       form.reset();
     },
@@ -199,17 +212,16 @@ export default function JoinCAS() {
             </div>
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight text-gray-900 dark:text-white">
-              Join the{" "}
+              Join{" "}
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Canadian Amyloidosis Society
+                CAS and CANN
               </span>
             </h1>
 
             <p className="text-xl text-gray-600 dark:text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
               Become part of Canada's premier professional network for
-              amyloidosis care. Access clinical tools, contribute to governance
-              decisions, and collaborate with leading experts across the
-              country.
+              amyloidosis care and nursing excellence. Access clinical tools, collaborate
+              with leading experts, and join specialized nursing education programs.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -417,11 +429,10 @@ export default function JoinCAS() {
                   </motion.div>
 
                   <h3 className="text-xl font-bold text-white mb-2 font-rosarivo">
-                    CAS Registration Form
+                    CAS and CANN Registration Form
                   </h3>
                   <p className="text-white/90 text-sm max-w-sm mx-auto leading-relaxed">
-                    Complete the registration form below. All fields are secure
-                    and confidential.
+                    Complete the registration form below for CAS and/or CANN membership. All fields are secure and confidential.
                   </p>
 
                   {/* Progress indicators */}
@@ -481,8 +492,52 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Show different questions based on membership choice */}
-                        {wantsMembership === "Yes" && (
+                        {/* Question 2: CANN membership question (NEW) */}
+                        <FormField
+                          control={form.control}
+                          name="wantsCANNMembership"
+                          render={({ field }) => (
+                            <FormItem className="space-y-3">
+                              <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
+                                2. I would like to become a member of the Canadian Amyloidosis Nursing Network (CANN)
+                              </FormLabel>
+                              <FormDescription className="text-sm text-gray-500 dark:text-gray-400">
+                                Note: CANN members automatically become CAS members
+                              </FormDescription>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  className="flex flex-col space-y-2"
+                                  data-testid="radio-wants-cann-membership"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Yes" id="cann-yes" />
+                                    <label
+                                      htmlFor="cann-yes"
+                                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-white/80"
+                                    >
+                                      Yes
+                                    </label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="No" id="cann-no" />
+                                    <label
+                                      htmlFor="cann-no"
+                                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-white/80"
+                                    >
+                                      No
+                                    </label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Show member questions if either CAS or CANN membership selected */}
+                        {isMember && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
@@ -490,14 +545,14 @@ export default function JoinCAS() {
                             transition={{ duration: 0.3 }}
                             className="space-y-6 border-t border-gray-200 dark:border-gray-700 pt-6"
                           >
-                            {/* "Yes" Membership Path - Questions 2-7 */}
+                            {/* Member Path - Questions 3-9 (for CAS or CANN members) */}
                             <FormField
                               control={form.control}
                               name="fullName"
                               render={({ field }) => (
                                 <FormItem>
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    2. Full name (first and last)
+                                    3. Full name (first and last)
                                   </FormLabel>
                                   <FormControl>
                                     <Input
@@ -518,7 +573,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem>
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    3. Email address
+                                    4. Email address
                                   </FormLabel>
                                   <FormControl>
                                     <Input
@@ -540,11 +595,14 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem>
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    4. Discipline (physician, nursing, genetic counsellor, etc)
+                                    5. Discipline (Include nursing designation/role if also registering for CANN)
                                   </FormLabel>
+                                  <FormDescription className="text-sm text-gray-500 dark:text-gray-400">
+                                    Example: Physician, Registered Nurse, Genetic Counsellor, etc.
+                                  </FormDescription>
                                   <FormControl>
                                     <Input
-                                      placeholder="Enter your answer"
+                                      placeholder="Enter your discipline"
                                       {...field}
                                       className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
                                       data-testid="input-discipline"
@@ -561,7 +619,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem>
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    5. Sub-specialty area of focus (cardiology, hematology, neurology, etc)
+                                    6. Sub-specialty area of focus (cardiology, hematology, neurology, etc)
                                   </FormLabel>
                                   <FormControl>
                                     <Input
@@ -582,7 +640,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem>
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    6. Center or Clinic Name/Institution
+                                    7. Centre or Clinic Name/Institution
                                   </FormLabel>
                                   <FormControl>
                                     <Input
@@ -603,7 +661,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem className="space-y-3">
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    7. I would like to receive communication from the Canadian Amyloidosis Society (email, newsletters)
+                                    8. I would like to receive communication from the Canadian Amyloidosis Society (email, newsletters)
                                   </FormLabel>
                                   <FormControl>
                                     <RadioGroup
@@ -643,7 +701,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem className="space-y-3">
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    8. I would like my center/clinic to be included in the Canadian Amyloidosis Services Map
+                                    9. I would like my centre/clinic to be included in the Canadian Amyloidosis Services Map
                                   </FormLabel>
                                   <FormControl>
                                     <RadioGroup
@@ -692,7 +750,7 @@ export default function JoinCAS() {
                                   render={({ field }) => (
                                     <FormItem>
                                       <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                        9. Center or Clinic Name/Institution
+                                        9. Centre or Clinic Name/Institution
                                       </FormLabel>
                                       <FormControl>
                                         <Input
@@ -713,7 +771,7 @@ export default function JoinCAS() {
                                   render={({ field }) => (
                                     <FormItem>
                                       <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                        10. Center or Clinic Address
+                                        10. Centre or Clinic Address
                                       </FormLabel>
                                       <FormControl>
                                         <Input
@@ -734,7 +792,7 @@ export default function JoinCAS() {
                                   render={({ field }) => (
                                     <FormItem>
                                       <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                        11. Center or Clinic Phone Number
+                                        11. Centre or Clinic Phone Number
                                       </FormLabel>
                                       <FormControl>
                                         <Input
@@ -756,7 +814,7 @@ export default function JoinCAS() {
                                   render={({ field }) => (
                                     <FormItem>
                                       <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                        12. Center or Clinic Fax Number
+                                        12. Centre or Clinic Fax Number
                                       </FormLabel>
                                       <FormControl>
                                         <Input
@@ -816,8 +874,8 @@ export default function JoinCAS() {
                           </motion.div>
                         )}
 
-                        {/* "No" Membership Path - New Questions 2-12 */}
-                        {wantsMembership === "No" && (
+                        {/* Non-Member Path - Questions 2-12 (shown when neither CAS nor CANN selected) */}
+                        {!isMember && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
@@ -832,7 +890,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem className="space-y-3">
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    2. I would like my center/clinic to be included in the Canadian Amyloidosis Services Map
+                                    2. I would like my centre/clinic to be included in the Canadian Amyloidosis Services Map
                                   </FormLabel>
                                   <FormControl>
                                     <RadioGroup
@@ -873,7 +931,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem>
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    3. Center or Clinic Name/Institution
+                                    3. Centre or Clinic Name/Institution
                                   </FormLabel>
                                   <FormControl>
                                     <Input
@@ -894,7 +952,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem>
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    4. Center or Clinic Address
+                                    4. Centre or Clinic Address
                                   </FormLabel>
                                   <FormControl>
                                     <Input
@@ -915,7 +973,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem>
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    5. Center or Clinic Phone Number
+                                    5. Centre or Clinic Phone Number
                                   </FormLabel>
                                   <FormControl>
                                     <Input
@@ -937,7 +995,7 @@ export default function JoinCAS() {
                               render={({ field }) => (
                                 <FormItem>
                                   <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                    6. Center or Clinic Fax Number
+                                    6. Centre or Clinic Fax Number
                                   </FormLabel>
                                   <FormControl>
                                     <Input
@@ -1073,7 +1131,7 @@ export default function JoinCAS() {
                                   render={({ field }) => (
                                     <FormItem>
                                       <FormLabel className="text-base font-medium text-gray-900 dark:text-white">
-                                        11. Center or Clinic Name/Institution
+                                        11. Centre or Clinic Name/Institution
                                       </FormLabel>
                                       <FormControl>
                                         <Input

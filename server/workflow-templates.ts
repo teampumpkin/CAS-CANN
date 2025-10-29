@@ -72,7 +72,7 @@ export const workflowTemplates: Record<string, InsertAutomationWorkflow> = {
           module: "Leads",
           recordId: "{{id}}",
           field: "Description",
-          value: "Added to sales campaign on " + new Date().toISOString()
+          value: "Added to sales campaign on {{NOW}}"
         }
       }
     ],

@@ -1,6 +1,7 @@
 import { storage } from "./storage";
 import { zohoCRMService } from "./zoho-crm-service";
 import { zohoCampaignsService } from "./zoho-campaigns-service";
+import { TemplateResolver } from "./template-resolver";
 import type { AutomationWorkflow, InsertWorkflowExecution, InsertActionExecution } from "@shared/schema";
 
 interface TriggerEvaluationResult {
@@ -133,8 +134,24 @@ class WorkflowExecutionEngine {
 
     const evaluation = await this.evaluateTrigger(workflow, context);
     if (!evaluation.shouldExecute) {
-      console.log(`[Workflow Engine] Trigger conditions not met for workflow ${workflowId}`);
-      throw new Error("Trigger conditions not met");
+      console.log(`[Workflow Engine] Trigger conditions not met for workflow ${workflowId} - creating skipped execution`);
+      
+      const executionData: InsertWorkflowExecution = {
+        workflowId: workflow.id,
+        status: "skipped",
+        triggerData: evaluation.triggerData,
+        executionContext: context,
+      };
+
+      const execution = await storage.createWorkflowExecution(executionData);
+      await storage.updateWorkflowExecution(execution.id, {
+        status: "skipped",
+        errorMessage: "Trigger conditions not met",
+        completedAt: new Date(),
+        duration: 0,
+      });
+      
+      return execution.id;
     }
 
     const executionData: InsertWorkflowExecution = {
@@ -163,10 +180,17 @@ class WorkflowExecutionEngine {
       }
 
       const actions = workflow.actions as any[];
-      let executionContextData = { ...context, ...evaluation.triggerData };
+      let executionContextData = { 
+        ...context, 
+        ...evaluation.triggerData,
+        NOW: new Date().toISOString(),
+        TODAY: new Date().toISOString().split('T')[0],
+        TIMESTAMP: Date.now(),
+      };
 
       for (const action of actions) {
-        const actionResult = await this.executeAction(execution.id, action, executionContextData);
+        const resolvedAction = TemplateResolver.resolveObject(action, executionContextData);
+        const actionResult = await this.executeAction(execution.id, resolvedAction, executionContextData);
         
         if (!actionResult.success) {
           await storage.updateWorkflowExecution(execution.id, {

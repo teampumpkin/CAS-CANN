@@ -12,7 +12,17 @@ You need to authenticate with Zoho first:
 2. Approve the connection
 3. Your tokens will be stored securely
 
-### 2. Access the Dashboard
+### 2. API Key Setup
+
+All automation endpoints are protected with an API key. The default development key is: `dev-automation-key-change-in-production`
+
+**For production**: Set the `AUTOMATION_API_KEY` environment variable to a secure random key.
+
+When making API calls, include the key in one of two ways:
+- Header: `X-Automation-API-Key: your-api-key-here`
+- Query param: `?apiKey=your-api-key-here`
+
+### 3. Access the Dashboard
 
 Visit: **http://localhost:5000/admin/automation**
 
@@ -20,6 +30,8 @@ This gives you a visual view of:
 - Active workflows
 - Pre-built templates
 - Campaign lists from Zoho
+
+The dashboard automatically includes the API key in all requests.
 
 ## How to Use (Chat Commands)
 

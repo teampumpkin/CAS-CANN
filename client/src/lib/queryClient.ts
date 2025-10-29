@@ -1,10 +1,25 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
+const AUTOMATION_API_KEY = "dev-automation-key-change-in-production";
+
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = (await res.text()) || res.statusText;
     throw new Error(`${res.status}: ${text}`);
   }
+}
+
+function getHeaders(url: string, hasData: boolean = false): HeadersInit {
+  const headers: HeadersInit = hasData ? { "Content-Type": "application/json" } : {};
+  
+  if (url.includes('/api/workflows') || 
+      url.includes('/api/campaigns') || 
+      url.includes('/api/commands') ||
+      url.includes('/api/executions')) {
+    (headers as any)["X-Automation-API-Key"] = AUTOMATION_API_KEY;
+  }
+  
+  return headers;
 }
 
 export async function apiRequest(
@@ -14,7 +29,7 @@ export async function apiRequest(
 ): Promise<Response> {
   const res = await fetch(url, {
     method,
-    headers: data ? { "Content-Type": "application/json" } : {},
+    headers: getHeaders(url, !!data),
     body: data ? JSON.stringify(data) : undefined,
     credentials: "include",
   });
@@ -29,7 +44,9 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey[0] as string, {
+    const url = queryKey[0] as string;
+    const res = await fetch(url, {
+      headers: getHeaders(url),
       credentials: "include",
     });
 

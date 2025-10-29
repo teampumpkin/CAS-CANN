@@ -9,6 +9,7 @@ import { oauthService } from "./oauth-service";
 import { dedicatedTokenManager } from "./dedicated-token-manager";
 import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
+import { requireAutomationAuth } from "./auth-middleware";
 // import { notificationService, notificationConfigSchema } from "./notification-service"; // Disabled for production
 // REMOVED: formScalabilityService - No longer used after endpoint consolidation
 import { errorHandlingService, errorClassificationSchema } from "./error-handling-service";
@@ -1602,7 +1603,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Workflow Templates API Routes
-  app.get("/api/workflow-templates", async (req, res) => {
+  app.get("/api/workflow-templates", requireAutomationAuth, async (req, res) => {
     try {
       const { getAllTemplates } = await import("./workflow-templates");
       const templates = getAllTemplates();
@@ -1613,7 +1614,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/workflow-templates/:templateName/create", async (req, res) => {
+  app.post("/api/workflow-templates/:templateName/create", requireAutomationAuth, async (req, res) => {
     try {
       const { getTemplate } = await import("./workflow-templates");
       const template = getTemplate(req.params.templateName);
@@ -1634,7 +1635,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Automation Workflows API Routes
-  app.get("/api/workflows", async (req, res) => {
+  app.get("/api/workflows", requireAutomationAuth, async (req, res) => {
     try {
       const { status, triggerType } = req.query;
       const workflows = await storage.getAutomationWorkflows({
@@ -1648,7 +1649,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/workflows/:id", async (req, res) => {
+  app.get("/api/workflows/:id", requireAutomationAuth, async (req, res) => {
     try {
       const workflow = await storage.getAutomationWorkflow(parseInt(req.params.id));
       if (!workflow) {
@@ -1661,7 +1662,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/workflows", async (req, res) => {
+  app.post("/api/workflows", requireAutomationAuth, async (req, res) => {
     try {
       const workflow = await storage.createAutomationWorkflow(req.body);
       res.status(201).json(workflow);
@@ -1671,7 +1672,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/workflows/:id", async (req, res) => {
+  app.put("/api/workflows/:id", requireAutomationAuth, async (req, res) => {
     try {
       const workflow = await storage.updateAutomationWorkflow(parseInt(req.params.id), req.body);
       if (!workflow) {
@@ -1684,7 +1685,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/workflows/:id", async (req, res) => {
+  app.delete("/api/workflows/:id", requireAutomationAuth, async (req, res) => {
     try {
       const deleted = await storage.deleteAutomationWorkflow(parseInt(req.params.id));
       if (!deleted) {
@@ -1697,7 +1698,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/workflows/:id/execute", async (req, res) => {
+  app.post("/api/workflows/:id/execute", requireAutomationAuth, async (req, res) => {
     try {
       const { workflowExecutionEngine } = await import("./workflow-execution-engine");
       const executionId = await workflowExecutionEngine.executeWorkflow(
@@ -1714,7 +1715,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/workflows/:id/executions", async (req, res) => {
+  app.get("/api/workflows/:id/executions", requireAutomationAuth, async (req, res) => {
     try {
       const executions = await storage.getWorkflowExecutions({
         workflowId: parseInt(req.params.id)
@@ -1726,7 +1727,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/executions/:id", async (req, res) => {
+  app.get("/api/executions/:id", requireAutomationAuth, async (req, res) => {
     try {
       const execution = await storage.getWorkflowExecution(parseInt(req.params.id));
       if (!execution) {
@@ -1741,7 +1742,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Zoho Campaigns API Routes
-  app.get("/api/campaigns/lists", async (req, res) => {
+  app.get("/api/campaigns/lists", requireAutomationAuth, async (req, res) => {
     try {
       const { zohoCampaignsService } = await import("./zoho-campaigns-service");
       const lists = await zohoCampaignsService.getLists();
@@ -1755,7 +1756,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/campaigns/lists", async (req, res) => {
+  app.post("/api/campaigns/lists", requireAutomationAuth, async (req, res) => {
     try {
       const { zohoCampaignsService } = await import("./zoho-campaigns-service");
       const { listName, ...additionalInfo } = req.body;
@@ -1770,7 +1771,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/campaigns/lists/:listKey/subscribers", async (req, res) => {
+  app.post("/api/campaigns/lists/:listKey/subscribers", requireAutomationAuth, async (req, res) => {
     try {
       const { zohoCampaignsService } = await import("./zoho-campaigns-service");
       const result = await zohoCampaignsService.addSubscriber(req.params.listKey, req.body);
@@ -1784,7 +1785,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/campaigns/lists/:listKey/subscribers/bulk", async (req, res) => {
+  app.post("/api/campaigns/lists/:listKey/subscribers/bulk", requireAutomationAuth, async (req, res) => {
     try {
       const { zohoCampaignsService } = await import("./zoho-campaigns-service");
       const { contacts } = req.body;
@@ -1799,7 +1800,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/campaigns", async (req, res) => {
+  app.get("/api/campaigns", requireAutomationAuth, async (req, res) => {
     try {
       const { zohoCampaignsService } = await import("./zoho-campaigns-service");
       const campaigns = await zohoCampaignsService.getCampaigns();
@@ -1813,7 +1814,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/campaigns", async (req, res) => {
+  app.post("/api/campaigns", requireAutomationAuth, async (req, res) => {
     try {
       const { zohoCampaignsService } = await import("./zoho-campaigns-service");
       const campaign = await zohoCampaignsService.createEmailCampaign(req.body);
@@ -1827,7 +1828,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/campaigns/:campaignKey/send", async (req, res) => {
+  app.post("/api/campaigns/:campaignKey/send", requireAutomationAuth, async (req, res) => {
     try {
       const { zohoCampaignsService } = await import("./zoho-campaigns-service");
       const { scheduleTime } = req.body;
@@ -1846,7 +1847,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Chat Command API Routes - for easy manual control
-  app.post("/api/commands/crm/leads", async (req, res) => {
+  app.post("/api/commands/crm/leads", requireAutomationAuth, async (req, res) => {
     try {
       const { limit = 20, ...filters } = req.body;
       const records = await zohoCRMService.getRecords("Leads", filters, limit);
@@ -1864,7 +1865,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/commands/crm/contacts", async (req, res) => {
+  app.post("/api/commands/crm/contacts", requireAutomationAuth, async (req, res) => {
     try {
       const { limit = 20, ...filters } = req.body;
       const records = await zohoCRMService.getRecords("Contacts", filters, limit);
@@ -1882,7 +1883,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/commands/sync-to-campaign", async (req, res) => {
+  app.post("/api/commands/sync-to-campaign", requireAutomationAuth, async (req, res) => {
     try {
       const { zohoCampaignsService } = await import("./zoho-campaigns-service");
       const { crmModule, listKey, filters, limit = 100 } = req.body;

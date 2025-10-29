@@ -54,52 +54,43 @@ export type Resource = typeof resources.$inferSelect;
 
 // Unified CAS and CANN Registration Form Schema
 export const casRegistrationSchema = z.object({
-  // Question 1: CAS membership question
+  // Question 1: CAS membership
   wantsMembership: z.enum(["Yes", "No"], {
     required_error: "Please select whether you want to become a CAS member",
   }),
   
-  // Question 2: CANN membership question (NEW)
+  // Question 2: CANN membership (required)
   wantsCANNMembership: z.enum(["Yes", "No"], {
     required_error: "Please select whether you want to join CANN",
   }),
   
-  // Questions 3-9: Core member information (required for CAS members or CANN members)
+  // Questions 3-8: Core member information (shown when either Q1 or Q2 = "Yes")
   fullName: z.string().optional(),
   email: z.string().optional(),
-  discipline: z.string().optional(), // Note: Include nursing designation/role if also registering for CANN
+  discipline: z.string().optional(),
   subspecialty: z.string().optional(),
-  institution: z.string().optional(), // Centre or Clinic Name/Institution
+  institution: z.string().optional(),
   wantsCommunications: z.enum(["Yes", "No"]).optional(),
+  
+  // Question 9: Services Map (ALWAYS visible, standalone)
   wantsServicesMapInclusion: z.enum(["Yes", "No"]).optional(),
   
-  // Services map details (shown when wantsServicesMapInclusion = "Yes")
-  centerName: z.string().optional(), // Centre or Clinic Name  
-  centerAddress: z.string().optional(), // Centre or Clinic Address
-  centerPhone: z.string().optional(), // Centre or Clinic Phone
-  centerFax: z.string().optional(), // Centre or Clinic Fax
-  allowsContact: z.enum(["Yes", "No"]).optional(),
+  // Question 10: CANN Additional Questions (shown only when Q2 = "Yes")
+  amyloidosisType: z.enum(["ATTR", "AL", "Both ATTR and AL", "Other"]).optional(),
+  cannCommunications: z.enum(["Yes", "No"]).optional(),
+  educationalInterests: z.array(z.string()).optional(),
+  otherEducationalInterest: z.string().optional(),
+  interestedInPresenting: z.enum(["Yes", "No"]).optional(),
   
-  // CANN-specific fields (shown only when wantsCANNMembership = "Yes")
-  // Note: Centre Name already collected above in 'institution' field, so we don't duplicate it
-  
-  // For "No" membership path (neither CAS nor CANN)
-  noMemberWantsServicesMap: z.enum(["Yes", "No"]).optional(),
-  noMemberCenterName: z.string().optional(),
-  noMemberCenterAddress: z.string().optional(),
-  noMemberCenterPhone: z.string().optional(),
-  noMemberCenterFax: z.string().optional(),
-  noMemberAllowsContact: z.enum(["Yes", "No"]).optional(),
+  // Question 11: Non-member contact fallback (only if both Q1 = No AND Q2 = No)
+  noMemberName: z.string().optional(),
   noMemberEmail: z.string().optional(),
-  noMemberDiscipline: z.string().optional(),
-  noMemberSubspecialty: z.string().optional(),
-  noMemberCenterNameForContact: z.string().optional(),
-  noMemberWantsCommunications: z.enum(["Yes", "No"]).optional(),
+  noMemberMessage: z.string().optional(),
 }).superRefine((data, ctx) => {
   // If CANN membership is Yes, they automatically become CAS members too
   const isMember = data.wantsMembership === "Yes" || data.wantsCANNMembership === "Yes";
   
-  // Conditional validation for membership path (CAS or CANN)
+  // Validation for membership path (shown when either Q1 or Q2 = "Yes")
   if (isMember) {
     if (!data.fullName || data.fullName.trim().length === 0) {
       ctx.addIssue({
@@ -154,158 +145,57 @@ export const casRegistrationSchema = z.object({
         path: ["wantsCommunications"],
       });
     }
-    
-    if (!data.wantsServicesMapInclusion) {
+  }
+  
+  // Validation for CANN-specific fields (Q10a-10d, shown only when Q2 = "Yes")
+  if (data.wantsCANNMembership === "Yes") {
+    if (!data.amyloidosisType) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Please select whether you want your center included in the services map",
-        path: ["wantsServicesMapInclusion"],
+        message: "Please select the type of amyloidosis patients you care for",
+        path: ["amyloidosisType"],
       });
     }
     
-    // Conditional validation for services map "Yes" path
-    if (data.wantsServicesMapInclusion === "Yes") {
-      if (!data.centerName || data.centerName.trim().length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Centre or Clinic Name is required",
-          path: ["centerName"],
-        });
-      }
-      
-      if (!data.centerAddress || data.centerAddress.trim().length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Centre or Clinic Address is required",
-          path: ["centerAddress"],
-        });
-      }
-      
-      if (!data.centerPhone || data.centerPhone.trim().length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Centre or Clinic Phone Number is required",
-          path: ["centerPhone"],
-        });
-      }
-      
-      if (!data.centerFax || data.centerFax.trim().length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Centre or Clinic Fax Number is required",
-          path: ["centerFax"],
-        });
-      }
-      
-      if (!data.allowsContact) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Please select whether you may be contacted by CAS",
-          path: ["allowsContact"],
-        });
-      }
+    if (!data.cannCommunications) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select whether you want to receive CANN communications",
+        path: ["cannCommunications"],
+      });
+    }
+    
+    if (!data.interestedInPresenting) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select whether you're interested in presenting",
+        path: ["interestedInPresenting"],
+      });
     }
   }
   
-  // Conditional validation for "No" membership path (neither CAS nor CANN)
+  // Validation for non-member contact fallback (Q11, shown only when both Q1 = No AND Q2 = No)
   if (!isMember) {
-    // Services map selection is required for non-members
-    if (!data.noMemberWantsServicesMap) {
+    if (!data.noMemberName || data.noMemberName.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Please select whether you want your centre included in the services map",
-        path: ["noMemberWantsServicesMap"],
+        message: "Name is required",
+        path: ["noMemberName"],
       });
     }
     
-    // Centre details are always required for non-members
-    if (!data.noMemberCenterName || data.noMemberCenterName.trim().length === 0) {
+    if (!data.noMemberEmail || data.noMemberEmail.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Centre or Clinic Name/Institution is required",
-        path: ["noMemberCenterName"],
+        message: "Email is required",
+        path: ["noMemberEmail"],
       });
-    }
-    
-    if (!data.noMemberCenterAddress || data.noMemberCenterAddress.trim().length === 0) {
+    } else if (!z.string().email().safeParse(data.noMemberEmail).success) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Centre or Clinic Address is required",
-        path: ["noMemberCenterAddress"],
+        message: "Please enter a valid email address",
+        path: ["noMemberEmail"],
       });
-    }
-    
-    if (!data.noMemberCenterPhone || data.noMemberCenterPhone.trim().length === 0) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Centre or Clinic Phone Number is required",
-        path: ["noMemberCenterPhone"],
-      });
-    }
-    
-    if (!data.noMemberCenterFax || data.noMemberCenterFax.trim().length === 0) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Centre or Clinic Fax Number is required",
-        path: ["noMemberCenterFax"],
-      });
-    }
-    
-    if (!data.noMemberAllowsContact) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Please select whether you may be contacted by CAS",
-        path: ["noMemberAllowsContact"],
-      });
-    }
-    
-    // Conditional validation when non-member allows contact (Questions 8-12)
-    if (data.noMemberAllowsContact === "Yes") {
-      if (!data.noMemberEmail || data.noMemberEmail.trim().length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Email address is required",
-          path: ["noMemberEmail"],
-        });
-      } else if (data.noMemberEmail && !z.string().email().safeParse(data.noMemberEmail).success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Please enter a valid email address",
-          path: ["noMemberEmail"],
-        });
-      }
-      
-      if (!data.noMemberDiscipline || data.noMemberDiscipline.trim().length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Discipline is required",
-          path: ["noMemberDiscipline"],
-        });
-      }
-      
-      if (!data.noMemberSubspecialty || data.noMemberSubspecialty.trim().length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Sub-specialty area is required",
-          path: ["noMemberSubspecialty"],
-        });
-      }
-      
-      if (!data.noMemberCenterNameForContact || data.noMemberCenterNameForContact.trim().length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Centre or Clinic Name/Institution is required",
-          path: ["noMemberCenterNameForContact"],
-        });
-      }
-      
-      if (!data.noMemberWantsCommunications) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Please select whether you want to receive communications",
-          path: ["noMemberWantsCommunications"],
-        });
-      }
     }
   }
 });

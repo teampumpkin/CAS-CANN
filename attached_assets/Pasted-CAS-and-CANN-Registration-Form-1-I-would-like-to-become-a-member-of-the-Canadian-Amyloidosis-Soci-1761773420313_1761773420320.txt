@@ -1,0 +1,65 @@
+CAS and CANN Registration Form 
+1. I would like to become a member of the Canadian Amyloidosis Society (CAS).
+☐ Yes   ☐ No
+
+2. I would like to become a member of the Canadian Amyloidosis Nursing Network (CANN).
+☐ Yes   ☐ No
+(If “Yes” is selected, additional CANN questions will appear at the end of this form.)
+ (Selecting “Yes” for CANN automatically includes CAS membership.)
+
+3. Full Name (First and Last)
+Enter your full name
+ __________________________________________
+
+4. Email Address
+Enter your email address
+ __________________________________________
+
+5. Discipline / Professional Designation or Nursing Role
+(e.g., Physician, Nurse Practitioner, Nurse Clinician, Educator, Researcher, Administrator)
+ __________________________________________
+
+6. Sub-specialty Area of Focus
+(e.g., Cardiology, Hematology, Neurology)
+ __________________________________________
+
+7. Centre or Clinic Name / Institution
+Enter your institution name
+ __________________________________________
+
+8. Would you like to receive CAS emails/newsletters?
+☐ Yes   ☐ No
+
+9. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?
+☐ Yes   ☐ No
+(Standalone question — always visible, not conditional.)
+
+10. CANN Additional Questions
+(Displayed only if “Yes” to Question 2 above)
+10a. In my nursing practice, I primarily care for patients with the following type of amyloidosis:
+☐ ATTR  ☐ AL  ☐ Both ATTR and AL  ☐ Other
+10b. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN):
+☐ Yes   ☐ No
+10c. Educational Interests (select all that apply):
+☐ Mental health considerations for amyloidosis and heart failure patients
+ ☐ Case presentations/discussion
+ ☐ Understanding PYP in amyloidosis
+ ☐ Genetic testing/counseling
+ ☐ Program start-up and multi-disciplinary engagement
+ ☐ Pathology and amyloidosis (mass spectrometry)
+ ☐ Diet, exercise, and/or cardiac rehab considerations
+ ☐ Multi-system involvement and clinical implications
+ ☐ Patient support groups: awareness, initiation, and lessons learned
+ ☐ Patient and Healthcare Professional Q&A - open forum
+ ☐ “A Day in the Life” – short presentations from various clinics
+ ☐ Other: ___________________________
+10d. I would be interested in presenting to CANN members at an Educational Series event:
+☐ Yes   ☐ No
+
+11. Non-member Contact (Fallback)
+(Displayed only if both Question 1 = No and Question 2 = No)
+Name: ___________________________
+ Email: ___________________________
+ Message / Reason for Contact: ___________________________
+
+

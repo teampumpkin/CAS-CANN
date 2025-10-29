@@ -60,7 +60,9 @@ export const casRegistrationSchema = z.object({
   }),
   
   // Question 2: CANN membership question (NEW)
-  wantsCANNMembership: z.enum(["Yes", "No"]).optional(),
+  wantsCANNMembership: z.enum(["Yes", "No"], {
+    required_error: "Please select whether you want to join CANN",
+  }),
   
   // Questions 3-9: Core member information (required for CAS members or CANN members)
   fullName: z.string().optional(),

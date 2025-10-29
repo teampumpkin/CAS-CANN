@@ -35,6 +35,8 @@ async function processPendingSubmissions() {
       const leadSourceMap: Record<string, string> = {
         "Join CANN Today": "Website - CANN Membership (Historical)",
         "Join CAS Today": "Website - Join CAS Today (Historical)",
+        "CAS Registration": "Website - CAS Registration (Historical)",
+        "CAS & CANN Registration": "Website - CAS & CANN Registration (Historical)",
       };
       zohoData.Lead_Source = leadSourceMap[submission.formName] || `Website - ${submission.formName} (Historical)`;
       

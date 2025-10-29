@@ -399,6 +399,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             // Add Lead_Source field with proper attribution
             const leadSourceMap: Record<string, string> = {
               "CAS Registration": "Website - CAS Registration",
+              "CAS & CANN Registration": "Website - CAS & CANN Registration",
               "Join CANN Today": "Website - CANN Membership",
             };
             zohoData.Lead_Source = leadSourceMap[form_name] || `Website - ${form_name}`;

@@ -150,7 +150,7 @@ export default function JoinCAS() {
         form_name: formName,
         data: formData,
       });
-      return response as unknown as SubmissionResponse;
+      return await response.json();
     },
     onSuccess: (data) => {
       setSubmissionId(data.submissionId);

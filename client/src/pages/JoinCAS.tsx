@@ -146,9 +146,9 @@ export default function JoinCAS() {
       const formName = isCANNMember ? "CAS & CANN Registration" : "CAS Registration";
       const formSource = isCANNMember ? "CAS & CANN Registration Form" : "CAS Registration Form";
       
-      const response = await apiRequest("POST", "/api/submit-form", {
-        form_name: formName,
-        data: formData,
+      const response = await apiRequest("POST", "/api/cas-cann-registration", {
+        formData: formData,
+        formName: formName,
       });
       return await response.json();
     },

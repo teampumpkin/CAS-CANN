@@ -246,6 +246,51 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // NEW: Unified CAS/CANN Registration endpoint (simple, direct to Zoho)
+  app.post("/api/cas-cann-registration", async (req, res) => {
+    try {
+      console.log("[CAS/CANN Registration] Received:", req.body);
+      
+      const { formData, formName } = req.body;
+      
+      // Direct Zoho submission without storage layer
+      const Lead_Source = formName === "CAS & CANN Registration" 
+        ? "Website - CAS & CANN Registration"
+        : "Website - CAS Registration";
+      
+      const zohoData: any = {
+        Last_Name: formData.fullName || "Unknown",
+        Email: formData.email,
+        Lead_Source: Lead_Source,
+      };
+      
+      // Add optional fields if present
+      if (formData.discipline) zohoData.Industry = formData.discipline;
+      if (formData.subspecialty) zohoData.Description = formData.subspecialty;
+      if (formData.institution) zohoData.Company = formData.institution;
+      
+      console.log("[CAS/CANN Registration] Submitting to Zoho:", zohoData);
+      
+      const zohoRecord = await zohoCRMService.createRecord("Leads", zohoData);
+      
+      console.log("[CAS/CANN Registration] ✅ Success! Zoho ID:", zohoRecord.id);
+      
+      res.status(201).json({
+        success: true,
+        message: "Registration submitted successfully",
+        submissionId: zohoRecord.id,
+        formName: formName
+      });
+      
+    } catch (error) {
+      console.error("[CAS/CANN Registration] ❌ Error:", error);
+      res.status(500).json({ 
+        success: false,
+        message: "Failed to submit registration" 
+      });
+    }
+  });
+
   // Join CAS application API route
   app.post("/api/join", async (req, res) => {
     try {

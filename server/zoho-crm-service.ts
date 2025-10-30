@@ -396,10 +396,7 @@ export class ZohoCRMService {
 
       const emailPayload = {
         data: [{
-          from: {
-            user_name: "Canadian Amyloidosis Society",
-            email: "noreply@amyloid.ca"
-          },
+          org_email: false,
           to: recipients,
           subject: `New ${registrationType} Registration - ${leadData.Last_Name}`,
           content: emailBody,

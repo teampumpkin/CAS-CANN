@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,9 +6,19 @@ import {
   UserPlus,
   CheckCircle,
   Send,
+  Users,
+  Heart,
+  Mail,
+  Building2,
+  Stethoscope,
+  GraduationCap,
+  MapPin,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 import {
   Form,
   FormControl,
@@ -134,51 +144,80 @@ export default function JoinCAS() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Hero Section */}
-      <section className="relative py-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-        <div className="container mx-auto px-6">
+      <section className="relative py-20 bg-gradient-to-br from-[#00AFE6]/5 via-white to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:via-gray-900 dark:to-[#00DD89]/10 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-3 bg-[#00AFE6]/10 rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6">
+            <motion.div 
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-8 shadow-sm"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
               <UserPlus className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-gray-900 dark:text-white">
-                Professional Membership
+              <span className="text-sm font-semibold text-gray-900 dark:text-white tracking-wide">
+                Professional Membership Application
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className="text-4xl md:text-5xl font-bold font-rosarivo mb-6 text-gray-900 dark:text-white">
+            <h1 className="text-5xl md:text-6xl font-bold font-rosarivo mb-6 text-gray-900 dark:text-white leading-tight">
               Join{" "}
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                CAS and CANN
+                CAS & CANN
               </span>
             </h1>
 
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
               Become part of Canada's premier professional network for amyloidosis care and nursing excellence.
             </p>
+            
+            <div className="flex items-center justify-center gap-6 mt-8">
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <Heart className="w-4 h-4 text-[#00AFE6]" />
+                <span>Patient-Focused</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <Users className="w-4 h-4 text-[#00DD89]" />
+                <span>Collaborative Network</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <Sparkles className="w-4 h-4 text-[#00AFE6]" />
+                <span>Evidence-Based</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Registration Form */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto">
-            <Card className="shadow-lg">
-              <CardHeader className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white">
-                <CardTitle className="text-2xl">CAS and CANN Registration Form</CardTitle>
-                <CardDescription className="text-white/90">
-                  Complete the form below to join our professional community
-                </CardDescription>
+      <section className="py-16 -mt-12">
+        <div className="container mx-auto px-4 sm:px-6">
+          <motion.div 
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <Card className="shadow-2xl border-0 overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white p-8 relative overflow-hidden">
+                <div className="absolute inset-0 bg-white/5" />
+                <div className="relative z-10">
+                  <CardTitle className="text-3xl font-bold mb-2">Registration Form</CardTitle>
+                  <CardDescription className="text-white/90 text-base">
+                    Complete the form below to join our professional community
+                  </CardDescription>
+                </div>
               </CardHeader>
-              <CardContent className="p-8">
+              <CardContent className="p-8 sm:p-12">
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
                     
                     {/* Question 1: CAS Membership */}
                     <FormField
@@ -245,12 +284,27 @@ export default function JoinCAS() {
                       )}
                     />
 
-                    {/* Questions 3-8: Member Information (shown when either Q1 or Q2 = "Yes") */}
-                    {isMember && (
-                      <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg space-y-6">
-                        <h3 className="text-xl font-semibold text-blue-800 dark:text-blue-200 mb-4">
-                          Member Information
-                        </h3>
+                    <Separator className="my-8" />
+
+                    {/* Questions 3-9: Member Information (shown when either Q1 or Q2 = "Yes") */}
+                    <AnimatePresence>
+                      {isMember && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0, y: -20 }}
+                          animate={{ opacity: 1, height: "auto", y: 0 }}
+                          exit={{ opacity: 0, height: 0, y: -20 }}
+                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-8 rounded-2xl border border-[#00AFE6]/20 space-y-6 shadow-sm">
+                            <div className="flex items-center gap-3 mb-6">
+                              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] flex items-center justify-center shadow-md">
+                                <Users className="w-5 h-5 text-white" />
+                              </div>
+                              <h3 className="text-2xl font-bold text-[#12465B] dark:text-white">
+                                Member Information
+                              </h3>
+                            </div>
 
                         {/* Question 3: Full Name */}
                         <FormField
@@ -411,15 +465,32 @@ export default function JoinCAS() {
                             </FormItem>
                           )}
                         />
-                      </div>
-                    )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <Separator className="my-8" />
 
                     {/* CANN Questions (shown only when Q2 = "Yes") */}
-                    {wantsCANNMembership === "Yes" && (
-                      <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg space-y-6">
-                        <h3 className="text-xl font-semibold text-green-800 dark:text-green-200 mb-4">
-                          CANN Questions
-                        </h3>
+                    <AnimatePresence>
+                      {wantsCANNMembership === "Yes" && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0, y: -20 }}
+                          animate={{ opacity: 1, height: "auto", y: 0 }}
+                          exit={{ opacity: 0, height: 0, y: -20 }}
+                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="bg-gradient-to-br from-[#E8FFF5] to-[#F0FFF9] dark:from-[#00DD89]/10 dark:to-[#00DD89]/5 p-8 rounded-2xl border border-[#00DD89]/20 space-y-6 shadow-sm">
+                            <div className="flex items-center gap-3 mb-6">
+                              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#00DD89] to-[#00AFE6] flex items-center justify-center shadow-md">
+                                <Stethoscope className="w-5 h-5 text-white" />
+                              </div>
+                              <h3 className="text-2xl font-bold text-[#045941] dark:text-white">
+                                CANN Questions
+                              </h3>
+                            </div>
 
                         {/* Question 10: Amyloidosis Type */}
                         <FormField
@@ -587,14 +658,31 @@ export default function JoinCAS() {
                           )}
                         />
                       </div>
-                    )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <Separator className="my-8" />
 
                     {/* Non-member Contact Fallback (shown only when both Q1 = No AND Q2 = No) */}
-                    {!isMember && wantsMembership === "No" && wantsCANNMembership === "No" && (
-                      <div className="bg-amber-50 dark:bg-amber-900/20 p-6 rounded-lg space-y-6">
-                        <h3 className="text-xl font-semibold text-amber-800 dark:text-amber-200 mb-4">
-                          Non-member Contact
-                        </h3>
+                    <AnimatePresence>
+                      {!isMember && wantsMembership === "No" && wantsCANNMembership === "No" && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0, y: -20 }}
+                          animate={{ opacity: 1, height: "auto", y: 0 }}
+                          exit={{ opacity: 0, height: 0, y: -20 }}
+                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/10 p-8 rounded-2xl border border-amber-300/30 space-y-6 shadow-sm">
+                            <div className="flex items-center gap-3 mb-6">
+                              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 flex items-center justify-center shadow-md">
+                                <Mail className="w-5 h-5 text-white" />
+                              </div>
+                              <h3 className="text-2xl font-bold text-amber-900 dark:text-amber-100">
+                                Non-member Contact
+                              </h3>
+                            </div>
 
                         <FormField
                           control={form.control}
@@ -651,33 +739,43 @@ export default function JoinCAS() {
                             </FormItem>
                           )}
                         />
-                      </div>
-                    )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     {/* Submit Button */}
-                    <div className="flex justify-center pt-6">
+                    <motion.div 
+                      className="flex justify-center pt-10"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
                       <Button
                         type="submit"
                         size="lg"
                         disabled={submitMutation.isPending}
-                        className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white hover:opacity-90 transition-opacity"
+                        className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-full px-12 py-6 text-lg font-semibold shadow-lg"
                         data-testid="button-submit"
                       >
                         {submitMutation.isPending ? (
-                          <>Submitting...</>
+                          <div className="flex items-center gap-3">
+                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            <span>Submitting Application...</span>
+                          </div>
                         ) : (
-                          <>
-                            <Send className="w-5 h-5 mr-2" />
-                            Submit Application
-                          </>
+                          <div className="flex items-center gap-3">
+                            <Send className="w-5 h-5" />
+                            <span>Submit Application</span>
+                          </div>
                         )}
                       </Button>
-                    </div>
+                    </motion.div>
                   </form>
                 </Form>
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         </div>
       </section>
 

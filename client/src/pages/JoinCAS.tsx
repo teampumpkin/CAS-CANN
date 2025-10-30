@@ -762,12 +762,12 @@ export default function JoinCAS() {
                         {submitMutation.isPending ? (
                           <div className="flex items-center gap-3">
                             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            <span>Submitting Application...</span>
+                            <span>Submitting Registration Form...</span>
                           </div>
                         ) : (
                           <div className="flex items-center gap-3">
                             <Send className="w-5 h-5" />
-                            <span>Submit Application</span>
+                            <span>Submit Registration Form</span>
                           </div>
                         )}
                       </Button>
@@ -787,9 +787,9 @@ export default function JoinCAS() {
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 mx-auto mb-4">
               <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
-            <DialogTitle className="text-center text-2xl">Application Submitted!</DialogTitle>
+            <DialogTitle className="text-center text-2xl">Registration Submitted!</DialogTitle>
             <DialogDescription className="text-center">
-              Thank you for your application. We've received your submission and will be in touch soon.
+              Thank you for your registration. We've received your submission and will be in touch soon.
             </DialogDescription>
           </DialogHeader>
           {submissionId && (

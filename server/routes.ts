@@ -301,17 +301,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
           zohoData.CANN_Communications = formData.cannCommunications;
         }
         
-        // Educational interests (checkbox array)
+        // Educational interests (checkbox array) - send as array for Zoho multiselect
         if (formData.educationalInterests && formData.educationalInterests.length > 0) {
-          let interests = formData.educationalInterests.join("; ");
+          const interests = [...formData.educationalInterests];
           // Add "Other" if specified
           if (formData.otherEducationalInterest) {
-            interests += `; Other: ${formData.otherEducationalInterest}`;
+            interests.push(`Other: ${formData.otherEducationalInterest}`);
           }
-          // Zoho has 210 char limit for multiselect fields
-          zohoData.Educational_Interests = interests.substring(0, 210);
+          // Send as array for Zoho jsonarray/multiselect field
+          zohoData.Educational_Interests = interests;
         } else if (formData.otherEducationalInterest) {
-          zohoData.Educational_Interests = `Other: ${formData.otherEducationalInterest}`.substring(0, 210);
+          zohoData.Educational_Interests = [`Other: ${formData.otherEducationalInterest}`];
         }
         
         if (formData.interestedInPresenting) {

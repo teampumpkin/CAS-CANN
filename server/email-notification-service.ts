@@ -33,7 +33,8 @@ export class EmailNotificationService {
       console.log(`[Email Notification] Preparing to send registration notification for ${data.fullName}`);
 
       const recipients: EmailRecipient[] = [
-        { user_name: "CAS Team", email: "CAS@amyloid.ca" }
+        { user_name: "CAS Team", email: "CAS@amyloid.ca" },
+        { user_name: "Karan Vasi", email: "vasi.karan@teampumpkin.com" }
       ];
 
       // Add CANN email if it's a CANN registration

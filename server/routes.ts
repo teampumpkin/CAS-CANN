@@ -1567,6 +1567,122 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin endpoint to create required custom fields in Zoho CRM
+  app.post("/api/admin/create-zoho-fields", async (req, res) => {
+    try {
+      console.log('[Admin] Creating custom fields in Zoho CRM Leads module...');
+      
+      const fieldsToCreate = [
+        {
+          api_name: "CAS_Communications",
+          field_label: "CAS Communications",
+          data_type: "picklist" as const,
+          pick_list_values: [
+            { display_value: "Yes", actual_value: "Yes" },
+            { display_value: "No", actual_value: "No" }
+          ]
+        },
+        {
+          api_name: "Services_Map_Inclusion",
+          field_label: "Services Map Inclusion",
+          data_type: "picklist" as const,
+          pick_list_values: [
+            { display_value: "Yes", actual_value: "Yes" },
+            { display_value: "No", actual_value: "No" }
+          ]
+        },
+        {
+          api_name: "Amyloidosis_Type",
+          field_label: "Amyloidosis Type",
+          data_type: "picklist" as const,
+          pick_list_values: [
+            { display_value: "ATTR", actual_value: "ATTR" },
+            { display_value: "AL", actual_value: "AL" },
+            { display_value: "Both ATTR and AL", actual_value: "Both ATTR and AL" },
+            { display_value: "Other", actual_value: "Other" }
+          ]
+        },
+        {
+          api_name: "CANN_Communications",
+          field_label: "CANN Communications",
+          data_type: "picklist" as const,
+          pick_list_values: [
+            { display_value: "Yes", actual_value: "Yes" },
+            { display_value: "No", actual_value: "No" }
+          ]
+        },
+        {
+          api_name: "Educational_Interests",
+          field_label: "Educational Interests",
+          data_type: "multiselectpicklist" as const,
+          pick_list_values: [
+            { display_value: "Diagnostic Techniques", actual_value: "Diagnostic Techniques" },
+            { display_value: "Treatment Pathways", actual_value: "Treatment Pathways" },
+            { display_value: "Patient Care", actual_value: "Patient Care" },
+            { display_value: "Research Updates", actual_value: "Research Updates" },
+            { display_value: "Case Studies", actual_value: "Case Studies" },
+            { display_value: "Networking Opportunities", actual_value: "Networking Opportunities" }
+          ]
+        },
+        {
+          api_name: "Interested_in_Presenting",
+          field_label: "Interested in Presenting",
+          data_type: "picklist" as const,
+          pick_list_values: [
+            { display_value: "Yes", actual_value: "Yes" },
+            { display_value: "No", actual_value: "No" }
+          ]
+        }
+      ];
+
+      const results = [];
+      const errors = [];
+
+      for (const fieldData of fieldsToCreate) {
+        try {
+          console.log(`[Admin] Creating field: ${fieldData.api_name}...`);
+          const createdField = await zohoCRMService.createCustomField("Leads", fieldData);
+          results.push({
+            field: fieldData.api_name,
+            status: 'created',
+            id: createdField.id
+          });
+          console.log(`[Admin] ✅ Successfully created field: ${fieldData.api_name}`);
+        } catch (error: any) {
+          // Check if field already exists
+          if (error.message?.includes('already exists') || error.message?.includes('DUPLICATE')) {
+            results.push({
+              field: fieldData.api_name,
+              status: 'already_exists'
+            });
+            console.log(`[Admin] ℹ️ Field already exists: ${fieldData.api_name}`);
+          } else {
+            errors.push({
+              field: fieldData.api_name,
+              error: error.message || 'Unknown error'
+            });
+            console.error(`[Admin] ❌ Failed to create field ${fieldData.api_name}:`, error);
+          }
+        }
+      }
+
+      res.json({
+        success: errors.length === 0,
+        message: `Created ${results.filter(r => r.status === 'created').length} fields, ${results.filter(r => r.status === 'already_exists').length} already existed`,
+        results,
+        errors: errors.length > 0 ? errors : undefined,
+        timestamp: new Date().toISOString()
+      });
+
+    } catch (error) {
+      console.error('[Admin] Failed to create custom fields:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to create custom fields'
+      });
+    }
+  });
+
   // Health monitoring status endpoint
   app.get("/api/admin/monitoring-status", async (req, res) => {
     try {

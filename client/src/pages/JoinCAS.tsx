@@ -191,7 +191,7 @@ export default function JoinCAS() {
               Become part of Canada's premier professional network for amyloidosis care and nursing excellence.
             </p>
             
-            <div className="flex items-center justify-center gap-6 mt-8">
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-8">
               <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <Heart className="w-4 h-4 text-[#00AFE6]" />
                 <span>Patient-Focused</span>
@@ -228,9 +228,9 @@ export default function JoinCAS() {
                   </CardDescription>
                 </div>
               </CardHeader>
-              <CardContent className="p-8 sm:p-12">
+              <CardContent className="p-4 sm:p-8 md:p-12">
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8 md:space-y-10">
                     
                     {/* Question 1: CAS Membership */}
                     <FormField
@@ -303,13 +303,13 @@ export default function JoinCAS() {
                     <AnimatePresence>
                       {isMember && (
                         <motion.div
-                          initial={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
-                          animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
-                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeInOut" }}
+                          initial={shouldReduceMotion ? {} : { opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={shouldReduceMotion ? {} : { opacity: 0 }}
+                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
-                          <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-8 rounded-2xl border border-[#00AFE6]/20 space-y-6 shadow-sm">
+                          <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-[#00AFE6]/20 space-y-4 sm:space-y-6 shadow-sm">
                             <div className="flex items-center gap-3 mb-6">
                               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] flex items-center justify-center shadow-md">
                                 <Users className="w-5 h-5 text-white" />
@@ -489,13 +489,13 @@ export default function JoinCAS() {
                     <AnimatePresence>
                       {wantsCANNMembership === "Yes" && (
                         <motion.div
-                          initial={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
-                          animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
-                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeInOut" }}
+                          initial={shouldReduceMotion ? {} : { opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={shouldReduceMotion ? {} : { opacity: 0 }}
+                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
-                          <div className="bg-gradient-to-br from-[#E8FFF5] to-[#F0FFF9] dark:from-[#00DD89]/10 dark:to-[#00DD89]/5 p-8 rounded-2xl border border-[#00DD89]/20 space-y-6 shadow-sm">
+                          <div className="bg-gradient-to-br from-[#E8FFF5] to-[#F0FFF9] dark:from-[#00DD89]/10 dark:to-[#00DD89]/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-[#00DD89]/20 space-y-4 sm:space-y-6 shadow-sm">
                             <div className="flex items-center gap-3 mb-6">
                               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#00DD89] to-[#00AFE6] flex items-center justify-center shadow-md">
                                 <Stethoscope className="w-5 h-5 text-white" />
@@ -681,13 +681,13 @@ export default function JoinCAS() {
                     <AnimatePresence>
                       {!isMember && wantsMembership === "No" && wantsCANNMembership === "No" && (
                         <motion.div
-                          initial={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
-                          animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
-                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeInOut" }}
+                          initial={shouldReduceMotion ? {} : { opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={shouldReduceMotion ? {} : { opacity: 0 }}
+                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
-                          <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/10 p-8 rounded-2xl border border-amber-300/30 space-y-6 shadow-sm">
+                          <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/10 p-4 sm:p-6 md:p-8 rounded-2xl border border-amber-300/30 space-y-4 sm:space-y-6 shadow-sm">
                             <div className="flex items-center gap-3 mb-6">
                               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 flex items-center justify-center shadow-md">
                                 <Mail className="w-5 h-5 text-white" />
@@ -794,17 +794,17 @@ export default function JoinCAS() {
 
       {/* Confirmation Modal */}
       <Dialog open={showConfirmationModal} onOpenChange={setShowConfirmationModal}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="w-[90vw] sm:max-w-md max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 mx-auto mb-4">
               <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
-            <DialogTitle className="text-center text-2xl">
+            <DialogTitle className="text-center text-xl sm:text-2xl">
               {submissionType === 'cann' && "CANN Membership Registration Submitted!"}
               {submissionType === 'cas' && "CAS Membership Registration Submitted!"}
               {submissionType === 'contact' && "Contact Form Submitted!"}
             </DialogTitle>
-            <DialogDescription className="text-center">
+            <DialogDescription className="text-center text-sm sm:text-base">
               {submissionType === 'cann' && "Thank you for registering for CANN membership! You are now also a member of CAS. We've received your submission and will be in touch soon with membership details."}
               {submissionType === 'cas' && "Thank you for registering for CAS membership! We've received your submission and will be in touch soon with membership details."}
               {submissionType === 'contact' && "Thank you for contacting us! We've received your message and will get back to you as soon as possible."}

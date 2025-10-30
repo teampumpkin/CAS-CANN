@@ -297,7 +297,7 @@ export default function JoinCAS() {
                           name="discipline"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>5. Discipline / Professional Designation or Nursing Role *</FormLabel>
+                              <FormLabel>5. Discipline / Professional Designation or Nursing Role (If also registering for CANN membership) *</FormLabel>
                               <FormDescription>
                                 e.g., Physician, Nurse Practitioner, Nurse Clinician, Educator, Researcher, Administrator
                               </FormDescription>

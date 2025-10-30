@@ -14,6 +14,7 @@ import { requireAutomationAuth } from "./auth-middleware";
 // REMOVED: formScalabilityService - No longer used after endpoint consolidation
 import { errorHandlingService, errorClassificationSchema } from "./error-handling-service";
 // REMOVED: streamlinedFormProcessor - No longer used after endpoint consolidation
+import { emailNotificationService } from "./email-notification-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -324,6 +325,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const zohoRecord = await zohoCRMService.createRecord("Leads", zohoData);
       
       console.log("[CAS/CANN Registration] ✅ Success! Zoho ID:", zohoRecord.id);
+      
+      // Send email notifications to CAS and CANN teams
+      try {
+        await emailNotificationService.sendRegistrationNotification({
+          fullName: isMember ? (formData.fullName || "Unknown") : (formData.noMemberName || "Non-Member Contact"),
+          email: isMember ? formData.email : formData.noMemberEmail,
+          discipline: formData.discipline,
+          membershipType: isCANNMember ? 'CAS & CANN' : (isMember ? 'CAS' : 'Contact'),
+          institution: formData.institution,
+          leadId: zohoRecord.id
+        });
+        console.log("[CAS/CANN Registration] ✅ Email notifications sent");
+      } catch (emailError) {
+        console.error("[CAS/CANN Registration] ⚠️ Failed to send email notifications:", emailError);
+        // Continue even if email fails - registration was successful
+      }
       
       res.status(201).json({
         success: true,

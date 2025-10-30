@@ -42,7 +42,7 @@ export class ZohoWorkflowService {
    * Create email notification action
    */
   private async createEmailNotificationAction(accessToken: string): Promise<string> {
-    const url = `${this.ZOHO_API_BASE}/settings/automation/workflow_rules/actions/email_notifications`;
+    const url = `${this.ZOHO_API_BASE}/settings/automation/email_notifications`;
 
     const payload = {
       email_notifications: [

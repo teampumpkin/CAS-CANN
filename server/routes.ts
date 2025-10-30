@@ -327,17 +327,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log("[CAS/CANN Registration] ✅ Success! Zoho ID:", zohoRecord.id);
       
-      // Send email notifications to CAS and CANN teams
+      // Send automated email notifications via Zoho Send Mail API
       try {
-        await emailNotificationService.sendRegistrationNotification({
-          fullName: isMember ? (formData.fullName || "Unknown") : (formData.noMemberName || "Non-Member Contact"),
-          email: isMember ? formData.email : formData.noMemberEmail,
-          discipline: formData.discipline,
-          membershipType: isCANNMember ? 'CAS & CANN' : (isMember ? 'CAS' : 'Contact'),
-          institution: formData.institution,
-          leadId: zohoRecord.id
-        });
-        console.log("[CAS/CANN Registration] ✅ Email notifications sent");
+        await zohoCRMService.sendRegistrationEmail(zohoRecord.id, zohoData);
+        console.log("[CAS/CANN Registration] ✅ Email notifications sent via Zoho CRM");
       } catch (emailError) {
         console.error("[CAS/CANN Registration] ⚠️ Failed to send email notifications:", emailError);
         // Continue even if email fails - registration was successful
@@ -1041,6 +1034,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("OAuth connect error:", error);
       res.status(500).json({ error: "Failed to initiate OAuth flow", details: error instanceof Error ? error.message : 'Unknown error' });
+    }
+  });
+
+  // Test endpoint to manually create workflow
+  app.get("/api/create-workflow", async (req, res) => {
+    try {
+      console.log("[Test] Manually triggering workflow creation...");
+      await zohoWorkflowService.createRegistrationEmailWorkflow();
+      res.json({ success: true, message: "Workflow created successfully!" });
+    } catch (error) {
+      console.error("[Test] Workflow creation failed:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Unknown error',
+        details: error
+      });
     }
   });
 

@@ -320,6 +320,120 @@ export class ZohoCRMService {
     }
   }
 
+  /**
+   * Send email notification for new registration using Zoho Send Mail API
+   */
+  async sendRegistrationEmail(leadId: string, leadData: any): Promise<void> {
+    try {
+      console.log(`[Zoho Email] Sending notification emails for lead ${leadId}...`);
+
+      const accessToken = await this.getAccessToken();
+
+      const registrationType = leadData.Lead_Source === 'Website - CAS & CANN Registration' 
+        ? 'CAS & CANN Membership' 
+        : 'CAS Membership';
+
+      const emailBody = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #00AFE6, #00DD89); padding: 30px; border-radius: 12px 12px 0 0; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 24px;">New Registration Received</h1>
+          </div>
+          
+          <div style="background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px;">
+            <h2 style="color: #1f2937; border-bottom: 2px solid #00AFE6; padding-bottom: 8px;">Registrant Details</h2>
+            
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;"><strong>Name:</strong></td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; text-align: right;">${leadData.Last_Name || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;"><strong>Email:</strong></td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; text-align: right;">${leadData.Email || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;"><strong>Discipline:</strong></td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; text-align: right;">${leadData.Industry || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;"><strong>Institution:</strong></td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; text-align: right;">${leadData.Company || 'N/A'}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0;"><strong>Registration Type:</strong></td>
+                <td style="padding: 12px 0; text-align: right;"><span style="background: linear-gradient(135deg, #00AFE6, #00DD89); color: white; padding: 4px 12px; border-radius: 6px; font-weight: bold;">${registrationType}</span></td>
+              </tr>
+            </table>
+            
+            <div style="margin-top: 30px; text-align: center;">
+              <a href="https://crm.zoho.com/crm/org20085707052/tab/Leads/${leadId}" 
+                 style="display: inline-block; background: linear-gradient(135deg, #00AFE6, #00DD89); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+                View in CRM
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const recipients = [
+        {
+          user_name: "CAS Team",
+          email: "CAS@amyloid.ca"
+        },
+        {
+          user_name: "Vasi Karan",
+          email: "vasi.karan@teampumpkin.com"
+        }
+      ];
+
+      // Add CANN team if it's a CANN registration
+      if (leadData.Lead_Source === 'Website - CAS & CANN Registration') {
+        recipients.push({
+          user_name: "CANN Team",
+          email: "CANN@amyloid.ca"
+        });
+      }
+
+      const emailPayload = {
+        data: [{
+          from: {
+            user_name: "Canadian Amyloidosis Society",
+            email: "noreply@amyloid.ca"
+          },
+          to: recipients,
+          subject: `New ${registrationType} Registration - ${leadData.Last_Name}`,
+          content: emailBody,
+          mail_format: "html"
+        }]
+      };
+
+      const url = `${this.baseUrl}/Leads/${leadId}/actions/send_mail`;
+      
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(emailPayload)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('[Zoho Email] Failed to send email:', errorText);
+        // Don't throw - email failure shouldn't break the registration
+        return;
+      }
+
+      const result = await response.json();
+      console.log('[Zoho Email] ✅ Email sent successfully!', result);
+      
+    } catch (error) {
+      console.error('[Zoho Email] Error sending registration email:', error);
+      // Don't throw - email failure shouldn't break the registration
+    }
+  }
+
   async updateRecord(moduleName: string, recordId: string, recordData: ZohoRecord): Promise<ZohoRecord> {
     try {
       // v8 API best practice: validate inputs

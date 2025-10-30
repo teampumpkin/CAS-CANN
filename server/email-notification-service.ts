@@ -114,23 +114,21 @@ export class EmailNotificationService {
         throw new Error('No valid Zoho access token available');
       }
 
-      // Get current user's email for "from" address
-      const currentUser = await this.getCurrentUser();
-      if (!currentUser) {
-        throw new Error('Unable to get current user email for sending');
-      }
-
       const url = `${this.ZOHO_API_BASE}/Leads/${params.leadId}/actions/send_mail`;
 
+      // Use CAS email as from address (likely verified in Zoho account)
       const payload = {
         data: [
           {
-            from: currentUser,
+            from: {
+              user_name: "Canadian Amyloidosis Society",
+              email: "CAS@amyloid.ca"
+            },
             to: params.to,
             subject: params.subject,
             content: params.content,
             mail_format: "html",
-            org_email: true
+            org_email: false
           }
         ]
       };

@@ -221,7 +221,7 @@ export default function JoinCAS() {
                             2. I would like to become a member of the Canadian Amyloidosis Nursing Network (CANN).
                           </FormLabel>
                           <FormDescription>
-                            If "Yes" is selected, additional CANN questions will appear at the end of this form. Selecting "Yes" for CANN automatically includes CAS membership.
+                            All CANN members will also be members of the CAS.
                           </FormDescription>
                           <FormControl>
                             <RadioGroup

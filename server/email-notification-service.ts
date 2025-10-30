@@ -64,6 +64,42 @@ export class EmailNotificationService {
   }
 
   /**
+   * Get current Zoho user info using Accounts API
+   */
+  private async getCurrentUser(): Promise<{ user_name: string; email: string } | null> {
+    try {
+      const accessToken = await dedicatedTokenManager.getValidAccessToken('zoho_crm');
+      if (!accessToken) {
+        return null;
+      }
+
+      // Use Zoho Accounts API which doesn't require extra scopes
+      const response = await fetch('https://accounts.zoho.com/oauth/user/info', {
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        console.error('[Email Notification] Failed to get user info:', response.status);
+        return null;
+      }
+
+      const data = await response.json();
+      if (data.Email) {
+        return {
+          user_name: data.Display_Name || `${data.First_Name} ${data.Last_Name}` || "CAS Admin",
+          email: data.Email
+        };
+      }
+      return null;
+    } catch (error) {
+      console.error('[Email Notification] Error getting current user:', error);
+      return null;
+    }
+  }
+
+  /**
    * Send email using Zoho CRM Send Mail API
    */
   private async sendEmail(params: {
@@ -78,11 +114,18 @@ export class EmailNotificationService {
         throw new Error('No valid Zoho access token available');
       }
 
+      // Get current user's email for "from" address
+      const currentUser = await this.getCurrentUser();
+      if (!currentUser) {
+        throw new Error('Unable to get current user email for sending');
+      }
+
       const url = `${this.ZOHO_API_BASE}/Leads/${params.leadId}/actions/send_mail`;
 
       const payload = {
         data: [
           {
+            from: currentUser,
             to: params.to,
             subject: params.subject,
             content: params.content,

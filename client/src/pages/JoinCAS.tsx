@@ -414,20 +414,20 @@ export default function JoinCAS() {
                       </div>
                     )}
 
-                    {/* Question 10: CANN Additional Questions (shown only when Q2 = "Yes") */}
+                    {/* CANN Questions (shown only when Q2 = "Yes") */}
                     {wantsCANNMembership === "Yes" && (
                       <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg space-y-6">
                         <h3 className="text-xl font-semibold text-green-800 dark:text-green-200 mb-4">
-                          10. CANN Additional Questions
+                          CANN Questions
                         </h3>
 
-                        {/* Question 10a: Amyloidosis Type */}
+                        {/* Question 10: Amyloidosis Type */}
                         <FormField
                           control={form.control}
                           name="amyloidosisType"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>10a. In my nursing practice, I primarily care for patients with the following type of amyloidosis: *</FormLabel>
+                              <FormLabel>10. In my nursing practice, I primarily care for patients with the following type of amyloidosis: *</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}
@@ -458,13 +458,13 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Question 10b: CANN Communications */}
+                        {/* Question 11: CANN Communications */}
                         <FormField
                           control={form.control}
                           name="cannCommunications"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>10b. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *</FormLabel>
+                              <FormLabel>11. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}
@@ -487,14 +487,14 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Question 10c: Educational Interests */}
+                        {/* Question 12: Educational Interests */}
                         <FormField
                           control={form.control}
                           name="educationalInterests"
                           render={() => (
                             <FormItem>
                               <div className="mb-4">
-                                <FormLabel className="text-base">10c. Educational Interests (select all that apply):</FormLabel>
+                                <FormLabel className="text-base">12. Educational Interests (select all that apply):</FormLabel>
                               </div>
                               <div className="space-y-3">
                                 {educationalInterestOptions.map((option) => (
@@ -558,13 +558,13 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Question 10d: Interest in Presenting */}
+                        {/* Question 13: Interest in Presenting */}
                         <FormField
                           control={form.control}
                           name="interestedInPresenting"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>10d. I would be interested in presenting to CANN members at an Educational Series event: *</FormLabel>
+                              <FormLabel>13. I would be interested in presenting to CANN members at an Educational Series event: *</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}
@@ -589,11 +589,11 @@ export default function JoinCAS() {
                       </div>
                     )}
 
-                    {/* Question 11: Non-member Contact Fallback (shown only when both Q1 = No AND Q2 = No) */}
+                    {/* Non-member Contact Fallback (shown only when both Q1 = No AND Q2 = No) */}
                     {!isMember && wantsMembership === "No" && wantsCANNMembership === "No" && (
                       <div className="bg-amber-50 dark:bg-amber-900/20 p-6 rounded-lg space-y-6">
                         <h3 className="text-xl font-semibold text-amber-800 dark:text-amber-200 mb-4">
-                          11. Non-member Contact
+                          Non-member Contact
                         </h3>
 
                         <FormField

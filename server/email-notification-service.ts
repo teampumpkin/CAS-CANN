@@ -83,15 +83,11 @@ export class EmailNotificationService {
       const payload = {
         data: [
           {
-            from: {
-              user_name: "Canadian Amyloidosis Society",
-              email: "noreply@amyloid.ca"
-            },
             to: params.to,
             subject: params.subject,
             content: params.content,
             mail_format: "html",
-            org_email: false
+            org_email: true
           }
         ]
       };

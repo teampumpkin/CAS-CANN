@@ -316,7 +316,7 @@ export class OAuthService {
       // Build URL manually to ensure proper encoding
       const baseUrl = 'https://accounts.zoho.com/oauth/v2/auth';
       const params = [
-        `scope=${encodeURIComponent('ZohoCRM.modules.ALL,ZohoCRM.settings.fields.ALL,ZohoCRM.settings.layouts.READ,ZohoCRM.settings.profiles.READ')}`,
+        `scope=${encodeURIComponent('ZohoCRM.modules.ALL,ZohoCRM.settings.fields.ALL,ZohoCRM.settings.layouts.READ,ZohoCRM.settings.profiles.READ,ZohoCRM.send_mail.all.CREATE')}`,
         `client_id=${encodeURIComponent(process.env.ZOHO_CLIENT_ID!)}`,
         `response_type=code`,
         `access_type=offline`,

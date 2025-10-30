@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -69,6 +69,7 @@ export default function JoinCAS() {
   const { toast } = useToast();
   const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const form = useForm<CASRegistrationForm>({
     resolver: zodResolver(casRegistrationSchema),
@@ -151,15 +152,15 @@ export default function JoinCAS() {
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
+            initial={shouldReduceMotion ? {} : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: "easeOut" }}
           >
             <motion.div 
               className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-8 shadow-sm"
-              initial={{ scale: 0.9 }}
+              initial={shouldReduceMotion ? {} : { scale: 0.9 }}
               animate={{ scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.2, duration: 0.5 }}
             >
               <UserPlus className="w-5 h-5 text-[#00AFE6]" />
               <span className="text-sm font-semibold text-gray-900 dark:text-white tracking-wide">
@@ -201,9 +202,9 @@ export default function JoinCAS() {
         <div className="container mx-auto px-4 sm:px-6">
           <motion.div 
             className="max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.3, duration: 0.6 }}
           >
             <Card className="shadow-2xl border-0 overflow-hidden">
               <CardHeader className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white p-8 relative overflow-hidden">
@@ -290,10 +291,10 @@ export default function JoinCAS() {
                     <AnimatePresence>
                       {isMember && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0, y: -20 }}
+                          initial={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
                           animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={{ opacity: 0, height: 0, y: -20 }}
-                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                          exit={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
+                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
                           <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-8 rounded-2xl border border-[#00AFE6]/20 space-y-6 shadow-sm">
@@ -476,10 +477,10 @@ export default function JoinCAS() {
                     <AnimatePresence>
                       {wantsCANNMembership === "Yes" && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0, y: -20 }}
+                          initial={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
                           animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={{ opacity: 0, height: 0, y: -20 }}
-                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                          exit={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
+                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
                           <div className="bg-gradient-to-br from-[#E8FFF5] to-[#F0FFF9] dark:from-[#00DD89]/10 dark:to-[#00DD89]/5 p-8 rounded-2xl border border-[#00DD89]/20 space-y-6 shadow-sm">
@@ -668,10 +669,10 @@ export default function JoinCAS() {
                     <AnimatePresence>
                       {!isMember && wantsMembership === "No" && wantsCANNMembership === "No" && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0, y: -20 }}
+                          initial={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
                           animate={{ opacity: 1, height: "auto", y: 0 }}
-                          exit={{ opacity: 0, height: 0, y: -20 }}
-                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                          exit={shouldReduceMotion ? {} : { opacity: 0, height: 0, y: -20 }}
+                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
                           <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/10 p-8 rounded-2xl border border-amber-300/30 space-y-6 shadow-sm">
@@ -747,9 +748,9 @@ export default function JoinCAS() {
                     {/* Submit Button */}
                     <motion.div 
                       className="flex justify-center pt-10"
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
+                      transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.2 }}
                     >
                       <Button
                         type="submit"

@@ -69,6 +69,7 @@ export default function JoinCAS() {
   const { toast } = useToast();
   const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [submissionType, setSubmissionType] = useState<'cann' | 'cas' | 'contact' | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
   const form = useForm<CASRegistrationForm>({
@@ -116,13 +117,24 @@ export default function JoinCAS() {
     },
     onSuccess: (data) => {
       setSubmissionId(data.submissionId);
+      
+      // Determine submission type
+      const formValues = form.getValues();
+      if (formValues.wantsCANNMembership === "Yes") {
+        setSubmissionType('cann');
+      } else if (formValues.wantsMembership === "Yes") {
+        setSubmissionType('cas');
+      } else {
+        setSubmissionType('contact');
+      }
+      
       setShowConfirmationModal(true);
-      const isCANNMember = form.getValues("wantsCANNMembership") === "Yes";
+      const isCANNMember = formValues.wantsCANNMembership === "Yes";
       toast({
-        title: "Application Submitted Successfully!",
+        title: "Registration Submitted Successfully!",
         description: isCANNMember 
-          ? "Your CAS & CANN membership application has been received."
-          : "Your CAS membership application has been received.",
+          ? "Your CAS & CANN membership registration has been received."
+          : "Your CAS membership registration has been received.",
       });
       form.reset();
     },
@@ -787,9 +799,15 @@ export default function JoinCAS() {
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 mx-auto mb-4">
               <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
-            <DialogTitle className="text-center text-2xl">Registration Submitted!</DialogTitle>
+            <DialogTitle className="text-center text-2xl">
+              {submissionType === 'cann' && "CANN Membership Registration Submitted!"}
+              {submissionType === 'cas' && "CAS Membership Registration Submitted!"}
+              {submissionType === 'contact' && "Contact Form Submitted!"}
+            </DialogTitle>
             <DialogDescription className="text-center">
-              Thank you for your registration. We've received your submission and will be in touch soon.
+              {submissionType === 'cann' && "Thank you for registering for CANN membership! You are now also a member of CAS. We've received your submission and will be in touch soon with membership details."}
+              {submissionType === 'cas' && "Thank you for registering for CAS membership! We've received your submission and will be in touch soon with membership details."}
+              {submissionType === 'contact' && "Thank you for contacting us! We've received your message and will get back to you as soon as possible."}
             </DialogDescription>
           </DialogHeader>
           {submissionId && (

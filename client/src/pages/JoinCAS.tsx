@@ -382,42 +382,37 @@ export default function JoinCAS() {
                             </FormItem>
                           )}
                         />
+
+                        {/* Question 9: Services Map */}
+                        <FormField
+                          control={form.control}
+                          name="wantsServicesMapInclusion"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>9. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?</FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  className="flex gap-6"
+                                  data-testid="radio-services-map"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Yes" id="map-yes" data-testid="radio-services-map-yes" />
+                                    <Label htmlFor="map-yes">Yes</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="No" id="map-no" data-testid="radio-services-map-no" />
+                                    <Label htmlFor="map-no">No</Label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
                       </div>
                     )}
-
-                    {/* Question 9: Services Map (ALWAYS visible) */}
-                    <FormField
-                      control={form.control}
-                      name="wantsServicesMapInclusion"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-lg font-semibold">
-                            9. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?
-                          </FormLabel>
-                          <FormDescription>
-                            Standalone question — always visible, not conditional.
-                          </FormDescription>
-                          <FormControl>
-                            <RadioGroup
-                              onValueChange={field.onChange}
-                              value={field.value}
-                              className="flex gap-6"
-                              data-testid="radio-services-map"
-                            >
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="Yes" id="map-yes" data-testid="radio-services-map-yes" />
-                                <Label htmlFor="map-yes">Yes</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="No" id="map-no" data-testid="radio-services-map-no" />
-                                <Label htmlFor="map-no">No</Label>
-                              </div>
-                            </RadioGroup>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
 
                     {/* Question 10: CANN Additional Questions (shown only when Q2 = "Yes") */}
                     {wantsCANNMembership === "Yes" && (

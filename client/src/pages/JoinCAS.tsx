@@ -303,7 +303,7 @@ export default function JoinCAS() {
                                 <Users className="w-5 h-5 text-white" />
                               </div>
                               <h3 className="text-2xl font-bold text-[#12465B] dark:text-white">
-                                Member Information
+                                Registrant Information and CAS Questions
                               </h3>
                             </div>
 

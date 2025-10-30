@@ -15,6 +15,7 @@ import { requireAutomationAuth } from "./auth-middleware";
 import { errorHandlingService, errorClassificationSchema } from "./error-handling-service";
 // REMOVED: streamlinedFormProcessor - No longer used after endpoint consolidation
 import { emailNotificationService } from "./email-notification-service";
+import { zohoWorkflowService } from "./zoho-workflow-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -1119,6 +1120,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (stored) {
         console.log("✅ Tokens stored automatically in database");
         
+        // Try to create email notification workflow
+        try {
+          console.log("[OAuth Callback] Attempting to create email notification workflow...");
+          await zohoWorkflowService.createRegistrationEmailWorkflow();
+          console.log("[OAuth Callback] ✅ Email notification workflow created successfully!");
+        } catch (workflowError) {
+          console.error("[OAuth Callback] Failed to create workflow (non-fatal):", workflowError);
+          // Continue even if workflow creation fails - can be done manually later
+        }
+        
         res.send(`
           <html>
             <head><title>Zoho OAuth Success</title></head>
@@ -1131,11 +1142,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
                   <li>Access tokens will automatically refresh before expiring</li>
                   <li>Your CANN membership forms will sync continuously with Zoho CRM</li>
                   <li>No manual token management required</li>
+                  <li><strong>Email notifications will be sent automatically for new registrations</strong></li>
                 </ul>
               </div>
               <p><strong>Token expires in:</strong> ${tokenData.expires_in} seconds (${Math.floor(tokenData.expires_in / 3600)} hours)</p>
               <p><strong>API Domain:</strong> ${tokenData.api_domain}</p>
-              <p><strong>Next Steps:</strong> Your integration is ready! Test your membership forms - they will automatically sync to Zoho CRM.</p>
+              <p><strong>Next Steps:</strong> Your integration is ready! Test your membership forms - they will automatically sync to Zoho CRM and send email notifications.</p>
               <p><a href="/">← Return to Website</a></p>
             </body>
           </html>

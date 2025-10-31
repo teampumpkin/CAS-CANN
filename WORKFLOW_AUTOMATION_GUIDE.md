@@ -57,7 +57,7 @@ The system uses these comprehensive Zoho CRM OAuth scopes:
 
 1. **Visit the OAuth authorization page:**
    ```
-   https://amyloid-ca.replit.app/api/oauth/authorize/zoho_crm
+   https://amyloid.ca/oauth/zoho/connect
    ```
 
 2. **Authorize the application** with the new scopes
@@ -65,7 +65,7 @@ The system uses these comprehensive Zoho CRM OAuth scopes:
 3. **Verify authentication:**
    ```bash
    curl -H "X-Automation-API-Key: YOUR_API_KEY" \
-        https://amyloid-ca.replit.app/api/admin/workflow-stats
+        https://amyloid.ca/api/admin/workflow-stats
    ```
 
 ---
@@ -183,7 +183,7 @@ X-Automation-API-Key: YOUR_API_KEY
 ### Example: Create Registration Email Workflows
 
 ```javascript
-const response = await fetch('https://amyloid-ca.replit.app/api/admin/setup-email-workflows', {
+const response = await fetch('https://amyloid.ca/api/admin/setup-email-workflows', {
   method: 'POST',
   headers: {
     'X-Automation-API-Key': process.env.AUTOMATION_API_KEY,
@@ -324,12 +324,12 @@ Each workflow follows this structure:
 
 ### 1. Test OAuth Authentication
 ```bash
-curl https://amyloid-ca.replit.app/api/oauth/authorize/zoho_crm
+curl https://amyloid.ca/oauth/zoho/connect
 ```
 
 ### 2. Test Workflow Creation
 ```bash
-curl -X POST https://amyloid-ca.replit.app/api/admin/setup-email-workflows \
+curl -X POST https://amyloid.ca/api/admin/setup-email-workflows \
   -H "X-Automation-API-Key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"recreate": false}'
@@ -337,13 +337,13 @@ curl -X POST https://amyloid-ca.replit.app/api/admin/setup-email-workflows \
 
 ### 3. Test Workflow Listing
 ```bash
-curl https://amyloid-ca.replit.app/api/admin/email-workflows \
+curl https://amyloid.ca/api/admin/email-workflows \
   -H "X-Automation-API-Key: YOUR_API_KEY"
 ```
 
 ### 4. Test Statistics
 ```bash
-curl https://amyloid-ca.replit.app/api/admin/workflow-stats \
+curl https://amyloid.ca/api/admin/workflow-stats \
   -H "X-Automation-API-Key: YOUR_API_KEY"
 ```
 

@@ -2159,6 +2159,58 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Zoho Workflow Setup - Create automated email notification workflows
+  app.post("/api/admin/setup-email-workflows", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log("[Admin] Setting up Zoho email notification workflows...");
+      
+      const result = await zohoWorkflowService.setupRegistrationEmailWorkflows();
+      
+      if (result.success) {
+        res.json({
+          success: true,
+          message: `Successfully created ${result.workflows.length} email notification workflows`,
+          workflows: result.workflows,
+          details: result
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: `Failed to create some workflows. ${result.workflows.length} succeeded, ${result.errors.length} failed`,
+          workflows: result.workflows,
+          errors: result.errors,
+          details: result
+        });
+      }
+    } catch (error) {
+      console.error("[Admin] Error setting up email workflows:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to setup email workflows",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Get list of existing workflow rules
+  app.get("/api/admin/email-workflows", requireAutomationAuth, async (req, res) => {
+    try {
+      const workflows = await zohoWorkflowService.getWorkflowRules();
+      res.json({
+        success: true,
+        count: workflows.length,
+        workflows
+      });
+    } catch (error) {
+      console.error("[Admin] Error fetching workflows:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch workflows",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

@@ -1102,6 +1102,58 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Test OAuth token validity by calling Zoho API
+  app.get("/api/test-oauth-token", async (req, res) => {
+    try {
+      console.log("[Test OAuth] Checking token validity...");
+      const token = await dedicatedTokenManager.getValidAccessToken('zoho_crm');
+      
+      if (!token) {
+        return res.json({
+          success: false,
+          error: "No token found in database",
+          solution: "Visit /oauth/zoho/connect to authorize"
+        });
+      }
+
+      console.log("[Test OAuth] Token found, testing against Zoho API...");
+      console.log("[Test OAuth] Token preview:", token.substring(0, 20) + "...");
+      
+      // Test the token by calling Zoho's users API
+      const zohoResponse = await fetch("https://www.zohoapis.com/crm/v8/users?type=CurrentUser", {
+        method: 'GET',
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${token}`
+        }
+      });
+
+      console.log("[Test OAuth] Zoho API response status:", zohoResponse.status);
+      const responseData = await zohoResponse.json();
+      
+      if (zohoResponse.ok) {
+        return res.json({
+          success: true,
+          message: "✅ OAuth token is valid and working!",
+          zohoUser: responseData.users?.[0],
+          tokenPreview: token.substring(0, 20) + "..."
+        });
+      } else {
+        return res.json({
+          success: false,
+          error: `Zoho API returned ${zohoResponse.status}`,
+          details: responseData,
+          solution: "Token exists but is invalid. Visit /oauth/zoho/connect to re-authorize"
+        });
+      }
+    } catch (error) {
+      console.error("[Test OAuth] Error:", error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
   // Test endpoint to manually create workflow
   app.get("/api/create-workflow", async (req, res) => {
     try {

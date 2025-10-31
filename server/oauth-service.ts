@@ -315,8 +315,21 @@ export class OAuthService {
     if (provider === 'zoho_crm') {
       // Build URL manually to ensure proper encoding
       const baseUrl = 'https://accounts.zoho.com/oauth/v2/auth';
+      
+      // Comprehensive OAuth scopes for full CRM automation
+      const scopes = [
+        'ZohoCRM.modules.ALL',                    // Full module access (Leads, Contacts, etc.)
+        'ZohoCRM.settings.fields.ALL',            // Custom field creation/management
+        'ZohoCRM.settings.layouts.READ',          // Layout information
+        'ZohoCRM.settings.profiles.READ',         // Profile information
+        'ZohoCRM.send_mail.all.CREATE',           // Send emails via CRM
+        'ZohoCRM.settings.workflow_rules.ALL',    // Workflow rules management
+        'ZohoCRM.settings.automation.ALL',        // Email notifications, webhooks, tasks, field updates
+        'ZohoCRM.settings.email_templates.READ'   // Email template access
+      ].join(',');
+      
       const params = [
-        `scope=${encodeURIComponent('ZohoCRM.modules.ALL,ZohoCRM.settings.fields.ALL,ZohoCRM.settings.layouts.READ,ZohoCRM.settings.profiles.READ,ZohoCRM.send_mail.all.CREATE,ZohoCRM.settings.workflow_rules.ALL,ZohoCRM.settings.email_templates.READ')}`,
+        `scope=${encodeURIComponent(scopes)}`,
         `client_id=${encodeURIComponent(process.env.ZOHO_CLIENT_ID!)}`,
         `response_type=code`,
         `access_type=offline`,

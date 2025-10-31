@@ -327,10 +327,14 @@ export class ZohoWorkflowService {
   /**
    * Get list of all workflow rules
    */
-  async getWorkflowRules(): Promise<any[]> {
+  async getWorkflowRules(module?: string): Promise<any[]> {
     try {
       const accessToken = await this.getAccessToken();
-      const url = `${this.ZOHO_API_BASE}/settings/automation/workflow_rules`;
+      let url = `${this.ZOHO_API_BASE}/settings/automation/workflow_rules`;
+      
+      if (module) {
+        url += `?module=${encodeURIComponent(module)}`;
+      }
 
       const response = await fetch(url, {
         headers: {
@@ -347,6 +351,192 @@ export class ZohoWorkflowService {
     } catch (error) {
       console.error('[Zoho Workflow] Error fetching workflows:', error);
       return [];
+    }
+  }
+
+  /**
+   * Get a specific workflow rule by ID
+   */
+  async getWorkflowRule(workflowId: string): Promise<any | null> {
+    try {
+      const accessToken = await this.getAccessToken();
+      const url = `${this.ZOHO_API_BASE}/settings/automation/workflow_rules/${workflowId}`;
+
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch workflow: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.workflow_rules?.[0] || null;
+    } catch (error) {
+      console.error('[Zoho Workflow] Error fetching workflow:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Update an existing workflow rule
+   */
+  async updateWorkflowRule(workflowId: string, updates: any): Promise<boolean> {
+    try {
+      const accessToken = await this.getAccessToken();
+      const url = `${this.ZOHO_API_BASE}/settings/automation/workflow_rules/${workflowId}`;
+
+      const payload = {
+        workflow_rules: [updates]
+      };
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to update workflow: ${response.status} - ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log(`[Zoho Workflow] Updated workflow ${workflowId}`);
+      return result.workflow_rules?.[0]?.status === 'success';
+    } catch (error) {
+      console.error('[Zoho Workflow] Error updating workflow:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Delete workflow rules
+   */
+  async deleteWorkflowRules(workflowIds: string[]): Promise<boolean> {
+    try {
+      const accessToken = await this.getAccessToken();
+      const url = `${this.ZOHO_API_BASE}/settings/automation/workflow_rules?ids=${workflowIds.join(',')}`;
+
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to delete workflows: ${response.status} - ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log(`[Zoho Workflow] Deleted ${workflowIds.length} workflows`);
+      return result.workflow_rules?.[0]?.status === 'success';
+    } catch (error) {
+      console.error('[Zoho Workflow] Error deleting workflows:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Get all email notification actions
+   */
+  async getEmailNotifications(): Promise<any[]> {
+    try {
+      const accessToken = await this.getAccessToken();
+      const url = `${this.ZOHO_API_BASE}/settings/automation/email_notifications`;
+
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch email notifications: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.email_notifications || [];
+    } catch (error) {
+      console.error('[Zoho Workflow] Error fetching email notifications:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Delete email notification actions
+   */
+  async deleteEmailNotifications(notificationIds: string[]): Promise<boolean> {
+    try {
+      const accessToken = await this.getAccessToken();
+      const url = `${this.ZOHO_API_BASE}/settings/automation/email_notifications?ids=${notificationIds.join(',')}`;
+
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to delete email notifications: ${response.status} - ${errorText}`);
+      }
+
+      console.log(`[Zoho Workflow] Deleted ${notificationIds.length} email notifications`);
+      return true;
+    } catch (error) {
+      console.error('[Zoho Workflow] Error deleting email notifications:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Get workflow usage statistics
+   */
+  async getWorkflowStats(): Promise<any> {
+    try {
+      const accessToken = await this.getAccessToken();
+      
+      // Get module-wise count
+      const moduleCountUrl = `${this.ZOHO_API_BASE}/settings/automation/workflow_rules/counts`;
+      const moduleCountResponse = await fetch(moduleCountUrl, {
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`
+        }
+      });
+
+      const moduleCount = moduleCountResponse.ok ? await moduleCountResponse.json() : {};
+
+      // Get actions count
+      const actionsCountUrl = `${this.ZOHO_API_BASE}/settings/automation/workflow_rules/actions/count`;
+      const actionsCountResponse = await fetch(actionsCountUrl, {
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`
+        }
+      });
+
+      const actionsCount = actionsCountResponse.ok ? await actionsCountResponse.json() : {};
+
+      return {
+        moduleCount: moduleCount.count || {},
+        actionsCount: actionsCount.count || {},
+        timestamp: new Date().toISOString()
+      };
+    } catch (error) {
+      console.error('[Zoho Workflow] Error fetching workflow stats:', error);
+      return {
+        moduleCount: {},
+        actionsCount: {},
+        error: error instanceof Error ? error.message : 'Unknown error'
+      };
     }
   }
 

@@ -2195,17 +2195,181 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get list of existing workflow rules
   app.get("/api/admin/email-workflows", requireAutomationAuth, async (req, res) => {
     try {
-      const workflows = await zohoWorkflowService.getWorkflowRules();
+      const module = req.query.module as string | undefined;
+      const workflows = await zohoWorkflowService.getWorkflowRules(module);
       res.json({
         success: true,
         count: workflows.length,
-        workflows
+        workflows,
+        module: module || 'all'
       });
     } catch (error) {
       console.error("[Admin] Error fetching workflows:", error);
       res.status(500).json({
         success: false,
         message: "Failed to fetch workflows",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Get a specific workflow rule by ID
+  app.get("/api/admin/email-workflows/:id", requireAutomationAuth, async (req, res) => {
+    try {
+      const workflow = await zohoWorkflowService.getWorkflowRule(req.params.id);
+      if (!workflow) {
+        return res.status(404).json({
+          success: false,
+          message: "Workflow not found"
+        });
+      }
+      res.json({
+        success: true,
+        workflow
+      });
+    } catch (error) {
+      console.error("[Admin] Error fetching workflow:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch workflow",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Update an existing workflow rule
+  app.put("/api/admin/email-workflows/:id", requireAutomationAuth, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updates = req.body;
+      
+      const success = await zohoWorkflowService.updateWorkflowRule(id, updates);
+      
+      if (success) {
+        res.json({
+          success: true,
+          message: `Workflow ${id} updated successfully`
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: "Failed to update workflow"
+        });
+      }
+    } catch (error) {
+      console.error("[Admin] Error updating workflow:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to update workflow",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Delete workflow rules
+  app.delete("/api/admin/email-workflows", requireAutomationAuth, async (req, res) => {
+    try {
+      const { ids } = req.body;
+      
+      if (!ids || !Array.isArray(ids) || ids.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Please provide workflow IDs to delete"
+        });
+      }
+      
+      const success = await zohoWorkflowService.deleteWorkflowRules(ids);
+      
+      if (success) {
+        res.json({
+          success: true,
+          message: `Deleted ${ids.length} workflow(s)`,
+          deletedCount: ids.length
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: "Failed to delete workflows"
+        });
+      }
+    } catch (error) {
+      console.error("[Admin] Error deleting workflows:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to delete workflows",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Get all email notification actions
+  app.get("/api/admin/email-notifications", requireAutomationAuth, async (req, res) => {
+    try {
+      const notifications = await zohoWorkflowService.getEmailNotifications();
+      res.json({
+        success: true,
+        count: notifications.length,
+        notifications
+      });
+    } catch (error) {
+      console.error("[Admin] Error fetching email notifications:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch email notifications",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Delete email notification actions
+  app.delete("/api/admin/email-notifications", requireAutomationAuth, async (req, res) => {
+    try {
+      const { ids } = req.body;
+      
+      if (!ids || !Array.isArray(ids) || ids.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Please provide notification IDs to delete"
+        });
+      }
+      
+      const success = await zohoWorkflowService.deleteEmailNotifications(ids);
+      
+      if (success) {
+        res.json({
+          success: true,
+          message: `Deleted ${ids.length} email notification(s)`,
+          deletedCount: ids.length
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: "Failed to delete email notifications"
+        });
+      }
+    } catch (error) {
+      console.error("[Admin] Error deleting email notifications:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to delete email notifications",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Get workflow statistics
+  app.get("/api/admin/workflow-stats", requireAutomationAuth, async (req, res) => {
+    try {
+      const stats = await zohoWorkflowService.getWorkflowStats();
+      res.json({
+        success: true,
+        stats
+      });
+    } catch (error) {
+      console.error("[Admin] Error fetching workflow stats:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch workflow stats",
         error: error instanceof Error ? error.message : "Unknown error"
       });
     }

@@ -1033,12 +1033,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     return { isProduction: isProductionDomain, baseUrl };
   };
 
-  // Debug endpoint to show OAuth authorization URL
+  // Debug endpoint to show OAuth authorization URL with dynamic scope support
   app.get("/oauth/zoho/debug", (req, res) => {
     try {
       const { isProduction, baseUrl } = getProductionDomain(req);
       const redirectUri = `${baseUrl}/oauth/zoho/callback`;
-      const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
+      
+      // Support custom scopes via query parameter
+      const scopesParam = req.query.scopes as string | undefined;
+      const customScopes = scopesParam ? scopesParam.split(',').map(s => s.trim()) : undefined;
+      
+      const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri, customScopes);
       
       res.send(`
         <html>
@@ -1050,6 +1055,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               <p><strong>Base URL:</strong> ${baseUrl}</p>
               <p><strong>Redirect URI:</strong> ${redirectUri}</p>
               <p><strong>Client ID:</strong> ${process.env.ZOHO_CLIENT_ID?.substring(0, 20)}...</p>
+              <p><strong>Scopes:</strong> ${customScopes ? 'Custom' : 'Default'}</p>
             </div>
             <div style="background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #28a745;">
               <h3>Authorization URL:</h3>
@@ -1059,6 +1065,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
               <a href="${authUrl}" style="display: inline-block; background: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
                 Click Here to Authorize with Zoho
               </a>
+            </div>
+            <div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #ffc107;">
+              <h4>💡 Dynamic Scopes</h4>
+              <p>You can customize scopes by adding <code>?scopes=</code> parameter:</p>
+              <p style="font-family: monospace; font-size: 12px;">
+                /oauth/zoho/debug?scopes=ZohoCRM.modules.ALL,ZohoCRM.settings.workflow_rules.ALL
+              </p>
             </div>
             <p style="color: #666; font-size: 14px;">
               <strong>Instructions:</strong> Click the button above to be redirected to Zoho's authorization page. 
@@ -1077,7 +1090,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Zoho OAuth connect endpoint - starts the authorization flow
+  // Zoho OAuth connect endpoint - starts the authorization flow with dynamic scopes
   app.get("/oauth/zoho/connect", (req, res) => {
     try {
       const { isProduction, baseUrl } = getProductionDomain(req);
@@ -1088,7 +1101,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log(`[OAuth Connect] Base URL: ${baseUrl}`);
       console.log(`[OAuth Connect] Redirect URI: ${redirectUri}`);
       
-      const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
+      // Support dynamic scopes via query parameter
+      // Example: /oauth/zoho/connect?scopes=ZohoCRM.modules.ALL,ZohoCRM.settings.fields.ALL
+      const scopesParam = req.query.scopes as string | undefined;
+      const customScopes = scopesParam ? scopesParam.split(',').map(s => s.trim()) : undefined;
+      
+      if (customScopes) {
+        console.log(`[OAuth Connect] Using custom scopes: ${customScopes.join(', ')}`);
+      } else {
+        console.log(`[OAuth Connect] Using default scopes from environment or hardcoded defaults`);
+      }
+      
+      const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri, customScopes);
       console.log(`[OAuth Connect] Authorization URL: ${authUrl}`);
       console.log(`[OAuth Connect] Redirecting to Zoho...`);
       

@@ -309,15 +309,18 @@ export class OAuthService {
   }
 
   /**
-   * Generate OAuth authorization URL
+   * Get default scopes for a provider
    */
-  getAuthorizationUrl(provider: string, redirectUri: string): string {
+  private getDefaultScopes(provider: string): string[] {
     if (provider === 'zoho_crm') {
-      // Build URL manually to ensure proper encoding
-      const baseUrl = 'https://accounts.zoho.com/oauth/v2/auth';
-      
-      // Comprehensive OAuth scopes for full CRM automation
-      const scopes = [
+      // Check if scopes are defined in environment variable
+      const envScopes = process.env.ZOHO_OAUTH_SCOPES;
+      if (envScopes) {
+        return envScopes.split(',').map(s => s.trim());
+      }
+
+      // Default comprehensive scopes for full CRM automation
+      return [
         'ZohoCRM.modules.ALL',                    // Full module access (Leads, Contacts, etc.)
         'ZohoCRM.settings.fields.ALL',            // Custom field creation/management
         'ZohoCRM.settings.layouts.READ',          // Layout information
@@ -325,7 +328,28 @@ export class OAuthService {
         'ZohoCRM.send_mail.all.CREATE',           // Send emails via CRM
         'ZohoCRM.settings.workflow_rules.ALL',    // Workflow rules management (includes all automation)
         'ZohoCRM.settings.email_templates.READ'   // Email template access
-      ].join(',');
+      ];
+    }
+    
+    return [];
+  }
+
+  /**
+   * Generate OAuth authorization URL with optional dynamic scopes
+   * @param provider - OAuth provider (e.g., 'zoho_crm')
+   * @param redirectUri - Callback URL after authorization
+   * @param customScopes - Optional array of custom scopes. If not provided, uses default scopes
+   */
+  getAuthorizationUrl(provider: string, redirectUri: string, customScopes?: string[]): string {
+    if (provider === 'zoho_crm') {
+      const baseUrl = 'https://accounts.zoho.com/oauth/v2/auth';
+      
+      // Use custom scopes if provided, otherwise use defaults
+      const scopeArray = customScopes && customScopes.length > 0 
+        ? customScopes 
+        : this.getDefaultScopes(provider);
+      
+      const scopes = scopeArray.join(',');
       
       const params = [
         `scope=${encodeURIComponent(scopes)}`,
@@ -336,6 +360,12 @@ export class OAuthService {
       ];
       
       const fullUrl = `${baseUrl}?${params.join('&')}`;
+      
+      if (customScopes && customScopes.length > 0) {
+        console.log(`[OAuth Service] Using custom scopes: ${scopes}`);
+      } else {
+        console.log(`[OAuth Service] Using default scopes: ${scopes}`);
+      }
       console.log(`[OAuth Service] Generated authorization URL: ${fullUrl}`);
       
       return fullUrl;

@@ -1033,6 +1033,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
     return { isProduction: isProductionDomain, baseUrl };
   };
 
+  // Debug endpoint to show OAuth authorization URL
+  app.get("/oauth/zoho/debug", (req, res) => {
+    try {
+      const { isProduction, baseUrl } = getProductionDomain(req);
+      const redirectUri = `${baseUrl}/oauth/zoho/callback`;
+      const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
+      
+      res.send(`
+        <html>
+          <head><title>OAuth Debug</title></head>
+          <body style="font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto;">
+            <h2>🔍 OAuth Authorization URL Debug</h2>
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 15px 0;">
+              <p><strong>Production Mode:</strong> ${isProduction}</p>
+              <p><strong>Base URL:</strong> ${baseUrl}</p>
+              <p><strong>Redirect URI:</strong> ${redirectUri}</p>
+              <p><strong>Client ID:</strong> ${process.env.ZOHO_CLIENT_ID?.substring(0, 20)}...</p>
+            </div>
+            <div style="background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #28a745;">
+              <h3>Authorization URL:</h3>
+              <p style="word-break: break-all; font-family: monospace; font-size: 12px;">${authUrl}</p>
+            </div>
+            <div style="margin: 20px 0;">
+              <a href="${authUrl}" style="display: inline-block; background: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                Click Here to Authorize with Zoho
+              </a>
+            </div>
+            <p style="color: #666; font-size: 14px;">
+              <strong>Instructions:</strong> Click the button above to be redirected to Zoho's authorization page. 
+              You should see a page asking you to grant permissions. If you're immediately redirected back here, 
+              there may be an issue with your Zoho OAuth configuration.
+            </p>
+          </body>
+        </html>
+      `);
+    } catch (error) {
+      console.error("[OAuth Debug] Error:", error);
+      res.status(500).json({ 
+        error: "Failed to generate OAuth URL", 
+        details: error instanceof Error ? error.message : 'Unknown error' 
+      });
+    }
+  });
+
   // Zoho OAuth connect endpoint - starts the authorization flow
   app.get("/oauth/zoho/connect", (req, res) => {
     try {
@@ -1045,7 +1089,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log(`[OAuth Connect] Redirect URI: ${redirectUri}`);
       
       const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
-      console.log(`[OAuth Connect] Authorization URL generated successfully`);
+      console.log(`[OAuth Connect] Authorization URL: ${authUrl}`);
+      console.log(`[OAuth Connect] Redirecting to Zoho...`);
       
       res.redirect(authUrl);
     } catch (error) {

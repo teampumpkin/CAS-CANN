@@ -1014,26 +1014,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Helper function to normalize production domain
+  const getProductionDomain = (req: express.Request): { isProduction: boolean; baseUrl: string } => {
+    const forwardedHost = req.get('x-forwarded-host') || req.get('host') || '';
+    const host = req.get('host') || '';
+    
+    // Check if this is a production domain (with or without www)
+    const isProductionDomain = 
+      forwardedHost.includes('amyloid.ca') || 
+      host.includes('amyloid.ca') ||
+      process.env.NODE_ENV === 'production';
+    
+    // Always use amyloid.ca for production OAuth to match Zoho configuration
+    const baseUrl = isProductionDomain 
+      ? 'https://amyloid.ca' 
+      : `${req.protocol}://${host}`;
+    
+    return { isProduction: isProductionDomain, baseUrl };
+  };
+
   // Zoho OAuth connect endpoint - starts the authorization flow
   app.get("/oauth/zoho/connect", (req, res) => {
     try {
-      // Use production domain for OAuth callback - check proxy headers for production detection
-      const forwardedHost = req.get('x-forwarded-host') || req.get('host');
-      const isProduction = forwardedHost === 'amyloid.ca' || process.env.NODE_ENV === 'production';
-      const baseUrl = isProduction ? 'https://amyloid.ca' : `${req.protocol}://${req.get('host')}`;
+      const { isProduction, baseUrl } = getProductionDomain(req);
       const redirectUri = `${baseUrl}/oauth/zoho/callback`;
       
-      console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}, NODE_ENV: ${process.env.NODE_ENV}`);
-      console.log(`[OAuth Connect] Detected production: ${isProduction}, Using base URL: ${baseUrl}`);
-      console.log(`[OAuth Connect] Generated redirect URI: ${redirectUri}`);
+      console.log(`[OAuth Connect] Host: ${req.get('host')}, X-Forwarded-Host: ${req.get('x-forwarded-host')}`);
+      console.log(`[OAuth Connect] Production mode: ${isProduction}`);
+      console.log(`[OAuth Connect] Base URL: ${baseUrl}`);
+      console.log(`[OAuth Connect] Redirect URI: ${redirectUri}`);
       
       const authUrl = oauthService.getAuthorizationUrl('zoho_crm', redirectUri);
-      console.log(`[OAuth Connect] Full authorization URL: ${authUrl}`);
+      console.log(`[OAuth Connect] Authorization URL generated successfully`);
       
       res.redirect(authUrl);
     } catch (error) {
-      console.error("OAuth connect error:", error);
-      res.status(500).json({ error: "Failed to initiate OAuth flow", details: error instanceof Error ? error.message : 'Unknown error' });
+      console.error("[OAuth Connect] Error:", error);
+      res.status(500).json({ 
+        error: "Failed to initiate OAuth flow", 
+        details: error instanceof Error ? error.message : 'Unknown error' 
+      });
     }
   });
 
@@ -1041,8 +1061,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/create-workflow", async (req, res) => {
     try {
       console.log("[Test] Manually triggering workflow creation...");
-      await zohoWorkflowService.createRegistrationEmailWorkflow();
-      res.json({ success: true, message: "Workflow created successfully!" });
+      const result = await zohoWorkflowService.setupRegistrationEmailWorkflows(false);
+      res.json({ success: true, message: "Workflows created successfully!", result });
     } catch (error) {
       console.error("[Test] Workflow creation failed:", error);
       res.status(500).json({ 
@@ -1095,7 +1115,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         `);
       }
 
-      console.log("Received Zoho authorization code:", code);
+      console.log("[OAuth Callback] Received Zoho authorization code");
+      
+      // Use the same domain normalization as the connect endpoint
+      const { baseUrl } = getProductionDomain(req);
+      const redirectUri = `${baseUrl}/oauth/zoho/callback`;
+      
+      console.log("[OAuth Callback] Using redirect URI:", redirectUri);
       
       // Exchange code for access token
       const tokenResponse = await fetch("https://accounts.zoho.com/oauth/v2/token", {
@@ -1107,9 +1133,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           grant_type: "authorization_code",
           client_id: process.env.ZOHO_CLIENT_ID!,
           client_secret: process.env.ZOHO_CLIENT_SECRET!,
-          redirect_uri: (req.get('x-forwarded-host') === 'amyloid.ca' || process.env.NODE_ENV === 'production')
-            ? 'https://amyloid.ca/oauth/zoho/callback'
-            : `${req.protocol}://${req.get('host')}/oauth/zoho/callback`,
+          redirect_uri: redirectUri,
           code: code as string,
         }),
       });
@@ -1129,13 +1153,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (stored) {
         console.log("✅ Tokens stored automatically in database");
         
-        // Try to create email notification workflow
+        // Try to create email notification workflows
         try {
-          console.log("[OAuth Callback] Attempting to create email notification workflow...");
-          await zohoWorkflowService.createRegistrationEmailWorkflow();
-          console.log("[OAuth Callback] ✅ Email notification workflow created successfully!");
+          console.log("[OAuth Callback] Attempting to create email notification workflows...");
+          const workflowResult = await zohoWorkflowService.setupRegistrationEmailWorkflows(false);
+          console.log("[OAuth Callback] ✅ Email notification workflows created successfully!", workflowResult);
         } catch (workflowError) {
-          console.error("[OAuth Callback] Failed to create workflow (non-fatal):", workflowError);
+          console.error("[OAuth Callback] Failed to create workflows (non-fatal):", workflowError);
           // Continue even if workflow creation fails - can be done manually later
         }
         

@@ -167,6 +167,35 @@ export class ZohoWorkflowService {
   }
 
   /**
+   * Get the current user's ID for from_address
+   */
+  private async getCurrentUserId(accessToken: string): Promise<string> {
+    try {
+      const url = `${this.ZOHO_API_BASE}/users?type=CurrentUser`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to get current user: ${response.status}`);
+      }
+
+      const result = await response.json();
+      if (result.users && result.users.length > 0) {
+        return result.users[0].id;
+      }
+      
+      throw new Error('No user found in response');
+    } catch (error) {
+      console.error('[Zoho Workflow] Failed to get current user ID:', error);
+      throw error;
+    }
+  }
+
+  /**
    * Create email notification action
    */
   private async createEmailNotificationAction(
@@ -178,6 +207,9 @@ export class ZohoWorkflowService {
       body: string;
     }
   ): Promise<string> {
+    // Get current user ID for from_address
+    const userId = await this.getCurrentUserId(accessToken);
+    
     const url = `${this.ZOHO_API_BASE}/settings/automation/email_notifications`;
 
     const payload = {
@@ -187,8 +219,11 @@ export class ZohoWorkflowService {
           module: {
             api_name: "Leads"
           },
-          from_email: {
-            type: "current_user"
+          from_address: {
+            resource: {
+              id: userId
+            },
+            type: "user"
           },
           to_emails: config.recipients,
           subject: config.subject,
@@ -196,6 +231,8 @@ export class ZohoWorkflowService {
         }
       ]
     };
+
+    console.log(`[Zoho Workflow] Creating email notification with from_address user ID: ${userId}`);
 
     const response = await fetch(url, {
       method: 'POST',

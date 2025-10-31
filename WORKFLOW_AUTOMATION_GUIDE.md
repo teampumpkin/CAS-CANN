@@ -13,7 +13,7 @@ This comprehensive system allows you to manage Zoho CRM workflows programmatical
 1. **OAuth Service** (`server/oauth-service.ts`)
    - Manages Zoho OAuth authentication with comprehensive scopes
    - Handles token refresh automatically
-   - Includes `ZohoCRM.settings.automation.ALL` for full automation access
+   - Uses `ZohoCRM.settings.workflow_rules.ALL` for full automation access
 
 2. **Workflow Service** (`server/zoho-workflow-service.ts`)
    - Core automation engine with complete CRUD operations
@@ -43,9 +43,10 @@ The system uses these comprehensive Zoho CRM OAuth scopes:
 | `ZohoCRM.settings.layouts.READ` | Layout information access |
 | `ZohoCRM.settings.profiles.READ` | Profile information access |
 | `ZohoCRM.send_mail.all.CREATE` | Send emails via CRM |
-| `ZohoCRM.settings.workflow_rules.ALL` | Workflow rules management |
-| `ZohoCRM.settings.automation.ALL` | **Email notifications, webhooks, tasks, field updates** |
+| `ZohoCRM.settings.workflow_rules.ALL` | **✅ Workflow rules management (includes all automation: email notifications, webhooks, tasks, field updates)** |
 | `ZohoCRM.settings.email_templates.READ` | Email template access |
+
+**Note:** The `ZohoCRM.settings.automation.ALL` scope does not exist in Zoho's API. The `ZohoCRM.settings.workflow_rules.ALL` scope provides complete workflow automation capabilities.
 
 ---
 

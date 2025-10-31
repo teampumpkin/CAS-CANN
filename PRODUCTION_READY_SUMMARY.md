@@ -13,14 +13,14 @@ Your Zoho CRM workflow automation system is now **fully configured for productio
 - **Fix**: Implemented production domain normalization
 - **Status**: OAuth flow now works correctly on production domain
 
-### 2. ✅ **OAuth Scopes - UPDATED**
-All required scopes for automation are included:
+### 2. ✅ **OAuth Scopes - FIXED**
+All required scopes for automation are included (invalid scope removed):
 - `ZohoCRM.modules.ALL` ✅
 - `ZohoCRM.settings.fields.ALL` ✅
-- `ZohoCRM.settings.automation.ALL` ✅ **NEW - Enables programmatic workflow creation**
-- `ZohoCRM.settings.workflow_rules.ALL` ✅
+- `ZohoCRM.settings.workflow_rules.ALL` ✅ **Enables ALL automation (workflows, emails, webhooks, tasks)**
 - `ZohoCRM.send_mail.all.CREATE` ✅
 - `ZohoCRM.settings.email_templates.READ` ✅
+- ~~`ZohoCRM.settings.automation.ALL`~~ ❌ **REMOVED - Invalid scope (doesn't exist in Zoho API)**
 
 ### 3. ✅ **Workflow Service - COMPLETE**
 Comprehensive CRUD operations for workflow management:

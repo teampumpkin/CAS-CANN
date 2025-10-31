@@ -323,8 +323,7 @@ export class OAuthService {
         'ZohoCRM.settings.layouts.READ',          // Layout information
         'ZohoCRM.settings.profiles.READ',         // Profile information
         'ZohoCRM.send_mail.all.CREATE',           // Send emails via CRM
-        'ZohoCRM.settings.workflow_rules.ALL',    // Workflow rules management
-        'ZohoCRM.settings.automation.ALL',        // Email notifications, webhooks, tasks, field updates
+        'ZohoCRM.settings.workflow_rules.ALL',    // Workflow rules management (includes all automation)
         'ZohoCRM.settings.email_templates.READ'   // Email template access
       ].join(',');
       

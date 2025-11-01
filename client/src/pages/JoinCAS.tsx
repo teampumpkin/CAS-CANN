@@ -465,7 +465,7 @@ export default function JoinCAS() {
                           name="wantsCommunications"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>10. Would you like to receive CAS emails/newsletters? *</FormLabel>
+                              <FormLabel>10. I would like to receive communication from the Canadian Amyloidosis Society (CAS): *</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}

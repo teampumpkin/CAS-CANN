@@ -502,34 +502,37 @@ export default function JoinCAS() {
                           animate={{ opacity: 1 }}
                           exit={shouldReduceMotion ? {} : { opacity: 0 }}
                           transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
                         >
-                          <FormField
-                            control={form.control}
-                            name="cannCommunications"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>11. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *</FormLabel>
-                                <FormControl>
-                                  <RadioGroup
-                                    onValueChange={field.onChange}
-                                    value={field.value}
-                                    className="flex gap-6"
-                                    data-testid="radio-cann-communications"
-                                  >
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="Yes" id="cann-comm-yes" data-testid="radio-cann-comm-yes" />
-                                      <Label htmlFor="cann-comm-yes">Yes</Label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem value="No" id="cann-comm-no" data-testid="radio-cann-comm-no" />
-                                      <Label htmlFor="cann-comm-no">No</Label>
-                                    </div>
-                                  </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
+                          <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-[#00AFE6]/20 shadow-sm">
+                            <FormField
+                              control={form.control}
+                              name="cannCommunications"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>11. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *</FormLabel>
+                                  <FormControl>
+                                    <RadioGroup
+                                      onValueChange={field.onChange}
+                                      value={field.value}
+                                      className="flex gap-6"
+                                      data-testid="radio-cann-communications"
+                                    >
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Yes" id="cann-comm-yes" data-testid="radio-cann-comm-yes" />
+                                        <Label htmlFor="cann-comm-yes">Yes</Label>
+                                      </div>
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="No" id="cann-comm-no" data-testid="radio-cann-comm-no" />
+                                        <Label htmlFor="cann-comm-no">No</Label>
+                                      </div>
+                                    </RadioGroup>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>

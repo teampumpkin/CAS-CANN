@@ -188,7 +188,7 @@ export default function JoinCAS() {
             </h1>
 
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
-              Become part of Canada's premier professional network for amyloidosis care and nursing excellence.
+              Become part of Canada's premier professional network for amyloidosis care.
             </p>
             
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-8">
@@ -358,19 +358,19 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Question 5: Discipline */}
+                        {/* Question 5: Professional Designation */}
                         <FormField
                           control={form.control}
                           name="discipline"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>5. Discipline / Professional Designation or Nursing Role (If also registering for CANN membership) *</FormLabel>
+                              <FormLabel>5. Professional designation *</FormLabel>
                               <FormDescription>
-                                e.g., Physician, Nurse Practitioner, Nurse Clinician, Educator, Researcher, Administrator
+                                e.g. physician, nurse, genetic counsellor, other
                               </FormDescription>
                               <FormControl>
                                 <Input 
-                                  placeholder="Enter your discipline" 
+                                  placeholder="Enter your professional designation" 
                                   {...field} 
                                   data-testid="input-discipline"
                                 />

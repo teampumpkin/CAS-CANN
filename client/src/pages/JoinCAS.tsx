@@ -9,10 +9,6 @@ import {
   Users,
   Heart,
   Mail,
-  Building2,
-  Stethoscope,
-  GraduationCap,
-  MapPin,
   Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -44,20 +40,6 @@ import { useToast } from "@/hooks/use-toast";
 import { casRegistrationSchema, type CASRegistrationForm } from "@shared/schema";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-
-const educationalInterestOptions = [
-  "Mental health considerations for amyloidosis and heart failure patients",
-  "Case presentations/discussion",
-  "Understanding PYP in amyloidosis",
-  "Genetic testing/counseling",
-  "Program start-up and multi-disciplinary engagement",
-  "Pathology and amyloidosis (mass spectrometry)",
-  "Diet, exercise, and/or cardiac rehab considerations",
-  "Multi-system involvement and clinical implications",
-  "Patient support groups: awareness, initiation, and lessons learned",
-  "Patient and Healthcare Professional Q&A - open forum",
-  "A Day in the Life – short presentations from various clinics",
-];
 
 interface SubmissionResponse {
   submissionId: string;
@@ -98,7 +80,6 @@ export default function JoinCAS() {
   // Watch form values for conditional rendering
   const wantsMembership = form.watch("wantsMembership");
   const wantsCANNMembership = form.watch("wantsCANNMembership");
-  const educationalInterests = form.watch("educationalInterests") || [];
   
   // Check if user is a member (either CAS or CANN)
   const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
@@ -522,7 +503,7 @@ export default function JoinCAS() {
 
                     <Separator className="my-8" />
 
-                    {/* CANN Questions (shown only when Q2 = "Yes") */}
+                    {/* Question 11: CANN Communications (shown only when Q2 = "Yes") */}
                     <AnimatePresence>
                       {wantsCANNMembership === "Yes" && (
                         <motion.div
@@ -530,184 +511,34 @@ export default function JoinCAS() {
                           animate={{ opacity: 1 }}
                           exit={shouldReduceMotion ? {} : { opacity: 0 }}
                           transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
-                          className="overflow-hidden"
                         >
-                          <div className="bg-gradient-to-br from-[#E8FFF5] to-[#F0FFF9] dark:from-[#00DD89]/10 dark:to-[#00DD89]/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-[#00DD89]/20 space-y-4 sm:space-y-6 shadow-sm">
-                            <div className="flex items-center gap-3 mb-6">
-                              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#00DD89] to-[#00AFE6] flex items-center justify-center shadow-md">
-                                <Stethoscope className="w-5 h-5 text-white" />
-                              </div>
-                              <h3 className="text-2xl font-bold text-[#045941] dark:text-white">
-                                CANN Questions
-                              </h3>
-                            </div>
-
-                        {/* Question 10: Amyloidosis Type */}
-                        <FormField
-                          control={form.control}
-                          name="amyloidosisType"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>10. In my nursing practice, I primarily care for patients with the following type of amyloidosis: *</FormLabel>
-                              <FormControl>
-                                <RadioGroup
-                                  onValueChange={field.onChange}
-                                  value={field.value}
-                                  className="space-y-3"
-                                  data-testid="radio-amyloidosis-type"
-                                >
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="ATTR" id="type-attr" data-testid="radio-type-attr" />
-                                    <Label htmlFor="type-attr">ATTR</Label>
-                                  </div>
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="AL" id="type-al" data-testid="radio-type-al" />
-                                    <Label htmlFor="type-al">AL</Label>
-                                  </div>
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="Both ATTR and AL" id="type-both" data-testid="radio-type-both" />
-                                    <Label htmlFor="type-both">Both ATTR and AL</Label>
-                                  </div>
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="Other" id="type-other" data-testid="radio-type-other" />
-                                    <Label htmlFor="type-other">Other</Label>
-                                  </div>
-                                </RadioGroup>
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        {/* Question 11: CANN Communications */}
-                        <FormField
-                          control={form.control}
-                          name="cannCommunications"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>11. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *</FormLabel>
-                              <FormControl>
-                                <RadioGroup
-                                  onValueChange={field.onChange}
-                                  value={field.value}
-                                  className="flex gap-6"
-                                  data-testid="radio-cann-communications"
-                                >
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="Yes" id="cann-comm-yes" data-testid="radio-cann-comm-yes" />
-                                    <Label htmlFor="cann-comm-yes">Yes</Label>
-                                  </div>
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="No" id="cann-comm-no" data-testid="radio-cann-comm-no" />
-                                    <Label htmlFor="cann-comm-no">No</Label>
-                                  </div>
-                                </RadioGroup>
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        {/* Question 12: Educational Interests */}
-                        <FormField
-                          control={form.control}
-                          name="educationalInterests"
-                          render={() => (
-                            <FormItem>
-                              <div className="mb-4">
-                                <FormLabel className="text-base">12. Educational Interests (select all that apply):</FormLabel>
-                              </div>
-                              <div className="space-y-3">
-                                {educationalInterestOptions.map((option) => (
-                                  <FormField
-                                    key={option}
-                                    control={form.control}
-                                    name="educationalInterests"
-                                    render={({ field }) => {
-                                      return (
-                                        <FormItem
-                                          key={option}
-                                          className="flex flex-row items-start space-x-3 space-y-0"
-                                        >
-                                          <FormControl>
-                                            <Checkbox
-                                              checked={field.value?.includes(option)}
-                                              onCheckedChange={(checked) => {
-                                                return checked
-                                                  ? field.onChange([...field.value || [], option])
-                                                  : field.onChange(
-                                                      field.value?.filter(
-                                                        (value) => value !== option
-                                                      )
-                                                    )
-                                              }}
-                                              data-testid={`checkbox-interest-${option.substring(0, 20).toLowerCase().replace(/\s+/g, '-')}`}
-                                            />
-                                          </FormControl>
-                                          <FormLabel className="font-normal">
-                                            {option}
-                                          </FormLabel>
-                                        </FormItem>
-                                      )
-                                    }}
-                                  />
-                                ))}
-                                
-                                {/* Other option with text input */}
-                                <FormField
-                                  control={form.control}
-                                  name="otherEducationalInterest"
-                                  render={({ field }) => (
-                                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                                      <FormControl>
-                                        <div className="flex items-center gap-3">
-                                          <span className="text-sm">Other:</span>
-                                          <Input
-                                            placeholder="Specify other interest"
-                                            {...field}
-                                            className="flex-1"
-                                            data-testid="input-other-interest"
-                                          />
-                                        </div>
-                                      </FormControl>
-                                    </FormItem>
-                                  )}
-                                />
-                              </div>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        {/* Question 13: Interest in Presenting */}
-                        <FormField
-                          control={form.control}
-                          name="interestedInPresenting"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>13. I would be interested in presenting to CANN members at an Educational Series event: *</FormLabel>
-                              <FormControl>
-                                <RadioGroup
-                                  onValueChange={field.onChange}
-                                  value={field.value}
-                                  className="flex gap-6"
-                                  data-testid="radio-presenting"
-                                >
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="Yes" id="present-yes" data-testid="radio-presenting-yes" />
-                                    <Label htmlFor="present-yes">Yes</Label>
-                                  </div>
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="No" id="present-no" data-testid="radio-presenting-no" />
-                                    <Label htmlFor="present-no">No</Label>
-                                  </div>
-                                </RadioGroup>
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
+                          <FormField
+                            control={form.control}
+                            name="cannCommunications"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>11. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *</FormLabel>
+                                <FormControl>
+                                  <RadioGroup
+                                    onValueChange={field.onChange}
+                                    value={field.value}
+                                    className="flex gap-6"
+                                    data-testid="radio-cann-communications"
+                                  >
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="Yes" id="cann-comm-yes" data-testid="radio-cann-comm-yes" />
+                                      <Label htmlFor="cann-comm-yes">Yes</Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="No" id="cann-comm-no" data-testid="radio-cann-comm-no" />
+                                      <Label htmlFor="cann-comm-no">No</Label>
+                                    </div>
+                                  </RadioGroup>
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
                         </motion.div>
                       )}
                     </AnimatePresence>

@@ -430,42 +430,13 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Question 9: CAS Communications */}
-                        <FormField
-                          control={form.control}
-                          name="wantsCommunications"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>9. Would you like to receive CAS emails/newsletters? *</FormLabel>
-                              <FormControl>
-                                <RadioGroup
-                                  onValueChange={field.onChange}
-                                  value={field.value}
-                                  className="flex gap-6"
-                                  data-testid="radio-communications"
-                                >
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="Yes" id="comm-yes" data-testid="radio-communications-yes" />
-                                    <Label htmlFor="comm-yes">Yes</Label>
-                                  </div>
-                                  <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="No" id="comm-no" data-testid="radio-communications-no" />
-                                    <Label htmlFor="comm-no">No</Label>
-                                  </div>
-                                </RadioGroup>
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        {/* Question 10: Services Map */}
+                        {/* Question 9: Services Map */}
                         <FormField
                           control={form.control}
                           name="wantsServicesMapInclusion"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>10. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?</FormLabel>
+                              <FormLabel>9. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}
@@ -480,6 +451,35 @@ export default function JoinCAS() {
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="No" id="map-no" data-testid="radio-services-map-no" />
                                     <Label htmlFor="map-no">No</Label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Question 10: CAS Communications */}
+                        <FormField
+                          control={form.control}
+                          name="wantsCommunications"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>10. Would you like to receive CAS emails/newsletters? *</FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  className="flex gap-6"
+                                  data-testid="radio-communications"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Yes" id="comm-yes" data-testid="radio-communications-yes" />
+                                    <Label htmlFor="comm-yes">Yes</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="No" id="comm-no" data-testid="radio-communications-no" />
+                                    <Label htmlFor="comm-no">No</Label>
                                   </div>
                                 </RadioGroup>
                               </FormControl>

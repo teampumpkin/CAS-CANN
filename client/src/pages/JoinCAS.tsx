@@ -402,13 +402,50 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Question 7: Institution */}
+                        {/* Question 7: Amyloidosis Type (visible to all members) */}
+                        <FormField
+                          control={form.control}
+                          name="amyloidosisType"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>7. In my practice, I primarily care for patients with the following type(s) of amyloidosis: *</FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  className="space-y-3"
+                                  data-testid="radio-amyloidosis-type"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="ATTR" id="type-attr" data-testid="radio-type-attr" />
+                                    <Label htmlFor="type-attr">ATTR</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="AL" id="type-al" data-testid="radio-type-al" />
+                                    <Label htmlFor="type-al">AL</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Both ATTR and AL" id="type-both" data-testid="radio-type-both" />
+                                    <Label htmlFor="type-both">Both ATTR and AL</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Other" id="type-other" data-testid="radio-type-other" />
+                                    <Label htmlFor="type-other">Other</Label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Question 8: Institution */}
                         <FormField
                           control={form.control}
                           name="institution"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>7. Centre or Clinic Name / Institution *</FormLabel>
+                              <FormLabel>8. Centre or Clinic Name / Institution *</FormLabel>
                               <FormControl>
                                 <Input 
                                   placeholder="Enter your institution name" 
@@ -421,13 +458,13 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Question 8: CAS Communications */}
+                        {/* Question 9: CAS Communications */}
                         <FormField
                           control={form.control}
                           name="wantsCommunications"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>8. Would you like to receive CAS emails/newsletters? *</FormLabel>
+                              <FormLabel>9. Would you like to receive CAS emails/newsletters? *</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}
@@ -450,13 +487,13 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Question 9: Services Map */}
+                        {/* Question 10: Services Map */}
                         <FormField
                           control={form.control}
                           name="wantsServicesMapInclusion"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>9. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?</FormLabel>
+                              <FormLabel>10. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}

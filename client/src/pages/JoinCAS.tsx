@@ -291,15 +291,6 @@ export default function JoinCAS() {
                           className="overflow-hidden"
                         >
                           <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-[#00AFE6]/20 space-y-4 sm:space-y-6 shadow-sm">
-                            <div className="flex items-center gap-3 mb-6">
-                              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] flex items-center justify-center shadow-md">
-                                <Users className="w-5 h-5 text-white" />
-                              </div>
-                              <h3 className="text-2xl font-bold text-[#12465B] dark:text-white">
-                                Registrant Information and CAS Questions
-                              </h3>
-                            </div>
-
                         {/* Question 3: Full Name */}
                         <FormField
                           control={form.control}

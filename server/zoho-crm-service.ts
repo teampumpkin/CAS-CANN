@@ -396,7 +396,7 @@ export class ZohoCRMService {
 
       const emailPayload = {
         data: [{
-          org_email: false,
+          org_email: true,
           to: recipients,
           subject: `New ${registrationType} Registration - ${leadData.Last_Name}`,
           content: emailBody,
@@ -428,6 +428,182 @@ export class ZohoCRMService {
     } catch (error) {
       console.error('[Zoho Email] Error sending registration email:', error);
       // Don't throw - email failure shouldn't break the registration
+    }
+  }
+
+  /**
+   * Send welcome email to new member with event details
+   */
+  async sendWelcomeEmail(leadId: string, leadData: any): Promise<void> {
+    try {
+      console.log(`[Zoho Welcome Email] Sending welcome email for lead ${leadId}...`);
+
+      const accessToken = await this.getAccessToken();
+      const isCANNMember = leadData.Lead_Source?.includes('CANN');
+      const memberName = leadData.Last_Name || 'there';
+
+      // Build event details section
+      const eventDetailsHTML = isCANNMember ? `
+        <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #1f2937; margin-top: 0;">📅 Upcoming Events</h3>
+          
+          <div style="margin-bottom: 15px; padding: 15px; background: white; border-left: 4px solid #00AFE6; border-radius: 4px;">
+            <h4 style="color: #00AFE6; margin: 0 0 8px 0;">CAS Journal Club - September Session</h4>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Date:</strong> September 25, 2025</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Time:</strong> 3-4 PM MST</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Topics:</strong></p>
+            <ul style="margin: 5px 0; color: #6b7280;">
+              <li>An Interesting Case of ATTR-neuropathy</li>
+              <li>Cardiac Amyloidosis</li>
+            </ul>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Presenters:</strong> Dr. Genevieve Matte, Dr. Edgar Da Silva</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Location:</strong> Virtual (No registration required)</p>
+          </div>
+
+          <div style="margin-bottom: 15px; padding: 15px; background: white; border-left: 4px solid #00DD89; border-radius: 4px;">
+            <h4 style="color: #00DD89; margin: 0 0 8px 0;">CANN Educational Series</h4>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Date:</strong> October 7, 2025</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Time:</strong> 2-3 PM MST</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Location:</strong> Virtual Event</p>
+            <p style="margin: 5px 0; color: #6b7280;">Topic and speaker to be announced. Visit the CANN Events page for details.</p>
+          </div>
+
+          <div style="padding: 15px; background: white; border-left: 4px solid #00AFE6; border-radius: 4px;">
+            <h4 style="color: #00AFE6; margin: 0 0 8px 0;">CAS Journal Club - November Session</h4>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Date:</strong> November 27, 2025</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Time:</strong> 3-4 PM MST</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Location:</strong> Virtual (Details coming soon)</p>
+          </div>
+        </div>
+      ` : `
+        <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #1f2937; margin-top: 0;">📅 Upcoming Events</h3>
+          
+          <div style="margin-bottom: 15px; padding: 15px; background: white; border-left: 4px solid #00AFE6; border-radius: 4px;">
+            <h4 style="color: #00AFE6; margin: 0 0 8px 0;">CAS Journal Club - September Session</h4>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Date:</strong> September 25, 2025</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Time:</strong> 3-4 PM MST</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Topics:</strong></p>
+            <ul style="margin: 5px 0; color: #6b7280;">
+              <li>An Interesting Case of ATTR-neuropathy</li>
+              <li>Cardiac Amyloidosis</li>
+            </ul>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Presenters:</strong> Dr. Genevieve Matte, Dr. Edgar Da Silva</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Location:</strong> Virtual (No registration required)</p>
+          </div>
+
+          <div style="padding: 15px; background: white; border-left: 4px solid #00AFE6; border-radius: 4px;">
+            <h4 style="color: #00AFE6; margin: 0 0 8px 0;">CAS Journal Club - November Session</h4>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Date:</strong> November 27, 2025</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Time:</strong> 3-4 PM MST</p>
+            <p style="margin: 5px 0; color: #6b7280;"><strong>Location:</strong> Virtual (Details coming soon)</p>
+          </div>
+        </div>
+      `;
+
+      const emailBody = `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #333;">
+          <div style="background: linear-gradient(135deg, #00AFE6, #00DD89); padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">Welcome to ${isCANNMember ? 'CAS & CANN' : 'CAS'}!</h1>
+            <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Thank you for joining the Canadian Amyloidosis Society</p>
+          </div>
+          
+          <div style="background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none;">
+            <p style="font-size: 16px; color: #374151; margin: 0 0 20px 0;">Dear ${memberName},</p>
+            
+            <p style="font-size: 15px; color: #4b5563; margin: 0 0 15px 0;">
+              We're thrilled to welcome you to the Canadian Amyloidosis Society${isCANNMember ? ' and the Canadian Amyloidosis Nursing Network (CANN)' : ''}! 
+              You're now part of a dedicated community working together to advance amyloidosis care, research, and education across Canada.
+            </p>
+
+            ${isCANNMember ? `
+            <div style="background: linear-gradient(135deg, rgba(0,175,230,0.1), rgba(0,221,137,0.1)); padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #00DD89;">
+              <h3 style="color: #00DD89; margin-top: 0;">🎯 As a CANN Member</h3>
+              <p style="color: #4b5563; margin: 0;">You'll receive exclusive access to nursing-focused educational resources, networking opportunities with fellow amyloidosis care specialists, and invitations to CANN-specific events throughout the year.</p>
+            </div>
+            ` : ''}
+
+            <h3 style="color: #1f2937; margin: 25px 0 15px 0;">🚀 Getting Started</h3>
+            <ul style="color: #4b5563; line-height: 1.8; margin: 0 0 20px 0;">
+              <li><strong>Visit our website:</strong> <a href="https://amyloid.ca" style="color: #00AFE6; text-decoration: none;">amyloid.ca</a></li>
+              <li><strong>Explore resources:</strong> Clinical tools, patient materials, and research updates</li>
+              <li><strong>Join upcoming events:</strong> Journal Clubs and educational series (see below)</li>
+              ${isCANNMember ? '<li><strong>Access CANN resources:</strong> Nursing-specific materials and case studies</li>' : ''}
+              <li><strong>Connect with the network:</strong> Collaborate with fellow clinicians and researchers</li>
+            </ul>
+
+            ${eventDetailsHTML}
+
+            <div style="background: linear-gradient(135deg, rgba(0,175,230,0.1), rgba(0,221,137,0.1)); padding: 20px; border-radius: 8px; margin: 25px 0;">
+              <h3 style="color: #1f2937; margin-top: 0;">📬 Stay Connected</h3>
+              <p style="color: #4b5563; margin: 0 0 10px 0;">You'll receive regular updates about:</p>
+              <ul style="color: #4b5563; margin: 0;">
+                <li>Upcoming events and educational opportunities</li>
+                <li>New clinical resources and guidelines</li>
+                <li>Research developments and publications</li>
+                ${isCANNMember ? '<li>CANN-specific nursing education and networking events</li>' : ''}
+                <li>Collaborative initiatives across Canada</li>
+              </ul>
+            </div>
+
+            <p style="font-size: 15px; color: #4b5563; margin: 25px 0 15px 0;">
+              If you have any questions or need assistance, please don't hesitate to reach out to us at 
+              <a href="mailto:CAS@amyloid.ca" style="color: #00AFE6; text-decoration: none;">CAS@amyloid.ca</a>${isCANNMember ? ' or <a href="mailto:CANN@amyloid.ca" style="color: #00DD89; text-decoration: none;">CANN@amyloid.ca</a>' : ''}.
+            </p>
+
+            <p style="font-size: 15px; color: #4b5563; margin: 20px 0 0 0;">
+              Welcome aboard!
+            </p>
+            
+            <p style="font-size: 15px; color: #4b5563; margin: 5px 0 0 0; font-weight: 600;">
+              The CAS Team${isCANNMember ? ' & CANN Executive Committee' : ''}
+            </p>
+          </div>
+
+          <div style="background: #f9fafb; padding: 20px 30px; border-radius: 0 0 12px 12px; text-align: center; border: 1px solid #e5e7eb; border-top: none;">
+            <p style="margin: 0; color: #9ca3af; font-size: 12px;">
+              Canadian Amyloidosis Society${isCANNMember ? ' & CANN' : ''}<br>
+              <a href="https://amyloid.ca" style="color: #00AFE6; text-decoration: none;">amyloid.ca</a>
+            </p>
+          </div>
+        </div>
+      `;
+
+      const emailPayload = {
+        data: [{
+          org_email: true,
+          to: [{
+            user_name: memberName,
+            email: leadData.Email
+          }],
+          subject: `Welcome to ${isCANNMember ? 'CAS & CANN' : 'CAS'} - Your Membership is Confirmed!`,
+          content: emailBody,
+          mail_format: "html"
+        }]
+      };
+
+      const url = `${this.baseUrl}/Leads/${leadId}/actions/send_mail`;
+      
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Zoho-oauthtoken ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(emailPayload)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('[Zoho Welcome Email] Failed to send:', errorText);
+        return;
+      }
+
+      const result = await response.json();
+      console.log('[Zoho Welcome Email] ✅ Sent successfully to', leadData.Email);
+      
+    } catch (error) {
+      console.error('[Zoho Welcome Email] Error:', error);
     }
   }
 

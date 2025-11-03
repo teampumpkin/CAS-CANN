@@ -314,10 +314,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Send automated email notifications via Zoho Send Mail API
       try {
+        // Send admin notification to CAS/CANN team
         await zohoCRMService.sendRegistrationEmail(zohoRecord.id, zohoData);
-        console.log("[CAS/CANN Registration] ✅ Email notifications sent via Zoho CRM");
+        console.log("[CAS/CANN Registration] ✅ Admin notification sent");
+        
+        // Send welcome email to the new member (only if they are a member, not a contact)
+        if (isMember) {
+          await zohoCRMService.sendWelcomeEmail(zohoRecord.id, zohoData);
+          console.log("[CAS/CANN Registration] ✅ Welcome email sent to member");
+        }
       } catch (emailError) {
-        console.error("[CAS/CANN Registration] ⚠️ Failed to send email notifications:", emailError);
+        console.error("[CAS/CANN Registration] ⚠️ Failed to send emails:", emailError);
         // Continue even if email fails - registration was successful
       }
       

@@ -1838,6 +1838,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Setup Email Notification Workflows
+  app.post("/api/admin/setup-email-workflows", async (req, res) => {
+    try {
+      console.log('[Admin] Setting up email notification workflows in Zoho CRM...');
+      
+      const result = await zohoWorkflowService.setupRegistrationEmailWorkflows();
+      
+      res.json({
+        success: result.success,
+        message: result.success 
+          ? `Successfully created ${result.workflows.length} email notification workflows`
+          : `Created ${result.workflows.length} workflows with ${result.errors.length} errors`,
+        workflows: result.workflows,
+        errors: result.errors.length > 0 ? result.errors : undefined,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('[Admin] Failed to setup email workflows:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to setup email workflows'
+      });
+    }
+  });
+
   // Data Sync Admin Routes
   // Import the data sync services
   const path = await import('path');

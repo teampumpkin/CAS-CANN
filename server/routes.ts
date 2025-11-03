@@ -310,23 +310,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const zohoRecord = await zohoCRMService.createRecord("Leads", zohoData);
       
-      console.log("[CAS/CANN Registration] ✅ Success! Zoho ID:", zohoRecord.id);
+      console.log("[CAS/CANN Registration] ✅ Lead created successfully! Zoho ID:", zohoRecord.id);
+      console.log("[CAS/CANN Registration] ℹ️  Email notifications should be configured via Zoho CRM Workflow Rules");
+      console.log("[CAS/CANN Registration] ℹ️  See ZOHO_EMAIL_WORKFLOW_SETUP.md for setup instructions");
       
-      // Send automated email notifications via Zoho Send Mail API
-      try {
-        // Send admin notification to CAS/CANN team
-        await zohoCRMService.sendRegistrationEmail(zohoRecord.id, zohoData);
-        console.log("[CAS/CANN Registration] ✅ Admin notification sent");
-        
-        // Send welcome email to the new member (only if they are a member, not a contact)
-        if (isMember) {
-          await zohoCRMService.sendWelcomeEmail(zohoRecord.id, zohoData);
-          console.log("[CAS/CANN Registration] ✅ Welcome email sent to member");
-        }
-      } catch (emailError) {
-        console.error("[CAS/CANN Registration] ⚠️ Failed to send emails:", emailError);
-        // Continue even if email fails - registration was successful
-      }
+      // NOTE: Email notifications are handled by Zoho CRM Workflow Rules, not direct API calls.
+      // This is more reliable and provides better email deliverability.
+      // 
+      // To set up automated emails:
+      // 1. Configure "Admin Notification" workflow in Zoho CRM (triggers on new Lead creation)
+      // 2. Configure "Member Welcome Email" workflow in Zoho CRM (triggers on new Lead creation)
+      // 
+      // See ZOHO_EMAIL_WORKFLOW_SETUP.md for detailed setup instructions.
       
       res.status(201).json({
         success: true,

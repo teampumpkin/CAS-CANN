@@ -64,25 +64,20 @@ export const casRegistrationSchema = z.object({
     required_error: "Please select whether you want to join CANN",
   }),
   
-  // Questions 3-8: Core member information (shown when either Q1 or Q2 = "Yes")
+  // Questions 3-10: Core member information (shown when either Q1 or Q2 = "Yes")
   fullName: z.string().optional(),
   email: z.string().optional(),
   discipline: z.string().optional(),
   subspecialty: z.string().optional(),
+  amyloidosisType: z.enum(["ATTR", "AL", "Both ATTR and AL", "Other"]).optional(), // Q7: visible to ALL members
   institution: z.string().optional(),
-  wantsCommunications: z.enum(["Yes", "No"]).optional(),
+  wantsServicesMapInclusion: z.enum(["Yes", "No"]).optional(), // Q9
+  wantsCommunications: z.enum(["Yes", "No"]).optional(), // Q10
   
-  // Question 9: Services Map (ALWAYS visible, standalone)
-  wantsServicesMapInclusion: z.enum(["Yes", "No"]).optional(),
-  
-  // Question 10: CANN Additional Questions (shown only when Q2 = "Yes")
-  amyloidosisType: z.enum(["ATTR", "AL", "Both ATTR and AL", "Other"]).optional(),
+  // Question 11: CANN Communications (shown only when Q2 = "Yes")
   cannCommunications: z.enum(["Yes", "No"]).optional(),
-  educationalInterests: z.array(z.string()).optional(),
-  otherEducationalInterest: z.string().optional(),
-  interestedInPresenting: z.enum(["Yes", "No"]).optional(),
   
-  // Question 11: Non-member contact fallback (only if both Q1 = No AND Q2 = No)
+  // Non-member contact fallback (only if both Q1 = No AND Q2 = No)
   noMemberName: z.string().optional(),
   noMemberEmail: z.string().optional(),
   noMemberMessage: z.string().optional(),
@@ -130,6 +125,14 @@ export const casRegistrationSchema = z.object({
       });
     }
     
+    if (!data.amyloidosisType) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Please select the type of amyloidosis patients you care for",
+        path: ["amyloidosisType"],
+      });
+    }
+    
     if (!data.institution || data.institution.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -147,16 +150,8 @@ export const casRegistrationSchema = z.object({
     }
   }
   
-  // Validation for CANN-specific fields (Q10a-10d, shown only when Q2 = "Yes")
+  // Validation for CANN-specific field (Q11, shown only when Q2 = "Yes")
   if (data.wantsCANNMembership === "Yes") {
-    if (!data.amyloidosisType) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Please select the type of amyloidosis patients you care for",
-        path: ["amyloidosisType"],
-      });
-    }
-    
     if (!data.cannCommunications) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -164,17 +159,9 @@ export const casRegistrationSchema = z.object({
         path: ["cannCommunications"],
       });
     }
-    
-    if (!data.interestedInPresenting) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Please select whether you're interested in presenting",
-        path: ["interestedInPresenting"],
-      });
-    }
   }
   
-  // Validation for non-member contact fallback (Q11, shown only when both Q1 = No AND Q2 = No)
+  // Validation for non-member contact fallback (shown only when both Q1 = No AND Q2 = No)
   if (!isMember) {
     if (!data.noMemberName || data.noMemberName.trim().length === 0) {
       ctx.addIssue({

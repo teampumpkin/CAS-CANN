@@ -265,21 +265,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
           : "Website - CAS Registration",
       };
       
-      // Member fields (Q3-8) - when either CAS or CANN = Yes
+      // Member fields (Q3-10) - when either CAS or CANN = Yes
       if (isMember) {
         zohoData.Last_Name = formData.fullName || "Unknown";
         zohoData.Email = formData.email;
         if (formData.discipline) zohoData.Industry = formData.discipline;
         if (formData.subspecialty) zohoData.Description = formData.subspecialty;
+        
+        // Q7: Amyloidosis Type - visible to ALL members (not just CANN)
+        if (formData.amyloidosisType) {
+          zohoData.Amyloidosis_Type = formData.amyloidosisType;
+        }
+        
         if (formData.institution) zohoData.Company = formData.institution;
         
-        // CAS Communications preference (Q8)
+        // Q9: Services Map Inclusion
+        if (formData.wantsServicesMapInclusion) {
+          zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
+        }
+        
+        // Q10: CAS Communications preference
         if (formData.wantsCommunications) {
           zohoData.CAS_Communications = formData.wantsCommunications;
         }
       }
       
-      // Non-member fallback (Q11) - when both CAS and CANN = No
+      // Non-member fallback - when both CAS and CANN = No
       if (!isMember) {
         zohoData.Last_Name = formData.noMemberName || "Non-Member Contact";
         zohoData.Email = formData.noMemberEmail;
@@ -288,36 +299,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
       
-      // Services Map (Q9) - always asked
-      if (formData.wantsServicesMapInclusion) {
-        zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
-      }
-      
-      // CANN-specific fields (Q10a-10d) - only when CANN = Yes
+      // Q11: CANN Communications - only when CANN = Yes
       if (isCANNMember) {
-        if (formData.amyloidosisType) {
-          zohoData.Amyloidosis_Type = formData.amyloidosisType;
-        }
-        
         if (formData.cannCommunications) {
           zohoData.CANN_Communications = formData.cannCommunications;
-        }
-        
-        // Educational interests (checkbox array) - send as array for Zoho multiselect
-        if (formData.educationalInterests && formData.educationalInterests.length > 0) {
-          const interests = [...formData.educationalInterests];
-          // Add "Other" if specified
-          if (formData.otherEducationalInterest) {
-            interests.push(`Other: ${formData.otherEducationalInterest}`);
-          }
-          // Send as array for Zoho jsonarray/multiselect field
-          zohoData.Educational_Interests = interests;
-        } else if (formData.otherEducationalInterest) {
-          zohoData.Educational_Interests = [`Other: ${formData.otherEducationalInterest}`];
-        }
-        
-        if (formData.interestedInPresenting) {
-          zohoData.Interested_in_Presenting = formData.interestedInPresenting;
         }
       }
       

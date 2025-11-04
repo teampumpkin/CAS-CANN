@@ -659,14 +659,10 @@ export default function JoinCAS() {
               <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
             <DialogTitle className="text-center text-xl sm:text-2xl">
-              {submissionType === 'cann' && "CANN Membership Registration Submitted!"}
-              {submissionType === 'cas' && "CAS Membership Registration Submitted!"}
-              {submissionType === 'contact' && "Contact Form Submitted!"}
+              Membership Registration Submitted!
             </DialogTitle>
             <DialogDescription className="text-center text-sm sm:text-base">
-              {submissionType === 'cann' && "Thank you for registering for CANN membership! You are now also a member of CAS. We've received your submission and will be in touch soon with membership details."}
-              {submissionType === 'cas' && "Thank you for registering for CAS membership! We've received your submission and will be in touch soon with membership details."}
-              {submissionType === 'contact' && "Thank you for contacting us! We've received your message and will get back to you as soon as possible."}
+              We've received your form submission and we will be in touch soon with membership details.
             </DialogDescription>
           </DialogHeader>
           {submissionId && (

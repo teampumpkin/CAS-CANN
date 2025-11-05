@@ -1,7 +1,7 @@
 import Hero from '@/components/Hero';
 import WelcomeSection from '@/components/WelcomeSection';
 import AboutAmyloidosisSection from '@/components/AboutAmyloidosisSection';
-
+import DirectoryPreviewSection from '@/components/DirectoryPreviewSection';
 import EventsNewsletterSection from '@/components/EventsNewsletterSection';
 // import FeaturedSpotlights from '@/components/FeaturedSpotlights';
 

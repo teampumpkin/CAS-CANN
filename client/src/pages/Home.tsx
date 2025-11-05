@@ -11,6 +11,7 @@ export default function Home() {
       <Hero />
       <WelcomeSection />
       <AboutAmyloidosisSection />
+      <DirectoryPreviewSection />
       <EventsNewsletterSection />
       {/* <FeaturedSpotlights /> */}
     </main>

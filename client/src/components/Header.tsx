@@ -107,6 +107,10 @@ export default function Header() {
           name: "Partnerships and Other Amyloidosis Organizations",
           href: "/partnerships",
         },
+        {
+          name: "Upload Resource",
+          href: "/upload-resource",
+        },
       ],
     },
     { name: "Get Involved", href: "/get-involved" },

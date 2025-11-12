@@ -99,25 +99,27 @@ export class ZohoCRMService {
 
   /**
    * Get a valid access token, automatically refreshing if needed
+   * BULLETPROOF: Attempts auto-refresh even for expired tokens
    */
   private async getAccessToken(): Promise<string> {
-    // Use dedicated token manager with proactive health check
+    // Layer 1: Check token health
     const health = await dedicatedTokenManager.checkTokenHealth('zoho_crm');
     
-    if (!health.isValid) {
-      const errorMsg = health.error || 'Token is invalid or expired';
-      console.error(`[Zoho CRM] Token health check failed: ${errorMsg}`);
-      throw new Error(`No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect`);
-    }
-
-    if (health.needsRefresh && health.isValid) {
-      console.log('[Zoho CRM] Proactively refreshing token before API call');
+    // Layer 2: If invalid OR needs refresh, attempt automatic refresh
+    if (!health.isValid || health.needsRefresh) {
+      console.log(`[Zoho CRM] Token ${!health.isValid ? 'expired' : 'needs refresh'}, attempting auto-recovery...`);
       const refreshed = await dedicatedTokenManager.forceRefreshToken('zoho_crm');
       if (refreshed) {
+        console.log('[Zoho CRM] ✅ Token auto-refreshed successfully');
         return refreshed.accessToken;
       }
+      
+      // If refresh failed, throw error with instructions
+      console.error(`[Zoho CRM] ❌ Auto-refresh failed - manual authentication required`);
+      throw new Error(`No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect`);
     }
     
+    // Layer 3: Get validated token from cache/database
     const token = await dedicatedTokenManager.getValidAccessToken('zoho_crm');
     if (!token) {
       throw new Error("No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect");
@@ -167,10 +169,14 @@ export class ZohoCRMService {
 
       // Handle OAuth errors (401) with token refresh retry
       if (response.status === 401 && retryCount < 2) {
-        console.log(`[Zoho API] OAuth error (401), attempting token refresh and retry`);
-        // Force token refresh by clearing cache
-        await oauthService.getValidToken('zoho_crm');
-        return this.makeRequest(endpoint, method, body, retryCount + 1);
+        console.log(`[Zoho API] OAuth error (401), forcing token refresh and retry...`);
+        // Force token refresh using dedicated token manager
+        const refreshed = await dedicatedTokenManager.forceRefreshToken('zoho_crm');
+        if (refreshed) {
+          console.log('[Zoho API] Token refreshed, retrying request...');
+          return this.makeRequest(endpoint, method, body, retryCount + 1);
+        }
+        console.error('[Zoho API] Token refresh failed after 401 error');
       }
 
       if (!response.ok) {

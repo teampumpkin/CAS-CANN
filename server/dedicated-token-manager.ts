@@ -9,8 +9,8 @@ export class DedicatedTokenManager {
   private static instance: DedicatedTokenManager;
   private tokenCache: Map<string, TokenInfo> = new Map();
   private healthCheckInterval: NodeJS.Timeout | null = null;
-  private readonly TOKEN_REFRESH_BUFFER_MS = 300000; // 5 minutes before expiry
-  private readonly HEALTH_CHECK_INTERVAL_MS = 60000; // 1 minute health checks
+  private readonly TOKEN_REFRESH_BUFFER_MS = 600000; // 10 minutes before expiry (was 5)
+  private readonly HEALTH_CHECK_INTERVAL_MS = 30000; // 30 seconds health checks (was 60)
   private lastHealthCheckTime: Date | null = null;
   private healthCheckCount = 0;
 
@@ -23,6 +23,7 @@ export class DedicatedTokenManager {
 
   /**
    * Initialize the token management system
+   * BULLETPROOF: Immediately attempts to recover from expired tokens on startup
    */
   async initialize(): Promise<void> {
     console.log('[TokenManager] Initializing dedicated token management system...');
@@ -30,11 +31,12 @@ export class DedicatedTokenManager {
     // Load existing tokens from database
     await this.loadTokensFromDatabase();
     
-    // Start health monitoring
-    this.startHealthMonitoring();
-    
-    // Perform initial health check
+    // IMMEDIATE startup recovery check
+    console.log('[TokenManager] Performing startup token recovery check...');
     await this.performHealthCheck();
+    
+    // Start continuous health monitoring
+    this.startHealthMonitoring();
     
     console.log('[TokenManager] Token management system initialized successfully');
   }

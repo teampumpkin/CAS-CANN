@@ -210,6 +210,7 @@ export const formSubmissions = pgTable("form_submissions", {
   errorMessage: text("error_message"), // Error details if sync failed
   retryCount: integer("retry_count").notNull().default(0),
   lastRetryAt: timestamp("last_retry_at"),
+  lastSyncAt: timestamp("last_sync_at"), // Timestamp when successfully synced to Zoho
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 }, (table) => [
@@ -275,6 +276,7 @@ export const insertFormSubmissionSchema = createInsertSchema(formSubmissions).om
   errorMessage: true,
   retryCount: true,
   lastRetryAt: true,
+  lastSyncAt: true,
 });
 
 export const insertSubmissionLogSchema = createInsertSchema(submissionLogs).omit({

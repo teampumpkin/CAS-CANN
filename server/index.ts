@@ -60,6 +60,11 @@ app.use((req, res, next) => {
   const { fieldMetadataCacheService } = await import("./field-metadata-cache-service");
   await fieldMetadataCacheService.initialize();
 
+  // Initialize Zoho sync worker (BULLETPROOF: processes pending form submissions)
+  const { zohoSyncWorker } = await import("./zoho-sync-worker");
+  zohoSyncWorker.start();
+  console.log('[Server] Zoho background sync worker started');
+
   // Initialize notification service (DISABLED for production)
   // const { notificationService } = await import("./notification-service");
   // Note: notificationService initializes automatically via its constructor

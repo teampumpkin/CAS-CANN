@@ -248,93 +248,59 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // NEW: Unified CAS/CANN Registration endpoint (simple, direct to Zoho)
+  // BULLETPROOF: CAS/CANN Registration endpoint - ALWAYS succeeds by saving locally first
   app.post("/api/cas-cann-registration", async (req, res) => {
     try {
       console.log("[CAS/CANN Registration] Received:", req.body);
       
       const { formData, formName } = req.body;
       
-      const isMember = formData.wantsMembership === "Yes" || formData.wantsCANNMembership === "Yes";
-      const isCANNMember = formData.wantsCANNMembership === "Yes";
-      
-      // Build Zoho Lead data
-      const zohoData: any = {
-        Lead_Source: formName === "CAS & CANN Registration" 
-          ? "Website - CAS & CANN Registration"
-          : "Website - CAS Registration",
-      };
-      
-      // Member fields (Q3-10) - when either CAS or CANN = Yes
-      if (isMember) {
-        zohoData.Last_Name = formData.fullName || "Unknown";
-        zohoData.Email = formData.email;
-        if (formData.discipline) zohoData.Industry = formData.discipline;
-        if (formData.subspecialty) zohoData.Description = formData.subspecialty;
-        
-        // Q7: Amyloidosis Type - visible to ALL members (not just CANN)
-        if (formData.amyloidosisType) {
-          zohoData.Amyloidosis_Type = formData.amyloidosisType;
-        }
-        
-        if (formData.institution) zohoData.Company = formData.institution;
-        
-        // Q9: Services Map Inclusion
-        if (formData.wantsServicesMapInclusion) {
-          zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
-        }
-        
-        // Q10: CAS Communications preference
-        if (formData.wantsCommunications) {
-          zohoData.CAS_Communications = formData.wantsCommunications;
-        }
+      // Validate form data (basic validation)
+      if (!formData || !formName) {
+        return res.status(400).json({ 
+          success: false,
+          message: "Invalid request: missing form data or form name" 
+        });
       }
       
-      // Non-member fallback - when both CAS and CANN = No
-      if (!isMember) {
-        zohoData.Last_Name = formData.noMemberName || "Non-Member Contact";
-        zohoData.Email = formData.noMemberEmail;
-        if (formData.noMemberMessage) {
-          zohoData.Description = `Non-member contact: ${formData.noMemberMessage}`;
-        }
-      }
+      // STEP 1: Save to local database FIRST (this ALWAYS succeeds)
+      const submission = await storage.createFormSubmission({
+        formName: formName,
+        submissionData: formData,
+        sourceForm: "CAS/CANN Registration Form",
+        zohoModule: "Leads",
+      });
       
-      // Q11: CANN Communications - only when CANN = Yes
-      if (isCANNMember) {
-        if (formData.cannCommunications) {
-          zohoData.CANN_Communications = formData.cannCommunications;
-        }
-      }
+      // STEP 2: Log receipt
+      await storage.createSubmissionLog({
+        submissionId: submission.id,
+        operation: "received",
+        status: "success",
+        details: { 
+          message: "Form submission received and queued for Zoho sync",
+          formType: formName,
+        },
+      });
       
-      console.log("[CAS/CANN Registration] Submitting to Zoho:", zohoData);
+      console.log(`[CAS/CANN Registration] ✅ Saved locally with ID: ${submission.id}, queued for Zoho sync`);
       
-      const zohoRecord = await zohoCRMService.createRecord("Leads", zohoData);
-      
-      console.log("[CAS/CANN Registration] ✅ Lead created successfully! Zoho ID:", zohoRecord.id);
-      console.log("[CAS/CANN Registration] ℹ️  Email notifications should be configured via Zoho CRM Workflow Rules");
-      console.log("[CAS/CANN Registration] ℹ️  See ZOHO_EMAIL_WORKFLOW_SETUP.md for setup instructions");
-      
-      // NOTE: Email notifications are handled by Zoho CRM Workflow Rules, not direct API calls.
-      // This is more reliable and provides better email deliverability.
-      // 
-      // To set up automated emails:
-      // 1. Configure "Admin Notification" workflow in Zoho CRM (triggers on new Lead creation)
-      // 2. Configure "Member Welcome Email" workflow in Zoho CRM (triggers on new Lead creation)
-      // 
-      // See ZOHO_EMAIL_WORKFLOW_SETUP.md for detailed setup instructions.
-      
+      // STEP 3: Return success immediately (user never sees Zoho failures)
       res.status(201).json({
         success: true,
         message: "Registration submitted successfully",
-        submissionId: zohoRecord.id,
-        formName: formName
+        submissionId: submission.id,
+        formName: formName,
       });
       
+      // Background worker will sync to Zoho asynchronously
+      console.log(`[CAS/CANN Registration] ℹ️  Submission #${submission.id} will be synced to Zoho by background worker`);
+      
     } catch (error) {
-      console.error("[CAS/CANN Registration] ❌ Error:", error);
+      console.error("[CAS/CANN Registration] ❌ Error saving submission:", error);
+      // Even database errors should be rare, but log them
       res.status(500).json({ 
         success: false,
-        message: "Failed to submit registration" 
+        message: "Failed to save registration. Please try again or contact support." 
       });
     }
   });

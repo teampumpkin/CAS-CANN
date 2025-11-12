@@ -364,12 +364,13 @@ export class DedicatedTokenManager {
       for (const provider of providers) {
         const health = await this.checkTokenHealth(provider);
         
-        if (!health.isValid) {
-          console.log(`[TokenManager] Health check #${this.healthCheckCount} failed for ${provider}: ${health.error || 'Token expired'}`);
-        } else if (health.needsRefresh) {
-          console.log(`[TokenManager] Health check #${this.healthCheckCount}: ${provider} needs refresh soon (${Math.round((health.timeToExpiry || 0) / 1000)}s remaining)`);
+        if (!health.isValid || health.needsRefresh) {
+          if (!health.isValid) {
+            console.log(`[TokenManager] Health check #${this.healthCheckCount} failed for ${provider}: ${health.error || 'Token expired'}`);
+          } else {
+            console.log(`[TokenManager] Health check #${this.healthCheckCount}: ${provider} needs refresh soon (${Math.round((health.timeToExpiry || 0) / 1000)}s remaining)`);
+          }
           
-          // ACTUALLY TRIGGER THE REFRESH!
           const tokenRecord = await this.getActiveTokenRecord(provider);
           if (tokenRecord && tokenRecord.refreshToken) {
             console.log(`[TokenManager] 🔄 Auto-refreshing token for ${provider}...`);
@@ -377,8 +378,12 @@ export class DedicatedTokenManager {
             if (refreshed) {
               console.log(`[TokenManager] ✅ Auto-refresh successful for ${provider}`);
             } else {
-              console.error(`[TokenManager] ❌ Auto-refresh failed for ${provider}`);
+              console.error(`[TokenManager] ❌ Auto-refresh failed for ${provider} - Manual re-authentication required`);
+              console.error(`[TokenManager] Please visit: /oauth/zoho/connect to re-authenticate`);
             }
+          } else {
+            console.error(`[TokenManager] ❌ No refresh token available for ${provider} - Manual re-authentication required`);
+            console.error(`[TokenManager] Please visit: /oauth/zoho/connect to authenticate`);
           }
         }
       }

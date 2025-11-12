@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Search, FileText, Heart, Users, MapPin, Building2, Phone, Mail, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'wouter';
 import InteractiveCanadaMap from './InteractiveCanadaMap';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { healthcareCenters, HealthcareCenter } from '@/data/healthcareCenters';
@@ -257,13 +258,15 @@ export default function DirectoryPreviewSection() {
               ))}
             </div>
 
-            <motion.button
-              className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Explore Full Directory
-            </motion.button>
+            <Link href="/directory">
+              <motion.button
+                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Explore Full Directory
+              </motion.button>
+            </Link>
           </motion.div>
 
           {/* Quick Stats Sidebar */}

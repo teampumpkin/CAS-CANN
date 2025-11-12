@@ -130,15 +130,21 @@ export class ZohoSyncWorker {
       console.log(`[Zoho Sync Worker] ✅ Submission #${submission.id} synced successfully! Zoho ID: ${zohoRecord.id}`);
 
     } catch (error) {
-      // FAILURE: Increment retry count and log error
+      // FAILURE: Increment retry count and schedule next retry with exponential backoff
       const errorMessage = error instanceof Error ? error.message : String(error);
       console.error(`[Zoho Sync Worker] ❌ Failed to sync submission #${submission.id}:`, errorMessage);
 
       await storage.incrementRetryCount(submission.id);
+      
+      // Calculate exponential backoff: 2^retryCount * 10 seconds
+      const backoffSeconds = Math.pow(2, submission.retryCount) * 10;
+      const nextRetryAt = new Date(Date.now() + backoffSeconds * 1000);
+
       await storage.updateFormSubmission(submission.id, {
         processingStatus: "pending", // Back to pending for retry
         errorMessage: errorMessage,
         lastRetryAt: new Date(),
+        nextRetryAt: nextRetryAt, // Schedule next retry attempt
       });
 
       await storage.createSubmissionLog({
@@ -146,12 +152,14 @@ export class ZohoSyncWorker {
         operation: "retry_attempt",
         status: "failed",
         errorMessage: errorMessage,
-        details: { retryCount: submission.retryCount + 1 },
+        details: { 
+          retryCount: submission.retryCount + 1,
+          nextRetryAt: nextRetryAt.toISOString(),
+          backoffSeconds: backoffSeconds,
+        },
       });
 
-      // Calculate backoff delay
-      const backoffSeconds = Math.pow(2, submission.retryCount) * 10; // Exponential backoff
-      console.log(`[Zoho Sync Worker] Will retry submission #${submission.id} (attempt ${submission.retryCount + 1}/${this.MAX_RETRIES}) after ${backoffSeconds}s`);
+      console.log(`[Zoho Sync Worker] ⏱️  Scheduled retry for submission #${submission.id} (attempt ${submission.retryCount + 1}/${this.MAX_RETRIES}) at ${nextRetryAt.toISOString()} (in ${backoffSeconds}s)`);
     }
   }
 

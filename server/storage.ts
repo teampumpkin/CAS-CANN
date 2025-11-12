@@ -37,7 +37,7 @@ import {
   type InsertCampaignSync,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, and, like, desc, gte, lte, notInArray } from "drizzle-orm";
+import { eq, and, like, desc, gte, lte, notInArray, isNull, or } from "drizzle-orm";
 
 export interface ResourceFilters {
   amyloidosisType?: string;
@@ -340,13 +340,18 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getFormSubmissionsByStatus(processingStatus: string, syncStatus: string): Promise<FormSubmission[]> {
+    // Get pending submissions that are ready to retry (nextRetryAt is null or in the past)
     return await db
       .select()
       .from(formSubmissions)
       .where(
         and(
           eq(formSubmissions.processingStatus, processingStatus as any),
-          eq(formSubmissions.syncStatus, syncStatus as any)
+          eq(formSubmissions.syncStatus, syncStatus as any),
+          or(
+            isNull(formSubmissions.nextRetryAt),
+            lte(formSubmissions.nextRetryAt, new Date())
+          )
         )
       )
       .orderBy(desc(formSubmissions.createdAt));

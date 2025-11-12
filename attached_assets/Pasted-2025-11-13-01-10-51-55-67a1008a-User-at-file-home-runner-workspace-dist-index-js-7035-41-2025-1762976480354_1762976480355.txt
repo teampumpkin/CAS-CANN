@@ -1,0 +1,100 @@
+2025-11-13 01:10:51.55
+67a1008a
+User
+at file:///home/runner/workspace/dist/index.js:7035:41
+2025-11-13 01:10:59.16
+67a1008a
+User
+[Zoho Sync Worker] Error processing queue: error: column "next_retry_at" does not exist
+2025-11-13 01:10:59.16
+67a1008a
+User
+at file:///home/runner/workspace/node_modules/@neondatabase/serverless/index.mjs:1345:74
+2025-11-13 01:10:59.16
+67a1008a
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-13 01:10:59.16
+67a1008a
+User
+at async NeonPreparedQuery.execute (file:///home/runner/workspace/node_modules/drizzle-orm/neon-serverless/session.js:76:20)
+2025-11-13 01:10:59.16
+67a1008a
+User
+at async DatabaseStorage.getFormSubmissionsByStatus (file:///home/runner/workspace/dist/index.js:632:16)
+2025-11-13 01:10:59.16
+67a1008a
+User
+at async ZohoSyncWorker.processQueue (file:///home/runner/workspace/dist/index.js:4665:38) {
+2025-11-13 01:10:59.16
+67a1008a
+User
+length: 191,
+2025-11-13 01:10:59.16
+67a1008a
+User
+severity: 'ERROR',
+2025-11-13 01:10:59.16
+67a1008a
+User
+code: '42703',
+2025-11-13 01:10:59.16
+67a1008a
+User
+detail: undefined,
+2025-11-13 01:10:59.16
+67a1008a
+User
+hint: 'Perhaps you meant to reference the column "form_submissions.last_retry_at".',
+2025-11-13 01:10:59.16
+67a1008a
+User
+position: '176',
+2025-11-13 01:10:59.16
+67a1008a
+User
+internalPosition: undefined,
+2025-11-13 01:10:59.16
+67a1008a
+User
+internalQuery: undefined,
+2025-11-13 01:10:59.16
+67a1008a
+User
+where: undefined,
+2025-11-13 01:10:59.16
+67a1008a
+User
+schema: undefined,
+2025-11-13 01:10:59.16
+67a1008a
+User
+table: undefined,
+2025-11-13 01:10:59.16
+67a1008a
+User
+column: undefined,
+2025-11-13 01:10:59.16
+67a1008a
+User
+dataType: undefined,
+2025-11-13 01:10:59.16
+67a1008a
+User
+constraint: undefined,
+2025-11-13 01:10:59.16
+67a1008a
+User
+file: 'parse_relation.c',
+2025-11-13 01:10:59.16
+67a1008a
+User
+line: '3729',
+2025-11-13 01:10:59.16
+67a1008a
+User
+routine: 'errorMissingColumn'
+2025-11-13 01:10:59.16
+67a1008a
+User
+}

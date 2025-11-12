@@ -1,0 +1,124 @@
+2025-11-13 00:54:17.41
+4e64a22c
+User
+CANN_Communications: 'Yes'
+2025-11-13 00:54:17.41
+4e64a22c
+User
+}
+2025-11-13 00:54:17.59
+4e64a22c
+User
+[Zoho CRM] Token expired, attempting auto-recovery...
+2025-11-13 00:54:17.63
+4e64a22c
+User
+[Zoho CRM] ❌ Auto-refresh failed - manual authentication required
+2025-11-13 00:54:17.63
+4e64a22c
+User
+Failed to create record in module Leads using v8 API: Error: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at ZohoCRMService.getAccessToken (file:///home/runner/workspace/dist/index.js:1343:17)
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at async ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1353:29)
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at async ZohoCRMService.createRecord (file:///home/runner/workspace/dist/index.js:1476:28)
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at async file:///home/runner/workspace/dist/index.js:6884:26
+2025-11-13 00:54:17.63
+4e64a22c
+User
+[CAS/CANN Registration] ❌ Error: Error: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at ZohoCRMService.getAccessToken (file:///home/runner/workspace/dist/index.js:1343:17)
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at async ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1353:29)
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at async ZohoCRMService.createRecord (file:///home/runner/workspace/dist/index.js:1476:28)
+2025-11-13 00:54:17.63
+4e64a22c
+User
+at async file:///home/runner/workspace/dist/index.js:6884:26
+2025-11-13 00:54:17.63
+4e64a22c
+User
+7:24:17 PM [express] POST /api/cas-cann-registration 500 in 223ms :: {"success":false,"message":"Fai…
+2025-11-13 00:54:19.18
+4e64a22c
+User
+[CAS/CANN Registration] Received: {
+2025-11-13 00:54:19.18
+4e64a22c
+User
+formData: {
+2025-11-13 00:54:19.18
+4e64a22c
+User
+wantsMembership: 'Yes',
+2025-11-13 00:54:19.18
+4e64a22c
+User
+wantsCANNMembership: 'Yes',
+2025-11-13 00:54:19.18
+4e64a22c
+User
+discipline: 'Cardiology',
+2025-11-13 00:54:19.18
+4e64a22c
+User
+subspecialty: 'cardiogioly',
+2025-11-13 00:54:19.18
+4e64a22c
+User
+institution: 'Toronto General Hospital',
+2025-11-13 00:54:19.18
+4e64a22c
+User
+wantsServicesMapInclusion: 'Yes',
+2025-11-13 00:54:19.18
+4e64a22c
+User
+wantsCommunications: 'No',
+2025-11-13 00:54:19.18
+4e64a22c
+User
+cannCommunications: 'Yes',
+2025-11-13 00:54:19.18
+4e64a22c
+User
+noMemberMessage: ''
+2025-11-13 00:54:19.18
+4e64a22c
+User
+formName: 'CAS & CANN Registration'
+2025-11-13 00:54:19.18
+4e64a22c
+User
+Last_Name: 'vasi',
+2025-11-13 00:54:19.18
+4e64a22c
+User
+Email: 'vasi.karan@teampumpkin.com',

@@ -111,6 +111,10 @@ export default function Header() {
           name: "Upload Resource",
           href: "/upload-resource",
         },
+        {
+          name: "Resource Moderation",
+          href: "/resource-moderation",
+        },
       ],
     },
     { name: "Get Involved", href: "/get-involved" },

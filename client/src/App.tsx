@@ -22,6 +22,7 @@ const Governance = lazy(() => import("@/pages/Governance"));
 const Directory = lazy(() => import("@/pages/Directory"));
 const Resources = lazy(() => import("@/pages/Resources"));
 const UploadResource = lazy(() => import("@/pages/UploadResource"));
+const ResourceModeration = lazy(() => import("@/pages/ResourceModeration"));
 const GetInvolved = lazy(() => import("@/pages/GetInvolved"));
 const JoinCAS = lazy(() => import("@/pages/JoinCAS"));
 const Contact = lazy(() => import("@/pages/Contact"));
@@ -81,6 +82,7 @@ function Router() {
         <Route path="/partnerships" component={Partnerships} />
 
         <Route path="/upload-resource" component={UploadResource} />
+        <Route path="/resource-moderation" component={ResourceModeration} />
         <Route path="/community" component={Community} />
         <Route path="/events" component={Events} />
         <Route path="/get-involved" component={GetInvolved} />

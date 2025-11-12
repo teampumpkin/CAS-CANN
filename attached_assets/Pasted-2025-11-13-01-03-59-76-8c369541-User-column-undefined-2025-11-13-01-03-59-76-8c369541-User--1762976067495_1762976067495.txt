@@ -1,0 +1,130 @@
+2025-11-13 01:03:59.76
+8c369541
+User
+column: undefined,
+2025-11-13 01:03:59.76
+8c369541
+User
+dataType: undefined,
+2025-11-13 01:03:59.76
+8c369541
+User
+constraint: undefined,
+2025-11-13 01:03:59.76
+8c369541
+User
+file: 'parse_relation.c',
+2025-11-13 01:03:59.76
+8c369541
+User
+line: '3729',
+2025-11-13 01:03:59.76
+8c369541
+User
+routine: 'errorMissingColumn'
+2025-11-13 01:03:59.76
+8c369541
+User
+}
+2025-11-13 01:04:09.75
+8c369541
+User
+[Zoho Sync Worker] Error processing queue: error: column "next_retry_at" does not exist
+2025-11-13 01:04:09.75
+8c369541
+User
+at file:///home/runner/workspace/node_modules/@neondatabase/serverless/index.mjs:1345:74
+2025-11-13 01:04:09.75
+8c369541
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-13 01:04:09.75
+8c369541
+User
+at async NeonPreparedQuery.execute (file:///home/runner/workspace/node_modules/drizzle-orm/neon-serverless/session.js:76:20)
+2025-11-13 01:04:09.75
+8c369541
+User
+at async DatabaseStorage.getFormSubmissionsByStatus (file:///home/runner/workspace/dist/index.js:632:16)
+2025-11-13 01:04:09.75
+8c369541
+User
+at async ZohoSyncWorker.processQueue (file:///home/runner/workspace/dist/index.js:4665:38) {
+2025-11-13 01:04:09.75
+8c369541
+User
+length: 191,
+2025-11-13 01:04:09.75
+8c369541
+User
+severity: 'ERROR',
+2025-11-13 01:04:09.75
+8c369541
+User
+code: '42703',
+2025-11-13 01:04:09.75
+8c369541
+User
+detail: undefined,
+2025-11-13 01:04:09.75
+8c369541
+User
+hint: 'Perhaps you meant to reference the column "form_submissions.last_retry_at".',
+2025-11-13 01:04:09.75
+8c369541
+User
+position: '176',
+2025-11-13 01:04:09.75
+8c369541
+User
+internalPosition: undefined,
+2025-11-13 01:04:09.75
+8c369541
+User
+internalQuery: undefined,
+2025-11-13 01:04:09.75
+8c369541
+User
+where: undefined,
+2025-11-13 01:04:09.75
+8c369541
+User
+schema: undefined,
+2025-11-13 01:04:09.75
+8c369541
+User
+table: undefined,
+2025-11-13 01:04:09.75
+8c369541
+User
+column: undefined,
+2025-11-13 01:04:09.75
+8c369541
+User
+dataType: undefined,
+2025-11-13 01:04:09.75
+8c369541
+User
+constraint: undefined,
+2025-11-13 01:04:09.75
+8c369541
+User
+file: 'parse_relation.c',
+2025-11-13 01:04:09.75
+8c369541
+User
+line: '3729',
+2025-11-13 01:04:09.75
+8c369541
+User
+routine: 'errorMissingColumn'
+2025-11-13 01:04:09.75
+8c369541
+User
+}
+
+Collapse
+
+Wrap
+
+Colors

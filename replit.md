@@ -99,7 +99,10 @@ Then verify background sync starts working:
 
 **Bulletproof Design Principles:**
 1. **Proactive Refresh**: Tokens are refreshed **10 minutes before expiration** (not after they expire)
-2. **Health Check System**: Runs every 30 seconds checking all token expiration statuses
+2. **Smart Health Check System**: Uses mathematical formula `MIN(REFRESH_BUFFER / 3, 5 minutes)` to guarantee at least 3 checks before refresh deadline
+   - For 10-minute buffer: Checks every 3.3 minutes (guarantees 3+ checks within buffer window)
+   - Formula ensures we **never miss** the refresh deadline even if one check is delayed
+   - Balances reliability (frequent enough) with efficiency (not too frequent)
 3. **Intelligent Error Handling**:
    - **Permanent Errors** (invalid_grant, invalid_client, invalid_code, invalid_client_secret): Token marked inactive → requires manual re-authentication
    - **Temporary Errors** (network timeouts, rate limits, API downtime): Token stays active → system keeps retrying automatically

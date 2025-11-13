@@ -9,8 +9,21 @@ export class DedicatedTokenManager {
   private static instance: DedicatedTokenManager;
   private tokenCache: Map<string, TokenInfo> = new Map();
   private healthCheckInterval: NodeJS.Timeout | null = null;
-  private readonly TOKEN_REFRESH_BUFFER_MS = 600000; // 10 minutes before expiry (was 5)
-  private readonly HEALTH_CHECK_INTERVAL_MS = 30000; // 30 seconds health checks (was 60)
+  private readonly TOKEN_REFRESH_BUFFER_MS = 600000; // 10 minutes before expiry
+  /**
+   * SMART HEALTH CHECK INTERVAL FORMULA:
+   * Interval = MIN(REFRESH_BUFFER / 3, 5 minutes)
+   * 
+   * This guarantees we check at least 3 times within the refresh buffer window,
+   * ensuring we never miss the refresh deadline even if one check is delayed.
+   * 
+   * For 10-minute buffer: MIN(600000/3, 300000) = MIN(200000, 300000) = 200 seconds
+   * For 5-minute buffer: MIN(300000/3, 300000) = MIN(100000, 300000) = 100 seconds
+   */
+  private readonly HEALTH_CHECK_INTERVAL_MS = Math.min(
+    Math.floor(600000 / 3), // Refresh buffer / 3 = check at least 3 times before deadline
+    300000                   // Max 5 minutes to avoid too frequent checks
+  ); // = 200 seconds (3.33 minutes) for 10-minute buffer
   private lastHealthCheckTime: Date | null = null;
   private healthCheckCount = 0;
   private consecutiveFailures: Map<string, number> = new Map(); // Track consecutive refresh failures per provider
@@ -411,7 +424,10 @@ export class DedicatedTokenManager {
       await this.performHealthCheck();
     }, this.HEALTH_CHECK_INTERVAL_MS);
 
-    console.log('[TokenManager] Health monitoring started');
+    const intervalMinutes = Math.round(this.HEALTH_CHECK_INTERVAL_MS / 60000 * 10) / 10; // Round to 1 decimal
+    const bufferMinutes = Math.round(this.TOKEN_REFRESH_BUFFER_MS / 60000);
+    console.log(`[TokenManager] Health monitoring started`);
+    console.log(`[TokenManager] 📊 Smart interval: ${intervalMinutes} min (checks ${Math.ceil(bufferMinutes / intervalMinutes)}x before ${bufferMinutes}-min refresh deadline)`);
   }
 
   private async performHealthCheck(): Promise<void> {

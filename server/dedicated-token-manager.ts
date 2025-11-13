@@ -13,6 +13,8 @@ export class DedicatedTokenManager {
   private readonly HEALTH_CHECK_INTERVAL_MS = 30000; // 30 seconds health checks (was 60)
   private lastHealthCheckTime: Date | null = null;
   private healthCheckCount = 0;
+  private consecutiveFailures: Map<string, number> = new Map(); // Track consecutive refresh failures per provider
+  private readonly MAX_CONSECUTIVE_FAILURES_WARNING = 5; // Log warning after 5 consecutive failures
 
   static getInstance(): DedicatedTokenManager {
     if (!DedicatedTokenManager.instance) {
@@ -100,6 +102,9 @@ export class DedicatedTokenManager {
         scope: createdToken.scope || '',
         tokenType: createdToken.tokenType || 'Bearer'
       });
+
+      // Reset consecutive failure counter on new token storage
+      this.consecutiveFailures.set(provider, 0);
 
       console.log(`[TokenManager] ✅ Token successfully stored and cached for ${provider}`);
       console.log(`[TokenManager] 📊 Expires: ${expiresAt.toISOString()}`);
@@ -298,6 +303,31 @@ export class DedicatedTokenManager {
         if (!response.ok) {
           const errorText = await response.text();
           console.error(`[TokenManager] Zoho token refresh failed: ${response.status} ${errorText}`);
+          
+          // Parse error response to determine if it's a permanent failure
+          let errorData;
+          try {
+            errorData = JSON.parse(errorText);
+          } catch {
+            errorData = { error: errorText };
+          }
+
+          // Only deactivate on permanent errors (invalid refresh token, revoked access, etc.)
+          const isPermanentError = errorData.error === 'invalid_code' || 
+                                   errorData.error === 'invalid_client' ||
+                                   errorData.error === 'invalid_grant' ||
+                                   errorData.error === 'invalid_client_secret' ||
+                                   errorText.includes('invalid_code') ||
+                                   errorText.includes('invalid_grant');
+          
+          if (isPermanentError) {
+            console.error(`[TokenManager] ⚠️ PERMANENT ERROR - Refresh token is invalid, marking as inactive`);
+            await storage.updateOAuthToken(tokenRecord.id, { isActive: false });
+            this.tokenCache.delete(provider);
+          } else {
+            console.error(`[TokenManager] ⚠️ TEMPORARY ERROR - Keeping token active for retry`);
+          }
+          
           throw new Error(`Zoho token refresh failed: ${response.status} ${errorText}`);
         }
 
@@ -305,6 +335,21 @@ export class DedicatedTokenManager {
 
         if (data.error) {
           console.error(`[TokenManager] Zoho token refresh error: ${data.error}`);
+          
+          // Only deactivate on permanent errors
+          const isPermanentError = data.error === 'invalid_code' || 
+                                   data.error === 'invalid_client' ||
+                                   data.error === 'invalid_grant' ||
+                                   data.error === 'invalid_client_secret';
+          
+          if (isPermanentError) {
+            console.error(`[TokenManager] ⚠️ PERMANENT ERROR - Refresh token is invalid, marking as inactive`);
+            await storage.updateOAuthToken(tokenRecord.id, { isActive: false });
+            this.tokenCache.delete(provider);
+          } else {
+            console.error(`[TokenManager] ⚠️ TEMPORARY ERROR - Keeping token active for retry`);
+          }
+          
           throw new Error(`Zoho token refresh error: ${data.error}`);
         }
 
@@ -328,6 +373,9 @@ export class DedicatedTokenManager {
         // Update cache
         this.cacheToken(provider, tokenInfo);
 
+        // Reset consecutive failure counter on success
+        this.consecutiveFailures.set(provider, 0);
+
         console.log(`[TokenManager] ✅ Successfully refreshed ${provider} token, expires at: ${expiresAt.toISOString()}`);
         return tokenInfo;
       }
@@ -337,9 +385,19 @@ export class DedicatedTokenManager {
 
     } catch (error) {
       console.error(`[TokenManager] Failed to refresh token for ${provider}:`, error);
-      // Mark token as inactive if refresh fails
-      await storage.updateOAuthToken(tokenRecord.id, { isActive: false });
-      this.tokenCache.delete(provider);
+      
+      // Track consecutive failures for monitoring
+      const currentFailures = (this.consecutiveFailures.get(provider) || 0) + 1;
+      this.consecutiveFailures.set(provider, currentFailures);
+      
+      // Log warning if failures exceed threshold
+      if (currentFailures >= this.MAX_CONSECUTIVE_FAILURES_WARNING) {
+        console.error(`[TokenManager] ⚠️⚠️⚠️ ALERT: ${currentFailures} consecutive refresh failures for ${provider}!`);
+        console.error(`[TokenManager] ⚠️⚠️⚠️ Please check Zoho API status or re-authenticate at /oauth/zoho/connect`);
+      }
+      
+      // Token is NOT deactivated here - only on permanent errors (handled above)
+      // This allows the health check to keep retrying with the same refresh token
       return null;
     }
   }

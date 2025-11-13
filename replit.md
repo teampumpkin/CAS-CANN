@@ -77,7 +77,8 @@ Key features include:
    - Caches tokens in memory for fast API request performance
    - Resets consecutive failure counter to zero
    - Starts the automatic token refresh health monitoring system (30-second intervals)
-   - Attempts to create email notification workflows in Zoho CRM (non-blocking, continues on failure)
+
+**Note:** Email notification workflow creation requires Zoho CRM Enterprise API access and is not available with standard OAuth. Configure workflows manually in Zoho CRM Settings → Automation → Workflow Rules.
 
 #### Step 3: Verify Successful Authentication
 After authentication, look for these confirmation messages in server logs:
@@ -154,7 +155,7 @@ Then verify background sync starts working:
 ### OAuth Debug Endpoints
 
 **`/oauth/zoho/debug`** - Shows OAuth configuration
-- Displays: Generated authorization URL, redirect URI, client ID, scopes
+- Displays: Generated authorization URL, redirect URI, client ID, scopes (`ZohoCRM.modules.ALL,ZohoCRM.settings.ALL`)
 - Shows: Production mode status, base URL detected
 - Use: Verify redirect URI matches Zoho console before authenticating
 

@@ -319,15 +319,12 @@ export class OAuthService {
         return envScopes.split(',').map(s => s.trim());
       }
 
-      // Default comprehensive scopes for full CRM automation
+      // Default valid scopes for CRM operations
+      // Using only scopes officially documented in Zoho CRM API v8
+      // See: https://www.zoho.com/crm/developer/docs/api/v8/scopes.html
       return [
-        'ZohoCRM.modules.ALL',                    // Full module access (Leads, Contacts, etc.)
-        'ZohoCRM.settings.fields.ALL',            // Custom field creation/management
-        'ZohoCRM.settings.layouts.READ',          // Layout information
-        'ZohoCRM.settings.profiles.READ',         // Profile information
-        'ZohoCRM.send_mail.all.CREATE',           // Send emails via CRM
-        'ZohoCRM.settings.workflow_rules.ALL',    // Workflow rules management (includes all automation)
-        'ZohoCRM.settings.email_templates.READ'   // Email template access
+        'ZohoCRM.modules.ALL',      // Full access to all CRM modules (Leads, Contacts, Deals, etc.)
+        'ZohoCRM.settings.ALL'      // Access to all settings (fields, layouts, profiles, etc.)
       ];
     }
     

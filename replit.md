@@ -6,67 +6,194 @@ This project is a modern, patient-focused website for the Canadian Amyloidosis S
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
-## Content References
-
-### About CAS Page Hero Description
-"Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through evidence-based collaboration."
-
 ## System Architecture
 
-### Frontend Architecture
-- **Framework**: React 18 with TypeScript.
-- **Build Tool**: Vite.
-- **Styling**: Tailwind CSS with a custom design system incorporating shadcn/ui.
-- **UI Components**: Radix UI primitives.
-- **Animations**: Framer Motion for sophisticated page transitions and micro-interactions.
-- **Routing**: Wouter for lightweight client-side routing.
-- **State Management**: TanStack Query for server state management.
-- **Accessibility**: Comprehensive WCAG 2.1 Level AA compliance, including accessibility tools widget, keyboard navigation, screen reader support, high contrast modes, font size adjustment, dyslexia-friendly fonts, and custom cursor sizes.
-- **Theme Architecture**: Unified light/dark theme system with `localStorage` persistence and system preference detection, using CSS variables and Tailwind's `dark:` prefixes for consistent styling. Brand colors (#00AFE6 and #00DD89) are consistently applied across both themes with optimized opacity for visibility.
-- **Internationalization**: Comprehensive French language support with a dynamic translation system covering over 200 text elements and consistent bilingual UX across the site.
-- **Design System**: Features a minimalist + Flat 2.0 hybrid style with soft shadows, rounded corners, and a typography stack using Rosarivo (serif) and Mulish (sans-serif). All components, including cards, buttons, and forms, adhere to this aesthetic with consistent brand color application.
-- **UI/UX Decisions**: Prioritizes clear visual hierarchy, professional medical aesthetic, interactive elements (e.g., map, statistics cards), and smooth animations. Specific enhancements include redesigned statistics cards, a two-level healthcare center popup system, compact interactive map with advanced clustering and zoom, enhanced navigation with official CAS logo, and comprehensive brand color enforcement across all pages. Hero sections are designed with thematic animations (e.g., heart, neural network, molecular structures) relevant to amyloidosis.
+### UI/UX Decisions
+The project features a minimalist + Flat 2.0 hybrid design with soft shadows and rounded corners, utilizing Rosarivo (serif) and Mulish (sans-serif) fonts. It prioritizes clear visual hierarchy, a professional medical aesthetic, interactive elements, and smooth animations. Key enhancements include redesigned statistics cards, a two-level healthcare center popup system, an interactive map with advanced clustering, and enhanced navigation. Brand colors (#00AFE6 and #00DD89) are consistently applied. Accessibility (WCAG 2.1 Level AA) is a core focus, including an accessibility tools widget, keyboard navigation, screen reader support, high contrast modes, font size adjustment, dyslexia-friendly fonts, and custom cursor sizes. A unified light/dark theme system with `localStorage` persistence and system preference detection is implemented.
 
-### Backend Architecture
-- **Runtime**: Node.js with Express.js server.
-- **Database**: PostgreSQL with Neon serverless database.
-- **ORM**: Drizzle ORM for type-safe database operations.
-- **API Design**: RESTful API with structured error handling.
-- **Session Management**: Connect-pg-simple for PostgreSQL-backed sessions.
+### Technical Implementations
+The frontend is built with React 18 and TypeScript, using Vite for building, Tailwind CSS with shadcn/ui for styling, Radix UI for primitives, Framer Motion for animations, and Wouter for routing. TanStack Query manages server state. Comprehensive French language support is integrated through a dynamic translation system.
 
-### Key Features and Implementations
-- **Content Management**: Comprehensive content documentation for bilingual support and consistent brand guidelines.
-- **Homepage Structure**: Reordered sections for improved user experience, featuring interactive map prominently.
-- **Amyloidosis Detail Pages**: Simplified visual design, consistent brand color implementation, and professional medical aesthetic.
-- **Events Integration**: CAS Journal Club and CANN Educational Series integration with member access notifications.
-- **Clinician-First Focus**: Enhanced hero sections, restructured navigation (Clinical Tools, Research Hub, Professional Network), comprehensive Governance Documents page, and a Structured Contributor Portal.
-- **Contact & Footer Enhancement**: Professional contact system with dedicated email addresses, comprehensive FAQ, and bilingual UX.
-- **About Pages Redesign**: Medical professional focus for "About Amyloidosis" (clinical red flags, comparison tables, diagnostic pathways) and clinical practice focus for "About CAS" (tool curation, diagnostic support, peer learning, clinical impact metrics).
-- **Performance Optimization**: Comprehensive image compression using an `OptimizedImage` component with lazy loading, bundle optimization, and query optimization.
-- **Navigation**: Enhanced design with prominent CAS logo serving as home link (removed separate Home navigation item), mobile optimization, and fixed scroll behavior.
-- **Interactive Healthcare Directory Map**: Features 25+ real facilities across Canada with clickable markers, detailed modals, and color-coded center types.
-- **CANN (Canadian Amyloidosis Network) Integration**: Dedicated page with network information, statistics, and professional objectives.
-- **Dynamic Multi-Form Lead Capture System**: Production-ready Zoho CRM v8 API integration with automatic OAuth token refresh, intelligent field mapping, and 24/7 operation. Both CAS Registration and CANN Membership forms sync to Zoho Leads module with distinct Lead_Source attribution for reporting. Features include case-insensitive field lookup, standard Zoho field prioritization (fullName → Last_Name), automatic custom field creation, proper handling of multiselectpicklist truncation (210-char limit), and automatic phone/email field type conversion to ensure data compatibility.
-- **Bulk Import System**: Excel-based historical data import system with configurable column mapping for both CANN Contacts and CAS Registration data sources. Includes automatic field sync, type-safe data transformation, and proper Lead_Source attribution with "(Historical)" tag to distinguish legacy data from live website submissions. Successfully imported 10 historical records (1 CANN, 9 CAS) with 100% sync success rate to Zoho CRM.
-- **Zoho CRM Data Integration Service**: Standalone service (`/services/zoho-data-sync/`) for processing CSV/Excel files and importing data into three Zoho modules (Accounts for Institutions, Contacts for Members, Resources for Documents). Features tag-based safety ("DataSyncService" tags) to avoid interfering with live web form submissions, dry-run mode for safe testing, bilingual (EN/FR) field support, data cleaning/deduplication, field validation, and batch processing (100 records/batch). Includes admin UI at `/admin/data-sync` for file upload, module selection, preview, and import execution. Tested end-to-end with 2 successful Zoho record creations (IDs: 6999043000000820001, 6999043000000821001). All 7 implementation phases complete and architect-reviewed.
-- **Unified CAS & CANN Registration Form** (`/join-cas`): Single comprehensive registration form combining CAS membership and CANN membership applications with sophisticated conditional logic. **This unified form replaces ALL registration forms across the entire website**, including the CANN page registration link (`AboutCANN.tsx` now links to `/join-cas`). Multiple route aliases are configured for accessibility: `/join`, `/join-cas`, `/join-cann`, `/join-cann-today`, `/cann-membership` all route to the unified form. Features intelligent form sections that display/hide based on membership selections, proper Zoho CRM Lead_Source attribution, enhanced UI/UX with professional medical aesthetic, and **automated email notifications** (implementation pending SMTP credentials). All "Center" terminology uses Canadian spelling "Centre". Form structure includes Q1 (CAS membership), Q2 (CANN membership - auto-includes CAS), Q3-Q9 (member fields shown when either Q1=Yes or Q2=Yes, including Services Map), CANN Questions section (Q10-Q13 shown only when Q2=Yes), and Non-member Contact (when both Q1=No and Q2=No). Section title updated to "Registrant Information and CAS Questions". Dynamic confirmation messages based on submission type (CANN membership, CAS membership, or contact form). Email notifications will be sent to CAS@amyloid.ca (all registrations), vasi.karan@teampumpkin.com (all registrations), and CANN@amyloid.ca (CANN memberships only) via SMTP using nodemailer once credentials are provided. Comprehensive UI/UX enhancements include:
-  - **Hero Section**: Gradient backgrounds from brand colors (#00AFE6/#00DD89), animated badges with icons (UserPlus), improved typography with gradient text, and feature highlights (Patient-Focused, Collaborative Network, Evidence-Based). Badges use flex-wrap for proper mobile wrapping with responsive gaps (gap-4 sm:gap-6).
-  - **Form Card**: Shadow-2xl elevation, gradient header (from-[#00AFE6] to-[#00DD89]), professional white text on gradient, mobile-responsive spacing (p-4 sm:p-8 md:p-12).
-  - **Conditional Sections**: Smooth AnimatePresence transitions optimized for mobile (opacity-only, no height animations to prevent jank), gradient backgrounds unique to each section:
-    * Registrant Information and CAS Questions (Q3-Q9): Blue gradient (#E6F8FF to #F0FBFF), Users icon, rounded-2xl with border and shadow, responsive padding (p-4 sm:p-6 md:p-8) and spacing (space-y-4 sm:space-y-6)
-    * CANN Questions (Q10-Q13): Green gradient (#E8FFF5 to #F0FFF9), Stethoscope icon, matching responsive styling
-    * Non-member Contact: Amber gradient (amber-50 to orange-50/50), Mail icon, consistent design language and responsive padding
-  - **Submit Button**: Pill shape (rounded-full), gradient background matching brand, large padding (px-12 py-6), hover effects (scale-105, shadow-2xl), animated loading state with spinner and disabled state
-  - **Confirmation Modal**: Dynamic messages based on submission type, mobile-responsive sizing (w-[90vw] sm:max-w-md), max-height with scrolling (max-h-[85vh] overflow-y-auto), responsive typography (text-xl sm:text-2xl for title, text-sm sm:text-base for description)
-  - **Visual Separators**: Separator components between major sections for improved visual flow
-  - **Mobile Optimization**: Comprehensive mobile responsiveness with reduced scrolling, touch-friendly targets, responsive spacing throughout (space-y-6 sm:space-y-8 md:space-y-10), and performance-optimized animations
-  - **Accessibility**: All animations respect prefers-reduced-motion preferences using useReducedMotion hook, ensuring WCAG 2.1 Level AA compliance
-  - **Icon System**: Strategic use of Lucide React icons (Users, Stethoscope, Mail, UserPlus, Send, Heart, Sparkles) to provide visual cues and enhance section identification
+The backend uses Node.js with Express.js, PostgreSQL (Neon serverless), and Drizzle ORM for type-safe database operations. It features a RESTful API with structured error handling and `connect-pg-simple` for session management.
+
+Key features include:
+- **Content Management**: Documentation for bilingual support and brand consistency.
+- **Interactive Healthcare Directory Map**: Displays 25+ Canadian facilities with clickable markers and detailed modals.
+- **CANN Integration**: A dedicated page for the Canadian Amyloidosis Network.
+- **Dynamic Multi-Form Lead Capture System**: Integrates with Zoho CRM v8 API for CAS Registration and CANN Membership forms, featuring automatic OAuth token refresh, intelligent field mapping, and distinct `Lead_Source` attribution. It handles field lookups, custom field creation, and data type conversions.
+- **Bulk Import System**: Excel-based historical data import with configurable column mapping for Zoho CRM, including automatic field sync and type-safe transformations.
+- **Zoho CRM Data Integration Service**: A standalone service for processing CSV/Excel files into Zoho (Accounts, Contacts, Resources) with an admin UI for file upload, preview, and import execution. It includes safety tags, dry-run mode, bilingual field support, data cleaning, validation, and batch processing.
+- **Bulletproof Form Submission System**: Local-first architecture ensuring form submissions are saved to PostgreSQL immediately and then asynchronously synced to Zoho CRM with exponential backoff and retry logic. It gracefully handles token expiration, network failures, and rate limits, with automatic token refresh before expiration.
+- **Unified CAS & CANN Registration Form**: A single comprehensive form (`/join-cas`) with conditional logic, replacing all other registration forms. It includes automated email notifications (pending SMTP credentials) and extensive UI/UX enhancements like gradient sections, smooth transitions, and comprehensive mobile optimization and accessibility.
+
+### Feature Specifications
+- Homepage: Reordered sections with interactive map prominence.
+- Amyloidosis Detail Pages: Simplified design, consistent branding, professional medical aesthetic.
+- Events Integration: CAS Journal Club and CANN Educational Series with member notifications.
+- Clinician-First Focus: Enhanced hero sections, restructured navigation (Clinical Tools, Research Hub, Professional Network), governance documents, and contributor portal.
+- Contact & Footer: Professional contact system, comprehensive FAQ, and bilingual UX.
+- About Pages: Redesigned for medical professionals ("About Amyloidosis") and clinical practice ("About CAS").
+- Performance Optimization: `OptimizedImage` component with lazy loading, bundle optimization, and query optimization.
+- Navigation: Enhanced design with prominent CAS logo as home link, mobile optimization, and fixed scroll behavior.
+- Zoho CRM OAuth Setup: Detailed guide for setting up and troubleshooting Zoho CRM integration, including automatic token refresh and debug endpoints (see dedicated section below).
+
+## Zoho CRM OAuth Setup Guide
+
+### Prerequisites
+1. **Zoho CRM Account**: Active Zoho CRM account (US datacenter: accounts.zoho.com)
+2. **Environment Variables** (configured in Replit Secrets):
+   - `ZOHO_CLIENT_ID`: OAuth client ID from Zoho API Console
+   - `ZOHO_CLIENT_SECRET`: OAuth client secret from Zoho API Console
+   - `ZOHO_ORG_ID`: Your Zoho CRM organization ID
+
+### Initial Setup (One-Time Configuration)
+
+#### Step 1: Register App in Zoho API Console
+1. Visit **https://api-console.zoho.com** (US datacenter)
+2. Click "Add Client ID" or "GET STARTED"
+3. Select **"Server-based Applications"** as client type
+4. Fill in the application details:
+   - **Client Name**: "CAS Website"
+   - **Homepage URL**: `https://amyloid.ca`
+   - **Authorized Redirect URI**: `https://amyloid.ca/oauth/zoho/callback`
+     - ⚠️ **Critical**: Must be **exactly** `https://amyloid.ca/oauth/zoho/callback` (case-sensitive, no trailing slash)
+     - For development/testing, also add: `https://[your-replit-url]/oauth/zoho/callback`
+5. Click "CREATE"
+6. Navigate to the **"Client Secret"** tab
+7. Copy your **Client ID** and **Client Secret**
+8. Add them to Replit Secrets (never commit to version control)
+
+#### Step 2: Authenticate the Application
+1. **Important**: If you previously hit Zoho's rate limit (10 attempts per 10 minutes), wait 10-15 minutes before proceeding
+2. Visit `https://amyloid.ca/oauth/zoho/connect` in your browser
+3. You'll be automatically redirected to Zoho's authorization page
+4. Review the requested permissions (CRM access, field management, email sending)
+5. Click **"Accept"** to grant permissions
+6. Zoho redirects you back to `/oauth/zoho/callback` with an authorization code
+7. The system automatically performs these steps:
+   - Exchanges the authorization code for access token + refresh token (code valid for 2 minutes only)
+   - Deactivates any existing tokens for the provider (marks `is_active=false` in database)
+   - Stores both new tokens in PostgreSQL `oauth_tokens` table with expiration timestamp
+   - Caches tokens in memory for fast API request performance
+   - Resets consecutive failure counter to zero
+   - Starts the automatic token refresh health monitoring system (30-second intervals)
+   - Attempts to create email notification workflows in Zoho CRM (non-blocking, continues on failure)
+
+#### Step 3: Verify Successful Authentication
+After authentication, look for these confirmation messages in server logs:
+
+```
+[TokenManager] ✅ Token successfully stored and cached for zoho_crm
+[TokenManager] 📊 Expires: [timestamp]
+[TokenManager] Token management system initialized successfully
+```
+
+Then verify background sync starts working:
+```
+[Zoho Sync Worker] Found X pending submissions
+[Zoho Sync Worker] ✅ Successfully synced submission #XX to Zoho CRM (ID: XXXXX)
+```
+
+### How Automatic Token Refresh Works
+
+**Bulletproof Design Principles:**
+1. **Proactive Refresh**: Tokens are refreshed **10 minutes before expiration** (not after they expire)
+2. **Health Check System**: Runs every 30 seconds checking all token expiration statuses
+3. **Intelligent Error Handling**:
+   - **Permanent Errors** (invalid_grant, invalid_client, invalid_code, invalid_client_secret): Token marked inactive → requires manual re-authentication
+   - **Temporary Errors** (network timeouts, rate limits, API downtime): Token stays active → system keeps retrying automatically
+4. **Failure Monitoring**: After 5 consecutive refresh failures, system logs alert: `⚠️⚠️⚠️ ALERT: X consecutive refresh failures!`
+5. **Zero Manual Intervention**: Once authenticated, runs 24/7 without human intervention unless permanent token revocation occurs
+
+**Token Lifecycle:**
+- **Access Token**: Expires in 1 hour → automatically refreshed every 50 minutes
+- **Refresh Token**: Never expires (unless manually revoked in Zoho console)
+- **Cache**: In-memory cache cleared on server restart → automatically reloaded from database
+
+### Troubleshooting Common Errors
+
+**❌ Error: "invalid_redirect_uri"**
+- **Cause**: Redirect URI in authorization request doesn't match Zoho console configuration
+- **Fix**: 
+  1. Visit `/oauth/zoho/debug` to see what URI the system is generating
+  2. Ensure Zoho console has **exactly** `https://amyloid.ca/oauth/zoho/callback`
+  3. Check for mismatches: `https` vs `http`, `www.amyloid.ca` vs `amyloid.ca`, trailing slash
+
+**❌ Error: "invalid_code" or "invalid_grant"**
+- **Cause**: Authorization code expired (2-minute limit) or already used (single-use only)
+- **Fix**: Visit `/oauth/zoho/connect` again to generate fresh authorization code
+
+**❌ Error: "throttles_limit_exceeded"**
+- **Cause**: Exceeded Zoho's 10 authorization attempts per 10 minutes per client ID
+- **Fix**: Wait 10-15 minutes for rate limit to reset, then retry
+
+**❌ Tokens not refreshing automatically**
+- **Check server logs** for `[TokenManager]` messages showing refresh attempts and results
+- **Verify active token exists** in database:
+  ```sql
+  SELECT id, provider, expires_at, is_active, refresh_token IS NOT NULL as has_refresh
+  FROM oauth_tokens 
+  WHERE provider='zoho_crm' AND is_active=true;
+  ```
+- **Solution**: If no active token with `refresh_token`, re-authenticate at `/oauth/zoho/connect`
+
+**❌ Form submissions not syncing to Zoho**
+- **Check sync worker logs**: Look for `[Zoho Sync Worker]` messages in server logs
+- **Verify pending submissions**:
+  ```sql
+  SELECT id, created_at, zoho_synced, zoho_crm_id, retry_count 
+  FROM form_submissions 
+  WHERE zoho_synced=false 
+  ORDER BY created_at DESC;
+  ```
+- **Common causes**:
+  - No valid OAuth token (re-authenticate)
+  - Zoho API rate limits (system auto-retries with exponential backoff)
+  - Network connectivity issues (system auto-retries)
+
+### OAuth Debug Endpoints
+
+**`/oauth/zoho/debug`** - Shows OAuth configuration
+- Displays: Generated authorization URL, redirect URI, client ID, scopes
+- Shows: Production mode status, base URL detected
+- Use: Verify redirect URI matches Zoho console before authenticating
+
+**`/oauth/zoho/connect`** - Initiates OAuth flow
+- Action: Redirects to Zoho authorization page
+- Use: Start authentication or re-authenticate after token expiration
+- Note: Automatically detects production vs development URL
+
+**`/oauth/zoho/callback`** - OAuth callback endpoint
+- Action: Receives authorization code from Zoho, exchanges for tokens, stores in database
+- Use: Don't visit directly - Zoho redirects here automatically
+- Response: HTML page showing success or error with details
+
+### Security & Best Practices
+
+✅ **Secrets Management**
+- Store `ZOHO_CLIENT_ID`, `ZOHO_CLIENT_SECRET`, `ZOHO_ORG_ID` in Replit Secrets (encrypted)
+- Never commit secrets to version control
+- Refresh tokens stored in PostgreSQL (database-level encryption)
+
+✅ **Token Storage**
+- Access tokens cached in memory for performance (cleared on restart)
+- Refresh tokens persisted in database `oauth_tokens` table
+- Old tokens deactivated (`is_active=false`) when new tokens stored
+
+✅ **Automatic Recovery**
+- Health check system runs every 30 seconds
+- Temporary failures don't break the system - it keeps retrying
+- Logs provide full audit trail of all refresh attempts
+
+✅ **Production Monitoring**
+- Monitor server logs for `[TokenManager]` messages
+- Alert on consecutive failure warnings: `⚠️⚠️⚠️ ALERT: X consecutive refresh failures`
+- Verify background sync worker is processing submissions: `[Zoho Sync Worker]` messages
 
 ## External Dependencies
 
 ### UI and Styling
-- **Radix UI**: Accessible component primitives (e.g., `@radix-ui/react-dialog`, `@radix-ui/react-tabs`).
+- **Radix UI**: Accessible component primitives.
 - **Tailwind CSS**: Utility-first CSS framework.
 - **Framer Motion**: Animation library for React.
 - **Lucide React**: Icon library.
@@ -81,3 +208,6 @@ Preferred communication style: Simple, everyday language.
 - **Drizzle ORM**: Type-safe database operations.
 - **Express.js**: Web application framework for Node.js.
 - **Connect-pg-simple**: PostgreSQL session store for session management.
+
+### Integrations
+- **Zoho CRM**: For lead capture, data management, and bulk imports.

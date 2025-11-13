@@ -48,6 +48,10 @@ app.use((req, res, next) => {
   console.log(`🗄️  Database: ${process.env.DATABASE_URL ? process.env.DATABASE_URL.split('@')[1]?.split('/')[0] : 'not configured'}`);
   console.log(`========================================\n`);
 
+  // Run database migrations
+  const { migrateRetryColumns } = await import("./migrations/add-retry-columns");
+  await migrateRetryColumns();
+
   // Initialize dedicated token management system
   const { dedicatedTokenManager } = await import("./dedicated-token-manager");
   await dedicatedTokenManager.initialize();

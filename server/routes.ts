@@ -1838,7 +1838,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const { fileParser } = await import('../services/zoho-data-sync/import/file-parser');
 
   // Configure multer for file uploads
-  const storage = multer.diskStorage({
+  const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
       const uploadDir = path.join(process.cwd(), 'services/zoho-data-sync/uploads');
       if (!fs.existsSync(uploadDir)) {
@@ -1853,7 +1853,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   const upload = multer({ 
-    storage,
+    storage: multerStorage,
     fileFilter: (req, file, cb) => {
       const allowedTypes = ['.csv', '.xlsx', '.xls'];
       const ext = path.extname(file.originalname).toLowerCase();

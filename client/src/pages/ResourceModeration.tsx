@@ -126,6 +126,7 @@ export default function ResourceModeration() {
         title: "Resource Approved",
         description: "The resource has been approved and is now publicly available.",
       });
+      queryClient.invalidateQueries({ queryKey: ['/api/resources/moderation'] });
       queryClient.invalidateQueries({ queryKey: ['/api/resources'] });
       setSelectedResource(null);
       setModerationNote('');
@@ -148,6 +149,7 @@ export default function ResourceModeration() {
         title: "Resource Rejected",
         description: "The resource has been rejected and removed from the queue.",
       });
+      queryClient.invalidateQueries({ queryKey: ['/api/resources/moderation'] });
       queryClient.invalidateQueries({ queryKey: ['/api/resources'] });
       setSelectedResource(null);
       setModerationNote('');
@@ -174,6 +176,7 @@ export default function ResourceModeration() {
         title: "Resource Flagged",
         description: "The resource has been flagged for enhancement.",
       });
+      queryClient.invalidateQueries({ queryKey: ['/api/resources/moderation'] });
       queryClient.invalidateQueries({ queryKey: ['/api/resources'] });
       setSelectedResource(null);
       setModerationNote('');

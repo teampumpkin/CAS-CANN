@@ -115,7 +115,7 @@ export default function ResourceModeration() {
 
   const approveMutation = useMutation({
     mutationFn: async ({ resourceId, note }: { resourceId: number; note?: string }) => {
-      return await apiRequest(`/api/resources/${resourceId}`, 'PUT', {
+      return await apiRequest('PUT', `/api/resources/${resourceId}`, {
         isApproved: true,
         moderatedBy: 'Admin', // In real app, this would be the current user
         moderationNote: note
@@ -141,7 +141,7 @@ export default function ResourceModeration() {
 
   const rejectMutation = useMutation({
     mutationFn: async ({ resourceId, note }: { resourceId: number; note: string }) => {
-      return await apiRequest(`/api/resources/${resourceId}`, 'DELETE');
+      return await apiRequest('DELETE', `/api/resources/${resourceId}`);
     },
     onSuccess: () => {
       toast({
@@ -163,7 +163,7 @@ export default function ResourceModeration() {
 
   const flagMutation = useMutation({
     mutationFn: async ({ resourceId, note }: { resourceId: number; note: string }) => {
-      return await apiRequest(`/api/resources/${resourceId}`, 'PUT', {
+      return await apiRequest('PUT', `/api/resources/${resourceId}`, {
         isFlagged: true,
         moderatedBy: 'Admin',
         moderationNote: note

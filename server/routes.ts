@@ -43,10 +43,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         audience: req.query.audience as string,
         language: req.query.language as string,
         region: req.query.region as string,
-        isPublic: req.query.isPublic === 'true',
-        isApproved: req.query.isApproved === 'true',
         search: req.query.search as string,
       };
+
+      // Handle boolean filters separately to properly handle 'false' strings
+      if (req.query.isPublic !== undefined) {
+        filters.isPublic = req.query.isPublic === 'true';
+      }
+      if (req.query.isApproved !== undefined) {
+        filters.isApproved = req.query.isApproved === 'true';
+      }
 
       // Remove undefined values
       Object.keys(filters).forEach(key => {

@@ -157,13 +157,15 @@ export default function UploadResource() {
 
   const uploadMutation = useMutation({
     mutationFn: async (data: UploadFormData & { fileUrl: string; fileName: string; fileType: string; fileSize: string }) => {
+      // Filter out form-only fields that aren't in the database schema
+      const { submitterRole, submitterOrganization, consentAgreed, phiConfirmation, editorialCharter, tags, ...resourceData } = data;
+      
       return await apiRequest('/api/resources', 'POST', {
-        ...data,
+        ...resourceData,
         isPublic: true,
         requiresLogin: false,
         isApproved: false, // Requires moderation
         tags: [data.amyloidosisType, data.resourceType, data.category, data.audience, ...data.tags.split(',').map(tag => tag.trim()).filter(tag => tag)],
-        downloadCount: 0
       });
     },
     onSuccess: () => {

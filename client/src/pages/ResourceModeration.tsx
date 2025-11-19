@@ -479,12 +479,12 @@ export default function ResourceModeration() {
                                 className="border-gray-300 dark:border-white/30 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/20"
                               >
                                 <Eye className="w-4 h-4 mr-2" />
-                                Review
+                                Preview
                               </Button>
                             </DialogTrigger>
                             <DialogContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-white/20 text-gray-900 dark:text-white max-w-4xl">
                               <DialogHeader>
-                                <DialogTitle className="text-gray-900 dark:text-white">Review Resource</DialogTitle>
+                                <DialogTitle className="text-gray-900 dark:text-white">Preview & Moderate Resource</DialogTitle>
                               </DialogHeader>
                               
                               {selectedResource && (

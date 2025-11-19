@@ -34,6 +34,11 @@ export const resources = pgTable("resources", {
   isPublic: boolean("is_public").notNull().default(true),
   requiresLogin: boolean("requires_login").notNull().default(false),
   submittedBy: varchar("submitted_by", { length: 255 }),
+  submitterRole: varchar("submitter_role", { length: 255 }),
+  submitterOrganization: varchar("submitter_organization", { length: 255 }),
+  consentAgreed: boolean("consent_agreed").default(false),
+  phiConfirmation: boolean("phi_confirmation").default(false),
+  editorialCharter: boolean("editorial_charter").default(false),
   moderatedBy: varchar("moderated_by", { length: 255 }),
   isApproved: boolean("is_approved").notNull().default(false),
   tags: text("tags").array(), // Array of tags

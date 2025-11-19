@@ -497,19 +497,37 @@ export default function ResourceModeration() {
                                   <div className="bg-white/5 rounded-lg p-4 border border-white/10">
                                     <div className="flex items-center justify-between mb-3">
                                       <h4 className="font-medium text-white">File Preview</h4>
-                                      <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => window.open(selectedResource.fileUrl, '_blank')}
-                                        className="border-[#00AFE6]/30 text-[#00AFE6] hover:bg-[#00AFE6]/20"
-                                      >
-                                        <Download className="w-4 h-4 mr-2" />
-                                        Download File
-                                      </Button>
+                                      {!selectedResource.fileUrl?.includes('example.com') ? (
+                                        <Button
+                                          variant="outline"
+                                          size="sm"
+                                          onClick={() => window.open(selectedResource.fileUrl, '_blank')}
+                                          className="border-[#00AFE6]/30 text-[#00AFE6] hover:bg-[#00AFE6]/20"
+                                          data-testid="button-download-file"
+                                        >
+                                          <Download className="w-4 h-4 mr-2" />
+                                          Download File
+                                        </Button>
+                                      ) : (
+                                        <div className="text-xs text-white/50 bg-white/5 px-3 py-1 rounded-md border border-white/10">
+                                          File stored in system
+                                        </div>
+                                      )}
                                     </div>
                                     
                                     <div className="bg-white/10 rounded-lg overflow-hidden">
-                                      {(selectedResource.fileType?.toLowerCase().startsWith('image/') || 
+                                      {selectedResource.fileUrl?.includes('example.com') ? (
+                                        <div className="flex flex-col items-center justify-center py-12">
+                                          <FileText className="w-16 h-16 text-white/40 mb-4" />
+                                          <p className="text-white/60 text-sm mb-2">{selectedResource.fileName}</p>
+                                          <p className="text-white/40 text-xs mb-4">{selectedResource.fileType} • {selectedResource.fileSize}</p>
+                                          <div className="bg-white/5 border border-white/10 rounded-lg p-4 max-w-md">
+                                            <p className="text-white/70 text-sm text-center">
+                                              File is stored in the system. Preview and download will be available once file storage is fully integrated.
+                                            </p>
+                                          </div>
+                                        </div>
+                                      ) : (selectedResource.fileType?.toLowerCase().startsWith('image/') || 
                                         ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'].includes(selectedResource.fileType?.toLowerCase() || '') ||
                                         ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'].some(ext => selectedResource.fileName?.toLowerCase().endsWith(`.${ext}`))) ? (
                                         <img 
@@ -556,6 +574,7 @@ export default function ResourceModeration() {
                                             size="sm"
                                             onClick={() => window.open(selectedResource.fileUrl, '_blank')}
                                             className="mt-4 border-white/30 text-white hover:bg-white/20"
+                                            data-testid="button-open-file"
                                           >
                                             <Eye className="w-4 h-4 mr-2" />
                                             Open File

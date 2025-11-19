@@ -157,11 +157,8 @@ export default function UploadResource() {
 
   const uploadMutation = useMutation({
     mutationFn: async (data: UploadFormData & { fileUrl: string; fileName: string; fileType: string; fileSize: string }) => {
-      // Filter out form-only fields that aren't in the database schema
-      const { submitterRole, submitterOrganization, consentAgreed, phiConfirmation, editorialCharter, tags, ...resourceData } = data;
-      
-      return await apiRequest('/api/resources', 'POST', {
-        ...resourceData,
+      return await apiRequest('POST', '/api/resources', {
+        ...data,
         isPublic: true,
         requiresLogin: false,
         isApproved: false, // Requires moderation

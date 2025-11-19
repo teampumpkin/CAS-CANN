@@ -509,7 +509,9 @@ export default function ResourceModeration() {
                                     </div>
                                     
                                     <div className="bg-white/10 rounded-lg overflow-hidden">
-                                      {selectedResource.fileType?.toLowerCase().startsWith('image/') ? (
+                                      {(selectedResource.fileType?.toLowerCase().startsWith('image/') || 
+                                        ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'].includes(selectedResource.fileType?.toLowerCase() || '') ||
+                                        ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'].some(ext => selectedResource.fileName?.toLowerCase().endsWith(`.${ext}`))) ? (
                                         <img 
                                           src={selectedResource.fileUrl} 
                                           alt={selectedResource.fileName}

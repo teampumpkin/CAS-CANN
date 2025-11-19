@@ -128,7 +128,6 @@ export default function ResourceModeration() {
       });
       queryClient.invalidateQueries({ queryKey: ['/api/resources/moderation'] });
       queryClient.invalidateQueries({ queryKey: ['/api/resources'] });
-      setSelectedResource(null);
       setModerationNote('');
     },
     onError: () => {
@@ -151,7 +150,6 @@ export default function ResourceModeration() {
       });
       queryClient.invalidateQueries({ queryKey: ['/api/resources/moderation'] });
       queryClient.invalidateQueries({ queryKey: ['/api/resources'] });
-      setSelectedResource(null);
       setModerationNote('');
     },
     onError: () => {
@@ -178,7 +176,6 @@ export default function ResourceModeration() {
       });
       queryClient.invalidateQueries({ queryKey: ['/api/resources/moderation'] });
       queryClient.invalidateQueries({ queryKey: ['/api/resources'] });
-      setSelectedResource(null);
       setModerationNote('');
     },
     onError: () => {
@@ -244,11 +241,10 @@ export default function ResourceModeration() {
   ).length;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Header */}
-      <section className="py-24 bg-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent" />
+      <section className="py-24 bg-gradient-to-br from-gray-100 to-white dark:from-gray-800 dark:via-gray-900 dark:to-black relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-200/20 dark:via-white/5 to-transparent" />
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -257,13 +253,13 @@ export default function ResourceModeration() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+            <div className="inline-flex items-center gap-3 bg-gray-200 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-300 dark:border-white/20 mb-6">
               <Shield className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-white/90">Resource Moderation</span>
+              <span className="text-sm font-medium text-gray-900 dark:text-white/90">Resource Moderation</span>
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
                 Moderation
               </span>
               <br />
@@ -272,7 +268,7 @@ export default function ResourceModeration() {
               </span>
             </h1>
             
-            <p className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
               Review and moderate submitted resources to maintain the quality and accuracy of Canada's trusted amyloidosis resource library.
             </p>
           </motion.div>
@@ -280,19 +276,19 @@ export default function ResourceModeration() {
       </section>
 
       {/* Search and Filters */}
-      <section className="py-12 bg-gray-900 border-b border-white/10">
+      <section className="py-12 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-white/10">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-6 mb-8">
+            <div className="bg-white dark:bg-white/10 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-white/20 p-6 mb-8 shadow-lg dark:shadow-none">
               {/* Search Bar */}
               <div className="relative mb-6">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/60 w-5 h-5" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-white/60 w-5 h-5" />
                 <Input
                   type="text"
                   placeholder="Search resources by title or submitter..."
                   value={filters.search}
                   onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-                  className="pl-12 h-14 bg-white/20 border-white/30 text-white placeholder-white/60 text-lg rounded-xl"
+                  className="pl-12 h-14 bg-gray-100 dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 text-lg rounded-xl"
                 />
               </div>
 
@@ -300,7 +296,7 @@ export default function ResourceModeration() {
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <Select value={filters.status} onValueChange={(value) => setFilters(prev => ({ ...prev, status: value }))}>
-                    <SelectTrigger className="bg-white/15 border-white/30 text-white w-48">
+                    <SelectTrigger className="bg-gray-100 dark:bg-white/15 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white w-48">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -314,7 +310,7 @@ export default function ResourceModeration() {
 
                   <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
                     <CollapsibleTrigger asChild>
-                      <Button variant="outline" className="border-white/30 text-white hover:bg-white/20 bg-white/15">
+                      <Button variant="outline" className="border-gray-300 dark:border-white/30 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/20 bg-gray-50 dark:bg-white/15">
                         <Filter className="w-4 h-4 mr-2" />
                         More Filters
                         {activeFiltersCount > 0 && (
@@ -328,14 +324,14 @@ export default function ResourceModeration() {
                   </Collapsible>
 
                   {activeFiltersCount > 0 && (
-                    <Button variant="ghost" onClick={clearFilters} className="text-white/80 hover:text-white hover:bg-white/20">
+                    <Button variant="ghost" onClick={clearFilters} className="text-gray-600 dark:text-white/80 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/20">
                       <X className="w-4 h-4 mr-2" />
                       Clear All
                     </Button>
                   )}
                 </div>
 
-                <div className="text-white/60 text-sm">
+                <div className="text-gray-600 dark:text-white/60 text-sm">
                   {resources.length} resource{resources.length !== 1 ? 's' : ''} in queue
                 </div>
               </div>
@@ -343,11 +339,11 @@ export default function ResourceModeration() {
               {/* Advanced Filters */}
               <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
                 <CollapsibleContent className="mt-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-white/15 rounded-xl border border-white/20">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-gray-50 dark:bg-white/15 rounded-xl border border-gray-200 dark:border-white/20">
                     <div>
-                      <label className="block text-sm font-medium text-white/90 mb-2">Amyloidosis Type</label>
+                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Amyloidosis Type</label>
                       <Select value={filters.amyloidosisType} onValueChange={(value) => setFilters(prev => ({ ...prev, amyloidosisType: value }))}>
-                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectTrigger className="bg-gray-100 dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -362,9 +358,9 @@ export default function ResourceModeration() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/90 mb-2">Category</label>
+                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Category</label>
                       <Select value={filters.category} onValueChange={(value) => setFilters(prev => ({ ...prev, category: value }))}>
-                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectTrigger className="bg-gray-100 dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -380,12 +376,12 @@ export default function ResourceModeration() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-white/90 mb-2">Submitted By</label>
+                      <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">Submitted By</label>
                       <Input
                         placeholder="Filter by submitter name..."
                         value={filters.submittedBy}
                         onChange={(e) => setFilters(prev => ({ ...prev, submittedBy: e.target.value }))}
-                        className="bg-white/20 border-white/30 text-white placeholder-white/60"
+                        className="bg-gray-100 dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60"
                       />
                     </div>
                   </div>
@@ -397,16 +393,16 @@ export default function ResourceModeration() {
       </section>
 
       {/* Resources Queue */}
-      <section className="py-12 bg-gray-900">
+      <section className="py-12 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-6">
           {isLoading ? (
             <div className="grid grid-cols-1 gap-6">
               {[...Array(3)].map((_, i) => (
-                <Card key={i} className="bg-white/5 backdrop-blur-xl border-white/20 animate-pulse">
+                <Card key={i} className="bg-white dark:bg-white/5 backdrop-blur-xl border-gray-200 dark:border-white/20 animate-pulse shadow-md dark:shadow-none">
                   <CardContent className="p-6">
-                    <div className="h-6 bg-white/10 rounded mb-4"></div>
-                    <div className="h-4 bg-white/10 rounded mb-2"></div>
-                    <div className="h-4 bg-white/10 rounded w-2/3"></div>
+                    <div className="h-6 bg-gray-200 dark:bg-white/10 rounded mb-4"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-white/10 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-white/10 rounded w-2/3"></div>
                   </CardContent>
                 </Card>
               ))}
@@ -415,13 +411,13 @@ export default function ResourceModeration() {
             <div className="text-center py-12">
               <AlertTriangle className="w-12 h-12 text-red-400 mx-auto mb-4" />
               <p className="text-red-400 text-lg mb-4">Failed to load moderation queue</p>
-              <p className="text-white/60">Please try again later or contact support if the problem persists.</p>
+              <p className="text-gray-600 dark:text-white/60">Please try again later or contact support if the problem persists.</p>
             </div>
           ) : resources.length === 0 ? (
             <div className="text-center py-12">
               <Check className="w-12 h-12 text-green-400 mx-auto mb-4" />
-              <p className="text-white/60 text-lg mb-4">No resources in moderation queue</p>
-              <p className="text-white/40">All submitted resources have been reviewed.</p>
+              <p className="text-gray-600 dark:text-white/60 text-lg mb-4">No resources in moderation queue</p>
+              <p className="text-gray-500 dark:text-white/40">All submitted resources have been reviewed.</p>
             </div>
           ) : (
             <div className="space-y-6">
@@ -432,30 +428,30 @@ export default function ResourceModeration() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Card className="bg-white/5 backdrop-blur-xl border-white/20 hover:bg-white/10 transition-all duration-300">
+                  <Card className="bg-white dark:bg-white/5 backdrop-blur-xl border-gray-200 dark:border-white/20 hover:bg-gray-50 dark:hover:bg-white/10 transition-all duration-300 shadow-md dark:shadow-none">
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-start gap-4">
                             <div className="flex-1">
                               <div className="flex items-center gap-3 mb-3">
-                                <h3 className="text-lg font-semibold text-white">{resource.title}</h3>
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{resource.title}</h3>
                                 <Badge className={`text-xs ${getStatusColor(resource.isApproved || false)}`}>
                                   {getStatusLabel(resource.isApproved || false)}
                                 </Badge>
                                 <Badge variant="outline" className="text-xs border-[#00AFE6]/30 text-[#00AFE6]">
                                   {resource.amyloidosisType}
                                 </Badge>
-                                <Badge variant="outline" className="text-xs border-white/20 text-white/70">
+                                <Badge variant="outline" className="text-xs border-gray-300 dark:border-white/20 text-gray-700 dark:text-white/70">
                                   {resource.category}
                                 </Badge>
                               </div>
                               
-                              <p className="text-white/70 text-sm mb-4 line-clamp-2">
+                              <p className="text-gray-600 dark:text-white/70 text-sm mb-4 line-clamp-2">
                                 {resource.description}
                               </p>
                               
-                              <div className="flex items-center gap-6 text-xs text-white/50 mb-4">
+                              <div className="flex items-center gap-6 text-xs text-gray-500 dark:text-white/50 mb-4">
                                 <div className="flex items-center gap-2">
                                   <User className="w-3 h-3" />
                                   <span>{resource.submittedBy || 'Anonymous'}</span>
@@ -480,23 +476,23 @@ export default function ResourceModeration() {
                                 variant="outline"
                                 size="sm"
                                 onClick={() => setSelectedResource(resource)}
-                                className="border-white/30 text-white hover:bg-white/20"
+                                className="border-gray-300 dark:border-white/30 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/20"
                               >
                                 <Eye className="w-4 h-4 mr-2" />
                                 Review
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="bg-gray-800 border-white/20 text-white max-w-4xl">
+                            <DialogContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-white/20 text-gray-900 dark:text-white max-w-4xl">
                               <DialogHeader>
-                                <DialogTitle className="text-white">Review Resource</DialogTitle>
+                                <DialogTitle className="text-gray-900 dark:text-white">Review Resource</DialogTitle>
                               </DialogHeader>
                               
                               {selectedResource && (
                                 <div className="space-y-6">
                                   {/* File Preview Section */}
-                                  <div className="bg-white/5 rounded-lg p-4 border border-white/10">
+                                  <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-4 border border-gray-200 dark:border-white/10">
                                     <div className="flex items-center justify-between mb-3">
-                                      <h4 className="font-medium text-white">File Preview</h4>
+                                      <h4 className="font-medium text-gray-900 dark:text-white">File Preview</h4>
                                       {!selectedResource.fileUrl?.includes('example.com') ? (
                                         <Button
                                           variant="outline"
@@ -509,20 +505,20 @@ export default function ResourceModeration() {
                                           Download File
                                         </Button>
                                       ) : (
-                                        <div className="text-xs text-white/50 bg-white/5 px-3 py-1 rounded-md border border-white/10">
+                                        <div className="text-xs text-gray-600 dark:text-white/50 bg-gray-200 dark:bg-white/5 px-3 py-1 rounded-md border border-gray-300 dark:border-white/10">
                                           File stored in system
                                         </div>
                                       )}
                                     </div>
                                     
-                                    <div className="bg-white/10 rounded-lg overflow-hidden">
+                                    <div className="bg-gray-100 dark:bg-white/10 rounded-lg overflow-hidden">
                                       {selectedResource.fileUrl?.includes('example.com') ? (
                                         <div className="flex flex-col items-center justify-center py-12">
-                                          <FileText className="w-16 h-16 text-white/40 mb-4" />
-                                          <p className="text-white/60 text-sm mb-2">{selectedResource.fileName}</p>
-                                          <p className="text-white/40 text-xs mb-4">{selectedResource.fileType} • {selectedResource.fileSize}</p>
-                                          <div className="bg-white/5 border border-white/10 rounded-lg p-4 max-w-md">
-                                            <p className="text-white/70 text-sm text-center">
+                                          <FileText className="w-16 h-16 text-gray-400 dark:text-white/40 mb-4" />
+                                          <p className="text-gray-600 dark:text-white/60 text-sm mb-2">{selectedResource.fileName}</p>
+                                          <p className="text-gray-500 dark:text-white/40 text-xs mb-4">{selectedResource.fileType} • {selectedResource.fileSize}</p>
+                                          <div className="bg-gray-200 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-lg p-4 max-w-md">
+                                            <p className="text-gray-700 dark:text-white/70 text-sm text-center">
                                               File is stored in the system. Preview and download will be available once file storage is fully integrated.
                                             </p>
                                           </div>
@@ -533,15 +529,15 @@ export default function ResourceModeration() {
                                         <img 
                                           src={selectedResource.fileUrl} 
                                           alt={selectedResource.fileName}
-                                          className="w-full max-h-96 object-contain bg-white/5"
+                                          className="w-full max-h-96 object-contain bg-gray-100 dark:bg-white/5"
                                           onError={(e) => {
                                             (e.target as HTMLImageElement).style.display = 'none';
                                             (e.target as HTMLImageElement).parentElement!.innerHTML = `
                                               <div class="flex flex-col items-center justify-center py-12">
-                                                <svg class="w-16 h-16 text-white/40 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-16 h-16 text-gray-400 dark:text-white/40 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                                 </svg>
-                                                <p class="text-white/60 text-sm">Image preview unavailable</p>
+                                                <p class="text-gray-600 dark:text-white/60 text-sm">Image preview unavailable</p>
                                               </div>
                                             `;
                                           }}
@@ -555,25 +551,25 @@ export default function ResourceModeration() {
                                             (e.target as HTMLIFrameElement).style.display = 'none';
                                             (e.target as HTMLIFrameElement).parentElement!.innerHTML = `
                                               <div class="flex flex-col items-center justify-center py-12">
-                                                <svg class="w-16 h-16 text-white/40 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-16 h-16 text-gray-400 dark:text-white/40 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                                                 </svg>
-                                                <p class="text-white/60 text-sm mb-2">PDF preview unavailable</p>
-                                                <p class="text-white/40 text-xs">${selectedResource.fileName}</p>
+                                                <p class="text-gray-600 dark:text-white/60 text-sm mb-2">PDF preview unavailable</p>
+                                                <p class="text-gray-500 dark:text-white/40 text-xs">${selectedResource.fileName}</p>
                                               </div>
                                             `;
                                           }}
                                         />
                                       ) : (
                                         <div className="flex flex-col items-center justify-center py-12">
-                                          <FileText className="w-16 h-16 text-white/40 mb-4" />
-                                          <p className="text-white/60 text-sm mb-2">{selectedResource.fileName}</p>
-                                          <p className="text-white/40 text-xs">{selectedResource.fileType}</p>
+                                          <FileText className="w-16 h-16 text-gray-400 dark:text-white/40 mb-4" />
+                                          <p className="text-gray-600 dark:text-white/60 text-sm mb-2">{selectedResource.fileName}</p>
+                                          <p className="text-gray-500 dark:text-white/40 text-xs">{selectedResource.fileType}</p>
                                           <Button
                                             variant="outline"
                                             size="sm"
                                             onClick={() => window.open(selectedResource.fileUrl, '_blank')}
-                                            className="mt-4 border-white/30 text-white hover:bg-white/20"
+                                            className="mt-4 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/20"
                                             data-testid="button-open-file"
                                           >
                                             <Eye className="w-4 h-4 mr-2" />
@@ -586,37 +582,37 @@ export default function ResourceModeration() {
                                   
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                      <h4 className="font-medium text-white mb-2">Resource Details</h4>
-                                      <div className="space-y-2 text-sm">
-                                        <div><span className="text-white/60">Title:</span> {selectedResource.title}</div>
-                                        <div><span className="text-white/60">Type:</span> {selectedResource.amyloidosisType}</div>
-                                        <div><span className="text-white/60">Category:</span> {selectedResource.category}</div>
-                                        <div><span className="text-white/60">Audience:</span> {selectedResource.audience}</div>
-                                        <div><span className="text-white/60">Language:</span> {selectedResource.language}</div>
-                                        <div><span className="text-white/60">Region:</span> {selectedResource.region}</div>
+                                      <h4 className="font-medium text-gray-900 dark:text-white mb-2">Resource Details</h4>
+                                      <div className="space-y-2 text-sm text-gray-900 dark:text-white">
+                                        <div><span className="text-gray-600 dark:text-white/60">Title:</span> {selectedResource.title}</div>
+                                        <div><span className="text-gray-600 dark:text-white/60">Type:</span> {selectedResource.amyloidosisType}</div>
+                                        <div><span className="text-gray-600 dark:text-white/60">Category:</span> {selectedResource.category}</div>
+                                        <div><span className="text-gray-600 dark:text-white/60">Audience:</span> {selectedResource.audience}</div>
+                                        <div><span className="text-gray-600 dark:text-white/60">Language:</span> {selectedResource.language}</div>
+                                        <div><span className="text-gray-600 dark:text-white/60">Region:</span> {selectedResource.region}</div>
                                       </div>
                                     </div>
                                     
                                     <div>
-                                      <h4 className="font-medium text-white mb-2">Submission Info</h4>
-                                      <div className="space-y-2 text-sm">
-                                        <div><span className="text-white/60">Submitted by:</span> {selectedResource.submittedBy || 'Anonymous'}</div>
-                                        <div><span className="text-white/60">File:</span> {selectedResource.fileName}</div>
-                                        <div><span className="text-white/60">Size:</span> {selectedResource.fileSize}</div>
-                                        <div><span className="text-white/60">Submitted:</span> {formatDate(selectedResource.createdAt || null)}</div>
+                                      <h4 className="font-medium text-gray-900 dark:text-white mb-2">Submission Info</h4>
+                                      <div className="space-y-2 text-sm text-gray-900 dark:text-white">
+                                        <div><span className="text-gray-600 dark:text-white/60">Submitted by:</span> {selectedResource.submittedBy || 'Anonymous'}</div>
+                                        <div><span className="text-gray-600 dark:text-white/60">File:</span> {selectedResource.fileName}</div>
+                                        <div><span className="text-gray-600 dark:text-white/60">Size:</span> {selectedResource.fileSize}</div>
+                                        <div><span className="text-gray-600 dark:text-white/60">Submitted:</span> {formatDate(selectedResource.createdAt || null)}</div>
                                       </div>
                                     </div>
                                   </div>
                                   
                                   <div>
-                                    <h4 className="font-medium text-white mb-2">Description</h4>
-                                    <p className="text-white/80 text-sm bg-white/5 p-3 rounded-3xl">
+                                    <h4 className="font-medium text-gray-900 dark:text-white mb-2">Description</h4>
+                                    <p className="text-gray-700 dark:text-white/80 text-sm bg-gray-100 dark:bg-white/5 p-3 rounded-3xl">
                                       {selectedResource.description}
                                     </p>
                                   </div>
                                   
                                   <div>
-                                    <label className="block text-sm font-medium text-white/90 mb-2">
+                                    <label className="block text-sm font-medium text-gray-900 dark:text-white/90 mb-2">
                                       Moderation Note (Optional)
                                     </label>
                                     <Textarea
@@ -624,13 +620,13 @@ export default function ResourceModeration() {
                                       onChange={(e) => setModerationNote(e.target.value)}
                                       placeholder="Add notes about your decision or required enhancements..."
                                       rows={3}
-                                      className="bg-white/10 border-white/30 text-white placeholder-white/50"
+                                      className="bg-gray-100 dark:bg-white/10 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50"
                                     />
                                   </div>
                                   
-                                  <Alert className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89]/10 border-blue-500/30">
+                                  <Alert className="bg-gradient-to-r from-[#00AFE6]/10 dark:from-[#00AFE6] to-[#00DD89]/10 border-blue-500/30">
                                     <AlertTriangle className="h-4 w-4 text-blue-400" />
-                                    <AlertDescription className="text-white/90">
+                                    <AlertDescription className="text-gray-900 dark:text-white/90">
                                       Please review the resource carefully before making a decision. Approved resources will be immediately available to all users.
                                     </AlertDescription>
                                   </Alert>
@@ -674,7 +670,7 @@ export default function ResourceModeration() {
                             variant="ghost"
                             size="sm"
                             onClick={() => window.open(resource.fileUrl, '_blank')}
-                            className="text-white/70 hover:text-white hover:bg-white/20"
+                            className="text-gray-600 dark:text-white/70 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/20"
                           >
                             <Download className="w-4 h-4" />
                           </Button>

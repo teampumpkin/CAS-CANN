@@ -493,6 +493,53 @@ export default function ResourceModeration() {
                               
                               {selectedResource && (
                                 <div className="space-y-6">
+                                  {/* File Preview Section */}
+                                  <div className="bg-white/5 rounded-lg p-4 border border-white/10">
+                                    <div className="flex items-center justify-between mb-3">
+                                      <h4 className="font-medium text-white">File Preview</h4>
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => window.open(selectedResource.fileUrl, '_blank')}
+                                        className="border-[#00AFE6]/30 text-[#00AFE6] hover:bg-[#00AFE6]/20"
+                                      >
+                                        <Download className="w-4 h-4 mr-2" />
+                                        Download File
+                                      </Button>
+                                    </div>
+                                    
+                                    <div className="bg-white/10 rounded-lg overflow-hidden">
+                                      {selectedResource.fileType?.startsWith('image/') ? (
+                                        <img 
+                                          src={selectedResource.fileUrl} 
+                                          alt={selectedResource.fileName}
+                                          className="w-full max-h-96 object-contain"
+                                        />
+                                      ) : selectedResource.fileType === 'application/pdf' ? (
+                                        <iframe
+                                          src={selectedResource.fileUrl}
+                                          className="w-full h-96"
+                                          title={selectedResource.fileName}
+                                        />
+                                      ) : (
+                                        <div className="flex flex-col items-center justify-center py-12">
+                                          <FileText className="w-16 h-16 text-white/40 mb-4" />
+                                          <p className="text-white/60 text-sm mb-2">{selectedResource.fileName}</p>
+                                          <p className="text-white/40 text-xs">{selectedResource.fileType}</p>
+                                          <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => window.open(selectedResource.fileUrl, '_blank')}
+                                            className="mt-4 border-white/30 text-white hover:bg-white/20"
+                                          >
+                                            <Eye className="w-4 h-4 mr-2" />
+                                            Open File
+                                          </Button>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                  
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
                                       <h4 className="font-medium text-white mb-2">Resource Details</h4>

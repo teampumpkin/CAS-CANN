@@ -509,17 +509,40 @@ export default function ResourceModeration() {
                                     </div>
                                     
                                     <div className="bg-white/10 rounded-lg overflow-hidden">
-                                      {selectedResource.fileType?.startsWith('image/') ? (
+                                      {selectedResource.fileType?.toLowerCase().startsWith('image/') ? (
                                         <img 
                                           src={selectedResource.fileUrl} 
                                           alt={selectedResource.fileName}
-                                          className="w-full max-h-96 object-contain"
+                                          className="w-full max-h-96 object-contain bg-white/5"
+                                          onError={(e) => {
+                                            (e.target as HTMLImageElement).style.display = 'none';
+                                            (e.target as HTMLImageElement).parentElement!.innerHTML = `
+                                              <div class="flex flex-col items-center justify-center py-12">
+                                                <svg class="w-16 h-16 text-white/40 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <p class="text-white/60 text-sm">Image preview unavailable</p>
+                                              </div>
+                                            `;
+                                          }}
                                         />
-                                      ) : selectedResource.fileType === 'application/pdf' ? (
+                                      ) : selectedResource.fileType?.toLowerCase().includes('pdf') || selectedResource.fileName?.toLowerCase().endsWith('.pdf') ? (
                                         <iframe
                                           src={selectedResource.fileUrl}
                                           className="w-full h-96"
                                           title={selectedResource.fileName}
+                                          onError={(e) => {
+                                            (e.target as HTMLIFrameElement).style.display = 'none';
+                                            (e.target as HTMLIFrameElement).parentElement!.innerHTML = `
+                                              <div class="flex flex-col items-center justify-center py-12">
+                                                <svg class="w-16 h-16 text-white/40 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <p class="text-white/60 text-sm mb-2">PDF preview unavailable</p>
+                                                <p class="text-white/40 text-xs">${selectedResource.fileName}</p>
+                                              </div>
+                                            `;
+                                          }}
                                         />
                                       ) : (
                                         <div className="flex flex-col items-center justify-center py-12">

@@ -482,9 +482,16 @@ export default function CANNResources() {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-6">
+                  <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-4">
                     Living with Cardiac Amyloidosis is a helpful guide for people who have this condition, their families, and anyone who wants to learn more about it. It explains what cardiac amyloidosis is, how it is diagnosed, and how it can be treated.
                   </p>
+
+                  {/* French Translation Notice */}
+                  <div className="mb-6 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <p className="text-xs text-blue-700 dark:text-blue-300 font-medium text-center italic">
+                      French translation of the booklet coming soon
+                    </p>
+                  </div>
 
                   {/* Download Button */}
                   <a

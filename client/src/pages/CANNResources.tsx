@@ -154,13 +154,13 @@ export default function CANNResources() {
   const upcomingEvents = [
     {
       title: "CANN Educational Series",
-      date: "October 7, 2025",
-      time: "2:00 – 3:00 PM (MST)",
+      date: "Coming Soon – February 2026, date TBD",
+      time: "TBD",
       location: "Virtual – login to CANN member portal for access details",
       format: "Webinar",
       description:
         "Occurring 3-4 times per year, topics and speakers are tailored toward the needs of CANN members.",
-      topic: "My Journey with Amyloidosis: A Patient's Perspective",
+      topic: undefined as string | undefined,
       registrationDeadline: "Registration not required",
       cmeCredits: "1 hour",
       type: "Webinar",

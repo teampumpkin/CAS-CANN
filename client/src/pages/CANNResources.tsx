@@ -113,6 +113,11 @@ export default function CANNResources() {
 
   const educationalSeries = [
     {
+      date: "October 7, 2025",
+      speaker: "Patient Advocate",
+      topic: "My Journey with Amyloidosis: A Patient's Perspective",
+    },
+    {
       date: "December 13, 2023",
       speaker:
         "Dr. Victor Jimenez Zepeda, Associate Professor, University of Calgary, Co-Director, Amyloidosis Program of Calgary",
@@ -143,11 +148,6 @@ export default function CANNResources() {
       speaker:
         "1. Krista Jelisava, RN, BScN, Co-Chair, CANN 2. Rose Ramm, RN, BN, Co-Chair, CANN",
       topic: "Interesting Case Presentation and Discussion",
-    },
-    {
-      date: "October 7, 2025",
-      speaker: "Patient Advocate",
-      topic: "My Journey with Amyloidosis: A Patient's Perspective",
     },
   ];
 

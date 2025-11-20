@@ -18,7 +18,37 @@ import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
 
-const upcomingEvents: any[] = [];
+const featuredEvents = [
+  {
+    id: 1,
+    title: "2025 Canadian Amyloidosis Summit",
+    date: "2025-10-31",
+    time: "All Day Event",
+    location: "Toronto, ON",
+    type: "Summit",
+    description:
+      "The 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). A comprehensive gathering of healthcare professionals, researchers, and patients focused on advancing amyloidosis care in Canada.",
+    image: summitSaveTheDateImg,
+    registrationUrl: "https://madhattr.ca/events/",
+  },
+];
+
+const upcomingEvents = [
+  {
+    id: 1,
+    title: "CAS Journal Club - November Session",
+    date: "2025-11-27",
+    time: "3:00 PM - 4:00 PM MST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description:
+      "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updates.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "#",
+    requiresMembershipCTA: true,
+    membershipType: "CAS",
+  },
+];
 
 const recentEvents: any[] = [];
 
@@ -34,7 +64,6 @@ const pastEvents = [
       "The 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). A comprehensive gathering of healthcare professionals, researchers, and patients focused on advancing amyloidosis care in Canada.",
     image: summitSaveTheDateImg,
     registrationUrl: "https://madhattr.ca/events/",
-    attendees: "150+",
   },
   {
     id: 2,
@@ -48,7 +77,6 @@ const pastEvents = [
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
     confirmed: true,
-    attendees: "45",
   },
   {
     id: 3,
@@ -61,7 +89,6 @@ const pastEvents = [
       "Organized by the Canadian Amyloidosis Nursing Network (CANN), these events occur regularly 3-4 times per year. This educational series provides ongoing professional development opportunities for nurses and healthcare professionals engaged in amyloidosis care.",
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
-    attendees: "38",
   },
 ];
 
@@ -152,8 +179,8 @@ export default function Events() {
         </div>
       </section>
 
-      {/* Section 5: Featured Event Section - Hidden until next featured event */}
-      {false && (
+      {/* Section 5: Featured Event Section */}
+      {featuredEvents.length > 0 && (
       <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/50 dark:via-transparent dark:to-gray-700/30"></div>
@@ -401,26 +428,6 @@ export default function Events() {
             </div>
 
             <TabsContent value="overview" className="mt-0">
-              {upcomingEvents.length === 0 ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="text-center py-16"
-                >
-                  <div className="max-w-md mx-auto">
-                    <div className="w-24 h-24 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <Calendar className="w-12 h-12 text-[#00AFE6]" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
-                      No Upcoming Events
-                    </h3>
-                    <p className="text-gray-600 dark:text-white/70 mb-6">
-                      Check back soon for new events and educational opportunities. Past events can be found in the Past Events tab.
-                    </p>
-                  </div>
-                </motion.div>
-              ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {upcomingEvents.map((event, index) => (
                   <motion.div
@@ -469,8 +476,8 @@ export default function Events() {
                           {event.description}
                         </p>
 
-                        {/* Membership info and Join button - Show for Journal Club sessions (index 0 and 2) and CANN Educational Series (index 1) */}
-                        {(index === 0 || index === 1 || index === 2) && (
+                        {/* Membership info and Join button - Show for events that require membership */}
+                        {event.requiresMembershipCTA && (
                           <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden space-y-2">
                             {/* Subtle animated background effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
@@ -479,14 +486,12 @@ export default function Events() {
                               <div className="flex items-center justify-center gap-1 mb-1">
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                                 <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
-                                  {index === 1
-                                    ? "Registration Not Required."
-                                    : "Registration Not Required."}
+                                  Registration Not Required.
                                 </p>
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                               </div>
                               <p className="text-xs font-medium text-gray-700 dark:text-white/80 mb-2">
-                                {index === 1
+                                {event.membershipType === "CANN"
                                   ? "Zoom details are sent to CANN members"
                                   : "Zoom details are sent to CAS members"}
                               </p>
@@ -494,17 +499,17 @@ export default function Events() {
                               <Button
                                 onClick={() =>
                                   (window.location.href =
-                                    index === 1
+                                    event.membershipType === "CANN"
                                       ? "/about-cann#join-section"
                                       : "/join-cas")
                                 }
                                 className={
-                                  index === 1
+                                  event.membershipType === "CANN"
                                     ? "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
                                     : "bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
                                 }
                                 data-testid={
-                                  index === 1
+                                  event.membershipType === "CANN"
                                     ? "button-join-cann"
                                     : "button-join-cas"
                                 }
@@ -512,7 +517,7 @@ export default function Events() {
                                 {/* Animated background effect */}
                                 <div
                                   className={
-                                    index === 1
+                                    event.membershipType === "CANN"
                                       ? "absolute inset-0 bg-gradient-to-r from-pink-500/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
                                       : "absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
                                   }
@@ -520,22 +525,22 @@ export default function Events() {
 
                                 <div
                                   className={
-                                    index === 1
+                                    event.membershipType === "CANN"
                                       ? "relative z-10 flex items-center justify-center text-white"
                                       : "relative z-10 flex items-center justify-center text-gray-800"
                                   }
                                 >
                                   <Users
                                     className={
-                                      index === 1
+                                      event.membershipType === "CANN"
                                         ? "w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-white"
                                         : "w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800"
                                     }
                                   />
-                                  {index === 1 ? "Join CANN" : "Join CAS"}
+                                  {event.membershipType === "CANN" ? "Join CANN" : "Join CAS"}
                                   <div
                                     className={
-                                      index === 1
+                                      event.membershipType === "CANN"
                                         ? "ml-1 w-1.5 h-1.5 bg-white rounded-full animate-pulse"
                                         : "ml-1 w-1.5 h-1.5 bg-gray-800 rounded-full animate-pulse"
                                     }
@@ -550,7 +555,6 @@ export default function Events() {
                   </motion.div>
                 ))}
               </div>
-              )}
             </TabsContent>
 
             <TabsContent value="recent" className="mt-0">
@@ -628,13 +632,6 @@ export default function Events() {
                         <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 leading-tight group-hover:text-[#00AFE6] transition-colors duration-300">
                           {event.title}
                         </h3>
-
-                        <div className="flex items-center gap-2 text-sm bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 px-3 py-2 rounded-xl border border-[#00AFE6]/10">
-                          <Users className="w-4 h-4 text-[#00AFE6]" />
-                          <span className="text-gray-600 dark:text-white/80 font-medium">
-                            {event.attendees} attendees
-                          </span>
-                        </div>
                       </div>
 
                       <CardContent className="p-8 pt-0 flex flex-col flex-1">

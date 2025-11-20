@@ -483,7 +483,7 @@ export default function CANNResources() {
 
                   {/* Description */}
                   <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-6">
-                    A comprehensive guide for patients and caregivers navigating cardiac amyloidosis. This booklet provides essential information about the condition, treatment options, and daily living strategies.
+                    Living with Cardiac Amyloidosis is a helpful guide for people who have this condition, their families, and anyone who wants to learn more about it. It explains what cardiac amyloidosis is, how it is diagnosed, and how it can be treated.
                   </p>
 
                   {/* Download Button */}

@@ -18,9 +18,26 @@ import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
 
-const upcomingEvents = [
+const upcomingEvents: any[] = [];
+
+const recentEvents: any[] = [];
+
+const pastEvents = [
   {
     id: 1,
+    title: "2025 Canadian Amyloidosis Summit",
+    date: "2025-10-31",
+    time: "All Day Event",
+    location: "Toronto, ON",
+    type: "Summit",
+    description:
+      "The 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). A comprehensive gathering of healthcare professionals, researchers, and patients focused on advancing amyloidosis care in Canada.",
+    image: summitSaveTheDateImg,
+    registrationUrl: "https://madhattr.ca/events/",
+    attendees: "150+",
+  },
+  {
+    id: 2,
     title: "CAS Journal Club - September Session",
     date: "2025-09-25",
     time: "3:00 PM - 4:00 PM MST",
@@ -31,35 +48,22 @@ const upcomingEvents = [
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
     confirmed: true,
+    attendees: "45",
   },
   {
-    id: 2,
+    id: 3,
     title: "CANN Educational Series",
     date: "2025-10-07",
     time: "2:00 – 3:00 PM MST",
     location: "Virtual Event",
     type: "Educational Series",
     description:
-      "Organized by the Canadian Amyloidosis Nursing Network (CANN), these events occur regularly 3-4 times per year.This educational series provides ongoing professional development opportunities for nurses and healthcare professionals engaged in amyloidosis care. Topic, speaker, and exact date are coordinated by the CANN Executive Committee. Visit the CANN Events page for more details.",
+      "Organized by the Canadian Amyloidosis Nursing Network (CANN), these events occur regularly 3-4 times per year. This educational series provides ongoing professional development opportunities for nurses and healthcare professionals engaged in amyloidosis care.",
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
-  },
-  {
-    id: 3,
-    title: "CAS Journal Club - November Session",
-    date: "2025-11-27",
-    time: "3:00 PM - 4:00 PM MST",
-    location: "Virtual Event",
-    type: "Journal Club",
-    description:
-      "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updates.",
-    image: "/api/placeholder/400/250",
-    registrationUrl: "#",
+    attendees: "38",
   },
 ];
-
-const recentEvents: any[] = [];
-const pastEvents: any[] = [];
 
 export default function Events() {
   const { t } = useLanguage();
@@ -148,7 +152,8 @@ export default function Events() {
         </div>
       </section>
 
-      {/* Section 5: 2025 Canadian Amyloidosis Summit Section */}
+      {/* Section 5: Featured Event Section - Hidden until next featured event */}
+      {false && (
       <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/50 dark:via-transparent dark:to-gray-700/30"></div>
@@ -318,6 +323,7 @@ export default function Events() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Section 6: Events Section */}
       <section
@@ -395,6 +401,26 @@ export default function Events() {
             </div>
 
             <TabsContent value="overview" className="mt-0">
+              {upcomingEvents.length === 0 ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-center py-16"
+                >
+                  <div className="max-w-md mx-auto">
+                    <div className="w-24 h-24 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <Calendar className="w-12 h-12 text-[#00AFE6]" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+                      No Upcoming Events
+                    </h3>
+                    <p className="text-gray-600 dark:text-white/70 mb-6">
+                      Check back soon for new events and educational opportunities. Past events can be found in the Past Events tab.
+                    </p>
+                  </div>
+                </motion.div>
+              ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {upcomingEvents.map((event, index) => (
                   <motion.div
@@ -524,6 +550,7 @@ export default function Events() {
                   </motion.div>
                 ))}
               </div>
+              )}
             </TabsContent>
 
             <TabsContent value="recent" className="mt-0">

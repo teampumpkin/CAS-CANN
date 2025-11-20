@@ -60,18 +60,6 @@ const allEvents = [
     registrationUrl: "#",
     confirmed: true,
   },
-  {
-    id: 4,
-    title: "CANN Educational Series",
-    date: "2025-10-07",
-    time: "2:00 – 3:00 PM MST",
-    location: "Virtual Event",
-    type: "Educational Series",
-    description:
-      "Organized by the Canadian Amyloidosis Nursing Network (CANN), these events occur regularly 3-4 times per year. This educational series provides ongoing professional development opportunities for nurses and healthcare professionals engaged in amyloidosis care.",
-    image: "/api/placeholder/400/250",
-    registrationUrl: "#",
-  },
 ];
 
 // Helper function to parse event date and compare with today

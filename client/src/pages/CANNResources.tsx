@@ -26,6 +26,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
+import cardiacAmyloidosisBooklet from "@assets/Living-with-cardiac-amyloidosis_1763624816977.pdf";
 
 export default function CANNResources() {
   const [isCopied, setIsCopied] = useState(false);
@@ -486,13 +487,20 @@ export default function CANNResources() {
                   </p>
 
                   {/* Download Button */}
-                  <Button
-                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl w-full shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn"
-                    data-testid="button-download-cardiac-booklet"
+                  <a
+                    href={cardiacAmyloidosisBooklet}
+                    download="Living-with-Cardiac-Amyloidosis.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <Download className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
-                    Download PDF
-                  </Button>
+                    <Button
+                      className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl w-full shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn"
+                      data-testid="button-download-cardiac-booklet"
+                    >
+                      <Download className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
+                      Download PDF
+                    </Button>
+                  </a>
                 </CardContent>
               </Card>
             </motion.div>

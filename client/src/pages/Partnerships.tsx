@@ -10,14 +10,18 @@ import {
   Stethoscope,
   GraduationCap,
   Network,
+  BookOpen,
+  Download,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import partnershipImage from "@assets/DSC02841_1750068895454.jpg";
+import cardiacAmyloidosisBooklet from "@assets/Living-with-cardiac-amyloidosis_1763624816977.pdf";
 
 export default function Partnerships() {
   const { t } = useLanguage();
@@ -348,6 +352,86 @@ export default function Partnerships() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Educational Materials Section */}
+      <section className="py-24 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Educational Materials
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
+              Educational resources for amyloidosis nurses, healthcare
+              professionals and patients.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Living with Cardiac Amyloidosis Booklet */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Card className="bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 border border-gray-200 dark:border-gray-700 hover:border-pink-500/50 dark:hover:border-pink-500/50 hover:shadow-xl hover:shadow-pink-500/10 transition-all duration-300 h-full flex flex-col rounded-2xl overflow-hidden group">
+                <CardContent className="p-6 flex flex-col flex-1">
+                  {/* Icon */}
+                  <div className="w-16 h-16 bg-gradient-to-br from-pink-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <BookOpen className="w-8 h-8 text-pink-600 dark:text-pink-400" />
+                  </div>
+
+                  {/* Badge */}
+                  <Badge className="bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 px-3 py-1 text-xs font-medium rounded-full mb-4 w-fit">
+                    Patient Resource
+                  </Badge>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors duration-300">
+                    Living with Cardiac Amyloidosis
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-4">
+                    Living with Cardiac Amyloidosis is a helpful guide for people who have this condition, their families, and anyone who wants to learn more about it. It explains what cardiac amyloidosis is, how it is diagnosed, and how it can be treated.
+                  </p>
+
+                  {/* French Translation Notice */}
+                  <div className="mb-6 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <p className="text-xs text-blue-700 dark:text-blue-300 font-medium text-center italic">
+                      French translation of the booklet coming soon
+                    </p>
+                  </div>
+
+                  {/* Download Button */}
+                  <a
+                    href={cardiacAmyloidosisBooklet}
+                    download="Living-with-Cardiac-Amyloidosis.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button
+                      className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl w-full shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn"
+                      data-testid="button-download-cardiac-booklet"
+                    >
+                      <Download className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
+                      Download PDF
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </section>

@@ -385,20 +385,20 @@ export default function Partnerships() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 border border-gray-200 dark:border-gray-700 hover:border-pink-500/50 dark:hover:border-pink-500/50 hover:shadow-xl hover:shadow-pink-500/10 transition-all duration-300 h-full flex flex-col rounded-2xl overflow-hidden group">
+              <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 border border-gray-200 dark:border-gray-700 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/50 hover:shadow-xl hover:shadow-[#00AFE6]/10 transition-all duration-300 h-full flex flex-col rounded-2xl overflow-hidden group">
                 <CardContent className="p-6 flex flex-col flex-1">
                   {/* Icon */}
-                  <div className="w-16 h-16 bg-gradient-to-br from-pink-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
-                    <BookOpen className="w-8 h-8 text-pink-600 dark:text-pink-400" />
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <BookOpen className="w-8 h-8 text-[#00AFE6] dark:text-[#00AFE6]" />
                   </div>
 
                   {/* Badge */}
-                  <Badge className="bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 px-3 py-1 text-xs font-medium rounded-full mb-4 w-fit">
+                  <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-3 py-1 text-xs font-medium rounded-full mb-4 w-fit">
                     Patient Resource
                   </Badge>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-[#00AFE6] dark:group-hover:text-[#00AFE6] transition-colors duration-300">
                     Living with Cardiac Amyloidosis
                   </h3>
 
@@ -422,7 +422,7 @@ export default function Partnerships() {
                     rel="noopener noreferrer"
                   >
                     <Button
-                      className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl w-full shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn"
+                      className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 rounded-xl w-full shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn"
                       data-testid="button-download-cardiac-booklet"
                     >
                       <Download className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />

@@ -167,9 +167,9 @@ export default function CANNResources() {
     },
     {
       title: "CANN Quarterly Meeting",
-      date: "November 25, 2025",
+      date: "December 2, 2025",
       time: "2:00 – 3:00 MST",
-      location: "Virtual – Login to CANN member portal for access details",
+      location: "Virtual – Access details (Zoom) will be sent to CANN members.",
       format: "Virtual Meeting",
       description:
         "All members' welcome! Connect with CANN members and receive live communication and updates about the network.",

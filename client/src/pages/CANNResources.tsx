@@ -455,63 +455,46 @@ export default function CANNResources() {
             </p>
           </motion.div>
 
-          <div className="flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Living with Cardiac Amyloidosis Booklet */}
             <motion.div
-              className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/90 dark:to-gray-900/90 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-gray-700/30 shadow-2xl max-w-sm mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <div className="flex flex-col items-center gap-4">
-                {/* Spinning Icon */}
-                <motion.div
-                  className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full shadow-lg"
-                  animate={{
-                    rotate: [0, 360],
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    rotate: { duration: 4, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-                  }}
-                >
-                  <BookOpen className="w-8 h-8 text-white" />
-                </motion.div>
+              <Card className="bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 border border-gray-200 dark:border-gray-700 hover:border-pink-500/50 dark:hover:border-pink-500/50 hover:shadow-xl hover:shadow-pink-500/10 transition-all duration-300 h-full flex flex-col rounded-2xl overflow-hidden group">
+                <CardContent className="p-6 flex flex-col flex-1">
+                  {/* Icon */}
+                  <div className="w-16 h-16 bg-gradient-to-br from-pink-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <BookOpen className="w-8 h-8 text-pink-600 dark:text-pink-400" />
+                  </div>
 
-                {/* Coming Soon Text */}
-                <motion.h3
-                  className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent"
-                  animate={{ opacity: [0.7, 1, 0.7] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  Coming Soon
-                </motion.h3>
+                  {/* Badge */}
+                  <Badge className="bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 px-3 py-1 text-xs font-medium rounded-full mb-4 w-fit">
+                    Patient Resource
+                  </Badge>
 
-                {/* Animated Dots */}
-                <div className="flex items-center gap-2">
-                  {[0, 0.3, 0.6].map((delay, index) => (
-                    <motion.div
-                      key={index}
-                      className="w-2 h-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full"
-                      animate={{
-                        scale: [0.8, 1.2, 0.8],
-                        opacity: [0.5, 1, 0.5],
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        delay: delay,
-                        ease: "easeInOut",
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors duration-300">
+                    Living with Cardiac Amyloidosis
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-6">
+                    A comprehensive guide for patients and caregivers navigating cardiac amyloidosis. This booklet provides essential information about the condition, treatment options, and daily living strategies.
+                  </p>
+
+                  {/* Download Button */}
+                  <Button
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl w-full shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn"
+                    data-testid="button-download-cardiac-booklet"
+                  >
+                    <Download className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
+                    Download PDF
+                  </Button>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </div>

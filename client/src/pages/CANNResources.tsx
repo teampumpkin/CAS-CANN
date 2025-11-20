@@ -144,6 +144,11 @@ export default function CANNResources() {
         "1. Krista Jelisava, RN, BScN, Co-Chair, CANN 2. Rose Ramm, RN, BN, Co-Chair, CANN",
       topic: "Interesting Case Presentation and Discussion",
     },
+    {
+      date: "October 7, 2025",
+      speaker: "Patient Advocate",
+      topic: "My Journey with Amyloidosis: A Patient's Perspective",
+    },
   ];
 
   const upcomingEvents = [

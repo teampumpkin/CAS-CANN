@@ -18,7 +18,8 @@ import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
 
-const featuredEvents = [
+// Single source of truth for all events
+const allEvents = [
   {
     id: 1,
     title: "2025 Canadian Amyloidosis Summit",
@@ -30,12 +31,10 @@ const featuredEvents = [
       "The 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). A comprehensive gathering of healthcare professionals, researchers, and patients focused on advancing amyloidosis care in Canada.",
     image: summitSaveTheDateImg,
     registrationUrl: "https://madhattr.ca/events/",
+    isFeatured: true, // Mark as featured event
   },
-];
-
-const upcomingEvents = [
   {
-    id: 1,
+    id: 2,
     title: "CAS Journal Club - November Session",
     date: "2025-11-27",
     time: "3:00 PM - 4:00 PM MST",
@@ -48,25 +47,8 @@ const upcomingEvents = [
     requiresMembershipCTA: true,
     membershipType: "CAS",
   },
-];
-
-const recentEvents: any[] = [];
-
-const pastEvents = [
   {
-    id: 1,
-    title: "2025 Canadian Amyloidosis Summit",
-    date: "2025-10-31",
-    time: "All Day Event",
-    location: "Toronto, ON",
-    type: "Summit",
-    description:
-      "The 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). A comprehensive gathering of healthcare professionals, researchers, and patients focused on advancing amyloidosis care in Canada.",
-    image: summitSaveTheDateImg,
-    registrationUrl: "https://madhattr.ca/events/",
-  },
-  {
-    id: 2,
+    id: 3,
     title: "CAS Journal Club - September Session",
     date: "2025-09-25",
     time: "3:00 PM - 4:00 PM MST",
@@ -79,7 +61,7 @@ const pastEvents = [
     confirmed: true,
   },
   {
-    id: 3,
+    id: 4,
     title: "CANN Educational Series",
     date: "2025-10-07",
     time: "2:00 – 3:00 PM MST",
@@ -92,9 +74,41 @@ const pastEvents = [
   },
 ];
 
+// Helper function to parse event date and compare with today
+const isEventPast = (dateString: string): boolean => {
+  const [year, month, day] = dateString.split("-").map(Number);
+  const eventDate = new Date(year, month - 1, day);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time to start of day for accurate comparison
+  return eventDate < today;
+};
+
+// Helper function to categorize events dynamically
+const categorizeEvents = () => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  const featured = allEvents.filter(event => event.isFeatured && !isEventPast(event.date));
+  const upcoming = allEvents.filter(event => !event.isFeatured && !isEventPast(event.date));
+  const past = allEvents.filter(event => isEventPast(event.date));
+  
+  // Sort past events by date (most recent first)
+  past.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB.getTime() - dateA.getTime();
+  });
+  
+  return { featured, upcoming, past };
+};
+
 export default function Events() {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("overview");
+  
+  // Dynamically categorize events based on current date
+  const { featured: featuredEvents, upcoming: upcomingEvents, past: pastEvents } = categorizeEvents();
+  const recentEvents: any[] = []; // Placeholder for recent events
 
   // Helper function to add ordinal suffix to day
   const getOrdinalSuffix = (day: number): string => {

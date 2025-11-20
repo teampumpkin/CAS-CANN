@@ -96,7 +96,6 @@ export default function Events() {
   
   // Dynamically categorize events based on current date
   const { featured: featuredEvents, upcoming: upcomingEvents, past: pastEvents } = categorizeEvents();
-  const recentEvents: any[] = []; // Placeholder for recent events
 
   // Helper function to add ordinal suffix to day
   const getOrdinalSuffix = (day: number): string => {
@@ -407,16 +406,6 @@ export default function Events() {
                   Upcoming Events
                 </button>
                 <button
-                  onClick={() => setActiveTab("recent")}
-                  className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
-                    activeTab === "recent"
-                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                      : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
-                  }`}
-                >
-                  Recent Events
-                </button>
-                <button
                   onClick={() => setActiveTab("past")}
                   className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
                     activeTab === "past"
@@ -553,55 +542,6 @@ export default function Events() {
                           </div>
                         )}
                       </div>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="recent" className="mt-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {recentEvents.map((event, index) => (
-                  <motion.div
-                    key={event.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00DD89]/50 dark:hover:border-[#00DD89]/60 hover:shadow-2xl hover:shadow-[#00DD89]/15 transition-all duration-500 h-full group rounded-3xl overflow-hidden">
-                      {/* Enhanced Header */}
-                      <div className="relative p-8 pb-6 bg-gradient-to-br from-[#00DD89]/10 via-[#00AFE6]/5 to-transparent">
-                        <div className="absolute top-4 right-4">
-                          <div className="flex items-center gap-2 text-sm bg-gradient-to-r from-[#00DD89]/20 to-[#00AFE6]/20 px-3 py-1 rounded-full border border-[#00DD89]/20">
-                            <Users className="w-4 h-4 text-[#00DD89]" />
-                            <span className="text-gray-600 dark:text-white/80 font-medium">
-                              {event.attendees}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="w-16 h-16 bg-gradient-to-br from-[#00DD89]/20 to-[#00AFE6]/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
-                          <Users className="w-8 h-8 text-[#00DD89] group-hover:text-[#00AFE6] transition-colors duration-300" />
-                        </div>
-
-                        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 leading-tight group-hover:text-[#00DD89] transition-colors duration-300">
-                          {event.title}
-                        </h3>
-
-                        <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-[#00DD89]/5 to-[#00AFE6]/5 rounded-xl border border-[#00DD89]/10">
-                          <Calendar className="w-5 h-5 text-[#00DD89] flex-shrink-0" />
-                          <span className="text-sm font-medium text-gray-700 dark:text-white/80">
-                            {formatEventDate(event.date)}
-                          </span>
-                        </div>
-                      </div>
-
-                      <CardContent className="p-8 pt-0">
-                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed">
-                          {event.description}
-                        </p>
-                      </CardContent>
                     </Card>
                   </motion.div>
                 ))}

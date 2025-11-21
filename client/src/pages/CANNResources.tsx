@@ -408,7 +408,7 @@ export default function CANNResources() {
                     </div>
                   ) : (
                     <div 
-                      className="relative w-full aspect-video bg-gradient-to-br from-pink-500/80 to-purple-600/80 dark:from-pink-600/70 dark:to-purple-700/70 overflow-hidden group cursor-pointer"
+                      className="relative w-full aspect-video bg-gradient-to-br from-[#00AFE6]/80 to-[#00DD89]/80 dark:from-[#00AFE6]/70 dark:to-[#00DD89]/70 overflow-hidden group cursor-pointer"
                       onClick={() => index === 0 && setPlayingVideoIndex(index)}
                     >
                       {/* Video thumbnail background */}
@@ -423,17 +423,20 @@ export default function CANNResources() {
                       )}
                       
                       {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-pink-500/60 to-purple-600/60 dark:from-pink-600/50 dark:to-purple-700/50" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/60 to-[#00DD89]/60 dark:from-[#00AFE6]/50 dark:to-[#00DD89]/50" />
                       
                       {/* Watch button centered */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         {index === 0 ? (
                           <motion.div
-                            className="bg-white/90 dark:bg-gray-900/90 rounded-full p-6 shadow-2xl group-hover:scale-110 transition-transform duration-300"
+                            className="bg-white/95 dark:bg-gray-900/95 rounded-full px-8 py-4 shadow-2xl group-hover:scale-110 transition-transform duration-300 flex items-center gap-3"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                           >
-                            <PlayCircle className="w-12 h-12 text-pink-600 dark:text-pink-400" />
+                            <PlayCircle className="w-8 h-8 text-[#00AFE6] dark:text-[#00DD89]" />
+                            <span className="text-xl font-bold text-gray-900 dark:text-white">
+                              Watch
+                            </span>
                           </motion.div>
                         ) : (
                           <div className="bg-white/90 dark:bg-gray-900/90 rounded-full px-6 py-3 shadow-2xl">
@@ -448,9 +451,9 @@ export default function CANNResources() {
 
                   {/* Details Section */}
                   <CardContent className="p-6 flex-1 flex flex-col">
-                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20 mb-3 w-fit">
-                      <Calendar className="w-4 h-4 text-pink-500" />
-                      <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 px-3 py-1 rounded-full border border-[#00AFE6]/20 mb-3 w-fit">
+                      <Calendar className="w-4 h-4 text-[#00AFE6]" />
+                      <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00DD89]">
                         {formatEventDate(session.date)}
                       </span>
                     </div>
@@ -461,7 +464,7 @@ export default function CANNResources() {
                     
                     <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
                       <div className="flex items-start gap-2">
-                        <User className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
+                        <User className="w-4 h-4 text-[#00AFE6] mt-0.5 flex-shrink-0" />
                         <div>
                           <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
                             Speaker:

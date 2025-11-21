@@ -27,9 +27,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import cardiacAmyloidosisBooklet from "@assets/Living-with-cardiac-amyloidosis_1763624816977.pdf";
+import patientJourneyVideo from "@assets/video1888503207.mp4";
 
 export default function CANNResources() {
   const [isCopied, setIsCopied] = useState(false);
+  const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -416,20 +418,47 @@ export default function CANNResources() {
                             </div>
                           </div>
                         </div>
-                        <div className="flex flex-col gap-2">
-                          <div className="inline-flex items-center justify-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800 w-fit mx-auto">
-                            <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
-                              Coming Soon
-                            </span>
+                        {index === 0 ? (
+                          <div className="flex flex-col gap-2">
+                            {playingVideoIndex === index ? (
+                              <div className="mt-4">
+                                <video
+                                  controls
+                                  className="w-full rounded-xl shadow-lg"
+                                  autoPlay
+                                  data-testid="video-patient-journey"
+                                >
+                                  <source src={patientJourneyVideo} type="video/mp4" />
+                                  Your browser does not support the video tag.
+                                </video>
+                              </div>
+                            ) : (
+                              <Button
+                                onClick={() => setPlayingVideoIndex(index)}
+                                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                                data-testid="button-watch-patient-journey"
+                              >
+                                <PlayCircle className="w-4 h-4 mr-2" />
+                                Watch Now
+                              </Button>
+                            )}
                           </div>
-                          <Button
-                            disabled
-                            className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-xl cursor-not-allowed"
-                          >
-                            <PlayCircle className="w-4 h-4 mr-2" />
-                            Watch
-                          </Button>
-                        </div>
+                        ) : (
+                          <div className="flex flex-col gap-2">
+                            <div className="inline-flex items-center justify-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800 w-fit mx-auto">
+                              <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
+                                Coming Soon
+                              </span>
+                            </div>
+                            <Button
+                              disabled
+                              className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-xl cursor-not-allowed"
+                            >
+                              <PlayCircle className="w-4 h-4 mr-2" />
+                              Watch
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </CardContent>

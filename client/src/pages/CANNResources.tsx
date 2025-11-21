@@ -408,22 +408,25 @@ export default function CANNResources() {
                     </div>
                   ) : (
                     <div 
-                      className="relative w-full aspect-video bg-gradient-to-br from-[#00AFE6]/80 to-[#00DD89]/80 dark:from-[#00AFE6]/70 dark:to-[#00DD89]/70 overflow-hidden group cursor-pointer"
+                      className="relative w-full aspect-video bg-gray-900 overflow-hidden group cursor-pointer"
                       onClick={() => index === 0 && setPlayingVideoIndex(index)}
                     >
                       {/* Video thumbnail background */}
-                      {index === 0 && (
+                      {index === 0 ? (
                         <video
-                          className="absolute inset-0 w-full h-full object-cover opacity-40"
+                          className="absolute inset-0 w-full h-full object-cover"
                           muted
                           playsInline
+                          preload="metadata"
                         >
                           <source src={patientJourneyVideo} type="video/mp4" />
                         </video>
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/80 to-[#00DD89]/80 dark:from-[#00AFE6]/70 dark:to-[#00DD89]/70" />
                       )}
                       
-                      {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/60 to-[#00DD89]/60 dark:from-[#00AFE6]/50 dark:to-[#00DD89]/50" />
+                      {/* Subtle dark overlay for better button visibility */}
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
                       
                       {/* Watch button centered */}
                       <div className="absolute inset-0 flex items-center justify-center">

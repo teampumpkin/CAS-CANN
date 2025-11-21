@@ -120,17 +120,16 @@ export default function CANNResources() {
       topic: "My Journey with Amyloidosis: A Patient's Perspective",
     },
     {
-      date: "December 13, 2023",
+      date: "May 13, 2025",
       speaker:
-        "Dr. Victor Jimenez Zepeda, Associate Professor, University of Calgary, Co-Director, Amyloidosis Program of Calgary",
-      topic:
-        "AL Amyloidosis: Diagnosis and Treatment in 2024 – Unfolding the Fibrils",
+        "1. Krista Jelisava, RN, BScN, Co-Chair, CANN 2. Rose Ramm, RN, BN, Co-Chair, CANN",
+      topic: "Interesting Case Presentation and Discussion",
     },
     {
-      date: "April 16, 2024",
-      speaker:
-        "Dr. Nowell Fine, Associate Professor, University of Calgary, Director, Amyloidosis Program of Calgary",
-      topic: "Lab Evaluation and Monitoring of Cardiac Amyloidosis",
+      date: "January 28, 2025",
+      speaker: "Marc Bains, Co-Founder, HeartLife Foundation",
+      topic:
+        "Living with Heart Failure is About Life, Not Failure – HeartLife Story and Advancement of National Advocacy",
     },
     {
       date: "October 8, 2024",
@@ -140,16 +139,17 @@ export default function CANNResources() {
         "Mental Health and Amyloidosis – Insights on Psychiatric Management of Patients with Cardiac Amyloidosis",
     },
     {
-      date: "January 28, 2025",
-      speaker: "Marc Bains, Co-Founder, HeartLife Foundation",
-      topic:
-        "Living with Heart Failure is About Life, Not Failure – HeartLife Story and Advancement of National Advocacy",
+      date: "April 16, 2024",
+      speaker:
+        "Dr. Nowell Fine, Associate Professor, University of Calgary, Director, Amyloidosis Program of Calgary",
+      topic: "Lab Evaluation and Monitoring of Cardiac Amyloidosis",
     },
     {
-      date: "May 13, 2025",
+      date: "December 13, 2023",
       speaker:
-        "1. Krista Jelisava, RN, BScN, Co-Chair, CANN 2. Rose Ramm, RN, BN, Co-Chair, CANN",
-      topic: "Interesting Case Presentation and Discussion",
+        "Dr. Victor Jimenez Zepeda, Associate Professor, University of Calgary, Co-Director, Amyloidosis Program of Calgary",
+      topic:
+        "AL Amyloidosis: Diagnosis and Treatment in 2024 – Unfolding the Fibrils",
     },
   ];
 

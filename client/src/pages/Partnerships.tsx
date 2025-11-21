@@ -355,7 +355,6 @@ export default function Partnerships() {
           </div>
         </div>
       </section>
-
-      </div>
+    </div>
   );
 }

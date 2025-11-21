@@ -392,73 +392,84 @@ export default function CANNResources() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex flex-col">
-                  <CardContent className="p-6 flex-1 flex flex-col">
-                    <div className="mb-4">
-                      <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20 mb-3">
-                        <Calendar className="w-4 h-4 text-pink-500" />
-                        <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
-                          {formatEventDate(session.date)}
-                        </span>
-                      </div>
-                      <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white leading-tight">
-                        {session.topic}
-                      </h3>
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex flex-col">
+                  {/* Video Thumbnail Section */}
+                  {playingVideoIndex === index ? (
+                    <div className="w-full aspect-video">
+                      <video
+                        controls
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        data-testid="video-patient-journey"
+                      >
+                        <source src={patientJourneyVideo} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
                     </div>
-                    <div className="mt-auto">
-                      <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-                        <div className="flex items-start gap-2 mb-4">
-                          <User className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
-                              Speaker:
-                            </div>
-                            <div className="text-sm text-gray-600 dark:text-white/70 font-bold">
-                              {session.speaker}
-                            </div>
-                          </div>
-                        </div>
+                  ) : (
+                    <div 
+                      className="relative w-full aspect-video bg-gradient-to-br from-pink-500/80 to-purple-600/80 dark:from-pink-600/70 dark:to-purple-700/70 overflow-hidden group cursor-pointer"
+                      onClick={() => index === 0 && setPlayingVideoIndex(index)}
+                    >
+                      {/* Video thumbnail background */}
+                      {index === 0 && (
+                        <video
+                          className="absolute inset-0 w-full h-full object-cover opacity-40"
+                          muted
+                          playsInline
+                        >
+                          <source src={patientJourneyVideo} type="video/mp4" />
+                        </video>
+                      )}
+                      
+                      {/* Overlay gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-pink-500/60 to-purple-600/60 dark:from-pink-600/50 dark:to-purple-700/50" />
+                      
+                      {/* Watch button centered */}
+                      <div className="absolute inset-0 flex items-center justify-center">
                         {index === 0 ? (
-                          <div className="flex flex-col gap-2">
-                            {playingVideoIndex === index ? (
-                              <div className="mt-4">
-                                <video
-                                  controls
-                                  className="w-full rounded-xl shadow-lg"
-                                  autoPlay
-                                  data-testid="video-patient-journey"
-                                >
-                                  <source src={patientJourneyVideo} type="video/mp4" />
-                                  Your browser does not support the video tag.
-                                </video>
-                              </div>
-                            ) : (
-                              <Button
-                                onClick={() => setPlayingVideoIndex(index)}
-                                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                                data-testid="button-watch-patient-journey"
-                              >
-                                <PlayCircle className="w-4 h-4 mr-2" />
-                                Watch Now
-                              </Button>
-                            )}
-                          </div>
+                          <motion.div
+                            className="bg-white/90 dark:bg-gray-900/90 rounded-full p-6 shadow-2xl group-hover:scale-110 transition-transform duration-300"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <PlayCircle className="w-12 h-12 text-pink-600 dark:text-pink-400" />
+                          </motion.div>
                         ) : (
-                          <div className="flex flex-col gap-2">
-                            <div className="inline-flex items-center justify-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800 w-fit mx-auto">
-                              <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
-                                Coming Soon
-                              </span>
-                            </div>
-                            <Button
-                              disabled
-                              className="w-full bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-xl cursor-not-allowed"
-                            >
-                              <PlayCircle className="w-4 h-4 mr-2" />
-                              Watch
-                            </Button>
+                          <div className="bg-white/90 dark:bg-gray-900/90 rounded-full px-6 py-3 shadow-2xl">
+                            <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+                              Coming Soon
+                            </span>
                           </div>
                         )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Details Section */}
+                  <CardContent className="p-6 flex-1 flex flex-col">
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 px-3 py-1 rounded-full border border-pink-500/20 mb-3 w-fit">
+                      <Calendar className="w-4 h-4 text-pink-500" />
+                      <span className="text-sm font-medium text-pink-600 dark:text-pink-400">
+                        {formatEventDate(session.date)}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white leading-tight">
+                      {session.topic}
+                    </h3>
+                    
+                    <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+                      <div className="flex items-start gap-2">
+                        <User className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
+                            Speaker:
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-white/70 font-bold">
+                            {session.speaker}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </CardContent>

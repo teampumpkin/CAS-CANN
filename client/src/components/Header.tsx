@@ -129,6 +129,7 @@ export default function Header() {
       ],
     },
     { name: "Contact Us", href: "/contact" },
+    { name: "Login", href: "/login", isSecondary: true },
     { name: "Join CAS / CANN", href: "/join-cas", isPrimary: true },
   ];
 
@@ -207,18 +208,21 @@ export default function Header() {
                       className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative whitespace-nowrap ${
                         item.isPrimary
                           ? "text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] border-transparent shadow-lg shadow-[#00AFE6]/30 hover:shadow-xl hover:shadow-[#00AFE6]/40 hover:scale-105"
-                          : isPageActive(item.href)
-                            ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30"
-                            : "text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20"
+                          : (item as any).isSecondary
+                            ? "text-[#00AFE6] bg-white border-[#00AFE6] hover:bg-[#00AFE6] hover:text-white shadow-md hover:shadow-lg transition-all"
+                            : isPageActive(item.href)
+                              ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30"
+                              : "text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20"
                       }`}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                      whileHover={{ scale: item.isPrimary ? 1.05 : 1.02 }}
+                      whileHover={{ scale: item.isPrimary || (item as any).isSecondary ? 1.05 : 1.02 }}
                       whileTap={{ scale: 0.98 }}
+                      data-testid={item.href === "/login" ? "link-header-login" : undefined}
                     >
                       {item.name}
-                      {!item.isPrimary && isPageActive(item.href) && (
+                      {!item.isPrimary && !(item as any).isSecondary && isPageActive(item.href) && (
                         <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                       )}
                     </motion.a>
@@ -624,17 +628,20 @@ export default function Header() {
                     className={`flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
                       item.isPrimary
                         ? "text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] shadow-lg shadow-[#00AFE6]/30"
-                        : isPageActive(item.href)
-                          ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 border-l-4 border-[#00AFE6]"
-                          : "text-gray-700 hover:bg-gray-100"
+                        : (item as any).isSecondary
+                          ? "text-[#00AFE6] bg-white border-2 border-[#00AFE6] shadow-md"
+                          : isPageActive(item.href)
+                            ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 border-l-4 border-[#00AFE6]"
+                            : "text-gray-700 hover:bg-gray-100"
                     }`}
                     onClick={() => {
                       setIsMenuOpen(false);
                       setMobileDropdowns({});
                     }}
+                    data-testid={item.href === "/login" ? "link-mobile-login" : undefined}
                   >
                     <span>{item.name}</span>
-                    {!item.isPrimary && isPageActive(item.href) && (
+                    {!item.isPrimary && !(item as any).isSecondary && isPageActive(item.href) && (
                       <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                     )}
                   </a>

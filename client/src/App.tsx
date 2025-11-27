@@ -59,6 +59,10 @@ const CANNMembershipForm = lazy(() => import("@/pages/CANNMembershipForm"));
 const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));
 const CommandDashboard = lazy(() => import("@/pages/CommandDashboard"));
 
+const Login = lazy(() => import("@/pages/Login"));
+const ForgotPassword = lazy(() => import("@/pages/ForgotPassword"));
+const MembersPortal = lazy(() => import("@/pages/MembersPortal"));
+
 // Loading component
 const PageLoader = () => (
   <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-900">
@@ -124,6 +128,13 @@ function Router() {
         <Route path="/cann-membership" component={JoinCAS} />
         <Route path="/admin/data-sync" component={DataSyncAdmin} />
         <Route path="/admin/automation" component={CommandDashboard} />
+        
+        {/* Members Portal Routes */}
+        <Route path="/login" component={Login} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/members-portal" component={MembersPortal} />
+        <Route path="/portal" component={MembersPortal} />
+        
         <Route component={NotFound} />
       </Switch>
     </Suspense>

@@ -436,38 +436,106 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get member events
+  // Get member events - Returns real CAS/CANN exclusive events
   app.get("/api/members/events", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
     try {
       if (!req.member) {
         return res.status(401).json({ success: false, message: "Not authenticated" });
       }
 
-      const events = await storage.getMemberEvents({ isPublished: true });
+      // CAS Member-only events from the Events page
+      const casEvents = [
+        {
+          id: 1,
+          title: "CAS Journal Club - November Session",
+          description: "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updates.",
+          eventDate: "2025-11-27T15:00:00-07:00",
+          eventType: "Journal Club",
+          location: "Virtual Event (Zoom)",
+          meetingLink: null, // Members receive Zoom link via email
+          duration: 60,
+          speakers: ["CAS Clinical Advisory Panel"],
+          tags: ["Journal Club", "Clinical Cases", "Research Updates"],
+          accessLevel: "cas_member",
+        },
+        {
+          id: 2,
+          title: "CAS Journal Club - September Session",
+          description: "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates.",
+          eventDate: "2025-09-25T15:00:00-06:00",
+          eventType: "Journal Club",
+          location: "Virtual Event (Zoom)",
+          meetingLink: null,
+          duration: 60,
+          speakers: ["CAS Clinical Advisory Panel"],
+          tags: ["Journal Club", "Clinical Cases"],
+          accessLevel: "cas_member",
+        },
+      ];
+
+      // CANN Educational Series events
+      const cannEvents = [
+        {
+          id: 3,
+          title: "My Journey with Amyloidosis: A Patient's Perspective",
+          description: "An insightful session featuring a patient advocate sharing their personal experience living with amyloidosis.",
+          eventDate: "2025-10-07T12:00:00-06:00",
+          eventType: "CANN Educational Series",
+          location: "Virtual Event (Zoom)",
+          meetingLink: null,
+          duration: 60,
+          speakers: ["Patient Advocate"],
+          tags: ["Patient Story", "CANN Educational Series"],
+          accessLevel: "cann_member",
+        },
+        {
+          id: 4,
+          title: "Interesting Case Presentation and Discussion",
+          description: "A collaborative case discussion led by CANN Co-Chairs featuring complex amyloidosis cases and clinical decision-making.",
+          eventDate: "2025-05-13T12:00:00-06:00",
+          eventType: "CANN Educational Series",
+          location: "Virtual Event (Zoom)",
+          meetingLink: null,
+          duration: 60,
+          speakers: ["Krista Jelisava, RN, BScN, Co-Chair, CANN", "Rose Ramm, RN, BN, Co-Chair, CANN"],
+          tags: ["Case Discussion", "CANN Educational Series"],
+          accessLevel: "cann_member",
+        },
+        {
+          id: 5,
+          title: "Living with Heart Failure is About Life, Not Failure",
+          description: "HeartLife Foundation co-founder Marc Bains discusses the HeartLife story and advancement of national advocacy for heart failure patients.",
+          eventDate: "2025-01-28T12:00:00-07:00",
+          eventType: "CANN Educational Series",
+          location: "Virtual Event (Zoom)",
+          meetingLink: null,
+          duration: 60,
+          speakers: ["Marc Bains, Co-Founder, HeartLife Foundation"],
+          tags: ["Heart Failure", "Advocacy", "CANN Educational Series"],
+          accessLevel: "cann_member",
+        },
+      ];
+
+      // Filter events based on member access level
+      let filteredEvents: typeof casEvents = [];
       
-      const filteredEvents = events.filter(event => {
-        if (req.member!.role === "admin") return true;
-        if (event.accessLevel === "cas_member") return true;
-        if (event.accessLevel === "cann_member" && req.member!.isCANNMember) return true;
-        if (event.accessLevel === "cas_cann_member" && req.member!.isCASMember && req.member!.isCANNMember) return true;
-        return false;
-      });
+      if (req.member.role === "admin") {
+        filteredEvents = [...casEvents, ...cannEvents];
+      } else {
+        if (req.member.isCASMember) {
+          filteredEvents = [...filteredEvents, ...casEvents];
+        }
+        if (req.member.isCANNMember) {
+          filteredEvents = [...filteredEvents, ...cannEvents];
+        }
+      }
+
+      // Sort by date (most recent first)
+      filteredEvents.sort((a, b) => new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime());
 
       res.json({
         success: true,
-        events: filteredEvents.map(event => ({
-          id: event.id,
-          title: event.title,
-          description: event.description,
-          eventDate: event.eventDate,
-          eventType: event.eventType,
-          location: event.location,
-          meetingLink: event.meetingLink,
-          duration: event.duration,
-          speakers: event.speakers,
-          tags: event.tags,
-          accessLevel: event.accessLevel,
-        })),
+        events: filteredEvents,
       });
     } catch (error) {
       console.error("[Portal] Get events error:", error);
@@ -475,38 +543,68 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get event recordings
+  // Get event recordings - CANN Educational Series recordings
   app.get("/api/members/recordings", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
     try {
       if (!req.member) {
         return res.status(401).json({ success: false, message: "Not authenticated" });
       }
 
-      const events = await storage.getMemberEvents({ isPublished: true });
-      
-      const recordings = events.filter(event => {
-        if (!event.recordingUrl) return false;
-        if (req.member!.role === "admin") return true;
-        if (event.accessLevel === "cas_member") return true;
-        if (event.accessLevel === "cann_member" && req.member!.isCANNMember) return true;
-        if (event.accessLevel === "cas_cann_member" && req.member!.isCASMember && req.member!.isCANNMember) return true;
-        return false;
-      });
+      // CANN Educational Series past recordings
+      const cannRecordings = [
+        {
+          id: 1,
+          title: "Mental Health and Amyloidosis",
+          description: "Insights on Psychiatric Management of Patients with Cardiac Amyloidosis - A comprehensive session covering the psychological aspects of living with cardiac amyloidosis.",
+          eventDate: "2024-10-08T12:00:00-06:00",
+          eventType: "CANN Educational Series",
+          recordingUrl: "#", // Members receive recording link via email
+          thumbnailUrl: null,
+          duration: 60,
+          speakers: ["Dr. Vidya Raj, Medical Director Hearts and Minds Clinic, Libin Cardiovascular Institute, Cumming School of Medicine, University of Calgary"],
+          tags: ["Mental Health", "Cardiac Amyloidosis", "CANN Educational Series"],
+          accessLevel: "cann_member",
+        },
+        {
+          id: 2,
+          title: "Lab Evaluation and Monitoring of Cardiac Amyloidosis",
+          description: "A detailed session on laboratory evaluation techniques and ongoing monitoring strategies for patients with cardiac amyloidosis.",
+          eventDate: "2024-04-16T12:00:00-06:00",
+          eventType: "CANN Educational Series",
+          recordingUrl: "#",
+          thumbnailUrl: null,
+          duration: 60,
+          speakers: ["Dr. Nowell Fine, Associate Professor, University of Calgary, Director, Amyloidosis Program of Calgary"],
+          tags: ["Lab Evaluation", "Monitoring", "Cardiac Amyloidosis", "CANN Educational Series"],
+          accessLevel: "cann_member",
+        },
+        {
+          id: 3,
+          title: "AL Amyloidosis: Diagnosis and Treatment in 2024 – Unfolding the Fibrils",
+          description: "An in-depth exploration of the latest approaches to diagnosing and treating AL amyloidosis, covering current best practices and emerging therapies.",
+          eventDate: "2023-12-13T12:00:00-07:00",
+          eventType: "CANN Educational Series",
+          recordingUrl: "#",
+          thumbnailUrl: null,
+          duration: 60,
+          speakers: ["Dr. Victor Jimenez Zepeda, Associate Professor, University of Calgary, Co-Director, Amyloidosis Program of Calgary"],
+          tags: ["AL Amyloidosis", "Diagnosis", "Treatment", "CANN Educational Series"],
+          accessLevel: "cann_member",
+        },
+      ];
+
+      // Only CANN members and admins can access recordings
+      if (!req.member.isCANNMember && req.member.role !== "admin") {
+        return res.json({
+          success: true,
+          recordings: [],
+          message: "CANN membership required to access educational recordings.",
+        });
+      }
 
       res.json({
         success: true,
-        recordings: recordings.map(event => ({
-          id: event.id,
-          title: event.title,
-          description: event.description,
-          eventDate: event.eventDate,
-          eventType: event.eventType,
-          recordingUrl: event.recordingUrl,
-          thumbnailUrl: event.thumbnailUrl,
-          duration: event.duration,
-          speakers: event.speakers,
-          tags: event.tags,
-        })),
+        recordings: cannRecordings,
       });
     } catch (error) {
       console.error("[Portal] Get recordings error:", error);

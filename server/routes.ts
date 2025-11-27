@@ -1,7 +1,17 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage, type ResourceFilters } from "./storage";
-import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission } from "@shared/schema";
+import { 
+  insertResourceSchema, 
+  dynamicFormSubmissionSchema, 
+  InsertFormSubmission,
+  loginSchema,
+  forgotPasswordSchema,
+  verifyOtpSchema,
+  resetPasswordSchema,
+  changePasswordSchema,
+  updateProfileSchema,
+} from "@shared/schema";
 import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
@@ -9,7 +19,17 @@ import { oauthService } from "./oauth-service";
 import { dedicatedTokenManager } from "./dedicated-token-manager";
 import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
-import { requireAutomationAuth } from "./auth-middleware";
+import { requireAutomationAuth, requireMemberAuth, type AuthenticatedRequest } from "./auth-middleware";
+import { 
+  verifyPassword, 
+  hashPassword, 
+  generateOTP, 
+  hashOTP, 
+  verifyOTP, 
+  getOTPExpiryDate,
+  sendPasswordResetEmail,
+  createMemberFromRegistration,
+} from "./auth-service";
 // import { notificationService, notificationConfigSchema } from "./notification-service"; // Disabled for production
 // REMOVED: formScalabilityService - No longer used after endpoint consolidation
 import { errorHandlingService, errorClassificationSchema } from "./error-handling-service";
@@ -22,6 +42,476 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Basic ping endpoint for deployment verification
   app.get('/ping', (_req, res) => {
     res.status(200).send('pong');
+  });
+
+  // ============================================
+  // Authentication API Routes
+  // ============================================
+
+  // Login endpoint
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const validatedData = loginSchema.parse(req.body);
+      
+      const member = await storage.getMemberByEmail(validatedData.email);
+      if (!member) {
+        return res.status(401).json({
+          success: false,
+          message: "Invalid email or password.",
+        });
+      }
+
+      if (member.status !== "active") {
+        return res.status(403).json({
+          success: false,
+          message: "Your account is not active. Please contact support.",
+        });
+      }
+
+      const isValidPassword = await verifyPassword(validatedData.password, member.passwordHash);
+      if (!isValidPassword) {
+        return res.status(401).json({
+          success: false,
+          message: "Invalid email or password.",
+        });
+      }
+
+      await storage.updateMemberLastLogin(member.id);
+
+      req.session.memberId = member.id;
+      req.session.memberEmail = member.email;
+      req.session.memberRole = member.role;
+
+      res.json({
+        success: true,
+        message: "Login successful",
+        member: {
+          id: member.id,
+          email: member.email,
+          fullName: member.fullName,
+          role: member.role,
+          isCASMember: member.isCASMember,
+          isCANNMember: member.isCANNMember,
+        },
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: "Validation error",
+          errors: error.errors,
+        });
+      }
+      console.error("[Auth] Login error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Login failed. Please try again.",
+      });
+    }
+  });
+
+  // Logout endpoint
+  app.post("/api/auth/logout", (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("[Auth] Logout error:", err);
+        return res.status(500).json({
+          success: false,
+          message: "Logout failed.",
+        });
+      }
+      res.clearCookie("connect.sid");
+      res.json({
+        success: true,
+        message: "Logged out successfully.",
+      });
+    });
+  });
+
+  // Get current user
+  app.get("/api/auth/me", async (req, res) => {
+    try {
+      if (!req.session?.memberId) {
+        return res.status(401).json({
+          success: false,
+          message: "Not authenticated",
+        });
+      }
+
+      const member = await storage.getMember(req.session.memberId);
+      if (!member || member.status !== "active") {
+        req.session.destroy(() => {});
+        return res.status(401).json({
+          success: false,
+          message: "Session expired. Please log in again.",
+        });
+      }
+
+      res.json({
+        success: true,
+        member: {
+          id: member.id,
+          email: member.email,
+          fullName: member.fullName,
+          role: member.role,
+          discipline: member.discipline,
+          subspecialty: member.subspecialty,
+          institution: member.institution,
+          isCASMember: member.isCASMember,
+          isCANNMember: member.isCANNMember,
+          wantsCommunications: member.wantsCommunications,
+          wantsCANNCommunications: member.wantsCANNCommunications,
+        },
+      });
+    } catch (error) {
+      console.error("[Auth] Get current user error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to get user data.",
+      });
+    }
+  });
+
+  // Forgot password - request OTP
+  app.post("/api/auth/forgot-password", async (req, res) => {
+    try {
+      const validatedData = forgotPasswordSchema.parse(req.body);
+      
+      const member = await storage.getMemberByEmail(validatedData.email);
+      if (!member) {
+        return res.json({
+          success: true,
+          message: "If an account exists with this email, you will receive a verification code.",
+        });
+      }
+
+      const otp = generateOTP();
+      const otpHash = await hashOTP(otp);
+      const expiresAt = getOTPExpiryDate();
+
+      await storage.createPasswordReset({
+        memberId: member.id,
+        email: member.email,
+        otpHash,
+        expiresAt,
+        maxAttempts: 3,
+      });
+
+      await sendPasswordResetEmail(member.email, member.fullName, otp);
+
+      res.json({
+        success: true,
+        message: "If an account exists with this email, you will receive a verification code.",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: "Validation error",
+          errors: error.errors,
+        });
+      }
+      console.error("[Auth] Forgot password error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to process request. Please try again.",
+      });
+    }
+  });
+
+  // Verify OTP
+  app.post("/api/auth/verify-otp", async (req, res) => {
+    try {
+      const validatedData = verifyOtpSchema.parse(req.body);
+      
+      const resetRequest = await storage.getActivePasswordReset(validatedData.email);
+      if (!resetRequest) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid or expired verification code. Please request a new one.",
+        });
+      }
+
+      if (resetRequest.attempts >= resetRequest.maxAttempts) {
+        return res.status(400).json({
+          success: false,
+          message: "Too many attempts. Please request a new verification code.",
+        });
+      }
+
+      const isValidOTP = await verifyOTP(validatedData.otp, resetRequest.otpHash);
+      if (!isValidOTP) {
+        await storage.incrementPasswordResetAttempts(resetRequest.id);
+        return res.status(400).json({
+          success: false,
+          message: "Invalid verification code. Please try again.",
+        });
+      }
+
+      res.json({
+        success: true,
+        message: "Verification code confirmed. You can now reset your password.",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: "Validation error",
+          errors: error.errors,
+        });
+      }
+      console.error("[Auth] Verify OTP error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Verification failed. Please try again.",
+      });
+    }
+  });
+
+  // Reset password
+  app.post("/api/auth/reset-password", async (req, res) => {
+    try {
+      const validatedData = resetPasswordSchema.parse(req.body);
+      
+      const resetRequest = await storage.getActivePasswordReset(validatedData.email);
+      if (!resetRequest) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid or expired reset request. Please request a new verification code.",
+        });
+      }
+
+      const isValidOTP = await verifyOTP(validatedData.otp, resetRequest.otpHash);
+      if (!isValidOTP) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid verification code.",
+        });
+      }
+
+      const newPasswordHash = await hashPassword(validatedData.newPassword);
+      await storage.updateMemberPassword(resetRequest.memberId, newPasswordHash);
+      await storage.markPasswordResetUsed(resetRequest.id);
+
+      res.json({
+        success: true,
+        message: "Password reset successful. You can now log in with your new password.",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: "Validation error",
+          errors: error.errors,
+        });
+      }
+      console.error("[Auth] Reset password error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Password reset failed. Please try again.",
+      });
+    }
+  });
+
+  // ============================================
+  // Member Portal API Routes (Protected)
+  // ============================================
+
+  // Get member profile
+  app.get("/api/members/profile", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      if (!req.member) {
+        return res.status(401).json({ success: false, message: "Not authenticated" });
+      }
+
+      const member = await storage.getMember(req.member.id);
+      if (!member) {
+        return res.status(404).json({ success: false, message: "Member not found" });
+      }
+
+      res.json({
+        success: true,
+        profile: {
+          id: member.id,
+          email: member.email,
+          fullName: member.fullName,
+          role: member.role,
+          discipline: member.discipline,
+          subspecialty: member.subspecialty,
+          institution: member.institution,
+          amyloidosisType: member.amyloidosisType,
+          isCASMember: member.isCASMember,
+          isCANNMember: member.isCANNMember,
+          wantsCommunications: member.wantsCommunications,
+          wantsCANNCommunications: member.wantsCANNCommunications,
+          wantsServicesMapInclusion: member.wantsServicesMapInclusion,
+          createdAt: member.createdAt,
+          lastLoginAt: member.lastLoginAt,
+        },
+      });
+    } catch (error) {
+      console.error("[Portal] Get profile error:", error);
+      res.status(500).json({ success: false, message: "Failed to get profile" });
+    }
+  });
+
+  // Update member profile
+  app.put("/api/members/profile", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      if (!req.member) {
+        return res.status(401).json({ success: false, message: "Not authenticated" });
+      }
+
+      const validatedData = updateProfileSchema.parse(req.body);
+      
+      const updatedMember = await storage.updateMember(req.member.id, validatedData);
+      if (!updatedMember) {
+        return res.status(404).json({ success: false, message: "Member not found" });
+      }
+
+      res.json({
+        success: true,
+        message: "Profile updated successfully",
+        profile: {
+          fullName: updatedMember.fullName,
+          discipline: updatedMember.discipline,
+          subspecialty: updatedMember.subspecialty,
+          institution: updatedMember.institution,
+          wantsCommunications: updatedMember.wantsCommunications,
+          wantsCANNCommunications: updatedMember.wantsCANNCommunications,
+        },
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: "Validation error",
+          errors: error.errors,
+        });
+      }
+      console.error("[Portal] Update profile error:", error);
+      res.status(500).json({ success: false, message: "Failed to update profile" });
+    }
+  });
+
+  // Change password
+  app.put("/api/members/password", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      if (!req.member) {
+        return res.status(401).json({ success: false, message: "Not authenticated" });
+      }
+
+      const validatedData = changePasswordSchema.parse(req.body);
+      
+      const member = await storage.getMember(req.member.id);
+      if (!member) {
+        return res.status(404).json({ success: false, message: "Member not found" });
+      }
+
+      const isValidPassword = await verifyPassword(validatedData.currentPassword, member.passwordHash);
+      if (!isValidPassword) {
+        return res.status(400).json({
+          success: false,
+          message: "Current password is incorrect.",
+        });
+      }
+
+      const newPasswordHash = await hashPassword(validatedData.newPassword);
+      await storage.updateMemberPassword(req.member.id, newPasswordHash);
+
+      res.json({
+        success: true,
+        message: "Password changed successfully.",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: "Validation error",
+          errors: error.errors,
+        });
+      }
+      console.error("[Portal] Change password error:", error);
+      res.status(500).json({ success: false, message: "Failed to change password" });
+    }
+  });
+
+  // Get member events
+  app.get("/api/members/events", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      if (!req.member) {
+        return res.status(401).json({ success: false, message: "Not authenticated" });
+      }
+
+      const events = await storage.getMemberEvents({ isPublished: true });
+      
+      const filteredEvents = events.filter(event => {
+        if (req.member!.role === "admin") return true;
+        if (event.accessLevel === "cas_member") return true;
+        if (event.accessLevel === "cann_member" && req.member!.isCANNMember) return true;
+        if (event.accessLevel === "cas_cann_member" && req.member!.isCASMember && req.member!.isCANNMember) return true;
+        return false;
+      });
+
+      res.json({
+        success: true,
+        events: filteredEvents.map(event => ({
+          id: event.id,
+          title: event.title,
+          description: event.description,
+          eventDate: event.eventDate,
+          eventType: event.eventType,
+          location: event.location,
+          meetingLink: event.meetingLink,
+          duration: event.duration,
+          speakers: event.speakers,
+          tags: event.tags,
+          accessLevel: event.accessLevel,
+        })),
+      });
+    } catch (error) {
+      console.error("[Portal] Get events error:", error);
+      res.status(500).json({ success: false, message: "Failed to get events" });
+    }
+  });
+
+  // Get event recordings
+  app.get("/api/members/recordings", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      if (!req.member) {
+        return res.status(401).json({ success: false, message: "Not authenticated" });
+      }
+
+      const events = await storage.getMemberEvents({ isPublished: true });
+      
+      const recordings = events.filter(event => {
+        if (!event.recordingUrl) return false;
+        if (req.member!.role === "admin") return true;
+        if (event.accessLevel === "cas_member") return true;
+        if (event.accessLevel === "cann_member" && req.member!.isCANNMember) return true;
+        if (event.accessLevel === "cas_cann_member" && req.member!.isCASMember && req.member!.isCANNMember) return true;
+        return false;
+      });
+
+      res.json({
+        success: true,
+        recordings: recordings.map(event => ({
+          id: event.id,
+          title: event.title,
+          description: event.description,
+          eventDate: event.eventDate,
+          eventType: event.eventType,
+          recordingUrl: event.recordingUrl,
+          thumbnailUrl: event.thumbnailUrl,
+          duration: event.duration,
+          speakers: event.speakers,
+          tags: event.tags,
+        })),
+      });
+    } catch (error) {
+      console.error("[Portal] Get recordings error:", error);
+      res.status(500).json({ success: false, message: "Failed to get recordings" });
+    }
   });
 
   // User API routes
@@ -290,12 +780,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log(`[CAS/CANN Registration] ✅ Saved locally with ID: ${submission.id}, queued for Zoho sync`);
       
-      // STEP 3: Return success immediately (user never sees Zoho failures)
+      // STEP 3: Create member account if this is a membership registration
+      let memberCreated = false;
+      if (formData.wantsMembership === "Yes" || formData.wantsCANNMembership === "Yes") {
+        try {
+          const memberResult = await createMemberFromRegistration({
+            email: formData.email,
+            fullName: formData.fullName,
+            discipline: formData.discipline,
+            subspecialty: formData.subspecialty,
+            institution: formData.institution,
+            amyloidosisType: formData.amyloidosisType,
+            wantsMembership: formData.wantsMembership,
+            wantsCANNMembership: formData.wantsCANNMembership,
+            wantsCommunications: formData.wantsCommunications,
+            cannCommunications: formData.cannCommunications,
+            wantsServicesMapInclusion: formData.wantsServicesMapInclusion,
+          }, submission.id);
+          
+          if (memberResult.success) {
+            memberCreated = true;
+            console.log(`[CAS/CANN Registration] ✅ Member account created for: ${formData.email}`);
+          } else {
+            console.log(`[CAS/CANN Registration] ℹ️ Member creation skipped: ${memberResult.error}`);
+          }
+        } catch (memberError) {
+          console.error("[CAS/CANN Registration] ⚠️ Member creation failed (non-blocking):", memberError);
+        }
+      }
+      
+      // STEP 4: Return success immediately (user never sees Zoho failures)
       res.status(201).json({
         success: true,
-        message: "Registration submitted successfully",
+        message: memberCreated 
+          ? "Registration submitted successfully. Check your email for login credentials to the Members Portal."
+          : "Registration submitted successfully",
         submissionId: submission.id,
         formName: formName,
+        memberAccountCreated: memberCreated,
       });
       
       // Background worker will sync to Zoho asynchronously

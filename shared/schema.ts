@@ -487,3 +487,196 @@ export const insertCampaignSyncSchema = createInsertSchema(campaignSyncs).omit({
 
 export type CampaignSync = typeof campaignSyncs.$inferSelect;
 export type InsertCampaignSync = z.infer<typeof insertCampaignSyncSchema>;
+
+// ============================================
+// Members Portal Schema
+// ============================================
+
+// Member status enum
+export const memberStatusEnum = pgEnum("member_status", ["pending", "active", "suspended", "inactive"]);
+
+// Member role enum
+export const memberRoleEnum = pgEnum("member_role", ["cas_member", "cann_member", "cas_cann_member", "admin"]);
+
+// Members table - stores member profiles
+export const members = pgTable("members", {
+  id: serial("id").primaryKey(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
+  fullName: varchar("full_name", { length: 255 }).notNull(),
+  passwordHash: text("password_hash").notNull(),
+  role: memberRoleEnum("role").notNull().default("cas_member"),
+  status: memberStatusEnum("status").notNull().default("active"),
+  
+  // Profile information from registration
+  discipline: varchar("discipline", { length: 255 }),
+  subspecialty: varchar("subspecialty", { length: 255 }),
+  institution: varchar("institution", { length: 255 }),
+  amyloidosisType: varchar("amyloidosis_type", { length: 100 }),
+  
+  // Membership flags
+  isCASMember: boolean("is_cas_member").notNull().default(false),
+  isCANNMember: boolean("is_cann_member").notNull().default(false),
+  wantsCommunications: boolean("wants_communications").notNull().default(false),
+  wantsCANNCommunications: boolean("wants_cann_communications").notNull().default(false),
+  wantsServicesMapInclusion: boolean("wants_services_map_inclusion").notNull().default(false),
+  
+  // Tracking
+  formSubmissionId: integer("form_submission_id").references(() => formSubmissions.id),
+  lastLoginAt: timestamp("last_login_at"),
+  passwordChangedAt: timestamp("password_changed_at"),
+  emailVerified: boolean("email_verified").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_members_email").on(table.email),
+  index("idx_members_status").on(table.status),
+  index("idx_members_role").on(table.role),
+]);
+
+export const insertMemberSchema = createInsertSchema(members).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  lastLoginAt: true,
+  passwordChangedAt: true,
+});
+
+export type Member = typeof members.$inferSelect;
+export type InsertMember = z.infer<typeof insertMemberSchema>;
+
+// Password reset tokens table - for forgot password OTP flow
+export const passwordResets = pgTable("password_resets", {
+  id: serial("id").primaryKey(),
+  memberId: integer("member_id").notNull().references(() => members.id, { onDelete: "cascade" }),
+  email: varchar("email", { length: 255 }).notNull(),
+  otpHash: text("otp_hash").notNull(), // Hashed OTP for security
+  expiresAt: timestamp("expires_at").notNull(),
+  attempts: integer("attempts").notNull().default(0),
+  maxAttempts: integer("max_attempts").notNull().default(3),
+  isUsed: boolean("is_used").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+}, (table) => [
+  index("idx_password_resets_member_id").on(table.memberId),
+  index("idx_password_resets_email").on(table.email),
+  index("idx_password_resets_expires").on(table.expiresAt),
+]);
+
+export const insertPasswordResetSchema = createInsertSchema(passwordResets).omit({
+  id: true,
+  createdAt: true,
+  attempts: true,
+  isUsed: true,
+});
+
+export type PasswordReset = typeof passwordResets.$inferSelect;
+export type InsertPasswordReset = z.infer<typeof insertPasswordResetSchema>;
+
+// Member sessions table - for express-session store
+export const memberSessions = pgTable("member_sessions", {
+  sid: varchar("sid", { length: 255 }).primaryKey(),
+  sess: jsonb("sess").notNull(),
+  expire: timestamp("expire").notNull(),
+}, (table) => [
+  index("idx_member_sessions_expire").on(table.expire),
+]);
+
+// Member-only events table
+export const memberEvents = pgTable("member_events", {
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  eventDate: timestamp("event_date").notNull(),
+  eventType: varchar("event_type", { length: 100 }).notNull(), // webinar, conference, workshop, etc.
+  location: varchar("location", { length: 255 }), // physical location or "Virtual"
+  meetingLink: varchar("meeting_link", { length: 500 }), // Zoom/Teams link for virtual events
+  recordingUrl: varchar("recording_url", { length: 500 }), // URL to recording after event
+  thumbnailUrl: varchar("thumbnail_url", { length: 500 }),
+  duration: integer("duration"), // Duration in minutes
+  speakers: text("speakers").array(),
+  tags: text("tags").array(),
+  accessLevel: memberRoleEnum("access_level").notNull().default("cas_member"), // Who can access
+  isPublished: boolean("is_published").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_member_events_event_date").on(table.eventDate),
+  index("idx_member_events_access_level").on(table.accessLevel),
+  index("idx_member_events_is_published").on(table.isPublished),
+]);
+
+export const insertMemberEventSchema = createInsertSchema(memberEvents).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type MemberEvent = typeof memberEvents.$inferSelect;
+export type InsertMemberEvent = z.infer<typeof insertMemberEventSchema>;
+
+// Login validation schema
+export const loginSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(1, "Password is required"),
+});
+
+export type LoginCredentials = z.infer<typeof loginSchema>;
+
+// Forgot password schema
+export const forgotPasswordSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+});
+
+export type ForgotPasswordRequest = z.infer<typeof forgotPasswordSchema>;
+
+// Verify OTP schema
+export const verifyOtpSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+  otp: z.string().length(6, "OTP must be 6 digits"),
+});
+
+export type VerifyOtpRequest = z.infer<typeof verifyOtpSchema>;
+
+// Reset password schema
+export const resetPasswordSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+  otp: z.string().length(6, "OTP must be 6 digits"),
+  newPassword: z.string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
+  confirmPassword: z.string(),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});
+
+export type ResetPasswordRequest = z.infer<typeof resetPasswordSchema>;
+
+// Change password schema (for logged-in users)
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1, "Current password is required"),
+  newPassword: z.string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
+  confirmPassword: z.string(),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});
+
+export type ChangePasswordRequest = z.infer<typeof changePasswordSchema>;
+
+// Update profile schema
+export const updateProfileSchema = z.object({
+  fullName: z.string().min(2, "Full name must be at least 2 characters").optional(),
+  discipline: z.string().optional(),
+  subspecialty: z.string().optional(),
+  institution: z.string().optional(),
+  wantsCommunications: z.boolean().optional(),
+  wantsCANNCommunications: z.boolean().optional(),
+});
+
+export type UpdateProfileRequest = z.infer<typeof updateProfileSchema>;

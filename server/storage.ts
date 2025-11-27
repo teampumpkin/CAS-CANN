@@ -11,6 +11,9 @@ import {
   workflowExecutions,
   actionExecutions,
   campaignSyncs,
+  members,
+  passwordResets,
+  memberEvents,
   type User,
   type InsertUser,
   type Resource,
@@ -35,6 +38,12 @@ import {
   type InsertActionExecution,
   type CampaignSync,
   type InsertCampaignSync,
+  type Member,
+  type InsertMember,
+  type PasswordReset,
+  type InsertPasswordReset,
+  type MemberEvent,
+  type InsertMemberEvent,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, like, desc, gte, lte, notInArray, isNull, or } from "drizzle-orm";
@@ -171,6 +180,31 @@ export interface IStorage {
   createCampaignSync(sync: InsertCampaignSync): Promise<CampaignSync>;
   updateCampaignSync(id: number, updates: Partial<CampaignSync>): Promise<CampaignSync | undefined>;
   deleteCampaignSync(id: number): Promise<boolean>;
+
+  // Member operations
+  getMember(id: number): Promise<Member | undefined>;
+  getMemberByEmail(email: string): Promise<Member | undefined>;
+  createMember(member: InsertMember): Promise<Member>;
+  updateMember(id: number, updates: Partial<Member>): Promise<Member | undefined>;
+  updateMemberLastLogin(id: number): Promise<void>;
+  updateMemberPassword(id: number, passwordHash: string): Promise<void>;
+  deleteMember(id: number): Promise<boolean>;
+  getMembers(filters?: { status?: string; role?: string }): Promise<Member[]>;
+
+  // Password reset operations
+  createPasswordReset(reset: InsertPasswordReset): Promise<PasswordReset>;
+  getPasswordResetByEmail(email: string): Promise<PasswordReset | undefined>;
+  getActivePasswordReset(email: string): Promise<PasswordReset | undefined>;
+  incrementPasswordResetAttempts(id: number): Promise<void>;
+  markPasswordResetUsed(id: number): Promise<void>;
+  deleteExpiredPasswordResets(): Promise<number>;
+
+  // Member events operations
+  getMemberEvents(filters?: { accessLevel?: string; isPublished?: boolean; hasRecording?: boolean }): Promise<MemberEvent[]>;
+  getMemberEvent(id: number): Promise<MemberEvent | undefined>;
+  createMemberEvent(event: InsertMemberEvent): Promise<MemberEvent>;
+  updateMemberEvent(id: number, updates: Partial<MemberEvent>): Promise<MemberEvent | undefined>;
+  deleteMemberEvent(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -864,6 +898,181 @@ export class DatabaseStorage implements IStorage {
 
   async deleteCampaignSync(id: number): Promise<boolean> {
     const result = await db.delete(campaignSyncs).where(eq(campaignSyncs.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  // Member operations
+  async getMember(id: number): Promise<Member | undefined> {
+    const [member] = await db.select().from(members).where(eq(members.id, id));
+    return member || undefined;
+  }
+
+  async getMemberByEmail(email: string): Promise<Member | undefined> {
+    const [member] = await db.select().from(members).where(eq(members.email, email.toLowerCase()));
+    return member || undefined;
+  }
+
+  async createMember(member: InsertMember): Promise<Member> {
+    const [created] = await db.insert(members).values({
+      ...member,
+      email: member.email.toLowerCase(),
+    }).returning();
+    return created;
+  }
+
+  async updateMember(id: number, updates: Partial<Member>): Promise<Member | undefined> {
+    const [updated] = await db
+      .update(members)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(members.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async updateMemberLastLogin(id: number): Promise<void> {
+    await db
+      .update(members)
+      .set({ lastLoginAt: new Date(), updatedAt: new Date() })
+      .where(eq(members.id, id));
+  }
+
+  async updateMemberPassword(id: number, passwordHash: string): Promise<void> {
+    await db
+      .update(members)
+      .set({ 
+        passwordHash,
+        passwordChangedAt: new Date(),
+        updatedAt: new Date()
+      })
+      .where(eq(members.id, id));
+  }
+
+  async deleteMember(id: number): Promise<boolean> {
+    const result = await db.delete(members).where(eq(members.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  async getMembers(filters?: { status?: string; role?: string }): Promise<Member[]> {
+    const conditions = [];
+    
+    if (filters?.status) {
+      conditions.push(eq(members.status, filters.status as any));
+    }
+    if (filters?.role) {
+      conditions.push(eq(members.role, filters.role as any));
+    }
+
+    return await db
+      .select()
+      .from(members)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(members.createdAt));
+  }
+
+  // Password reset operations
+  async createPasswordReset(reset: InsertPasswordReset): Promise<PasswordReset> {
+    const [created] = await db.insert(passwordResets).values({
+      ...reset,
+      email: reset.email.toLowerCase(),
+    }).returning();
+    return created;
+  }
+
+  async getPasswordResetByEmail(email: string): Promise<PasswordReset | undefined> {
+    const [reset] = await db
+      .select()
+      .from(passwordResets)
+      .where(eq(passwordResets.email, email.toLowerCase()))
+      .orderBy(desc(passwordResets.createdAt));
+    return reset || undefined;
+  }
+
+  async getActivePasswordReset(email: string): Promise<PasswordReset | undefined> {
+    const [reset] = await db
+      .select()
+      .from(passwordResets)
+      .where(
+        and(
+          eq(passwordResets.email, email.toLowerCase()),
+          eq(passwordResets.isUsed, false),
+          gte(passwordResets.expiresAt, new Date())
+        )
+      )
+      .orderBy(desc(passwordResets.createdAt));
+    return reset || undefined;
+  }
+
+  async incrementPasswordResetAttempts(id: number): Promise<void> {
+    const [current] = await db.select().from(passwordResets).where(eq(passwordResets.id, id));
+    if (current) {
+      await db
+        .update(passwordResets)
+        .set({ attempts: current.attempts + 1 })
+        .where(eq(passwordResets.id, id));
+    }
+  }
+
+  async markPasswordResetUsed(id: number): Promise<void> {
+    await db
+      .update(passwordResets)
+      .set({ isUsed: true })
+      .where(eq(passwordResets.id, id));
+  }
+
+  async deleteExpiredPasswordResets(): Promise<number> {
+    const result = await db
+      .delete(passwordResets)
+      .where(
+        or(
+          lte(passwordResets.expiresAt, new Date()),
+          eq(passwordResets.isUsed, true)
+        )
+      );
+    return result.rowCount || 0;
+  }
+
+  // Member events operations
+  async getMemberEvents(filters?: { accessLevel?: string; isPublished?: boolean; hasRecording?: boolean }): Promise<MemberEvent[]> {
+    const conditions = [];
+    
+    if (filters?.accessLevel) {
+      conditions.push(eq(memberEvents.accessLevel, filters.accessLevel as any));
+    }
+    if (filters?.isPublished !== undefined) {
+      conditions.push(eq(memberEvents.isPublished, filters.isPublished));
+    }
+    if (filters?.hasRecording) {
+      conditions.push(isNull(memberEvents.recordingUrl));
+    }
+
+    return await db
+      .select()
+      .from(memberEvents)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(memberEvents.eventDate));
+  }
+
+  async getMemberEvent(id: number): Promise<MemberEvent | undefined> {
+    const [event] = await db.select().from(memberEvents).where(eq(memberEvents.id, id));
+    return event || undefined;
+  }
+
+  async createMemberEvent(event: InsertMemberEvent): Promise<MemberEvent> {
+    const [created] = await db.insert(memberEvents).values(event).returning();
+    return created;
+  }
+
+  async updateMemberEvent(id: number, updates: Partial<MemberEvent>): Promise<MemberEvent | undefined> {
+    const [updated] = await db
+      .update(memberEvents)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(memberEvents.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteMemberEvent(id: number): Promise<boolean> {
+    const result = await db.delete(memberEvents).where(eq(memberEvents.id, id));
     return (result.rowCount || 0) > 0;
   }
 }

@@ -265,7 +265,7 @@ export default function CANNTownhallRegistration() {
                     If you are not yet a CANN member, please{" "}
                     <a 
                       href="/join-cas" 
-                      className="text-[#00DD89] hover:underline font-medium"
+                      className="text-pink-500 hover:underline font-medium"
                       data-testid="link-join-cann"
                     >
                       join CANN first

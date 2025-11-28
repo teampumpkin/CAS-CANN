@@ -189,7 +189,7 @@ export default function CANNResources() {
         "We want to hear from you! This live session will be professionally facilitated, designed to understand the needs of new/current CANN members and shape future direction.",
       registrationDeadline: "Registration is now open",
       cmeCredits: "1.5 - 2 hours",
-      type: "Virtual Workshop",
+      type: "Townhall",
       registrationUrl: "/events/cann-townhall/register",
       requiresCANNMembership: true,
     },

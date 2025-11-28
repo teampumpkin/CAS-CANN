@@ -11,6 +11,8 @@ import {
   workflowExecutions,
   actionExecutions,
   campaignSyncs,
+  townhallRegistrations,
+  eventAdmins,
   type User,
   type InsertUser,
   type Resource,
@@ -35,6 +37,10 @@ import {
   type InsertActionExecution,
   type CampaignSync,
   type InsertCampaignSync,
+  type TownhallRegistration,
+  type InsertTownhallRegistration,
+  type EventAdmin,
+  type InsertEventAdmin,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, like, desc, gte, lte, notInArray, isNull, or } from "drizzle-orm";
@@ -171,6 +177,16 @@ export interface IStorage {
   createCampaignSync(sync: InsertCampaignSync): Promise<CampaignSync>;
   updateCampaignSync(id: number, updates: Partial<CampaignSync>): Promise<CampaignSync | undefined>;
   deleteCampaignSync(id: number): Promise<boolean>;
+
+  // Townhall registration operations
+  getTownhallRegistrations(): Promise<TownhallRegistration[]>;
+  getTownhallRegistration(id: number): Promise<TownhallRegistration | undefined>;
+  createTownhallRegistration(registration: InsertTownhallRegistration): Promise<TownhallRegistration>;
+  deleteTownhallRegistration(id: number): Promise<boolean>;
+
+  // Event admin operations
+  getEventAdmin(username: string): Promise<EventAdmin | undefined>;
+  createEventAdmin(admin: InsertEventAdmin): Promise<EventAdmin>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -865,6 +881,40 @@ export class DatabaseStorage implements IStorage {
   async deleteCampaignSync(id: number): Promise<boolean> {
     const result = await db.delete(campaignSyncs).where(eq(campaignSyncs.id, id));
     return (result.rowCount || 0) > 0;
+  }
+
+  // Townhall registration operations
+  async getTownhallRegistrations(): Promise<TownhallRegistration[]> {
+    return await db
+      .select()
+      .from(townhallRegistrations)
+      .orderBy(desc(townhallRegistrations.createdAt));
+  }
+
+  async getTownhallRegistration(id: number): Promise<TownhallRegistration | undefined> {
+    const [registration] = await db.select().from(townhallRegistrations).where(eq(townhallRegistrations.id, id));
+    return registration || undefined;
+  }
+
+  async createTownhallRegistration(registration: InsertTownhallRegistration): Promise<TownhallRegistration> {
+    const [created] = await db.insert(townhallRegistrations).values(registration).returning();
+    return created;
+  }
+
+  async deleteTownhallRegistration(id: number): Promise<boolean> {
+    const result = await db.delete(townhallRegistrations).where(eq(townhallRegistrations.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  // Event admin operations
+  async getEventAdmin(username: string): Promise<EventAdmin | undefined> {
+    const [admin] = await db.select().from(eventAdmins).where(eq(eventAdmins.username, username));
+    return admin || undefined;
+  }
+
+  async createEventAdmin(admin: InsertEventAdmin): Promise<EventAdmin> {
+    const [created] = await db.insert(eventAdmins).values(admin).returning();
+    return created;
   }
 }
 

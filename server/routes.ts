@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage, type ResourceFilters } from "./storage";
-import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission } from "@shared/schema";
+import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission, insertTownhallRegistrationSchema } from "@shared/schema";
 import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
@@ -2496,6 +2496,177 @@ export async function registerRoutes(app: Express): Promise<Server> {
         success: false,
         message: "Failed to fetch workflow stats",
         error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // ========================================
+  // CANN Townhall Event Registration Routes
+  // ========================================
+
+  // Admin credentials for event registration (environment-based)
+  const EVENT_ADMIN_USERNAME = process.env.EVENT_ADMIN_USERNAME || "cannAdmin";
+  const EVENT_ADMIN_PASSWORD = process.env.EVENT_ADMIN_PASSWORD || "Townhall2025!";
+
+  // Middleware for basic auth on event admin routes
+  const requireEventAdminAuth = (req: any, res: any, next: any) => {
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader || !authHeader.startsWith("Basic ")) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+
+    const base64Credentials = authHeader.split(" ")[1];
+    const credentials = Buffer.from(base64Credentials, "base64").toString("utf-8");
+    const [username, password] = credentials.split(":");
+
+    if (username === EVENT_ADMIN_USERNAME && password === EVENT_ADMIN_PASSWORD) {
+      next();
+    } else {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+  };
+
+  // Public endpoint: Register for CANN Townhall event
+  app.post("/api/events/cann-townhall/register", async (req, res) => {
+    try {
+      const validatedData = insertTownhallRegistrationSchema.parse(req.body);
+      const registration = await storage.createTownhallRegistration(validatedData);
+      
+      console.log(`[Townhall] New registration from: ${registration.email}`);
+      
+      res.status(201).json({
+        success: true,
+        message: "Registration successful",
+        registrationId: registration.id
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          success: false,
+          message: "Invalid registration data", 
+          errors: error.errors 
+        });
+      }
+      console.error(`[Townhall] Error creating registration: ${error}`);
+      res.status(500).json({ 
+        success: false,
+        message: "Failed to create registration" 
+      });
+    }
+  });
+
+  // Admin endpoint: Verify login credentials
+  app.post("/api/admin/events/login", (req, res) => {
+    const { username, password } = req.body;
+    
+    if (username === EVENT_ADMIN_USERNAME && password === EVENT_ADMIN_PASSWORD) {
+      res.json({ 
+        success: true, 
+        message: "Login successful",
+        token: Buffer.from(`${username}:${password}`).toString("base64")
+      });
+    } else {
+      res.status(401).json({ 
+        success: false, 
+        message: "Invalid username or password" 
+      });
+    }
+  });
+
+  // Admin endpoint: Get all townhall registrations
+  app.get("/api/admin/events/townhall/registrations", requireEventAdminAuth, async (req, res) => {
+    try {
+      const registrations = await storage.getTownhallRegistrations();
+      res.json({
+        success: true,
+        registrations,
+        count: registrations.length
+      });
+    } catch (error) {
+      console.error(`[Townhall Admin] Error fetching registrations: ${error}`);
+      res.status(500).json({ 
+        success: false,
+        message: "Failed to fetch registrations" 
+      });
+    }
+  });
+
+  // Admin endpoint: Export registrations as CSV
+  app.get("/api/admin/events/townhall/registrations/export", requireEventAdminAuth, async (req, res) => {
+    try {
+      const registrations = await storage.getTownhallRegistrations();
+      const format = req.query.format || "csv";
+
+      // RFC 4180 compliant CSV field escaping
+      const escapeCSVField = (field: string | null | undefined): string => {
+        if (field === null || field === undefined) return '""';
+        const str = String(field);
+        // Escape double quotes by doubling them, then wrap in quotes
+        const escaped = str.replace(/"/g, '""').replace(/\r?\n/g, ' ');
+        return `"${escaped}"`;
+      };
+
+      if (format === "csv") {
+        // Generate CSV with proper RFC 4180 escaping
+        const headers = ["ID", "First Name", "Last Name", "Email", "Institution", "CANN Member", "Registration Date"];
+        const csvRows = [
+          headers.join(","),
+          ...registrations.map(r => [
+            r.id,
+            escapeCSVField(r.firstName),
+            escapeCSVField(r.lastName),
+            escapeCSVField(r.email),
+            escapeCSVField(r.institution),
+            r.isCannMember ? "Yes" : "No",
+            r.createdAt ? new Date(r.createdAt).toISOString() : ""
+          ].join(","))
+        ];
+        
+        const csvContent = csvRows.join("\n");
+        
+        res.setHeader("Content-Type", "text/csv; charset=utf-8");
+        res.setHeader("Content-Disposition", `attachment; filename="cann-townhall-registrations-${new Date().toISOString().split('T')[0]}.csv"`);
+        res.send(csvContent);
+      } else {
+        // Return JSON for other formats
+        res.json({
+          success: true,
+          registrations,
+          count: registrations.length
+        });
+      }
+    } catch (error) {
+      console.error(`[Townhall Admin] Error exporting registrations: ${error}`);
+      res.status(500).json({ 
+        success: false,
+        message: "Failed to export registrations" 
+      });
+    }
+  });
+
+  // Admin endpoint: Delete a registration
+  app.delete("/api/admin/events/townhall/registrations/:id", requireEventAdminAuth, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const deleted = await storage.deleteTownhallRegistration(id);
+      
+      if (!deleted) {
+        return res.status(404).json({ 
+          success: false,
+          message: "Registration not found" 
+        });
+      }
+      
+      res.json({ 
+        success: true,
+        message: "Registration deleted successfully" 
+      });
+    } catch (error) {
+      console.error(`[Townhall Admin] Error deleting registration: ${error}`);
+      res.status(500).json({ 
+        success: false,
+        message: "Failed to delete registration" 
       });
     }
   });

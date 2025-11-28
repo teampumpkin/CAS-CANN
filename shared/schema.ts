@@ -487,3 +487,41 @@ export const insertCampaignSyncSchema = createInsertSchema(campaignSyncs).omit({
 
 export type CampaignSync = typeof campaignSyncs.$inferSelect;
 export type InsertCampaignSync = z.infer<typeof insertCampaignSyncSchema>;
+
+// CANN Townhall Event Registrations
+export const townhallRegistrations = pgTable("townhall_registrations", {
+  id: serial("id").primaryKey(),
+  firstName: varchar("first_name", { length: 100 }).notNull(),
+  lastName: varchar("last_name", { length: 100 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  institution: varchar("institution", { length: 255 }).notNull(),
+  isCannMember: boolean("is_cann_member").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+}, (table) => [
+  index("idx_townhall_registrations_email").on(table.email),
+  index("idx_townhall_registrations_created_at").on(table.createdAt),
+]);
+
+export const insertTownhallRegistrationSchema = createInsertSchema(townhallRegistrations).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type TownhallRegistration = typeof townhallRegistrations.$inferSelect;
+export type InsertTownhallRegistration = z.infer<typeof insertTownhallRegistrationSchema>;
+
+// Admin credentials for event management
+export const eventAdmins = pgTable("event_admins", {
+  id: serial("id").primaryKey(),
+  username: varchar("username", { length: 100 }).notNull().unique(),
+  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertEventAdminSchema = createInsertSchema(eventAdmins).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type EventAdmin = typeof eventAdmins.$inferSelect;
+export type InsertEventAdmin = z.infer<typeof insertEventAdminSchema>;

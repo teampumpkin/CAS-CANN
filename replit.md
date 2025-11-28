@@ -25,6 +25,10 @@ Key features include:
 - **Zoho CRM Data Integration Service**: A standalone service for processing CSV/Excel files into Zoho (Accounts, Contacts, Resources) with an admin UI for file upload, preview, and import execution.
 - **Bulletproof Form Submission System**: Local-first architecture ensuring form submissions are saved to PostgreSQL immediately and then asynchronously synced to Zoho CRM with exponential backoff and retry logic, including automatic token refresh.
 - **Unified CAS & CANN Registration Form**: A single comprehensive form (`/join-cas`) with conditional logic, replacing all other registration forms. It includes automated email notifications (pending SMTP credentials) and extensive UI/UX enhancements.
+- **CANN Townhall Event Registration System**: Event-specific registration for the CANN Townhall - Ideation Workshop with:
+  - **Registration Form** (`/events/cann-townhall/register`): Captures First Name, Last Name, Email, Institution, and CANN membership status with form validation and success confirmation popup.
+  - **Admin Dashboard** (`/eventsdownload`): Password-protected admin portal for viewing and managing event registrations. Supports CSV export with RFC 4180 compliant escaping.
+  - **Admin Credentials**: Username: `cannAdmin`, Password: `Townhall2025!` (configurable via environment variables `EVENT_ADMIN_USERNAME` and `EVENT_ADMIN_PASSWORD`).
 - **Resource Management System**: A comprehensive system for clinicians to upload and share diagnostic tools, protocols, and educational materials. Features include:
   - **Upload Portal** (`/upload-resource`): Multi-step form for submitting resources with file attachments, metadata, and consent agreements.
   - **Moderation Dashboard** (`/admin/resources/moderation`): Administrative interface for reviewing, approving, or rejecting resource submissions with file preview capabilities.

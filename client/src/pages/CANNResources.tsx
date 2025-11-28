@@ -393,64 +393,23 @@ export default function CANNResources() {
                 viewport={{ once: true }}
               >
                 <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex flex-col">
-                  {/* Video Thumbnail Section */}
-                  {playingVideoIndex === index ? (
-                    <div className="w-full aspect-video">
-                      <video
-                        controls
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        data-testid="video-patient-journey"
-                      >
-                        <source src={patientJourneyVideo} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                  ) : (
-                    <div 
-                      className="relative w-full aspect-video bg-gray-900 overflow-hidden group cursor-pointer"
-                      onClick={() => index === 0 && setPlayingVideoIndex(index)}
-                    >
-                      {/* Video thumbnail background */}
-                      {index === 0 ? (
-                        <video
-                          className="absolute inset-0 w-full h-full object-cover"
-                          muted
-                          playsInline
-                          preload="metadata"
-                        >
-                          <source src={patientJourneyVideo} type="video/mp4" />
-                        </video>
-                      ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/80 to-[#00DD89]/80 dark:from-[#00AFE6]/70 dark:to-[#00DD89]/70" />
-                      )}
-                      
-                      {/* Subtle dark overlay for better button visibility */}
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
-                      
-                      {/* Watch button centered */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        {index === 0 ? (
-                          <motion.div
-                            className="bg-white/95 dark:bg-gray-900/95 rounded-full px-8 py-4 shadow-2xl group-hover:scale-110 transition-transform duration-300 flex items-center gap-3"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            <PlayCircle className="w-8 h-8 text-[#00AFE6] dark:text-[#00DD89]" />
-                            <span className="text-xl font-bold text-gray-900 dark:text-white">
-                              Watch
-                            </span>
-                          </motion.div>
-                        ) : (
-                          <div className="bg-white/90 dark:bg-gray-900/90 rounded-full px-6 py-3 shadow-2xl">
-                            <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">
-                              Coming Soon
-                            </span>
-                          </div>
-                        )}
+                  {/* Thumbnail Section */}
+                  <div className="relative w-full aspect-video bg-gray-900 overflow-hidden group">
+                    {/* Gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/80 to-[#00DD89]/80 dark:from-[#00AFE6]/70 dark:to-[#00DD89]/70" />
+                    
+                    {/* Subtle dark overlay */}
+                    <div className="absolute inset-0 bg-black/20" />
+                    
+                    {/* Coming Soon badge centered */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-white/95 dark:bg-gray-900/95 rounded-full px-6 py-3 shadow-2xl">
+                        <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+                          Coming Soon
+                        </span>
                       </div>
                     </div>
-                  )}
+                  </div>
 
                   {/* Details Section */}
                   <CardContent className="p-6 flex-1 flex flex-col">

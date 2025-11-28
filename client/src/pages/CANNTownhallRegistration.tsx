@@ -259,13 +259,13 @@ export default function CANNTownhallRegistration() {
                 </div>
 
                 {/* CANN Members Notice */}
-                <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200 dark:border-amber-800/50 rounded-xl p-4">
-                  <p className="text-amber-800 dark:text-amber-200 text-sm">
+                <div className="bg-[#00AFE6]/10 dark:bg-[#00AFE6]/20 border border-[#00AFE6]/30 dark:border-[#00AFE6]/40 rounded-xl p-4">
+                  <p className="text-[#00AFE6] dark:text-[#00AFE6] text-sm">
                     <strong>Note:</strong> This event is exclusively for CANN members. 
                     If you are not yet a CANN member, please{" "}
                     <a 
                       href="/join-cas" 
-                      className="text-[#00AFE6] hover:underline font-medium"
+                      className="text-[#00DD89] hover:underline font-medium"
                       data-testid="link-join-cann"
                     >
                       join CANN first

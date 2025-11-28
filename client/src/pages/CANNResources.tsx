@@ -639,7 +639,7 @@ export default function CANNResources() {
                           </div>
                           <div className="flex items-center gap-2">
                             <MapPin className="w-4 h-4 text-pink-500" />
-                            <span>{event.location}</span>
+                            <span>Virtual</span>
                           </div>
                         </div>
                       </div>

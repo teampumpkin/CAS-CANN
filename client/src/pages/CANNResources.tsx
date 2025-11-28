@@ -645,7 +645,7 @@ export default function CANNResources() {
                             <div className="space-y-3">
                               {event.requiresCANNMembership && (
                                 <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded-full border border-amber-200 dark:border-amber-800">
-                                  <span className="text-xs font-medium dark:text-amber-400 text-[#00afe6]">
+                                  <span className="text-xs font-medium dark:text-amber-400 text-[#00dd89]">
                                     CANN Members Only
                                   </span>
                                 </div>

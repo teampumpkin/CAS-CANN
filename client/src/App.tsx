@@ -58,6 +58,8 @@ const TestForms = lazy(() => import("@/pages/TestForms"));
 const CANNMembershipForm = lazy(() => import("@/pages/CANNMembershipForm"));
 const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));
 const CommandDashboard = lazy(() => import("@/pages/CommandDashboard"));
+const CANNTownhallRegistration = lazy(() => import("@/pages/CANNTownhallRegistration"));
+const CANNTownhallAdmin = lazy(() => import("@/pages/CANNTownhallAdmin"));
 
 // Loading component
 const PageLoader = () => (
@@ -125,6 +127,8 @@ function Router() {
         <Route path="/cann-membership" component={JoinCAS} />
         <Route path="/admin/data-sync" component={DataSyncAdmin} />
         <Route path="/admin/automation" component={CommandDashboard} />
+        <Route path="/events/cann-townhall/register" component={CANNTownhallRegistration} />
+        <Route path="/admin/events/cann-townhall" component={CANNTownhallAdmin} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

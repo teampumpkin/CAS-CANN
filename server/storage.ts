@@ -11,6 +11,7 @@ import {
   workflowExecutions,
   actionExecutions,
   campaignSyncs,
+  eventRegistrations,
   type User,
   type InsertUser,
   type Resource,
@@ -35,6 +36,8 @@ import {
   type InsertActionExecution,
   type CampaignSync,
   type InsertCampaignSync,
+  type EventRegistration,
+  type InsertEventRegistration,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, like, desc, gte, lte, notInArray, isNull, or } from "drizzle-orm";
@@ -171,6 +174,12 @@ export interface IStorage {
   createCampaignSync(sync: InsertCampaignSync): Promise<CampaignSync>;
   updateCampaignSync(id: number, updates: Partial<CampaignSync>): Promise<CampaignSync | undefined>;
   deleteCampaignSync(id: number): Promise<boolean>;
+
+  // Event registration operations
+  getEventRegistrations(eventId?: string): Promise<EventRegistration[]>;
+  getEventRegistration(id: number): Promise<EventRegistration | undefined>;
+  createEventRegistration(registration: InsertEventRegistration): Promise<EventRegistration>;
+  deleteEventRegistration(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -864,6 +873,36 @@ export class DatabaseStorage implements IStorage {
 
   async deleteCampaignSync(id: number): Promise<boolean> {
     const result = await db.delete(campaignSyncs).where(eq(campaignSyncs.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  // Event registration operations
+  async getEventRegistrations(eventId?: string): Promise<EventRegistration[]> {
+    if (eventId) {
+      return await db
+        .select()
+        .from(eventRegistrations)
+        .where(eq(eventRegistrations.eventId, eventId))
+        .orderBy(desc(eventRegistrations.registeredAt));
+    }
+    return await db
+      .select()
+      .from(eventRegistrations)
+      .orderBy(desc(eventRegistrations.registeredAt));
+  }
+
+  async getEventRegistration(id: number): Promise<EventRegistration | undefined> {
+    const [registration] = await db.select().from(eventRegistrations).where(eq(eventRegistrations.id, id));
+    return registration || undefined;
+  }
+
+  async createEventRegistration(registration: InsertEventRegistration): Promise<EventRegistration> {
+    const [created] = await db.insert(eventRegistrations).values(registration).returning();
+    return created;
+  }
+
+  async deleteEventRegistration(id: number): Promise<boolean> {
+    const result = await db.delete(eventRegistrations).where(eq(eventRegistrations.id, id));
     return (result.rowCount || 0) > 0;
   }
 }

@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage, type ResourceFilters } from "./storage";
-import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission } from "@shared/schema";
+import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission, insertEventRegistrationSchema, eventRegistrationFormSchema } from "@shared/schema";
 import { fieldSyncEngine } from "./field-sync-engine";
 import { zohoCRMService } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
@@ -2496,6 +2496,132 @@ export async function registerRoutes(app: Express): Promise<Server> {
         success: false,
         message: "Failed to fetch workflow stats",
         error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // ===== EVENT REGISTRATION ROUTES =====
+  
+  // Register for CANN Townhall event
+  app.post("/api/events/cann-townhall/register", async (req, res) => {
+    try {
+      // Validate the form data
+      const validationResult = eventRegistrationFormSchema.safeParse(req.body);
+      
+      if (!validationResult.success) {
+        return res.status(400).json({
+          success: false,
+          message: "Validation failed",
+          errors: validationResult.error.errors
+        });
+      }
+
+      const { firstName, lastName, email, institution, isCANNMember } = validationResult.data;
+
+      // Create the registration
+      const registration = await storage.createEventRegistration({
+        eventId: "cann-townhall-2025",
+        eventName: "CANN Townhall – Ideation Workshop",
+        firstName,
+        lastName,
+        email,
+        institution,
+        isCANNMember: isCANNMember === "Yes"
+      });
+
+      res.status(201).json({
+        success: true,
+        message: "Thank you for registering for the CANN Townhall. Further details about this event will be provided to you via email.",
+        registration: {
+          id: registration.id,
+          eventName: registration.eventName
+        }
+      });
+    } catch (error) {
+      console.error("[Event Registration] Error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to register for event. Please try again."
+      });
+    }
+  });
+
+  // Get all registrations for CANN Townhall (admin)
+  app.get("/api/admin/events/cann-townhall/registrations", async (req, res) => {
+    try {
+      const registrations = await storage.getEventRegistrations("cann-townhall-2025");
+      res.json({
+        success: true,
+        count: registrations.length,
+        registrations
+      });
+    } catch (error) {
+      console.error("[Admin] Error fetching registrations:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch registrations"
+      });
+    }
+  });
+
+  // Export registrations as CSV
+  app.get("/api/admin/events/cann-townhall/registrations/export", async (req, res) => {
+    try {
+      const registrations = await storage.getEventRegistrations("cann-townhall-2025");
+      
+      // Create CSV content
+      const headers = ["ID", "First Name", "Last Name", "Email", "Institution", "CANN Member", "Registered At"];
+      const csvRows = [headers.join(",")];
+      
+      for (const reg of registrations) {
+        const row = [
+          reg.id,
+          `"${reg.firstName.replace(/"/g, '""')}"`,
+          `"${reg.lastName.replace(/"/g, '""')}"`,
+          `"${reg.email.replace(/"/g, '""')}"`,
+          `"${reg.institution.replace(/"/g, '""')}"`,
+          reg.isCANNMember ? "Yes" : "No",
+          reg.registeredAt ? new Date(reg.registeredAt).toISOString() : ""
+        ];
+        csvRows.push(row.join(","));
+      }
+      
+      const csvContent = csvRows.join("\n");
+      
+      res.setHeader("Content-Type", "text/csv");
+      res.setHeader("Content-Disposition", `attachment; filename="cann-townhall-registrations-${new Date().toISOString().split('T')[0]}.csv"`);
+      res.send(csvContent);
+    } catch (error) {
+      console.error("[Admin] Error exporting registrations:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to export registrations"
+      });
+    }
+  });
+
+  // Delete a registration (admin)
+  app.delete("/api/admin/events/registrations/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const deleted = await storage.deleteEventRegistration(id);
+      
+      if (deleted) {
+        res.json({
+          success: true,
+          message: "Registration deleted successfully"
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "Registration not found"
+        });
+      }
+    } catch (error) {
+      console.error("[Admin] Error deleting registration:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to delete registration"
       });
     }
   });

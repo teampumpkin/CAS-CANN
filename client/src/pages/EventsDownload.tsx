@@ -272,7 +272,7 @@ export default function EventsDownload() {
           <Button
             variant="outline"
             onClick={handleLogout}
-            className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white border-gray-200 dark:border-gray-600"
+            className="text-red-600 dark:text-red-500 hover:text-red-700 dark:hover:text-red-400 border-red-600 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
             data-testid="button-logout"
           >
             <LogOut className="w-4 h-4 mr-2" />

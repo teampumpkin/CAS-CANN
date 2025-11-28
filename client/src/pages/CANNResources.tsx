@@ -646,24 +646,26 @@ export default function CANNResources() {
                       <div className="flex flex-col justify-between">
                         <div className="mb-4">
                           {event.registrationUrl ? (
-                            <div className="space-y-2">
+                            <div className="space-y-3">
                               {event.requiresCANNMembership && (
-                                <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded-full border border-amber-200 dark:border-amber-800 mb-2">
+                                <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded-full border border-amber-200 dark:border-amber-800">
                                   <span className="text-xs font-medium text-amber-600 dark:text-amber-400">
                                     CANN Members Only
                                   </span>
                                 </div>
                               )}
-                              <Link href={event.registrationUrl}>
-                                <Button
-                                  size="sm"
-                                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-lg w-full"
-                                  data-testid={`button-register-${event.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                >
-                                  <ExternalLink className="w-4 h-4 mr-2" />
-                                  Register Now
-                                </Button>
-                              </Link>
+                              <div>
+                                <Link href={event.registrationUrl}>
+                                  <Button
+                                    size="sm"
+                                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-lg w-full"
+                                    data-testid={`button-register-${event.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                  >
+                                    <ExternalLink className="w-4 h-4 mr-2" />
+                                    Register Now
+                                  </Button>
+                                </Link>
+                              </div>
                             </div>
                           ) : (
                             <>

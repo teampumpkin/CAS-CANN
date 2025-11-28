@@ -374,48 +374,48 @@ export default function EventsDownload() {
                   <TableBody>
                     {registrationsData?.registrations?.map((registration) => (
                       <TableRow key={registration.id} data-testid={`row-registration-${registration.id}`}>
-                        <TableCell className="font-medium text-gray-500">
+                        <TableCell className="font-medium text-gray-500 dark:text-gray-400">
                           #{registration.id}
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                              <span className="text-xs font-medium text-gray-600">
+                            <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                              <span className="text-xs font-medium text-gray-600 dark:text-gray-300">
                                 {registration.firstName[0]}{registration.lastName[0]}
                               </span>
                             </div>
-                            <span className="font-medium text-gray-900">
+                            <span className="font-medium text-gray-900 dark:text-white">
                               {registration.firstName} {registration.lastName}
                             </span>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-2 text-gray-600">
+                          <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                             <Mail className="w-4 h-4" />
                             {registration.email}
                           </div>
                         </TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-2 text-gray-600">
+                          <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                             <Building2 className="w-4 h-4" />
                             {registration.institution}
                           </div>
                         </TableCell>
                         <TableCell className="text-center">
                           {registration.isCannMember ? (
-                            <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+                            <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-xs font-medium">
                               <CheckCircle className="w-3 h-3" />
                               Yes
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium">
+                            <span className="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full text-xs font-medium">
                               <XCircle className="w-3 h-3" />
                               No
                             </span>
                           )}
                         </TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-2 text-gray-500 text-sm">
+                          <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm">
                             <Calendar className="w-4 h-4" />
                             {registration.createdAt
                               ? new Date(registration.createdAt).toLocaleDateString("en-CA", {
@@ -434,7 +434,7 @@ export default function EventsDownload() {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
                                 data-testid={`button-delete-${registration.id}`}
                               >
                                 <Trash2 className="w-4 h-4" />

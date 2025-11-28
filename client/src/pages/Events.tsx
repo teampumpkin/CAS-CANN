@@ -50,20 +50,6 @@ const allEvents = [
   },
   {
     id: 3,
-    title: "CANN Townhall – Ideation Workshop",
-    date: "2025-12-15",
-    time: "TBD",
-    location: "Virtual Event",
-    type: "CANN Workshop",
-    description:
-      "Join us for an interactive ideation workshop to shape the future of amyloidosis care in Canada. This exclusive event is open to CANN members only.",
-    image: "/api/placeholder/400/250",
-    internalRegistrationUrl: "/events/cann-townhall/register",
-    requiresMembershipCTA: true,
-    membershipType: "CANN",
-  },
-  {
-    id: 4,
     title: "CAS Journal Club - September Session",
     date: "2025-09-25",
     time: "3:00 PM - 4:00 PM MST",
@@ -482,37 +468,8 @@ export default function Events() {
                           {event.description}
                         </p>
 
-                        {/* Registration button for events with internal registration */}
-                        {event.internalRegistrationUrl && (
-                          <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden space-y-2">
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
-                            <div className="relative z-10">
-                              <div className="flex items-center justify-center gap-1 mb-1">
-                                <div className="w-1.5 h-1.5 bg-[#00DD89] rounded-full animate-pulse"></div>
-                                <p className="text-sm font-semibold text-[#00DD89] dark:text-[#00DD89]">
-                                  CANN Members Only
-                                </p>
-                                <div className="w-1.5 h-1.5 bg-[#00DD89] rounded-full animate-pulse"></div>
-                              </div>
-                              <Link href={event.internalRegistrationUrl}>
-                                <Button
-                                  className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-sm relative overflow-hidden"
-                                  data-testid="button-register-townhall"
-                                >
-                                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                                  <div className="relative z-10 flex items-center justify-center">
-                                    <Calendar className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
-                                    Register Now
-                                    <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                                  </div>
-                                </Button>
-                              </Link>
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Membership info and Join button - Show for events that require membership but don't have internal registration */}
-                        {event.requiresMembershipCTA && !event.internalRegistrationUrl && (
+                        {/* Membership info and Join button - Show for events that require membership */}
+                        {event.requiresMembershipCTA && (
                           <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden space-y-2">
                             {/* Subtle animated background effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>

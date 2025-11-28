@@ -187,8 +187,7 @@ export default function CANNResources() {
       format: "Virtual Workshop",
       description:
         "We want to hear from you! This live session will be professionally facilitated, designed to understand the needs of new/current CANN members and shape future direction.",
-      registrationDeadline: "Registration is now open",
-      registrationUrl: "/events/cann-townhall/register",
+      registrationDeadline: "Registration Required – Details coming soon!",
       cmeCredits: "1.5 - 2 hours",
       type: "Virtual Workshop",
     },
@@ -684,19 +683,7 @@ export default function CANNResources() {
                               {event.registrationDeadline}
                             </div>
                           )}
-                          {event.registrationUrl ? (
-                            <div className="mt-3">
-                              <Link href={event.registrationUrl}>
-                                <Button
-                                  size="sm"
-                                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-lg w-full shadow-lg hover:shadow-xl transition-all duration-300"
-                                  data-testid="button-register-townhall"
-                                >
-                                  Register Now
-                                </Button>
-                              </Link>
-                            </div>
-                          ) : event.location
+                          {event.location
                             ?.toLowerCase()
                             .includes("login to cann member portal") && (
                             <div className="mt-3 space-y-2">

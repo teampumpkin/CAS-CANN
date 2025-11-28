@@ -153,7 +153,7 @@ export default function CANNTownhallRegistration() {
             </motion.div>
 
             <h1 className="font-rosarivo text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="text-event-title">
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                 CANN Townhall
               </span>
               <br />

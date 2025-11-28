@@ -168,14 +168,14 @@ export default function EventsDownload() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center p-4">
+      <div className="min-h-[calc(100vh-6rem)] bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="w-full max-w-md"
         >
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
             <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] p-6 text-white text-center">
               <Shield className="w-12 h-12 mx-auto mb-3" />
               <h1 className="text-2xl font-bold" data-testid="text-login-title">Event Admin Portal</h1>
@@ -192,12 +192,12 @@ export default function EventsDownload() {
                     name="username"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700">Username</FormLabel>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Username</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             placeholder="Enter username"
-                            className="h-11"
+                            className="h-11 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700"
                             data-testid="input-admin-username"
                           />
                         </FormControl>
@@ -211,13 +211,13 @@ export default function EventsDownload() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700">Password</FormLabel>
+                        <FormLabel className="text-gray-700 dark:text-gray-300">Password</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             type="password"
                             placeholder="Enter password"
-                            className="h-11"
+                            className="h-11 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700"
                             data-testid="input-admin-password"
                           />
                         </FormControl>
@@ -227,7 +227,7 @@ export default function EventsDownload() {
                   />
 
                   {loginError && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm" data-testid="text-login-error">
+                    <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 text-red-700 dark:text-red-400 text-sm" data-testid="text-login-error">
                       {loginError}
                     </div>
                   )}
@@ -257,22 +257,22 @@ export default function EventsDownload() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      <header className="bg-white border-b border-gray-200 shadow-sm">
+    <div className="min-h-[calc(100vh-6rem)] bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+      <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Shield className="w-8 h-8 text-[#00AFE6]" />
             <div>
-              <h1 className="text-xl font-bold text-gray-900" data-testid="text-dashboard-title">
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white" data-testid="text-dashboard-title">
                 Event Admin Dashboard
               </h1>
-              <p className="text-sm text-gray-500">CANN Townhall Registrations</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">CANN Townhall Registrations</p>
             </div>
           </div>
           <Button
             variant="outline"
             onClick={handleLogout}
-            className="text-gray-600 hover:text-gray-900"
+            className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white border-gray-200 dark:border-gray-600"
             data-testid="button-logout"
           >
             <LogOut className="w-4 h-4 mr-2" />
@@ -288,49 +288,49 @@ export default function EventsDownload() {
           transition={{ duration: 0.5 }}
         >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 p-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-lg flex items-center justify-center">
                   <Users className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900" data-testid="text-total-registrations">
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white" data-testid="text-total-registrations">
                     {registrationsData?.count || 0}
                   </p>
-                  <p className="text-sm text-gray-500">Total Registrations</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Total Registrations</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 p-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                  <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900" data-testid="text-cann-members">
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white" data-testid="text-cann-members">
                     {registrationsData?.registrations?.filter(r => r.isCannMember).length || 0}
                   </p>
-                  <p className="text-sm text-gray-500">CANN Members</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">CANN Members</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 p-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
-                  <XCircle className="w-6 h-6 text-amber-600" />
+                <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center">
+                  <XCircle className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900" data-testid="text-non-cann-members">
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white" data-testid="text-non-cann-members">
                     {registrationsData?.registrations?.filter(r => !r.isCannMember).length || 0}
                   </p>
-                  <p className="text-sm text-gray-500">Non-CANN Members</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Non-CANN Members</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6 flex items-center justify-center">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 p-6 flex items-center justify-center">
               <Button
                 onClick={handleDownloadCSV}
                 className="w-full h-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white font-semibold"
@@ -342,20 +342,20 @@ export default function EventsDownload() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
-            <div className="p-6 border-b border-gray-100">
-              <h2 className="text-lg font-semibold text-gray-900">Registration List</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 overflow-hidden">
+            <div className="p-6 border-b border-gray-100 dark:border-gray-700">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Registration List</h2>
             </div>
 
             {isLoadingRegistrations ? (
               <div className="p-12 text-center">
                 <Loader2 className="w-8 h-8 mx-auto animate-spin text-[#00AFE6]" />
-                <p className="text-gray-500 mt-2">Loading registrations...</p>
+                <p className="text-gray-500 dark:text-gray-400 mt-2">Loading registrations...</p>
               </div>
             ) : registrationsData?.registrations?.length === 0 ? (
               <div className="p-12 text-center">
-                <Users className="w-12 h-12 mx-auto text-gray-300 mb-3" />
-                <p className="text-gray-500" data-testid="text-no-registrations">No registrations yet</p>
+                <Users className="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-3" />
+                <p className="text-gray-500 dark:text-gray-400" data-testid="text-no-registrations">No registrations yet</p>
               </div>
             ) : (
               <div className="overflow-x-auto">

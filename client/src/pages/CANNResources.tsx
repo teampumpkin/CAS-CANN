@@ -283,7 +283,6 @@ export default function CANNResources() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <ParallaxBackground>{null}</ParallaxBackground>
-
       {/* Hero Section */}
       <section className="py-32 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
         <div className="absolute inset-0">
@@ -326,7 +325,6 @@ export default function CANNResources() {
           </motion.div>
         </div>
       </section>
-
       {/* Training Programs Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-6">
@@ -446,7 +444,6 @@ export default function CANNResources() {
           </div>
         </div>
       </section>
-
       {/* Educational Resources Section */}
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
@@ -526,7 +523,6 @@ export default function CANNResources() {
           </div>
         </div>
       </section>
-
       {/* Upcoming Events Section */}
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
@@ -649,7 +645,7 @@ export default function CANNResources() {
                             <div className="space-y-3">
                               {event.requiresCANNMembership && (
                                 <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded-full border border-amber-200 dark:border-amber-800">
-                                  <span className="text-xs font-medium text-amber-600 dark:text-amber-400">
+                                  <span className="text-xs font-medium dark:text-amber-400 text-[#00afe6]">
                                     CANN Members Only
                                   </span>
                                 </div>
@@ -705,7 +701,6 @@ export default function CANNResources() {
           </div>
         </div>
       </section>
-
       {/* Contact Section */}
       <section className="py-24 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 relative overflow-hidden">
         {/* Background Elements */}

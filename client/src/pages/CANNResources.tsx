@@ -645,48 +645,8 @@ export default function CANNResources() {
                       </div>
                       <div className="flex flex-col justify-between">
                         <div className="mb-4">
-                          <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                            Registration:
-                          </div>
-                          {event.registrationDeadline ===
-                          "Registration is now open" ? (
-                            <motion.div
-                              className="relative"
-                              initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                              animate={{ opacity: 1, scale: 1, y: 0 }}
-                              transition={{
-                                duration: 0.8,
-                                delay: 0.3,
-                                type: "spring",
-                                bounce: 0.3,
-                              }}
-                            >
-                              <motion.div
-                                className="inline-block bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold px-3 py-1.5 rounded-full shadow-lg border-2 border-green-400/50"
-                                animate={{
-                                  scale: [1, 1.05, 1],
-                                  boxShadow: [
-                                    "0 4px 15px rgba(34, 197, 94, 0.3)",
-                                    "0 6px 20px rgba(34, 197, 94, 0.5)",
-                                    "0 4px 15px rgba(34, 197, 94, 0.3)",
-                                  ],
-                                }}
-                                transition={{
-                                  duration: 2,
-                                  repeat: Infinity,
-                                  ease: "easeInOut",
-                                }}
-                              >
-                                {event.registrationDeadline}
-                              </motion.div>
-                            </motion.div>
-                          ) : (
-                            <div className="font-semibold text-pink-600">
-                              {event.registrationDeadline}
-                            </div>
-                          )}
                           {event.registrationUrl ? (
-                            <div className="mt-3 space-y-2">
+                            <div className="space-y-2">
                               {event.requiresCANNMembership && (
                                 <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded-full border border-amber-200 dark:border-amber-800 mb-2">
                                   <span className="text-xs font-medium text-amber-600 dark:text-amber-400">
@@ -705,7 +665,17 @@ export default function CANNResources() {
                                 </Button>
                               </Link>
                             </div>
-                          ) : event.location
+                          ) : (
+                            <>
+                              <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                                Registration:
+                              </div>
+                              <div className="font-semibold text-pink-600">
+                                {event.registrationDeadline}
+                              </div>
+                            </>
+                          )}
+                          {!event.registrationUrl && event.location
                             ?.toLowerCase()
                             .includes("login to cann member portal") && (
                             <div className="mt-3 space-y-2">

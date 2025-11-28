@@ -233,12 +233,12 @@ export default function CANNTownhallRegistration() {
           >
             <Button
               variant="ghost"
-              onClick={() => setLocation("/cann")}
+              onClick={() => setLocation("/cann-resources")}
               className="mb-6 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
               data-testid="button-back-events"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to CANN Resources
+              Back to CANN Resources/Events
             </Button>
 
             <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50 overflow-hidden">
@@ -481,12 +481,12 @@ export default function CANNTownhallRegistration() {
             <Button
               onClick={() => {
                 setShowSuccessDialog(false);
-                setLocation("/cann");
+                setLocation("/cann-resources");
               }}
               className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg shadow-pink-500/25"
               data-testid="button-close-success"
             >
-              Back to CANN Resources
+              Back to CANN Resources/Events
             </Button>
           </div>
         </DialogContent>

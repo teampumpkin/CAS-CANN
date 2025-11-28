@@ -190,7 +190,7 @@ export default function CANNTownhallRegistration() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-5 py-3 rounded-2xl border border-gray-200/50 dark:border-gray-700/50 shadow-lg"
               >
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl flex items-center justify-center">
                   <Clock className="w-5 h-5 text-white" />
                 </div>
                 <div className="text-left">
@@ -205,7 +205,7 @@ export default function CANNTownhallRegistration() {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 className="flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-5 py-3 rounded-2xl border border-gray-200/50 dark:border-gray-700/50 shadow-lg"
               >
-                <div className="w-10 h-10 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-white" />
                 </div>
                 <div className="text-left">

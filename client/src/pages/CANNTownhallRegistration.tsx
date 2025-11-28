@@ -144,10 +144,10 @@ export default function CANNTownhallRegistration() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 to-purple-600/10 dark:from-pink-500/20 dark:to-purple-600/20 backdrop-blur-sm px-4 py-2 rounded-full border border-pink-500/20 dark:border-pink-500/30 mb-6"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-sm px-4 py-2 rounded-full border border-[#00AFE6]/30 dark:border-[#00AFE6]/40 mb-6"
             >
-              <Sparkles className="w-4 h-4 text-pink-500" />
-              <span className="text-sm font-medium bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+              <Sparkles className="w-4 h-4 text-[#00AFE6]" />
+              <span className="text-sm font-medium bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Virtual Workshop
               </span>
             </motion.div>

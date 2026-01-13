@@ -1,6 +1,15 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+
+function log(message: string, source = "express") {
+  const formattedTime = new Date().toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+  console.log(`${formattedTime} [${source}] ${message}`);
+}
 
 const app = express();
 app.use(express.json());
@@ -51,6 +60,9 @@ app.use((req, res, next) => {
   // Run database migrations
   const { migrateRetryColumns } = await import("./migrations/add-retry-columns");
   await migrateRetryColumns();
+  
+  const { migrateAutoCreateFields } = await import("./migrations/fix-auto-create-fields");
+  await migrateAutoCreateFields();
 
   // Initialize dedicated token management system
   const { dedicatedTokenManager } = await import("./dedicated-token-manager");
@@ -63,6 +75,10 @@ app.use((req, res, next) => {
   // Initialize field metadata cache service
   const { fieldMetadataCacheService } = await import("./field-metadata-cache-service");
   await fieldMetadataCacheService.initialize();
+
+  // Initialize form configuration engine (ensures legacy defaults for autoCreateFields)
+  const { formConfigEngine } = await import("./form-config-engine");
+  await formConfigEngine.initialize();
 
   // Initialize Zoho sync worker (BULLETPROOF: processes pending form submissions)
   const { zohoSyncWorker } = await import("./zoho-sync-worker");
@@ -99,10 +115,15 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
+  // In production, serve static files. In development, use Vite's dev server.
+  if (isProduction) {
+    const { serveStatic } = await import("./static");
     serveStatic(app);
+  } else {
+    // Use string concatenation to prevent esbuild from bundling vite.ts
+    const vitePath = "./vi" + "te";
+    const viteModule = await import(vitePath);
+    await viteModule.setupVite(app, server);
   }
 
   // Use PORT environment variable for production deployments

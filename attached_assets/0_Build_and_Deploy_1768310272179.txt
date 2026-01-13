@@ -1,0 +1,461 @@
+﻿2026-01-13T13:16:08.7431599Z Current runner version: '2.330.0'
+2026-01-13T13:16:08.7463913Z ##[group]Runner Image Provisioner
+2026-01-13T13:16:08.7465387Z Hosted Compute Agent
+2026-01-13T13:16:08.7466325Z Version: 20251211.462
+2026-01-13T13:16:08.7467539Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+2026-01-13T13:16:08.7468889Z Build Date: 2025-12-11T16:28:49Z
+2026-01-13T13:16:08.7469948Z Worker ID: {573f8680-081f-47cc-911d-bf0c75d1a593}
+2026-01-13T13:16:08.7471808Z ##[endgroup]
+2026-01-13T13:16:08.7472732Z ##[group]Operating System
+2026-01-13T13:16:08.7473640Z Ubuntu
+2026-01-13T13:16:08.7474465Z 24.04.3
+2026-01-13T13:16:08.7475242Z LTS
+2026-01-13T13:16:08.7475995Z ##[endgroup]
+2026-01-13T13:16:08.7477081Z ##[group]Runner Image
+2026-01-13T13:16:08.7478038Z Image: ubuntu-24.04
+2026-01-13T13:16:08.7478884Z Version: 20260105.202.1
+2026-01-13T13:16:08.7480792Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260105.202/images/ubuntu/Ubuntu2404-Readme.md
+2026-01-13T13:16:08.7483559Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260105.202
+2026-01-13T13:16:08.7485516Z ##[endgroup]
+2026-01-13T13:16:08.7487635Z ##[group]GITHUB_TOKEN Permissions
+2026-01-13T13:16:08.7490329Z Contents: read
+2026-01-13T13:16:08.7491313Z Metadata: read
+2026-01-13T13:16:08.7492207Z Packages: read
+2026-01-13T13:16:08.7493170Z ##[endgroup]
+2026-01-13T13:16:08.7496182Z Secret source: Actions
+2026-01-13T13:16:08.7497507Z Prepare workflow directory
+2026-01-13T13:16:08.8063479Z Prepare all required actions
+2026-01-13T13:16:08.8119897Z Getting action download info
+2026-01-13T13:16:09.1247206Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-01-13T13:16:10.0873716Z Download action repository 'aws-actions/configure-aws-credentials@v4' (SHA:7474bc4690e29a8392af63c5b98e7449536d5c3a)
+2026-01-13T13:16:10.4817133Z Download action repository 'aws-actions/amazon-ecr-login@v2' (SHA:062b18b96a7aff071d4dc91bc00c4c1a7945b076)
+2026-01-13T13:16:10.9232596Z Complete job name: Build and Deploy
+2026-01-13T13:16:11.0095920Z ##[group]Run actions/checkout@v4
+2026-01-13T13:16:11.0097583Z with:
+2026-01-13T13:16:11.0098453Z   repository: teampumpkin/CAS-CANN
+2026-01-13T13:16:11.0099807Z   token: ***
+2026-01-13T13:16:11.0100627Z   ssh-strict: true
+2026-01-13T13:16:11.0101478Z   ssh-user: git
+2026-01-13T13:16:11.0102345Z   persist-credentials: true
+2026-01-13T13:16:11.0103328Z   clean: true
+2026-01-13T13:16:11.0104203Z   sparse-checkout-cone-mode: true
+2026-01-13T13:16:11.0105270Z   fetch-depth: 1
+2026-01-13T13:16:11.0106145Z   fetch-tags: false
+2026-01-13T13:16:11.0107168Z   show-progress: true
+2026-01-13T13:16:11.0108071Z   lfs: false
+2026-01-13T13:16:11.0108887Z   submodules: false
+2026-01-13T13:16:11.0109779Z   set-safe-directory: true
+2026-01-13T13:16:11.0110990Z env:
+2026-01-13T13:16:11.0111790Z   AWS_REGION: ap-south-1
+2026-01-13T13:16:11.0112738Z   ECR_REPOSITORY: cas-cann
+2026-01-13T13:16:11.0113726Z   ECS_CLUSTER: cas-cann26
+2026-01-13T13:16:11.0114865Z   ECS_SERVICE: cas-website-task-service-k7z3yzx3
+2026-01-13T13:16:11.0116100Z ##[endgroup]
+2026-01-13T13:16:11.1196479Z Syncing repository: teampumpkin/CAS-CANN
+2026-01-13T13:16:11.1199304Z ##[group]Getting Git version info
+2026-01-13T13:16:11.1200645Z Working directory is '/home/runner/work/CAS-CANN/CAS-CANN'
+2026-01-13T13:16:11.1202515Z [command]/usr/bin/git version
+2026-01-13T13:16:11.2412663Z git version 2.52.0
+2026-01-13T13:16:11.2441008Z ##[endgroup]
+2026-01-13T13:16:11.2456224Z Temporarily overriding HOME='/home/runner/work/_temp/7645a691-e951-4ff8-95c2-02bd7414c159' before making global git config changes
+2026-01-13T13:16:11.2459187Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-13T13:16:11.2469292Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/CAS-CANN/CAS-CANN
+2026-01-13T13:16:11.2551183Z Deleting the contents of '/home/runner/work/CAS-CANN/CAS-CANN'
+2026-01-13T13:16:11.2554834Z ##[group]Initializing the repository
+2026-01-13T13:16:11.2558951Z [command]/usr/bin/git init /home/runner/work/CAS-CANN/CAS-CANN
+2026-01-13T13:16:11.3271101Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-01-13T13:16:11.3273770Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-01-13T13:16:11.3275699Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-01-13T13:16:11.3277376Z hint: call:
+2026-01-13T13:16:11.3278102Z hint:
+2026-01-13T13:16:11.3279046Z hint: 	git config --global init.defaultBranch <name>
+2026-01-13T13:16:11.3280216Z hint:
+2026-01-13T13:16:11.3281305Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-01-13T13:16:11.3283135Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-01-13T13:16:11.3284572Z hint:
+2026-01-13T13:16:11.3285334Z hint: 	git branch -m <name>
+2026-01-13T13:16:11.3286227Z hint:
+2026-01-13T13:16:11.3287534Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-01-13T13:16:11.3324363Z Initialized empty Git repository in /home/runner/work/CAS-CANN/CAS-CANN/.git/
+2026-01-13T13:16:11.3340667Z [command]/usr/bin/git remote add origin https://github.com/teampumpkin/CAS-CANN
+2026-01-13T13:16:11.3435169Z ##[endgroup]
+2026-01-13T13:16:11.3437858Z ##[group]Disabling automatic garbage collection
+2026-01-13T13:16:11.3440129Z [command]/usr/bin/git config --local gc.auto 0
+2026-01-13T13:16:11.3469369Z ##[endgroup]
+2026-01-13T13:16:11.3471646Z ##[group]Setting up auth
+2026-01-13T13:16:11.3477155Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-13T13:16:11.3510957Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-13T13:16:11.5430995Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-13T13:16:11.5462088Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-13T13:16:11.5678230Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-13T13:16:11.5707540Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-13T13:16:11.5935764Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-01-13T13:16:11.5969047Z ##[endgroup]
+2026-01-13T13:16:11.5970440Z ##[group]Fetching the repository
+2026-01-13T13:16:11.5977500Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f2d82319b52cb912e09a924beacacfa42b432e56:refs/remotes/origin/main
+2026-01-13T13:16:12.7955327Z From https://github.com/teampumpkin/CAS-CANN
+2026-01-13T13:16:12.7956490Z  * [new ref]         f2d82319b52cb912e09a924beacacfa42b432e56 -> origin/main
+2026-01-13T13:16:12.8064785Z ##[endgroup]
+2026-01-13T13:16:12.8065240Z ##[group]Determining the checkout info
+2026-01-13T13:16:12.8067485Z ##[endgroup]
+2026-01-13T13:16:12.8072515Z [command]/usr/bin/git sparse-checkout disable
+2026-01-13T13:16:12.8256042Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-01-13T13:16:12.8281413Z ##[group]Checking out the ref
+2026-01-13T13:16:12.8285832Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-01-13T13:16:13.1558367Z Switched to a new branch 'main'
+2026-01-13T13:16:13.1559589Z branch 'main' set up to track 'origin/main'.
+2026-01-13T13:16:13.1585662Z ##[endgroup]
+2026-01-13T13:16:13.1631042Z [command]/usr/bin/git log -1 --format=%H
+2026-01-13T13:16:13.1656122Z f2d82319b52cb912e09a924beacacfa42b432e56
+2026-01-13T13:16:13.1892336Z ##[group]Run aws-actions/configure-aws-credentials@v4
+2026-01-13T13:16:13.1892727Z with:
+2026-01-13T13:16:13.1893100Z   aws-access-key-id: ***
+2026-01-13T13:16:13.1893642Z   aws-secret-access-key: ***
+2026-01-13T13:16:13.1893894Z   aws-region: ap-south-1
+2026-01-13T13:16:13.1894138Z   audience: sts.amazonaws.com
+2026-01-13T13:16:13.1894393Z   output-env-credentials: true
+2026-01-13T13:16:13.1894627Z env:
+2026-01-13T13:16:13.1894811Z   AWS_REGION: ap-south-1
+2026-01-13T13:16:13.1895037Z   ECR_REPOSITORY: cas-cann
+2026-01-13T13:16:13.1895262Z   ECS_CLUSTER: cas-cann26
+2026-01-13T13:16:13.1895533Z   ECS_SERVICE: cas-website-task-service-k7z3yzx3
+2026-01-13T13:16:13.1895825Z ##[endgroup]
+2026-01-13T13:16:14.3108973Z Proceeding with IAM user credentials
+2026-01-13T13:16:14.3273349Z ##[group]Run aws-actions/amazon-ecr-login@v2
+2026-01-13T13:16:14.3273670Z with:
+2026-01-13T13:16:14.3273880Z   mask-password: true
+2026-01-13T13:16:14.3274093Z   registry-type: private
+2026-01-13T13:16:14.3274305Z   skip-logout: false
+2026-01-13T13:16:14.3274485Z env:
+2026-01-13T13:16:14.3274655Z   AWS_REGION: ap-south-1
+2026-01-13T13:16:14.3274869Z   ECR_REPOSITORY: cas-cann
+2026-01-13T13:16:14.3275086Z   ECS_CLUSTER: cas-cann26
+2026-01-13T13:16:14.3275336Z   ECS_SERVICE: cas-website-task-service-k7z3yzx3
+2026-01-13T13:16:14.3275620Z   AWS_DEFAULT_REGION: ap-south-1
+2026-01-13T13:16:14.3275975Z   AWS_ACCESS_KEY_ID: ***
+2026-01-13T13:16:14.3276278Z   AWS_SECRET_ACCESS_KEY: ***
+2026-01-13T13:16:14.3276486Z ##[endgroup]
+2026-01-13T13:16:15.4707609Z Logging into registry 010526240249.dkr.ecr.ap-south-1.amazonaws.com
+2026-01-13T13:16:18.4862888Z ##[group]Run echo "Building Docker image..."
+2026-01-13T13:16:18.4863259Z [36;1mecho "Building Docker image..."[0m
+2026-01-13T13:16:18.4863658Z [36;1mdocker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .[0m
+2026-01-13T13:16:18.4864193Z [36;1mdocker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest[0m
+2026-01-13T13:16:18.4864747Z [36;1mecho "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT[0m
+2026-01-13T13:16:18.4899480Z shell: /usr/bin/bash -e {0}
+2026-01-13T13:16:18.4899734Z env:
+2026-01-13T13:16:18.4899915Z   AWS_REGION: ap-south-1
+2026-01-13T13:16:18.4900136Z   ECR_REPOSITORY: cas-cann
+2026-01-13T13:16:18.4900352Z   ECS_CLUSTER: cas-cann26
+2026-01-13T13:16:18.4900607Z   ECS_SERVICE: cas-website-task-service-k7z3yzx3
+2026-01-13T13:16:18.4900895Z   AWS_DEFAULT_REGION: ap-south-1
+2026-01-13T13:16:18.4901221Z   AWS_ACCESS_KEY_ID: ***
+2026-01-13T13:16:18.4901524Z   AWS_SECRET_ACCESS_KEY: ***
+2026-01-13T13:16:18.4901852Z   ECR_REGISTRY: 010526240249.dkr.ecr.ap-south-1.amazonaws.com
+2026-01-13T13:16:18.4902210Z   IMAGE_TAG: f2d82319b52cb912e09a924beacacfa42b432e56
+2026-01-13T13:16:18.4902479Z ##[endgroup]
+2026-01-13T13:16:18.4969083Z Building Docker image...
+2026-01-13T13:16:21.4112627Z #0 building with "default" instance using docker driver
+2026-01-13T13:16:21.4113062Z 
+2026-01-13T13:16:21.4113268Z #1 [internal] load build definition from Dockerfile
+2026-01-13T13:16:21.4113652Z #1 transferring dockerfile: 1.04kB done
+2026-01-13T13:16:21.4113907Z #1 DONE 0.0s
+2026-01-13T13:16:21.4114042Z 
+2026-01-13T13:16:21.4114188Z #2 [auth] library/node:pull token for registry-1.docker.io
+2026-01-13T13:16:21.5613845Z #2 DONE 0.0s
+2026-01-13T13:16:21.5614072Z 
+2026-01-13T13:16:21.5614296Z #3 [internal] load metadata for docker.io/library/node:20-alpine
+2026-01-13T13:16:21.8606523Z #3 DONE 0.5s
+2026-01-13T13:16:21.9794238Z 
+2026-01-13T13:16:21.9794777Z #4 [internal] load .dockerignore
+2026-01-13T13:16:21.9795470Z #4 transferring context: 2B done
+2026-01-13T13:16:21.9795842Z #4 DONE 0.0s
+2026-01-13T13:16:21.9796016Z 
+2026-01-13T13:16:21.9796630Z #5 [builder 1/6] FROM docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448
+2026-01-13T13:16:21.9798259Z #5 resolve docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448 done
+2026-01-13T13:16:21.9799393Z #5 extracting sha256:1074353eec0db2c1d81d5af2671e56e00cf5738486f5762609ea33d606f88612
+2026-01-13T13:16:22.0803501Z #5 sha256:e80b0510ba947015cacddea3d23dcdc761e399971c074a1bf32eea7e44510524 6.52kB / 6.52kB done
+2026-01-13T13:16:22.0807788Z #5 sha256:1074353eec0db2c1d81d5af2671e56e00cf5738486f5762609ea33d606f88612 3.86MB / 3.86MB 0.1s done
+2026-01-13T13:16:22.0810743Z #5 sha256:8d06ba6946d1f299d8f962e37906c77006df33d47050430a57f7893ec35af697 0B / 42.78MB 0.1s
+2026-01-13T13:16:22.0811834Z #5 sha256:cb3325e64457574e24f92246e3da3376946e473d636209e1390eac47b50b26a3 0B / 1.26MB 0.1s
+2026-01-13T13:16:22.0812929Z #5 sha256:fd1849a5c548bc65ee47a64498951bda5d40e87d08efe9dca69b5c8cdedc7a52 0B / 443B 0.1s
+2026-01-13T13:16:22.0813902Z #5 sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448 7.67kB / 7.67kB done
+2026-01-13T13:16:22.0814834Z #5 sha256:fcbb8f7d018707c656a4da2eea8a15f2893d2258093fea9ff2ea5ea1cba82112 1.72kB / 1.72kB done
+2026-01-13T13:16:22.1830402Z #5 sha256:8d06ba6946d1f299d8f962e37906c77006df33d47050430a57f7893ec35af697 25.17MB / 42.78MB 0.2s
+2026-01-13T13:16:22.1832822Z #5 sha256:cb3325e64457574e24f92246e3da3376946e473d636209e1390eac47b50b26a3 1.26MB / 1.26MB 0.1s done
+2026-01-13T13:16:22.1834055Z #5 sha256:fd1849a5c548bc65ee47a64498951bda5d40e87d08efe9dca69b5c8cdedc7a52 443B / 443B 0.2s done
+2026-01-13T13:16:22.2858841Z #5 extracting sha256:1074353eec0db2c1d81d5af2671e56e00cf5738486f5762609ea33d606f88612 0.2s done
+2026-01-13T13:16:22.2860039Z #5 sha256:8d06ba6946d1f299d8f962e37906c77006df33d47050430a57f7893ec35af697 42.78MB / 42.78MB 0.3s done
+2026-01-13T13:16:22.3887475Z #5 extracting sha256:8d06ba6946d1f299d8f962e37906c77006df33d47050430a57f7893ec35af697
+2026-01-13T13:16:22.4970365Z #5 ...
+2026-01-13T13:16:22.4970836Z 
+2026-01-13T13:16:22.4971327Z #6 [internal] load build context
+2026-01-13T13:16:22.4971788Z #6 transferring context: 134.80MB 0.5s done
+2026-01-13T13:16:22.4972233Z #6 DONE 0.5s
+2026-01-13T13:16:22.4972349Z 
+2026-01-13T13:16:22.4972902Z #5 [builder 1/6] FROM docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448
+2026-01-13T13:16:23.6802683Z #5 extracting sha256:8d06ba6946d1f299d8f962e37906c77006df33d47050430a57f7893ec35af697 1.2s done
+2026-01-13T13:16:24.5895591Z #5 extracting sha256:cb3325e64457574e24f92246e3da3376946e473d636209e1390eac47b50b26a3
+2026-01-13T13:16:24.7008318Z #5 extracting sha256:cb3325e64457574e24f92246e3da3376946e473d636209e1390eac47b50b26a3 0.0s done
+2026-01-13T13:16:24.7009431Z #5 extracting sha256:fd1849a5c548bc65ee47a64498951bda5d40e87d08efe9dca69b5c8cdedc7a52 done
+2026-01-13T13:16:24.7010204Z #5 DONE 2.8s
+2026-01-13T13:16:24.7010381Z 
+2026-01-13T13:16:24.7010521Z #7 [builder 2/6] WORKDIR /app
+2026-01-13T13:16:24.7010893Z #7 DONE 0.0s
+2026-01-13T13:16:24.7011061Z 
+2026-01-13T13:16:24.7011256Z #8 [builder 3/6] COPY package*.json ./
+2026-01-13T13:16:24.7011674Z #8 DONE 0.0s
+2026-01-13T13:16:24.7012210Z 
+2026-01-13T13:16:24.7012925Z #9 [production 2/6] RUN apk add --no-cache wget
+2026-01-13T13:16:25.1770392Z #9 0.522 (1/4) Installing libunistring (1.4.1-r0)
+2026-01-13T13:16:25.2908345Z #9 0.537 (2/4) Installing libidn2 (2.3.8-r0)
+2026-01-13T13:16:25.2909277Z #9 0.542 (3/4) Installing pcre2 (10.47-r0)
+2026-01-13T13:16:25.2931183Z #9 0.550 (4/4) Installing wget (1.25.0-r2)
+2026-01-13T13:16:25.2935916Z #9 0.557 Executing busybox-1.37.0-r30.trigger
+2026-01-13T13:16:25.2936405Z #9 0.566 OK: 14.0 MiB in 22 packages
+2026-01-13T13:16:25.2936961Z #9 DONE 0.6s
+2026-01-13T13:16:25.2937131Z 
+2026-01-13T13:16:25.2937274Z #10 [production 3/6] WORKDIR /app
+2026-01-13T13:16:25.2937671Z #10 DONE 0.0s
+2026-01-13T13:16:25.2937867Z 
+2026-01-13T13:16:25.2938012Z #11 [builder 4/6] RUN npm ci
+2026-01-13T13:16:25.4592388Z #11 ...
+2026-01-13T13:16:25.4592631Z 
+2026-01-13T13:16:25.4592822Z #12 [production 4/6] COPY package*.json ./
+2026-01-13T13:16:25.4593305Z #12 DONE 0.0s
+2026-01-13T13:16:25.6098581Z 
+2026-01-13T13:16:25.6099699Z #13 [production 5/6] RUN npm ci --omit=dev
+2026-01-13T13:16:32.0692655Z #13 ...
+2026-01-13T13:16:32.0692941Z 
+2026-01-13T13:16:32.0693088Z #11 [builder 4/6] RUN npm ci
+2026-01-13T13:16:32.0693835Z #11 7.365 npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+2026-01-13T13:16:32.2656375Z #11 7.412 npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+2026-01-13T13:16:46.2360696Z #11 ...
+2026-01-13T13:16:46.2361108Z 
+2026-01-13T13:16:46.2362527Z #13 [production 5/6] RUN npm ci --omit=dev
+2026-01-13T13:16:46.2363305Z #13 20.93 
+2026-01-13T13:16:46.2364081Z #13 20.93 added 597 packages, and audited 598 packages in 21s
+2026-01-13T13:16:46.4093544Z #13 20.93 
+2026-01-13T13:16:46.4094391Z #13 20.93 62 packages are looking for funding
+2026-01-13T13:16:46.4096182Z #13 20.93   run `npm fund` for details
+2026-01-13T13:16:46.4096530Z #13 20.95 
+2026-01-13T13:16:46.4124016Z #13 20.95 11 vulnerabilities (3 low, 2 moderate, 6 high)
+2026-01-13T13:16:46.4124525Z #13 20.95 
+2026-01-13T13:16:46.4124911Z #13 20.95 To address issues that do not require attention, run:
+2026-01-13T13:16:46.4125422Z #13 20.95   npm audit fix
+2026-01-13T13:16:46.4125743Z #13 20.95 
+2026-01-13T13:16:46.4126095Z #13 20.95 Some issues need review, and may require choosing
+2026-01-13T13:16:46.4126615Z #13 20.95 a different dependency.
+2026-01-13T13:16:46.4127270Z #13 20.95 
+2026-01-13T13:16:46.4127563Z #13 20.95 Run `npm audit` for details.
+2026-01-13T13:16:46.4127942Z #13 20.95 npm notice
+2026-01-13T13:16:46.4128478Z #13 20.95 npm notice New major version of npm available! 10.8.2 -> 11.7.0
+2026-01-13T13:16:46.4129258Z #13 20.95 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.7.0
+2026-01-13T13:16:46.4130333Z #13 20.95 npm notice To update run: npm install -g npm@11.7.0
+2026-01-13T13:16:46.4130835Z #13 20.95 npm notice
+2026-01-13T13:16:49.4793984Z #13 DONE 24.2s
+2026-01-13T13:16:49.4794280Z 
+2026-01-13T13:16:49.4794626Z #11 [builder 4/6] RUN npm ci
+2026-01-13T13:16:49.4795026Z #11 23.15 
+2026-01-13T13:16:49.4795404Z #11 23.15 added 690 packages, and audited 691 packages in 23s
+2026-01-13T13:16:49.4795918Z #11 23.15 
+2026-01-13T13:16:49.4796255Z #11 23.15 74 packages are looking for funding
+2026-01-13T13:16:49.4797256Z #11 23.15   run `npm fund` for details
+2026-01-13T13:16:49.4797856Z #11 23.21 
+2026-01-13T13:16:49.4798242Z #11 23.21 18 vulnerabilities (3 low, 9 moderate, 6 high)
+2026-01-13T13:16:49.4798723Z #11 23.21 
+2026-01-13T13:16:49.4799128Z #11 23.21 To address issues that do not require attention, run:
+2026-01-13T13:16:49.4799657Z #11 23.21   npm audit fix
+2026-01-13T13:16:49.4799972Z #11 23.21 
+2026-01-13T13:16:49.4800422Z #11 23.21 To address all issues possible (including breaking changes), run:
+2026-01-13T13:16:49.4801003Z #11 23.21   npm audit fix --force
+2026-01-13T13:16:49.4801230Z #11 23.21 
+2026-01-13T13:16:49.4801460Z #11 23.21 Some issues need review, and may require choosing
+2026-01-13T13:16:49.4801934Z #11 23.21 a different dependency.
+2026-01-13T13:16:49.4802245Z #11 23.21 
+2026-01-13T13:16:49.4802422Z #11 23.21 Run `npm audit` for details.
+2026-01-13T13:16:49.4802654Z #11 23.21 npm notice
+2026-01-13T13:16:49.4803017Z #11 23.21 npm notice New major version of npm available! 10.8.2 -> 11.7.0
+2026-01-13T13:16:49.4803469Z #11 23.21 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.7.0
+2026-01-13T13:16:49.4803898Z #11 23.21 npm notice To update run: npm install -g npm@11.7.0
+2026-01-13T13:16:49.4804298Z #11 23.21 npm notice
+2026-01-13T13:16:49.6315243Z #11 DONE 24.8s
+2026-01-13T13:16:49.6315431Z 
+2026-01-13T13:16:49.6315535Z #14 [builder 5/6] COPY . .
+2026-01-13T13:16:49.7885085Z #14 DONE 0.3s
+2026-01-13T13:16:49.9398213Z 
+2026-01-13T13:16:49.9398700Z #15 [builder 6/6] RUN npm run build
+2026-01-13T13:16:50.0475316Z #15 0.258 
+2026-01-13T13:16:50.0475710Z #15 0.258 > rest-express@1.0.0 build
+2026-01-13T13:16:50.0476667Z #15 0.258 > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2026-01-13T13:16:50.0478064Z #15 0.258 
+2026-01-13T13:16:50.2700994Z #15 0.481 vite v5.4.14 building for production...
+2026-01-13T13:16:50.4762588Z #15 0.536 transforming...
+2026-01-13T13:16:51.0413210Z #15 1.252 Browserslist: browsers data (caniuse-lite) is 15 months old. Please run:
+2026-01-13T13:16:51.0416216Z #15 1.252   npx update-browserslist-db@latest
+2026-01-13T13:16:51.0417326Z #15 1.252   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2026-01-13T13:16:57.2901852Z #15 7.501 ✓ 2239 modules transformed.
+2026-01-13T13:16:57.6647125Z #15 7.875 rendering chunks...
+2026-01-13T13:16:57.9389591Z #15 8.150 computing gzip size...
+2026-01-13T13:16:58.0399151Z #15 8.186 ../dist/public/index.html                                                                             1.12 kB │ gzip:   0.60 kB
+2026-01-13T13:16:58.0402250Z #15 8.186 ../dist/public/assets/l_cas_vert_ko_1753253840024-DiLEgexn.png                                       29.88 kB
+2026-01-13T13:16:58.0403453Z #15 8.186 ../dist/public/assets/l_cas_vert_rgb_1753253116732-DLuKjovW.png                                      40.40 kB
+2026-01-13T13:16:58.0404640Z #15 8.186 ../dist/public/assets/shutterstock_2447944539_1753254859154-DrWh2H6M.jpg                            245.51 kB
+2026-01-13T13:16:58.0405907Z #15 8.186 ../dist/public/assets/CANN-RGB-dark-theme_1756219144378-DhmF-rl6.png                                348.99 kB
+2026-01-13T13:16:58.0407384Z #15 8.186 ../dist/public/assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238-0jSq_6-q.jpg    617.84 kB
+2026-01-13T13:16:58.0408642Z #15 8.186 ../dist/public/assets/DSC02843_1750141211187-D4kklFUB.jpg                                         4,396.42 kB
+2026-01-13T13:16:58.0410365Z #15 8.186 ../dist/public/assets/DSC02841_1750068895454-Dd2I2wx3.jpg                                         5,804.19 kB
+2026-01-13T13:16:58.0411624Z #15 8.186 ../dist/public/assets/DSC05873_1750141133352-DLB47JpD.jpg                                         5,890.07 kB
+2026-01-13T13:16:58.0412814Z #15 8.186 ../dist/public/assets/DSC02826_1750068895453-BTwMwqmK.jpg                                         5,989.91 kB
+2026-01-13T13:16:58.0414076Z #15 8.186 ../dist/public/assets/Living-with-cardiac-amyloidosis_1763624816977-DByzpZ2I.pdf                  9,781.88 kB
+2026-01-13T13:16:58.0415584Z #15 8.187 ../dist/public/assets/index-BIHn4fJv.css                                                            202.19 kB │ gzip:  27.83 kB
+2026-01-13T13:16:58.0417393Z #15 8.187 ../dist/public/assets/DSC02841_1750068895454-BYg2jDAn.js                                              0.07 kB │ gzip:   0.09 kB
+2026-01-13T13:16:58.0418932Z #15 8.187 ../dist/public/assets/DSC02826_1750068895453-CB8Tk82m.js                                              0.07 kB │ gzip:   0.09 kB
+2026-01-13T13:16:58.0420362Z #15 8.187 ../dist/public/assets/utils-km2FGkQ4.js                                                               0.09 kB │ gzip:   0.10 kB
+2026-01-13T13:16:58.0421745Z #15 8.187 ../dist/public/assets/index-DEZjVDRS.js                                                               0.14 kB │ gzip:   0.14 kB
+2026-01-13T13:16:58.0423131Z #15 8.187 ../dist/public/assets/index-BwryC7u0.js                                                               0.22 kB │ gzip:   0.20 kB
+2026-01-13T13:16:58.0424506Z #15 8.187 ../dist/public/assets/index-DrIrR0OO.js                                                               0.23 kB │ gzip:   0.17 kB
+2026-01-13T13:16:58.0425883Z #15 8.187 ../dist/public/assets/check-zTcx7Kno.js                                                               0.29 kB │ gzip:   0.24 kB
+2026-01-13T13:16:58.0431428Z #15 8.187 ../dist/public/assets/chevron-up-Cst3-M6K.js                                                          0.30 kB │ gzip:   0.24 kB
+2026-01-13T13:16:58.0432582Z #15 8.187 ../dist/public/assets/filter-Bx7cC-Yj.js                                                              0.33 kB │ gzip:   0.26 kB
+2026-01-13T13:16:58.0433547Z #15 8.187 ../dist/public/assets/arrow-right-CQbIA9_l.js                                                         0.33 kB │ gzip:   0.26 kB
+2026-01-13T13:16:58.0434530Z #15 8.187 ../dist/public/assets/arrow-left-CNIFC00n.js                                                          0.33 kB │ gzip:   0.26 kB
+2026-01-13T13:16:58.0435442Z #15 8.187 ../dist/public/assets/search-BUa_h5VL.js                                                              0.34 kB │ gzip:   0.27 kB
+2026-01-13T13:16:58.0436648Z #15 8.187 ../dist/public/assets/circle-check-CIuRXCNq.js                                                        0.34 kB │ gzip:   0.27 kB
+2026-01-13T13:16:58.0438043Z #15 8.187 ../dist/public/assets/clock-BEttTVK0.js                                                               0.35 kB │ gzip:   0.27 kB
+2026-01-13T13:16:58.0438978Z #15 8.187 ../dist/public/assets/circle-check-big-Co_1ekTC.js                                                    0.36 kB │ gzip:   0.28 kB
+2026-01-13T13:16:58.0439900Z #15 8.187 ../dist/public/assets/user-hkp36t6b.js                                                                0.37 kB │ gzip:   0.28 kB
+2026-01-13T13:16:58.0440772Z #15 8.187 ../dist/public/assets/circle-x-CZ6NiJLH.js                                                            0.37 kB │ gzip:   0.28 kB
+2026-01-13T13:16:58.0441646Z #15 8.187 ../dist/public/assets/star-ohtqKA7C.js                                                                0.38 kB │ gzip:   0.29 kB
+2026-01-13T13:16:58.0442533Z #15 8.187 ../dist/public/assets/target-GCESGafT.js                                                              0.39 kB │ gzip:   0.26 kB
+2026-01-13T13:16:58.0443404Z #15 8.188 ../dist/public/assets/copy-_bRgMP4D.js                                                                0.40 kB │ gzip:   0.31 kB
+2026-01-13T13:16:58.0444486Z #15 8.188 ../dist/public/assets/activity-BefC0UbS.js                                                            0.40 kB │ gzip:   0.30 kB
+2026-01-13T13:16:58.0445436Z #15 8.188 ../dist/public/assets/circle-alert-_ramq8w-.js                                                        0.42 kB │ gzip:   0.29 kB
+2026-01-13T13:16:58.0446388Z #15 8.188 ../dist/public/assets/external-link-DBV4_7rc.js                                                       0.42 kB │ gzip:   0.30 kB
+2026-01-13T13:16:58.0447781Z #15 8.188 ../dist/public/assets/user-check-D-1aDCYw.js                                                          0.42 kB │ gzip:   0.32 kB
+2026-01-13T13:16:58.0448685Z #15 8.188 ../dist/public/assets/map-pin-DXsGWtWX.js                                                             0.42 kB │ gzip:   0.32 kB
+2026-01-13T13:16:58.0449598Z #15 8.188 ../dist/public/assets/upload-GB7YfKJX.js                                                              0.43 kB │ gzip:   0.32 kB
+2026-01-13T13:16:58.0450519Z #15 8.188 ../dist/public/assets/download-kvjPuU9b.js                                                            0.43 kB │ gzip:   0.32 kB
+2026-01-13T13:16:58.0451522Z #15 8.188 ../dist/public/assets/triangle-alert-D3CqmlvZ.js                                                      0.43 kB │ gzip:   0.31 kB
+2026-01-13T13:16:58.0452414Z #15 8.188 ../dist/public/assets/shield-DQPOjGFZ.js                                                              0.44 kB │ gzip:   0.33 kB
+2026-01-13T13:16:58.0453279Z #15 8.188 ../dist/public/assets/award-BckYwj4G.js                                                               0.44 kB │ gzip:   0.33 kB
+2026-01-13T13:16:58.0454134Z #15 8.188 ../dist/public/assets/send-J04ef1Pd.js                                                                0.46 kB │ gzip:   0.33 kB
+2026-01-13T13:16:58.0455010Z #15 8.188 ../dist/public/assets/refresh-cw-d_iKni_b.js                                                          0.49 kB │ gzip:   0.32 kB
+2026-01-13T13:16:58.0455897Z #15 8.188 ../dist/public/assets/textarea-CoYjDayr.js                                                            0.50 kB │ gzip:   0.32 kB
+2026-01-13T13:16:58.0457008Z #15 8.188 ../dist/public/assets/graduation-cap-jIEHPfgJ.js                                                      0.50 kB │ gzip:   0.35 kB
+2026-01-13T13:16:58.0457928Z #15 8.188 ../dist/public/assets/stethoscope-BbLXSGk7.js                                                         0.51 kB │ gzip:   0.34 kB
+2026-01-13T13:16:58.0458832Z #15 8.188 ../dist/public/assets/trash-2-BpdqPw2L.js                                                             0.53 kB │ gzip:   0.35 kB
+2026-01-13T13:16:58.0459982Z #15 8.188 ../dist/public/assets/droplets-B5DuC41i.js                                                            0.54 kB │ gzip:   0.38 kB
+2026-01-13T13:16:58.0460875Z #15 8.188 ../dist/public/assets/microscope-BfcK46wQ.js                                                          0.55 kB │ gzip:   0.35 kB
+2026-01-13T13:16:58.0461759Z #15 8.188 ../dist/public/assets/network-BXzyQOHP.js                                                             0.55 kB │ gzip:   0.34 kB
+2026-01-13T13:16:58.0463183Z #15 8.188 ../dist/public/assets/label-nMG8HEVr.js                                                               0.55 kB │ gzip:   0.37 kB
+2026-01-13T13:16:58.0464345Z #15 8.188 ../dist/public/assets/phone-BQ8IbVzb.js                                                               0.56 kB │ gzip:   0.36 kB
+2026-01-13T13:16:58.0465768Z #15 8.188 ../dist/public/assets/input-CkGOxcWi.js                                                               0.58 kB │ gzip:   0.35 kB
+2026-01-13T13:16:58.0467336Z #15 8.188 ../dist/public/assets/building-2-DgNfDagX.js                                                          0.61 kB │ gzip:   0.35 kB
+2026-01-13T13:16:58.0468720Z #15 8.188 ../dist/public/assets/not-found-BMCTBuSP.js                                                           0.67 kB │ gzip:   0.38 kB
+2026-01-13T13:16:58.0470318Z #15 8.188 ../dist/public/assets/separator-DaGgPK_Y.js                                                           0.67 kB │ gzip:   0.40 kB
+2026-01-13T13:16:58.0471720Z #15 8.188 ../dist/public/assets/sparkles-hgRjg_i0.js                                                            0.68 kB │ gzip:   0.40 kB
+2026-01-13T13:16:58.0473054Z #15 8.188 ../dist/public/assets/badge-CjkSlAj0.js                                                               0.71 kB │ gzip:   0.37 kB
+2026-01-13T13:16:58.0474415Z #15 8.188 ../dist/public/assets/brain-D5DS-qfH.js                                                               0.90 kB │ gzip:   0.46 kB
+2026-01-13T13:16:58.0475777Z #15 8.188 ../dist/public/assets/alert-C5Y-B5Ly.js                                                               0.91 kB │ gzip:   0.47 kB
+2026-01-13T13:16:58.0477341Z #15 8.188 ../dist/public/assets/card-a-xUvlLQ.js                                                                0.99 kB │ gzip:   0.37 kB
+2026-01-13T13:16:58.0478861Z #15 8.188 ../dist/public/assets/ParallaxBackground-Cx0H6RIo.js                                                  1.23 kB │ gzip:   0.65 kB
+2026-01-13T13:16:58.0480343Z #15 8.188 ../dist/public/assets/button-D3BW_qDh.js                                                              1.23 kB │ gzip:   0.60 kB
+2026-01-13T13:16:58.0481709Z #15 8.188 ../dist/public/assets/form-BBFFMGOc.js                                                                1.74 kB │ gzip:   0.76 kB
+2026-01-13T13:16:58.0483075Z #15 8.188 ../dist/public/assets/dialog-Bj6zgqJU.js                                                              2.04 kB │ gzip:   0.82 kB
+2026-01-13T13:16:58.0484437Z #15 8.189 ../dist/public/assets/checkbox-CQS2-1Tc.js                                                            2.83 kB │ gzip:   1.41 kB
+2026-01-13T13:16:58.0485886Z #15 8.189 ../dist/public/assets/useMutation-BwbKJWGY.js                                                         2.91 kB │ gzip:   1.23 kB
+2026-01-13T13:16:58.0487525Z #15 8.189 ../dist/public/assets/tabs-jfW0t4WI.js                                                                3.27 kB │ gzip:   1.37 kB
+2026-01-13T13:16:58.0488935Z #15 8.189 ../dist/public/assets/index-DByUx04A.js                                                               3.40 kB │ gzip:   1.54 kB
+2026-01-13T13:16:58.0490350Z #15 8.189 ../dist/public/assets/radio-group-CYI-S31j.js                                                         4.18 kB │ gzip:   1.93 kB
+2026-01-13T13:16:58.0491756Z #15 8.189 ../dist/public/assets/index-DatJhU-9.js                                                               5.28 kB │ gzip:   2.02 kB
+2026-01-13T13:16:58.0493229Z #15 8.189 ../dist/public/assets/CommandDashboard-B3MLUqbZ.js                                                    7.55 kB │ gzip:   2.23 kB
+2026-01-13T13:16:58.0494998Z #15 8.189 ../dist/public/assets/Partnerships-Bh7POgxW.js                                                        7.58 kB │ gzip:   2.47 kB
+2026-01-13T13:16:58.0496462Z #15 8.189 ../dist/public/assets/JournalClub-DGYtaCA-.js                                                         7.83 kB │ gzip:   2.19 kB
+2026-01-13T13:16:58.0498124Z #15 8.189 ../dist/public/assets/Contact-CBHh4inz.js                                                             8.32 kB │ gzip:   2.59 kB
+2026-01-13T13:16:58.0499580Z #15 8.189 ../dist/public/assets/DataSyncAdmin-D38kwe6r.js                                                       9.73 kB │ gzip:   3.20 kB
+2026-01-13T13:16:58.0501065Z #15 8.189 ../dist/public/assets/useQuery-dsJ3EVBv.js                                                           10.34 kB │ gzip:   3.66 kB
+2026-01-13T13:16:58.0502559Z #15 8.189 ../dist/public/assets/CANNMembershipForm-BszvA3z8.js                                                 12.65 kB │ gzip:   3.35 kB
+2026-01-13T13:16:58.0504103Z #15 8.189 ../dist/public/assets/Governance-BiMCgsfu.js                                                         13.82 kB │ gzip:   4.15 kB
+2026-01-13T13:16:58.0505504Z #15 8.189 ../dist/public/assets/CANNTownhallRegistration-DHGmx6bQ.js                                           14.95 kB │ gzip:   3.78 kB
+2026-01-13T13:16:58.0506561Z #15 8.189 ../dist/public/assets/ALect2Amyloidosis-Dqxv8Ycd.js                                                  15.19 kB │ gzip:   3.41 kB
+2026-01-13T13:16:58.0508126Z #15 8.189 ../dist/public/assets/AAAmyloidosis-C401VvHI.js                                                      15.22 kB │ gzip:   3.44 kB
+2026-01-13T13:16:58.0509638Z #15 8.189 ../dist/public/assets/Community-D3H_9fZU.js                                                          16.01 kB │ gzip:   3.93 kB
+2026-01-13T13:16:58.0510744Z #15 8.189 ../dist/public/assets/Combination-LFyxmHM4.js                                                        16.39 kB │ gzip:   6.17 kB
+2026-01-13T13:16:58.0512385Z #15 8.189 ../dist/public/assets/OtherAmyloidosis-DhOYaybx.js                                                   16.69 kB │ gzip:   3.73 kB
+2026-01-13T13:16:58.0513858Z #15 8.189 ../dist/public/assets/Events-BH3hJxji.js                                                             16.92 kB │ gzip:   4.18 kB
+2026-01-13T13:16:58.0514651Z #15 8.189 ../dist/public/assets/Resources-ZA_OXAMw.js                                                          17.23 kB │ gzip:   4.88 kB
+2026-01-13T13:16:58.0515415Z #15 8.189 ../dist/public/assets/AboutCANN-D-5QqHji.js                                                          18.18 kB │ gzip:   4.26 kB
+2026-01-13T13:16:58.0516181Z #15 8.189 ../dist/public/assets/EventsDownload-B71H3EDN.js                                                     18.66 kB │ gzip:   5.29 kB
+2026-01-13T13:16:58.0517371Z #15 8.189 ../dist/public/assets/ALAmyloidosis-Ds-yyrzA.js                                                      18.72 kB │ gzip:   4.10 kB
+2026-01-13T13:16:58.0518694Z #15 8.189 ../dist/public/assets/ATTRAmyloidosis-CvcIGs89.js                                                    18.88 kB │ gzip:   3.99 kB
+2026-01-13T13:16:58.0520038Z #15 8.189 ../dist/public/assets/GetInvolved-DjirAZJe.js                                                        19.81 kB │ gzip:   4.60 kB
+2026-01-13T13:16:58.0521416Z #15 8.189 ../dist/public/assets/About-fXK2utuf.js                                                              20.03 kB │ gzip:   3.74 kB
+2026-01-13T13:16:58.0522934Z #15 8.189 ../dist/public/assets/AccessibilityStatement-D0pE5FF-.js                                             20.04 kB │ gzip:   5.59 kB
+2026-01-13T13:16:58.0524589Z #15 8.189 ../dist/public/assets/ContributorPortal-CIPXiED_.js                                                  21.25 kB │ gzip:   5.68 kB
+2026-01-13T13:16:58.0526046Z #15 8.189 ../dist/public/assets/select-BbcGO8ry.js                                                             21.26 kB │ gzip:   7.37 kB
+2026-01-13T13:16:58.0528025Z #15 8.189 ../dist/public/assets/CANNResources-0DiMicXD.js                                                      22.89 kB │ gzip:   5.59 kB
+2026-01-13T13:16:58.0529469Z #15 8.189 ../dist/public/assets/ResourceModeration-D8UTgSoF.js                                                 24.88 kB │ gzip:   6.26 kB
+2026-01-13T13:16:58.0530926Z #15 8.189 ../dist/public/assets/TestForms-QW9CyM3o.js                                                          28.89 kB │ gzip:   6.28 kB
+2026-01-13T13:16:58.0532420Z #15 8.190 ../dist/public/assets/UploadResource-f_iPprzi.js                                                     28.95 kB │ gzip:   6.53 kB
+2026-01-13T13:16:58.0533881Z #15 8.190 ../dist/public/assets/AboutAmyloidosis-e5h51Znt.js                                                   31.39 kB │ gzip:   7.08 kB
+2026-01-13T13:16:58.0535369Z #15 8.190 ../dist/public/assets/Home-CtFy1f26.js                                                               31.62 kB │ gzip:   6.99 kB
+2026-01-13T13:16:58.0537019Z #15 8.190 ../dist/public/assets/JoinCAS-B5uuCdIc.js                                                            68.31 kB │ gzip:  18.13 kB
+2026-01-13T13:16:58.0538465Z #15 8.190 ../dist/public/assets/index-Da_SvA_r.js                                                              87.23 kB │ gzip:  24.23 kB
+2026-01-13T13:16:58.0540166Z #15 8.190 ../dist/public/assets/Directory-Cl-Ow1uY.js                                                         268.52 kB │ gzip: 102.66 kB
+2026-01-13T13:16:58.0541672Z #15 8.190 ../dist/public/assets/index-47E6jsxG.js                                                             487.44 kB │ gzip: 152.32 kB
+2026-01-13T13:16:58.0542617Z #15 8.190 ✓ built in 7.68s
+2026-01-13T13:16:58.0543317Z #15 8.250 ✘ [ERROR] Could not resolve "./migrations/fix-auto-create-fields"
+2026-01-13T13:16:58.0543928Z #15 8.250 
+2026-01-13T13:16:58.0544244Z #15 8.250     server/index.ts:64:51:
+2026-01-13T13:16:58.0545082Z #15 8.250       64 │ ...ateFields } = await import("./migrations/fix-auto-create-fields");
+2026-01-13T13:16:58.0546079Z #15 8.250          ╵                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2026-01-13T13:16:58.0546618Z #15 8.250 
+2026-01-13T13:16:58.2020460Z #15 8.250 ✘ [ERROR] Could not resolve "./form-config-engine"
+2026-01-13T13:16:58.2021099Z #15 8.250 
+2026-01-13T13:16:58.2021491Z #15 8.250     server/index.ts:80:44:
+2026-01-13T13:16:58.2022285Z #15 8.250       80 │   const { formConfigEngine } = await import("./form-config-engine");
+2026-01-13T13:16:58.2023122Z #15 8.250          ╵                                             ~~~~~~~~~~~~~~~~~~~~~~
+2026-01-13T13:16:58.2023627Z #15 8.250 
+2026-01-13T13:16:58.2023882Z #15 8.262 2 errors
+2026-01-13T13:16:58.2489321Z #15 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+2026-01-13T13:16:58.2749429Z ------
+2026-01-13T13:16:58.2750129Z  > [builder 6/6] RUN npm run build:
+2026-01-13T13:16:58.2751176Z 8.250       64 │ ...ateFields } = await import("./migrations/fix-auto-create-fields");
+2026-01-13T13:16:58.2752100Z 8.250          ╵                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2026-01-13T13:16:58.2752573Z 8.250 
+2026-01-13T13:16:58.2753062Z 8.250 ✘ [ERROR] Could not resolve "./form-config-engine"
+2026-01-13T13:16:58.2753558Z 8.250 
+2026-01-13T13:16:58.2753859Z 8.250     server/index.ts:80:44:
+2026-01-13T13:16:58.2754607Z 8.250       80 │   const { formConfigEngine } = await import("./form-config-engine");
+2026-01-13T13:16:58.2755469Z 8.250          ╵                                             ~~~~~~~~~~~~~~~~~~~~~~
+2026-01-13T13:16:58.2755934Z 8.250 
+2026-01-13T13:16:58.2756370Z 8.262 2 errors
+2026-01-13T13:16:58.2756669Z ------
+2026-01-13T13:16:58.2764037Z Dockerfile:14
+2026-01-13T13:16:58.2766151Z --------------------
+2026-01-13T13:16:58.2768027Z   12 |     
+2026-01-13T13:16:58.2768356Z   13 |     # Build frontend and bundle server
+2026-01-13T13:16:58.2768800Z   14 | >>> RUN npm run build
+2026-01-13T13:16:58.2769133Z   15 |     
+2026-01-13T13:16:58.2771965Z   16 |     # Stage 2: Production runtime
+2026-01-13T13:16:58.2772354Z --------------------
+2026-01-13T13:16:58.2773086Z ERROR: failed to build: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+2026-01-13T13:16:58.2836171Z ##[error]Process completed with exit code 1.
+2026-01-13T13:16:58.2945800Z Post job cleanup.
+2026-01-13T13:16:58.3362480Z Logging out of registry 010526240249.dkr.ecr.ap-south-1.amazonaws.com
+2026-01-13T13:16:58.3672971Z Post job cleanup.
+2026-01-13T13:16:58.5002444Z Post job cleanup.
+2026-01-13T13:16:58.5976140Z [command]/usr/bin/git version
+2026-01-13T13:16:58.6012584Z git version 2.52.0
+2026-01-13T13:16:58.6054987Z Temporarily overriding HOME='/home/runner/work/_temp/d946a4a3-70a7-402f-ab92-6244107c58e2' before making global git config changes
+2026-01-13T13:16:58.6055957Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-13T13:16:58.6060788Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/CAS-CANN/CAS-CANN
+2026-01-13T13:16:58.6095739Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-13T13:16:58.6128053Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-13T13:16:58.6396638Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-13T13:16:58.6417149Z http.https://github.com/.extraheader
+2026-01-13T13:16:58.6429994Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-01-13T13:16:58.6460657Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-13T13:16:58.6679682Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-13T13:16:58.6710625Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-13T13:16:58.7032948Z Cleaning up orphan processes

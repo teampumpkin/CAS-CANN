@@ -1,7 +1,6 @@
-import { FieldMapping, InsertFieldMapping, FormConfiguration, SubmitFieldConfig, SubmitFieldsMap } from "@shared/schema";
+import { FieldMapping, InsertFieldMapping } from "@shared/schema";
 import { oauthService } from "./oauth-service";
 import { dedicatedTokenManager } from "./dedicated-token-manager";
-import { storage } from "./storage";
 
 // Zoho CRM API types
 export interface ZohoField {
@@ -302,17 +301,11 @@ export class ZohoCRMService {
         throw new Error("Record data cannot be empty");
       }
 
-      // DEBUG: Log the exact payload being sent to Zoho
-      console.log(`[Zoho CRM DEBUG] Creating record with data:`, JSON.stringify(recordData, null, 2));
-
       const response = await this.makeRequest<ZohoApiResponse<ZohoRecord>>(
         `/${moduleName}`,
         "POST",
         { data: [recordData] }
       );
-
-      // DEBUG: Log full API response
-      console.log(`[Zoho CRM DEBUG] Full API response:`, JSON.stringify(response, null, 2));
 
       if (response.data && response.data.length > 0) {
         const createdRecord = response.data[0];
@@ -873,85 +866,6 @@ export class ZohoCRMService {
     }
 
     return zohoData;
-  }
-
-  /**
-   * Format field data for Zoho CRM using form configuration
-   * Delegates to FormConfigEngine for consistent filtering, then applies type formatting
-   * Returns both formatted data and diagnostics (excluded fields)
-   */
-  async formatFieldDataForZohoWithConfig(
-    formData: Record<string, any>,
-    formConfig: FormConfiguration
-  ): Promise<{ zohoData: Record<string, any>; excludedFields: string[]; leadSource: string }> {
-    // Import formConfigEngine dynamically to avoid circular dependency
-    const { formConfigEngine } = await import("./form-config-engine");
-    
-    // Delegate filtering to FormConfigEngine for consistent strictMapping behavior
-    const filtered = formConfigEngine.filterFormDataForZoho(formData, formConfig);
-    const submitFields = (formConfig.submitFields || {}) as SubmitFieldsMap;
-    const fieldMappings = (formConfig.fieldMappings || {}) as Record<string, string>;
-    const configuredFieldCount = Object.keys(submitFields).length + Object.keys(fieldMappings).length;
-    
-    console.log(`[Zoho CRM] Formatting data with config for form "${formConfig.formName}"`, {
-      strictMapping: formConfig.strictMapping ?? false,
-      configuredFields: configuredFieldCount,
-      inputFields: Object.keys(formData).length,
-      filteredFields: Object.keys(filtered.filteredData).length,
-      excludedFields: filtered.excludedFields.length
-    });
-
-    // Apply type formatting to filtered data
-    const zohoData: Record<string, any> = {};
-    
-    // Get field metadata for looking up actual Zoho field types
-    const fieldMetadataCache = await storage.getFieldMetadataCache({ zohoModule: formConfig.zohoModule || "Leads" });
-    const metadataByApiName = new Map(fieldMetadataCache.map(f => [f.fieldApiName, f]));
-    
-    for (const mapping of filtered.mappedFields) {
-      const { formField, zohoField, value } = mapping;
-      if (value === null || value === undefined) continue;
-      
-      // Get field config for type info - prefer submitFields, then metadata cache, then detection
-      const fieldConfig = submitFields[formField];
-      const zohoFieldMeta = metadataByApiName.get(zohoField);
-      
-      // Use actual Zoho field type from metadata if available
-      let fieldType: string;
-      let maxLength: number;
-      
-      if (fieldConfig?.fieldType) {
-        fieldType = fieldConfig.fieldType;
-        maxLength = fieldConfig.maxLength || 255;
-      } else if (zohoFieldMeta) {
-        fieldType = zohoFieldMeta.dataType;
-        maxLength = zohoFieldMeta.maxLength || 255;
-      } else {
-        fieldType = this.detectFieldType(value, formField);
-        maxLength = 255;
-      }
-      
-      // Apply proper type formatting based on ACTUAL Zoho field type
-      if (fieldType === "boolean") {
-        zohoData[zohoField] = this.convertToBoolean(value);
-      } else if (fieldType === "multiselectpicklist" && Array.isArray(value)) {
-        zohoData[zohoField] = this.truncateField(value.join(";"), zohoField, maxLength);
-      } else if (fieldType === "phone" || fieldType === "email") {
-        zohoData[zohoField] = this.truncateField(String(value), zohoField, maxLength);
-      } else {
-        // For text fields, keep as string - DO NOT convert Yes/No to boolean
-        zohoData[zohoField] = this.truncateField(String(value), zohoField, maxLength);
-      }
-      
-      console.log(`[Zoho CRM] Formatted: ${formField} → ${zohoField} (${fieldType})`);
-    }
-
-    // Add Lead_Source from filtered result
-    zohoData.Lead_Source = filtered.leadSource;
-    console.log(`[Zoho CRM] Added Lead_Source: ${filtered.leadSource}`);
-
-    console.log(`[Zoho CRM] Formatted ${Object.keys(zohoData).length} fields for Zoho CRM, excluded ${filtered.excludedFields.length}`);
-    return { zohoData, excludedFields: filtered.excludedFields, leadSource: filtered.leadSource };
   }
 
   private truncateField(value: any, fieldName: string, maxLength?: number | null): any {

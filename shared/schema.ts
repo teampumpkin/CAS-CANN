@@ -259,25 +259,17 @@ export const fieldMappings = pgTable("field_mappings", {
   index("idx_field_mappings_zoho_module").on(table.zohoModule),
 ]);
 
-// Form configurations table - centralized form-to-CRM mapping registry
+// Form configurations table - optional form-to-module mappings and settings
 export const formConfigurations = pgTable("form_configurations", {
   id: serial("id").primaryKey(),
   formName: varchar("form_name", { length: 255 }).notNull().unique(),
   zohoModule: varchar("zoho_module", { length: 100 }).notNull().default("Leads"),
-  leadSourceTag: text("lead_source_tag"), // Unique identifier in Zoho Lead_Source field
-  displayFields: jsonb("display_fields"), // Fields to show on form UI (stored as JSON array)
-  submitFields: jsonb("submit_fields"), // Field mappings: { formField: { zohoField, label, required, fieldType } }
-  fieldMappings: jsonb("field_mappings"), // Legacy: Custom field name mappings (deprecated)
-  strictMapping: boolean("strict_mapping").notNull().default(true), // Only send configured fields to Zoho
-  autoCreateFields: boolean("auto_create_fields").notNull().default(false), // Auto-create missing Zoho fields
+  fieldMappings: jsonb("field_mappings"), // Custom field name mappings
   isActive: boolean("is_active").notNull().default(true),
   description: text("description"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
-}, (table) => [
-  index("idx_form_configurations_active").on(table.isActive),
-  index("idx_form_configurations_lead_source").on(table.leadSourceTag),
-]);
+});
 
 // Insert schemas for form submission system
 export const insertFormSubmissionSchema = createInsertSchema(formSubmissions).omit({
@@ -350,30 +342,6 @@ export type FormConfiguration = typeof formConfigurations.$inferSelect;
 export type InsertFormConfiguration = z.infer<typeof insertFormConfigurationSchema>;
 export type FieldMetadataCache = typeof fieldMetadataCache.$inferSelect;
 export type InsertFieldMetadataCache = z.infer<typeof insertFieldMetadataCacheSchema>;
-
-// Form field mapping configuration types
-export interface SubmitFieldConfig {
-  zohoField: string;       // Target Zoho CRM field API name
-  label: string;           // Human-readable label for the field
-  required?: boolean;      // Whether field is required for submission
-  fieldType?: string;      // Field type: text, email, phone, picklist, boolean
-  maxLength?: number;      // Max length for text fields
-  picklistValues?: string[]; // Allowed values for picklist fields
-}
-
-export type SubmitFieldsMap = Record<string, SubmitFieldConfig>;
-
-// Zod schema for validating submit field configurations
-export const submitFieldConfigSchema = z.object({
-  zohoField: z.string().min(1),
-  label: z.string().min(1),
-  required: z.boolean().optional(),
-  fieldType: z.enum(["text", "email", "phone", "picklist", "multiselectpicklist", "boolean"]).optional(),
-  maxLength: z.number().optional(),
-  picklistValues: z.array(z.string()).optional(),
-});
-
-export const submitFieldsMapSchema = z.record(z.string(), submitFieldConfigSchema);
 
 // Dynamic form submission schema - validates the API request format
 export const dynamicFormSubmissionSchema = z.object({

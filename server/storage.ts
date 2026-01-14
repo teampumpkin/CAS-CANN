@@ -128,12 +128,9 @@ export interface IStorage {
   // Form configuration operations
   getFormConfigurations(): Promise<FormConfiguration[]>;
   getFormConfiguration(formName: string): Promise<FormConfiguration | undefined>;
-  getActiveFormConfigurations(): Promise<FormConfiguration[]>;
   createFormConfiguration(config: InsertFormConfiguration): Promise<FormConfiguration>;
   updateFormConfiguration(id: number, updates: Partial<FormConfiguration>): Promise<FormConfiguration | undefined>;
-  updateFormConfigurationByName(formName: string, updates: Partial<FormConfiguration>): Promise<FormConfiguration | undefined>;
   deleteFormConfiguration(id: number): Promise<boolean>;
-  deleteFormConfigurationByName(formName: string): Promise<boolean>;
 
   // OAuth token operations
   getOAuthTokens(filters?: { provider?: string; isActive?: boolean }): Promise<OAuthToken[]>;
@@ -545,28 +542,6 @@ export class DatabaseStorage implements IStorage {
 
   async deleteFormConfiguration(id: number): Promise<boolean> {
     const result = await db.delete(formConfigurations).where(eq(formConfigurations.id, id));
-    return (result.rowCount || 0) > 0;
-  }
-
-  async getActiveFormConfigurations(): Promise<FormConfiguration[]> {
-    return await db
-      .select()
-      .from(formConfigurations)
-      .where(eq(formConfigurations.isActive, true))
-      .orderBy(desc(formConfigurations.createdAt));
-  }
-
-  async updateFormConfigurationByName(formName: string, updates: Partial<FormConfiguration>): Promise<FormConfiguration | undefined> {
-    const [updatedConfig] = await db
-      .update(formConfigurations)
-      .set({ ...updates, updatedAt: new Date() })
-      .where(eq(formConfigurations.formName, formName))
-      .returning();
-    return updatedConfig || undefined;
-  }
-
-  async deleteFormConfigurationByName(formName: string): Promise<boolean> {
-    const result = await db.delete(formConfigurations).where(eq(formConfigurations.formName, formName));
     return (result.rowCount || 0) > 0;
   }
 

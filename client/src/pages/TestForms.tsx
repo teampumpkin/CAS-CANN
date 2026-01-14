@@ -933,7 +933,7 @@ export default function TestForms() {
                 <Card>
                   <CardContent className="pt-4">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-600" data-testid="stat-total">
+                      <div className="text-2xl font-bold text-[#00AFE6]" data-testid="stat-total">
                         {(systemStats as any).systemStatus.totalSubmissions}
                       </div>
                       <div className="text-sm text-muted-foreground">Total</div>
@@ -1025,7 +1025,7 @@ export default function TestForms() {
                         </div>
                         <div className="flex justify-between">
                           <span>Eligible for Retry:</span>
-                          <span className="font-semibold text-blue-600">{(systemStats as any).retryStatistics.eligibleForRetry}</span>
+                          <span className="font-semibold text-[#00AFE6]">{(systemStats as any).retryStatistics.eligibleForRetry}</span>
                         </div>
                         <div className="flex justify-between">
                           <span>Max Retries Reached:</span>

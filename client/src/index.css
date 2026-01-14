@@ -447,16 +447,26 @@ html.accessibility-font-size [role="checkbox"] * {
 /* Ensure minimum touch targets */
 button, 
 a, 
-input, 
+input:not([type="checkbox"]):not([type="radio"]), 
 select, 
 textarea, 
 [role="button"], 
-[role="link"] {
+[role="link"]:not([role="radio"]):not([role="checkbox"]) {
   min-height: 44px;
   min-width: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Reset checkbox and radio button sizes to prevent oversizing */
+input[type="checkbox"],
+input[type="radio"],
+[role="checkbox"],
+[role="radio"],
+[data-radix-collection-item] {
+  min-height: unset !important;
+  min-width: unset !important;
 }
 
 /* Skip links */

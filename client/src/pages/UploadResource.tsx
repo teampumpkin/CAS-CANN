@@ -29,6 +29,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { z } from "zod";
 
 const uploadFormSchema = z.object({
@@ -51,46 +52,47 @@ const uploadFormSchema = z.object({
 
 type UploadFormData = z.infer<typeof uploadFormSchema>;
 
-const amyloidosisTypes = [
-  { value: "AL", label: "AL (Light Chain)" },
-  { value: "ATTR", label: "ATTR (Transthyretin)" },
-  { value: "AA", label: "AA (Inflammatory)" },
-  { value: "ALect2", label: "ALect2" },
-  { value: "General", label: "General/Multiple Types" }
+// Helper functions to get translated options
+const getAmyloidosisTypes = (t: any) => [
+  { value: "AL", label: t('upload.amyloidosisTypes.al') },
+  { value: "ATTR", label: t('upload.amyloidosisTypes.attr') },
+  { value: "AA", label: t('upload.amyloidosisTypes.aa') },
+  { value: "ALect2", label: t('upload.amyloidosisTypes.alect2') },
+  { value: "General", label: t('upload.amyloidosisTypes.general') }
 ];
 
-const resourceTypes = [
-  { value: "diagnostic-tools", label: "Diagnostic Tools" },
-  { value: "referral-pathways", label: "Referral Pathways" },
-  { value: "sops", label: "Standard Operating Procedures" },
-  { value: "patient-handouts", label: "Patient Handouts" },
-  { value: "clinical-forms", label: "Clinical Forms" },
-  { value: "research-materials", label: "Research Materials" }
+const getResourceTypes = (t: any) => [
+  { value: "diagnostic-tools", label: t('upload.documentTypes.diagnosticTools') },
+  { value: "referral-pathways", label: t('upload.documentTypes.referralPathways') },
+  { value: "sops", label: t('upload.documentTypes.sops') },
+  { value: "patient-handouts", label: t('upload.documentTypes.patientHandouts') },
+  { value: "clinical-forms", label: t('upload.documentTypes.clinicalForms') },
+  { value: "research-materials", label: t('upload.documentTypes.researchMaterials') }
 ];
 
-const categories = [
-  { value: "toolkit", label: "Clinical Toolkit" },
-  { value: "guidelines", label: "Guidelines & Protocols" },
-  { value: "articles", label: "Articles & Publications" },
-  { value: "webinars", label: "Educational Content" },
-  { value: "libraries", label: "Resource Libraries" },
-  { value: "education", label: "Patient Education" }
+const getCategories = (t: any) => [
+  { value: "toolkit", label: t('upload.categories.toolkit') },
+  { value: "guidelines", label: t('upload.categories.guidelines') },
+  { value: "articles", label: t('upload.categories.articles') },
+  { value: "webinars", label: t('upload.categories.webinars') },
+  { value: "libraries", label: t('upload.categories.libraries') },
+  { value: "education", label: t('upload.categories.education') }
 ];
 
-const audiences = [
-  { value: "clinician", label: "Clinicians & Healthcare Providers" },
-  { value: "patient", label: "Patients" },
-  { value: "caregiver", label: "Caregivers & Families" },
-  { value: "researcher", label: "Researchers & Academics" }
+const getAudiences = (t: any) => [
+  { value: "clinician", label: t('upload.audiences.clinician') },
+  { value: "patient", label: t('upload.audiences.patient') },
+  { value: "caregiver", label: t('upload.audiences.caregiver') },
+  { value: "researcher", label: t('upload.audiences.researcher') }
 ];
 
-const languages = [
-  { value: "en", label: "English" },
-  { value: "fr", label: "French" }
+const getLanguages = (t: any) => [
+  { value: "en", label: t('resources.languages.english') },
+  { value: "fr", label: t('resources.languages.french') }
 ];
 
-const regions = [
-  { value: "national", label: "National (Canada-wide)" },
+const getRegions = (t: any) => [
+  { value: "national", label: t('resources.regions.national') + " (Canada)" },
   { value: "BC", label: "British Columbia" },
   { value: "AB", label: "Alberta" },
   { value: "SK", label: "Saskatchewan" },
@@ -127,12 +129,21 @@ const getFileIcon = (fileType: string) => {
 };
 
 export default function UploadResource() {
+  const { t } = useLanguage();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [isUploading, setIsUploading] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  
+  // Get translated arrays
+  const amyloidosisTypes = getAmyloidosisTypes(t);
+  const resourceTypes = getResourceTypes(t);
+  const categories = getCategories(t);
+  const audiences = getAudiences(t);
+  const languages = getLanguages(t);
+  const regions = getRegions(t);
 
   const form = useForm<UploadFormData>({
     resolver: zodResolver(uploadFormSchema),
@@ -167,8 +178,8 @@ export default function UploadResource() {
     },
     onSuccess: () => {
       toast({
-        title: "Resource Submitted Successfully",
-        description: "Your resource has been submitted for review. It will be published after moderation approval.",
+        title: t('upload.success.title'),
+        description: t('upload.success.description'),
       });
       form.reset();
       setSelectedFile(null);
@@ -177,8 +188,8 @@ export default function UploadResource() {
     },
     onError: (error) => {
       toast({
-        title: "Upload Failed",
-        description: "There was an error submitting your resource. Please try again.",
+        title: t('upload.error.title'),
+        description: t('upload.error.description'),
         variant: "destructive",
       });
       console.error("Upload error:", error);
@@ -208,8 +219,8 @@ export default function UploadResource() {
   const handleFileSelection = (file: File) => {
     if (!acceptedFileTypes.includes(file.type)) {
       toast({
-        title: "Invalid File Type",
-        description: "Please upload a PDF, DOCX, XLSX, or PNG file.",
+        title: t('upload.error.invalidType'),
+        description: t('upload.error.invalidTypeDesc'),
         variant: "destructive",
       });
       return;
@@ -217,8 +228,8 @@ export default function UploadResource() {
 
     if (file.size > 10 * 1024 * 1024) { // 10MB limit
       toast({
-        title: "File Too Large",
-        description: "Please upload a file smaller than 10MB.",
+        title: t('upload.error.tooLarge'),
+        description: t('upload.error.tooLargeDesc'),
         variant: "destructive",
       });
       return;
@@ -246,8 +257,8 @@ export default function UploadResource() {
   const onSubmit = async (data: UploadFormData) => {
     if (!selectedFile) {
       toast({
-        title: "No File Selected",
-        description: "Please select a file to upload.",
+        title: t('upload.error.noFile'),
+        description: t('upload.error.noFileDesc'),
         variant: "destructive",
       });
       return;
@@ -298,21 +309,21 @@ export default function UploadResource() {
           >
             <div className="inline-flex items-center gap-3 bg-gray-900/10 dark:bg-white/10 backdrop-blur-xl rounded-full px-6 py-3 border border-gray-900/20 dark:border-white/20 mb-6">
               <Upload className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-gray-900/90 dark:text-white/90">Resource Submission</span>
+              <span className="text-sm font-medium text-gray-900/90 dark:text-white/90">{t('upload.hero.badge')}</span>
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold font-rosarivo mb-6 leading-[1.4]">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Help Us Grow
+                {t('upload.hero.title1')}
               </span>
               <br />
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Canada's Trusted Resource Library
+                {t('upload.hero.title2')}
               </span>
             </h1>
             
             <p className="text-xl text-gray-700 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              This upload tool allows clinicians, researchers, and administrators to share tools, documents, or links that improve amyloidosis diagnosis, treatment, and coordination.
+              {t('upload.hero.description')}
             </p>
           </motion.div>
         </div>
@@ -330,30 +341,30 @@ export default function UploadResource() {
                 <CardHeader>
                   <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                     <Users className="w-5 h-5 text-[#00AFE6]" />
-                    Who Can Submit
+                    {t('upload.whoCanSubmit.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="space-y-2 text-sm text-gray-700 dark:text-white/80">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Healthcare professionals (physicians, nurses, allied health)</span>
+                      <span>{t('upload.whoCanSubmit.healthcare')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Researchers and academics</span>
+                      <span>{t('upload.whoCanSubmit.researchers')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Healthcare administrators</span>
+                      <span>{t('upload.whoCanSubmit.administrators')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Medical societies and organizations</span>
+                      <span>{t('upload.whoCanSubmit.societies')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Patient advocacy groups</span>
+                      <span>{t('upload.whoCanSubmit.advocacy')}</span>
                     </div>
                   </div>
                 </CardContent>
@@ -364,30 +375,30 @@ export default function UploadResource() {
                 <CardHeader>
                   <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
                     <FileText className="w-5 h-5 text-[#00AFE6]" />
-                    What Types Are Accepted
+                    {t('upload.whatAccepted.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="space-y-2 text-sm text-gray-700 dark:text-white/80">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Diagnostic tools and checklists</span>
+                      <span>{t('upload.whatAccepted.diagnostic')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Referral pathways and protocols</span>
+                      <span>{t('upload.whatAccepted.referral')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Standard operating procedures</span>
+                      <span>{t('upload.whatAccepted.sops')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Patient education materials</span>
+                      <span>{t('upload.whatAccepted.education')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#00DD89]" />
-                      <span>Clinical forms and templates</span>
+                      <span>{t('upload.whatAccepted.forms')}</span>
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-4">

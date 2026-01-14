@@ -11,15 +11,15 @@ export default function Hero() {
   const tiles = [
     {
       icon: Users,
-      label: "Join",
-      description: "Become a CAS member",
+      label: t("hero.tiles.join.label"),
+      description: t("hero.tiles.join.description"),
       href: "/join-cas",
     },
     {
       icon: Calendar,
-      label: "Events",
-      description: "Upcoming events and educational sessions",
-      href: "/events",
+      label: t("hero.tiles.events.label"),
+      description: t("hero.tiles.events.description"),
+      href: "/events-and-news",
     },
   ];
 
@@ -60,7 +60,7 @@ export default function Hero() {
 
       {/* Call to action - Fixed position at bottom */}
       <div className="absolute bottom-4 left-0 right-0 text-[#00AFE6] text-m font-semibold group-hover:text-[#00DD89] transition-colors duration-300 flex items-center justify-center gap-2">
-        <span>Click to explore</span>
+        <span>{t("hero.tiles.clickToExplore")}</span>
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
       </div>
     </motion.a>

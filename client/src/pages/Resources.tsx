@@ -68,42 +68,47 @@ const getAmyloidosisTypes = (t: any) => [
   { value: "General", label: t('resources.types.general') }
 ];
 
-const resourceTypes = [
-  { value: "all", label: "All Types" },
-  { value: "form", label: "Forms" },
-  { value: "tool", label: "Tools" },
-  { value: "article", label: "Articles" },
-  { value: "pathway", label: "Pathways" },
-  { value: "visual", label: "Visuals" },
-  { value: "research", label: "Research" }
+// Helper function to get resource types with translations
+const getResourceTypes = (t: any) => [
+  { value: "all", label: t('resources.filters.allTypes') },
+  { value: "form", label: t('resources.resourceTypes.forms') },
+  { value: "tool", label: t('resources.resourceTypes.tools') },
+  { value: "article", label: t('resources.resourceTypes.articles') },
+  { value: "pathway", label: t('resources.resourceTypes.pathways') },
+  { value: "visual", label: t('resources.resourceTypes.visuals') },
+  { value: "research", label: t('resources.resourceTypes.research') }
 ];
 
-const categories = [
-  { value: "all", label: "All Categories" },
-  { value: "diagnostic-tools", label: "Diagnostic Tools", icon: Stethoscope },
-  { value: "referral-pathways", label: "Referral Pathways", icon: ArrowRight },
-  { value: "sops", label: "SOPs", icon: ClipboardList },
-  { value: "patient-handouts", label: "Patient Handouts", icon: FileUserIcon }
+// Helper function to get categories with translations
+const getCategories = (t: any) => [
+  { value: "all", label: t('resources.filters.allCategories') },
+  { value: "diagnostic-tools", label: t('resources.categories.diagnosticTools'), icon: Stethoscope, desc: t('resources.categories.diagnosticToolsDesc') },
+  { value: "referral-pathways", label: t('resources.categories.referralPathways'), icon: ArrowRight, desc: t('resources.categories.referralPathwaysDesc') },
+  { value: "sops", label: t('resources.categories.sops'), icon: ClipboardList, desc: t('resources.categories.sopsDesc') },
+  { value: "patient-handouts", label: t('resources.categories.patientHandouts'), icon: FileUserIcon, desc: t('resources.categories.patientHandoutsDesc') }
 ];
 
-const audiences = [
-  { value: "all", label: "All Audiences" },
-  { value: "clinician", label: "Clinicians" },
-  { value: "patient", label: "Patients" },
-  { value: "caregiver", label: "Caregivers" },
-  { value: "researcher", label: "Researchers" }
+// Helper function to get audiences with translations
+const getAudiences = (t: any) => [
+  { value: "all", label: t('resources.filters.allAudiences') },
+  { value: "clinician", label: t('resources.audiences.clinicians') },
+  { value: "patient", label: t('resources.audiences.patients') },
+  { value: "caregiver", label: t('resources.audiences.caregivers') },
+  { value: "researcher", label: t('resources.audiences.researchers') }
 ];
 
-const languages = [
-  { value: "all", label: "All Languages" },
-  { value: "en", label: "English" },
-  { value: "fr", label: "French" },
-  { value: "bilingual", label: "Bilingual (EN/FR)" }
+// Helper function to get languages with translations
+const getLanguages = (t: any) => [
+  { value: "all", label: t('resources.filters.allLanguages') },
+  { value: "en", label: t('resources.languages.english') },
+  { value: "fr", label: t('resources.languages.french') },
+  { value: "bilingual", label: t('resources.languages.bilingual') }
 ];
 
-const regions = [
-  { value: "all", label: "All Regions" },
-  { value: "national", label: "National" },
+// Helper function to get regions (province names stay in English as proper nouns)
+const getRegions = (t: any) => [
+  { value: "all", label: t('resources.filters.allRegions') },
+  { value: "national", label: t('resources.regions.national') },
   { value: "BC", label: "British Columbia" },
   { value: "AB", label: "Alberta" },
   { value: "SK", label: "Saskatchewan" },
@@ -175,8 +180,13 @@ const formatDate = (date: string | Date | null) => {
 export default function Resources() {
   const { t } = useLanguage();
   
-  // Get translated amyloidosis types
+  // Get translated arrays
   const amyloidosisTypes = getAmyloidosisTypes(t);
+  const resourceTypes = getResourceTypes(t);
+  const categories = getCategories(t);
+  const audiences = getAudiences(t);
+  const languages = getLanguages(t);
+  const regions = getRegions(t);
   
   const [filters, setFilters] = useState<ResourceFilters>({
     search: '',
@@ -269,17 +279,17 @@ export default function Resources() {
           >
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6 shadow-lg">
               <BookOpen className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-sm font-medium text-gray-800 dark:text-white/90">Professional Resources</span>
+              <span className="text-sm font-medium text-gray-800 dark:text-white/90">{t('resources.hero.badge')}</span>
             </div>
             
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight">
               <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Clinical Practice Resources
+                {t('resources.hero.title')}
               </span>
             </h1>
             
             <p className="text-xl text-gray-600 dark:text-white/70 mb-8 max-w-3xl mx-auto">
-              Evidence-based tools, pathways, and resources for healthcare professionals managing amyloidosis patients across Canada.
+              {t('resources.hero.description')}
             </p>
             
             {/* Resource Categories Overview */}
@@ -299,10 +309,7 @@ export default function Resources() {
                     </div>
                     <h3 className="font-semibold text-gray-800 dark:text-white mb-2">{category.label}</h3>
                     <p className="text-sm text-gray-600 dark:text-white/70">
-                      {category.value === 'diagnostic-tools' && 'Assessment tools, screening protocols, and diagnostic aids'}
-                      {category.value === 'referral-pathways' && 'Structured referral guidelines and care pathways'}
-                      {category.value === 'sops' && 'Standard operating procedures and clinical protocols'}
-                      {category.value === 'patient-handouts' && 'Educational materials and patient information sheets'}
+                      {category.desc}
                     </p>
                   </motion.div>
                 );
@@ -327,23 +334,23 @@ export default function Resources() {
                 <div className="flex-1 text-center lg:text-left">
                   <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
                     <Upload className="w-6 h-6 inline mr-2 text-[#00AFE6]" />
-                    Contribute to the Knowledge Base
+                    {t('resources.contribute.title')}
                   </h2>
                   <p className="text-gray-600 dark:text-white/70 mb-4">
-                    Share your clinical tools, protocols, and educational materials with the Canadian amyloidosis community
+                    {t('resources.contribute.description')}
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
                     <Badge variant="outline" className="border-[#00AFE6]/30 text-[#00AFE6]">
                       <CheckCircle className="w-3 h-3 mr-1" />
-                      Peer Reviewed
+                      {t('resources.contribute.peerReviewed')}
                     </Badge>
                     <Badge variant="outline" className="border-[#00DD89]/30 text-[#00DD89]">
                       <Shield className="w-3 h-3 mr-1" />
-                      Quality Assured
+                      {t('resources.contribute.qualityAssured')}
                     </Badge>
                     <Badge variant="outline" className="border-gray-400 text-gray-600 dark:text-gray-400">
                       <Globe className="w-3 h-3 mr-1" />
-                      National Access
+                      {t('resources.contribute.nationalAccess')}
                     </Badge>
                   </div>
                 </div>
@@ -353,7 +360,7 @@ export default function Resources() {
                     className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/150 hover:to-[#00DD89]/150 text-white border-0 shadow-lg"
                   >
                     <Upload className="w-5 h-5 mr-2" />
-                    Upload Resource
+                    {t('resources.upload.button')}
                   </Button>
                   <Button
                     variant="outline"
@@ -361,7 +368,7 @@ export default function Resources() {
                     className="border-gray-300 hover:border-[#00AFE6]/50"
                   >
                     <FileEdit className="w-5 h-5 mr-2" />
-                    Editorial Policy
+                    {t('resources.contribute.editorialPolicy')}
                   </Button>
                 </div>
               </div>
@@ -375,7 +382,7 @@ export default function Resources() {
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-white/60 w-5 h-5" />
                   <Input
                     type="text"
-                    placeholder="Search resources..."
+                    placeholder={t('resources.filters.search')}
                     value={filters.search}
                     onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
                     className="pl-12 h-12 bg-white dark:bg-white/20 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/60 rounded-xl focus:ring-2 focus:ring-[#00AFE6] focus:border-[#00AFE6]"

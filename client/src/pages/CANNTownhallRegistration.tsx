@@ -28,28 +28,36 @@ import { apiRequest } from "@/lib/queryClient";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ParallaxBackground from "@/components/ParallaxBackground";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const registrationSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Please enter a valid email address"),
-  institution: z.string().min(1, "Centre or Clinic Name/Institution is required"),
-  isCannMember: z.enum(["yes", "no"], {
-    required_error: "Please indicate if you are a CANN member",
-  }),
-});
-
-type RegistrationForm = z.infer<typeof registrationSchema>;
+type RegistrationFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  institution: string;
+  isCannMember: "yes" | "no" | undefined;
+};
 
 export default function CANNTownhallRegistration() {
+  const { t } = useLanguage();
   const [, setLocation] = useLocation();
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+
+  const registrationSchema = z.object({
+    firstName: z.string().min(1, t('cannTownhall.validation.firstNameRequired')),
+    lastName: z.string().min(1, t('cannTownhall.validation.lastNameRequired')),
+    email: z.string().email(t('cannTownhall.validation.emailInvalid')),
+    institution: z.string().min(1, t('cannTownhall.validation.institutionRequired')),
+    isCannMember: z.enum(["yes", "no"], {
+      required_error: t('cannTownhall.validation.cannMemberRequired'),
+    }),
+  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const form = useForm<RegistrationForm>({
+  const form = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
       firstName: "",
@@ -61,7 +69,7 @@ export default function CANNTownhallRegistration() {
   });
 
   const registerMutation = useMutation({
-    mutationFn: async (data: RegistrationForm) => {
+    mutationFn: async (data: RegistrationFormData) => {
       const response = await apiRequest("POST", "/api/events/cann-townhall/register", {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -80,7 +88,7 @@ export default function CANNTownhallRegistration() {
     },
   });
 
-  const onSubmit = (data: RegistrationForm) => {
+  const onSubmit = (data: RegistrationFormData) => {
     registerMutation.mutate(data);
   };
 
@@ -148,23 +156,22 @@ export default function CANNTownhallRegistration() {
             >
               <Sparkles className="w-4 h-4 text-[#00AFE6]" />
               <span className="text-sm font-medium bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Virtual Workshop
+                {t('cannTownhall.badge')}
               </span>
             </motion.div>
 
             <h1 className="font-rosarivo text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="text-event-title">
               <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                CANN Townhall
+                {t('cannTownhall.title.townhall')}
               </span>
               <br />
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Ideation Workshop
+                {t('cannTownhall.title.workshop')}
               </span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-600 dark:text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed">
-              We want to hear from you! This live session will be professionally facilitated, 
-              designed to understand the needs of new/current CANN members and shape future direction.
+              {t('cannTownhall.description')}
             </p>
 
             {/* Event Details Cards */}
@@ -179,8 +186,8 @@ export default function CANNTownhallRegistration() {
                   <Calendar className="w-5 h-5 text-white" />
                 </div>
                 <div className="text-left">
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Date</div>
-                  <div className="font-semibold text-gray-900 dark:text-white">January 22, 2026</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">{t('cannTownhall.date.label')}</div>
+                  <div className="font-semibold text-gray-900 dark:text-white">{t('cannTownhall.date.value')}</div>
                 </div>
               </motion.div>
 
@@ -194,8 +201,8 @@ export default function CANNTownhallRegistration() {
                   <Clock className="w-5 h-5 text-white" />
                 </div>
                 <div className="text-left">
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Time</div>
-                  <div className="font-semibold text-gray-900 dark:text-white">5:00 - 6:30 PM MST</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">{t('cannTownhall.time.label')}</div>
+                  <div className="font-semibold text-gray-900 dark:text-white">{t('cannTownhall.time.value')}</div>
                 </div>
               </motion.div>
 
@@ -209,8 +216,8 @@ export default function CANNTownhallRegistration() {
                   <MapPin className="w-5 h-5 text-white" />
                 </div>
                 <div className="text-left">
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Location</div>
-                  <div className="font-semibold text-gray-900 dark:text-white">Virtual Event</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">{t('cannTownhall.location.label')}</div>
+                  <div className="font-semibold text-gray-900 dark:text-white">{t('cannTownhall.location.value')}</div>
                 </div>
               </motion.div>
             </div>
@@ -238,7 +245,7 @@ export default function CANNTownhallRegistration() {
               data-testid="button-back-events"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to CANN Resources/Events
+              {t('cannTownhall.backToEvents')}
             </Button>
 
             <div className="bg-white dark:bg-gray-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50 overflow-hidden">
@@ -250,10 +257,10 @@ export default function CANNTownhallRegistration() {
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                      Event Registration
+                      {t('cannTownhall.form.title')}
                     </h2>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Complete the form below to register
+                      {t('cannTownhall.form.subtitle')}
                     </p>
                   </div>
                 </div>
@@ -261,14 +268,13 @@ export default function CANNTownhallRegistration() {
                 {/* CANN Members Notice */}
                 <div className="bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border border-[#00AFE6]/30 dark:border-[#00AFE6]/40 rounded-xl p-4">
                   <p className="text-gray-700 dark:text-gray-300 text-sm">
-                    <strong className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">Note:</strong> This event is exclusively for CANN members. 
-                    If you are not yet a CANN member, please{" "}
+                    <strong className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">{t('cannTownhall.form.note')}</strong> {t('cannTownhall.form.noteText')}{" "}
                     <a 
                       href="/join-cas" 
                       className="text-pink-500 hover:underline font-medium"
                       data-testid="link-join-cann"
                     >
-                      join CANN first
+                      {t('cannTownhall.form.joinCANNFirst')}
                     </a>.
                   </p>
                 </div>
@@ -285,12 +291,12 @@ export default function CANNTownhallRegistration() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">
-                              First Name <span className="text-pink-500">*</span>
+                              {t('cannTownhall.form.firstName')} <span className="text-pink-500">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
                                 {...field}
-                                placeholder="Enter your first name"
+                                placeholder={t('cannTownhall.form.firstName')}
                                 className="h-12 bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 focus:border-pink-500 focus:ring-pink-500/20 rounded-xl"
                                 data-testid="input-first-name"
                               />
@@ -306,12 +312,12 @@ export default function CANNTownhallRegistration() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">
-                              Last Name <span className="text-pink-500">*</span>
+                              {t('cannTownhall.form.lastName')} <span className="text-pink-500">*</span>
                             </FormLabel>
                             <FormControl>
                               <Input
                                 {...field}
-                                placeholder="Enter your last name"
+                                placeholder={t('cannTownhall.form.lastName')}
                                 className="h-12 bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 focus:border-pink-500 focus:ring-pink-500/20 rounded-xl"
                                 data-testid="input-last-name"
                               />
@@ -328,13 +334,13 @@ export default function CANNTownhallRegistration() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">
-                            Email Address <span className="text-pink-500">*</span>
+                            {t('cannTownhall.form.email')} <span className="text-pink-500">*</span>
                           </FormLabel>
                           <FormControl>
                             <Input
                               {...field}
                               type="email"
-                              placeholder="Enter your email address"
+                              placeholder={t('cannTownhall.form.email')}
                               className="h-12 bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 focus:border-pink-500 focus:ring-pink-500/20 rounded-xl"
                               data-testid="input-email"
                             />
@@ -350,12 +356,12 @@ export default function CANNTownhallRegistration() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">
-                            Centre or Clinic Name/Institution <span className="text-pink-500">*</span>
+                            {t('cannTownhall.form.institution')} <span className="text-pink-500">*</span>
                           </FormLabel>
                           <FormControl>
                             <Input
                               {...field}
-                              placeholder="Enter your institution name"
+                              placeholder={t('cannTownhall.form.institution')}
                               className="h-12 bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 focus:border-pink-500 focus:ring-pink-500/20 rounded-xl"
                               data-testid="input-institution"
                             />
@@ -371,7 +377,7 @@ export default function CANNTownhallRegistration() {
                       render={({ field }) => (
                         <FormItem className="space-y-4">
                           <FormLabel className="text-gray-700 dark:text-gray-300 font-medium">
-                            I am a CANN member <span className="text-pink-500">*</span>
+                            {t('cannTownhall.form.isCannMember')} <span className="text-pink-500">*</span>
                           </FormLabel>
                           <FormControl>
                             <RadioGroup
@@ -394,7 +400,7 @@ export default function CANNTownhallRegistration() {
                                   data-testid="radio-cann-member-yes"
                                 />
                                 <span className="text-gray-700 dark:text-gray-300 font-medium">
-                                  Yes
+                                  {t('cannTownhall.form.yes')}
                                 </span>
                               </label>
                               <label 
@@ -412,7 +418,7 @@ export default function CANNTownhallRegistration() {
                                   data-testid="radio-cann-member-no"
                                 />
                                 <span className="text-gray-700 dark:text-gray-300 font-medium">
-                                  No
+                                  {t('cannTownhall.form.no')}
                                 </span>
                               </label>
                             </RadioGroup>
@@ -432,10 +438,10 @@ export default function CANNTownhallRegistration() {
                         {registerMutation.isPending ? (
                           <>
                             <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                            Registering...
+                            {t('cannTownhall.form.submitting')}
                           </>
                         ) : (
-                          "Register for Event"
+                          t('cannTownhall.form.submit')
                         )}
                       </Button>
                     </div>
@@ -447,7 +453,7 @@ export default function CANNTownhallRegistration() {
                         className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-xl p-4 text-red-700 dark:text-red-300 text-sm" 
                         data-testid="text-error-message"
                       >
-                        An error occurred while registering. Please try again.
+                        {t('cannTownhall.form.error')}
                       </motion.div>
                     )}
                   </form>
@@ -471,10 +477,10 @@ export default function CANNTownhallRegistration() {
               <CheckCircle className="w-10 h-10 text-white" />
             </motion.div>
             <DialogTitle className="text-center text-2xl font-bold text-gray-900 dark:text-white" data-testid="text-success-title">
-              Registration Successful!
+              {t('cannTownhall.success.title')}
             </DialogTitle>
             <DialogDescription className="text-center text-gray-600 dark:text-gray-400 text-base leading-relaxed" data-testid="text-success-message">
-              Thank you for registering for the CANN Townhall. Further details about this event will be provided to you via email.
+              {t('cannTownhall.success.message')}
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-center mt-6">
@@ -486,7 +492,7 @@ export default function CANNTownhallRegistration() {
               className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg shadow-pink-500/25"
               data-testid="button-close-success"
             >
-              Back to CANN Resources/Events
+              {t('cannTownhall.success.button')}
             </Button>
           </div>
         </DialogContent>

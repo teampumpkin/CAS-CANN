@@ -4,16 +4,16 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import casLogo from '@assets/l_cas_vert_ko_1753253840024.png';
 
 export default function Footer() {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
 
   const sitemapLinks = [
-    { name: "About CAS", href: "/about", icon: Users, status: "available" },
-    { name: "About Amyloidosis", href: "/about-amyloidosis", icon: FileText, status: "available" },
-    { name: "Partnership", href: "/partnerships", icon: BookOpen, status: "available" },
-    { name: "Get Involved", href: "/get-involved", icon: Heart, status: "available" },
-    { name: "About CANN", href: "/about-cann", icon: Users, status: "available" },
-    { name: "CANN Resources", href: "/cann-resources", icon: Calendar, status: "available" },
-    { name: "Contact Us", href: "/contact", icon: Mail, status: "available" }
+    { nameKey: "footer.aboutCAS", href: "/about", icon: Users, status: "available" },
+    { nameKey: "footer.aboutAmyloidosis", href: "/about-amyloidosis", icon: FileText, status: "available" },
+    { nameKey: "footer.partnership", href: "/partnerships", icon: BookOpen, status: "available" },
+    { nameKey: "footer.getInvolved", href: "/get-involved", icon: Heart, status: "available" },
+    { nameKey: "footer.aboutCANN", href: "/about-cann", icon: Users, status: "available" },
+    { nameKey: "footer.cannResources", href: "/cann-resources", icon: Calendar, status: "available" },
+    { nameKey: "footer.contactUs", href: "/contact", icon: Mail, status: "available" }
   ];
 
 
@@ -51,12 +51,12 @@ export default function Footer() {
                 </div>
                 
                 <p className="text-white/80 text-sm leading-relaxed mb-6 max-w-md">
-                  Advancing awareness, enhancing patient care, and improving outcomes for all Canadians affected by amyloidosis.
+                  {t("footer.tagline")}
                 </p>
 
                 {/* Contact Information */}
                 <div className="mb-6">
-                  <h4 className="text-white font-semibold mb-3 text-sm">Contact Us</h4>
+                  <h4 className="text-white font-semibold mb-3 text-sm">{t("footer.contactUs")}</h4>
                   <div className="space-y-2">
                     {contactInfo.map((contact, index) => (
                       <div key={index} className="flex items-center gap-3">
@@ -79,7 +79,7 @@ export default function Footer() {
                     className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-full font-semibold text-sm hover:shadow-lg hover:shadow-[#00AFE6]/25 transition-all duration-300 hover:scale-105"
                   >
                     <UserPlus className="w-4 h-4" />
-                    JOIN CAS
+                    {t("footer.joinCAS")}
                   </a>
                 </div>
               </motion.div>
@@ -93,7 +93,7 @@ export default function Footer() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-white font-semibold mb-4 text-sm">Quick Links</h3>
+                <h3 className="text-white font-semibold mb-4 text-sm">{t("footer.quickLinks")}</h3>
                 <ul className="space-y-2">
                   {sitemapLinks.map((link, index) => (
                     <li key={index}>
@@ -101,7 +101,7 @@ export default function Footer() {
                         href={link.href}
                         className="text-white/70 hover:text-white transition-colors duration-300 text-sm block"
                       >
-                        {link.name}
+                        {t(link.nameKey)}
                       </a>
                     </li>
                   ))}
@@ -119,7 +119,7 @@ export default function Footer() {
               >
                 {/* Language Toggle */}
                 <div>
-                  <h4 className="text-white font-semibold mb-3 text-sm">Language</h4>
+                  <h4 className="text-white font-semibold mb-3 text-sm">{t("footer.language")}</h4>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setLanguage('en')}
@@ -159,12 +159,12 @@ export default function Footer() {
         >
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="text-white/50 text-sm">
-              © 2025 Canadian Amyloidosis Society. All rights reserved.
+              {t("footer.copyright")}
             </div>
             <div>
               <a href="/accessibility" className="text-white/70 hover:text-white transition-colors text-sm flex items-center gap-2">
                 <Globe className="w-4 h-4" />
-                Accessibility Statement
+                {t("footer.accessibilityStatement")}
               </a>
             </div>
           </div>

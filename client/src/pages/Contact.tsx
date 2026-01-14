@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Mail, ChevronDown, Plus, Minus, Copy, Check } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [isCopied, setIsCopied] = useState(false);
 
@@ -72,7 +74,7 @@ export default function Contact() {
           >
             <Mail className="w-5 h-5 text-[#00AFE6]" />
             <span className="text-sm font-medium text-gray-800 dark:text-white/90">
-              Contact Us
+              {t('contactPage.badge')}
             </span>
           </motion.div>
 
@@ -83,7 +85,7 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <span className="text-gray-900 dark:text-white">Welcome to </span>
+            <span className="text-gray-900 dark:text-white">{t('contactPage.welcomeTitle').split('CAS')[0]}</span>
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
               CAS
             </span>
@@ -96,9 +98,7 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            We welcome all questions and feedback. Whether you're a patient,
-            caregiver, healthcare professional, or researcher, we're here to
-            connect and support the amyloidosis community.
+            {t('contactPage.welcomeDescription')}
           </motion.p>
 
           {/* Email Section */}
@@ -115,10 +115,10 @@ export default function Contact() {
 
               <div className="text-center">
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">
-                  Get in Touch
+                  {t('contactPage.getInTouch')}
                 </h2>
                 <p className="text-gray-600 dark:text-white/70 mb-6">
-                  Send us your questions, feedback, or collaboration ideas
+                  {t('contactPage.sendMessage')}
                 </p>
               </div>
 
@@ -171,15 +171,14 @@ export default function Contact() {
             <div className="text-center mb-8">
               <h3 className="text-2xl md:text-3xl font-bold mb-3 font-rosarivo">
                 <span className="text-gray-900 dark:text-white">
-                  Frequently Asked{" "}
+                  {t('contactPage.faq.title').split(' ').slice(0, -1).join(' ')}{" "}
                 </span>
                 <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                  Questions
+                  {t('contactPage.faq.title').split(' ').slice(-1)[0]}
                 </span>
               </h3>
               <p className="text-gray-600 dark:text-white/70">
-                Quick answers to common questions about CAS, resources, and
-                membership.
+                {t('contactPage.faq.subtitle')}
               </p>
             </div>
 

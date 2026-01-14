@@ -94,8 +94,8 @@ export default function Header() {
       href: "#about",
       hasDropdown: true,
       dropdownItems: [
-        { name: "About CAS", href: "/about" },
-        { name: "About Amyloidosis", href: "/about-amyloidosis" },
+        { name: t("nav.aboutCAS"), href: "/about" },
+        { name: t("nav.aboutAmyloidosis"), href: "/about-amyloidosis" },
       ],
     },
     {
@@ -103,34 +103,33 @@ export default function Header() {
       href: "#resources",
       hasDropdown: true,
       dropdownItems: [
-        {
-          name: "Partnerships and Other Amyloidosis Organizations",
-          href: "/partnerships",
-        },
-        // Hidden for now
         // {
-        //   name: "Upload Resource",
+        //   name: t("nav.resourceLibrary"),
+        //   href: "/resource-library",
+        // },
+        // {
+        //   name: t("nav.uploadResource"),
         //   href: "/upload-resource",
         // },
-        // {
-        //   name: "Resource Moderation",
-        //   href: "/resource-moderation",
-        // },
+        {
+          name: t("nav.partnerships"),
+          href: "/partnerships",
+        },
       ],
     },
-    { name: "Get Involved", href: "/get-involved" },
-    { name: "Events", href: "/events" },
+    { name: t("nav.getInvolved"), href: "/get-involved" },
+    { name: t("nav.events"), href: "/events-and-news" },
     {
       name: "CANN",
       href: "#cann",
       hasDropdown: true,
       dropdownItems: [
-        { name: "About CANN", href: "/about-cann" },
-        { name: "Resources/Events", href: "/cann-resources" },
+        { name: t("nav.aboutCANN"), href: "/about-cann" },
+        { name: t("nav.cannResources"), href: "/cann-resources" },
       ],
     },
-    { name: "Contact Us", href: "/contact" },
-    { name: "Join CAS / CANN", href: "/join-cas", isPrimary: true },
+    { name: t("nav.contactUs"), href: "/contact" },
+    { name: t("nav.joinCASCANN"), href: "/join-cas", isPrimary: true },
   ];
 
   useEffect(() => {
@@ -152,7 +151,7 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
     >
-      <div className="max-w-8xl mx-auto px-4 lg:px-6">
+      <div className="max-w-8xl mx-auto px-4 xl:px-6">
         <div className="flex items-center justify-between h-20 md:h-24 min-w-0">
           {/* Logo */}
           <motion.a
@@ -170,7 +169,7 @@ export default function Header() {
           </motion.a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center">
+          <nav className="hidden xl:flex items-center">
             <div className="flex items-center gap-1 bg-gray-100/95 backdrop-blur-xl rounded-full px-4 py-2 border border-gray-300/50 shadow-lg">
               {navItems.map((item, index) => (
                 <div key={item.name} className="relative group">
@@ -269,7 +268,7 @@ export default function Header() {
                               }}
                             >
                               <div className="flex items-center gap-3">
-                                <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-50 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+                                <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full opacity-50 group-hover/item:opacity-100 transition-opacity duration-300"></div>
                                 <span className="group-hover/item:translate-x-1 transition-transform duration-300">
                                   {dropdownItem.name}
                                 </span>
@@ -341,7 +340,7 @@ export default function Header() {
                             </button>
                           </div>
 
-                          <div className="space-y-4 max-h-96 overflow-y-auto">
+                          <div className="space-y-4 max-h-96 overflow-y-auto pr-3">
                             {/* Font Size */}
                             <div className="space-y-2">
                               <div className="flex items-center justify-between">
@@ -524,7 +523,7 @@ export default function Header() {
 
             {/* Mobile Menu Button */}
             <motion.button
-              className="lg:hidden p-2 md:p-3 rounded-xl bg-gray-100 hover:bg-gray-200 border border-gray-300 transition-all duration-300"
+              className="xl:hidden p-2 md:p-3 rounded-xl bg-gray-100 hover:bg-gray-200 border border-gray-300 transition-all duration-300"
               onClick={() => {
                 setIsMenuOpen(!isMenuOpen);
                 if (isMenuOpen) {
@@ -547,7 +546,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <motion.div
-        className="lg:hidden"
+        className="xl:hidden"
         initial={false}
         animate={{
           height: isMenuOpen ? "auto" : 0,
@@ -579,7 +578,7 @@ export default function Header() {
                       <span>{item.name}</span>
                       <div className="flex items-center gap-2">
                         {isPageActive(item.href, item.dropdownItems) && (
-                          <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                          <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                         )}
                         <ChevronDown
                           className={`w-4 h-4 transition-transform duration-300 ${
@@ -600,7 +599,7 @@ export default function Header() {
                           <a
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className={`block px-8 py-3 rounded-xl transition-all duration-300 text-sm ${
+                            className={`flex items-center justify-start gap-3 px-8 py-3 rounded-xl transition-all duration-300 text-sm ${
                               location === dropdownItem.href
                                 ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/20 to-[#00DD89]/20 border-l-4 border-[#00AFE6]"
                                 : "text-gray-600 hover:text-gray-800 hover:bg-gray-100"
@@ -610,10 +609,10 @@ export default function Header() {
                               setMobileDropdowns({});
                             }}
                           >
-                            {dropdownItem.name}
-                            {location === dropdownItem.href && (
-                              <div className="inline-block ml-2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                            )}
+                            <div className={`w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full ${
+                              location === dropdownItem.href ? "opacity-100" : "opacity-50"
+                            }`}></div>
+                            <span className="text-left">{dropdownItem.name}</span>
                           </a>
                         ))}
                       </motion.div>
@@ -636,7 +635,7 @@ export default function Header() {
                   >
                     <span>{item.name}</span>
                     {!item.isPrimary && isPageActive(item.href) && (
-                      <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                      <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                     )}
                   </a>
                 )}
@@ -646,15 +645,17 @@ export default function Header() {
 
           {/* Control Buttons Section */}
           <div className="px-4 pt-4 mt-4 border-t border-gray-200">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <LanguageSwitcher />
-              <ThemeToggle />
+            <div className="flex flex-col items-center gap-2 mb-3">
+              <div className="flex items-center justify-center gap-2">
+                <LanguageSwitcher />
+                <ThemeToggle />
+              </div>
               <button
                 onClick={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
-                className="flex items-center gap-1.5 bg-gray-100 backdrop-blur-sm border border-gray-300 rounded-full px-2.5 py-0.5 cursor-pointer hover:bg-gray-200 transition-all duration-300 shadow-sm h-6 min-w-[80px] justify-center text-gray-700 text-xs font-medium"
+                className="flex items-center gap-1.5 bg-gray-100 backdrop-blur-sm border border-gray-300 rounded-full px-3 py-1 cursor-pointer hover:bg-gray-200 transition-all duration-300 shadow-sm justify-center text-gray-700 text-xs font-medium"
               >
                 <Settings className="w-3.5 h-3.5" />
-                <span>Access</span>
+                <span>Accessibility</span>
               </button>
             </div>
 
@@ -665,7 +666,7 @@ export default function Header() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-gray-50 rounded-xl p-4 mt-3 border border-gray-200"
+                className="bg-white rounded-xl p-4 mt-3 border border-gray-300 shadow-lg"
               >
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="text-sm font-bold text-gray-900">
@@ -673,7 +674,7 @@ export default function Header() {
                   </h4>
                   <button
                     onClick={() => setIsAccessibilityOpen(false)}
-                    className="p-1 rounded-full hover:bg-gray-200"
+                    className="p-1 rounded-full hover:bg-gray-100 text-gray-600"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -682,22 +683,22 @@ export default function Header() {
                 <div className="space-y-3">
                   {/* Font Size */}
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-700">Text Size</span>
+                    <span className="text-xs text-gray-700 font-medium">Text Size</span>
                     <div className="flex items-center gap-1">
                       <button
                         onClick={decreaseFontSize}
                         disabled={fontSize <= 12}
-                        className="p-1 border rounded hover:bg-gray-100 disabled:opacity-50"
+                        className="p-1 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 text-gray-700"
                       >
                         <Minus className="w-3 h-3" />
                       </button>
-                      <span className="text-xs bg-gray-200 px-2 py-1 rounded min-w-[40px] text-center">
+                      <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded min-w-[40px] text-center font-medium">
                         {fontSize}px
                       </span>
                       <button
                         onClick={increaseFontSize}
                         disabled={fontSize >= 24}
-                        className="p-1 border rounded hover:bg-gray-100 disabled:opacity-50"
+                        className="p-1 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 text-gray-700"
                       >
                         <Plus className="w-3 h-3" />
                       </button>
@@ -712,7 +713,7 @@ export default function Header() {
                           "accessibility-high-contrast",
                         )
                       }
-                      className="text-xs px-2 py-1 border rounded hover:bg-gray-100 text-center"
+                      className="text-xs px-2 py-2 border border-gray-300 rounded hover:bg-gray-100 text-center text-gray-700 font-medium"
                     >
                       High Contrast
                     </button>
@@ -722,7 +723,7 @@ export default function Header() {
                           "accessibility-dyslexia-font",
                         )
                       }
-                      className="text-xs px-2 py-1 border rounded hover:bg-gray-100 text-center"
+                      className="text-xs px-2 py-2 border border-gray-300 rounded hover:bg-gray-100 text-center text-gray-700 font-medium"
                     >
                       Dyslexia Font
                     </button>
@@ -730,7 +731,7 @@ export default function Header() {
 
                   <button
                     onClick={resetSettings}
-                    className="w-full text-xs px-2 py-1 border rounded hover:bg-gray-100 text-center"
+                    className="w-full text-xs px-2 py-2 border border-gray-300 rounded hover:bg-gray-100 text-center text-gray-700 font-medium"
                   >
                     Reset Settings
                   </button>

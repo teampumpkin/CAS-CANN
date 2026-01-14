@@ -22,16 +22,31 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import ParallaxBackground from "../components/ParallaxBackground";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import cardiacAmyloidosisBooklet from "@assets/Living-with-cardiac-amyloidosis_1763624816977.pdf";
 import patientJourneyVideo from "@assets/video1888503207.mp4";
 
+// MST Timezone constant (America/Edmonton handles MST/MDT automatically)
+const MST_TIMEZONE = 'America/Edmonton';
+
+// Helper to get current date in MST timezone
+const getMSTDate = (): Date => {
+  const now = new Date();
+  const mstDateStr = now.toLocaleDateString('en-CA', { timeZone: MST_TIMEZONE });
+  const [year, month, day] = mstDateStr.split('-').map(Number);
+  return new Date(year, month - 1, day);
+};
+
 export default function CANNResources() {
+  const { t } = useLanguage();
   const [isCopied, setIsCopied] = useState(false);
   const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null);
+  const [activeEventTab, setActiveEventTab] = useState("upcoming");
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -48,16 +63,58 @@ export default function CANNResources() {
     }
   };
 
-  // Format date to "Thursday, September 25th, 2025"
+  // Format date to "Thursday, September 25th, 2025" in MST timezone
   const formatEventDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
-    const monthName = date.toLocaleDateString('en-US', { month: 'long' });
-    const day = date.getDate();
-    const year = date.getFullYear();
-    const ordinalSuffix = getOrdinalSuffix(day);
+    // Guard against empty or invalid date strings
+    if (!dateString) return "TBD";
     
-    return `${dayName}, ${monthName} ${day}${ordinalSuffix}, ${year}`;
+    // Check if it's a valid YYYY-MM-DD format
+    const parts = dateString.split("-").map(Number);
+    if (parts.length !== 3 || parts.some(isNaN)) {
+      // Not a YYYY-MM-DD format, return the original string (already human-readable)
+      return dateString;
+    }
+    
+    const [year, month, day] = parts;
+    
+    // Create a date that represents this date in MST
+    // Use noon to avoid any edge cases with daylight saving
+    const dateForFormatting = new Date(Date.UTC(year, month - 1, day, 18, 0, 0)); // 18:00 UTC = noon MST
+    
+    // Validate the date is valid
+    if (isNaN(dateForFormatting.getTime())) {
+      return dateString;
+    }
+    
+    // Format using MST timezone
+    const dayName = dateForFormatting.toLocaleDateString('en-US', { weekday: 'long', timeZone: MST_TIMEZONE });
+    const monthName = dateForFormatting.toLocaleDateString('en-US', { month: 'long', timeZone: MST_TIMEZONE });
+    const dayNumber = parseInt(dateForFormatting.toLocaleDateString('en-US', { day: 'numeric', timeZone: MST_TIMEZONE }));
+    const yearNumber = parseInt(dateForFormatting.toLocaleDateString('en-US', { year: 'numeric', timeZone: MST_TIMEZONE }));
+    const ordinalSuffix = getOrdinalSuffix(dayNumber);
+    
+    return `${dayName}, ${monthName} ${dayNumber}${ordinalSuffix}, ${yearNumber}`;
+  };
+
+  // Check if an event date has passed (using MST timezone)
+  const isEventPast = (dateString: string): boolean => {
+    if (!dateString || dateString === 'TBD') return false;
+    
+    // Check if it's a valid YYYY-MM-DD format
+    const parts = dateString.split("-").map(Number);
+    if (parts.length !== 3 || parts.some(isNaN)) {
+      return false; // Can't determine if non-ISO date is past
+    }
+    
+    const [year, month, day] = parts;
+    const eventDate = new Date(year, month - 1, day);
+    
+    if (isNaN(eventDate.getTime())) {
+      return false;
+    }
+    
+    const todayMST = getMSTDate();
+    return eventDate < todayMST;
   };
 
   const copyEmail = async () => {
@@ -72,211 +129,249 @@ export default function CANNResources() {
 
   const educationalResources = [
     {
-      title: "Amyloidosis Clinical Guidelines",
-      description:
-        "Comprehensive evidence-based guidelines for diagnosis and treatment of all amyloidosis types.",
-      type: "Clinical Guide",
-      format: "PDF",
-      size: "2.4 MB",
-      updated: "December 2024",
-      category: "Guidelines",
+      title: t('cannResources.resources.guidelines.title'),
+      description: t('cannResources.resources.guidelines.description'),
+      type: t('cannResources.resources.guidelines.type'),
+      format: t('cannResources.resources.format.pdf'),
+      size: t('cannResources.resources.guidelines.size'),
+      updated: t('cannResources.resources.guidelines.updated'),
+      category: t('cannResources.resources.categories.guidelines'),
     },
     {
-      title: "Nursing Care Protocols",
-      description:
-        "Specialized nursing care protocols for amyloidosis patients across different care settings.",
-      type: "Protocol Document",
-      format: "PDF",
-      size: "1.8 MB",
-      updated: "November 2024",
-      category: "Nursing",
+      title: t('cannResources.resources.protocols.title'),
+      description: t('cannResources.resources.protocols.description'),
+      type: t('cannResources.resources.protocols.type'),
+      format: t('cannResources.resources.format.pdf'),
+      size: t('cannResources.resources.protocols.size'),
+      updated: t('cannResources.resources.protocols.updated'),
+      category: t('cannResources.resources.categories.nursing'),
     },
     {
-      title: "Patient Assessment Tools",
-      description:
-        "Standardized assessment forms and screening tools for early detection and monitoring.",
-      type: "Assessment Tools",
-      format: "PDF",
-      size: "950 KB",
-      updated: "October 2024",
-      category: "Assessment",
+      title: t('cannResources.resources.assessment.title'),
+      description: t('cannResources.resources.assessment.description'),
+      type: t('cannResources.resources.assessment.type'),
+      format: t('cannResources.resources.format.pdf'),
+      size: t('cannResources.resources.assessment.size'),
+      updated: t('cannResources.resources.assessment.updated'),
+      category: t('cannResources.resources.categories.assessment'),
     },
     {
-      title: "Diagnostic Imaging Guide",
-      description:
-        "Best practices for imaging in amyloidosis diagnosis and staging.",
-      type: "Imaging Guide",
-      format: "PDF",
-      size: "3.2 MB",
-      updated: "September 2024",
-      category: "Diagnostics",
+      title: t('cannResources.resources.imaging.title'),
+      description: t('cannResources.resources.imaging.description'),
+      type: t('cannResources.resources.imaging.type'),
+      format: t('cannResources.resources.format.pdf'),
+      size: t('cannResources.resources.imaging.size'),
+      updated: t('cannResources.resources.imaging.updated'),
+      category: t('cannResources.resources.categories.diagnostics'),
     },
   ];
 
   const educationalSeries = [
     {
-      date: "October 7, 2025",
-      speaker: "Patient Advocate",
-      topic: "My Journey with Amyloidosis: A Patient's Perspective",
+      rawDate: "2025-10-07",
+      speaker: t('cannResources.series.session1.speaker'),
+      topic: t('cannResources.series.session1.topic'),
     },
     {
-      date: "May 13, 2025",
-      speaker:
-        "1. Krista Jelisava, RN, BScN, Co-Chair, CANN 2. Rose Ramm, RN, BN, Co-Chair, CANN",
-      topic: "Interesting Case Presentation and Discussion",
+      rawDate: "2025-05-13",
+      speaker: t('cannResources.series.session2.speaker'),
+      topic: t('cannResources.series.session2.topic'),
     },
     {
-      date: "January 28, 2025",
-      speaker: "Marc Bains, Co-Founder, HeartLife Foundation",
-      topic:
-        "Living with Heart Failure is About Life, Not Failure – HeartLife Story and Advancement of National Advocacy",
+      rawDate: "2025-01-28",
+      speaker: t('cannResources.series.session3.speaker'),
+      topic: t('cannResources.series.session3.topic'),
     },
     {
-      date: "October 8, 2024",
-      speaker:
-        "Dr. Vidya Raj, Medical Director Hearts and Minds Clinic, Libin Cardiovascular Institute, Cumming School of Medicine, University of Calgary",
-      topic:
-        "Mental Health and Amyloidosis – Insights on Psychiatric Management of Patients with Cardiac Amyloidosis",
+      rawDate: "2024-10-08",
+      speaker: t('cannResources.series.session4.speaker'),
+      topic: t('cannResources.series.session4.topic'),
     },
     {
-      date: "April 16, 2024",
-      speaker:
-        "Dr. Nowell Fine, Associate Professor, University of Calgary, Director, Amyloidosis Program of Calgary",
-      topic: "Lab Evaluation and Monitoring of Cardiac Amyloidosis",
+      rawDate: "2024-04-16",
+      speaker: t('cannResources.series.session5.speaker'),
+      topic: t('cannResources.series.session5.topic'),
     },
     {
-      date: "December 13, 2023",
-      speaker:
-        "Dr. Victor Jimenez Zepeda, Associate Professor, University of Calgary, Co-Director, Amyloidosis Program of Calgary",
-      topic:
-        "AL Amyloidosis: Diagnosis and Treatment in 2024 – Unfolding the Fibrils",
+      rawDate: "2023-12-13",
+      speaker: t('cannResources.series.session6.speaker'),
+      topic: t('cannResources.series.session6.topic'),
     },
   ];
 
-  const upcomingEvents = [
+  // All CANN events with rawDate for automatic past/upcoming categorization
+  const allCANNEvents = [
     {
-      title: "CANN Educational Series",
-      date: "Coming Soon – February 2026, date TBD",
-      time: "TBD",
-      location: "Virtual – login to CANN member portal for access details",
-      format: "Webinar",
-      description:
-        "Occurring 3-4 times per year, topics and speakers are tailored toward the needs of CANN members.",
+      id: 1,
+      title: t('cannResources.events.eduSeries.title'),
+      date: t('cannResources.events.eduSeries.date'),
+      rawDate: "2026-02-18", // February 18, 2026 MST
+      time: t('cannResources.events.eduSeries.time'),
+      location: t('cannResources.events.eduSeries.location'),
+      format: t('cannResources.events.eduSeries.format'),
+      description: t('cannResources.events.eduSeries.description'),
       topic: undefined as string | undefined,
-      registrationDeadline: "Registration not required",
-      cmeCredits: "1 hour",
-      type: "Webinar",
+      presentationTitle: t('cannResources.events.eduSeries.presentationTitle'),
+      speaker: t('cannResources.events.eduSeries.speaker'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.eduSeries.credits'),
+      type: t('cannResources.events.types.webinar'),
     },
     {
-      title: "CANN Quarterly Meeting",
-      date: "December 2, 2025",
-      time: "2:00 – 3:00 MST",
-      location: "Virtual – Access details (Zoom) will be sent to CANN members.",
-      format: "Virtual Meeting",
-      description:
-        "All members' welcome! Connect with CANN members and receive live communication and updates about the network.",
-      registrationDeadline: "Registration not required",
-      cmeCredits: "1 hour",
-      type: "Meeting",
+      id: 2,
+      title: t('cannResources.events.quarterly.title'),
+      date: t('cannResources.events.quarterly.date'),
+      rawDate: "2025-12-02",
+      time: t('cannResources.events.quarterly.time'),
+      location: t('cannResources.events.quarterly.location'),
+      format: t('cannResources.events.quarterly.format'),
+      description: t('cannResources.events.quarterly.description'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.quarterly.credits'),
+      type: t('cannResources.events.types.meeting'),
     },
     {
-      title: "CANN Townhall – Ideation Workshop",
-      date: "January 22, 2026",
-      time: "5:00 PM - 6:30 PM (MST)",
-      location: "Virtual - Login to CANN member portal for access details",
-      format: "Virtual Workshop",
-      description:
-        "We want to hear from you! This live session will be professionally facilitated, designed to understand the needs of new/current CANN members and shape future direction.",
-      registrationDeadline: "Registration is now open",
-      cmeCredits: "1.5 - 2 hours",
-      type: "Townhall",
-      registrationUrl: "/events/cann-townhall/register",
+      id: 3,
+      title: t('cannResources.events.townhall.title'),
+      date: t('cannResources.events.townhall.date'),
+      rawDate: "2026-01-22",
+      time: t('cannResources.events.townhall.time'),
+      location: t('cannResources.events.townhall.location'),
+      format: t('cannResources.events.townhall.format'),
+      description: t('cannResources.events.townhall.description'),
+      registrationDeadline: t('cannResources.events.townhall.registration'),
+      cmeCredits: t('cannResources.events.townhall.credits'),
+      type: t('cannResources.events.types.townhall'),
+      registrationUrl: "https://pangaea-consultants.typeform.com/to/uakirBOt?typeform-source=www.google.com",
       requiresCANNMembership: true,
     },
     {
-      title: "Canadian Amyloidosis Summit",
-      date: "Coming Soon – Fall 2026",
-      time: "TBD",
-      location: "TBD",
-      format: "In-person",
-      description:
-        "Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.",
-      registrationDeadline: "Coming Soon",
-      cmeCredits: "3 days",
-      type: "Conference",
+      id: 4,
+      title: t('cannResources.events.quarterlyMar2026.title'),
+      date: t('cannResources.events.quarterlyMar2026.date'),
+      rawDate: "2026-03-10",
+      time: t('cannResources.events.quarterlyMar2026.time'),
+      location: t('cannResources.events.quarterlyMar2026.location'),
+      format: t('cannResources.events.quarterlyMar2026.format'),
+      description: t('cannResources.events.quarterlyMar2026.description'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.quarterlyMar2026.credits'),
+      type: t('cannResources.events.types.meeting'),
+    },
+    {
+      id: 5,
+      title: t('cannResources.events.summit.title'),
+      date: t('cannResources.events.summit.date'),
+      rawDate: "2026-10-15", // Fall 2026 TBD
+      displayDate: "Fall 2026 – date TBD",
+      time: t('cannResources.events.summit.time'),
+      location: t('cannResources.events.summit.location'),
+      format: t('cannResources.events.summit.format'),
+      description: t('cannResources.events.summit.description'),
+      registrationDeadline: t('cannResources.comingSoon'),
+      cmeCredits: t('cannResources.events.summit.credits'),
+      type: t('cannResources.events.types.conference'),
     },
   ];
 
+  // Helper to parse raw date string as local date for consistent timezone handling
+  const parseLocalDate = (dateString: string): Date => {
+    const [year, month, day] = dateString.split("-").map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  // Categorize events into upcoming and past
+  const categorizeEvents = () => {
+    const upcoming = allCANNEvents.filter(event => !isEventPast(event.rawDate));
+    const past = allCANNEvents.filter(event => isEventPast(event.rawDate));
+    
+    // Sort upcoming by date (soonest first) - using local date parsing
+    upcoming.sort((a, b) => {
+      const dateA = parseLocalDate(a.rawDate);
+      const dateB = parseLocalDate(b.rawDate);
+      return dateA.getTime() - dateB.getTime();
+    });
+    
+    // Sort past by date (most recent first) - using local date parsing
+    past.sort((a, b) => {
+      const dateA = parseLocalDate(a.rawDate);
+      const dateB = parseLocalDate(b.rawDate);
+      return dateB.getTime() - dateA.getTime();
+    });
+    
+    return { upcoming, past };
+  };
+
+  const { upcoming: upcomingEvents, past: pastEvents } = categorizeEvents();
+
   const trainingPrograms = [
     {
-      title: "Amyloidosis Specialist Certification",
-      duration: "8 weeks",
-      format: "Blended Learning",
-      level: "Advanced",
-      description:
-        "Comprehensive certification program for healthcare professionals specializing in amyloidosis care.",
+      title: t('cannResources.training.certification.title'),
+      duration: t('cannResources.training.certification.duration'),
+      format: t('cannResources.training.certification.format'),
+      level: t('cannResources.training.levels.advanced'),
+      description: t('cannResources.training.certification.description'),
       modules: [
-        "Pathophysiology",
-        "Diagnosis",
-        "Treatment",
-        "Patient Management",
+        t('cannResources.training.modules.pathophysiology'),
+        t('cannResources.training.modules.diagnosis'),
+        t('cannResources.training.modules.treatment'),
+        t('cannResources.training.modules.patientManagement'),
       ],
-      nextStart: "April 2025",
+      nextStart: t('cannResources.training.certification.nextStart'),
     },
     {
-      title: "Early Detection Workshop",
-      duration: "1 day",
-      format: "In-person",
-      level: "Intermediate",
-      description:
-        "Intensive workshop on recognizing early signs and symptoms of amyloidosis.",
-      modules: ["Red Flags", "Screening Tools", "Referral Pathways"],
-      nextStart: "March 2025",
+      title: t('cannResources.training.detection.title'),
+      duration: t('cannResources.training.detection.duration'),
+      format: t('cannResources.training.detection.format'),
+      level: t('cannResources.training.levels.intermediate'),
+      description: t('cannResources.training.detection.description'),
+      modules: [
+        t('cannResources.training.modules.redFlags'),
+        t('cannResources.training.modules.screeningTools'),
+        t('cannResources.training.modules.referralPathways'),
+      ],
+      nextStart: t('cannResources.training.detection.nextStart'),
     },
     {
-      title: "Research Methods in Amyloidosis",
-      duration: "6 weeks",
-      format: "Online",
-      level: "Advanced",
-      description:
-        "Research methodology course specifically designed for amyloidosis studies.",
+      title: t('cannResources.training.research.title'),
+      duration: t('cannResources.training.research.duration'),
+      format: t('cannResources.training.research.format'),
+      level: t('cannResources.training.levels.advanced'),
+      description: t('cannResources.training.research.description'),
       modules: [
-        "Study Design",
-        "Data Collection",
-        "Statistical Analysis",
-        "Publication",
+        t('cannResources.training.modules.studyDesign'),
+        t('cannResources.training.modules.dataCollection'),
+        t('cannResources.training.modules.statisticalAnalysis'),
+        t('cannResources.training.modules.publication'),
       ],
-      nextStart: "May 2025",
+      nextStart: t('cannResources.training.research.nextStart'),
     },
   ];
 
   const researchPublications = [
     {
-      title: "CANN Registry Annual Report 2024",
-      authors: "CANN Research Committee",
-      journal: "CANN Publications",
+      title: t('cannResources.publications.registry.title'),
+      authors: t('cannResources.publications.registry.authors'),
+      journal: t('cannResources.publications.registry.journal'),
       year: "2024",
-      type: "Report",
-      abstract:
-        "Comprehensive analysis of amyloidosis cases across Canada with treatment outcomes and survival data.",
+      type: t('cannResources.publications.types.report'),
+      abstract: t('cannResources.publications.registry.abstract'),
     },
     {
-      title: "AI-Assisted Diagnosis in Cardiac Amyloidosis",
-      authors: "Dr. Smith et al.",
-      journal: "Canadian Journal of Cardiology",
+      title: t('cannResources.publications.ai.title'),
+      authors: t('cannResources.publications.ai.authors'),
+      journal: t('cannResources.publications.ai.journal'),
       year: "2024",
-      type: "Research Article",
-      abstract:
-        "Machine learning approaches to improve diagnostic accuracy in cardiac amyloidosis.",
+      type: t('cannResources.publications.types.article'),
+      abstract: t('cannResources.publications.ai.abstract'),
     },
     {
-      title: "Nursing Interventions in AL Amyloidosis",
-      authors: "CANN Nursing Committee",
-      journal: "Canadian Oncology Nursing Journal",
+      title: t('cannResources.publications.nursing.title'),
+      authors: t('cannResources.publications.nursing.authors'),
+      journal: t('cannResources.publications.nursing.journal'),
       year: "2024",
-      type: "Clinical Study",
-      abstract:
-        "Evidence-based nursing interventions to improve quality of life in AL amyloidosis patients.",
+      type: t('cannResources.publications.types.study'),
+      abstract: t('cannResources.publications.nursing.abstract'),
     },
   ];
 
@@ -303,7 +398,7 @@ export default function CANNResources() {
             <div className="inline-flex items-center gap-3 bg-pink-500/10 dark:bg-pink-400/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 dark:border-pink-400/20 mb-6">
               <BookOpen className="w-5 h-5 text-pink-600" />
               <span className="text-sm font-medium text-gray-700 dark:text-white/90">
-                Professional Resources
+                {t('cannResources.badge')}
               </span>
             </div>
 
@@ -313,14 +408,12 @@ export default function CANNResources() {
               </span>
               <br />
               <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                Resources & Events
+                {t('cannResources.heroTitle.resourcesEvents')}
               </span>
             </h1>
 
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-8 max-w-3xl mx-auto">
-              Access a variety of educational sessions and materials, patient
-              resources, and professional development opportunities for
-              amyloidosis nurses.
+              {t('cannResources.heroDescription')}
             </p>
           </motion.div>
         </div>
@@ -337,11 +430,11 @@ export default function CANNResources() {
           >
             <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                CANN Educational Series
+                {t('cannResources.educationalSeries.title')}
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Past CANN Educational Series – Access previously recorded sessions
+              {t('cannResources.educationalSeries.subtitle')}
             </p>
           </motion.div>
 
@@ -360,11 +453,10 @@ export default function CANNResources() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                      Members Only Access
+                      {t('cannResources.membersOnly.title')}
                     </h3>
                     <p className="text-gray-600 dark:text-white/70 text-sm">
-                      Join CANN to access exclusive recorded training sessions
-                      and educational resources
+                      {t('cannResources.membersOnly.description')}
                     </p>
                   </div>
                 </div>
@@ -416,7 +508,7 @@ export default function CANNResources() {
                     <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 px-3 py-1 rounded-full border border-[#00AFE6]/20 mb-3 w-fit">
                       <Calendar className="w-4 h-4 text-[#00AFE6]" />
                       <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00DD89]">
-                        {formatEventDate(session.date)}
+                        {formatEventDate(session.rawDate)}
                       </span>
                     </div>
                     
@@ -456,12 +548,11 @@ export default function CANNResources() {
           >
             <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Educational Materials
+                {t('cannResources.materials.title')}
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Educational resources for amyloidosis nurses, healthcare
-              professionals and patients.
+              {t('cannResources.materials.description')}
             </p>
           </motion.div>
 
@@ -482,22 +573,22 @@ export default function CANNResources() {
 
                   {/* Badge */}
                   <Badge className="bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 px-3 py-1 text-xs font-medium rounded-full mb-4 w-fit">
-                    Patient Resource
+                    Patient and Caregiver Resource
                   </Badge>
 
                   {/* Title */}
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors duration-300">
-                    Living with Cardiac Amyloidosis
+                    Living with Cardiac Amyloidosis Patient Booklet
                   </h3>
 
                   {/* Description */}
                   <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-4">
-                    Living with Cardiac Amyloidosis is a helpful guide for people who have this condition, their families, and anyone who wants to learn more about it. It explains what cardiac amyloidosis is, how it is diagnosed, and how it can be treated.
+                    This comprehensive guide is meant to help patients and their caregivers better understand cardiac amyloidosis. It covers many topics including clarifying the disease process, symptoms, diagnosis, treatment, and other important aspects of living with this condition. The booklet can be downloaded and/or printed to share with others.
                   </p>
 
                   {/* French Translation Notice */}
-                  <div className="mb-6 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                    <p className="text-xs text-blue-700 dark:text-blue-300 font-medium text-center italic">
+                  <div className="mb-6 p-3 bg-pink-50 dark:bg-pink-900/20 rounded-lg border border-pink-200 dark:border-pink-800">
+                    <p className="text-xs text-pink-700 dark:text-pink-300 font-medium text-center italic">
                       French translation of the booklet coming soon
                     </p>
                   </div>
@@ -523,7 +614,7 @@ export default function CANNResources() {
           </div>
         </div>
       </section>
-      {/* Upcoming Events Section */}
+      {/* Events Section with Tabs */}
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
@@ -535,172 +626,320 @@ export default function CANNResources() {
           >
             <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Upcoming Events
+                {t('cannResources.eventsSection.title')}
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Professional development opportunities, conferences, educational
-              sessions and CANN events, including quarterly meetings.
+              {t('cannResources.eventsSection.subtitle')}
             </p>
           </motion.div>
 
-          <motion.div
-            className="mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
+          <Tabs
+            value={activeEventTab}
+            onValueChange={setActiveEventTab}
+            className="max-w-6xl mx-auto"
           >
-            <div className="bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 rounded-2xl p-6 shadow-lg border border-pink-200/50 dark:border-slate-700/50 max-w-4xl mx-auto">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-3 flex-shrink-0">
-                    <Users className="w-6 h-6 text-pink-600 dark:text-pink-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
-                      Members Only Events
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      Join CANN to access exclusive professional development
-                      opportunities
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  onClick={() =>
-                    (window.location.href = "/about-cann#join-section")
-                  }
-                  size="lg"
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 w-full sm:w-auto sm:flex-shrink-0"
+            {/* Tab Buttons */}
+            <div className="flex justify-center mb-8 overflow-x-auto pb-2">
+              <div className="bg-gradient-to-r from-pink-100/80 to-purple-100/60 dark:from-pink-900/20 dark:to-purple-900/20 backdrop-blur-xl border border-pink-500/20 dark:border-pink-500/30 rounded-2xl p-1 sm:p-2 shadow-2xl inline-flex min-w-max">
+                <button
+                  onClick={() => setActiveEventTab("upcoming")}
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                    activeEventTab === "upcoming"
+                      ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+                      : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-pink-100/50 dark:hover:bg-pink-900/30"
+                  }`}
+                  data-testid="tab-upcoming-events"
                 >
-                  <Users className="w-4 h-4 mr-2" />
-                  Join CANN
-                </Button>
+                  {t('cannResources.tabs.upcomingEvents')}
+                </button>
+                <button
+                  onClick={() => setActiveEventTab("past")}
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                    activeEventTab === "past"
+                      ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+                      : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-pink-100/50 dark:hover:bg-pink-900/30"
+                  }`}
+                  data-testid="tab-past-events"
+                >
+                  {t('cannResources.tabs.pastEvents')}
+                </button>
               </div>
             </div>
-          </motion.div>
 
-          <div className="space-y-8">
-            {upcomingEvents.map((event, index) => (
+            {/* Upcoming Events Tab */}
+            <TabsContent value="upcoming" className="mt-0">
+              {/* Members Only Banner */}
               <motion.div
-                key={index}
+                className="mb-12"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-pink-50/30 dark:from-gray-900 dark:to-pink-900/10 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
-                  <CardContent className="p-8">
-                    <div className="grid lg:grid-cols-3 gap-6">
-                      <div className="lg:col-span-2">
-                        <div className="flex items-center gap-3 mb-4">
-                          <Badge
-                            variant="outline"
-                            className="border-pink-500 text-pink-600"
-                          >
-                            {event.type}
-                          </Badge>
-                          <Badge
-                            variant="secondary"
-                            className="bg-gray-100 dark:bg-gray-800"
-                          >
-                            {event.format}
-                          </Badge>
-                        </div>
-                        <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
-                          {event.title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-white/70 mb-4 leading-relaxed">
-                          {event.description}
-                        </p>
-                        {index === 0 && event.topic && (
-                          <div className="mb-4 p-4 bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 border border-pink-200 dark:border-pink-800 rounded-xl">
-                            <div className="text-sm font-medium text-pink-600 dark:text-pink-400 mb-1">
-                              Session Topic:
-                            </div>
-                            <div className="text-gray-800 dark:text-white font-medium italic">
-                              "{event.topic}"
-                            </div>
-                          </div>
-                        )}
-                        <div className="grid md:grid-cols-2 gap-4 text-sm">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-pink-500" />
-                            <span>{event.date}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-pink-500" />
-                            <span>{event.time}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-pink-500" />
-                            <span>Virtual</span>
-                          </div>
-                        </div>
+                <div className="bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 rounded-2xl p-6 shadow-lg border border-pink-200/50 dark:border-slate-700/50 max-w-4xl mx-auto">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-3 flex-shrink-0">
+                        <Users className="w-6 h-6 text-pink-600 dark:text-pink-400" />
                       </div>
-                      <div className="flex flex-col justify-between">
-                        <div className="mb-4">
-                          {event.registrationUrl ? (
-                            <div className="space-y-3">
-                              {event.requiresCANNMembership && (
-                                <div className="inline-flex items-center gap-2 bg-[#00AFE6]/10 dark:bg-[#00AFE6]/20 px-2 py-1 rounded-full border border-[#00AFE6]/30 dark:border-[#00AFE6]/40">
-                                  <span className="text-xs font-medium text-[#00AFE6] dark:text-[#00AFE6]">
-                                    CANN Members Only
-                                  </span>
-                                </div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
+                          {t('cannResources.eventsAccess.title')}
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-300 text-sm">
+                          {t('cannResources.eventsAccess.description')}
+                        </p>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => (window.location.href = "/about-cann#join-section")}
+                      size="lg"
+                      className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 w-full sm:w-auto sm:flex-shrink-0"
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      {t('cannResources.eventsAccess.joinButton')}
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Upcoming Events List */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {upcomingEvents.length > 0 ? (
+                  upcomingEvents.map((event, index) => (
+                    <motion.div
+                      key={event.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="h-full"
+                    >
+                      <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-pink-500/50 dark:hover:border-pink-500/60 hover:shadow-2xl hover:shadow-pink-500/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden">
+                        {/* Header Section */}
+                        <div className="relative p-6 pb-4 bg-gradient-to-br from-pink-500/10 via-purple-500/5 to-transparent">
+                          <div className="flex justify-between items-start mb-4">
+                            <div className="w-16 h-16 bg-gradient-to-br from-pink-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center">
+                              <Calendar className="w-8 h-8 text-pink-500" />
+                            </div>
+                            <div className="flex flex-wrap gap-2 justify-end">
+                              <Badge className="bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 px-2 py-1 text-xs font-medium rounded">
+                                {event.type}
+                              </Badge>
+                              {event.format && (
+                                <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800 px-2 py-1 text-xs">
+                                  {event.format}
+                                </Badge>
                               )}
+                            </div>
+                          </div>
+                          <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug">
+                            {event.title}{event.presentationTitle && ` - ${event.presentationTitle}`}
+                          </h3>
+                          {/* Speaker - in header below presentation title */}
+                          {event.speaker && (
+                            <div className="flex items-start gap-2 text-sm mt-3">
+                              <User className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
                               <div>
-                                <Link href={event.registrationUrl}>
+                                <span className="font-medium text-gray-600 dark:text-white/70">{t('cannResources.events.speakerLabel')}</span>
+                                <p className="text-gray-800 dark:text-white font-bold mt-1 whitespace-pre-line">
+                                  {event.speaker}
+                                </p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Content Section */}
+                        <CardContent className="p-6 pt-0 flex flex-col flex-1">
+                          {/* Event Details */}
+                          <div className="space-y-2 mb-4">
+                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                              <Calendar className="w-4 h-4 text-pink-500" />
+                              <span>{event.displayDate || formatEventDate(event.rawDate)}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                              <Clock className="w-4 h-4 text-pink-500" />
+                              <span>{event.time}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                              <MapPin className="w-4 h-4 text-pink-500" />
+                              <span>{event.location}</span>
+                            </div>
+                          </div>
+
+                          {/* Optional Topic Box */}
+                          {event.topic && (
+                            <div className="mb-4 p-3 bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 border border-pink-200 dark:border-pink-800 rounded-xl">
+                              <div className="text-xs font-medium text-pink-600 dark:text-pink-400 mb-1">
+                                {t('cannResources.events.sessionTopic')}
+                              </div>
+                              <div className="text-sm text-gray-800 dark:text-white font-medium italic">
+                                "{event.topic}"
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Description */}
+                          <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-4">
+                            {event.description}
+                          </p>
+
+                          {/* Optional CME Credits */}
+                          {event.cmeCredits && (
+                            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                              <Award className="w-4 h-4 text-pink-500" />
+                              <span>{event.cmeCredits}</span>
+                            </div>
+                          )}
+
+                          {/* CTA Section */}
+                          {event.registrationUrl ? (
+                            <div className="text-center p-3 bg-gradient-to-r from-pink-500/15 to-purple-600/15 rounded-xl border border-pink-500/40 shadow-md shadow-pink-500/10 relative overflow-hidden space-y-2">
+                              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/5 to-purple-600/5 opacity-50 animate-pulse"></div>
+                              <div className="relative z-10">
+                                {/* Registration Message */}
+                                {event.registrationDeadline && (
+                                  <p className="text-xs font-medium text-gray-700 dark:text-white/80 mb-2">
+                                    {event.registrationDeadline}
+                                  </p>
+                                )}
+                                {event.requiresCANNMembership && (
+                                  <div className="flex items-center justify-center gap-1 mb-2">
+                                    <div className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-pulse"></div>
+                                    <p className="text-xs font-medium text-pink-600 dark:text-pink-400">
+                                      {t('cannResources.events.cannMembersOnly')}
+                                    </p>
+                                    <div className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-pulse"></div>
+                                  </div>
+                                )}
+                                <a 
+                                  href={event.registrationUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
                                   <Button
                                     size="sm"
-                                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-lg w-full"
-                                    data-testid={`button-register-${event.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
+                                    data-testid={`button-register-${event.id}`}
                                   >
-                                    <ExternalLink className="w-4 h-4 mr-2" />
-                                    Register Now
+                                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                                    <div className="relative z-10 flex items-center justify-center text-white">
+                                      <ExternalLink className="w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300" />
+                                      {t('cannResources.events.registerNow')}
+                                      <div className="ml-1 w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+                                    </div>
                                   </Button>
-                                </Link>
+                                </a>
                               </div>
                             </div>
                           ) : (
-                            <>
-                              <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                                Registration:
+                            <div className="text-center p-3 bg-gradient-to-r from-pink-500/10 to-purple-600/10 rounded-xl border border-pink-500/30">
+                              <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                                {t('cannResources.events.registration')}
                               </div>
-                              <div className="font-semibold text-pink-600">
+                              <div className="text-sm font-semibold text-pink-600 dark:text-pink-400">
                                 {event.registrationDeadline}
                               </div>
-                            </>
-                          )}
-                          {!event.registrationUrl && event.location
-                            ?.toLowerCase()
-                            .includes("login to cann member portal") && (
-                            <div className="mt-3 space-y-2">
-                              <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full border border-blue-200 dark:border-blue-800">
-                                <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
-                                  Coming Soon
-                                </span>
-                              </div>
-                              <Button
-                                disabled
-                                size="sm"
-                                className="bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-lg cursor-not-allowed w-full"
-                              >
-                                Log in
-                              </Button>
                             </div>
                           )}
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <Calendar className="w-16 h-16 text-pink-300 mx-auto mb-4" />
+                    <p className="text-gray-500 dark:text-gray-400 text-lg">
+                      {t('cannResources.events.noUpcoming')}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+
+            {/* Past Events Tab */}
+            <TabsContent value="past" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {pastEvents.length > 0 ? (
+                  pastEvents.map((event, index) => (
+                    <motion.div
+                      key={event.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-pink-500/50 dark:hover:border-pink-500/60 hover:shadow-2xl hover:shadow-pink-500/15 transition-all duration-500 h-full group rounded-3xl overflow-hidden">
+                        <div className="relative p-8 pb-6 bg-gradient-to-br from-pink-500/10 via-purple-500/5 to-transparent">
+                          <div className="absolute top-4 right-4">
+                            <Badge className="bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 px-3 py-1 text-xs font-medium rounded-full">
+                              {event.type}
+                            </Badge>
+                          </div>
+
+                          <div className="w-16 h-16 bg-gradient-to-br from-pink-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                            <Calendar className="w-8 h-8 text-pink-500 group-hover:text-purple-500 transition-colors duration-300" />
+                          </div>
+
+                          <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 leading-tight group-hover:text-pink-500 transition-colors duration-300">
+                            {event.title}
+                          </h3>
                         </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+
+                        <CardContent className="p-8 pt-0 flex flex-col flex-1">
+                          <div className="space-y-3 mb-6">
+                            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-pink-500/5 to-purple-600/5 rounded-xl border border-pink-500/10">
+                              <Calendar className="w-5 h-5 text-pink-500 flex-shrink-0" />
+                              <span className="text-sm font-medium text-gray-700 dark:text-white/80">
+                                {formatEventDate(event.rawDate)}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-pink-500/5 to-purple-600/5 rounded-xl border border-pink-500/10">
+                              <Clock className="w-5 h-5 text-pink-500 flex-shrink-0" />
+                              <span className="text-sm font-medium text-gray-700 dark:text-white/80">
+                                {event.time}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-pink-500/5 to-purple-600/5 rounded-xl border border-pink-500/10">
+                              <MapPin className="w-5 h-5 text-pink-500 flex-shrink-0" />
+                              <span className="text-sm font-medium text-gray-700 dark:text-white/80">
+                                {event.location}
+                              </span>
+                            </div>
+                          </div>
+
+                          <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed mb-4 flex-grow">
+                            {event.description}
+                          </p>
+
+                          {event.cmeCredits && (
+                            <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+                              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                                <Award className="w-4 h-4 text-pink-500" />
+                                <span>{event.cmeCredits}</span>
+                              </div>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <Calendar className="w-16 h-16 text-pink-300 mx-auto mb-4" />
+                    <p className="text-gray-500 dark:text-gray-400 text-lg">
+                      {t('cannResources.events.noPast')}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
+
       {/* Contact Section */}
       <section className="py-24 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 relative overflow-hidden">
         {/* Background Elements */}

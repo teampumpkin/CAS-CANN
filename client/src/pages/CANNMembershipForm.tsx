@@ -146,7 +146,7 @@ export default function CANNMembershipForm() {
       case "completed":
         return <CheckCircle className="h-5 w-5 text-green-600" />;
       case "processing":
-        return <Clock className="h-5 w-5 text-blue-600 animate-spin" />;
+        return <Clock className="h-5 w-5 text-pink-500 animate-spin" />;
       case "failed":
         return <AlertCircle className="h-5 w-5 text-red-600" />;
       default:
@@ -155,12 +155,12 @@ export default function CANNMembershipForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-white dark:from-gray-900 dark:to-gray-800 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex justify-center items-center gap-2 mb-4">
-            <Users className="h-8 w-8 text-blue-600" />
+            <Users className="h-8 w-8 text-pink-500" />
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
               Join CANN Today
             </h1>
@@ -197,9 +197,9 @@ export default function CANNMembershipForm() {
 
         {/* Main Form */}
         <Card className="shadow-xl">
-          <CardHeader className="bg-blue-600 text-white rounded-t-lg">
+          <CardHeader className="bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-t-lg">
             <CardTitle className="text-2xl">CANN Membership Application</CardTitle>
-            <CardDescription className="text-blue-100">
+            <CardDescription className="text-pink-100">
               Membership is free and open to all nursing professionals engaged in amyloidosis care
             </CardDescription>
           </CardHeader>
@@ -245,8 +245,8 @@ export default function CANNMembershipForm() {
                 {watchMembershipRequest === "Yes" && (
                   <>
                     <Separator />
-                    <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg space-y-6">
-                      <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-200">
+                    <div className="bg-pink-50 dark:bg-pink-900/20 p-6 rounded-lg space-y-6">
+                      <h3 className="text-lg font-semibold text-pink-800 dark:text-pink-200">
                         Membership Information
                       </h3>
                       
@@ -546,7 +546,7 @@ export default function CANNMembershipForm() {
                     type="submit"
                     size="lg"
                     disabled={submitMutation.isPending}
-                    className="w-full md:w-auto px-12 py-3 text-lg bg-blue-600 hover:bg-blue-700"
+                    className="w-full md:w-auto px-12 py-3 text-lg bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
                     data-testid="button-submit"
                   >
                     {submitMutation.isPending ? (

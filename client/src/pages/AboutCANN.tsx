@@ -28,7 +28,7 @@ import cannLogoImg from "@assets/CANN-RGB-dark-theme_1756219144378.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function AboutCANN() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   useScrollAnimations();
 
   // Scroll to top when component mounts
@@ -56,80 +56,71 @@ export default function AboutCANN() {
 
   const networkData = {
     mission: {
-      title: "Connecting Healthcare Professionals",
-      description:
-        "The Canadian Amyloidosis Nursing Network (CANN) is founded by nurses, for nurses. This purpose driven professional network is dedicated to supporting amyloidosis nurses and advancing nursing care for amyloidosis patients across Canada.",
+      title: t('aboutCANN.mission.title'),
+      description: t('aboutCANN.heroDescription'),
       keyPoints: [
-        "Multidisciplinary approach to amyloidosis care",
-        "Knowledge sharing and best practice development",
-        "Collaborative research initiatives and clinical trials",
-        "Professional development and training programs",
+        t('aboutCANN.mission.keyPoint1'),
+        t('aboutCANN.mission.keyPoint2'),
+        t('aboutCANN.mission.keyPoint3'),
+        t('aboutCANN.mission.keyPoint4'),
       ],
     },
     objectives: [
       {
-        title: "Education and Professional Development",
-        description:
-          "Focus on meeting the unique learning needs of amyloidosis nurses with tailored educational sessions and resources.",
+        title: t('aboutCANN.objectives.education.title'),
+        description: t('aboutCANN.objectives.education.description'),
         icon: GraduationCap,
         color: "from-pink-500 to-rose-500",
       },
       {
-        title: "Networking and Collaboration",
-        description:
-          "Facilitate communication and connection of nurses across the country.",
+        title: t('aboutCANN.objectives.networking.title'),
+        description: t('aboutCANN.objectives.networking.description'),
         icon: Network,
         color: "from-purple-500 to-pink-500",
       },
       {
-        title: "Knowledge Translation",
-        description:
-          "Unit nurses to share and develop best practices, tools and resources to improve care delivery and grow nursing expertise.",
+        title: t('aboutCANN.objectives.knowledge.title'),
+        description: t('aboutCANN.objectives.knowledge.description'),
         icon: BookOpen,
         color: "from-fuchsia-500 to-purple-500",
       },
       {
-        title: "Patient Advocacy",
-        description:
-          "Facilitate and enhance support for our patients and their caregivers.",
+        title: t('aboutCANN.objectives.advocacy.title'),
+        description: t('aboutCANN.objectives.advocacy.description'),
         icon: Heart,
         color: "from-violet-500 to-fuchsia-500",
       },
     ],
     network: {
-      coverage: "National Coverage",
-      centers: "Uniting Canadian Healthcare Centers",
-      provinces: "All 10 Provinces",
-      territories: "3 Territories",
+      coverage: t('aboutCANN.nationalCoverage'),
+      centers: t('aboutCANN.unitingCenters'),
+      provinces: t('aboutCANN.network.provinces'),
+      territories: t('aboutCANN.network.territories'),
     },
     achievements: [
       {
-        title: "Research Excellence",
-        description:
-          "Leading 12 active research projects and clinical trials across multiple amyloidosis types.",
+        title: t('aboutCANN.achievements.research.title'),
+        description: t('aboutCANN.achievements.research.description'),
         stat: "12+",
-        label: "Active Studies",
+        label: t('aboutCANN.achievements.research.label'),
       },
       {
-        title: "Professional Training",
-        description:
-          "Trained over 200 healthcare professionals in specialized amyloidosis care and diagnosis.",
+        title: t('aboutCANN.achievements.training.title'),
+        description: t('aboutCANN.achievements.training.description'),
         stat: "200+",
-        label: "Professionals Trained",
+        label: t('aboutCANN.achievements.training.label'),
       },
       {
-        title: "Patient Impact",
-        description:
-          "Improved care pathways have reduced average diagnosis time by 40% in network centers.",
+        title: t('aboutCANN.achievements.patient.title'),
+        description: t('aboutCANN.achievements.patient.description'),
         stat: "40%",
-        label: "Faster Diagnosis",
+        label: t('aboutCANN.achievements.patient.label'),
       },
       {
-        title: "Knowledge Sharing",
-        description:
-          "Published 35+ peer-reviewed articles and clinical guidelines through network collaboration.",
+        title: t('aboutCANN.achievements.knowledge.title'),
+        description: t('aboutCANN.achievements.knowledge.description'),
         stat: "35+",
-        label: "Publications",
+        label: t('aboutCANN.achievements.knowledge.label'),
       },
     ],
   };
@@ -137,23 +128,20 @@ export default function AboutCANN() {
   const keyPillars = [
     {
       icon: GraduationCap,
-      title: "Professional Development",
-      description:
-        "Advance your knowledge and expertise in amyloidosis nursing through curated educational sessions and resources.",
+      title: t('aboutCANN.pillars.professionalDevelopment.title'),
+      description: t('aboutCANN.pillars.professionalDevelopment.description'),
       color: "from-pink-400 to-rose-400",
     },
     {
       icon: Globe,
-      title: "National Collaboration",
-      description:
-        "Connect with nursing colleagues across Canada to share knowledge and best practices.",
+      title: t('aboutCANN.pillars.nationalCollaboration.title'),
+      description: t('aboutCANN.pillars.nationalCollaboration.description'),
       color: "from-purple-400 to-pink-400",
     },
     {
       icon: Heart,
-      title: "Patient Impact",
-      description:
-        "Improve patient outcomes through advocacy and collaborative support.",
+      title: t('aboutCANN.pillars.patientImpact.title'),
+      description: t('aboutCANN.pillars.patientImpact.description'),
       color: "from-fuchsia-400 to-purple-400",
     },
   ];
@@ -161,58 +149,52 @@ export default function AboutCANN() {
   const membershipBenefits = [
     {
       icon: Network,
-      title: "Professional Network",
-      description:
-        "Connect with amyloidosis nursing professionals across Canada.",
+      title: t('aboutCANN.benefits.professionalNetwork.title'),
+      description: t('aboutCANN.benefits.professionalNetwork.description'),
       color: "from-pink-400 to-rose-400",
     },
     {
       icon: BookOpen,
-      title: "Educational Resources",
-      description:
-        "Access to educational materials, live virtual educational sessions and recordings.",
+      title: t('aboutCANN.benefits.educationalResources.title'),
+      description: t('aboutCANN.benefits.educationalResources.description'),
       color: "from-purple-400 to-pink-400",
     },
     {
       icon: Users,
-      title: "Knowledge Sharing",
-      description:
-        "Share best practices, clinical resources and learn from experienced colleagues.",
+      title: t('aboutCANN.benefits.knowledgeSharing.title'),
+      description: t('aboutCANN.benefits.knowledgeSharing.description'),
       color: "from-fuchsia-400 to-purple-400",
     },
     {
       icon: Award,
-      title: "Professional Development",
-      description:
-        "Benefit from a network dedicated to meeting the unique learning needs of its nursing members.",
+      title: t('aboutCANN.benefits.professionalDev.title'),
+      description: t('aboutCANN.benefits.professionalDev.description'),
       color: "from-violet-400 to-fuchsia-400",
     },
     {
       icon: Globe,
-      title: "National Coverage",
-      description:
-        "Be part of a network spanning all provinces and territories.",
+      title: t('aboutCANN.benefits.nationalCoverage.title'),
+      description: t('aboutCANN.benefits.nationalCoverage.description'),
       color: "from-pink-400 to-rose-400",
     },
     {
       icon: Heart,
-      title: "Patient Impact",
-      description:
-        "Unite with Canadian nursing colleagues to improve patient outcomes through collaborative care.",
+      title: t('aboutCANN.benefits.patientImpact.title'),
+      description: t('aboutCANN.benefits.patientImpact.description'),
       color: "from-rose-400 to-pink-400",
     },
   ];
 
   const membershipRequirements = [
-    "Active nursing license in Canada",
-    "Interest and/or expertise in amyloidosis care",
-    "Commitment to professional development",
+    t('aboutCANN.joinCANN.req1'),
+    t('aboutCANN.joinCANN.req2'),
+    t('aboutCANN.joinCANN.req3'),
   ];
 
   const portalFeatures = [
-    "Access live and recorded educational sessions and other materials",
-    "Connect with network members, share tools and resources",
-    "View upcoming events, obtain schedules and access details for virtual CANN meetings and educational sessions",
+    t('aboutCANN.portalFeatures.feature1'),
+    t('aboutCANN.portalFeatures.feature2'),
+    t('aboutCANN.portalFeatures.feature3'),
   ];
 
   return (
@@ -268,22 +250,22 @@ export default function AboutCANN() {
               <div className="inline-flex items-center gap-3 bg-pink-500/10 dark:bg-pink-400/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 dark:border-pink-400/20 mb-6">
                 <Network className="w-5 h-5 text-pink-600" />
                 <span className="text-sm font-medium text-gray-700 dark:text-white/90">
-                  About Our Network
+                  {t('aboutCANN.badge')}
                 </span>
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                  About the Canadian
+                  {t('aboutCANN.heroTitle.about')}
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                  Amyloidosis Nursing Network
+                  {t('aboutCANN.heroTitle.network')}
                 </span>
               </h1>
 
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-                {networkData.mission.description}
+                {t('aboutCANN.heroDescription')}
               </p>
             </div>
           </motion.div>
@@ -312,27 +294,24 @@ export default function AboutCANN() {
                 <div className="inline-flex items-center gap-3 bg-pink-500/10 dark:bg-pink-400/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 dark:border-pink-400/20 mb-6">
                   <Network className="w-5 h-5 text-pink-600" />
                   <span className="text-sm font-medium text-gray-700 dark:text-white/90">
-                    Our Mission
+                    {t('aboutCANN.mission.badge')}
                   </span>
                 </div>
 
                 <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight">
                   <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                    {networkData.mission.title}
+                    {t('aboutCANN.mission.title')}
                   </span>
                 </h2>
 
                 <div className="space-y-6 text-gray-600 dark:text-white/70 leading-relaxed">
                   <p className="text-lg">
-                    As an affiliate of the Canadian Amyloidosis Society, we
-                    bring together nurses with interest and expertise in
-                    amyloidosis, united in our commitment to excellence in
-                    amyloidosis care.
+                    {t('aboutCANN.mission.description')}
                   </p>
                 </div>
 
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 mt-8">
-                  Key Pillars
+                  {t('aboutCANN.keyPillars')}
                 </h3>
                 <div className="space-y-6">
                   {keyPillars.map((pillar, index) => (
@@ -356,23 +335,23 @@ export default function AboutCANN() {
 
                 <div className="bg-gradient-to-r from-pink-500/10 to-purple-600/10 border border-pink-500/20 rounded-2xl p-6 mt-8">
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                    Network Impact
+                    {t('aboutCANN.networkImpact')}
                   </h3>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="text-pink-600 font-medium">
-                        Coverage:
+                        {t('aboutCANN.coverage')}
                       </span>
                       <div className="text-gray-700 dark:text-white/80">
-                        {networkData.network.coverage}
+                        {t('aboutCANN.nationalCoverage')}
                       </div>
                     </div>
                     <div>
                       <span className="text-pink-600 font-medium">
-                        Centers:
+                        {t('aboutCANN.centers')}
                       </span>
                       <div className="text-gray-700 dark:text-white/80">
-                        {networkData.network.centers}
+                        {t('aboutCANN.unitingCenters')}
                       </div>
                     </div>
                   </div>
@@ -408,7 +387,7 @@ export default function AboutCANN() {
                               {networkData.network.provinces}
                             </div>
                             <div className="text-xs text-gray-700 dark:text-white/80">
-                              Provinces
+                              {t('aboutCANN.provinces')}
                             </div>
                           </div>
                           <div className="text-center">
@@ -416,7 +395,7 @@ export default function AboutCANN() {
                               {networkData.network.territories}
                             </div>
                             <div className="text-xs text-gray-700 dark:text-white/80">
-                              Territories
+                              {t('aboutCANN.territories')}
                             </div>
                           </div>
                         </div>
@@ -458,12 +437,11 @@ export default function AboutCANN() {
           >
             <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Network Objectives
+                {t('aboutCANN.objectivesTitle')}
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Four key pillars guide CANN's mission to transform amyloidosis
-              care across Canada.
+              {t('aboutCANN.objectivesSubtitle')}
             </p>
           </motion.div>
 
@@ -509,12 +487,11 @@ export default function AboutCANN() {
             >
               <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
                 <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                  Membership Benefits
+                  {t('aboutCANN.membershipBenefitsTitle')}
                 </span>
               </h2>
               <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-                Join a network dedicated to serving the needs of members and
-                advancing amyloidosis nursing care across Canada.
+                {t('aboutCANN.membershipBenefitsSubtitle')}
               </p>
             </motion.div>
 

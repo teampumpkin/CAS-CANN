@@ -54,7 +54,7 @@ export default function Partnerships() {
       ],
     },
     {
-      category: "North American Partners",
+      category: "North American Organizations",
       icon: Heart,
       organizations: [
         {
@@ -74,6 +74,12 @@ export default function Partnerships() {
           description: "US-based amyloidosis patient orgnization",
           website: "https://www.amyloidosissupport.org",
           country: "United States",
+        },
+        {
+          name: "Transthyretin Amyloidosis Canada",
+          description: "Canadian amyloidosis patient organization",
+          website: "https://madhattr.ca/",
+          country: "Canada",
         },
       ],
     },
@@ -154,7 +160,7 @@ export default function Partnerships() {
           >
             <Handshake className="w-4 h-4 text-[#00AFE6]" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Strategic Partnerships
+              {t('partnerships.badge')}
             </span>
           </motion.div>
 
@@ -165,11 +171,11 @@ export default function Partnerships() {
             className="crawford-section-title mb-6"
           >
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-              Partnerships And Other
+              {t('partnerships.title.partnerships')}
             </span>
             <br />
             <span className="text-gray-800 dark:text-white">
-              Amyloidosis Organizations
+              {t('partnerships.title.organizations')}
             </span>
           </motion.h1>
 
@@ -179,7 +185,7 @@ export default function Partnerships() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-300 mb-6 max-w-2xl mx-auto"
           >
-            Collaborative relationships that strengthen our impact
+            {t('partnerships.subtitle')}
           </motion.h2>
 
           <motion.p
@@ -188,8 +194,7 @@ export default function Partnerships() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            We work with leading organizations to advance amyloidosis care,
-            research, and patient support across Canada.
+            {t('partnerships.description')}
           </motion.p>
 
           <motion.div
@@ -204,7 +209,7 @@ export default function Partnerships() {
               asChild
             >
               <Link href="/contact">
-                Contact Us
+                {t('partnerships.contactUs')}
                 <ExternalLink className="w-4 h-4 ml-2" />
               </Link>
             </Button>
@@ -279,11 +284,7 @@ export default function Partnerships() {
           >
             <h2 className="crawford-section-title mb-4">
               <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Amyloidosis
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Organizations
+                {t('partnerships.organizationsTitle')}
               </span>
             </h2>
           </motion.div>
@@ -341,7 +342,7 @@ export default function Partnerships() {
                               rel="noopener noreferrer"
                               className="flex items-center gap-2"
                             >
-                              Visit Website
+                              {t('partnerships.visitWebsite')}
                               <ExternalLink className="w-3 h-3" />
                             </a>
                           </Button>

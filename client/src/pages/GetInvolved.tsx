@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Users,
   Heart,
@@ -174,6 +175,7 @@ const recentEvents: any[] = [];
 const pastEvents: any[] = [];
 
 export default function GetInvolved() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("overview");
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const { toast } = useToast();
@@ -295,24 +297,22 @@ export default function GetInvolved() {
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-6 shadow-lg">
               <Users className="w-5 h-5 text-[#00AFE6]" />
               <span className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Get Involved
+                {t('getInvolved.badge')}
               </span>
             </div>
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-rosarivo mb-6 leading-tight">
               <span className="bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                Join Our Mission
+                {t('getInvolved.title.join')}
               </span>
               <br />
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                To Improve Awareness, Diagnosis, and Care
+                {t('getInvolved.title.improve')}
               </span>
             </h1>
 
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              The Canadian Amyloidosis Society is powered by people who care.
-              Whether you're a clinician, researcher, patient, caregiver, or
-              ally—you have a role to play in accelerating change.
+              {t('getInvolved.description')}
             </p>
           </motion.div>
         </div>
@@ -331,18 +331,17 @@ export default function GetInvolved() {
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
               <Users className="w-5 h-5 text-[#00AFE6]" />
               <span className="text-gray-800 dark:text-white/90 font-medium">
-                Get Involved
+                {t('getInvolved.badge')}
               </span>
             </div>
             <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
-              <span className="text-gray-800 dark:text-white">Ways to </span>
+              <span className="text-gray-800 dark:text-white">{t('getInvolved.waysToParticipate').split(' ')[0]} </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Participate
+                {t('getInvolved.waysToParticipate').split(' ').slice(1).join(' ')}
               </span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto">
-              Contribute to our mission of improving amyloidosis care across
-              Canada by joining CAS.
+              {t('getInvolved.waysDescription')}
             </p>
           </motion.div>
 
@@ -421,11 +420,11 @@ export default function GetInvolved() {
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
                 <Shield className="w-5 h-5 text-[#00AFE6]" />
                 <span className="text-gray-800 dark:text-white/90 font-medium">
-                  Membership
+                  {t('getInvolved.membership.badge')}
                 </span>
               </div>
               <h2 className="text-5xl lg:text-6xl font-bold font-rosarivo mb-6">
-                <span className="text-gray-800 dark:text-white">Why Join </span>
+                <span className="text-gray-800 dark:text-white">{t('getInvolved.membership.whyJoin').split(' CAS?')[0]} </span>
                 <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                   CAS?
                 </span>
@@ -448,7 +447,7 @@ export default function GetInvolved() {
                           <CheckCircle className="w-6 h-6 text-white" />
                         </div>
                         <h3 className="text-2xl font-bold text-gray-800 dark:text-white font-rosarivo">
-                          Member Benefits
+                          {t('getInvolved.memberBenefits.title')}
                         </h3>
                       </div>
                       <div className="w-16 h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
@@ -508,7 +507,7 @@ export default function GetInvolved() {
                           <Shield className="w-6 h-6 text-white" />
                         </div>
                         <h3 className="text-2xl font-bold text-gray-800 dark:text-white font-rosarivo">
-                          Participation Notes
+                          {t('getInvolved.participationNotes.title')}
                         </h3>
                       </div>
                       <div className="w-16 h-0.5 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full"></div>

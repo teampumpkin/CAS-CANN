@@ -13,8 +13,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
 import {
   Form,
   FormControl,
@@ -27,7 +25,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import {
   Dialog,
@@ -40,6 +37,7 @@ import { useToast } from "@/hooks/use-toast";
 import { casRegistrationSchema, type CASRegistrationForm } from "@shared/schema";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface SubmissionResponse {
   submissionId: string;
@@ -49,6 +47,7 @@ interface SubmissionResponse {
 
 export default function JoinCAS() {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [submissionType, setSubmissionType] = useState<'cann' | 'cas' | 'contact' | null>(null);
@@ -74,14 +73,11 @@ export default function JoinCAS() {
     },
   });
 
-  // Watch form values for conditional rendering
   const wantsMembership = form.watch("wantsMembership");
   const wantsCANNMembership = form.watch("wantsCANNMembership");
   
-  // Check if user is a member (either CAS or CANN)
   const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
 
-  // Submit form mutation
   const submitMutation = useMutation({
     mutationFn: async (formData: CASRegistrationForm): Promise<SubmissionResponse> => {
       const isCANNMember = formData.wantsCANNMembership === "Yes";
@@ -96,7 +92,6 @@ export default function JoinCAS() {
     onSuccess: (data) => {
       setSubmissionId(data.submissionId);
       
-      // Determine submission type
       const formValues = form.getValues();
       if (formValues.wantsCANNMembership === "Yes") {
         setSubmissionType('cann');
@@ -109,18 +104,18 @@ export default function JoinCAS() {
       setShowConfirmationModal(true);
       const isCANNMember = formValues.wantsCANNMembership === "Yes";
       toast({
-        title: "Registration Submitted Successfully!",
+        title: t('joinCAS.toast.successTitle'),
         description: isCANNMember 
-          ? "Your CAS & CANN membership registration has been received."
-          : "Your CAS membership registration has been received.",
+          ? t('joinCAS.toast.successCASCANN')
+          : t('joinCAS.toast.successCAS'),
       });
       form.reset();
     },
     onError: (error) => {
       console.error("Form submission error:", error);
       toast({
-        title: "Submission Failed",
-        description: "There was an error submitting your application. Please try again or contact us directly.",
+        title: t('joinCAS.toast.errorTitle'),
+        description: t('joinCAS.toast.errorDescription'),
         variant: "destructive",
       });
     },
@@ -154,33 +149,33 @@ export default function JoinCAS() {
             >
               <UserPlus className="w-5 h-5 text-[#00AFE6]" />
               <span className="text-sm font-semibold text-gray-900 dark:text-white tracking-wide">
-                Professional Membership Application
+                {t('joinCAS.badge')}
               </span>
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl font-bold font-rosarivo mb-6 text-gray-900 dark:text-white leading-tight">
-              Join{" "}
+              {t('joinCAS.title.join')}{" "}
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                CAS & CANN
+                {t('joinCAS.title.casCANN')}
               </span>
             </h1>
 
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
-              Become part of Canada's premier professional network for amyloidosis care.
+              {t('joinCAS.subtitle')}
             </p>
             
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-8">
               <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <Heart className="w-4 h-4 text-[#00AFE6]" />
-                <span>Patient-Focused</span>
+                <span>{t('joinCAS.patientFocused')}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <Users className="w-4 h-4 text-[#00DD89]" />
-                <span>Collaborative Network</span>
+                <span>{t('joinCAS.collaborativeNetwork')}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <Sparkles className="w-4 h-4 text-[#00AFE6]" />
-                <span>Evidence-Based</span>
+                <span>{t('joinCAS.evidenceBased')}</span>
               </div>
             </div>
           </motion.div>
@@ -200,9 +195,9 @@ export default function JoinCAS() {
               <CardHeader className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-white/5" />
                 <div className="relative z-10">
-                  <CardTitle className="text-3xl font-bold mb-2">Registration Form</CardTitle>
+                  <CardTitle className="text-3xl font-bold mb-2">{t('joinCAS.formTitle')}</CardTitle>
                   <CardDescription className="text-white/90 text-base">
-                    Complete the form below to join our professional community
+                    {t('joinCAS.formDescription')}
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -217,7 +212,7 @@ export default function JoinCAS() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-lg font-semibold">
-                            1. I would like to become a member of the Canadian Amyloidosis Society (CAS).
+                            {t('joinCAS.q1.label')}
                           </FormLabel>
                           <FormControl>
                             <RadioGroup
@@ -228,11 +223,11 @@ export default function JoinCAS() {
                             >
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="Yes" id="cas-yes" data-testid="radio-cas-yes" />
-                                <Label htmlFor="cas-yes">Yes</Label>
+                                <Label htmlFor="cas-yes">{t('joinCAS.yes')}</Label>
                               </div>
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="No" id="cas-no" data-testid="radio-cas-no" />
-                                <Label htmlFor="cas-no">No</Label>
+                                <Label htmlFor="cas-no">{t('joinCAS.no')}</Label>
                               </div>
                             </RadioGroup>
                           </FormControl>
@@ -248,10 +243,10 @@ export default function JoinCAS() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-lg font-semibold">
-                            2. I would like to become a member of the Canadian Amyloidosis Nursing Network (CANN).
+                            {t('joinCAS.q2.label')}
                           </FormLabel>
                           <FormDescription>
-                            All CANN members will also be members of the CAS.
+                            {t('joinCAS.q2.description')}
                           </FormDescription>
                           <FormControl>
                             <RadioGroup
@@ -262,11 +257,11 @@ export default function JoinCAS() {
                             >
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="Yes" id="cann-yes" data-testid="radio-cann-yes" />
-                                <Label htmlFor="cann-yes">Yes</Label>
+                                <Label htmlFor="cann-yes">{t('joinCAS.yes')}</Label>
                               </div>
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="No" id="cann-no" data-testid="radio-cann-no" />
-                                <Label htmlFor="cann-no">No</Label>
+                                <Label htmlFor="cann-no">{t('joinCAS.no')}</Label>
                               </div>
                             </RadioGroup>
                           </FormControl>
@@ -275,9 +270,7 @@ export default function JoinCAS() {
                       )}
                     />
 
-                    <Separator className="my-8" />
-
-                    {/* Questions 3-9: Member Information (shown when either Q1 or Q2 = "Yes") */}
+                    {/* Questions 3-10: Member Information (shown when either Q1 or Q2 = "Yes") */}
                     <AnimatePresence>
                       {isMember && (
                         <motion.div
@@ -294,10 +287,10 @@ export default function JoinCAS() {
                           name="fullName"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>3. Full Name (First and Last) *</FormLabel>
+                              <FormLabel>{t('joinCAS.q3.label')}</FormLabel>
                               <FormControl>
                                 <Input 
-                                  placeholder="Enter your full name" 
+                                  placeholder={t('joinCAS.q3.placeholder')} 
                                   {...field} 
                                   data-testid="input-full-name"
                                 />
@@ -313,11 +306,11 @@ export default function JoinCAS() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>4. Email Address *</FormLabel>
+                              <FormLabel>{t('joinCAS.q4.label')}</FormLabel>
                               <FormControl>
                                 <Input 
                                   type="email" 
-                                  placeholder="Enter your email address" 
+                                  placeholder={t('joinCAS.q4.placeholder')} 
                                   {...field} 
                                   data-testid="input-email"
                                 />
@@ -333,13 +326,13 @@ export default function JoinCAS() {
                           name="discipline"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>5. Professional designation *</FormLabel>
+                              <FormLabel>{t('joinCAS.q5.label')}</FormLabel>
                               <FormDescription>
-                                e.g. physician, nurse, genetic counsellor, other
+                                {t('joinCAS.q5.description')}
                               </FormDescription>
                               <FormControl>
                                 <Input 
-                                  placeholder="Enter your professional designation" 
+                                  placeholder={t('joinCAS.q5.placeholder')} 
                                   {...field} 
                                   data-testid="input-discipline"
                                 />
@@ -355,13 +348,13 @@ export default function JoinCAS() {
                           name="subspecialty"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>6. Sub-specialty Area of Focus *</FormLabel>
+                              <FormLabel>{t('joinCAS.q6.label')}</FormLabel>
                               <FormDescription>
-                                e.g., Cardiology, Hematology, Neurology
+                                {t('joinCAS.q6.description')}
                               </FormDescription>
                               <FormControl>
                                 <Input 
-                                  placeholder="Enter your sub-specialty" 
+                                  placeholder={t('joinCAS.q6.placeholder')} 
                                   {...field} 
                                   data-testid="input-subspecialty"
                                 />
@@ -371,13 +364,13 @@ export default function JoinCAS() {
                           )}
                         />
 
-                        {/* Question 7: Amyloidosis Type (visible to all members) */}
+                        {/* Question 7: Amyloidosis Type */}
                         <FormField
                           control={form.control}
                           name="amyloidosisType"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>7. In my practice, I primarily care for patients with the following type(s) of amyloidosis: *</FormLabel>
+                              <FormLabel>{t('joinCAS.q7.label')}</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}
@@ -387,19 +380,19 @@ export default function JoinCAS() {
                                 >
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="ATTR" id="type-attr" data-testid="radio-type-attr" />
-                                    <Label htmlFor="type-attr">ATTR</Label>
+                                    <Label htmlFor="type-attr">{t('joinCAS.q7.attr')}</Label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="AL" id="type-al" data-testid="radio-type-al" />
-                                    <Label htmlFor="type-al">AL</Label>
+                                    <Label htmlFor="type-al">{t('joinCAS.q7.al')}</Label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Both ATTR and AL" id="type-both" data-testid="radio-type-both" />
-                                    <Label htmlFor="type-both">Both ATTR and AL</Label>
+                                    <Label htmlFor="type-both">{t('joinCAS.q7.both')}</Label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Other" id="type-other" data-testid="radio-type-other" />
-                                    <Label htmlFor="type-other">Other</Label>
+                                    <Label htmlFor="type-other">{t('joinCAS.q7.other')}</Label>
                                   </div>
                                 </RadioGroup>
                               </FormControl>
@@ -414,10 +407,10 @@ export default function JoinCAS() {
                           name="institution"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>8. Centre or Clinic Name / Institution *</FormLabel>
+                              <FormLabel>{t('joinCAS.q8.label')}</FormLabel>
                               <FormControl>
                                 <Input 
-                                  placeholder="Enter your institution name" 
+                                  placeholder={t('joinCAS.q8.placeholder')} 
                                   {...field} 
                                   data-testid="input-institution"
                                 />
@@ -433,7 +426,7 @@ export default function JoinCAS() {
                           name="wantsServicesMapInclusion"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>9. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?</FormLabel>
+                              <FormLabel>{t('joinCAS.q9.label')}</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}
@@ -443,11 +436,11 @@ export default function JoinCAS() {
                                 >
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Yes" id="map-yes" data-testid="radio-services-map-yes" />
-                                    <Label htmlFor="map-yes">Yes</Label>
+                                    <Label htmlFor="map-yes">{t('joinCAS.yes')}</Label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="No" id="map-no" data-testid="radio-services-map-no" />
-                                    <Label htmlFor="map-no">No</Label>
+                                    <Label htmlFor="map-no">{t('joinCAS.no')}</Label>
                                   </div>
                                 </RadioGroup>
                               </FormControl>
@@ -462,7 +455,7 @@ export default function JoinCAS() {
                           name="wantsCommunications"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>10. I would like to receive communication from the Canadian Amyloidosis Society (CAS): *</FormLabel>
+                              <FormLabel>{t('joinCAS.q10.label')}</FormLabel>
                               <FormControl>
                                 <RadioGroup
                                   onValueChange={field.onChange}
@@ -472,11 +465,11 @@ export default function JoinCAS() {
                                 >
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Yes" id="comm-yes" data-testid="radio-communications-yes" />
-                                    <Label htmlFor="comm-yes">Yes</Label>
+                                    <Label htmlFor="comm-yes">{t('joinCAS.yes')}</Label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="No" id="comm-no" data-testid="radio-communications-no" />
-                                    <Label htmlFor="comm-no">No</Label>
+                                    <Label htmlFor="comm-no">{t('joinCAS.no')}</Label>
                                   </div>
                                 </RadioGroup>
                               </FormControl>
@@ -488,8 +481,6 @@ export default function JoinCAS() {
                         </motion.div>
                       )}
                     </AnimatePresence>
-
-                    <Separator className="my-8" />
 
                     {/* Question 11: CANN Communications (shown only when Q2 = "Yes") */}
                     <AnimatePresence>
@@ -507,7 +498,7 @@ export default function JoinCAS() {
                               name="cannCommunications"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>11. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *</FormLabel>
+                                  <FormLabel>{t('joinCAS.q11.label')}</FormLabel>
                                   <FormControl>
                                     <RadioGroup
                                       onValueChange={field.onChange}
@@ -517,11 +508,11 @@ export default function JoinCAS() {
                                     >
                                       <div className="flex items-center space-x-2">
                                         <RadioGroupItem value="Yes" id="cann-comm-yes" data-testid="radio-cann-comm-yes" />
-                                        <Label htmlFor="cann-comm-yes">Yes</Label>
+                                        <Label htmlFor="cann-comm-yes">{t('joinCAS.yes')}</Label>
                                       </div>
                                       <div className="flex items-center space-x-2">
                                         <RadioGroupItem value="No" id="cann-comm-no" data-testid="radio-cann-comm-no" />
-                                        <Label htmlFor="cann-comm-no">No</Label>
+                                        <Label htmlFor="cann-comm-no">{t('joinCAS.no')}</Label>
                                       </div>
                                     </RadioGroup>
                                   </FormControl>
@@ -533,8 +524,6 @@ export default function JoinCAS() {
                         </motion.div>
                       )}
                     </AnimatePresence>
-
-                    <Separator className="my-8" />
 
                     {/* Non-member Contact Fallback (shown only when both Q1 = No AND Q2 = No) */}
                     <AnimatePresence>
@@ -552,7 +541,7 @@ export default function JoinCAS() {
                                 <Mail className="w-5 h-5 text-white" />
                               </div>
                               <h3 className="text-2xl font-bold text-amber-900 dark:text-amber-100">
-                                Non-member Contact
+                                {t('joinCAS.nonMember.title')}
                               </h3>
                             </div>
 
@@ -561,10 +550,10 @@ export default function JoinCAS() {
                           name="noMemberName"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Name *</FormLabel>
+                              <FormLabel>{t('joinCAS.nonMember.name')}</FormLabel>
                               <FormControl>
                                 <Input 
-                                  placeholder="Enter your name" 
+                                  placeholder={t('joinCAS.nonMember.namePlaceholder')} 
                                   {...field} 
                                   data-testid="input-no-member-name"
                                 />
@@ -579,11 +568,11 @@ export default function JoinCAS() {
                           name="noMemberEmail"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Email *</FormLabel>
+                              <FormLabel>{t('joinCAS.nonMember.email')}</FormLabel>
                               <FormControl>
                                 <Input 
                                   type="email"
-                                  placeholder="Enter your email" 
+                                  placeholder={t('joinCAS.nonMember.emailPlaceholder')} 
                                   {...field} 
                                   data-testid="input-no-member-email"
                                 />
@@ -598,10 +587,10 @@ export default function JoinCAS() {
                           name="noMemberMessage"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Message / Reason for Contact</FormLabel>
+                              <FormLabel>{t('joinCAS.nonMember.message')}</FormLabel>
                               <FormControl>
                                 <Textarea 
-                                  placeholder="Please share why you're reaching out" 
+                                  placeholder={t('joinCAS.nonMember.messagePlaceholder')} 
                                   {...field} 
                                   rows={4}
                                   data-testid="textarea-no-member-message"
@@ -633,12 +622,12 @@ export default function JoinCAS() {
                         {submitMutation.isPending ? (
                           <div className="flex items-center gap-3">
                             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            <span>Submitting Registration Form...</span>
+                            <span>{t('joinCAS.submitting')}</span>
                           </div>
                         ) : (
                           <div className="flex items-center gap-3">
                             <Send className="w-5 h-5" />
-                            <span>Submit Registration Form</span>
+                            <span>{t('joinCAS.submit')}</span>
                           </div>
                         )}
                       </Button>
@@ -659,20 +648,20 @@ export default function JoinCAS() {
               <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
             <DialogTitle className="text-center text-xl sm:text-2xl">
-              Membership Registration Submitted!
+              {t('joinCAS.success.title')}
             </DialogTitle>
             <DialogDescription className="text-center text-sm sm:text-base">
-              We've received your form submission and we will be in touch soon with membership details.
+              {t('joinCAS.success.description')}
             </DialogDescription>
           </DialogHeader>
           {submissionId && (
             <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-              Reference ID: {submissionId}
+              {t('joinCAS.success.referenceId')}: {submissionId}
             </div>
           )}
           <div className="flex justify-center mt-4">
             <Button onClick={() => setShowConfirmationModal(false)}>
-              Close
+              {t('joinCAS.success.close')}
             </Button>
           </div>
         </DialogContent>

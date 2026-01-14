@@ -16,6 +16,7 @@ import { errorHandlingService, errorClassificationSchema } from "./error-handlin
 // REMOVED: streamlinedFormProcessor - No longer used after endpoint consolidation
 import { emailNotificationService } from "./email-notification-service";
 import { zohoWorkflowService } from "./zoho-workflow-service";
+import { formConfigEngine } from "./form-config-engine";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -445,20 +446,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
           console.log(`[Form Submission] Starting CRM push for submission ${submissionId}`);
           const pushStartTime = Date.now();
           
+          // Hoist excludedFieldsList to outer scope so both success and failure logs can access it
+          let excludedFieldsList: string[] = [];
+          
           try {
-            // Get updated field mappings after sync
-            const updatedMappings = await storage.getFieldMappings({ zohoModule: targetModule });
+            // Load form configuration to determine field mapping strategy
+            const formConfig = await formConfigEngine.getFormConfiguration(form_name);
+            let zohoData: Record<string, any>;
             
-            // Format data for Zoho CRM
-            const zohoData = zohoCRMService.formatFieldDataForZoho(data, updatedMappings);
-            
-            // Add Lead_Source field with proper attribution
-            const leadSourceMap: Record<string, string> = {
-              "CAS Registration": "Website - CAS Registration",
-              "CAS & CANN Registration": "Website - CAS & CANN Registration",
-              "Join CANN Today": "Website - CANN Membership",
-            };
-            zohoData.Lead_Source = leadSourceMap[form_name] || `Website - ${form_name}`;
+            if (formConfig && formConfig.submitFields && Object.keys(formConfig.submitFields as object).length > 0) {
+              // Use configuration-based field formatting (new system)
+              console.log(`[Form Submission] Using config-based formatting for form "${form_name}"`);
+              const result = await zohoCRMService.formatFieldDataForZohoWithConfig(data, formConfig);
+              zohoData = result.zohoData;
+              excludedFieldsList = result.excludedFields;
+              
+              // Log excluded fields for diagnostics (always log for visibility)
+              console.log(`[Form Submission] Formatting result: ${Object.keys(zohoData).length} fields included, ${excludedFieldsList.length} excluded`);
+              if (excludedFieldsList.length > 0) {
+                console.log(`[Form Submission] Excluded unmapped fields (strictMapping):`, excludedFieldsList);
+              }
+            } else {
+              // Smart auto-mapping for unconfigured forms - matches fields to existing Zoho fields
+              console.log(`[Form Submission] Using SMART auto-mapping for form "${form_name}" (no config)`);
+              const { smartFieldMapper } = await import("./smart-field-mapper");
+              const smartResult = await smartFieldMapper.mapFormDataToZoho(data, form_name, targetModule);
+              zohoData = smartResult.zohoData;
+              excludedFieldsList = smartResult.unmappedFields;
+              
+              console.log(`[Form Submission] Smart mapping result: ${smartResult.mappedFields.length} mapped, ${excludedFieldsList.length} excluded`);
+              if (excludedFieldsList.length > 0) {
+                console.log(`[Form Submission] Excluded unmapped fields (smart mapping):`, excludedFieldsList);
+              }
+            }
             
             console.log(`[Form Submission] Pushing data to Zoho ${targetModule}:`, zohoData);
             
@@ -472,7 +492,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               zohoCrmId: zohoRecord.id || null
             });
 
-            // Log successful CRM push
+            // Log successful CRM push with excluded fields for audit visibility
             await storage.createSubmissionLog({
               submissionId: submission.id,
               operation: "crm_push",
@@ -480,7 +500,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
               details: {
                 zohoRecordId: zohoRecord.id,
                 targetModule,
-                fieldsSubmitted: Object.keys(zohoData).length
+                fieldsSubmitted: Object.keys(zohoData).length,
+                excludedFields: excludedFieldsList,
+                excludedFieldsCount: excludedFieldsList.length
               },
               duration: Date.now() - pushStartTime
             });
@@ -496,12 +518,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
               errorMessage: `CRM push failed: ${crmError instanceof Error ? crmError.message : 'Unknown error'}`
             });
 
-            // Log failed CRM push
+            // Log failed CRM push with excluded fields for audit parity
             await storage.createSubmissionLog({
               submissionId: submission.id,
               operation: "crm_push",
               status: "failed",
-              details: { error: crmError instanceof Error ? crmError.message : 'Unknown error' },
+              details: { 
+                error: crmError instanceof Error ? crmError.message : 'Unknown error',
+                excludedFields: excludedFieldsList,
+                excludedFieldsCount: excludedFieldsList.length
+              },
               duration: Date.now() - pushStartTime,
               errorMessage: crmError instanceof Error ? crmError.message : 'Unknown error'
             });
@@ -827,7 +853,380 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Setup endpoint for CANN form configuration
+  // ============================================================
+  // Audit System API - Track submissions, identify issues, enable re-sync
+  // ============================================================
+
+  // GET /api/audit/submissions - List submissions with filtering
+  app.get("/api/audit/submissions", async (req, res) => {
+    try {
+      const { formName, status, syncStatus, limit: limitParam, offset: offsetParam } = req.query;
+      const limit = parseInt(limitParam as string) || 100;
+      const offset = parseInt(offsetParam as string) || 0;
+
+      let submissions = await storage.getFormSubmissions();
+
+      // Apply filters
+      if (formName) {
+        submissions = submissions.filter(s => s.formName === formName);
+      }
+      if (status) {
+        submissions = submissions.filter(s => s.processingStatus === status);
+      }
+      if (syncStatus) {
+        submissions = submissions.filter(s => s.syncStatus === syncStatus);
+      }
+
+      // Sort by newest first
+      submissions.sort((a, b) => {
+        const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return dateB - dateA;
+      });
+
+      // Paginate
+      const total = submissions.length;
+      const paginated = submissions.slice(offset, offset + limit);
+
+      res.json({
+        success: true,
+        total,
+        limit,
+        offset,
+        submissions: paginated.map(s => ({
+          id: s.id,
+          formName: s.formName,
+          processingStatus: s.processingStatus,
+          syncStatus: s.syncStatus,
+          zohoCrmId: s.zohoCrmId,
+          retryCount: s.retryCount,
+          errorMessage: s.errorMessage,
+          createdAt: s.createdAt,
+          lastSyncAt: s.lastSyncAt,
+        })),
+      });
+    } catch (error) {
+      console.error('[Audit API] Error listing submissions:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to list submissions',
+      });
+    }
+  });
+
+  // GET /api/audit/failed - List failed submissions eligible for resync
+  app.get("/api/audit/failed", async (req, res) => {
+    try {
+      const failedSubmissions = await storage.getFormSubmissionsByStatus("failed", "failed");
+      const maxRetries = 5;
+
+      const eligibleForRetry = failedSubmissions.filter(s => s.retryCount < maxRetries);
+      const exhaustedRetries = failedSubmissions.filter(s => s.retryCount >= maxRetries);
+
+      res.json({
+        success: true,
+        summary: {
+          totalFailed: failedSubmissions.length,
+          eligibleForRetry: eligibleForRetry.length,
+          exhaustedRetries: exhaustedRetries.length,
+        },
+        eligibleForRetry: eligibleForRetry.map(s => ({
+          id: s.id,
+          formName: s.formName,
+          retryCount: s.retryCount,
+          errorMessage: s.errorMessage,
+          createdAt: s.createdAt,
+          lastRetryAt: s.lastRetryAt,
+        })),
+        exhaustedRetries: exhaustedRetries.map(s => ({
+          id: s.id,
+          formName: s.formName,
+          retryCount: s.retryCount,
+          errorMessage: s.errorMessage,
+          createdAt: s.createdAt,
+          lastRetryAt: s.lastRetryAt,
+        })),
+      });
+    } catch (error) {
+      console.error('[Audit API] Error listing failed submissions:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to list failed submissions',
+      });
+    }
+  });
+
+  // GET /api/audit/submission/:id - Get detailed submission info with logs
+  app.get("/api/audit/submission/:id", async (req, res) => {
+    try {
+      const submissionId = parseInt(req.params.id);
+      
+      if (isNaN(submissionId)) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid submission ID',
+        });
+      }
+
+      const submission = await storage.getFormSubmission(submissionId);
+      
+      if (!submission) {
+        return res.status(404).json({
+          success: false,
+          error: `Submission not found: ${submissionId}`,
+        });
+      }
+
+      const logs = await storage.getSubmissionLogs({ submissionId });
+
+      res.json({
+        success: true,
+        submission: {
+          id: submission.id,
+          formName: submission.formName,
+          submissionData: submission.submissionData,
+          sourceForm: submission.sourceForm,
+          zohoModule: submission.zohoModule,
+          zohoCrmId: submission.zohoCrmId,
+          processingStatus: submission.processingStatus,
+          syncStatus: submission.syncStatus,
+          errorMessage: submission.errorMessage,
+          retryCount: submission.retryCount,
+          lastRetryAt: submission.lastRetryAt,
+          nextRetryAt: submission.nextRetryAt,
+          lastSyncAt: submission.lastSyncAt,
+          createdAt: submission.createdAt,
+          updatedAt: submission.updatedAt,
+        },
+        logs: logs.map(log => ({
+          id: log.id,
+          operation: log.operation,
+          status: log.status,
+          details: log.details,
+          errorMessage: log.errorMessage,
+          duration: log.duration,
+          createdAt: log.createdAt,
+        })),
+      });
+    } catch (error) {
+      console.error('[Audit API] Error getting submission details:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to get submission details',
+      });
+    }
+  });
+
+  // POST /api/audit/submission/:id/resync - Force resync a submission
+  app.post("/api/audit/submission/:id/resync", async (req, res) => {
+    try {
+      const submissionId = parseInt(req.params.id);
+      const { resetRetryCount } = req.body;
+
+      if (isNaN(submissionId)) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid submission ID',
+        });
+      }
+
+      const submission = await storage.getFormSubmission(submissionId);
+      
+      if (!submission) {
+        return res.status(404).json({
+          success: false,
+          error: `Submission not found: ${submissionId}`,
+        });
+      }
+
+      // Optionally reset retry count to allow more retries
+      if (resetRetryCount) {
+        await storage.updateFormSubmission(submissionId, {
+          retryCount: 0,
+          errorMessage: null,
+          processingStatus: 'pending' as any,
+          syncStatus: 'pending' as any,
+        });
+      }
+
+      // Trigger retry
+      const result = await retryService.retrySubmission(submissionId);
+
+      res.json({
+        success: result.success,
+        message: result.success 
+          ? `Resync successful for submission ${submissionId}` 
+          : `Resync failed: ${result.errorMessage}`,
+        retryCount: result.retryCount,
+        finalStatus: result.finalStatus,
+      });
+    } catch (error) {
+      console.error('[Audit API] Error resyncing submission:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to resync submission',
+      });
+    }
+  });
+
+  // GET /api/audit/sync-gaps - Identify potential missed syncs
+  app.get("/api/audit/sync-gaps", async (req, res) => {
+    try {
+      const allSubmissions = await storage.getFormSubmissions();
+      
+      // Get submissions older than 5 minutes that are still pending/processing
+      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+      
+      const stuckPending = allSubmissions.filter(s => {
+        const createdAt = s.createdAt ? new Date(s.createdAt) : null;
+        return s.processingStatus === 'pending' && 
+               createdAt && createdAt < fiveMinutesAgo;
+      });
+
+      const stuckProcessing = allSubmissions.filter(s => {
+        const createdAt = s.createdAt ? new Date(s.createdAt) : null;
+        return s.processingStatus === 'processing' && 
+               createdAt && createdAt < fiveMinutesAgo;
+      });
+
+      // Submissions with no Zoho ID despite being "completed"
+      const completedNoZohoId = allSubmissions.filter(s => 
+        s.processingStatus === 'completed' && 
+        s.syncStatus === 'synced' && 
+        !s.zohoCrmId
+      );
+
+      res.json({
+        success: true,
+        summary: {
+          stuckPending: stuckPending.length,
+          stuckProcessing: stuckProcessing.length,
+          completedNoZohoId: completedNoZohoId.length,
+          totalIssues: stuckPending.length + stuckProcessing.length + completedNoZohoId.length,
+        },
+        stuckPending: stuckPending.map(s => ({
+          id: s.id,
+          formName: s.formName,
+          createdAt: s.createdAt,
+        })),
+        stuckProcessing: stuckProcessing.map(s => ({
+          id: s.id,
+          formName: s.formName,
+          createdAt: s.createdAt,
+        })),
+        completedNoZohoId: completedNoZohoId.map(s => ({
+          id: s.id,
+          formName: s.formName,
+          createdAt: s.createdAt,
+        })),
+      });
+    } catch (error) {
+      console.error('[Audit API] Error checking sync gaps:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to check sync gaps',
+      });
+    }
+  });
+
+  // Setup endpoint for CAS/CANN form configurations with proper submitFields
+  app.post("/api/setup-form-configurations", async (req, res) => {
+    try {
+      console.log("[Setup] Setting up CAS/CANN Form Configurations with submitFields...");
+      const results: any[] = [];
+
+      // Configuration for "CAS Registration"
+      const casConfig = {
+        formName: "CAS Registration",
+        zohoModule: "Leads",
+        leadSourceTag: "Website - CAS Registration",
+        description: "CAS-only registration form",
+        strictMapping: false,
+        autoCreateFields: false,
+        submitFields: {
+          fullName: { zohoField: "Full_Name", label: "Full Name", required: true, fieldType: "text" },
+          email: { zohoField: "Email", label: "Email", required: true, fieldType: "email" },
+          discipline: { zohoField: "Designation", label: "Discipline", required: false, fieldType: "text" },
+          subspecialty: { zohoField: "Description", label: "Subspecialty", required: false, fieldType: "text" },
+          amyloidosisType: { zohoField: "Amyloidosis_Type", label: "Amyloidosis Type", required: false, fieldType: "picklist" },
+          institution: { zohoField: "Company", label: "Institution", required: false, fieldType: "text" },
+          wantsServicesMapInclusion: { zohoField: "Services_Map_Inclusion", label: "Services Map", required: false, fieldType: "picklist" },
+          wantsCommunications: { zohoField: "CAS_Communications", label: "CAS Communications", required: false, fieldType: "picklist" },
+        },
+      };
+
+      // Configuration for "CAS & CANN Registration"  
+      const casCANNConfig = {
+        formName: "CAS & CANN Registration",
+        zohoModule: "Leads",
+        leadSourceTag: "Website - CAS & CANN Registration",
+        description: "Combined CAS and CANN registration form",
+        strictMapping: false,
+        autoCreateFields: false,
+        submitFields: {
+          fullName: { zohoField: "Full_Name", label: "Full Name", required: true, fieldType: "text" },
+          email: { zohoField: "Email", label: "Email", required: true, fieldType: "email" },
+          discipline: { zohoField: "Designation", label: "Discipline", required: false, fieldType: "text" },
+          subspecialty: { zohoField: "Description", label: "Subspecialty", required: false, fieldType: "text" },
+          amyloidosisType: { zohoField: "Amyloidosis_Type", label: "Amyloidosis Type", required: false, fieldType: "picklist" },
+          institution: { zohoField: "Company", label: "Institution", required: false, fieldType: "text" },
+          wantsServicesMapInclusion: { zohoField: "Services_Map_Inclusion", label: "Services Map", required: false, fieldType: "picklist" },
+          wantsCommunications: { zohoField: "CAS_Communications", label: "CAS Communications", required: false, fieldType: "picklist" },
+          wantsCANNMembership: { zohoField: "CANN_Member", label: "CANN Membership", required: false, fieldType: "picklist" },
+          cannCommunications: { zohoField: "CANN_Communications", label: "CANN Communications", required: false, fieldType: "picklist" },
+        },
+      };
+
+      // Configuration for "Join CANN Today"
+      const cannConfig = {
+        formName: "Join CANN Today",
+        zohoModule: "Leads",
+        leadSourceTag: "Website - CANN Membership",
+        description: "CANN membership application form",
+        strictMapping: false,
+        autoCreateFields: false,
+        submitFields: {
+          fullName: { zohoField: "Full_Name", label: "Full Name", required: true, fieldType: "text" },
+          email: { zohoField: "Email", label: "Email", required: true, fieldType: "email" },
+          discipline: { zohoField: "Designation", label: "Discipline", required: false, fieldType: "text" },
+          subspecialty: { zohoField: "Description", label: "Subspecialty", required: false, fieldType: "text" },
+          institution: { zohoField: "Company", label: "Institution", required: false, fieldType: "text" },
+          cannCommunications: { zohoField: "CANN_Communications", label: "CANN Communications", required: false, fieldType: "picklist" },
+        },
+      };
+
+      for (const configData of [casConfig, casCANNConfig, cannConfig]) {
+        const existing = await formConfigEngine.getFormConfiguration(configData.formName);
+        if (existing) {
+          const updated = await formConfigEngine.updateFormConfiguration(configData.formName, {
+            submitFields: configData.submitFields as any,
+            leadSourceTag: configData.leadSourceTag,
+            strictMapping: configData.strictMapping,
+            autoCreateFields: configData.autoCreateFields,
+          });
+          results.push({ formName: configData.formName, action: "updated", config: updated });
+        } else {
+          const created = await formConfigEngine.createFormConfiguration(configData);
+          results.push({ formName: configData.formName, action: "created", config: created });
+        }
+      }
+
+      res.json({
+        success: true,
+        message: "Form configurations set up successfully",
+        results,
+      });
+
+    } catch (error) {
+      console.error("[Setup] Error setting up form configurations:", error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to setup form configurations',
+      });
+    }
+  });
+
+  // Setup endpoint for CANN form configuration (legacy)
   app.post("/api/setup-cann-form", async (req, res) => {
     try {
       console.log("[Setup] Setting up CANN Membership Form Configuration...");
@@ -1647,6 +2046,206 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // REMOVED: All duplicate form processing endpoints
   // Only /api/submit-form is the canonical form submission endpoint
+
+  // ============================================================
+  // Form Configuration API - CRUD for form-to-CRM mappings
+  // ============================================================
+  
+  // GET /api/form-configurations - List all form configurations
+  app.get("/api/form-configurations", async (req, res) => {
+    try {
+      const activeOnly = req.query.active === 'true';
+      const configs = activeOnly 
+        ? await formConfigEngine.getActiveFormConfigurations()
+        : await formConfigEngine.getAllFormConfigurations();
+      
+      res.json({
+        success: true,
+        count: configs.length,
+        configurations: configs,
+      });
+    } catch (error) {
+      console.error('[Form Config API] Error listing configurations:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to list configurations',
+      });
+    }
+  });
+
+  // GET /api/form-configurations/:formName - Get specific form configuration
+  app.get("/api/form-configurations/:formName", async (req, res) => {
+    try {
+      const { formName } = req.params;
+      const config = await formConfigEngine.getFormConfiguration(formName);
+      
+      if (!config) {
+        return res.status(404).json({
+          success: false,
+          error: `Form configuration not found: ${formName}`,
+        });
+      }
+      
+      res.json({
+        success: true,
+        configuration: config,
+      });
+    } catch (error) {
+      console.error('[Form Config API] Error getting configuration:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to get configuration',
+      });
+    }
+  });
+
+  // POST /api/form-configurations - Create new form configuration
+  app.post("/api/form-configurations", async (req, res) => {
+    try {
+      const { formName, zohoModule, leadSourceTag, displayFields, submitFields, strictMapping, autoCreateFields, description } = req.body;
+      
+      if (!formName) {
+        return res.status(400).json({
+          success: false,
+          error: 'Form name is required',
+        });
+      }
+
+      // Check if configuration already exists
+      const existing = await formConfigEngine.getFormConfiguration(formName);
+      if (existing) {
+        return res.status(409).json({
+          success: false,
+          error: `Form configuration already exists: ${formName}`,
+        });
+      }
+
+      const config = await formConfigEngine.createFormConfiguration({
+        formName,
+        zohoModule,
+        leadSourceTag,
+        displayFields,
+        submitFields,
+        strictMapping,
+        autoCreateFields,
+        description,
+      });
+
+      res.status(201).json({
+        success: true,
+        message: `Form configuration created: ${formName}`,
+        configuration: config,
+      });
+    } catch (error) {
+      console.error('[Form Config API] Error creating configuration:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to create configuration',
+      });
+    }
+  });
+
+  // PUT /api/form-configurations/:formName - Update form configuration
+  app.put("/api/form-configurations/:formName", async (req, res) => {
+    try {
+      const { formName } = req.params;
+      const { zohoModule, leadSourceTag, displayFields, submitFields, strictMapping, autoCreateFields, isActive, description } = req.body;
+
+      // Check if configuration exists
+      const existing = await formConfigEngine.getFormConfiguration(formName);
+      if (!existing) {
+        return res.status(404).json({
+          success: false,
+          error: `Form configuration not found: ${formName}`,
+        });
+      }
+
+      const updates: Record<string, any> = {};
+      if (zohoModule !== undefined) updates.zohoModule = zohoModule;
+      if (leadSourceTag !== undefined) updates.leadSourceTag = leadSourceTag;
+      if (displayFields !== undefined) updates.displayFields = displayFields;
+      if (submitFields !== undefined) updates.submitFields = submitFields;
+      if (strictMapping !== undefined) updates.strictMapping = strictMapping;
+      if (autoCreateFields !== undefined) updates.autoCreateFields = autoCreateFields;
+      if (isActive !== undefined) updates.isActive = isActive;
+      if (description !== undefined) updates.description = description;
+
+      const config = await formConfigEngine.updateFormConfiguration(formName, updates);
+
+      res.json({
+        success: true,
+        message: `Form configuration updated: ${formName}`,
+        configuration: config,
+      });
+    } catch (error) {
+      console.error('[Form Config API] Error updating configuration:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to update configuration',
+      });
+    }
+  });
+
+  // DELETE /api/form-configurations/:formName - Delete form configuration
+  app.delete("/api/form-configurations/:formName", async (req, res) => {
+    try {
+      const { formName } = req.params;
+
+      const existing = await formConfigEngine.getFormConfiguration(formName);
+      if (!existing) {
+        return res.status(404).json({
+          success: false,
+          error: `Form configuration not found: ${formName}`,
+        });
+      }
+
+      const deleted = await formConfigEngine.deleteFormConfiguration(formName);
+
+      if (deleted) {
+        res.json({
+          success: true,
+          message: `Form configuration deleted: ${formName}`,
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          error: 'Failed to delete configuration',
+        });
+      }
+    } catch (error) {
+      console.error('[Form Config API] Error deleting configuration:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to delete configuration',
+      });
+    }
+  });
+
+  // POST /api/form-configurations/:formName/validate - Validate form configuration
+  app.post("/api/form-configurations/:formName/validate", async (req, res) => {
+    try {
+      const { formName } = req.params;
+      const configData = req.body;
+      
+      // Merge formName from URL
+      configData.formName = configData.formName || formName;
+      
+      const validation = formConfigEngine.validateFormConfiguration(configData);
+      
+      res.json({
+        success: validation.valid,
+        valid: validation.valid,
+        errors: validation.errors,
+        warnings: validation.warnings,
+      });
+    } catch (error) {
+      console.error('[Form Config API] Error validating configuration:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to validate configuration',
+      });
+    }
+  });
 
   // Admin endpoint to reload tokens from database
   app.post("/api/admin/reload-tokens", async (req, res) => {

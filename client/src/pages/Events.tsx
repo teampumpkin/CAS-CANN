@@ -8,6 +8,7 @@ import {
   Clock,
   ExternalLink,
   Users,
+  Award,
 } from "lucide-react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -19,20 +20,47 @@ import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
 
+// Journal Club Sessions Data
+const journalClubSessions = [
+  {
+    rawDate: "2025-09-25",
+    topics: [
+      { title: "ATTR Neuropathy", presenter: "Dr. Genevieve Matte, University of Montreal" },
+      { title: "Cardiac Amyloidosis", presenter: "Dr. Edgar Da Silva, University of Ottawa" },
+    ],
+  },
+  {
+    rawDate: "2025-11-27",
+    topics: [
+      { title: "AL Amyloidosis", presenter: "Dr. Janine Mazengarb, University of British Columbia" },
+      { title: "Diagnostic Dilemmas", presenter: "Dr. Rajin Choudhury, University of Calgary" },
+    ],
+  },
+  {
+    rawDate: "2026-02-26",
+    topics: [
+      { title: "Is it really hATTR?", presenter: "Dr. Gord Jewett, University of Calgary" },
+      { title: "Topic To Be Announced", presenter: "TBD, Queen's University" },
+    ],
+  },
+];
+
 // Single source of truth for all events
 const allEvents = [
   {
     id: 1,
-    title: "2025 Canadian Amyloidosis Summit",
-    date: "2025-10-31",
-    time: "All Day Event",
-    location: "Toronto, ON",
-    type: "Summit",
+    title: "Canadian Amyloidosis Summit",
+    date: "2026-10-15",
+    displayDate: "Fall 2026 – date TBD",
+    time: "TBD",
+    location: "TBD",
+    type: "In-person & Virtual",
     description:
-      "The 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). A comprehensive gathering of healthcare professionals, researchers, and patients focused on advancing amyloidosis care in Canada.",
+      "This annual educational conference is jointly hosted by the CAS and Transthyretin Amyloidosis Canada (TAC). The Summit unites both amyloidosis healthcare professionals and patients with accredited scientific sessions for professionals and dedicated sessions for patients/caregivers.",
     image: summitSaveTheDateImg,
-    registrationUrl: "https://madhattr.ca/events/",
-    isFeatured: true, // Mark as featured event
+    registrationUrl: "",
+    isFeatured: true,
+    isComingSoon: true,
   },
   {
     id: 2,
@@ -61,15 +89,62 @@ const allEvents = [
     registrationUrl: "#",
     confirmed: true,
   },
+  {
+    id: 4,
+    title: "CAS Journal Club - February Session",
+    date: "2026-02-26",
+    time: "3:00 PM - 4:00 PM MST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description:
+      "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "#",
+    requiresMembershipCTA: true,
+    membershipType: "CAS",
+    topics: [
+      { title: "Is it really hATTR?", presenter: "Dr. Gord Jewett, University of Calgary" },
+      { title: "Topic To Be Announced", presenter: "TBD, Queen's University" },
+    ],
+  },
+  {
+    id: 5,
+    title: "2025 Canadian Amyloidosis Summit",
+    date: "2025-10-31",
+    displayDate: "October 31 – November 2, 2025",
+    time: "8:00 AM - 5:00 PM EST",
+    location: "Toronto, ON",
+    type: "Summit",
+    description:
+      "The 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). A comprehensive gathering of healthcare professionals, researchers, and patients focused on advancing amyloidosis care in Canada.",
+    image: summitSaveTheDateImg,
+    registrationUrl: "",
+  },
 ];
 
-// Helper function to parse event date and compare with today
+// MST Timezone constant (America/Edmonton handles MST/MDT automatically)
+const MST_TIMEZONE = 'America/Edmonton';
+
+// Helper to get current date in MST timezone
+const getMSTDate = (): Date => {
+  const now = new Date();
+  const mstDateStr = now.toLocaleDateString('en-CA', { timeZone: MST_TIMEZONE });
+  const [year, month, day] = mstDateStr.split('-').map(Number);
+  return new Date(year, month - 1, day);
+};
+
+// Helper function to parse event date and compare with today in MST
 const isEventPast = (dateString: string): boolean => {
   const [year, month, day] = dateString.split("-").map(Number);
   const eventDate = new Date(year, month - 1, day);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // Reset time to start of day for accurate comparison
-  return eventDate < today;
+  const todayMST = getMSTDate();
+  return eventDate < todayMST;
+};
+
+// Helper to parse date string for sorting (timezone-independent for date-only comparisons)
+const parseLocalDate = (dateString: string): Date => {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
 };
 
 // Helper function to categorize events dynamically
@@ -78,13 +153,21 @@ const categorizeEvents = () => {
   today.setHours(0, 0, 0, 0);
   
   const featured = allEvents.filter(event => event.isFeatured && !isEventPast(event.date));
-  const upcoming = allEvents.filter(event => !event.isFeatured && !isEventPast(event.date));
+  // Include ALL upcoming events (including featured ones) in the upcoming tab
+  const upcoming = allEvents.filter(event => !isEventPast(event.date));
   const past = allEvents.filter(event => isEventPast(event.date));
   
-  // Sort past events by date (most recent first)
+  // Sort upcoming events by date (soonest first) - using local date parsing
+  upcoming.sort((a, b) => {
+    const dateA = parseLocalDate(a.date);
+    const dateB = parseLocalDate(b.date);
+    return dateA.getTime() - dateB.getTime();
+  });
+  
+  // Sort past events by date (most recent first) - using local date parsing
   past.sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
+    const dateA = parseLocalDate(a.date);
+    const dateB = parseLocalDate(b.date);
     return dateB.getTime() - dateA.getTime();
   });
   
@@ -113,17 +196,33 @@ export default function Events() {
     }
   };
 
-  // Format date to "Thursday, September 25th, 2025"
-  // Fixed to handle dates as local dates instead of UTC to prevent timezone issues
+  // Format date to "Thursday, September 25th, 2025" in MST timezone
   const formatEventDate = (dateString: string): string => {
-    // Parse date as local date by splitting and using Date constructor to avoid UTC conversion
-    const [year, month, day] = dateString.split("-").map(Number);
-    const date = new Date(year, month - 1, day); // month is 0-indexed
-
-    const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
-    const monthName = date.toLocaleDateString("en-US", { month: "long" });
-    const dayNumber = date.getDate();
-    const yearNumber = date.getFullYear();
+    // Guard against empty or invalid date strings
+    if (!dateString) return "TBD";
+    
+    // Check if it's a valid YYYY-MM-DD format
+    const parts = dateString.split("-").map(Number);
+    if (parts.length !== 3 || parts.some(isNaN)) {
+      return dateString; // Return as-is if not ISO format
+    }
+    
+    const [year, month, day] = parts;
+    
+    // Create a date that represents this date in MST
+    // Use noon to avoid any edge cases with daylight saving
+    const dateForFormatting = new Date(Date.UTC(year, month - 1, day, 18, 0, 0)); // 18:00 UTC = noon MST
+    
+    // Validate the date is valid
+    if (isNaN(dateForFormatting.getTime())) {
+      return dateString;
+    }
+    
+    // Format using MST timezone
+    const dayName = dateForFormatting.toLocaleDateString("en-US", { weekday: "long", timeZone: MST_TIMEZONE });
+    const monthName = dateForFormatting.toLocaleDateString("en-US", { month: "long", timeZone: MST_TIMEZONE });
+    const dayNumber = parseInt(dateForFormatting.toLocaleDateString("en-US", { day: "numeric", timeZone: MST_TIMEZONE }));
+    const yearNumber = parseInt(dateForFormatting.toLocaleDateString("en-US", { year: "numeric", timeZone: MST_TIMEZONE }));
     const ordinalSuffix = getOrdinalSuffix(dayNumber);
 
     return `${dayName}, ${monthName} ${dayNumber}${ordinalSuffix}, ${yearNumber}`;
@@ -151,7 +250,7 @@ export default function Events() {
           >
             <Calendar className="w-4 h-4 text-[#00AFE6]" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Educational Events
+              {t('eventsPage.badge')}
             </span>
           </motion.div>
 
@@ -162,10 +261,10 @@ export default function Events() {
             className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 font-rosarivo"
           >
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-              Events &
+              {t('eventsPage.title.events')}
             </span>
             <br />
-            <span className="text-gray-800 dark:text-white">Education</span>
+            <span className="text-gray-800 dark:text-white">{t('eventsPage.title.education')}</span>
           </motion.h1>
 
           <motion.p
@@ -174,15 +273,12 @@ export default function Events() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            Join our community for educational conferences, expert webinars,
-            support groups, and professional development opportunities across
-            Canada.
+            {t('eventsPage.description')}
           </motion.p>
         </div>
       </section>
 
-      {/* Section 5: Featured Event Section - Hidden for now but layout preserved */}
-      {false && (
+      {/* Section 5: Featured Event Section */}
       <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/50 dark:via-transparent dark:to-gray-700/30"></div>
@@ -201,7 +297,7 @@ export default function Events() {
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 shadow-lg">
                 <Calendar className="w-5 h-5 text-[#00AFE6]" />
                 <span className="text-gray-800 dark:text-white/90 font-medium">
-                  Featured Event
+                  {t('eventsPage.featuredEvent')}
                 </span>
               </div>
 
@@ -213,16 +309,16 @@ export default function Events() {
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="w-2 h-2 bg-[#00AFE6] rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00AFE6]">
-                  Registration is open
+                <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
+                <span className="text-sm font-medium text-amber-600 dark:text-amber-400">
+                  {t('eventsPage.comingSoon')}
                 </span>
               </motion.div>
             </div>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight">
               <span className="text-gray-800 dark:text-white">
-                2025 Canadian{" "}
+                Canadian{" "}
               </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Amyloidosis Summit
@@ -230,62 +326,12 @@ export default function Events() {
             </h2>
 
             <p className="text-lg sm:text-xl text-gray-600 dark:text-white/70 max-w-4xl mx-auto leading-relaxed px-4">
-              Registration is open
+              {t('events.summit.description')}
             </p>
           </motion.div>
 
           <div className="max-w-7xl mx-auto">
-            {/* Larger, Centered Save the Date Image */}
-            <motion.div
-              className="relative mb-16 flex justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/25 dark:to-[#00DD89]/25 backdrop-blur-xl rounded-3xl p-8 border border-[#00AFE6]/30 shadow-2xl max-w-4xl w-full">
-                <img
-                  src={summitSaveTheDateImg}
-                  alt="Save the Date - 2025 Canadian Amyloidosis Summit"
-                  className="w-full h-auto rounded-2xl shadow-2xl"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#00AFE6]/5 to-transparent rounded-3xl pointer-events-none" />
-
-                {/* Floating accent elements around the image */}
-                <motion.div
-                  className="absolute -top-6 -right-6 w-16 h-16 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-3xl flex items-center justify-center shadow-2xl"
-                  animate={{
-                    y: [0, -12, 0],
-                    rotate: [0, 8, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Calendar className="w-8 h-8 text-white" />
-                </motion.div>
-
-                <motion.div
-                  className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-3xl flex items-center justify-center shadow-2xl"
-                  animate={{
-                    y: [0, 12, 0],
-                    rotate: [0, -8, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 2.5,
-                  }}
-                >
-                  <MapPin className="w-8 h-8 text-white" />
-                </motion.div>
-              </div>
-            </motion.div>
-
-            {/* Summit Information Card - Centered Below Image */}
+            {/* Summit Information Card - Centered */}
             <motion.div
               className="flex justify-center"
               initial={{ opacity: 0, y: 30 }}
@@ -296,7 +342,7 @@ export default function Events() {
               <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
                 <div className="text-center">
                   <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">
-                    Event Details
+                    {t('eventsPage.eventDetails')}
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
@@ -304,10 +350,10 @@ export default function Events() {
                       <Calendar className="w-8 h-8 text-[#00AFE6]" />
                       <div className="text-center">
                         <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                          Dates
+                          {t('eventsPage.dates')}
                         </p>
                         <p className="text-gray-800 dark:text-white font-semibold">
-                          October 31 - November 2, 2025
+                          {t('events.summit.date')}
                         </p>
                       </div>
                     </div>
@@ -316,34 +362,22 @@ export default function Events() {
                       <MapPin className="w-8 h-8 text-[#00DD89]" />
                       <div className="text-center">
                         <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                          Location
+                          {t('eventsPage.format')}
                         </p>
                         <p className="text-gray-800 dark:text-white font-semibold">
-                          Toronto, ON
+                          {t('events.summit.type')}
                         </p>
                       </div>
                     </div>
                   </div>
 
                   <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
-                    Join us for the 2025 Canadian Amyloidosis Summit, hosted by
-                    CAS and Transthyretin Amyloidosis Canada (TAC). Registration
-                    is open through the TAC website.
+                    {t('eventsPage.summitHostedBy')}
                   </p>
 
                   <div className="space-y-4">
-                    <Button
-                      onClick={() =>
-                        window.open("https://madhattr.ca/events/", "_blank")
-                      }
-                      className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 group px-8 py-4 text-lg font-semibold rounded-2xl"
-                    >
-                      Register Now
-                      <ExternalLink className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
-                    </Button>
-
-                    <p className="text-sm text-gray-500 dark:text-white/50">
-                      Registration is open
+                    <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
+                      {t('eventsPage.registrationComingSoon')}
                     </p>
                   </div>
                 </div>
@@ -352,7 +386,120 @@ export default function Events() {
           </div>
         </div>
       </section>
-      )}
+
+      {/* CAS Journal Club Section */}
+      <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
+              <Calendar className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-gray-800 dark:text-white/90 font-medium">
+                {t('eventsPage.journalClubBadge')}
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                CAS Journal Club
+              </span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
+              {t('eventsPage.journalClubDescription')}
+            </p>
+            <Link href="/journal-club">
+              <Button className="mt-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white font-semibold px-6 py-3 rounded-xl shadow-lg">
+                {t('eventsPage.viewFullSchedule')}
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </motion.div>
+
+          {/* Journal Club Sessions Grid */}
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {journalClubSessions.map((session, index) => {
+                const isPast = isEventPast(session.rawDate);
+                return (
+                  <motion.div
+                    key={session.rawDate}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className={`h-full flex flex-col rounded-2xl overflow-hidden transition-all duration-300 ${
+                      isPast 
+                        ? "bg-gray-100/80 dark:bg-gray-800/50 border-gray-200/50 dark:border-gray-700/50 opacity-60" 
+                        : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-[#00AFE6]/50 hover:shadow-xl hover:shadow-[#00AFE6]/10"
+                    }`}>
+                      <CardContent className="p-6 flex flex-col flex-1">
+                        <div className="flex items-center justify-between mb-4">
+                          <Badge className={`${isPast ? "bg-gray-400" : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89]"} text-white text-xs px-3 py-1`}>
+                            {isPast ? t('eventsPage.pastEvent') : t('eventsPage.upcomingEvent')}
+                          </Badge>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">Virtual</span>
+                        </div>
+                        
+                        <div className="flex items-center gap-2 mb-3">
+                          <Calendar className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`} />
+                          <span className={`text-sm font-medium ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-700 dark:text-gray-300"}`}>
+                            {formatEventDate(session.rawDate)}
+                          </span>
+                        </div>
+                        
+                        <div className="flex items-center gap-2 mb-4">
+                          <Clock className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`} />
+                          <span className={`text-sm ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-600 dark:text-gray-400"}`}>
+                            3:00 PM - 4:00 PM MST
+                          </span>
+                        </div>
+
+                        {session.topics && (
+                          <div className={`flex-1 p-3 rounded-xl border space-y-2 ${
+                            isPast 
+                              ? "bg-gray-50 dark:bg-gray-700/30 border-gray-200 dark:border-gray-600" 
+                              : "bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 border-[#00AFE6]/20"
+                          }`}>
+                            <div className={`text-xs font-medium ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}>
+                              {t('eventsPage.sessionTopics')}
+                            </div>
+                            {session.topics.map((topic, idx) => (
+                              <div key={idx} className={`border-l-2 pl-2 ${isPast ? "border-gray-300" : "border-[#00AFE6]/40"}`}>
+                                <div className={`text-sm font-medium ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}>
+                                  {topic.title}
+                                </div>
+                                <div className={`text-xs ${isPast ? "text-gray-400" : "text-gray-600 dark:text-gray-400"}`}>
+                                  {topic.presenter}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {!isPast && (
+                          <div className="mt-4 text-center p-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-lg">
+                            <p className="text-xs text-[#00AFE6] font-medium">{t('eventsPage.registrationNotRequired')}</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-400">{t('eventsPage.zoomDetailsCAS')}</p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Section 6: Events Section */}
       <section
@@ -375,17 +522,16 @@ export default function Events() {
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
               <Calendar className="w-5 h-5 text-[#00AFE6]" />
               <span className="text-gray-800 dark:text-white/90 font-medium">
-                Community
+                {t('eventsPage.communityBadge')}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Events & Community
+                {t('eventsPage.communityTitle')}
               </span>
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              Join us at upcoming events and see highlights from our recent
-              community gatherings.
+              {t('eventsPage.communityDescription')}
             </p>
           </motion.div>
 
@@ -404,7 +550,7 @@ export default function Events() {
                       : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
                   }`}
                 >
-                  Upcoming Events
+                  {t('eventsPage.upcomingEvents')}
                 </button>
                 <button
                   onClick={() => setActiveTab("past")}
@@ -414,7 +560,7 @@ export default function Events() {
                       : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
                   }`}
                 >
-                  Past Events
+                  {t('eventsPage.pastEvents')}
                 </button>
               </div>
             </div>
@@ -431,63 +577,107 @@ export default function Events() {
                     className="h-full"
                   >
                     <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden">
-                      <div className="p-6 flex flex-col flex-1">
-                        {/* Badge */}
+                      {/* Header Section */}
+                      <div className="relative p-6 pb-4 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
                         <div className="flex justify-between items-start mb-4">
                           <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center">
                             <Calendar className="w-8 h-8 text-[#00AFE6]" />
                           </div>
-                          <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
-                            {event.type}
-                          </Badge>
+                          <div className="flex flex-wrap gap-2 justify-end">
+                            <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
+                              {event.type}
+                            </Badge>
+                            {(event as any).format && (
+                              <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-800 px-2 py-1 text-xs">
+                                {(event as any).format}
+                              </Badge>
+                            )}
+                          </div>
                         </div>
-
-                        {/* Title */}
-                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug mb-6">
+                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug">
                           {event.title}
                         </h3>
+                      </div>
 
+                      {/* Content Section */}
+                      <CardContent className="p-6 pt-0 flex flex-col flex-1">
                         {/* Event Details */}
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                            <Calendar className="w-4 h-4" />
-                            <span>{formatEventDate(event.date)}</span>
+                            <Calendar className="w-4 h-4 text-[#00AFE6]" />
+                            <span>{(event as any).displayDate || formatEventDate(event.date)}</span>
                           </div>
                           <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                            <Clock className="w-4 h-4" />
+                            <Clock className="w-4 h-4 text-[#00AFE6]" />
                             <span>{event.time}</span>
                           </div>
                           <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                            <MapPin className="w-4 h-4" />
+                            <MapPin className="w-4 h-4 text-[#00AFE6]" />
                             <span>{event.location}</span>
                           </div>
                         </div>
 
+                        {/* Optional Topic Box - Single Topic */}
+                        {(event as any).topic && !(event as any).topics && (
+                          <div className="mb-4 p-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-xl">
+                            <div className="text-xs font-medium text-[#00AFE6] mb-1">
+                              {t('eventsPage.sessionTopic')}
+                            </div>
+                            <div className="text-sm text-gray-800 dark:text-white font-medium italic">
+                              "{(event as any).topic}"
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Optional Topics Box - Multiple Topics with Presenters */}
+                        {(event as any).topics && (
+                          <div className="mb-4 p-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border border-[#00AFE6]/20 rounded-xl space-y-3">
+                            <div className="text-xs font-medium text-[#00AFE6]">
+                              {t('eventsPage.sessionTopics')}
+                            </div>
+                            {(event as any).topics.map((topicItem: { title: string; presenter: string }, idx: number) => (
+                              <div key={idx} className="border-l-2 border-[#00AFE6]/40 pl-3">
+                                <div className="text-sm text-gray-800 dark:text-white font-medium italic">
+                                  "{topicItem.title}"
+                                </div>
+                                <div className="text-xs text-gray-600 dark:text-white/70 mt-1">
+                                  {t('eventsPage.presenter')}: {topicItem.presenter}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
                         {/* Description */}
-                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-6">
+                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-4">
                           {event.description}
                         </p>
 
-                        {/* Membership info and Join button - Show for events that require membership */}
+                        {/* Optional CME Credits */}
+                        {(event as any).cmeCredits && (
+                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                            <Award className="w-4 h-4 text-[#00AFE6]" />
+                            <span>{(event as any).cmeCredits}</span>
+                          </div>
+                        )}
+
+                        {/* CTA Section - Membership info and Join button */}
                         {event.requiresMembershipCTA && (
                           <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden space-y-2">
-                            {/* Subtle animated background effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
-
                             <div className="relative z-10">
                               <div className="flex items-center justify-center gap-1 mb-1">
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                                 <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
-                                  Registration Not Required.
+                                  {t('eventsPage.registrationNotRequired')}
                                 </p>
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                               </div>
                               <p className="text-xs font-medium text-gray-700 dark:text-white/80 mb-2">
                                 {event.membershipType === "CANN"
-                                  ? "Zoom details are sent to CANN members"
-                                  : "Zoom details are sent to CAS members"}
+                                  ? t('eventsPage.zoomDetailsCANN')
+                                  : t('eventsPage.zoomDetailsCAS')}
                               </p>
-
                               <Button
                                 onClick={() =>
                                   (window.location.href =
@@ -506,7 +696,6 @@ export default function Events() {
                                     : "button-join-cas"
                                 }
                               >
-                                {/* Animated background effect */}
                                 <div
                                   className={
                                     event.membershipType === "CANN"
@@ -514,7 +703,6 @@ export default function Events() {
                                       : "absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
                                   }
                                 ></div>
-
                                 <div
                                   className={
                                     event.membershipType === "CANN"
@@ -542,7 +730,26 @@ export default function Events() {
                             </div>
                           </div>
                         )}
-                      </div>
+
+                        {/* CTA Section - Coming Soon */}
+                        {(event as any).isComingSoon && (
+                          <div className="text-center p-3 bg-gradient-to-r from-amber-500/15 to-orange-500/15 rounded-xl border border-amber-500/40 shadow-md shadow-amber-500/10 relative overflow-hidden space-y-2">
+                            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-orange-500/5 opacity-50 animate-pulse"></div>
+                            <div className="relative z-10">
+                              <div className="flex items-center justify-center gap-1 mb-1">
+                                <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
+                                <p className="text-sm font-semibold text-amber-600 dark:text-amber-400">
+                                  {t('eventsPage.comingSoon')}
+                                </p>
+                                <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
+                              </div>
+                              <p className="text-xs font-medium text-gray-700 dark:text-white/80">
+                                {t('eventsPage.registrationComingSoon')}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                      </CardContent>
                     </Card>
                   </motion.div>
                 ))}
@@ -582,7 +789,7 @@ export default function Events() {
                           <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-xl border border-[#00AFE6]/10">
                             <Calendar className="w-5 h-5 text-[#00AFE6] flex-shrink-0" />
                             <span className="text-sm font-medium text-gray-700 dark:text-white/80">
-                              {formatEventDate(event.date)}
+                              {(event as any).displayDate || formatEventDate(event.date)}
                             </span>
                           </div>
                           <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-[#00DD89]/5 to-[#00AFE6]/5 rounded-xl border border-[#00DD89]/10">
@@ -607,13 +814,13 @@ export default function Events() {
       </section>
 
       {/* CANN Events Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80" />
-        <div className="absolute top-0 left-0 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl -translate-x-48 -translate-y-48" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl translate-x-48 translate-y-48" />
+        <div className="absolute top-0 left-0 w-48 sm:w-72 md:w-96 h-48 sm:h-72 md:h-96 bg-pink-500/10 rounded-full blur-3xl -translate-x-24 sm:-translate-x-36 md:-translate-x-48 -translate-y-24 sm:-translate-y-36 md:-translate-y-48" />
+        <div className="absolute bottom-0 right-0 w-48 sm:w-72 md:w-96 h-48 sm:h-72 md:h-96 bg-purple-600/10 rounded-full blur-3xl translate-x-24 sm:translate-x-36 md:translate-x-48 translate-y-24 sm:translate-y-36 md:translate-y-48" />
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -621,22 +828,22 @@ export default function Events() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-900/80 dark:to-gray-800/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-200/50 dark:border-gray-400/30 shadow-2xl">
+            <div className="bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-900/80 dark:to-gray-800/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 border border-gray-200/50 dark:border-gray-400/30 shadow-2xl">
               {/* Header Badge */}
               <motion.div
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-500/10 to-purple-600/10 backdrop-blur-xl rounded-full px-6 py-3 border border-pink-500/20 dark:border-pink-500/30 mb-8"
+                className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-pink-500/10 to-purple-600/10 backdrop-blur-xl rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-pink-500/20 dark:border-pink-500/30 mb-4 sm:mb-6 md:mb-8"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Users className="w-5 h-5 text-pink-500" />
-                <span className="text-sm font-medium text-gray-800 dark:text-white/90">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5 text-pink-500" />
+                <span className="text-xs sm:text-sm font-medium text-gray-800 dark:text-white/90">
                   CANN Events
                 </span>
               </motion.div>
 
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-rosarivo mb-4 sm:mb-6">
                 <span className="text-gray-900 dark:text-white">
                   Looking for{" "}
                 </span>
@@ -645,7 +852,7 @@ export default function Events() {
                 </span>
               </h2>
 
-              <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-12">
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-6 sm:mb-8 md:mb-12 px-2">
                 Explore the Canadian Amyloidosis Nursing Network (CANN) educational series, upcoming events, and professional development opportunities.
               </p>
 
@@ -656,12 +863,12 @@ export default function Events() {
                 >
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-10 py-6 text-xl font-bold shadow-xl hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 group"
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-xl sm:rounded-2xl px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-xl font-bold shadow-xl hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 group w-full sm:w-auto"
                     data-testid="button-view-cann-events"
                   >
-                    <Calendar className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" />
-                    View CANN Events
-                    <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 mr-2 sm:mr-3 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="whitespace-nowrap">View CANN Events</span>
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
                 </motion.div>
               </Link>

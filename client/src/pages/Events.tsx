@@ -569,252 +569,6 @@ export default function Events() {
         </div>
       </section>
 
-      {/* CAS Journal Club Section */}
-      <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
-              <Calendar className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-gray-800 dark:text-white/90 font-medium">
-                {t("eventsPage.journalClubBadge")}
-              </span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                CAS Journal Club
-              </span>
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              {t("eventsPage.journalClubDescription")}
-            </p>
-            <Link href="/journal-club">
-              <Button className="mt-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white font-semibold px-6 py-3 rounded-xl shadow-lg">
-                {t("eventsPage.viewFullSchedule")}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
-          </motion.div>
-
-          {/* Journal Club Tabs */}
-          <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-2">
-            <div className="bg-gradient-to-r from-gray-100/80 to-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-1 sm:p-2 shadow-2xl inline-flex min-w-max">
-              <button
-                onClick={() => setJournalClubTab("upcoming")}
-                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
-                  journalClubTab === "upcoming"
-                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
-                }`}
-              >
-                {t("eventsPage.upcomingEvents")}
-              </button>
-              <button
-                onClick={() => setJournalClubTab("past")}
-                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
-                  journalClubTab === "past"
-                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
-                }`}
-              >
-                {t("eventsPage.pastEvents")}
-              </button>
-            </div>
-          </div>
-
-          {/* Journal Club Sessions Grid */}
-          <div className="max-w-6xl mx-auto">
-            <div
-              className={`grid gap-6 ${
-                (journalClubTab === "upcoming"
-                  ? upcomingJournalClubSessions
-                  : pastJournalClubSessions
-                ).length === 1
-                  ? "grid-cols-1 max-w-md mx-auto"
-                  : (journalClubTab === "upcoming"
-                        ? upcomingJournalClubSessions
-                        : pastJournalClubSessions
-                      ).length === 2
-                    ? "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
-                    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-              }`}
-            >
-              {(journalClubTab === "upcoming"
-                ? upcomingJournalClubSessions
-                : pastJournalClubSessions
-              ).map((session, index) => {
-                const isPast = isEventPast(session.rawDate);
-                // Get month name for session title
-                const sessionDate = parseLocalDate(session.rawDate);
-                const monthName = sessionDate.toLocaleDateString("en-US", {
-                  month: "long",
-                  timeZone: MST_TIMEZONE,
-                });
-
-                return (
-                  <motion.div
-                    key={session.rawDate}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="h-full"
-                  >
-                    <Card
-                      className={`h-full flex flex-col rounded-3xl overflow-hidden transition-all duration-500 ${
-                        isPast
-                          ? "bg-gradient-to-br from-gray-100/95 to-gray-50/95 dark:from-gray-800/50 dark:to-gray-900/50 border-gray-200/50 dark:border-gray-700/50 opacity-70"
-                          : "bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15"
-                      }`}
-                    >
-                      {/* Header Section */}
-                      <div
-                        className={`relative p-6 ${isPast ? "bg-gray-100/50 dark:bg-gray-700/30" : "bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent"}`}
-                      >
-                        <div className="flex justify-between items-start mb-4">
-                          <div
-                            className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isPast ? "bg-gray-200/50 dark:bg-gray-600/30" : "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20"}`}
-                          >
-                            <Calendar
-                              className={`w-8 h-8 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            />
-                          </div>
-                          <Badge
-                            className={`${isPast ? "bg-gray-400" : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89]"} text-white border-0 px-2 py-1 text-xs font-medium rounded`}
-                          >
-                            Journal Club
-                          </Badge>
-                        </div>
-                        <h3
-                          className={`text-xl font-semibold leading-snug ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
-                        >
-                          CAS Journal Club - {monthName} Session
-                        </h3>
-                      </div>
-
-                      {/* Content Section */}
-                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
-                        {/* Event Details */}
-                        <div className="space-y-2 mb-4">
-                          <div
-                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                          >
-                            <Calendar
-                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            />
-                            <span>{formatEventDate(session.rawDate)}</span>
-                          </div>
-                          <div
-                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                          >
-                            <Clock
-                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            />
-                            <span>3:00 PM - 4:00 PM MST</span>
-                          </div>
-                          <div
-                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                          >
-                            <MapPin
-                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            />
-                            <span>Virtual Event</span>
-                          </div>
-                        </div>
-
-                        {/* Topics Section */}
-                        {session.topics && (
-                          <div
-                            className={`mb-4 p-3 rounded-xl border space-y-3 ${
-                              isPast
-                                ? "bg-gray-50 dark:bg-gray-700/30 border-gray-200 dark:border-gray-600"
-                                : "bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border-[#00AFE6]/20"
-                            }`}
-                          >
-                            <div
-                              className={`text-xs font-medium ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            >
-                              {t("eventsPage.sessionTopics")}
-                            </div>
-                            {session.topics.map((topic, idx) => (
-                              <div
-                                key={idx}
-                                className={`border-l-2 pl-3 ${isPast ? "border-gray-300" : "border-[#00AFE6]/40"}`}
-                              >
-                                <div
-                                  className={`text-sm font-medium italic ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
-                                >
-                                  "{topic.title}"
-                                </div>
-                                <div
-                                  className={`text-xs mt-1 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                                >
-                                  {t("eventsPage.presenter")}: {topic.presenter}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* Description */}
-                        <p
-                          className={`text-sm leading-relaxed flex-1 mb-4 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                        >
-                          One-hour virtual session focusing on amyloidosis
-                          clinical case-based presentations and scientific
-                          updates.
-                        </p>
-
-                        {/* CTA Section */}
-                        {!isPast && (
-                          <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden space-y-2">
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
-                            <div className="relative z-10">
-                              <div className="flex items-center justify-center gap-1 mb-1">
-                                <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
-                                <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
-                                  {t("eventsPage.registrationNotRequired")}
-                                </p>
-                                <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
-                              </div>
-                              <p className="text-xs font-medium text-gray-700 dark:text-white/80 mb-2">
-                                {t("eventsPage.zoomDetailsCAS")}
-                              </p>
-                              <Button
-                                onClick={() =>
-                                  (window.location.href = "/join-cas")
-                                }
-                                className="bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
-                              >
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                                <div className="relative z-10 flex items-center justify-center text-gray-800">
-                                  <Users className="w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
-                                  Join CAS
-                                  <div className="ml-1 w-1.5 h-1.5 bg-gray-800 rounded-full animate-pulse"></div>
-                                </div>
-                              </Button>
-                            </div>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Canadian Amyloidosis Summit Section */}
       <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
@@ -1093,6 +847,252 @@ export default function Events() {
                 )}
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* CAS Journal Club Section */}
+      <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
+              <Calendar className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-gray-800 dark:text-white/90 font-medium">
+                {t("eventsPage.journalClubBadge")}
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                CAS Journal Club
+              </span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
+              {t("eventsPage.journalClubDescription")}
+            </p>
+            <Link href="/journal-club">
+              <Button className="mt-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white font-semibold px-6 py-3 rounded-xl shadow-lg">
+                {t("eventsPage.viewFullSchedule")}
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </motion.div>
+
+          {/* Journal Club Tabs */}
+          <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-2">
+            <div className="bg-gradient-to-r from-gray-100/80 to-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-1 sm:p-2 shadow-2xl inline-flex min-w-max">
+              <button
+                onClick={() => setJournalClubTab("upcoming")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  journalClubTab === "upcoming"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t("eventsPage.upcomingEvents")}
+              </button>
+              <button
+                onClick={() => setJournalClubTab("past")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  journalClubTab === "past"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t("eventsPage.pastEvents")}
+              </button>
+            </div>
+          </div>
+
+          {/* Journal Club Sessions Grid */}
+          <div className="max-w-6xl mx-auto">
+            <div
+              className={`grid gap-6 ${
+                (journalClubTab === "upcoming"
+                  ? upcomingJournalClubSessions
+                  : pastJournalClubSessions
+                ).length === 1
+                  ? "grid-cols-1 max-w-md mx-auto"
+                  : (journalClubTab === "upcoming"
+                        ? upcomingJournalClubSessions
+                        : pastJournalClubSessions
+                      ).length === 2
+                    ? "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
+                    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+              }`}
+            >
+              {(journalClubTab === "upcoming"
+                ? upcomingJournalClubSessions
+                : pastJournalClubSessions
+              ).map((session, index) => {
+                const isPast = isEventPast(session.rawDate);
+                // Get month name for session title
+                const sessionDate = parseLocalDate(session.rawDate);
+                const monthName = sessionDate.toLocaleDateString("en-US", {
+                  month: "long",
+                  timeZone: MST_TIMEZONE,
+                });
+
+                return (
+                  <motion.div
+                    key={session.rawDate}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="h-full"
+                  >
+                    <Card
+                      className={`h-full flex flex-col rounded-3xl overflow-hidden transition-all duration-500 ${
+                        isPast
+                          ? "bg-gradient-to-br from-gray-100/95 to-gray-50/95 dark:from-gray-800/50 dark:to-gray-900/50 border-gray-200/50 dark:border-gray-700/50 opacity-70"
+                          : "bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15"
+                      }`}
+                    >
+                      {/* Header Section */}
+                      <div
+                        className={`relative p-6 ${isPast ? "bg-gray-100/50 dark:bg-gray-700/30" : "bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent"}`}
+                      >
+                        <div className="flex justify-between items-start mb-4">
+                          <div
+                            className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isPast ? "bg-gray-200/50 dark:bg-gray-600/30" : "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20"}`}
+                          >
+                            <Calendar
+                              className={`w-8 h-8 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            />
+                          </div>
+                          <Badge
+                            className={`${isPast ? "bg-gray-400" : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89]"} text-white border-0 px-2 py-1 text-xs font-medium rounded`}
+                          >
+                            Journal Club
+                          </Badge>
+                        </div>
+                        <h3
+                          className={`text-xl font-semibold leading-snug ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
+                        >
+                          CAS Journal Club - {monthName} Session
+                        </h3>
+                      </div>
+
+                      {/* Content Section */}
+                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
+                        {/* Event Details */}
+                        <div className="space-y-2 mb-4">
+                          <div
+                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                          >
+                            <Calendar
+                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            />
+                            <span>{formatEventDate(session.rawDate)}</span>
+                          </div>
+                          <div
+                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                          >
+                            <Clock
+                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            />
+                            <span>3:00 PM - 4:00 PM MST</span>
+                          </div>
+                          <div
+                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                          >
+                            <MapPin
+                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            />
+                            <span>Virtual Event</span>
+                          </div>
+                        </div>
+
+                        {/* Topics Section */}
+                        {session.topics && (
+                          <div
+                            className={`mb-4 p-3 rounded-xl border space-y-3 ${
+                              isPast
+                                ? "bg-gray-50 dark:bg-gray-700/30 border-gray-200 dark:border-gray-600"
+                                : "bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border-[#00AFE6]/20"
+                            }`}
+                          >
+                            <div
+                              className={`text-xs font-medium ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            >
+                              {t("eventsPage.sessionTopics")}
+                            </div>
+                            {session.topics.map((topic, idx) => (
+                              <div
+                                key={idx}
+                                className={`border-l-2 pl-3 ${isPast ? "border-gray-300" : "border-[#00AFE6]/40"}`}
+                              >
+                                <div
+                                  className={`text-sm font-medium italic ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
+                                >
+                                  "{topic.title}"
+                                </div>
+                                <div
+                                  className={`text-xs mt-1 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                                >
+                                  {t("eventsPage.presenter")}: {topic.presenter}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Description */}
+                        <p
+                          className={`text-sm leading-relaxed flex-1 mb-4 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                        >
+                          One-hour virtual session focusing on amyloidosis
+                          clinical case-based presentations and scientific
+                          updates.
+                        </p>
+
+                        {/* CTA Section */}
+                        {!isPast && (
+                          <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden space-y-2">
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
+                            <div className="relative z-10">
+                              <div className="flex items-center justify-center gap-1 mb-1">
+                                <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
+                                <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
+                                  {t("eventsPage.registrationNotRequired")}
+                                </p>
+                                <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
+                              </div>
+                              <p className="text-xs font-medium text-gray-700 dark:text-white/80 mb-2">
+                                {t("eventsPage.zoomDetailsCAS")}
+                              </p>
+                              <Button
+                                onClick={() =>
+                                  (window.location.href = "/join-cas")
+                                }
+                                className="bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
+                              >
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                                <div className="relative z-10 flex items-center justify-center text-gray-800">
+                                  <Users className="w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
+                                  Join CAS
+                                  <div className="ml-1 w-1.5 h-1.5 bg-gray-800 rounded-full animate-pulse"></div>
+                                </div>
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

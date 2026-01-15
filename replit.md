@@ -38,6 +38,7 @@ Key features include:
 ### Feature Specifications
 - Homepage: Reordered sections with interactive map prominence.
 - Amyloidosis Detail Pages: Simplified design, consistent branding, professional medical aesthetic.
+- Events Page Structure: Hero → Featured Event → Canadian Amyloidosis Summit → CAS Journal Club → CANN Events → News (with newsletter modal).
 - Events Integration: CAS Journal Club and CANN Educational Series with member notifications.
 - Clinician-First Focus: Enhanced hero sections, restructured navigation (Clinical Tools, Research Hub, Professional Network), governance documents, and contributor portal.
 - Contact & Footer: Professional contact system, comprehensive FAQ, and bilingual UX.

@@ -22,6 +22,11 @@ import { Tabs, TabsContent } from "@/components/ui/tabs";
 import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
+import cannLogoImg from "@assets/CAN_logo_1768484961432.png";
+import summitImage1 from "@assets/summit_image_1_1768484961432.png";
+import summitImage2 from "@assets/summit_image_2_1768484961431.png";
+import summitImage3 from "@assets/summit_image_3_1768484961431.png";
+import summitPosterImg from "@assets/summit_poster_1768484961427.png";
 
 // Journal Club Sessions Data
 const journalClubSessions = [
@@ -143,7 +148,7 @@ const newsletters = [
           ctaText: "CAS Registration",
           ctaLink: "/join-cas",
           hasLogo: true,
-          logoPlaceholder: "[CAN LOGO]"
+          logoImage: cannLogoImg
         },
         {
           title: "",
@@ -159,16 +164,15 @@ const newsletters = [
         },
         {
           title: "Canadian Amyloidosis Summit",
-          content: `[3 Images in a single row]
-
-We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals attending. Attendance will again be free and offered both in person and virtual. The Canadian Amyloidosis Summit 2025 is again welcoming abstract submissions from amyloidosis researchers attending. Please consider submitting your abstract when registering to attend. Abstracts submissions are accepted on all topics related to amyloidosis research and the only requirement for submission is registering to attend. Abstracts that are accepted will be presented in poster format. Those attending may also present their abstract on behalf of their research team (student, trainee, supervisor).
-
-[Banner Image]
+          content: `We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals attending. Attendance will again be free and offered both in person and virtual. The Canadian Amyloidosis Summit 2025 is again welcoming abstract submissions from amyloidosis researchers attending. Please consider submitting your abstract when registering to attend. Abstracts submissions are accepted on all topics related to amyloidosis research and the only requirement for submission is registering to attend. Abstracts that are accepted will be presented in poster format. Those attending may also present their abstract on behalf of their research team (student, trainee, supervisor).
 
 Note: All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.
 
-Summit Registration
-[QR code + CTA Link]`
+Summit Registration`,
+          hasThreeImages: true,
+          threeImages: [summitImage1, summitImage2, summitImage3],
+          hasBannerImage: true,
+          bannerImage: summitPosterImg
         },
         {
           title: "CAS Journal Club Webinar",
@@ -1168,9 +1172,25 @@ export default function Events() {
                     </div>
                   ) : (
                     <div key={index} className={section.title ? "border-l-4 border-[#00AFE6] pl-6" : ""}>
-                      {(section as any).hasLogo && (
-                        <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl text-center text-gray-500 dark:text-gray-400 text-sm italic">
-                          {(section as any).logoPlaceholder}
+                      {(section as any).hasLogo && (section as any).logoImage && (
+                        <div className="mb-4 flex justify-center">
+                          <img 
+                            src={(section as any).logoImage} 
+                            alt="CANN Logo" 
+                            className="max-w-xs h-auto"
+                          />
+                        </div>
+                      )}
+                      {(section as any).hasThreeImages && (section as any).threeImages && (
+                        <div className="mb-4 grid grid-cols-3 gap-3">
+                          {(section as any).threeImages.map((img: string, imgIndex: number) => (
+                            <img 
+                              key={imgIndex}
+                              src={img} 
+                              alt={`Summit image ${imgIndex + 1}`} 
+                              className="w-full h-32 object-cover rounded-lg"
+                            />
+                          ))}
                         </div>
                       )}
                       {section.title && (
@@ -1183,6 +1203,15 @@ export default function Events() {
                           {section.content.split('**').map((part, i) => 
                             i % 2 === 1 ? <strong key={i} className="text-gray-800 dark:text-white">{part}</strong> : part
                           )}
+                        </div>
+                      )}
+                      {(section as any).hasBannerImage && (section as any).bannerImage && (
+                        <div className="mt-4 mb-4">
+                          <img 
+                            src={(section as any).bannerImage} 
+                            alt="Summit Banner" 
+                            className="w-full h-auto rounded-lg shadow-md"
+                          />
                         </div>
                       )}
                       {(section as any).hasCTA && (

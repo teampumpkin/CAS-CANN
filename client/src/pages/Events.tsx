@@ -137,11 +137,17 @@ const newsletters = [
       intro: `Welcome to the Canadian Amyloidosis Society (CAS)! The CAS was launched in October 2024 at the Canadian Amyloidosis Summit, and is a multidisciplinary medical organization dedicated to serving healthcare professionals who provide amyloidosis care within Canada. We are proud to announce that the CAS has over 180 members from across Canada, representing multiple different medical specialties and disciplines providing amyloid patient care! We are excited to announce that our website, amyloid.ca, is now live!`,
       sections: [
         {
-          title: "Canadian Amyloidosis Nursing Network (CANN)",
-          content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars designed specifically for nursing professionals.`,
+          title: "",
+          content: ``,
           hasCTA: true,
           ctaText: "CAS Registration",
-          ctaLink: "/join-cas"
+          ctaLink: "/join-cas",
+          hasLogo: true,
+          logoPlaceholder: "[CANN LOGO]"
+        },
+        {
+          title: "",
+          content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars designed specifically for nursing professionals.`
         },
         {
           title: "TELL US WHAT YOU THINK!",
@@ -153,18 +159,18 @@ const newsletters = [
         },
         {
           title: "Canadian Amyloidosis Summit",
-          content: `We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals.
+          content: `[3 Images in a single row]
+
+We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals.
 
 Registration for the 2025 Canadian Amyloidosis Summit is Open - CLICK HERE!
 
-[3 Images in a single row]
+[Banner Image]
 
 All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.
 
-[Image]`,
-          hasCTA: true,
-          ctaText: "Summit Registration",
-          ctaLink: "#"
+Summit Registration
+[QR code + CTA Link]`
         },
         {
           title: "CAS Journal Club Webinar",
@@ -1163,10 +1169,17 @@ export default function Events() {
                       </h2>
                     </div>
                   ) : (
-                    <div key={index} className="border-l-4 border-[#00AFE6] pl-6">
-                      <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3">
-                        {section.title}
-                      </h3>
+                    <div key={index} className={section.title ? "border-l-4 border-[#00AFE6] pl-6" : ""}>
+                      {(section as any).hasLogo && (
+                        <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl text-center text-gray-500 dark:text-gray-400 text-sm italic">
+                          {(section as any).logoPlaceholder}
+                        </div>
+                      )}
+                      {section.title && (
+                        <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3">
+                          {section.title}
+                        </h3>
+                      )}
                       {section.content && (
                         <div className="text-gray-600 dark:text-white/70 text-sm leading-relaxed whitespace-pre-line">
                           {section.content.split('**').map((part, i) => 

@@ -27,6 +27,12 @@ import summitImage1 from "@assets/summit_image_1_1768484961432.png";
 import summitImage2 from "@assets/summit_image_2_1768484961431.png";
 import summitImage3 from "@assets/summit_image_3_1768484961431.png";
 import summitPosterImg from "@assets/summit_poster_1768484961427.png";
+// Newsletter 2 images
+import cannLogoDarkImg from "@assets/cann_rgb_dark_theme_1756219144378_dhmf_rl6_zc_v5_1553680000000_1768487481003.png";
+import summit2025Photo1 from "@assets/6110ba86_43ba_413c_9bf7_00e4a1ce8c19_zc_v3_1553680000000116018_1768487481005.jpg";
+import summit2025Photo2 from "@assets/d33be37a_54c0_47a5_891b_f018d610f554_zc_v3_1553680000000116018_1768487481005.jpg";
+import summit2025Photo3 from "@assets/2d226423_9ba2_4a2b_b87c_05bf881cd89a_zc_v3_1553680000000116018_1768487481005.jpg";
+import casLogoImg from "@assets/1767774519236_1_zc_v1_1553680000000116018_1768487481006.jpeg";
 
 // Journal Club Sessions Data
 const journalClubSessions = [
@@ -227,6 +233,77 @@ Note: All members of CAS and CANN are invited to attend the first Annual General
           title:
             "5th Annual International Amyloidosis Meeting for Patients and Doctors, September 25-26, 2025, Baveno, Italy",
           content: `The International ATTR Amyloidosis Meeting for Patients and Doctors is a highly anticipated event in the amyloidosis community. This meeting brings together patients, caregivers, families, scientists, doctors, and other healthcare providers to learn about the latest developments in the field. The hybrid format of the event ensures that it is accessible to a wider audience, allowing participants from around the world to join virtually. This approach promotes inclusivity and enables the exchange of insights regardless of geographical constraints. To facilitate the access, simultaneous translation will be offered for the patients' program. Find out more at: https://attr2025.com/`,
+        },
+      ],
+    },
+  },
+  {
+    id: 2,
+    title: "CAS Newsletter - January 2026",
+    date: "2026-01-15",
+    thumbnail: "/api/placeholder/400/250",
+    excerpt:
+      "Updates from the 2025 Canadian Amyloidosis Summit, Journal Club sessions, CANN events, and the latest news from the world of amyloidosis.",
+    content: {
+      intro: ``,
+      sections: [
+        {
+          title: "",
+          content: ``,
+          hasLogo: true,
+          logoImage: casLogoImg,
+        },
+        {
+          title: "EVENTS",
+          isHeader: true,
+        },
+        {
+          title: "Canadian Amyloidosis Summit 2025",
+          content: `In partnership with Transthyretin Amyloidosis Canada (TAC), the Canadian Amyloidosis Summit was held in Toronto the weekend of November 1-2, 2025, with over 120 people attending. This hybrid event featured parallel sessions for both healthcare providers and patients/families, with CME accreditation for healthcare provider sessions. The Summit featured interesting presentations and panel discussions from many national and internationally recognized leaders from the amyloidosis community. The CAS also held its first Annual General Meeting (AGM) at the Summit. Planning for the 2026 Canadian Amyloidosis Summit next fall is already underway. Stay tuned for future updates and hope you can join us!`,
+          hasThreeImages: true,
+          threeImages: [summit2025Photo1, summit2025Photo2, summit2025Photo3],
+        },
+        {
+          title: "CAS Journal Club",
+          content: `CAS Journal Club continues with quarterly virtual presentations featuring interesting amyloidosis cases from across Canada. The November 2025 CAS journal club included great case discussions presented by Dr. Janine Mazengarb from the University of British Columbia and Dr. Rajin Choudhury from the University of Calgary.
+
+Next Session: February 26th at 5-6 PM EST
+Presenters to be announced.
+
+All CAS members are welcome to join; the Zoom link will be sent by e-mail to all members in advance.`,
+          hasCTA: true,
+          ctaText: "More details at amyloid.ca/journal-club",
+          ctaLink: "/journal-club",
+        },
+        {
+          title: "Canadian Amyloidosis Nursing Network",
+          content: `CANN is pleased to invite members to the following upcoming events:`,
+          hasLogo: true,
+          logoImage: cannLogoDarkImg,
+        },
+        {
+          title: "CANN Townhall: January 22, 2026",
+          content: `Join us for a virtual ideation workshop. This professionally facilitated round table discussion is designed for members to connect and share ideas. Registration is OPEN!`,
+        },
+        {
+          title: "CANN Educational Series: February 18, 2026",
+          content: `Join us to deepen understanding surrounding the role of PYP scans in the management of amyloidosis.`,
+        },
+        {
+          title: "UPDATES FROM THE WORLD OF AMYLOIDOSIS",
+          isHeader: true,
+        },
+        {
+          title: "Health Canada Notice of Compliance for Vutrisiran",
+          content: `In December 2025, Health Canada provided the Notice of Compliance for vutrisiran (Amvuttra, Alnylam Pharmaceuticals) for the treatment of wild-type or hereditary transthyretin-mediated amyloidosis cardiomyopathy. The approval broadens the indication for vutrisiran, from its existing indication for the treatment Stage 1 or stage 2 polyneuropathy in patients with hereditary transthyretin-mediated amyloidosis.`,
+        },
+        {
+          title: "MAGNITUDE Clinical Trial Enrollment Placed on Hold",
+          content: `On October 27, 2025, Intellia Therapeutics paused enrollment in its MAGNITUDE clinical trial after one participant experienced severe elevations in liver transaminases, meeting the study's pre-defined safety criteria. The participant was hospitalized and sadly passed away from complications of acute liver failure. Subsequently, the U.S. FDA placed the trial on clinical hold. The MAGNITUDE (NCT06128629) trial is evaluating nexiguran ziclumeran (nex-z) for the treatment of ATTR cardiomyopathy using CRISPR/Cas9 technology.`,
+        },
+        {
+          title: "International Symposium on Amyloidosis",
+          content: `The International Society of Amyloidosis (ISA) will be holding its international symposium November 15-18, 2026, in beautiful Montevideo, Uruguay. For more details and to register for this exciting event please visit the ISA website: isaamyloidosis.org`,
         },
       ],
     },

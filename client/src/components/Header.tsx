@@ -579,7 +579,7 @@ export default function Header() {
                 {item.hasDropdown ? (
                   <>
                     <div
-                      className={`w-full flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
+                      className={`w-full flex items-center justify-start px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
                         isPageActive(item.href, item.dropdownItems)
                           ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15"
                           : "text-gray-700 hover:bg-gray-100"
@@ -595,7 +595,7 @@ export default function Header() {
                             setMobileDropdowns({});
                           }
                         }}
-                        className="flex-1"
+                        className="flex-1 text-left"
                       >
                         {item.name}
                       </a>
@@ -654,9 +654,9 @@ export default function Header() {
                 ) : (
                   <a
                     href={item.href}
-                    className={`flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
+                    className={`flex items-center justify-start px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
                       item.isPrimary
-                        ? "text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] shadow-lg shadow-[#00AFE6]/30"
+                        ? "text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] shadow-lg shadow-[#00AFE6]/30 justify-center"
                         : isPageActive(item.href)
                           ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 border-l-4 border-[#00AFE6]"
                           : "text-gray-700 hover:bg-gray-100"
@@ -666,7 +666,7 @@ export default function Header() {
                       setMobileDropdowns({});
                     }}
                   >
-                    <span>{item.name}</span>
+                    <span className={item.isPrimary ? "" : "flex-1"}>{item.name}</span>
                     {!item.isPrimary && isPageActive(item.href) && (
                       <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                     )}

@@ -192,13 +192,13 @@ export default function Events() {
     .filter(session => isEventPast(session.rawDate))
     .sort((a, b) => parseLocalDate(b.rawDate).getTime() - parseLocalDate(a.rawDate).getTime());
 
-  // Categorize Summit events (type === "Summit" only, excluding featured event)
+  // Categorize Summit events (type === "Summit" or "In-person & Virtual")
   const upcomingSummitEvents = allEvents
-    .filter(event => event.type === "Summit" && !isEventPast(event.date))
+    .filter(event => (event.type === "Summit" || event.type === "In-person & Virtual") && !isEventPast(event.date))
     .sort((a, b) => parseLocalDate(a.date).getTime() - parseLocalDate(b.date).getTime());
   
   const pastSummitEvents = allEvents
-    .filter(event => event.type === "Summit" && isEventPast(event.date))
+    .filter(event => (event.type === "Summit" || event.type === "In-person & Virtual") && isEventPast(event.date))
     .sort((a, b) => parseLocalDate(b.date).getTime() - parseLocalDate(a.date).getTime());
 
   // Helper function to add ordinal suffix to day
@@ -715,7 +715,7 @@ export default function Events() {
                             </p>
 
                             {/* CTA Section */}
-                            {event.registrationUrl && (
+                            {event.registrationUrl ? (
                               <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
                                 <div className="relative z-10">
@@ -728,6 +728,22 @@ export default function Events() {
                                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                                     </span>
                                   </Button>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="text-center p-3 bg-gradient-to-r from-amber-500/15 to-orange-500/15 rounded-xl border border-amber-500/40 shadow-md shadow-amber-500/10 relative overflow-hidden">
+                                <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-orange-500/5 opacity-50 animate-pulse"></div>
+                                <div className="relative z-10">
+                                  <div className="flex items-center justify-center gap-1 mb-1">
+                                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
+                                    <p className="text-sm font-semibold text-amber-600 dark:text-amber-400">
+                                      {t('eventsPage.comingSoon')}
+                                    </p>
+                                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
+                                  </div>
+                                  <p className="text-xs text-gray-600 dark:text-white/70">
+                                    {t('eventsPage.registrationComingSoon')}
+                                  </p>
                                 </div>
                               </div>
                             )}
@@ -778,18 +794,18 @@ export default function Events() {
                         viewport={{ once: true }}
                         className="h-full"
                       >
-                        <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden group">
+                        <Card className="bg-gradient-to-br from-gray-100/95 to-gray-200/95 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl border border-gray-300/60 dark:border-gray-600/40 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden opacity-70">
                           {/* Header Section */}
-                          <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
+                          <div className="relative p-6 bg-gradient-to-br from-gray-200/50 via-gray-100/30 to-transparent dark:from-gray-700/30 dark:via-gray-800/20 dark:to-transparent">
                             <div className="flex justify-between items-start mb-4">
-                              <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                                <Award className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                              <div className="w-16 h-16 bg-gradient-to-br from-gray-300/50 to-gray-400/30 dark:from-gray-600/50 dark:to-gray-700/30 rounded-2xl flex items-center justify-center">
+                                <Award className="w-8 h-8 text-gray-400 dark:text-gray-500" />
                               </div>
-                              <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
+                              <Badge className="bg-gray-400 dark:bg-gray-600 text-white border-0 px-2 py-1 text-xs font-medium rounded">
                                 {event.type}
                               </Badge>
                             </div>
-                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug group-hover:text-[#00AFE6] transition-colors duration-300">
+                            <h3 className="text-xl font-semibold text-gray-500 dark:text-gray-400 leading-snug">
                               {event.title}
                             </h3>
                           </div>
@@ -798,22 +814,22 @@ export default function Events() {
                           <CardContent className="p-6 pt-4 flex flex-col flex-1">
                             {/* Event Details */}
                             <div className="space-y-2 mb-4">
-                              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                                <Calendar className="w-4 h-4 text-[#00AFE6]" />
+                              <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+                                <Calendar className="w-4 h-4 text-gray-400" />
                                 <span>{(event as any).displayDate || formatEventDate(event.date)}</span>
                               </div>
-                              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                                <Clock className="w-4 h-4 text-[#00AFE6]" />
+                              <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+                                <Clock className="w-4 h-4 text-gray-400" />
                                 <span>{event.time}</span>
                               </div>
-                              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                                <MapPin className="w-4 h-4 text-[#00AFE6]" />
+                              <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+                                <MapPin className="w-4 h-4 text-gray-400" />
                                 <span>{event.location}</span>
                               </div>
                             </div>
 
                             {/* Description */}
-                            <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1">
+                            <p className="text-gray-400 dark:text-gray-500 text-sm leading-relaxed flex-1">
                               {event.description}
                             </p>
                           </CardContent>

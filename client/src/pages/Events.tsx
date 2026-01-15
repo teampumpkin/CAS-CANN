@@ -544,8 +544,7 @@ export default function Events() {
           >
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
               {t("eventsPage.title.events")}
-            </span>
-            <br />
+            </span>{" "}
             <span className="text-gray-800 dark:text-white">
               {t("eventsPage.title.education")}
             </span>

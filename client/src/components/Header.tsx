@@ -578,31 +578,48 @@ export default function Header() {
               <div key={item.name} className="space-y-1">
                 {item.hasDropdown ? (
                   <>
-                    <button
-                      onClick={() =>
-                        setMobileDropdowns((prev) => ({
-                          ...prev,
-                          [item.name]: !prev[item.name],
-                        }))
-                      }
+                    <div
                       className={`w-full flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
                         isPageActive(item.href, item.dropdownItems)
                           ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15"
                           : "text-gray-700 hover:bg-gray-100"
                       }`}
                     >
-                      <span>{item.name}</span>
+                      <a
+                        href={item.href.startsWith("#") ? undefined : item.href.split("#")[0]}
+                        onClick={(e) => {
+                          if (item.href.startsWith("#")) {
+                            e.preventDefault();
+                          } else {
+                            setIsMenuOpen(false);
+                            setMobileDropdowns({});
+                          }
+                        }}
+                        className="flex-1"
+                      >
+                        {item.name}
+                      </a>
                       <div className="flex items-center gap-2">
                         {isPageActive(item.href, item.dropdownItems) && (
                           <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                         )}
-                        <ChevronDown
-                          className={`w-4 h-4 transition-transform duration-300 ${
-                            mobileDropdowns[item.name] ? "rotate-180" : ""
-                          }`}
-                        />
+                        <button
+                          onClick={() =>
+                            setMobileDropdowns((prev) => ({
+                              ...prev,
+                              [item.name]: !prev[item.name],
+                            }))
+                          }
+                          className="p-1"
+                        >
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform duration-300 ${
+                              mobileDropdowns[item.name] ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
                       </div>
-                    </button>
+                    </div>
                     {mobileDropdowns[item.name] && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}

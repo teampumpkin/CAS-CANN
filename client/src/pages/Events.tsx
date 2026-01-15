@@ -1273,16 +1273,6 @@ export default function Events() {
                         section.title ? "border-l-4 border-[#00AFE6] pl-6" : ""
                       }
                     >
-                      {(section as any).hasLogo &&
-                        (section as any).logoImage && (
-                          <div className="mb-4 flex justify-center">
-                            <img
-                              src={(section as any).logoImage}
-                              alt="CANN Logo"
-                              className="max-w-xs h-auto"
-                            />
-                          </div>
-                        )}
                       {(section as any).hasThreeImages &&
                         (section as any).threeImages && (
                           <div className="mb-4 grid grid-cols-3 gap-3">

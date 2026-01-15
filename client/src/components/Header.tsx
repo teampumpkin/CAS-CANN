@@ -184,8 +184,14 @@ export default function Header() {
               {navItems.map((item, index) => (
                 <div key={item.name} className="relative group">
                   {item.hasDropdown ? (
-                    <motion.button
-                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap ${
+                    <motion.a
+                      href={item.href.startsWith("#") ? undefined : item.href.split("#")[0]}
+                      onClick={(e) => {
+                        if (item.href.startsWith("#")) {
+                          e.preventDefault();
+                        }
+                      }}
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap cursor-pointer ${
                         isPageActive(item.href, item.dropdownItems)
                           ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30"
                           : "text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20"
@@ -210,7 +216,7 @@ export default function Header() {
                       {isPageActive(item.href, item.dropdownItems) && (
                         <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                       )}
-                    </motion.button>
+                    </motion.a>
                   ) : (
                     <motion.a
                       href={item.href}

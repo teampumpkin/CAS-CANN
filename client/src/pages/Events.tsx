@@ -489,7 +489,7 @@ export default function Events() {
                         : "bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15"
                     }`}>
                       {/* Header Section */}
-                      <div className={`relative p-6 pb-4 ${isPast ? "bg-gray-100/50 dark:bg-gray-700/30" : "bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent"}`}>
+                      <div className={`relative p-6 ${isPast ? "bg-gray-100/50 dark:bg-gray-700/30" : "bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent"}`}>
                         <div className="flex justify-between items-start mb-4">
                           <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isPast ? "bg-gray-200/50 dark:bg-gray-600/30" : "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20"}`}>
                             <Calendar className={`w-8 h-8 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`} />
@@ -504,7 +504,7 @@ export default function Events() {
                       </div>
 
                       {/* Content Section */}
-                      <CardContent className="p-6 pt-0 flex flex-col flex-1">
+                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
                         {/* Event Details */}
                         <div className="space-y-2 mb-4">
                           <div className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}>
@@ -665,7 +665,7 @@ export default function Events() {
                   >
                     <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden">
                       {/* Header Section */}
-                      <div className="relative p-6 pb-4 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
+                      <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
                         <div className="flex justify-between items-start mb-4">
                           <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center">
                             <Calendar className="w-8 h-8 text-[#00AFE6]" />
@@ -687,7 +687,7 @@ export default function Events() {
                       </div>
 
                       {/* Content Section */}
-                      <CardContent className="p-6 pt-0 flex flex-col flex-1">
+                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
                         {/* Event Details */}
                         <div className="space-y-2 mb-4">
                           <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
@@ -855,23 +855,21 @@ export default function Events() {
                   >
                     <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full group rounded-3xl overflow-hidden">
                       {/* Enhanced Header */}
-                      <div className="relative p-8 pb-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
-                        <div className="absolute top-4 right-4">
-                          <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-3 py-1 text-xs font-medium rounded-full">
+                      <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <Calendar className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                          </div>
+                          <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
                             {event.type}
                           </Badge>
                         </div>
-
-                        <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
-                          <Calendar className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
-                        </div>
-
-                        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 leading-tight group-hover:text-[#00AFE6] transition-colors duration-300">
+                        <h3 className="text-xl font-bold text-gray-800 dark:text-white leading-tight group-hover:text-[#00AFE6] transition-colors duration-300">
                           {event.title}
                         </h3>
                       </div>
 
-                      <CardContent className="p-8 pt-0 flex flex-col flex-1">
+                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
                         <div className="space-y-3 mb-6">
                           <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-xl border border-[#00AFE6]/10">
                             <Calendar className="w-5 h-5 text-[#00AFE6] flex-shrink-0" />

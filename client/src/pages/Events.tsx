@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import {
   Calendar,
@@ -368,12 +369,34 @@ const categorizeEvents = () => {
 
 export default function Events() {
   const { t } = useLanguage();
+  const [location] = useLocation();
   const [activeTab, setActiveTab] = useState("overview");
   const [journalClubTab, setJournalClubTab] = useState("upcoming");
   const [summitTab, setSummitTab] = useState("upcoming");
   const [selectedNewsletter, setSelectedNewsletter] = useState<
     (typeof newsletters)[0] | null
   >(null);
+
+  // Handle hash navigation from other pages
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      // Small delay to ensure the page has rendered
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          const headerOffset = 100; // Account for fixed header
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  }, [location]);
 
   // Dynamically categorize events based on current date
   const {

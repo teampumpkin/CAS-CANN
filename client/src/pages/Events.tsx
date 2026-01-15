@@ -134,7 +134,7 @@ const newsletters = [
     thumbnail: "/api/placeholder/400/250",
     excerpt: "Welcome to the Canadian Amyloidosis Society! Updates on the 2025 Summit, Journal Club, research fellowships, and the latest from the world of amyloidosis.",
     content: {
-      intro: `Welcome to the Canadian Amyloidosis Society (CAS)! The CAS was launched in October 2024 at the Canadian Amyloidosis Summit, and is a multidisciplinary medical organization dedicated to serving healthcare professionals who provide amyloidosis care within Canada. We are proud to announce that the CAS has over 180 members from across Canada, representing multiple different medical specialties and disciplines providing amyloid patient care! We are excited to announce that our website, amyloid.ca, is now live!`,
+      intro: `Welcome to the Canadian Amyloidosis Society (CAS)!   The CAS was launched in October 2024 at the Canadian Amyloidosis Summit, and is a multidisciplinary medical organization dedicated to serving healthcare professionals who provide amyloidosis care within Canada. We are proud to announce that the CAS has over 180 members from across Canada, representing multiple different medical specialties and disciplines providing amyloid patient care! We are excited to announce that our website is nearing completion and will provide a separate announcement when it is officially launched. The website will have a new and updated registration link for new members wishing to join the CAS available shortly. Registration is free! As an important objective of the CAS, we are creating a map of amyloid services across Canada and are requesting the help of our members in the hopes that they are willing to have the amyloid services they offer listed on this map. This will be displayed on our website and announced when it officially goes live.`,
       sections: [
         {
           title: "",
@@ -143,11 +143,11 @@ const newsletters = [
           ctaText: "CAS Registration",
           ctaLink: "/join-cas",
           hasLogo: true,
-          logoPlaceholder: "[CANN LOGO]"
+          logoPlaceholder: "[CAN LOGO]"
         },
         {
           title: "",
-          content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars designed specifically for nursing professionals.`
+          content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars to its members on a variety of amyloid topics curated specifically to address the learning needs of CANN members. Please contact CANN@amyloid.ca to learn more.`
         },
         {
           title: "TELL US WHAT YOU THINK!",
@@ -161,20 +161,18 @@ const newsletters = [
           title: "Canadian Amyloidosis Summit",
           content: `[3 Images in a single row]
 
-We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals.
-
-Registration for the 2025 Canadian Amyloidosis Summit is Open - CLICK HERE!
+We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals attending. Attendance will again be free and offered both in person and virtual. The Canadian Amyloidosis Summit 2025 is again welcoming abstract submissions from amyloidosis researchers attending. Please consider submitting your abstract when registering to attend. Abstracts submissions are accepted on all topics related to amyloidosis research and the only requirement for submission is registering to attend. Abstracts that are accepted will be presented in poster format. Those attending may also present their abstract on behalf of their research team (student, trainee, supervisor).
 
 [Banner Image]
 
-All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.
+Note: All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.
 
 Summit Registration
 [QR code + CTA Link]`
         },
         {
           title: "CAS Journal Club Webinar",
-          content: `The CAS held its first virtual Journal Club Webinar in May 2025. Two very interesting case presentations were made, one by Dr. Victor Jimenez Zepeda (haematologist in Calgary) and the other by Dr. François Tournoux (cardiologist in Montreal). Our next journal club webinar will be held on Thursday, September 25, 2025, at 5 PM EST. We will again present two interesting cases and have time for discussion, as well as a brief update on other CAS activities. The virtual link to join is available for CAS members.`
+          content: `The CAS held its first virtual Journal Club Webinar in May 2025. Two very interesting case presentations were made, one by Dr. Victor Jimenez Zepeda (haematologist in Calgary) and the other by Dr. François Tournoux (cardiologist in Montreal). Our next journal club webinar will be held on Thursday, September 25, 2025, at 5 PM EST. We will again present two interesting cases and have time for discussion, as well as a brief update on other CAS activities. The virtual link to join has been circulated to members. Please join us for this exciting event!`
         },
         {
           title: "OPPORTUNITIES",
@@ -182,7 +180,7 @@ Summit Registration
         },
         {
           title: "Amyloidosis Research Consortium (ARC) Clinical Fellowship Award Program - 2026 applications now open",
-          content: `This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with ️up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes.`
+          content: `This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with ️up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes. Apply here: https://arci.org/fellowship/`
         },
         {
           title: "International Society of Amyloidosis (ISA) Amyloidosis Fellowship Program - Call for applications for ISA 2026-2027 Fellowships is now open",
@@ -194,15 +192,15 @@ Summit Registration
         },
         {
           title: "Phase 3 Clinical Trial of Anselamimab in AL Amyloidosis Fails to Meet Primary Endpoint:",
-          content: `Alexion, AstraZeneca Rare Disease, has announced that the Phase 3 CARES clinical trial did not meet its main goal. Anselamimab did not show a statistically significant improvement in survival during the study period. The goal of the CARES study was to find out if the investigational drug anselamimab could help newly diagnosed AL amyloidosis patients live longer. Sadly, the drug did not show a significant benefit during the study period. Though this main goal of the trial was not met, further analysis is ongoing.`
+          content: `Alexion, AstraZeneca Rare Disease, has announced that the Phase 3 CARES clinical trial did not meet its main goal. Anselamimab did not show a statistically significant improvement in survival during the study period. The goal of the CARES study was to find out if the investigational drug anselamimab could help newly diagnosed AL amyloidosis patients live longer. Sadly, the drug did not show a significant benefit during the study period. Though this main goal of the trial was not met, anselamimab was considered generally safe and well-tolerated.`
         },
         {
           title: "Phase 3 Clinical Trial of Birtmamimab in AL Amyloidosis Fails to Meet Primary Endpoint:",
-          content: `Prothena Biosciences has announced that the Phase 3 AFFIRM-AL clinical trial evaluating birtamimab in patients with Mayo Stage IV AL amyloidosis has failed to meet its primary endpoint. This announcement means that treatment with birtamimab did not significantly prolong survival within the duration of the study, based on the data collected and analyzed as part of the study. The company also announced neither of the secondary endpoints were met (6-minute walk test distance and Short Form-36 physical component score).`
+          content: `Prothena Biosciences has announced that the Phase 3 AFFIRM-AL clinical trial evaluating birtamimab in patients with Mayo Stage IV AL amyloidosis has failed to meet its primary endpoint. This announcement means that treatment with birtamimab did not significantly prolong survival within the duration of the study, based on the data collected and analyzed as part of the study. The company also announced neither of the secondary endpoints were met (6-minute walk test distance and Short Form-36 version 2 Physical Component Score). Birtamimab development will be discontinued, including stopping the open label extension of the AFFIRM-AL clinical trial.`
         },
         {
           title: "5th Annual International Amyloidosis Meeting for Patients and Doctors, September 25-26, 2025, Baveno, Italy",
-          content: `The International ATTR Amyloidosis Meeting for Patients and Doctors is a highly anticipated event in the amyloidosis community. This meeting brings together patients, caregivers, families, scientists, doctors, and other healthcare providers to learn about the latest developments in the field. The hybrid format of the event ensures that it is accessible to a wider audience, allowing participants from around the world to join virtually. This approach promotes inclusivity and enables broader participation.`
+          content: `The International ATTR Amyloidosis Meeting for Patients and Doctors is a highly anticipated event in the amyloidosis community. This meeting brings together patients, caregivers, families, scientists, doctors, and other healthcare providers to learn about the latest developments in the field. The hybrid format of the event ensures that it is accessible to a wider audience, allowing participants from around the world to join virtually. This approach promotes inclusivity and enables the exchange of insights regardless of geographical constraints. To facilitate the access, simultaneous translation will be offered for the patients' program. Find out more at: https://attr2025.com/`
         }
       ]
     }

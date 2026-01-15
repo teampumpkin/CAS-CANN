@@ -138,42 +138,65 @@ const newsletters = [
       sections: [
         {
           title: "Canadian Amyloidosis Nursing Network (CANN)",
-          content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars designed specifically for nursing professionals.`
+          content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars designed specifically for nursing professionals.`,
+          hasCTA: true,
+          ctaText: "CAS Registration",
+          ctaLink: "/join-cas"
         },
         {
-          title: "We Want Your Feedback!",
-          content: `As members of the Canadian amyloidosis community, we want your help in shaping and growing the CAS. We are open to all questions, feedback, and ideas for ongoing or new initiatives. We also want to showcase our accomplishments. If you have updates or announcements you would like highlighted in our Newsletter, please let us know. Please contact us at CAS@amyloid.ca.`
+          title: "TELL US WHAT YOU THINK!",
+          content: `We want your feedback! As members of the Canadian amyloidosis community, we want your help in shaping and growing the CAS. We are open to all questions, feedback, and ideas for ongoing or new initiatives. We also want to showcase our accomplishments. If you have updates or announcements you would like highlighted in our Newsletter, please let us know. Please contact us at CAS@amyloid.ca.`
+        },
+        {
+          title: "EVENTS",
+          isHeader: true
         },
         {
           title: "Canadian Amyloidosis Summit",
           content: `We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals.
 
-Registration for the 2025 Canadian Amyloidosis Summit is now open! All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriott, room TBA, virtual attendance available.`
+Registration for the 2025 Canadian Amyloidosis Summit is Open - CLICK HERE!
+
+[3 Images in a single row]
+
+All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.
+
+[Image]`,
+          hasCTA: true,
+          ctaText: "Summit Registration",
+          ctaLink: "#"
         },
         {
           title: "CAS Journal Club Webinar",
           content: `The CAS held its first virtual Journal Club Webinar in May 2025. Two very interesting case presentations were made, one by Dr. Victor Jimenez Zepeda (haematologist in Calgary) and the other by Dr. François Tournoux (cardiologist in Montreal). Our next journal club webinar will be held on Thursday, September 25, 2025, at 5 PM EST. We will again present two interesting cases and have time for discussion, as well as a brief update on other CAS activities. The virtual link to join is available for CAS members.`
         },
         {
-          title: "Research Opportunities",
-          content: `**Amyloidosis Research Consortium (ARC) Clinical Fellowship Award Program - 2026 applications now open**
-
-This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes.
-
-**International Society of Amyloidosis (ISA) Fellowship Program**
-
-Applications for ISA 2026-2027 Fellowships is now open. ISA awards a limited number of amyloidosis fellowships each year, with a focus on clinical training in all types of amyloidosis. Apply at: https://www.isaamyloidosis.org/fellowships/`
+          title: "OPPORTUNITIES",
+          isHeader: true
         },
         {
-          title: "Updates From the World of Amyloidosis",
-          content: `**Phase 3 Clinical Trial of Anselamimab in AL Amyloidosis Fails to Meet Primary Endpoint:**
-Alexion, AstraZeneca Rare Disease, has announced that the Phase 3 CARES clinical trial did not meet its main goal. Anselamimab did not show a statistically significant improvement in survival during the study period. The goal of the CARES study was to find out if the investigational drug anselamimab could help newly diagnosed AL amyloidosis patients live longer. Though this main goal was not met, further analysis is ongoing.
-
-**Phase 3 Clinical Trial of Birtamimab in AL Amyloidosis Fails to Meet Primary Endpoint:**
-Prothena Biosciences has announced that the Phase 3 AFFIRM-AL clinical trial evaluating birtamimab in patients with Mayo Stage IV AL amyloidosis has failed to meet its primary endpoint. Treatment with birtamimab did not significantly prolong survival within the duration of the study.
-
-**5th Annual International Amyloidosis Meeting for Patients and Doctors**
-September 25-26, 2025, Baveno, Italy. The International ATTR Amyloidosis Meeting for Patients and Doctors is a highly anticipated event in the amyloidosis community. This meeting brings together patients, caregivers, families, scientists, doctors, and other healthcare providers to learn about the latest developments in the field. The hybrid format ensures accessibility to a wider audience, allowing participants from around the world to join virtually.`
+          title: "Amyloidosis Research Consortium (ARC) Clinical Fellowship Award Program - 2026 applications now open",
+          content: `This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with ️up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes. Applications are now open.`
+        },
+        {
+          title: "International Society of Amyloidosis (ISA) Amyloidosis Fellowship Program - Call for applications for ISA 2026-2027 Fellowships is now open",
+          content: `Applications for ISA 2026-2027 Fellowships is now open ISA awards a limited number of amyloidosis fellowships each year, with a focus on clinical training in all types of amyloidosis. The number of fellowships will depend on funds available. Apply here: https://www.isaamyloidosis.org/fellowships/`
+        },
+        {
+          title: "UPDATES FROM THE WORLD OF AMYLOIDOSIS",
+          isHeader: true
+        },
+        {
+          title: "Phase 3 Clinical Trial of Anselamimab in AL Amyloidosis Fails to Meet Primary Endpoint:",
+          content: `Alexion, AstraZeneca Rare Disease, has announced that the Phase 3 CARES clinical trial did not meet its main goal. Anselamimab did not show a statistically significant improvement in survival during the study period. The goal of the CARES study was to find out if the investigational drug anselamimab could help newly diagnosed AL amyloidosis patients live longer. Sadly, the drug did not show a significant benefit during the study period. Though this main goal of the trial was not met, further analysis is ongoing.`
+        },
+        {
+          title: "Phase 3 Clinical Trial of Birtmamimab in AL Amyloidosis Fails to Meet Primary Endpoint:",
+          content: `Prothena Biosciences has announced that the Phase 3 AFFIRM-AL clinical trial evaluating birtamimab in patients with Mayo Stage IV AL amyloidosis has failed to meet its primary endpoint. This announcement means that treatment with birtamimab did not significantly prolong survival within the duration of the study, based on the data collected and analyzed as part of the study. The company also announced neither of the secondary endpoints were met (6-minute walk test distance and Short Form-36 physical component score).`
+        },
+        {
+          title: "5th Annual International Amyloidosis Meeting for Patients and Doctors, September 25-26, 2025, Baveno, Italy",
+          content: `The International ATTR Amyloidosis Meeting for Patients and Doctors is a highly anticipated event in the amyloidosis community. This meeting brings together patients, caregivers, families, scientists, doctors, and other healthcare providers to learn about the latest developments in the field. The hybrid format of the event ensures that it is accessible to a wider audience, allowing participants from around the world to join virtually. This approach promotes inclusivity and enables broader participation.`
         }
       ]
     }
@@ -1131,18 +1154,39 @@ export default function Events() {
               </p>
 
               {/* Sections */}
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {selectedNewsletter.content.sections.map((section, index) => (
-                  <div key={index} className="border-l-4 border-[#00AFE6] pl-6">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">
-                      {section.title}
-                    </h3>
-                    <div className="text-gray-600 dark:text-white/70 text-sm leading-relaxed whitespace-pre-line">
-                      {section.content.split('**').map((part, i) => 
-                        i % 2 === 1 ? <strong key={i} className="text-gray-800 dark:text-white">{part}</strong> : part
+                  (section as any).isHeader ? (
+                    <div key={index} className="mt-8 mb-4">
+                      <h2 className="text-2xl font-bold text-[#00AFE6] dark:text-[#00AFE6] border-b-2 border-[#00AFE6]/30 pb-2">
+                        {section.title}
+                      </h2>
+                    </div>
+                  ) : (
+                    <div key={index} className="border-l-4 border-[#00AFE6] pl-6">
+                      <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3">
+                        {section.title}
+                      </h3>
+                      {section.content && (
+                        <div className="text-gray-600 dark:text-white/70 text-sm leading-relaxed whitespace-pre-line">
+                          {section.content.split('**').map((part, i) => 
+                            i % 2 === 1 ? <strong key={i} className="text-gray-800 dark:text-white">{part}</strong> : part
+                          )}
+                        </div>
+                      )}
+                      {(section as any).hasCTA && (
+                        <div className="mt-4">
+                          <Button
+                            onClick={() => window.location.href = (section as any).ctaLink}
+                            className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 py-2 px-6 rounded-lg font-semibold text-sm"
+                          >
+                            {(section as any).ctaText}
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </Button>
+                        </div>
                       )}
                     </div>
-                  </div>
+                  )
                 ))}
               </div>
 

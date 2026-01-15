@@ -177,9 +177,19 @@ const categorizeEvents = () => {
 export default function Events() {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("overview");
+  const [journalClubTab, setJournalClubTab] = useState("upcoming");
   
   // Dynamically categorize events based on current date
   const { featured: featuredEvents, upcoming: upcomingEvents, past: pastEvents } = categorizeEvents();
+
+  // Categorize Journal Club sessions
+  const upcomingJournalClubSessions = journalClubSessions
+    .filter(session => !isEventPast(session.rawDate))
+    .sort((a, b) => parseLocalDate(a.rawDate).getTime() - parseLocalDate(b.rawDate).getTime());
+  
+  const pastJournalClubSessions = journalClubSessions
+    .filter(session => isEventPast(session.rawDate))
+    .sort((a, b) => parseLocalDate(b.rawDate).getTime() - parseLocalDate(a.rawDate).getTime());
 
   // Helper function to add ordinal suffix to day
   const getOrdinalSuffix = (day: number): string => {
@@ -423,10 +433,36 @@ export default function Events() {
             </Link>
           </motion.div>
 
+          {/* Journal Club Tabs */}
+          <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-2">
+            <div className="bg-gradient-to-r from-gray-100/80 to-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-1 sm:p-2 shadow-2xl inline-flex min-w-max">
+              <button
+                onClick={() => setJournalClubTab("upcoming")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  journalClubTab === "upcoming"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t('eventsPage.upcomingEvents')}
+              </button>
+              <button
+                onClick={() => setJournalClubTab("past")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  journalClubTab === "past"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t('eventsPage.pastEvents')}
+              </button>
+            </div>
+          </div>
+
           {/* Journal Club Sessions Grid */}
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {journalClubSessions.map((session, index) => {
+              {(journalClubTab === "upcoming" ? upcomingJournalClubSessions : pastJournalClubSessions).map((session, index) => {
                 const isPast = isEventPast(session.rawDate);
                 return (
                   <motion.div

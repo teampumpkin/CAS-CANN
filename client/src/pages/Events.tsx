@@ -178,6 +178,7 @@ export default function Events() {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("overview");
   const [journalClubTab, setJournalClubTab] = useState("upcoming");
+  const [summitTab, setSummitTab] = useState("upcoming");
   
   // Dynamically categorize events based on current date
   const { featured: featuredEvents, upcoming: upcomingEvents, past: pastEvents } = categorizeEvents();
@@ -190,6 +191,11 @@ export default function Events() {
   const pastJournalClubSessions = journalClubSessions
     .filter(session => isEventPast(session.rawDate))
     .sort((a, b) => parseLocalDate(b.rawDate).getTime() - parseLocalDate(a.rawDate).getTime());
+
+  // Categorize Summit events
+  const pastSummitEvents = allEvents
+    .filter(event => event.type === "Summit" && isEventPast(event.date))
+    .sort((a, b) => parseLocalDate(b.date).getTime() - parseLocalDate(a.date).getTime());
 
   // Helper function to add ordinal suffix to day
   const getOrdinalSuffix = (day: number): string => {
@@ -340,59 +346,150 @@ export default function Events() {
             </p>
           </motion.div>
 
+          {/* Summit Tabs */}
+          <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-2">
+            <div className="bg-gradient-to-r from-gray-100/80 to-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-1 sm:p-2 shadow-2xl inline-flex min-w-max">
+              <button
+                onClick={() => setSummitTab("upcoming")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  summitTab === "upcoming"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t('eventsPage.upcomingEvents')}
+              </button>
+              <button
+                onClick={() => setSummitTab("past")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  summitTab === "past"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t('eventsPage.pastEvents')}
+              </button>
+            </div>
+          </div>
+
           <div className="max-w-7xl mx-auto">
-            {/* Summit Information Card - Centered */}
-            <motion.div
-              className="flex justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
-                <div className="text-center">
-                  <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">
-                    {t('eventsPage.eventDetails')}
-                  </h3>
+            {/* Upcoming Summit Tab */}
+            {summitTab === "upcoming" && (
+              <motion.div
+                className="flex justify-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
+                  <div className="text-center">
+                    <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">
+                      {t('eventsPage.eventDetails')}
+                    </h3>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
-                    <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
-                      <Calendar className="w-8 h-8 text-[#00AFE6]" />
-                      <div className="text-center">
-                        <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                          {t('eventsPage.dates')}
-                        </p>
-                        <p className="text-gray-800 dark:text-white font-semibold">
-                          {t('events.summit.date')}
-                        </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+                      <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
+                        <Calendar className="w-8 h-8 text-[#00AFE6]" />
+                        <div className="text-center">
+                          <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
+                            {t('eventsPage.dates')}
+                          </p>
+                          <p className="text-gray-800 dark:text-white font-semibold">
+                            {t('events.summit.date')}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 rounded-2xl border border-[#00DD89]/20">
+                        <MapPin className="w-8 h-8 text-[#00DD89]" />
+                        <div className="text-center">
+                          <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
+                            {t('eventsPage.format')}
+                          </p>
+                          <p className="text-gray-800 dark:text-white font-semibold">
+                            {t('events.summit.type')}
+                          </p>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 rounded-2xl border border-[#00DD89]/20">
-                      <MapPin className="w-8 h-8 text-[#00DD89]" />
-                      <div className="text-center">
-                        <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                          {t('eventsPage.format')}
-                        </p>
-                        <p className="text-gray-800 dark:text-white font-semibold">
-                          {t('events.summit.type')}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
-                    {t('eventsPage.summitHostedBy')}
-                  </p>
-
-                  <div className="space-y-4">
-                    <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
-                      {t('eventsPage.registrationComingSoon')}
+                    <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
+                      {t('eventsPage.summitHostedBy')}
                     </p>
+
+                    <div className="space-y-4">
+                      <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
+                        {t('eventsPage.registrationComingSoon')}
+                      </p>
+                    </div>
                   </div>
                 </div>
+              </motion.div>
+            )}
+
+            {/* Past Summit Tab */}
+            {summitTab === "past" && (
+              <div className={`grid gap-6 ${
+                pastSummitEvents.length === 1
+                  ? "grid-cols-1 max-w-2xl mx-auto"
+                  : pastSummitEvents.length === 2
+                    ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+                    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+              }`}>
+                {pastSummitEvents.map((event, index) => (
+                  <motion.div
+                    key={event.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="h-full"
+                  >
+                    <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden group">
+                      {/* Header Section */}
+                      <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <Calendar className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                          </div>
+                          <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
+                            {event.type}
+                          </Badge>
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug group-hover:text-[#00AFE6] transition-colors duration-300">
+                          {event.title}
+                        </h3>
+                      </div>
+
+                      {/* Content Section */}
+                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
+                        {/* Event Details */}
+                        <div className="space-y-2 mb-4">
+                          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                            <Calendar className="w-4 h-4 text-[#00AFE6]" />
+                            <span>{(event as any).displayDate || formatEventDate(event.date)}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                            <Clock className="w-4 h-4 text-[#00AFE6]" />
+                            <span>{event.time}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                            <MapPin className="w-4 h-4 text-[#00AFE6]" />
+                            <span>{event.location}</span>
+                          </div>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1">
+                          {event.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
               </div>
-            </motion.div>
+            )}
           </div>
         </div>
       </section>

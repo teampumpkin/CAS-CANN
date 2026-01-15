@@ -9,6 +9,9 @@ import {
   ExternalLink,
   Users,
   Award,
+  Newspaper,
+  X,
+  ChevronRight,
 } from "lucide-react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -122,6 +125,61 @@ const allEvents = [
   },
 ];
 
+// Newsletter Data
+const newsletters = [
+  {
+    id: 1,
+    title: "CAS Newsletter - Summer 2025",
+    date: "2025-06-15",
+    thumbnail: "/api/placeholder/400/250",
+    excerpt: "Welcome to the Canadian Amyloidosis Society! Updates on the 2025 Summit, Journal Club, research fellowships, and the latest from the world of amyloidosis.",
+    content: {
+      intro: `Welcome to the Canadian Amyloidosis Society (CAS)! The CAS was launched in October 2024 at the Canadian Amyloidosis Summit, and is a multidisciplinary medical organization dedicated to serving healthcare professionals who provide amyloidosis care within Canada. We are proud to announce that the CAS has over 180 members from across Canada, representing multiple different medical specialties and disciplines providing amyloid patient care! We are excited to announce that our website, amyloid.ca, is now live!`,
+      sections: [
+        {
+          title: "Canadian Amyloidosis Nursing Network (CANN)",
+          content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars designed specifically for nursing professionals.`
+        },
+        {
+          title: "We Want Your Feedback!",
+          content: `As members of the Canadian amyloidosis community, we want your help in shaping and growing the CAS. We are open to all questions, feedback, and ideas for ongoing or new initiatives. We also want to showcase our accomplishments. If you have updates or announcements you would like highlighted in our Newsletter, please let us know. Please contact us at CAS@amyloid.ca.`
+        },
+        {
+          title: "Canadian Amyloidosis Summit",
+          content: `We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals.
+
+Registration for the 2025 Canadian Amyloidosis Summit is now open! All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriott, room TBA, virtual attendance available.`
+        },
+        {
+          title: "CAS Journal Club Webinar",
+          content: `The CAS held its first virtual Journal Club Webinar in May 2025. Two very interesting case presentations were made, one by Dr. Victor Jimenez Zepeda (haematologist in Calgary) and the other by Dr. François Tournoux (cardiologist in Montreal). Our next journal club webinar will be held on Thursday, September 25, 2025, at 5 PM EST. We will again present two interesting cases and have time for discussion, as well as a brief update on other CAS activities. The virtual link to join is available for CAS members.`
+        },
+        {
+          title: "Research Opportunities",
+          content: `**Amyloidosis Research Consortium (ARC) Clinical Fellowship Award Program - 2026 applications now open**
+
+This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes.
+
+**International Society of Amyloidosis (ISA) Fellowship Program**
+
+Applications for ISA 2026-2027 Fellowships is now open. ISA awards a limited number of amyloidosis fellowships each year, with a focus on clinical training in all types of amyloidosis. Apply at: https://www.isaamyloidosis.org/fellowships/`
+        },
+        {
+          title: "Updates From the World of Amyloidosis",
+          content: `**Phase 3 Clinical Trial of Anselamimab in AL Amyloidosis Fails to Meet Primary Endpoint:**
+Alexion, AstraZeneca Rare Disease, has announced that the Phase 3 CARES clinical trial did not meet its main goal. Anselamimab did not show a statistically significant improvement in survival during the study period. The goal of the CARES study was to find out if the investigational drug anselamimab could help newly diagnosed AL amyloidosis patients live longer. Though this main goal was not met, further analysis is ongoing.
+
+**Phase 3 Clinical Trial of Birtamimab in AL Amyloidosis Fails to Meet Primary Endpoint:**
+Prothena Biosciences has announced that the Phase 3 AFFIRM-AL clinical trial evaluating birtamimab in patients with Mayo Stage IV AL amyloidosis has failed to meet its primary endpoint. Treatment with birtamimab did not significantly prolong survival within the duration of the study.
+
+**5th Annual International Amyloidosis Meeting for Patients and Doctors**
+September 25-26, 2025, Baveno, Italy. The International ATTR Amyloidosis Meeting for Patients and Doctors is a highly anticipated event in the amyloidosis community. This meeting brings together patients, caregivers, families, scientists, doctors, and other healthcare providers to learn about the latest developments in the field. The hybrid format ensures accessibility to a wider audience, allowing participants from around the world to join virtually.`
+        }
+      ]
+    }
+  }
+];
+
 // MST Timezone constant (America/Edmonton handles MST/MDT automatically)
 const MST_TIMEZONE = 'America/Edmonton';
 
@@ -179,6 +237,7 @@ export default function Events() {
   const [activeTab, setActiveTab] = useState("overview");
   const [journalClubTab, setJournalClubTab] = useState("upcoming");
   const [summitTab, setSummitTab] = useState("upcoming");
+  const [selectedNewsletter, setSelectedNewsletter] = useState<typeof newsletters[0] | null>(null);
   
   // Dynamically categorize events based on current date
   const { featured: featuredEvents, upcoming: upcomingEvents, past: pastEvents } = categorizeEvents();
@@ -925,6 +984,181 @@ export default function Events() {
           </motion.div>
         </div>
       </section>
+
+      {/* News Section */}
+      <section className="py-12 sm:py-16 md:py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+        {/* Frost Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/30 dark:via-transparent dark:to-gray-700/20"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
+              <Newspaper className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-gray-800 dark:text-white/90 font-medium">
+                News & Updates
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                CAS Newsletter
+              </span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
+              Stay informed with the latest updates, announcements, and news from the Canadian Amyloidosis Society.
+            </p>
+          </motion.div>
+
+          {/* Newsletter Cards Grid */}
+          <div className={`grid gap-6 ${
+            newsletters.length === 1
+              ? "grid-cols-1 max-w-2xl mx-auto"
+              : newsletters.length === 2
+                ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          }`}>
+            {newsletters.map((newsletter, index) => (
+              <motion.div
+                key={newsletter.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="h-full"
+              >
+                <Card 
+                  className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden group cursor-pointer"
+                  onClick={() => setSelectedNewsletter(newsletter)}
+                >
+                  {/* Header Section */}
+                  <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                        <Newspaper className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                      </div>
+                      <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
+                        Newsletter
+                      </Badge>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug group-hover:text-[#00AFE6] transition-colors duration-300">
+                      {newsletter.title}
+                    </h3>
+                  </div>
+
+                  {/* Content Section */}
+                  <CardContent className="p-6 pt-4 flex flex-col flex-1">
+                    {/* Date */}
+                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70 mb-4">
+                      <Calendar className="w-4 h-4 text-[#00AFE6]" />
+                      <span>{formatEventDate(newsletter.date)}</span>
+                    </div>
+
+                    {/* Excerpt */}
+                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-4">
+                      {newsletter.excerpt}
+                    </p>
+
+                    {/* Read More CTA */}
+                    <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="relative z-10 flex items-center justify-center gap-2 text-[#00AFE6] font-semibold text-sm">
+                        <span>Read Full Newsletter</span>
+                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Modal */}
+      {selectedNewsletter && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          onClick={() => setSelectedNewsletter(null)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="relative p-6 sm:p-8 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent border-b border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => setSelectedNewsletter(null)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+              >
+                <X className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+              </button>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-xl flex items-center justify-center">
+                  <Newspaper className="w-6 h-6 text-[#00AFE6]" />
+                </div>
+                <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-3 py-1 text-xs font-medium rounded">
+                  Newsletter
+                </Badge>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white mb-2 pr-12">
+                {selectedNewsletter.title}
+              </h2>
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                <Calendar className="w-4 h-4 text-[#00AFE6]" />
+                <span>{formatEventDate(selectedNewsletter.date)}</span>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 sm:p-8 overflow-y-auto max-h-[calc(90vh-200px)]">
+              {/* Intro */}
+              <p className="text-gray-700 dark:text-white/80 text-base leading-relaxed mb-8">
+                {selectedNewsletter.content.intro}
+              </p>
+
+              {/* Sections */}
+              <div className="space-y-8">
+                {selectedNewsletter.content.sections.map((section, index) => (
+                  <div key={index} className="border-l-4 border-[#00AFE6] pl-6">
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">
+                      {section.title}
+                    </h3>
+                    <div className="text-gray-600 dark:text-white/70 text-sm leading-relaxed whitespace-pre-line">
+                      {section.content.split('**').map((part, i) => 
+                        i % 2 === 1 ? <strong key={i} className="text-gray-800 dark:text-white">{part}</strong> : part
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Contact CTA */}
+              <div className="mt-8 p-6 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
+                <p className="text-center text-gray-700 dark:text-white/80">
+                  Have questions or feedback? Contact us at{" "}
+                  <a href="mailto:CAS@amyloid.ca" className="text-[#00AFE6] hover:underline font-semibold">
+                    CAS@amyloid.ca
+                  </a>
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }

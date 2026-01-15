@@ -182,7 +182,7 @@ Summit Registration
         },
         {
           title: "Amyloidosis Research Consortium (ARC) Clinical Fellowship Award Program - 2026 applications now open",
-          content: `This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with ️up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes. Applications are now open.`
+          content: `This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with ️up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes.`
         },
         {
           title: "International Society of Amyloidosis (ISA) Amyloidosis Fellowship Program - Call for applications for ISA 2026-2027 Fellowships is now open",

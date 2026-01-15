@@ -566,40 +566,6 @@ export default function Events() {
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Canadian Amyloidosis Summit Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
-              <Award className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-gray-800 dark:text-white/90 font-medium">
-                Annual Conference
-              </span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                Canadian Amyloidosis Summit
-              </span>
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              The annual educational conference jointly hosted by CAS and
-              Transthyretin Amyloidosis Canada (TAC), uniting healthcare
-              professionals and patients.
-            </p>
-          </motion.div>
 
           {/* Summit Tabs */}
           <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-2">
@@ -750,8 +716,7 @@ export default function Events() {
                       No Upcoming Summit Events
                     </h3>
                     <p className="text-gray-600 dark:text-white/70 max-w-md mx-auto">
-                      Check the featured event section above for information
-                      about the next Canadian Amyloidosis Summit.
+                      Stay tuned for announcements about the next Canadian Amyloidosis Summit.
                     </p>
                   </motion.div>
                 )}

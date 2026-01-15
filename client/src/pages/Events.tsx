@@ -33,21 +33,36 @@ const journalClubSessions = [
   {
     rawDate: "2025-09-25",
     topics: [
-      { title: "ATTR Neuropathy", presenter: "Dr. Genevieve Matte, University of Montreal" },
-      { title: "Cardiac Amyloidosis", presenter: "Dr. Edgar Da Silva, University of Ottawa" },
+      {
+        title: "ATTR Neuropathy",
+        presenter: "Dr. Genevieve Matte, University of Montreal",
+      },
+      {
+        title: "Cardiac Amyloidosis",
+        presenter: "Dr. Edgar Da Silva, University of Ottawa",
+      },
     ],
   },
   {
     rawDate: "2025-11-27",
     topics: [
-      { title: "AL Amyloidosis", presenter: "Dr. Janine Mazengarb, University of British Columbia" },
-      { title: "Diagnostic Dilemmas", presenter: "Dr. Rajin Choudhury, University of Calgary" },
+      {
+        title: "AL Amyloidosis",
+        presenter: "Dr. Janine Mazengarb, University of British Columbia",
+      },
+      {
+        title: "Diagnostic Dilemmas",
+        presenter: "Dr. Rajin Choudhury, University of Calgary",
+      },
     ],
   },
   {
     rawDate: "2026-02-26",
     topics: [
-      { title: "Is it really hATTR?", presenter: "Dr. Gord Jewett, University of Calgary" },
+      {
+        title: "Is it really hATTR?",
+        presenter: "Dr. Gord Jewett, University of Calgary",
+      },
       { title: "Topic To Be Announced", presenter: "TBD, Queen's University" },
     ],
   },
@@ -111,7 +126,10 @@ const allEvents = [
     requiresMembershipCTA: true,
     membershipType: "CAS",
     topics: [
-      { title: "Is it really hATTR?", presenter: "Dr. Gord Jewett, University of Calgary" },
+      {
+        title: "Is it really hATTR?",
+        presenter: "Dr. Gord Jewett, University of Calgary",
+      },
       { title: "Topic To Be Announced", presenter: "TBD, Queen's University" },
     ],
   },
@@ -137,7 +155,8 @@ const newsletters = [
     title: "CAS Newsletter - Summer 2025",
     date: "2025-06-15",
     thumbnail: "/api/placeholder/400/250",
-    excerpt: "Welcome to the Canadian Amyloidosis Society! Updates on the 2025 Summit, Journal Club, research fellowships, and the latest from the world of amyloidosis.",
+    excerpt:
+      "Welcome to the Canadian Amyloidosis Society! Updates on the 2025 Summit, Journal Club, research fellowships, and the latest from the world of amyloidosis.",
     content: {
       intro: `Welcome to the Canadian Amyloidosis Society (CAS)!   The CAS was launched in October 2024 at the Canadian Amyloidosis Summit, and is a multidisciplinary medical organization dedicated to serving healthcare professionals who provide amyloidosis care within Canada. We are proud to announce that the CAS has over 180 members from across Canada, representing multiple different medical specialties and disciplines providing amyloid patient care! We are excited to announce that our website is nearing completion and will provide a separate announcement when it is officially launched. The website will have a new and updated registration link for new members wishing to join the CAS available shortly. Registration is free! As an important objective of the CAS, we are creating a map of amyloid services across Canada and are requesting the help of our members in the hopes that they are willing to have the amyloid services they offer listed on this map. This will be displayed on our website and announced when it officially goes live.`,
       sections: [
@@ -148,77 +167,82 @@ const newsletters = [
           ctaText: "CAS Registration",
           ctaLink: "/join-cas",
           hasLogo: true,
-          logoImage: cannLogoImg
+          logoImage: cannLogoImg,
         },
         {
           title: "",
-          content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars to its members on a variety of amyloid topics curated specifically to address the learning needs of CANN members. Please contact CANN@amyloid.ca to learn more.`
+          content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars to its members on a variety of amyloid topics curated specifically to address the learning needs of CANN members. Please contact CANN@amyloid.ca to learn more.`,
         },
         {
           title: "TELL US WHAT YOU THINK!",
-          content: `We want your feedback! As members of the Canadian amyloidosis community, we want your help in shaping and growing the CAS. We are open to all questions, feedback, and ideas for ongoing or new initiatives. We also want to showcase our accomplishments. If you have updates or announcements you would like highlighted in our Newsletter, please let us know. Please contact us at CAS@amyloid.ca.`
+          content: `We want your feedback! As members of the Canadian amyloidosis community, we want your help in shaping and growing the CAS. We are open to all questions, feedback, and ideas for ongoing or new initiatives. We also want to showcase our accomplishments. If you have updates or announcements you would like highlighted in our Newsletter, please let us know. Please contact us at CAS@amyloid.ca.`,
         },
         {
           title: "EVENTS",
-          isHeader: true
+          isHeader: true,
         },
         {
           title: "Canadian Amyloidosis Summit",
           content: `We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals attending. Attendance will again be free and offered both in person and virtual. The Canadian Amyloidosis Summit 2025 is again welcoming abstract submissions from amyloidosis researchers attending. Please consider submitting your abstract when registering to attend. Abstracts submissions are accepted on all topics related to amyloidosis research and the only requirement for submission is registering to attend. Abstracts that are accepted will be presented in poster format. Those attending may also present their abstract on behalf of their research team (student, trainee, supervisor).
 
-Note: All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.
-
-Summit Registration`,
+Note: All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.`,
           hasThreeImages: true,
           threeImages: [summitImage1, summitImage2, summitImage3],
           hasBannerImage: true,
-          bannerImage: summitPosterImg
+          bannerImage: summitPosterImg,
         },
         {
           title: "CAS Journal Club Webinar",
-          content: `The CAS held its first virtual Journal Club Webinar in May 2025. Two very interesting case presentations were made, one by Dr. Victor Jimenez Zepeda (haematologist in Calgary) and the other by Dr. François Tournoux (cardiologist in Montreal). Our next journal club webinar will be held on Thursday, September 25, 2025, at 5 PM EST. We will again present two interesting cases and have time for discussion, as well as a brief update on other CAS activities. The virtual link to join has been circulated to members. Please join us for this exciting event!`
+          content: `The CAS held its first virtual Journal Club Webinar in May 2025. Two very interesting case presentations were made, one by Dr. Victor Jimenez Zepeda (haematologist in Calgary) and the other by Dr. François Tournoux (cardiologist in Montreal). Our next journal club webinar will be held on Thursday, September 25, 2025, at 5 PM EST. We will again present two interesting cases and have time for discussion, as well as a brief update on other CAS activities. The virtual link to join has been circulated to members. Please join us for this exciting event!`,
         },
         {
           title: "OPPORTUNITIES",
-          isHeader: true
+          isHeader: true,
         },
         {
-          title: "Amyloidosis Research Consortium (ARC) Clinical Fellowship Award Program - 2026 applications now open",
-          content: `This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with ️up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes. Apply here: https://arci.org/fellowship/`
+          title:
+            "Amyloidosis Research Consortium (ARC) Clinical Fellowship Award Program - 2026 applications now open",
+          content: `This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with ️up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes. Apply here: https://arci.org/fellowship/`,
         },
         {
-          title: "International Society of Amyloidosis (ISA) Amyloidosis Fellowship Program - Call for applications for ISA 2026-2027 Fellowships is now open",
-          content: `Applications for ISA 2026-2027 Fellowships is now open ISA awards a limited number of amyloidosis fellowships each year, with a focus on clinical training in all types of amyloidosis. The number of fellowships will depend on funds available. Apply here: https://www.isaamyloidosis.org/fellowships/`
+          title:
+            "International Society of Amyloidosis (ISA) Amyloidosis Fellowship Program - Call for applications for ISA 2026-2027 Fellowships is now open",
+          content: `Applications for ISA 2026-2027 Fellowships is now open ISA awards a limited number of amyloidosis fellowships each year, with a focus on clinical training in all types of amyloidosis. The number of fellowships will depend on funds available. Apply here: https://www.isaamyloidosis.org/fellowships/`,
         },
         {
           title: "UPDATES FROM THE WORLD OF AMYLOIDOSIS",
-          isHeader: true
+          isHeader: true,
         },
         {
-          title: "Phase 3 Clinical Trial of Anselamimab in AL Amyloidosis Fails to Meet Primary Endpoint:",
-          content: `Alexion, AstraZeneca Rare Disease, has announced that the Phase 3 CARES clinical trial did not meet its main goal. Anselamimab did not show a statistically significant improvement in survival during the study period. The goal of the CARES study was to find out if the investigational drug anselamimab could help newly diagnosed AL amyloidosis patients live longer. Sadly, the drug did not show a significant benefit during the study period. Though this main goal of the trial was not met, anselamimab was considered generally safe and well-tolerated.`
+          title:
+            "Phase 3 Clinical Trial of Anselamimab in AL Amyloidosis Fails to Meet Primary Endpoint:",
+          content: `Alexion, AstraZeneca Rare Disease, has announced that the Phase 3 CARES clinical trial did not meet its main goal. Anselamimab did not show a statistically significant improvement in survival during the study period. The goal of the CARES study was to find out if the investigational drug anselamimab could help newly diagnosed AL amyloidosis patients live longer. Sadly, the drug did not show a significant benefit during the study period. Though this main goal of the trial was not met, anselamimab was considered generally safe and well-tolerated.`,
         },
         {
-          title: "Phase 3 Clinical Trial of Birtmamimab in AL Amyloidosis Fails to Meet Primary Endpoint:",
-          content: `Prothena Biosciences has announced that the Phase 3 AFFIRM-AL clinical trial evaluating birtamimab in patients with Mayo Stage IV AL amyloidosis has failed to meet its primary endpoint. This announcement means that treatment with birtamimab did not significantly prolong survival within the duration of the study, based on the data collected and analyzed as part of the study. The company also announced neither of the secondary endpoints were met (6-minute walk test distance and Short Form-36 version 2 Physical Component Score). Birtamimab development will be discontinued, including stopping the open label extension of the AFFIRM-AL clinical trial.`
+          title:
+            "Phase 3 Clinical Trial of Birtmamimab in AL Amyloidosis Fails to Meet Primary Endpoint:",
+          content: `Prothena Biosciences has announced that the Phase 3 AFFIRM-AL clinical trial evaluating birtamimab in patients with Mayo Stage IV AL amyloidosis has failed to meet its primary endpoint. This announcement means that treatment with birtamimab did not significantly prolong survival within the duration of the study, based on the data collected and analyzed as part of the study. The company also announced neither of the secondary endpoints were met (6-minute walk test distance and Short Form-36 version 2 Physical Component Score). Birtamimab development will be discontinued, including stopping the open label extension of the AFFIRM-AL clinical trial.`,
         },
         {
-          title: "5th Annual International Amyloidosis Meeting for Patients and Doctors, September 25-26, 2025, Baveno, Italy",
-          content: `The International ATTR Amyloidosis Meeting for Patients and Doctors is a highly anticipated event in the amyloidosis community. This meeting brings together patients, caregivers, families, scientists, doctors, and other healthcare providers to learn about the latest developments in the field. The hybrid format of the event ensures that it is accessible to a wider audience, allowing participants from around the world to join virtually. This approach promotes inclusivity and enables the exchange of insights regardless of geographical constraints. To facilitate the access, simultaneous translation will be offered for the patients' program. Find out more at: https://attr2025.com/`
-        }
-      ]
-    }
-  }
+          title:
+            "5th Annual International Amyloidosis Meeting for Patients and Doctors, September 25-26, 2025, Baveno, Italy",
+          content: `The International ATTR Amyloidosis Meeting for Patients and Doctors is a highly anticipated event in the amyloidosis community. This meeting brings together patients, caregivers, families, scientists, doctors, and other healthcare providers to learn about the latest developments in the field. The hybrid format of the event ensures that it is accessible to a wider audience, allowing participants from around the world to join virtually. This approach promotes inclusivity and enables the exchange of insights regardless of geographical constraints. To facilitate the access, simultaneous translation will be offered for the patients' program. Find out more at: https://attr2025.com/`,
+        },
+      ],
+    },
+  },
 ];
 
 // MST Timezone constant (America/Edmonton handles MST/MDT automatically)
-const MST_TIMEZONE = 'America/Edmonton';
+const MST_TIMEZONE = "America/Edmonton";
 
 // Helper to get current date in MST timezone
 const getMSTDate = (): Date => {
   const now = new Date();
-  const mstDateStr = now.toLocaleDateString('en-CA', { timeZone: MST_TIMEZONE });
-  const [year, month, day] = mstDateStr.split('-').map(Number);
+  const mstDateStr = now.toLocaleDateString("en-CA", {
+    timeZone: MST_TIMEZONE,
+  });
+  const [year, month, day] = mstDateStr.split("-").map(Number);
   return new Date(year, month - 1, day);
 };
 
@@ -240,26 +264,28 @@ const parseLocalDate = (dateString: string): Date => {
 const categorizeEvents = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  
-  const featured = allEvents.filter(event => event.isFeatured && !isEventPast(event.date));
+
+  const featured = allEvents.filter(
+    (event) => event.isFeatured && !isEventPast(event.date),
+  );
   // Include ALL upcoming events (including featured ones) in the upcoming tab
-  const upcoming = allEvents.filter(event => !isEventPast(event.date));
-  const past = allEvents.filter(event => isEventPast(event.date));
-  
+  const upcoming = allEvents.filter((event) => !isEventPast(event.date));
+  const past = allEvents.filter((event) => isEventPast(event.date));
+
   // Sort upcoming events by date (soonest first) - using local date parsing
   upcoming.sort((a, b) => {
     const dateA = parseLocalDate(a.date);
     const dateB = parseLocalDate(b.date);
     return dateA.getTime() - dateB.getTime();
   });
-  
+
   // Sort past events by date (most recent first) - using local date parsing
   past.sort((a, b) => {
     const dateA = parseLocalDate(a.date);
     const dateB = parseLocalDate(b.date);
     return dateB.getTime() - dateA.getTime();
   });
-  
+
   return { featured, upcoming, past };
 };
 
@@ -268,28 +294,56 @@ export default function Events() {
   const [activeTab, setActiveTab] = useState("overview");
   const [journalClubTab, setJournalClubTab] = useState("upcoming");
   const [summitTab, setSummitTab] = useState("upcoming");
-  const [selectedNewsletter, setSelectedNewsletter] = useState<typeof newsletters[0] | null>(null);
-  
+  const [selectedNewsletter, setSelectedNewsletter] = useState<
+    (typeof newsletters)[0] | null
+  >(null);
+
   // Dynamically categorize events based on current date
-  const { featured: featuredEvents, upcoming: upcomingEvents, past: pastEvents } = categorizeEvents();
+  const {
+    featured: featuredEvents,
+    upcoming: upcomingEvents,
+    past: pastEvents,
+  } = categorizeEvents();
 
   // Categorize Journal Club sessions
   const upcomingJournalClubSessions = journalClubSessions
-    .filter(session => !isEventPast(session.rawDate))
-    .sort((a, b) => parseLocalDate(a.rawDate).getTime() - parseLocalDate(b.rawDate).getTime());
-  
+    .filter((session) => !isEventPast(session.rawDate))
+    .sort(
+      (a, b) =>
+        parseLocalDate(a.rawDate).getTime() -
+        parseLocalDate(b.rawDate).getTime(),
+    );
+
   const pastJournalClubSessions = journalClubSessions
-    .filter(session => isEventPast(session.rawDate))
-    .sort((a, b) => parseLocalDate(b.rawDate).getTime() - parseLocalDate(a.rawDate).getTime());
+    .filter((session) => isEventPast(session.rawDate))
+    .sort(
+      (a, b) =>
+        parseLocalDate(b.rawDate).getTime() -
+        parseLocalDate(a.rawDate).getTime(),
+    );
 
   // Categorize Summit events (type === "Summit" or "In-person & Virtual")
   const upcomingSummitEvents = allEvents
-    .filter(event => (event.type === "Summit" || event.type === "In-person & Virtual") && !isEventPast(event.date))
-    .sort((a, b) => parseLocalDate(a.date).getTime() - parseLocalDate(b.date).getTime());
-  
+    .filter(
+      (event) =>
+        (event.type === "Summit" || event.type === "In-person & Virtual") &&
+        !isEventPast(event.date),
+    )
+    .sort(
+      (a, b) =>
+        parseLocalDate(a.date).getTime() - parseLocalDate(b.date).getTime(),
+    );
+
   const pastSummitEvents = allEvents
-    .filter(event => (event.type === "Summit" || event.type === "In-person & Virtual") && isEventPast(event.date))
-    .sort((a, b) => parseLocalDate(b.date).getTime() - parseLocalDate(a.date).getTime());
+    .filter(
+      (event) =>
+        (event.type === "Summit" || event.type === "In-person & Virtual") &&
+        isEventPast(event.date),
+    )
+    .sort(
+      (a, b) =>
+        parseLocalDate(b.date).getTime() - parseLocalDate(a.date).getTime(),
+    );
 
   // Helper function to add ordinal suffix to day
   const getOrdinalSuffix = (day: number): string => {
@@ -310,29 +364,47 @@ export default function Events() {
   const formatEventDate = (dateString: string): string => {
     // Guard against empty or invalid date strings
     if (!dateString) return "TBD";
-    
+
     // Check if it's a valid YYYY-MM-DD format
     const parts = dateString.split("-").map(Number);
     if (parts.length !== 3 || parts.some(isNaN)) {
       return dateString; // Return as-is if not ISO format
     }
-    
+
     const [year, month, day] = parts;
-    
+
     // Create a date that represents this date in MST
     // Use noon to avoid any edge cases with daylight saving
-    const dateForFormatting = new Date(Date.UTC(year, month - 1, day, 18, 0, 0)); // 18:00 UTC = noon MST
-    
+    const dateForFormatting = new Date(
+      Date.UTC(year, month - 1, day, 18, 0, 0),
+    ); // 18:00 UTC = noon MST
+
     // Validate the date is valid
     if (isNaN(dateForFormatting.getTime())) {
       return dateString;
     }
-    
+
     // Format using MST timezone
-    const dayName = dateForFormatting.toLocaleDateString("en-US", { weekday: "long", timeZone: MST_TIMEZONE });
-    const monthName = dateForFormatting.toLocaleDateString("en-US", { month: "long", timeZone: MST_TIMEZONE });
-    const dayNumber = parseInt(dateForFormatting.toLocaleDateString("en-US", { day: "numeric", timeZone: MST_TIMEZONE }));
-    const yearNumber = parseInt(dateForFormatting.toLocaleDateString("en-US", { year: "numeric", timeZone: MST_TIMEZONE }));
+    const dayName = dateForFormatting.toLocaleDateString("en-US", {
+      weekday: "long",
+      timeZone: MST_TIMEZONE,
+    });
+    const monthName = dateForFormatting.toLocaleDateString("en-US", {
+      month: "long",
+      timeZone: MST_TIMEZONE,
+    });
+    const dayNumber = parseInt(
+      dateForFormatting.toLocaleDateString("en-US", {
+        day: "numeric",
+        timeZone: MST_TIMEZONE,
+      }),
+    );
+    const yearNumber = parseInt(
+      dateForFormatting.toLocaleDateString("en-US", {
+        year: "numeric",
+        timeZone: MST_TIMEZONE,
+      }),
+    );
     const ordinalSuffix = getOrdinalSuffix(dayNumber);
 
     return `${dayName}, ${monthName} ${dayNumber}${ordinalSuffix}, ${yearNumber}`;
@@ -360,7 +432,7 @@ export default function Events() {
           >
             <Calendar className="w-4 h-4 text-[#00AFE6]" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {t('eventsPage.badge')}
+              {t("eventsPage.badge")}
             </span>
           </motion.div>
 
@@ -371,10 +443,12 @@ export default function Events() {
             className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 font-rosarivo"
           >
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-              {t('eventsPage.title.events')}
+              {t("eventsPage.title.events")}
             </span>
             <br />
-            <span className="text-gray-800 dark:text-white">{t('eventsPage.title.education')}</span>
+            <span className="text-gray-800 dark:text-white">
+              {t("eventsPage.title.education")}
+            </span>
           </motion.h1>
 
           <motion.p
@@ -383,7 +457,7 @@ export default function Events() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            {t('eventsPage.description')}
+            {t("eventsPage.description")}
           </motion.p>
         </div>
       </section>
@@ -407,7 +481,7 @@ export default function Events() {
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 shadow-lg">
                 <Calendar className="w-5 h-5 text-[#00AFE6]" />
                 <span className="text-gray-800 dark:text-white/90 font-medium">
-                  {t('eventsPage.featuredEvent')}
+                  {t("eventsPage.featuredEvent")}
                 </span>
               </div>
 
@@ -421,22 +495,20 @@ export default function Events() {
               >
                 <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
                 <span className="text-sm font-medium text-amber-600 dark:text-amber-400">
-                  {t('eventsPage.comingSoon')}
+                  {t("eventsPage.comingSoon")}
                 </span>
               </motion.div>
             </div>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight">
-              <span className="text-gray-800 dark:text-white">
-                Canadian{" "}
-              </span>
+              <span className="text-gray-800 dark:text-white">Canadian </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
                 Amyloidosis Summit
               </span>
             </h2>
 
             <p className="text-lg sm:text-xl text-gray-600 dark:text-white/70 max-w-4xl mx-auto leading-relaxed px-4">
-              {t('events.summit.description')}
+              {t("events.summit.description")}
             </p>
           </motion.div>
 
@@ -452,7 +524,7 @@ export default function Events() {
               <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
                 <div className="text-center">
                   <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">
-                    {t('eventsPage.eventDetails')}
+                    {t("eventsPage.eventDetails")}
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
@@ -460,10 +532,10 @@ export default function Events() {
                       <Calendar className="w-8 h-8 text-[#00AFE6]" />
                       <div className="text-center">
                         <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                          {t('eventsPage.dates')}
+                          {t("eventsPage.dates")}
                         </p>
                         <p className="text-gray-800 dark:text-white font-semibold">
-                          {t('events.summit.date')}
+                          {t("events.summit.date")}
                         </p>
                       </div>
                     </div>
@@ -472,22 +544,22 @@ export default function Events() {
                       <MapPin className="w-8 h-8 text-[#00DD89]" />
                       <div className="text-center">
                         <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                          {t('eventsPage.format')}
+                          {t("eventsPage.format")}
                         </p>
                         <p className="text-gray-800 dark:text-white font-semibold">
-                          {t('events.summit.type')}
+                          {t("events.summit.type")}
                         </p>
                       </div>
                     </div>
                   </div>
 
                   <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
-                    {t('eventsPage.summitHostedBy')}
+                    {t("eventsPage.summitHostedBy")}
                   </p>
 
                   <div className="space-y-4">
                     <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
-                      {t('eventsPage.registrationComingSoon')}
+                      {t("eventsPage.registrationComingSoon")}
                     </p>
                   </div>
                 </div>
@@ -514,7 +586,7 @@ export default function Events() {
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
               <Calendar className="w-5 h-5 text-[#00AFE6]" />
               <span className="text-gray-800 dark:text-white/90 font-medium">
-                {t('eventsPage.journalClubBadge')}
+                {t("eventsPage.journalClubBadge")}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
@@ -523,11 +595,11 @@ export default function Events() {
               </span>
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              {t('eventsPage.journalClubDescription')}
+              {t("eventsPage.journalClubDescription")}
             </p>
             <Link href="/journal-club">
               <Button className="mt-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white font-semibold px-6 py-3 rounded-xl shadow-lg">
-                {t('eventsPage.viewFullSchedule')}
+                {t("eventsPage.viewFullSchedule")}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -544,7 +616,7 @@ export default function Events() {
                     : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
                 }`}
               >
-                {t('eventsPage.upcomingEvents')}
+                {t("eventsPage.upcomingEvents")}
               </button>
               <button
                 onClick={() => setJournalClubTab("past")}
@@ -554,26 +626,40 @@ export default function Events() {
                     : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
                 }`}
               >
-                {t('eventsPage.pastEvents')}
+                {t("eventsPage.pastEvents")}
               </button>
             </div>
           </div>
 
           {/* Journal Club Sessions Grid */}
           <div className="max-w-6xl mx-auto">
-            <div className={`grid gap-6 ${
-              (journalClubTab === "upcoming" ? upcomingJournalClubSessions : pastJournalClubSessions).length === 1
-                ? "grid-cols-1 max-w-md mx-auto"
-                : (journalClubTab === "upcoming" ? upcomingJournalClubSessions : pastJournalClubSessions).length === 2
-                  ? "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
-                  : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            }`}>
-              {(journalClubTab === "upcoming" ? upcomingJournalClubSessions : pastJournalClubSessions).map((session, index) => {
+            <div
+              className={`grid gap-6 ${
+                (journalClubTab === "upcoming"
+                  ? upcomingJournalClubSessions
+                  : pastJournalClubSessions
+                ).length === 1
+                  ? "grid-cols-1 max-w-md mx-auto"
+                  : (journalClubTab === "upcoming"
+                        ? upcomingJournalClubSessions
+                        : pastJournalClubSessions
+                      ).length === 2
+                    ? "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
+                    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+              }`}
+            >
+              {(journalClubTab === "upcoming"
+                ? upcomingJournalClubSessions
+                : pastJournalClubSessions
+              ).map((session, index) => {
                 const isPast = isEventPast(session.rawDate);
                 // Get month name for session title
                 const sessionDate = parseLocalDate(session.rawDate);
-                const monthName = sessionDate.toLocaleDateString("en-US", { month: "long", timeZone: MST_TIMEZONE });
-                
+                const monthName = sessionDate.toLocaleDateString("en-US", {
+                  month: "long",
+                  timeZone: MST_TIMEZONE,
+                });
+
                 return (
                   <motion.div
                     key={session.rawDate}
@@ -583,22 +669,34 @@ export default function Events() {
                     viewport={{ once: true }}
                     className="h-full"
                   >
-                    <Card className={`h-full flex flex-col rounded-3xl overflow-hidden transition-all duration-500 ${
-                      isPast 
-                        ? "bg-gradient-to-br from-gray-100/95 to-gray-50/95 dark:from-gray-800/50 dark:to-gray-900/50 border-gray-200/50 dark:border-gray-700/50 opacity-70" 
-                        : "bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15"
-                    }`}>
+                    <Card
+                      className={`h-full flex flex-col rounded-3xl overflow-hidden transition-all duration-500 ${
+                        isPast
+                          ? "bg-gradient-to-br from-gray-100/95 to-gray-50/95 dark:from-gray-800/50 dark:to-gray-900/50 border-gray-200/50 dark:border-gray-700/50 opacity-70"
+                          : "bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15"
+                      }`}
+                    >
                       {/* Header Section */}
-                      <div className={`relative p-6 ${isPast ? "bg-gray-100/50 dark:bg-gray-700/30" : "bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent"}`}>
+                      <div
+                        className={`relative p-6 ${isPast ? "bg-gray-100/50 dark:bg-gray-700/30" : "bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent"}`}
+                      >
                         <div className="flex justify-between items-start mb-4">
-                          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isPast ? "bg-gray-200/50 dark:bg-gray-600/30" : "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20"}`}>
-                            <Calendar className={`w-8 h-8 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`} />
+                          <div
+                            className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isPast ? "bg-gray-200/50 dark:bg-gray-600/30" : "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20"}`}
+                          >
+                            <Calendar
+                              className={`w-8 h-8 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            />
                           </div>
-                          <Badge className={`${isPast ? "bg-gray-400" : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89]"} text-white border-0 px-2 py-1 text-xs font-medium rounded`}>
+                          <Badge
+                            className={`${isPast ? "bg-gray-400" : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89]"} text-white border-0 px-2 py-1 text-xs font-medium rounded`}
+                          >
                             Journal Club
                           </Badge>
                         </div>
-                        <h3 className={`text-xl font-semibold leading-snug ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}>
+                        <h3
+                          className={`text-xl font-semibold leading-snug ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
+                        >
                           CAS Journal Club - {monthName} Session
                         </h3>
                       </div>
@@ -607,37 +705,60 @@ export default function Events() {
                       <CardContent className="p-6 pt-4 flex flex-col flex-1">
                         {/* Event Details */}
                         <div className="space-y-2 mb-4">
-                          <div className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}>
-                            <Calendar className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`} />
+                          <div
+                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                          >
+                            <Calendar
+                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            />
                             <span>{formatEventDate(session.rawDate)}</span>
                           </div>
-                          <div className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}>
-                            <Clock className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`} />
+                          <div
+                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                          >
+                            <Clock
+                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            />
                             <span>3:00 PM - 4:00 PM MST</span>
                           </div>
-                          <div className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}>
-                            <MapPin className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`} />
+                          <div
+                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                          >
+                            <MapPin
+                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            />
                             <span>Virtual Event</span>
                           </div>
                         </div>
 
                         {/* Topics Section */}
                         {session.topics && (
-                          <div className={`mb-4 p-3 rounded-xl border space-y-3 ${
-                            isPast 
-                              ? "bg-gray-50 dark:bg-gray-700/30 border-gray-200 dark:border-gray-600" 
-                              : "bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border-[#00AFE6]/20"
-                          }`}>
-                            <div className={`text-xs font-medium ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}>
-                              {t('eventsPage.sessionTopics')}
+                          <div
+                            className={`mb-4 p-3 rounded-xl border space-y-3 ${
+                              isPast
+                                ? "bg-gray-50 dark:bg-gray-700/30 border-gray-200 dark:border-gray-600"
+                                : "bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border-[#00AFE6]/20"
+                            }`}
+                          >
+                            <div
+                              className={`text-xs font-medium ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            >
+                              {t("eventsPage.sessionTopics")}
                             </div>
                             {session.topics.map((topic, idx) => (
-                              <div key={idx} className={`border-l-2 pl-3 ${isPast ? "border-gray-300" : "border-[#00AFE6]/40"}`}>
-                                <div className={`text-sm font-medium italic ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}>
+                              <div
+                                key={idx}
+                                className={`border-l-2 pl-3 ${isPast ? "border-gray-300" : "border-[#00AFE6]/40"}`}
+                              >
+                                <div
+                                  className={`text-sm font-medium italic ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
+                                >
                                   "{topic.title}"
                                 </div>
-                                <div className={`text-xs mt-1 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}>
-                                  {t('eventsPage.presenter')}: {topic.presenter}
+                                <div
+                                  className={`text-xs mt-1 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                                >
+                                  {t("eventsPage.presenter")}: {topic.presenter}
                                 </div>
                               </div>
                             ))}
@@ -645,8 +766,12 @@ export default function Events() {
                         )}
 
                         {/* Description */}
-                        <p className={`text-sm leading-relaxed flex-1 mb-4 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}>
-                          One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates.
+                        <p
+                          className={`text-sm leading-relaxed flex-1 mb-4 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                        >
+                          One-hour virtual session focusing on amyloidosis
+                          clinical case-based presentations and scientific
+                          updates.
                         </p>
 
                         {/* CTA Section */}
@@ -657,15 +782,17 @@ export default function Events() {
                               <div className="flex items-center justify-center gap-1 mb-1">
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                                 <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
-                                  {t('eventsPage.registrationNotRequired')}
+                                  {t("eventsPage.registrationNotRequired")}
                                 </p>
                                 <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
                               </div>
                               <p className="text-xs font-medium text-gray-700 dark:text-white/80 mb-2">
-                                {t('eventsPage.zoomDetailsCAS')}
+                                {t("eventsPage.zoomDetailsCAS")}
                               </p>
                               <Button
-                                onClick={() => (window.location.href = "/join-cas")}
+                                onClick={() =>
+                                  (window.location.href = "/join-cas")
+                                }
                                 className="bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
                               >
                                 <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
@@ -714,7 +841,9 @@ export default function Events() {
               </span>
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              The annual educational conference jointly hosted by CAS and Transthyretin Amyloidosis Canada (TAC), uniting healthcare professionals and patients.
+              The annual educational conference jointly hosted by CAS and
+              Transthyretin Amyloidosis Canada (TAC), uniting healthcare
+              professionals and patients.
             </p>
           </motion.div>
 
@@ -729,7 +858,7 @@ export default function Events() {
                     : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
                 }`}
               >
-                {t('eventsPage.upcomingEvents')}
+                {t("eventsPage.upcomingEvents")}
               </button>
               <button
                 onClick={() => setSummitTab("past")}
@@ -739,7 +868,7 @@ export default function Events() {
                     : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
                 }`}
               >
-                {t('eventsPage.pastEvents')}
+                {t("eventsPage.pastEvents")}
               </button>
             </div>
           </div>
@@ -749,13 +878,15 @@ export default function Events() {
             {summitTab === "upcoming" && (
               <div>
                 {upcomingSummitEvents.length > 0 ? (
-                  <div className={`grid gap-6 ${
-                    upcomingSummitEvents.length === 1
-                      ? "grid-cols-1 max-w-2xl mx-auto"
-                      : upcomingSummitEvents.length === 2
-                        ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
-                        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                  }`}>
+                  <div
+                    className={`grid gap-6 ${
+                      upcomingSummitEvents.length === 1
+                        ? "grid-cols-1 max-w-2xl mx-auto"
+                        : upcomingSummitEvents.length === 2
+                          ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+                          : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                    }`}
+                  >
                     {upcomingSummitEvents.map((event, index) => (
                       <motion.div
                         key={event.id}
@@ -787,7 +918,10 @@ export default function Events() {
                             <div className="space-y-2 mb-4">
                               <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
                                 <Calendar className="w-4 h-4 text-[#00AFE6]" />
-                                <span>{(event as any).displayDate || formatEventDate(event.date)}</span>
+                                <span>
+                                  {(event as any).displayDate ||
+                                    formatEventDate(event.date)}
+                                </span>
                               </div>
                               <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
                                 <Clock className="w-4 h-4 text-[#00AFE6]" />
@@ -810,7 +944,12 @@ export default function Events() {
                                 <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
                                 <div className="relative z-10">
                                   <Button
-                                    onClick={() => window.open(event.registrationUrl, '_blank')}
+                                    onClick={() =>
+                                      window.open(
+                                        event.registrationUrl,
+                                        "_blank",
+                                      )
+                                    }
                                     className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs"
                                   >
                                     <span className="flex items-center gap-2">
@@ -827,12 +966,12 @@ export default function Events() {
                                   <div className="flex items-center justify-center gap-1 mb-1">
                                     <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
                                     <p className="text-sm font-semibold text-amber-600 dark:text-amber-400">
-                                      {t('eventsPage.comingSoon')}
+                                      {t("eventsPage.comingSoon")}
                                     </p>
                                     <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
                                   </div>
                                   <p className="text-xs text-gray-600 dark:text-white/70">
-                                    {t('eventsPage.registrationComingSoon')}
+                                    {t("eventsPage.registrationComingSoon")}
                                   </p>
                                 </div>
                               </div>
@@ -857,7 +996,8 @@ export default function Events() {
                       No Upcoming Summit Events
                     </h3>
                     <p className="text-gray-600 dark:text-white/70 max-w-md mx-auto">
-                      Check the featured event section above for information about the next Canadian Amyloidosis Summit.
+                      Check the featured event section above for information
+                      about the next Canadian Amyloidosis Summit.
                     </p>
                   </motion.div>
                 )}
@@ -868,13 +1008,15 @@ export default function Events() {
             {summitTab === "past" && (
               <div>
                 {pastSummitEvents.length > 0 ? (
-                  <div className={`grid gap-6 ${
-                    pastSummitEvents.length === 1
-                      ? "grid-cols-1 max-w-2xl mx-auto"
-                      : pastSummitEvents.length === 2
-                        ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
-                        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                  }`}>
+                  <div
+                    className={`grid gap-6 ${
+                      pastSummitEvents.length === 1
+                        ? "grid-cols-1 max-w-2xl mx-auto"
+                        : pastSummitEvents.length === 2
+                          ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+                          : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                    }`}
+                  >
                     {pastSummitEvents.map((event, index) => (
                       <motion.div
                         key={event.id}
@@ -906,7 +1048,10 @@ export default function Events() {
                             <div className="space-y-2 mb-4">
                               <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
                                 <Calendar className="w-4 h-4 text-gray-400" />
-                                <span>{(event as any).displayDate || formatEventDate(event.date)}</span>
+                                <span>
+                                  {(event as any).displayDate ||
+                                    formatEventDate(event.date)}
+                                </span>
                               </div>
                               <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
                                 <Clock className="w-4 h-4 text-gray-400" />
@@ -992,7 +1137,9 @@ export default function Events() {
               </h2>
 
               <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-6 sm:mb-8 md:mb-12 px-2">
-                Explore the Canadian Amyloidosis Nursing Network (CANN) educational series, upcoming events, and professional development opportunities.
+                Explore the Canadian Amyloidosis Nursing Network (CANN)
+                educational series, upcoming events, and professional
+                development opportunities.
               </p>
 
               <Link href="/cann-resources">
@@ -1043,18 +1190,21 @@ export default function Events() {
               </span>
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              Stay informed with the latest updates, announcements, and news from the Canadian Amyloidosis Society.
+              Stay informed with the latest updates, announcements, and news
+              from the Canadian Amyloidosis Society.
             </p>
           </motion.div>
 
           {/* Newsletter Cards Grid */}
-          <div className={`grid gap-6 ${
-            newsletters.length === 1
-              ? "grid-cols-1 max-w-2xl mx-auto"
-              : newsletters.length === 2
-                ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
-                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-          }`}>
+          <div
+            className={`grid gap-6 ${
+              newsletters.length === 1
+                ? "grid-cols-1 max-w-2xl mx-auto"
+                : newsletters.length === 2
+                  ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+                  : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
             {newsletters.map((newsletter, index) => (
               <motion.div
                 key={newsletter.id}
@@ -1064,7 +1214,7 @@ export default function Events() {
                 viewport={{ once: true }}
                 className="h-full"
               >
-                <Card 
+                <Card
                   className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden group cursor-pointer"
                   onClick={() => setSelectedNewsletter(newsletter)}
                 >
@@ -1163,7 +1313,7 @@ export default function Events() {
 
               {/* Sections */}
               <div className="space-y-6">
-                {selectedNewsletter.content.sections.map((section, index) => (
+                {selectedNewsletter.content.sections.map((section, index) =>
                   (section as any).isHeader ? (
                     <div key={index} className="mt-8 mb-4">
                       <h2 className="text-2xl font-bold text-[#00AFE6] dark:text-[#00AFE6] border-b-2 border-[#00AFE6]/30 pb-2">
@@ -1171,28 +1321,37 @@ export default function Events() {
                       </h2>
                     </div>
                   ) : (
-                    <div key={index} className={section.title ? "border-l-4 border-[#00AFE6] pl-6" : ""}>
-                      {(section as any).hasLogo && (section as any).logoImage && (
-                        <div className="mb-4 flex justify-center">
-                          <img 
-                            src={(section as any).logoImage} 
-                            alt="CANN Logo" 
-                            className="max-w-xs h-auto"
-                          />
-                        </div>
-                      )}
-                      {(section as any).hasThreeImages && (section as any).threeImages && (
-                        <div className="mb-4 grid grid-cols-3 gap-3">
-                          {(section as any).threeImages.map((img: string, imgIndex: number) => (
-                            <img 
-                              key={imgIndex}
-                              src={img} 
-                              alt={`Summit image ${imgIndex + 1}`} 
-                              className="w-full h-32 object-cover rounded-lg"
+                    <div
+                      key={index}
+                      className={
+                        section.title ? "border-l-4 border-[#00AFE6] pl-6" : ""
+                      }
+                    >
+                      {(section as any).hasLogo &&
+                        (section as any).logoImage && (
+                          <div className="mb-4 flex justify-center">
+                            <img
+                              src={(section as any).logoImage}
+                              alt="CANN Logo"
+                              className="max-w-xs h-auto"
                             />
-                          ))}
-                        </div>
-                      )}
+                          </div>
+                        )}
+                      {(section as any).hasThreeImages &&
+                        (section as any).threeImages && (
+                          <div className="mb-4 grid grid-cols-3 gap-3">
+                            {(section as any).threeImages.map(
+                              (img: string, imgIndex: number) => (
+                                <img
+                                  key={imgIndex}
+                                  src={img}
+                                  alt={`Summit image ${imgIndex + 1}`}
+                                  className="w-full h-32 object-cover rounded-lg"
+                                />
+                              ),
+                            )}
+                          </div>
+                        )}
                       {section.title && (
                         <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3">
                           {section.title}
@@ -1200,24 +1359,36 @@ export default function Events() {
                       )}
                       {section.content && (
                         <div className="text-gray-600 dark:text-white/70 text-sm leading-relaxed whitespace-pre-line">
-                          {section.content.split('**').map((part, i) => 
-                            i % 2 === 1 ? <strong key={i} className="text-gray-800 dark:text-white">{part}</strong> : part
+                          {section.content.split("**").map((part, i) =>
+                            i % 2 === 1 ? (
+                              <strong
+                                key={i}
+                                className="text-gray-800 dark:text-white"
+                              >
+                                {part}
+                              </strong>
+                            ) : (
+                              part
+                            ),
                           )}
                         </div>
                       )}
-                      {(section as any).hasBannerImage && (section as any).bannerImage && (
-                        <div className="mt-4 mb-4">
-                          <img 
-                            src={(section as any).bannerImage} 
-                            alt="Summit Banner" 
-                            className="w-full h-auto rounded-lg shadow-md"
-                          />
-                        </div>
-                      )}
+                      {(section as any).hasBannerImage &&
+                        (section as any).bannerImage && (
+                          <div className="mt-4 mb-4">
+                            <img
+                              src={(section as any).bannerImage}
+                              alt="Summit Banner"
+                              className="w-full h-auto rounded-lg shadow-md"
+                            />
+                          </div>
+                        )}
                       {(section as any).hasCTA && (
                         <div className="mt-4">
                           <Button
-                            onClick={() => window.location.href = (section as any).ctaLink}
+                            onClick={() =>
+                              (window.location.href = (section as any).ctaLink)
+                            }
                             className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 py-2 px-6 rounded-lg font-semibold text-sm"
                           >
                             {(section as any).ctaText}
@@ -1226,15 +1397,18 @@ export default function Events() {
                         </div>
                       )}
                     </div>
-                  )
-                ))}
+                  ),
+                )}
               </div>
 
               {/* Contact CTA */}
               <div className="mt-8 p-6 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
                 <p className="text-center text-gray-700 dark:text-white/80">
                   Have questions or feedback? Contact us at{" "}
-                  <a href="mailto:CAS@amyloid.ca" className="text-[#00AFE6] hover:underline font-semibold">
+                  <a
+                    href="mailto:CAS@amyloid.ca"
+                    className="text-[#00AFE6] hover:underline font-semibold"
+                  >
                     CAS@amyloid.ca
                   </a>
                 </p>

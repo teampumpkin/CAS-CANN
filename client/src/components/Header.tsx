@@ -118,7 +118,7 @@ export default function Header() {
       ],
     },
     { name: t("nav.getInvolved"), href: "/get-involved" },
-    { name: t("nav.events"), href: "/events" },
+    { name: t("nav.events"), href: "/events-and-news" },
     {
       name: "CANN",
       href: "#cann",

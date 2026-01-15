@@ -641,57 +641,90 @@ export default function Events() {
           {/* Upcoming Events - Event Details Card */}
           {summitTab === "upcoming" && (
             <div className="max-w-7xl mx-auto">
-              <motion.div
-                className="flex justify-center"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
-                  <div className="text-center">
-                    <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">
-                      {t("eventsPage.eventDetails")}
-                    </h3>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
-                      <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
-                        <Calendar className="w-8 h-8 text-[#00AFE6]" />
+              {upcomingSummitEvents.length > 0 ? (
+                <div
+                  className={`grid gap-6 ${
+                    upcomingSummitEvents.length === 1
+                      ? "grid-cols-1 max-w-2xl mx-auto"
+                      : upcomingSummitEvents.length === 2
+                        ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+                        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                  }`}
+                >
+                  {upcomingSummitEvents.map((event, index) => (
+                    <motion.div
+                      key={event.id}
+                      className="flex justify-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl w-full hover:shadow-3xl hover:border-[#00AFE6]/30 transition-all duration-500">
                         <div className="text-center">
-                          <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                            {t("eventsPage.dates")}
+                          <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">
+                            {event.title}
+                          </h3>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+                            <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
+                              <Calendar className="w-8 h-8 text-[#00AFE6]" />
+                              <div className="text-center">
+                                <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
+                                  {t("eventsPage.dates")}
+                                </p>
+                                <p className="text-gray-800 dark:text-white font-semibold">
+                                  {(event as any).displayDate || formatEventDate(event.date)}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 rounded-2xl border border-[#00DD89]/20">
+                              <MapPin className="w-8 h-8 text-[#00DD89]" />
+                              <div className="text-center">
+                                <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
+                                  {t("eventsPage.format")}
+                                </p>
+                                <p className="text-gray-800 dark:text-white font-semibold">
+                                  {event.type}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
+                            {event.description}
                           </p>
-                          <p className="text-gray-800 dark:text-white font-semibold">
-                            {t("events.summit.date")}
-                          </p>
+
+                          <div className="space-y-4">
+                            <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
+                              {t("eventsPage.registrationComingSoon")}
+                            </p>
+                          </div>
                         </div>
                       </div>
-
-                      <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 rounded-2xl border border-[#00DD89]/20">
-                        <MapPin className="w-8 h-8 text-[#00DD89]" />
-                        <div className="text-center">
-                          <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                            {t("eventsPage.format")}
-                          </p>
-                          <p className="text-gray-800 dark:text-white font-semibold">
-                            {t("events.summit.type")}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
-                      {t("eventsPage.summitHostedBy")}
-                    </p>
-
-                    <div className="space-y-4">
-                      <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
-                        {t("eventsPage.registrationComingSoon")}
-                      </p>
-                    </div>
-                  </div>
+                    </motion.div>
+                  ))}
                 </div>
-              </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="text-center py-12"
+                >
+                  <div className="w-20 h-20 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Calendar className="w-10 h-10 text-[#00AFE6]" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                    No Upcoming Summit Events
+                  </h3>
+                  <p className="text-gray-600 dark:text-white/70 max-w-md mx-auto">
+                    Stay tuned for announcements about future Canadian Amyloidosis Summit events.
+                  </p>
+                </motion.div>
+              )}
             </div>
           )}
 

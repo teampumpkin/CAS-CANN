@@ -461,7 +461,13 @@ export default function Events() {
 
           {/* Journal Club Sessions Grid */}
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className={`grid gap-6 ${
+              (journalClubTab === "upcoming" ? upcomingJournalClubSessions : pastJournalClubSessions).length === 1
+                ? "grid-cols-1 max-w-md mx-auto"
+                : (journalClubTab === "upcoming" ? upcomingJournalClubSessions : pastJournalClubSessions).length === 2
+                  ? "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
+                  : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            }`}>
               {(journalClubTab === "upcoming" ? upcomingJournalClubSessions : pastJournalClubSessions).map((session, index) => {
                 const isPast = isEventPast(session.rawDate);
                 return (

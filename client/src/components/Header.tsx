@@ -118,7 +118,17 @@ export default function Header() {
       ],
     },
     { name: t("nav.getInvolved"), href: "/get-involved" },
-    { name: t("nav.events"), href: "/events-and-news" },
+    {
+      name: t("nav.events"),
+      href: "/events-and-news",
+      hasDropdown: true,
+      dropdownItems: [
+        { name: "Canadian Amyloidosis Summit", href: "/events-and-news#summit" },
+        { name: "CAS Journal Club", href: "/events-and-news#journal-club" },
+        { name: "CANN Events", href: "/events-and-news#cann-events" },
+        { name: "News", href: "/events-and-news#news" },
+      ],
+    },
     {
       name: "CANN",
       href: "#cann",

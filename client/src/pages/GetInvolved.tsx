@@ -58,6 +58,36 @@ import { z } from "zod";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
 
+// MST Timezone constant (America/Edmonton handles MST/MDT automatically)
+const MST_TIMEZONE = "America/Edmonton";
+
+// Helper to get current date in MST timezone
+const getMSTDate = (): Date => {
+  const now = new Date();
+  const mstDateStr = now.toLocaleDateString("en-CA", {
+    timeZone: MST_TIMEZONE,
+  });
+  const [year, month, day] = mstDateStr.split("-").map(Number);
+  return new Date(year, month - 1, day);
+};
+
+// Helper function to parse event date and compare with today in MST
+const isEventPast = (dateString: string): boolean => {
+  if (!dateString || dateString === "TBD") return false;
+  const parts = dateString.split("-").map(Number);
+  if (parts.length !== 3 || parts.some(isNaN)) return false;
+  const [year, month, day] = parts;
+  const eventDate = new Date(year, month - 1, day);
+  const todayMST = getMSTDate();
+  return eventDate < todayMST;
+};
+
+// Helper to parse date string for sorting
+const parseLocalDate = (dateString: string): Date => {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+};
+
 const membershipFormSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
   lastName: z.string().min(2, "Last name must be at least 2 characters"),
@@ -130,7 +160,8 @@ const provinces = [
   { value: "NU", label: "Nunavut" },
 ];
 
-const upcomingEvents = [
+// All events with dates for automatic categorization
+const allGetInvolvedEvents = [
   {
     id: 1,
     title: "CAS Journal Club - September Session",
@@ -170,9 +201,18 @@ const upcomingEvents = [
   },
 ];
 
-const recentEvents: any[] = [];
-
-const pastEvents: any[] = [];
+// Automatically categorize events based on date (MST timezone)
+const categorizeGetInvolvedEvents = () => {
+  const upcoming = allGetInvolvedEvents
+    .filter((event) => !isEventPast(event.date))
+    .sort((a, b) => parseLocalDate(a.date).getTime() - parseLocalDate(b.date).getTime());
+  
+  const past = allGetInvolvedEvents
+    .filter((event) => isEventPast(event.date))
+    .sort((a, b) => parseLocalDate(b.date).getTime() - parseLocalDate(a.date).getTime());
+  
+  return { upcoming, past };
+};
 
 export default function GetInvolved() {
   const { t } = useLanguage();

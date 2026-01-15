@@ -560,15 +560,15 @@ export default function AboutCANN() {
                 professionals engaged in the field of amyloidosis.
               </p>
 
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 mb-8">
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 sm:p-8 mb-8 text-left max-w-md mx-auto sm:max-w-lg">
+                <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6 text-left">
                   Membership Requirements
                 </h3>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {membershipRequirements.map((requirement, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-pink-600" />
-                      <span className="text-gray-700 dark:text-gray-300">
+                    <div key={index} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-pink-600 shrink-0 mt-0.5" />
+                      <span className="text-gray-700 dark:text-gray-300 text-sm sm:text-base text-left">
                         {requirement}
                       </span>
                     </div>

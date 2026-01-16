@@ -104,14 +104,6 @@ export default function Header() {
       hasDropdown: true,
       dropdownItems: [
         {
-          name: t("nav.resourceLibrary"),
-          href: "/resource-library",
-        },
-        {
-          name: t("nav.uploadResource"),
-          href: "/upload-resource",
-        },
-        {
           name: t("nav.partnerships"),
           href: "/partnerships",
         },

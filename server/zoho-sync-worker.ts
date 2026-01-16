@@ -224,10 +224,10 @@ export class ZohoSyncWorker {
       // Email (required)
       if (formData.email) zohoData.Email = formData.email;
       
-      // Professional info - field names match form labels
+      // Professional info - exact Zoho API field names from Leads module
       if (formData.discipline) zohoData.Professional_Designation = formData.discipline;
-      if (formData.subspecialty) zohoData.Subspecialty = formData.subspecialty;
-      if (formData.institution) zohoData.Institution = formData.institution;
+      if (formData.subspecialty) zohoData.Sub_Specialty = formData.subspecialty;
+      if (formData.institution) zohoData.Institution_Name = formData.institution;
       
       // Amyloidosis specific
       if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;

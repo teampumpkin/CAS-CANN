@@ -32,10 +32,10 @@ const CAS_CANN_FIELD_MAPPING: Record<string, { zohoField: string; fieldType: For
   // Contact info
   'email': { zohoField: 'Email', fieldType: 'email' },
   
-  // Professional info - CORRECT FIELD NAMES
+  // Professional info - exact Zoho API field names from Leads module
   'discipline': { zohoField: 'Professional_Designation', fieldType: 'text' },
-  'subspecialty': { zohoField: 'Subspecialty', fieldType: 'text' },
-  'institution': { zohoField: 'Institution', fieldType: 'text' },
+  'subspecialty': { zohoField: 'Sub_Specialty', fieldType: 'text' },
+  'institution': { zohoField: 'Institution_Name', fieldType: 'text' },
   
   // Amyloidosis specific
   'amyloidosisType': { zohoField: 'Amyloidosis_Type', fieldType: 'text' },

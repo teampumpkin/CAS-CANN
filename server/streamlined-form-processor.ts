@@ -32,24 +32,24 @@ const CAS_CANN_FIELD_MAPPING: Record<string, { zohoField: string; fieldType: For
   // Contact info
   'email': { zohoField: 'Email', fieldType: 'email' },
   
-  // Professional info
-  'discipline': { zohoField: 'Industry', fieldType: 'text' },
-  'subspecialty': { zohoField: 'Sub_Specialty', fieldType: 'text' },
-  'institution': { zohoField: 'Company', fieldType: 'text' },
+  // Professional info - CORRECT FIELD NAMES
+  'discipline': { zohoField: 'Professional_Designation', fieldType: 'text' },
+  'subspecialty': { zohoField: 'Subspecialty', fieldType: 'text' },
+  'institution': { zohoField: 'Institution', fieldType: 'text' },
   
   // Amyloidosis specific
   'amyloidosisType': { zohoField: 'Amyloidosis_Type', fieldType: 'text' },
   
-  // Membership preferences
+  // Membership preferences (Zoho expects BOOLEAN for these)
   'wantsMembership': { zohoField: 'CAS_Member', fieldType: 'boolean' },
-  'wantsCANNMembership': { zohoField: 'PANN_Member', fieldType: 'boolean' },
+  'wantsCANNMembership': { zohoField: 'CANN_Member', fieldType: 'boolean' },
   
-  // Communication preferences
-  'wantsCommunications': { zohoField: 'CAS_Communications', fieldType: 'boolean' },
-  'cannCommunications': { zohoField: 'CANN_Communication_Consent', fieldType: 'boolean' },
+  // Communication preferences (Zoho expects TEXT for these)
+  'wantsCommunications': { zohoField: 'CAS_Communications', fieldType: 'text' },
+  'cannCommunications': { zohoField: 'CANN_Communications', fieldType: 'text' },
   
-  // Services map
-  'wantsServicesMapInclusion': { zohoField: 'Services_Map_Inclusion', fieldType: 'boolean' },
+  // Services map (Zoho expects TEXT for this)
+  'wantsServicesMapInclusion': { zohoField: 'Services_Map_Inclusion', fieldType: 'text' },
 };
 
 export class StreamlinedFormProcessor {

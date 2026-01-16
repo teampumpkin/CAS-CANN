@@ -232,15 +232,15 @@ export class ZohoSyncWorker {
       // Amyloidosis specific
       if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;
       
-      // Membership flags (Zoho expects text "Yes"/"No", not boolean)
-      if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership;
-      if (formData.wantsCANNMembership) zohoData.CANN_Member = formData.wantsCANNMembership;
+      // Membership flags (Zoho expects BOOLEAN for these fields)
+      if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership === "Yes";
+      if (formData.wantsCANNMembership) zohoData.CANN_Member = formData.wantsCANNMembership === "Yes";
       
-      // Communication preferences (Zoho expects text "Yes"/"No", not boolean)
+      // Communication preferences (Zoho expects TEXT "Yes"/"No" for these fields)
       if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications;
       if (formData.cannCommunications) zohoData.CANN_Communications = formData.cannCommunications;
       
-      // Services map (Zoho expects text "Yes"/"No", not boolean)
+      // Services map (Zoho expects TEXT "Yes"/"No" for this field)
       if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
     }
 

@@ -232,16 +232,16 @@ export class ZohoSyncWorker {
       // Amyloidosis specific
       if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;
       
-      // Membership flags
-      if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership === "Yes";
-      if (formData.wantsCANNMembership) zohoData.CANN_Member = formData.wantsCANNMembership === "Yes";
+      // Membership flags (Zoho expects text "Yes"/"No", not boolean)
+      if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership;
+      if (formData.wantsCANNMembership) zohoData.CANN_Member = formData.wantsCANNMembership;
       
-      // Communication preferences
-      if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications === "Yes";
-      if (formData.cannCommunications) zohoData.CANN_Communications = formData.cannCommunications === "Yes";
+      // Communication preferences (Zoho expects text "Yes"/"No", not boolean)
+      if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications;
+      if (formData.cannCommunications) zohoData.CANN_Communications = formData.cannCommunications;
       
-      // Services map
-      if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion === "Yes";
+      // Services map (Zoho expects text "Yes"/"No", not boolean)
+      if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
     }
 
     // Non-member fallback
@@ -254,6 +254,7 @@ export class ZohoSyncWorker {
     }
 
     console.log(`[Zoho Sync Worker] Mapped ${Object.keys(zohoData).length} fields:`, Object.keys(zohoData));
+    console.log(`[Zoho Sync Worker] 📤 SENDING TO ZOHO:`, JSON.stringify(zohoData, null, 2));
 
     return zohoData;
   }

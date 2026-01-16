@@ -1,7 +1,7 @@
 import Hero from '@/components/Hero';
 import WelcomeSection from '@/components/WelcomeSection';
 import AboutAmyloidosisSection from '@/components/AboutAmyloidosisSection';
-import DirectoryPreviewSection from '@/components/DirectoryPreviewSection';
+// import DirectoryPreviewSection from '@/components/DirectoryPreviewSection';
 import EventsNewsletterSection from '@/components/EventsNewsletterSection';
 // import FeaturedSpotlights from '@/components/FeaturedSpotlights';
 
@@ -11,7 +11,7 @@ export default function Home() {
       <Hero />
       <WelcomeSection />
       <AboutAmyloidosisSection />
-      <DirectoryPreviewSection />
+      {/* <DirectoryPreviewSection /> */}
       <EventsNewsletterSection />
       {/* <FeaturedSpotlights /> */}
     </main>

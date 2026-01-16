@@ -164,28 +164,80 @@ export class ZohoSyncWorker {
   }
 
   /**
+   * Check if this is a CAS/CANN registration form
+   * Handles HTML entity encoding (&amp; vs &)
+   */
+  private isCASCANNForm(formName: string): boolean {
+    const normalized = formName.replace(/&amp;/g, '&').toLowerCase().trim();
+    return normalized.includes('cas') && normalized.includes('cann');
+  }
+
+  /**
+   * Split full name into first and last name
+   * Single-word names go to Last_Name (required by Zoho for Leads)
+   */
+  private splitFullName(fullName: string): { firstName: string; lastName: string } {
+    if (!fullName || typeof fullName !== 'string') {
+      return { firstName: '', lastName: '' };
+    }
+    
+    const trimmed = fullName.trim();
+    const parts = trimmed.split(/\s+/);
+    
+    if (parts.length === 1) {
+      return { firstName: '', lastName: parts[0] };
+    }
+    
+    return { 
+      firstName: parts[0], 
+      lastName: parts.slice(1).join(' ')
+    };
+  }
+
+  /**
    * Build Zoho CRM data from form submission
+   * STRICT WHITELIST: Only sends mapped fields to Zoho - no custom field creation
    */
   private buildZohoData(formData: any, formName: string): any {
+    const isCASCANN = this.isCASCANNForm(formName);
     const isMember = formData.wantsMembership === "Yes" || formData.wantsCANNMembership === "Yes";
-    const isCANNMember = formData.wantsCANNMembership === "Yes";
+
+    console.log(`[Zoho Sync Worker] Building data for form "${formName}" (CAS/CANN: ${isCASCANN}, Member: ${isMember})`);
 
     const zohoData: any = {
-      Lead_Source: formName === "CAS & CANN Registration" 
+      Lead_Source: isCASCANN 
         ? "Website - CAS & CANN Registration"
         : "Website - CAS Registration",
     };
 
-    // Member fields
+    // Member fields - STRICT WHITELIST
     if (isMember) {
-      zohoData.Last_Name = formData.fullName || "Unknown";
-      zohoData.Email = formData.email;
+      // Split full name into First_Name and Last_Name
+      const { firstName, lastName } = this.splitFullName(formData.fullName);
+      if (firstName) zohoData.First_Name = firstName;
+      zohoData.Last_Name = lastName || "Unknown";
+      
+      // Email (required)
+      if (formData.email) zohoData.Email = formData.email;
+      
+      // Professional info - mapped to standard Zoho fields
       if (formData.discipline) zohoData.Industry = formData.discipline;
-      if (formData.subspecialty) zohoData.Description = formData.subspecialty;
-      if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;
+      if (formData.subspecialty) zohoData.Sub_Specialty = formData.subspecialty;
       if (formData.institution) zohoData.Company = formData.institution;
-      if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
-      if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications;
+      
+      // Amyloidosis specific
+      if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;
+      
+      // Membership flags
+      if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership === "Yes";
+      if (formData.wantsCANNMembership) zohoData.PANN_Member = formData.wantsCANNMembership === "Yes";
+      
+      // Communication preferences
+      if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications === "Yes";
+      if (formData.cannCommunications) zohoData.CANN_Communication_Consent = formData.cannCommunications === "Yes";
+      
+      // Services map
+      if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion === "Yes";
     }
 
     // Non-member fallback
@@ -197,10 +249,7 @@ export class ZohoSyncWorker {
       }
     }
 
-    // CANN Communications
-    if (isCANNMember && formData.cannCommunications) {
-      zohoData.CANN_Communications = formData.cannCommunications;
-    }
+    console.log(`[Zoho Sync Worker] Mapped ${Object.keys(zohoData).length} fields:`, Object.keys(zohoData));
 
     return zohoData;
   }

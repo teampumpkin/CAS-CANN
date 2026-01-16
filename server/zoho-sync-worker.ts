@@ -212,7 +212,7 @@ export class ZohoSyncWorker {
       Lead_Source: isCASCANN 
         ? "Website - CAS & CANN Registration"
         : "Website - CAS Registration",
-      Layout: { name: "CAS and CANN" },
+      Layout: { id: "6999043000000091055", name: "CAS and CANN" },
     };
 
     // Member fields - STRICT WHITELIST with form-matching field names
@@ -225,31 +225,35 @@ export class ZohoSyncWorker {
       // Email (required)
       if (formData.email) zohoData.Email = formData.email;
       
-      // Professional info - exact Zoho API field names from CAS and CANN layout
+      // Company (REQUIRED by Zoho Leads module) - use institution or fallback
+      zohoData.Company = formData.institution || "Individual";
+      
+      // Professional info - Zoho API names use underscores
       if (formData.discipline) zohoData.Professional_Designation = formData.discipline;
       if (formData.subspecialty) zohoData.subspecialty = formData.subspecialty;
-      if (formData.institution) zohoData["Institution Name"] = formData.institution;
+      if (formData.institution) zohoData.Institution_Name = formData.institution;
       if (formData.province) zohoData.province = formData.province;
       
-      // Amyloidosis specific - field has space in name
-      if (formData.amyloidosisType) zohoData["Amyloidosis Type"] = formData.amyloidosisType;
+      // Amyloidosis specific
+      if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;
       
-      // Membership flags (Zoho expects BOOLEAN for these checkbox fields)
-      if (formData.wantsMembership) zohoData["CAS Member"] = formData.wantsMembership === "Yes";
-      if (formData.wantsCANNMembership) zohoData["CANN Member"] = formData.wantsCANNMembership === "Yes";
+      // Membership flags (Zoho expects BOOLEAN)
+      if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership === "Yes";
+      if (formData.wantsCANNMembership) zohoData.CANN_Member = formData.wantsCANNMembership === "Yes";
       
       // Communication preferences (Zoho picklist fields)
-      if (formData.wantsCommunications) zohoData["CAS Communications"] = formData.wantsCommunications;
-      if (formData.cannCommunications) zohoData["CANN Communications"] = formData.cannCommunications;
+      if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications;
+      if (formData.cannCommunications) zohoData.CANN_Communications = formData.cannCommunications;
       
       // Services map (Zoho picklist field)
-      if (formData.wantsServicesMapInclusion) zohoData["Services Map Inclusion"] = formData.wantsServicesMapInclusion;
+      if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
     }
 
     // Non-member fallback
     if (!isMember) {
       zohoData.Last_Name = formData.noMemberName || "Non-Member Contact";
       zohoData.Email = formData.noMemberEmail;
+      zohoData.Company = "Individual"; // Required by Zoho Leads
       if (formData.noMemberMessage) {
         zohoData.Description = `Non-member contact: ${formData.noMemberMessage}`;
       }

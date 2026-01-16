@@ -53,8 +53,12 @@ export class ZohoSyncWorker {
    */
   private async processQueue(): Promise<void> {
     try {
+      console.log(`[Zoho Sync Worker] ⏰ Checking for pending submissions...`);
+      
       // Get pending submissions (not already synced, under max retries)
       const pendingSubmissions = await storage.getFormSubmissionsByStatus("pending", "pending");
+      
+      console.log(`[Zoho Sync Worker] Query result: ${pendingSubmissions.length} pending submissions found`);
       
       if (pendingSubmissions.length === 0) {
         return; // Nothing to process

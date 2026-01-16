@@ -195,17 +195,29 @@ export class StreamlinedFormProcessor {
 
   /**
    * Check if this is a CAS/CANN registration form
+   * Uses exact form name matching to prevent false positives
    */
   private isCASCANNForm(formName: string): boolean {
-    const lowerName = formName.toLowerCase();
-    return lowerName.includes('cas') || 
-           lowerName.includes('cann') || 
-           lowerName.includes('registration') ||
-           lowerName.includes('join');
+    const exactMatches = [
+      'cas-cann-registration',
+      'cas_cann_registration', 
+      'cas & cann registration',
+      'cas-registration',
+      'cann-registration',
+      'join-cas',
+      'join cas',
+      'cas-member-registration',
+      'cann-member-registration',
+    ];
+    
+    const lowerName = formName.toLowerCase().trim();
+    return exactMatches.includes(lowerName) || 
+           (lowerName.includes('cas') && lowerName.includes('cann'));
   }
 
   /**
    * Split full name into first and last name
+   * For single-word names, uses the name as Last_Name (Zoho requires Last_Name for Leads)
    */
   private splitFullName(fullName: string): { firstName: string; lastName: string } {
     if (!fullName || typeof fullName !== 'string') {
@@ -216,7 +228,8 @@ export class StreamlinedFormProcessor {
     const parts = trimmed.split(/\s+/);
     
     if (parts.length === 1) {
-      return { firstName: parts[0], lastName: '' };
+      // Single word name - use as Last_Name since Zoho requires it for Leads
+      return { firstName: '', lastName: parts[0] };
     }
     
     const firstName = parts[0];

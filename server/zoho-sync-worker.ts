@@ -225,24 +225,25 @@ export class ZohoSyncWorker {
       // Email (required)
       if (formData.email) zohoData.Email = formData.email;
       
-      // Professional info - exact Zoho API field names from Leads module
+      // Professional info - exact Zoho API field names from CAS and CANN layout
       if (formData.discipline) zohoData.Professional_Designation = formData.discipline;
-      if (formData.subspecialty) zohoData.Sub_Specialty = formData.subspecialty;
-      if (formData.institution) zohoData.Institution_Name = formData.institution;
+      if (formData.subspecialty) zohoData.subspecialty = formData.subspecialty;
+      if (formData.institution) zohoData["Institution Name"] = formData.institution;
+      if (formData.province) zohoData.province = formData.province;
       
-      // Amyloidosis specific
-      if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;
+      // Amyloidosis specific - field has space in name
+      if (formData.amyloidosisType) zohoData["Amyloidosis Type"] = formData.amyloidosisType;
       
-      // Membership flags (Zoho expects BOOLEAN for these fields)
-      if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership === "Yes";
-      if (formData.wantsCANNMembership) zohoData.CANN_Member = formData.wantsCANNMembership === "Yes";
+      // Membership flags (Zoho expects BOOLEAN for these checkbox fields)
+      if (formData.wantsMembership) zohoData["CAS Member"] = formData.wantsMembership === "Yes";
+      if (formData.wantsCANNMembership) zohoData["CANN Member"] = formData.wantsCANNMembership === "Yes";
       
-      // Communication preferences (Zoho expects TEXT "Yes"/"No" for these fields)
-      if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications;
-      if (formData.cannCommunications) zohoData.CANN_Communications = formData.cannCommunications;
+      // Communication preferences (Zoho picklist fields)
+      if (formData.wantsCommunications) zohoData["CAS Communications"] = formData.wantsCommunications;
+      if (formData.cannCommunications) zohoData["CANN Communications"] = formData.cannCommunications;
       
-      // Services map (Zoho expects TEXT "Yes"/"No" for this field)
-      if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
+      // Services map (Zoho picklist field)
+      if (formData.wantsServicesMapInclusion) zohoData["Services Map Inclusion"] = formData.wantsServicesMapInclusion;
     }
 
     // Non-member fallback

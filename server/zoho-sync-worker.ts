@@ -212,6 +212,7 @@ export class ZohoSyncWorker {
       Lead_Source: isCASCANN 
         ? "Website - CAS & CANN Registration"
         : "Website - CAS Registration",
+      Layout: { name: "CAS and CANN" },
     };
 
     // Member fields - STRICT WHITELIST with form-matching field names

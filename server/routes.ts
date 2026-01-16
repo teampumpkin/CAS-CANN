@@ -446,19 +446,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const pushStartTime = Date.now();
           
           try {
-            // Get updated field mappings after sync
-            const updatedMappings = await storage.getFieldMappings({ zohoModule: targetModule });
+            // Check if this is a CAS/CANN form - use explicit mapping
+            const isCASCANN = form_name.replace(/&amp;/g, '&').toLowerCase().includes('cas') && 
+                              form_name.replace(/&amp;/g, '&').toLowerCase().includes('cann');
             
-            // Format data for Zoho CRM
-            const zohoData = zohoCRMService.formatFieldDataForZoho(data, updatedMappings);
+            let zohoData: any;
             
-            // Add Lead_Source field with proper attribution
-            const leadSourceMap: Record<string, string> = {
-              "CAS Registration": "Website - CAS Registration",
-              "CAS & CANN Registration": "Website - CAS & CANN Registration",
-              "Join CANN Today": "Website - CANN Membership",
-            };
-            zohoData.Lead_Source = leadSourceMap[form_name] || `Website - ${form_name}`;
+            if (isCASCANN) {
+              // Use explicit CAS/CANN field mapping
+              zohoData = {
+                Lead_Source: "Website - CAS & CANN Registration",
+                Layout: { id: "6999043000000091055", name: "CAS and CANN" },
+                Company: data.institution || "Individual",
+              };
+              
+              // Split name
+              if (data.fullName) {
+                const parts = data.fullName.trim().split(/\s+/);
+                if (parts.length === 1) {
+                  zohoData.Last_Name = parts[0];
+                } else {
+                  zohoData.First_Name = parts[0];
+                  zohoData.Last_Name = parts.slice(1).join(' ');
+                }
+              }
+              
+              if (data.email) zohoData.Email = data.email;
+              if (data.discipline) zohoData.Professional_Designation = data.discipline;
+              if (data.subspecialty) zohoData.subspecialty = data.subspecialty;
+              if (data.institution) zohoData.Institution_Name = data.institution;
+              if (data.province) zohoData.province = data.province;
+              if (data.amyloidosisType) zohoData.Amyloidosis_Type = data.amyloidosisType;
+              if (data.wantsMembership) zohoData.CAS_Member = data.wantsMembership === "Yes";
+              if (data.wantsCANNMembership) zohoData.CANN_Member = data.wantsCANNMembership === "Yes";
+              if (data.wantsCommunications) zohoData.CAS_Communications = data.wantsCommunications;
+              if (data.cannCommunications) zohoData.CANN_Communications = data.cannCommunications;
+              if (data.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = data.wantsServicesMapInclusion;
+            } else {
+              // Get updated field mappings after sync for other forms
+              const updatedMappings = await storage.getFieldMappings({ zohoModule: targetModule });
+              zohoData = zohoCRMService.formatFieldDataForZoho(data, updatedMappings);
+              
+              const leadSourceMap: Record<string, string> = {
+                "CAS Registration": "Website - CAS Registration",
+                "Join CANN Today": "Website - CANN Membership",
+              };
+              zohoData.Lead_Source = leadSourceMap[form_name] || `Website - ${form_name}`;
+              zohoData.Company = data.institution || data.company || "Individual";
+            }
             
             console.log(`[Form Submission] Pushing data to Zoho ${targetModule}:`, zohoData);
             
@@ -2241,6 +2276,85 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
     } catch (error) {
       console.error(`[Debug] Error fetching lead:`, error);
+      res.status(500).json({ 
+        success: false, 
+        error: error instanceof Error ? error.message : "Unknown error" 
+      });
+    }
+  });
+
+  // Bulk update endpoint - re-sync local submissions to Zoho with correct field mappings
+  app.post("/api/admin/bulk-resync-leads", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log("[Bulk Resync] Starting bulk resync of CAS/CANN registrations...");
+      
+      // Get all synced submissions that have a Zoho ID
+      const submissions = await storage.getFormSubmissions({});
+      const casCanNSubmissions = submissions.filter(s => 
+        s.zohoCrmId && 
+        (s.formName.toLowerCase().includes('cas') || s.formName.toLowerCase().includes('cann'))
+      );
+      
+      console.log(`[Bulk Resync] Found ${casCanNSubmissions.length} CAS/CANN submissions with Zoho IDs`);
+      
+      const results = {
+        total: casCanNSubmissions.length,
+        updated: 0,
+        skipped: 0,
+        failed: 0,
+        errors: [] as string[],
+      };
+      
+      for (const submission of casCanNSubmissions) {
+        try {
+          const formData = submission.submissionData as Record<string, any>;
+          
+          // Build update data with correct field mappings
+          const updateData: any = {
+            Layout: { id: "6999043000000091055", name: "CAS and CANN" },
+          };
+          
+          // Only update fields that have values in submission data
+          if (formData.institution) {
+            updateData.Company = formData.institution;
+            updateData.Institution_Name = formData.institution;
+          }
+          if (formData.discipline) updateData.Professional_Designation = formData.discipline;
+          if (formData.subspecialty) updateData.subspecialty = formData.subspecialty;
+          if (formData.province) updateData.province = formData.province;
+          if (formData.amyloidosisType) updateData.Amyloidosis_Type = formData.amyloidosisType;
+          if (formData.wantsMembership) updateData.CAS_Member = formData.wantsMembership === "Yes";
+          if (formData.wantsCANNMembership) updateData.CANN_Member = formData.wantsCANNMembership === "Yes";
+          if (formData.wantsCommunications) updateData.CAS_Communications = formData.wantsCommunications;
+          if (formData.cannCommunications) updateData.CANN_Communications = formData.cannCommunications;
+          if (formData.wantsServicesMapInclusion) updateData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
+          
+          // Skip if no meaningful fields to update
+          if (Object.keys(updateData).length <= 1) {
+            results.skipped++;
+            continue;
+          }
+          
+          console.log(`[Bulk Resync] Updating lead ${submission.zohoCrmId} (submission #${submission.id})...`);
+          
+          // Update the lead in Zoho
+          await zohoCRMService.updateRecord("Leads", submission.zohoCrmId!, updateData);
+          results.updated++;
+          
+          // Small delay to avoid rate limiting
+          await new Promise(resolve => setTimeout(resolve, 200));
+          
+        } catch (error) {
+          results.failed++;
+          results.errors.push(`Submission #${submission.id}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        }
+      }
+      
+      console.log(`[Bulk Resync] Complete:`, results);
+      res.json({ success: true, results });
+      
+    } catch (error) {
+      console.error("[Bulk Resync] Error:", error);
       res.status(500).json({ 
         success: false, 
         error: error instanceof Error ? error.message : "Unknown error" 

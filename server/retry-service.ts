@@ -260,21 +260,67 @@ export class RetryService {
   }
 
   /**
+   * Check if this is a CAS/CANN registration form
+   */
+  private isCASCANNForm(formName: string): boolean {
+    const normalized = formName.replace(/&amp;/g, '&').toLowerCase().trim();
+    return normalized.includes('cas') && normalized.includes('cann');
+  }
+
+  /**
+   * Build CAS/CANN specific Zoho data with correct field mappings
+   */
+  private buildCASCANNZohoData(formData: any, formName: string): any {
+    const zohoData: any = {
+      Lead_Source: "Website - CAS & CANN Registration",
+      Layout: { id: "6999043000000091055", name: "CAS and CANN" },
+    };
+
+    // Split full name
+    if (formData.fullName) {
+      const parts = formData.fullName.trim().split(/\s+/);
+      if (parts.length === 1) {
+        zohoData.Last_Name = parts[0];
+      } else {
+        zohoData.First_Name = parts[0];
+        zohoData.Last_Name = parts.slice(1).join(' ');
+      }
+    }
+
+    if (formData.email) zohoData.Email = formData.email;
+    zohoData.Company = formData.institution || "Individual";
+    if (formData.discipline) zohoData.Professional_Designation = formData.discipline;
+    if (formData.subspecialty) zohoData.subspecialty = formData.subspecialty;
+    if (formData.institution) zohoData.Institution_Name = formData.institution;
+    if (formData.province) zohoData.province = formData.province;
+    if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;
+    if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership === "Yes";
+    if (formData.wantsCANNMembership) zohoData.CANN_Member = formData.wantsCANNMembership === "Yes";
+    if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications;
+    if (formData.cannCommunications) zohoData.CANN_Communications = formData.cannCommunications;
+    if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
+
+    return zohoData;
+  }
+
+  /**
    * Attempt CRM push for a submission
    */
   private async attemptCrmPush(submission: FormSubmission): Promise<{ success: boolean; errorMessage?: string }> {
     try {
-      // Get field mappings
-      const fieldMappings = await storage.getFieldMappings({ zohoModule: submission.zohoModule });
-      
-      // Format data for Zoho CRM
-      const zohoData = zohoCRMService.formatFieldDataForZoho(
-        submission.submissionData as Record<string, any>, 
-        fieldMappings
-      );
-      
-      // Add Lead_Source field (standard Zoho field to track form source)
-      zohoData.Lead_Source = submission.formName;
+      const formData = submission.submissionData as Record<string, any>;
+      let zohoData: any;
+
+      // Use CAS/CANN specific mapping for those forms
+      if (this.isCASCANNForm(submission.formName)) {
+        zohoData = this.buildCASCANNZohoData(formData, submission.formName);
+      } else {
+        // Get field mappings for other forms
+        const fieldMappings = await storage.getFieldMappings({ zohoModule: submission.zohoModule });
+        zohoData = zohoCRMService.formatFieldDataForZoho(formData, fieldMappings);
+        zohoData.Lead_Source = submission.formName;
+        zohoData.Company = formData.institution || formData.company || "Individual";
+      }
       
       console.log(`[Retry] Pushing data to Zoho ${submission.zohoModule}:`, zohoData);
       

@@ -210,7 +210,7 @@ export class ZohoSyncWorker {
         : "Website - CAS Registration",
     };
 
-    // Member fields - STRICT WHITELIST
+    // Member fields - STRICT WHITELIST with form-matching field names
     if (isMember) {
       // Split full name into First_Name and Last_Name
       const { firstName, lastName } = this.splitFullName(formData.fullName);
@@ -220,21 +220,21 @@ export class ZohoSyncWorker {
       // Email (required)
       if (formData.email) zohoData.Email = formData.email;
       
-      // Professional info - mapped to standard Zoho fields
-      if (formData.discipline) zohoData.Industry = formData.discipline;
-      if (formData.subspecialty) zohoData.Sub_Specialty = formData.subspecialty;
-      if (formData.institution) zohoData.Company = formData.institution;
+      // Professional info - field names match form labels
+      if (formData.discipline) zohoData.Professional_Designation = formData.discipline;
+      if (formData.subspecialty) zohoData.Subspecialty = formData.subspecialty;
+      if (formData.institution) zohoData.Institution = formData.institution;
       
       // Amyloidosis specific
       if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;
       
       // Membership flags
       if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership === "Yes";
-      if (formData.wantsCANNMembership) zohoData.PANN_Member = formData.wantsCANNMembership === "Yes";
+      if (formData.wantsCANNMembership) zohoData.CANN_Member = formData.wantsCANNMembership === "Yes";
       
       // Communication preferences
       if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications === "Yes";
-      if (formData.cannCommunications) zohoData.CANN_Communication_Consent = formData.cannCommunications === "Yes";
+      if (formData.cannCommunications) zohoData.CANN_Communications = formData.cannCommunications === "Yes";
       
       // Services map
       if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion === "Yes";

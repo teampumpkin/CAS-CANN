@@ -2212,6 +2212,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Debug endpoint to fetch a specific lead from Zoho
+  app.get("/api/debug/zoho-lead/:id", async (req, res) => {
+    try {
+      const leadId = req.params.id;
+      console.log(`[Debug] Fetching lead ${leadId} from Zoho...`);
+      const lead = await zohoCRMService.getRecord("Leads", leadId);
+      if (lead) {
+        // Return all fields for debugging
+        res.json({
+          success: true,
+          lead,
+          fieldsOfInterest: {
+            Professional_Designation: lead.Professional_Designation,
+            Sub_Specialty: lead.Sub_Specialty,
+            Institution_Name: lead.Institution_Name,
+            Industry: lead.Industry,
+            Company: lead.Company,
+            Description: lead.Description,
+            CAS_Member: lead.CAS_Member,
+            CANN_Member: lead.CANN_Member,
+            CAS_Communications: lead.CAS_Communications,
+            CANN_Communications: lead.CANN_Communications,
+          }
+        });
+      } else {
+        res.status(404).json({ success: false, message: "Lead not found" });
+      }
+    } catch (error) {
+      console.error(`[Debug] Error fetching lead:`, error);
+      res.status(500).json({ 
+        success: false, 
+        error: error instanceof Error ? error.message : "Unknown error" 
+      });
+    }
+  });
+
   // Chat Command API Routes - for easy manual control
   app.post("/api/commands/crm/leads", requireAutomationAuth, async (req, res) => {
     try {

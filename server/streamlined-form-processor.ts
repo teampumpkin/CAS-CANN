@@ -20,6 +20,38 @@ export interface FormFieldMapping {
   isRequired: boolean;
 }
 
+/**
+ * EXPLICIT FIELD MAPPING FOR CAS/CANN REGISTRATION FORM
+ * Only these fields will be sent to Zoho CRM - all others are ignored
+ * Maps form field names to exact Zoho API field names
+ */
+const CAS_CANN_FIELD_MAPPING: Record<string, { zohoField: string; fieldType: FormFieldMapping['fieldType'] }> = {
+  // Name fields - fullName gets split into First_Name and Last_Name
+  'fullName': { zohoField: 'SPLIT_NAME', fieldType: 'text' },
+  
+  // Contact info
+  'email': { zohoField: 'Email', fieldType: 'email' },
+  
+  // Professional info
+  'discipline': { zohoField: 'Industry', fieldType: 'text' },
+  'subspecialty': { zohoField: 'Sub_Specialty', fieldType: 'text' },
+  'institution': { zohoField: 'Company', fieldType: 'text' },
+  
+  // Amyloidosis specific
+  'amyloidosisType': { zohoField: 'Amyloidosis_Type', fieldType: 'text' },
+  
+  // Membership preferences
+  'wantsMembership': { zohoField: 'CAS_Member', fieldType: 'boolean' },
+  'wantsCANNMembership': { zohoField: 'PANN_Member', fieldType: 'boolean' },
+  
+  // Communication preferences
+  'wantsCommunications': { zohoField: 'CAS_Communications', fieldType: 'boolean' },
+  'cannCommunications': { zohoField: 'CANN_Communication_Consent', fieldType: 'boolean' },
+  
+  // Services map
+  'wantsServicesMapInclusion': { zohoField: 'Services_Map_Inclusion', fieldType: 'boolean' },
+};
+
 export class StreamlinedFormProcessor {
   private static instance: StreamlinedFormProcessor;
 
@@ -56,7 +88,11 @@ export class StreamlinedFormProcessor {
       const zohoModule = this.determineZohoModule(formName, submissionData);
       
       // 4. Add source identification
-      crmData['Lead_Source'] = `Web Form: ${formName}`;
+      if (this.isCASCANNForm(formName)) {
+        crmData['Lead_Source'] = 'Website - CAS & CANN Registration';
+      } else {
+        crmData['Lead_Source'] = `Web Form: ${formName}`;
+      }
       if (sourceUrl) {
         crmData['Website'] = sourceUrl;
       }
@@ -158,8 +194,40 @@ export class StreamlinedFormProcessor {
   }
 
   /**
+   * Check if this is a CAS/CANN registration form
+   */
+  private isCASCANNForm(formName: string): boolean {
+    const lowerName = formName.toLowerCase();
+    return lowerName.includes('cas') || 
+           lowerName.includes('cann') || 
+           lowerName.includes('registration') ||
+           lowerName.includes('join');
+  }
+
+  /**
+   * Split full name into first and last name
+   */
+  private splitFullName(fullName: string): { firstName: string; lastName: string } {
+    if (!fullName || typeof fullName !== 'string') {
+      return { firstName: '', lastName: '' };
+    }
+    
+    const trimmed = fullName.trim();
+    const parts = trimmed.split(/\s+/);
+    
+    if (parts.length === 1) {
+      return { firstName: parts[0], lastName: '' };
+    }
+    
+    const firstName = parts[0];
+    const lastName = parts.slice(1).join(' ');
+    
+    return { firstName, lastName };
+  }
+
+  /**
    * Create form-specific field mapping
-   * Each form gets its own field mapping based on its actual fields
+   * Uses EXPLICIT mapping for CAS/CANN forms - only whitelisted fields are sent
    */
   private createFormSpecificFieldMapping(
     formName: string, 
@@ -172,6 +240,31 @@ export class StreamlinedFormProcessor {
     
     console.log(`[Form Processor] Creating field mapping for "${formName}" with fields:`, formFields);
 
+    // For CAS/CANN forms, use STRICT explicit mapping - only send whitelisted fields
+    if (this.isCASCANNForm(formName)) {
+      console.log(`[Form Processor] Using STRICT CAS/CANN field mapping - only whitelisted fields will be sent`);
+      
+      formFields.forEach(fieldName => {
+        const explicitMapping = CAS_CANN_FIELD_MAPPING[fieldName];
+        
+        if (explicitMapping) {
+          mapping.push({
+            formField: fieldName,
+            zohoField: explicitMapping.zohoField,
+            fieldType: explicitMapping.fieldType,
+            isRequired: fieldName === 'email' || fieldName === 'fullName',
+          });
+          console.log(`[Form Processor] ✓ Mapped: ${fieldName} → ${explicitMapping.zohoField}`);
+        } else {
+          console.log(`[Form Processor] ✗ Skipped (not in whitelist): ${fieldName}`);
+        }
+      });
+      
+      console.log(`[Form Processor] CAS/CANN mapping complete: ${mapping.length} fields will be sent to Zoho`);
+      return mapping;
+    }
+
+    // For other forms, use the generic mapping (fallback)
     formFields.forEach(fieldName => {
       const fieldValue = submissionData[fieldName];
       const fieldType = this.detectFieldType(fieldName, fieldValue);
@@ -193,6 +286,7 @@ export class StreamlinedFormProcessor {
 
   /**
    * Transform form data to Zoho CRM format using field mapping
+   * Handles special cases like name splitting for CAS/CANN forms
    */
   private transformDataForZoho(
     submissionData: Record<string, any>, 
@@ -204,9 +298,22 @@ export class StreamlinedFormProcessor {
       const formValue = submissionData[mapping.formField];
       
       if (formValue !== undefined && formValue !== null && formValue !== '') {
-        // Transform value based on field type
-        const transformedValue = this.transformFieldValue(formValue, mapping.fieldType);
-        crmData[mapping.zohoField] = transformedValue;
+        // Special handling for fullName - split into First_Name and Last_Name
+        if (mapping.zohoField === 'SPLIT_NAME') {
+          const { firstName, lastName } = this.splitFullName(formValue);
+          if (firstName) {
+            crmData['First_Name'] = firstName;
+            console.log(`[Form Processor] Split name: First_Name = "${firstName}"`);
+          }
+          if (lastName) {
+            crmData['Last_Name'] = lastName;
+            console.log(`[Form Processor] Split name: Last_Name = "${lastName}"`);
+          }
+        } else {
+          // Transform value based on field type
+          const transformedValue = this.transformFieldValue(formValue, mapping.fieldType);
+          crmData[mapping.zohoField] = transformedValue;
+        }
       }
     });
 

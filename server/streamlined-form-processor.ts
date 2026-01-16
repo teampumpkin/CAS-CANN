@@ -32,11 +32,10 @@ const CAS_CANN_FIELD_MAPPING: Record<string, { zohoField: string; fieldType: For
   // Contact info
   'email': { zohoField: 'Email', fieldType: 'email' },
   
-  // Professional info - exact Zoho API field names from Leads module (CAS and CANN layout)
+  // Professional info - exact Zoho API field names from Leads module
   'discipline': { zohoField: 'Professional_Designation', fieldType: 'text' },
-  'subspecialty': { zohoField: 'subspecialty', fieldType: 'text' },
+  'subspecialty': { zohoField: 'Sub_Specialty', fieldType: 'text' },
   'institution': { zohoField: 'Institution_Name', fieldType: 'text' },
-  'province': { zohoField: 'province', fieldType: 'text' },
   
   // Amyloidosis specific
   'amyloidosisType': { zohoField: 'Amyloidosis_Type', fieldType: 'text' },
@@ -88,14 +87,11 @@ export class StreamlinedFormProcessor {
       // 3. Determine Zoho module (default to Leads for most forms)
       const zohoModule = this.determineZohoModule(formName, submissionData);
       
-      // 4. Add source identification and required fields
+      // 4. Add source identification
       if (this.isCASCANNForm(formName)) {
         crmData['Lead_Source'] = 'Website - CAS & CANN Registration';
-        crmData['Layout'] = { id: "6999043000000091055", name: "CAS and CANN" };
-        crmData['Company'] = submissionData.institution || "Individual";
       } else {
         crmData['Lead_Source'] = `Web Form: ${formName}`;
-        crmData['Company'] = submissionData.institution || submissionData.company || "Individual";
       }
       if (sourceUrl) {
         crmData['Website'] = sourceUrl;

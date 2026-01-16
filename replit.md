@@ -46,8 +46,7 @@ Key features include:
 - Performance Optimization: `OptimizedImage` component with lazy loading, bundle optimization, and query optimization.
 - Navigation: Enhanced design with prominent CAS logo as home link, mobile optimization, and fixed scroll behavior.
 - Zoho CRM OAuth Setup: Detailed guide for setting up and troubleshooting Zoho CRM integration, including automatic token refresh and debug endpoints.
-- **Zoho CRM Field Mapping (Jan 2026)**: Custom "CAS and CANN" layout (ID: 6999043000000091055) with correct field mappings: `discipline→Professional_Designation`, `subspecialty→subspecialty`, `institution→Institution_Name`, `province→province`, `amyloidosisType→Amyloidosis_Type`, `wantsServicesMapInclusion→Services_Map_Inclusion`. The `Company` field is also populated (required by Zoho Leads) using the institution value. All sync code paths (worker, retry service, routes) use consistent explicit CAS/CANN field mapping.
-- **Bulk Resync Endpoint** (`/api/admin/bulk-resync-leads`): Admin endpoint (requires automation API key) to update existing Zoho leads with correct field mappings from local submission data.
+- **Zoho CRM Field Mapping (Jan 2026)**: Custom "CAS and CANN" layout (ID: 6999043000000091055) with correct field mappings: `discipline→Professional_Designation`, `subspecialty→subspecialty`, `institution→Institution_Name`, `province→province`. The `Company` field is also populated (required by Zoho Leads) using the institution value.
 
 ## External Dependencies
 

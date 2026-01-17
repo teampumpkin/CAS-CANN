@@ -1,0 +1,34 @@
+The deployment failed because the ECS service cas-website-task-service-k7z3yzx3 could not stabilize; the error message indicates "deployment failed: tasks failed to start" and "Waiter ServicesStable failed: Max attempts exceeded." This usually means that the ECS tasks are not starting properly, causing the deployment to time out.
+
+Here are key areas to address:
+
+1. Check ECS Task Definition and Logs:
+- Look in AWS ECS console for the cas-website-task-service-k7z3yzx3 service and review the task events and container logs for why tasks are failing (e.g., wrong image, startup failures, missing environment variables, insufficient permissions).
+
+2. Confirm Docker Image:
+- The workflow builds and pushes an image with:
+  docker build --platform linux/amd64 --build-arg VITE_ENVIRONMENT=production ...
+  - Make sure the image builds correctly locally with the same build arguments.
+  - Verify that any required environment variables are included in the ECS task definition.
+
+3. VPC/Networking & IAM:
+- Ensure the ECS service has the correct networking setup (subnets, security groups, public IP assignment if required).
+- Check that the service/task has permissions needed to pull images from ECR and access other AWS resources.
+
+Suggested next steps in code/infra:
+- In your ECS Task Definition:
+  - Ensure all required environment variables and secrets are present.
+  - Use the latest image and confirm the image exists in your ECR repository.
+- In .github/workflows/deploy.yml, review how the service and cluster names are set (lines 12–13):
+  ECS_CLUSTER: cas-cann26
+  ECS_SERVICE: cas-website-task-service-k7z3yzx3
+
+If you find a missing environment variable or startup command issue, update your task definition accordingly. For example:
+```json
+"environment": [
+  { "name": "VITE_ENVIRONMENT", "value": "production" }
+]
+```
+or adjust entryPoint/cmd if needed.
+
+Check logs for specific error messages—these will indicate the root cause so you can target the fix. The problem is not in the GitHub Actions workflow itself but in the ECS service or task configuration.

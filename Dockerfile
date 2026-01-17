@@ -14,8 +14,11 @@ RUN npm ci
 # Copy all source files
 COPY . .
 
-# Build frontend and bundle server (VITE_ENVIRONMENT is baked into the frontend build)
-RUN npm run build
+# Build frontend
+RUN npx vite build
+
+# Bundle server for production (exclude vite dev server to prevent runtime import errors)
+RUN npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist --external:./vite --external:../vite.config
 
 # Stage 2: Production runtime
 FROM node:20-alpine AS production

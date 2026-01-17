@@ -9,7 +9,25 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### UI/UX Decisions
-The project features a minimalist + Flat 2.0 hybrid design with soft shadows and rounded corners, utilizing Rosarivo (serif) and Mulish (sans-serif) fonts. It prioritizes clear visual hierarchy, a professional medical aesthetic, interactive elements, and smooth animations. Key enhancements include redesigned statistics cards, a two-level healthcare center popup system, an interactive map with advanced clustering, and enhanced navigation. Brand colors (#00AFE6 and #00DD89) are consistently applied. Accessibility (WCAG 2.1 Level AA) is a core focus, including an accessibility tools widget, keyboard navigation, screen reader support, high contrast modes, font size adjustment, dyslexia-friendly fonts, and custom cursor sizes. A unified light/dark theme system with `localStorage` persistence and system preference detection is implemented.
+The project features a minimalist + Flat 2.0 hybrid design with soft shadows and rounded corners, utilizing Rosarivo (serif) and Mulish (sans-serif) fonts. It prioritizes clear visual hierarchy, a professional medical aesthetic, interactive elements, and smooth animations. Key enhancements include redesigned statistics cards, a two-level healthcare center popup system, an interactive map with advanced clustering, and enhanced navigation. Accessibility (WCAG 2.1 Level AA) is a core focus, including an accessibility tools widget, keyboard navigation, screen reader support, high contrast modes, font size adjustment, dyslexia-friendly fonts, and custom cursor sizes. A unified light/dark theme system with `localStorage` persistence and system preference detection is implemented.
+
+### Brand Colors
+**CAS Brand (Primary):**
+- CAS Teal: `#00AFE6` - Primary brand color, buttons, links, badges
+- CAS Green: `#00DD89` - Secondary brand color, success states, accents
+- CAS Gradient: `from-[#00AFE6] to-[#00DD89]` - Hero sections, CTAs
+
+**CANN Brand (Sub-brand):**
+- CANN Pink: `pink-500` (#ec4899) - CANN titles, icons, links
+- CANN Purple: `purple-600` (#9333ea) - CANN gradients
+- CANN Gradient: `from-pink-500 to-purple-600` - CANN pages, event cards, buttons
+
+**Functional Colors:**
+- Error/Destructive: `red-500`, `red-600` - Logout buttons, error messages
+- Warning: `amber-500`, `yellow-500` - Caution notices
+- Success: `green-500`, `[#00DD89]` - Confirmations
+
+See `docs/design-guidelines.md` for complete design system documentation.
 
 ### Technical Implementations
 The frontend is built with React 18 and TypeScript, using Vite for building, Tailwind CSS with shadcn/ui for styling, Radix UI for primitives, Framer Motion for animations, and Wouter for routing. TanStack Query manages server state. Comprehensive French language support is integrated through a dynamic translation system.
@@ -35,10 +53,16 @@ Key features include:
   - **File Preview System**: Smart file type detection supporting images and PDFs.
   - **Placeholder URL Handling**: Graceful UX for simulated file uploads.
 
+### Timezone Configuration
+All event dates and past/upcoming detection are locked to **MST (Mountain Standard Time)** using the `America/Edmonton` timezone. This ensures:
+- Consistent date display for all users worldwide
+- Past/upcoming event detection uses MST midnight as the cutoff
+- Day of week calculations are based on MST calendar
+- No date shifts regardless of the viewer's local timezone
+
 ### Feature Specifications
 - Homepage: Reordered sections with interactive map prominence.
 - Amyloidosis Detail Pages: Simplified design, consistent branding, professional medical aesthetic.
-- Events Page Structure: Hero → Featured Event → Canadian Amyloidosis Summit → CAS Journal Club → CANN Events → News (with newsletter modal).
 - Events Integration: CAS Journal Club and CANN Educational Series with member notifications.
 - Clinician-First Focus: Enhanced hero sections, restructured navigation (Clinical Tools, Research Hub, Professional Network), governance documents, and contributor portal.
 - Contact & Footer: Professional contact system, comprehensive FAQ, and bilingual UX.
@@ -46,7 +70,6 @@ Key features include:
 - Performance Optimization: `OptimizedImage` component with lazy loading, bundle optimization, and query optimization.
 - Navigation: Enhanced design with prominent CAS logo as home link, mobile optimization, and fixed scroll behavior.
 - Zoho CRM OAuth Setup: Detailed guide for setting up and troubleshooting Zoho CRM integration, including automatic token refresh and debug endpoints.
-- **Zoho CRM Field Mapping (Jan 2026)**: Custom "CAS and CANN" layout (ID: 6999043000000091055) with correct field mappings: `discipline→Professional_Designation`, `subspecialty→subspecialty`, `institution→Institution_Name`, `province→province`. The `Company` field is also populated (required by Zoho Leads) using the institution value.
 
 ## External Dependencies
 

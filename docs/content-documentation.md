@@ -2,23 +2,7 @@
 
 This document provides a comprehensive overview of all content used across the Canadian Amyloidosis Society website, organized by pages and sections. The website supports both English and French languages with consistent brand messaging.
 
-## Brand Guidelines
-
-### Brand Colors
-- **Primary Blue**: #00AFE6
-- **Primary Green**: #00DD89
-- **Usage**: Consistent brand color gradients throughout all sections
-
-### Typography
-- **Primary Font**: Mulish (sans-serif)
-- **Display Font**: Rosarivo (serif)
-- **Hierarchy**: Consistent text sizing from text-xs to text-6xl
-
-### Design Principles
-- Minimalist + Flat 2.0 hybrid design
-- Soft shadows and rounded corners (rounded-3xl preferred)
-- High contrast ratios for accessibility
-- Professional medical aesthetic
+> **Note:** For design guidelines (colors, typography, components, theme system), see [`design-guidelines.md`](./design-guidelines.md).
 
 ---
 

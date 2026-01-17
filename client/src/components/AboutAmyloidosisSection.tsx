@@ -74,7 +74,7 @@ export default function AboutAmyloidosisSection() {
           </h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-xl text-gray-700 dark:text-white/80 leading-relaxed mb-4">
-              Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians and researchers in their work, providing accessible resources and information for those providing amyloidosis care.
+              {t('about.introDescription')}
             </p>
             <div className="flex items-center justify-center gap-4 mt-6">
               <div className="w-16 h-0.5 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>

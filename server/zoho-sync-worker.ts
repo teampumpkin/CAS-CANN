@@ -53,12 +53,8 @@ export class ZohoSyncWorker {
    */
   private async processQueue(): Promise<void> {
     try {
-      console.log(`[Zoho Sync Worker] ⏰ Checking for pending submissions...`);
-      
       // Get pending submissions (not already synced, under max retries)
       const pendingSubmissions = await storage.getFormSubmissionsByStatus("pending", "pending");
-      
-      console.log(`[Zoho Sync Worker] Query result: ${pendingSubmissions.length} pending submissions found`);
       
       if (pendingSubmissions.length === 0) {
         return; // Nothing to process
@@ -108,9 +104,12 @@ export class ZohoSyncWorker {
 
       console.log(`[Zoho Sync Worker] Syncing submission #${submission.id} to Zoho...`);
 
-      // Build Zoho data from submission
+      // Build Zoho data from submission using smart mapping
       const formData = submission.submissionData as any;
-      const zohoData = this.buildZohoData(formData, submission.formName);
+      console.log(`[Zoho Sync Worker DEBUG] Form data for submission #${submission.id}:`, JSON.stringify(formData, null, 2));
+      
+      const zohoData = await this.buildZohoDataAsync(formData, submission.formName, submission.zohoModule);
+      console.log(`[Zoho Sync Worker DEBUG] Zoho data for submission #${submission.id}:`, JSON.stringify(zohoData, null, 2));
 
       // Attempt to sync to Zoho
       const zohoRecord = await zohoCRMService.createRecord(submission.zohoModule, zohoData);
@@ -168,99 +167,50 @@ export class ZohoSyncWorker {
   }
 
   /**
-   * Check if this is a CAS/CANN registration form
-   * Handles HTML entity encoding (&amp; vs &)
+   * Build Zoho CRM data from form submission using smart field mapping
+   * Automatically matches form fields to existing Zoho fields without creating new ones
    */
-  private isCASCANNForm(formName: string): boolean {
-    const normalized = formName.replace(/&amp;/g, '&').toLowerCase().trim();
-    return normalized.includes('cas') && normalized.includes('cann');
-  }
-
-  /**
-   * Split full name into first and last name
-   * Single-word names go to Last_Name (required by Zoho for Leads)
-   */
-  private splitFullName(fullName: string): { firstName: string; lastName: string } {
-    if (!fullName || typeof fullName !== 'string') {
-      return { firstName: '', lastName: '' };
-    }
-    
-    const trimmed = fullName.trim();
-    const parts = trimmed.split(/\s+/);
-    
-    if (parts.length === 1) {
-      return { firstName: '', lastName: parts[0] };
-    }
-    
-    return { 
-      firstName: parts[0], 
-      lastName: parts.slice(1).join(' ')
-    };
-  }
-
-  /**
-   * Build Zoho CRM data from form submission
-   * STRICT WHITELIST: Only sends mapped fields to Zoho - no custom field creation
-   */
-  private buildZohoData(formData: any, formName: string): any {
-    const isCASCANN = this.isCASCANNForm(formName);
-    const isMember = formData.wantsMembership === "Yes" || formData.wantsCANNMembership === "Yes";
-
-    console.log(`[Zoho Sync Worker] Building data for form "${formName}" (CAS/CANN: ${isCASCANN}, Member: ${isMember})`);
-
-    const zohoData: any = {
-      Lead_Source: isCASCANN 
-        ? "Website - CAS & CANN Registration"
-        : "Website - CAS Registration",
-      Layout: { id: "6999043000000091055", name: "CAS and CANN" },
-    };
-
-    // Member fields - STRICT WHITELIST with form-matching field names
-    if (isMember) {
-      // Split full name into First_Name and Last_Name
-      const { firstName, lastName } = this.splitFullName(formData.fullName);
-      if (firstName) zohoData.First_Name = firstName;
-      zohoData.Last_Name = lastName || "Unknown";
+  private async buildZohoDataAsync(formData: any, formName: string, zohoModule: string): Promise<any> {
+    try {
+      // First check if there's a form configuration
+      const { formConfigEngine } = await import("./form-config-engine");
+      const formConfig = await formConfigEngine.getFormConfiguration(formName);
       
-      // Email (required)
-      if (formData.email) zohoData.Email = formData.email;
+      const hasSubmitFields = formConfig?.submitFields && Object.keys(formConfig.submitFields as object).length > 0;
+      const hasFieldMappings = formConfig?.fieldMappings && Object.keys(formConfig.fieldMappings as object).length > 0;
       
-      // Company (REQUIRED by Zoho Leads module) - use institution or fallback
-      zohoData.Company = formData.institution || "Individual";
-      
-      // Professional info - Zoho API names use underscores
-      if (formData.discipline) zohoData.Professional_Designation = formData.discipline;
-      if (formData.subspecialty) zohoData.subspecialty = formData.subspecialty;
-      if (formData.institution) zohoData.Institution_Name = formData.institution;
-      if (formData.province) zohoData.province = formData.province;
-      
-      // Amyloidosis specific
-      if (formData.amyloidosisType) zohoData.Amyloidosis_Type = formData.amyloidosisType;
-      
-      // Membership flags (Zoho expects BOOLEAN)
-      if (formData.wantsMembership) zohoData.CAS_Member = formData.wantsMembership === "Yes";
-      if (formData.wantsCANNMembership) zohoData.CANN_Member = formData.wantsCANNMembership === "Yes";
-      
-      // Communication preferences (Zoho picklist fields)
-      if (formData.wantsCommunications) zohoData.CAS_Communications = formData.wantsCommunications;
-      if (formData.cannCommunications) zohoData.CANN_Communications = formData.cannCommunications;
-      
-      // Services map (Zoho picklist field)
-      if (formData.wantsServicesMapInclusion) zohoData.Services_Map_Inclusion = formData.wantsServicesMapInclusion;
-    }
-
-    // Non-member fallback
-    if (!isMember) {
-      zohoData.Last_Name = formData.noMemberName || "Non-Member Contact";
-      zohoData.Email = formData.noMemberEmail;
-      zohoData.Company = "Individual"; // Required by Zoho Leads
-      if (formData.noMemberMessage) {
-        zohoData.Description = `Non-member contact: ${formData.noMemberMessage}`;
+      if (formConfig && (hasSubmitFields || hasFieldMappings)) {
+        // Use config-based mapping
+        console.log(`[Zoho Sync Worker] Using config-based mapping for "${formName}"`);
+        const result = await zohoCRMService.formatFieldDataForZohoWithConfig(formData, formConfig);
+        return result.zohoData;
       }
+      
+      // Use smart auto-mapping for unconfigured forms
+      console.log(`[Zoho Sync Worker] Using smart auto-mapping for "${formName}"`);
+      const { smartFieldMapper } = await import("./smart-field-mapper");
+      const result = await smartFieldMapper.mapFormDataToZoho(formData, formName, zohoModule);
+      
+      console.log(`[Zoho Sync Worker] Smart mapping: ${result.mappedFields.length} mapped, ${result.unmappedFields.length} excluded`);
+      return result.zohoData;
+    } catch (error) {
+      console.error(`[Zoho Sync Worker] Smart mapping failed, using fallback:`, error);
+      return this.buildZohoDataFallback(formData, formName);
     }
+  }
 
-    console.log(`[Zoho Sync Worker] Mapped ${Object.keys(zohoData).length} fields:`, Object.keys(zohoData));
-    console.log(`[Zoho Sync Worker] 📤 SENDING TO ZOHO:`, JSON.stringify(zohoData, null, 2));
+  /**
+   * Fallback Zoho data builder for when smart mapping fails
+   */
+  private buildZohoDataFallback(formData: any, formName: string): any {
+    const zohoData: any = {
+      Lead_Source: `Website - ${formName}`,
+      Last_Name: formData.fullName || formData.name || "Unknown",
+      Email: formData.email,
+    };
+
+    if (formData.institution) zohoData.Company = formData.institution;
+    if (formData.discipline) zohoData.discipline = formData.discipline;
 
     return zohoData;
   }

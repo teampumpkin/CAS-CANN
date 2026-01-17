@@ -1,6 +1,7 @@
 import { storage } from "./storage";
 import { zohoCRMService, ZohoField, ZohoFieldCreateRequest } from "./zoho-crm-service";
-import { FieldMapping, InsertFieldMapping, FormSubmission } from "@shared/schema";
+import { FieldMapping, InsertFieldMapping, FormSubmission, FormConfiguration, SubmitFieldsMap } from "@shared/schema";
+import { formConfigEngine } from "./form-config-engine";
 
 export interface FieldSyncResult {
   success: boolean;
@@ -51,8 +52,23 @@ export class FieldSyncEngine {
       }
     };
 
+    // Hoist excludedFieldsInSync to outer scope so both success and error logs can access it
+    let excludedFieldsInSync: string[] = [];
+
     try {
       console.log(`[FieldSync] Starting field sync for submission ${submission.id} (${submission.formName})`);
+      
+      // Step 0: Load form configuration to check flags
+      const formConfig = await formConfigEngine.getFormConfiguration(submission.formName);
+      const autoCreateFields = formConfig ? formConfigEngine.shouldAutoCreateFields(formConfig) : true;
+      const strictMapping = formConfig?.strictMapping ?? false;
+      
+      console.log(`[FieldSync] Form config for "${submission.formName}":`, {
+        hasConfig: !!formConfig,
+        autoCreateFields,
+        strictMapping,
+        configuredFields: formConfig?.submitFields ? Object.keys(formConfig.submitFields as SubmitFieldsMap).length : 0
+      });
       
       // Log the operation start
       await storage.createSubmissionLog({
@@ -62,7 +78,9 @@ export class FieldSyncEngine {
         details: {
           module: submission.zohoModule,
           formName: submission.formName,
-          fieldCount: Object.keys(submission.submissionData as any).length
+          fieldCount: Object.keys(submission.submissionData as any).length,
+          autoCreateFields,
+          strictMapping
         }
       });
 
@@ -71,18 +89,41 @@ export class FieldSyncEngine {
         zohoModule: submission.zohoModule
       });
 
-      // Step 2: Compare form fields against existing mappings
+      // Step 2: Filter submission data if strictMapping is enabled
+      let dataToProcess = submission.submissionData as Record<string, any>;
+      
+      if (formConfig && strictMapping) {
+        const submitFields = (formConfig.submitFields || {}) as SubmitFieldsMap;
+        const configuredFieldNames = new Set(Object.keys(submitFields));
+        
+        // Only process fields that are in the configuration
+        dataToProcess = {};
+        for (const [key, value] of Object.entries(submission.submissionData as Record<string, any>)) {
+          if (configuredFieldNames.has(key)) {
+            dataToProcess[key] = value;
+          } else {
+            excludedFieldsInSync.push(key);
+          }
+        }
+        
+        console.log(`[FieldSync] Strict mapping: filtered from ${Object.keys(submission.submissionData as any).length} to ${Object.keys(dataToProcess).length} fields`);
+        if (excludedFieldsInSync.length > 0) {
+          console.log(`[FieldSync] Excluded fields (strictMapping):`, excludedFieldsInSync);
+        }
+      }
+
+      // Step 3: Compare form fields against existing mappings
       const comparison = await this.compareFields(
-        submission.submissionData as Record<string, any>,
+        dataToProcess,
         existingMappings,
         submission.zohoModule
       );
 
       result.fieldsProcessed = comparison.existing.length + comparison.missing.length;
 
-      // Step 3: Create missing fields in Zoho CRM
-      if (comparison.missing.length > 0) {
-        console.log(`[FieldSync] Creating ${comparison.missing.length} missing fields in Zoho CRM`);
+      // Step 4: Create missing fields in Zoho CRM (only if autoCreateFields is enabled)
+      if (comparison.missing.length > 0 && autoCreateFields) {
+        console.log(`[FieldSync] Creating ${comparison.missing.length} missing fields in Zoho CRM (autoCreateFields=true)`);
         
         for (const missingField of comparison.missing) {
           try {
@@ -96,21 +137,27 @@ export class FieldSyncEngine {
             console.error(`[FieldSync] ${errorMsg}`);
           }
         }
+      } else if (comparison.missing.length > 0 && !autoCreateFields) {
+        console.log(`[FieldSync] Skipping creation of ${comparison.missing.length} missing fields (autoCreateFields=false)`);
+        // Log skipped fields for reference
+        for (const missingField of comparison.missing) {
+          console.log(`[FieldSync] Skipped field: ${missingField.fieldName} (autoCreateFields disabled)`);
+        }
       }
 
-      // Step 4: Update field mappings in database
+      // Step 5: Update field mappings in database
       await this.updateFieldMappingsFromZoho(submission.zohoModule);
       result.fieldsSynced = result.fieldsCreated + comparison.existing.length;
 
       // Mark existing fields as still valid
       result.details.existing = comparison.existing.map(f => f.fieldName);
 
-      // Determine overall success
+      // Determine overall success - missing fields without autoCreate is NOT an error
       result.success = result.errors.length === 0;
 
       const duration = Date.now() - startTime;
       
-      // Log the operation completion
+      // Log the operation completion with excluded fields for audit visibility
       await storage.createSubmissionLog({
         submissionId: submission.id,
         operation: "field_sync",
@@ -119,7 +166,10 @@ export class FieldSyncEngine {
           ...result.details,
           duration,
           fieldsProcessed: result.fieldsProcessed,
-          fieldsCreated: result.fieldsCreated
+          fieldsCreated: result.fieldsCreated,
+          skippedFieldCreation: !autoCreateFields && comparison.missing.length > 0,
+          excludedFields: excludedFieldsInSync,
+          excludedFieldsCount: excludedFieldsInSync.length
         },
         duration,
         errorMessage: result.errors.length > 0 ? result.errors.join("; ") : undefined
@@ -134,12 +184,16 @@ export class FieldSyncEngine {
 
       console.error(`[FieldSync] ${errorMsg}`);
       
-      // Log the error
+      // Log the error with excluded fields for audit consistency
       await storage.createSubmissionLog({
         submissionId: submission.id,
         operation: "field_sync",
         status: "failed",
-        details: { error: errorMsg },
+        details: { 
+          error: errorMsg,
+          excludedFields: excludedFieldsInSync,
+          excludedFieldsCount: excludedFieldsInSync.length
+        },
         duration: Date.now() - startTime,
         errorMessage: errorMsg
       });

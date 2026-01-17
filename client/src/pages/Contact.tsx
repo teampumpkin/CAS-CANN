@@ -163,13 +163,13 @@ export default function Contact() {
 
           {/* FAQ Section */}
           <motion.div
-            className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 border border-gray-200/50 dark:border-gray-400/30 shadow-2xl"
+            className="bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-200/50 dark:border-gray-400/30 shadow-2xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="text-center mb-6 sm:mb-8">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3 font-rosarivo">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold mb-3 font-rosarivo">
                 <span className="text-gray-900 dark:text-white">
                   {t('contactPage.faq.title').split(' ').slice(0, -1).join(' ')}{" "}
                 </span>
@@ -177,38 +177,38 @@ export default function Contact() {
                   {t('contactPage.faq.title').split(' ').slice(-1)[0]}
                 </span>
               </h3>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-white/70">
+              <p className="text-gray-600 dark:text-white/70">
                 {t('contactPage.faq.subtitle')}
               </p>
             </div>
 
-            <div className="space-y-3 sm:space-y-4 max-w-4xl mx-auto">
+            <div className="space-y-4 max-w-4xl mx-auto">
               {faqData.slice(2).map((faq, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white/50 dark:bg-gray-900/50 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-gray-200/50 dark:border-gray-600/30 overflow-hidden"
+                  className="bg-white/50 dark:bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-600/30 overflow-hidden"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
                 >
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full p-4 sm:p-6 text-left flex items-start justify-between hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors duration-200 group"
+                    className="w-full p-6 text-left flex items-start justify-between hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors duration-200 group"
                   >
-                    <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm flex-shrink-0 mt-0.5">
+                    <div className="flex items-start gap-4 flex-1">
+                      <div className="w-8 h-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-1">
                         {index + 1}
                       </div>
-                      <h4 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 dark:text-white group-hover:text-[#00AFE6] transition-colors duration-200 leading-snug sm:leading-relaxed text-left">
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-[#00AFE6] transition-colors duration-200 leading-relaxed">
                         {faq.question}
                       </h4>
                     </div>
                     <motion.div
                       animate={{ rotate: openFAQ === index ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
-                      className="flex-shrink-0 ml-2 sm:ml-4 mt-0.5"
+                      className="flex-shrink-0 ml-4 mt-1"
                     >
-                      <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 dark:text-gray-500 group-hover:text-[#00AFE6] transition-colors duration-200" />
+                      <ChevronDown className="w-6 h-6 text-gray-400 dark:text-gray-500 group-hover:text-[#00AFE6] transition-colors duration-200" />
                     </motion.div>
                   </button>
 
@@ -221,12 +221,12 @@ export default function Contact() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t border-gray-200/50 dark:border-gray-600/30">
-                      <div className="pt-4 sm:pt-6">
-                        <div className="flex gap-3 sm:gap-4">
-                          <div className="w-6 sm:w-8 flex-shrink-0"></div>
+                    <div className="px-6 pb-6 border-t border-gray-200/50 dark:border-gray-600/30">
+                      <div className="pt-6">
+                        <div className="flex gap-4">
+                          <div className="w-8 flex-shrink-0"></div>
                           <p
-                            className="text-sm sm:text-base text-gray-600 dark:text-white/70 leading-relaxed text-left"
+                            className="text-gray-600 dark:text-white/70 leading-relaxed text-base text-left"
                             dangerouslySetInnerHTML={{ __html: faq.answer }}
                           />
                         </div>

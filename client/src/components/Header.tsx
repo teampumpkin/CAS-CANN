@@ -103,6 +103,14 @@ export default function Header() {
       href: "#resources",
       hasDropdown: true,
       dropdownItems: [
+        // {
+        //   name: t("nav.resourceLibrary"),
+        //   href: "/resource-library",
+        // },
+        // {
+        //   name: t("nav.uploadResource"),
+        //   href: "/upload-resource",
+        // },
         {
           name: t("nav.partnerships"),
           href: "/partnerships",
@@ -110,17 +118,7 @@ export default function Header() {
       ],
     },
     { name: t("nav.getInvolved"), href: "/get-involved" },
-    {
-      name: t("nav.events"),
-      href: "/events-and-news",
-      hasDropdown: true,
-      dropdownItems: [
-        { name: "Canadian Amyloidosis Summit", href: "/events-and-news#summit" },
-        { name: "CAS Journal Club", href: "/events-and-news#journal-club" },
-        { name: "CANN Events", href: "/events-and-news#cann-events" },
-        { name: "News", href: "/events-and-news#news" },
-      ],
-    },
+    { name: t("nav.events"), href: "/events" },
     {
       name: "CANN",
       href: "#cann",
@@ -176,14 +174,8 @@ export default function Header() {
               {navItems.map((item, index) => (
                 <div key={item.name} className="relative group">
                   {item.hasDropdown ? (
-                    <motion.a
-                      href={item.href.startsWith("#") ? undefined : item.href.split("#")[0]}
-                      onClick={(e) => {
-                        if (item.href.startsWith("#")) {
-                          e.preventDefault();
-                        }
-                      }}
-                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap cursor-pointer ${
+                    <motion.button
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap ${
                         isPageActive(item.href, item.dropdownItems)
                           ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30"
                           : "text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20"
@@ -208,7 +200,7 @@ export default function Header() {
                       {isPageActive(item.href, item.dropdownItems) && (
                         <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                       )}
-                    </motion.a>
+                    </motion.button>
                   ) : (
                     <motion.a
                       href={item.href}
@@ -583,7 +575,7 @@ export default function Header() {
                           : "text-gray-700 hover:bg-gray-100"
                       }`}
                     >
-                      <span className="text-left">{item.name}</span>
+                      <span>{item.name}</span>
                       <div className="flex items-center gap-2">
                         {isPageActive(item.href, item.dropdownItems) && (
                           <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
@@ -629,9 +621,9 @@ export default function Header() {
                 ) : (
                   <a
                     href={item.href}
-                    className={`flex items-center justify-start px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
+                    className={`flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
                       item.isPrimary
-                        ? "text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] shadow-lg shadow-[#00AFE6]/30 justify-center"
+                        ? "text-white bg-gradient-to-r from-[#00AFE6] to-[#00DD89] shadow-lg shadow-[#00AFE6]/30"
                         : isPageActive(item.href)
                           ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 border-l-4 border-[#00AFE6]"
                           : "text-gray-700 hover:bg-gray-100"
@@ -641,7 +633,7 @@ export default function Header() {
                       setMobileDropdowns({});
                     }}
                   >
-                    <span className={item.isPrimary ? "" : "flex-1"}>{item.name}</span>
+                    <span>{item.name}</span>
                     {!item.isPrimary && isPageActive(item.href) && (
                       <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                     )}

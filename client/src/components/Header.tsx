@@ -594,22 +594,7 @@ export default function Header() {
                           : "text-gray-700 hover:bg-gray-100"
                       }`}
                     >
-                      <a
-                        href={item.href.startsWith("#") ? undefined : item.href}
-                        onClick={() => {
-                          if (!item.href.startsWith("#")) {
-                            setIsMenuOpen(false);
-                            setMobileDropdowns({});
-                          }
-                        }}
-                        className="flex-1"
-                      >
-                        {item.name}
-                      </a>
-                      <div className="flex items-center gap-2">
-                        {isPageActive(item.href, item.dropdownItems) && (
-                          <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
-                        )}
+                      {item.href.startsWith("#") ? (
                         <button
                           onClick={() =>
                             setMobileDropdowns((prev) => ({
@@ -617,7 +602,37 @@ export default function Header() {
                               [item.name]: !prev[item.name],
                             }))
                           }
-                          className="p-1 hover:bg-gray-200 rounded-lg transition-colors"
+                          className="flex-1 text-left"
+                        >
+                          {item.name}
+                        </button>
+                      ) : (
+                        <a
+                          href={item.href}
+                          onClick={() => {
+                            setIsMenuOpen(false);
+                            setMobileDropdowns({});
+                          }}
+                          className="flex-1"
+                        >
+                          {item.name}
+                        </a>
+                      )}
+                      <div className="flex items-center gap-2">
+                        {isPageActive(item.href, item.dropdownItems) && (
+                          <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+                        )}
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setMobileDropdowns((prev) => ({
+                              ...prev,
+                              [item.name]: !prev[item.name],
+                            }));
+                          }}
+                          className="p-2 -mr-2 hover:bg-gray-200 rounded-lg transition-colors"
+                          aria-label={`Toggle ${item.name} submenu`}
                         >
                           <ChevronDown
                             className={`w-4 h-4 transition-transform duration-300 ${

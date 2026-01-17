@@ -198,8 +198,9 @@ export default function Header() {
               {navItems.map((item, index) => (
                 <div key={item.name} className="relative group">
                   {item.hasDropdown ? (
-                    <motion.button
-                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap ${
+                    <motion.a
+                      href={item.href.startsWith("#") ? undefined : item.href}
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border whitespace-nowrap cursor-pointer ${
                         isPageActive(item.href, item.dropdownItems)
                           ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/30 to-[#00DD89]/30 border-[#00AFE6]/60 shadow-lg shadow-[#00AFE6]/30"
                           : "text-gray-700 hover:text-gray-900 hover:bg-gradient-to-r hover:from-[#00AFE6]/20 hover:to-[#00DD89]/20 border-transparent hover:border-[#00AFE6]/40 hover:shadow-md hover:shadow-[#00AFE6]/20"
@@ -224,7 +225,7 @@ export default function Header() {
                       {isPageActive(item.href, item.dropdownItems) && (
                         <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                       )}
-                    </motion.button>
+                    </motion.a>
                   ) : (
                     <motion.a
                       href={item.href}
@@ -586,31 +587,46 @@ export default function Header() {
               <div key={item.name} className="space-y-1">
                 {item.hasDropdown ? (
                   <>
-                    <button
-                      onClick={() =>
-                        setMobileDropdowns((prev) => ({
-                          ...prev,
-                          [item.name]: !prev[item.name],
-                        }))
-                      }
+                    <div
                       className={`w-full flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
                         isPageActive(item.href, item.dropdownItems)
                           ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15"
                           : "text-gray-700 hover:bg-gray-100"
                       }`}
                     >
-                      <span>{item.name}</span>
+                      <a
+                        href={item.href.startsWith("#") ? undefined : item.href}
+                        onClick={() => {
+                          if (!item.href.startsWith("#")) {
+                            setIsMenuOpen(false);
+                            setMobileDropdowns({});
+                          }
+                        }}
+                        className="flex-1"
+                      >
+                        {item.name}
+                      </a>
                       <div className="flex items-center gap-2">
                         {isPageActive(item.href, item.dropdownItems) && (
                           <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                         )}
-                        <ChevronDown
-                          className={`w-4 h-4 transition-transform duration-300 ${
-                            mobileDropdowns[item.name] ? "rotate-180" : ""
-                          }`}
-                        />
+                        <button
+                          onClick={() =>
+                            setMobileDropdowns((prev) => ({
+                              ...prev,
+                              [item.name]: !prev[item.name],
+                            }))
+                          }
+                          className="p-1 hover:bg-gray-200 rounded-lg transition-colors"
+                        >
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform duration-300 ${
+                              mobileDropdowns[item.name] ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
                       </div>
-                    </button>
+                    </div>
                     {mobileDropdowns[item.name] && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}

@@ -14,13 +14,23 @@ export function log(message: string, source = "express") {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
+  // Handle both bundled (dist/index.js) and source (server/index.ts) execution
+  // When bundled: import.meta.dirname = dist/, look for dist/public
+  // When running from source with tsx: import.meta.dirname = server/, look for dist/public from project root
+  let distPath = path.resolve(import.meta.dirname, "public");
+  
+  if (!fs.existsSync(distPath)) {
+    // Fallback: try from project root (for tsx execution)
+    distPath = path.resolve(import.meta.dirname, "..", "dist", "public");
+  }
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`,
     );
   }
+  
+  log(`Serving static files from: ${distPath}`);
 
   app.use(express.static(distPath));
 

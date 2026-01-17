@@ -22,17 +22,9 @@ import { Tabs, TabsContent } from "@/components/ui/tabs";
 import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
-import cannLogoImg from "@assets/CAN_logo_1768484961432.png";
-import summitImage1 from "@assets/summit_image_1_1768484961432.png";
-import summitImage2 from "@assets/summit_image_2_1768484961431.png";
-import summitImage3 from "@assets/summit_image_3_1768484961431.png";
-import summitPosterImg from "@assets/summit_poster_1768484961427.png";
-// Newsletter 2 images
-import cannLogoDarkImg from "@assets/cann_rgb_dark_theme_1756219144378_dhmf_rl6_zc_v5_1553680000000_1768487481003.png";
-import summit2025Photo1 from "@assets/6110ba86_43ba_413c_9bf7_00e4a1ce8c19_zc_v3_1553680000000116018_1768487481005.jpg";
-import summit2025Photo2 from "@assets/d33be37a_54c0_47a5_891b_f018d610f554_zc_v3_1553680000000116018_1768487481005.jpg";
-import summit2025Photo3 from "@assets/2d226423_9ba2_4a2b_b87c_05bf881cd89a_zc_v3_1553680000000116018_1768487481005.jpg";
-import casLogoImg from "@assets/1767774519236_1_zc_v1_1553680000000116018_1768487481006.jpeg";
+import cannLogoDarkImg from "@assets/CANN-RGB-dark-theme_1756219144378.png";
+import cannLogoLightImg from "@assets/CANN-RGB-light-theme_1756219058912.png";
+import casLogoImg from "@assets/l_cas_vert_rgb_1753253116732.png";
 
 // Journal Club Sessions Data
 const journalClubSessions = [
@@ -173,7 +165,7 @@ const newsletters = [
           ctaText: "CAS Registration",
           ctaLink: "/join-cas",
           hasLogo: true,
-          logoImage: cannLogoImg,
+          logoImage: cannLogoDarkImg,
         },
         {
           title: "",
@@ -192,10 +184,8 @@ const newsletters = [
           content: `We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals attending. Attendance will again be free and offered both in person and virtual. The Canadian Amyloidosis Summit 2025 is again welcoming abstract submissions from amyloidosis researchers attending. Please consider submitting your abstract when registering to attend. Abstracts submissions are accepted on all topics related to amyloidosis research and the only requirement for submission is registering to attend. Abstracts that are accepted will be presented in poster format. Those attending may also present their abstract on behalf of their research team (student, trainee, supervisor).
 
 Note: All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.`,
-          hasThreeImages: true,
-          threeImages: [summitImage1, summitImage2, summitImage3],
           hasBannerImage: true,
-          bannerImage: summitPosterImg,
+          bannerImage: summitSaveTheDateImg,
         },
         {
           title: "CAS Journal Club Webinar",
@@ -260,8 +250,6 @@ Note: All members of CAS and CANN are invited to attend the first Annual General
         {
           title: "Canadian Amyloidosis Summit 2025",
           content: `In partnership with Transthyretin Amyloidosis Canada (TAC), the Canadian Amyloidosis Summit was held in Toronto the weekend of November 1-2, 2025, with over 120 people attending. This hybrid event featured parallel sessions for both healthcare providers and patients/families, with CME accreditation for healthcare provider sessions. The Summit featured interesting presentations and panel discussions from many national and internationally recognized leaders from the amyloidosis community. The CAS also held its first Annual General Meeting (AGM) at the Summit. Planning for the 2026 Canadian Amyloidosis Summit next fall is already underway. Stay tuned for future updates and hope you can join us!`,
-          hasThreeImages: true,
-          threeImages: [summit2025Photo1, summit2025Photo2, summit2025Photo3],
         },
         {
           title: "CAS Journal Club",

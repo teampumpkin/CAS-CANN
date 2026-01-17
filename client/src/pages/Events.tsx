@@ -542,29 +542,6 @@ export default function Events() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 shadow-lg">
-                <Calendar className="w-5 h-5 text-[#00AFE6]" />
-                <span className="text-gray-800 dark:text-white/90 font-medium">
-                  {t("eventsPage.featuredEvent")}
-                </span>
-              </div>
-
-              {/* Status Badge */}
-              <motion.div
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-4 py-2"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-amber-600 dark:text-amber-400">
-                  {t("eventsPage.comingSoon")}
-                </span>
-              </motion.div>
-            </div>
-
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-rosarivo mb-8 leading-tight">
               <span className="text-gray-800 dark:text-white">Canadian </span>
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">

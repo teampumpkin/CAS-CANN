@@ -10,7 +10,7 @@ env:
   AWS_REGION: ap-south-1
   ECR_REPOSITORY: cas-cann
   ECS_CLUSTER: cas-cann26
-  ECS_SERVICE: cas-cann-service
+  ECS_SERVICE: cas-website-task-service-k7z3yzx3
 
 jobs:
   build-and-deploy:

@@ -249,8 +249,8 @@ export default function Events() {
         </div>
       </section>
 
-      {/* Section 5: Featured Event Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+      {/* Section 5: Featured Event Section - Summit */}
+      <section id="summit" className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/50 dark:via-transparent dark:to-gray-700/30"></div>
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
@@ -358,9 +358,9 @@ export default function Events() {
         </div>
       </section>
 
-      {/* Section 6: Events Section */}
+      {/* Section 6: Journal Club Section */}
       <section
-        id="events"
+        id="journal-club"
         className="py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden"
       >
         {/* Frost Background Effect */}
@@ -652,7 +652,7 @@ export default function Events() {
       </section>
 
       {/* CANN Events Section */}
-      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 relative overflow-hidden">
+      <section id="cann-events" className="py-12 sm:py-16 md:py-24 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80" />
         <div className="absolute top-0 left-0 w-48 sm:w-72 md:w-96 h-48 sm:h-72 md:h-96 bg-pink-500/10 rounded-full blur-3xl -translate-x-24 sm:-translate-x-36 md:-translate-x-48 -translate-y-24 sm:-translate-y-36 md:-translate-y-48" />
@@ -706,6 +706,65 @@ export default function Events() {
                   >
                     <Calendar className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 mr-2 sm:mr-3 group-hover:scale-110 transition-transform duration-300" />
                     <span className="whitespace-nowrap">View CANN Events</span>
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Button>
+                </motion.div>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* News Section */}
+      <section id="news" className="py-12 sm:py-16 md:py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-cyan-50/30 dark:from-gray-800/30 dark:via-transparent dark:to-gray-700/20"></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <motion.div
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-gradient-to-br from-white/80 to-gray-50/80 dark:from-gray-900/80 dark:to-gray-800/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 border border-gray-200/50 dark:border-gray-400/30 shadow-2xl">
+              <motion.div
+                className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-[#00AFE6]/20 mb-4 sm:mb-6 md:mb-8"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-[#00AFE6]" />
+                <span className="text-xs sm:text-sm font-medium text-gray-800 dark:text-white/90">
+                  Latest Updates
+                </span>
+              </motion.div>
+
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-rosarivo mb-4 sm:mb-6">
+                <span className="text-gray-900 dark:text-white">
+                  CAS{" "}
+                </span>
+                <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                  News & Newsletters
+                </span>
+              </h2>
+
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-white/70 leading-relaxed mb-6 sm:mb-8 md:mb-12 px-2">
+                Stay informed with the latest news, newsletters, and announcements from the Canadian Amyloidosis Society.
+              </p>
+
+              <Link href="/news">
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 rounded-xl sm:rounded-2xl px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-xl font-bold shadow-xl hover:shadow-2xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group w-full sm:w-auto"
+                  >
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 mr-2 sm:mr-3 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="whitespace-nowrap">View News & Newsletters</span>
                     <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
                 </motion.div>

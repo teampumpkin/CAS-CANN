@@ -132,13 +132,13 @@ export default function Header() {
       ? [
           {
             name: t("nav.eventsAndNews"),
-            href: "#events-news",
+            href: "/events-and-news",
             hasDropdown: true,
             dropdownItems: [
-              { name: t("nav.summit"), href: "/events" },
-              { name: t("nav.journalClub"), href: "/journal-club" },
-              { name: t("nav.cannEvents"), href: "/cann-resources" },
-              { name: t("nav.news"), href: "/news" },
+              { name: t("nav.summit"), href: "/events-and-news#summit" },
+              { name: t("nav.journalClub"), href: "/events-and-news#journal-club" },
+              { name: t("nav.cannEvents"), href: "/events-and-news#cann-events" },
+              { name: t("nav.news"), href: "/events-and-news#news" },
             ],
           },
         ]

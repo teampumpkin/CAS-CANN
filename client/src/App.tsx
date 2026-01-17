@@ -60,6 +60,7 @@ const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));
 const CommandDashboard = lazy(() => import("@/pages/CommandDashboard"));
 const CANNTownhallRegistration = lazy(() => import("@/pages/CANNTownhallRegistration"));
 const EventsDownload = lazy(() => import("@/pages/EventsDownload"));
+const News = lazy(() => import("@/pages/News"));
 
 // Loading component
 const PageLoader = () => (
@@ -117,6 +118,7 @@ function Router() {
         <Route path="/cann/resources" component={CANNResources} />
         <Route path="/cann-resources" component={CANNResources} />
         <Route path="/journal-club" component={JournalClub} />
+        <Route path="/news" component={News} />
         <Route path="/accessibility" component={AccessibilityStatement} />
         <Route path="/contributor-portal" component={ContributorPortal} />
         <Route path="/test-forms" component={TestForms} />

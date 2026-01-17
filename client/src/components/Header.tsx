@@ -41,6 +41,7 @@ import casLogo from "@assets/l_cas_vert_rgb_1753253116732.png";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { isStaging } from "@/hooks/useEnvironment";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -88,6 +89,8 @@ export default function Header() {
     return location === href;
   };
 
+  const stagingOnly = isStaging();
+  
   const navItems = [
     {
       name: t("nav.about"),
@@ -102,23 +105,44 @@ export default function Header() {
       name: t("nav.resources"),
       href: "#resources",
       hasDropdown: true,
-      dropdownItems: [
-        {
-          name: t("nav.uploadResource"),
-          href: "/upload-resource",
-        },
-        {
-          name: t("nav.manageResources"),
-          href: "/admin/resources/moderation",
-        },
-        {
-          name: t("nav.partnerships"),
-          href: "/partnerships",
-        },
-      ],
+      dropdownItems: stagingOnly
+        ? [
+            {
+              name: t("nav.uploadResource"),
+              href: "/upload-resource",
+            },
+            {
+              name: t("nav.manageResources"),
+              href: "/admin/resources/moderation",
+            },
+            {
+              name: t("nav.partnerships"),
+              href: "/partnerships",
+            },
+          ]
+        : [
+            {
+              name: t("nav.partnerships"),
+              href: "/partnerships",
+            },
+          ],
     },
     { name: t("nav.getInvolved"), href: "/get-involved" },
-    { name: t("nav.events"), href: "/events" },
+    ...(stagingOnly
+      ? [
+          {
+            name: t("nav.eventsAndNews"),
+            href: "#events-news",
+            hasDropdown: true,
+            dropdownItems: [
+              { name: t("nav.summit"), href: "/events" },
+              { name: t("nav.journalClub"), href: "/journal-club" },
+              { name: t("nav.cannEvents"), href: "/cann-resources" },
+              { name: t("nav.news"), href: "/news" },
+            ],
+          },
+        ]
+      : [{ name: t("nav.events"), href: "/events" }]),
     {
       name: "CANN",
       href: "#cann",

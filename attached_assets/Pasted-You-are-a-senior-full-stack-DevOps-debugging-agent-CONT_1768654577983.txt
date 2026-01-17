@@ -1,0 +1,64 @@
+You are a senior full-stack + DevOps debugging agent.
+
+CONTEXT
+- Replit is used as STAGING
+- GitHub sync is enabled
+- AWS ECS (ap-south-1) is LIVE production
+- Same repository and Docker image are used for both
+- AWS itself is confirmed working
+- Deployment failure happens at ECS task startup, not at GitHub Actions auth
+
+KNOWN ISSUES
+1. Environment-based page visibility:
+   - LIVE must show:
+     • Updated Journal Club page
+     • OLD Events page (legacy)
+   - STAGING must show:
+     • Map section on homepage
+     • Upload Resources page
+     • Manage Resources page
+     • NEW Events & News page
+   - No manual code toggling allowed
+
+2. Deployment failure:
+   - ECS fails with:
+     "unable to pull secrets or registry auth"
+   - Image exists in ECR
+   - AWS credentials are valid
+   - Strong suspicion of:
+     • Dockerfile / server entry mismatch
+     • Image architecture mismatch
+     • Task definition misconfiguration
+
+YOUR TASKS
+A. Analyze codebase for environment-based routing & feature flags
+   - Identify where routes, menus, and components should be gated
+   - Propose a clean env-variable-based solution
+
+B. Analyze Dockerfile and build process
+   - Validate build output
+   - Validate CMD / ENTRYPOINT
+   - Validate exposed port vs runtime port
+   - Check for Replit-specific assumptions
+
+C. Analyze ECS compatibility
+   - Image architecture vs ECS runtime
+   - Task execution role requirements
+   - Image URI correctness
+
+D. Identify the SINGLE most likely root cause of the ECS failure
+   - Explain why AWS auth errors are misleading here
+   - Provide minimal fix that does NOT touch AWS infra
+
+OUTPUT FORMAT (STRICT)
+1. Root Cause Summary (1–2 paragraphs)
+2. Environment Visibility Fix (with examples)
+3. Build / Docker Fix (exact changes)
+4. ECS Runtime Fix (if any)
+5. Verification Checklist (before redeploy)
+
+IMPORTANT RULES
+- Do NOT suggest changing AWS secrets
+- Do NOT suggest separate branches
+- Do NOT suggest manual commenting/uncommenting
+- Focus on deterministic fixes only

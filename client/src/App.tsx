@@ -83,9 +83,8 @@ function Router() {
         {/* <Route path="/resource-library" component={Resources} /> */}
         <Route path="/partnerships" component={Partnerships} />
 
-        {/* <Route path="/upload-resource" component={UploadResource} /> */}
-        {/* <Route path="/resource-moderation" component={ResourceModeration} /> */}
-        {/* <Route path="/admin/resources/moderation" component={ResourceModeration} /> */}
+        <Route path="/upload-resource" component={UploadResource} />
+        <Route path="/admin/resources/moderation" component={ResourceModeration} />
         <Route path="/community" component={Community} />
         <Route path="/events" component={Events} />
         <Route path="/get-involved" component={GetInvolved} />

@@ -602,9 +602,9 @@ export default function Header() {
                               [item.name]: !prev[item.name],
                             }))
                           }
-                          className="flex-1 text-left"
+                          className="flex-grow text-left"
                         >
-                          {item.name}
+                          <span>{item.name}</span>
                         </button>
                       ) : (
                         <a
@@ -613,12 +613,12 @@ export default function Header() {
                             setIsMenuOpen(false);
                             setMobileDropdowns({});
                           }}
-                          className="flex-1 text-left"
+                          className="flex-grow text-left"
                         >
-                          {item.name}
+                          <span>{item.name}</span>
                         </a>
                       )}
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 shrink-0">
                         {isPageActive(item.href, item.dropdownItems) && (
                           <div className="w-2 h-2 shrink-0 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                         )}
@@ -631,7 +631,7 @@ export default function Header() {
                               [item.name]: !prev[item.name],
                             }));
                           }}
-                          className="p-2 -mr-2 hover:bg-gray-200 rounded-lg transition-colors"
+                          className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
                           aria-label={`Toggle ${item.name} submenu`}
                         >
                           <ChevronDown

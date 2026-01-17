@@ -1,0 +1,120 @@
+GitHub Copilot Chat Assistant
+
+Problem summary
+- The job failed at "Wait for deployment to stabilize" with:
+  - ECS service event: "(service cas-website-task-service-k7z3yzx3) (deployment ecs-svc/...) deployment failed: tasks failed to start."
+  - aws ecs wait services-stable returned "Max attempts exceeded" → the new tasks never reached RUNNING / healthy.
+
+Most likely root causes
+- Container starts then immediately exits (crash, missing files, bad CMD/ENTRYPOINT, wrong build output).
+- Task definition misconfiguration (wrong port mappings, health check causing immediate fail).
+- Required environment variables/secrets missing causing startup error.
+- Task execution role missing permissions (cannot pull image or write to CloudWatch).
+- Networking (subnets/security groups) prevents task from reaching ALB or required services (health checks fail).
+- Resource limits (insufficient CPU/memory) or ENI/subnet capacity issues.
+
+Concrete diagnostic steps to run (quick copy/paste)
+Run these commands (they use the same AWS credentials from the workflow). Add them to your CI or run locally with the same AWS profile/region.
+
+1) See recent service events (most immediate info):
+aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].events' --output json
+
+2) List stopped tasks for the service and inspect stopped reason / exit code:
+TASK_ARNS=$(aws ecs list-tasks --cluster $ECS_CLUSTER --service-name $ECS_SERVICE --desired-status STOPPED --query 'taskArns' --output text)
+[ -z "$TASK_ARNS" ] || aws ecs describe-tasks --cluster $ECS_CLUSTER --tasks $TASK_ARNS --query 'tasks[*].{taskArn:taskArn,lastStatus:lastStatus,stopCode:stopCode,stoppedReason:stoppedReason,containers:containers[*].[name,exitCode,reason,logStreamName]}' --output json
+
+3) Get the task definition used by the service (to check log config / ports):
+TD_ARN=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].taskDefinition' --output text)
+aws ecs describe-task-definition --task-definition "$TD_ARN" --query 'taskDefinition.containerDefinitions[]' --output json
+
+4) If containerDefinitions use awslogs, fetch the CloudWatch logs (replace LOG_GROUP and LOG_STREAM from previous output):
+aws logs get-log-events --log-group-name "<log-group-name>" --log-stream-name "<log-stream-name>" --start-from-head --output json
+
+If you prefer a single script to add to the workflow and collect everything into the job log, use the snippet below.
+
+Recommended workflow diagnostics step (paste into .github/workflows/deploy.yml after the Deploy to ECS step and before/replace the Wait step)
+- Use the ref for the current workflow: https://github.com/teampumpkin/CAS-CANN/blob/d408742b2dcc0bd0ff7f15cf0f79be7abf4d19e4/.github/workflows/deploy.yml
+
+Add this step (bash) to capture diagnostics and fail with a clear message:
+
+- name: Gather ECS failure details
+  if: always()
+  env:
+    AWS_REGION: ${{ env.AWS_REGION }}
+    ECS_CLUSTER: ${{ env.ECS_CLUSTER }}
+    ECS_SERVICE: ${{ env.ECS_SERVICE }}
+  run: |
+    set -euo pipefail
+    echo "=== Service events ==="
+    aws ecs describe-services --cluster "$ECS_CLUSTER" --services "$ECS_SERVICE" --query 'services[0].events' --output json || true
+    echo
+    echo "=== Task definition ==="
+    TD_ARN=$(aws ecs describe-services --cluster "$ECS_CLUSTER" --services "$ECS_SERVICE" --query 'services[0].taskDefinition' --output text)
+    echo "TaskDefinition: $TD_ARN"
+    aws ecs describe-task-definition --task-definition "$TD_ARN" --output json || true
+    echo
+    echo "=== Recently stopped tasks ==="
+    STOPPED=$(aws ecs list-tasks --cluster "$ECS_CLUSTER" --service-name "$ECS_SERVICE" --desired-status STOPPED --query 'taskArns' --output text || true)
+    if [ -n "$STOPPED" ]; then
+      aws ecs describe-tasks --cluster "$ECS_CLUSTER" --tasks $STOPPED --output json || true
+      # Attempt to fetch container log stream names and pull logs if present
+      for task in $(aws ecs describe-tasks --cluster "$ECS_CLUSTER" --tasks $STOPPED --query 'tasks[].containers[].logStreamName' --output text || true); do
+        if [ -n "$task" ] && [[ "$task" != "None" ]]; then
+          # need the log group name from task definition's logConfiguration
+          LOG_GROUP=$(aws ecs describe-task-definition --task-definition "$TD_ARN" --query 'taskDefinition.containerDefinitions[0].logConfiguration.options."awslogs-group"' --output text || true)
+          if [ -n "$LOG_GROUP" ] && [[ "$LOG_GROUP" != "None" ]]; then
+            echo "=== CloudWatch logs for stream: $task (group: $LOG_GROUP) ==="
+            aws logs get-log-events --log-group-name "$LOG_GROUP" --log-stream-name "$task" --limit 200 || true
+          fi
+        fi
+      done
+    else
+      echo "No stopped tasks found."
+    fi
+
+How to act on common findings
+- stoppedReason / container exitCode non-zero + logs show runtime error:
+  - Fix application startup (missing build artifact, wrong CMD/ENTRYPOINT). Rebuild image locally and run container to reproduce: docker run -it --rm <image> sh -c "<start command>"
+- Log shows permission to pull image or to write logs denied:
+  - Ensure task execution role has AmazonECSTaskExecutionRolePolicy and ECR access.
+- Health check failures (ALB target group or container healthCheck in task def):
+  - Verify container port matches target group mapping and health-check path, adjust health check path/timeouts.
+- Image built for wrong architecture (you set --platform linux/amd64) — ensure runtime matches Fargate/EC2.
+- Networking issues:
+  - Verify task ENI subnets have route to internet (if pulling remote resources) and security groups allow ALB health checks.
+- Resource limits:
+  - Increase CPU/memory in task definition if OOM/insufficient resources observed.
+
+Other actionable improvements to the workflow
+- Make the deploy step capture diagnostics automatically on failure (use the snippet above with if: always()).
+- Increase job timeout if needed (timeout-minutes: 60).
+- Replace the plain aws ecs wait with a custom loop that polls describe-services for more detailed status and prints events each iteration. Example:
+
+- name: Wait for ECS service to stabilize (custom)
+  run: |
+    set -e
+    timeout=600  # seconds
+    interval=10
+    elapsed=0
+    while [ $elapsed -lt $timeout ]; do
+      echo "Checking service status (elapsed ${elapsed}s)..."
+      STATUS=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].[runningCount,desiredCount,deployments]' --output json)
+      echo "$STATUS"
+      # check if there is a stable deployment (no pending/primary status issues)
+      STABLE=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].deployments[?status==`PRIMARY`].rolloutState' --output text || true)
+      if [ "$STABLE" = "COMPLETED" ]; then
+        echo "Service stable."
+        exit 0
+      fi
+      sleep $interval
+      elapsed=$((elapsed+interval))
+    done
+    echo "Timed out waiting for service to stabilize"
+    exit 1
+
+Final recommendations (short)
+1. Add the diagnostics step above so CI prints service events, stopped task details, and CloudWatch logs — that will reveal the exact cause.  
+2. Inspect stoppedReason/exitCode and CloudWatch logs — fix the application startup or task definition accordingly.  
+3. If necessary, adjust task role, networking, ports/health checks, or resources and retry.
+
+If you paste the failing service events and stopped task describe output here I will interpret them and provide the exact code change or task definition fix.

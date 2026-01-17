@@ -1,0 +1,731 @@
+2s
+2s
+2s
+3s
+43s
+55s
+5s
+Run echo "Triggering ECS deployment..."
+Triggering ECS deployment...
+{
+    "service": {
+        "serviceArn": "arn:aws:ecs:ap-south-1:010526240249:service/cas-cann26/cas-website-task-service-k7z3yzx3",
+        "serviceName": "cas-website-task-service-k7z3yzx3",
+        "clusterArn": "arn:aws:ecs:ap-south-1:010526240249:cluster/cas-cann26",
+        "loadBalancers": [
+            {
+                "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13",
+                "containerName": "cas-app",
+                "containerPort": 5000
+            }
+        ],
+        "serviceRegistries": [],
+        "status": "ACTIVE",
+        "desiredCount": 1,
+        "runningCount": 1,
+        "pendingCount": 0,
+        "capacityProviderStrategy": [
+            {
+                "capacityProvider": "FARGATE",
+                "weight": 1,
+                "base": 0
+            }
+        ],
+        "platformVersion": "1.4.0",
+        "platformFamily": "Linux",
+        "taskDefinition": "arn:aws:ecs:ap-south-1:010526240249:task-definition/cas-website-task:3",
+        "deploymentConfiguration": {
+            "deploymentCircuitBreaker": {
+                "enable": true,
+                "rollback": true
+            },
+            "maximumPercent": 200,
+            "minimumHealthyPercent": 100,
+            "strategy": "ROLLING",
+            "bakeTimeInMinutes": 0
+        },
+        "deployments": [
+            {
+                "id": "ecs-svc/5028824203528393642",
+                "status": "PRIMARY",
+                "taskDefinition": "arn:aws:ecs:ap-south-1:010526240249:task-definition/cas-website-task:3",
+                "desiredCount": 0,
+                "pendingCount": 0,
+                "runningCount": 0,
+                "failedTasks": 0,
+                "createdAt": "2026-01-17T17:43:09.993000+00:00",
+                "updatedAt": "2026-01-17T17:43:09.993000+00:00",
+                "capacityProviderStrategy": [
+                    {
+                        "capacityProvider": "FARGATE",
+                        "weight": 1,
+                        "base": 0
+                    }
+                ],
+                "platformVersion": "1.4.0",
+                "platformFamily": "Linux",
+                "networkConfiguration": {
+                    "awsvpcConfiguration": {
+                        "subnets": [
+                            "subnet-032a81f6c2a4f2cab",
+                            "subnet-0abdc1ae09b73072d",
+                            "subnet-0bfa147bd90cf3f53"
+                        ],
+                        "securityGroups": [
+                            "sg-0c4901b0ec6b1b0b1"
+                        ],
+                        "assignPublicIp": "ENABLED"
+                    }
+                },
+                "rolloutState": "IN_PROGRESS",
+                "rolloutStateReason": "ECS deployment ecs-svc/5028824203528393642 in progress."
+            },
+            {
+                "id": "ecs-svc/6158497922957581938",
+                "status": "ACTIVE",
+                "taskDefinition": "arn:aws:ecs:ap-south-1:010526240249:task-definition/cas-website-task:3",
+                "desiredCount": 1,
+                "pendingCount": 0,
+                "runningCount": 0,
+                "failedTasks": 2,
+                "createdAt": "2026-01-17T17:24:50.800000+00:00",
+                "updatedAt": "2026-01-17T17:26:00.396000+00:00",
+                "capacityProviderStrategy": [
+                    {
+                        "capacityProvider": "FARGATE",
+                        "weight": 1,
+                        "base": 0
+                    }
+                ],
+                "platformVersion": "1.4.0",
+                "platformFamily": "Linux",
+                "networkConfiguration": {
+                    "awsvpcConfiguration": {
+                        "subnets": [
+                            "subnet-032a81f6c2a4f2cab",
+                            "subnet-0abdc1ae09b73072d",
+                            "subnet-0bfa147bd90cf3f53"
+                        ],
+                        "securityGroups": [
+                            "sg-0c4901b0ec6b1b0b1"
+                        ],
+                        "assignPublicIp": "ENABLED"
+                    }
+                },
+                "rolloutState": "IN_PROGRESS",
+                "rolloutStateReason": "ECS deployment ecs-svc/6158497922957581938 in progress."
+            },
+            {
+                "id": "ecs-svc/0130074919036356190",
+                "status": "ACTIVE",
+                "taskDefinition": "arn:aws:ecs:ap-south-1:010526240249:task-definition/cas-website-task:3",
+                "desiredCount": 1,
+                "pendingCount": 0,
+                "runningCount": 1,
+                "failedTasks": 0,
+                "createdAt": "2026-01-17T16:04:28.205000+00:00",
+                "updatedAt": "2026-01-17T17:26:06.648000+00:00",
+                "capacityProviderStrategy": [
+                    {
+                        "capacityProvider": "FARGATE",
+                        "weight": 1,
+                        "base": 0
+                    }
+                ],
+                "platformVersion": "1.4.0",
+                "platformFamily": "Linux",
+                "networkConfiguration": {
+                    "awsvpcConfiguration": {
+                        "subnets": [
+                            "subnet-032a81f6c2a4f2cab",
+                            "subnet-0abdc1ae09b73072d",
+                            "subnet-0bfa147bd90cf3f53"
+                        ],
+                        "securityGroups": [
+                            "sg-0c4901b0ec6b1b0b1"
+                        ],
+                        "assignPublicIp": "ENABLED"
+                    }
+                },
+                "rolloutState": "COMPLETED",
+                "rolloutStateReason": "ECS deployment ecs-svc/0130074919036356190 completed."
+            }
+        ],
+        "roleArn": "arn:aws:iam::010526240249:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+        "events": [
+            {
+                "id": "e52e1eba-efcc-4a2d-908b-d84d54f492dd",
+                "createdAt": "2026-01-17T17:38:45.684000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/6158497922957581938) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "20ee3c18-1682-4a60-b2ae-bb64524cc0a9",
+                "createdAt": "2026-01-17T17:38:45.679000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "36d37fbc-16f4-4953-bbb6-3dbb49815685",
+                "createdAt": "2026-01-17T17:38:36.693000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "62fc6608-4f8b-4534-9439-9c5c88d0bac8",
+                "createdAt": "2026-01-17T17:37:59.036000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 6cc335c157594d2abe537b5a22c3efd6)."
+            },
+            {
+                "id": "7ee85344-93c4-4934-ae58-b390264179f3",
+                "createdAt": "2026-01-17T17:32:43.785000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/6158497922957581938) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "e775b782-2ad0-4899-9959-4d30e4b8f2cf",
+                "createdAt": "2026-01-17T17:32:43.781000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "c4f52738-eeca-4658-8bbf-a72812868529",
+                "createdAt": "2026-01-17T17:32:34.646000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "80e5de84-835e-4c5c-84ab-599a51382285",
+                "createdAt": "2026-01-17T17:31:56.691000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 4b8c7756045f4ea59fda43e4a3727d19)."
+            },
+            {
+                "id": "446b2ecd-2d11-4fa3-af05-2184f71170a2",
+                "createdAt": "2026-01-17T17:26:37.626000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/6158497922957581938) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "45c72575-0d72-468f-9445-aead7098f92c",
+                "createdAt": "2026-01-17T17:26:37.623000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "78bd7822-9669-4907-bd45-309a1822b9e2",
+                "createdAt": "2026-01-17T17:26:17.406000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "8523d122-0ed6-4887-8762-b5edb3aac771",
+                "createdAt": "2026-01-17T17:25:35.294000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 9aa5bc916d9b4c7d8573c198f5558b0c)."
+            },
+            {
+                "id": "915b5f9d-09aa-449f-835e-29ad810bffaa",
+                "createdAt": "2026-01-17T17:20:22.744000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/8481843602225275402) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "4fd3d440-088c-4eb9-b419-bdd1ebd8ec45",
+                "createdAt": "2026-01-17T17:20:22.740000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "e34898c2-4a15-4b8f-8ea6-3c42678763bb",
+                "createdAt": "2026-01-17T17:20:14.075000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "7d387825-385f-4847-966d-2eba99575e35",
+                "createdAt": "2026-01-17T17:19:33.220000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task f56504a047014fddbb2b83a1f9e49c87)."
+            },
+            {
+                "id": "c0103674-06af-4157-a2b1-19695104501e",
+                "createdAt": "2026-01-17T17:14:20.996000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/8481843602225275402) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "f80412d0-d1f8-4268-8dd9-cf8dbc297db8",
+                "createdAt": "2026-01-17T17:14:20.991000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "7349bd3f-57d3-45f2-a933-868a3dab6272",
+                "createdAt": "2026-01-17T17:14:11.372000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "e5c4fe39-c286-4ace-bca7-18cab81b70da",
+                "createdAt": "2026-01-17T17:13:29.681000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task c3730669cf8e4d87a3b7c5a5eefca851)."
+            },
+            {
+                "id": "8ac78ae3-1098-46b5-ab74-09897467eadb",
+                "createdAt": "2026-01-17T17:08:10.217000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "5a06052c-2981-4281-88bc-1e7403c665e9",
+                "createdAt": "2026-01-17T17:08:10.169000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/5685246494977282361) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "f23233c6-2241-4daf-bdcc-c87db009f97c",
+                "createdAt": "2026-01-17T17:08:10.165000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "5c3c07f3-d313-43ab-9162-8beac1364a4c",
+                "createdAt": "2026-01-17T17:07:27.300000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "e4090d61-3084-4b48-857f-7f9d3f0b859f",
+                "createdAt": "2026-01-17T17:06:45.357000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task eaae6e9f041b40d883fa4339986b1340)."
+            },
+            {
+                "id": "df91e1a0-6565-4c8c-9c17-bb73b7c7de3c",
+                "createdAt": "2026-01-17T16:33:04.638000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has reached a steady state."
+            },
+            {
+                "id": "bda606ff-31e3-4204-ac15-fa1c21ea85d1",
+                "createdAt": "2026-01-17T16:33:04.637000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) (deployment ecs-svc/0130074919036356190) deployment completed."
+            },
+            {
+                "id": "ee3d551c-9e19-4145-b34e-da615b298842",
+                "createdAt": "2026-01-17T16:32:08.695000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) stopped 1 pending tasks."
+            },
+            {
+                "id": "4caa34d8-507a-495e-84e6-0b19f227af29",
+                "createdAt": "2026-01-17T16:32:07.912000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) rolling back to deployment ecs-svc/0130074919036356190."
+            },
+            {
+                "id": "6fbc57c3-fe1c-425a-9329-f8b583b717fe",
+                "createdAt": "2026-01-17T16:32:07.911000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) (deployment ecs-svc/9776606007790920089) deployment failed: tasks failed to start."
+            },
+            {
+                "id": "8e30a2f8-ca59-4d9d-9eca-bf48c272f0ac",
+                "createdAt": "2026-01-17T16:31:49.792000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 792085a388d347218e77de10603b9162)."
+            },
+            {
+                "id": "bc7205e7-7ae4-4746-ab60-a37b54b2eba8",
+                "createdAt": "2026-01-17T16:31:29.286000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/9776606007790920089) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "e7c7d359-d849-44e9-9ff9-82bd060540f6",
+                "createdAt": "2026-01-17T16:31:29.281000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "37896291-a77a-4a1d-a502-17a1320281cf",
+                "createdAt": "2026-01-17T16:30:09.299000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 6b8e11118314471eb8534cc89edc4f30)."
+            },
+            {
+                "id": "80865c1c-c03b-4d58-b831-c2461f987fcf",
+                "createdAt": "2026-01-17T16:29:49.028000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/9776606007790920089) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "be675e13-8762-4caf-8d22-59283092fe32",
+                "createdAt": "2026-01-17T16:29:49.023000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "10cd54ef-db4b-45cd-b34d-7d28fadf1479",
+                "createdAt": "2026-01-17T16:28:29.016000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 13d6ae3358ad4a62b9abfdfe1c16e02c)."
+            },
+            {
+                "id": "2eb004cb-8bc2-4af5-a29f-d858b712dd89",
+                "createdAt": "2026-01-17T16:23:24.780000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/9776606007790920089) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "78deda80-bcf2-4c40-80df-df1c6b739088",
+                "createdAt": "2026-01-17T16:23:14.433000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "5fc32ede-e5fc-48e9-a8da-5f4851dbf5a9",
+                "createdAt": "2026-01-17T16:23:03.835000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "99563d0f-4d42-4245-b34e-001c830d4b99",
+                "createdAt": "2026-01-17T16:22:21.921000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task cb0d1b23bb5b4c0fa7e1b1c365ffbb86)."
+            },
+            {
+                "id": "71999b99-c8a3-493c-8715-8cfd42dc6cfc",
+                "createdAt": "2026-01-17T16:17:05.290000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "5954ff5d-e920-469e-a613-0267c99423e6",
+                "createdAt": "2026-01-17T16:17:05.225000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/1064839143473642616) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "e853ede1-003f-40a9-b038-3d6aae5b4e40",
+                "createdAt": "2026-01-17T16:17:05.220000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "a757e5f3-8e56-411d-a31f-610661e927a0",
+                "createdAt": "2026-01-17T16:16:23.937000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "c52b2c3d-c49b-4b59-9a72-1686efc0e6db",
+                "createdAt": "2026-01-17T16:15:43.738000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 7a61636f05d94654a031a4ab32697853)."
+            },
+            {
+                "id": "08b49321-8b0a-4e2d-be32-e908236c3e8a",
+                "createdAt": "2026-01-17T16:10:26.737000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/1064839143473642616) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "fc6c73ec-3162-4d75-a385-156893d43180",
+                "createdAt": "2026-01-17T16:10:26.732000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "09bd763d-e249-45ca-80f1-9c3c2300c087",
+                "createdAt": "2026-01-17T16:10:17.141000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "0096c7b1-3468-4b55-afb6-2f55bf372efd",
+                "createdAt": "2026-01-17T16:09:35.426000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task fba68fea64cc43a28ce33f63c5f10d71)."
+            },
+            {
+                "id": "e30d5564-5660-48d2-87ec-460332fee4c8",
+                "createdAt": "2026-01-17T16:09:03.968000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has reached a steady state."
+            },
+            {
+                "id": "e9ecaeea-af08-4fd7-a1fb-e9ff6b7b6226",
+                "createdAt": "2026-01-17T16:09:03.967000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) (deployment ecs-svc/0130074919036356190) deployment completed."
+            },
+            {
+                "id": "d2726fa4-35c3-4feb-b5f2-42625c657073",
+                "createdAt": "2026-01-17T16:07:50.837000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/0324647086846562817) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "9693e7dc-9908-4b12-8d1b-f30180e71da7",
+                "createdAt": "2026-01-17T16:07:50.832000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "e1a1be50-82d6-42ef-976e-7e7381ce3e9f",
+                "createdAt": "2026-01-17T16:07:40.748000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has stopped 1 running tasks: (task fc2631876b8a48ecb1bd71730805f396)."
+            },
+            {
+                "id": "d8567faf-015f-40fb-91b6-874b08416619",
+                "createdAt": "2026-01-17T16:06:48.904000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "b7a4345c-c45e-45c2-aa28-b9fafd8af978",
+                "createdAt": "2026-01-17T16:06:07.928000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 29518f4516d345c4909b100552078608)."
+            },
+            {
+                "id": "82e21561-eb1c-4a6c-bdbd-b95030d9be7a",
+                "createdAt": "2026-01-17T16:05:15.119000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/5958019761261752583) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "fc0c2f52-c2ef-449f-8d87-687fe50ae840",
+                "createdAt": "2026-01-17T16:05:04.749000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "ca70add2-4147-45d8-bd46-bbc615220b6e",
+                "createdAt": "2026-01-17T16:04:55.544000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) stopped 1 pending tasks."
+            },
+            {
+                "id": "18e53de2-0891-4f15-8a25-f6861f491620",
+                "createdAt": "2026-01-17T16:04:55.479000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "63e01c0f-83d6-4b60-ab2b-1ed50ad5ea2e",
+                "createdAt": "2026-01-17T16:04:13.533000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 39e6e77886664356a2c8db889ca69427)."
+            },
+            {
+                "id": "029b7dc4-0fb7-4eb0-ba41-5898ffe5c3cf",
+                "createdAt": "2026-01-17T10:08:41.247000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has reached a steady state."
+            },
+            {
+                "id": "0c56f0d0-d2a6-4b49-b61a-429474e90917",
+                "createdAt": "2026-01-17T10:08:41.246000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) (deployment ecs-svc/0324647086846562817) deployment completed."
+            },
+            {
+                "id": "da06086d-1c2e-46d0-be24-b6cbe155ecd3",
+                "createdAt": "2026-01-17T10:07:38.008000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/7637832891006132699) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "a78bfe6c-1c8f-4045-9f7d-a7e62742a2de",
+                "createdAt": "2026-01-17T10:07:38.004000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "7dd7594d-8ca5-42ef-8cb7-93f77593f881",
+                "createdAt": "2026-01-17T10:07:28.423000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has stopped 1 running tasks: (task 0bb6609be7a34190a85c27ec2e65985f)."
+            },
+            {
+                "id": "8f7ca9fa-73c3-4a6b-bbb4-a9e584878225",
+                "createdAt": "2026-01-17T10:06:37.773000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "c05cb13e-5a4e-4b62-9408-0daca7154f62",
+                "createdAt": "2026-01-17T10:05:56.053000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task fc2631876b8a48ecb1bd71730805f396)."
+            },
+            {
+                "id": "8ae80cf2-5cba-433b-8d53-68b816812d45",
+                "createdAt": "2026-01-17T09:58:18.517000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has reached a steady state."
+            },
+            {
+                "id": "18c7bf23-75f5-4e7f-a34b-75f1eb4c1e35",
+                "createdAt": "2026-01-17T09:58:18.516000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) (deployment ecs-svc/7637832891006132699) deployment completed."
+            },
+            {
+                "id": "9d149c11-1936-43bc-b58b-45bfc9668a0e",
+                "createdAt": "2026-01-17T09:57:06.860000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/5834057620271073385) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "580d41d0-af06-4bbe-abf9-c5a2102754ab",
+                "createdAt": "2026-01-17T09:57:06.855000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "7e98f63c-0db7-463a-9881-b23b5b458a2a",
+                "createdAt": "2026-01-17T09:57:05.493000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has stopped 1 running tasks: (task 9b9383327d0144d8ac3977fc7747a0ac)."
+            },
+            {
+                "id": "e6896fa3-425d-4b65-8af6-d76727366dbf",
+                "createdAt": "2026-01-17T09:56:14.978000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "24549bfa-882f-4458-b8a1-d12d14aaed22",
+                "createdAt": "2026-01-17T09:55:33.637000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 0bb6609be7a34190a85c27ec2e65985f)."
+            },
+            {
+                "id": "f48380b1-12e2-443d-b999-5d970fc16f9b",
+                "createdAt": "2026-01-17T09:51:35.111000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has reached a steady state."
+            },
+            {
+                "id": "2e606bd8-49b1-42ae-aaa4-92974f26ea15",
+                "createdAt": "2026-01-17T09:51:35.110000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) (deployment ecs-svc/5834057620271073385) deployment completed."
+            },
+            {
+                "id": "76eb3b69-683e-4444-8854-8a31a25970cc",
+                "createdAt": "2026-01-17T09:50:43.018000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/3296401466342606664) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "08574b25-f76e-4b59-aeca-dbe9f51fc514",
+                "createdAt": "2026-01-17T09:50:43.013000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "00175c84-7f44-4f9c-89fc-2aa717841bbe",
+                "createdAt": "2026-01-17T09:50:32.410000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has stopped 1 running tasks: (task 968c962c09444035a241c5ba0c7ff764)."
+            },
+            {
+                "id": "dcc1f6c8-6f12-4b84-9f1e-6666962071b4",
+                "createdAt": "2026-01-17T09:49:40.190000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "5dd79281-8601-4817-b017-3053a33aa477",
+                "createdAt": "2026-01-17T09:48:59.427000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 9b9383327d0144d8ac3977fc7747a0ac)."
+            },
+            {
+                "id": "3cbbb394-7e4a-46f3-a131-b4627b05cc24",
+                "createdAt": "2026-01-17T09:42:46.115000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "624f59af-c15a-415c-b072-5e8c59d71d88",
+                "createdAt": "2026-01-17T09:42:46.061000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/3807977536823004667) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "121f04ff-f2b6-412d-afd5-389c9d47d446",
+                "createdAt": "2026-01-17T09:42:46.057000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "8620172f-bfd2-42aa-8061-2e22e6800bd8",
+                "createdAt": "2026-01-17T09:42:35.706000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has stopped 1 running tasks: (task 378017055705429cad3a1abd0aa1b6e9)."
+            },
+            {
+                "id": "9c3b2b62-9ae1-4d5a-b09a-e4e109b5e3dc",
+                "createdAt": "2026-01-17T09:42:35.666000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) (task 378017055705429cad3a1abd0aa1b6e9) (port 5000) is unhealthy in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13) due to (reason Target is in an Availability Zone that is not enabled for the load balancer)."
+            },
+            {
+                "id": "8e5b5fa4-82b2-4bb0-8103-06ebca7fca70",
+                "createdAt": "2026-01-17T09:39:59.086000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "f993e1cc-473f-4f58-a92e-1e819c1a6d59",
+                "createdAt": "2026-01-17T09:39:08.806000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task 378017055705429cad3a1abd0aa1b6e9)."
+            },
+            {
+                "id": "a2a09281-a388-4f6d-a153-90eae608cc6e",
+                "createdAt": "2026-01-17T09:32:43.340000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "3f38f14f-acaa-43d7-8df0-abdd58c6af44",
+                "createdAt": "2026-01-17T09:32:43.295000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/3807977536823004667) has begun draining connections on 1 tasks."
+            },
+            {
+                "id": "b2408589-f88e-4a9b-b0ca-430ae9808361",
+                "createdAt": "2026-01-17T09:32:43.274000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "391565cb-cb21-4432-8d3f-c4780fcd5a7a",
+                "createdAt": "2026-01-17T09:32:33.567000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has stopped 1 running tasks: (task fbe1dda3fa944722978f1b585b6607b0)."
+            },
+            {
+                "id": "5d80ada7-b907-4fd7-b534-579bafa415fa",
+                "createdAt": "2026-01-17T09:32:33.532000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) (task fbe1dda3fa944722978f1b585b6607b0) (port 5000) is unhealthy in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13) due to (reason Target is in an Availability Zone that is not enabled for the load balancer)."
+            },
+            {
+                "id": "7c5c3dc4-6902-47aa-94ac-4d59e0e8a9cd",
+                "createdAt": "2026-01-17T09:29:58.246000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-south-1:010526240249:targetgroup/cas-alb-tg/c16d45c1a328af13)"
+            },
+            {
+                "id": "163266e5-43a6-4c2f-adc4-8164d8b8d9e1",
+                "createdAt": "2026-01-17T09:29:16.789000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has started 1 tasks: (task fbe1dda3fa944722978f1b585b6607b0)."
+            },
+            {
+                "id": "49fa9edf-a8ef-40f5-83f4-1502f5e9db90",
+                "createdAt": "2026-01-17T09:15:26.681000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) has reached a steady state."
+            },
+            {
+                "id": "7c00355f-41ff-47d5-85dd-b672e0abd733",
+                "createdAt": "2026-01-17T09:15:26.680000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3) (deployment ecs-svc/3296401466342606664) deployment completed."
+            },
+            {
+                "id": "d880ebd8-9930-44db-aa79-42bba0e27c4e",
+                "createdAt": "2026-01-17T09:14:24.998000+00:00",
+                "message": "(service cas-website-task-service-k7z3yzx3, taskSet ecs-svc/7874918936312292459) has begun draining connections on 1 tasks."
+            }
+        ],
+        "createdAt": "2026-01-12T13:31:54.114000+00:00",
+        "currentServiceRevisions": [
+            {
+                "arn": "arn:aws:ecs:ap-south-1:010526240249:service-revision/cas-cann26/cas-website-task-service-k7z3yzx3/5028824203528393642",
+                "requestedTaskCount": 0,
+                "runningTaskCount": 0,
+                "pendingTaskCount": 0
+            },
+            {
+                "arn": "arn:aws:ecs:ap-south-1:010526240249:service-revision/cas-cann26/cas-website-task-service-k7z3yzx3/6158497922957581938",
+                "requestedTaskCount": 1,
+                "runningTaskCount": 0,
+                "pendingTaskCount": 0
+            },
+            {
+                "arn": "arn:aws:ecs:ap-south-1:010526240249:service-revision/cas-cann26/cas-website-task-service-k7z3yzx3/0130074919036356190",
+                "requestedTaskCount": 1,
+                "runningTaskCount": 1,
+                "pendingTaskCount": 0
+            }
+        ],
+        "placementConstraints": [],
+        "placementStrategy": [],
+        "networkConfiguration": {
+            "awsvpcConfiguration": {
+                "subnets": [
+                    "subnet-032a81f6c2a4f2cab",
+                    "subnet-0abdc1ae09b73072d",
+                    "subnet-0bfa147bd90cf3f53"
+                ],
+                "securityGroups": [
+                    "sg-0c4901b0ec6b1b0b1"
+                ],
+                "assignPublicIp": "ENABLED"
+            }
+        },
+        "healthCheckGracePeriodSeconds": 0,
+        "schedulingStrategy": "REPLICA",
+        "deploymentController": {
+            "type": "ECS"
+        },
+        "createdBy": "arn:aws:iam::010526240249:root",
+        "enableECSManagedTags": true,
+        "propagateTags": "NONE",
+        "enableExecuteCommand": false,
+        "availabilityZoneRebalancing": "ENABLED",
+        "resourceManagementType": "CUSTOMER"
+    }
+}
+10m 35s
+Run echo "Waiting for ECS service to stabilize..."
+Waiting for ECS service to stabilize...
+Waiter ServicesStable failed: Max attempts exceeded
+Error: Process completed with exit code 255.
+0s
+0s
+Post job cleanup.
+Logging out of registry 010526240249.dkr.ecr.ap-south-1.amazonaws.com
+0s
+Post job cleanup.
+1s
+Post job cleanup.
+/usr/bin/git version
+git version 2.52.0
+Temporarily overriding HOME='/home/runner/work/_temp/9c01c729-bbd4-42cf-b139-288ff5e7a3bb' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /home/runner/work/CAS-CANN/CAS-CANN
+/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+http.https://github.com/.extraheader
+/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.ori

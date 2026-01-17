@@ -53,6 +53,24 @@ Key features include:
   - **File Preview System**: Smart file type detection supporting images and PDFs.
   - **Placeholder URL Handling**: Graceful UX for simulated file uploads.
 
+### Environment-Based Feature Flags
+The codebase uses `VITE_ENVIRONMENT` to control feature visibility between staging (Replit) and production (AWS ECS):
+
+**Staging Features** (`VITE_ENVIRONMENT=staging` or unset):
+- Interactive Healthcare Directory Map on homepage
+- Upload Resource and Manage Resources navigation items
+- "Events and News" dropdown with: Canadian Amyloidosis Summit, CAS Journal Club, CANN Events, News
+
+**Production Features** (`VITE_ENVIRONMENT=production`):
+- No map section on homepage
+- Simple "Events" link (no dropdown)
+- Resources dropdown shows only Partnerships
+
+**Implementation**:
+- `client/src/hooks/useEnvironment.ts`: Hook and utility functions (`isStaging()`, `isProduction()`)
+- `Dockerfile`: Accepts `VITE_ENVIRONMENT` build arg (defaults to production)
+- `.github/workflows/deploy.yml`: Passes `--build-arg VITE_ENVIRONMENT=production` for ECS builds
+
 ### Timezone Configuration
 All event dates and past/upcoming detection are locked to **MST (Mountain Standard Time)** using the `America/Edmonton` timezone. This ensures:
 - Consistent date display for all users worldwide

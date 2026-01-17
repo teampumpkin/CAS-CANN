@@ -3,6 +3,10 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Accept build argument for environment
+ARG VITE_ENVIRONMENT=production
+ENV VITE_ENVIRONMENT=$VITE_ENVIRONMENT
+
 # Install dependencies first (better layer caching)
 COPY package*.json ./
 RUN npm ci
@@ -10,7 +14,7 @@ RUN npm ci
 # Copy all source files
 COPY . .
 
-# Build frontend and bundle server
+# Build frontend and bundle server (VITE_ENVIRONMENT is baked into the frontend build)
 RUN npm run build
 
 # Stage 2: Production runtime

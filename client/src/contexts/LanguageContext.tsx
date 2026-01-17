@@ -758,6 +758,9 @@ const translations = {
     'eventsPage.registerForEvent': 'Register for Event',
     'eventsPage.noPastEvents': 'No past events yet',
     'eventsPage.checkBackSoon': 'Check back soon for updates on past events.',
+    'eventsPage.journalClubBadge': 'CAS Journal Club',
+    'eventsPage.journalClubDescription': 'Join our quarterly virtual case presentations featuring amyloidosis cases from across Canada.',
+    'eventsPage.viewFullSchedule': 'View Full Schedule',
     
     // Contact Page - Additional Keys
     'contactPage.badge': 'Contact Us',
@@ -1936,6 +1939,9 @@ const translations = {
     'eventsPage.registerForEvent': 'S\'inscrire à l\'événement',
     'eventsPage.noPastEvents': 'Aucun événement passé pour l\'instant',
     'eventsPage.checkBackSoon': 'Revenez bientôt pour des mises à jour sur les événements passés.',
+    'eventsPage.journalClubBadge': 'Club de Lecture CAS',
+    'eventsPage.journalClubDescription': 'Rejoignez nos présentations de cas virtuelles trimestrielles mettant en vedette des cas d\'amylose de partout au Canada.',
+    'eventsPage.viewFullSchedule': 'Voir le Calendrier Complet',
     
     // Contact Page - Additional Keys
     'contactPage.badge': 'Contactez-Nous',

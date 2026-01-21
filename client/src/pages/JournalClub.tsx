@@ -44,6 +44,16 @@ interface Session {
 
 const allSessions: Session[] = [
   {
+    rawDate: "2025-05-08",
+    dateKey: "journalClub.dates.may2025",
+    topics: [
+      { topicKey: "journalClub.topics.properTyping", presenterName: "Dr. Victor Jimenez-Zepeda, University of Calgary" },
+      { topicKey: "journalClub.topics.heartFailureATTR", presenterName: "Dr. Francois Tournoux, University of Montreal" },
+    ],
+    location: "Virtual",
+    registrationNotRequired: true,
+  },
+  {
     rawDate: "2025-09-25",
     dateKey: "journalClub.dates.sept2025",
     topics: [

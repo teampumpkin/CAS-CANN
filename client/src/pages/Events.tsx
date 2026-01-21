@@ -29,6 +29,19 @@ import casLogoImg from "@assets/l_cas_vert_rgb_1753253116732.png";
 // Journal Club Sessions Data
 const journalClubSessions = [
   {
+    rawDate: "2025-05-08",
+    topics: [
+      {
+        title: "Proper Typing for Proper Treatment",
+        presenter: "Dr. Victor Jimenez-Zepeda, University of Calgary",
+      },
+      {
+        title: "Heart Failure Therapy in ATTR Amyloidosis: Is it time to go against the grain?",
+        presenter: "Dr. Francois Tournoux, University of Montreal",
+      },
+    ],
+  },
+  {
     rawDate: "2025-09-25",
     topics: [
       {
@@ -109,6 +122,29 @@ const allEvents = [
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
     confirmed: true,
+  },
+  {
+    id: 10,
+    title: "CAS Journal Club - May Session",
+    date: "2025-05-08",
+    time: "3:00 PM - 4:00 PM MST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description:
+      "The inaugural CAS Journal Club session featuring case presentations on proper typing for treatment and heart failure therapy in ATTR amyloidosis.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "#",
+    confirmed: true,
+    topics: [
+      {
+        title: "Proper Typing for Proper Treatment",
+        presenter: "Dr. Victor Jimenez-Zepeda, University of Calgary",
+      },
+      {
+        title: "Heart Failure Therapy in ATTR Amyloidosis: Is it time to go against the grain?",
+        presenter: "Dr. Francois Tournoux, University of Montreal",
+      },
+    ],
   },
   {
     id: 4,

@@ -98,7 +98,7 @@ const allEvents = [
   },
   {
     id: 2,
-    title: "CAS Journal Club - November Session",
+    title: "CAS Journal Club November 2025",
     date: "2025-11-27",
     time: "3:00 PM - 4:00 PM MST",
     location: "Virtual Event",
@@ -112,7 +112,7 @@ const allEvents = [
   },
   {
     id: 3,
-    title: "CAS Journal Club - September Session",
+    title: "CAS Journal Club September 2025",
     date: "2025-09-25",
     time: "3:00 PM - 4:00 PM MST",
     location: "Virtual Event",
@@ -125,7 +125,7 @@ const allEvents = [
   },
   {
     id: 10,
-    title: "CAS Journal Club - May Session",
+    title: "CAS Journal Club May 2025",
     date: "2025-05-08",
     time: "3:00 PM - 4:00 PM MST",
     location: "Virtual Event",
@@ -148,7 +148,7 @@ const allEvents = [
   },
   {
     id: 4,
-    title: "CAS Journal Club - February Session",
+    title: "CAS Journal Club February 2026",
     date: "2026-02-26",
     time: "3:00 PM - 4:00 PM MST",
     location: "Virtual Event",
@@ -855,6 +855,10 @@ export default function Events() {
                   month: "long",
                   timeZone: EST_TIMEZONE,
                 });
+                const yearName = sessionDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  timeZone: EST_TIMEZONE,
+                });
 
                 return (
                   <motion.div
@@ -893,7 +897,7 @@ export default function Events() {
                         <h3
                           className={`text-xl font-semibold leading-snug ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
                         >
-                          CAS Journal Club - {monthName} Session
+                          CAS Journal Club {monthName} {yearName}
                         </h3>
                       </div>
 

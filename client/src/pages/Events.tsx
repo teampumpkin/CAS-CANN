@@ -1057,7 +1057,7 @@ export default function Events() {
                 development opportunities.
               </p>
 
-              <Link href="/cann-resources">
+              <Link href="/cann-resources#cann-events">
                 <motion.div
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}

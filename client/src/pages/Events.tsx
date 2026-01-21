@@ -186,22 +186,22 @@ const allEvents = [
 const newsletters = [
   {
     id: 1,
-    title: "CAS Newsletter - Summer 2025",
-    date: "2025-06-15",
+    title: "CAS Newsletter - September 2025",
+    date: "2025-09-15",
     thumbnail: "/api/placeholder/400/250",
     excerpt:
       "Welcome to the Canadian Amyloidosis Society! Updates on the 2025 Summit, Journal Club, research fellowships, and the latest from the world of amyloidosis.",
     content: {
-      intro: `Welcome to the Canadian Amyloidosis Society (CAS)!   The CAS was launched in October 2024 at the Canadian Amyloidosis Summit, and is a multidisciplinary medical organization dedicated to serving healthcare professionals who provide amyloidosis care within Canada. We are proud to announce that the CAS has over 180 members from across Canada, representing multiple different medical specialties and disciplines providing amyloid patient care! We are excited to announce that our website is nearing completion and will provide a separate announcement when it is officially launched. The website will have a new and updated registration link for new members wishing to join the CAS available shortly. Registration is free! As an important objective of the CAS, we are creating a map of amyloid services across Canada and are requesting the help of our members in the hopes that they are willing to have the amyloid services they offer listed on this map. This will be displayed on our website and announced when it officially goes live.`,
+      intro: `Welcome to the Canadian Amyloidosis Society (CAS)! The CAS was launched in October 2024 at the Canadian Amyloidosis Summit, and is a multidisciplinary medical organization dedicated to serving healthcare professionals who provide amyloidosis care within Canada. We are proud to announce that the CAS has over 180 members from across Canada, representing multiple different medical specialties and disciplines providing amyloid patient care! We are excited to announce that our website is nearing completion and will provide a separate announcement when it is officially launched.
+
+The website will have a new and updated registration link for new members wishing to join the CAS available shortly. Registration is free! As an important objective of the CAS, we are creating a map of amyloid services across Canada and are requesting the help of our members in the hopes that they are willing to have the amyloid services they offer listed on this map. This will be displayed on our website and announced when it officially goes live.`,
       sections: [
         {
-          title: "",
+          title: "CAS Registration",
           content: ``,
           hasCTA: true,
-          ctaText: "CAS Registration",
+          ctaText: "Register Here",
           ctaLink: "/join-cas",
-          hasLogo: true,
-          logoImage: cannLogoDarkImg,
         },
         {
           title: "",
@@ -217,11 +217,18 @@ const newsletters = [
         },
         {
           title: "Canadian Amyloidosis Summit",
-          content: `We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals attending. Attendance will again be free and offered both in person and virtual. The Canadian Amyloidosis Summit 2025 is again welcoming abstract submissions from amyloidosis researchers attending. Please consider submitting your abstract when registering to attend. Abstracts submissions are accepted on all topics related to amyloidosis research and the only requirement for submission is registering to attend. Abstracts that are accepted will be presented in poster format. Those attending may also present their abstract on behalf of their research team (student, trainee, supervisor).
+          content: `We are again excited to cohost the third annual Canadian Amyloidosis Summit, in partnership with Transthyretin Amyloidosis Canada (TAC), our national patient support organization. The Canadian Amyloidosis Summit will be held in Toronto, October 31 to November 2, 2025. It will again be a combined healthcare professional and patient/caregiver event, with dedicated sessions offered for each group of attendees. Continuing Medical Education (CME) accreditation again will be available for healthcare professionals attending. Attendance will again be free and offered both in person and virtual.
 
-Note: All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.`,
+The Canadian Amyloidosis Summit 2025 is again welcoming abstract submissions from amyloidosis researchers attending. Please consider submitting your abstract when registering to attend. Abstracts submissions are accepted on all topics related to amyloidosis research and the only requirement for submission is registering to attend. Abstracts that are accepted will be presented in poster format. Those attending may also present their abstract on behalf of their research team (student, trainee, supervisor).
+
+Registration for the 2025 Canadian Amyloidosis Summit is Open - CLICK HERE!
+
+All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.`,
           hasBannerImage: true,
           bannerImage: summitSaveTheDateImg,
+          hasCTA: true,
+          ctaText: "Register Here",
+          ctaLink: "https://www.canadianamyloidosissummit.ca/",
         },
         {
           title: "CAS Journal Club Webinar",
@@ -234,7 +241,7 @@ Note: All members of CAS and CANN are invited to attend the first Annual General
         {
           title:
             "Amyloidosis Research Consortium (ARC) Clinical Fellowship Award Program - 2026 applications now open",
-          content: `This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with ️up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes. Apply here: https://arci.org/fellowship/`,
+          content: `This Program is developing the next generation of leaders in amyloidosis care and research. The program funds one-year fellowships at leading U.S. and Canadian amyloidosis centers with up to 10 fellows funded. The award program focuses on: Clinical Care, Multi-Disciplinary Collaboration, Research Participation, and Health Equity. This fellowship is an opportunity to broaden expertise, collaborate with top specialists, and make a lasting impact on patient care and outcomes. Apply here: https://arci.org/fellowship/`,
         },
         {
           title:

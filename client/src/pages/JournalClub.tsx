@@ -12,23 +12,23 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 
-// MST Timezone constant (America/Edmonton handles MST/MDT automatically)
-const MST_TIMEZONE = 'America/Edmonton';
+// EST Timezone constant (America/Toronto handles EST/EDT automatically)
+const EST_TIMEZONE = 'America/Toronto';
 
-// Helper to get current date in MST timezone
-const getMSTDate = (): Date => {
+// Helper to get current date in EST timezone
+const getESTDate = (): Date => {
   const now = new Date();
-  const mstDateStr = now.toLocaleDateString('en-CA', { timeZone: MST_TIMEZONE });
-  const [year, month, day] = mstDateStr.split('-').map(Number);
+  const estDateStr = now.toLocaleDateString('en-CA', { timeZone: EST_TIMEZONE });
+  const [year, month, day] = estDateStr.split('-').map(Number);
   return new Date(year, month - 1, day);
 };
 
-// Check if session date has passed (using MST timezone)
+// Check if session date has passed (using EST timezone)
 const isSessionPast = (rawDate: string): boolean => {
   const [year, month, day] = rawDate.split("-").map(Number);
   const sessionDate = new Date(year, month - 1, day);
-  const todayMST = getMSTDate();
-  return sessionDate < todayMST;
+  const todayEST = getESTDate();
+  return sessionDate < todayEST;
 };
 
 interface Session {

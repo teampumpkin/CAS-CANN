@@ -72,10 +72,10 @@ The codebase uses `VITE_ENVIRONMENT` to control feature visibility between stagi
 - `.github/workflows/deploy.yml`: Passes `--build-arg VITE_ENVIRONMENT=production` for ECS builds
 
 ### Timezone Configuration
-All event dates and past/upcoming detection are locked to **MST (Mountain Standard Time)** using the `America/Edmonton` timezone. This ensures:
+All event dates and past/upcoming detection are locked to **EST (Eastern Standard Time)** using the `America/Toronto` timezone. This ensures:
 - Consistent date display for all users worldwide
-- Past/upcoming event detection uses MST midnight as the cutoff
-- Day of week calculations are based on MST calendar
+- Past/upcoming event detection uses EST midnight as the cutoff
+- Day of week calculations are based on EST calendar
 - No date shifts regardless of the viewer's local timezone
 
 ### Feature Specifications

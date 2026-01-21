@@ -298,25 +298,25 @@ All CAS members are welcome to join; the Zoom link will be sent by e-mail to all
   },
 ];
 
-// MST Timezone constant (America/Edmonton handles MST/MDT automatically)
-const MST_TIMEZONE = "America/Edmonton";
+// EST Timezone constant (America/Toronto handles EST/EDT automatically)
+const EST_TIMEZONE = "America/Toronto";
 
-// Helper to get current date in MST timezone
-const getMSTDate = (): Date => {
+// Helper to get current date in EST timezone
+const getESTDate = (): Date => {
   const now = new Date();
-  const mstDateStr = now.toLocaleDateString("en-CA", {
-    timeZone: MST_TIMEZONE,
+  const estDateStr = now.toLocaleDateString("en-CA", {
+    timeZone: EST_TIMEZONE,
   });
-  const [year, month, day] = mstDateStr.split("-").map(Number);
+  const [year, month, day] = estDateStr.split("-").map(Number);
   return new Date(year, month - 1, day);
 };
 
-// Helper function to parse event date and compare with today in MST
+// Helper function to parse event date and compare with today in EST
 const isEventPast = (dateString: string): boolean => {
   const [year, month, day] = dateString.split("-").map(Number);
   const eventDate = new Date(year, month - 1, day);
-  const todayMST = getMSTDate();
-  return eventDate < todayMST;
+  const todayEST = getESTDate();
+  return eventDate < todayEST;
 };
 
 // Helper to parse date string for sorting (timezone-independent for date-only comparisons)
@@ -425,7 +425,7 @@ export default function Events() {
     }
   };
 
-  // Format date to "Thursday, September 25th, 2025" in MST timezone
+  // Format date to "Thursday, September 25th, 2025" in EST timezone
   const formatEventDate = (dateString: string): string => {
     // Guard against empty or invalid date strings
     if (!dateString) return "TBD";
@@ -449,25 +449,25 @@ export default function Events() {
       return dateString;
     }
 
-    // Format using MST timezone
+    // Format using EST timezone
     const dayName = dateForFormatting.toLocaleDateString("en-US", {
       weekday: "long",
-      timeZone: MST_TIMEZONE,
+      timeZone: EST_TIMEZONE,
     });
     const monthName = dateForFormatting.toLocaleDateString("en-US", {
       month: "long",
-      timeZone: MST_TIMEZONE,
+      timeZone: EST_TIMEZONE,
     });
     const dayNumber = parseInt(
       dateForFormatting.toLocaleDateString("en-US", {
         day: "numeric",
-        timeZone: MST_TIMEZONE,
+        timeZone: EST_TIMEZONE,
       }),
     );
     const yearNumber = parseInt(
       dateForFormatting.toLocaleDateString("en-US", {
         year: "numeric",
-        timeZone: MST_TIMEZONE,
+        timeZone: EST_TIMEZONE,
       }),
     );
     const ordinalSuffix = getOrdinalSuffix(dayNumber);
@@ -817,7 +817,7 @@ export default function Events() {
                 const sessionDate = parseLocalDate(session.rawDate);
                 const monthName = sessionDate.toLocaleDateString("en-US", {
                   month: "long",
-                  timeZone: MST_TIMEZONE,
+                  timeZone: EST_TIMEZONE,
                 });
 
                 return (

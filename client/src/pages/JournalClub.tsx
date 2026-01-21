@@ -244,7 +244,12 @@ export default function JournalClub() {
             <TabsContent value="upcoming" className="mt-0">
               {upcomingSessions.length > 0 ? (
                 <div className="grid gap-6">
-                  {upcomingSessions.map((session, index) => (
+                  {upcomingSessions.map((session, index) => {
+                    const sessionDate = new Date(session.rawDate + 'T12:00:00');
+                    const monthName = sessionDate.toLocaleDateString('en-US', { month: 'long', timeZone: EST_TIMEZONE });
+                    const yearName = sessionDate.toLocaleDateString('en-US', { year: 'numeric', timeZone: EST_TIMEZONE });
+                    
+                    return (
                     <motion.div
                       key={index}
                       className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300"
@@ -254,6 +259,11 @@ export default function JournalClub() {
                     >
                       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                         <div className="flex-1">
+                          {/* Session Title */}
+                          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-rosarivo">
+                            CAS Journal Club {monthName} {yearName}
+                          </h2>
+                          
                           <div className="flex items-center gap-4 mb-4">
                             <div className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-4 py-2 rounded-full text-sm font-bold">
                               {t(session.dateKey)}
@@ -334,7 +344,8 @@ export default function JournalClub() {
                         </div>
                       </div>
                     </motion.div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="text-center py-16">
@@ -355,7 +366,12 @@ export default function JournalClub() {
             <TabsContent value="past" className="mt-0">
               {pastSessions.length > 0 ? (
                 <div className="grid gap-6">
-                  {pastSessions.map((session, index) => (
+                  {pastSessions.map((session, index) => {
+                    const sessionDate = new Date(session.rawDate + 'T12:00:00');
+                    const monthName = sessionDate.toLocaleDateString('en-US', { month: 'long', timeZone: EST_TIMEZONE });
+                    const yearName = sessionDate.toLocaleDateString('en-US', { year: 'numeric', timeZone: EST_TIMEZONE });
+                    
+                    return (
                     <motion.div
                       key={index}
                       className="bg-white/80 dark:bg-gray-800/80 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 opacity-90"
@@ -365,6 +381,11 @@ export default function JournalClub() {
                     >
                       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                         <div className="flex-1">
+                          {/* Session Title */}
+                          <h2 className="text-2xl font-bold text-gray-500 dark:text-gray-300 mb-4 font-rosarivo">
+                            CAS Journal Club {monthName} {yearName}
+                          </h2>
+                          
                           <div className="flex items-center gap-4 mb-4">
                             <div className="bg-gray-400 text-white px-4 py-2 rounded-full text-sm font-bold">
                               {t(session.dateKey)}
@@ -419,7 +440,8 @@ export default function JournalClub() {
                         </div>
                       </div>
                     </motion.div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="text-center py-16">

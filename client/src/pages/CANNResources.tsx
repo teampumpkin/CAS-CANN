@@ -615,7 +615,7 @@ export default function CANNResources() {
         </div>
       </section>
       {/* Events Section with Tabs */}
-      <section className="py-24 bg-white dark:bg-gray-900">
+      <section id="cann-events" className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div
             className="text-center mb-16"

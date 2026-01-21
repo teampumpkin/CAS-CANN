@@ -761,6 +761,7 @@ const translations = {
     'eventsPage.journalClubBadge': 'CAS Journal Club',
     'eventsPage.journalClubDescription': 'Join our quarterly virtual case presentations featuring amyloidosis cases from across Canada.',
     'eventsPage.viewFullSchedule': 'View Full Schedule',
+    'eventsPage.presenter': 'Presenter',
     
     // Contact Page - Additional Keys
     'contactPage.badge': 'Contact Us',
@@ -1945,6 +1946,7 @@ const translations = {
     'eventsPage.journalClubBadge': 'Club de Lecture CAS',
     'eventsPage.journalClubDescription': 'Rejoignez nos présentations de cas virtuelles trimestrielles mettant en vedette des cas d\'amylose de partout au Canada.',
     'eventsPage.viewFullSchedule': 'Voir le Calendrier Complet',
+    'eventsPage.presenter': 'Présentateur',
     
     // Contact Page - Additional Keys
     'contactPage.badge': 'Contactez-Nous',

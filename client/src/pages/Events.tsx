@@ -562,7 +562,6 @@ export default function Events() {
           </motion.p>
         </div>
       </section>
-
       {/* Section 5: Featured Event Section */}
       <section id="summit" className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Background Effects */}
@@ -764,7 +763,6 @@ export default function Events() {
           )}
         </div>
       </section>
-
       {/* CAS Journal Club Section */}
       <section id="journal-club" className="py-24 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
@@ -1014,7 +1012,6 @@ export default function Events() {
           </div>
         </div>
       </section>
-
       {/* CANN Events Section */}
       <section id="cann-events" className="py-12 sm:py-16 md:py-24 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 relative overflow-hidden">
         {/* Background Elements */}
@@ -1080,7 +1077,6 @@ export default function Events() {
           </motion.div>
         </div>
       </section>
-
       {/* News Section */}
       <section id="news" className="py-12 sm:py-16 md:py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Frost Background Effect */}
@@ -1107,10 +1103,8 @@ export default function Events() {
                 CAS Newsletter
               </span>
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              Stay informed with the latest updates, announcements, and news
-              from the Canadian Amyloidosis Society.
-            </p>
+            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">See the latest news and updates from the amyloidosis community across Canada
+            and internationally</p>
           </motion.div>
 
           {/* Newsletter Cards Grid */}
@@ -1179,7 +1173,6 @@ export default function Events() {
           </div>
         </div>
       </section>
-
       {/* Newsletter Modal */}
       {selectedNewsletter && (
         <motion.div

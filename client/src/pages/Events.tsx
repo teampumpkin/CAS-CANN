@@ -25,6 +25,12 @@ import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_
 import cannLogoDarkImg from "@assets/CANN-RGB-dark-theme_1756219144378.png";
 import cannLogoLightImg from "@assets/CANN-RGB-light-theme_1756219058912.png";
 import casLogoImg from "@assets/l_cas_vert_rgb_1753253116732.png";
+import newsletterCasLogoImg from "@assets/252564000002356792_zc_v1_1755005174466_cas_logo_1768993082233.png";
+import eventImage1 from "@assets/252564000002356792_zc_v1_1755005804435_event_1_1768993082234.png";
+import eventImage2 from "@assets/252564000002356792_zc_v1_1755005815011_event_2_1768993082234.png";
+import eventImage3 from "@assets/252564000002356792_zc_v1_1755028042016_event_3_1768993082234.png";
+import summitBannerImg from "@assets/252564000002356792_zc_v1_1755030579235_screenshot_2025_08_12_a_1768993082234.png";
+import summitQrCodeImg from "@assets/252564000002356792_zc_v1_1757952404533_summit_registration_qr__1768993082235.png";
 
 // Journal Club Sessions Data
 const journalClubSessions = [
@@ -188,14 +194,20 @@ const newsletters = [
     id: 1,
     title: "CAS Newsletter - September 2025",
     date: "2025-09-15",
-    thumbnail: "/api/placeholder/400/250",
+    thumbnail: newsletterCasLogoImg,
     excerpt:
       "Welcome to the Canadian Amyloidosis Society! Updates on the 2025 Summit, Journal Club, research fellowships, and the latest from the world of amyloidosis.",
     content: {
-      intro: `Welcome to the Canadian Amyloidosis Society (CAS)! The CAS was launched in October 2024 at the Canadian Amyloidosis Summit, and is a multidisciplinary medical organization dedicated to serving healthcare professionals who provide amyloidosis care within Canada. We are proud to announce that the CAS has over 180 members from across Canada, representing multiple different medical specialties and disciplines providing amyloid patient care! We are excited to announce that our website is nearing completion and will provide a separate announcement when it is officially launched.
+      intro: ``,
+      headerLogo: newsletterCasLogoImg,
+      eventImages: [eventImage1, eventImage2, eventImage3],
+      sections: [
+        {
+          title: "",
+          content: `Welcome to the Canadian Amyloidosis Society (CAS)! The CAS was launched in October 2024 at the Canadian Amyloidosis Summit, and is a multidisciplinary medical organization dedicated to serving healthcare professionals who provide amyloidosis care within Canada. We are proud to announce that the CAS has over 180 members from across Canada, representing multiple different medical specialties and disciplines providing amyloid patient care! We are excited to announce that our website is nearing completion and will provide a separate announcement when it is officially launched.
 
 The website will have a new and updated registration link for new members wishing to join the CAS available shortly. Registration is free! As an important objective of the CAS, we are creating a map of amyloid services across Canada and are requesting the help of our members in the hopes that they are willing to have the amyloid services they offer listed on this map. This will be displayed on our website and announced when it officially goes live.`,
-      sections: [
+        },
         {
           title: "CAS Registration",
           content: ``,
@@ -206,6 +218,8 @@ The website will have a new and updated registration link for new members wishin
         {
           title: "",
           content: `The Canadian Amyloidosis Nursing Network (CANN) is an affiliate of the CAS. Nurses play a critical role in the management of amyloidosis patients yet are underrepresented with respect to educational and quality improvement initiatives in this field. In recognition of this gap, CANN was formed to support awareness and education, including professional development and knowledge translation for nurses providing amyloidosis patient care. CANN offers an educational series of live webinars to its members on a variety of amyloid topics curated specifically to address the learning needs of CANN members. Please contact CANN@amyloid.ca to learn more.`,
+          hasLogo: true,
+          logoImage: cannLogoDarkImg,
         },
         {
           title: "TELL US WHAT YOU THINK!",
@@ -221,13 +235,15 @@ The website will have a new and updated registration link for new members wishin
 
 The Canadian Amyloidosis Summit 2025 is again welcoming abstract submissions from amyloidosis researchers attending. Please consider submitting your abstract when registering to attend. Abstracts submissions are accepted on all topics related to amyloidosis research and the only requirement for submission is registering to attend. Abstracts that are accepted will be presented in poster format. Those attending may also present their abstract on behalf of their research team (student, trainee, supervisor).
 
-Registration for the 2025 Canadian Amyloidosis Summit is Open - CLICK HERE!
+Registration for the 2025 Canadian Amyloidosis Summit is Open!
 
 All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.`,
           hasBannerImage: true,
-          bannerImage: summitSaveTheDateImg,
+          bannerImage: summitBannerImg,
+          hasQrCode: true,
+          qrCodeImage: summitQrCodeImg,
           hasCTA: true,
-          ctaText: "Register Here",
+          ctaText: "Register for Summit",
           ctaLink: "https://www.canadianamyloidosissummit.ca/",
         },
         {
@@ -1224,10 +1240,39 @@ export default function Events() {
 
             {/* Modal Content */}
             <div className="p-6 sm:p-8 overflow-y-auto max-h-[calc(90vh-200px)]">
+              {/* Header Logo */}
+              {(selectedNewsletter.content as any).headerLogo && (
+                <div className="flex justify-center mb-8">
+                  <img
+                    src={(selectedNewsletter.content as any).headerLogo}
+                    alt="CAS Logo"
+                    className="h-24 w-auto"
+                  />
+                </div>
+              )}
+
+              {/* Event Images Grid */}
+              {(selectedNewsletter.content as any).eventImages && (
+                <div className="grid grid-cols-3 gap-4 mb-8">
+                  {(selectedNewsletter.content as any).eventImages.map(
+                    (img: string, imgIndex: number) => (
+                      <img
+                        key={imgIndex}
+                        src={img}
+                        alt={`CAS Event ${imgIndex + 1}`}
+                        className="w-full h-36 object-cover rounded-xl shadow-md"
+                      />
+                    ),
+                  )}
+                </div>
+              )}
+
               {/* Intro */}
-              <p className="text-gray-700 dark:text-white/80 text-base leading-relaxed mb-8">
-                {selectedNewsletter.content.intro}
-              </p>
+              {selectedNewsletter.content.intro && (
+                <p className="text-gray-700 dark:text-white/80 text-base leading-relaxed mb-8">
+                  {selectedNewsletter.content.intro}
+                </p>
+              )}
 
               {/* Sections */}
               <div className="space-y-6">
@@ -1298,6 +1343,19 @@ export default function Events() {
                               src={(section as any).bannerImage}
                               alt="Summit Banner"
                               className="w-full h-auto rounded-lg shadow-md"
+                            />
+                          </div>
+                        )}
+                      {(section as any).hasQrCode &&
+                        (section as any).qrCodeImage && (
+                          <div className="mt-4 mb-4 flex flex-col items-center gap-2">
+                            <p className="text-sm text-gray-600 dark:text-white/70 font-medium">
+                              Scan to Register:
+                            </p>
+                            <img
+                              src={(section as any).qrCodeImage}
+                              alt="Registration QR Code"
+                              className="w-32 h-32 rounded-lg shadow-md"
                             />
                           </div>
                         )}

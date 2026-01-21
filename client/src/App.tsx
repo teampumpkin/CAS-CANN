@@ -86,7 +86,6 @@ function Router() {
         <Route path="/upload-resource" component={UploadResource} />
         <Route path="/admin/resources/moderation" component={ResourceModeration} />
         <Route path="/community" component={Community} />
-        <Route path="/events" component={Events} />
         <Route path="/events-and-news" component={Events} />
         <Route path="/get-involved" component={GetInvolved} />
         <Route path="/join" component={JoinCAS} />

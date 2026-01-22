@@ -2702,10 +2702,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
             recordData.amyloidosistype = formData.amyloidosisType;
           }
           
-          // Address/contact info
-          if (formData.institutionAddress) recordData.institutionaddress = formData.institutionAddress;
-          if (formData.institutionPhone) recordData.institutionphone = formData.institutionPhone;
-          if (formData.institutionFax) recordData.institutionfax = formData.institutionFax;
+          // Address/contact info - truncate to Zoho field limits and clean up newlines
+          const cleanAndTruncate = (val: string, maxLen: number) => {
+            if (!val) return val;
+            return val.replace(/\r\n|\r|\n/g, ', ').substring(0, maxLen);
+          };
+          
+          // Institution field has 50 char limit - also clean Company fields
+          if (recordData.institution) {
+            recordData.institution = cleanAndTruncate(recordData.institution, 50);
+          }
+          if (recordData.Company) {
+            recordData.Company = cleanAndTruncate(recordData.Company, 100); // Company has longer limit
+          }
+          if (recordData.Institution_Name) {
+            recordData.Institution_Name = cleanAndTruncate(recordData.Institution_Name, 100);
+          }
+          
+          if (formData.institutionAddress) recordData.institutionaddress = cleanAndTruncate(formData.institutionAddress, 50);
+          if (formData.institutionPhone) recordData.institutionphone = formData.institutionPhone?.toString().replace(/[^\d\-\+\s\(\)]/g, '').substring(0, 30);
+          if (formData.institutionFax) recordData.institutionfax = formData.institutionFax?.toString().replace(/[^\d\-\+\s\(\)]/g, '').substring(0, 30);
           if (formData.province) recordData.province = formData.province;
           
           // Membership flags

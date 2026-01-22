@@ -2818,6 +2818,222 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Analyze Zoho CRM data - get breakdown by Lead_Source and Layout
+  app.get("/api/admin/zoho-crm-analysis", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Fetching Zoho CRM data for analysis...');
+      
+      // Fetch all leads from Zoho with pagination
+      const allLeads: any[] = [];
+      let page = 1;
+      let hasMore = true;
+      
+      while (hasMore && page <= 10) { // Max 10 pages (2000 records)
+        const response = await zohoCRMService.getRecords('Leads', {
+          page,
+          per_page: 200,
+          fields: 'id,Last_Name,Email,Lead_Source,Layout,Company,Created_Time'
+        });
+        
+        if (response && response.length > 0) {
+          allLeads.push(...response);
+          page++;
+          hasMore = response.length === 200;
+        } else {
+          hasMore = false;
+        }
+      }
+      
+      // Categorize by Lead_Source
+      const byLeadSource: Record<string, number> = {};
+      const byLayout: Record<string, number> = {};
+      const testRecords: any[] = [];
+      
+      for (const lead of allLeads) {
+        const source = lead.Lead_Source || 'Unknown';
+        const layout = lead.Layout?.name || 'Unknown';
+        
+        byLeadSource[source] = (byLeadSource[source] || 0) + 1;
+        byLayout[layout] = (byLayout[layout] || 0) + 1;
+        
+        // Check if test record
+        const email = lead.Email?.toLowerCase() || '';
+        const name = lead.Last_Name?.toLowerCase() || '';
+        if (email.includes('test') || email.includes('debug') || 
+            email.includes('vasi') || email.endsWith('@example.com') ||
+            name.includes('test')) {
+          testRecords.push({
+            id: lead.id,
+            name: lead.Last_Name,
+            email: lead.Email,
+            source: lead.Lead_Source
+          });
+        }
+      }
+      
+      // Find duplicates by email
+      const emailCounts: Record<string, { count: number; ids: string[]; names: string[] }> = {};
+      for (const lead of allLeads) {
+        const email = lead.Email?.toLowerCase();
+        if (email) {
+          if (!emailCounts[email]) {
+            emailCounts[email] = { count: 0, ids: [], names: [] };
+          }
+          emailCounts[email].count++;
+          emailCounts[email].ids.push(lead.id);
+          emailCounts[email].names.push(lead.Last_Name || '');
+        }
+      }
+      const duplicates = Object.entries(emailCounts)
+        .filter(([_, data]) => data.count > 1)
+        .map(([email, data]) => ({ email, ...data }))
+        .sort((a, b) => b.count - a.count);
+      
+      res.json({
+        success: true,
+        totalRecords: allLeads.length,
+        byLeadSource,
+        byLayout,
+        testRecordsCount: testRecords.length,
+        testRecords: testRecords.slice(0, 50),
+        duplicatesCount: duplicates.length,
+        duplicates: duplicates.slice(0, 30),
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('[Admin] Zoho analysis failed:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Analysis failed'
+      });
+    }
+  });
+
+  // Deduplicate Zoho CRM records (keep newest, delete older duplicates)
+  app.post("/api/admin/zoho-deduplicate", requireAutomationAuth, async (req, res) => {
+    try {
+      const { dryRun = true } = req.body;
+      console.log(`[Admin] ${dryRun ? 'DRY RUN: ' : ''}Deduplicating Zoho CRM records...`);
+      
+      // Fetch all leads
+      const allLeads: any[] = [];
+      let page = 1;
+      let hasMore = true;
+      
+      while (hasMore && page <= 10) {
+        const response = await zohoCRMService.getRecords('Leads', { page, per_page: 200, fields: 'id,Last_Name,Email,Created_Time' });
+        if (response && response.length > 0) {
+          allLeads.push(...response);
+          page++;
+          hasMore = response.length === 200;
+        } else {
+          hasMore = false;
+        }
+      }
+      
+      // Group by email
+      const emailGroups: Record<string, any[]> = {};
+      for (const lead of allLeads) {
+        const email = lead.Email?.toLowerCase();
+        if (email) {
+          if (!emailGroups[email]) emailGroups[email] = [];
+          emailGroups[email].push(lead);
+        }
+      }
+      
+      // Find IDs to delete (keep the one with highest ID = newest)
+      const idsToDelete: string[] = [];
+      for (const [email, leads] of Object.entries(emailGroups)) {
+        if (leads.length > 1) {
+          // Sort by ID descending, keep first (highest ID = newest)
+          leads.sort((a, b) => b.id.localeCompare(a.id));
+          for (let i = 1; i < leads.length; i++) {
+            idsToDelete.push(leads[i].id);
+          }
+        }
+      }
+      
+      console.log(`[Admin] Found ${idsToDelete.length} duplicate records to delete`);
+      
+      if (dryRun) {
+        res.json({
+          success: true,
+          message: `Dry run: Would delete ${idsToDelete.length} duplicate records`,
+          dryRun: true,
+          duplicateCount: idsToDelete.length,
+          idsToDelete: idsToDelete.slice(0, 50)
+        });
+      } else {
+        // Delete in batches
+        const results: any[] = [];
+        for (let i = 0; i < idsToDelete.length; i += 100) {
+          const batch = idsToDelete.slice(i, i + 100);
+          try {
+            await zohoCRMService['makeRequest'](`/Leads?ids=${batch.join(',')}`, 'DELETE');
+            results.push({ batch: i / 100 + 1, count: batch.length, status: 'deleted' });
+            console.log(`[Admin] Deleted duplicate batch ${i / 100 + 1}: ${batch.length} records`);
+          } catch (error) {
+            results.push({ batch: i / 100 + 1, count: batch.length, status: 'failed' });
+          }
+        }
+        
+        res.json({
+          success: true,
+          message: `Deleted ${idsToDelete.length} duplicate records from Zoho CRM`,
+          results
+        });
+      }
+    } catch (error) {
+      console.error('[Admin] Deduplication failed:', error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'Failed' });
+    }
+  });
+
+  // Delete test records from Zoho CRM
+  app.post("/api/admin/zoho-delete-test-records", requireAutomationAuth, async (req, res) => {
+    try {
+      const { dryRun = true, testRecordIds } = req.body;
+      console.log(`[Admin] ${dryRun ? 'DRY RUN: ' : ''}Deleting test records from Zoho CRM...`);
+      
+      if (!testRecordIds || !Array.isArray(testRecordIds) || testRecordIds.length === 0) {
+        return res.status(400).json({ success: false, error: 'testRecordIds array required' });
+      }
+      
+      if (dryRun) {
+        res.json({
+          success: true,
+          message: `Dry run: Would delete ${testRecordIds.length} test records from Zoho`,
+          dryRun: true,
+          recordCount: testRecordIds.length
+        });
+      } else {
+        // Delete in batches of 100 (Zoho limit)
+        const results: any[] = [];
+        for (let i = 0; i < testRecordIds.length; i += 100) {
+          const batch = testRecordIds.slice(i, i + 100);
+          const idsParam = batch.join(',');
+          
+          try {
+            await zohoCRMService['makeRequest'](`/Leads?ids=${idsParam}`, 'DELETE');
+            results.push({ batch: i / 100 + 1, count: batch.length, status: 'deleted' });
+            console.log(`[Admin] Deleted batch ${i / 100 + 1}: ${batch.length} records`);
+          } catch (error) {
+            results.push({ batch: i / 100 + 1, count: batch.length, status: 'failed', error: error instanceof Error ? error.message : 'Unknown error' });
+          }
+        }
+        
+        res.json({
+          success: true,
+          message: `Deleted ${testRecordIds.length} test records from Zoho CRM`,
+          results
+        });
+      }
+    } catch (error) {
+      console.error('[Admin] Zoho delete failed:', error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'Delete failed' });
+    }
+  });
+
   // Clean up test/debug records from database
   app.post("/api/admin/cleanup-test-records", requireAutomationAuth, async (req, res) => {
     try {

@@ -709,6 +709,25 @@ export class ZohoCRMService {
     }
   }
 
+  async getRecords(moduleName: string, options: { page?: number; per_page?: number; fields?: string } = {}): Promise<ZohoRecord[]> {
+    try {
+      const params = new URLSearchParams();
+      if (options.page) params.append('page', options.page.toString());
+      if (options.per_page) params.append('per_page', options.per_page.toString());
+      if (options.fields) params.append('fields', options.fields);
+      
+      const queryString = params.toString() ? `?${params.toString()}` : '';
+      const response = await this.makeRequest<ZohoApiResponse<ZohoRecord>>(
+        `/${moduleName}${queryString}`
+      );
+
+      return response.data || [];
+    } catch (error) {
+      console.error(`Failed to get records from module ${moduleName}:`, error);
+      return [];
+    }
+  }
+
   /**
    * Get all fields for a specific module (for metadata caching)
    */

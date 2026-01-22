@@ -2693,8 +2693,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
             recordData.discipline = formData.discipline;
           }
           
-          // Subspecialty
-          if (formData.subspecialty) recordData.subspecialty = formData.subspecialty;
+          // Subspecialty - truncate to 50 chars (Zoho field limit)
+          if (formData.subspecialty) {
+            recordData.subspecialty = formData.subspecialty.toString().substring(0, 50);
+          }
           
           // Amyloidosis type
           if (formData.amyloidosisType) {
@@ -2720,8 +2722,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
           }
           
           if (formData.institutionAddress) recordData.institutionaddress = cleanAndTruncate(formData.institutionAddress, 50);
-          if (formData.institutionPhone) recordData.institutionphone = formData.institutionPhone?.toString().replace(/[^\d\-\+\s\(\)]/g, '').substring(0, 30);
-          if (formData.institutionFax) recordData.institutionfax = formData.institutionFax?.toString().replace(/[^\d\-\+\s\(\)]/g, '').substring(0, 30);
+          
+          // Phone sanitization - strip extensions (x, ext, etc.) and keep only valid phone chars
+          const sanitizePhone = (phone: string) => {
+            if (!phone) return undefined;
+            // Remove everything after 'x', 'ext', or similar extension markers
+            let cleaned = phone.toString().split(/\s*[xX]\s*|\s*ext\.?\s*/i)[0];
+            // Keep only digits, dashes, plus, spaces, parentheses
+            cleaned = cleaned.replace(/[^\d\-\+\s\(\)]/g, '').trim();
+            return cleaned.substring(0, 30) || undefined;
+          };
+          
+          if (formData.institutionPhone) recordData.institutionphone = sanitizePhone(formData.institutionPhone);
+          if (formData.institutionFax) recordData.institutionfax = sanitizePhone(formData.institutionFax);
           if (formData.province) recordData.province = formData.province;
           
           // Membership flags

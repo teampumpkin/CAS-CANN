@@ -294,21 +294,65 @@ export class ZohoCRMService {
     }
   }
 
+  /**
+   * Get all layouts for a module (public method for debugging and configuration)
+   */
+  async getLayouts(moduleName: string = "Leads"): Promise<ZohoLayout[]> {
+    try {
+      const response = await this.makeRequest<ZohoLayoutResponse>(
+        `/settings/layouts?module=${moduleName}`
+      );
+      
+      if (!response.layouts || response.layouts.length === 0) {
+        console.log(`[Zoho CRM] No layouts found for module ${moduleName}`);
+        return [];
+      }
+      
+      console.log(`[Zoho CRM] Found ${response.layouts.length} layouts for ${moduleName}`);
+      return response.layouts;
+    } catch (error) {
+      console.error(`[Zoho CRM] Failed to get layouts for ${moduleName}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get layout ID by name for a module
+   */
+  async getLayoutIdByName(layoutName: string, moduleName: string = "Leads"): Promise<string | null> {
+    try {
+      const layouts = await this.getLayouts(moduleName);
+      const layout = layouts.find(l => l.name.toLowerCase() === layoutName.toLowerCase());
+      return layout?.id || null;
+    } catch (error) {
+      console.error(`[Zoho CRM] Failed to find layout "${layoutName}":`, error);
+      return null;
+    }
+  }
+
   // Core API methods
-  async createRecord(moduleName: string, recordData: ZohoRecord): Promise<ZohoRecord> {
+  async createRecord(moduleName: string, recordData: ZohoRecord, layoutId?: string): Promise<ZohoRecord> {
     try {
       // v8 API best practice: validate record data
       if (!recordData || Object.keys(recordData).length === 0) {
         throw new Error("Record data cannot be empty");
       }
 
+      // Add layout to record if specified
+      const dataToSend = layoutId 
+        ? { ...recordData, Layout: { id: layoutId } }
+        : recordData;
+
       // DEBUG: Log the exact payload being sent to Zoho
-      console.log(`[Zoho CRM DEBUG] Creating record with data:`, JSON.stringify(recordData, null, 2));
+      console.log(`[Zoho CRM DEBUG] Creating record with data:`, JSON.stringify(dataToSend, null, 2));
+      if (layoutId) {
+        console.log(`[Zoho CRM DEBUG] Using layout ID: ${layoutId}`);
+      }
 
       const response = await this.makeRequest<ZohoApiResponse<ZohoRecord>>(
         `/${moduleName}`,
         "POST",
-        { data: [recordData] }
+        { data: [dataToSend] }
       );
 
       // DEBUG: Log full API response

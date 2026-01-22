@@ -695,6 +695,72 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Zoho CRM layouts endpoint - fetch all layouts for a module
+  app.get("/api/zoho/layouts", async (req, res) => {
+    try {
+      const moduleName = (req.query.module as string) || "Leads";
+      const layouts = await zohoCRMService.getLayouts(moduleName);
+      
+      res.json({
+        success: true,
+        module: moduleName,
+        layoutCount: layouts.length,
+        layouts: layouts.map(layout => ({
+          id: layout.id,
+          name: layout.name,
+          sections: layout.sections?.map(s => ({ id: s.id, name: s.name, displayLabel: s.display_label })) || []
+        }))
+      });
+    } catch (error) {
+      console.error("Failed to fetch Zoho layouts:", error);
+      res.status(500).json({
+        success: false,
+        message: `Failed to fetch layouts: ${error instanceof Error ? error.message : 'Unknown error'}`
+      });
+    }
+  });
+
+  // Zoho CRM layout fields endpoint - fetch all fields for a specific layout
+  app.get("/api/zoho/layouts/:layoutName/fields", async (req, res) => {
+    try {
+      const { layoutName } = req.params;
+      const moduleName = (req.query.module as string) || "Leads";
+      
+      // Get layout ID
+      const layoutId = await zohoCRMService.getLayoutIdByName(layoutName, moduleName);
+      if (!layoutId) {
+        return res.status(404).json({
+          success: false,
+          message: `Layout "${layoutName}" not found in module ${moduleName}`
+        });
+      }
+      
+      // Get all fields for the module
+      const fields = await zohoCRMService.getModuleFields(moduleName);
+      
+      res.json({
+        success: true,
+        layout: { id: layoutId, name: layoutName },
+        module: moduleName,
+        fieldCount: fields.length,
+        fields: fields.map(f => ({
+          apiName: f.api_name,
+          label: f.field_label,
+          dataType: f.data_type,
+          required: f.required || false,
+          customField: f.custom_field || false,
+          picklistValues: f.pick_list_values?.map(p => p.display_value) || []
+        }))
+      });
+    } catch (error) {
+      console.error("Failed to fetch layout fields:", error);
+      res.status(500).json({
+        success: false,
+        message: `Failed to fetch layout fields: ${error instanceof Error ? error.message : 'Unknown error'}`
+      });
+    }
+  });
+
   // Retry failed submission endpoint
   app.post("/api/retry/submission/:id", async (req, res) => {
     try {

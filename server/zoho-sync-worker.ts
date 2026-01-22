@@ -108,11 +108,20 @@ export class ZohoSyncWorker {
       const formData = submission.submissionData as any;
       console.log(`[Zoho Sync Worker DEBUG] Form data for submission #${submission.id}:`, JSON.stringify(formData, null, 2));
       
+      // Get form configuration to check for layout
+      const { formConfigEngine } = await import("./form-config-engine");
+      const formConfig = await formConfigEngine.getFormConfiguration(submission.formName);
+      const layoutId = (formConfig as any)?.zohoLayoutId || undefined;
+      
+      if (layoutId) {
+        console.log(`[Zoho Sync Worker] Using layout ID: ${layoutId} (${(formConfig as any)?.zohoLayoutName || 'unknown'})`);
+      }
+      
       const zohoData = await this.buildZohoDataAsync(formData, submission.formName, submission.zohoModule);
       console.log(`[Zoho Sync Worker DEBUG] Zoho data for submission #${submission.id}:`, JSON.stringify(zohoData, null, 2));
 
-      // Attempt to sync to Zoho
-      const zohoRecord = await zohoCRMService.createRecord(submission.zohoModule, zohoData);
+      // Attempt to sync to Zoho with layout if configured
+      const zohoRecord = await zohoCRMService.createRecord(submission.zohoModule, zohoData, layoutId);
 
       // SUCCESS: Update submission as synced
       await storage.updateFormSubmission(submission.id, {

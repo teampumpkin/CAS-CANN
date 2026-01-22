@@ -264,6 +264,8 @@ export const formConfigurations = pgTable("form_configurations", {
   id: serial("id").primaryKey(),
   formName: varchar("form_name", { length: 255 }).notNull().unique(),
   zohoModule: varchar("zoho_module", { length: 100 }).notNull().default("Leads"),
+  zohoLayoutId: varchar("zoho_layout_id", { length: 100 }), // Zoho CRM layout ID (CAS, CANN, etc.)
+  zohoLayoutName: varchar("zoho_layout_name", { length: 255 }), // Layout name for reference
   leadSourceTag: text("lead_source_tag"), // Unique identifier in Zoho Lead_Source field
   displayFields: jsonb("display_fields"), // Fields to show on form UI (stored as JSON array)
   submitFields: jsonb("submit_fields"), // Field mappings: { formField: { zohoField, label, required, fieldType } }

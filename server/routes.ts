@@ -2644,6 +2644,220 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Re-sync orphaned records back to Zoho CRM as new leads
+  app.post("/api/admin/resync-orphaned-records", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Starting re-sync of orphaned records to Zoho CRM...');
+      
+      const { dryRun = true, limit = 100 } = req.body;
+      const layoutId = '6999043000000091055'; // CAS and CANN layout
+      
+      // Get orphaned submissions (failed with ORPHANED message)
+      const submissions = await storage.getFormSubmissions();
+      const orphanedSubmissions = submissions.filter(s => 
+        s.syncStatus === 'failed' && 
+        s.errorMessage?.includes('ORPHANED') &&
+        ['CAS & CANN Registration', 'CAS Registration', 'Excel Import - CAS Registration', 'Excel Import - PANN Membership'].includes(s.formName)
+      ).slice(0, limit);
+      
+      console.log(`[Admin] Found ${orphanedSubmissions.length} orphaned records to re-sync (limit: ${limit})`);
+      
+      const results: { id: number; oldZohoId: string | null; newZohoId?: string; status: string; error?: string }[] = [];
+      
+      for (const submission of orphanedSubmissions) {
+        try {
+          const formData = submission.submissionData as Record<string, any>;
+          
+          // Build complete record data for new lead
+          const recordData: Record<string, any> = {
+            Layout: { id: layoutId },
+            Lead_Source: submission.formName.includes('Excel') 
+              ? 'Excel Import - Re-synced' 
+              : submission.formName
+          };
+          
+          // Map all fields properly
+          if (formData.fullName) recordData.Last_Name = formData.fullName;
+          if (formData.email) recordData.Email = formData.email;
+          
+          // Institution -> Company (critical for Excel imports)
+          if (formData.institution) {
+            recordData.Company = formData.institution;
+            recordData.Institution_Name = formData.institution;
+            recordData.institution = formData.institution;
+          }
+          
+          // Professional designation
+          if (formData.discipline) {
+            recordData.Professional_Designation = formData.discipline;
+            recordData.discipline = formData.discipline;
+          }
+          
+          // Subspecialty
+          if (formData.subspecialty) recordData.subspecialty = formData.subspecialty;
+          
+          // Amyloidosis type
+          if (formData.amyloidosisType) {
+            recordData.Amyloidosis_Type = formData.amyloidosisType;
+            recordData.amyloidosistype = formData.amyloidosisType;
+          }
+          
+          // Address/contact info
+          if (formData.institutionAddress) recordData.institutionaddress = formData.institutionAddress;
+          if (formData.institutionPhone) recordData.institutionphone = formData.institutionPhone;
+          if (formData.institutionFax) recordData.institutionfax = formData.institutionFax;
+          if (formData.province) recordData.province = formData.province;
+          
+          // Membership flags
+          if (formData.wantsMembership !== undefined) {
+            const isMember = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
+            recordData.CAS_Member = isMember;
+            recordData.wantsmembership = isMember;
+          }
+          if (formData.wantsCANNMembership !== undefined) {
+            recordData.CANN_Member = formData.wantsCANNMembership === 'Yes' || formData.wantsCANNMembership === true;
+          }
+          
+          // Communication preferences
+          if (formData.wantsCommunications !== undefined) {
+            const wantsCom = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true;
+            recordData.CAS_Communications = wantsCom ? 'Yes' : 'No';
+            recordData.wantscommunications = wantsCom;
+            recordData.communicationconsent = wantsCom;
+          }
+          if (formData.cannCommunications !== undefined) {
+            recordData.CANN_Communications = formData.cannCommunications === 'Yes' || formData.cannCommunications === true ? 'Yes' : 'No';
+          }
+          
+          // Services map
+          if (formData.wantsServicesMapInclusion !== undefined) {
+            const wantsMap = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true;
+            recordData.Services_Map_Inclusion = wantsMap ? 'Yes' : 'No';
+            recordData.wantsservicesmapinclusion = wantsMap;
+            recordData.servicesmapconsent = wantsMap;
+          }
+          
+          // Source form tracking
+          recordData.Source_Form = submission.formName;
+          
+          if (dryRun) {
+            console.log(`[Admin DryRun] Would create new Zoho lead for orphaned record ${submission.id}`);
+            results.push({ id: submission.id, oldZohoId: submission.zohoCrmId, status: 'dry_run' });
+          } else {
+            // Create new lead in Zoho
+            const newLead = await zohoCRMService.createRecord('Leads', recordData);
+            const newZohoId = newLead.id || newLead.details?.id;
+            
+            // Update database with new Zoho ID
+            await storage.updateFormSubmission(submission.id, {
+              syncStatus: 'synced',
+              zohoCrmId: newZohoId,
+              errorMessage: null
+            });
+            
+            console.log(`[Admin] Re-synced orphaned record ${submission.id} -> new Zoho ID: ${newZohoId}`);
+            results.push({ id: submission.id, oldZohoId: submission.zohoCrmId, newZohoId, status: 'resynced' });
+          }
+        } catch (error) {
+          const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+          console.error(`[Admin] Failed to re-sync record ${submission.id}:`, errorMsg);
+          results.push({ id: submission.id, oldZohoId: submission.zohoCrmId, status: 'failed', error: errorMsg });
+        }
+      }
+      
+      const successCount = results.filter(r => r.status === 'resynced' || r.status === 'dry_run').length;
+      const failedCount = results.filter(r => r.status === 'failed').length;
+      
+      res.json({
+        success: true,
+        message: dryRun 
+          ? `Dry run: ${successCount} orphaned records would be re-synced to Zoho`
+          : `Re-synced ${successCount} orphaned records to Zoho, ${failedCount} failed`,
+        dryRun,
+        totalProcessed: results.length,
+        successCount,
+        failedCount,
+        results,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('[Admin] Re-sync failed:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Re-sync failed'
+      });
+    }
+  });
+
+  // Clean up test/debug records from database
+  app.post("/api/admin/cleanup-test-records", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Cleaning up test/debug records from database...');
+      
+      const { dryRun = true } = req.body;
+      
+      // List of test form names to delete
+      const testFormPatterns = [
+        'oauth_test%',
+        'test_%',
+        'pipeline%',
+        'database-pipeline%',
+        'production%test%',
+        'routing%test%',
+        'simple-crm%',
+        'verification%',
+        'contact'
+      ];
+      
+      // Get all submissions
+      const submissions = await storage.getFormSubmissions();
+      const testSubmissions = submissions.filter(s => {
+        const name = s.formName.toLowerCase();
+        return testFormPatterns.some(pattern => {
+          const regex = new RegExp('^' + pattern.replace(/%/g, '.*') + '$', 'i');
+          return regex.test(s.formName);
+        });
+      });
+      
+      console.log(`[Admin] Found ${testSubmissions.length} test records to delete`);
+      
+      if (dryRun) {
+        res.json({
+          success: true,
+          message: `Dry run: Would delete ${testSubmissions.length} test records`,
+          dryRun: true,
+          recordsToDelete: testSubmissions.map(s => ({ id: s.id, formName: s.formName })),
+          timestamp: new Date().toISOString()
+        });
+      } else {
+        // Delete each test record
+        let deletedCount = 0;
+        for (const submission of testSubmissions) {
+          try {
+            await storage.deleteFormSubmission(submission.id);
+            deletedCount++;
+          } catch (error) {
+            console.error(`[Admin] Failed to delete record ${submission.id}:`, error);
+          }
+        }
+        
+        res.json({
+          success: true,
+          message: `Deleted ${deletedCount} test records`,
+          dryRun: false,
+          deletedCount,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('[Admin] Cleanup failed:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Cleanup failed'
+      });
+    }
+  });
+
   // Data Sync Admin Routes
   // Import the data sync services
   const path = await import('path');

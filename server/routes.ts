@@ -2496,6 +2496,137 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Batch update Zoho records with correct field mappings
+  app.post("/api/admin/fix-zoho-records", async (req, res) => {
+    try {
+      console.log('[Admin] Starting batch update of Zoho records with correct field mappings...');
+      
+      const { dryRun = true, limit = 10 } = req.body;
+      const layoutId = '6999043000000091055'; // CAS and CANN layout
+      
+      // Get all synced submissions that need fixing
+      const submissions = await storage.getFormSubmissions();
+      const syncedSubmissions = submissions.filter(s => 
+        s.syncStatus === 'synced' && 
+        s.zohoCrmId && 
+        ['CAS & CANN Registration', 'CAS Registration', 'Excel Import - CAS Registration', 'Excel Import - PANN Membership'].includes(s.formName)
+      ).slice(0, limit);
+      
+      console.log(`[Admin] Found ${syncedSubmissions.length} records to update (limit: ${limit})`);
+      
+      const results: { id: number; zohoId: string; status: string; error?: string }[] = [];
+      
+      for (const submission of syncedSubmissions) {
+        try {
+          const formData = submission.submissionData as Record<string, any>;
+          
+          // Build comprehensive field mapping
+          const updateData: Record<string, any> = {
+            Layout: { id: layoutId }
+          };
+          
+          // Standard fields
+          if (formData.fullName) updateData.Last_Name = formData.fullName;
+          if (formData.email) updateData.Email = formData.email;
+          
+          // Professional designation from discipline
+          if (formData.discipline) {
+            updateData.Professional_Designation = formData.discipline;
+            updateData.discipline = formData.discipline;
+          }
+          
+          // Institution - map to both Company and Institution_Name
+          if (formData.institution) {
+            updateData.Company = formData.institution;
+            updateData.Institution_Name = formData.institution;
+            updateData.institution = formData.institution;
+          }
+          
+          // Subspecialty
+          if (formData.subspecialty) {
+            updateData.subspecialty = formData.subspecialty;
+          }
+          
+          // Amyloidosis type
+          if (formData.amyloidosisType) {
+            updateData.Amyloidosis_Type = formData.amyloidosisType;
+            updateData.amyloidosistype = formData.amyloidosisType;
+          }
+          
+          // Institution address/phone
+          if (formData.institutionAddress) updateData.institutionaddress = formData.institutionAddress;
+          if (formData.institutionPhone) updateData.institutionphone = formData.institutionPhone;
+          if (formData.institutionFax) updateData.institutionfax = formData.institutionFax;
+          
+          // Membership flags
+          if (formData.wantsMembership) {
+            updateData.CAS_Member = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
+            updateData.wantsmembership = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
+          }
+          if (formData.wantsCANNMembership) {
+            updateData.CANN_Member = formData.wantsCANNMembership === 'Yes' || formData.wantsCANNMembership === true;
+          }
+          
+          // Communication preferences
+          if (formData.wantsCommunications) {
+            updateData.CAS_Communications = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true ? 'Yes' : 'No';
+            updateData.wantscommunications = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true;
+            updateData.communicationconsent = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true;
+          }
+          if (formData.cannCommunications) {
+            updateData.CANN_Communications = formData.cannCommunications === 'Yes' || formData.cannCommunications === true ? 'Yes' : 'No';
+          }
+          
+          // Services map
+          if (formData.wantsServicesMapInclusion) {
+            updateData.Services_Map_Inclusion = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true ? 'Yes' : 'No';
+            updateData.wantsservicesmapinclusion = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true;
+            updateData.servicesmapconsent = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true;
+          }
+          
+          // Province if available
+          if (formData.province) updateData.province = formData.province;
+          
+          // Source form tracking
+          updateData.Source_Form = submission.formName;
+          
+          if (dryRun) {
+            console.log(`[Admin DryRun] Would update Zoho record ${submission.zohoCrmId}:`, JSON.stringify(updateData, null, 2));
+            results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'dry_run', error: undefined });
+          } else {
+            await zohoCRMService.updateRecord('Leads', submission.zohoCrmId!, updateData);
+            console.log(`[Admin] Updated Zoho record ${submission.zohoCrmId} successfully`);
+            results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'updated', error: undefined });
+          }
+        } catch (error) {
+          const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+          console.error(`[Admin] Failed to update record ${submission.id}:`, errorMsg);
+          results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'failed', error: errorMsg });
+        }
+      }
+      
+      const successCount = results.filter(r => r.status === 'updated' || r.status === 'dry_run').length;
+      const failedCount = results.filter(r => r.status === 'failed').length;
+      
+      res.json({
+        success: true,
+        message: dryRun 
+          ? `Dry run completed: ${successCount} records would be updated`
+          : `Updated ${successCount} records, ${failedCount} failed`,
+        dryRun,
+        totalProcessed: results.length,
+        results,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('[Admin] Batch update failed:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Batch update failed'
+      });
+    }
+  });
+
   // Data Sync Admin Routes
   // Import the data sync services
   const path = await import('path');

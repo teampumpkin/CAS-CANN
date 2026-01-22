@@ -2496,8 +2496,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Batch update Zoho records with correct field mappings
-  app.post("/api/admin/fix-zoho-records", async (req, res) => {
+  // Batch update Zoho records with correct field mappings (protected admin endpoint)
+  app.post("/api/admin/fix-zoho-records", requireAutomationAuth, async (req, res) => {
     try {
       console.log('[Admin] Starting batch update of Zoho records with correct field mappings...');
       
@@ -2601,20 +2601,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
         } catch (error) {
           const errorMsg = error instanceof Error ? error.message : 'Unknown error';
           console.error(`[Admin] Failed to update record ${submission.id}:`, errorMsg);
-          results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'failed', error: errorMsg });
+          
+          // Check if record is orphaned (Zoho ID no longer exists)
+          const isOrphaned = errorMsg.includes('the id given seems to be invalid');
+          
+          if (isOrphaned && !dryRun) {
+            // Mark as failed with orphaned message in database
+            await storage.updateFormSubmission(submission.id, {
+              syncStatus: 'failed',
+              errorMessage: 'ORPHANED: Zoho record no longer exists - ID was deleted from Zoho CRM'
+            });
+            results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'orphaned', error: errorMsg });
+          } else {
+            results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'failed', error: errorMsg });
+          }
         }
       }
       
       const successCount = results.filter(r => r.status === 'updated' || r.status === 'dry_run').length;
+      const orphanedCount = results.filter(r => r.status === 'orphaned').length;
       const failedCount = results.filter(r => r.status === 'failed').length;
       
       res.json({
         success: true,
         message: dryRun 
           ? `Dry run completed: ${successCount} records would be updated`
-          : `Updated ${successCount} records, ${failedCount} failed`,
+          : `Updated ${successCount} records, ${orphanedCount} orphaned (marked in DB), ${failedCount} failed`,
         dryRun,
         totalProcessed: results.length,
+        successCount,
+        orphanedCount,
+        failedCount,
         results,
         timestamp: new Date().toISOString()
       });

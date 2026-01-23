@@ -1,0 +1,188 @@
+id,form_name,full_name,email,discipline,subspecialty,institution,province,amyloidosis_type,zoho_crm_id,status,created_at
+248,CAS & CANN Registration,Nital Jain (test),nitaljain56@gmail.com,PM,Neurology,Test Institute,,Both ATTR and AL,6999043000001729001,completed,2026-01-23 14:14:20.793699
+247,CAS & CANN Registration,Nital Jain (test),nitaljain26@gmail.com,PM,IT,Test Institute,,Both ATTR and AL,6999043000001726001,completed,2026-01-23 14:10:50.487352
+246,CAS & CANN Registration,Nital Jain ,nitaljain26@gmail.com,PM,IT,Test Institute,,Both ATTR and AL,6999043000001724002,completed,2026-01-23 14:00:34.206242
+245,CAS & CANN Registration,vasi,vasi@gmail.com,Cardiology,neurology,psg,,ATTR,6999043000001719003,completed,2026-01-23 09:38:59.559698
+244,CAS & CANN Registration,Hilary Hagel,hilary.hagel@islandhealth.ca,Registered Nurse,Cardiology ,RJH Heart Function Clinic,,ATTR,6999043000001669041,completed,2026-01-22 21:16:40.67926
+239,CAS & CANN Registration,Alexis Richard ,lexis_m14@hotmail.com,Registered Nurse ,Cardiology- HF,RIH heart Function Clinic ,,Both ATTR and AL,6999043000001643002,completed,2026-01-20 23:32:52.310139
+217,CAS & CANN Registration,Verify Fields Now,verifynow@example.com,Cardiology,Interventional,Verify Medical Center,,ATTR,6999043000001667026,completed,2026-01-16 11:44:34.916183
+212,CAS & CANN Registration,Final Verify User,verify@example.com,Cardiology,Heart Failure,Verify Hospital,,ATTR,6999043000001670010,completed,2026-01-16 11:32:31.069265
+202,CAS & CANN Registration,Dorothy Roberts,cardio1researchdata@gmail.com,Patient support group coordinator ,Cardiology,Cardio 1,,ATTR,6999043000001560001,completed,2026-01-15 17:40:27.961337
+201,CAS & CANN Registration,Dorothy Roberts,dorothyroberts1@me.com,ATTR supports group coordinator ,Cardiology ,Cardio 1,,ATTR,6999043000001558002,completed,2026-01-15 17:37:57.698714
+197,CAS & CANN Registration,Rohini Charan,rohini.charan@fraserhealth.ca,RN,cardiology,Heart Function clinic,,ATTR,6999043000001528002,completed,2026-01-13 16:32:21.359041
+195,Excel Import - PANN Membership,Rowles,karen.rowles@albertahealthservices.ca,Nurse ,,Alberta Health Services,,,6999043000001667036,completed,2025-12-16 19:25:12.848921
+194,Excel Import - PANN Membership,Yurasek,kelly.yurasek@ucalgary.ca,"",,Alberta Health Services ,,,6999043000001688007,completed,2025-12-16 19:25:12.824606
+193,Excel Import - PANN Membership,Loyola,melissa.loyola@albertahealthservices.ca,Nurse Clinician ,,Alberta Health Services - Arthur Child Cancer Center,,,6999043000001681031,completed,2025-12-16 19:25:12.802849
+192,Excel Import - PANN Membership,Shields,deb.shields@albertahealthservices.ca,Nurse Clinician ,,Alberta Health Services- South Health Campus,,,6999043000001700021,completed,2025-12-16 19:25:12.77988
+191,Excel Import - PANN Membership,Hayes ,kyla.hayes@saskhealthauthority.ca,Clinical Nurse Educator ,,CarioNeuro Diagnostics Heart Function Clinic ,,,6999043000001685023,completed,2025-12-16 19:25:12.756015
+190,Excel Import - PANN Membership,Young ,clayton.young@saskhealthauthority.ca,Pharmacist,,Regina General Hospital Heart Function Clinic,,,6999043000001673033,completed,2025-12-16 19:25:12.733085
+189,Excel Import - PANN Membership,Nurkowski,joshua.nurkowski@saskhealthauthority.ca,Pharmacist,,Regina General Hospital Heart Function Clinic,,,6999043000001683010,completed,2025-12-16 19:25:12.709958
+188,Excel Import - PANN Membership,Wihlidal,Cara.Wihlidal@saskhealthauthority.ca,Nurse Practitioner  ,,Regina General Hospital Heart Function Clinic,,,6999043000001669020,completed,2025-12-16 19:25:12.686696
+187,Excel Import - PANN Membership,Vossen-Anweiler,meg.vossen-anweiler@saskhealthauthority.ca,Nurse Practitioner  ,,Saskatchewan Health Authority,,,6999043000001663015,completed,2025-12-16 19:25:12.663752
+186,Excel Import - PANN Membership,Kosar,Lynette.Kosar@saskhealthauthority.ca,Pharmacist,,Saskatchewan Health Authority,,,6999043000001669035,completed,2025-12-16 19:25:12.640084
+185,Excel Import - PANN Membership,Jelisavac,Krista.Jelisavac@saskhealthauthority.ca,Nurse ,,Saskatchewan Health Authority  Royal University Hospital ,,,6999043000001362246,completed,2025-12-16 19:25:12.616608
+184,Excel Import - PANN Membership,Townsend,ktownsend.pvri@gmail.com,Pharmacist,,"",,,6999043000001363318,completed,2025-12-16 19:25:12.593572
+183,Excel Import - PANN Membership,Stoeber,Adriane.Stoeber@saskhealthauthority.ca,Nurse ,,"",,,6999043000001356281,completed,2025-12-16 19:25:12.570305
+182,Excel Import - PANN Membership,Veenhuyzen,jveenhuy@ucalgary.ca,Nurse ,,University of Calgary (Alberta Health Services),,,6999043000001357221,completed,2025-12-16 19:25:12.547143
+181,Excel Import - PANN Membership,Ramm,rramm@cardio1.ca,Nurse ,,Cardio 1 ,,,6999043000001352196,completed,2025-12-16 19:25:12.523977
+180,Excel Import - PANN Membership,Peters,Jpeters2@sbgh.mb.ca,Nurse ,,St. Boniface Hospital.   WRHA,,,6999043000001347226,completed,2025-12-16 19:25:12.499109
+179,Excel Import - PANN Membership,Penner,lorih.penner@saskhealthauthority.ca,Nurse Practitioner  ,,"Saskatchewan Health Authority, Royal University Hospital",,,6999043000001349240,completed,2025-12-16 19:25:12.473911
+178,Excel Import - PANN Membership,Penner,jennifer.penner@ahs.ca,Nurse Clinician ,,Alberta Health Services/Chinook Regional Hospital/  Alberta Healthy Living Program,,,6999043000001358260,completed,2025-12-16 19:25:12.450103
+177,Excel Import - PANN Membership,Litwin,lyndsay.litwin@gmail.com,Nurse Clinician ,,Alberta Health Services- South Health Campus,,,6999043000001689017,completed,2025-12-16 19:25:12.426745
+176,Excel Import - PANN Membership,Lemay,llemay@sbgh.mb.ca,Nurse ,,SBGH- cardiac clinics,,,6999043000001673038,completed,2025-12-16 19:25:12.402992
+175,Excel Import - PANN Membership,Knight,jknight@edmontoncardiology.com,Nurse Clinician ,,Edmonton Cardiology Consultants ,,,6999043000001690014,completed,2025-12-16 19:25:12.37879
+174,Excel Import - PANN Membership,Gelineau,kgelineau@sbgh.mb.ca,Nurse ,,WRHA- St Boniface Hospital,,,6999043000001670040,completed,2025-12-16 19:25:12.355991
+173,Excel Import - PANN Membership,Evans,tara.evans@albertahealthservices.ca,Nurse Clinician ,,Alberta Health Services-south zone CHR,,,6999043000001682033,completed,2025-12-16 19:25:12.326809
+172,Excel Import - PANN Membership,Duncan,shannon.duncan@saskhealthauthority.ca,Nurse ,,Saskatchewan Health Authority,,,6999043000001346265,completed,2025-12-16 19:25:12.301709
+171,Excel Import - PANN Membership,Cox,jaime.cox@albertahealthservices.ca,Nurse Practitioner  ,,Alberta Health Services - Chinook Regional Hospital - Lethbridge,,,6999043000001331317,completed,2025-12-16 19:25:12.276993
+170,Excel Import - PANN Membership,Chartrand,schartrand1@sbgh.mb.ca,Nurse ,,St. Boniface Hospital ,,,6999043000001352206,completed,2025-12-16 19:25:12.250582
+169,Excel Import - PANN Membership,Bosley,debra.bosley@albertahealthservices.ca,Nurse Clinician ,,Alberta Health Services- South Health Campus,,,6999043000001340236,completed,2025-12-16 19:25:12.225421
+168,Excel Import - PANN Membership,Barnabé,sbarnabe@sbgh.mb.ca,Nurse Practitioner  ,,Saint-Boniface Hospital,,,6999043000001347231,completed,2025-12-16 19:25:12.201217
+167,Excel Import - PANN Membership,Bailey,monique.bailey@ahs.ca,Nurse Clinician ,,Alberta Health Services Chinook Regional Hospital,,,6999043000001359226,completed,2025-12-16 19:25:12.159351
+166,Excel Import - CAS Registration,Anne Marie Carr ,Info@madhattr.ca,Patient ,Interested cardiology & neurology,Vita Clinic ,,,6999043000001685028,completed,2025-12-16 19:24:02.061896
+165,Excel Import - CAS Registration,Kerri Schellenberg,kerri.schellenberg@usask.ca,Physician,Neuromuscular neurology,University of Saskatchewan,,,6999043000001684029,completed,2025-12-16 19:24:02.039211
+164,Excel Import - CAS Registration,Emmanuelle Massie,emmanuelle.massie@interiorhealth.ca,Physician,Cardiology,Kelowna Cardiology Associate,,,6999043000001700026,completed,2025-12-16 19:24:02.016452
+163,Excel Import - CAS Registration,Alex Van,alex.van@queensu.ca,Resident Physician,Cardiology ,Kingston Health Sciences Centre,,,6999043000001344168,completed,2025-12-16 19:24:01.993604
+162,Excel Import - CAS Registration,Kim Anderson,kim.anderson@nshealth.ca,Physician,Cardiology,QEII Halifax Infirmary,,,6999043000001338141,completed,2025-12-16 19:24:01.970462
+161,Excel Import - CAS Registration,Amanda Fiander,aefiander@gmail.com,Neurologist,Neuromuscular Neurology,Maritime Neurology,,,6999043000001343176,completed,2025-12-16 19:24:01.947883
+160,Excel Import - CAS Registration,Shahin Khayambashi,shahin.khayambashi1@vch.ca,Physician,Neurology,Vancouver General Hospital,,,6999043000001360191,completed,2025-12-16 19:24:01.925873
+159,Excel Import - CAS Registration,Olivier Desplantie,olivier.desplantie@mail.mcgill.ca,Physician,"Cardiology (HF, cardiomyopathies, transplant, cardiac rehab)","Royal Jubilee Hospital
+Pulse Complete Cardiac Care clinic",,,6999043000001338146,completed,2025-12-16 19:24:01.902943
+158,Excel Import - CAS Registration,Masood Rezaei,masood.rezaei@queensu.ca,Research assistant,cardiology,Queen's university,,,6999043000001353206,completed,2025-12-16 19:24:01.88056
+157,Excel Import - CAS Registration,Rebecca Wood,rebecca.wood@queensu.ca,Research assistant,"Cardiology, Neurology",Queen's University & Kingston Health Sciences Center,,,6999043000001348176,completed,2025-12-16 19:24:01.857956
+156,Excel Import - CAS Registration,Sameer Chhibber ,Sameer.chhibber@ancentre.ca,Physician ,Neurology,University of Calgary and Alberta Neurologic Centre,,,6999043000001354147,completed,2025-12-16 19:24:01.835129
+155,Excel Import - CAS Registration,Gordon Jewett,gjewett@ucalgary.ca,Physician,Neurology,University of Calgary Neuromuscular Clinic,,,6999043000001350205,completed,2025-12-16 19:24:01.812455
+154,Excel Import - CAS Registration,Weiji Sun,21WS33@queensu.ca,Student (Trainee),Cardiology,Queen's University,,,6999043000001364225,completed,2025-12-16 19:24:01.789697
+153,Excel Import - CAS Registration,Fatima Saqib,fatima2saqib@gmail.com,Health Sciences Graduate ,"Cardiology, Heart Failure, Heart Attacks ","Hotel Dieu Hospital, Kingston Health Sciences Centre ",,,6999043000001355201,completed,2025-12-16 19:24:01.766926
+152,Excel Import - CAS Registration,Mike Morris,mikemorrisnp@outlook.com,Nurse Practitioner ,Cardiology - Heart Failure specific,Western Memorial Regional Hospital ,,,6999043000001361201,completed,2025-12-16 19:24:01.743945
+151,Excel Import - CAS Registration,Djalal Abdoulaye Haroun,djalal6322@gmail.com,Cardiovascular Surgery Resident,Adult Cardiovascular Surgery,"Institute of cardiology and cardiovascular surgery, Havana, Cuba",,,6999043000001357191,completed,2025-12-16 19:24:01.72088
+150,Excel Import - CAS Registration,Ian Paterson,dpaterson@ottawaheart.ca,physician,cardiology,UOHI,,,6999043000001342151,completed,2025-12-16 19:24:01.69894
+149,Excel Import - CAS Registration,Natalie Ho,natalie.mho@gmail.com,Physician,Cardiology,Scarborough Health Network,,,6999043000001359186,completed,2025-12-16 19:24:01.676251
+148,Excel Import - CAS Registration,Peiman Marzban,pmarzban@cardio1.ca,Physician,Cardiology,Cardio 1,,,6999043000001351207,completed,2025-12-16 19:24:01.653184
+147,Excel Import - CAS Registration,Chantel Anderson,chantel.anderson@ahs.ca,Nursing (CRN),"hematology, clinical research ",ACCC -Arthur Child Cancer Centre,,,6999043000001360196,completed,2025-12-16 19:24:01.6305
+146,Excel Import - CAS Registration,Tara Dzwiniel,tara.dzwiniel@ahs.ca,Genetic Counsellor,"Cardiology
+Neurology","AHS, University of Alberta Hospital",,,6999043000001347161,completed,2025-12-16 19:24:01.607688
+145,Excel Import - CAS Registration,David Bewick,bewickd@nbnet.nb.ca,Cardiologist,"Echo,heart failure,clinical",New Brunswick Heart Center,,,6999043000001363283,completed,2025-12-16 19:24:01.584811
+144,Excel Import - CAS Registration,Brendon Macknak,macknakb@gmail.com,Physician,Cardiology,Regina General Hospital,,,6999043000001344173,completed,2025-12-16 19:24:01.56166
+143,Excel Import - CAS Registration,Aws Almufleh,almufleh.aws@gmail.com,Physician,Cardiology,Kingston Health Sciences Centre,,,6999043000001331262,completed,2025-12-16 19:24:01.538815
+142,Excel Import - CAS Registration,Diego Delgado,diego.delgado@uhn.ca,Physician,Cardiology,UHN,,,6999043000001352171,completed,2025-12-16 19:24:01.516322
+141,Excel Import - CAS Registration,Marie-Claude Parent,drmc.parent@gmail.com,Physician ,Cardiology ,Institut de Cardiologie de Montréal ,,,6999043000001350215,completed,2025-12-16 19:24:01.493422
+140,Excel Import - CAS Registration,Rajin Choudhury,rajin_c@yahoo.com,Cardiology,Cardiac Amyloidosis,"LIBIN Cardiovascular Institute, Cumming School of Medicine, University of Calgary",,,6999043000001362191,completed,2025-12-16 19:24:01.470802
+139,Excel Import - CAS Registration,Alex Jahangirvand ,alexjahangirvand@yahoo.com,Physician ,Neurology and Neuromuscular Specialist ,Barrie Neurology Clinic ,,,6999043000001345220,completed,2025-12-16 19:24:01.448251
+138,Excel Import - CAS Registration,Martha Louzada,martha.louzada@lhsc.on.ca,physician,hematology,London Health Sciences Centre,,,6999043000001343181,completed,2025-12-16 19:24:01.424846
+137,Excel Import - CAS Registration,Stephen Parkin,stephen.parkin@bccancer.bc.ca,Physician,Hematology,Vancouver General Hospital/University of British Columbia,,,6999043000001357201,completed,2025-12-16 19:24:01.402964
+136,Excel Import - CAS Registration,Amer Ghavanini,ahmadamer.ghavanini@thp.ca,Physician,Neurologist and Neuromuscular Disorders Subspecialist,"Credit Valley Hospital, Trillium Health Partners, Mississauga, Ontario",,,6999043000001342161,completed,2025-12-16 19:24:01.380241
+135,Excel Import - CAS Registration,Kendra Townsend,ktownsend.pvri@gmail.com,Pharmacist,Cardiology,Not specifically employed by a centre/institution.  Work on informal contract with Dr. A. Lavoie in Regina.,,,6999043000001347171,completed,2025-12-16 19:24:01.356827
+134,Excel Import - CAS Registration,Julia Varghese,Julia.varghese@bccancer.bc.ca,Physician ,Hematology,Vancouver General Hospital ,,,6999043000001364235,completed,2025-12-16 19:24:01.335357
+133,Excel Import - CAS Registration,Ashley Freeman,ashley.freeman@bccancer.bc.ca,Physician,Hematology,BC Cancer Victoria,,,6999043000001353211,completed,2025-12-16 19:24:01.310745
+132,Excel Import - CAS Registration,Colin Stewart,colin.stewart@albertahealthservices.ca,Resident Physician,Hematology,ACCC,,,6999043000001343191,completed,2025-12-16 19:24:01.287752
+131,Excel Import - CAS Registration,Melissa Ignaczak,melissa.ignaczak@albertahealthservices.ca,Nursing,"Clinical trials, hematology",Arthur J.E. Child Comprehensive Cancer Centre,,,6999043000001351217,completed,2025-12-16 19:24:01.264326
+130,Excel Import - CAS Registration,Julie Côté,julie.cote.33@ulaval.ca,Physician,Hematology,CHU de Québec,,,6999043000001364240,completed,2025-12-16 19:24:01.241496
+129,Excel Import - CAS Registration,Tony Reiman,Anthony.Reiman@HorizonNB.ca,physician,Medical Oncology,Saint John Regional Hospital,,,6999043000001349195,completed,2025-12-16 19:24:01.218795
+128,Excel Import - CAS Registration,Richard LeBlanc,richard.leblanc.med2@ssss.gouv.qc.ca,Physician,Hematology,Hôpital Maisonneuve-Rosemont,,,6999043000001690019,completed,2025-12-16 19:24:01.194698
+127,Excel Import - CAS Registration,Zainab Altaha,Dr.zainabaltaha@gmail.com,Physician,Cardiology,University of Calgary,,,6999043000001671016,completed,2025-12-16 19:24:01.171773
+126,Excel Import - CAS Registration,Pallavi Ganguli,22fw6@queensu.ca,Physician,Hematology,The Ottawa Hospital - General Campus,,,6999043000001361211,completed,2025-12-16 19:24:01.148074
+125,Excel Import - CAS Registration,Sita Bhella,sita.bhella@uhn.ca,physician,hematology,Princess Margaret Cancer Centre,,,6999043000001678024,completed,2025-12-16 19:24:01.125195
+124,Excel Import - CAS Registration,Anitha Jambula,anitha.jambula@ahs.ca,Research Coordinator,Hematology,Arthur Child J.E. Comprhensive Cancer Centre,,,6999043000001664021,completed,2025-12-16 19:24:01.101943
+123,Excel Import - CAS Registration,Nina Mason,nina.mason@ahs.ca,Clinicla trial nurse,"hematology, cardiology critical care",Arthur Child Cancer Center,,,6999043000001700031,completed,2025-12-16 19:24:01.078983
+122,Excel Import - CAS Registration,Mohammed A. Aljama,aljama@hhsc.ca,Physician,Hematology,"Juravinski cancer centre
+McMaster University",,,6999043000001683015,completed,2025-12-16 19:24:01.057352
+121,Excel Import - CAS Registration,Rami Kotb,rkotb@cancercare.mb.ca,Physician,Hematology / Oncology,CancerCare Manitoba,,,6999043000001664026,completed,2025-12-16 19:24:01.034792
+120,Excel Import - CAS Registration,Ibraheem Othman,ibraheem.othman@saskcancer.ca,Physician,Hematology,ABCC ( Allan Blaire Cancer Center),,,6999043000001663020,completed,2025-12-16 19:24:01.011807
+119,Excel Import - CAS Registration,Hira Mian,mianh@mcmaster.ca,MD,Hematology,McMaster/JCC,,,6999043000001354162,completed,2025-12-16 19:24:00.98916
+118,Excel Import - CAS Registration,Christopher Cipkar,ccipkar@toh.ca,Physician ,Malignant Hematology,The Ottawa Hospital/University of Ottawa,,,6999043000001338161,completed,2025-12-16 19:24:00.966668
+117,Excel Import - CAS Registration,Kevin Song,ksong@bccancer.bc.ca,Physician,Hematology,Vancouver General Hospital,,,6999043000001353216,completed,2025-12-16 19:24:00.943968
+116,Excel Import - CAS Registration,Anna Giulione,anna.giulione@ahs.ca,Nurse - Clinical research nurse,Hematology,Arthur Child Comprehensive Cancer Centre,,,6999043000001346230,completed,2025-12-16 19:24:00.920535
+115,Excel Import - CAS Registration,Charles Kassardjian,charles.kassardjian@unityhealth.to,Physician,Neurology (Neuromuscular),St. Michael's Hospital,,,6999043000001331267,completed,2025-12-16 19:24:00.896305
+114,Excel Import - CAS Registration,Alina Gerrie,agerrie@bccancer.bc.ca,Physician,Hematology,BC Cancer,,,6999043000001346235,completed,2025-12-16 19:24:00.872695
+113,Excel Import - CAS Registration,Erma Gardner,erma.gardner@bccancer.bc.ca,Physician,Hematology,BC Cancer Kelowna,,,6999043000001682038,completed,2025-12-16 19:24:00.849687
+112,Excel Import - CAS Registration,Michael Heffernan,heffernan.cdn@gmail.com,Physician,Cardiologist,Halton Healthcare,,,6999043000001356256,completed,2025-12-16 19:24:00.827097
+111,Excel Import - CAS Registration,Marc Benoit,mabenoit@ualberta.ca,Physician,Cardiology,"Royal Alexandra Hospital
+Edmonton Cardiology Consultants",,,6999043000001671027,completed,2025-12-16 19:24:00.80416
+110,Excel Import - CAS Registration,Mary Halpine,dr.mary.halpine@horizonnb.ca,MD,Physiatry,Moncton City Hospital,,,6999043000001358230,completed,2025-12-16 19:24:00.781886
+109,Excel Import - CAS Registration,Matti Allen,mattallen@toh.ca,Physician,Physical Medicine and Rehabilitation,The Ottawa Hospital ,,,6999043000001685033,completed,2025-12-16 19:24:00.758161
+108,Excel Import - CAS Registration,Anita Chan,AnitaY.M.Chan@albertahealthservices.ca,Physician,Cardiology,"Mazankowski Alberta Heart Institute, University of Alberta Hospital",,,6999043000001671032,completed,2025-12-16 19:24:00.735566
+107,Excel Import - CAS Registration,Lynette Kosar,lynette.kosar@saskhealthauthority.ca,pharmacist,cardiology (heart failure),Heart Function Clinic / Saskatchewan Health Authority (Saskatoon),,,6999043000001674033,completed,2025-12-16 19:24:00.713162
+106,Excel Import - CAS Registration,Kyla Hayes,kyla.hayes@saskhealthauthortiy.ca,Nursing,Cardiology,Sask Health Authority-- Regina Heart Function Clinic,,,6999043000001670050,completed,2025-12-16 19:24:00.689855
+105,Excel Import - CAS Registration,Juan Duero,juan.dueroposada@uhn.ca,Physician,Cardiology,University Health Network,,,6999043000001684034,completed,2025-12-16 19:24:00.66685
+104,Excel Import - CAS Registration,Jason Hart,jhart@bccancer.bc.ca,Physician,Hematology,BC Cancer - Victoria,,,6999043000001700036,completed,2025-12-16 19:24:00.645237
+103,Excel Import - CAS Registration,Victoria DeVito,vdevito@ualberta.ca,Physician,Hematology,Cross Cancer Institute,,,6999043000001355216,completed,2025-12-16 19:24:00.62273
+102,Excel Import - CAS Registration,Danyal Ladha,danyal.ladha1@gmail.com,Physician ,Hematology,Princess Margaret Cancer Centre,,,6999043000001356261,completed,2025-12-16 19:24:00.59935
+100,Excel Import - CAS Registration,Lakshman Vasanthamohan,lvasanthamohan@lh.ca,physician,hematology,Lakeridge Oshawa,,,6999043000001333217,completed,2025-12-16 19:24:00.553794
+99,Excel Import - CAS Registration,Manar Hamwd,drmanarhamed@gmail.com,Physician ,Hematology,Private,,,6999043000001361216,completed,2025-12-16 19:24:00.530871
+96,Excel Import - CAS Registration,Andrée-Anne Pelland ,andreeanne.pelland@gmail.com,"Physician, Multiple Myeloma Fellow",Hematology-Oncology ,Currently fellow at BC Cancer Vancouver. Afterwards staff position at CHU de Québec. ,,,6999043000001333222,completed,2025-12-16 19:24:00.459034
+95,Excel Import - CAS Registration,Leonard Minuk,lminuk4@cancercare.mb.ca,Physician,Hematology,CancerCare Manitoba,,,6999043000001347181,completed,2025-12-16 19:24:00.435672
+93,Excel Import - CAS Registration,Nicole Laferriere,laferrin@tbh.net,Physician,Hematology,Thunder Bay Regional Health Sciences,,,6999043000001690024,completed,2025-12-16 19:24:00.390912
+92,Excel Import - CAS Registration,Morgan Krauter,krauterm@rvh.on.ca,Nurse practitioner,Heart failure ,"Royal Victoria Regional Health Centre, Barrie, ON",,,6999043000001669025,completed,2025-12-16 19:24:00.369201
+91,Excel Import - CAS Registration,Krista Jelisavac,krista.jelisavac@saskhealthauthority.ca,Nurse Clinician ,Cardiology/heart failure/amyloidosis ,"Royal University Hospital Saskatoon, SK 
+Cardiology Outpatient Services ",,,6999043000001675026,completed,2025-12-16 19:24:00.345967
+90,Excel Import - CAS Registration,Karen Yu,karen.yu2@nygh.on.ca,Nursing,cardiology,North York General Hospital,,,6999043000001677007,completed,2025-12-16 19:24:00.322304
+89,Excel Import - CAS Registration,Spencer Martin,spencer.martin@lhsc.on.ca,Pharmacist,Cardiology,London Health Sciences Centre,,,6999043000001682048,completed,2025-12-16 19:24:00.299411
+88,Excel Import - CAS Registration,Shannon Duncan,shannon.duncan@saskhealthauthority.ca,Nursing,Heart Function clinic,"Regina Heart Function Clinic, Regina General Hospital",,,6999043000001669030,completed,2025-12-16 19:24:00.251355
+87,Excel Import - CAS Registration,Ryan Davey,ryan.davey@lhsc.on.ca,Physician,Cardiology,"London Health Sciences Centre, Western University",,,6999043000001674038,completed,2025-12-16 19:24:00.228842
+86,Excel Import - CAS Registration,Mona Mahal,mona.mahal@fraserhealth.ca,RN,Cardiology,Jim Pattison-Cardiac Amyloidosis Clinic,,,6999043000001688012,completed,2025-12-16 19:24:00.206073
+85,Excel Import - CAS Registration,Conor Sheridan,0cs48@queensu.ca,Resident physician,Cardiology,Queen’s University,,,6999043000001678029,completed,2025-12-16 19:24:00.181756
+84,Excel Import - CAS Registration,Rodolfo Pike,"Rodolfopike@gmail.com",Nurse Practitioner’s ,Cardiology,"Heart Function Clinic
+NLHS",,,6999043000001679039,completed,2025-12-16 19:24:00.152558
+82,Excel Import - CAS Registration,Anil Gupta,anilgupta@rogers.com,Physician. ,Cardiologist ,"One Heart Care
+Trillium Health Partners",,,6999043000001354167,completed,2025-12-16 19:24:00.107309
+81,Excel Import - CAS Registration,Robert Millet,Robertjhmiller@gmail.com,Physician,Cardiology,Calgary,,,6999043000001359201,completed,2025-12-16 19:24:00.083667
+80,Excel Import - CAS Registration,Tammy Ryan,tammy.ryan@medportal.ca,Physician ,Cardiology,University of Calgary,,,6999043000001356266,completed,2025-12-16 19:24:00.060712
+79,Excel Import - CAS Registration,Suzanne Ho,suzanne.ho@vch.ca,Nurse,Cardiology ,Vancouver Cardiac Amyloid Clinic,,,6999043000001333232,completed,2025-12-16 19:24:00.036843
+78,Excel Import - CAS Registration,Kai Yi Wu,Kaiyi4@ualberta.ca,Resident physician ,Cardiology ,University of Alberta ,,,6999043000001364260,completed,2025-12-16 19:24:00.015182
+76,Excel Import - CAS Registration,Peng Wang,pw2@ualberta.ca,Hematologist/Physician,Hematology,Cross Cancer Institute,,,6999043000001354172,completed,2025-12-16 19:23:59.969657
+75,Excel Import - CAS Registration,irwindeep sandhu,irwindeep.sandhu@ualberta.ca,MD,heamtology,Cross Cancer Institute,,,6999043000001362201,completed,2025-12-16 19:23:59.947315
+74,Excel Import - CAS Registration,Michelle Hartwick,Michelle.hartwick@ucalgary.ca,Nursing ,Cardiology research ,University of Calgary ,,,6999043000001363303,completed,2025-12-16 19:23:59.924675
+73,Excel Import - CAS Registration,Kim Ronak,kronak@ucalgary.ca,"Research Coordinator, Amyloid research",Cardiology,University of Calgary,,,6999043000001663025,completed,2025-12-16 19:23:59.901829
+72,Excel Import - CAS Registration,Caifeng (Ivy) Yang,Ivyyoung1010@hotmail.com,Nursing,Hematology,Arthur Child Comprehensive Cancer Center in AHS,,,6999043000001676027,completed,2025-12-16 19:23:59.878877
+71,Excel Import - CAS Registration,Mervyn Carr ,merv.carr@gmail.com,Caregiver and advocate,None,Transthyretin amyloidosis Canada ,,,6999043000001671021,completed,2025-12-16 19:23:59.856994
+70,Excel Import - CAS Registration,Michelle Tsang ,Michelle.y.tsang@gmail.com ,Physician ,Neurology ,Community neurology ,,,6999043000001688017,completed,2025-12-16 19:23:59.833666
+69,Excel Import - CAS Registration,Shelley Zieroth,szieroth@sbgh.mb.ca,physician,cardiology,"St. Boniface Hospital
+Winnipeg, Manitoba",,,6999043000001664031,completed,2025-12-16 19:23:59.81094
+68,Excel Import - CAS Registration,Ahmad Didi,ahmad_didi87@hotmail.com,Physician,cardiology,"Saint Boniface Hospital, Winnipeg",,,6999043000001681021,completed,2025-12-16 19:23:59.787344
+67,Excel Import - CAS Registration,S. Allan Schaffer,aschaffer@sbgh.mb.ca,Physician,Cardiology,"Heart Function and Heart Transplant Clinics
+St. Boniface Hospital, Winnipeg
+University of Manitoba",,,6999043000001677012,completed,2025-12-16 19:23:59.764165
+66,Excel Import - CAS Registration,Allison Alldrit,allison.alldrit@gmail.com,Nurse Practitioner,Cardiology,Cardiac Care North York,,,6999043000001331277,completed,2025-12-16 19:23:59.741232
+65,Excel Import - CAS Registration,Fernando Rivera-Theurel,fernando.riveratheurel@uhn.ca,Physician,Cardiology / Cardio Oncology/ Cardiac Rehab,University of Toronto / University Health Network,,,6999043000001359206,completed,2025-12-16 19:23:59.718388
+64,Excel Import - CAS Registration,Katie Connolly ,Katherine.Connolly@medportal.ca,Physician ,Cardiology ,"McMaster university /
+St Joseph’s Healthcare Hamilton ",,,6999043000001700051,completed,2025-12-16 19:23:59.676378
+63,Excel Import - CAS Registration,Calvin Tong,calvin616@gmail.com,Physician,Cardiology,Surrey Memorial Hospital/ JPOCSC,,,6999043000001344198,completed,2025-12-16 19:23:59.653074
+62,Excel Import - CAS Registration,Peter Mitoff,peter.mitoff@gmail.com,Physician,Cardiology,Unity Health / St. Joseph's Health Centre,,,6999043000001360206,completed,2025-12-16 19:23:59.631096
+61,Excel Import - CAS Registration,Kyla Hayes,kyla.hayes@saskhealthauthority.ca,Nursing,Cardiology & oncology,Regina Amyloidosis Clinic / Regina Heart Function Clinic,,,6999043000001348196,completed,2025-12-16 19:23:59.608356
+60,Excel Import - CAS Registration,Freya Kelly,fkelly@ottawaheart.ca,Nurse,Cardiology,University of Ottawa Heart Institute,,,6999043000001342176,completed,2025-12-16 19:23:59.584975
+59,Excel Import - CAS Registration,Keith Dares,Kw.dares@gmail.com,Patient Advocate,Patient,None,,,6999043000001354177,completed,2025-12-16 19:23:59.562341
+58,Excel Import - CAS Registration,Kareem Morant,Kareem.morant@gmail.com,Physician,Cardiology,North York General Hospital,,,6999043000001333242,completed,2025-12-16 19:23:59.539279
+57,Excel Import - CAS Registration,Rami MASSIE,rami.massie@mcgill.ca,Physician ,Neurologist - Neuromuscular medicine and EMG,"Montreal Neurological Hospital
+McGill University Health Center",,,6999043000001340216,completed,2025-12-16 19:23:59.516901
+56,Excel Import - CAS Registration,Gordon Moe,gordon.moe@unityhealth.to,Physician,cardiology,St. Michael's Hospital,,,6999043000001350230,completed,2025-12-16 19:23:59.495173
+55,Excel Import - CAS Registration,Melissa Loyola ,melissa.loyola@albertahealthservices.ca,Nursing ,Hematology - Multiple myeloma and amyloidosis,Tom Baker Cancer Centre soon to be Arthur Child Cancer Center,,,6999043000001361221,completed,2025-12-16 19:23:59.47258
+54,Excel Import - CAS Registration,Jennifer Knight,jknight@edmontoncardiology.com,RN/ NP student,Cardiology,Edmonton Cardiology Consultants - Cardiac Amyloid Program (Dr. Marc Benoit),,,6999043000001347186,completed,2025-12-16 19:23:59.449425
+53,Excel Import - CAS Registration,Monique Bailey,monique.bailey@ahs.ca,Registered Nurse,Cardiology,"Heart Function Clinic
+Chinook Regional Hospital
+",,,6999043000001663030,completed,2025-12-16 19:23:59.42605
+52,Excel Import - CAS Registration,Sophie Barnabé,sbarnabe@sbgh.mb.ca,Nurse Practitioner,Cardiology,St-Boniface Hospital,,,6999043000001684039,completed,2025-12-16 19:23:59.403774
+51,Excel Import - CAS Registration,Cathy (Cathleen) Huculak,cathleen.huculak@ahs.ca,Genetic Counsellor,Cardiovascular genetics,Clinical Genetics,,,6999043000001665033,completed,2025-12-16 19:23:59.381734
+50,Excel Import - CAS Registration,Scott Ryan,scott.ryan@ucalgary.ca,Research Scientist,"neurology, protein folding disorders",University of Calgary,,,6999043000001681026,completed,2025-12-16 19:23:59.358799
+49,Excel Import - CAS Registration,Lyndsay Litwin,lyndsay.litwin@gmail.com,Nurse Clinician,Cardiology,South Health Campus,,,6999043000001676032,completed,2025-12-16 19:23:59.335816
+48,Excel Import - CAS Registration,Dr. Denise Chan,denise.chan@albertahealthservices.ca,physician,Radiology and Nuclear Medicine,"Foothills Medical Center (Alberta Health Services)
+South Health Campus (Alberta Health Services)
+EFW Radiology Clinics",,,6999043000001663035,completed,2025-12-16 19:23:59.313578
+47,Excel Import - CAS Registration,Carrie LaFond,clafond@mic.ca,Diagnostic Imaging,Nuclear Medicine,MIC Medical Imaging,,,6999043000001670045,completed,2025-12-16 19:23:59.289912
+46,Excel Import - CAS Registration,Jonathan Howlett,"jghowlet@ucalgary.ca
+",Physician,Cardiology,University of Calgary,,,6999043000001680013,completed,2025-12-16 19:23:59.26672
+45,Excel Import - CAS Registration,Ilias Mylonas,imylonas@gmail.com,Physician,Cardiology and nuclear imaging,Libin Cardiovascular Institute/TotalCardiology,,,6999043000001687026,completed,2025-12-16 19:23:59.243796
+44,Excel Import - CAS Registration,Melissa Loyola,Melissa.loyola@ahs.ca,Nursing ,Hematology - multiple myeloma and amyloidosis ,Tom Baker Cancer Centre soon to be Arthur Child Cancer Centre,,,6999043000001678034,completed,2025-12-16 19:23:59.222244
+43,Excel Import - CAS Registration,Karan Shahi,shahikaran1999@gmail.com,Student,Cardiology,"Libin Cardiovascular Institute, University of Calgary",,,6999043000001355226,completed,2025-12-16 19:23:59.199474
+42,Excel Import - CAS Registration,Chris Hahn,chriatopher.hahn@ahs.ca,Physician,Neurology,University of Calgary,,,6999043000001356271,completed,2025-12-16 19:23:59.17583
+41,Excel Import - CAS Registration,Debra Bosley,deb.bosley1@gmail.com,Registered Nurse,Nurse Clinician for Cardiac Amyloidosis Clinic,South Heath Campus,,,6999043000001333247,completed,2025-12-16 19:23:59.150755
+40,Excel Import - CAS Registration,Jennifer Koppel,jennifer.koppel@ahs.ca,Nurse Practitioner ,Cardiology,Albert Health Services ,,,6999043000001347196,completed,2025-12-16 19:23:59.126734
+39,Excel Import - CAS Registration,Fern Marusiak,fern.marusiak@albertahealthservices.ca,registered nurse,Cardiology,"Amyloidosis Program of Calgary
+Cardiac Amyloidosis Clinic, Alberta Health Services",,,6999043000001364265,completed,2025-12-16 19:23:59.101949
+38,Excel Import - CAS Registration,Robert Miller,robert.miller@ahs.ca,Physician,Cardiology,"University of Calgary, Libin Cardiovascular Institute",,,6999043000001345240,completed,2025-12-16 19:23:59.075994
+37,Excel Import - CAS Registration,Benjamin Adam,baadam@ualberta.ca,Pathologist,"Renal, cardiac and pulmonary pathology",University of Alberta Hospital,,,6999043000001343211,completed,2025-12-16 19:23:59.054145
+36,Excel Import - CAS Registration,Alexander Tamm,astamm@ualberta.ca,Physician,Nuclear Medicine,University of Alberta,,,6999043000001331282,completed,2025-12-16 19:23:59.031051
+35,Excel Import - CAS Registration,Ellen lewis,Ellen.lewis@ahs.ca,"Medical student 
+NP ",Hematology ,Tbcc,,,6999043000001354182,completed,2025-12-16 19:23:59.006624
+34,Excel Import - CAS Registration,Kate Elzinga,kate.elzinga@ahs.ca,Physician,Plastic surgery,University of Calgary,,,6999043000001350240,completed,2025-12-16 19:23:58.97766
+31,CAS & CANN Registration,nina mason,nina.mason@cancercarealberta.ca,Bachelors of nursing,hematology ,arthurchild cancer center,,AL,6999043000001664036,completed,2025-12-16 17:23:51.831828

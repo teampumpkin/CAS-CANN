@@ -110,3 +110,63 @@ All event dates and past/upcoming detection are locked to **EST (Eastern Standar
 
 ### Integrations
 - **Zoho CRM**: For lead capture, data management, and bulk imports.
+
+## ⚠️ Protected Files - DO NOT MODIFY
+
+The following files are critical to the AWS ECS production deployment pipeline. **DO NOT modify these files without explicit approval from the project lead.**
+
+| File | Purpose | Risk if Modified |
+|------|---------|------------------|
+| `Dockerfile` | Builds production Docker image | Breaks deployment |
+| `.github/workflows/deploy.yml` | GitHub Actions deployment workflow | Breaks CI/CD pipeline |
+| `server/index.prod.ts` | Production server entry point (no Vite) | Server crashes in production |
+
+### Why These Files Are Protected
+- They control the live website at **amyloid.ca**
+- They have been tested and verified to work with AWS ECS
+- Incorrect changes can cause deployment failures or site outages
+
+## Collaborator Guidelines
+
+### Adding New Features
+1. **Create new pages** in `client/src/pages/` and register in `App.tsx`
+2. **Add API routes** in `server/routes.ts`
+3. **Update navigation** in `client/src/components/Header.tsx`
+
+### Showing/Hiding Features Between Staging and Production
+Use the environment hook - **DO NOT modify protected files**:
+
+```typescript
+// In your component
+import { isStaging, isProduction } from "@/hooks/useEnvironment";
+
+// Show only in staging (Replit)
+{isStaging() && <MyNewFeature />}
+
+// Show only in production (AWS)
+{isProduction() && <ProductionOnlyFeature />}
+```
+
+### Example: Adding a new page only visible in staging
+```typescript
+// In Header.tsx navItems
+...(stagingOnly
+  ? [
+      { name: "My New Page", href: "/my-new-page" },
+    ]
+  : []),
+```
+
+### What You CAN Safely Modify
+- `client/src/pages/*` - Add/edit pages
+- `client/src/components/*` - Add/edit components
+- `server/routes.ts` - Add API endpoints
+- `shared/schema.ts` - Add database schemas
+- `client/src/components/Header.tsx` - Update navigation (use `stagingOnly` for restrictions)
+
+### What You CANNOT Modify Without Approval
+- `Dockerfile`
+- `.github/workflows/deploy.yml`
+- `server/index.prod.ts`
+- `server/vite.ts`
+- `vite.config.ts`

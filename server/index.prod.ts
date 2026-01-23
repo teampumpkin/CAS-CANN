@@ -1,3 +1,24 @@
+// ============================================================================
+// ⚠️  PROTECTED FILE - DO NOT MODIFY WITHOUT APPROVAL
+// ============================================================================
+// This is the PRODUCTION server entry point for AWS ECS deployment.
+// It intentionally has NO Vite imports to avoid build errors.
+//
+// For development, use: server/index.ts (includes Vite dev server)
+// For production, use: server/index.prod.ts (this file)
+//
+// Before modifying:
+// 1. Consult with the project lead
+// 2. Ensure changes don't break the production build
+// 3. Test with: npx esbuild server/index.prod.ts --platform=node --bundle
+//
+// To add/hide features between staging and production:
+// - Use isStaging()/isProduction() from client/src/hooks/useEnvironment.ts
+// - Do NOT modify this file for feature visibility
+//
+// Last verified: January 2025
+// ============================================================================
+
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic, log } from "./static";

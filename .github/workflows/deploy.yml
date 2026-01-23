@@ -1,3 +1,22 @@
+# ============================================================================
+# ⚠️  PROTECTED FILE - DO NOT MODIFY WITHOUT APPROVAL
+# ============================================================================
+# This workflow deploys to AWS ECS production at amyloid.ca
+# Any changes can break the live website or deployment pipeline.
+#
+# Before modifying:
+# 1. Consult with the project lead
+# 2. Test workflow changes in a separate branch first
+# 3. Verify AWS credentials and ECS configuration
+#
+# Protected settings:
+# - VITE_ENVIRONMENT=production (controls feature visibility)
+# - ECS_CLUSTER, ECS_SERVICE (AWS infrastructure)
+# - ECR_REPOSITORY (Docker image storage)
+#
+# Last verified: January 2025
+# ============================================================================
+
 name: Deploy to AWS ECS
 
 on:

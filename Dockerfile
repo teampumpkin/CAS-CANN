@@ -1,3 +1,17 @@
+# ============================================================================
+# ⚠️  PROTECTED FILE - DO NOT MODIFY WITHOUT APPROVAL
+# ============================================================================
+# This file is part of the AWS ECS production deployment pipeline.
+# Any changes to this file can break the live website at amyloid.ca
+#
+# Before modifying:
+# 1. Consult with the project lead
+# 2. Test changes locally with: docker build -t test-build .
+# 3. Verify the container starts: docker run -p 5000:5000 test-build
+#
+# Last verified: January 2025
+# ============================================================================
+
 # Stage 1: Build application
 FROM node:20-alpine AS builder
 

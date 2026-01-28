@@ -1,0 +1,172 @@
+Scope Document: Dynamic Multi-Form Lead Capture to Zoho CRM
+Project Name:
+
+Automated Multi-Form Lead Capture & CRM Sync (Website → Zoho CRM)
+
+1. Objective
+
+Capture leads from any form on the website automatically.
+
+Push all submissions to Zoho CRM Leads module (or other modules dynamically).
+
+Automatically create missing fields in Zoho CRM — no manual work required.
+
+Label every lead with the source form name for tracking and reporting.
+
+Handle all field types: text, email, phone, picklist, multi-select, boolean.
+
+Provide logging and error tracking for monitoring submissions.
+
+2. Key Features
+2.1 Dynamic Form Integration
+
+Accept submissions from any website form via a single endpoint.
+
+Form submissions include:
+
+Form name (unique identifier)
+
+All fields (dynamic; any number or type)
+
+Supports adding new forms anytime without code changes.
+
+2.2 Automated Field Management
+
+Fetch all existing fields from Zoho CRM via Metadata API.
+
+Compare incoming form fields with existing CRM fields.
+
+Automatically create missing fields:
+
+Text for free-text inputs
+
+Picklist for dropdowns
+
+Multi-select for checkboxes
+
+Boolean for Yes/No fields
+
+2.3 Data Push to Zoho CRM
+
+Use Core API to push data into Leads module or dynamically assigned module.
+
+Include a Source_Form field for each lead.
+
+Handles:
+
+Single value fields
+
+Multi-select arrays
+
+Picklist mapping
+
+2.4 Logging & Monitoring
+
+Log every submission (success or failure) in backend console or file.
+
+Retry mechanism for failed Zoho API calls.
+
+Optional: Email alerts on repeated failures.
+
+2.5 Multi-Form Scalability
+
+Any new website form can be integrated by submitting its form_name and data.
+
+No backend code changes required for new forms.
+
+Optional configuration JSON to map forms to different Zoho modules.
+
+3. Technical Architecture
+[Website Forms] 
+     ↓ (form submission)
+[Replit Backend / API Server]
+     ↓
+[Dynamic Field Sync Engine] → Zoho Metadata API
+     ↓
+[Data Push Engine] → Zoho Core API (Leads/Other Modules)
+     ↓
+[Logging / Monitoring]
+
+
+Components:
+
+Website Forms:
+
+HTML forms on your Replit-hosted website.
+
+Must include form_name in submission.
+
+Replit Backend/API Server:
+
+Node.js server endpoint /submit-form.
+
+Accepts any form submission dynamically.
+
+Processes fields, syncs with CRM, pushes data.
+
+Dynamic Field Sync Engine:
+
+Fetches fields from Zoho CRM.
+
+Creates missing fields automatically via Metadata API.
+
+Data Push Engine:
+
+Sends the submission to Zoho using Core API.
+
+Includes Source_Form field for tracking.
+
+Logging & Monitoring:
+
+Tracks success/failure of submissions.
+
+Retry mechanism for failed API calls.
+
+4. Data Flow Example
+
+Form Submission Example:
+
+{
+  "form_name": "Join CANN Today",
+  "data": {
+    "Full Name": "Jane Doe",
+    "Email": "jane@example.com",
+    "Professional Designation": "Nurse Clinician",
+    "Sub-specialty Focus": "Cardiology",
+    "Amyloidosis Patient Type": "ATTR",
+    "Institution Name": "Heart Care Center",
+    "Communication Consent": "Yes",
+    "Educational Interests": [
+      "Mental health considerations for amyloidosis",
+      "Case presentations/discussion"
+    ],
+    "Presentation Opportunity": "No"
+  }
+}
+
+
+Backend Process:
+
+Detect form_name → "Join CANN Today".
+
+Fetch existing CRM fields → compare with form data.
+
+Create missing fields automatically.
+
+Add Source_Form = "Join CANN Today".
+
+Push data to Zoho Leads module.
+
+Log success/failure.
+
+5. Environment & Configuration
+.env
+ZOHO_ACCESS_TOKEN=your_zoho_oauth_token
+ZOHO_ORG_ID=your_zoho_org_id
+DEFAULT_MODULE=Leads
+
+Optional Form-Module Mapping
+{
+  "Join CANN Today": { "module": "Leads" },
+  "Another Form": { "module": "Contacts" }
+}

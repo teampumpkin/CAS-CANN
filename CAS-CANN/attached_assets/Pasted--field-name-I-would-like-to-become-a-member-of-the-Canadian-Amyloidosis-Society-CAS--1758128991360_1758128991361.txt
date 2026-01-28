@@ -1,0 +1,130 @@
+[
+  {
+    "field_name": "I would like to become a member of the Canadian Amyloidosis Society (CAS)",
+    "label": "Membership request",
+    "required": true,
+    "type": "radio",
+    "options": ["Yes", "No"],
+    "dependency": null
+  },
+  {
+    "field_name": "Full name (first and last)",
+    "label": "Full name",
+    "required": true,
+    "type": "text",
+    "dependency": {
+      "field": "Membership request",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "Email address",
+    "label": "Email address",
+    "required": true,
+    "type": "text",
+    "dependency": {
+      "field": "Membership request",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "Discipline",
+    "label": "Physician, nursing, genetic counsellor, etc",
+    "required": true,
+    "type": "text",
+    "dependency": {
+      "field": "Membership request",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "Sub-specialty area of focus",
+    "label": "Cardiology, hematology, neurology, etc",
+    "required": true,
+    "type": "text",
+    "dependency": {
+      "field": "Membership request",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "Center or Clinic Name/Institution",
+    "label": "Clinic/Institution name",
+    "required": true,
+    "type": "text",
+    "dependency": {
+      "field": "Membership request",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "I would like to receive communication from the Canadian Amyloidosis Society (email, newsletters)",
+    "label": "Consent for communication",
+    "required": true,
+    "type": "radio",
+    "options": ["Yes", "No"],
+    "dependency": {
+      "field": "Membership request",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "I would like my center/clinic to be included in the Canadian Amyloidosis Services Map",
+    "label": "Consent for services map inclusion",
+    "required": true,
+    "type": "radio",
+    "options": ["Yes", "No"],
+    "dependency": null
+  },
+  {
+    "field_name": "Center or Clinic Name/Institution",
+    "label": "Clinic/Institution name",
+    "required": true,
+    "type": "text",
+    "dependency": {
+      "field": "Consent for services map inclusion",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "Center or Clinic Address",
+    "label": "Clinic/Institution address",
+    "required": true,
+    "type": "text",
+    "dependency": {
+      "field": "Consent for services map inclusion",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "Center or Clinic Phone Number",
+    "label": "Clinic/Institution phone",
+    "required": true,
+    "type": "text",
+    "dependency": {
+      "field": "Consent for services map inclusion",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "Center or Clinic Fax Number",
+    "label": "Clinic/Institution fax",
+    "required": true,
+    "type": "text",
+    "dependency": {
+      "field": "Consent for services map inclusion",
+      "value": "Yes"
+    }
+  },
+  {
+    "field_name": "I may be contacted, if needed, by the CAS to provide information for the Canadian Amyloidosis Services Map",
+    "label": "Consent for follow up",
+    "required": true,
+    "type": "radio",
+    "options": ["Yes", "No"],
+    "dependency": {
+      "field": "Consent for services map inclusion",
+      "value": "Yes"
+    }
+  }
+]

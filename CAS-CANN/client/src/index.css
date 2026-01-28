@@ -1,0 +1,606 @@
+@import url('https://fonts.googleapis.com/css2?family=Rosarivo:ital@0;1&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(0, 175, 230, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0, 221, 137, 0.03) 0%, transparent 50%);
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px; /* Account for fixed header height */
+  }
+  
+  /* Fix text overlapping for headings */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+  }
+  
+  h1 {
+    line-height: 1.1;
+  }
+  
+  /* Specifically fix large headings */
+  .text-4xl, .text-5xl, .text-6xl {
+    line-height: 1.1;
+  }
+
+  /* Accessibility: Screen Reader Only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Accessibility: Skip Links */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 0 0 4px 4px;
+    z-index: 100;
+    transition: top 0.3s;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  /* Navigation Dropdown Fix */
+  .dropdown-container {
+    position: relative;
+    z-index: 9999 !important;
+  }
+
+  .dropdown-menu {
+    position: absolute !important;
+    z-index: 9999 !important;
+    top: 100% !important;
+    left: 0 !important;
+    min-width: 280px !important;
+    background: rgb(17, 24, 39) !important;
+    backdrop-filter: blur(12px) !important;
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  .dropdown-menu > div {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+  }
+}
+
+:root {
+  /* Light Theme - Medical Professional */
+  --background: hsl(197, 30%, 98%);
+  --foreground: hsl(0, 0%, 9%);
+  --card: hsl(197, 40%, 99%);
+  --card-foreground: hsl(0, 0%, 9%);
+  --popover: hsl(197, 40%, 99%);
+  --popover-foreground: hsl(0, 0%, 9%);
+  --primary: hsl(197, 100%, 46%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(197, 30%, 95%);
+  --secondary-foreground: hsl(0, 0%, 9%);
+  --muted: hsl(197, 30%, 95%);
+  --muted-foreground: hsl(215, 15%, 46%);
+  --accent: hsl(197, 30%, 95%);
+  --accent-foreground: hsl(0, 0%, 9%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(197, 25%, 88%);
+  --input: hsl(197, 25%, 88%);
+  --ring: hsl(197, 100%, 46%);
+  --radius: 0.5rem;
+  
+  /* CAS Brand Colors */
+  --cas-blue: #00AFE6;
+  --cas-green: #00DD89;
+  
+  /* Light Theme Specific Variables */
+  --section-bg: hsl(197, 25%, 97%);
+  --card-border: hsl(197, 40%, 85%);
+  --gradient-from: hsl(197, 50%, 96%);
+  --gradient-to: hsl(158, 50%, 96%);
+}
+
+.dark {
+  /* Dark Theme - Professional Medical */
+  --background: hsl(224, 71%, 4%);
+  --foreground: hsl(213, 31%, 91%);
+  --card: hsl(224, 71%, 4%);
+  --card-foreground: hsl(213, 31%, 91%);
+  --popover: hsl(224, 71%, 4%);
+  --popover-foreground: hsl(213, 31%, 91%);
+  --primary: hsl(197, 100%, 46%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(215, 27%, 17%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --muted: hsl(215, 27%, 17%);
+  --muted-foreground: hsl(217, 10%, 64%);
+  --accent: hsl(215, 27%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 63%, 31%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(215, 27%, 17%);
+  --input: hsl(215, 27%, 17%);
+  --ring: hsl(197, 100%, 46%);
+  
+  /* CAS Brand Colors (same in dark mode) */
+  --cas-blue: #00AFE6;
+  --cas-green: #00DD89;
+  
+  /* Dark Theme Specific Variables */
+  --section-bg: hsl(224, 71%, 6%);
+  --card-border: hsl(215, 27%, 20%);
+  --gradient-from: hsl(224, 71%, 8%);
+  --gradient-to: hsl(224, 71%, 8%);
+}
+
+@layer components {
+  /* Crawford-style section layouts */
+  .crawford-section {
+    @apply py-24 lg:py-40;
+  }
+  
+  .crawford-dark-section {
+    @apply bg-gray-900 dark:bg-gray-800 text-white py-24 lg:py-40 relative overflow-hidden;
+  }
+  
+  .crawford-light-section {
+    @apply bg-gray-50 dark:bg-gray-900 py-24 lg:py-40;
+  }
+  
+  /* Dark section background effects */
+  .crawford-dark-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top right, rgba(0, 175, 230, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(0, 221, 137, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  /* Crawford-style typography with better scaling */
+  .crawford-hero-title {
+    @apply text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tight text-gray-900 dark:text-white;
+    font-family: 'Rosarivo', serif;
+    font-weight: 400;
+  }
+  
+  .crawford-section-title {
+    @apply text-3xl font-bold leading-[0.95] tracking-tight text-gray-900 dark:text-white;
+    font-family: 'Rosarivo', serif;
+    font-weight: 400;
+    font-size: 48px !important;
+  }
+  
+  .crawford-subtitle {
+    @apply text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed font-light;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 300;
+  }
+
+  /* Hide scrollbars for horizontal scroll */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Enhanced Crawford-style cards */
+  .crawford-card {
+    @apply bg-white dark:bg-gray-800 rounded-3xl p-8 lg:p-12 shadow-[0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] border border-gray-100/50 dark:border-gray-700/50 transition-all duration-500 relative overflow-hidden;
+  }
+  
+  .crawford-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 175, 230, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .crawford-card:hover {
+    @apply shadow-[0_8px_40px_rgba(0,0,0,0.12)] -translate-y-2;
+    border-color: rgba(0, 175, 230, 0.2);
+  }
+  
+  .crawford-card:hover::before {
+    opacity: 1;
+  }
+  
+  /* Enhanced Crawford-style buttons */
+  .crawford-btn-primary {
+    @apply bg-gray-900 hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 text-white px-10 py-5 rounded-full font-medium text-lg transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden;
+  }
+  
+  .crawford-btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .crawford-btn-primary:hover::before {
+    left: 100%;
+  }
+  
+  .crawford-btn-secondary {
+    @apply bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white px-10 py-5 rounded-full font-medium text-lg border border-gray-200 dark:border-gray-600 transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+  
+  .crawford-btn-blue {
+    @apply bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-full font-medium text-lg transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+  
+  /* Enhanced Crawford-style grid layouts */
+  .crawford-asymmetric {
+    @apply grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center;
+  }
+  
+  .crawford-content-7 {
+    @apply col-span-1 lg:col-span-7;
+  }
+  
+  .crawford-content-5 {
+    @apply col-span-1 lg:col-span-5;
+  }
+  
+  /* Enhanced Crawford-style navigation */
+  .crawford-nav {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-b border-gray-100/50 dark:border-gray-800/50 transition-all duration-300;
+  }
+  
+  /* Enhanced Crawford-style stat cards */
+  .crawford-stat-card {
+    @apply bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20 transition-all duration-300 hover:bg-white/15;
+  }
+  
+  /* Enhanced Crawford gradients */
+  .crawford-gradient {
+    background: linear-gradient(135deg, #00AFE6 0%, #00DD89 100%);
+  }
+
+  /* Custom scrollbar styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 175, 230, 0.6);
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 175, 230, 0.8);
+  }
+}
+
+/* Accessibility Features */
+:root {
+  --accessibility-font-size: 16px;
+}
+
+/* Font size adjustment */
+html.accessibility-font-size * {
+  font-size: calc(var(--accessibility-font-size) * 1px) !important;
+}
+
+/* Exclude form controls from font size scaling */
+html.accessibility-font-size [data-radix-collection-item],
+html.accessibility-font-size [role="radio"], 
+html.accessibility-font-size [role="checkbox"],
+html.accessibility-font-size [role="radio"] *,
+html.accessibility-font-size [role="checkbox"] * {
+  font-size: inherit !important;
+}
+
+/* High contrast mode */
+.accessibility-high-contrast {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #1a1a1a;
+  --card-foreground: #ffffff;
+  --border: #ffffff;
+  --input: #1a1a1a;
+  --ring: #ffffff;
+}
+
+.accessibility-high-contrast * {
+  border-color: #ffffff !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.accessibility-high-contrast img {
+  filter: contrast(150%) brightness(110%);
+}
+
+/* Inverted colors */
+.accessibility-inverted {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.accessibility-inverted img,
+.accessibility-inverted video {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Reduced motion */
+.accessibility-reduced-motion,
+.accessibility-reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Enhanced focus indicators */
+.accessibility-focus-visible *:focus {
+  outline: 3px solid #00AFE6 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 5px rgba(0, 175, 230, 0.3) !important;
+}
+
+/* Dyslexia-friendly font */
+.accessibility-dyslexia-font,
+.accessibility-dyslexia-font * {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', 'Arial', sans-serif !important;
+}
+
+/* Cursor size adjustments */
+.accessibility-cursor-large,
+.accessibility-cursor-large * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><polygon points="8,1 16,13 13,13 16,27 8,15 11,15" fill="white" stroke="black" stroke-width="2"/></svg>') 16 16, auto !important;
+}
+
+.accessibility-cursor-extra-large,
+.accessibility-cursor-extra-large * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><polygon points="8,1 24,19 19,19 24,41 8,23 13,23" fill="white" stroke="black" stroke-width="3"/></svg>') 24 24, auto !important;
+}
+
+/* Keyboard navigation improvements */
+.accessibility-keyboard-nav {
+  outline: none;
+}
+
+.accessibility-keyboard-nav:focus-visible {
+  outline: 3px solid #00AFE6;
+  outline-offset: 2px;
+}
+
+/* Screen reader improvements */
+.accessibility-screen-reader .sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  border: 0;
+  background: #fffbf0;
+  color: #333;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* High contrast button styles */
+.accessibility-high-contrast button,
+.accessibility-high-contrast .btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+.accessibility-high-contrast button:hover,
+.accessibility-high-contrast .btn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Ensure minimum touch targets */
+button, 
+a, 
+input:not([type="checkbox"]):not([type="radio"]), 
+select, 
+textarea, 
+[role="button"], 
+[role="link"]:not([role="radio"]):not([role="checkbox"]) {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Reset checkbox and radio button sizes to prevent oversizing */
+input[type="checkbox"],
+input[type="radio"],
+[role="checkbox"],
+[role="radio"],
+[data-radix-collection-item] {
+  min-height: unset !important;
+  min-width: unset !important;
+}
+
+/* Skip links */
+.skip-links {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.skip-links:focus {
+  top: 0;
+}
+
+/* Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+    --border: #ffffff;
+    --card: #1a1a1a;
+    --card-foreground: #ffffff;
+  }
+}
+
+/* Print styles for accessibility */
+@media print {
+  * {
+    color: #000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+}
+  
+  .crawford-gradient-subtle {
+    background: linear-gradient(135deg, rgba(0, 175, 230, 0.1) 0%, rgba(0, 221, 137, 0.1) 100%);
+  }
+  
+  /* Crawford-style glass morphism */
+  .crawford-glass {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20;
+  }
+  
+  .crawford-glass-dark {
+    @apply backdrop-blur-xl bg-black/10 border border-black/20;
+  }
+  
+  /* Crawford-style hover animations */
+  .crawford-hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+  }
+  
+  .crawford-hover-glow {
+    @apply transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,175,230,0.3)];
+  }
+  
+  /* Crawford-style text effects */
+  .crawford-text-gradient {
+    background: linear-gradient(135deg, #00AFE6 0%, #00DD89 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Enhanced scroll-triggered animations */
+  .crawford-fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .crawford-fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Crawford-style focus states */
+  .crawford-focus {
+    @apply focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .dark ::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #00AFE6 0%, #00DD89 100%);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #0099cc 0%, #00bb77 100%);
+  }

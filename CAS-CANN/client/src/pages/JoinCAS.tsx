@@ -1,0 +1,671 @@
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  UserPlus,
+  CheckCircle,
+  Send,
+  Users,
+  Heart,
+  Mail,
+  Sparkles,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
+import { casRegistrationSchema, type CASRegistrationForm } from "@shared/schema";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { useLanguage } from "../contexts/LanguageContext";
+
+interface SubmissionResponse {
+  submissionId: string;
+  status: string;
+  message: string;
+}
+
+export default function JoinCAS() {
+  const { toast } = useToast();
+  const { t } = useLanguage();
+  const [submissionId, setSubmissionId] = useState<string | null>(null);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [submissionType, setSubmissionType] = useState<'cann' | 'cas' | 'contact' | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const form = useForm<CASRegistrationForm>({
+    resolver: zodResolver(casRegistrationSchema),
+    defaultValues: {
+      wantsMembership: undefined,
+      wantsCANNMembership: undefined,
+      fullName: "",
+      email: "",
+      discipline: "",
+      subspecialty: "",
+      amyloidosisType: undefined,
+      institution: "",
+      wantsServicesMapInclusion: undefined,
+      wantsCommunications: undefined,
+      cannCommunications: undefined,
+      noMemberName: "",
+      noMemberEmail: "",
+      noMemberMessage: "",
+    },
+  });
+
+  const wantsMembership = form.watch("wantsMembership");
+  const wantsCANNMembership = form.watch("wantsCANNMembership");
+  
+  const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
+
+  const submitMutation = useMutation({
+    mutationFn: async (formData: CASRegistrationForm): Promise<SubmissionResponse> => {
+      const isCANNMember = formData.wantsCANNMembership === "Yes";
+      const formName = isCANNMember ? "CAS & CANN Registration" : "CAS Registration";
+      
+      const response = await apiRequest("POST", "/api/cas-cann-registration", {
+        formData: formData,
+        formName: formName,
+      });
+      return await response.json();
+    },
+    onSuccess: (data) => {
+      setSubmissionId(data.submissionId);
+      
+      const formValues = form.getValues();
+      if (formValues.wantsCANNMembership === "Yes") {
+        setSubmissionType('cann');
+      } else if (formValues.wantsMembership === "Yes") {
+        setSubmissionType('cas');
+      } else {
+        setSubmissionType('contact');
+      }
+      
+      setShowConfirmationModal(true);
+      const isCANNMember = formValues.wantsCANNMembership === "Yes";
+      toast({
+        title: t('joinCAS.toast.successTitle'),
+        description: isCANNMember 
+          ? t('joinCAS.toast.successCASCANN')
+          : t('joinCAS.toast.successCAS'),
+      });
+      form.reset();
+    },
+    onError: (error) => {
+      console.error("Form submission error:", error);
+      toast({
+        title: t('joinCAS.toast.errorTitle'),
+        description: t('joinCAS.toast.errorDescription'),
+        variant: "destructive",
+      });
+    },
+  });
+
+  const onSubmit = async (data: CASRegistrationForm) => {
+    try {
+      await submitMutation.mutateAsync(data);
+    } catch (error) {
+      console.error("Submit error:", error);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-br from-[#00AFE6]/5 via-white to-[#00DD89]/5 dark:from-[#00AFE6]/10 dark:via-gray-900 dark:to-[#00DD89]/10 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <motion.div
+            className="max-w-4xl mx-auto text-center"
+            initial={shouldReduceMotion ? {} : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.div 
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full px-6 py-3 border border-[#00AFE6]/20 mb-8 shadow-sm"
+              initial={shouldReduceMotion ? {} : { scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.2, duration: 0.5 }}
+            >
+              <UserPlus className="w-5 h-5 text-[#00AFE6]" />
+              <span className="text-sm font-semibold text-gray-900 dark:text-white tracking-wide">
+                {t('joinCAS.badge')}
+              </span>
+            </motion.div>
+
+            <h1 className="text-5xl md:text-6xl font-bold font-rosarivo mb-6 text-gray-900 dark:text-white leading-tight">
+              {t('joinCAS.title.join')}{" "}
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                {t('joinCAS.title.casCANN')}
+              </span>
+            </h1>
+
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
+              {t('joinCAS.subtitle')}
+            </p>
+            
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-8">
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <Heart className="w-4 h-4 text-[#00AFE6]" />
+                <span>{t('joinCAS.patientFocused')}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <Users className="w-4 h-4 text-[#00DD89]" />
+                <span>{t('joinCAS.collaborativeNetwork')}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <Sparkles className="w-4 h-4 text-[#00AFE6]" />
+                <span>{t('joinCAS.evidenceBased')}</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Registration Form */}
+      <section className="py-16 -mt-12">
+        <div className="container mx-auto px-4 sm:px-6">
+          <motion.div 
+            className="max-w-4xl mx-auto"
+            initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.3, duration: 0.6 }}
+          >
+            <Card className="shadow-2xl border-0 overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white p-8 relative overflow-hidden">
+                <div className="absolute inset-0 bg-white/5" />
+                <div className="relative z-10">
+                  <CardTitle className="text-3xl font-bold mb-2">{t('joinCAS.formTitle')}</CardTitle>
+                  <CardDescription className="text-white/90 text-base">
+                    {t('joinCAS.formDescription')}
+                  </CardDescription>
+                </div>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-8 md:p-12">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8 md:space-y-10">
+                    
+                    {/* Question 1: CAS Membership */}
+                    <FormField
+                      control={form.control}
+                      name="wantsMembership"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-lg font-semibold">
+                            {t('joinCAS.q1.label')}
+                          </FormLabel>
+                          <FormControl>
+                            <RadioGroup
+                              onValueChange={field.onChange}
+                              value={field.value}
+                              className="flex gap-6"
+                              data-testid="radio-cas-membership"
+                            >
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="Yes" id="cas-yes" data-testid="radio-cas-yes" />
+                                <Label htmlFor="cas-yes">{t('joinCAS.yes')}</Label>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="No" id="cas-no" data-testid="radio-cas-no" />
+                                <Label htmlFor="cas-no">{t('joinCAS.no')}</Label>
+                              </div>
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Question 2: CANN Membership */}
+                    <FormField
+                      control={form.control}
+                      name="wantsCANNMembership"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-lg font-semibold">
+                            {t('joinCAS.q2.label')}
+                          </FormLabel>
+                          <FormDescription>
+                            {t('joinCAS.q2.description')}
+                          </FormDescription>
+                          <FormControl>
+                            <RadioGroup
+                              onValueChange={field.onChange}
+                              value={field.value}
+                              className="flex gap-6"
+                              data-testid="radio-cann-membership"
+                            >
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="Yes" id="cann-yes" data-testid="radio-cann-yes" />
+                                <Label htmlFor="cann-yes">{t('joinCAS.yes')}</Label>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="No" id="cann-no" data-testid="radio-cann-no" />
+                                <Label htmlFor="cann-no">{t('joinCAS.no')}</Label>
+                              </div>
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Questions 3-10: Member Information (shown when either Q1 or Q2 = "Yes") */}
+                    <AnimatePresence>
+                      {isMember && (
+                        <motion.div
+                          initial={shouldReduceMotion ? {} : { opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={shouldReduceMotion ? {} : { opacity: 0 }}
+                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-[#00AFE6]/20 space-y-4 sm:space-y-6 shadow-sm">
+                        {/* Question 3: Full Name */}
+                        <FormField
+                          control={form.control}
+                          name="fullName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.q3.label')}</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder={t('joinCAS.q3.placeholder')} 
+                                  {...field} 
+                                  data-testid="input-full-name"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Question 4: Email */}
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.q4.label')}</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  type="email" 
+                                  placeholder={t('joinCAS.q4.placeholder')} 
+                                  {...field} 
+                                  data-testid="input-email"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Question 5: Professional Designation */}
+                        <FormField
+                          control={form.control}
+                          name="discipline"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.q5.label')}</FormLabel>
+                              <FormDescription>
+                                {t('joinCAS.q5.description')}
+                              </FormDescription>
+                              <FormControl>
+                                <Input 
+                                  placeholder={t('joinCAS.q5.placeholder')} 
+                                  {...field} 
+                                  data-testid="input-discipline"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Question 6: Sub-specialty */}
+                        <FormField
+                          control={form.control}
+                          name="subspecialty"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.q6.label')}</FormLabel>
+                              <FormDescription>
+                                {t('joinCAS.q6.description')}
+                              </FormDescription>
+                              <FormControl>
+                                <Input 
+                                  placeholder={t('joinCAS.q6.placeholder')} 
+                                  {...field} 
+                                  data-testid="input-subspecialty"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Question 7: Amyloidosis Type */}
+                        <FormField
+                          control={form.control}
+                          name="amyloidosisType"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.q7.label')}</FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  className="space-y-3"
+                                  data-testid="radio-amyloidosis-type"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="ATTR" id="type-attr" data-testid="radio-type-attr" />
+                                    <Label htmlFor="type-attr">{t('joinCAS.q7.attr')}</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="AL" id="type-al" data-testid="radio-type-al" />
+                                    <Label htmlFor="type-al">{t('joinCAS.q7.al')}</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Both ATTR and AL" id="type-both" data-testid="radio-type-both" />
+                                    <Label htmlFor="type-both">{t('joinCAS.q7.both')}</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Other" id="type-other" data-testid="radio-type-other" />
+                                    <Label htmlFor="type-other">{t('joinCAS.q7.other')}</Label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Question 8: Institution */}
+                        <FormField
+                          control={form.control}
+                          name="institution"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.q8.label')}</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder={t('joinCAS.q8.placeholder')} 
+                                  {...field} 
+                                  data-testid="input-institution"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Question 9: Services Map */}
+                        <FormField
+                          control={form.control}
+                          name="wantsServicesMapInclusion"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.q9.label')}</FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  className="flex gap-6"
+                                  data-testid="radio-services-map"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Yes" id="map-yes" data-testid="radio-services-map-yes" />
+                                    <Label htmlFor="map-yes">{t('joinCAS.yes')}</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="No" id="map-no" data-testid="radio-services-map-no" />
+                                    <Label htmlFor="map-no">{t('joinCAS.no')}</Label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Question 10: CAS Communications */}
+                        <FormField
+                          control={form.control}
+                          name="wantsCommunications"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.q10.label')}</FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  className="flex gap-6"
+                                  data-testid="radio-communications"
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="Yes" id="comm-yes" data-testid="radio-communications-yes" />
+                                    <Label htmlFor="comm-yes">{t('joinCAS.yes')}</Label>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="No" id="comm-no" data-testid="radio-communications-no" />
+                                    <Label htmlFor="comm-no">{t('joinCAS.no')}</Label>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Question 11: CANN Communications (shown only when Q2 = "Yes") */}
+                    <AnimatePresence>
+                      {wantsCANNMembership === "Yes" && (
+                        <motion.div
+                          initial={shouldReduceMotion ? {} : { opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={shouldReduceMotion ? {} : { opacity: 0 }}
+                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-[#00AFE6]/20 shadow-sm">
+                            <FormField
+                              control={form.control}
+                              name="cannCommunications"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>{t('joinCAS.q11.label')}</FormLabel>
+                                  <FormControl>
+                                    <RadioGroup
+                                      onValueChange={field.onChange}
+                                      value={field.value}
+                                      className="flex gap-6"
+                                      data-testid="radio-cann-communications"
+                                    >
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="Yes" id="cann-comm-yes" data-testid="radio-cann-comm-yes" />
+                                        <Label htmlFor="cann-comm-yes">{t('joinCAS.yes')}</Label>
+                                      </div>
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem value="No" id="cann-comm-no" data-testid="radio-cann-comm-no" />
+                                        <Label htmlFor="cann-comm-no">{t('joinCAS.no')}</Label>
+                                      </div>
+                                    </RadioGroup>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Non-member Contact Fallback (shown only when both Q1 = No AND Q2 = No) */}
+                    <AnimatePresence>
+                      {!isMember && wantsMembership === "No" && wantsCANNMembership === "No" && (
+                        <motion.div
+                          initial={shouldReduceMotion ? {} : { opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={shouldReduceMotion ? {} : { opacity: 0 }}
+                          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/10 p-4 sm:p-6 md:p-8 rounded-2xl border border-amber-300/30 space-y-4 sm:space-y-6 shadow-sm">
+                            <div className="flex items-center gap-3 mb-6">
+                              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 flex items-center justify-center shadow-md">
+                                <Mail className="w-5 h-5 text-white" />
+                              </div>
+                              <h3 className="text-2xl font-bold text-amber-900 dark:text-amber-100">
+                                {t('joinCAS.nonMember.title')}
+                              </h3>
+                            </div>
+
+                        <FormField
+                          control={form.control}
+                          name="noMemberName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.nonMember.name')}</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder={t('joinCAS.nonMember.namePlaceholder')} 
+                                  {...field} 
+                                  data-testid="input-no-member-name"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="noMemberEmail"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.nonMember.email')}</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  type="email"
+                                  placeholder={t('joinCAS.nonMember.emailPlaceholder')} 
+                                  {...field} 
+                                  data-testid="input-no-member-email"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="noMemberMessage"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>{t('joinCAS.nonMember.message')}</FormLabel>
+                              <FormControl>
+                                <Textarea 
+                                  placeholder={t('joinCAS.nonMember.messagePlaceholder')} 
+                                  {...field} 
+                                  rows={4}
+                                  data-testid="textarea-no-member-message"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Submit Button */}
+                    <motion.div 
+                      className="flex justify-center pt-10"
+                      initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={shouldReduceMotion ? { duration: 0 } : { delay: 0.2 }}
+                    >
+                      <Button
+                        type="submit"
+                        size="lg"
+                        disabled={submitMutation.isPending}
+                        className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white hover:shadow-2xl hover:scale-105 transition-all duration-300 rounded-full px-12 py-6 text-lg font-semibold shadow-lg"
+                        data-testid="button-submit"
+                      >
+                        {submitMutation.isPending ? (
+                          <div className="flex items-center gap-3">
+                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            <span>{t('joinCAS.submitting')}</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-3">
+                            <Send className="w-5 h-5" />
+                            <span>{t('joinCAS.submit')}</span>
+                          </div>
+                        )}
+                      </Button>
+                    </motion.div>
+                  </form>
+                </Form>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Confirmation Modal */}
+      <Dialog open={showConfirmationModal} onOpenChange={setShowConfirmationModal}>
+        <DialogContent className="w-[90vw] sm:max-w-md max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 mx-auto mb-4">
+              <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+            </div>
+            <DialogTitle className="text-center text-xl sm:text-2xl">
+              {t('joinCAS.success.title')}
+            </DialogTitle>
+            <DialogDescription className="text-center text-sm sm:text-base">
+              {t('joinCAS.success.description')}
+            </DialogDescription>
+          </DialogHeader>
+          {submissionId && (
+            <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+              {t('joinCAS.success.referenceId')}: {submissionId}
+            </div>
+          )}
+          <div className="flex justify-center mt-4">
+            <Button onClick={() => setShowConfirmationModal(false)}>
+              {t('joinCAS.success.close')}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}

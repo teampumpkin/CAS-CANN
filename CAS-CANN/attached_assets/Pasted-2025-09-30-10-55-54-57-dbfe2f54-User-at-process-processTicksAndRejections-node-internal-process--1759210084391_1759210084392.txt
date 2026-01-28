@@ -1,0 +1,124 @@
+2025-09-30 10:55:54.57
+dbfe2f54
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-30 10:55:54.57
+dbfe2f54
+User
+at async ZohoCRMService.createCustomField (file:///home/runner/workspace/dist/index.js:1471:28)
+2025-09-30 10:55:54.57
+dbfe2f54
+User
+at async FieldSyncEngine.createFieldInZohoCRM (file:///home/runner/workspace/dist/index.js:2070:26)
+2025-09-30 10:55:54.57
+dbfe2f54
+User
+at async FieldSyncEngine.syncFieldsForSubmission (file:///home/runner/workspace/dist/index.js:1969:13)
+2025-09-30 10:55:54.57
+dbfe2f54
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3663:35)
+2025-09-30 10:55:54.57
+dbfe2f54
+User
+[FieldSync] Failed to create field otheramyloidosistype: Zoho API v8 Error 400: HTTP 400 Error
+2025-09-30 10:55:54.67
+dbfe2f54
+User
+[Zoho API v8] GET https://www.zohoapis.com/crm/v8/settings/fields?module=Leads
+2025-09-30 10:55:56.07
+dbfe2f54
+User
+[FieldSync] Updated 0 field mappings for Leads
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+[FieldSync] Completed field sync for submission 15 in 50720ms: 0 created, 20 errors
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+[Form Submission] Field sync failed for submission 15: [
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field Source_Form: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field fullname: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field discipline: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field emailaddress: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field subspecialty: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field otherinterest: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field institutionfax: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field amyloidosistype: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field areasofinterest: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field followupconsent: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field institutionname: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field institutionphone: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field membershiprequest: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field presentationtopic: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field institutionaddress: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field mapinstitutionname: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field presentinginterest: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field servicesmapconsent: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field communicationconsent: Zoho API v8 Error 400: HTTP 400 Error',
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+'Failed to create field otheramyloidosistype: Zoho API v8 Error 400: HTTP 400 Error'
+2025-09-30 10:55:56.27
+dbfe2f54
+User
+]

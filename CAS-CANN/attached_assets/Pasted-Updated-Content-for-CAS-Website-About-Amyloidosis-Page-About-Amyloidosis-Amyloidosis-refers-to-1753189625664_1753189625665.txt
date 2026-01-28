@@ -1,0 +1,155 @@
+Updated Content for CAS Website: About Amyloidosis Page
+
+⸻
+
+About Amyloidosis
+
+Amyloidosis refers to a group of rare diseases caused by abnormal protein deposits (called amyloid) building up in organs and tissues. These misfolded proteins disrupt normal body functions, leading to serious health complications.
+
+What is Amyloid?
+
+Amyloid forms when proteins in the body misfold, clump together, and deposit in different organs. As amyloid builds up, it can lead to organ damage and reduced quality of life.
+
+Symptoms
+
+Symptoms vary based on the type of amyloidosis and which organs are affected. Common general symptoms include:
+	•	Fatigue
+	•	Weight loss
+	•	Swelling in legs/ankles
+	•	Shortness of breath
+	•	Numbness or tingling in hands/feet
+
+Symptoms can often resemble other conditions, leading to delayed diagnosis.
+
+⸻
+
+Types of Amyloidosis
+
+Each type is named with “A” followed by the protein responsible. For example:
+	•	AL Amyloidosis (from light chain proteins)
+	•	ATTR Amyloidosis (from transthyretin protein)
+	•	AA, ALECT2, Aβ2M, and other rare forms
+
+⸻
+
+AL Amyloidosis
+	•	Caused by abnormal plasma cells producing light chains that form amyloid.
+	•	Often diagnosed after age 50; affects both men and women.
+	•	Related to multiple myeloma (10-15% overlap).
+
+Key Symptoms
+	•	Leg swelling
+	•	Fatigue
+	•	Irregular heartbeat
+	•	Enlarged tongue
+	•	Skin changes (bruising, purple patches around eyes)
+
+Diagnosis
+	•	Tissue biopsy
+	•	Blood/urine tests for light chains
+	•	Bone marrow biopsy
+	•	Imaging tests (ECG, MRI, echocardiogram)
+
+Treatment
+	•	Target abnormal plasma cells with:
+	•	Chemotherapy
+	•	Steroids
+	•	Proteasome inhibitors
+	•	Monoclonal antibodies
+	•	Stem cell transplant (in select cases)
+	•	Supportive care to manage symptoms and organ function
+
+⸻
+
+ATTR Amyloidosis
+
+Caused by abnormal transthyretin (TTR) protein. Two forms:
+	•	Hereditary (hATTR): Inherited mutations in TTR gene
+	•	Wild-type (ATTRwt): Develops with age, usually affects the heart
+
+Hereditary ATTR (hATTR)
+	•	Caused by over 120 TTR mutations
+	•	Common mutations:
+	•	pV50M: Portugal, Sweden, Japan
+	•	pV142I: African descent
+	•	pT80A: Irish descent
+
+Symptoms
+	•	Heart issues: palpitations, fainting, fatigue
+	•	Nerve issues: numbness, walking difficulty
+	•	GI symptoms: nausea, weight loss
+
+Diagnosis
+	•	Genetic testing for TTR mutations
+	•	Biopsies, imaging (MRI, scans), and protein testing
+
+Treatment
+	•	TTR stabilizers: Tafamidis (Vyndaqel), Acoramidis (Attruby)
+	•	Gene silencers: Patisiran (Onpattro), Vutrisiran (Amvuttra)
+	•	Supportive care: For symptoms and organ protection
+
+Wild-Type ATTR (ATTRwt)
+	•	Non-inherited; develops with age
+	•	Primarily affects men over 60
+	•	Often causes heart failure and carpal tunnel syndrome
+
+Diagnosis & Treatment
+
+Same as hATTR, with emphasis on TTR stabilizers and supportive care.
+
+⸻
+
+Rare Types of Amyloidosis
+
+AA Amyloidosis
+	•	Linked to long-standing inflammation or infections
+	•	Mostly affects kidneys
+	•	Treat underlying disease to reduce SAA protein
+
+ALECT2 Amyloidosis
+	•	More common in people of Mexican, Punjabi, Native American, and Middle Eastern descent
+	•	Often underdiagnosed
+	•	Mainly affects kidneys, also liver and spleen
+
+Aβ2M Amyloidosis
+	•	Seen in long-term dialysis patients
+	•	Affects bones and joints
+	•	Becoming rarer due to improved dialysis techniques
+
+Apolipoprotein Amyloidosis
+	•	Hereditary
+	•	Caused by unstable cholesterol transport proteins (e.g., ApoA-I, ApoA-II)
+	•	Affects heart, kidneys, and nerves
+
+Fibrinogen (AFib), Gelsolin (AGel), and Lysozyme (ALys) Amyloidosis
+	•	Inherited
+	•	Affect kidneys, nerves, skin, or glands
+	•	Currently no specific treatments; supportive care and research ongoing
+
+⸻
+
+Diagnostic Tools Summary
+	•	Biopsies (tissue, bone marrow)
+	•	Blood and urine analysis
+	•	Imaging: ECG, MRI, echocardiograms
+	•	Genetic testing (for hereditary types)
+	•	Specialized testing: mass spectrometry, immunohistochemistry
+
+⸻
+
+Treatment Overview
+
+Main Approaches
+	•	Stabilizing the abnormal protein (e.g., Tafamidis)
+	•	Gene silencing (e.g., Vutrisiran, Patisiran)
+	•	Chemotherapy & plasma cell targeting (for AL)
+	•	Organ support & symptom management
+
+Note: Treatments depend on the amyloidosis type, stage of disease, and patient health.
+
+⸻
+
+Additional Notes
+	•	Early diagnosis is critical for better outcomes
+	•	Genetic counseling recommended for families with hereditary amyloidosis
+	•	Ongoing clinical trials may offer access to emerging therapies

@@ -1,0 +1,124 @@
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+Failed to fetch fields for module Contacts: Error: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at ZohoCRMService.getAccessToken (file:///home/runner/workspace/dist/index.js:1478:17)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1495:29)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async ZohoCRMService.getFieldsForModule (file:///home/runner/workspace/dist/index.js:1675:28)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async _FieldMetadataCacheService.syncModuleMetadata (file:///home/runner/workspace/dist/index.js:1954:30)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async _FieldMetadataCacheService.syncAllModuleMetadata (file:///home/runner/workspace/dist/index.js:1935:32)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async _FieldMetadataCacheService.initialize (file:///home/runner/workspace/dist/index.js:1880:13)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async file:///home/runner/workspace/dist/index.js:4745:3
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+[Field Cache] Failed to sync metadata for Contacts: Error: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at ZohoCRMService.getAccessToken (file:///home/runner/workspace/dist/index.js:1478:17)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1495:29)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async ZohoCRMService.getFieldsForModule (file:///home/runner/workspace/dist/index.js:1675:28)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async _FieldMetadataCacheService.syncModuleMetadata (file:///home/runner/workspace/dist/index.js:1954:30)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async _FieldMetadataCacheService.syncAllModuleMetadata (file:///home/runner/workspace/dist/index.js:1935:32)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async _FieldMetadataCacheService.initialize (file:///home/runner/workspace/dist/index.js:1880:13)
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+at async file:///home/runner/workspace/dist/index.js:4745:3
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+[Field Cache] Failed to sync Contacts: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+[Field Cache] Metadata sync completed: {
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+leads: 0,
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+contacts: 0,
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+errors: [
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+'Failed to sync Leads: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect',
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+'Failed to sync Contacts: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect'
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+]
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+}
+2025-10-07 13:36:38.57
+09eaf7bd
+User
+[Field Cache] Daily sync timer started (24h interval)
+2025-10-07 13:36:39.06
+09eaf7bd
+User
+8:06:38 AM [express] 🚀 Server listening on 0.0.0.0:3000 (production)
+2025-10-07 13:37:38.39
+09eaf7bd
+User
+[TokenManager] Health check #2 failed for zoho_crm: Token expired
+2025-10-07 13:38:39.40
+09eaf7bd
+User
+[TokenManager] Health check #3 failed for zoho_crm: Token expired

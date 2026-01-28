@@ -1,0 +1,47 @@
+You have 12 Excel files in the attached_assets folder. Your mission is to process them all **directly via script**, importing into the correct Zoho modules. Follow the steps below:
+
+1️⃣ **File-to-Module Mapping**  
+- Accounts (Institutions / Clinics / Hospitals): Files 1, 2, 5, 6, 8  
+- Contacts (Members / HCPs): Files 3, 4, 9  
+- Resources (Documents / Forms / Guides): File 5 (Resources sheet), File 7  
+
+2️⃣ **Processing Rules**  
+- Start with a **dry run** for every file first, to validate data and relationships.  
+- Apply data cleanup automatically:  
+  - Deduplicate by email (Contacts)  
+  - Normalize names, phone numbers, postal codes  
+  - Map bilingual fields correctly (EN/FR)  
+- Use `Institution_ID` to link Contacts and Resources to Accounts.  
+- Skip any records tagged as “WebForm” to avoid interfering with live Zoho pipelines.  
+- Save a **checkpoint/log** after each file’s dry run.  
+
+3️⃣ **Execution Flow**  
+For each file (1-12):  
+- Dry run first: validate, clean, show summary (records to create, duplicates, invalids)  
+- Once dry run is ✅, perform live import into the correct module  
+- Log results and save a checkpoint after live import  
+
+4️⃣ **Reporting**  
+After all 12 files are processed, produce a **master JSON report** including:  
+- Total records processed per module  
+- Records successfully created  
+- Records skipped / duplicates / invalid  
+- Any errors encountered  
+
+5️⃣ **Manual Steps for Resources (Phase 5)**  
+- After Resource records are created, provide a **list of files to attach manually** in Zoho (PDFs or other assets), linked to the correct `Institution_ID`.  
+
+6️⃣ **Bilingual Support**  
+- Ensure all field labels and dropdowns support English and French where applicable.  
+
+7️⃣ **Safety Rules**  
+- Never touch live WebForm records  
+- Auto-rollback on failure  
+- Validate relationships (Contacts → Accounts, Resources → Accounts)  
+
+🚀 **Start processing** the files in this sequence:  
+1, 2, 5, 6, 8 → Accounts  
+3, 4, 9 → Contacts  
+5 (Resources sheet), 7 → Resources  
+
+After each file, output a **summary of the dry run** and **live import** results. Confirm before moving to the next file.

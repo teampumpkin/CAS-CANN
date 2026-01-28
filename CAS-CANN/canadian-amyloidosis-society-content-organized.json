@@ -1,0 +1,298 @@
+{
+  "document_info": {
+    "title": "Canadian Amyloidosis Society - Complete Website Content",
+    "version": "2.0.0",
+    "date": "2025-08-01",
+    "description": "Organized website content with clear headings and subheadings",
+    "total_size": "76KB",
+    "languages": ["English", "French"],
+    "content_sections": 8
+  },
+
+  "1_HOMEPAGE_CONTENT": {
+    "1.1_Hero_Section": {
+      "heading": "Canadian Amyloidosis Society",
+      "subheading": "Clinical Excellence Platform",
+      "description": "Advancing evidence-based amyloidosis care through clinical excellence, professional collaboration, and structured knowledge sharing."
+    },
+    
+    "1.2_Welcome_Section": {
+      "heading": "Welcome to the Canadian Amyloidosis Society",
+      "subheading": "Who we are",
+      "description": "Your trusted partner in amyloidosis care, connecting patients, families, and healthcare professionals across Canada.",
+      "detailed_content": "We are dedicated to improving the lives of those affected by amyloidosis through education, support, and advocacy. Our comprehensive platform provides essential resources, connects you with specialized care, and builds a supportive community for patients and families nationwide.",
+      "mission": {
+        "title": "Our Mission",
+        "content": "To accelerate awareness, improve diagnosis, and enhance care for amyloidosis patients across Canada through education, advocacy, and community support."
+      },
+      "vision": {
+        "title": "Our Vision", 
+        "content": "A future where every Canadian affected by amyloidosis receives timely diagnosis, optimal treatment, and comprehensive support."
+      }
+    },
+
+    "1.3_About_Amyloidosis_Section": {
+      "heading": "What is Amyloidosis",
+      "subheading": "Medical Information",
+      "description": "Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.",
+      "detailed_content": "Amyloidosis is a rare but serious condition where misfolded proteins (amyloid) accumulate in organs and tissues throughout the body. Understanding the different types, recognizing early symptoms, and accessing specialized care are crucial for managing this condition effectively.",
+      "early_detection": {
+        "title": "Early Detection Saves Lives",
+        "content": "Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. Early recognition and proper testing are crucial for better patient outcomes.",
+        "additional_info": "Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada."
+      }
+    },
+
+    "1.4_Directory_Section": {
+      "heading": "Find Specialized Care",
+      "subheading": "Find Care",
+      "description": "Connecting healthcare across the nation.",
+      "detailed_content": "Find specialized amyloidosis treatment centers, experienced physicians, and clinical experts across all Canadian provinces and territories."
+    },
+
+    "1.5_Events_Newsletter_Section": {
+      "heading": "Events & Newsletter",
+      "subheading": "Stay Connected",
+      "description": "Stay informed about the latest research, treatment advances, and community events in amyloidosis care.",
+      "detailed_content": "Join our community to receive regular updates, educational content, and information about upcoming events, webinars, and support group meetings.",
+      "community_benefits": {
+        "title": "Join Our Community",
+        "description": "Get exclusive access to research updates, community events, and expert insights delivered monthly."
+      }
+    }
+  },
+
+  "2_ABOUT_CAS_PAGE": {
+    "2.1_Hero_Section": {
+      "heading": "Canadian Amyloidosis Society",
+      "subheading": "Connecting Healthcare Across Canada",
+      "description": "Building a national platform for clinical practice support",
+      "detailed_content": "Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through evidence-based collaboration."
+    },
+
+    "2.2_What_We_Do": {
+      "heading": "What We Do",
+      "tool_curation": {
+        "title": "Tool Curation",
+        "description": "Evidence-based clinical tools, protocols, and diagnostic pathways developed by practicing specialists."
+      },
+      "diagnostic_support": {
+        "title": "Diagnostic Support",
+        "description": "Rapid diagnostic pathways, decision support tools, and consultation networks for complex cases."
+      },
+      "peer_learning": {
+        "title": "Peer Learning",
+        "description": "Collaborative professional networks, case discussions, and continuous medical education opportunities."
+      }
+    },
+
+    "2.3_Our_Values": {
+      "heading": "Our Values",
+      "patient_centered": {
+        "title": "Patient-Centered",
+        "description": "Every decision and resource is designed with patient outcomes as the primary focus."
+      },
+      "collaborative": {
+        "title": "Collaborative",
+        "description": "We bring together diverse expertise to solve complex clinical challenges."
+      },
+      "evidence_informed": {
+        "title": "Evidence-Informed",
+        "description": "All resources are grounded in current research and clinical best practices."
+      },
+      "transparent": {
+        "title": "Transparent",
+        "description": "Open access to information, clear governance, and accountable stewardship."
+      }
+    },
+
+    "2.4_Governance": {
+      "heading": "Governance & Documents",
+      "corporate_governance": {
+        "title": "Corporate Governance",
+        "description": "Articles of incorporation, by-laws, and board meeting minutes."
+      },
+      "financial_transparency": {
+        "title": "Financial Transparency", 
+        "description": "Annual financial reports, audited statements, and funding sources."
+      },
+      "clinical_governance": {
+        "title": "Clinical Governance",
+        "description": "Evidence review processes, clinical advisory guidelines, and quality standards."
+      }
+    }
+  },
+
+  "3_ABOUT_AMYLOIDOSIS_PAGE": {
+    "3.1_Hero_Section": {
+      "heading": "Understanding Amyloidosis",
+      "subheading": "Medical Information",
+      "description": "Learn the signs, understand the types, and take action early.",
+      "detailed_content": "Amyloidosis is a rare but serious disease where misfolded proteins accumulate in organs. Early detection and appropriate treatment can significantly improve outcomes."
+    },
+
+    "3.2_Warning_Signs": {
+      "heading": "Warning Signs",
+      "subheading": "Early symptoms that require medical attention",
+      "cardiac_symptoms": "Cardiac Symptoms",
+      "neurological_symptoms": "Neurological Symptoms", 
+      "gastrointestinal_symptoms": "Gastrointestinal Symptoms",
+      "genitourinary_symptoms": "Genitourinary Symptoms",
+      "systemic_symptoms": "Systemic Symptoms"
+    },
+
+    "3.3_Types_of_Amyloidosis": {
+      "heading": "Types of Amyloidosis",
+      "subheading": "Major forms and their characteristics",
+      "al_amyloidosis": {
+        "name": "AL Amyloidosis",
+        "description": "Most common form, affects heart, kidneys, liver, and nervous system"
+      },
+      "aa_amyloidosis": {
+        "name": "AA Amyloidosis", 
+        "description": "Secondary to chronic inflammatory conditions"
+      },
+      "hereditary": {
+        "name": "Hereditary",
+        "description": "Genetic forms including TTR, fibrinogen, and lysozyme"
+      }
+    }
+  },
+
+  "4_CANN_NETWORK_PAGE": {
+    "4.1_Mission": {
+      "heading": "Canadian Amyloidosis Nursing Network",
+      "description": "The field of amyloidosis has experienced tremendous growth in recent years. Within this multidisciplinary community, nurses play a vital role in enhancing the quality, accessibility, and coordination of healthcare services for amyloidosis patients. This evolving landscape generates enthusiasm for the development of a national nursing network to unite amyloidosis nurses across the country. The Canadian Amyloidosis Nursing Network (CANN) is proudly developing as an affiliate of the Canadian Amyloidosis Society (CAS). This purpose-driven network aims to meet the dynamic educational needs of amyloidosis nurses through professional development, knowledge translation, and best practice sharing and to facilitate collaboration amongst this community of nursing professionals while supporting individuals with amyloidosis.",
+      "mission_statement": "CANN represents a specialized nursing network dedicated to advancing amyloidosis care through professional development, knowledge translation, and collaborative practice among nursing professionals nationwide.",
+      "key_points": [
+        "Multidisciplinary approach to amyloidosis care",
+        "Knowledge sharing and best practice development",
+        "Collaborative research initiatives and clinical trials", 
+        "Professional development and training programs"
+      ]
+    },
+
+    "4.2_Objectives": {
+      "heading": "Network Objectives",
+      "enhance_care_quality": {
+        "title": "Enhance Care Quality",
+        "description": "Standardize and improve amyloidosis care across Canada through evidence-based protocols and shared expertise."
+      },
+      "accelerate_research": {
+        "title": "Accelerate Research",
+        "description": "Facilitate collaborative research projects and clinical trials to advance understanding and treatment options."
+      },
+      "build_capacity": {
+        "title": "Build Capacity", 
+        "description": "Develop healthcare professional capacity through training, education, and knowledge exchange programs."
+      },
+      "improve_outcomes": {
+        "title": "Improve Outcomes",
+        "description": "Create measurable improvements in patient outcomes through coordinated care and research efforts."
+      }
+    },
+
+    "4.3_Achievements": {
+      "heading": "Network Achievements",
+      "research_excellence": {
+        "title": "Research Excellence",
+        "description": "Leading active research projects and clinical trials across multiple amyloidosis types."
+      },
+      "professional_training": {
+        "title": "Professional Training",
+        "description": "Training healthcare professionals in specialized amyloidosis care and diagnosis."
+      },
+      "patient_impact": {
+        "title": "Patient Impact",
+        "description": "Improved care pathways have reduced average diagnosis time in network centers."
+      },
+      "knowledge_sharing": {
+        "title": "Knowledge Sharing",
+        "description": "Publishing peer-reviewed articles and clinical guidelines through network collaboration."
+      }
+    }
+  },
+
+  "5_RESOURCES_PAGE": {
+    "5.1_Hero_Section": {
+      "heading": "Clinical Resources",
+      "subheading": "Evidence-based tools for healthcare professionals",
+      "description": "Access comprehensive clinical resources, diagnostic tools, and educational materials developed by amyloidosis specialists."
+    },
+
+    "5.2_Resource_Types": {
+      "heading": "Resource Categories",
+      "all_types": "All Types",
+      "al_amyloidosis": "AL Amyloidosis",
+      "attr_amyloidosis": "ATTR Amyloidosis", 
+      "aa_amyloidosis": "AA Amyloidosis",
+      "alect2_amyloidosis": "ALect2 Amyloidosis",
+      "general_amyloidosis": "General Amyloidosis"
+    }
+  },
+
+  "6_CONTACT_PAGE": {
+    "6.1_Hero_Section": {
+      "heading": "Contact Us",
+      "subheading": "Get in touch with our team",
+      "description": "We're here to help with your questions, resource needs, and collaboration opportunities."
+    },
+
+    "6.2_Quick_Contact": {
+      "heading": "Quick Contact",
+      "general_inquiries": {
+        "title": "General Inquiries",
+        "description": "General questions about CAS, membership, and services"
+      },
+      "resource_support": {
+        "title": "Resource Support",
+        "description": "Help with accessing or contributing clinical resources"
+      },
+      "patient_support": {
+        "title": "Patient Support",
+        "description": "Patient and family support questions"
+      },
+      "professional_inquiries": {
+        "title": "Professional Inquiries",
+        "description": "Healthcare provider and researcher collaboration"
+      }
+    },
+
+    "6.3_FAQ": {
+      "heading": "Frequently Asked Questions",
+      "subheading": "Quick answers to common questions",
+      "resource_access": {
+        "question": "How can I access clinical resources?",
+        "answer": "Healthcare professionals can access our clinical resources through the Resources section. Some materials require registration to ensure appropriate use in clinical settings."
+      },
+      "membership": {
+        "question": "Is there a membership fee for CAS?",
+        "answer": "CAS membership is free for all healthcare professionals and researchers. Patient and family access to support resources is also provided at no cost."
+      },
+      "patient_care": {
+        "question": "Do you provide direct patient care?",
+        "answer": "CAS does not provide direct patient care. We connect patients with specialized healthcare providers and provide educational resources to support informed healthcare decisions."
+      },
+      "collaboration": {
+        "question": "How can my organization partner with CAS?",
+        "answer": "We welcome partnerships with healthcare institutions, research organizations, and professional societies. Contact us at professionals@canadianamyloidosis.ca to discuss collaboration opportunities."
+      }
+    }
+  },
+
+  "7_HEALTHCARE_DIRECTORY": {
+    "7.1_Overview": {
+      "heading": "Healthcare Centers Directory",
+      "description": "Directory of healthcare centers across Canada specializing in amyloidosis care"
+    }
+  },
+
+  "8_FRENCH_TRANSLATIONS": {
+    "8.1_Overview": {
+      "heading": "French Language Content",
+      "description": "Complete French translations for all English content above",
+      "coverage": "100% of English content translated",
+      "note": "All headings, subheadings, descriptions, and detailed content have French equivalents"
+    }
+  }
+}

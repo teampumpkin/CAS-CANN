@@ -1,0 +1,88 @@
+2025-09-30 21:33:34.26
+4f58122f
+User
+[Zoho CRM] Token health check failed: Token is invalid or expired
+2025-09-30 21:33:34.26
+4f58122f
+User
+Failed to fetch fields for module Leads using v8 API: Error: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-09-30 21:33:34.26
+4f58122f
+User
+at ZohoCRMService.getAccessToken (file:///home/runner/workspace/dist/index.js:1398:17)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1415:29)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async ZohoCRMService.getModuleFields (file:///home/runner/workspace/dist/index.js:1471:28)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async FieldSyncEngine.updateFieldMappingsFromZoho (file:///home/runner/workspace/dist/index.js:2176:26)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async FieldSyncEngine.syncFieldsForSubmission (file:///home/runner/workspace/dist/index.js:2066:7)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3750:35)
+2025-09-30 21:33:34.26
+4f58122f
+User
+[FieldSync] Failed to update field mappings from Zoho: Error: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-09-30 21:33:34.26
+4f58122f
+User
+at ZohoCRMService.getAccessToken (file:///home/runner/workspace/dist/index.js:1398:17)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1415:29)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async ZohoCRMService.getModuleFields (file:///home/runner/workspace/dist/index.js:1471:28)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async FieldSyncEngine.updateFieldMappingsFromZoho (file:///home/runner/workspace/dist/index.js:2176:26)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async FieldSyncEngine.syncFieldsForSubmission (file:///home/runner/workspace/dist/index.js:2066:7)
+2025-09-30 21:33:34.26
+4f58122f
+User
+at async Immediate. (file:///home/runner/workspace/dist/index.js:3750:35)
+2025-09-30 21:33:34.26
+4f58122f
+User
+[FieldSync] Field sync failed: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-09-30 21:33:34.29
+4f58122f
+User
+[Form Submission] Field sync failed for submission 33: [
+2025-09-30 21:33:34.29
+4f58122f
+User
+'Field sync failed: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect'
+2025-09-30 21:33:34.29
+4f58122f
+User
+]
+2025-09-30 21:33:53.74
+4f58122f
+User
+[TokenManager] Health check failed for zoho_crm: Token expired

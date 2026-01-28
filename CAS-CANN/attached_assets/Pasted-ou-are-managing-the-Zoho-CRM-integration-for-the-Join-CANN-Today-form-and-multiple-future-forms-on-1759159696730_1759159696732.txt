@@ -1,0 +1,65 @@
+ou are managing the Zoho CRM integration for the “Join CANN Today” form and multiple future forms on our website. The current setup is partially working — forms are submitted, stored in the database, and processed through a pipeline with field mapping, retry logic, and audit logging. OAuth token management is implemented but expired tokens are blocking the final push to Zoho CRM.
+
+Your tasks are as follows:
+
+OAuth Module Enhancements
+
+Implement automatic token refresh to ensure expired tokens never block the pipeline.
+
+Verify that token expiry is proactively checked before pushing data to Zoho CRM.
+
+Ensure OAuth redirect and callback flows are fully functional for server-based app registration.
+
+CRM Push Module
+
+Complete the push to Zoho CRM (/crm/v3/Leads and /crm/v3/Contacts) once OAuth is active.
+
+Map all webform fields, including custom fields (Amyloidosis Type, Educational Interests, Communication Preferences, etc.) to CRM fields dynamically.
+
+Store Zoho record IDs back into the database for traceability.
+
+Field Metadata Module
+
+Cache Zoho CRM field metadata locally to reduce repeated API calls.
+
+Implement auto-refresh for metadata at least once a day to accommodate future new fields.
+
+Reporting Module
+
+Implement /api/reports endpoint to fetch aggregated lead data.
+
+Integrate Zoho Query API (COQL) to generate reports showing all fields from CRM.
+
+Ensure reports can filter by form source, date range, or lead status.
+
+Notification Module
+
+Implement a weekly summary notification system for clients.
+
+Include total leads, new submissions, and CSV/Excel export of submissions.
+
+Optionally, implement real-time alert notifications using Zoho Notification API for lead changes.
+
+Scalability / Dynamic Forms Module
+
+Ensure any new form added to the website can be automatically processed with existing pipeline.
+
+Assign a unique form source label to each submission for tracking.
+
+Error Handling & Retry Enhancements
+
+Ensure failed submissions due to OAuth errors or API rate limits are retried automatically.
+
+Maintain comprehensive audit logs for every action, including retries, failures, and successes.
+
+Deliverables:
+
+Fully functioning OAuth flow with auto-refresh.
+
+Real-time push of form submissions to Zoho CRM Leads and Contacts.
+
+Complete reporting endpoint with all CRM fields included.
+
+Weekly client notification system.
+
+Fully scalable dynamic form integration.

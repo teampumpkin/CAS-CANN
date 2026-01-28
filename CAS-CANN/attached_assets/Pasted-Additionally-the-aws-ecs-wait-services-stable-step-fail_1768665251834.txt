@@ -1,0 +1,63 @@
+Additionally, the aws ecs wait services-stable step failed due to tasks not starting, confirming that container images could not be pulled from ECR.
+
+*Solution:*
+
+1. *Check AWS Credentials:*  
+   Make sure the GitHub repository secrets AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY contain valid IAM credentials with permission to access ECR and ECS in the ap-south-1 region.  
+   In your workflow, these secrets are referenced here:
+   yaml
+   aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+   
+   See workflow file [.github/workflows/deploy.yml](https://github.com/teampumpkin/CAS-CANN/blob/79f1f1f549d9edbd7e7fc2a5bb9428062881b4f5/.github/workflows/deploy.yml).
+
+2. *IAM Role Permissions:*  
+   Ensure your IAM user or role associated with these credentials has these policies:
+   - AmazonEC2ContainerRegistryFullAccess
+   - AmazonECS_FullAccess  
+   Or customized policies allowing at least:
+   - ecr:GetAuthorizationToken
+   - ecr:BatchCheckLayerAvailability
+   - ecr:GetDownloadUrlForLayer
+   - ecs:UpdateService
+   - ecs:DescribeServices
+
+   Example snippet for the IAM policy:
+   json
+   {
+     "Effect": "Allow",
+     "Action": [
+       "ecr:GetAuthorizationToken",
+       "ecr:BatchCheckLayerAvailability",
+       "ecr:GetDownloadUrlForLayer",
+       "ecs:UpdateService",
+       "ecs:DescribeServices"
+     ],
+     "Resource": "*"
+   }
+   
+
+3. *Secrets Store:*  
+   Verify that there are no typos and the secrets are current (not revoked/rotated).
+
+4. *Double Check Registry and Service Names:*  
+   - ECR Registry is constructed dynamically: ${{ steps.login-ecr.outputs.registry }}
+   - Service: cas-website-task-service-k7z3yzx3
+   - Cluster: cas-cann26
+
+   Make sure these exist and are correctly configured in AWS.
+
+*Summary of Code Fix Suggestions:*
+
+If you update the AWS credentials and ensure proper IAM permissions, the workflow should authenticate and allow ECS tasks to pull images from ECR, resolving the deployment failure.
+
+If you need to test your setup locally, you can run:
+sh
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin <your-ecr-uri>
+
+to verify the credentials work for ECR access.
+
+For more details, refer to the workflow definition:  
+[.github/workflows/deploy.yml (ref: 79f1f1f549d9edbd7e7fc2a5bb9428062881b4f5)](https://github.com/teampumpkin/CAS-CANN/blob/79f1f1f549d9edbd7e7fc2a5bb9428062881b4f5/.github/workflows/deploy.yml).
+
+Adjust your IAM credential setup and the job should proceed successfully.

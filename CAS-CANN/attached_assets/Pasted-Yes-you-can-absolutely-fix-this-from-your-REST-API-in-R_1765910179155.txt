@@ -1,0 +1,219 @@
+Yes, you can absolutely fix this from your **REST API in Replit**. Here's the complete breakdown:
+
+## **ROOT CAUSE:**
+
+The empty fields are being created because your **Zoho Leads module has ALL fields available**, and when you POST data to Zoho via REST API, the API receives your mapped fields correctly, but Zoho CRM **auto-populates the schema with empty values for unmapped fields**. This is not a webform issue—it's how Zoho API works by default.
+
+***
+
+## **CONCERNS WITH API-BASED FILTERING:**
+
+| Concern | Impact | Severity |
+|---------|--------|----------|
+| **Empty fields still exist in Zoho schema** | Even after filtering on your backend, Zoho database stores empty fields | ⚠️ Medium |
+| **Performance overhead** | You're doing extra processing that could be avoided | ⚠️ Low |
+| **Maintenance burden** | You must maintain this filtering logic in your code | ⚠️ Medium |
+| **API usage limits** | Extra API calls if you're updating records later | ⚠️ Low |
+| **Data consistency** | Harder to track what's expected vs what's coming in | ⚠️ Medium |
+
+**Better approach:** Fix at the **Zoho source** (webform configuration) OR filter at **API level** (your backend code)
+
+***
+
+## **SOLUTION 1: Filter in Your REST API (Replit - Recommended if you control the backend):**
+
+### **Node.js/Express Example:**
+
+```javascript
+// Replit Backend - Filter empty fields before sending to Zoho
+async function createLeadInZoho(leadData) {
+  // FILTER 1: Remove null, undefined, and empty strings
+  const filteredLead = {};
+  
+  for (const [key, value] of Object.entries(leadData)) {
+    if (value !== null && value !== undefined && value !== '') {
+      filteredLead[key] = value;
+    }
+  }
+
+  // FILTER 2: Only include mapped fields (whitelist approach)
+  const mappedFields = [
+    'Last_Name',
+    'First_Name', 
+    'Email',
+    'Phone',
+    'Company',
+    'Industry',
+    'Lead_Source',
+    'Lead_Status',
+    'amyloidosisType',
+    'Services_Map_Inclusion',
+    'CAS_Communications',
+    'CANN_Communications'
+    // Add only YOUR webform fields here
+  ];
+
+  const whitelistedLead = {};
+  mappedFields.forEach(field => {
+    if (filteredLead[field]) {
+      whitelistedLead[field] = filteredLead[field];
+    }
+  });
+
+  // Now send only filtered data to Zoho
+  const zohoResponse = await fetch(
+    'https://www.zohoapis.com/crm/v5/Leads',
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Zoho-oauthtoken ${ACCESS_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: [
+          {
+            ...whitelistedLead,
+            Last_Name: whitelistedLead.Last_Name || 'Lead',
+            Company: whitelistedLead.Company || 'Unknown'
+          }
+        ]
+      })
+    }
+  );
+
+  return zohoResponse.json();
+}
+
+// Usage:
+const incomingData = {
+  First_Name: 'Vasi',
+  Last_Name: 'Test',
+  Email: 'vasimarketer@gmail.com',
+  Phone: '',  // Empty - will be filtered
+  Title: null, // Null - will be filtered
+  testfield2: undefined, // Undefined - will be filtered
+  Company: 'PSG',
+  Industry: 'Cardiology',
+  amyloidosisType: 'Both ATTR and AL'
+};
+
+await createLeadInZoho(incomingData);
+```
+
+### **Python Example (if using FastAPI/Flask):**
+
+```python
+from fastapi import FastAPI
+import httpx
+import os
+
+app = FastAPI()
+
+MAPPED_FIELDS = [
+    'Last_Name', 'First_Name', 'Email', 'Phone', 'Company',
+    'Industry', 'Lead_Source', 'amyloidosisType', 
+    'Services_Map_Inclusion', 'CAS_Communications', 'CANN_Communications'
+]
+
+def filter_lead_data(lead_data: dict) -> dict:
+    """Remove empty fields and only keep mapped fields"""
+    # Step 1: Remove empty/null values
+    non_empty = {k: v for k, v in lead_data.items() if v}
+    
+    # Step 2: Keep only mapped fields
+    filtered = {k: v for k, v in non_empty.items() if k in MAPPED_FIELDS}
+    
+    # Step 3: Ensure required fields have values
+    filtered['Last_Name'] = filtered.get('Last_Name', 'Lead')
+    filtered['Company'] = filtered.get('Company', 'Unknown')
+    
+    return filtered
+
+@app.post("/create-lead")
+async def create_lead(lead_data: dict):
+    """Create lead with filtered data"""
+    filtered_lead = filter_lead_data(lead_data)
+    
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            'https://www.zohoapis.com/crm/v5/Leads',
+            headers={
+                'Authorization': f'Zoho-oauthtoken {os.getenv("ZOHO_TOKEN")}',
+                'Content-Type': 'application/json'
+            },
+            json={'data': [filtered_lead]}
+        )
+    
+    return response.json()
+```
+
+***
+
+## **SOLUTION 2: Use Zoho's Field Validation (API-level):**
+
+```javascript
+// Alternative: Use Zoho's validation_mandatory field
+const leadPayload = {
+  data: [
+    {
+      Last_Name: 'Test',
+      First_Name: 'Vasi',
+      Email: 'vasimarketer@gmail.com',
+      Company: 'PSG',
+      Industry: 'Cardiology',
+      amyloidosisType: 'Both ATTR and AL',
+      // Explicitly map ONLY these fields - omit everything else
+      // Zoho will NOT create empty fields for unmapped ones if you use this approach
+    }
+  ],
+  trigger: ['workflow', 'blueprint'] // Trigger automations if needed
+};
+```
+
+***
+
+## **PROMPTS FOR YOUR API IMPLEMENTATION:**
+
+1. **What fields are actually being sent from your web form to Replit?**
+   - Log `console.log(JSON.stringify(incomingData, null, 2))` to see what's coming in
+
+2. **Are you sending all Leads module fields, or only the form fields?**
+   - If you're sending ALL fields from Zoho schema → that's the problem
+   - Only send fields that have values
+
+3. **Is your backend receiving extra fields from a third-party form builder?**
+   - Check if form builder (Gravity Forms, Typeform, etc.) is adding empty fields
+
+4. **Code to log what you're sending:**
+   ```javascript
+   console.log("Fields being sent to Zoho:");
+   console.log(JSON.stringify(filteredLead, null, 2));
+   console.log(`Total fields: ${Object.keys(filteredLead).length}`);
+   console.log(`Non-empty fields: ${Object.values(filteredLead).filter(v => v).length}`);
+   ```
+
+***
+
+## **WHY "ONLY MAPPED FIELDS ARE PUSHING FROM BACKEND":**
+
+✓ **This is correct behavior!** Your backend is only sending mapped fields. The issue is:
+
+- **Zoho CRM is auto-creating schema fields for ALL available fields in the module**
+- When Zoho receives your POST with only 5 fields, it stores those 5 + creates empty entries for the other 50+ fields
+- This is **Zoho's default behavior**, not your API's fault
+
+***
+
+## **FINAL RECOMMENDATION:**
+
+Implement **Solution 1** in your Replit code + **adjust at Zoho level**:
+
+1. **In Replit:** Filter to send only non-empty, mapped fields ✓
+2. **In Zoho:** Go to **Setup → Channels → Webforms → Your Form → Field Mapping** and **deselect unnecessary fields** ✓
+
+This dual approach ensures:
+- Your API is clean and efficient
+- Zoho only creates fields you actually need
+- New leads won't have 50+ empty fields cluttering the view
+
+Would you like me to help you implement this in your specific backend framework?

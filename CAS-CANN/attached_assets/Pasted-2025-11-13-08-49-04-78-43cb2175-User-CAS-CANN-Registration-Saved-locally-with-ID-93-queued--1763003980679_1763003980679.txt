@@ -1,0 +1,64 @@
+2025-11-13 08:49:04.78
+43cb2175
+User
+[CAS/CANN Registration] ✅ Saved locally with ID: 93, queued for Zoho sync
+2025-11-13 08:49:04.78
+43cb2175
+User
+[CAS/CANN Registration] ℹ️ Submission #93 will be synced to Zoho by background worker
+2025-11-13 08:49:04.78
+43cb2175
+User
+3:19:04 AM [express] POST /api/cas-cann-registration 201 in 81ms :: {"success":true,"message":"Regis…
+2025-11-13 08:49:07.70
+43cb2175
+User
+[Zoho Sync Worker] Found 1 pending submissions
+2025-11-13 08:49:07.74
+43cb2175
+User
+[Zoho Sync Worker] Syncing submission #93 to Zoho...
+2025-11-13 08:49:07.77
+43cb2175
+User
+[Zoho CRM] Token expired, attempting auto-recovery...
+2025-11-13 08:49:07.81
+43cb2175
+User
+[Zoho CRM] ❌ Auto-refresh failed - manual authentication required
+2025-11-13 08:49:07.81
+43cb2175
+User
+Failed to create record in module Leads using v8 API: Error: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-11-13 08:49:07.81
+43cb2175
+User
+at ZohoCRMService.getAccessToken (file:///home/runner/workspace/dist/index.js:1353:17)
+2025-11-13 08:49:07.81
+43cb2175
+User
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-11-13 08:49:07.81
+43cb2175
+User
+at async ZohoCRMService.makeRequest (file:///home/runner/workspace/dist/index.js:1363:29)
+2025-11-13 08:49:07.81
+43cb2175
+User
+at async ZohoCRMService.createRecord (file:///home/runner/workspace/dist/index.js:1486:28)
+2025-11-13 08:49:07.81
+43cb2175
+User
+at async ZohoSyncWorker.syncSubmission (file:///home/runner/workspace/dist/index.js:4756:30)
+2025-11-13 08:49:07.81
+43cb2175
+User
+at async ZohoSyncWorker.processQueue (file:///home/runner/workspace/dist/index.js:4724:13)
+2025-11-13 08:49:07.81
+43cb2175
+User
+[Zoho Sync Worker] ❌ Failed to sync submission #93: No valid Zoho CRM access token available. Please authenticate via /oauth/zoho/connect
+2025-11-13 08:49:07.96
+43cb2175
+User
+[Zoho Sync Worker] ⏱️ Scheduled retry for submission #93 (attempt 1/5) at 2025-11-13T03:19:17.888Z (in 10s

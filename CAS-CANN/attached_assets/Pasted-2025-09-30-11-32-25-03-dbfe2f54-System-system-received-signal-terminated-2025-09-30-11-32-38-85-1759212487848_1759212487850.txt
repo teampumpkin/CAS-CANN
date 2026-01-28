@@ -1,0 +1,92 @@
+2025-09-30 11:32:25.03
+dbfe2f54
+System
+system: received signal terminated
+2025-09-30 11:32:38.85
+dfe1b5e0
+User
+6:02:38 AM [express] POST /api/test-token-status 200 in 2ms
+2025-09-30 11:37:38.82
+dfe1b5e0
+User
+[OAuth Connect] Host: amyloid.ca, X-Forwarded-Host: amyloid.ca, NODE_ENV: production
+2025-09-30 11:37:38.82
+dfe1b5e0
+User
+[OAuth Connect] Detected production: true, Using base URL: https://amyloid.ca
+2025-09-30 11:37:38.82
+dfe1b5e0
+User
+[OAuth Connect] Generated redirect URI: https://amyloid.ca/oauth/zoho/callback
+2025-09-30 11:37:38.82
+dfe1b5e0
+User
+[OAuth Service] Generated authorization URL: https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.leads.ALL%2CZohoCRM.modules.contacts.ALL%2CZohoCRM.settings.fields.ALL&client_id=1000.1VOH5MB3GQNDX5HR8I4ZJPNSE8Q0IJ&response_type=code&access_type=offline&redirect_uri=https%3A%2F%2Famyloid.ca%2Foauth%2Fzoho%2Fcallback
+2025-09-30 11:37:38.82
+dfe1b5e0
+User
+[OAuth Connect] Full authorization URL: https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.leads.ALL%2CZohoCRM.modules.contacts.ALL%2CZohoCRM.settings.fields.ALL&client_id=1000.1VOH5MB3GQNDX5HR8I4ZJPNSE8Q0IJ&response_type=code&access_type=offline&redirect_uri=https%3A%2F%2Famyloid.ca%2Foauth%2Fzoho%2Fcallback
+2025-09-30 11:37:39.20
+dfe1b5e0
+User
+[OAuth Connect] Host: amyloid.ca, X-Forwarded-Host: amyloid.ca, NODE_ENV: production
+2025-09-30 11:37:39.20
+dfe1b5e0
+User
+[OAuth Connect] Detected production: true, Using base URL: https://amyloid.ca
+2025-09-30 11:37:39.20
+dfe1b5e0
+User
+[OAuth Connect] Generated redirect URI: https://amyloid.ca/oauth/zoho/callback
+2025-09-30 11:37:39.20
+dfe1b5e0
+User
+[OAuth Service] Generated authorization URL: https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.leads.ALL%2CZohoCRM.modules.contacts.ALL%2CZohoCRM.settings.fields.ALL&client_id=1000.1VOH5MB3GQNDX5HR8I4ZJPNSE8Q0IJ&response_type=code&access_type=offline&redirect_uri=https%3A%2F%2Famyloid.ca%2Foauth%2Fzoho%2Fcallback
+2025-09-30 11:37:39.20
+dfe1b5e0
+User
+[OAuth Connect] Full authorization URL: https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.leads.ALL%2CZohoCRM.modules.contacts.ALL%2CZohoCRM.settings.fields.ALL&client_id=1000.1VOH5MB3GQNDX5HR8I4ZJPNSE8Q0IJ&response_type=code&access_type=offline&redirect_uri=https%3A%2F%2Famyloid.ca%2Foauth%2Fzoho%2Fcallback
+2025-09-30 11:37:43.52
+dfe1b5e0
+User
+[OAuth Callback] Full query parameters: {
+2025-09-30 11:37:43.52
+dfe1b5e0
+User
+code: '1000.1fab7284e19fde769fe6ab810bceeba8.8e32d0113f3b07c48da35fb29c7b0d91',
+2025-09-30 11:37:43.52
+dfe1b5e0
+User
+location: 'us',
+2025-09-30 11:37:43.52
+dfe1b5e0
+User
+'accounts-server': 'https://accounts.zoho.com'
+2025-09-30 11:37:43.52
+dfe1b5e0
+User
+}
+2025-09-30 11:37:43.52
+dfe1b5e0
+User
+[OAuth Callback] Request URL: /oauth/zoho/callback?code=1000.1fab7284e19fde769fe6ab810bceeba8.8e32d0113f3b07c48da35fb29c7b0d91&location=us&accounts-server=https%3A%2F%2Faccounts.zoho.com
+2025-09-30 11:37:43.52
+dfe1b5e0
+User
+Received Zoho authorization code: 1000.1fab7284e19fde769fe6ab810bceeba8.8e32d0113f3b07c48da35fb29c7b0d91
+2025-09-30 11:37:43.72
+dfe1b5e0
+User
+Successfully obtained access token!
+2025-09-30 11:37:43.72
+dfe1b5e0
+User
+[TokenManager] Storing new token for provider: zoho_crm
+2025-09-30 11:37:43.93
+dfe1b5e0
+User
+[TokenManager] Successfully stored token for zoho_crm, expires: 2025-09-30T07:07:43.723Z
+2025-09-30 11:37:43.93
+dfe1b5e0
+User
+✅ Tokens stored automatically in database

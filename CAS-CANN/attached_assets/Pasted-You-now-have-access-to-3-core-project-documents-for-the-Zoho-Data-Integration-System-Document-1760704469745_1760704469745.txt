@@ -1,0 +1,50 @@
+You now have access to 3 core project documents for the Zoho Data Integration System:
+
+📘 Document 1: Zoho Data Integration Service Architecture  
+Defines what to build – an independent microservice that integrates with Zoho CRM without interfering with the live WebForm → Zoho pipeline.  
+Core principles: tag-based safety, CSV/Excel imports, cleanup, deduplication, JSON reporting, future AI enrichment support.
+
+📗 Document 2: Directory Resource Project (SOW)  
+Defines why to build it – the operational data migration project using 16 CSV/Excel files to populate and relate 3 Zoho modules (Accounts, Contacts, Resources) with bilingual data support for amyloid.ca.  
+End goal: unified bilingual master directory for public visualization.
+
+📙 Document 3: Execution Checklist & Methodology  
+Defines how to build it – 8 phased, checkpoint-driven methodology ensuring clean architecture, validation, and rollback safety.
+
+---
+
+🎯 My Understanding Summary
+- Doc 1 = **What to Build (Architecture)**
+- Doc 2 = **Why to Build (Project Scope)**
+- Doc 3 = **How to Build (Methodology)**
+
+Your mission:
+1. Build the standalone Zoho Data Integration Service using the methodology from Document 3.  
+2. Use it to execute the Directory Resource Project from Document 2.  
+3. Follow the architectural principles and isolation rules from Document 1.  
+
+---
+
+🧠 Tech Stack Decision Checkpoint
+Before you start execution:
+My current codebase uses **Node.js/TypeScript**, but Document 3 proposes **Python (pandas, openpyxl)** for data handling.  
+
+I want you to analyze and recommend the best option:  
+
+**Option A:** Build in **Python** – Create a fully separate backend microservice as a clean data utility layer.  
+**Option B:** Build in **TypeScript** – Integrate the data service as a module within the existing Node.js-based architecture for unified control.  
+
+✅ Your decision must be based on:
+- Long-term scalability
+- Ease of API maintenance
+- Data processing efficiency
+- Future compatibility with AI enrichment and RAG workflows
+
+Once decided, confirm the language stack choice and begin **Phase 1: Environment Setup**, following the checkpoint methodology exactly as defined in Document 3.
+
+Each phase must:
+- Be validated independently  
+- Save a snapshot or checkpoint  
+- Log completion before proceeding to the next
+
+Start when ready.

@@ -1,0 +1,216 @@
+HOMEPAGE
+ Section 1 (hero): 
+Title Canadian Amyloidosis Society (CAS) Subheading Accelerating awareness, diagnosis, and care.
+
+ Section 2: 
+Welcome to the Canadian Amyloidosis Society (CAS) We are dedicated to transforming amyloidosis care in Canada through patient-centered innovation, collaboration, and advocacy. Our mission is to enhance the quality and timeliness of care for individuals affected by this rare and complex disease. By accelerating access to diagnosis, treatment, and support, we are working to ensure that every person living with amyloidosis receives the care they need—when they need it, wherever they are in Canada. 
+ Section 3: 
+What is Amyloidosis?
+Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
+For detailed information on Amyloidosis and each type click here. (Link to the About Amyloidosis webpage.) 
+Special Features   
+(example- research publications & recent events.)   
+Section 4:
+
+Upcoming events
+(Feature/highlight the next 1-2 upcoming events.)
+Subscribe to our newsletter. Link to a form for people to input name & email address. (To be stored in the CRM.) (CAS is deciding if anyone can sign up to receive the newsletter or if only CAS members will receive the newsletter. If only CAS members will receive the newsletter, then this section will be removed.) 
+
+Section 5:
+
+What You’ll Find Here (A mini representation of the geo-spatial map that links to the map)
+            - Link to the searchable directory of clinics and services across Canada
+            - Uploadable, high-quality resources contributed by clinical teams
+            - Clear, accessible information on amyloidosis and its subtypes
+            - Tools to get involved, share insights, and join our mission
+
+
+Section 6:
+
+Quick Links (Suggested Tiles)
+· Find Support in Your Region
+· Upload a Clinical Resource
+· Join CAS
+· Browse the Resource.
+
+
+Section 7:
+
+ Featured Spotlights
+· “What is ATTR? Learn the signs and see how Canadian teams are responding.”
+· “New Upload: B.C. Cardiac Amyloidosis Pathway – see the latest provincial tool.”
+“Join the Movement: Why clinicians, researchers, and families are uniting.”   Visual Prompts for Canva / Magic Media
+1. Hero banner: abstract image of protein structure morphing into a human heart (stylized)
+2. Icons or map overlays showing regions of support across Canada
+3. Photo tile: clinician reading diagnostic chart (blurred face, waiver cleared)
+4. Graphic tiles for main site actions (Directory, Upload, Learn, Join) 
+ CMS/UX Notes for Replit
+· Hero image must be mobile-responsive with clear action tiles below
+· Embed quick link tiles with icons and hover states
+· Use featured spotlight rotator to surface new uploads and stories  
+ABOUT CAS PAGE
+Header Connecting patients, clinicians, researchers, and advocates to improve outcomes in amyloidosis care. 
+Who We Are The Canadian Amyloidosis Society (CAS) is a clinician-led, patient-informed organization dedicated to increasing awareness, accelerating diagnosis, and improving coordinated care for people living with amyloidosis. We serve as a national platform to connect, align, and support individuals and institutions working across the amyloidosis spectrum. 
+Our Vision A Canada where every person affected by amyloidosis receives timely, accurate diagnosis and high-quality care. 
+Our Values
+· Patient-Centered: We elevate lived experience alongside clinical and scientific expertise.
+· Collaborative: We bridge sectors and geographies to drive collective impact.
+· Evidence-Informed: We prioritize data, research, and clinical excellence.
+· Transparent: We uphold clarity, governance, and responsible leadership. 
+What We Do
+· Curate a national Directory of clinics, care teams, and resources
+· Facilitate access to tools that support earlier and more accurate diagnosis
+· Share trusted information for patients, families, and care providers
+· Enable clinicians to upload, share, and adapt resources
+· Convene a national Executive Committee for strategic alignment
+
+Executive Committee The CAS Executive Committee is composed of clinical leaders, researchers, strategic partners, and lived-experience advisors. This group guides platform strategy, ensures ethical oversight, and supports resource curation. 
+Our Partners
+Include partner logos that link to their websites: TAC, CANN, ARC, ISA and others. 
+ Visual Prompts for Canva / Magic Media
+1. CAS logo treatment with tagline and visual identity grid
+2. Portrait tiles of Executive Committee members (if photos permitted)
+3. Visual diagram showing CAS as central hub linking clinicians, patients, researchers, partners
+4. Icons for mission, vision, values in consistent branding style
+ 
+ CMS/UX Notes for Replit
+· Include anchor links to Executive Committee and Governance sections
+· Format “What We Do” and “Our Values” into modular cards
+· Ensure clear CTA at bottom: “Join CAS” or “Meet Our Team”  
+ABOUT AMYLOIDOSIS PAGE
+Header Learn the signs, understand the types, and take action early. 
+Overview Amyloidosis is a group of rare diseases caused by abnormal protein buildup (amyloid) in the body. These deposits can damage organs and tissues, leading to serious health complications. Because symptoms often mimic other conditions, diagnosis is frequently delayed. 
+Why It Matters Early diagnosis and treatment can significantly improve quality of life and outcomes. Understanding the signs—and acting on them—is key.
+Amyloidosis Types and Clinical Pathways Each subtype affects different organs and may require distinct treatment approaches. Below are summaries of the most common forms:
+1. AL (Light-Chain) Amyloidosis
+· Signs & Symptoms: Fatigue, swelling (especially legs), numbness, irregular heartbeat, enlarged tongue
+· Diagnosis & Testing: Blood and urine tests (free light chains), biopsy, cardiac imaging, bone marrow biopsy
+· Treatment: Chemotherapy, stem cell transplant, supportive organ care
+ 
+2. ATTR (Transthyretin) Amyloidosis – Hereditary and Wild-Type
+· Signs & Symptoms: Heart failure, peripheral neuropathy, gastrointestinal issues, carpal tunnel syndrome
+· Diagnosis & Testing: Genetic testing (for hereditary), scintigraphy, cardiac MRI, tissue biopsy
+· Treatment: TTR stabilizers (tafamidis), gene silencers, cardiac therapies, supportive care
+3. AA (Secondary) Amyloidosis
+· Signs & Symptoms: Kidney dysfunction, joint pain, fatigue
+· Diagnosis & Testing: SAA blood levels, kidney or fat pad biopsy
+· Treatment: Address underlying inflammatory condition (e.g., RA, infections), anti-inflammatory biologics
+4. Other Types (Localized, Dialysis-Related, Rare Mutations)
+· Treatment varies widely based on type, organ impact, and cause
+Disclaimers & Clinical Oversight This content is for informational purposes only. It is not intended to replace medical advice. All medical decisions should be made in consultation with a qualified healthcare provider. 
+ Visual Prompts for Canva / Magic Media
+1. Infographic showing protein → amyloid → organ damage sequence
+2. Side-by-side symptom icons for AL vs ATTR
+3. Simple visual chart of diagnosis steps (bloodwork → biopsy → imaging)
+4. Callout box: “Early signs of ATTR often missed — learn what to watch for” 
+ CMS/UX Notes for Replit
+· Break each subtype into collapsible or tabbed sections
+· Highlight warning signs using callout or badge components
+· Include CTA to Directory (“Find a Clinic”) and Resources page
+· Ensure persistent disclaimer at bottom of page  
+DIRECTORY – FIND SUPPORT PAGE
+Geo-spatial Map
+(Will include Treatment Centres  & Treatment Availability)
+(See the Directory & Geo-spatial Mapping document previously shared)  
+(Canadian Registry for Amyloidosis Research (CRAP) would be included here in the map. CAPER may be included here.)
+ 
+Canadian Amyloid Nursing Network (CANN) 
+(Link to a landing page with information about it)
+  
+RESOURCES PAGE
+Header A living library for clinicians, researchers, and families. 
+Overview The CAS Resource Library hosts documents, tools, and visuals that support diagnosis, treatment, education, and care coordination. Contributors from across Canada submit new materials, which are reviewed by moderators before publication. 
+Browse & Search Users can filter by:
+1. Amyloidosis type (AL, ATTR, AA, etc.)
+2. Resource type (form, tool, article, pathway, visual, research abstract)
+3. Link to relevant pages
+a. Toolkit
+b. Library of guidelines
+c. Important articles
+d. Webinars
+e. Libraries
+f. Education materials
+4. Intended audience (clinician, patient, caregiver)
+5. Language (English, French)
+6. Region (provincial or national) 
+Download Access & Permissions
+· Public documents are freely downloadable
+· Clinical uploads may require login or member confirmation
+· All resources are tagged with submission info and date
+· Most documents are PDF, with limited support for DOCX, XLSX, PNG 
+Resource Types
+· Clinical tools (e.g., biopsy checklists, cardiac scan forms)
+· Diagnostic and referral pathways
+· Patient education materials (e.g., “What is ATTR?” infographics)
+· Practice protocols, policies, and SOPs
+· Research abstracts and outcome snapshots 
+ Visual Prompts for Canva / Magic Media
+1. Search and filter UI mockup with tags and dropdowns
+2. Tiles showing resource types (form, infographic, video, PDF)
+3. Sample preview pane for a document entry
+4. “New This Month” rotator or highlight block 
+ CMS/UX Notes for Replit
+· Implement tag-based search engine
+· Include sortable table or grid view with preview and metadata
+· Highlight trending or recent uploads dynamically
+· Link back to Upload a Resource form with soft CTA
+
+
+UPLOAD A RESOURCE
+Header Help us grow Canada’s trusted resource library for amyloidosis care.
+
+Purpose This upload tool allows clinicians, researchers, and administrators to share tools, documents, or links that improve amyloidosis diagnosis, treatment, and coordination.
+ 
+Accepted Resource Types
+· Referral forms, diagnostic protocols, and care pathways
+· Regional care navigation tools and patient education handouts
+· Clinical trial site info sheets or eligibility tools
+· Research abstracts and visual summaries
+· Translation-ready documents (English or French) 
+Submission Fields
+· Resource Title, Summary, and File Upload (PDF, PNG, DOCX, etc.)
+· Tag by Region, Amyloidosis Type, Language, Audience, and Format
+· Consent checkbox: “I have rights to submit and share this resource”
+· Optional Contributor Info (Name, Role, Organization) 
+Moderation Workflow All uploads are reviewed by CAS moderators before public display. Resources may be flagged for enhancement (e.g., French translation, visual accessibility) prior to publishing. 
+Privacy & Consent Notes Contributors must confirm that no personal health information (PHI) is included in uploads. Resources may be anonymized, summarized, or declined based on content suitability.   Visual Prompts for Canva / Magic Media
+1. Clean, mobile-friendly form mockup
+2. Icons for resource types (form, info sheet, pathway, visual abstract)
+3. Preview card showing how an uploaded resource will appear 
+ CMS/UX Notes for Replit
+· Auto-tagging system based on upload metadata
+· Admin review panel for approval or feedback
+· Display upload status for contributor accounts
+· Confirmation page with link to “Browse Resources”
+
+
+GET INVOLVED
+Header Join our mission to improve awareness, diagnosis, and care.
+
+Why Get Involved? The Canadian Amyloidosis Society is powered by people who care. Whether you're a clinician, researcher, patient, caregiver, or ally—you have a role to play in accelerating change.
+
+Ways to Participate
+· Join CAS: Become a member! Become part of our growing community. Clinicians, researchers, and health system leaders are especially encouraged to register for ongoing collaboration opportunities.
+· Contribute Resources: Upload clinical tools or patient education materials through our structured portal.
+· Share Your Story: Help raise awareness by sharing a lived experience, reflection, or clinical journey.
+· Support the Mission: We welcome support from aligned organizations, philanthropic partners, and volunteers. Donations are welcome in support of CAS initiatives. (Link to the U of C page to collect donations – ideal future state is to collect donations directly to CAS after they become an official society)
+· Attend Events: (Include a listing of Upcoming Events & feature images and stories of recent events.)
+
+Join CAS By joining CAS, you signal your commitment to improving care across Canada. Members receive periodic updates, invitations to contribute, and the ability to be listed as contributors on shared resources.
+
+Privacy & Participation Notes Membership in CAS is voluntary and non-financial. Participation is governed by our Membership Policy and Code of Conduct.
+
+ Visual Prompts for Canva / Magic Media
+1. Engagement collage: clinicians in discussion, caregiver with patient, researcher in lab
+2. “Join Now” call-to-action card or signup modal preview
+3. UGC-style quote tiles (from members or contributors, real or mock)
+4. Organizational logos (for approved supporters or partners)
+
+ CMS/UX Notes for Replit
+· Build “Join CAS” as a dynamic form with optional profile fields
+· Tag contributors and enable attribution where appropriate
+· Allow submissions to “Share Your Story” via file or form
+· Show contributor role and partner support section (optional)
+
+
+CONTACT US

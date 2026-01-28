@@ -1,0 +1,260 @@
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Heart, Users, BookOpen, Lightbulb } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+export default function FeaturedSpotlights() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const spotlights = [
+    {
+      category: 'Clinical Guide',
+      icon: BookOpen,
+      title: 'New Provincial Biopsy Guide Released',
+      description: 'Ontario Health releases updated cardiac biopsy guidelines for amyloidosis diagnosis, featuring new endomyocardial biopsy protocols and safety standards.',
+      image: '/images/clinical-guide-1.jpg',
+      readTime: '8 min read',
+      gradient: 'from-[#00AFE6] to-[#00DD89]',
+      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
+      tags: ['Clinical Practice', 'Diagnosis', 'Provincial Guidelines'],
+      date: 'January 2025'
+    },
+    {
+      category: 'Research Breakthrough',
+      icon: Lightbulb,
+      title: 'TTR Stabilizer Therapy Shows Promise',
+      description: 'Canadian multi-center study demonstrates significant efficacy of tafamidis in hereditary ATTR amyloidosis patients with 78% reduction in disease progression.',
+      image: '/images/research-update-1.jpg',
+      readTime: '10 min read',
+      gradient: 'from-emerald-500 to-teal-600',
+      bgGradient: 'from-[#00AFE6]/15 to-[#00DD89]/15',
+      tags: ['Research', 'ATTR', 'Treatment'],
+      date: 'December 2024'
+    },
+    {
+      category: 'Treatment Update',
+      icon: Heart,
+      title: 'Gene Silencing Therapy Access Expanded',
+      description: 'Health Canada approves broader access to patisiran for hereditary ATTR amyloidosis, now available through provincial drug programs in BC, ON, and QC.',
+      image: '/images/treatment-update-1.jpg',
+      readTime: '6 min read',
+      gradient: 'from-purple-500 to-violet-600',
+      bgGradient: 'from-purple-50 to-violet-50',
+      tags: ['Treatment Access', 'Gene Therapy', 'Provincial Coverage'],
+      date: 'November 2024'
+    },
+    {
+      category: 'Quality Improvement',
+      icon: Users,
+      title: 'Rapid Diagnostic Pathway Implementation',
+      description: 'Toronto General Hospital launches 6-week diagnostic pathway for suspected amyloidosis cases, reducing time to diagnosis from 8 months to 42 days.',
+      image: '/images/quality-improvement-1.jpg',
+      readTime: '7 min read',
+      gradient: 'from-orange-500 to-red-500',
+      bgGradient: 'from-orange-50 to-red-50',
+      tags: ['Quality Care', 'Diagnostic Efficiency', 'Hospital Initiative'],
+      date: 'October 2024'
+    }
+  ];
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % spotlights.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + spotlights.length) % spotlights.length);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0">
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/10 to-[#00AFE6]/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-2 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm border border-gray-900/20 dark:border-white/20 rounded-full px-6 py-3 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
+            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">Important Updates</span>
+          </motion.div>
+
+          <h2 className="crawford-section-title text-gray-900 dark:text-white mb-4">
+            Important Updates & Featured Spotlights
+          </h2>
+          <p className="text-xl text-gray-700 dark:text-white/80 max-w-4xl mx-auto leading-relaxed">
+            Latest updates from the world of amyloidosis including clinical guidelines, research breakthroughs, treatment advances and other news from across Canada and internationally.
+          </p>
+        </motion.div>
+
+        {/* Carousel */}
+        <div className="relative">
+          <div className="overflow-hidden rounded-3xl">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+              >
+                <div className={`grid lg:grid-cols-12 gap-0 backdrop-blur-xl border rounded-3xl overflow-hidden ${
+                  currentIndex === 0 
+                    ? 'bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30'
+                    : currentIndex === 1
+                    ? 'bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 to-[#00AFE6]/20 border-[#00DD89]/20 dark:border-[#00DD89]/30'
+                    : currentIndex === 2
+                    ? 'bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 border-[#00AFE6]/20 dark:border-[#00AFE6]/30'
+                    : 'bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 to-[#00AFE6]/20 border-[#00DD89]/20 dark:border-[#00DD89]/30'
+                }`}>
+                  {/* Content Side */}
+                  <div className="lg:col-span-7 p-12 lg:p-16 flex items-center">
+                    <div className="w-full">
+                      <motion.div
+                        className="flex items-center gap-3 mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                      >
+                        <div className={`w-12 h-12 bg-gradient-to-br ${spotlights[currentIndex].gradient} rounded-2xl flex items-center justify-center shadow-lg`}>
+                          {(() => {
+                            const Icon = spotlights[currentIndex].icon;
+                            return <Icon className="w-6 h-6 text-white" />;
+                          })()}
+                        </div>
+                        <div>
+                          <span className="text-gray-900 dark:text-white/70 text-sm font-medium uppercase tracking-wide">
+                            {spotlights[currentIndex].category}
+                          </span>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="w-1 h-1 bg-gray-600 dark:bg-white/40 rounded-full"></div>
+                            <span className="text-gray-700 dark:text-white/60 text-sm">{spotlights[currentIndex].readTime}</span>
+                            <div className="w-1 h-1 bg-gray-600 dark:bg-white/40 rounded-full"></div>
+                            <span className="text-gray-700 dark:text-white/60 text-sm">{spotlights[currentIndex].date}</span>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      <motion.h3
+                        className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6 leading-tight font-cardo"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                      >
+                        {spotlights[currentIndex].title}
+                      </motion.h3>
+
+                      <motion.p
+                        className="text-xl text-gray-800 dark:text-white/80 leading-relaxed mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                      >
+                        {spotlights[currentIndex].description}
+                      </motion.p>
+
+                      {/* Clinical Tags */}
+                      <motion.div
+                        className="flex flex-wrap gap-2 mb-8"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.35 }}
+                      >
+                        {spotlights[currentIndex].tags.map((tag, index) => (
+                          <span
+                            key={index}
+                            className="bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm text-gray-900 dark:text-white/90 px-3 py-1 rounded-full text-sm font-medium border border-gray-900/20 dark:border-white/20"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </motion.div>
+
+                      <motion.button
+                        className="group inline-flex items-center gap-3 bg-gradient-to-r from-gray-900/20 to-gray-900/10 dark:from-white/20 dark:to-white/10 backdrop-blur-sm text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-semibold border border-gray-900/20 dark:border-white/20 hover:bg-gray-900/30 dark:hover:bg-white/30 transition-all duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span>Read Full Story</span>
+                        <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </motion.button>
+                    </div>
+                  </div>
+
+                  {/* Visual Side */}
+                  <div className="lg:col-span-5 relative">
+                    <div className={`h-full min-h-[400px] lg:min-h-[500px] bg-gradient-to-br ${spotlights[currentIndex].bgGradient} flex items-center justify-center`}>
+                      <motion.div
+                        className="text-center text-gray-500"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                      >
+                        <div className={`w-24 h-24 bg-gradient-to-br ${spotlights[currentIndex].gradient} rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-2xl`}>
+                          {(() => {
+                            const Icon = spotlights[currentIndex].icon;
+                            return <Icon className="w-12 h-12 text-white" />;
+                          })()}
+                        </div>
+                        <p className="text-sm font-medium">Image placeholder</p>
+                        <p className="text-xs opacity-70">{spotlights[currentIndex].category}</p>
+                      </motion.div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center justify-between mt-8">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={prevSlide}
+                className="w-12 h-12 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm border border-gray-900/20 dark:border-white/20 rounded-xl flex items-center justify-center text-gray-900 dark:text-white hover:bg-gray-900/20 dark:hover:bg-white/20 transition-all duration-300"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="w-12 h-12 bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm border border-gray-900/20 dark:border-white/20 rounded-xl flex items-center justify-center text-gray-900 dark:text-white hover:bg-gray-900/20 dark:hover:bg-white/20 transition-all duration-300"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+
+
+
+            {/* Counter */}
+            <div className="text-gray-700 dark:text-white/60 text-sm font-medium">
+              {String(currentIndex + 1).padStart(2, '0')} / {String(spotlights.length).padStart(2, '0')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,63 @@
+That's a smart request. Providing a clear map of every file and its use case ensures you understand the "why" behind the CRM architecture.
+
+You have a total of **16 unique data sheets** (including the two new French specification sheets and sheets from the multi-sheet Excel files), which fit into three main categories.
+
+Here is a breakdown of all your files, their use case in the scenario, and the resulting Zoho CRM module:
+
+***
+
+## Client's Ask: Data Identification and Use Case
+
+The client's goal is to establish a **Directory Resource Project / CRM / Mapping** system for the Canadian Amyloidosis Society (`amyloid.ca`). This requires three linked entities:
+
+1.  **The Directory:** The list of specialized clinics and hospitals.
+2.  **The Membership:** The professionals who staff those clinics and are CAS members.
+3.  **The Resources:** The documents and forms associated with the clinics.
+
+***
+
+## File-by-File Breakdown and Zoho Mapping
+
+### Category 1: Directory Institutions & Map Data (Zoho **Accounts** Module)
+
+These files are used to create **one record per hospital/clinic** with its address, specialty, and services offered.
+
+| File Name | Use Case | CRM Action |
+| :--- | :--- | :--- |
+| **`CAS_Directory_Export_Populated_May2025.xlsx - Institutions.csv`** | **PRIMARY MASTER LIST:** This is the most crucial file for the Institutions (**Accounts**). It contains the **unique `Institution_ID`**, which is required to link all other data (especially Resources) to the correct clinic. | **Import (Master):** Use to create the **Accounts** records and map the **`Institution_ID`** to a custom field (e.g., `CAS ID`). |
+| **`CAS_Directory_Master_Reorganized_v2.xlsx - Sheet1.csv`** | **CLEAN MASTER REFERENCE:** A comprehensive list of institutions with basic contact and address info. | **Consolidation:** Use to cross-reference and fill in missing address data (Province, Postal Code) in the `*Institutions.csv` primary file. |
+| **`Canadian Amyloidosis Society-Centers_for_Map-English.xlsx`** (and French version) | **SOURCE DATA:** Raw data gathered for the map, listing institutions by specialty. | **Consolidation:** Use for cross-checking data, especially to confirm the `Consent to List` status for the public map. |
+| **`CAS_Intake_Form_EN.xlsx - Sheet1.csv`** | **MAPPING GUIDE:** Defines the required fields and input types for the **Institution** (Account) record. | **Setup:** Use to create all **Custom Fields** in the Zoho **Accounts** module (e.g., Institution Type, Specialty Area Multi-select). |
+| **`CAS_Field_Spec_Updated_May2025.xlsx - Tombstone Data.csv`** | **MAPPING GUIDE (Detailed):** Provides field names and data types for institution data, including the essential **`Institution_ID`** field specification. | **Setup:** Confirms field types and requirements for the **Accounts** module. |
+| **`SCA_Formulaire_Inscription_Annuaire_FR.xlsx - Sheet1.csv`** | **MAPPING GUIDE (French Equivalent):** Confirms the required fields for French-speaking users/institutions. | **Setup:** Ensure field labels and dropdown values are bilingual in the Accounts module where necessary. |
+| **`Revised-draft-06-June-2024-National_Map...`** (Atlantic, QUE, ON, SKMB, AB, BC sheets) | **ENRICHMENT/SERVICES:** These six provincial sheets contain highly detailed service information (e.g., access to PYP scans, MRI, Genetic testing). | **Enrichment:** Extract the granular service columns and use them to **populate custom fields** on the corresponding Account records. This makes the map functional. |
+
+### Category 2: Membership Registration Data (Zoho **Contacts** Module)
+
+These files are used to create **one record per individual member** (HCP), which will be linked to an Account.
+
+| File Name | Use Case | CRM Action |
+| :--- | :--- | :--- |
+| **`Canadian Amyloidosis Society-Membership Registration-English...`** | **PRIMARY CONTACT DATA:** English submissions of member information. | **Consolidation:** Combine with the French file and **Deduplicate** by Email Address. **Pre-process** to split "Full name" into "First Name" and "Last Name". |
+| **`CAS Membership Registration Form (French)...`** | **FRENCH CONTACT DATA:** French submissions of member information. | **Consolidation:** Combine with the English file. **Link** the `Nom du centre ou de la clinique/Institution` field to the **Accounts** module via a lookup field. |
+| **`CAS_Membership_Registration_Upgraded_EN_v2.xlsx - Sheet1.csv`** | **MAPPING GUIDE:** Defines all the required fields and preferences for the **Contact** record. | **Setup:** Create all **Custom Fields** in the Zoho **Contacts** module (e.g., Primary Specialty, Preferred Role in CAS). |
+| **`SCA_Inscription_Membre_Améliorée_FR_v2.xlsx - Sheet1.csv`** | **MAPPING GUIDE (French Equivalent):** Confirms the required fields for membership for French-speaking users. | **Setup:** Confirms field labels and data types for the Contacts module. |
+
+### Category 3: Directory Resources Data (Zoho **Custom Module: Resources**)
+
+This file defines and populates the documents and guides related to the institutions.
+
+| File Name | Use Case | CRM Action |
+| :--- | :--- | :--- |
+| **`CAS_Directory_Export_Populated_May2025.xlsx - Resources.csv`** | **PRIMARY RESOURCE DATA:** Contains the title and metadata for all documents (e.g., Referral Forms, Patient Guides). | **Import (Master):** Use to create records in the **Custom Resources Module**. **Crucially, map `Linked_Institution_ID` to the Account's `CAS ID`** to link the document to the clinic. |
+| **`CAS_Field_Spec_Updated_May2025.xlsx - Resource Data.csv`** | **MAPPING GUIDE:** Defines the required fields and relationships for the **Resources Custom Module**. | **Setup:** Use to create the **Custom Resources Module** and all its fields (Document Type, Topic Area, Access Tier). |
+
+***
+
+## Step-by-Step Implementation Summary
+
+1.  **Phase 1 (Setup):** Create a **Custom Module called "Resources"**. Create all necessary **Custom Fields** in the **Accounts**, **Contacts**, and **Resources** modules using the `*Field_Spec*` and `*Intake_Form*` files as your field dictionary.
+2.  **Phase 2 (Import 1 - Accounts):** Consolidate the `*Institutions.csv` and the six **`Revised-draft-06-June-2024-National_Map...`** sheets into one master list. **Import this list into the Accounts module** (ensuring the `Institution_ID` is mapped to a custom field).
+3.  **Phase 3 (Import 2 - Contacts):** Consolidate and deduplicate the English and French **`*Membership Registration*`** files. **Import this list into the Contacts module**, ensuring you **link** the contact to the correct **Account** (Institution).
+4.  **Phase 4 (Import 3 - Resources):** **Import the `*Resources.csv` file into the new Custom Resources Module**, linking each resource record back to its corresponding Account record via the `Institution_ID`.
+5.  **Phase 5 (Manual):** Manually upload the actual resource files (PDFs, etc.) and attach them to the records created in Phase 4.

@@ -1,0 +1,46 @@
+Focus entirely on visual structure, section-level layout, micro-interactions, and scroll behavior. Recreate the overall feel of Crawford’s site, adapted for a nonprofit health awareness brand.
+
+🔷 Design Identity:
+	•	Style: Minimalist + Soft Flat 2.0, with a light neumorphic layer feel
+	•	Grid-based layout with wide gutters and padded, centered content blocks
+	•	Each section should feel like an individual, softly elevated card
+	•	Avoid overuse of icons or decoration — simplicity and typography lead
+
+🎨 Color & Branding:
+	•	Use CAS primary brand colors only as accents:
+	•	#00AFE6 (blue) and #00DD89 (green)
+	•	Backgrounds: mostly white or light gray (#F8F9FA, #FAFBFC)
+	•	Subtle gradients only where necessary (e.g. buttons, hover states)
+
+🧱 Components & Surfaces (Match Crawford Style):
+	•	Rounded cards with soft shadows (box-shadow in blur not hard drop)
+	•	Buttons: pill-shaped, medium-large, brand-accented with soft shadows
+	•	Content sections: center-aligned, max-width of 1140px
+	•	Spacing: 64px–96px between sections, maintain calm breathing room
+
+✨ Scroll & Animations:
+	•	Use fade-in-up or fade-in-zoom for section reveals
+	•	Navigation bar should be sticky and fade-in on scroll
+	•	Card hover: light lift with background tint or outline glow
+	•	Button hover: soft zoom-in with brand color fill or glow
+	•	Smooth transitions between sliders or carousels (if present)
+	•	Subtle parallax on large banners (desktop only)
+
+🤏 Micro-Interactions:
+	•	On hover: tiles lift slightly, text shifts upward a few pixels
+	•	On focus: form inputs use animated underline or border glow
+	•	Navigation hover: underline expands smoothly from center
+	•	Quick link tiles (e.g. “Join CAS”, “Find Support”) animate softly on hover
+
+♿ Accessibility:
+	•	Ensure high color contrast between text and background
+	•	All sections should be keyboard navigable
+	•	Use clearly distinguishable focus rings
+	•	Maintain font size of at least 18px for body text
+	•	Avoid purely color-based cues for actions
+
+📱 Responsive Behavior:
+	•	Hero images resize or shift below text on smaller screens
+	•	Tiles become stacked with padding on mobile
+	•	Navigation collapses into icon menu with smooth slide-out
+	•	Use vertical spacing to preserve the visual calm on narrow breakpoints

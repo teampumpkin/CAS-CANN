@@ -1,0 +1,46 @@
+The job is failing due to the following error during the AWS ECS deployment step:
+
+```
+An error occurred (ServiceNotFoundException) when calling the UpdateService operation:
+Process completed with exit code 254.
+```
+
+**Root Cause**
+- The AWS CLI returned a `ServiceNotFoundException` when trying to update the ECS service. This means the ECS service name referenced in your deployment step does not exist in the specified cluster/region.
+
+**Solution**
+1. **Verify Service Name and Cluster**
+   - Double-check the service name and cluster used in your deploy step (likely in `.github/workflows/deploy.yml`).
+   - Make sure the ECS service is created and exists in your AWS account in the `ap-south-1` region.
+
+2. **Update the Workflow File**
+   - If the service name in `deploy.yml` is incorrect, update it to the correct ECS service name.
+   - Example snippet where you should check/change:
+     ```yaml
+     - name: Deploy to ECS
+       run: |
+         aws ecs update-service --cluster myCluster --service myService --force-new-deployment
+     ```
+     Replace `myCluster` and `myService` with names that exist in your AWS console.
+
+3. **Check AWS Credentials and Permissions**
+   - Ensure the IAM user/role used has permissions for `ecs:UpdateService`.
+
+**Suggested Code Change**
+Update your `.github/workflows/deploy.yml` to reference the correct ECS service name, for example:
+```yaml
+- name: Deploy to ECS
+  run: |
+    aws ecs update-service \
+      --cluster <correct-cluster-name> \
+      --service <correct-service-name> \
+      --force-new-deployment
+```
+Replace `<correct-cluster-name>` and `<correct-service-name>` with valid existing values.
+
+**Next Steps**
+- Go to your AWS ECS console in `ap-south-1` and verify your cluster and service exist.
+- Update `.github/workflows/deploy.yml` to use the correct names.
+- Re-run the workflow.
+
+If you need help locating or correcting the ECS service name in your workflow file, let me know and I can fetch and review the necessary config for you.

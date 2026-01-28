@@ -1,0 +1,1358 @@
+CANADIAN AMYLOIDOSIS SOCIETY (CAS) WEBSITE - ALL CONTENT TEXT
+================================================================
+
+This document contains all text content used across the Canadian Amyloidosis Society website, organized by pages and sections.
+
+** CONTENT CLEANED (July 25, 2025) **
+✅ Removed all color codes, gradients, and hex values
+✅ Removed all icon references and technical formatting
+✅ Removed all internal links and navigation paths
+✅ Kept only essential text content for documentation
+✅ Maintained section structure and content organization
+
+================================================================================
+1. HOMEPAGE (/)
+================================================================================
+
+--- HERO SECTION ---
+Badge: Clinical Excellence Platform
+Main Title: Canadian Amyloidosis Society
+Subtitle: Advancing evidence-based amyloidosis care through clinical excellence, professional collaboration, and structured knowledge sharing.
+
+Title Structure:
+- Line 1: "Canadian"
+- Line 2: "Amyloidosis"  
+- Line 3: "Society"
+
+Clinical Impact Metrics (3 cards):
+- 6-Week Diagnosis: "Reduced diagnostic timeline"
+- 25+ Centers: "Network coverage"  
+- 1,200+ Patients: "Served annually"
+
+Quick Action Tiles (2x2 grid):
+- Join
+- Directory
+- Upload
+- Learn
+
+--- WELCOME SECTION ---
+Badge: Who we are
+Title: Welcome to the Canadian Amyloidosis Society (CAS)
+Subtitle: Your trusted partner in amyloidosis care, connecting patients, families, and healthcare professionals across Canada.
+
+Main Description: We are dedicated to improving the lives of those affected by amyloidosis through education, support, and advocacy. Our comprehensive platform provides essential resources, connects you with specialized care, and builds a supportive community for patients and families nationwide.
+
+Layout: Two-column grid with content left, image right
+
+Left Column Content:
+- Premium badge
+- Heading text
+- Two paragraphs of description text
+- Call-to-action button
+
+Right Column:
+- Medical professional image in rounded container
+- Stats overlay on bottom of image with mission/vision
+
+Stats Overlay on Image (3 columns with dividers):
+Left: "15+" | "Years Supporting"
+Center: "1K+" | "Patients Helped"  
+Right: "100%" | "Patient Focused"
+
+Button: "Learn More About Our Work" 
+
+--- ABOUT AMYLOIDOSIS SECTION ---
+Badge: Medical Information
+Title: What is Amyloidosis?
+Subtitle: Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.
+
+Layout: Title section, then 4-column grid of type cards, then large Early Detection section below
+
+Type Cards (4 cards in grid):
+Each card has: name, description, prevalence
+
+1. AL Amyloidosis 
+   - 
+   - Description: Most common form, affects heart, kidneys, liver, and nervous system
+   - Prevalence: 70% of cases
+
+2. AA Amyloidosis
+   - 
+   - Description: Secondary to chronic inflammatory conditions
+   - Prevalence: 20% of cases
+
+3. Hereditary
+   - 
+   - Description: Genetic forms including TTR, fibrinogen, and lysozyme
+   - Prevalence: 5% of cases
+
+4. Other Types
+   - 
+   - Description: Including β2-microglobulin and localized forms
+   - Prevalence: 5% of cases
+
+Early Detection Section (large 2-column card):
+Background: White/transparent backdrop with medical pattern overlay
+
+Left Column:
+- Title: "Early Detection Saves Lives" (
+- Description: Amyloidosis is often misdiagnosed or diagnosed late because its symptoms mimic other conditions. Early recognition and proper testing are crucial for better patient outcomes.
+- Subdescription: Our directory connects patients with specialized centers and healthcare providers experienced in diagnosing and treating amyloidosis across Canada.
+- Button: "Learn More" 
+
+Right Column (2 hoverable statistics cards):
+1. Card with  
+   - "2-3 years" (large 
+   - "Average time to diagnosis" (bold title)
+   - "Many patients see multiple doctors before receiving proper diagnosis" (description)
+
+2. Card with  
+   - "3,000+" (large 
+   - "Canadians affected" (bold title)
+   - "Estimated number of people living with amyloidosis in Canada" (description)
+
+--- QUICK LINKS SECTION ---
+Badge: Quick Access
+Title: Essential Resources
+Subtitle: Quick access to the most important tools and information for patients, families, and healthcare professionals.
+
+6-Card Grid Layout:
+Each card has: icon, title, description, brand 
+
+1. Find Specialists Card:
+   - 
+   - Title: Find Specialists  
+   - Description: Locate amyloidosis specialists in your area
+   - 
+   - Link: #specialists
+
+2. Patient Resources Card:
+   - 
+   - Title: Patient Resources
+   - Description: Comprehensive guides for patients and families
+   -   
+   - Link: #resources
+
+3. Support Groups Card:
+   - 
+   - Title: Support Groups
+   - Description: Connect with others and find support
+   - 
+   - Link: #support
+
+4. Get Involved Card:
+   - 
+   - Title: Get Involved
+   - Description: Join our community and make a difference  
+   - 
+   - Link: #get-involved
+
+5. Events Card:
+   - 
+   - Title: Events
+   - Description: Upcoming events and meetings
+   - 
+   - Link: #events
+
+6. Contact Us Card:
+   - 
+   - Title: Contact Us
+   - Description: Get in touch with our team
+   - 
+   - Link: #contact
+
+--- EVENTS & NEWSLETTER SECTION ---
+Badge: Stay Connected
+Title: Events & Newsletter
+Subtitle: Stay informed about the latest research, treatment advances, and community events in amyloidosis care.
+
+Layout: Header with logo, 3 event cards, then community stats and newsletter signup
+
+CAS Logo Display:
+- Canadian Amyloidosis Society logo image with 
+
+Event Cards (3 cards):
+1. Patient & Family Conference:
+   - 
+   - Title: Patient & Family Conference
+   - Description: Annual gathering featuring leading specialists and patient advocates sharing the latest advances in treatment and care.
+   - Date: November 15-16, 2024  
+   - Attendees: 250+
+   - Type: In-Person
+   - 
+   
+
+2. Monthly Research Webinars:
+   - 
+   - Title: Monthly Research Webinars
+   - Description: Expert presentations on the latest treatment advances, diagnostic techniques, and clinical trial updates.
+   - Date: First Thursday of each month
+   - Attendees: 500+
+   - Type: Virtual
+   - 
+   
+
+3. Support Group Meetings:
+   - 
+   - Title: Support Group Meetings
+   - Description: Virtual and in-person meetings across Canada providing emotional support and practical guidance.
+   - Date: Weekly sessions available
+   - Attendees: 50+
+   - Type: Hybrid
+   - 
+   
+
+--- DIRECTORY PREVIEW SECTION ---
+Badge: Find Care
+Title: Find Specialized Care  
+Subtitle: Connecting healthcare across the nation.
+
+Layout: Header, Interactive Map, Feature Cards, Statistics
+
+Interactive Canada Map:
+- Compact map display (h-64 md:h-80)
+- Healthcare center markers with clustering
+- Clickable provinces showing center details
+- Color-coded legend for center types
+- Hover tooltips with province names
+
+Directory Features (4 cards):
+1. Treatment Centers:
+   - 
+   - Title: Treatment Centers
+   - Description: Specialized amyloidosis treatment facilities across Canada
+   - 
+
+2. Clinical Experts:
+   -   
+   - Title: Clinical Experts
+   - Description: Leading physicians and healthcare professionals
+   - 
+
+3. Support Networks:
+   - 
+   - Title: Support Networks
+   - Description: Patient advocacy groups and community resources
+   - 
+
+4. Resources Library:
+   - 
+   - Title: Resources Library
+   - Description: Medical protocols and educational materials
+   - 
+
+Quick Statistics (3 cards):
+1. "1.2K+" | "Active Patients" | 
+2. "45+" | "Research Studies" |   
+3. "8" | "Clinical Trials" | 
+
+Map Legend:
+- Hospitals (blue markers)
+- Specialty Centers (green markers)  
+- Research Centers (purple markers)
+- Clinics (orange markers)
+- Connecting healthcare across the nation
+
+Map Legend:
+- 10+ Centers (Blue)
+- 5-9 Centers (Green) 
+- 2-4 Centers (Light Blue)
+- 1 Center (Orange)
+
+Network Stats:
+- Total Healthcare Centers
+- Active Provinces
+- Total Provinces & Territories
+
+--- EVENTS & NEWSLETTER SECTION ---
+Badge: Stay Connected
+Title: Events & Newsletter
+Subtitle: Stay informed about the latest research, treatment advances, and community events in amyloidosis care.
+
+Description: Join our community to receive regular updates, educational content, and information about upcoming events, webinars, and support group meetings.
+
+Features:
+- Upcoming Events
+- Latest News & Updates
+- Newsletter Signup
+- Email: Enter your email address
+- Button: Subscribe to Newsletter
+
+Stay Connected:
+- Join Our Community
+- Get exclusive access to research updates, community events, and expert insights delivered monthly.
+- Join 5,000+ community members
+
+Statistics:
+- Subscribers
+- Events/Year
+- Provinces
+- Satisfaction
+
+Community Calendar:
+- Community Calendar
+- Connect with experts, patients, and researchers through our comprehensive event program.
+
+--- QUICK LINKS SECTION ---
+Badge: Quick Access
+Title: Essential Resources
+Subtitle: Quick access to the most important tools and information for patients, families, and healthcare professionals.
+
+Six Quick Links:
+
+1. Patient Resources
+   - Comprehensive guides for patients and families
+   - Button: Get Access
+
+2. Healthcare Directory
+   - Specialized centers and experts
+   - Button: Browse
+
+3. Support Groups
+   - Connect with others and find support
+   - Button: Connect
+
+4. Research Updates
+   - Latest advances and research
+   - Button: Stay Informed
+
+5. Emergency Contacts
+   - Urgent help resources
+   - Button: Get Help
+
+6. Clinical Trials
+   - Research participation opportunities
+   - Button: Explore
+
+Additional Quick Actions:
+- Find Specialists: Locate amyloidosis specialists in your area
+- Get Involved: Join our community and make a difference
+- Button: Access Now
+- Events: Upcoming events and meetings
+- Contact Us: Get in touch with our team
+- Status: Available
+
+--- FEATURED SPOTLIGHTS SECTION ---
+Badge: Featured
+Title: Featured Spotlights
+Subtitle: Latest updates, success stories, and amyloidosis research breakthroughs from our community.
+
+Content Categories:
+- Latest News
+- Patient Stories  
+- Research Updates
+- Button: Read More
+- Button: View All
+
+Content Types:
+- Author
+- Date
+- Category
+- Button: Share Story
+- News Updates
+- Research Highlights
+- Community News
+- Patient Journey
+- Treatment Breakthrough
+- Diagnostic Improvement
+
+================================================================================
+2. ABOUT CAS PAGE (/about)
+================================================================================
+
+--- HERO SECTION ---
+Badge: About CAS
+Title: Canadian Amyloidosis Society
+Subtitle: Connecting Healthcare Across Canada
+Description: Building a national platform for clinical practice support
+Extended Description: Founded by healthcare professionals for healthcare professionals. We unite clinicians, researchers, and institutions to advance amyloidosis care through evidence-based collaboration.
+
+Buttons:
+- Our Mission
+- Get Involved
+
+Statistics:
+- Healthcare Professionals
+- Partner Institutions
+- Clinical Resources
+- Provinces/Territories
+
+--- WHAT WE DO SECTION ---
+Title: What We Do
+
+Three Core Areas:
+
+1. Tool Curation
+   - Evidence-based clinical tools, protocols, and diagnostic pathways developed by practicing specialists.
+
+2. Diagnostic Support
+   - Rapid diagnostic pathways, decision support tools, and consultation networks for complex cases.
+
+3. Peer Learning
+   - Collaborative professional networks, case discussions, and continuous medical education opportunities.
+
+--- VALUES SECTION ---
+Four Core Values:
+
+1. Patient-Centered
+   - Every decision and resource is designed with patient outcomes as the primary focus.
+
+2. Collaborative
+   - We bring together diverse expertise to solve complex clinical challenges.
+
+3. Evidence-Informed
+   - All resources are grounded in current research and clinical best practices.
+
+4. Transparent
+   - Open access to information, clear governance, and accountable stewardship.
+
+--- SERVICES SECTION ---
+Services Offered:
+- Comprehensive healthcare provider directory
+- Rapid diagnostic pathway tools
+- Clinical information resources
+- Professional development materials
+- Expert committee guidance
+
+--- EXECUTIVE COMMITTEE SECTION ---
+Title: Executive Committee
+Subtitle: Leading healthcare professionals dedicated to advancing amyloidosis care
+
+Committee Members:
+- Dr. Sarah Chen - Medical Director
+- Dr. Michael Thompson - Clinical Research Lead
+- Dr. Jennifer Walsh - Patient Care Coordinator
+- Dr. David Kumar - Technology Integration
+- Dr. Lisa Martinez - Community Outreach
+- Dr. Robert Fraser - Quality Assurance
+
+Join Our Clinical Network:
+Title: Join Our Clinical Network
+Subtitle: Contribute to advancing amyloidosis care in Canada
+Description: Whether you're a clinician, researcher, or healthcare professional, there are multiple ways to contribute to our mission.
+
+Three Contribution Paths:
+
+1. Clinician Contributors
+   - Share expertise through case studies, tool validation, and peer review.
+
+2. Research Collaborators
+   - Contribute to evidence base through studies, publications, and data sharing.
+
+3. Institutional Partners
+   - Healthcare organizations supporting infrastructure and resources.
+
+--- GOVERNANCE DOCUMENTS SECTION ---
+Title: Governance & Documents
+Subtitle: Transparent governance and organizational documents
+
+Three Document Categories:
+
+1. Corporate Governance
+   - Articles of incorporation, by-laws, and board meeting minutes.
+   Documents: Annual Financial Report, Audit Results, Funding Sources, Impact Metrics
+
+2. Financial Transparency
+   - Annual financial reports, audited statements, and funding sources.
+
+3. Clinical Governance
+   - Evidence review processes, clinical advisory guidelines, and quality standards.
+
+Buttons:
+- Download Document
+- View Document
+
+--- STRATEGIC PARTNERSHIPS SECTION ---
+Title: Strategic Partnerships
+Subtitle: Collaborative relationships that strengthen our impact
+Description: We work with leading organizations to advance amyloidosis care, research, and patient support across Canada and internationally.
+
+Buttons:
+- Contact Us
+- Learn More
+- View All Partnerships
+
+Final CTAs:
+- Join Our Network
+- Get Involved
+- Explore Resources
+
+================================================================================
+3. ABOUT AMYLOIDOSIS PAGE (/about-amyloidosis)
+================================================================================
+
+--- HERO SECTION ---
+Badge: Medical Information
+Title: Understanding Amyloidosis
+Subtitle: Learn the signs, understand the types, and take action early.
+Description: Amyloidosis is a rare but serious disease where misfolded proteins accumulate in organs. Early detection and appropriate treatment can significantly improve outcomes.
+Target Audience: PCPs, cardiologists, neurologists, nephrologists, hematologists
+Buttons: Get Started, Browse Directory
+
+--- SIMPLIFIED PATHOPHYSIOLOGY SECTION ---
+Title: Pathophysiology
+Description: Amyloidosis occurs when proteins misfold and accumulate in tissues.
+Detailed Explanation: When proteins misfold, they can form fibril deposits called amyloid that accumulate in various organs and tissues, disrupting normal function and potentially leading to organ failure if left untreated.
+
+--- WARNING SIGNS SECTION ---
+Title: Warning Signs
+Subtitle: Early symptoms that require medical attention.
+
+Five Symptom Categories:
+
+1. Cardiac Symptoms:
+   
+   Symptoms:
+   - Shortness of breath
+   - Chest pain  
+   - Irregular heartbeat
+   - Swelling in legs/ankles
+   - Fatigue during normal activities
+
+2. Neurological Symptoms:
+   
+   Symptoms:
+   - Numbness in hands/feet
+   - Tingling sensations
+   - Muscle weakness
+   - Carpal tunnel syndrome
+   - Balance problems
+
+3. Gastrointestinal Symptoms:
+   
+   Symptoms:
+   - Persistent diarrhea
+   - Nausea and vomiting
+   - Abdominal pain
+   - Loss of appetite
+   - Malabsorption symptoms
+
+4. Genitourinary Symptoms:
+   
+   Symptoms:
+   - Proteinuria (protein in urine)
+   - Decreased urine output
+   - Kidney dysfunction
+   - Urinary retention
+   - Bladder problems
+
+5. Systemic Symptoms:
+   
+   Symptoms:
+   - Unexplained weight loss
+   - Enlarged tongue
+   - Easy bruising
+   - Changes in skin texture
+   - Chronic fatigue
+
+--- TYPES OF AMYLOIDOSIS SECTION ---
+Title: Types of Amyloidosis
+Subtitle: Major forms and their characteristics.
+
+Three Expandable Type Cards:
+
+1. AL (Light-Chain) Amyloidosis:
+   Subtitle: Caused by abnormal plasma cells producing light chains
+   Prevalence: Often diagnosed after age 50; affects both men and women
+   Disease Context: Related to multiple myeloma (10-15% overlap)
+   
+   Symptoms:
+   - Leg swelling
+   - Fatigue
+   - Irregular heartbeat
+   - Enlarged tongue
+   - Skin changes (bruising, purple patches around eyes)
+   
+   Diagnosis Methods:
+   - Tissue biopsy
+   - Blood/urine tests for light chains
+   - Bone marrow biopsy
+   - Imaging tests (ECG, MRI, echocardiogram)
+   
+   Treatment Options:
+   - Chemotherapy
+   - Steroids
+   - Proteasome inhibitors
+   - Monoclonal antibodies
+   - Stem cell transplant (in select cases)
+   - Supportive care to manage symptoms and organ function
+   
+   Key Point: Target abnormal plasma cells with various therapies
+
+2. ATTR (Transthyretin) Amyloidosis:
+   Subtitle: Two forms: Hereditary (hATTR) and Wild-type (ATTRwt)
+   Prevalence: hATTR: Over 120 TTR mutations known
+   Disease Context: ATTRwt: Non-inherited, develops with age, primarily affects men over 60
+   
+   Symptoms:
+   - Heart issues: palpitations, fainting, fatigue
+   - Nerve issues: numbness, walking difficulty
+   - GI symptoms: nausea, weight loss
+   
+   Diagnosis Methods:
+   - Genetic testing for TTR mutations
+   - Biopsies, imaging (MRI, scans)
+   - Protein testing
+   
+   Treatment Options:
+   - TTR stabilizers: Tafamidis (Vyndaqel), Acoramidis (Attruby)
+   - Gene silencers: Patisiran (Onpattro), Vutrisiran (Amvuttra)
+   - Supportive care for symptoms and organ protection
+   
+   Key Point: Wild-type often causes heart failure and carpal tunnel syndrome
+
+3. Rare Types of Amyloidosis:
+   Subtitle: AA, ALECT2, Aβ2M, and other rare forms
+   Prevalence: Variable prevalence by geographic and ethnic background
+   Disease Context: Different underlying causes and affected organs
+   
+   Symptoms:
+   - AA: Linked to long-standing inflammation, mostly affects kidneys
+   - ALECT2: More common in Mexican, Punjabi, Native American, Middle Eastern descent
+   - Aβ2M: Seen in long-term dialysis patients, affects bones and joints
+   
+   Diagnosis Methods:
+   - Biopsies, blood and urine analysis
+   - Imaging: ECG, MRI, echocardiograms
+   - Genetic testing for hereditary types
+   - Specialized testing: mass spectrometry, immunohistochemistry
+   
+   Treatment Options:
+   - AA: Treat underlying disease to reduce SAA protein
+   - ALECT2: Often underdiagnosed, mainly affects kidneys
+   - Aβ2M: Becoming rarer due to improved dialysis techniques
+   - Supportive care and research ongoing for most types
+   
+   Key Point: Early diagnosis is critical for better outcomes
+
+--- DIAGNOSTIC PATHWAY SECTION ---
+Title: Diagnostic Pathway
+Subtitle: Systematic approach to diagnosis.
+
+5-Step Evidence-Based Approach:
+1. Clinical suspicion based on symptoms and presentation
+2. Initial screening with appropriate blood tests and imaging
+3. Confirmatory testing including tissue biopsy
+4. Typing studies to determine specific amyloid protein
+5. Subtype classification for targeted treatment planning
+
+--- CLINICAL GUIDELINES SECTION ---
+Title: Clinical Guidelines
+Subtitle: Professional resources for clinicians.
+
+External Resources:
+- Canadian Cardiovascular Society (CCS) Guidelines
+- Mayo Clinic Protocols  
+- NHS Treatment Standards
+
+--- PROFESSIONAL DISCLAIMER SECTION ---
+Title: Professional Disclaimer
+Content: This information is intended for healthcare professionals and educational purposes. It does not replace professional medical advice.
+Emergency Notice: For medical emergencies, call 911
+
+Call-to-Action Buttons:
+- Find a Specialist
+- Download Resources
+- View Complete Directory
+- Explore Resources
+- Learn more about types
+- Access Clinical Tools
+
+================================================================================
+4. DIRECTORY PAGE (/directory)
+================================================================================
+
+--- HERO SECTION ---
+Title: Healthcare Provider Directory
+Subtitle: Connect with amyloidosis specialists and treatment centers across Canada
+Search Features: Geographic and specialty filtering
+
+--- INTERACTIVE MAP SECTION ---
+Province-by-Province Coverage:
+- All 13 provinces and territories
+- Healthcare center clustering
+- Detailed facility information
+
+--- QUALITY ASSURANCE SECTION ---
+Title: Directory Standards & Review Process
+
+Directory Standards:
+
+1. Inclusion Criteria:
+   - Clinical expertise documentation
+   - Specialty services verification
+   - Geographic coverage requirements
+   - Verified contact information
+
+2. Review Cycle:
+   - Quarterly comprehensive reviews
+   - Real-time updates
+   - Professional verification
+   - Community feedback integration
+
+--- BACKEND VETTING PROCESS SECTION ---
+Title: Backend Vetting Process
+
+Six-Step Process:
+1. Medical license verification
+2. Hospital/clinic accreditation check
+3. Specialty certification confirmation
+4. Annual contact verification
+5. Service offering updates
+6. Quality assurance reviews
+
+--- DIRECTORY UPDATE SECTION ---
+Title: Help us maintain the most comprehensive directory
+Subtitle: Help us maintain the most comprehensive directory of amyloidosis care providers. Suggest new clinics or update existing information.
+
+Buttons:
+- Suggest a Clinic
+- Update Information
+
+================================================================================
+5. CONTACT PAGE (/contact)
+================================================================================
+
+--- HERO SECTION ---
+Title: Contact Us
+Subtitle: Get in touch with our team
+Description: We're here to help with your questions, resource needs, and collaboration opportunities.
+
+--- CONTACT SECTIONS ---
+Four Specialized Contact Areas:
+
+1. General Inquiries
+   - Email: info@canadianamyloidosis.ca
+   - Phone: 1-800-CAS-INFO
+   - Description: Questions about CAS, media requests, or collaboration opportunities
+   - Response Time: 24-48 hours
+
+2. Resource & Directory Updates
+   - Email: resources@canadianamyloidosis.ca
+   - Phone: 1-800-CAS-INFO ext. 2
+   - Description: Submit new resources, update directory information, or report issues
+   - Response Time: 3-5 business days
+
+3. Membership & Support
+   - Email: support@canadianamyloidosis.ca
+   - Phone: 1-800-CAS-INFO ext. 3
+   - Description: Membership questions, support group information, or volunteer opportunities
+   - Response Time: 1-2 business days
+
+4. Healthcare Professionals
+   - Email: professionals@canadianamyloidosis.ca
+   - Phone: 1-800-CAS-INFO ext. 4
+   - Description: Professional resources, collaboration, and educational opportunities
+   - Response Time: 2-3 business days
+
+--- CONTACT FORM SECTION ---
+Title: Send us a Message
+Subtitle: Fill out the form below and we'll get back to you promptly
+
+Form Fields:
+- Name
+- Email
+- Organization (Optional)
+- Inquiry Type
+- Subject
+- Message
+- Privacy Consent: I agree to the privacy policy and terms of service
+- Security Verification
+
+Inquiry Types:
+- General Question
+- Resource Request
+- Support Needed
+- Professional Collaboration
+- Media Inquiry
+- Other
+
+Buttons:
+- Send Message
+- Sending...
+
+--- FAQ SECTION ---
+Title: Frequently Asked Questions
+Subtitle: Quick answers to common questions
+
+Six FAQ Categories:
+
+1. How can I access clinical resources?
+   Answer: Healthcare professionals can access our clinical resources through the Resources section. Some materials require registration to ensure appropriate use in clinical settings.
+
+2. Is there a membership fee for CAS?
+   Answer: CAS membership is free for all healthcare professionals and researchers. Patient and family access to support resources is also provided at no cost.
+
+3. Do you provide direct patient care?
+   Answer: CAS does not provide direct patient care. We connect patients with specialized healthcare providers and provide educational resources to support informed healthcare decisions.
+
+4. How can my organization partner with CAS?
+   Answer: We welcome partnerships with healthcare institutions, research organizations, and professional societies. Contact us at professionals@canadianamyloidosis.ca to discuss collaboration opportunities.
+
+5. Can I contribute clinical resources to CAS?
+   Answer: Yes! We encourage healthcare professionals to share evidence-based resources. All submissions undergo peer review to ensure clinical accuracy and relevance.
+
+6. How do I stay updated on CAS activities?
+   Answer: Join our newsletter, follow our social media channels, or register for our professional network to receive regular updates on research, resources, and events.
+
+--- OFFICE INFORMATION SECTION ---
+Title: Office Information
+
+National Office:
+- Canadian Amyloidosis Society
+- Canada
+- Phone: (555) 123-4567
+- Email: info@canadianamyloidosis.ca
+
+Office Hours:
+- Monday - Friday: 9:00 AM - 5:00 PM EST
+- Saturday - Sunday: Closed
+
+Important Notes:
+- For medical emergencies, please contact your healthcare provider or call 911
+- Services available in English and French
+- Response Time varies by inquiry type
+
+================================================================================
+6. HEALTHCARE CENTER DATABASE
+================================================================================
+
+--- COVERAGE STATISTICS ---
+- Total Centers: 25+ facilities
+- Provincial Coverage: All 13 provinces/territories
+- Center Types: Hospitals, Specialty Centers, Research Facilities, Clinics
+
+--- FACILITY INFORMATION STRUCTURE ---
+Standardized Data Points for Each Center:
+- Center name and location
+- Contact information (phone, email, website, address)
+- Specialties and services offered
+- Center type and certifications
+- Establishment year
+- Detailed descriptions
+
+--- MAJOR CENTERS BY PROVINCE ---
+
+BRITISH COLUMBIA (2 centers):
+1. Vancouver General Hospital
+   - Vancouver, BC
+   - Phone: (604) 875-4111
+   - Email: amyloidosis@vch.ca
+   - Specialties: AL Amyloidosis, ATTR Amyloidosis, Cardiac Amyloidosis
+   - Services: Diagnosis, Treatment, Clinical Trials, Cardiac Care
+   - Description: Leading comprehensive amyloidosis treatment center in Western Canada with specialized cardiac unit.
+
+2. St. Paul's Hospital
+   - Vancouver, BC
+   - Phone: (604) 682-2344
+   - Email: cardiology@sth.ca
+   - Specialties: Cardiac Amyloidosis, Heart Failure
+   - Services: Cardiac Assessment, Specialized Imaging, Treatment
+   - Description: Specialized cardiac amyloidosis center with advanced imaging capabilities.
+
+ALBERTA (1 center):
+1. Foothills Medical Centre
+   - Calgary, AB
+   - Phone: (403) 944-1110
+   - Email: amyloidosis@ahs.ca
+   - Specialties: AL Amyloidosis, Multi-organ Care, Hematology
+   - Services: Diagnosis, Chemotherapy, Stem Cell Transplant, Monitoring
+   - Description: Alberta's primary amyloidosis treatment center with comprehensive care.
+
+ONTARIO (4 centers):
+1. Toronto General Hospital
+   - Toronto, ON
+   - Phone: (416) 340-4800
+   - Email: amyloidosis@uhn.ca
+   - Specialties: AL Amyloidosis, ATTR Amyloidosis, Cardiac Amyloidosis
+   - Services: Comprehensive Care, Transplant, Research, Clinical Trials
+   - Description: Canada's largest amyloidosis program with comprehensive multidisciplinary care.
+
+2. Princess Margaret Cancer Centre
+   - Toronto, ON
+   - Phone: (416) 946-4501
+   - Email: hematology@uhn.ca
+   - Specialties: AL Amyloidosis, Hematology, Stem Cell Transplant
+   - Services: Hematology, Stem Cell Transplant, Clinical Trials
+   - Description: Leading cancer center specializing in AL amyloidosis treatment.
+
+3. University of Ottawa Heart Institute
+   - Ottawa, ON
+   - Phone: (613) 696-7000
+   - Email: cardiology@ottawaheart.ca
+   - Specialties: Cardiac Amyloidosis, ATTR Amyloidosis
+   - Services: Cardiac Assessment, Specialized Imaging, Treatment
+   - Description: Specialized cardiac amyloidosis center with advanced diagnostic capabilities.
+
+4. Hamilton General Hospital
+   - Hamilton, ON
+   - Phone: (905) 527-4322
+   - Email: nephrology@hhsc.ca
+   - Specialties: AL Amyloidosis, Nephrology
+   - Services: Diagnosis, Treatment, Kidney Care
+   - Description: Regional amyloidosis center serving southwestern Ontario.
+
+QUEBEC (3 centers):
+1. Montreal Heart Institute
+   - Montreal, QC
+   - Phone: (514) 376-3330
+   - Email: amyloidosis@icm-mhi.org
+   - Specialties: Cardiac Amyloidosis, ATTR Amyloidosis, Research
+   - Services: Cardiac Care, Research, Clinical Trials, Genetic Testing
+   - Description: Leading cardiac amyloidosis research and treatment center in Quebec.
+
+2. Centre Hospitalier de l'Université de Montréal
+   - Montreal, QC
+   - Phone: (514) 890-8000
+   - Email: hematologie@chum.qc.ca
+   - Specialties: AL Amyloidosis, Hematology
+   - Services: Hematology, Diagnosis, Treatment
+   - Description: University hospital with specialized hematology-oncology amyloidosis program.
+
+3. Institut Universitaire de Cardiologie et de Pneumologie de Québec
+   - Quebec City, QC
+   - Phone: (418) 656-8711
+   - Email: cardiologie@criucpq.ulaval.ca
+   - Specialties: Cardiac Amyloidosis, Pulmonary Care
+   - Services: Cardiac Care, Pulmonary Assessment, Treatment
+   - Description: Specialized cardiac and pulmonary amyloidosis program.
+
+[Additional provinces have 1-2 centers each with similar detailed information]
+
+================================================================================
+7. NAVIGATION & FOOTER CONTENT
+================================================================================
+
+--- MAIN NAVIGATION ---
+Primary Navigation Links:
+- Home
+- About
+- Resources
+- Directory
+- Community
+- Contact
+
+Dropdown Menus:
+About:
+- About CAS
+- About Amyloidosis
+- Governance
+- Accessibility Statement
+
+Resources:
+- Browse Resources
+- Upload Resource
+- Resource Moderation
+
+Community:
+- Get Involved
+- Join CAS
+- Join CANN
+- Events
+
+--- FOOTER CONTENT ---
+Four-Column Layout:
+
+1. Quick Links:
+- Home
+- About CAS
+- About Amyloidosis
+- Resources
+- Directory
+- Contact
+- Get Involved
+- Accessibility
+
+2. Contact Information:
+- Phone: 1-800-CAS-INFO
+- Email: info@canadianamyloidosis.ca
+- National Office
+- Available in English and French
+
+3. Legal & Privacy:
+- Privacy Policy
+- Terms of Use
+- Accessibility Statement
+- Cookie Policy
+
+4. Language Status:
+- English: Available
+- French: Available
+- Bilingual Support Indicators
+
+Social Media Links:
+- Professional networking platforms
+- Educational resource channels
+- Community engagement tools
+
+Copyright: © 2025 Canadian Amyloidosis Society. All rights reserved.
+
+================================================================================
+8. AMYLOIDOSIS TYPE DETAIL PAGES
+================================================================================
+
+--- AL AMYLOIDOSIS PAGE (/amyloidosis-types/al) ---
+Title: AL Amyloidosis (Light Chain)
+Focus Areas:
+- Cardiac involvement patterns
+- Treatment protocols
+- Prognosis factors
+- Clinical statistics
+- Hematologic origin details
+- Multi-organ involvement patterns
+
+--- ATTR AMYLOIDOSIS PAGE (/amyloidosis-types/attr) ---
+Title: ATTR Amyloidosis (Transthyretin)
+Content Sections:
+- Genetic vs. wild-type variants
+- Neurologic manifestations
+- Cardiac complications
+- Therapeutic approaches
+- Hereditary patterns
+- Treatment options
+
+--- OTHER AMYLOIDOSIS TYPES PAGE (/amyloidosis-types/other) ---
+Title: Other & Rare Amyloidosis Types
+Comprehensive Coverage:
+- AA Amyloidosis characteristics
+- Localized amyloidosis forms
+- Dialysis-related complications
+- Rare variant presentations
+- Secondary amyloidosis types
+- Regional manifestations
+
+================================================================================
+9. ACCESSIBILITY FEATURES TEXT
+================================================================================
+
+--- ACCESSIBILITY TOOLS ---
+WCAG 2.1 Level AA Compliance Features:
+- Font size adjustment (12px-24px)
+- High contrast modes (Normal, High Contrast, Inverted)
+- Cursor size options (Normal, Large, Extra-Large)
+- Reduced motion support
+- Dyslexia-friendly fonts (OpenDyslexic option)
+- Screen reader optimization
+
+--- ACCESSIBILITY STATEMENT PAGE ---
+Title: Accessibility Statement
+Content: Comprehensive accessibility statement with compliance details, features, and contact information for accessibility support.
+
+Keyboard Navigation Features:
+- Skip links implementation
+- Focus indicators throughout site
+- Semantic HTML structure
+- ARIA labels and announcements
+- Full keyboard accessibility
+
+================================================================================
+10. LANGUAGE SUPPORT CONTENT
+================================================================================
+
+--- BILINGUAL IMPLEMENTATION ---
+Primary Language: English (fully implemented)
+Secondary Language: French (comprehensive translation system)
+
+Translation Coverage Areas:
+- All major content sections
+- User interface elements
+- Form labels and validation messages
+- Navigation and menu items
+- Error messages and notifications
+- Modal dialogs and popups
+- Button text and calls-to-action
+
+Language Status Indicators:
+- "Available" tags for completed translations
+- "Coming Soon" tags for content in development
+- Persistent language switcher in footer
+- localStorage-based language preference saving
+
+--- FRENCH TRANSLATIONS ---
+Hero Section (French):
+Main Title: Société Canadienne d'Amyloïdose (SCA)
+Subtitle: Accélérer la sensibilisation, faire progresser les soins et soutenir les patients à travers le Canada grâce à des ressources fondées sur des preuves et une collaboration professionnelle.
+
+[Comprehensive French translations available for all major sections]
+
+================================================================================
+2. RESOURCES PAGE (/resources)
+================================================================================
+
+--- HERO SECTION ---
+Badge: Professional Resources
+Title: Clinical Resources Library
+Subtitle: Access evidence-based tools, protocols, and educational materials curated by medical professionals for the Canadian amyloidosis community.
+
+Description: Our comprehensive resource library provides healthcare professionals, patients, and caregivers with access to the latest clinical guidelines, diagnostic tools, patient education materials, and professional development resources.
+
+--- SEARCH AND FILTERING SYSTEM ---
+Search Features:
+- Full-text search across all resources
+- Advanced filtering by multiple criteria
+- Real-time results updating
+- Resource type categorization
+
+Filter Categories:
+1. Amyloidosis Type: All Types, AL, ATTR, AA, ALect2, General
+2. Resource Type: All Types, Forms, Tools, Articles, Pathways, Visuals, Research
+3. Category: All Categories, Diagnostic Tools, Referral Pathways, SOPs, Patient Handouts
+4. Audience: All Audiences, Clinicians, Patients, Caregivers, Researchers
+5. Language: All Languages, English, French, Bilingual
+6. Region: All Regions, National, plus all Canadian provinces and territories
+
+--- RESOURCE CATEGORIES ---
+Main Categories:
+1. Diagnostic Tools
+   - Clinical assessment forms
+   - Screening questionnaires
+   - Laboratory protocols
+   - Imaging guidelines
+
+2. Referral Pathways
+   - Referral criteria
+   - Process workflows
+   - Contact directories
+   - Timeline expectations
+
+3. Standard Operating Procedures
+   - Clinical protocols
+   - Treatment guidelines
+   - Quality assurance procedures
+   - Safety protocols
+
+4. Patient Handouts
+   - Educational materials
+   - Treatment explanations
+   - Support resources
+   - Care instructions
+
+================================================================================
+3. GET INVOLVED PAGE (/get-involved)
+================================================================================
+
+--- HERO SECTION ---
+Badge: Get Involved
+Title: Join Our Mission To Improve Awareness, Diagnosis, and Care
+Subtitle: The Canadian Amyloidosis Society is powered by people who care. Whether you're a clinician, researcher, patient, caregiver, or ally—you have a role to play in accelerating change.
+
+--- WAYS TO PARTICIPATE SECTION ---
+Four Main Participation Options:
+
+1. Join CAS
+   Description: Become a member of our growing community. Clinicians, researchers, and health system leaders are especially encouraged to register.
+
+2. Contribute Resources
+   Description: Upload clinical tools or patient education materials through our structured portal to help the community.
+
+3. Share Your Story
+   Description: Help raise awareness by sharing a lived experience, reflection, or clinical journey with the community.
+
+4. Support the Mission
+   Description: We welcome support from aligned organizations, philanthropic partners, and volunteers. Donations support CAS initiatives.
+
+--- MEMBERSHIP BENEFITS ---
+Why Join CAS:
+
+1. Professional Network Access
+   - Connect with leading clinicians and researchers
+   - Participate in expert discussions
+   - Access exclusive professional content
+
+2. Educational Opportunities
+   - Continuing education credits
+   - Webinar and conference access
+   - Research update notifications
+
+3. Resource Sharing Platform
+   - Submit and access clinical tools
+   - Peer review opportunities
+   - Quality assured content
+
+4. Advocacy and Impact
+   - Policy development participation
+   - Public awareness campaigns
+   - Healthcare system improvements
+
+--- EVENTS SECTION ---
+Three Event Categories:
+
+1. Upcoming Events
+   - CAS Journal Club Sessions
+   - CANN Educational Series
+   - Annual Summit
+   - Regional Workshops
+
+2. Recent Events
+   - Past 6 months activities
+   - Recorded sessions
+   - Summary reports
+
+3. Past Events
+   - Historical event archive
+   - Attendee testimonials
+   - Impact metrics
+
+================================================================================
+4. DETAILED AMYLOIDOSIS PAGES
+================================================================================
+
+--- AL AMYLOIDOSIS PAGE (/amyloidosis-types/al) ---
+
+Hero Section:
+Badge: Light Chain Amyloidosis
+Title: AL Amyloidosis
+Subtitle: AL amyloidosis is caused by abnormal plasma cells producing light chains. It's the most common form of amyloidosis, often diagnosed after age 50 and affects both men and women.
+
+Detailed Overview Paragraphs:
+AL amyloidosis affects approximately 3,000-4,000 people in North America each year. The "AL" stands for "Amyloid Light chain," referring to the misfolded light chain proteins that form amyloid deposits.
+
+This condition most commonly affects the heart, kidneys, liver, and nervous system. Early diagnosis is crucial as treatment can prevent further organ damage and improve quality of life.
+
+The median age at diagnosis is 65 years, and it affects men slightly more often than women. Unlike other forms of amyloidosis, AL amyloidosis is not hereditary.
+
+Key Statistics:
+- Most common form of amyloidosis (70% of cases)
+- Related to multiple myeloma (10-15% overlap)
+- Prevalence: ~8-12 per million
+- Median Age: 65 years
+- Heart Involvement: 70%
+- Kidney Involvement: 60%
+
+Clinical Presentation:
+Symptoms:
+- Leg swelling
+- Fatigue
+- Irregular heartbeat
+- Enlarged tongue
+- Skin changes (bruising, purple patches around eyes)
+
+Diagnostic Approach:
+- Tissue biopsy
+- Blood/urine tests for light chains
+- Bone marrow biopsy
+- Imaging tests (ECG, MRI, echocardiogram)
+
+Treatment Options:
+- Chemotherapy
+- Steroids
+- Proteasome inhibitors
+- Monoclonal antibodies
+- Stem cell transplant (in select cases)
+- Supportive care to manage symptoms and organ function
+
+Treatment Centers:
+- Princess Margaret Cancer Centre (Toronto, ON) - Comprehensive amyloidosis program
+- Vancouver General Hospital (Vancouver, BC) - Hematology and stem cell transplant
+- CHUM Centre hospitalier de l'Université de Montréal (Montreal, QC) - Amyloidosis clinic
+- Clinical Trial: Daratumumab in AL Amyloidosis (Multiple Centers) - Phase III study
+
+--- ATTR AMYLOIDOSIS PAGE (/amyloidosis-types/attr) ---
+
+Hero Section:
+Badge: Transthyretin Amyloidosis
+Title: ATTR Amyloidosis
+Subtitle: ATTR amyloidosis has two forms: Hereditary (hATTR) with over 120 TTR mutations known, and Wild-type (ATTRwt) which is non-inherited, develops with age, and primarily affects men over 60.
+
+Two Main Forms:
+1. Hereditary ATTR (hATTR)
+   - Over 120 TTR mutations known
+   - Genetic inheritance pattern
+   - Variable age of onset
+   - Family history present
+
+2. Wild-type ATTR (ATTRwt)
+   - Non-inherited form
+   - Develops with age
+   - Primarily affects men over 60
+   - No family history
+
+Symptoms:
+- Heart issues: palpitations, fainting, fatigue
+- Nerve issues: numbness, walking difficulty
+- GI symptoms: nausea, weight loss
+
+Diagnosis:
+- Genetic testing for TTR mutations
+- Biopsies, imaging (MRI, scans)
+- Protein testing
+
+Treatment:
+- TTR stabilizers: Tafamidis (Vyndaqel), Acoramidis (Attruby)
+- Gene silencers: Patisiran (Onpattro), Vutrisiran (Amvuttra)
+- Supportive care for symptoms and organ protection
+
+Treatment Centers:
+- Toronto General Hospital (Toronto, ON) - Comprehensive ATTR amyloidosis program
+- Montreal Heart Institute (Montreal, QC) - Cardiac amyloidosis clinic
+- University of Alberta Hospital (Edmonton, AB) - Hereditary amyloidosis program
+
+--- OTHER AMYLOIDOSIS TYPES PAGE (/amyloidosis-types/other) ---
+
+Hero Section:
+Badge: Other Amyloidosis Forms
+Title: Understanding Other Amyloidosis Forms
+Subtitle: Beyond AL and ATTR, several other forms of amyloidosis exist, each with unique characteristics, causes, and treatment approaches.
+
+Comprehensive Overview Paragraphs:
+While AL and ATTR amyloidosis are the most common forms, several other types of amyloidosis exist, each with distinct characteristics and treatment approaches. Understanding these various forms is crucial for accurate diagnosis and appropriate management.
+
+These less common forms include AA amyloidosis (secondary amyloidosis), localized forms that affect specific organs, and dialysis-related amyloidosis. Each type has unique underlying causes and requires specialized approaches to diagnosis and treatment.
+
+The key to managing these conditions lies in understanding their specific pathophysiology and addressing the underlying causes when possible. Early recognition and appropriate intervention can significantly improve patient outcomes.
+
+AA (Secondary) Amyloidosis:
+Description: Caused by chronic inflammatory conditions like rheumatoid arthritis, inflammatory bowel disease, or chronic infections. The key is controlling the underlying inflammatory disease.
+
+Key Features:
+- Secondary to chronic inflammation
+- Primarily affects kidneys
+- Treatment focuses on underlying condition
+- Better prognosis when inflammation controlled
+
+Localized Amyloidosis:
+Description: Amyloid deposits that remain confined to specific organs or tissues without systemic involvement.
+
+Common Forms:
+- Cutaneous (skin) amyloidosis
+- Laryngeal amyloidosis
+- Bladder amyloidosis
+- Conjunctival amyloidosis
+
+Dialysis-related Amyloidosis:
+Description: Develops in patients on long-term dialysis due to accumulation of β2-microglobulin protein.
+
+Characteristics:
+- Associated with chronic kidney disease
+- Joint and bone involvement
+- Carpal tunnel syndrome common
+- Improved with kidney transplant
+
+Rare Variant Presentations:
+Additional rare forms including:
+- AH amyloidosis (heavy chain)
+- AFib amyloidosis (fibrinogen)
+- ALys amyloidosis (lysozyme)
+- AGel amyloidosis (gelsolin)
+- ALECT2: More common in Mexican, Punjabi, Native American, Middle Eastern descent
+- Aβ2M: Seen in long-term dialysis patients, affects bones and joints
+
+Treatment Approaches:
+- AA: Treat underlying disease to reduce SAA protein
+- ALECT2: Often underdiagnosed, mainly affects kidneys
+- Aβ2M: Becoming rarer due to improved dialysis techniques
+- Supportive care and research ongoing for most types
+
+Clinical Note: Early diagnosis is critical for better outcomes across all amyloidosis types.
+
+================================================================================
+END OF CONTENT DOCUMENTATION
+================================================================================
+
+Total Translation Keys: 200+
+Total Healthcare Centers: 25+
+Provincial Coverage: 13 provinces and territories
+Language Support: English (complete) and French (comprehensive)
+Accessibility Compliance: WCAG 2.1 Level AA
+
+This document contains all text content used across the Canadian Amyloidosis Society website as of July 2025.

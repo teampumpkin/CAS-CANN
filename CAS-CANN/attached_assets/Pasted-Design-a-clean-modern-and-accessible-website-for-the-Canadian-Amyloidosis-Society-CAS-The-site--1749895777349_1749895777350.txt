@@ -1,0 +1,48 @@
+Design a clean, modern, and accessible website for the Canadian Amyloidosis Society (CAS). The site is focused on patient-first communication, clinician access to verified resources, and community engagement.
+
+Ignore content and page structure — focus only on the visual style, animations, UI effects, micro-interactions, and accessibility.
+
+🔷 Brand & Tone:
+	•	Calm, professional, and trustworthy
+	•	Designed for diverse audiences — patients, caregivers, clinicians
+	•	Incorporate CAS brand colors:
+	•	Primary: #00AFE6 (blue), #00DD89 (green)
+	•	Logo style should inspire font and color choices sitewide
+
+🎨 Visual Design Style:
+	•	Use a Minimalist + Flat 2.0 hybrid approach
+	•	Spacious layout with clear hierarchy and soft section breaks
+	•	Rounded cards with gentle shadows
+	•	Modern sans-serif typography (e.g., Inter, DM Sans)
+	•	Use soft gradients or lightly tinted backgrounds to separate sections
+	•	Icons only when necessary for clarity — keep interface clean and content-first
+
+🧭 Navigation Behavior:
+	•	Persistent top navigation with dropdowns
+	•	Logo remains fixed and clickable at all times
+	•	Collapsible mobile menu with slide-in behavior
+	•	Homepage uses bold, tile-based navigation for key sections
+
+⚙️ Animations & Effects:
+	•	Section transitions: scroll-triggered fade-in, slide-up, or light zoom-in
+	•	Hero or background images may use subtle parallax on desktop
+	•	Sticky call-to-action (CTA) button animates in after scroll threshold
+	•	Button hover: slight scale and soft glow or border highlight
+	•	Card hover: gentle lift with shadow and slight background tint
+	•	Accordion-style transitions for FAQs or expandable sections
+	•	Smooth scroll on internal link navigation
+
+🤏 Micro-Interactions:
+	•	Form fields: highlight border or glow on focus
+	•	Upload & Filter tags: animated state change with clarity and contrast
+	•	Error/success messages: soft slide-in transitions
+	•	Clickable tiles: scale-in effect with slight bounce or glow on tap
+	•	Navigation links: animated underline or color fade on hover
+
+♿ Accessibility Considerations:
+	•	High contrast color pairings
+	•	Responsive layout with generous spacing and scalable font sizes
+	•	Fully keyboard-navigable: menus, forms, buttons
+	•	Alt text required for all images/icons
+	•	Clear focus indicators for all interactive elements
+	•	Link text must use both color and underline for clarity

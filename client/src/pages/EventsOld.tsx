@@ -432,16 +432,14 @@ export default function EventsOld() {
             </div>
           </div>
 
-          {/* Events Grid */}
-          <div className="max-w-6xl mx-auto">
+          {/* Events Grid - 2 column max layout */}
+          <div className="max-w-4xl mx-auto">
             {((eventsTab === "upcoming" ? upcomingEvents : pastEvents).length > 0) ? (
               <div
                 className={`grid gap-6 ${
                   (eventsTab === "upcoming" ? upcomingEvents : pastEvents).length === 1
-                    ? "grid-cols-1 max-w-md mx-auto"
-                    : (eventsTab === "upcoming" ? upcomingEvents : pastEvents).length === 2
-                      ? "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
-                      : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                    ? "grid-cols-1 max-w-lg mx-auto"
+                    : "grid-cols-1 md:grid-cols-2"
                 }`}
               >
                 {(eventsTab === "upcoming" ? upcomingEvents : pastEvents).map((event, index) => {
@@ -456,20 +454,19 @@ export default function EventsOld() {
                       className="h-full"
                     >
                       <Card
-                        className={`backdrop-blur-xl h-full flex flex-col rounded-3xl overflow-hidden transition-all duration-500 ${
+                        className={`h-full flex flex-col rounded-3xl overflow-hidden transition-all duration-500 ${
                           isPast
-                            ? "bg-gradient-to-br from-gray-100/95 to-gray-200/95 dark:from-gray-800/80 dark:to-gray-900/80 border border-gray-300/60 dark:border-gray-600/40 opacity-70"
-                            : "bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15"
+                            ? "bg-gradient-to-br from-gray-100/95 to-gray-50/95 dark:from-gray-800/50 dark:to-gray-900/50 border-gray-200/50 dark:border-gray-700/50 opacity-70"
+                            : "bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15"
                         }`}
                       >
-                        <div className="p-6 flex flex-col flex-1">
+                        {/* Header Section */}
+                        <div
+                          className={`relative p-6 ${isPast ? "bg-gray-100/50 dark:bg-gray-700/30" : "bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent"}`}
+                        >
                           <div className="flex justify-between items-start mb-4">
                             <div
-                              className={`w-16 h-16 rounded-2xl flex items-center justify-center ${
-                                isPast
-                                  ? "bg-gradient-to-br from-gray-300/50 to-gray-400/30 dark:from-gray-600/50 dark:to-gray-700/30"
-                                  : "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20"
-                              }`}
+                              className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isPast ? "bg-gray-200/50 dark:bg-gray-600/30" : "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20"}`}
                             >
                               {event.type === "Summit" ? (
                                 <Award className={`w-8 h-8 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`} />
@@ -478,124 +475,149 @@ export default function EventsOld() {
                               )}
                             </div>
                             <Badge
-                              className={`border-0 px-2 py-1 text-xs font-medium rounded ${
-                                isPast
-                                  ? "bg-gray-400 text-white"
-                                  : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white"
-                              }`}
+                              className={`${isPast ? "bg-gray-400" : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89]"} text-white border-0 px-2 py-1 text-xs font-medium rounded`}
                             >
                               {event.type}
                             </Badge>
                           </div>
-
                           <h3
-                            className={`text-xl font-semibold leading-snug mb-4 ${
-                              isPast
-                                ? "text-gray-500 dark:text-gray-400"
-                                : "text-gray-800 dark:text-white"
-                            }`}
+                            className={`text-xl font-semibold leading-snug ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
                           >
                             {event.title}
                           </h3>
+                        </div>
 
+                        {/* Content Section */}
+                        <CardContent className="p-6 pt-4 flex flex-col flex-1">
+                          {/* Event Details */}
                           <div className="space-y-2 mb-4">
                             <div
-                              className={`flex items-center gap-2 text-sm ${
-                                isPast
-                                  ? "text-gray-400 dark:text-gray-500"
-                                  : "text-gray-600 dark:text-white/70"
-                              }`}
+                              className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
                             >
-                              <Calendar className="w-4 h-4" />
+                              <Calendar
+                                className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                              />
                               <span>{event.displayDate}</span>
                             </div>
                             <div
-                              className={`flex items-center gap-2 text-sm ${
-                                isPast
-                                  ? "text-gray-400 dark:text-gray-500"
-                                  : "text-gray-600 dark:text-white/70"
-                              }`}
+                              className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
                             >
-                              <Clock className="w-4 h-4" />
+                              <Clock
+                                className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                              />
                               <span>{event.time}</span>
                             </div>
                             <div
-                              className={`flex items-center gap-2 text-sm ${
-                                isPast
-                                  ? "text-gray-400 dark:text-gray-500"
-                                  : "text-gray-600 dark:text-white/70"
-                              }`}
+                              className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
                             >
-                              <MapPin className="w-4 h-4" />
+                              <MapPin
+                                className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                              />
                               <span>{event.location}</span>
                             </div>
                           </div>
 
+                          {/* Topics Section */}
+                          {event.topics && (
+                            <div
+                              className={`mb-4 p-3 rounded-xl border space-y-3 ${
+                                isPast
+                                  ? "bg-gray-50 dark:bg-gray-700/30 border-gray-200 dark:border-gray-600"
+                                  : "bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border-[#00AFE6]/20"
+                              }`}
+                            >
+                              <div
+                                className={`text-xs font-medium ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                              >
+                                {t("eventsPage.sessionTopics")}
+                              </div>
+                              {event.topics.map((topic, idx) => (
+                                <div
+                                  key={idx}
+                                  className={`border-l-2 pl-3 ${isPast ? "border-gray-300" : "border-[#00AFE6]/40"}`}
+                                >
+                                  <div
+                                    className={`text-sm font-medium italic ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
+                                  >
+                                    "{topic.title}"
+                                  </div>
+                                  <div
+                                    className={`text-xs mt-1 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
+                                  >
+                                    {t("eventsPage.presenter")}: {topic.presenter}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Description */}
                           <p
-                            className={`text-sm leading-relaxed flex-1 mb-4 line-clamp-3 ${
-                              isPast
-                                ? "text-gray-400 dark:text-gray-500"
-                                : "text-gray-600 dark:text-white/70"
-                            }`}
+                            className={`text-sm leading-relaxed flex-1 mb-4 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
                           >
                             {event.description}
                           </p>
 
-                          {event.topics && (
-                            <div className="mb-4">
-                              <p
-                                className={`text-sm font-medium mb-2 ${
-                                  isPast
-                                    ? "text-gray-500 dark:text-gray-400"
-                                    : "text-gray-700 dark:text-white/80"
-                                }`}
-                              >
-                                Topics:
-                              </p>
-                              <ul className="space-y-1">
-                                {event.topics.map((topic, topicIndex) => (
-                                  <li
-                                    key={topicIndex}
-                                    className={`text-xs ${
-                                      isPast
-                                        ? "text-gray-400 dark:text-gray-500"
-                                        : "text-gray-600 dark:text-white/70"
-                                    }`}
-                                  >
-                                    • {topic.title}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-
+                          {/* CTA Section */}
                           {isPast ? (
                             <div className="text-center p-3 bg-gray-100 dark:bg-gray-700/50 rounded-xl mt-auto">
                               <p className="text-sm text-gray-500 dark:text-white/60">
                                 This event has ended
                               </p>
                             </div>
-                          ) : (
-                            <div className="space-y-4 mt-auto">
-                              <div className="text-center p-4 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-xl border border-[#00AFE6]/20">
-                                <p className="text-sm font-medium text-gray-700 dark:text-white/90 mb-1">
-                                  {event.type === "Summit" ? "Registration coming soon" : "Registration not required"}
-                                </p>
-                                {event.type !== "Summit" && (
-                                  <p className="text-xs text-gray-600 dark:text-white/70">
-                                    Zoom details are sent to CAS members
+                          ) : event.type === "Summit" ? (
+                            <div className="space-y-2 mt-auto">
+                              <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden">
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
+                                <div className="relative z-10">
+                                  <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
+                                    Registration coming soon
                                   </p>
-                                )}
+                                </div>
                               </div>
-                              <Link href="/join-cas">
-                                <Button className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm">
+                              <Button
+                                onClick={() => (window.location.href = "/join-cas")}
+                                className="w-full bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-sm relative overflow-hidden"
+                              >
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                                <div className="relative z-10 flex items-center justify-center text-gray-800">
+                                  <Users className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
                                   Join CAS
-                                  <Users className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                                </Button>
-                              </Link>
+                                  <div className="ml-2 w-1.5 h-1.5 bg-gray-800 rounded-full animate-pulse"></div>
+                                </div>
+                              </Button>
+                            </div>
+                          ) : (
+                            <div className="space-y-2 mt-auto">
+                              <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden">
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
+                                <div className="relative z-10">
+                                  <div className="flex items-center justify-center gap-1 mb-1">
+                                    <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
+                                    <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
+                                      {t("eventsPage.registrationNotRequired")}
+                                    </p>
+                                    <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
+                                  </div>
+                                  <p className="text-xs font-medium text-gray-700 dark:text-white/80">
+                                    {t("eventsPage.zoomDetailsCAS")}
+                                  </p>
+                                </div>
+                              </div>
+                              <Button
+                                onClick={() => (window.location.href = "/join-cas")}
+                                className="w-full bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-sm relative overflow-hidden"
+                              >
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                                <div className="relative z-10 flex items-center justify-center text-gray-800">
+                                  <Users className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
+                                  Join CAS
+                                  <div className="ml-2 w-1.5 h-1.5 bg-gray-800 rounded-full animate-pulse"></div>
+                                </div>
+                              </Button>
                             </div>
                           )}
-                        </div>
+                        </CardContent>
                       </Card>
                     </motion.div>
                   );

@@ -139,6 +139,7 @@ export default function Header() {
               { name: t("nav.journalClub"), href: "/journal-club" },
               { name: t("nav.cannEvents"), href: "/events-and-news#cann-events" },
               { name: t("nav.news"), href: "/events-and-news#news" },
+              { name: "Old Event Page", href: "/events-old" },
             ],
           },
         ]

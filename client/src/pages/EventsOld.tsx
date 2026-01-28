@@ -6,72 +6,157 @@ import {
   MapPin,
   Clock,
   Users,
+  Award,
 } from "lucide-react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
+import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
 
-const casEvents = [
+// Journal Club Sessions Data (copied from Events.tsx)
+const journalClubSessions = [
+  {
+    rawDate: "2025-05-08",
+    topics: [
+      {
+        title: "Proper Typing for Proper Treatment",
+        presenter: "Dr. Victor Jimenez-Zepeda, University of Calgary",
+      },
+      {
+        title: "Heart Failure Therapy in ATTR Amyloidosis: Is it time to go against the grain?",
+        presenter: "Dr. Francois Tournoux, University of Montreal",
+      },
+    ],
+  },
+  {
+    rawDate: "2025-09-25",
+    topics: [
+      {
+        title: "ATTR Neuropathy",
+        presenter: "Dr. Genevieve Matte, University of Montreal",
+      },
+      {
+        title: "Cardiac Amyloidosis",
+        presenter: "Dr. Edgar Da Silva, University of Ottawa",
+      },
+    ],
+  },
+  {
+    rawDate: "2025-11-27",
+    topics: [
+      {
+        title: "AL Amyloidosis",
+        presenter: "Dr. Janine Mazengarb, University of British Columbia",
+      },
+      {
+        title: "Diagnostic Dilemmas",
+        presenter: "Dr. Rajin Choudhury, University of Calgary",
+      },
+    ],
+  },
+  {
+    rawDate: "2026-02-26",
+    topics: [
+      {
+        title: "Is it really hATTR?",
+        presenter: "Dr. Gord Jewett, University of Calgary",
+      },
+      { title: "Topic To Be Announced", presenter: "TBD, Queen's University" },
+    ],
+  },
+];
+
+// Summit Events Data (copied from Events.tsx)
+const summitEvents = [
   {
     id: 1,
-    title: "CAS Journal Club - February 2026",
-    date: "2026-02-26",
-    time: "5:00 PM - 6:00 PM EST",
-    location: "Virtual Event",
-    type: "Journal Club",
+    title: "Canadian Amyloidosis Summit",
+    date: "2026-10-15",
+    displayDate: "Fall 2026 – date TBD",
+    time: "TBD",
+    location: "TBD",
+    type: "In-person & Virtual",
     description:
-      "One-hour virtual session designed for CAS members. Topics: Is it really hATTR? by Dr. Gord Jewett and Topic TBD by Queen's University presenter.",
+      "This annual educational conference is jointly hosted by the CAS and Transthyretin Amyloidosis Canada (TAC). The Summit unites both amyloidosis healthcare professionals and patients with accredited scientific sessions for professionals and dedicated sessions for patients/caregivers.",
+    image: summitSaveTheDateImg,
     isUpcoming: true,
+    isComingSoon: true,
   },
   {
-    id: 2,
-    title: "CAS Journal Club - November 2025",
-    date: "2025-11-27",
-    time: "3:00 PM - 4:00 PM MST",
-    location: "Virtual Event",
-    type: "Journal Club",
+    id: 5,
+    title: "2025 Canadian Amyloidosis Summit",
+    date: "2025-10-31",
+    displayDate: "October 31 – November 2, 2025",
+    time: "8:00 AM - 5:00 PM EST",
+    location: "Toronto, ON",
+    type: "Summit",
     description:
-      "Topics covered: AL Amyloidosis by Dr. Janine Mazengarb (UBC) and Diagnostic Dilemmas by Dr. Rajin Choudhury (University of Calgary).",
-    isUpcoming: false,
-  },
-  {
-    id: 3,
-    title: "CAS Journal Club - September 2025",
-    date: "2025-09-25",
-    time: "3:00 PM - 4:00 PM MST",
-    location: "Virtual Event",
-    type: "Journal Club",
-    description:
-      "Topics covered: ATTR Neuropathy by Dr. Genevieve Matte (University of Montreal) and Cardiac Amyloidosis by Dr. Edgar Da Silva (University of Ottawa).",
-    isUpcoming: false,
-  },
-  {
-    id: 4,
-    title: "CAS Journal Club - May 2025",
-    date: "2025-05-08",
-    time: "3:00 PM - 4:00 PM MST",
-    location: "Virtual Event",
-    type: "Journal Club",
-    description:
-      "The inaugural CAS Journal Club session featuring Proper Typing for Proper Treatment by Dr. Victor Jimenez-Zepeda and Heart Failure Therapy in ATTR Amyloidosis by Dr. Francois Tournoux.",
+      "The 2025 Canadian Amyloidosis Summit, hosted by CAS and Transthyretin Amyloidosis Canada (TAC). A comprehensive gathering of healthcare professionals, researchers, and patients focused on advancing amyloidosis care in Canada.",
+    image: summitSaveTheDateImg,
     isUpcoming: false,
   },
 ];
 
 const EST_TIMEZONE = "America/Toronto";
 
+// Helper to parse date string
+const parseLocalDate = (dateString: string): Date => {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+};
+
+// Helper function to check if event is past
+const isEventPast = (dateString: string): boolean => {
+  const [year, month, day] = dateString.split("-").map(Number);
+  const eventDate = new Date(year, month - 1, day);
+  const now = new Date();
+  const estDateStr = now.toLocaleDateString("en-CA", { timeZone: EST_TIMEZONE });
+  const [todayYear, todayMonth, todayDay] = estDateStr.split("-").map(Number);
+  const todayEST = new Date(todayYear, todayMonth - 1, todayDay);
+  return eventDate < todayEST;
+};
+
 export default function EventsOld() {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState("upcoming");
+  const [journalClubTab, setJournalClubTab] = useState("upcoming");
+  const [summitTab, setSummitTab] = useState("upcoming");
 
-  const upcomingEvents = casEvents.filter((e) => e.isUpcoming);
-  const pastEvents = casEvents.filter((e) => !e.isUpcoming);
+  // Categorize Journal Club sessions
+  const upcomingJournalClubSessions = journalClubSessions
+    .filter((session) => !isEventPast(session.rawDate))
+    .sort(
+      (a, b) =>
+        parseLocalDate(a.rawDate).getTime() - parseLocalDate(b.rawDate).getTime()
+    );
 
+  const pastJournalClubSessions = journalClubSessions
+    .filter((session) => isEventPast(session.rawDate))
+    .sort(
+      (a, b) =>
+        parseLocalDate(b.rawDate).getTime() - parseLocalDate(a.rawDate).getTime()
+    );
+
+  // Categorize Summit events
+  const upcomingSummitEvents = summitEvents.filter((e) => e.isUpcoming);
+  const pastSummitEvents = summitEvents.filter((e) => !e.isUpcoming);
+
+  // Helper function to add ordinal suffix to day
+  const getOrdinalSuffix = (day: number): string => {
+    if (day > 3 && day < 21) return "th";
+    switch (day % 10) {
+      case 1: return "st";
+      case 2: return "nd";
+      case 3: return "rd";
+      default: return "th";
+    }
+  };
+
+  // Format date to "Thursday, September 25th, 2025" in EST timezone
   const formatEventDate = (dateString: string): string => {
     if (!dateString) return "TBD";
     const parts = dateString.split("-").map(Number);
@@ -101,16 +186,6 @@ export default function EventsOld() {
         timeZone: EST_TIMEZONE,
       }),
     );
-
-    const getOrdinalSuffix = (d: number): string => {
-      if (d > 3 && d < 21) return "th";
-      switch (d % 10) {
-        case 1: return "st";
-        case 2: return "nd";
-        case 3: return "rd";
-        default: return "th";
-      }
-    };
 
     return `${dayName}, ${monthName} ${dayNumber}${getOrdinalSuffix(dayNumber)}, ${yearNumber}`;
   };
@@ -175,7 +250,7 @@ export default function EventsOld() {
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            className="text-center mb-20"
+            className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -193,70 +268,179 @@ export default function EventsOld() {
             </p>
           </motion.div>
 
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              className="flex justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
-                <div className="text-center">
-                  <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">
-                    {t("eventsPage.eventDetails")}
-                  </h3>
+          {/* Summit Tabs */}
+          <div className="flex justify-center mb-8 mt-12 overflow-x-auto pb-2">
+            <div className="bg-gradient-to-r from-gray-100/80 to-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-1 sm:p-2 shadow-2xl inline-flex min-w-max">
+              <button
+                onClick={() => setSummitTab("upcoming")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  summitTab === "upcoming"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t("eventsPage.upcomingEvents")}
+              </button>
+              <button
+                onClick={() => setSummitTab("past")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  summitTab === "past"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t("eventsPage.pastEvents")}
+              </button>
+            </div>
+          </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
-                    <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
-                      <Calendar className="w-8 h-8 text-[#00AFE6]" />
-                      <div className="text-center">
-                        <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                          {t("eventsPage.dates")}
-                        </p>
-                        <p className="text-gray-800 dark:text-white font-semibold">
-                          {t("events.summit.date")}
-                        </p>
+          {/* Upcoming Summit Events */}
+          {summitTab === "upcoming" && (
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                className="flex justify-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/20 shadow-2xl max-w-2xl w-full">
+                  <div className="text-center">
+                    <h3 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 font-rosarivo">
+                      {t("eventsPage.eventDetails")}
+                    </h3>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+                      <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
+                        <Calendar className="w-8 h-8 text-[#00AFE6]" />
+                        <div className="text-center">
+                          <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
+                            {t("eventsPage.dates")}
+                          </p>
+                          <p className="text-gray-800 dark:text-white font-semibold">
+                            {t("events.summit.date")}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 rounded-2xl border border-[#00DD89]/20">
+                        <MapPin className="w-8 h-8 text-[#00DD89]" />
+                        <div className="text-center">
+                          <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
+                            {t("eventsPage.format")}
+                          </p>
+                          <p className="text-gray-800 dark:text-white font-semibold">
+                            {t("events.summit.type")}
+                          </p>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 rounded-2xl border border-[#00DD89]/20">
-                      <MapPin className="w-8 h-8 text-[#00DD89]" />
-                      <div className="text-center">
-                        <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                          {t("eventsPage.format")}
-                        </p>
-                        <p className="text-gray-800 dark:text-white font-semibold">
-                          {t("events.summit.type")}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
-                    {t("eventsPage.summitHostedBy")}
-                  </p>
-
-                  <div className="space-y-4">
-                    <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
-                      {t("eventsPage.registrationComingSoon")}
+                    <p className="text-gray-600 dark:text-white/70 mb-10 leading-relaxed text-lg">
+                      {t("eventsPage.summitHostedBy")}
                     </p>
+
+                    <div className="space-y-4">
+                      <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
+                        {t("eventsPage.registrationComingSoon")}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
+              </motion.div>
+            </div>
+          )}
+
+          {/* Past Summit Events */}
+          {summitTab === "past" && (
+            <div>
+              {pastSummitEvents.length > 0 ? (
+                <div
+                  className={`grid gap-6 ${
+                    pastSummitEvents.length === 1
+                      ? "grid-cols-1 max-w-2xl mx-auto"
+                      : pastSummitEvents.length === 2
+                        ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+                        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                  }`}
+                >
+                  {pastSummitEvents.map((event, index) => (
+                    <motion.div
+                      key={event.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="h-full"
+                    >
+                      <Card className="bg-gradient-to-br from-gray-100/95 to-gray-200/95 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl border border-gray-300/60 dark:border-gray-600/40 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden opacity-70">
+                        <div className="relative p-6 bg-gradient-to-br from-gray-200/50 via-gray-100/30 to-transparent dark:from-gray-700/30 dark:via-gray-800/20 dark:to-transparent">
+                          <div className="flex justify-between items-start mb-4">
+                            <div className="w-16 h-16 bg-gradient-to-br from-gray-300/50 to-gray-400/30 dark:from-gray-600/50 dark:to-gray-700/30 rounded-2xl flex items-center justify-center">
+                              <Award className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+                            </div>
+                            <Badge className="bg-gray-400 dark:bg-gray-600 text-white border-0 px-2 py-1 text-xs font-medium rounded">
+                              {event.type}
+                            </Badge>
+                          </div>
+                          <h3 className="text-xl font-semibold text-gray-500 dark:text-gray-400 leading-snug">
+                            {event.title}
+                          </h3>
+                        </div>
+
+                        <CardContent className="p-6 pt-4 flex flex-col flex-1">
+                          <div className="space-y-2 mb-4">
+                            <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+                              <Calendar className="w-4 h-4 text-gray-400" />
+                              <span>{event.displayDate || formatEventDate(event.date)}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+                              <Clock className="w-4 h-4 text-gray-400" />
+                              <span>{event.time}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+                              <MapPin className="w-4 h-4 text-gray-400" />
+                              <span>{event.location}</span>
+                            </div>
+                          </div>
+
+                          <p className="text-gray-400 dark:text-gray-500 text-sm leading-relaxed flex-1">
+                            {event.description}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="text-center py-12"
+                >
+                  <div className="w-20 h-20 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Award className="w-10 h-10 text-gray-400" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                    No Past Summit Events
+                  </h3>
+                  <p className="text-gray-600 dark:text-white/70 max-w-md mx-auto">
+                    Past summit events will appear here after they conclude.
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* CAS Events Section */}
-      <section
-        id="events"
-        className="py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/30 dark:via-transparent dark:to-gray-700/20"></div>
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
+      {/* CAS Journal Club Section */}
+      <section id="journal-club" className="py-24 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -269,96 +453,191 @@ export default function EventsOld() {
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
               <Calendar className="w-5 h-5 text-[#00AFE6]" />
               <span className="text-gray-800 dark:text-white/90 font-medium">
-                CAS Events
+                {t("eventsPage.journalClubBadge")}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
               <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                CAS Journal Club & Events
+                CAS Journal Club
               </span>
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              Join us at upcoming CAS events and see highlights from our past
-              community gatherings.
+              {t("eventsPage.journalClubDescription")}
             </p>
+            <Link href="/journal-club">
+              <Button className="mt-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white font-semibold px-6 py-3 rounded-xl shadow-lg">
+                {t("eventsPage.viewFullSchedule")}
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
           </motion.div>
 
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="max-w-6xl mx-auto px-4"
-          >
-            <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-2">
-              <div className="bg-gradient-to-r from-gray-100/80 to-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-1 sm:p-2 shadow-2xl inline-flex min-w-max">
-                <button
-                  onClick={() => setActiveTab("upcoming")}
-                  className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
-                    activeTab === "upcoming"
-                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                      : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
-                  }`}
-                >
-                  Upcoming Events
-                </button>
-                <button
-                  onClick={() => setActiveTab("past")}
-                  className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
-                    activeTab === "past"
-                      ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
-                      : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
-                  }`}
-                >
-                  Past Events
-                </button>
-              </div>
+          {/* Journal Club Tabs */}
+          <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-2">
+            <div className="bg-gradient-to-r from-gray-100/80 to-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-1 sm:p-2 shadow-2xl inline-flex min-w-max">
+              <button
+                onClick={() => setJournalClubTab("upcoming")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  journalClubTab === "upcoming"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t("eventsPage.upcomingEvents")}
+              </button>
+              <button
+                onClick={() => setJournalClubTab("past")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  journalClubTab === "past"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+              >
+                {t("eventsPage.pastEvents")}
+              </button>
             </div>
+          </div>
 
-            <TabsContent value="upcoming" className="mt-0">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {upcomingEvents.length > 0 ? (
-                  upcomingEvents.map((event, index) => (
-                    <motion.div
-                      key={event.id}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="h-full"
+          {/* Journal Club Sessions Grid */}
+          <div className="max-w-6xl mx-auto">
+            <div
+              className={`grid gap-6 ${
+                (journalClubTab === "upcoming"
+                  ? upcomingJournalClubSessions
+                  : pastJournalClubSessions
+                ).length === 1
+                  ? "grid-cols-1 max-w-md mx-auto"
+                  : (journalClubTab === "upcoming"
+                      ? upcomingJournalClubSessions
+                      : pastJournalClubSessions
+                    ).length === 2
+                    ? "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
+                    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+              }`}
+            >
+              {(journalClubTab === "upcoming"
+                ? upcomingJournalClubSessions
+                : pastJournalClubSessions
+              ).map((session, index) => {
+                const isPast = journalClubTab === "past";
+                return (
+                  <motion.div
+                    key={session.rawDate}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="h-full"
+                  >
+                    <Card
+                      className={`backdrop-blur-xl h-full flex flex-col rounded-3xl overflow-hidden transition-all duration-500 ${
+                        isPast
+                          ? "bg-gradient-to-br from-gray-100/95 to-gray-200/95 dark:from-gray-800/80 dark:to-gray-900/80 border border-gray-300/60 dark:border-gray-600/40 opacity-70"
+                          : "bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15"
+                      }`}
                     >
-                      <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden">
-                        <div className="p-6 flex flex-col flex-1">
-                          <div className="flex justify-between items-start mb-4">
-                            <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center">
-                              <Calendar className="w-8 h-8 text-[#00AFE6]" />
-                            </div>
-                            <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
-                              {event.type}
-                            </Badge>
+                      <div className="p-6 flex flex-col flex-1">
+                        <div className="flex justify-between items-start mb-4">
+                          <div
+                            className={`w-16 h-16 rounded-2xl flex items-center justify-center ${
+                              isPast
+                                ? "bg-gradient-to-br from-gray-300/50 to-gray-400/30 dark:from-gray-600/50 dark:to-gray-700/30"
+                                : "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20"
+                            }`}
+                          >
+                            <Calendar
+                              className={`w-8 h-8 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
+                            />
                           </div>
+                          <Badge
+                            className={`border-0 px-2 py-1 text-xs font-medium rounded ${
+                              isPast
+                                ? "bg-gray-400 text-white"
+                                : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white"
+                            }`}
+                          >
+                            Journal Club
+                          </Badge>
+                        </div>
 
-                          <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug mb-6">
-                            {event.title}
-                          </h3>
+                        <h3
+                          className={`text-xl font-semibold leading-snug mb-4 ${
+                            isPast
+                              ? "text-gray-500 dark:text-gray-400"
+                              : "text-gray-800 dark:text-white"
+                          }`}
+                        >
+                          CAS Journal Club
+                        </h3>
 
-                          <div className="space-y-2 mb-4">
-                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                              <Calendar className="w-4 h-4" />
-                              <span>{formatEventDate(event.date)}</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                              <Clock className="w-4 h-4" />
-                              <span>{event.time}</span>
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                              <MapPin className="w-4 h-4" />
-                              <span>{event.location}</span>
-                            </div>
+                        <div className="space-y-2 mb-4">
+                          <div
+                            className={`flex items-center gap-2 text-sm ${
+                              isPast
+                                ? "text-gray-400 dark:text-gray-500"
+                                : "text-gray-600 dark:text-white/70"
+                            }`}
+                          >
+                            <Calendar className="w-4 h-4" />
+                            <span>{formatEventDate(session.rawDate)}</span>
                           </div>
+                          <div
+                            className={`flex items-center gap-2 text-sm ${
+                              isPast
+                                ? "text-gray-400 dark:text-gray-500"
+                                : "text-gray-600 dark:text-white/70"
+                            }`}
+                          >
+                            <Clock className="w-4 h-4" />
+                            <span>5:00 PM - 6:00 PM EST</span>
+                          </div>
+                          <div
+                            className={`flex items-center gap-2 text-sm ${
+                              isPast
+                                ? "text-gray-400 dark:text-gray-500"
+                                : "text-gray-600 dark:text-white/70"
+                            }`}
+                          >
+                            <MapPin className="w-4 h-4" />
+                            <span>Virtual Event</span>
+                          </div>
+                        </div>
 
-                          <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-6 line-clamp-3">
-                            {event.description}
+                        <div className="flex-1 mb-6">
+                          <p
+                            className={`text-sm font-medium mb-2 ${
+                              isPast
+                                ? "text-gray-500 dark:text-gray-400"
+                                : "text-gray-700 dark:text-white/80"
+                            }`}
+                          >
+                            Topics:
                           </p>
+                          <ul className="space-y-2">
+                            {session.topics.map((topic, topicIndex) => (
+                              <li
+                                key={topicIndex}
+                                className={`text-sm ${
+                                  isPast
+                                    ? "text-gray-400 dark:text-gray-500"
+                                    : "text-gray-600 dark:text-white/70"
+                                }`}
+                              >
+                                <span className="font-medium">{topic.title}</span>
+                                <br />
+                                <span className="text-xs">{topic.presenter}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
 
+                        {isPast ? (
+                          <div className="text-center p-3 bg-gray-100 dark:bg-gray-700/50 rounded-xl">
+                            <p className="text-sm text-gray-500 dark:text-white/60">
+                              This event has ended
+                            </p>
+                          </div>
+                        ) : (
                           <div className="space-y-4">
                             <div className="text-center p-4 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 rounded-xl border border-[#00AFE6]/20">
                               <p className="text-sm font-medium text-gray-700 dark:text-white/90 mb-1">
@@ -369,85 +648,47 @@ export default function EventsOld() {
                               </p>
                             </div>
                             <Link href="/join-cas">
-                              <Button
-                                className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm"
-                              >
+                              <Button className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white border-0 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/25 transition-all duration-300 group/btn py-3 rounded-2xl font-semibold text-sm">
                                 Join CAS
                                 <Users className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
                               </Button>
                             </Link>
                           </div>
-                        </div>
-                      </Card>
-                    </motion.div>
-                  ))
-                ) : (
-                  <div className="col-span-full text-center py-12">
-                    <p className="text-gray-500 dark:text-gray-400">
-                      No upcoming events at this time. Check back soon!
-                    </p>
-                  </div>
-                )}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="past" className="mt-0">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {pastEvents.map((event, index) => (
-                  <motion.div
-                    key={event.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="h-full"
-                  >
-                    <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-gray-400/50 dark:hover:border-gray-500/60 hover:shadow-xl transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden opacity-80">
-                      <div className="p-6 flex flex-col flex-1">
-                        <div className="flex justify-between items-start mb-4">
-                          <div className="w-16 h-16 bg-gradient-to-br from-gray-300/20 to-gray-400/20 rounded-2xl flex items-center justify-center">
-                            <Calendar className="w-8 h-8 text-gray-500" />
-                          </div>
-                          <Badge className="bg-gray-400 text-white border-0 px-2 py-1 text-xs font-medium rounded">
-                            {event.type}
-                          </Badge>
-                        </div>
-
-                        <h3 className="text-xl font-semibold text-gray-700 dark:text-white/80 leading-snug mb-6">
-                          {event.title}
-                        </h3>
-
-                        <div className="space-y-2 mb-4">
-                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white/60">
-                            <Calendar className="w-4 h-4" />
-                            <span>{formatEventDate(event.date)}</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white/60">
-                            <Clock className="w-4 h-4" />
-                            <span>{event.time}</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-white/60">
-                            <MapPin className="w-4 h-4" />
-                            <span>{event.location}</span>
-                          </div>
-                        </div>
-
-                        <p className="text-gray-500 dark:text-white/60 text-sm leading-relaxed flex-1 mb-6 line-clamp-3">
-                          {event.description}
-                        </p>
-
-                        <div className="text-center p-3 bg-gray-100 dark:bg-gray-700/50 rounded-xl">
-                          <p className="text-sm text-gray-500 dark:text-white/60">
-                            This event has ended
-                          </p>
-                        </div>
+                        )}
                       </div>
                     </Card>
                   </motion.div>
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
+                );
+              })}
+            </div>
+
+            {(journalClubTab === "upcoming"
+              ? upcomingJournalClubSessions
+              : pastJournalClubSessions
+            ).length === 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="text-center py-12"
+              >
+                <div className="w-20 h-20 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Calendar className="w-10 h-10 text-gray-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                  {journalClubTab === "upcoming"
+                    ? "No Upcoming Sessions"
+                    : "No Past Sessions"}
+                </h3>
+                <p className="text-gray-600 dark:text-white/70 max-w-md mx-auto">
+                  {journalClubTab === "upcoming"
+                    ? "New journal club sessions will be announced soon."
+                    : "Past sessions will appear here after they conclude."}
+                </p>
+              </motion.div>
+            )}
+          </div>
         </div>
       </section>
 

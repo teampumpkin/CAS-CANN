@@ -13,6 +13,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { lazy, Suspense } from "react";
 import { Loader2 } from "lucide-react";
+import { isProduction } from "@/hooks/useEnvironment";
 
 // Lazy load components for better performance
 const Home = lazy(() => import("@/pages/Home"));
@@ -53,8 +54,13 @@ const NotFound = lazy(() => import("@/pages/not-found"));
 const Partnerships = lazy(() => import("@/pages/Partnerships"));
 
 const Community = lazy(() => import("@/pages/Community"));
-const Events = lazy(() => import("@/pages/Events"));
-const EventsOld = lazy(() => import("@/pages/EventsOld"));
+const EventsStaging = lazy(() => import("@/pages/Events"));
+const EventsProduction = lazy(() => import("@/pages/EventsOld"));
+
+// Environment-aware Events component
+// Staging (Replit): Shows Events.tsx with full features
+// Production (AWS): Shows EventsOld.tsx with simpler layout
+const Events = isProduction() ? EventsProduction : EventsStaging;
 const TestForms = lazy(() => import("@/pages/TestForms"));
 const CANNMembershipForm = lazy(() => import("@/pages/CANNMembershipForm"));
 const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));
@@ -89,7 +95,7 @@ function Router() {
         <Route path="/community" component={Community} />
         <Route path="/events" component={Events} />
         <Route path="/events-and-news" component={Events} />
-        <Route path="/events-old" component={EventsOld} />
+        <Route path="/events-old" component={EventsProduction} />
         <Route path="/get-involved" component={GetInvolved} />
         <Route path="/join" component={JoinCAS} />
         <Route path="/join-cas" component={JoinCAS} />

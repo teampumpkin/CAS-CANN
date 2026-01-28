@@ -54,6 +54,7 @@ const Partnerships = lazy(() => import("@/pages/Partnerships"));
 
 const Community = lazy(() => import("@/pages/Community"));
 const Events = lazy(() => import("@/pages/Events"));
+const EventsOld = lazy(() => import("@/pages/EventsOld"));
 const TestForms = lazy(() => import("@/pages/TestForms"));
 const CANNMembershipForm = lazy(() => import("@/pages/CANNMembershipForm"));
 const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));
@@ -88,6 +89,7 @@ function Router() {
         <Route path="/community" component={Community} />
         <Route path="/events" component={Events} />
         <Route path="/events-and-news" component={Events} />
+        <Route path="/events-old" component={EventsOld} />
         <Route path="/get-involved" component={GetInvolved} />
         <Route path="/join" component={JoinCAS} />
         <Route path="/join-cas" component={JoinCAS} />

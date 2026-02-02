@@ -137,7 +137,7 @@ export default function Header() {
             dropdownItems: [
               { name: t("nav.summit"), href: "/events-and-news#summit" },
               { name: t("nav.journalClub"), href: "/journal-club" },
-              { name: t("nav.cannEvents"), href: "/events-and-news#cann-events" },
+              { name: t("nav.cannEvents"), href: "/cann-resources" },
               { name: t("nav.news"), href: "/events-and-news#news" },
               { name: "Old Event Page", href: "/events-old" },
             ],

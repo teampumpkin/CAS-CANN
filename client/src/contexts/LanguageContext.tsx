@@ -1141,6 +1141,7 @@ const translations = {
     'journalClub.topics.alAmyloidosis': 'An Interesting Case of AL Amyloidosis',
     'journalClub.topics.diagnosticDilemmas': 'Diagnostic Dilemmas in Cardiac Amyloidosis',
     'journalClub.topics.hATTR': 'Is it really hATTR?',
+    'journalClub.topics.interestingCase': 'Interesting amyloidosis case',
     'journalClub.topics.tbd': 'Topic To Be Announced',
 
     // Join CAS/CANN Form
@@ -2327,6 +2328,7 @@ const translations = {
     'journalClub.topics.alAmyloidosis': 'Un cas intéressant d\'amylose AL',
     'journalClub.topics.diagnosticDilemmas': 'Dilemmes diagnostiques dans l\'amylose cardiaque',
     'journalClub.topics.hATTR': 'Est-ce vraiment hATTR?',
+    'journalClub.topics.interestingCase': 'Cas intéressant d\'amylose',
     'journalClub.topics.tbd': 'Sujet à annoncer',
 
     // Join CAS/CANN Form

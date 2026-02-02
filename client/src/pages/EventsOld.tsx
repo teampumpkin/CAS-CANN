@@ -86,7 +86,7 @@ const journalClubSessions = [
         title: "Is it really hATTR?",
         presenter: "Dr. Gord Jewett, University of Calgary",
       },
-      { title: "Topic To Be Announced", presenter: "TBD, Queen's University" },
+      { title: "Interesting amyloidosis case", presenter: "Dr. Aws Almufleh, Queen's University" },
     ],
   },
 ];

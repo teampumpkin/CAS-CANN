@@ -12,23 +12,23 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 
-// EST Timezone constant (America/Toronto handles EST/EDT automatically)
-const EST_TIMEZONE = 'America/Toronto';
+// MST Timezone constant (America/Edmonton handles MST/MDT automatically)
+const MST_TIMEZONE = 'America/Edmonton';
 
-// Helper to get current date in EST timezone
-const getESTDate = (): Date => {
+// Helper to get current date in MST timezone
+const getMSTDate = (): Date => {
   const now = new Date();
-  const estDateStr = now.toLocaleDateString('en-CA', { timeZone: EST_TIMEZONE });
-  const [year, month, day] = estDateStr.split('-').map(Number);
+  const mstDateStr = now.toLocaleDateString('en-CA', { timeZone: MST_TIMEZONE });
+  const [year, month, day] = mstDateStr.split('-').map(Number);
   return new Date(year, month - 1, day);
 };
 
-// Check if session date has passed (using EST timezone)
+// Check if session date has passed (using MST timezone)
 const isSessionPast = (rawDate: string): boolean => {
   const [year, month, day] = rawDate.split("-").map(Number);
   const sessionDate = new Date(year, month - 1, day);
-  const todayEST = getESTDate();
-  return sessionDate < todayEST;
+  const todayMST = getMSTDate();
+  return sessionDate < todayMST;
 };
 
 interface Session {
@@ -246,8 +246,8 @@ export default function JournalClub() {
                 <div className="grid gap-6">
                   {upcomingSessions.map((session, index) => {
                     const sessionDate = new Date(session.rawDate + 'T12:00:00');
-                    const monthName = sessionDate.toLocaleDateString('en-US', { month: 'long', timeZone: EST_TIMEZONE });
-                    const yearName = sessionDate.toLocaleDateString('en-US', { year: 'numeric', timeZone: EST_TIMEZONE });
+                    const monthName = sessionDate.toLocaleDateString('en-US', { month: 'long', timeZone: MST_TIMEZONE });
+                    const yearName = sessionDate.toLocaleDateString('en-US', { year: 'numeric', timeZone: MST_TIMEZONE });
                     
                     return (
                     <motion.div
@@ -368,8 +368,8 @@ export default function JournalClub() {
                 <div className="grid gap-6">
                   {pastSessions.map((session, index) => {
                     const sessionDate = new Date(session.rawDate + 'T12:00:00');
-                    const monthName = sessionDate.toLocaleDateString('en-US', { month: 'long', timeZone: EST_TIMEZONE });
-                    const yearName = sessionDate.toLocaleDateString('en-US', { year: 'numeric', timeZone: EST_TIMEZONE });
+                    const monthName = sessionDate.toLocaleDateString('en-US', { month: 'long', timeZone: MST_TIMEZONE });
+                    const yearName = sessionDate.toLocaleDateString('en-US', { year: 'numeric', timeZone: MST_TIMEZONE });
                     
                     return (
                     <motion.div

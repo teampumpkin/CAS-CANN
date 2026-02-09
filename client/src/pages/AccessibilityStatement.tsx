@@ -502,8 +502,8 @@ export default function AccessibilityStatement() {
                 <CardContent>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     {language === 'en'
-                      ? 'Call us during business hours (Monday-Friday, 9 AM - 5 PM EST):'
-                      : 'Appelez-nous pendant les heures ouvrables (lundi-vendredi, 9h-17h EST):'
+                      ? 'Call us during business hours (Monday-Friday, 9 AM - 5 PM MST):'
+                      : 'Appelez-nous pendant les heures ouvrables (lundi-vendredi, 9h-17h MST):'
                     }
                   </p>
                   <Button 

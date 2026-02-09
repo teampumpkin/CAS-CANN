@@ -1142,6 +1142,7 @@ const translations = {
     'journalClub.topics.diagnosticDilemmas': 'Diagnostic Dilemmas in Cardiac Amyloidosis',
     'journalClub.topics.hATTR': 'Is it really hATTR?',
     'journalClub.topics.interestingCase': 'Interesting amyloidosis case',
+    'journalClub.topics.hereditaryATTRMixed': 'Hereditary ATTR Amyloidosis with Mixed Phenotypes: Therapeutic Prioritization When Cardiac and Neurologic Trajectories Diverge',
     'journalClub.topics.tbd': 'Topic To Be Announced',
 
     // Join CAS/CANN Form
@@ -2329,6 +2330,7 @@ const translations = {
     'journalClub.topics.diagnosticDilemmas': 'Dilemmes diagnostiques dans l\'amylose cardiaque',
     'journalClub.topics.hATTR': 'Est-ce vraiment hATTR?',
     'journalClub.topics.interestingCase': 'Cas intéressant d\'amylose',
+    'journalClub.topics.hereditaryATTRMixed': 'Amylose héréditaire à transthyrétine avec phénotypes mixtes : priorisation thérapeutique lorsque les trajectoires cardiaques et neurologiques divergent',
     'journalClub.topics.tbd': 'Sujet à annoncer',
 
     // Join CAS/CANN Form

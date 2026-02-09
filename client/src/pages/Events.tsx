@@ -80,7 +80,7 @@ const journalClubSessions = [
         title: "Is it really hATTR?",
         presenter: "Dr. Gord Jewett, University of Calgary",
       },
-      { title: "Interesting amyloidosis case", presenter: "Dr. Aws Almufleh, Queen's University" },
+      { title: "Hereditary ATTR Amyloidosis with Mixed Phenotypes: Therapeutic Prioritization When Cardiac and Neurologic Trajectories Diverge", presenter: "Dr. Conor Sheridan, Queen's University" },
     ],
   },
 ];
@@ -170,7 +170,7 @@ const allEvents = [
         title: "Is it really hATTR?",
         presenter: "Dr. Gord Jewett, University of Calgary",
       },
-      { title: "Interesting amyloidosis case", presenter: "Dr. Aws Almufleh, Queen's University" },
+      { title: "Hereditary ATTR Amyloidosis with Mixed Phenotypes: Therapeutic Prioritization When Cardiac and Neurologic Trajectories Diverge", presenter: "Dr. Conor Sheridan, Queen's University" },
     ],
   },
   {

@@ -78,7 +78,7 @@ const allSessions: Session[] = [
     dateKey: "journalClub.dates.feb2026",
     topics: [
       { topicKey: "journalClub.topics.hATTR", presenterName: "Dr. Gord Jewett, University of Calgary" },
-      { topicKey: "journalClub.topics.interestingCase", presenterName: "Dr. Aws Almufleh, Queen's University" },
+      { topicKey: "journalClub.topics.hereditaryATTRMixed", presenterName: "Dr. Conor Sheridan, Queen's University" },
     ],
     location: "Virtual",
     registrationNotRequired: true,

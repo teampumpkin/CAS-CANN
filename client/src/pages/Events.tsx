@@ -188,6 +188,31 @@ const allEvents = [
   },
 ];
 
+// News Items Data
+const newsItems = [
+  {
+    id: 1,
+    title: "Health Canada Notice of Compliance for Vutrisiran",
+    date: "2025-12-15",
+    description: "In December 2025, Health Canada provided the Notice of Compliance for vutrisiran (Amvuttra, Alnylam Pharmaceuticals) for the treatment of wild-type or hereditary transthyretin-mediated amyloidosis cardiomyopathy. The approval broadens the indication for vutrisiran, from its existing indication for the treatment of stage 1 or stage 2 polyneuropathy in patients with hereditary transthyretin-mediated amyloidosis.",
+    category: "Regulatory",
+  },
+  {
+    id: 2,
+    title: "MAGNITUDE Clinical Trial Enrollment Placed on Hold",
+    date: "2025-10-27",
+    description: "On October 27, 2025, Intellia Therapeutics paused enrollment in its MAGNITUDE clinical trial after one participant experienced severe elevations in liver transaminases, meeting the study's pre-defined safety criteria. The participant was hospitalized and sadly passed away from complications of acute liver failure. Subsequently, the U.S. FDA placed the trial on clinical hold.\n\nThe MAGNITUDE (NCT06128629) trial is evaluating nexiguran ziclumeran (nex-z) for the treatment of ATTR cardiomyopathy using CRISPR/Cas9 technology.",
+    category: "Clinical Trial",
+  },
+  {
+    id: 3,
+    title: "CANN Townhall",
+    date: "2026-01-22",
+    description: "Thank you to all who contributed to the success of the Townhall on January 22, 2026! This professionally facilitated ideation workshop was designed to help shape and refine the purpose, goals, and objectives for the network. Members from various provinces connected to share and discuss member needs, and brainstorm ideas to guide future direction for CANN. The results of the Townhall will be shared at the CANN Operational meeting on Tuesday, March 10th from 4:00 – 5:00 EST. Zoom details will be shared with members. We have an exciting year ahead!",
+    category: "CANN",
+  },
+];
+
 // Newsletter Data
 const newsletters = [
   {
@@ -1150,6 +1175,58 @@ export default function Events() {
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">See the latest news and updates from the amyloidosis community across Canada
             and internationally</p>
+          </motion.div>
+
+          {/* News Items */}
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-16">
+            {newsItems.map((item, index) => (
+              <motion.div
+                key={`news-${item.id}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="h-full"
+              >
+                <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden group">
+                  <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                        <Newspaper className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                      </div>
+                      <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
+                        {item.category}
+                      </Badge>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug group-hover:text-[#00AFE6] transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <CardContent className="p-6 pt-4 flex flex-col flex-1">
+                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70 mb-4">
+                      <Calendar className="w-4 h-4 text-[#00AFE6]" />
+                      <span>{formatEventDate(item.date)}</span>
+                    </div>
+                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 whitespace-pre-line">
+                      {item.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Newsletters Subsection */}
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold font-rosarivo text-gray-800 dark:text-white">
+              Newsletters
+            </h3>
           </motion.div>
 
           {/* Newsletter Cards Grid */}

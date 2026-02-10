@@ -1,0 +1,167 @@
+import { motion } from "framer-motion";
+import { Users, MapPin, Calendar, Award } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import summitPosterImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
+import summitPhoto1 from "@assets/252564000002356792_zc_v1_1755005804435_event_1_1768993082234.png";
+import summitPhoto2 from "@assets/252564000002356792_zc_v1_1755005815011_event_2_1768993082234.png";
+import summitPhoto3 from "@assets/252564000002356792_zc_v1_1755028042016_event_3_1768993082234.png";
+
+export default function SummitRecapSection() {
+  const { language } = useLanguage();
+
+  const title = "Canadian Amyloidosis Summit 2025";
+  const description = language === 'en'
+    ? "In partnership with Transthyretin Amyloidosis Canada (TAC), the Canadian Amyloidosis Summit was held in Toronto the weekend of November 1-2, 2025, with over 120 people attending. This hybrid event featured parallel sessions for both healthcare providers and patients/families, with CME accreditation for healthcare provider sessions."
+    : "En partenariat avec Amylose à Transthyrétine Canada (TAC), le Sommet canadien sur l'amylose s'est tenu à Toronto la fin de semaine du 1er au 2 novembre 2025, avec plus de 120 participants. Cet événement hybride proposait des sessions parallèles pour les professionnels de la santé et les patients/familles, avec une accréditation EMC pour les sessions des professionnels de la santé.";
+
+  const description2 = language === 'en'
+    ? "The Summit featured interesting presentations and panel discussions from many national and internationally recognized leaders from the amyloidosis community. The CAS also held its first Annual General Meeting (AGM) at the Summit. Planning for the 2026 Canadian Amyloidosis Summit this fall is already underway. Stay tuned for future updates and hope you can join us!"
+    : "Le Sommet a présenté des présentations et des discussions en panel intéressantes de nombreux leaders nationaux et internationaux reconnus de la communauté de l'amylose. La SCA a également tenu sa première Assemblée générale annuelle (AGA) lors du Sommet. La planification du Sommet canadien sur l'amylose 2026 cet automne est déjà en cours. Restez à l'écoute pour les futures mises à jour et nous espérons que vous pourrez vous joindre à nous!";
+
+  const highlights = [
+    {
+      icon: Users,
+      value: "120+",
+      label: language === 'en' ? "Attendees" : "Participants",
+    },
+    {
+      icon: MapPin,
+      value: "Toronto",
+      label: language === 'en' ? "Location" : "Lieu",
+    },
+    {
+      icon: Calendar,
+      value: "Nov 1-2",
+      label: "2025",
+    },
+    {
+      icon: Award,
+      value: "CME",
+      label: language === 'en' ? "Accredited" : "Accrédité",
+    },
+  ];
+
+  const photos = [
+    { src: summitPhoto1, alt: "Summit keynote presentation" },
+    { src: summitPhoto2, alt: "Summit panel discussion" },
+    { src: summitPhoto3, alt: "Summit medical presentation" },
+  ];
+
+  return (
+    <section className="relative py-10 lg:py-16 bg-gradient-to-br from-[#00AFE6]/5 via-white to-[#00DD89]/5 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute -top-40 -right-32 w-96 h-96 bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-[#00DD89]/15 to-[#00AFE6]/15 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        <motion.div
+          className="text-center mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-[#00AFE6]/30 dark:border-white/20 rounded-full px-6 py-3 mb-4 shadow-lg shadow-[#00AFE6]/10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
+            <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">
+              {language === 'en' ? 'Event Recap' : 'Récapitulatif de l\'événement'}
+            </span>
+          </motion.div>
+
+          <h2 className="crawford-section-title mb-4">
+            <span className="text-gray-900 dark:text-white">Canadian Amyloidosis </span>
+            <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+              Summit 2025
+            </span>
+          </h2>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-10 items-start mb-12">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <div className="flex flex-wrap gap-4 mb-8">
+              {highlights.map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center gap-3 bg-white/90 dark:bg-white/5 backdrop-blur-sm rounded-2xl px-5 py-3 border border-[#00AFE6]/20 dark:border-white/10 shadow-sm"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  viewport={{ once: true }}
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00AFE6] to-[#00DD89] flex items-center justify-center">
+                    <item.icon className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-gray-900 dark:text-white text-sm">{item.value}</p>
+                    <p className="text-gray-500 dark:text-white/60 text-xs">{item.label}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="text-gray-700 dark:text-white/80 leading-relaxed text-lg mb-6">
+              {description}
+            </p>
+            <p className="text-gray-700 dark:text-white/80 leading-relaxed text-lg">
+              {description2}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <div className="rounded-2xl overflow-hidden border border-[#00AFE6]/20 dark:border-white/10 shadow-xl shadow-[#00AFE6]/10">
+              <img
+                src={summitPosterImg}
+                alt="2025 Canadian Amyloidosis Summit - Save the Date"
+                className="w-full h-auto"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div
+          className="grid md:grid-cols-3 gap-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {photos.map((photo, index) => (
+            <motion.div
+              key={index}
+              className="group relative rounded-2xl overflow-hidden border border-[#00AFE6]/20 dark:border-white/10 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/15 transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 * index }}
+              viewport={{ once: true }}
+            >
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}

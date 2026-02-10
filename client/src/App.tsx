@@ -58,9 +58,8 @@ const EventsStaging = lazy(() => import("@/pages/Events"));
 const EventsProduction = lazy(() => import("@/pages/EventsOld"));
 
 // Environment-aware Events component
-// Staging (Replit): Shows Events.tsx with full features
-// Production (AWS): Shows EventsOld.tsx with simpler layout
-const Events = isProduction() ? EventsProduction : EventsStaging;
+// Both staging (Replit) and production (AWS) now show EventsOld.tsx
+const Events = EventsProduction;
 const TestForms = lazy(() => import("@/pages/TestForms"));
 const CANNMembershipForm = lazy(() => import("@/pages/CANNMembershipForm"));
 const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Users, MapPin, Calendar, Award } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import summitPosterImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
 import summitPhoto1 from "@assets/252564000002356792_zc_v1_1755005804435_event_1_1768993082234.png";
@@ -17,29 +16,6 @@ export default function SummitRecapSection() {
   const description2 = language === 'en'
     ? "The Summit featured interesting presentations and panel discussions from many national and internationally recognized leaders from the amyloidosis community. The CAS also held its first Annual General Meeting (AGM) at the Summit. Planning for the 2026 Canadian Amyloidosis Summit this fall is already underway. Stay tuned for future updates and hope you can join us!"
     : "Le Sommet a présenté des présentations et des discussions en panel intéressantes de nombreux leaders nationaux et internationaux reconnus de la communauté de l'amylose. La SCA a également tenu sa première Assemblée générale annuelle (AGA) lors du Sommet. La planification du Sommet canadien sur l'amylose 2026 cet automne est déjà en cours. Restez à l'écoute pour les futures mises à jour et nous espérons que vous pourrez vous joindre à nous!";
-
-  const highlights = [
-    {
-      icon: Users,
-      value: "120+",
-      label: language === 'en' ? "Attendees" : "Participants",
-    },
-    {
-      icon: MapPin,
-      value: "Toronto",
-      label: language === 'en' ? "Location" : "Lieu",
-    },
-    {
-      icon: Calendar,
-      value: "Nov 1-2",
-      label: "2025",
-    },
-    {
-      icon: Award,
-      value: "CME",
-      label: language === 'en' ? "Accredited" : "Accrédité",
-    },
-  ];
 
   const photos = [
     { src: summitPhoto1, alt: "Summit keynote presentation" },
@@ -89,27 +65,6 @@ export default function SummitRecapSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <div className="flex flex-wrap gap-4 mb-8">
-              {highlights.map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center gap-3 bg-white/90 dark:bg-white/5 backdrop-blur-sm rounded-2xl px-5 py-3 border border-[#00AFE6]/20 dark:border-white/10 shadow-sm"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 * index }}
-                  viewport={{ once: true }}
-                >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00AFE6] to-[#00DD89] flex items-center justify-center">
-                    <item.icon className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-gray-900 dark:text-white text-sm">{item.value}</p>
-                    <p className="text-gray-500 dark:text-white/60 text-xs">{item.label}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
             <p className="text-gray-700 dark:text-white/80 leading-relaxed text-lg mb-6">
               {description}
             </p>

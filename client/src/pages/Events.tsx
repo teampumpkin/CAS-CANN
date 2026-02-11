@@ -1203,10 +1203,6 @@ export default function Events() {
                     </h3>
                   </div>
                   <CardContent className="p-6 pt-4 flex flex-col flex-1">
-                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70 mb-4">
-                      <Calendar className="w-4 h-4 text-[#00AFE6]" />
-                      <span>{formatEventDate(item.date)}</span>
-                    </div>
                     <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 whitespace-pre-line">
                       {item.description}
                     </p>

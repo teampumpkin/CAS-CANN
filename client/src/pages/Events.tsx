@@ -1147,8 +1147,8 @@ export default function Events() {
           </motion.div>
         </div>
       </section>
-      {/* News Section */}
-      <section id="news" className="py-12 sm:py-16 md:py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+      {/* News Section - Hidden for now */}
+      {false && (<section id="news" className="py-12 sm:py-16 md:py-24 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Frost Background Effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-cyan-100/20 dark:from-gray-800/30 dark:via-transparent dark:to-gray-700/20"></div>
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
@@ -1294,9 +1294,9 @@ export default function Events() {
             ))}
           </div>
         </div>
-      </section>
-      {/* Newsletter Modal */}
-      {selectedNewsletter && (
+      </section>)}
+      {/* Newsletter Modal - Hidden for now */}
+      {selectedNewsletter && false && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

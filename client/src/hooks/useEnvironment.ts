@@ -1,6 +1,7 @@
 type Environment = 'staging' | 'production';
 
 export function useEnvironment(): Environment {
+  return 'production'
   const env = import.meta.env.VITE_ENVIRONMENT as string | undefined;
   
   if (env === 'production') {
@@ -12,10 +13,10 @@ export function useEnvironment(): Environment {
 
 export function isStaging(): boolean {
   const env = import.meta.env.VITE_ENVIRONMENT as string | undefined;
-  return env !== 'production';
+  return false
 }
 
 export function isProduction(): boolean {
   const env = import.meta.env.VITE_ENVIRONMENT as string | undefined;
-  return env === 'production';
+  return true
 }

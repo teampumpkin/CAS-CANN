@@ -13,7 +13,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { lazy, Suspense } from "react";
 import { Loader2 } from "lucide-react";
-import { isProduction } from "@/hooks/useEnvironment";
+import { isProduction, isStaging } from "@/hooks/useEnvironment";
 
 // Lazy load components for better performance
 const Home = lazy(() => import("@/pages/Home"));
@@ -61,6 +61,7 @@ const EventsProduction = lazy(() => import("@/pages/EventsOld"));
 // Staging (Replit): Shows Events.tsx with full features
 // Production (AWS): Shows EventsOld.tsx with simpler layout
 const Events = isProduction() ? EventsProduction : EventsStaging;
+const stagingOnly = isStaging();
 const TestForms = lazy(() => import("@/pages/TestForms"));
 const CANNMembershipForm = lazy(() => import("@/pages/CANNMembershipForm"));
 const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));
@@ -86,17 +87,17 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
         <Route path="/governance" component={Governance} />
-        <Route path="/directory" component={Directory} />
+        {stagingOnly && <Route path="/directory" component={Directory} />}
         {/* <Route path="/resource-library" component={Resources} /> */}
         <Route path="/partnerships" component={Partnerships} />
 
-        <Route path="/upload-resource" component={UploadResource} />
-        <Route path="/admin/resources/moderation" component={ResourceModeration} />
+        {stagingOnly && <Route path="/upload-resource" component={UploadResource} />}
+        {stagingOnly && <Route path="/admin/resources/moderation" component={ResourceModeration} />}
         <Route path="/community" component={Community} />
         <Route path="/events" component={Events} />
-        <Route path="/events-and-news" component={Events} />
-        <Route path="/events-old" component={EventsProduction} />
-        <Route path="/old-events" component={EventsProduction} />
+        {stagingOnly && <Route path="/events-and-news" component={Events} />}
+        {stagingOnly && <Route path="/events-old" component={EventsProduction} />}
+        {stagingOnly && <Route path="/old-events" component={EventsProduction} />}
         <Route path="/get-involved" component={GetInvolved} />
         <Route path="/join" component={JoinCAS} />
         <Route path="/join-cas" component={JoinCAS} />
@@ -128,13 +129,13 @@ function Router() {
         <Route path="/cann-resources" component={CANNResources} />
         <Route path="/journal-club" component={JournalClub} />
         <Route path="/accessibility" component={AccessibilityStatement} />
-        <Route path="/contributor-portal" component={ContributorPortal} />
-        <Route path="/test-forms" component={TestForms} />
+        {stagingOnly && <Route path="/contributor-portal" component={ContributorPortal} />}
+        {stagingOnly && <Route path="/test-forms" component={TestForms} />}
         <Route path="/join-cann" component={JoinCAS} />
         <Route path="/join-cann-today" component={JoinCAS} />
         <Route path="/cann-membership" component={JoinCAS} />
-        <Route path="/admin/data-sync" component={DataSyncAdmin} />
-        <Route path="/admin/automation" component={CommandDashboard} />
+        {stagingOnly && <Route path="/admin/data-sync" component={DataSyncAdmin} />}
+        {stagingOnly && <Route path="/admin/automation" component={CommandDashboard} />}
         <Route path="/events/cann-townhall/register" component={CANNTownhallRegistration} />
         <Route path="/eventsdownload" component={EventsDownload} />
         <Route component={NotFound} />

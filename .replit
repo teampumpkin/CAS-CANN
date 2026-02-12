@@ -44,4 +44,4 @@ waitForPort = 5000
 [userenv]
 
 [userenv.development]
-VITE_ENVIRONMENT = "production"
+VITE_ENVIRONMENT = "staging"

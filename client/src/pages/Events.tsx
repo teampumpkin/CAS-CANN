@@ -895,190 +895,118 @@ export default function Events() {
             </div>
           </div>
 
-          {/* Journal Club Sessions Grid */}
+          {/* Journal Club Sessions List */}
           <div className="max-w-6xl mx-auto">
-            <div
-              className={`grid gap-6 ${
-                (journalClubTab === "upcoming"
+            {(journalClubTab === "upcoming"
+              ? upcomingJournalClubSessions
+              : pastJournalClubSessions
+            ).length > 0 ? (
+              <div className="grid gap-6">
+                {(journalClubTab === "upcoming"
                   ? upcomingJournalClubSessions
                   : pastJournalClubSessions
-                ).length === 1
-                  ? "grid-cols-1 max-w-md mx-auto"
-                  : (journalClubTab === "upcoming"
-                        ? upcomingJournalClubSessions
-                        : pastJournalClubSessions
-                      ).length === 2
-                    ? "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
-                    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-              }`}
-            >
-              {(journalClubTab === "upcoming"
-                ? upcomingJournalClubSessions
-                : pastJournalClubSessions
-              ).map((session, index) => {
-                const isPast = isEventPast(session.rawDate);
-                // Get month name for session title
-                const sessionDate = parseLocalDate(session.rawDate);
-                const monthName = sessionDate.toLocaleDateString("en-US", {
-                  month: "long",
-                  timeZone: MST_TIMEZONE,
-                });
-                const yearName = sessionDate.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  timeZone: MST_TIMEZONE,
-                });
+                ).map((session, index) => {
+                  const isPast = isEventPast(session.rawDate);
+                  const sessionDate = parseLocalDate(session.rawDate);
+                  const monthName = sessionDate.toLocaleDateString("en-US", {
+                    month: "long",
+                    timeZone: MST_TIMEZONE,
+                  });
+                  const yearName = sessionDate.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    timeZone: MST_TIMEZONE,
+                  });
 
-                return (
-                  <motion.div
-                    key={session.rawDate}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="h-full"
-                  >
-                    <Card
-                      className={`h-full flex flex-col rounded-3xl overflow-hidden transition-all duration-500 ${
-                        isPast
-                          ? "bg-gradient-to-br from-gray-100/95 to-gray-50/95 dark:from-gray-800/50 dark:to-gray-900/50 border-gray-200/50 dark:border-gray-700/50 opacity-70"
-                          : "bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15"
-                      }`}
+                  return (
+                    <motion.div
+                      key={session.rawDate}
+                      className={`${isPast ? "bg-white/80 dark:bg-gray-800/80 opacity-90" : "bg-white dark:bg-gray-800 hover:shadow-lg"} rounded-2xl p-8 border border-gray-200 dark:border-gray-700 transition-shadow duration-300`}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
                     >
-                      {/* Header Section */}
-                      <div
-                        className={`relative p-6 ${isPast ? "bg-gray-100/50 dark:bg-gray-700/30" : "bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent"}`}
-                      >
-                        <div className="flex justify-between items-start mb-4">
-                          <div
-                            className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isPast ? "bg-gray-200/50 dark:bg-gray-600/30" : "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20"}`}
-                          >
-                            <Calendar
-                              className={`w-8 h-8 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            />
-                          </div>
-                          <Badge
-                            className={`${isPast ? "bg-gray-400" : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89]"} text-white border-0 px-2 py-1 text-xs font-medium rounded`}
-                          >
-                            Journal Club
-                          </Badge>
-                        </div>
-                        <h3
-                          className={`text-xl font-semibold leading-snug ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
-                        >
-                          CAS Journal Club {monthName} {yearName}
-                        </h3>
-                      </div>
+                      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                        <div className="flex-1">
+                          <h3 className={`text-2xl font-bold ${isPast ? "text-gray-500 dark:text-gray-300" : "text-gray-900 dark:text-white"} mb-4 font-rosarivo`}>
+                            CAS Journal Club {monthName} {yearName}
+                          </h3>
 
-                      {/* Content Section */}
-                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
-                        {/* Event Details */}
-                        <div className="space-y-2 mb-4">
-                          <div
-                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                          >
-                            <Calendar
-                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            />
-                            <span>{formatEventDate(session.rawDate)}</span>
-                          </div>
-                          <div
-                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                          >
-                            <Clock
-                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            />
-                            <span>3:00 PM - 4:00 PM MST</span>
-                          </div>
-                          <div
-                            className={`flex items-center gap-2 text-sm ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                          >
-                            <MapPin
-                              className={`w-4 h-4 ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            />
-                            <span>Virtual Event</span>
-                          </div>
-                        </div>
-
-                        {/* Topics Section */}
-                        {session.topics && (
-                          <div
-                            className={`mb-4 p-3 rounded-xl border space-y-3 ${
-                              isPast
-                                ? "bg-gray-50 dark:bg-gray-700/30 border-gray-200 dark:border-gray-600"
-                                : "bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 border-[#00AFE6]/20"
-                            }`}
-                          >
-                            <div
-                              className={`text-xs font-medium ${isPast ? "text-gray-400" : "text-[#00AFE6]"}`}
-                            >
-                              {t("eventsPage.sessionTopics")}
+                          <div className="flex flex-wrap items-center gap-4 mb-4">
+                            <div className={`${isPast ? "bg-gray-400" : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89]"} text-white px-4 py-2 rounded-full text-sm font-bold`}>
+                              {formatEventDate(session.rawDate)}
                             </div>
-                            {session.topics.map((topic, idx) => (
-                              <div
-                                key={idx}
-                                className={`border-l-2 pl-3 ${isPast ? "border-gray-300" : "border-[#00AFE6]/40"}`}
-                              >
-                                <div
-                                  className={`text-sm font-medium italic ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-800 dark:text-white"}`}
-                                >
-                                  "{topic.title}"
-                                </div>
-                                <div
-                                  className={`text-xs mt-1 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                                >
-                                  {t("eventsPage.presenter")}: {topic.presenter}
-                                </div>
+                            {isPast && (
+                              <div className="bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full text-xs font-bold">
+                                {t("eventsPage.pastEvent")}
                               </div>
-                            ))}
+                            )}
+                            <div className={`flex items-center gap-2 ${isPast ? "text-gray-500 dark:text-gray-500" : "text-gray-600 dark:text-gray-400"}`}>
+                              <Clock className="w-4 h-4" />
+                              <span className="text-sm">3:00 PM - 4:00 PM MST</span>
+                            </div>
                           </div>
-                        )}
 
-                        {/* Description */}
-                        <p
-                          className={`text-sm leading-relaxed flex-1 mb-4 ${isPast ? "text-gray-400" : "text-gray-600 dark:text-white/70"}`}
-                        >
-                          One-hour virtual session focusing on amyloidosis
-                          clinical case-based presentations and scientific
-                          updates.
-                        </p>
+                          {session.topics && (
+                            <div className="mb-3 space-y-3">
+                              {session.topics.map((topic, idx) => (
+                                <div key={idx}>
+                                  <h4 className={`text-xl font-bold ${isPast ? "text-gray-500 dark:text-gray-400" : "text-gray-900 dark:text-white"} mb-2`}>
+                                    {topic.title}
+                                  </h4>
+                                  <div className={`${isPast ? "text-gray-400 dark:text-gray-500" : "text-gray-700 dark:text-gray-300"}`}>
+                                    <span className="text-lg font-semibold">
+                                      {t("eventsPage.presenter")}: {topic.presenter}
+                                    </span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
 
-                        {/* CTA Section */}
-                        {!isPast && (
-                          <div className="text-center p-3 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15 rounded-xl border border-[#00AFE6]/40 shadow-md shadow-[#00AFE6]/10 relative overflow-hidden space-y-2">
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#00AFE6]/5 to-[#00DD89]/5 opacity-50 animate-pulse"></div>
-                            <div className="relative z-10">
-                              <div className="flex items-center justify-center gap-1 mb-1">
-                                <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
-                                <p className="text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6]">
-                                  {t("eventsPage.registrationNotRequired")}
-                                </p>
-                                <div className="w-1.5 h-1.5 bg-[#00AFE6] rounded-full animate-pulse"></div>
-                              </div>
-                              <p className="text-xs font-medium text-gray-700 dark:text-white/80 mb-2">
+                        <div className="flex-shrink-0">
+                          <div className="space-y-3">
+                            <div className={`flex items-center gap-2 ${isPast ? "text-gray-400" : "text-gray-700 dark:text-gray-300"}`}>
+                              <MapPin className="w-4 h-4 text-[#00AFE6]" />
+                              <span className="text-sm">{t("eventsPage.virtualEvent")}</span>
+                            </div>
+
+                            <div className={`flex items-center gap-2 ${isPast ? "text-gray-400" : "text-gray-700 dark:text-gray-300"}`}>
+                              <Calendar className="w-4 h-4 text-[#00DD89]" />
+                              <span className="text-sm italic text-[#00DD89]">
                                 {t("eventsPage.zoomDetailsCAS")}
-                              </p>
-                              <Button
-                                onClick={() =>
-                                  (window.location.href = "/join-cas")
-                                }
-                                className="bg-[#00DD89] hover:bg-[#00DD89]/90 text-gray-800 border border-[#00DD89] hover:border-[#00DD89]/90 shadow-lg hover:shadow-xl hover:shadow-[#00DD89]/25 transition-all duration-300 group/btn py-2 px-6 rounded-lg font-semibold text-xs relative overflow-hidden"
+                              </span>
+                            </div>
+
+                            <div className="pt-2">
+                              <div
+                                className={`${isPast ? "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400" : "bg-gradient-to-r from-[#00AFE6] to-[#00DD89]"} px-3 py-2 rounded-full text-xs font-bold inline-block`}
+                                style={!isPast ? { color: "#2a2a2a" } : undefined}
                               >
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#00DD89]/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                                <div className="relative z-10 flex items-center justify-center text-gray-800">
-                                  <Users className="w-3 h-3 mr-1 group-hover/btn:scale-110 transition-transform duration-300 text-gray-800" />
-                                  Join CAS
-                                  <div className="ml-1 w-1.5 h-1.5 bg-gray-800 rounded-full animate-pulse"></div>
-                                </div>
-                              </Button>
+                                {t("eventsPage.registrationNotRequired")}
+                              </div>
                             </div>
                           </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                );
-              })}
-            </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-center py-16">
+                <div className="w-20 h-20 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Calendar className="w-10 h-10 text-[#00AFE6]" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  {t("eventsPage.noUpcomingSessions")}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {t("eventsPage.checkBackSoon")}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>

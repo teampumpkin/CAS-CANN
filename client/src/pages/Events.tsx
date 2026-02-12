@@ -106,7 +106,7 @@ const allEvents = [
     id: 2,
     title: "CAS Journal Club November 2025",
     date: "2025-11-27",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "3:00 PM - 4:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:
@@ -120,7 +120,7 @@ const allEvents = [
     id: 3,
     title: "CAS Journal Club September 2025",
     date: "2025-09-25",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "3:00 PM - 4:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:
@@ -133,7 +133,7 @@ const allEvents = [
     id: 10,
     title: "CAS Journal Club May 2025",
     date: "2025-05-08",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "3:00 PM - 4:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:
@@ -156,7 +156,7 @@ const allEvents = [
     id: 4,
     title: "CAS Journal Club February 2026",
     date: "2026-02-26",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "3:00 PM - 4:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:
@@ -178,7 +178,7 @@ const allEvents = [
     title: "2025 Canadian Amyloidosis Summit",
     date: "2025-10-31",
     displayDate: "October 31 – November 2, 2025",
-    time: "8:00 AM - 5:00 PM MST",
+    time: "8:00 AM - 5:00 PM EST",
     location: "Toronto, ON",
     type: "Summit",
     description:
@@ -208,7 +208,7 @@ const newsItems = [
     id: 3,
     title: "CANN Townhall",
     date: "2026-01-22",
-    description: "Thank you to all who contributed to the success of the Townhall on January 22, 2026! This professionally facilitated ideation workshop was designed to help shape and refine the purpose, goals, and objectives for the network. Members from various provinces connected to share and discuss member needs, and brainstorm ideas to guide future direction for CANN. The results of the Townhall will be shared at the CANN Operational meeting on Tuesday, March 10th from 4:00 – 5:00 MST. Zoom details will be shared with members. We have an exciting year ahead!",
+    description: "Thank you to all who contributed to the success of the Townhall on January 22, 2026! This professionally facilitated ideation workshop was designed to help shape and refine the purpose, goals, and objectives for the network. Members from various provinces connected to share and discuss member needs, and brainstorm ideas to guide future direction for CANN. The results of the Townhall will be shared at the CANN Operational meeting on Tuesday, March 10th from 4:00 – 5:00 EST. Zoom details will be shared with members. We have an exciting year ahead!",
     category: "CANN",
   },
 ];
@@ -262,7 +262,7 @@ The Canadian Amyloidosis Summit 2025 is again welcoming abstract submissions fro
 
 Registration for the 2025 Canadian Amyloidosis Summit is Open!
 
-All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 MST, Toronto Airport Marriot, room TBA, virtual attendance available.`,
+All members of CAS and CANN are invited to attend the first Annual General Meeting for the CAS at the Canadian Amyloidosis Summit on Saturday, November 1st at 4:00 EST, Toronto Airport Marriot, room TBA, virtual attendance available.`,
           hasBannerImage: true,
           bannerImage: summitBannerImg,
           hasQrCode: true,
@@ -273,7 +273,7 @@ All members of CAS and CANN are invited to attend the first Annual General Meeti
         },
         {
           title: "CAS Journal Club Webinar",
-          content: `The CAS held its first virtual Journal Club Webinar in May 2025. Two very interesting case presentations were made, one by Dr. Victor Jimenez Zepeda (haematologist in Calgary) and the other by Dr. François Tournoux (cardiologist in Montreal). Our next journal club webinar will be held on Thursday, September 25, 2025, at 5 PM MST. We will again present two interesting cases and have time for discussion, as well as a brief update on other CAS activities. The virtual link to join has been circulated to members. Please join us for this exciting event!`,
+          content: `The CAS held its first virtual Journal Club Webinar in May 2025. Two very interesting case presentations were made, one by Dr. Victor Jimenez Zepeda (haematologist in Calgary) and the other by Dr. François Tournoux (cardiologist in Montreal). Our next journal club webinar will be held on Thursday, September 25, 2025, at 5 PM EST. We will again present two interesting cases and have time for discussion, as well as a brief update on other CAS activities. The virtual link to join has been circulated to members. Please join us for this exciting event!`,
         },
         {
           title: "OPPORTUNITIES",
@@ -339,7 +339,7 @@ All members of CAS and CANN are invited to attend the first Annual General Meeti
           title: "CAS Journal Club",
           content: `CAS Journal Club continues with quarterly virtual presentations featuring interesting amyloidosis cases from across Canada. The November 2025 CAS journal club included great case discussions presented by Dr. Janine Mazengarb from the University of British Columbia and Dr. Rajin Choudhury from the University of Calgary.
 
-Next Session: February 26th at 5-6 PM MST
+Next Session: February 26th at 5-6 PM EST
 Presenters to be announced.
 
 All CAS members are welcome to join; the Zoom link will be sent by e-mail to all members in advance.`,
@@ -382,25 +382,25 @@ All CAS members are welcome to join; the Zoom link will be sent by e-mail to all
   },
 ];
 
-// MST Timezone constant (America/Edmonton handles MST/MDT automatically)
-const MST_TIMEZONE = "America/Edmonton";
+// EST Timezone constant (America/Toronto handles EST/EDT automatically)
+const EST_TIMEZONE = "America/Toronto";
 
-// Helper to get current date in MST timezone
-const getMSTDate = (): Date => {
+// Helper to get current date in EST timezone
+const getESTDate = (): Date => {
   const now = new Date();
-  const mstDateStr = now.toLocaleDateString("en-CA", {
-    timeZone: MST_TIMEZONE,
+  const estDateStr = now.toLocaleDateString("en-CA", {
+    timeZone: EST_TIMEZONE,
   });
-  const [year, month, day] = mstDateStr.split("-").map(Number);
+  const [year, month, day] = estDateStr.split("-").map(Number);
   return new Date(year, month - 1, day);
 };
 
-// Helper function to parse event date and compare with today in MST
+// Helper function to parse event date and compare with today in EST
 const isEventPast = (dateString: string): boolean => {
   const [year, month, day] = dateString.split("-").map(Number);
   const eventDate = new Date(year, month - 1, day);
-  const todayMST = getMSTDate();
-  return eventDate < todayMST;
+  const todayEST = getESTDate();
+  return eventDate < todayEST;
 };
 
 // Helper to parse date string for sorting (timezone-independent for date-only comparisons)
@@ -531,7 +531,7 @@ export default function Events() {
     }
   };
 
-  // Format date to "Thursday, September 25th, 2025" in MST timezone
+  // Format date to "Thursday, September 25th, 2025" in EST timezone
   const formatEventDate = (dateString: string): string => {
     // Guard against empty or invalid date strings
     if (!dateString) return "TBD";
@@ -544,36 +544,36 @@ export default function Events() {
 
     const [year, month, day] = parts;
 
-    // Create a date that represents this date in MST
+    // Create a date that represents this date in EST
     // Use noon to avoid any edge cases with daylight saving
     const dateForFormatting = new Date(
-      Date.UTC(year, month - 1, day, 18, 0, 0),
-    ); // 18:00 UTC = noon MST
+      Date.UTC(year, month - 1, day, 17, 0, 0),
+    ); // 17:00 UTC = noon EST
 
     // Validate the date is valid
     if (isNaN(dateForFormatting.getTime())) {
       return dateString;
     }
 
-    // Format using MST timezone
+    // Format using EST timezone
     const dayName = dateForFormatting.toLocaleDateString("en-US", {
       weekday: "long",
-      timeZone: MST_TIMEZONE,
+      timeZone: EST_TIMEZONE,
     });
     const monthName = dateForFormatting.toLocaleDateString("en-US", {
       month: "long",
-      timeZone: MST_TIMEZONE,
+      timeZone: EST_TIMEZONE,
     });
     const dayNumber = parseInt(
       dateForFormatting.toLocaleDateString("en-US", {
         day: "numeric",
-        timeZone: MST_TIMEZONE,
+        timeZone: EST_TIMEZONE,
       }),
     );
     const yearNumber = parseInt(
       dateForFormatting.toLocaleDateString("en-US", {
         year: "numeric",
-        timeZone: MST_TIMEZONE,
+        timeZone: EST_TIMEZONE,
       }),
     );
     const ordinalSuffix = getOrdinalSuffix(dayNumber);
@@ -910,11 +910,11 @@ export default function Events() {
                   const sessionDate = parseLocalDate(session.rawDate);
                   const monthName = sessionDate.toLocaleDateString("en-US", {
                     month: "long",
-                    timeZone: MST_TIMEZONE,
+                    timeZone: EST_TIMEZONE,
                   });
                   const yearName = sessionDate.toLocaleDateString("en-US", {
                     year: "numeric",
-                    timeZone: MST_TIMEZONE,
+                    timeZone: EST_TIMEZONE,
                   });
 
                   return (
@@ -943,7 +943,7 @@ export default function Events() {
                             )}
                             <div className={`flex items-center gap-2 ${isPast ? "text-gray-500 dark:text-gray-500" : "text-gray-600 dark:text-gray-400"}`}>
                               <Clock className="w-4 h-4" />
-                              <span className="text-sm">3:00 PM - 4:00 PM MST</span>
+                              <span className="text-sm">3:00 PM - 4:00 PM EST</span>
                             </div>
                           </div>
 

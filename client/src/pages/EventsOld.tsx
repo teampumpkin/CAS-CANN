@@ -24,7 +24,7 @@ const journalClubSessions = [
     rawDate: "2025-05-08",
     type: "Journal Club",
     title: "CAS Journal Club May 2025",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "3:00 PM - 4:00 PM EST",
     location: "Virtual Event",
     description: "The inaugural CAS Journal Club session featuring case presentations on proper typing for treatment and heart failure therapy in ATTR amyloidosis.",
     topics: [
@@ -42,7 +42,7 @@ const journalClubSessions = [
     rawDate: "2025-09-25",
     type: "Journal Club",
     title: "CAS Journal Club September 2025",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "3:00 PM - 4:00 PM EST",
     location: "Virtual Event",
     description: "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates.",
     topics: [
@@ -60,7 +60,7 @@ const journalClubSessions = [
     rawDate: "2025-11-27",
     type: "Journal Club",
     title: "CAS Journal Club November 2025",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "3:00 PM - 4:00 PM EST",
     location: "Virtual Event",
     description: "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updates.",
     topics: [
@@ -78,7 +78,7 @@ const journalClubSessions = [
     rawDate: "2026-02-26",
     type: "Journal Club",
     title: "CAS Journal Club February 2026",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "3:00 PM - 4:00 PM EST",
     location: "Virtual Event",
     description: "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates.",
     topics: [
@@ -110,7 +110,7 @@ const summitEvents = [
     title: "2025 Canadian Amyloidosis Summit",
     date: "2025-10-31",
     displayDate: "October 31 – November 2, 2025",
-    time: "8:00 AM - 5:00 PM MST",
+    time: "8:00 AM - 5:00 PM EST",
     location: "Toronto, ON",
     type: "Summit",
     description:
@@ -119,7 +119,7 @@ const summitEvents = [
   },
 ];
 
-const MST_TIMEZONE = "America/Edmonton";
+const EST_TIMEZONE = "America/Toronto";
 
 // Helper to parse date string
 const parseLocalDate = (dateString: string): Date => {
@@ -132,10 +132,10 @@ const isEventPast = (dateString: string): boolean => {
   const [year, month, day] = dateString.split("-").map(Number);
   const eventDate = new Date(year, month - 1, day);
   const now = new Date();
-  const mstDateStr = now.toLocaleDateString("en-CA", { timeZone: MST_TIMEZONE });
-  const [todayYear, todayMonth, todayDay] = mstDateStr.split("-").map(Number);
-  const todayMST = new Date(todayYear, todayMonth - 1, todayDay);
-  return eventDate < todayMST;
+  const estDateStr = now.toLocaleDateString("en-CA", { timeZone: EST_TIMEZONE });
+  const [todayYear, todayMonth, todayDay] = estDateStr.split("-").map(Number);
+  const todayEST = new Date(todayYear, todayMonth - 1, todayDay);
+  return eventDate < todayEST;
 };
 
 export default function EventsOld() {
@@ -153,7 +153,7 @@ export default function EventsOld() {
     }
   };
 
-  // Format date to "Thursday, September 25th, 2025" in MST timezone
+  // Format date to "Thursday, September 25th, 2025" in EST timezone
   const formatEventDate = (dateString: string): string => {
     if (!dateString) return "TBD";
     const parts = dateString.split("-").map(Number);
@@ -165,22 +165,22 @@ export default function EventsOld() {
 
     const dayName = dateForFormatting.toLocaleDateString("en-US", {
       weekday: "long",
-      timeZone: MST_TIMEZONE,
+      timeZone: EST_TIMEZONE,
     });
     const monthName = dateForFormatting.toLocaleDateString("en-US", {
       month: "long",
-      timeZone: MST_TIMEZONE,
+      timeZone: EST_TIMEZONE,
     });
     const dayNumber = parseInt(
       dateForFormatting.toLocaleDateString("en-US", {
         day: "numeric",
-        timeZone: MST_TIMEZONE,
+        timeZone: EST_TIMEZONE,
       }),
     );
     const yearNumber = parseInt(
       dateForFormatting.toLocaleDateString("en-US", {
         year: "numeric",
-        timeZone: MST_TIMEZONE,
+        timeZone: EST_TIMEZONE,
       }),
     );
 

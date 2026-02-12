@@ -31,14 +31,14 @@ import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import cardiacAmyloidosisBooklet from "@assets/Living-with-cardiac-amyloidosis_1763624816977.pdf";
 import patientJourneyVideo from "@assets/video1888503207.mp4";
 
-// MST Timezone constant (America/Edmonton handles MST/MDT automatically)
-const MST_TIMEZONE = 'America/Edmonton';
+// EST Timezone constant (America/Toronto handles EST/EDT automatically)
+const EST_TIMEZONE = 'America/Toronto';
 
-// Helper to get current date in MST timezone
-const getMSTDate = (): Date => {
+// Helper to get current date in EST timezone
+const getESTDate = (): Date => {
   const now = new Date();
-  const mstDateStr = now.toLocaleDateString('en-CA', { timeZone: MST_TIMEZONE });
-  const [year, month, day] = mstDateStr.split('-').map(Number);
+  const estDateStr = now.toLocaleDateString('en-CA', { timeZone: EST_TIMEZONE });
+  const [year, month, day] = estDateStr.split('-').map(Number);
   return new Date(year, month - 1, day);
 };
 
@@ -81,7 +81,7 @@ export default function CANNResources() {
     }
   };
 
-  // Format date to "Thursday, September 25th, 2025" in MST timezone
+  // Format date to "Thursday, September 25th, 2025" in EST timezone
   const formatEventDate = (dateString: string): string => {
     // Guard against empty or invalid date strings
     if (!dateString) return "TBD";
@@ -95,26 +95,26 @@ export default function CANNResources() {
     
     const [year, month, day] = parts;
     
-    // Create a date that represents this date in MST
+    // Create a date that represents this date in EST
     // Use noon to avoid any edge cases with daylight saving
-    const dateForFormatting = new Date(Date.UTC(year, month - 1, day, 18, 0, 0)); // 18:00 UTC = noon MST
+    const dateForFormatting = new Date(Date.UTC(year, month - 1, day, 17, 0, 0)); // 17:00 UTC = noon EST
     
     // Validate the date is valid
     if (isNaN(dateForFormatting.getTime())) {
       return dateString;
     }
     
-    // Format using MST timezone
-    const dayName = dateForFormatting.toLocaleDateString('en-US', { weekday: 'long', timeZone: MST_TIMEZONE });
-    const monthName = dateForFormatting.toLocaleDateString('en-US', { month: 'long', timeZone: MST_TIMEZONE });
-    const dayNumber = parseInt(dateForFormatting.toLocaleDateString('en-US', { day: 'numeric', timeZone: MST_TIMEZONE }));
-    const yearNumber = parseInt(dateForFormatting.toLocaleDateString('en-US', { year: 'numeric', timeZone: MST_TIMEZONE }));
+    // Format using EST timezone
+    const dayName = dateForFormatting.toLocaleDateString('en-US', { weekday: 'long', timeZone: EST_TIMEZONE });
+    const monthName = dateForFormatting.toLocaleDateString('en-US', { month: 'long', timeZone: EST_TIMEZONE });
+    const dayNumber = parseInt(dateForFormatting.toLocaleDateString('en-US', { day: 'numeric', timeZone: EST_TIMEZONE }));
+    const yearNumber = parseInt(dateForFormatting.toLocaleDateString('en-US', { year: 'numeric', timeZone: EST_TIMEZONE }));
     const ordinalSuffix = getOrdinalSuffix(dayNumber);
     
     return `${dayName}, ${monthName} ${dayNumber}${ordinalSuffix}, ${yearNumber}`;
   };
 
-  // Check if an event date has passed (using MST timezone)
+  // Check if an event date has passed (using EST timezone)
   const isEventPast = (dateString: string): boolean => {
     if (!dateString || dateString === 'TBD') return false;
     
@@ -131,8 +131,8 @@ export default function CANNResources() {
       return false;
     }
     
-    const todayMST = getMSTDate();
-    return eventDate < todayMST;
+    const todayEST = getESTDate();
+    return eventDate < todayEST;
   };
 
   const copyEmail = async () => {
@@ -223,7 +223,7 @@ export default function CANNResources() {
       id: 1,
       title: t('cannResources.events.eduSeries.title'),
       date: t('cannResources.events.eduSeries.date'),
-      rawDate: "2026-02-18", // February 18, 2026 MST
+      rawDate: "2026-02-18", // February 18, 2026 EST
       time: t('cannResources.events.eduSeries.time'),
       location: t('cannResources.events.eduSeries.location'),
       format: t('cannResources.events.eduSeries.format'),

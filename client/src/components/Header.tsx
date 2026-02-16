@@ -596,7 +596,7 @@ export default function Header() {
                 {item.hasDropdown ? (
                   <>
                     <div
-                      className={`w-full flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 text-left ${
+                      className={`w-full grid grid-cols-[1fr_auto] items-center px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 ${
                         isPageActive(item.href, item.dropdownItems)
                           ? "text-gray-800 bg-gradient-to-r from-[#00AFE6]/15 to-[#00DD89]/15"
                           : "text-gray-700 hover:bg-gray-100"
@@ -610,7 +610,7 @@ export default function Header() {
                             setMobileDropdowns({});
                           }
                         }}
-                        className="flex-1 text-left"
+                        className="text-left"
                       >
                         {item.name}
                       </a>

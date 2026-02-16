@@ -841,32 +841,57 @@ export default function Events() {
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            className="text-center mb-16"
+            className="mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
-              <Calendar className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-gray-800 dark:text-white/90 font-medium">
-                {t("eventsPage.journalClubBadge")}
-              </span>
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">
+                  {t("journalClub.about.title")}
+                </h2>
+                <div className="prose prose-lg dark:prose-invert max-w-none">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    {t("journalClub.about.description1")}
+                  </p>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    {t("journalClub.about.description2")}
+                  </p>
+                </div>
+                <Link href="/journal-club">
+                  <Button className="mt-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white font-semibold px-6 py-3 rounded-xl shadow-lg">
+                    {t("eventsPage.viewFullSchedule")}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 h-fit">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                  {t("journalClub.sessionDetails.title")}
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                    <Calendar className="w-5 h-5 text-[#00AFE6]" />
+                    <span>{t("journalClub.sessionDetails.frequency")}</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                    <Clock className="w-5 h-5 text-[#00AFE6]" />
+                    <span>{t("journalClub.sessionDetails.time")}</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                    <MapPin className="w-5 h-5 text-[#00AFE6]" />
+                    <span>{t("journalClub.sessionDetails.location")}</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                    <Users className="w-5 h-5 text-[#00AFE6]" />
+                    <span>{t("journalClub.sessionDetails.access")}</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                CAS Journal Club
-              </span>
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              {t("eventsPage.journalClubDescription")}
-            </p>
-            <Link href="/journal-club">
-              <Button className="mt-6 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:from-[#00AFE6]/90 hover:to-[#00DD89]/90 text-white font-semibold px-6 py-3 rounded-xl shadow-lg">
-                {t("eventsPage.viewFullSchedule")}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
           </motion.div>
 
           {/* Journal Club Tabs */}

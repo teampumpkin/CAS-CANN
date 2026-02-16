@@ -152,46 +152,61 @@ export default function JournalClub() {
       </motion.div>
 
       {/* Main Content */}
-      <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 via-transparent to-[#00DD89]/5"></div>
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00AFE6]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#00DD89]/5 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 backdrop-blur-xl border border-[#00AFE6]/20 rounded-full px-6 py-3 mb-8 shadow-lg">
-              <BookOpen className="w-5 h-5 text-[#00AFE6]" />
-              <span className="text-gray-800 dark:text-white/90 font-medium">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        {/* Overview */}
+        <motion.div
+          className="mb-16"
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 font-rosarivo">
                 {t('journalClub.about.title')}
-              </span>
+              </h2>
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                  {t('journalClub.about.description1')}
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {t('journalClub.about.description2')}
+                </p>
+              </div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-rosarivo mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                CAS Journal Club
-              </span>
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4 mb-4">
-              {t('journalClub.about.description1')}
-            </p>
-            <p className="text-base sm:text-lg text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed px-4">
-              {t('journalClub.about.description2')}
-            </p>
-          </motion.div>
 
-          {/* Sessions with Tabs */}
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-          <div className="max-w-6xl mx-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 h-fit">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                {t('journalClub.sessionDetails.title')}
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                  <Calendar className="w-5 h-5 text-[#00AFE6]" />
+                  <span>{t('journalClub.sessionDetails.frequency')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                  <Clock className="w-5 h-5 text-[#00AFE6]" />
+                  <span>{t('journalClub.sessionDetails.time')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                  <MapPin className="w-5 h-5 text-[#00AFE6]" />
+                  <span>{t('journalClub.sessionDetails.location')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                  <Users className="w-5 h-5 text-[#00AFE6]" />
+                  <span>{t('journalClub.sessionDetails.access')}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Sessions with Tabs */}
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
           <Tabs
             value={activeTab}
             onValueChange={setActiveTab}
@@ -443,8 +458,7 @@ export default function JournalClub() {
               )}
             </TabsContent>
           </Tabs>
-          </div>
-          </motion.div>
+        </motion.div>
 
         {/* Call to Action */}
         <motion.div
@@ -469,8 +483,7 @@ export default function JournalClub() {
             </motion.button>
           </Link>
         </motion.div>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

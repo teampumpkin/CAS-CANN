@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import summitPosterImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
+import summitPosterImg from "@assets/2026_CANADIAN_AMYLOIDOSIS_SUMMIT_Banner_1771244911556.png";
 import summitPhoto1 from "@assets/252564000002356792_zc_v1_1755005804435_event_1_1768993082234.png";
 import summitPhoto2 from "@assets/252564000002356792_zc_v1_1755005815011_event_2_1768993082234.png";
 import summitPhoto3 from "@assets/252564000002356792_zc_v1_1755028042016_event_3_1768993082234.png";

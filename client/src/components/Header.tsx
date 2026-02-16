@@ -598,16 +598,10 @@ export default function Header() {
                     <button
                       type="button"
                       onClick={() => {
-                        if (!item.href.startsWith("#")) {
-                          setIsMenuOpen(false);
-                          setMobileDropdowns({});
-                          window.location.href = item.href;
-                        } else {
-                          setMobileDropdowns((prev) => ({
-                            ...prev,
-                            [item.name]: !prev[item.name],
-                          }));
-                        }
+                        setMobileDropdowns((prev) => ({
+                          ...prev,
+                          [item.name]: !prev[item.name],
+                        }));
                       }}
                       className={`w-full flex items-center justify-between px-4 py-3 font-semibold text-base rounded-xl transition-all duration-300 text-left ${
                         isPageActive(item.href, item.dropdownItems)

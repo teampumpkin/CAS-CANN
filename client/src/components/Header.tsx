@@ -83,7 +83,15 @@ export default function Header() {
     }
 
     if (dropdownItems) {
-      return dropdownItems.some((item) => item.href === location);
+      const dropdownMatch = dropdownItems.some((item) => {
+        const itemPath = item.href.split("#")[0];
+        return item.href === location || (itemPath && itemPath === location);
+      });
+      if (dropdownMatch) return true;
+    }
+
+    if (!href.startsWith("#") && href.split("#")[0] === location) {
+      return true;
     }
 
     return location === href;

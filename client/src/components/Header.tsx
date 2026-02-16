@@ -602,24 +602,30 @@ export default function Header() {
                           : "text-gray-700 hover:bg-gray-100"
                       }`}
                     >
-                      <a
-                        href={item.href.startsWith("#") ? undefined : item.href}
-                        onClick={(e) => {
-                          if (item.href.startsWith("#")) {
-                            e.preventDefault();
+                      {item.href.startsWith("#") ? (
+                        <span
+                          onClick={() => {
                             setMobileDropdowns((prev) => ({
                               ...prev,
                               [item.name]: !prev[item.name],
                             }));
-                          } else {
+                          }}
+                          className="flex-1 block text-left cursor-pointer"
+                        >
+                          {item.name}
+                        </span>
+                      ) : (
+                        <a
+                          href={item.href}
+                          onClick={() => {
                             setIsMenuOpen(false);
                             setMobileDropdowns({});
-                          }
-                        }}
-                        className="flex-1 text-left cursor-pointer"
-                      >
-                        {item.name}
-                      </a>
+                          }}
+                          className="flex-1 block text-left cursor-pointer"
+                        >
+                          {item.name}
+                        </a>
+                      )}
                       <div className="flex items-center gap-2 shrink-0">
                         {isPageActive(item.href, item.dropdownItems) && (
                           <span className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></span>

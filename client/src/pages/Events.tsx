@@ -208,7 +208,9 @@ const newsItems = [
     id: 3,
     title: "CANN Townhall",
     date: "2026-01-22",
-    description: "Thank you to all who contributed to the success of the Townhall on January 22, 2026! This professionally facilitated ideation workshop was designed to help shape and refine the purpose, goals, and objectives for the network. Members from various provinces connected to share and discuss member needs, and brainstorm ideas to guide future direction for CANN. The results of the Townhall will be shared at the CANN Operational meeting on Tuesday, March 10th from 4:00 – 5:00 EST. Zoom details will be shared with members. We have an exciting year ahead!",
+    description: "Thank you to all who contributed to the success of the Townhall on January 22, 2026! This professionally facilitated ideation workshop was designed to help shape and refine the purpose, goals, and objectives for the network. Members from various provinces connected to share and discuss member needs, and brainstorm ideas to guide future direction for CANN. The results of the Townhall will be shared at the ",
+    descriptionLink: { text: "CANN Operational meeting", href: "/cann-resources#cann-events" },
+    descriptionAfterLink: " on Tuesday, March 10th from 4:00 – 5:00 EST. Zoom details will be shared with members. We have an exciting year ahead!",
     category: "CANN",
   },
 ];
@@ -1158,6 +1160,14 @@ export default function Events() {
                   <CardContent className="p-6 pt-4 flex flex-col flex-1">
                     <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 whitespace-pre-line">
                       {item.description}
+                      {(item as any).descriptionLink && (
+                        <Link href={(item as any).descriptionLink.href}>
+                          <span className="text-[#00AFE6] hover:text-[#00DD89] font-semibold underline cursor-pointer transition-colors duration-200">
+                            {(item as any).descriptionLink.text}
+                          </span>
+                        </Link>
+                      )}
+                      {(item as any).descriptionAfterLink && (item as any).descriptionAfterLink}
                     </p>
                   </CardContent>
                 </Card>

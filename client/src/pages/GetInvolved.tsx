@@ -135,7 +135,7 @@ const upcomingEvents = [
     id: 1,
     title: "CAS Journal Club - September Session",
     date: "2025-09-25",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:
@@ -148,7 +148,7 @@ const upcomingEvents = [
     id: 2,
     title: "CANN Educational Series",
     date: "2025-10-07",
-    time: "2:00 – 3:00 PM MST",
+    time: "4:00 – 5:00 PM EST",
     location: "Virtual Event",
     type: "Educational Series",
     description:
@@ -160,7 +160,7 @@ const upcomingEvents = [
     id: 3,
     title: "CAS Journal Club - November Session",
     date: "2025-11-27",
-    time: "3:00 PM - 4:00 PM MST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:

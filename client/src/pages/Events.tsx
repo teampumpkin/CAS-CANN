@@ -107,7 +107,7 @@ const allEvents = [
     id: 2,
     title: "CAS Journal Club November 2025",
     date: "2025-11-27",
-    time: "3:00 PM - 4:00 PM EST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:
@@ -121,7 +121,7 @@ const allEvents = [
     id: 3,
     title: "CAS Journal Club September 2025",
     date: "2025-09-25",
-    time: "3:00 PM - 4:00 PM EST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:
@@ -134,7 +134,7 @@ const allEvents = [
     id: 10,
     title: "CAS Journal Club May 2025",
     date: "2025-05-08",
-    time: "3:00 PM - 4:00 PM EST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:

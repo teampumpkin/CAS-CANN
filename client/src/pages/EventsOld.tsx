@@ -24,7 +24,7 @@ const journalClubSessions = [
     rawDate: "2025-05-08",
     type: "Journal Club",
     title: "CAS Journal Club May 2025",
-    time: "3:00 PM - 4:00 PM EST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     description: "The inaugural CAS Journal Club session featuring case presentations on proper typing for treatment and heart failure therapy in ATTR amyloidosis.",
     topics: [
@@ -42,7 +42,7 @@ const journalClubSessions = [
     rawDate: "2025-09-25",
     type: "Journal Club",
     title: "CAS Journal Club September 2025",
-    time: "3:00 PM - 4:00 PM EST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     description: "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates.",
     topics: [
@@ -60,7 +60,7 @@ const journalClubSessions = [
     rawDate: "2025-11-27",
     type: "Journal Club",
     title: "CAS Journal Club November 2025",
-    time: "3:00 PM - 4:00 PM EST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     description: "Continuing the national journal club initiative for CAS members. One-hour virtual session focusing on amyloidosis clinical case-based presentation and scientific updates.",
     topics: [
@@ -78,7 +78,7 @@ const journalClubSessions = [
     rawDate: "2026-02-26",
     type: "Journal Club",
     title: "CAS Journal Club February 2026",
-    time: "3:00 PM - 4:00 PM EST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     description: "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates.",
     topics: [

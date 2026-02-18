@@ -74,7 +74,7 @@ export default function SummitRecapSection() {
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 gap-4"
+            className="grid grid-cols-2 gap-4"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}

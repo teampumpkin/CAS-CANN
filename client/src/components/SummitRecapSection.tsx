@@ -74,30 +74,47 @@ export default function SummitRecapSection() {
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-2 gap-4"
+            className="flex flex-col gap-4"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            {photos.map((photo, index) => (
-              <motion.div
-                key={index}
-                className="group relative rounded-2xl overflow-hidden border border-[#00AFE6]/20 dark:border-white/10 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/15 transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.15 * index }}
-                viewport={{ once: true }}
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </motion.div>
-            ))}
+            <div className="grid grid-cols-2 gap-4">
+              {photos.slice(1).map((photo, index) => (
+                <motion.div
+                  key={index}
+                  className="group relative rounded-2xl overflow-hidden border border-[#00AFE6]/20 dark:border-white/10 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/15 transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.15 * index }}
+                  viewport={{ once: true }}
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div
+              className="group relative rounded-2xl overflow-hidden border border-[#00AFE6]/20 dark:border-white/10 shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/15 transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <img
+                src={photos[0].src}
+                alt={photos[0].alt}
+                className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </motion.div>
           </motion.div>
         </div>
 

@@ -188,20 +188,53 @@ export class ZohoSyncWorker {
       const hasSubmitFields = formConfig?.submitFields && Object.keys(formConfig.submitFields as object).length > 0;
       const hasFieldMappings = formConfig?.fieldMappings && Object.keys(formConfig.fieldMappings as object).length > 0;
       
+      let zohoData: any;
+      
       if (formConfig && (hasSubmitFields || hasFieldMappings)) {
         // Use config-based mapping
         console.log(`[Zoho Sync Worker] Using config-based mapping for "${formName}"`);
         const result = await zohoCRMService.formatFieldDataForZohoWithConfig(formData, formConfig);
-        return result.zohoData;
+        zohoData = result.zohoData;
+      } else {
+        // Use smart auto-mapping for unconfigured forms
+        console.log(`[Zoho Sync Worker] Using smart auto-mapping for "${formName}"`);
+        const { smartFieldMapper } = await import("./smart-field-mapper");
+        const result = await smartFieldMapper.mapFormDataToZoho(formData, formName, zohoModule);
+        
+        console.log(`[Zoho Sync Worker] Smart mapping: ${result.mappedFields.length} mapped, ${result.unmappedFields.length} excluded`);
+        zohoData = result.zohoData;
       }
       
-      // Use smart auto-mapping for unconfigured forms
-      console.log(`[Zoho Sync Worker] Using smart auto-mapping for "${formName}"`);
-      const { smartFieldMapper } = await import("./smart-field-mapper");
-      const result = await smartFieldMapper.mapFormDataToZoho(formData, formName, zohoModule);
+      // POST-PROCESSING: Apply centralized business rules on top of smart/config mapping
+      // This ensures CANN→CAS dependency, Record_Type, consent field completeness,
+      // and Lead_Source differentiation are ALWAYS applied regardless of mapping path
+      const { buildCentralizedZohoData } = await import("./zoho-crm-service");
+      const centralResult = buildCentralizedZohoData({
+        formData,
+        formName,
+        isExcelImport: formName.includes('Excel'),
+      });
       
-      console.log(`[Zoho Sync Worker] Smart mapping: ${result.mappedFields.length} mapped, ${result.unmappedFields.length} excluded`);
-      return result.zohoData;
+      // Merge: centralized rules fill in any fields the smart/config mapper missed
+      // Smart mapper's field values take precedence for fields it DID map
+      const mergedData = { ...centralResult.zohoData, ...zohoData };
+      
+      // ALWAYS override these business-rule fields from centralized mapper
+      // These must come from the centralized mapper to enforce dependencies and correct types
+      if (centralResult.zohoData.CAS_Member !== undefined) mergedData.CAS_Member = centralResult.zohoData.CAS_Member;
+      if (centralResult.zohoData.CANN_Member !== undefined) mergedData.CANN_Member = centralResult.zohoData.CANN_Member;
+      if (centralResult.zohoData.Record_Type !== undefined) mergedData.Record_Type = centralResult.zohoData.Record_Type;
+      if (centralResult.zohoData.Lead_Source !== undefined) mergedData.Lead_Source = centralResult.zohoData.Lead_Source;
+      // Consent picklist fields: override even when value is "No" (check for undefined, not truthy)
+      // This ensures picklist strings always win over smart mapper's boolean values
+      if (centralResult.zohoData.CAS_Communications !== undefined) mergedData.CAS_Communications = centralResult.zohoData.CAS_Communications;
+      if (centralResult.zohoData.CANN_Communications !== undefined) mergedData.CANN_Communications = centralResult.zohoData.CANN_Communications;
+      if (centralResult.zohoData.CANN_Communication_Consent !== undefined) mergedData.CANN_Communication_Consent = centralResult.zohoData.CANN_Communication_Consent;
+      if (centralResult.zohoData.Services_Map_Inclusion !== undefined) mergedData.Services_Map_Inclusion = centralResult.zohoData.Services_Map_Inclusion;
+      
+      console.log(`[Zoho Sync Worker] Post-processing rules applied: ${centralResult.appliedRules.join('; ')}`);
+      
+      return mergedData;
     } catch (error) {
       console.error(`[Zoho Sync Worker] Smart mapping failed, using fallback:`, error);
       return this.buildZohoDataFallback(formData, formName);
@@ -210,18 +243,18 @@ export class ZohoSyncWorker {
 
   /**
    * Fallback Zoho data builder for when smart mapping fails
+   * Uses centralized mapping utility to ensure business rules are enforced
    */
   private buildZohoDataFallback(formData: any, formName: string): any {
-    const zohoData: any = {
-      Lead_Source: `Website - ${formName}`,
-      Last_Name: formData.fullName || formData.name || "Unknown",
-      Email: formData.email,
-    };
+    const { buildCentralizedZohoData } = require("./zoho-crm-service");
+    const result = buildCentralizedZohoData({
+      formData,
+      formName,
+      isExcelImport: formName.includes('Excel'),
+    });
 
-    if (formData.institution) zohoData.Company = formData.institution;
-    if (formData.discipline) zohoData.discipline = formData.discipline;
-
-    return zohoData;
+    console.log(`[Zoho Sync Worker] Centralized fallback mapping applied. Rules: ${result.appliedRules.join('; ')}`);
+    return result.zohoData;
   }
 }
 

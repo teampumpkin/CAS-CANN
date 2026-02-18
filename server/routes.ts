@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage, type ResourceFilters } from "./storage";
 import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission, insertTownhallRegistrationSchema } from "@shared/schema";
 import { fieldSyncEngine } from "./field-sync-engine";
-import { zohoCRMService } from "./zoho-crm-service";
+import { zohoCRMService, buildCentralizedZohoData } from "./zoho-crm-service";
 import { retryService } from "./retry-service";
 import { oauthService } from "./oauth-service";
 import { dedicatedTokenManager } from "./dedicated-token-manager";
@@ -2520,75 +2520,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         try {
           const formData = submission.submissionData as Record<string, any>;
           
-          // Build comprehensive field mapping
-          const updateData: Record<string, any> = {
-            Layout: { id: layoutId }
-          };
+          // Use centralized field mapping with business rules
+          const mappingResult = buildCentralizedZohoData({
+            formData,
+            formName: submission.formName,
+            layoutId,
+            isExcelImport: submission.formName.includes('Excel'),
+          });
+          const updateData = mappingResult.zohoData;
           
-          // Standard fields
-          if (formData.fullName) updateData.Last_Name = formData.fullName;
-          if (formData.email) updateData.Email = formData.email;
-          
-          // Professional designation from discipline
-          if (formData.discipline) {
-            updateData.Professional_Designation = formData.discipline;
-            updateData.discipline = formData.discipline;
-          }
-          
-          // Institution - map to both Company and Institution_Name
-          if (formData.institution) {
-            updateData.Company = formData.institution;
-            updateData.Institution_Name = formData.institution;
-            updateData.institution = formData.institution;
-          }
-          
-          // Subspecialty
-          if (formData.subspecialty) {
-            updateData.subspecialty = formData.subspecialty;
-          }
-          
-          // Amyloidosis type
-          if (formData.amyloidosisType) {
-            updateData.Amyloidosis_Type = formData.amyloidosisType;
-            updateData.amyloidosistype = formData.amyloidosisType;
-          }
-          
-          // Institution address/phone
-          if (formData.institutionAddress) updateData.institutionaddress = formData.institutionAddress;
-          if (formData.institutionPhone) updateData.institutionphone = formData.institutionPhone;
-          if (formData.institutionFax) updateData.institutionfax = formData.institutionFax;
-          
-          // Membership flags
-          if (formData.wantsMembership) {
-            updateData.CAS_Member = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
-            updateData.wantsmembership = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
-          }
-          if (formData.wantsCANNMembership) {
-            updateData.CANN_Member = formData.wantsCANNMembership === 'Yes' || formData.wantsCANNMembership === true;
-          }
-          
-          // Communication preferences
-          if (formData.wantsCommunications) {
-            updateData.CAS_Communications = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true ? 'Yes' : 'No';
-            updateData.wantscommunications = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true;
-            updateData.communicationconsent = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true;
-          }
-          if (formData.cannCommunications) {
-            updateData.CANN_Communications = formData.cannCommunications === 'Yes' || formData.cannCommunications === true ? 'Yes' : 'No';
-          }
-          
-          // Services map
-          if (formData.wantsServicesMapInclusion) {
-            updateData.Services_Map_Inclusion = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true ? 'Yes' : 'No';
-            updateData.wantsservicesmapinclusion = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true;
-            updateData.servicesmapconsent = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true;
-          }
-          
-          // Province if available
-          if (formData.province) updateData.province = formData.province;
-          
-          // Source form tracking
-          updateData.Source_Form = submission.formName;
+          console.log(`[Admin] Centralized mapping for submission #${submission.id}: ${mappingResult.appliedRules.join('; ')}`);
           
           if (dryRun) {
             console.log(`[Admin DryRun] Would update Zoho record ${submission.zohoCrmId}:`, JSON.stringify(updateData, null, 2));
@@ -2668,106 +2609,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         try {
           const formData = submission.submissionData as Record<string, any>;
           
-          // Build complete record data for new lead
-          const recordData: Record<string, any> = {
-            Layout: { id: layoutId },
-            Lead_Source: submission.formName.includes('Excel') 
-              ? 'Excel Import - Re-synced' 
-              : submission.formName
-          };
+          // Use centralized field mapping with business rules
+          const mappingResult = buildCentralizedZohoData({
+            formData,
+            formName: submission.formName,
+            layoutId,
+            isExcelImport: submission.formName.includes('Excel'),
+            isResync: true,
+          });
+          const recordData = mappingResult.zohoData;
           
-          // Map all fields properly
-          if (formData.fullName) recordData.Last_Name = formData.fullName;
-          if (formData.email) recordData.Email = formData.email;
-          
-          // Institution -> Company (critical for Excel imports)
-          if (formData.institution) {
-            recordData.Company = formData.institution;
-            recordData.Institution_Name = formData.institution;
-            recordData.institution = formData.institution;
-          }
-          
-          // Professional designation
-          if (formData.discipline) {
-            recordData.Professional_Designation = formData.discipline;
-            recordData.discipline = formData.discipline;
-          }
-          
-          // Subspecialty - truncate to 50 chars (Zoho field limit)
-          if (formData.subspecialty) {
-            recordData.subspecialty = formData.subspecialty.toString().substring(0, 50);
-          }
-          
-          // Amyloidosis type
-          if (formData.amyloidosisType) {
-            recordData.Amyloidosis_Type = formData.amyloidosisType;
-            recordData.amyloidosistype = formData.amyloidosisType;
-          }
-          
-          // Address/contact info - truncate to Zoho field limits and clean up newlines
-          const cleanAndTruncate = (val: string, maxLen: number) => {
-            if (!val) return val;
-            return val.replace(/\r\n|\r|\n/g, ', ').substring(0, maxLen);
-          };
-          
-          // Institution field has 50 char limit - also clean Company fields
-          if (recordData.institution) {
-            recordData.institution = cleanAndTruncate(recordData.institution, 50);
-          }
-          if (recordData.Company) {
-            recordData.Company = cleanAndTruncate(recordData.Company, 100); // Company has longer limit
-          }
-          if (recordData.Institution_Name) {
-            recordData.Institution_Name = cleanAndTruncate(recordData.Institution_Name, 100);
-          }
-          
-          if (formData.institutionAddress) recordData.institutionaddress = cleanAndTruncate(formData.institutionAddress, 50);
-          
-          // Phone sanitization - strip extensions (x, ext, etc.) and keep only valid phone chars
-          const sanitizePhone = (phone: string) => {
-            if (!phone) return undefined;
-            // Remove everything after 'x', 'ext', or similar extension markers
-            let cleaned = phone.toString().split(/\s*[xX]\s*|\s*ext\.?\s*/i)[0];
-            // Keep only digits, dashes, plus, spaces, parentheses
-            cleaned = cleaned.replace(/[^\d\-\+\s\(\)]/g, '').trim();
-            return cleaned.substring(0, 30) || undefined;
-          };
-          
-          if (formData.institutionPhone) recordData.institutionphone = sanitizePhone(formData.institutionPhone);
-          if (formData.institutionFax) recordData.institutionfax = sanitizePhone(formData.institutionFax);
-          if (formData.province) recordData.province = formData.province;
-          
-          // Membership flags
-          if (formData.wantsMembership !== undefined) {
-            const isMember = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
-            recordData.CAS_Member = isMember;
-            recordData.wantsmembership = isMember;
-          }
-          if (formData.wantsCANNMembership !== undefined) {
-            recordData.CANN_Member = formData.wantsCANNMembership === 'Yes' || formData.wantsCANNMembership === true;
-          }
-          
-          // Communication preferences
-          if (formData.wantsCommunications !== undefined) {
-            const wantsCom = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true;
-            recordData.CAS_Communications = wantsCom ? 'Yes' : 'No';
-            recordData.wantscommunications = wantsCom;
-            recordData.communicationconsent = wantsCom;
-          }
-          if (formData.cannCommunications !== undefined) {
-            recordData.CANN_Communications = formData.cannCommunications === 'Yes' || formData.cannCommunications === true ? 'Yes' : 'No';
-          }
-          
-          // Services map
-          if (formData.wantsServicesMapInclusion !== undefined) {
-            const wantsMap = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true;
-            recordData.Services_Map_Inclusion = wantsMap ? 'Yes' : 'No';
-            recordData.wantsservicesmapinclusion = wantsMap;
-            recordData.servicesmapconsent = wantsMap;
-          }
-          
-          // Source form tracking
-          recordData.Source_Form = submission.formName;
+          console.log(`[Admin] Centralized mapping for orphaned submission #${submission.id}: ${mappingResult.appliedRules.join('; ')}`);
           
           if (dryRun) {
             console.log(`[Admin DryRun] Would create new Zoho lead for orphaned record ${submission.id}`);
@@ -2814,6 +2666,107 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         error: error instanceof Error ? error.message : 'Re-sync failed'
+      });
+    }
+  });
+
+  // Data remediation: Fix CANN→CAS dependency violations and add Record_Type to existing records
+  app.post("/api/admin/zoho/fix-membership-dependencies", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Starting membership dependency remediation...');
+      
+      const { dryRun = true, limit = 100 } = req.body;
+      
+      const submissions = await storage.getFormSubmissions();
+      const targetSubmissions = submissions.filter(s => 
+        s.syncStatus === 'synced' && 
+        s.zohoCrmId &&
+        ['CAS & CANN Registration', 'CAS Registration', 'Excel Import - CAS Registration', 'Excel Import - PANN Membership'].includes(s.formName)
+      ).slice(0, limit);
+      
+      console.log(`[Admin] Scanning ${targetSubmissions.length} synced records for dependency violations...`);
+      
+      const results: { 
+        id: number; 
+        zohoId: string; 
+        status: string; 
+        issues: string[];
+        error?: string;
+      }[] = [];
+      
+      let violationCount = 0;
+      let missingRecordTypeCount = 0;
+      
+      for (const submission of targetSubmissions) {
+        try {
+          const formData = submission.submissionData as Record<string, any>;
+          const issues: string[] = [];
+          const updateData: Record<string, any> = {};
+          
+          const wantsCAS = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
+          const wantsCANN = formData.wantsCANNMembership === 'Yes' || formData.wantsCANNMembership === true;
+          
+          // Check CANN→CAS dependency violation
+          if (wantsCANN && !wantsCAS) {
+            issues.push('CANN→CAS violation: CANN_Member=true but CAS_Member=false');
+            updateData.CAS_Member = true;
+            updateData.wantsmembership = true;
+            violationCount++;
+          }
+          
+          // Add Record_Type classification (always apply — this field was never sent before)
+          const isMember = wantsCAS || wantsCANN;
+          updateData.Record_Type = isMember ? 'Member' : 'Inquiry';
+          issues.push(`Record_Type set to "${isMember ? 'Member' : 'Inquiry'}"`);
+          missingRecordTypeCount++;
+          
+          // Fix Lead_Source for non-member inquiries
+          if (!isMember && !submission.formName.includes('Excel')) {
+            updateData.Lead_Source = 'Website - Contact Inquiry';
+            issues.push('Lead_Source corrected to "Website - Contact Inquiry"');
+          }
+          
+          if (Object.keys(updateData).length === 0) {
+            results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'no_changes_needed', issues });
+            continue;
+          }
+          
+          if (dryRun) {
+            console.log(`[Admin DryRun] Would fix record ${submission.zohoCrmId}: ${issues.join('; ')}`);
+            results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'dry_run', issues });
+          } else {
+            await zohoCRMService.updateRecord('Leads', submission.zohoCrmId!, updateData);
+            console.log(`[Admin] Fixed record ${submission.zohoCrmId}: ${issues.join('; ')}`);
+            results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'fixed', issues });
+          }
+        } catch (error) {
+          const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+          results.push({ id: submission.id, zohoId: submission.zohoCrmId!, status: 'failed', issues: [], error: errorMsg });
+        }
+      }
+      
+      const fixedCount = results.filter(r => r.status === 'fixed' || r.status === 'dry_run').length;
+      const failedCount = results.filter(r => r.status === 'failed').length;
+      
+      res.json({
+        success: true,
+        message: dryRun 
+          ? `Dry run: ${fixedCount} records would be remediated (${violationCount} CANN→CAS violations, ${missingRecordTypeCount} Record_Type additions)`
+          : `Remediated ${fixedCount} records (${violationCount} CANN→CAS violations fixed, ${missingRecordTypeCount} Record_Type added), ${failedCount} failed`,
+        dryRun,
+        totalScanned: targetSubmissions.length,
+        violationCount,
+        missingRecordTypeCount,
+        fixedCount,
+        failedCount,
+        results,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('[Admin] Remediation failed:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Remediation failed'
       });
     }
   });

@@ -1072,3 +1072,165 @@ export class ZohoCRMService {
 }
 
 export const zohoCRMService = new ZohoCRMService();
+
+/**
+ * Centralized CAS/CANN Field Mapping Utility
+ * 
+ * Single source of truth for mapping form submission data to Zoho CRM fields.
+ * Used by: zoho-sync-worker (fallback), admin batch-update, admin re-sync orphans.
+ * 
+ * Business Rules Enforced:
+ * 1. CANN→CAS dependency: CANN_Member=true forces CAS_Member=true
+ * 2. Record_Type classification: "Member" vs "Inquiry" for email segmentation
+ * 3. Lead_Source differentiation: Non-member inquiries get distinct source
+ * 4. Consent fields always mapped to both standard and legacy Zoho field names
+ */
+
+export interface CentralizedMappingOptions {
+  formData: Record<string, any>;
+  formName: string;
+  layoutId?: string;
+  isExcelImport?: boolean;
+  isResync?: boolean;
+}
+
+export interface CentralizedMappingResult {
+  zohoData: Record<string, any>;
+  recordType: "Member" | "Inquiry";
+  leadSource: string;
+  appliedRules: string[];
+}
+
+function cleanAndTruncate(val: string, maxLen: number): string {
+  if (!val) return val;
+  return val.replace(/\r\n|\r|\n/g, ', ').substring(0, maxLen);
+}
+
+function sanitizePhone(phone: string): string | undefined {
+  if (!phone) return undefined;
+  let cleaned = phone.toString().split(/\s*[xX]\s*|\s*ext\.?\s*/i)[0];
+  cleaned = cleaned.replace(/[^\d\-\+\s\(\)]/g, '').trim();
+  return cleaned.substring(0, 30) || undefined;
+}
+
+export function buildCentralizedZohoData(options: CentralizedMappingOptions): CentralizedMappingResult {
+  const { formData, formName, layoutId, isExcelImport = false, isResync = false } = options;
+  const appliedRules: string[] = [];
+
+  const zohoData: Record<string, any> = {};
+
+  if (layoutId) {
+    zohoData.Layout = { id: layoutId };
+  }
+
+  // --- Standard identity fields ---
+  if (formData.fullName) zohoData.Last_Name = formData.fullName;
+  if (formData.email) zohoData.Email = formData.email;
+
+  // --- Professional info ---
+  if (formData.discipline) {
+    zohoData.Professional_Designation = formData.discipline;
+    zohoData.discipline = formData.discipline;
+  }
+
+  // --- Institution (map to both Company and Institution_Name) ---
+  if (formData.institution) {
+    zohoData.Company = cleanAndTruncate(formData.institution, 100);
+    zohoData.Institution_Name = cleanAndTruncate(formData.institution, 100);
+    zohoData.institution = cleanAndTruncate(formData.institution, 50);
+  }
+
+  // --- Subspecialty ---
+  if (formData.subspecialty) {
+    zohoData.subspecialty = formData.subspecialty.toString().substring(0, 50);
+  }
+
+  // --- Amyloidosis type ---
+  if (formData.amyloidosisType) {
+    zohoData.Amyloidosis_Type = formData.amyloidosisType;
+    zohoData.amyloidosistype = formData.amyloidosisType;
+  }
+
+  // --- Address/contact info ---
+  if (formData.institutionAddress) zohoData.institutionaddress = cleanAndTruncate(formData.institutionAddress, 50);
+  if (formData.institutionPhone) zohoData.institutionphone = sanitizePhone(formData.institutionPhone);
+  if (formData.institutionFax) zohoData.institutionfax = sanitizePhone(formData.institutionFax);
+  if (formData.province) zohoData.province = formData.province;
+
+  // --- Membership flags with CANN→CAS dependency enforcement ---
+  const wantsCAS = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
+  const wantsCANN = formData.wantsCANNMembership === 'Yes' || formData.wantsCANNMembership === true;
+
+  if (formData.wantsMembership !== undefined || formData.wantsCANNMembership !== undefined) {
+    let casMember = wantsCAS;
+
+    // BUSINESS RULE: CANN membership implies CAS membership
+    if (wantsCANN && !casMember) {
+      casMember = true;
+      appliedRules.push('CANN→CAS dependency: forced CAS_Member=true because CANN_Member=true');
+    }
+
+    zohoData.CAS_Member = casMember;
+    zohoData.wantsmembership = casMember;
+    zohoData.CANN_Member = wantsCANN;
+  }
+
+  // --- Record_Type classification ---
+  const isMember = wantsCAS || wantsCANN;
+  const recordType: "Member" | "Inquiry" = isMember ? "Member" : "Inquiry";
+  zohoData.Record_Type = recordType;
+  appliedRules.push(`Record_Type set to "${recordType}"`);
+
+  // --- Lead_Source ---
+  let leadSource: string;
+  if (isExcelImport && isResync) {
+    leadSource = 'Excel Import - Re-synced';
+  } else if (isExcelImport) {
+    leadSource = formName;
+  } else if (!isMember) {
+    leadSource = 'Website - Contact Inquiry';
+    appliedRules.push('Lead_Source set to "Website - Contact Inquiry" for non-member');
+  } else {
+    leadSource = `Website - ${formName}`;
+  }
+  zohoData.Lead_Source = leadSource;
+
+  // --- Communication consent fields (mapped to BOTH standard and legacy field names) ---
+  if (formData.wantsCommunications !== undefined) {
+    const wantsCom = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true;
+    zohoData.CAS_Communications = wantsCom ? 'Yes' : 'No';
+    zohoData.wantscommunications = wantsCom;
+    zohoData.communicationconsent = wantsCom;
+  }
+
+  if (formData.cannCommunications !== undefined) {
+    const wantsCANNCom = formData.cannCommunications === 'Yes' || formData.cannCommunications === true;
+    zohoData.CANN_Communications = wantsCANNCom ? 'Yes' : 'No';
+    zohoData.CANN_Communication_Consent = wantsCANNCom ? 'Yes' : 'No';
+  }
+
+  // --- Services map inclusion consent ---
+  if (formData.wantsServicesMapInclusion !== undefined) {
+    const wantsMap = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true;
+    zohoData.Services_Map_Inclusion = wantsMap ? 'Yes' : 'No';
+    zohoData.wantsservicesmapinclusion = wantsMap;
+    zohoData.servicesmapconsent = wantsMap;
+  }
+
+  // --- Non-member inquiry fields ---
+  if (!isMember) {
+    if (formData.noMemberName) zohoData.Last_Name = formData.noMemberName;
+    if (formData.noMemberEmail) zohoData.Email = formData.noMemberEmail;
+    if (formData.noMemberMessage) zohoData.Description = formData.noMemberMessage;
+  }
+
+  // --- Source form tracking ---
+  zohoData.Source_Form = formName;
+
+  return {
+    zohoData,
+    recordType,
+    leadSource,
+    appliedRules,
+  };
+}

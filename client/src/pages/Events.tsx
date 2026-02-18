@@ -157,7 +157,7 @@ const allEvents = [
     id: 4,
     title: "CAS Journal Club February 2026",
     date: "2026-02-26",
-    time: "3:00 PM - 4:00 PM EST",
+    time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",
     description:
@@ -994,7 +994,7 @@ export default function Events() {
                             )}
                             <div className={`flex items-center gap-2 ${isPast ? "text-gray-500 dark:text-gray-500" : "text-gray-600 dark:text-gray-400"}`}>
                               <Clock className="w-4 h-4" />
-                              <span className="text-sm">3:00 PM - 4:00 PM EST</span>
+                              <span className="text-sm">5:00 PM - 6:00 PM EST</span>
                             </div>
                           </div>
 

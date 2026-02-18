@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import summitPosterImg from "@assets/2026_CANADIAN_AMYLOIDOSIS_SUMMIT_Banner_1771406329054.png";
+import summitPosterImg from "@assets/2026_CANADIAN_AMYLOIDOSIS_SUMMIT_Banner_1771407335182.png";
 import summitPhoto1 from "@assets/2d226423-9ba2-4a2b-b87c-05bf881cd89a_1771244987107.jpg";
 import summitPhoto2 from "@assets/6110ba86-43ba-413c-9bf7-00e4a1ce8c19_1771244987108.jpg";
 import summitPhoto3 from "@assets/d33be37a-54c0-47a5-891b-f018d610f554_1771244987108.jpg";

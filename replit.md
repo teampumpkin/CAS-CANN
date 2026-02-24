@@ -111,7 +111,7 @@ Event dates and past/upcoming detection on the Journal Club, Events, EventsOld, 
 - **Connect-pg-simple**: PostgreSQL session store for session management.
 
 ### Integrations
-- **Zoho CRM**: For lead capture, data management, and bulk imports.
+- **Zoho CRM**: For lead capture, data management, and bulk imports. Data is populated across Leads (245), Contacts (257), and Accounts (157 deduplicated institutions) modules with CAS-specific custom fields (CAS_Member, CANN_Member, Record_Type, Professional_Designation, etc.). OAuth uses Self Client credentials (`ZOHO_SELF_CLIENT_ID`, `ZOHO_SELF_CLIENT_SECRET`) with automatic token refresh.
 
 ## ⚠️ Protected Files - DO NOT MODIFY
 

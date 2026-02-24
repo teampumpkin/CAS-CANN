@@ -300,8 +300,8 @@ export class DedicatedTokenManager {
         
         const params = new URLSearchParams({
           grant_type: "refresh_token",
-          client_id: process.env.ZOHO_CLIENT_ID!,
-          client_secret: process.env.ZOHO_CLIENT_SECRET!,
+          client_id: (process.env.ZOHO_SELF_CLIENT_ID || process.env.ZOHO_CLIENT_ID)!,
+          client_secret: (process.env.ZOHO_SELF_CLIENT_SECRET || process.env.ZOHO_CLIENT_SECRET)!,
           refresh_token: tokenRecord.refreshToken!,
         });
 

@@ -1487,7 +1487,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               <p><strong>Production Mode:</strong> ${isProduction}</p>
               <p><strong>Base URL:</strong> ${baseUrl}</p>
               <p><strong>Redirect URI:</strong> ${redirectUri}</p>
-              <p><strong>Client ID:</strong> ${process.env.ZOHO_CLIENT_ID?.substring(0, 20)}...</p>
+              <p><strong>Client ID:</strong> ${(process.env.ZOHO_SELF_CLIENT_ID || process.env.ZOHO_CLIENT_ID)?.substring(0, 20)}...</p>
               <p><strong>Scopes:</strong> ${customScopes ? 'Custom' : 'Default'}</p>
             </div>
             <div style="background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid #28a745;">
@@ -1685,8 +1685,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         },
         body: new URLSearchParams({
           grant_type: "authorization_code",
-          client_id: process.env.ZOHO_CLIENT_ID!,
-          client_secret: process.env.ZOHO_CLIENT_SECRET!,
+          client_id: (process.env.ZOHO_SELF_CLIENT_ID || process.env.ZOHO_CLIENT_ID)!,
+          client_secret: (process.env.ZOHO_SELF_CLIENT_SECRET || process.env.ZOHO_CLIENT_SECRET)!,
           redirect_uri: redirectUri,
           code: code as string,
         }),

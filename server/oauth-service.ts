@@ -141,8 +141,8 @@ export class OAuthService {
     
     const params = new URLSearchParams({
       grant_type: "refresh_token",
-      client_id: process.env.ZOHO_CLIENT_ID!,
-      client_secret: process.env.ZOHO_CLIENT_SECRET!,
+      client_id: (process.env.ZOHO_SELF_CLIENT_ID || process.env.ZOHO_CLIENT_ID)!,
+      client_secret: (process.env.ZOHO_SELF_CLIENT_SECRET || process.env.ZOHO_CLIENT_SECRET)!,
       refresh_token: tokenRecord.refreshToken!,
     });
 
@@ -350,7 +350,7 @@ export class OAuthService {
       
       const params = [
         `scope=${encodeURIComponent(scopes)}`,
-        `client_id=${encodeURIComponent(process.env.ZOHO_CLIENT_ID!)}`,
+        `client_id=${encodeURIComponent((process.env.ZOHO_SELF_CLIENT_ID || process.env.ZOHO_CLIENT_ID)!)}`,
         `response_type=code`,
         `access_type=offline`,
         `redirect_uri=${encodeURIComponent(redirectUri)}`

@@ -10,8 +10,11 @@ import type { FormSubmission } from '@shared/schema';
 export class ZohoSyncWorker {
   private isRunning = false;
   private syncInterval: NodeJS.Timeout | null = null;
+  private requeueInterval: NodeJS.Timeout | null = null;
   private readonly SYNC_INTERVAL_MS = 10000; // 10 seconds
-  private readonly MAX_RETRIES = 5;
+  private readonly REQUEUE_INTERVAL_MS = 300000; // 5 minutes — re-check failed submissions
+  private readonly MAX_FAST_RETRIES = 5; // After this, switch to slow retry schedule
+  private readonly MAX_TOTAL_RETRIES = 50; // Very high ceiling — effectively never give up
   private readonly BATCH_SIZE = 10;
 
   /**
@@ -34,6 +37,11 @@ export class ZohoSyncWorker {
     this.syncInterval = setInterval(() => {
       this.processQueue();
     }, this.SYNC_INTERVAL_MS);
+
+    // Periodically re-queue failed submissions that have been waiting long enough
+    this.requeueInterval = setInterval(() => {
+      this.requeueFailedSubmissions();
+    }, this.REQUEUE_INTERVAL_MS);
   }
 
   /**
@@ -43,6 +51,10 @@ export class ZohoSyncWorker {
     if (this.syncInterval) {
       clearInterval(this.syncInterval);
       this.syncInterval = null;
+    }
+    if (this.requeueInterval) {
+      clearInterval(this.requeueInterval);
+      this.requeueInterval = null;
     }
     this.isRunning = false;
     console.log('[Zoho Sync Worker] Stopped');
@@ -79,20 +91,20 @@ export class ZohoSyncWorker {
    */
   private async syncSubmission(submission: FormSubmission): Promise<void> {
     try {
-      // Check retry limit
-      if (submission.retryCount >= this.MAX_RETRIES) {
-        console.error(`[Zoho Sync Worker] Submission #${submission.id} exceeded max retries (${this.MAX_RETRIES})`);
+      // Check if we've exceeded the absolute ceiling (50 retries = days of trying)
+      if (submission.retryCount >= this.MAX_TOTAL_RETRIES) {
+        console.error(`[Zoho Sync Worker] Submission #${submission.id} exceeded absolute max retries (${this.MAX_TOTAL_RETRIES}) — marking for manual review`);
         await storage.updateFormSubmission(submission.id, {
           processingStatus: "failed",
           syncStatus: "failed",
-          errorMessage: `Exceeded maximum retry attempts (${this.MAX_RETRIES})`,
+          errorMessage: `Exceeded ${this.MAX_TOTAL_RETRIES} retry attempts — requires manual review. Data is safe in database.`,
         });
         
         await storage.createSubmissionLog({
           submissionId: submission.id,
           operation: "crm_push",
           status: "failed",
-          errorMessage: `Exceeded maximum retry attempts (${this.MAX_RETRIES})`,
+          errorMessage: `Exceeded ${this.MAX_TOTAL_RETRIES} retry attempts — requires manual review`,
         });
         return;
       }
@@ -148,15 +160,21 @@ export class ZohoSyncWorker {
 
       await storage.incrementRetryCount(submission.id);
       
-      // Calculate exponential backoff: 2^retryCount * 10 seconds
-      const backoffSeconds = Math.pow(2, submission.retryCount) * 10;
+      // Calculate backoff: fast retries use exponential (10s, 20s, 40s, 80s, 160s)
+      // After MAX_FAST_RETRIES, switch to 5-minute intervals (capped)
+      let backoffSeconds: number;
+      if (submission.retryCount < this.MAX_FAST_RETRIES) {
+        backoffSeconds = Math.pow(2, submission.retryCount) * 10; // exponential: 10, 20, 40, 80, 160
+      } else {
+        backoffSeconds = 300; // 5 minutes for slow retries
+      }
       const nextRetryAt = new Date(Date.now() + backoffSeconds * 1000);
 
       await storage.updateFormSubmission(submission.id, {
-        processingStatus: "pending", // Back to pending for retry
+        processingStatus: "pending", // Back to pending for retry — NEVER give up
         errorMessage: errorMessage,
         lastRetryAt: new Date(),
-        nextRetryAt: nextRetryAt, // Schedule next retry attempt
+        nextRetryAt: nextRetryAt,
       });
 
       await storage.createSubmissionLog({
@@ -168,10 +186,11 @@ export class ZohoSyncWorker {
           retryCount: submission.retryCount + 1,
           nextRetryAt: nextRetryAt.toISOString(),
           backoffSeconds: backoffSeconds,
+          phase: submission.retryCount < this.MAX_FAST_RETRIES ? 'fast_retry' : 'slow_retry',
         },
       });
 
-      console.log(`[Zoho Sync Worker] ⏱️  Scheduled retry for submission #${submission.id} (attempt ${submission.retryCount + 1}/${this.MAX_RETRIES}) at ${nextRetryAt.toISOString()} (in ${backoffSeconds}s)`);
+      console.log(`[Zoho Sync Worker] ⏱️  Scheduled retry for submission #${submission.id} (attempt ${submission.retryCount + 1}/${this.MAX_TOTAL_RETRIES}, ${submission.retryCount < this.MAX_FAST_RETRIES ? 'fast' : 'slow'} phase) at ${nextRetryAt.toISOString()} (in ${backoffSeconds}s)`);
     }
   }
 
@@ -238,6 +257,46 @@ export class ZohoSyncWorker {
     } catch (error) {
       console.error(`[Zoho Sync Worker] Smart mapping failed, using fallback:`, error);
       return this.buildZohoDataFallback(formData, formName);
+    }
+  }
+
+  /**
+   * Re-queue failed submissions that have been stuck for at least 30 minutes
+   * Only targets submissions that exhausted the old 5-retry limit and were permanently failed
+   * Does NOT touch submissions at the absolute ceiling (50 retries = manual review needed)
+   * Does NOT fight the main retry loop — respects nextRetryAt scheduling
+   */
+  private async requeueFailedSubmissions(): Promise<void> {
+    try {
+      const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+      const allSubmissions = await storage.getFormSubmissions();
+      const failedSubmissions = allSubmissions.filter(s => 
+        s.syncStatus === 'failed' && 
+        s.processingStatus === 'failed' &&
+        s.retryCount < this.MAX_TOTAL_RETRIES &&
+        !s.zohoCrmId &&
+        // Only re-queue if it's been stuck for at least 30 minutes (not fighting main retry loop)
+        (!s.lastRetryAt || new Date(s.lastRetryAt) < thirtyMinutesAgo)
+      );
+
+      if (failedSubmissions.length === 0) return;
+
+      console.log(`[Zoho Sync Worker] Found ${failedSubmissions.length} stale failed submissions to re-queue`);
+
+      for (const submission of failedSubmissions) {
+        // Use progressive backoff: longer delays for higher retry counts
+        const backoffMinutes = Math.min(submission.retryCount * 5, 60); // cap at 60 minutes
+        const nextRetryAt = new Date(Date.now() + backoffMinutes * 60 * 1000);
+        await storage.updateFormSubmission(submission.id, {
+          processingStatus: 'pending' as any,
+          syncStatus: 'pending' as any,
+          nextRetryAt,
+          errorMessage: `Re-queued for retry (attempt ${submission.retryCount + 1}). Previous error: ${submission.errorMessage?.substring(0, 200)}`,
+        });
+        console.log(`[Zoho Sync Worker] Re-queued submission #${submission.id} (retry ${submission.retryCount + 1}/${this.MAX_TOTAL_RETRIES}, next in ${backoffMinutes}min)`);
+      }
+    } catch (error) {
+      console.error('[Zoho Sync Worker] Error re-queuing failed submissions:', error);
     }
   }
 

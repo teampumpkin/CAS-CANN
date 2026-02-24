@@ -959,17 +959,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
         total,
         limit,
         offset,
-        submissions: paginated.map(s => ({
-          id: s.id,
-          formName: s.formName,
-          processingStatus: s.processingStatus,
-          syncStatus: s.syncStatus,
-          zohoCrmId: s.zohoCrmId,
-          retryCount: s.retryCount,
-          errorMessage: s.errorMessage,
-          createdAt: s.createdAt,
-          lastSyncAt: s.lastSyncAt,
-        })),
+        submissions: paginated.map(s => {
+          const data = s.submissionData as any;
+          return {
+            id: s.id,
+            formName: s.formName,
+            fullName: data?.fullName || data?.noMemberName || '',
+            email: data?.email || data?.noMemberEmail || '',
+            discipline: data?.discipline || '',
+            institution: data?.institution || '',
+            wantsMembership: data?.wantsMembership,
+            wantsCANNMembership: data?.wantsCANNMembership,
+            processingStatus: s.processingStatus,
+            syncStatus: s.syncStatus,
+            zohoCrmId: s.zohoCrmId,
+            retryCount: s.retryCount,
+            errorMessage: s.errorMessage,
+            createdAt: s.createdAt,
+            lastSyncAt: s.lastSyncAt,
+          };
+        }),
       });
     } catch (error) {
       console.error('[Audit API] Error listing submissions:', error);

@@ -87,6 +87,24 @@ All 7 operational views requested by Blue Monarch can be constructed using expli
 
 ---
 
+## Zoho Layout Configuration
+
+Records are assigned to the correct Zoho layout based on form type:
+
+| Form Name | Zoho Layout | Layout ID |
+|-----------|------------|-----------|
+| CAS Registration | CAS Registration | `6999043000001335003` |
+| CAS & CANN Registration | CAS and CANN | `6999043000000091055` |
+| Excel Import - CAS Registration | CAS Registration | `6999043000001335003` |
+| Excel Import - PANN Membership | CAS and CANN | `6999043000000091055` |
+
+Layout is set via form configurations in the database and applied by:
+- **Sync worker**: Reads layout from form config and passes to `createRecord`
+- **Admin orphan re-sync**: Reads layout from form config (with fallback to CAS and CANN)
+- **Admin remediation**: Updates layout on existing records to correct any historical misassignment
+
+---
+
 ## Open Items
 
 1. **Zoho OAuth Scope**: Current token returns 401 (invalid scope). Re-authorization required before:

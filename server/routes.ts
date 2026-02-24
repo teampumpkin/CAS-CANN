@@ -2632,11 +2632,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         try {
           const formData = submission.submissionData as Record<string, any>;
           
+          // Get layout from form configuration (falls back to CAS and CANN layout)
+          const formConfig = await formConfigEngine.getFormConfiguration(submission.formName);
+          const resolvedLayoutId = formConfig?.zohoLayoutId || layoutId;
+          
           // Use centralized field mapping with business rules
           const mappingResult = buildCentralizedZohoData({
             formData,
             formName: submission.formName,
-            layoutId,
+            layoutId: resolvedLayoutId,
             isExcelImport: submission.formName.includes('Excel'),
             isResync: true,
           });
@@ -2728,6 +2732,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           
           const wantsCAS = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
           const wantsCANN = formData.wantsCANNMembership === 'Yes' || formData.wantsCANNMembership === true;
+          
+          // Fix layout assignment from form configuration
+          const formConfig = await formConfigEngine.getFormConfiguration(submission.formName);
+          if (formConfig?.zohoLayoutId) {
+            updateData.Layout = { id: formConfig.zohoLayoutId };
+            issues.push(`Layout set to "${formConfig.zohoLayoutName || formConfig.zohoLayoutId}"`);
+          }
           
           // Check CANN→CAS dependency violation
           if (wantsCANN && !wantsCAS) {

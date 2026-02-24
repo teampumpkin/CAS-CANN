@@ -2397,6 +2397,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
             { display_value: "Yes", actual_value: "Yes" },
             { display_value: "No", actual_value: "No" }
           ]
+        },
+        {
+          api_name: "Record_Type",
+          field_label: "Record Type",
+          data_type: "picklist" as const,
+          pick_list_values: [
+            { display_value: "Member", actual_value: "Member" },
+            { display_value: "Inquiry", actual_value: "Inquiry" }
+          ]
+        },
+        {
+          api_name: "CANN_Communication_Consent",
+          field_label: "CANN Communication Consent",
+          data_type: "picklist" as const,
+          pick_list_values: [
+            { display_value: "Yes", actual_value: "Yes" },
+            { display_value: "No", actual_value: "No" }
+          ]
+        },
+        {
+          api_name: "Source_Form",
+          field_label: "Source Form",
+          data_type: "text" as const,
         }
       ];
 

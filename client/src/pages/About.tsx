@@ -383,22 +383,10 @@ export default function About() {
                   description: "Margot Davis is an advanced heart failure and transplant cardiologist at St. Paul's Hospital, a Clinical Associate Professor at the University of British Columbia, and Director of the UBC Cardiac Amyloidosis Clinic and the UBC Cardiology-Oncology Program. Her research is focused on cardiac amyloidosis, heart disease in cancer patients, and advanced heart failure. She is Co-Principal Investigator of the Canadian Registry for Amyloidosis Research, Vice President of the Canadian Heart Failure Society, and Western Regional Director of the Canadian Cardiovascular Society.",
                 },
                 {
-                  name: "Genevieve Matte, MD",
-                  institution: "Université de Montréal",
-                },
-                {
                   name: "Michelle Mezei, BSc(Pharm), MDCM, FRCPC",
                   institution: "University of British Columbia",
                   photo: michelleMezeiPhoto,
                   description: "Dr. Michelle Mezei is a Clinical Professor of Neurology at the University of British Columbia and works as a neurology consultant in the Vancouver Centre for Neuromuscular Disease and Adult Metabolic Diseases Clinic, Vancouver General Hospital. She is the past UBC Neuromuscular Fellowship Director (2008–2024) and ongoing Academic Head of Neuromuscular Clinical Trials. Dr. Mezei has a longstanding special interest in hereditary ATTR polyneuropathy, including as Principal Investigator in several pivotal trials. She is on the executive of the Canadian Amyloidosis Society. She serves nationally with the Canadian Neurological Sciences Federation (CNSF) as Co-Vice President of the Scientific Program Committee for the Annual Congress, and is a longstanding board member of the Canadian Society of Clinical Neurophysiologists (CSCN). Dr. Mezei's patient advocacy work includes with TTR Amyloidosis Canada and serving on the national board of MitoCanada.",
-                },
-                {
-                  name: "François Tournoux, MD",
-                  institution: "McGill University",
-                },
-                {
-                  name: "Christopher Venner, MD",
-                  institution: "University of British Columbia",
                 },
                 {
                   name: "Victor Jimenez-Zepeda, MD, FRCPC",
@@ -411,6 +399,18 @@ export default function About() {
                   institution: "University of Calgary",
                   photo: janVeenhuyzenPhoto,
                   description: "Jan is the program manager of the Amyloidosis Program of Calgary, Libin Cardiovascular Institute, Department of Cardiac Sciences at the University of Calgary. She has 30 years of cardiac nursing experience in diverse practice settings ranging from critical care to ambulatory care, and more than 15 years of clinical research experience. Jan has served in various leadership roles to develop and advance specialized clinical and research programs. Her role with the CAS includes organizational advancement through strategic planning and operational oversight. She is the Chair of the Canadian Amyloidosis Nursing Network (CANN) and past Co-Chair of the Prairie Amyloidosis Nursing Network (PANN).",
+                },
+                {
+                  name: "Genevieve Matte, MD",
+                  institution: "Université de Montréal",
+                },
+                {
+                  name: "François Tournoux, MD",
+                  institution: "McGill University",
+                },
+                {
+                  name: "Christopher Venner, MD",
+                  institution: "University of British Columbia",
                 },
               ].map((member, index) => (
                 <motion.div

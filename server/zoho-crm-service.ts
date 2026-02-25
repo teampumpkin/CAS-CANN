@@ -1082,6 +1082,111 @@ export class ZohoCRMService {
       actual_value: value
     }));
   }
+
+  async createOperationalViews(): Promise<{ created: string[]; failed: { name: string; error: string }[] }> {
+    const created: string[] = [];
+    const failed: { name: string; error: string }[] = [];
+
+    const views = [
+      {
+        name: "CAS Only",
+        description: "Scenario A — CAS member only, no CANN membership",
+        criteria: {
+          group: [
+            { field: { api_name: "CAS_Member" }, comparator: "equal", value: "true" },
+            { field: { api_name: "CANN_Member" }, comparator: "equal", value: "false" }
+          ],
+          group_operator: "and"
+        }
+      },
+      {
+        name: "Both CAS and CANN",
+        description: "Scenario C — holds both CAS and CANN membership",
+        criteria: {
+          group: [
+            { field: { api_name: "CAS_Member" }, comparator: "equal", value: "true" },
+            { field: { api_name: "CANN_Member" }, comparator: "equal", value: "true" }
+          ],
+          group_operator: "and"
+        }
+      },
+      {
+        name: "Non-Member Contacts",
+        description: "Scenario D — inquiry records, not members",
+        criteria: {
+          group: [
+            { field: { api_name: "Record_Type" }, comparator: "equal", value: "Inquiry" }
+          ],
+          group_operator: "and"
+        }
+      },
+      {
+        name: "CAS Communications Eligible",
+        description: "CAS members who have consented to CAS communications",
+        criteria: {
+          group: [
+            { field: { api_name: "CAS_Member" }, comparator: "equal", value: "true" },
+            { field: { api_name: "CAS_Communications" }, comparator: "equal", value: "Yes" }
+          ],
+          group_operator: "and"
+        }
+      },
+      {
+        name: "CANN Communications Eligible",
+        description: "CANN members who have consented to CANN communications",
+        criteria: {
+          group: [
+            { field: { api_name: "CANN_Member" }, comparator: "equal", value: "true" },
+            { field: { api_name: "CANN_Communications" }, comparator: "equal", value: "Yes" }
+          ],
+          group_operator: "and"
+        }
+      }
+    ];
+
+    for (const view of views) {
+      try {
+        console.log(`[Zoho Views] Creating view: ${view.name}...`);
+        const payload = {
+          custom_views: [
+            {
+              name: view.name,
+              module: { api_name: "Leads" },
+              access_type: "public",
+              criteria: view.criteria,
+              sort_by: { api_name: "Last_Name" },
+              sort_order: "asc",
+              fields: [
+                { api_name: "Last_Name" },
+                { api_name: "Email" },
+                { api_name: "CAS_Member" },
+                { api_name: "CANN_Member" },
+                { api_name: "Record_Type" },
+                { api_name: "Lead_Source" }
+              ]
+            }
+          ]
+        };
+
+        const response = await this.makeRequest<any>("/settings/custom_views?module=Leads", "POST", payload);
+
+        if (response?.custom_views?.[0]?.status === "success" || response?.custom_views?.[0]?.id) {
+          console.log(`[Zoho Views] ✅ Created: ${view.name}`);
+          created.push(view.name);
+        } else {
+          const errMsg = response?.custom_views?.[0]?.message || JSON.stringify(response);
+          console.error(`[Zoho Views] ❌ Failed: ${view.name} — ${errMsg}`);
+          failed.push({ name: view.name, error: errMsg });
+        }
+      } catch (error) {
+        const errMsg = error instanceof Error ? error.message : "Unknown error";
+        console.error(`[Zoho Views] ❌ Exception for ${view.name}: ${errMsg}`);
+        failed.push({ name: view.name, error: errMsg });
+      }
+    }
+
+    return { created, failed };
+  }
 }
 
 export const zohoCRMService = new ZohoCRMService();

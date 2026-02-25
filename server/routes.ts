@@ -3030,6 +3030,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.post("/api/admin/zoho/create-views", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Creating operational Zoho CRM views...');
+      const result = await zohoCRMService.createOperationalViews();
+      res.json({
+        success: result.failed.length === 0,
+        created: result.created,
+        failed: result.failed,
+        summary: `${result.created.length} views created, ${result.failed.length} failed`
+      });
+    } catch (error) {
+      console.error('[Admin] Zoho view creation failed:', error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'View creation failed' });
+    }
+  });
+
   // Clean up test/debug records from database
   app.post("/api/admin/cleanup-test-records", requireAutomationAuth, async (req, res) => {
     try {

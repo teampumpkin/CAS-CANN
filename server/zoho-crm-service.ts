@@ -1436,24 +1436,30 @@ export class ZohoCRMService {
           name: ruleName,
           description,
           module: { api_name: "Leads" },
-          execute_when: { type: "create" },
-          conditions: [{
-            sequence_number: 1,
+          execute_when: {
+            type: "create",
+            details: { trigger_module: { api_name: "Leads" } }
+          },
+          conditions: notificationIds.map((id, idx) => ({
+            sequence_number: idx + 1,
             criteria_details: criteriaDetails,
             instant_actions: {
-              actions: notificationIds.map(id => ({ id, type: "email_notifications" }))
+              actions: [{ id, type: "email_notifications" }]
             },
             scheduled_actions: null
-          }]
+          }))
         }]
       };
 
+      console.log(`[Workflow Rules] Payload for "${ruleName}":`, JSON.stringify(payload, null, 2));
       const resp = await fetch(`${baseUrl}/settings/automation/workflow_rules`, {
         method: "POST",
         headers: { Authorization: authHeader, "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      return await resp.json() as any;
+      const data = await resp.json() as any;
+      console.log(`[Workflow Rules] Response for "${ruleName}":`, JSON.stringify(data, null, 2));
+      return data;
     };
 
     const results: Array<{ name: string; created: boolean; id?: string; error?: string; rawResponse?: any }> = [];
@@ -1473,7 +1479,7 @@ export class ZohoCRMService {
         ]
       },
       {
-        name: "CAS New Lead - CAS & CANN Registration",
+        name: "CAS New Lead - CAS and CANN Registration",
         description: "Fires when a new lead registers for both CAS and CANN membership. Notifies admin team and sends welcome emails to registrant.",
         criteriaGroup: [
           { comparator: "equal", field: { api_name: "CAS_Member" }, type: "value", value: "true" },

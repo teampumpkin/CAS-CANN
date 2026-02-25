@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Users,
   Target,
@@ -19,6 +20,7 @@ import {
   ExternalLink,
   Download,
   CheckCircle,
+  X,
 } from "lucide-react";
 import ParallaxBackground from "../components/ParallaxBackground";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -33,8 +35,16 @@ import michelleMezeiPhoto from "@assets/Michelle_Mezei_1772024001282.jpeg";
 import victorJimenezPhoto from "@assets/Victor_Jimenez-Zepeda_1772024001277.jpg";
 import janVeenhuyzenPhoto from "@assets/Jan_Veenhuyzen_1772024001281.jpg";
 
+type CommitteeMember = {
+  name: string;
+  institution: string;
+  photo?: string;
+  description?: string;
+};
+
 export default function About() {
   const { t } = useLanguage();
+  const [selectedMember, setSelectedMember] = useState<CommitteeMember | null>(null);
 
   const values = [
     {
@@ -330,14 +340,13 @@ export default function About() {
             </motion.h3>
             <div className="flex justify-center">
               <motion.div
-                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-300 group w-full max-w-2xl"
+                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-300 group w-full max-w-sm"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                {/* Top row: photo + name/institution */}
-                <div className="flex gap-5 items-center mb-4">
+                <div className="flex gap-5 items-center">
                   <div className="relative flex-shrink-0">
                     <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
                       <img src={nowellFinePhoto} alt="Nowell Fine" className="w-full h-full object-cover object-top" />
@@ -346,19 +355,26 @@ export default function About() {
                       <Award className="w-3.5 h-3.5 text-white" />
                     </div>
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
                       Nowell Fine, MD, SM, FRCPC
                     </h4>
-                    <p className="text-[#00AFE6] font-semibold text-sm">
+                    <p className="text-[#00AFE6] font-semibold text-sm mb-3">
                       University of Calgary
                     </p>
+                    <button
+                      onClick={() => setSelectedMember({
+                        name: "Nowell Fine, MD, SM, FRCPC",
+                        institution: "University of Calgary",
+                        photo: nowellFinePhoto,
+                        description: "Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.",
+                      })}
+                      className="text-sm font-semibold text-[#00AFE6] hover:text-[#00DD89] transition-colors duration-200 underline underline-offset-2"
+                    >
+                      Read More
+                    </button>
                   </div>
                 </div>
-                {/* Bio: full width below */}
-                <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed border-t border-[#00AFE6]/20 pt-4">
-                  Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
-                </p>
               </motion.div>
             </div>
           </div>
@@ -374,7 +390,7 @@ export default function About() {
             >
               CAS Executive Committee Members
             </motion.h3>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
                   name: "Margot K. Davis, MD, MSc, FRCPC, FCCS",
@@ -421,8 +437,7 @@ export default function About() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  {/* Top row: photo + name/institution */}
-                  <div className="flex gap-5 items-center mb-4">
+                  <div className="flex gap-5 items-center">
                     <div className="relative flex-shrink-0">
                       {member.photo ? (
                         <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
@@ -437,22 +452,23 @@ export default function About() {
                         <Award className="w-3.5 h-3.5 text-white" />
                       </div>
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
                         {member.name}
                       </h4>
-                      <p className="text-[#00AFE6] font-semibold text-sm">
+                      <p className="text-[#00AFE6] font-semibold text-sm mb-3">
                         {member.institution}
                       </p>
+                      {member.description && (
+                        <button
+                          onClick={() => setSelectedMember(member)}
+                          className="text-sm font-semibold text-[#00AFE6] hover:text-[#00DD89] transition-colors duration-200 underline underline-offset-2"
+                        >
+                          Read More
+                        </button>
+                      )}
                     </div>
                   </div>
-
-                  {/* Bio: full width below */}
-                  {member.description && (
-                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed border-t border-[#00AFE6]/20 pt-4">
-                      {member.description}
-                    </p>
-                  )}
                 </motion.div>
               ))}
             </div>
@@ -714,6 +730,64 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* Bio Modal */}
+      <AnimatePresence>
+        {selectedMember && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            onClick={() => setSelectedMember(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.25 }}
+              className="bg-white dark:bg-gray-900 rounded-3xl max-w-lg w-full shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal header */}
+              <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 border-b border-gray-200 dark:border-gray-700">
+                <button
+                  onClick={() => setSelectedMember(null)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                >
+                  <X className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                </button>
+                <div className="flex gap-4 items-center pr-10">
+                  {selectedMember.photo ? (
+                    <div className="w-20 h-20 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30 flex-shrink-0">
+                      <img src={selectedMember.photo} alt={selectedMember.name} className="w-full h-full object-cover object-top" />
+                    </div>
+                  ) : (
+                    <div className="w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center flex-shrink-0">
+                      <Users className="w-9 h-9 text-white" />
+                    </div>
+                  )}
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white leading-snug">
+                      {selectedMember.name}
+                    </h3>
+                    <p className="text-[#00AFE6] font-semibold text-sm mt-0.5">
+                      {selectedMember.institution}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal body */}
+              <div className="p-6">
+                <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed">
+                  {selectedMember.description}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

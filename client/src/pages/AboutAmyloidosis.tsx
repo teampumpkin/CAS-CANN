@@ -1160,17 +1160,17 @@ export default function AboutAmyloidosis() {
 
       {/* Floating Medical Disclaimer */}
       {isDisclaimerVisible && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full mx-4 sm:mx-0">
-          <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.95 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="bg-white dark:bg-gray-800 border border-[#00AFE6]/30 dark:border-white/10 rounded-2xl shadow-2xl shadow-black/20 p-5"
-          >
-            <div className="flex items-start gap-3">
-              <Shield className="w-5 h-5 text-[#00AFE6] mt-0.5 flex-shrink-0" />
-              <div className="flex-1 min-w-0">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 40 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          className="fixed bottom-0 left-0 right-0 z-50 bg-gray-200 dark:bg-gray-800 border-t border-gray-300 dark:border-white/10 py-6 shadow-2xl"
+        >
+          <div className="container mx-auto px-6">
+            <div className="flex items-start gap-4">
+              <Shield className="w-6 h-6 text-[#00AFE6] mt-0.5 flex-shrink-0" />
+              <div className="flex-1">
                 <p className="text-gray-800 dark:text-white/90 text-sm leading-relaxed">
                   <strong className="text-[#00AFE6]">Medical Disclaimer:</strong>{" "}
                   This information is for educational purposes only and should not
@@ -1183,13 +1183,13 @@ export default function AboutAmyloidosis() {
               <button
                 onClick={() => setIsDisclaimerVisible(false)}
                 aria-label="Close disclaimer"
-                className="flex-shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-white/70 transition-colors duration-200 ml-1"
+                className="flex-shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-white/70 transition-colors duration-200"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       )}
     </div>
   );

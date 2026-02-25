@@ -340,14 +340,17 @@ export default function About() {
                   </div>
                 </div>
 
-                <div className="text-center">
+                <div className="text-center mb-3">
                   <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                    Nowell Fine, MD
+                    Nowell Fine, MD, SM, FRCPC
                   </h4>
                   <p className="text-[#00AFE6] font-semibold text-sm mb-2">
                     University of Calgary
                   </p>
                 </div>
+                <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed text-left border-t border-[#00AFE6]/20 pt-3 mt-1">
+                  Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
+                </p>
               </motion.div>
             </div>
           </div>
@@ -377,7 +380,7 @@ export default function About() {
                 {
                   name: "Michelle Mezei, BSc(Pharm), MDCM, FRCPC",
                   institution: "University of British Columbia",
-                  description: "Dr. Michelle Mezei is a Clinical Professor of Neurology at the University of British Columbia and works as a neurology consultant in the Vancouver Centre for Neuromuscular Disease and Adult Metabolic Diseases Clinic, Vancouver General Hospital. She is the past UBC Neuromuscular Fellowship Director (2008–2024) and ongoing Academic Head of Neuromuscular Clinical Trials. Dr. Mezei has a longstanding special interest in hereditary ATTR polyneuropathy, including as Principal Investigator in several pivotal trials. She serves on the executive of the Canadian Amyloidosis Society, as Co-Vice President of the Scientific Program Committee for the Canadian Neurological Sciences Federation Annual Congress, and on the national board of MitoCanada.",
+                  description: "Dr. Michelle Mezei is a Clinical Professor of Neurology at the University of British Columbia and works as a neurology consultant in the Vancouver Centre for Neuromuscular Disease and Adult Metabolic Diseases Clinic, Vancouver General Hospital. She is the past UBC Neuromuscular Fellowship Director (2008–2024) and ongoing Academic Head of Neuromuscular Clinical Trials. Dr. Mezei has a longstanding special interest in hereditary ATTR polyneuropathy, including as Principal Investigator in several pivotal trials. She is on the executive of the Canadian Amyloidosis Society. She serves nationally with the Canadian Neurological Sciences Federation (CNSF) as Co-Vice President of the Scientific Program Committee for the Annual Congress, and is a longstanding board member of the Canadian Society of Clinical Neurophysiologists (CSCN). Dr. Mezei's patient advocacy work includes with TTR Amyloidosis Canada and serving on the national board of MitoCanada.",
                 },
                 {
                   name: "François Tournoux, MD",
@@ -391,6 +394,11 @@ export default function About() {
                   name: "Victor Jimenez-Zepeda, MD, FRCPC",
                   institution: "University of Calgary",
                   description: "Dr. Victor H. Jimenez-Zepeda is an Associate Professor of Medicine at the University of Calgary's Cumming School of Medicine. He leads the clinical program for AL amyloidosis at the Tom Baker Cancer Center and is the founder of the clinic for the assessment of Monoclonal Gammopathy of Clinical and Undetermined Significance and the Amyloid Screening Clinic. Dr. Jimenez-Zepeda is also a member of the International Kidney and Monoclonal Gammopathy group and the International Society of Amyloidosis.",
+                },
+                {
+                  name: "Jan Veenhuyzen, R.N., BScN",
+                  institution: "University of Calgary",
+                  description: "Jan is the program manager of the Amyloidosis Program of Calgary, Libin Cardiovascular Institute, Department of Cardiac Sciences at the University of Calgary. She has 30 years of cardiac nursing experience in diverse practice settings ranging from critical care to ambulatory care, and more than 15 years of clinical research experience. Jan has served in various leadership roles to develop and advance specialized clinical and research programs. Her role with the CAS includes organizational advancement through strategic planning and operational oversight. She is the Chair of the Canadian Amyloidosis Nursing Network (CANN) and past Co-Chair of the Prairie Amyloidosis Nursing Network (PANN).",
                 },
               ].map((member, index) => (
                 <motion.div

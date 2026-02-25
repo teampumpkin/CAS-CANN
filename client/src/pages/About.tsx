@@ -340,13 +340,13 @@ export default function About() {
             </motion.h3>
             <div className="flex justify-center">
               <motion.div
-                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-300 group w-full max-w-sm"
+                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-300 group w-full max-w-2xl"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="flex gap-5 items-center">
+                <div className="flex gap-5 items-center mb-4">
                   <div className="relative flex-shrink-0">
                     <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
                       <img src={nowellFinePhoto} alt="Nowell Fine" className="w-full h-full object-cover object-top" />
@@ -355,25 +355,30 @@ export default function About() {
                       <Award className="w-3.5 h-3.5 text-white" />
                     </div>
                   </div>
-                  <div className="min-w-0 flex-1">
+                  <div className="min-w-0">
                     <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
                       Nowell Fine, MD, SM, FRCPC
                     </h4>
-                    <p className="text-[#00AFE6] font-semibold text-sm mb-3">
+                    <p className="text-[#00AFE6] font-semibold text-sm">
                       University of Calgary
                     </p>
-                    <button
-                      onClick={() => setSelectedMember({
-                        name: "Nowell Fine, MD, SM, FRCPC",
-                        institution: "University of Calgary",
-                        photo: nowellFinePhoto,
-                        description: "Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.",
-                      })}
-                      className="text-sm font-semibold text-[#00AFE6] hover:text-[#00DD89] transition-colors duration-200 underline underline-offset-2"
-                    >
-                      Read More
-                    </button>
                   </div>
+                </div>
+                <div className="border-t border-[#00AFE6]/20 pt-4">
+                  <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed line-clamp-3 mb-2">
+                    Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
+                  </p>
+                  <button
+                    onClick={() => setSelectedMember({
+                      name: "Nowell Fine, MD, SM, FRCPC",
+                      institution: "University of Calgary",
+                      photo: nowellFinePhoto,
+                      description: "Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.",
+                    })}
+                    className="text-sm font-semibold text-[#00AFE6] hover:text-[#00DD89] transition-colors duration-200 underline underline-offset-2"
+                  >
+                    Read More
+                  </button>
                 </div>
               </motion.div>
             </div>
@@ -390,7 +395,7 @@ export default function About() {
             >
               CAS Executive Committee Members
             </motion.h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
                   name: "Margot K. Davis, MD, MSc, FRCPC, FCCS",
@@ -437,7 +442,7 @@ export default function About() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className="flex gap-5 items-center">
+                  <div className="flex gap-5 items-center mb-4">
                     <div className="relative flex-shrink-0">
                       {member.photo ? (
                         <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
@@ -452,23 +457,28 @@ export default function About() {
                         <Award className="w-3.5 h-3.5 text-white" />
                       </div>
                     </div>
-                    <div className="min-w-0 flex-1">
+                    <div className="min-w-0">
                       <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
                         {member.name}
                       </h4>
-                      <p className="text-[#00AFE6] font-semibold text-sm mb-3">
+                      <p className="text-[#00AFE6] font-semibold text-sm">
                         {member.institution}
                       </p>
-                      {member.description && (
-                        <button
-                          onClick={() => setSelectedMember(member)}
-                          className="text-sm font-semibold text-[#00AFE6] hover:text-[#00DD89] transition-colors duration-200 underline underline-offset-2"
-                        >
-                          Read More
-                        </button>
-                      )}
                     </div>
                   </div>
+                  {member.description && (
+                    <div className="border-t border-[#00AFE6]/20 pt-4">
+                      <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed line-clamp-3 mb-2">
+                        {member.description}
+                      </p>
+                      <button
+                        onClick={() => setSelectedMember(member)}
+                        className="text-sm font-semibold text-[#00AFE6] hover:text-[#00DD89] transition-colors duration-200 underline underline-offset-2"
+                      >
+                        Read More
+                      </button>
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>

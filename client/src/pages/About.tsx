@@ -750,7 +750,7 @@ export default function About() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.25 }}
-              className="bg-white dark:bg-gray-900 rounded-3xl max-w-lg w-full shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+              className="bg-white dark:bg-gray-900 rounded-3xl max-w-2xl w-full shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal header */}
@@ -761,14 +761,14 @@ export default function About() {
                 >
                   <X className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                 </button>
-                <div className="flex gap-5 items-center pr-10">
+                <div className="flex gap-6 items-center pr-10">
                   {selectedMember.photo ? (
-                    <div className="w-36 h-36 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30 flex-shrink-0">
+                    <div className="w-48 h-48 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30 flex-shrink-0">
                       <img src={selectedMember.photo} alt={selectedMember.name} className="w-full h-full object-cover object-top" />
                     </div>
                   ) : (
-                    <div className="w-36 h-36 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center flex-shrink-0">
-                      <Users className="w-14 h-14 text-white" />
+                    <div className="w-48 h-48 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center flex-shrink-0">
+                      <Users className="w-20 h-20 text-white" />
                     </div>
                   )}
                   <div>

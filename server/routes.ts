@@ -3095,17 +3095,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       console.log(`[Admin] ✅ Token updated successfully. New scope: ${tokenData.scope}`);
-      const hasAutomationScope = (tokenData.scope || '').includes('automation');
+      const hasWorkflowScope = (tokenData.scope || '').includes('workflow_rules') || (tokenData.scope || '').includes('settings.ALL');
       const expiresAt = new Date(Date.now() + (tokenData.expires_in || 3600) * 1000);
 
       res.json({
         success: true,
         scope: tokenData.scope,
-        hasAutomationScope,
+        hasWorkflowScope,
         expiresAt,
-        message: hasAutomationScope
-          ? "Token updated with automation scope — ready to create workflow rules"
-          : "Token updated but automation scope is missing — regenerate with ZohoCRM.settings.automation.ALL included"
+        message: hasWorkflowScope
+          ? "Token updated with workflow rules scope — ready to create workflow rules"
+          : "Token updated but workflow rules scope may be missing — regenerate with ZohoCRM.settings.workflow_rules.ALL included"
       });
     } catch (error) {
       console.error('[Admin] Token regrant failed:', error);

@@ -1369,7 +1369,7 @@ export class ZohoCRMService {
     return results;
   }
 
-  async createWorkflowRules(): Promise<Array<{ name: string; created: boolean; id?: string; error?: string }>> {
+  async createWorkflowRules(): Promise<Array<{ name: string; created: boolean; id?: string; error?: string; rawResponse?: any }>> {
     const accessToken = await this.getAccessToken();
     const authHeader = `Zoho-oauthtoken ${accessToken}`;
     const baseUrl = this.baseUrl;
@@ -1382,94 +1382,144 @@ export class ZohoCRMService {
       cannWelcome:     "6999043000001079008",
     };
 
-    const rules = [
+    const ADMIN_EMAILS = ["CAS@amyloid.ca", "vasi.karan@teampumpkin.com"];
+    const CANN_ADMIN_EMAILS = ["CAS@amyloid.ca", "CANN@amyloid.ca", "vasi.karan@teampumpkin.com"];
+
+    const makeAdminRecipient = (emails: string[]) => ({
+      type: "emails",
+      details: { emails }
+    });
+
+    const LEAD_EMAIL_RECIPIENT = {
+      type: "merge_field",
+      details: { api_name: "${!Leads.Email}" }
+    };
+
+    const createEmailNotification = async (notifName: string, templateId: string, toRecipients: object[]) => {
+      const payload = {
+        email_notifications: [{
+          name: notifName,
+          feature_type: "workflow",
+          template: { id: templateId },
+          module: { api_name: "Leads" },
+          recipients: { to: toRecipients }
+        }]
+      };
+      const resp = await fetch(`${baseUrl}/settings/automation/email_notifications`, {
+        method: "POST",
+        headers: { Authorization: authHeader, "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await resp.json() as any;
+      const notif = data?.email_notifications?.[0];
+      if (notif?.status === "success" && notif?.details?.id) {
+        console.log(`[Workflow Rules] ✅ Email notification created: "${notifName}" (ID: ${notif.details.id})`);
+        return notif.details.id as string;
+      }
+      const errMsg = notif?.message || JSON.stringify(data).substring(0, 300);
+      throw new Error(`Failed to create email notification "${notifName}": ${errMsg}`);
+    };
+
+    const createWorkflowRule = async (
+      ruleName: string,
+      description: string,
+      criteriaGroup: object[],
+      groupOperator: string,
+      notificationIds: string[]
+    ) => {
+      const criteriaDetails = criteriaGroup.length > 0
+        ? { criteria: { group_operator: groupOperator, group: criteriaGroup } }
+        : null;
+
+      const payload = {
+        workflow_rules: [{
+          name: ruleName,
+          description,
+          module: { api_name: "Leads" },
+          execute_when: { type: "create" },
+          conditions: [{
+            sequence_number: 1,
+            criteria_details: criteriaDetails,
+            instant_actions: {
+              actions: notificationIds.map(id => ({ id, type: "email_notifications" }))
+            },
+            scheduled_actions: null
+          }]
+        }]
+      };
+
+      const resp = await fetch(`${baseUrl}/settings/automation/workflow_rules`, {
+        method: "POST",
+        headers: { Authorization: authHeader, "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      return await resp.json() as any;
+    };
+
+    const results: Array<{ name: string; created: boolean; id?: string; error?: string; rawResponse?: any }> = [];
+
+    const ruleDefs = [
       {
         name: "CAS New Lead - CAS Only Registration",
         description: "Fires when a new lead registers for CAS membership only (not CANN). Notifies admin team and sends welcome email to registrant.",
-        conditions: {
-          criteria_pattern: "1 and 2",
-          criteria: [
-            { criteria_item_id: "1", field: { api_name: "CAS_Member" }, comparator: "equal", value: "true" },
-            { criteria_item_id: "2", field: { api_name: "CANN_Member" }, comparator: "equal", value: "false" },
-          ]
-        },
-        emailActions: [
-          { template_id: TEMPLATE_IDS.casOnlyAdmin, recipient_type: "owner", label: "Admin notification" },
-          { template_id: TEMPLATE_IDS.casWelcome,   recipient_type: "lead",  label: "Member welcome email" },
+        criteriaGroup: [
+          { comparator: "equal", field: { api_name: "CAS_Member" }, type: "value", value: "true" },
+          { comparator: "equal", field: { api_name: "CANN_Member" }, type: "value", value: "false" },
+        ],
+        groupOperator: "AND",
+        notifications: [
+          { name: "CAS Admin Notif - CAS Only",   templateId: TEMPLATE_IDS.casOnlyAdmin, to: [makeAdminRecipient(ADMIN_EMAILS)] },
+          { name: "CAS Welcome Email - CAS Only",  templateId: TEMPLATE_IDS.casWelcome,   to: [LEAD_EMAIL_RECIPIENT] },
         ]
       },
       {
         name: "CAS New Lead - CAS & CANN Registration",
         description: "Fires when a new lead registers for both CAS and CANN membership. Notifies admin team and sends welcome emails to registrant.",
-        conditions: {
-          criteria_pattern: "1 and 2",
-          criteria: [
-            { criteria_item_id: "1", field: { api_name: "CAS_Member" }, comparator: "equal", value: "true" },
-            { criteria_item_id: "2", field: { api_name: "CANN_Member" }, comparator: "equal", value: "true" },
-          ]
-        },
-        emailActions: [
-          { template_id: TEMPLATE_IDS.casAndCannAdmin, recipient_type: "owner", label: "Admin notification" },
-          { template_id: TEMPLATE_IDS.casWelcome,      recipient_type: "lead",  label: "CAS welcome email" },
-          { template_id: TEMPLATE_IDS.cannWelcome,     recipient_type: "lead",  label: "CANN welcome email" },
+        criteriaGroup: [
+          { comparator: "equal", field: { api_name: "CAS_Member" }, type: "value", value: "true" },
+          { comparator: "equal", field: { api_name: "CANN_Member" }, type: "value", value: "true" },
+        ],
+        groupOperator: "AND",
+        notifications: [
+          { name: "CAS Admin Notif - CAS & CANN",  templateId: TEMPLATE_IDS.casAndCannAdmin, to: [makeAdminRecipient(CANN_ADMIN_EMAILS)] },
+          { name: "CAS Welcome Email - CAS & CANN", templateId: TEMPLATE_IDS.casWelcome,      to: [LEAD_EMAIL_RECIPIENT] },
+          { name: "CANN Welcome Email - CAS & CANN",templateId: TEMPLATE_IDS.cannWelcome,     to: [LEAD_EMAIL_RECIPIENT] },
         ]
       },
       {
         name: "CAS New Lead - Non-Member Inquiry",
         description: "Fires when a new lead submits a contact inquiry without requesting membership. Notifies admin team.",
-        conditions: {
-          criteria_pattern: "1",
-          criteria: [
-            { criteria_item_id: "1", field: { api_name: "Record_Type" }, comparator: "equal", value: "Inquiry" },
-          ]
-        },
-        emailActions: [
-          { template_id: TEMPLATE_IDS.nonMemberAdmin, recipient_type: "owner", label: "Admin notification" },
+        criteriaGroup: [
+          { comparator: "equal", field: { api_name: "Record_Type" }, type: "value", value: "Inquiry" },
+        ],
+        groupOperator: "AND",
+        notifications: [
+          { name: "CAS Admin Notif - Non-Member",  templateId: TEMPLATE_IDS.nonMemberAdmin, to: [makeAdminRecipient(ADMIN_EMAILS)] },
         ]
       }
     ];
 
-    const results: Array<{ name: string; created: boolean; id?: string; error?: string }> = [];
-
-    for (const rule of rules) {
+    for (const rule of ruleDefs) {
       try {
-        const actions = rule.emailActions.map(a => ({
-          type: "email",
-          template: { id: a.template_id },
-          recipients: a.recipient_type === "lead"
-            ? [{ type: "field", field: { api_name: "Email" } }]
-            : [{ type: "field", field: { api_name: "Owner" } }]
-        }));
+        console.log(`[Workflow Rules] Creating email notifications for: ${rule.name}...`);
+        const notifIds: string[] = [];
+        for (const notif of rule.notifications) {
+          const id = await createEmailNotification(notif.name, notif.templateId, notif.to);
+          notifIds.push(id);
+        }
 
-        const payload = {
-          workflow_rules: [{
-            name: rule.name,
-            description: rule.description,
-            module: { api_name: "Leads" },
-            trigger: { type: "ON_CREATE" },
-            conditions: rule.conditions,
-            actions
-          }]
-        };
-
-        console.log(`[Workflow Rules] Creating: ${rule.name}...`);
-        const resp = await fetch(`${baseUrl}/settings/automation/workflow_rules`, {
-          method: "POST",
-          headers: { Authorization: authHeader, "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        const data = await resp.json();
+        console.log(`[Workflow Rules] Creating rule: ${rule.name} with ${notifIds.length} email action(s)...`);
+        const data = await createWorkflowRule(rule.name, rule.description, rule.criteriaGroup, rule.groupOperator, notifIds);
         const ruleResult = data?.workflow_rules?.[0];
 
-        if (ruleResult?.status === "success" || ruleResult?.id || ruleResult?.details?.id) {
+        if (ruleResult?.status === "success" || ruleResult?.details?.id) {
           const ruleId = ruleResult?.id || ruleResult?.details?.id;
-          console.log(`[Workflow Rules] ✅ Created: ${rule.name} (ID: ${ruleId})`);
+          console.log(`[Workflow Rules] ✅ Rule created: ${rule.name} (ID: ${ruleId})`);
           results.push({ name: rule.name, created: true, id: ruleId });
         } else {
-          const errMsg = ruleResult?.message || JSON.stringify(data).substring(0, 200);
-          console.error(`[Workflow Rules] ❌ Failed: ${rule.name} — ${errMsg}`);
-          results.push({ name: rule.name, created: false, error: errMsg });
+          const errMsg = ruleResult?.message || JSON.stringify(data).substring(0, 300);
+          console.error(`[Workflow Rules] ❌ Rule failed: ${rule.name} — ${errMsg}`);
+          results.push({ name: rule.name, created: false, error: errMsg, rawResponse: data });
         }
       } catch (error) {
         const errMsg = error instanceof Error ? error.message : "Unknown error";

@@ -330,32 +330,33 @@ export default function About() {
             </motion.h3>
             <div className="flex justify-center">
               <motion.div
-                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 group w-full max-w-sm"
+                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-300 group w-full max-w-2xl"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="relative mb-4">
-                  <div className="w-24 h-24 rounded-2xl mx-auto group-hover:scale-110 transition-transform duration-300 overflow-hidden ring-2 ring-[#00AFE6]/30">
-                    <img src={nowellFinePhoto} alt="Nowell Fine" className="w-full h-full object-cover object-top" />
+                <div className="flex gap-5 items-start">
+                  <div className="relative flex-shrink-0">
+                    <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
+                      <img src={nowellFinePhoto} alt="Nowell Fine" className="w-full h-full object-cover object-top" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-7 h-7 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
+                      <Award className="w-3.5 h-3.5 text-white" />
+                    </div>
                   </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
-                    <Award className="w-4 h-4 text-white" />
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
+                      Nowell Fine, MD, SM, FRCPC
+                    </h4>
+                    <p className="text-[#00AFE6] font-semibold text-sm mb-3">
+                      University of Calgary
+                    </p>
+                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed border-t border-[#00AFE6]/20 pt-3">
+                      Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
+                    </p>
                   </div>
                 </div>
-
-                <div className="text-center mb-3">
-                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                    Nowell Fine, MD, SM, FRCPC
-                  </h4>
-                  <p className="text-[#00AFE6] font-semibold text-sm mb-2">
-                    University of Calgary
-                  </p>
-                </div>
-                <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed text-left border-t border-[#00AFE6]/20 pt-3 mt-1">
-                  Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
-                </p>
               </motion.div>
             </div>
           </div>
@@ -371,7 +372,7 @@ export default function About() {
             >
               CAS Executive Committee Members
             </motion.h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
                   name: "Margot K. Davis, MD, MSc, FRCPC, FCCS",
@@ -412,41 +413,44 @@ export default function About() {
               ].map((member, index) => (
                 <motion.div
                   key={index}
-                  className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:scale-105 transition-all duration-300 group"
+                  className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-300 group"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className="relative mb-4">
-                    {member.photo ? (
-                      <div className="w-24 h-24 rounded-2xl mx-auto group-hover:scale-110 transition-transform duration-300 overflow-hidden ring-2 ring-[#00AFE6]/30">
-                        <img src={member.photo} alt={member.name} className="w-full h-full object-cover object-top" />
+                  <div className="flex gap-5 items-start">
+                    {/* Photo column */}
+                    <div className="relative flex-shrink-0">
+                      {member.photo ? (
+                        <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
+                          <img src={member.photo} alt={member.name} className="w-full h-full object-cover object-top" />
+                        </div>
+                      ) : (
+                        <div className="w-32 h-32 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center">
+                          <Users className="w-12 h-12 text-white" />
+                        </div>
+                      )}
+                      <div className="absolute -top-2 -right-2 w-7 h-7 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
+                        <Award className="w-3.5 h-3.5 text-white" />
                       </div>
-                    ) : (
-                      <div className="w-24 h-24 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
-                        <Users className="w-10 h-10 text-white" />
-                      </div>
-                    )}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
-                      <Award className="w-4 h-4 text-white" />
+                    </div>
+
+                    {/* Text column */}
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
+                        {member.name}
+                      </h4>
+                      <p className="text-[#00AFE6] font-semibold text-sm mb-3">
+                        {member.institution}
+                      </p>
+                      {member.description && (
+                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed border-t border-[#00AFE6]/20 pt-3">
+                          {member.description}
+                        </p>
+                      )}
                     </div>
                   </div>
-
-                  <div className="text-center mb-3">
-                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-1 leading-snug">
-                      {member.name}
-                    </h4>
-                    <p className="text-[#00AFE6] font-semibold text-sm">
-                      {member.institution}
-                    </p>
-                  </div>
-
-                  {member.description && (
-                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed line-clamp-5 text-left border-t border-[#00AFE6]/20 pt-3 mt-1">
-                      {member.description}
-                    </p>
-                  )}
                 </motion.div>
               ))}
             </div>

@@ -1187,6 +1187,187 @@ export class ZohoCRMService {
 
     return { created, failed };
   }
+
+  async fixEmailTemplates(): Promise<Array<{ name: string; fixed: boolean; changes: string[]; error?: string }>> {
+    const templates = [
+      {
+        id: "6999043000000903020",
+        name: "CAS CANN Membership Email Template",
+        fixSubject: (s: string) => {
+          const changes: string[] = [];
+          let fixed = s;
+          if (fixed.includes("${!Leads.First_Name} - New CAS Membership Registration")) {
+            fixed = fixed.replace(
+              "${!Leads.First_Name} - New CAS Membership Registration",
+              "${!Leads.First_Name} ${!Leads.Last_Name} - New CAS & CANN Membership Registration"
+            );
+            changes.push("Subject: added Last_Name and updated title to 'CAS & CANN'");
+          }
+          return { fixed, changes };
+        },
+        fixBody: (b: string) => {
+          const changes: string[] = [];
+          let fixed = b;
+          if (fixed.includes("${!Leads.Industry}")) {
+            fixed = fixed.replace(/\$\{!Leads\.Industry\}/g, "${!Leads.Professional_Designation}");
+            changes.push("Body: replaced ${!Leads.Industry} with ${!Leads.Professional_Designation}");
+          }
+          if (fixed.includes("${!Leads.amyloidosistype}")) {
+            fixed = fixed.replace(/<tr[^>]*>(?:(?!<\/tr>)[\s\S])*\$\{!Leads\.amyloidosistype\}(?:(?!<\/tr>)[\s\S])*<\/tr>/gi, "");
+            changes.push("Body: removed deactivated amyloidosistype field row");
+          }
+          return { fixed, changes };
+        }
+      },
+      {
+        id: "6999043000000903027",
+        name: "Non-Member Contact Email Template",
+        fixSubject: (s: string) => {
+          const changes: string[] = [];
+          let fixed = s;
+          if (fixed.startsWith("? ") || fixed.startsWith("?")) {
+            fixed = fixed.replace(/^\?\s*/, "");
+            changes.push("Subject: removed leading '?' corruption");
+          }
+          if (fixed.includes("{{Last_Name}}")) {
+            fixed = fixed.replace(/\{\{Last_Name\}\}/g, "${!Leads.Last_Name}");
+            changes.push("Subject: fixed {{Last_Name}} → ${!Leads.Last_Name}");
+          }
+          return { fixed, changes };
+        },
+        fixBody: (b: string) => {
+          const changes: string[] = [];
+          let fixed = b;
+          const simpleReplacements: Array<[string, string]> = [
+            ["{{Last_Name}}", "${!Leads.Last_Name}"],
+            ["{{Email}}", "${!Leads.Email}"],
+            ["{{Description}}", "${!Leads.Description}"],
+          ];
+          for (const [from, to] of simpleReplacements) {
+            if (fixed.includes(from)) {
+              fixed = fixed.split(from).join(to);
+              changes.push(`Body: fixed ${from} → ${to}`);
+            }
+          }
+          for (const field of ["{{RECORD_ID}}", "{{CURRENT_DATE}}", "{{CURRENT_TIME}}"]) {
+            if (fixed.includes(field)) {
+              const escaped = field.replace(/[{}]/g, "\\$&");
+              fixed = fixed.replace(new RegExp(`<tr[^>]*>(?:(?!</tr>)[\\s\\S])*${escaped}(?:(?!</tr>)[\\s\\S])*</tr>`, "gi"), "");
+              changes.push(`Body: removed ${field} row`);
+            }
+          }
+          return { fixed, changes };
+        }
+      },
+      {
+        id: "6999043000000903013",
+        name: "CAS Registration Email Template",
+        fixSubject: (s: string) => {
+          const changes: string[] = [];
+          let fixed = s;
+          if (fixed.includes("{{Last_Name}}") || fixed.includes("{{Industry}}")) {
+            fixed = fixed
+              .replace(/\{\{Last_Name\}\}/g, "${!Leads.Last_Name}")
+              .replace(/\{\{Industry\}\}/g, "${!Leads.Professional_Designation}");
+            changes.push("Subject: fixed {{Last_Name}} and {{Industry}} to correct Zoho syntax and field");
+          }
+          return { fixed, changes };
+        },
+        fixBody: (b: string) => {
+          const changes: string[] = [];
+          let fixed = b;
+          const simpleReplacements: Array<[string, string]> = [
+            ["{{Last_Name}}", "${!Leads.Last_Name}"],
+            ["{{Email}}", "${!Leads.Email}"],
+            ["{{Industry}}", "${!Leads.Professional_Designation}"],
+            ["{{Description}}", "${!Leads.Description}"],
+            ["{{Company}}", "${!Leads.Company}"],
+            ["{{CAS_Communications}}", "${!Leads.CAS_Communications}"],
+            ["{{Services_Map_Inclusion}}", "${!Leads.Services_Map_Inclusion}"],
+          ];
+          for (const [from, to] of simpleReplacements) {
+            if (fixed.includes(from)) {
+              fixed = fixed.split(from).join(to);
+              changes.push(`Body: fixed ${from} → ${to}`);
+            }
+          }
+          for (const field of ["{{RECORD_ID}}", "{{CURRENT_DATE}}", "{{CURRENT_TIME}}"]) {
+            if (fixed.includes(field)) {
+              const escaped = field.replace(/[{}]/g, "\\$&");
+              fixed = fixed.replace(new RegExp(`<tr[^>]*>(?:(?!</tr>)[\\s\\S])*${escaped}(?:(?!</tr>)[\\s\\S])*</tr>`, "gi"), "");
+              changes.push(`Body: removed ${field} row`);
+            }
+          }
+          return { fixed, changes };
+        }
+      }
+    ];
+
+    const results: Array<{ name: string; fixed: boolean; changes: string[]; error?: string }> = [];
+    const accessToken = await this.getAccessToken();
+    const authHeader = `Zoho-oauthtoken ${accessToken}`;
+
+    for (const t of templates) {
+      const allChanges: string[] = [];
+      try {
+        const getResp = await fetch(`${this.baseUrl}/settings/email_templates/${t.id}`, {
+          headers: { Authorization: authHeader }
+        });
+        if (!getResp.ok) {
+          results.push({ name: t.name, fixed: false, changes: [], error: `GET failed with status ${getResp.status}` });
+          continue;
+        }
+        const getData = await getResp.json();
+        const current = getData?.email_templates?.[0];
+        if (!current) {
+          results.push({ name: t.name, fixed: false, changes: [], error: "Template not found in Zoho response" });
+          continue;
+        }
+
+        const subjectResult = t.fixSubject(current.subject || "");
+        const bodyResult = t.fixBody(current.mail_content || current.content || "");
+
+        allChanges.push(...subjectResult.changes, ...bodyResult.changes);
+
+        if (allChanges.length === 0) {
+          console.log(`[Fix Templates] ✅ ${t.name} — already clean, no changes needed`);
+          results.push({ name: t.name, fixed: true, changes: ["No changes needed — already correct"] });
+          continue;
+        }
+
+        const putResp = await fetch(`${this.baseUrl}/settings/email_templates/${t.id}`, {
+          method: "PUT",
+          headers: { Authorization: authHeader, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email_templates: [
+              {
+                name: current.name,
+                subject: subjectResult.fixed,
+                mail_content: bodyResult.fixed
+              }
+            ]
+          })
+        });
+
+        const putData = await putResp.json();
+        const success = putData?.email_templates?.[0]?.status === "success" || putData?.email_templates?.[0]?.id;
+        if (success) {
+          console.log(`[Fix Templates] ✅ ${t.name} — ${allChanges.length} fix(es) applied`);
+          results.push({ name: t.name, fixed: true, changes: allChanges });
+        } else {
+          const errMsg = putData?.email_templates?.[0]?.message || JSON.stringify(putData);
+          console.error(`[Fix Templates] ❌ ${t.name} — Zoho rejected update: ${errMsg}`);
+          results.push({ name: t.name, fixed: false, changes: allChanges, error: `Zoho rejected: ${errMsg}` });
+        }
+      } catch (error) {
+        const errMsg = error instanceof Error ? error.message : "Unknown error";
+        console.error(`[Fix Templates] ❌ ${t.name} — Exception: ${errMsg}`);
+        results.push({ name: t.name, fixed: false, changes: allChanges, error: errMsg });
+      }
+    }
+
+    return results;
+  }
 }
 
 export const zohoCRMService = new ZohoCRMService();

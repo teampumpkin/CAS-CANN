@@ -3046,6 +3046,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Fix broken merge fields in Zoho CRM admin notification email templates
+  app.post("/api/admin/zoho/fix-email-templates", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Fixing Zoho CRM email template merge fields...');
+      const results = await zohoCRMService.fixEmailTemplates();
+      const allFixed = results.every(r => r.fixed);
+      const totalChanges = results.reduce((sum, r) => sum + r.changes.length, 0);
+      res.json({
+        success: allFixed,
+        results,
+        summary: `${results.filter(r => r.fixed).length}/${results.length} templates fixed, ${totalChanges} total changes applied`
+      });
+    } catch (error) {
+      console.error('[Admin] Email template fix failed:', error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'Template fix failed' });
+    }
+  });
+
   // Clean up test/debug records from database
   app.post("/api/admin/cleanup-test-records", requireAutomationAuth, async (req, res) => {
     try {

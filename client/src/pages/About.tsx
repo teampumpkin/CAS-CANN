@@ -336,7 +336,8 @@ export default function About() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="flex gap-5 items-start">
+                {/* Top row: photo + name/institution */}
+                <div className="flex gap-5 items-center mb-4">
                   <div className="relative flex-shrink-0">
                     <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
                       <img src={nowellFinePhoto} alt="Nowell Fine" className="w-full h-full object-cover object-top" />
@@ -345,18 +346,19 @@ export default function About() {
                       <Award className="w-3.5 h-3.5 text-white" />
                     </div>
                   </div>
-                  <div className="flex-1 min-w-0">
+                  <div className="min-w-0">
                     <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
                       Nowell Fine, MD, SM, FRCPC
                     </h4>
-                    <p className="text-[#00AFE6] font-semibold text-sm mb-3">
+                    <p className="text-[#00AFE6] font-semibold text-sm">
                       University of Calgary
-                    </p>
-                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed border-t border-[#00AFE6]/20 pt-3">
-                      Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
                     </p>
                   </div>
                 </div>
+                {/* Bio: full width below */}
+                <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed border-t border-[#00AFE6]/20 pt-4">
+                  Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
+                </p>
               </motion.div>
             </div>
           </div>
@@ -419,8 +421,8 @@ export default function About() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className="flex gap-5 items-start">
-                    {/* Photo column */}
+                  {/* Top row: photo + name/institution */}
+                  <div className="flex gap-5 items-center mb-4">
                     <div className="relative flex-shrink-0">
                       {member.photo ? (
                         <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
@@ -435,22 +437,22 @@ export default function About() {
                         <Award className="w-3.5 h-3.5 text-white" />
                       </div>
                     </div>
-
-                    {/* Text column */}
-                    <div className="flex-1 min-w-0">
+                    <div className="min-w-0">
                       <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
                         {member.name}
                       </h4>
-                      <p className="text-[#00AFE6] font-semibold text-sm mb-3">
+                      <p className="text-[#00AFE6] font-semibold text-sm">
                         {member.institution}
                       </p>
-                      {member.description && (
-                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed border-t border-[#00AFE6]/20 pt-3">
-                          {member.description}
-                        </p>
-                      )}
                     </div>
                   </div>
+
+                  {/* Bio: full width below */}
+                  {member.description && (
+                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed border-t border-[#00AFE6]/20 pt-4">
+                      {member.description}
+                    </p>
+                  )}
                 </motion.div>
               ))}
             </div>

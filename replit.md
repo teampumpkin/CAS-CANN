@@ -172,3 +172,20 @@ import { isStaging, isProduction } from "@/hooks/useEnvironment";
 - `server/index.prod.ts`
 - `server/vite.ts`
 - `vite.config.ts`
+
+## Replit Deployment Build Note
+
+**Important**: There is a known mismatch between the Replit build script and the production start script:
+- `npm run build` compiles the server to `dist/index.prod.js` (via `--outdir=dist`)
+- `npm start` runs `node dist/index.js`
+
+The **Dockerfile** (AWS) uses `--outfile=dist/index.js` and is unaffected. For **Replit deploys** only:
+
+**After any server-side code change, before publishing:**
+```bash
+npm run build && cp dist/index.prod.js dist/index.js
+```
+
+This copies the freshly compiled file to the name the start script expects. Failing to do this will result in the production server running stale old code.
+
+The `dist/index.js` committed to the repo must always be the latest compiled output before publishing.

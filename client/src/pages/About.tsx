@@ -767,14 +767,14 @@ export default function About() {
                 >
                   <X className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                 </button>
-                <div className="flex gap-4 items-center pr-10">
+                <div className="flex gap-5 items-center pr-10">
                   {selectedMember.photo ? (
-                    <div className="w-20 h-20 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30 flex-shrink-0">
+                    <div className="w-36 h-36 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30 flex-shrink-0">
                       <img src={selectedMember.photo} alt={selectedMember.name} className="w-full h-full object-cover object-top" />
                     </div>
                   ) : (
-                    <div className="w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center flex-shrink-0">
-                      <Users className="w-9 h-9 text-white" />
+                    <div className="w-36 h-36 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center flex-shrink-0">
+                      <Users className="w-14 h-14 text-white" />
                     </div>
                   )}
                   <div>

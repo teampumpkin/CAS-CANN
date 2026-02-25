@@ -1134,6 +1134,7 @@ const translations = {
     'journalClub.dates.sept2025': 'Thursday, September 25th, 2025',
     'journalClub.dates.nov2025': 'Thursday, November 27th, 2025',
     'journalClub.dates.feb2026': 'Thursday, February 26th, 2026',
+    'journalClub.dates.june2026': 'Thursday, June 4th, 2026',
     'journalClub.topics.properTyping': 'Proper Typing for Proper Treatment',
     'journalClub.topics.heartFailureATTR': 'Heart Failure Therapy in ATTR Amyloidosis: Is it time to go against the grain?',
     'journalClub.topics.attrNeuropathy': 'An Interesting Case of ATTR-neuropathy',
@@ -1143,6 +1144,7 @@ const translations = {
     'journalClub.topics.hATTR': 'Is it really hATTR?',
     'journalClub.topics.interestingCase': 'Interesting amyloidosis case',
     'journalClub.topics.hereditaryATTRMixed': 'Hereditary ATTR Amyloidosis with Mixed Phenotypes: Therapeutic Prioritization When Cardiac and Neurologic Trajectories Diverge',
+    'journalClub.topics.hATTRAccess': 'Challenges in equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis',
     'journalClub.topics.tbd': 'Topic To Be Announced',
 
     // Join CAS/CANN Form
@@ -2322,6 +2324,7 @@ const translations = {
     'journalClub.dates.sept2025': 'Jeudi 25 septembre 2025',
     'journalClub.dates.nov2025': 'Jeudi 27 novembre 2025',
     'journalClub.dates.feb2026': 'Jeudi 26 février 2026',
+    'journalClub.dates.june2026': 'Jeudi 4 juin 2026',
     'journalClub.topics.properTyping': 'Typage approprié pour un traitement approprié',
     'journalClub.topics.heartFailureATTR': 'Thérapie de l\'insuffisance cardiaque dans l\'amylose ATTR : Est-il temps d\'aller à contre-courant?',
     'journalClub.topics.attrNeuropathy': 'Un cas intéressant de neuropathie ATTR',
@@ -2331,6 +2334,7 @@ const translations = {
     'journalClub.topics.hATTR': 'Est-ce vraiment hATTR?',
     'journalClub.topics.interestingCase': 'Cas intéressant d\'amylose',
     'journalClub.topics.hereditaryATTRMixed': 'Amylose héréditaire à transthyrétine avec phénotypes mixtes : priorisation thérapeutique lorsque les trajectoires cardiaques et neurologiques divergent',
+    'journalClub.topics.hATTRAccess': 'Défis liés à un accès équitable et abordable au diagnostic et au traitement de l\'amylose à transthyrétine héréditaire',
     'journalClub.topics.tbd': 'Sujet à annoncer',
 
     // Join CAS/CANN Form

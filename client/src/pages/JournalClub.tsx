@@ -83,6 +83,15 @@ const allSessions: Session[] = [
     location: "Virtual",
     registrationNotRequired: true,
   },
+  {
+    rawDate: "2026-06-04",
+    dateKey: "journalClub.dates.june2026",
+    topics: [
+      { topicKey: "journalClub.topics.hATTRAccess", presenterName: "Dr. Anna Lehman, and Emilie Theberge, PhD Candidate, University of British Columbia" },
+    ],
+    location: "Virtual",
+    registrationNotRequired: true,
+  },
 ];
 
 export default function JournalClub() {

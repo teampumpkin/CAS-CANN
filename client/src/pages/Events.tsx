@@ -93,6 +93,14 @@ const journalClubSessions = [
       },
     ],
   },
+  {
+    rawDate: "2026-09-24",
+    topics: [],
+  },
+  {
+    rawDate: "2026-11-26",
+    topics: [],
+  },
 ];
 
 // Single source of truth for all events
@@ -202,6 +210,34 @@ const allEvents = [
         presenter: "Dr. Anna Lehman, and Emilie Theberge, PhD Candidate, University of British Columbia",
       },
     ],
+  },
+  {
+    id: 12,
+    title: "CAS Journal Club September 2026",
+    date: "2026-09-24",
+    time: "5:00 PM - 6:00 PM EST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description:
+      "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates. Topic and presenter to be announced.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "#",
+    requiresMembershipCTA: true,
+    membershipType: "CAS",
+  },
+  {
+    id: 13,
+    title: "CAS Journal Club November 2026",
+    date: "2026-11-26",
+    time: "5:00 PM - 6:00 PM EST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description:
+      "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates. Topic and presenter to be announced.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "#",
+    requiresMembershipCTA: true,
+    membershipType: "CAS",
   },
   {
     id: 5,

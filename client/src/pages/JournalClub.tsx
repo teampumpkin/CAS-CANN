@@ -92,6 +92,24 @@ const allSessions: Session[] = [
     location: "Virtual",
     registrationNotRequired: true,
   },
+  {
+    rawDate: "2026-09-24",
+    dateKey: "journalClub.dates.sept2026",
+    topics: [
+      { topicKey: "journalClub.topics.tbd", presenterName: "" },
+    ],
+    location: "Virtual",
+    registrationNotRequired: true,
+  },
+  {
+    rawDate: "2026-11-26",
+    dateKey: "journalClub.dates.nov2026",
+    topics: [
+      { topicKey: "journalClub.topics.tbd", presenterName: "" },
+    ],
+    location: "Virtual",
+    registrationNotRequired: true,
+  },
 ];
 
 export default function JournalClub() {

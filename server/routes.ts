@@ -3046,6 +3046,91 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Exchange a Zoho Self Client grant code for new access+refresh tokens with expanded scope
+  app.post("/api/admin/zoho/regrant-token", requireAutomationAuth, async (req, res) => {
+    try {
+      const { grantCode } = req.body;
+      if (!grantCode) {
+        return res.status(400).json({ success: false, error: "grantCode is required in the request body" });
+      }
+
+      const clientId = process.env.ZOHO_SELF_CLIENT_ID;
+      const clientSecret = process.env.ZOHO_SELF_CLIENT_SECRET;
+      if (!clientId || !clientSecret) {
+        return res.status(500).json({ success: false, error: "ZOHO_SELF_CLIENT_ID or ZOHO_SELF_CLIENT_SECRET not configured" });
+      }
+
+      console.log('[Admin] Exchanging Zoho grant code for new token with automation scope...');
+
+      const params = new URLSearchParams({
+        grant_type: "authorization_code",
+        client_id: clientId,
+        client_secret: clientSecret,
+        code: grantCode,
+      });
+
+      const tokenResp = await fetch("https://accounts.zoho.com/oauth/v2/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString()
+      });
+
+      const tokenData = await tokenResp.json();
+
+      if (!tokenData.access_token || !tokenData.refresh_token) {
+        console.error('[Admin] Token exchange failed:', tokenData);
+        return res.status(400).json({
+          success: false,
+          error: tokenData.error || tokenData.message || "Token exchange failed — grant code may be expired (must be used within 3 minutes)",
+          zohoResponse: tokenData
+        });
+      }
+
+      await dedicatedTokenManager.storeToken('zoho_crm', {
+        access_token:  tokenData.access_token,
+        refresh_token: tokenData.refresh_token,
+        expires_in:    tokenData.expires_in || 3600,
+        scope:         tokenData.scope || '',
+        token_type:    tokenData.token_type || 'Bearer',
+      });
+
+      console.log(`[Admin] ✅ Token updated successfully. New scope: ${tokenData.scope}`);
+      const hasAutomationScope = (tokenData.scope || '').includes('automation');
+      const expiresAt = new Date(Date.now() + (tokenData.expires_in || 3600) * 1000);
+
+      res.json({
+        success: true,
+        scope: tokenData.scope,
+        hasAutomationScope,
+        expiresAt,
+        message: hasAutomationScope
+          ? "Token updated with automation scope — ready to create workflow rules"
+          : "Token updated but automation scope is missing — regenerate with ZohoCRM.settings.automation.ALL included"
+      });
+    } catch (error) {
+      console.error('[Admin] Token regrant failed:', error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'Token regrant failed' });
+    }
+  });
+
+  // Create Zoho CRM workflow rules for email automation
+  app.post("/api/admin/zoho/create-workflow-rules", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Creating Zoho CRM workflow rules...');
+      const results = await zohoCRMService.createWorkflowRules();
+      const created = results.filter(r => r.created).length;
+      const failed = results.filter(r => !r.created).length;
+      res.json({
+        success: failed === 0,
+        results,
+        summary: `${created}/${results.length} workflow rules created`
+      });
+    } catch (error) {
+      console.error('[Admin] Workflow rule creation failed:', error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'Workflow rule creation failed' });
+    }
+  });
+
   // Fix broken merge fields in Zoho CRM admin notification email templates
   app.post("/api/admin/zoho/fix-email-templates", requireAutomationAuth, async (req, res) => {
     try {

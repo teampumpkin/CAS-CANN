@@ -1368,6 +1368,118 @@ export class ZohoCRMService {
 
     return results;
   }
+
+  async createWorkflowRules(): Promise<Array<{ name: string; created: boolean; id?: string; error?: string }>> {
+    const accessToken = await this.getAccessToken();
+    const authHeader = `Zoho-oauthtoken ${accessToken}`;
+    const baseUrl = this.baseUrl;
+
+    const TEMPLATE_IDS = {
+      casOnlyAdmin:    "6999043000000903013",
+      casAndCannAdmin: "6999043000000903020",
+      nonMemberAdmin:  "6999043000000903027",
+      casWelcome:      "6999043000001079001",
+      cannWelcome:     "6999043000001079008",
+    };
+
+    const rules = [
+      {
+        name: "CAS New Lead - CAS Only Registration",
+        description: "Fires when a new lead registers for CAS membership only (not CANN). Notifies admin team and sends welcome email to registrant.",
+        conditions: {
+          criteria_pattern: "1 and 2",
+          criteria: [
+            { criteria_item_id: "1", field: { api_name: "CAS_Member" }, comparator: "equal", value: "true" },
+            { criteria_item_id: "2", field: { api_name: "CANN_Member" }, comparator: "equal", value: "false" },
+          ]
+        },
+        emailActions: [
+          { template_id: TEMPLATE_IDS.casOnlyAdmin, recipient_type: "owner", label: "Admin notification" },
+          { template_id: TEMPLATE_IDS.casWelcome,   recipient_type: "lead",  label: "Member welcome email" },
+        ]
+      },
+      {
+        name: "CAS New Lead - CAS & CANN Registration",
+        description: "Fires when a new lead registers for both CAS and CANN membership. Notifies admin team and sends welcome emails to registrant.",
+        conditions: {
+          criteria_pattern: "1 and 2",
+          criteria: [
+            { criteria_item_id: "1", field: { api_name: "CAS_Member" }, comparator: "equal", value: "true" },
+            { criteria_item_id: "2", field: { api_name: "CANN_Member" }, comparator: "equal", value: "true" },
+          ]
+        },
+        emailActions: [
+          { template_id: TEMPLATE_IDS.casAndCannAdmin, recipient_type: "owner", label: "Admin notification" },
+          { template_id: TEMPLATE_IDS.casWelcome,      recipient_type: "lead",  label: "CAS welcome email" },
+          { template_id: TEMPLATE_IDS.cannWelcome,     recipient_type: "lead",  label: "CANN welcome email" },
+        ]
+      },
+      {
+        name: "CAS New Lead - Non-Member Inquiry",
+        description: "Fires when a new lead submits a contact inquiry without requesting membership. Notifies admin team.",
+        conditions: {
+          criteria_pattern: "1",
+          criteria: [
+            { criteria_item_id: "1", field: { api_name: "Record_Type" }, comparator: "equal", value: "Inquiry" },
+          ]
+        },
+        emailActions: [
+          { template_id: TEMPLATE_IDS.nonMemberAdmin, recipient_type: "owner", label: "Admin notification" },
+        ]
+      }
+    ];
+
+    const results: Array<{ name: string; created: boolean; id?: string; error?: string }> = [];
+
+    for (const rule of rules) {
+      try {
+        const actions = rule.emailActions.map(a => ({
+          type: "email",
+          template: { id: a.template_id },
+          recipients: a.recipient_type === "lead"
+            ? [{ type: "field", field: { api_name: "Email" } }]
+            : [{ type: "field", field: { api_name: "Owner" } }]
+        }));
+
+        const payload = {
+          workflow_rules: [{
+            name: rule.name,
+            description: rule.description,
+            module: { api_name: "Leads" },
+            trigger: { type: "ON_CREATE" },
+            conditions: rule.conditions,
+            actions
+          }]
+        };
+
+        console.log(`[Workflow Rules] Creating: ${rule.name}...`);
+        const resp = await fetch(`${baseUrl}/settings/automation/workflow_rules`, {
+          method: "POST",
+          headers: { Authorization: authHeader, "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await resp.json();
+        const ruleResult = data?.workflow_rules?.[0];
+
+        if (ruleResult?.status === "success" || ruleResult?.id || ruleResult?.details?.id) {
+          const ruleId = ruleResult?.id || ruleResult?.details?.id;
+          console.log(`[Workflow Rules] ✅ Created: ${rule.name} (ID: ${ruleId})`);
+          results.push({ name: rule.name, created: true, id: ruleId });
+        } else {
+          const errMsg = ruleResult?.message || JSON.stringify(data).substring(0, 200);
+          console.error(`[Workflow Rules] ❌ Failed: ${rule.name} — ${errMsg}`);
+          results.push({ name: rule.name, created: false, error: errMsg });
+        }
+      } catch (error) {
+        const errMsg = error instanceof Error ? error.message : "Unknown error";
+        console.error(`[Workflow Rules] ❌ Exception for ${rule.name}: ${errMsg}`);
+        results.push({ name: rule.name, created: false, error: errMsg });
+      }
+    }
+
+    return results;
+  }
 }
 
 export const zohoCRMService = new ZohoCRMService();

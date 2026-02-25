@@ -22,6 +22,9 @@ import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import partnershipImage from "@assets/DSC02841_1750068895454.jpg";
 import cardiacAmyloidosisBooklet from "@assets/Living-with-cardiac-amyloidosis_1763624816977.pdf";
+import pfizerLogo from "@assets/Pfizer_Logo_Color_RGB_1772025732184.png";
+import astraZenecaLogo from "@assets/AZ_RGB_H_COL_1772025732173.jpg";
+import bridgeBioLogo from "@assets/BB_Logo_Full_Color_RGB@2x_1772025732184.png";
 
 export default function Partnerships() {
   const { t } = useLanguage();
@@ -351,6 +354,53 @@ export default function Partnerships() {
                     </motion.div>
                   ))}
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sponsorship Acknowledgement Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="crawford-section-title mb-4">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                Sponsorship Acknowledgement
+              </span>
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+              The Canadian Amyloidosis Society gratefully acknowledges the support of our sponsors.
+            </p>
+          </motion.div>
+
+          <div className="flex flex-wrap justify-center items-center gap-10">
+            {[
+              { name: "Pfizer", logo: pfizerLogo },
+              { name: "AstraZeneca", logo: astraZenecaLogo },
+              { name: "BridgeBio", logo: bridgeBioLogo },
+            ].map((sponsor, index) => (
+              <motion.div
+                key={sponsor.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -4, scale: 1.03 }}
+                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-8 flex items-center justify-center"
+                style={{ minWidth: "220px", minHeight: "120px" }}
+              >
+                <img
+                  src={sponsor.logo}
+                  alt={`${sponsor.name} logo`}
+                  className="max-h-16 max-w-[180px] object-contain"
+                />
               </motion.div>
             ))}
           </div>

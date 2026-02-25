@@ -1374,12 +1374,14 @@ export class ZohoCRMService {
     const authHeader = `Zoho-oauthtoken ${accessToken}`;
     const baseUrl = this.baseUrl;
 
-    const TEMPLATE_IDS = {
-      casOnlyAdmin:    "6999043000000903013",
-      casAndCannAdmin: "6999043000000903020",
-      nonMemberAdmin:  "6999043000000903027",
-      casWelcome:      "6999043000001079001",
-      cannWelcome:     "6999043000001079008",
+    const LEADS_MODULE = { api_name: "Leads", id: "6999043000000002175" };
+
+    const TEMPLATES: Record<string, { id: string; name: string }> = {
+      casOnlyAdmin:    { id: "6999043000000903013", name: "CAS Registration Email Template" },
+      casAndCannAdmin: { id: "6999043000000903020", name: "CAS CANN Membership Email Template" },
+      nonMemberAdmin:  { id: "6999043000000903027", name: "Non-Member Contact Email Template" },
+      casWelcome:      { id: "6999043000001079001", name: "CAS Membership Welcome" },
+      cannWelcome:     { id: "6999043000001079008", name: "CANN Membership Welcome" },
     };
 
     const ADMIN_EMAILS = ["CAS@amyloid.ca", "vasi.karan@teampumpkin.com"];
@@ -1395,13 +1397,19 @@ export class ZohoCRMService {
       details: { api_name: "${!Leads.Email}" }
     };
 
-    const createEmailNotification = async (notifName: string, templateId: string, toRecipients: object[]) => {
+    const FROM_ADDRESS = {
+      type: "user",
+      resource: { id: "6999043000000575366", name: "Vasi Karan" }
+    };
+
+    const createEmailNotification = async (notifName: string, template: { id: string; name: string }, toRecipients: object[]) => {
       const payload = {
         email_notifications: [{
           name: notifName,
           feature_type: "workflow",
-          template: { id: templateId },
-          module: { api_name: "Leads" },
+          template: { id: template.id, name: template.name },
+          module: LEADS_MODULE,
+          from_address: FROM_ADDRESS,
           recipients: { to: toRecipients }
         }]
       };
@@ -1411,12 +1419,14 @@ export class ZohoCRMService {
         body: JSON.stringify(payload)
       });
       const data = await resp.json() as any;
+      console.log(`[Workflow Rules] Email notif response for "${notifName}":`, JSON.stringify(data).substring(0, 500));
       const notif = data?.email_notifications?.[0];
       if (notif?.status === "success" && notif?.details?.id) {
         console.log(`[Workflow Rules] ✅ Email notification created: "${notifName}" (ID: ${notif.details.id})`);
         return notif.details.id as string;
       }
-      const errMsg = notif?.message || JSON.stringify(data).substring(0, 300);
+      const errDetail = notif?.details ? ` | details: ${JSON.stringify(notif.details)}` : "";
+      const errMsg = (notif?.message || JSON.stringify(data).substring(0, 300)) + errDetail;
       throw new Error(`Failed to create email notification "${notifName}": ${errMsg}`);
     };
 
@@ -1440,14 +1450,14 @@ export class ZohoCRMService {
             type: "create",
             details: { trigger_module: { api_name: "Leads" } }
           },
-          conditions: notificationIds.map((id, idx) => ({
-            sequence_number: idx + 1,
+          conditions: [{
+            sequence_number: 1,
             criteria_details: criteriaDetails,
             instant_actions: {
-              actions: [{ id, type: "email_notifications" }]
+              actions: notificationIds.map(id => ({ id, type: "email_notifications" }))
             },
             scheduled_actions: null
-          }))
+          }]
         }]
       };
 
@@ -1474,8 +1484,8 @@ export class ZohoCRMService {
         ],
         groupOperator: "AND",
         notifications: [
-          { name: "CAS Admin Notif - CAS Only",   templateId: TEMPLATE_IDS.casOnlyAdmin, to: [makeAdminRecipient(ADMIN_EMAILS)] },
-          { name: "CAS Welcome Email - CAS Only",  templateId: TEMPLATE_IDS.casWelcome,   to: [LEAD_EMAIL_RECIPIENT] },
+          { name: "CAS Admin Notif - CAS Only",   template: TEMPLATES.casOnlyAdmin, to: [makeAdminRecipient(ADMIN_EMAILS)] },
+          { name: "CAS Welcome Email - CAS Only",  template: TEMPLATES.casWelcome,   to: [LEAD_EMAIL_RECIPIENT] },
         ]
       },
       {
@@ -1487,9 +1497,9 @@ export class ZohoCRMService {
         ],
         groupOperator: "AND",
         notifications: [
-          { name: "CAS Admin Notif - CAS & CANN",  templateId: TEMPLATE_IDS.casAndCannAdmin, to: [makeAdminRecipient(CANN_ADMIN_EMAILS)] },
-          { name: "CAS Welcome Email - CAS & CANN", templateId: TEMPLATE_IDS.casWelcome,      to: [LEAD_EMAIL_RECIPIENT] },
-          { name: "CANN Welcome Email - CAS & CANN",templateId: TEMPLATE_IDS.cannWelcome,     to: [LEAD_EMAIL_RECIPIENT] },
+          { name: "CAS Admin Notif - CAS and CANN",  template: TEMPLATES.casAndCannAdmin, to: [makeAdminRecipient(CANN_ADMIN_EMAILS)] },
+          { name: "CAS Welcome Email - CAS and CANN", template: TEMPLATES.casWelcome,      to: [LEAD_EMAIL_RECIPIENT] },
+          { name: "CANN Welcome Email - CAS and CANN",template: TEMPLATES.cannWelcome,     to: [LEAD_EMAIL_RECIPIENT] },
         ]
       },
       {
@@ -1500,7 +1510,7 @@ export class ZohoCRMService {
         ],
         groupOperator: "AND",
         notifications: [
-          { name: "CAS Admin Notif - Non-Member",  templateId: TEMPLATE_IDS.nonMemberAdmin, to: [makeAdminRecipient(ADMIN_EMAILS)] },
+          { name: "CAS Admin Notif - Non-Member",  template: TEMPLATES.nonMemberAdmin, to: [makeAdminRecipient(ADMIN_EMAILS)] },
         ]
       }
     ];
@@ -1510,7 +1520,7 @@ export class ZohoCRMService {
         console.log(`[Workflow Rules] Creating email notifications for: ${rule.name}...`);
         const notifIds: string[] = [];
         for (const notif of rule.notifications) {
-          const id = await createEmailNotification(notif.name, notif.templateId, notif.to);
+          const id = await createEmailNotification(notif.name, notif.template, notif.to);
           notifIds.push(id);
         }
 

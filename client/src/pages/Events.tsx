@@ -84,6 +84,15 @@ const journalClubSessions = [
       { title: "Hereditary ATTR Amyloidosis with Mixed Phenotypes: Therapeutic Prioritization When Cardiac and Neurologic Trajectories Diverge", presenter: "Dr. Conor Sheridan, Queen's University" },
     ],
   },
+  {
+    rawDate: "2026-06-04",
+    topics: [
+      {
+        title: "Challenges in equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis",
+        presenter: "Dr. Anna Lehman, and Emilie Theberge, PhD Candidate, University of British Columbia",
+      },
+    ],
+  },
 ];
 
 // Single source of truth for all events
@@ -172,6 +181,26 @@ const allEvents = [
         presenter: "Dr. Gord Jewett, University of Calgary",
       },
       { title: "Hereditary ATTR Amyloidosis with Mixed Phenotypes: Therapeutic Prioritization When Cardiac and Neurologic Trajectories Diverge", presenter: "Dr. Conor Sheridan, Queen's University" },
+    ],
+  },
+  {
+    id: 11,
+    title: "CAS Journal Club June 2026",
+    date: "2026-06-04",
+    time: "5:00 PM - 6:00 PM EST",
+    location: "Virtual Event",
+    type: "Journal Club",
+    description:
+      "One-hour virtual session focusing on equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis.",
+    image: "/api/placeholder/400/250",
+    registrationUrl: "#",
+    requiresMembershipCTA: true,
+    membershipType: "CAS",
+    topics: [
+      {
+        title: "Challenges in equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis",
+        presenter: "Dr. Anna Lehman, and Emilie Theberge, PhD Candidate, University of British Columbia",
+      },
     ],
   },
   {

@@ -27,6 +27,11 @@ import diagnosticImage from "@assets/DSC05873_1750141133352.jpg";
 import collaborationImage from "@assets/DSC02843_1750141211187.jpg";
 import leadershipImage from "@assets/DSC02841_1750141287437.jpg";
 import partnershipImage from "@assets/DSC_0022_1750141322198.jpg";
+import nowellFinePhoto from "@assets/Nowell_Fine_1772024001282.jpeg";
+import margotDavisPhoto from "@assets/Margo_Davis_1772024001281.jpg";
+import michelleMezeiPhoto from "@assets/Michelle_Mezei_1772024001282.jpeg";
+import victorJimenezPhoto from "@assets/Victor_Jimenez-Zepeda_1772024001277.jpg";
+import janVeenhuyzenPhoto from "@assets/Jan_Veenhuyzen_1772024001281.jpg";
 
 export default function About() {
   const { t } = useLanguage();
@@ -332,8 +337,8 @@ export default function About() {
                 viewport={{ once: true }}
               >
                 <div className="relative mb-4">
-                  <div className="w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
-                    <Users className="w-10 h-10 text-white" />
+                  <div className="w-24 h-24 rounded-2xl mx-auto group-hover:scale-110 transition-transform duration-300 overflow-hidden ring-2 ring-[#00AFE6]/30">
+                    <img src={nowellFinePhoto} alt="Nowell Fine" className="w-full h-full object-cover object-top" />
                   </div>
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
                     <Award className="w-4 h-4 text-white" />
@@ -371,6 +376,7 @@ export default function About() {
                 {
                   name: "Margot K. Davis, MD, MSc, FRCPC, FCCS",
                   institution: "University of British Columbia",
+                  photo: margotDavisPhoto,
                   description: "Margot Davis is an advanced heart failure and transplant cardiologist at St. Paul's Hospital, a Clinical Associate Professor at the University of British Columbia, and Director of the UBC Cardiac Amyloidosis Clinic and the UBC Cardiology-Oncology Program. Her research is focused on cardiac amyloidosis, heart disease in cancer patients, and advanced heart failure. She is Co-Principal Investigator of the Canadian Registry for Amyloidosis Research, Vice President of the Canadian Heart Failure Society, and Western Regional Director of the Canadian Cardiovascular Society.",
                 },
                 {
@@ -380,6 +386,7 @@ export default function About() {
                 {
                   name: "Michelle Mezei, BSc(Pharm), MDCM, FRCPC",
                   institution: "University of British Columbia",
+                  photo: michelleMezeiPhoto,
                   description: "Dr. Michelle Mezei is a Clinical Professor of Neurology at the University of British Columbia and works as a neurology consultant in the Vancouver Centre for Neuromuscular Disease and Adult Metabolic Diseases Clinic, Vancouver General Hospital. She is the past UBC Neuromuscular Fellowship Director (2008–2024) and ongoing Academic Head of Neuromuscular Clinical Trials. Dr. Mezei has a longstanding special interest in hereditary ATTR polyneuropathy, including as Principal Investigator in several pivotal trials. She is on the executive of the Canadian Amyloidosis Society. She serves nationally with the Canadian Neurological Sciences Federation (CNSF) as Co-Vice President of the Scientific Program Committee for the Annual Congress, and is a longstanding board member of the Canadian Society of Clinical Neurophysiologists (CSCN). Dr. Mezei's patient advocacy work includes with TTR Amyloidosis Canada and serving on the national board of MitoCanada.",
                 },
                 {
@@ -393,11 +400,13 @@ export default function About() {
                 {
                   name: "Victor Jimenez-Zepeda, MD, FRCPC",
                   institution: "University of Calgary",
+                  photo: victorJimenezPhoto,
                   description: "Dr. Victor H. Jimenez-Zepeda is an Associate Professor of Medicine at the University of Calgary's Cumming School of Medicine. He leads the clinical program for AL amyloidosis at the Tom Baker Cancer Center and is the founder of the clinic for the assessment of Monoclonal Gammopathy of Clinical and Undetermined Significance and the Amyloid Screening Clinic. Dr. Jimenez-Zepeda is also a member of the International Kidney and Monoclonal Gammopathy group and the International Society of Amyloidosis.",
                 },
                 {
                   name: "Jan Veenhuyzen, R.N., BScN",
                   institution: "University of Calgary",
+                  photo: janVeenhuyzenPhoto,
                   description: "Jan is the program manager of the Amyloidosis Program of Calgary, Libin Cardiovascular Institute, Department of Cardiac Sciences at the University of Calgary. She has 30 years of cardiac nursing experience in diverse practice settings ranging from critical care to ambulatory care, and more than 15 years of clinical research experience. Jan has served in various leadership roles to develop and advance specialized clinical and research programs. Her role with the CAS includes organizational advancement through strategic planning and operational oversight. She is the Chair of the Canadian Amyloidosis Nursing Network (CANN) and past Co-Chair of the Prairie Amyloidosis Nursing Network (PANN).",
                 },
               ].map((member, index) => (
@@ -410,9 +419,15 @@ export default function About() {
                   viewport={{ once: true }}
                 >
                   <div className="relative mb-4">
-                    <div className="w-20 h-20 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
-                      <Users className="w-10 h-10 text-white" />
-                    </div>
+                    {member.photo ? (
+                      <div className="w-24 h-24 rounded-2xl mx-auto group-hover:scale-110 transition-transform duration-300 overflow-hidden ring-2 ring-[#00AFE6]/30">
+                        <img src={member.photo} alt={member.name} className="w-full h-full object-cover object-top" />
+                      </div>
+                    ) : (
+                      <div className="w-24 h-24 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                        <Users className="w-10 h-10 text-white" />
+                      </div>
+                    )}
                     <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
                       <Award className="w-4 h-4 text-white" />
                     </div>

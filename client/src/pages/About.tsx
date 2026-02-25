@@ -351,9 +351,6 @@ export default function About() {
                     <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
                       <img src={nowellFinePhoto} alt="Nowell Fine" className="w-full h-full object-cover object-top" />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-7 h-7 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
-                      <Award className="w-3.5 h-3.5 text-white" />
-                    </div>
                   </div>
                   <div className="min-w-0">
                     <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
@@ -453,9 +450,6 @@ export default function About() {
                           <Users className="w-12 h-12 text-white" />
                         </div>
                       )}
-                      <div className="absolute -top-2 -right-2 w-7 h-7 bg-gradient-to-r from-[#00DD89] to-[#00AFE6] rounded-full flex items-center justify-center">
-                        <Award className="w-3.5 h-3.5 text-white" />
-                      </div>
                     </div>
                     <div className="min-w-0">
                       <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">

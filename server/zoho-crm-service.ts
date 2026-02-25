@@ -360,6 +360,19 @@ export class ZohoCRMService {
 
       if (response.data && response.data.length > 0) {
         const createdRecord = response.data[0];
+
+        // Zoho can return HTTP 200 with an error status inside the data item
+        // e.g. {"status": "error", "code": "INVALID_DATA", "message": "...", "details": {...}}
+        if (createdRecord.status === "error") {
+          const zohoCode = createdRecord.code || "UNKNOWN_ERROR";
+          const zohoMessage = createdRecord.message || "Zoho rejected the record";
+          const zohoDetails = createdRecord.details ? JSON.stringify(createdRecord.details) : "";
+          const fullError = `Zoho API rejected record: [${zohoCode}] ${zohoMessage}${zohoDetails ? ` — ${zohoDetails}` : ""}`;
+          console.error(`[Zoho CRM] Record creation REJECTED by Zoho API: ${fullError}`);
+          console.error(`[Zoho CRM] Full rejection response:`, JSON.stringify(createdRecord, null, 2));
+          throw new Error(fullError);
+        }
+
         const recordId = createdRecord.details?.id || createdRecord.id;
         console.log(`[Zoho v8] Successfully created record in ${moduleName}:`, recordId);
         
@@ -1130,14 +1143,12 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   // --- Professional info ---
   if (formData.discipline) {
     zohoData.Professional_Designation = formData.discipline;
-    zohoData.discipline = formData.discipline;
   }
 
   // --- Institution (map to both Company and Institution_Name) ---
   if (formData.institution) {
     zohoData.Company = cleanAndTruncate(formData.institution, 100);
     zohoData.Institution_Name = cleanAndTruncate(formData.institution, 100);
-    zohoData.institution = cleanAndTruncate(formData.institution, 50);
   }
 
   // --- Subspecialty ---
@@ -1145,10 +1156,9 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
     zohoData.subspecialty = formData.subspecialty.toString().substring(0, 50);
   }
 
-  // --- Amyloidosis type ---
+  // --- Amyloidosis type (Amyloidosis_Type is the active field; amyloidosistype is deactivated — do NOT send it) ---
   if (formData.amyloidosisType) {
     zohoData.Amyloidosis_Type = formData.amyloidosisType;
-    zohoData.amyloidosistype = formData.amyloidosisType;
   }
 
   // --- Address/contact info ---

@@ -366,16 +366,18 @@ export default function About() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  name: "Margo Davis, MD",
+                  name: "Margot K. Davis, MD, MSc, FRCPC, FCCS",
                   institution: "University of British Columbia",
+                  description: "Margot Davis is an advanced heart failure and transplant cardiologist at St. Paul's Hospital, a Clinical Associate Professor at the University of British Columbia, and Director of the UBC Cardiac Amyloidosis Clinic and the UBC Cardiology-Oncology Program. Her research is focused on cardiac amyloidosis, heart disease in cancer patients, and advanced heart failure. She is Co-Principal Investigator of the Canadian Registry for Amyloidosis Research, Vice President of the Canadian Heart Failure Society, and Western Regional Director of the Canadian Cardiovascular Society.",
                 },
                 {
                   name: "Genevieve Matte, MD",
                   institution: "Université de Montréal",
                 },
                 {
-                  name: "Michelle Mezei, MD",
+                  name: "Michelle Mezei, BSc(Pharm), MDCM, FRCPC",
                   institution: "University of British Columbia",
+                  description: "Dr. Michelle Mezei is a Clinical Professor of Neurology at the University of British Columbia and works as a neurology consultant in the Vancouver Centre for Neuromuscular Disease and Adult Metabolic Diseases Clinic, Vancouver General Hospital. She is the past UBC Neuromuscular Fellowship Director (2008–2024) and ongoing Academic Head of Neuromuscular Clinical Trials. Dr. Mezei has a longstanding special interest in hereditary ATTR polyneuropathy, including as Principal Investigator in several pivotal trials. She serves on the executive of the Canadian Amyloidosis Society, as Co-Vice President of the Scientific Program Committee for the Canadian Neurological Sciences Federation Annual Congress, and on the national board of MitoCanada.",
                 },
                 {
                   name: "François Tournoux, MD",
@@ -386,8 +388,9 @@ export default function About() {
                   institution: "University of British Columbia",
                 },
                 {
-                  name: "Victor Jimenez-Zepeda, MD",
+                  name: "Victor Jimenez-Zepeda, MD, FRCPC",
                   institution: "University of Calgary",
+                  description: "Dr. Victor H. Jimenez-Zepeda is an Associate Professor of Medicine at the University of Calgary's Cumming School of Medicine. He leads the clinical program for AL amyloidosis at the Tom Baker Cancer Center and is the founder of the clinic for the assessment of Monoclonal Gammopathy of Clinical and Undetermined Significance and the Amyloid Screening Clinic. Dr. Jimenez-Zepeda is also a member of the International Kidney and Monoclonal Gammopathy group and the International Society of Amyloidosis.",
                 },
               ].map((member, index) => (
                 <motion.div
@@ -407,14 +410,20 @@ export default function About() {
                     </div>
                   </div>
 
-                  <div className="text-center">
-                    <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                  <div className="text-center mb-3">
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-1 leading-snug">
                       {member.name}
                     </h4>
-                    <p className="text-[#00AFE6] font-semibold text-sm mb-2">
+                    <p className="text-[#00AFE6] font-semibold text-sm">
                       {member.institution}
                     </p>
                   </div>
+
+                  {member.description && (
+                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed line-clamp-5 text-left border-t border-[#00AFE6]/20 pt-3 mt-1">
+                      {member.description}
+                    </p>
+                  )}
                 </motion.div>
               ))}
             </div>

@@ -32,7 +32,7 @@ import {
   X,
 } from "lucide-react";
 import { Link } from "wouter";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ParallaxBackground from "../components/ParallaxBackground";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -40,33 +40,10 @@ export default function AboutAmyloidosis() {
   const { t } = useLanguage();
   const [expandedType, setExpandedType] = useState<string | null>(null);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleType = (type: string) => {
     setExpandedType(expandedType === type ? null : type);
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down and past 100px
-        setIsDisclaimerVisible(false);
-      } else if (currentScrollY < lastScrollY) {
-        // Scrolling up
-        setIsDisclaimerVisible(true);
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [lastScrollY]);
 
   const warningSignsData = [
     {

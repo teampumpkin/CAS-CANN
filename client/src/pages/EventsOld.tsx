@@ -89,6 +89,38 @@ const journalClubSessions = [
       { title: "Hereditary ATTR Amyloidosis with Mixed Phenotypes: Therapeutic Prioritization When Cardiac and Neurologic Trajectories Diverge", presenter: "Dr. Conor Sheridan, Queen's University" },
     ],
   },
+  {
+    rawDate: "2026-06-04",
+    type: "Journal Club",
+    title: "CAS Journal Club June 2026",
+    time: "5:00 PM - 6:00 PM EST",
+    location: "Virtual Event",
+    description: "One-hour virtual session focusing on equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis.",
+    topics: [
+      {
+        title: "Challenges in equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis",
+        presenter: "Dr. Anna Lehman, and Emilie Theberge, PhD Candidate, University of British Columbia",
+      },
+    ],
+  },
+  {
+    rawDate: "2026-09-24",
+    type: "Journal Club",
+    title: "CAS Journal Club September 2026",
+    time: "5:00 PM - 6:00 PM EST",
+    location: "Virtual Event",
+    description: "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates. Topic and presenter to be announced.",
+    topics: [],
+  },
+  {
+    rawDate: "2026-11-26",
+    type: "Journal Club",
+    title: "CAS Journal Club November 2026",
+    time: "5:00 PM - 6:00 PM EST",
+    location: "Virtual Event",
+    description: "One-hour virtual session focusing on amyloidosis clinical case-based presentations and scientific updates. Topic and presenter to be announced.",
+    topics: [],
+  },
 ];
 
 // Summit Events Data (from Events.tsx)

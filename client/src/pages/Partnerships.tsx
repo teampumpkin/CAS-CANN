@@ -25,6 +25,7 @@ import cardiacAmyloidosisBooklet from "@assets/Living-with-cardiac-amyloidosis_1
 import pfizerLogo from "@assets/Pfizer_Logo_Color_RGB_1772025732184.png";
 import astraZenecaLogo from "@assets/AZ_RGB_H_COL_1772025732173.jpg";
 import bridgeBioLogo from "@assets/BB_Logo_Full_Color_RGB@2x_1772025732184.png";
+import alnylam from "@assets/alnylam-corporate-logo_midnight_(1)_1772436944884.png";
 
 export default function Partnerships() {
   const { t } = useLanguage();
@@ -385,6 +386,7 @@ export default function Partnerships() {
               { name: "Pfizer", logo: pfizerLogo },
               { name: "AstraZeneca", logo: astraZenecaLogo },
               { name: "BridgeBio", logo: bridgeBioLogo },
+              { name: "Alnylam Pharmaceuticals", logo: alnylam },
             ].map((sponsor, index) => (
               <motion.div
                 key={sponsor.name}

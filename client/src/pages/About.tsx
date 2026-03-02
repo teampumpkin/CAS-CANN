@@ -363,14 +363,14 @@ export default function About() {
                 </div>
                 <div className="border-t border-[#00AFE6]/20 pt-4">
                   <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed line-clamp-3 mb-2">
-                    Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He serves as Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic, and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
+                    Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
                   </p>
                   <button
                     onClick={() => setSelectedMember({
                       name: "Nowell Fine, MD, SM, FRCPC",
                       institution: "University of Calgary",
                       photo: nowellFinePhoto,
-                      description: "Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He serves as Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic, and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.",
+                      description: "Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.",
                     })}
                     className="text-sm font-semibold text-[#00AFE6] hover:text-[#00DD89] transition-colors duration-200 underline underline-offset-2"
                   >
@@ -404,7 +404,7 @@ export default function About() {
                   name: "Michelle Mezei, BSc(Pharm), MDCM, FRCPC",
                   institution: "University of British Columbia",
                   photo: michelleMezeiPhoto,
-                  description: "Dr. Mezei is a Clinical Professor of Neurology at the University of British Columbia and serves as a neurology consultant in the Vancouver Centre for Neuromuscular Disease and Adult Metabolic Diseases Clinic, Vancouver General Hospital. She is the past UBC Neuromuscular Fellowship Director (2008–2024) and ongoing Academic Head of Neuromuscular Clinical Trials. Dr. Mezei has a longstanding special interest in hereditary ATTR polyneuropathy, including as Principal Investigator in several pivotal trials. She serves on the executive of the Canadian Amyloidosis Society, and nationally with the Canadian Neurological Sciences Federation (CNSF) as Co-Vice President of the Scientific Program Committee for the Annual Congress. She is a longstanding board member of the Canadian Society of Clinical Neurophysiologists (CSCN). Dr. Mezei's patient advocacy work includes TTR Amyloidosis Canada and serving on the national board of MitoCanada.",
+                  description: "Dr. Michelle Mezei is a Clinical Professor of Neurology at the University of British Columbia and works as a neurology consultant in the Vancouver Centre for Neuromuscular Disease and Adult Metabolic Diseases Clinic, Vancouver General Hospital. She is the past UBC Neuromuscular Fellowship Director (2008–2024) and ongoing Academic Head of Neuromuscular Clinical Trials. Dr. Mezei has a longstanding special interest in hereditary ATTR polyneuropathy, including as Principal Investigator in several pivotal trials. She is on the executive of the Canadian Amyloidosis Society. She serves nationally with the Canadian Neurological Sciences Federation (CNSF) as Co-Vice President of the Scientific Program Committee for the Annual Congress, and is a longstanding board member of the Canadian Society of Clinical Neurophysiologists (CSCN). Dr. Mezei's patient advocacy work includes with TTR Amyloidosis Canada and serving on the national board of MitoCanada.",
                 },
                 {
                   name: "Victor Jimenez-Zepeda, MD, FRCPC",
@@ -416,7 +416,7 @@ export default function About() {
                   name: "Jan Veenhuyzen, R.N., BScN",
                   institution: "University of Calgary",
                   photo: janVeenhuyzenPhoto,
-                  description: "Ms. Veenhuyzen serves as Program Manager of the Amyloidosis Program of Calgary, Libin Cardiovascular Institute, Department of Cardiac Sciences at the University of Calgary. She has 30 years of cardiac nursing experience across diverse practice settings ranging from critical care to ambulatory care, and more than 15 years of clinical research experience. She has served in various leadership roles to develop and advance specialized clinical and research programs. Her role with the Canadian Amyloidosis Society encompasses organizational advancement through strategic planning and operational oversight. She is Chair of the Canadian Amyloidosis Nursing Network (CANN) and past Co-Chair of the Prairie Amyloidosis Nursing Network (PANN).",
+                  description: "Jan is the program manager of the Amyloidosis Program of Calgary, Libin Cardiovascular Institute, Department of Cardiac Sciences at the University of Calgary. She has 30 years of cardiac nursing experience in diverse practice settings ranging from critical care to ambulatory care, and more than 15 years of clinical research experience. Jan has served in various leadership roles to develop and advance specialized clinical and research programs. Her role with the CAS includes organizational advancement through strategic planning and operational oversight. She is the Chair of the Canadian Amyloidosis Nursing Network (CANN) and past Co-Chair of the Prairie Amyloidosis Nursing Network (PANN).",
                 },
                 {
                   name: "Genevieve Matte, MD",

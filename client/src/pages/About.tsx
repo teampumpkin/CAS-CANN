@@ -237,11 +237,7 @@ export default function About() {
               viewport={{ once: true }}
             >
               <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-6">
-                The CAS Executive Committee is composed of clinical leaders,
-                researchers, strategic partners, and lived-experience advisors
-                from across Canada. This group guides platform strategy, ensures
-                ethical oversight, and supports resource curation while
-                advancing clinical practice and patient outcomes.
+                The CAS Executive Committee is composed of clinical leaders, researchers, and strategic partner advisors from across Canada.
               </p>
 
               <div className="space-y-4 mb-8">
@@ -260,7 +256,7 @@ export default function About() {
                 <div className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full mt-3 flex-shrink-0" />
                   <p className="text-gray-600 dark:text-white/70">
-                    Strategic partners and lived-experience advisors
+                    Strategic partner advisors
                   </p>
                 </div>
               </div>

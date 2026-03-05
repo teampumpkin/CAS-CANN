@@ -237,7 +237,7 @@ export default function About() {
               viewport={{ once: true }}
             >
               <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-6">
-                The CAS Executive Committee is composed of clinical leaders, researchers, and strategic partner advisors from across Canada.
+                The CAS Executive Committee is composed of clinical leaders, researchers, strategic partner advisors from across Canada. This group guides platform strategy, ensures ethical oversight, and supports resource curation while advancing clinical practice and patient outcomes.
               </p>
 
               <div className="space-y-4 mb-8">

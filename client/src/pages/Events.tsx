@@ -265,9 +265,9 @@ const newsItems = [
   },
   {
     id: 2,
-    title: "MAGNITUDE Clinical Trial Enrollment Placed on Hold",
-    date: "2025-10-27",
-    description: "On October 27, 2025, Intellia Therapeutics paused enrollment in its MAGNITUDE clinical trial after one participant experienced severe elevations in liver transaminases, meeting the study's pre-defined safety criteria. The participant was hospitalized and sadly passed away from complications of acute liver failure. Subsequently, the U.S. FDA placed the trial on clinical hold.\n\nThe MAGNITUDE (NCT06128629) trial is evaluating nexiguran ziclumeran (nex-z) for the treatment of ATTR cardiomyopathy using CRISPR/Cas9 technology.",
+    title: "MAGNITUDE Clinical Trial Enrollment Hold Lifted",
+    date: "2026-03-02",
+    description: "On October 27, 2025, Intellia Therapeutics paused enrollment in its MAGNITUDE clinical trial after one participant experienced severe elevations in liver transaminases, meeting the study's pre-defined safety criteria. The participant was hospitalized and sadly passed away from complications of acute liver failure. Subsequently, the U.S. FDA placed the trial on clinical hold. On March 2, 2026, the U.S. FDA lifted this pause, permitting ongoing enrollment in the clinical trial that now includes enhanced monitoring of liver laboratory tests, guidance for management if they become abnormal, and new exclusion criteria to reduce the risk of liver abnormalities occurring.\n\nThe MAGNITUDE (NCT06128629) trial is evaluating nexiguran ziclumeran (nex-z) for the treatment of ATTR cardiomyopathy using CRISPR/Cas9 technology.",
     category: "Clinical Trial",
   },
   {
@@ -438,8 +438,8 @@ All CAS members are welcome to join; the Zoom link will be sent by e-mail to all
           content: `In December 2025, Health Canada provided the Notice of Compliance for vutrisiran (Amvuttra, Alnylam Pharmaceuticals) for the treatment of wild-type or hereditary transthyretin-mediated amyloidosis cardiomyopathy. The approval broadens the indication for vutrisiran, from its existing indication for the treatment Stage 1 or stage 2 polyneuropathy in patients with hereditary transthyretin-mediated amyloidosis.`,
         },
         {
-          title: "MAGNITUDE Clinical Trial Enrollment Placed on Hold",
-          content: `On October 27, 2025, Intellia Therapeutics paused enrollment in its MAGNITUDE clinical trial after one participant experienced severe elevations in liver transaminases, meeting the study's pre-defined safety criteria. The participant was hospitalized and sadly passed away from complications of acute liver failure. Subsequently, the U.S. FDA placed the trial on clinical hold. The MAGNITUDE (NCT06128629) trial is evaluating nexiguran ziclumeran (nex-z) for the treatment of ATTR cardiomyopathy using CRISPR/Cas9 technology.`,
+          title: "MAGNITUDE Clinical Trial Enrollment Hold Lifted",
+          content: `On October 27, 2025, Intellia Therapeutics paused enrollment in its MAGNITUDE clinical trial after one participant experienced severe elevations in liver transaminases, meeting the study's pre-defined safety criteria. The participant was hospitalized and sadly passed away from complications of acute liver failure. Subsequently, the U.S. FDA placed the trial on clinical hold. On March 2, 2026, the U.S. FDA lifted this pause, permitting ongoing enrollment in the clinical trial that now includes enhanced monitoring of liver laboratory tests, guidance for management if they become abnormal, and new exclusion criteria to reduce the risk of liver abnormalities occurring. The MAGNITUDE (NCT06128629) trial is evaluating nexiguran ziclumeran (nex-z) for the treatment of ATTR cardiomyopathy using CRISPR/Cas9 technology.`,
         },
         {
           title: "International Symposium on Amyloidosis",

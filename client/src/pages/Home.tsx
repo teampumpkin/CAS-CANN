@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
       <WelcomeSection />
       <AboutAmyloidosisSection />
-      {isStaging() && <SummitRecapSection />}
+      <SummitRecapSection />
       {showMapSection && <DirectoryPreviewSection />}
       <EventsNewsletterSection />
     </main>

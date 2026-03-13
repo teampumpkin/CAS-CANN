@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "ZDloTE8x-35plkZflQZED"
+uri = "file://docs/newsletter-campaign-guide.md"
+type = "text"
+title = "CAS / CANN Newsletter Campaign Guide"

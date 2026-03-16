@@ -11,9 +11,32 @@ import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, Component, ReactNode } from "react";
 import { Loader2 } from "lucide-react";
 import { isStaging } from "@/hooks/useEnvironment";
+
+class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromError(error: Error) { return { error }; }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ padding: 40, fontFamily: "monospace", color: "red" }}>
+          <h2>Runtime Error — check this to fix the blank page:</h2>
+          <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+            {this.state.error.message}
+            {"\n\n"}
+            {this.state.error.stack}
+          </pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 // Lazy load components for better performance
 const Home = lazy(() => import("@/pages/Home"));
@@ -146,6 +169,7 @@ function Router() {
 
 function App() {
   return (
+    <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <LanguageProvider>
@@ -178,6 +202,7 @@ function App() {
         </LanguageProvider>
       </ThemeProvider>
     </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

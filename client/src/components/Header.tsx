@@ -136,21 +136,17 @@ export default function Header() {
           ],
     },
     { name: t("nav.getInvolved"), href: "/get-involved" },
-    ...(stagingOnly
-      ? [
-          {
-            name: t("nav.eventsAndNews"),
-            href: "/events-and-news",
-            hasDropdown: true,
-            dropdownItems: [
-              { name: t("nav.summit"), href: "/events-and-news#summit" },
-              { name: t("nav.journalClub"), href: "/journal-club" },
-              { name: t("nav.cannEvents"), href: "/cann-resources#cann-events" },
-              { name: t("nav.news"), href: "/events-and-news#news" },
-            ],
-          },
-        ]
-      : [{ name: t("nav.events"), href: "/events" }]),
+    {
+      name: t("nav.eventsAndNews"),
+      href: "/events-and-news",
+      hasDropdown: true,
+      dropdownItems: [
+        { name: t("nav.summit"), href: "/events-and-news#summit" },
+        { name: t("nav.journalClub"), href: "/journal-club" },
+        { name: t("nav.cannEvents"), href: "/cann-resources#cann-events" },
+        { name: t("nav.news"), href: "/events-and-news#news" },
+      ],
+    },
     {
       name: "CANN",
       href: "#cann",

@@ -61,11 +61,13 @@ The codebase uses `VITE_ENVIRONMENT` to control feature visibility between stagi
 **Staging Features** (`VITE_ENVIRONMENT=staging` or unset):
 - Interactive Healthcare Directory Map on homepage
 - Upload Resource and Manage Resources navigation items
+
+**Both Environments (Staging + Production):**
 - "Events and News" dropdown with: Canadian Amyloidosis Summit, CAS Journal Club, CANN Events, News
+- Summit Recap section on homepage
 
 **Production Features** (`VITE_ENVIRONMENT=production`):
 - No map section on homepage
-- Simple "Events" link (no dropdown)
 - Resources dropdown shows only Partnerships
 
 **Implementation**:

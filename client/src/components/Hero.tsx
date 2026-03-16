@@ -19,7 +19,7 @@ export default function Hero() {
       icon: Calendar,
       label: t("hero.tiles.events.label"),
       description: t("hero.tiles.events.description"),
-      href: "/events",
+      href: "/events-and-news",
     },
   ];
 

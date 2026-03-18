@@ -65,6 +65,10 @@ export default function JoinCAS() {
       amyloidosisType: undefined,
       institution: "",
       wantsServicesMapInclusion: undefined,
+      centerName: "",
+      centerAddress: "",
+      centerPhone: "",
+      centerFax: "",
       wantsCommunications: undefined,
       cannCommunications: undefined,
       noMemberName: "",
@@ -75,6 +79,7 @@ export default function JoinCAS() {
 
   const wantsMembership = form.watch("wantsMembership");
   const wantsCANNMembership = form.watch("wantsCANNMembership");
+  const wantsServicesMapInclusion = form.watch("wantsServicesMapInclusion");
   
   const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
 
@@ -448,6 +453,90 @@ export default function JoinCAS() {
                             </FormItem>
                           )}
                         />
+
+                        {/* Question 9 branching: Centre/Clinic details when Services Map = Yes */}
+                        <AnimatePresence>
+                          {wantsServicesMapInclusion === "Yes" && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pl-4 border-l-2 border-primary/30 space-y-4 mt-2">
+                                <FormField
+                                  control={form.control}
+                                  name="centerName"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel>{t('joinCAS.q9.centerName')}</FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          {...field}
+                                          placeholder={t('joinCAS.q9.centerNamePlaceholder')}
+                                          data-testid="input-center-name"
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+                                <FormField
+                                  control={form.control}
+                                  name="centerAddress"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel>{t('joinCAS.q9.centerAddress')}</FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          {...field}
+                                          placeholder={t('joinCAS.q9.centerAddressPlaceholder')}
+                                          data-testid="input-center-address"
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+                                <FormField
+                                  control={form.control}
+                                  name="centerPhone"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel>{t('joinCAS.q9.centerPhone')}</FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          {...field}
+                                          placeholder={t('joinCAS.q9.centerPhonePlaceholder')}
+                                          data-testid="input-center-phone"
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+                                <FormField
+                                  control={form.control}
+                                  name="centerFax"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel>{t('joinCAS.q9.centerFax')}</FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          {...field}
+                                          placeholder={t('joinCAS.q9.centerFaxPlaceholder')}
+                                          data-testid="input-center-fax"
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
 
                         {/* Question 10: CAS Communications */}
                         <FormField

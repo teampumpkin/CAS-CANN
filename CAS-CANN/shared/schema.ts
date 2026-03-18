@@ -77,6 +77,10 @@ export const casRegistrationSchema = z.object({
   amyloidosisType: z.enum(["ATTR", "AL", "Both ATTR and AL", "Other"]).optional(), // Q7: visible to ALL members
   institution: z.string().optional(),
   wantsServicesMapInclusion: z.enum(["Yes", "No"]).optional(), // Q9
+  centerName: z.string().optional(), // Q9 branch: Center or Clinic Name
+  centerAddress: z.string().optional(), // Q9 branch: Center or Clinic Address
+  centerPhone: z.string().optional(), // Q9 branch: Center or Clinic Phone Number
+  centerFax: z.string().optional(), // Q9 branch: Center or Clinic Fax Number
   wantsCommunications: z.enum(["Yes", "No"]).optional(), // Q10
   
   // Question 11: CANN Communications (shown only when Q2 = "Yes")

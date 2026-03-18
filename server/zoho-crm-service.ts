@@ -1689,6 +1689,14 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
     zohoData.Services_Map_Inclusion = wantsMap ? 'Yes' : 'No';
     zohoData.wantsservicesmapinclusion = wantsMap;
     zohoData.servicesmapconsent = wantsMap;
+
+    // --- Services map centre/clinic details (Q9 branching fields) ---
+    if (wantsMap) {
+      if (formData.centerName) zohoData.Map_Clinic_Name = formData.centerName;
+      if (formData.centerAddress) zohoData.Map_Clinic_Address = formData.centerAddress;
+      if (formData.centerPhone) zohoData.Map_Clinic_Phone = formData.centerPhone;
+      if (formData.centerFax) zohoData.Map_Clinic_Fax = formData.centerFax;
+    }
   }
 
   // --- Non-member inquiry fields ---

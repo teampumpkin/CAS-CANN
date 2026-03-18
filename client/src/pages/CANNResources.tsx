@@ -327,6 +327,21 @@ export default function CANNResources() {
     return new Date(year, month - 1, day);
   };
 
+  // Build the full Educational Series list: merge past edu events from allCANNEvents
+  // with the static historical educationalSeries entries, sorted newest first.
+  // This means any CANN Educational Series event automatically rolls in once it has passed.
+  const pastEduEventSessions = allCANNEvents
+    .filter(event => event.presentationTitle !== undefined && isEventPast(event.rawDate))
+    .map(event => ({
+      rawDate: event.rawDate,
+      speaker: event.speaker || '',
+      topic: event.presentationTitle || '',
+    }));
+
+  const allEducationalSeries = [...pastEduEventSessions, ...educationalSeries].sort((a, b) =>
+    parseLocalDate(b.rawDate).getTime() - parseLocalDate(a.rawDate).getTime()
+  );
+
   // Categorize events into upcoming and past
   const categorizeEvents = () => {
     const upcoming = allCANNEvents.filter(event => !isEventPast(event.rawDate));
@@ -522,7 +537,7 @@ export default function CANNResources() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {educationalSeries.map((session, index) => (
+            {allEducationalSeries.map((session, index) => (
               <motion.div
                 key={index}
                 className="h-full"

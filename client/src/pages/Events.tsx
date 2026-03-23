@@ -91,6 +91,10 @@ const journalClubSessions = [
         title: "Challenges in equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis",
         presenter: "Dr. Anna Lehman, and Emilie Theberge, PhD Candidate, University of British Columbia",
       },
+      {
+        title: "From Fragmentation to Coordination: Designing Digital Infrastructure to Support Multidisciplinary Amyloidosis Care",
+        presenter: "Mary O'Sullivan, RN, MHI, Doctor of Nursing Candidate, University of Toronto",
+      },
     ],
   },
   {
@@ -199,7 +203,7 @@ const allEvents = [
     location: "Virtual Event",
     type: "Journal Club",
     description:
-      "One-hour virtual session focusing on equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis.",
+      "One-hour virtual session featuring presentations on equitable access to diagnosis and treatment for hereditary transthyretin amyloidosis, and designing digital infrastructure to support multidisciplinary amyloidosis care.",
     image: "/api/placeholder/400/250",
     registrationUrl: "#",
     requiresMembershipCTA: true,
@@ -208,6 +212,10 @@ const allEvents = [
       {
         title: "Challenges in equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis",
         presenter: "Dr. Anna Lehman, and Emilie Theberge, PhD Candidate, University of British Columbia",
+      },
+      {
+        title: "From Fragmentation to Coordination: Designing Digital Infrastructure to Support Multidisciplinary Amyloidosis Care",
+        presenter: "Mary O'Sullivan, RN, MHI, Doctor of Nursing Candidate, University of Toronto",
       },
     ],
   },

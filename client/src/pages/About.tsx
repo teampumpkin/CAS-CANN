@@ -323,60 +323,6 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* CAS Director */}
-          <div className="mb-12">
-            <motion.h3 
-              className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              CAS Director
-            </motion.h3>
-            <div className="flex justify-center">
-              <motion.div
-                className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 backdrop-blur-xl rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30 hover:border-[#00AFE6]/40 dark:hover:border-[#00AFE6]/50 hover:shadow-2xl hover:shadow-[#00AFE6]/20 transition-all duration-300 group w-full max-w-2xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex gap-5 items-center mb-4">
-                  <div className="relative flex-shrink-0">
-                    <div className="w-32 h-32 rounded-2xl overflow-hidden ring-2 ring-[#00AFE6]/30">
-                      <img src={nowellFinePhoto} alt="Nowell Fine" className="w-full h-full object-cover object-top" />
-                    </div>
-                  </div>
-                  <div className="min-w-0">
-                    <h4 className="text-base font-bold text-gray-900 dark:text-white mb-0.5 leading-snug">
-                      Nowell Fine, MD, SM, FRCPC
-                    </h4>
-                    <p className="text-[#00AFE6] font-semibold text-sm">
-                      University of Calgary
-                    </p>
-                  </div>
-                </div>
-                <div className="border-t border-[#00AFE6]/20 pt-4">
-                  <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed line-clamp-3 mb-2">
-                    Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.
-                  </p>
-                  <button
-                    onClick={() => setSelectedMember({
-                      name: "Nowell Fine, MD, SM, FRCPC",
-                      institution: "University of Calgary",
-                      photo: nowellFinePhoto,
-                      description: "Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.",
-                    })}
-                    className="text-sm font-semibold text-[#00AFE6] hover:text-[#00DD89] transition-colors duration-200 underline underline-offset-2"
-                  >
-                    Read More
-                  </button>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-
           {/* CAS Executive Committee Members */}
           <div>
             <motion.h3 
@@ -390,6 +336,12 @@ export default function About() {
             </motion.h3>
             <div className="grid md:grid-cols-2 gap-8">
               {[
+                {
+                  name: "Nowell Fine, MD, SM, FRCPC",
+                  institution: "University of Calgary",
+                  photo: nowellFinePhoto,
+                  description: "Dr. Fine is a heart failure cardiologist and echocardiologist in the Departments of Cardiac Sciences, Medicine, and Community Health Sciences at the University of Calgary's Cumming School of Medicine. He is the Director of the Amyloidosis Program of Calgary, Director of the Cardiac Amyloidosis Clinic and Co-Principal Investigator for the Canadian Registry for Amyloidosis Research.",
+                },
                 {
                   name: "Margot K. Davis, MD, MSc, FRCPC, FCCS",
                   institution: "University of British Columbia",

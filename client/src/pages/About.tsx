@@ -196,7 +196,6 @@ export default function About() {
           </div>
         </div>
       </ParallaxBackground>
-
       {/* Executive Committee Section */}
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
@@ -236,9 +235,7 @@ export default function About() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-6">
-                The CAS Executive Committee is composed of clinical leaders, researchers and, and partner advisors from across Canada.
-              </p>
+              <p className="text-lg text-gray-600 dark:text-white/70 leading-relaxed mb-6">The CAS Executive Committee is composed of clinical leaders, researchers, and strategic partner advisors from across Canada.</p>
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
@@ -427,7 +424,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
       {/* Vision Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-white/10">
         <div className="container mx-auto px-6">
@@ -518,7 +514,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
       {/* Values Section */}
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
@@ -574,7 +569,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
       {/* What We Do Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-900 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" />
@@ -682,7 +676,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
       {/* Bio Modal */}
       <AnimatePresence>
         {selectedMember && (

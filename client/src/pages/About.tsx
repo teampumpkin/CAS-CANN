@@ -34,6 +34,7 @@ import margotDavisPhoto from "@assets/Margo_Davis_1772024001281.jpg";
 import michelleMezeiPhoto from "@assets/Michelle_Mezei_1772024001282.jpeg";
 import victorJimenezPhoto from "@assets/Victor_Jimenez-Zepeda_1772024001277.jpg";
 import janVeenhuyzenPhoto from "@assets/Jan_Veenhuyzen_1772024001281.jpg";
+import geneviereMattePhoto from "@assets/L476N-03WTAMD_MatteG_02_1774257950527.jpg";
 
 type CommitteeMember = {
   name: string;
@@ -364,8 +365,10 @@ export default function About() {
                   description: "Jan is the program manager of the Amyloidosis Program of Calgary, Libin Cardiovascular Institute, Department of Cardiac Sciences at the University of Calgary. She has 30 years of cardiac nursing experience in diverse practice settings ranging from critical care to ambulatory care, and more than 15 years of clinical research experience. Jan has served in various leadership roles to develop and advance specialized clinical and research programs. Her role with the CAS includes organizational advancement through strategic planning and operational oversight. She is the Chair of the Canadian Amyloidosis Nursing Network (CANN) and past Co-Chair of the Prairie Amyloidosis Nursing Network (PANN).",
                 },
                 {
-                  name: "Genevieve Matte, MD",
+                  name: "Geneviève Matte, MD",
                   institution: "Université de Montréal",
+                  photo: geneviereMattePhoto,
+                  description: "Dr. Geneviève Matte is a neurologist and clinician-scientist at the Centre hospitalier de l'Université de Montréal (CHUM) and the CHUM Research Centre, and has been an Assistant Clinical Professor in the Department of Neurosciences at the Université de Montréal since 2010. Dr. Matte subsequently completed advanced training in neuromuscular medicine at the Cleveland Clinic Foundation in Cleveland, Ohio.\n\nUpon joining the CHUM Department of Neurology, Dr. Matte became actively involved in the care of patients with amyotrophic lateral sclerosis (ALS) and other neuromuscular disorders. She also serves as the neurology lead for the CHUM amyloidosis referral program, receiving consultations from across the province of Quebec.\n\nFrom 2020 to 2024, Dr. Matte was Co-Chair of the Canadian ALS Research Network (CALS). She is currently a member of the Executive Committee of the Canadian Amyloidosis Society, contributes to multiple initiatives aimed at improving awareness and patient care, and has co-authored two peer-reviewed publications in the field.",
                 },
                 {
                   name: "François Tournoux, MD",
@@ -724,10 +727,12 @@ export default function About() {
               </div>
 
               {/* Modal body */}
-              <div className="p-6">
-                <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed">
-                  {selectedMember.description}
-                </p>
+              <div className="p-6 space-y-4">
+                {selectedMember.description?.split('\n\n').map((paragraph, i) => (
+                  <p key={i} className="text-gray-600 dark:text-white/70 text-sm leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </motion.div>
           </motion.div>

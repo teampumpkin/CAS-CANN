@@ -1158,6 +1158,7 @@ const translations = {
     'journalClub.topics.interestingCase': 'Interesting amyloidosis case',
     'journalClub.topics.hereditaryATTRMixed': 'Hereditary ATTR Amyloidosis with Mixed Phenotypes: Therapeutic Prioritization When Cardiac and Neurologic Trajectories Diverge',
     'journalClub.topics.hATTRAccess': 'Challenges in equitable and affordable access to diagnosis and treatment for hereditary transthyretin amyloidosis',
+    'journalClub.topics.digitalInfrastructure': 'From Fragmentation to Coordination: Designing Digital Infrastructure to Support Multidisciplinary Amyloidosis Care',
     'journalClub.topics.tbd': 'Topic To Be Announced',
 
     // Join CAS/CANN Form
@@ -2369,6 +2370,7 @@ const translations = {
     'journalClub.topics.interestingCase': 'Cas intéressant d\'amylose',
     'journalClub.topics.hereditaryATTRMixed': 'Amylose héréditaire à transthyrétine avec phénotypes mixtes : priorisation thérapeutique lorsque les trajectoires cardiaques et neurologiques divergent',
     'journalClub.topics.hATTRAccess': 'Défis liés à un accès équitable et abordable au diagnostic et au traitement de l\'amylose à transthyrétine héréditaire',
+    'journalClub.topics.digitalInfrastructure': 'De la fragmentation à la coordination : Concevoir une infrastructure numérique pour soutenir les soins multidisciplinaires en amylose',
     'journalClub.topics.tbd': 'Sujet à annoncer',
 
     // Join CAS/CANN Form

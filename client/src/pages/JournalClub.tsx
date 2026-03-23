@@ -88,6 +88,7 @@ const allSessions: Session[] = [
     dateKey: "journalClub.dates.june2026",
     topics: [
       { topicKey: "journalClub.topics.hATTRAccess", presenterName: "Dr. Anna Lehman, and Emilie Theberge, PhD Candidate, University of British Columbia" },
+      { topicKey: "journalClub.topics.digitalInfrastructure", presenterName: "Mary O'Sullivan, RN, MHI, Doctor of Nursing Candidate, University of Toronto" },
     ],
     location: "Virtual",
     registrationNotRequired: true,

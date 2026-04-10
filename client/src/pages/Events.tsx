@@ -112,10 +112,10 @@ const allEvents = [
   {
     id: 1,
     title: "Canadian Amyloidosis Summit",
-    date: "2026-10-15",
-    displayDate: "Fall 2026 – date TBD",
+    date: "2026-10-23",
+    displayDate: "October 23–25, 2026",
     time: "TBD",
-    location: "TBD",
+    location: "Toronto Airport Marriott, Toronto, ON",
     type: "In-person & Virtual",
     description:
       "This annual educational conference is jointly hosted by the CAS and Transthyretin Amyloidosis Canada (TAC). The Summit unites both amyloidosis healthcare professionals and patients with accredited scientific sessions for professionals and dedicated sessions for patients/caregivers.",

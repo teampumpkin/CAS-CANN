@@ -797,7 +797,7 @@ export default function CANNResources() {
                             </div>
                           </div>
                           <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug">
-                            {event.title}{event.presentationTitle && ` - ${event.presentationTitle}`}
+                            {event.presentationTitle || event.title}
                           </h3>
                           {/* Speaker - in header below presentation title */}
                           {event.speaker && (

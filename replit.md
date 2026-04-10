@@ -55,6 +55,11 @@ Key features include:
   - **File Preview System**: Smart file type detection supporting images and PDFs.
   - **Placeholder URL Handling**: Graceful UX for simulated file uploads.
 
+### Deployment Environments
+**IMPORTANT — Two separate environments exist:**
+- **Staging**: Replit publish (the "Publish" button in Replit). Used for preview and testing.
+- **Production**: Git push to the production repository. This is the live site served via AWS ECS. Do NOT use Replit publish to update production.
+
 ### Environment-Based Feature Flags
 The codebase uses `VITE_ENVIRONMENT` to control feature visibility between staging (Replit) and production (AWS ECS):
 

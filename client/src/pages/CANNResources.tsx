@@ -309,8 +309,8 @@ export default function CANNResources() {
       id: 5,
       title: t('cannResources.events.summit.title'),
       date: t('cannResources.events.summit.date'),
-      rawDate: "2026-10-15", // Fall 2026 TBD
-      displayDate: "Fall 2026 – date TBD",
+      rawDate: "2026-10-23",
+      displayDate: "October 23–25, 2026",
       time: t('cannResources.events.summit.time'),
       location: t('cannResources.events.summit.location'),
       format: t('cannResources.events.summit.format'),

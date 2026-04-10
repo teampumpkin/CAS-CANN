@@ -136,7 +136,7 @@ const translations = {
     // Event Cards
     'events.summit.title': 'Canadian Amyloidosis Summit',
     'events.summit.description': 'This annual educational conference is jointly hosted by the CAS and Transthyretin Amyloidosis Canada (TAC). The Summit unites both amyloidosis healthcare professionals and patients with accredited scientific sessions for professionals and dedicated sessions for patients/caregivers.',
-    'events.summit.date': 'Fall 2026 – date TBD',
+    'events.summit.date': 'October 23–25, 2026',
     'events.summit.type': 'In-person & Virtual',
     'events.journalClub.title': 'CAS Journal Club',
     'events.journalClub.description': 'Expert presentations of clinical cases and related discussion, journal review and/or clinical trial updates.',
@@ -1381,7 +1381,7 @@ const translations = {
     // Event Cards
     'events.summit.title': 'Sommet Canadien sur l\'Amylose',
     'events.summit.description': 'Cette conférence éducative annuelle est organisée conjointement par CAS et Transthyrétin Amylose Canada (TAC). Le Sommet réunit les professionnels de la santé spécialisés en amylose et les patients avec des sessions scientifiques accréditées pour les professionnels et des sessions dédiées aux patients/aidants.',
-    'events.summit.date': 'Automne 2026 – date à confirmer',
+    'events.summit.date': '23–25 octobre 2026',
     'events.summit.type': 'En personne et virtuel',
     'events.journalClub.title': 'Club de Lecture CAS',
     'events.journalClub.description': 'Présentations d\'experts sur des cas cliniques et discussions connexes, revue de littérature et/ou mises à jour sur les essais cliniques.',

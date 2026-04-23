@@ -405,6 +405,128 @@ export async function runSSOTValidation(): Promise<ValidationReport> {
   return report;
 }
 
+export interface ApplyChangesOptions {
+  dryRun: boolean;
+  confirmConsentDeletion: boolean;
+}
+
+export interface ApplyChangesResult {
+  dryRun: boolean;
+  deleted: Array<{ zohoId: string; name: string; email: string; status: string }>;
+  created: Array<{ rowIndex: number; name: string; email: string; zohoId?: string; status: string }>;
+  skipped: Array<{ zohoId?: string; rowIndex?: number; name: string; email: string; reason: string }>;
+  errors: Array<{ zohoId?: string; rowIndex?: number; name: string; email: string; error: string }>;
+  counts: { deleted: number; created: number; skipped: number; errors: number };
+}
+
+export async function applySSOTChanges(options: ApplyChangesOptions): Promise<ApplyChangesResult> {
+  const { dryRun, confirmConsentDeletion } = options;
+  console.log(`[SSOT Phase 2] Starting apply-changes (dryRun=${dryRun}, confirmConsentDeletion=${confirmConsentDeletion})`);
+
+  const report = await runSSOTValidation();
+
+  const deleted: ApplyChangesResult['deleted'] = [];
+  const created: ApplyChangesResult['created'] = [];
+  const skipped: ApplyChangesResult['skipped'] = [];
+  const errors: ApplyChangesResult['errors'] = [];
+
+  for (const candidate of report.removalCandidates) {
+    const name = `${normalize(candidate.crmRecord.First_Name)} ${normalize(candidate.crmRecord.Last_Name)}`.trim();
+    const email = normalize(candidate.crmRecord.Email);
+
+    if (candidate.consentDataAtRisk.hasConsentData && !confirmConsentDeletion) {
+      skipped.push({
+        zohoId: candidate.zohoId,
+        name,
+        email,
+        reason: 'Has consent data — requires explicit confirmConsentDeletion=true',
+      });
+      console.log(`[SSOT Phase 2] Skipping ${name} (${candidate.zohoId}) — consent data at risk`);
+      continue;
+    }
+
+    if (dryRun) {
+      deleted.push({ zohoId: candidate.zohoId, name, email, status: 'would-delete' });
+      console.log(`[SSOT Phase 2] [DRY RUN] Would delete: ${name} (${candidate.zohoId})`);
+    } else {
+      try {
+        const result = await zohoCRMService.deleteRecord('Leads', candidate.zohoId);
+        deleted.push({ zohoId: candidate.zohoId, name, email, status: result.status || 'success' });
+        console.log(`[SSOT Phase 2] Deleted: ${name} (${candidate.zohoId}) — ${result.status}`);
+      } catch (err) {
+        const errMsg = err instanceof Error ? err.message : String(err);
+        errors.push({ zohoId: candidate.zohoId, name, email, error: errMsg });
+        console.error(`[SSOT Phase 2] Delete error for ${name} (${candidate.zohoId}):`, errMsg);
+      }
+    }
+  }
+
+  for (const candidate of report.newRecordCandidates) {
+    const firstName = normalize(candidate.ssotRow.first_name);
+    const lastName = normalize(candidate.ssotRow.last_name);
+    const email = normalize(candidate.ssotRow.email);
+    const name = `${firstName} ${lastName}`.trim() || `Row ${candidate.rowIndex}`;
+
+    if (candidate.missingEmail) {
+      skipped.push({
+        rowIndex: candidate.rowIndex,
+        name,
+        email: '',
+        reason: 'Missing email — cannot create CRM record without email',
+      });
+      console.log(`[SSOT Phase 2] Skipping row ${candidate.rowIndex} (${name}) — no email`);
+      continue;
+    }
+
+    if (dryRun) {
+      created.push({ rowIndex: candidate.rowIndex, name, email, status: 'would-create' });
+      console.log(`[SSOT Phase 2] [DRY RUN] Would create: ${name} <${email}> (row ${candidate.rowIndex})`);
+    } else {
+      try {
+        const institution = normalize(candidate.ssotRow.institution);
+        const discipline = normalize(candidate.ssotRow.discipline);
+        const subspecialty = normalize(candidate.ssotRow.subspecialty);
+
+        const recordData: Record<string, any> = {
+          Last_Name: lastName || '(Unknown)',
+          Lead_Source: 'SSOT Import',
+        };
+        if (firstName) recordData.First_Name = firstName;
+        if (email) recordData.Email = email;
+        if (institution) recordData.Institution_Name = institution;
+        if (discipline) recordData.Professional_Designation = discipline;
+        if (subspecialty) recordData.subspecialty = subspecialty;
+
+        const newRecord = await zohoCRMService.createRecord('Leads', recordData);
+        const newId = newRecord.id || newRecord.details?.id;
+        created.push({ rowIndex: candidate.rowIndex, name, email, zohoId: String(newId || ''), status: 'created' });
+        console.log(`[SSOT Phase 2] Created: ${name} <${email}> → Zoho ID ${newId}`);
+      } catch (err) {
+        const errMsg = err instanceof Error ? err.message : String(err);
+        errors.push({ rowIndex: candidate.rowIndex, name, email, error: errMsg });
+        console.error(`[SSOT Phase 2] Create error for ${name} (row ${candidate.rowIndex}):`, errMsg);
+      }
+    }
+  }
+
+  const result: ApplyChangesResult = {
+    dryRun,
+    deleted,
+    created,
+    skipped,
+    errors,
+    counts: {
+      deleted: deleted.length,
+      created: created.length,
+      skipped: skipped.length,
+      errors: errors.length,
+    },
+  };
+
+  console.log(`[SSOT Phase 2] ✅ Done (dryRun=${dryRun}):`, result.counts);
+  return result;
+}
+
 export function buildHumanReadableSummary(report: ValidationReport): string {
   const s = report.summary;
   const lines: string[] = [];

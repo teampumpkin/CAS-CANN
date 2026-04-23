@@ -677,6 +677,27 @@ export class ZohoCRMService {
     }
   }
 
+  async deleteRecord(moduleName: string, recordId: string): Promise<{ status: string; code: string; message: string }> {
+    try {
+      if (!recordId) {
+        throw new Error('Record ID is required for deletion');
+      }
+      const response = await this.makeRequest<ZohoApiResponse<any>>(
+        `/${moduleName}?ids=${recordId}`,
+        'DELETE'
+      );
+      if (response.data && response.data.length > 0) {
+        const result = response.data[0];
+        console.log(`[Zoho v8] Deleted record ${recordId} from ${moduleName}:`, result.status);
+        return result;
+      }
+      throw new Error('No data returned from delete request');
+    } catch (error) {
+      console.error(`Failed to delete record ${recordId} from ${moduleName}:`, error);
+      throw error;
+    }
+  }
+
   async updateRecord(moduleName: string, recordId: string, recordData: ZohoRecord): Promise<ZohoRecord> {
     try {
       // v8 API best practice: validate inputs

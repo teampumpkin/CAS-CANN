@@ -18,7 +18,7 @@ import { emailNotificationService } from "./email-notification-service";
 import { zohoWorkflowService } from "./zoho-workflow-service";
 import { formConfigEngine } from "./form-config-engine";
 import { z } from "zod";
-import { runSSOTValidation, buildHumanReadableSummary } from "./ssot-validation-service";
+import { runSSOTValidation, buildHumanReadableSummary, applySSOTChanges } from "./ssot-validation-service";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Basic ping endpoint for deployment verification
@@ -2846,6 +2846,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         error: error instanceof Error ? error.message : 'SSOT validation failed',
+      });
+    }
+  });
+
+  // SSOT Apply Changes (Phase 2 - deletions and new record creation)
+  app.post("/api/admin/zoho/apply-ssot-changes", requireAutomationAuth, async (req, res) => {
+    try {
+      const schema = z.object({
+        dryRun: z.boolean().default(true),
+        confirmConsentDeletion: z.boolean().default(false),
+      });
+      const parsed = schema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ success: false, error: 'Invalid request body', details: parsed.error.issues });
+      }
+      const { dryRun, confirmConsentDeletion } = parsed.data;
+      console.log(`[Admin] apply-ssot-changes called: dryRun=${dryRun}, confirmConsentDeletion=${confirmConsentDeletion}`);
+      const result = await applySSOTChanges({ dryRun, confirmConsentDeletion });
+      res.json({ success: true, result });
+    } catch (error) {
+      console.error('[Admin] apply-ssot-changes failed:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'apply-ssot-changes failed',
       });
     }
   });

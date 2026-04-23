@@ -1,7 +1,7 @@
 # CAS / CANN CRM — Client Handover Report
 
 **Prepared For**: Blue Monarch Consulting
-**Date**: February 24, 2026
+**Date**: February 24, 2026 *(updated April 23, 2026 — see Addendum)*
 **Scope**: Response to *CAS/CANN CRM Architecture and Data Completeness — Internal Review*
 **Status**: All items addressed. CRM is operational and ready for campaign activation.
 
@@ -30,15 +30,16 @@
 
 ## 1. Executive Summary
 
-The Zoho CRM implementation for CAS and CANN is structurally complete and data-clean. All form-captured attributes persist as discrete, queryable CRM fields. Membership dependency logic is enforced server-side on every submission path. All 245 Lead records have been classified, with zero null values in any membership, consent, or classification field. Four custom views are deployed for operational segmentation. The system is ready to support outbound communications and campaign execution.
+The Zoho CRM implementation for CAS and CANN is structurally complete and data-clean. All form-captured attributes persist as discrete, queryable CRM fields. Membership dependency logic is enforced server-side on every submission path. All Lead records have been classified, with zero null values in any membership, consent, or classification field. Six custom views are deployed for operational segmentation. The system is ready to support outbound communications and campaign execution.
 
-**Key Metrics:**
-- **245 Leads** — 214 Members, 31 Inquiries (100% classified)
+**Key Metrics (as of April 23, 2026):**
+- **247 Leads** — classified records post-SSOT reconciliation *(was 245 at Feb 2026 report)*
 - **257 Contacts** — linked to institutional Accounts
 - **258 Accounts** — deduplicated institutions with province and type classification
 - **0 contradictory records** — CANN=Yes always accompanies CAS=Yes
 - **0 null consent fields** — every record has explicit Yes/No for all 3 consent fields
 - **11 custom fields** on Leads — clean schema, 47 legacy junk fields removed
+- **6 custom views** — including two new January filtered views (added April 2026)
 
 ---
 
@@ -62,7 +63,7 @@ The prior extract represented a filtered view. The full Leads module schema cont
 
 | Module | Records | Purpose |
 |--------|---------|---------|
-| **Leads** | 245 | Primary registration/intake data |
+| **Leads** | 247 *(post-April 2026 SSOT sync)* | Primary registration/intake data |
 | **Contacts** | 257 | People records linked to institutions |
 | **Accounts** | 258 | Deduplicated institutions/organizations |
 
@@ -274,7 +275,7 @@ All records have a populated `Lead_Source` field identifying their origin:
 
 ## 13. Operational List Views
 
-Four custom views are deployed in the Zoho CRM Leads module:
+Six custom views are deployed in the Zoho CRM Leads module:
 
 | View Name | Zoho ID | Filter Logic | Purpose |
 |-----------|---------|-------------|---------|
@@ -282,6 +283,10 @@ Four custom views are deployed in the Zoho CRM Leads module:
 | **CANN_Members** | `6999043000001937019` | `CANN_Member = true` | All CANN members |
 | **Website_Registrations** | `6999043000001899022` | `Lead_Source starts with "Website"` | Web form submissions only |
 | **Members_vs_Inquiries** | `6999043000001911093` | `Record_Type is not empty` | Segmented member/inquiry view |
+| **January 2025 – New Registrations** | *(created April 23, 2026)* | `Created_Time Jan 1–31, 2025` | January 2025 intake |
+| **January 2026 – New Registrations** | *(created April 23, 2026)* | `Created_Time Jan 1–31, 2026` | January 2026 intake |
+
+**Accessing the January views:** Leads module → view dropdown (top left) → public views section.
 
 **Additional views constructable** using field criteria (no custom view needed — use Zoho's built-in filter):
 
@@ -358,5 +363,53 @@ Direct mapping of every item requested in the Blue Monarch review document to th
 | Specifications for operational list views aligned to membership and consent logic | §13 | Provided |
 
 ---
+
+---
+
+## Addendum — April 23, 2026 SSOT Reconciliation
+
+This addendum documents the three-phase CRM update completed on April 23, 2026, following delivery of the final SSOT spreadsheet (`2026_04_CAS_CANN_Members_SSOTv6_FINAL`, 232 rows).
+
+### Phase 1 — Validation (Read-Only)
+Full comparison of the SSOT against all CRM Leads records. Output: matched records (by Zoho ID then email), removal candidates, new record candidates, and field-level discrepancies. Report saved to `docs/ssot-validation-report-2026-04.md`.
+
+### Phase 2 — CRM Sync (Live)
+| Action | Count | Detail |
+|--------|-------|--------|
+| Deleted | 2 | `vasi test` (test record), `Unknown / jane.smith@hospital.ca` (dummy) |
+| Created | 2 | Danielle Murray (danielle.murray@pch.ca), Karine Deschenes (karine.deshenes@icm-mhi.org) |
+| Skipped — consent protected | 17 | Have active CAS/CANN/Services Map opt-in data; require manual review |
+| Skipped — missing email | 2 | Md. Pervez Anwar (Row 5), Jing Zeng (Row 6) — add manually once email sourced |
+
+**Post-sync CRM count: 247 Leads** (target 232 requires manual resolution of the 17 consent-protected records and addition of the 2 no-email records).
+
+**Consent-protected records requiring manual review (not in SSOT):**
+
+| Zoho ID | Name | Email | Has CAS Comm | Has CANN Comm | On Services Map |
+|---------|------|-------|-------------|--------------|-----------------|
+| 6999043000001967018 | Devan Hrupp | devan.hrupp@albertahealthservices.ca | Yes | Yes | No |
+| 6999043000001965018 | Karine Deschenes *(duplicate)* | karine.deschenes@icm-mhi.org | Yes | Yes | Yes |
+| 6999043000001961002 | Danielle Murray *(duplicate)* | danielle.murray@phc.ca | Yes | Yes | Yes |
+| 6999043000001917001 | Danielle Murray *(duplicate)* | danielle.murray@phc.ca | Yes | Yes | Yes |
+| 6999043000001916001 | Karine Deschenes *(duplicate)* | karine.deschenes@icm-mhi.org | Yes | Yes | Yes |
+| 6999043000001700031 | Nina Mason | nina.mason@ahs.ca | Yes | No | No |
+| 6999043000001685028 | Anne Marie Carr | Info@madhattr.ca | Yes | No | No |
+| 6999043000001678034 | Melissa Loyola | Melissa.loyola@ahs.ca | Yes | No | No |
+| 6999043000001671021 | Mervyn Carr | merv.carr@gmail.com | Yes | No | No |
+| 6999043000001670050 | Kyla Hayes | kyla.hayes@saskhealthauthortiy.ca | Yes | No | No |
+| 6999043000001558002 | Dorothy Roberts | dorothyroberts1@me.com | Yes | No | No |
+| 6999043000001359201 | Robert Millet | Robertjhmiller@gmail.com | Yes | No | No |
+| 6999043000001354177 | Keith Dares | Kw.dares@gmail.com | Yes | No | No |
+| 6999043000001340236 | Bosley | debra.bosley@albertahealthservices.ca | Yes | No | No |
+| 6999043000001141003 | Mona Mahal | monamahal2@gmail.com | Yes | No | No |
+| 6999043000001080002 | Leanne | leanne.walper@gmail.com | Yes | No | No |
+| 6999043000001023002 | Valérie Fontaine | valerie.fontaine.chum@ssss.gouv.qc.ca | Yes | No | No |
+
+> Danielle Murray and Karine Deschenes each appear **twice** — these are pre-existing duplicate records. Recommend merging or deleting the older duplicate in each pair directly in Zoho.
+
+### Phase 3 — January CRM Views
+Two public views created in the Leads module (confirmed live April 23, 2026):
+- **January 2025 – New Registrations** — leads created Jan 1–31, 2025
+- **January 2026 – New Registrations** — leads created Jan 1–31, 2026
 
 *End of Report*

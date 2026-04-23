@@ -35,4 +35,10 @@ title = "Final Delivery Summary"
 id = "in9vPPdB7OKeTcy2HHnpL"
 uri = "file://docs/phase2-completion-report-2026-04-23.md"
 type = "text"
-title = "CRM SSOT Sync — Final Completion Report (April 23, 2026)"
+title = "Phase 2 Completion Report — April 23, 2026"
+
+[[outputs]]
+id = "ppdAEDYdnqQ30oEZJMSTq"
+uri = "file://docs/crm-handover-report.md"
+type = "text"
+title = "CAS / CANN CRM — Client Handover Report (Updated April 23, 2026)"

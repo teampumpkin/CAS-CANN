@@ -84,14 +84,14 @@ The 232 target is reachable with two manual steps:
 
 ## Phase 3 — January CRM Views Created
 
-Two public filtered views were created in the Zoho CRM Leads module:
+Two public filtered views are now live in the Zoho CRM Leads module:
 
-| View Name | Filter |
-|-----------|--------|
-| January 2025 – New Registrations | Created_Time: Jan 1–31, 2025 |
-| January 2026 – New Registrations | Created_Time: Jan 1–31, 2026 |
+| View Name | Filter | Columns Shown |
+|-----------|--------|---------------|
+| January 2025 – New Registrations | Created_Time Jan 1–31, 2025 | Last Name, First Name, Email, Lead Source |
+| January 2026 – New Registrations | Created_Time Jan 1–31, 2026 | Last Name, First Name, Email, Lead Source |
 
-Both views are sorted by Created_Time (newest first) and show: Last Name, First Name, Email, Date Created, CAS Member, CANN Member, Record Type, Lead Source.
+**How to access:** In Zoho CRM → Leads → click the view dropdown (top left) → scroll to the public views section.
 
 ---
 

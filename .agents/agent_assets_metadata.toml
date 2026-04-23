@@ -11,22 +11,22 @@ title = "CAS / CANN Newsletter Campaign Guide"
 id = "prp6uWidHJvX4chPzUUxH"
 uri = "file://attached_assets/CAS_CANN_ValidationReport_2026_04.xlsx"
 type = "table"
-title = "CAS & CANN — Updated Data Workbook with Validation Sheets (April 2026)"
+title = "SSOT Validation Report (Excel)"
 
 [[outputs]]
 id = "1ZtDMZ_MFEl_DDbjp0_Eh"
 uri = "file://docs/ssot-validation-report-2026-04.md"
 type = "text"
-title = "CAS & CANN — SSOT Validation Report Document (April 2026)"
+title = "SSOT Validation Report (Full Written)"
 
 [[outputs]]
 id = "UELNksazU2uPeM1aScaQ9"
 uri = "file://attached_assets/CAS_CANN_Final_Delivery_2026_04_23.xlsx"
 type = "table"
-title = "CAS & CANN — Final Delivery Sheet (Health Check + All Work Done)"
+title = "CAS & CANN Final Delivery (Excel)"
 
 [[outputs]]
 id = "FvV6dsLuc-ZSeAc7nw-Gk"
 uri = "file://docs/final-delivery-summary-2026-04-23.md"
 type = "text"
-title = "Final Delivery Summary — System Health + All Work Done"
+title = "Final Delivery Summary"

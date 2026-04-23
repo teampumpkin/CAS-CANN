@@ -18,6 +18,7 @@ import { emailNotificationService } from "./email-notification-service";
 import { zohoWorkflowService } from "./zoho-workflow-service";
 import { formConfigEngine } from "./form-config-engine";
 import { z } from "zod";
+import { runSSOTValidation, buildHumanReadableSummary } from "./ssot-validation-service";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Basic ping endpoint for deployment verification
@@ -2818,6 +2819,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         error: error instanceof Error ? error.message : 'Remediation failed'
+      });
+    }
+  });
+
+  // SSOT vs CRM Validation Report (Phase 1 - read-only comparison)
+  app.get("/api/admin/zoho/ssot-validation-report", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Running SSOT vs CRM validation report...');
+      const format = (req.query.format as string) || 'json';
+
+      const report = await runSSOTValidation();
+
+      if (format === 'text') {
+        const summary = buildHumanReadableSummary(report);
+        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+        return res.send(summary);
+      }
+
+      res.json({
+        success: true,
+        report,
+      });
+    } catch (error) {
+      console.error('[Admin] SSOT validation failed:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'SSOT validation failed',
       });
     }
   });

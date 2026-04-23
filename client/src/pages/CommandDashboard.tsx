@@ -4,13 +4,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Play, Pause, Trash2, Plus, RefreshCw } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Loader2, Play, Pause, Trash2, Plus, RefreshCw, Calendar, CheckCircle2, XCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+
+interface JanuaryViewResult {
+  success: boolean;
+  created: string[];
+  failed: { name: string; error: string }[];
+  summary: string;
+  views?: { name: string; filter: string }[];
+}
 
 export default function CommandDashboard() {
   const { toast } = useToast();
   const [selectedWorkflow, setSelectedWorkflow] = useState<number | null>(null);
+  const [januaryViewResult, setJanuaryViewResult] = useState<JanuaryViewResult | null>(null);
 
   const { data: workflows, isLoading: workflowsLoading } = useQuery({
     queryKey: ["/api/workflows"],
@@ -82,6 +92,33 @@ export default function CommandDashboard() {
     },
   });
 
+  const createJanuaryViewsMutation = useMutation({
+    mutationFn: async () => {
+      return await apiRequest("/api/admin/zoho/create-january-views", {
+        method: "POST",
+      }) as JanuaryViewResult;
+    },
+    onSuccess: (data) => {
+      setJanuaryViewResult(data);
+      if (data.success) {
+        toast({ title: "January views created successfully", description: data.summary });
+      } else {
+        toast({
+          title: "Some views failed to create",
+          description: data.summary,
+          variant: "destructive",
+        });
+      }
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Failed to create January views",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   return (
     <div className="min-h-screen bg-background p-8" data-testid="command-dashboard">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -97,6 +134,7 @@ export default function CommandDashboard() {
             <TabsTrigger value="workflows" data-testid="tab-workflows">Workflows</TabsTrigger>
             <TabsTrigger value="templates" data-testid="tab-templates">Templates</TabsTrigger>
             <TabsTrigger value="campaigns" data-testid="tab-campaigns">Campaign Lists</TabsTrigger>
+            <TabsTrigger value="crm-views" data-testid="tab-crm-views">CRM Views</TabsTrigger>
           </TabsList>
 
           <TabsContent value="workflows" className="space-y-4">
@@ -289,6 +327,82 @@ export default function CommandDashboard() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="crm-views" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5" />
+                  January Filtered Views
+                </CardTitle>
+                <CardDescription>
+                  Create custom list views in the Zoho CRM Leads module filtered by registration date.
+                  This will create two public views — one for January 2025 and one for January 2026 —
+                  sorted by creation date (newest first).
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="rounded-md border p-4 space-y-2 text-sm">
+                  <p className="font-medium text-foreground">Views to be created:</p>
+                  <div className="space-y-1 text-muted-foreground">
+                    <p>• <span className="font-mono text-foreground">January 2025 – New Registrations</span> — Created_Time between Jan 1 and Jan 31, 2025</p>
+                    <p>• <span className="font-mono text-foreground">January 2026 – New Registrations</span> — Created_Time between Jan 1 and Jan 31, 2026</p>
+                  </div>
+                  <p className="text-xs text-muted-foreground pt-1">
+                    Fields shown: Last Name, First Name, Email, Created Time, CAS Member, CANN Member, Record Type, Lead Source
+                  </p>
+                </div>
+
+                <Button
+                  onClick={() => createJanuaryViewsMutation.mutate()}
+                  disabled={createJanuaryViewsMutation.isPending}
+                  data-testid="button-create-january-views"
+                >
+                  {createJanuaryViewsMutation.isPending ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Creating views…
+                    </>
+                  ) : (
+                    <>
+                      <Calendar className="h-4 w-4 mr-2" />
+                      Create January Views in Zoho CRM
+                    </>
+                  )}
+                </Button>
+
+                {januaryViewResult && (
+                  <div className="space-y-3">
+                    {januaryViewResult.created.length > 0 && (
+                      <Alert className="border-green-500">
+                        <CheckCircle2 className="h-4 w-4 text-green-600" />
+                        <AlertTitle className="text-green-700">Created successfully</AlertTitle>
+                        <AlertDescription>
+                          <ul className="mt-1 space-y-1">
+                            {januaryViewResult.created.map((name) => (
+                              <li key={name} className="text-sm">✅ {name}</li>
+                            ))}
+                          </ul>
+                        </AlertDescription>
+                      </Alert>
+                    )}
+                    {januaryViewResult.failed.length > 0 && (
+                      <Alert variant="destructive">
+                        <XCircle className="h-4 w-4" />
+                        <AlertTitle>Failed to create</AlertTitle>
+                        <AlertDescription>
+                          <ul className="mt-1 space-y-1">
+                            {januaryViewResult.failed.map((f) => (
+                              <li key={f.name} className="text-sm">❌ {f.name}: {f.error}</li>
+                            ))}
+                          </ul>
+                        </AlertDescription>
+                      </Alert>
+                    )}
                   </div>
                 )}
               </CardContent>

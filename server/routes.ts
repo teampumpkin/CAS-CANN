@@ -3106,6 +3106,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.post("/api/admin/zoho/create-january-views", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Creating January filtered views in Zoho CRM Leads module...');
+      const result = await zohoCRMService.createJanuaryViews();
+      res.json({
+        success: result.failed.length === 0,
+        created: result.created,
+        failed: result.failed,
+        summary: `${result.created.length} January views created, ${result.failed.length} failed`,
+        views: [
+          { name: "January 2025 – New Registrations", filter: "Created_Time between 2025-01-01 and 2025-01-31" },
+          { name: "January 2026 – New Registrations", filter: "Created_Time between 2026-01-01 and 2026-01-31" }
+        ]
+      });
+    } catch (error) {
+      console.error('[Admin] January view creation failed:', error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'January view creation failed' });
+    }
+  });
+
   // Exchange a Zoho Self Client grant code for new access+refresh tokens with expanded scope
   app.post("/api/admin/zoho/regrant-token", requireAutomationAuth, async (req, res) => {
     try {

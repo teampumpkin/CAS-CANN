@@ -1217,6 +1217,80 @@ export class ZohoCRMService {
     return { created, failed };
   }
 
+  async createJanuaryViews(): Promise<{ created: string[]; failed: { name: string; error: string }[] }> {
+    const created: string[] = [];
+    const failed: { name: string; error: string }[] = [];
+
+    const views = [
+      {
+        name: "January 2025 – New Registrations",
+        description: "Leads created during January 2025 (Created_Time between 2025-01-01 and 2025-01-31)",
+        criteria: {
+          group: [
+            { field: { api_name: "Created_Time" }, comparator: "between", value: "2025-01-01", end_value: "2025-01-31" }
+          ],
+          group_operator: "and"
+        }
+      },
+      {
+        name: "January 2026 – New Registrations",
+        description: "Leads created during January 2026 (Created_Time between 2026-01-01 and 2026-01-31)",
+        criteria: {
+          group: [
+            { field: { api_name: "Created_Time" }, comparator: "between", value: "2026-01-01", end_value: "2026-01-31" }
+          ],
+          group_operator: "and"
+        }
+      }
+    ];
+
+    for (const view of views) {
+      try {
+        console.log(`[Zoho Views] Creating January view: ${view.name}...`);
+        const payload = {
+          custom_views: [
+            {
+              name: view.name,
+              description: view.description,
+              module: { api_name: "Leads" },
+              access_type: "public",
+              criteria: view.criteria,
+              sort_by: { api_name: "Created_Time" },
+              sort_order: "desc",
+              fields: [
+                { api_name: "Last_Name" },
+                { api_name: "First_Name" },
+                { api_name: "Email" },
+                { api_name: "Created_Time" },
+                { api_name: "CAS_Member" },
+                { api_name: "CANN_Member" },
+                { api_name: "Record_Type" },
+                { api_name: "Lead_Source" }
+              ]
+            }
+          ]
+        };
+
+        const response = await this.makeRequest<any>("/settings/custom_views?module=Leads", "POST", payload);
+
+        if (response?.custom_views?.[0]?.status === "success" || response?.custom_views?.[0]?.id) {
+          console.log(`[Zoho Views] ✅ Created January view: ${view.name}`);
+          created.push(view.name);
+        } else {
+          const errMsg = response?.custom_views?.[0]?.message || JSON.stringify(response);
+          console.error(`[Zoho Views] ❌ Failed January view: ${view.name} — ${errMsg}`);
+          failed.push({ name: view.name, error: errMsg });
+        }
+      } catch (error) {
+        const errMsg = error instanceof Error ? error.message : "Unknown error";
+        console.error(`[Zoho Views] ❌ Exception for January view ${view.name}: ${errMsg}`);
+        failed.push({ name: view.name, error: errMsg });
+      }
+    }
+
+    return { created, failed };
+  }
+
   async fixEmailTemplates(): Promise<Array<{ name: string; fixed: boolean; changes: string[]; error?: string }>> {
     const templates = [
       {

@@ -535,6 +535,102 @@ export async function applySSOTChanges(options: ApplyChangesOptions): Promise<Ap
   return result;
 }
 
+const SSOT_TO_CRM_FIELD: Record<string, string> = {
+  first_name: 'First_Name',
+  last_name: 'Last_Name',
+  email: 'Email',
+  institution: 'Institution_Name',
+  discipline: 'Professional_Designation',
+  subspecialty: 'subspecialty',
+};
+
+export interface FieldCorrectionsOptions {
+  dryRun: boolean;
+}
+
+export interface FieldCorrectionsResult {
+  dryRun: boolean;
+  updated: Array<{
+    zohoId: string;
+    name: string;
+    email: string;
+    fields: Array<{ field: string; ssotValue: string | null; crmValue: string | null }>;
+    status: string;
+  }>;
+  skipped: Array<{ zohoId: string; name: string; email: string; reason: string }>;
+  errors: Array<{ zohoId: string; name: string; email: string; error: string }>;
+  counts: { updated: number; skipped: number; errors: number };
+}
+
+export async function applyFieldCorrections(
+  options: FieldCorrectionsOptions
+): Promise<FieldCorrectionsResult> {
+  const { dryRun } = options;
+  console.log(`[SSOT Phase 2b] Starting apply-field-corrections (dryRun=${dryRun})`);
+
+  const report = await runSSOTValidation();
+
+  const updated: FieldCorrectionsResult['updated'] = [];
+  const skipped: FieldCorrectionsResult['skipped'] = [];
+  const errors: FieldCorrectionsResult['errors'] = [];
+
+  for (const matched of report.matchedWithDiscrepancies) {
+    const name = `${normalize(matched.crmRecord.First_Name)} ${normalize(matched.crmRecord.Last_Name)}`.trim();
+    const email = normalize(matched.crmRecord.Email);
+
+    const recordData: Record<string, any> = {};
+    const fieldSummary: Array<{ field: string; ssotValue: string | null; crmValue: string | null }> = [];
+
+    for (const discrepancy of matched.discrepancies) {
+      const crmField = SSOT_TO_CRM_FIELD[discrepancy.field];
+      if (!crmField) {
+        console.warn(`[SSOT Phase 2b] Unknown field mapping for "${discrepancy.field}" — skipping field`);
+        continue;
+      }
+      if (discrepancy.ssotValue !== null && discrepancy.ssotValue !== '') {
+        recordData[crmField] = discrepancy.ssotValue;
+        fieldSummary.push({ field: discrepancy.field, ssotValue: discrepancy.ssotValue, crmValue: discrepancy.crmValue });
+      }
+    }
+
+    if (Object.keys(recordData).length === 0) {
+      skipped.push({ zohoId: matched.zohoId, name, email, reason: 'No patchable fields after mapping (all discrepant SSOT values are blank)' });
+      console.log(`[SSOT Phase 2b] Skipping ${name} (${matched.zohoId}) — no patchable fields`);
+      continue;
+    }
+
+    if (dryRun) {
+      updated.push({ zohoId: matched.zohoId, name, email, fields: fieldSummary, status: 'would-update' });
+      console.log(`[SSOT Phase 2b] [DRY RUN] Would update: ${name} (${matched.zohoId})`, recordData);
+    } else {
+      try {
+        await zohoCRMService.updateRecord('Leads', matched.zohoId, recordData);
+        updated.push({ zohoId: matched.zohoId, name, email, fields: fieldSummary, status: 'updated' });
+        console.log(`[SSOT Phase 2b] Updated: ${name} (${matched.zohoId})`);
+      } catch (err) {
+        const errMsg = err instanceof Error ? err.message : String(err);
+        errors.push({ zohoId: matched.zohoId, name, email, error: errMsg });
+        console.error(`[SSOT Phase 2b] Update error for ${name} (${matched.zohoId}):`, errMsg);
+      }
+    }
+  }
+
+  const result: FieldCorrectionsResult = {
+    dryRun,
+    updated,
+    skipped,
+    errors,
+    counts: {
+      updated: updated.length,
+      skipped: skipped.length,
+      errors: errors.length,
+    },
+  };
+
+  console.log(`[SSOT Phase 2b] ✅ Done (dryRun=${dryRun}):`, result.counts);
+  return result;
+}
+
 export function buildHumanReadableSummary(report: ValidationReport): string {
   const s = report.summary;
   const lines: string[] = [];

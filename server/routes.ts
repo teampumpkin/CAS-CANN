@@ -20,7 +20,7 @@ import { emailNotificationService } from "./email-notification-service";
 import { zohoWorkflowService } from "./zoho-workflow-service";
 import { formConfigEngine } from "./form-config-engine";
 import { z } from "zod";
-import { runSSOTValidation, buildHumanReadableSummary, applySSOTChanges } from "./ssot-validation-service";
+import { runSSOTValidation, buildHumanReadableSummary, applySSOTChanges, applyFieldCorrections } from "./ssot-validation-service";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Basic ping endpoint for deployment verification
@@ -2896,6 +2896,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         error: error instanceof Error ? error.message : 'apply-ssot-changes failed',
+      });
+    }
+  });
+
+  // SSOT Apply Field Corrections (Phase 2b — patch matched records with field-level discrepancies)
+  app.post("/api/admin/zoho/apply-ssot-field-corrections", requireAutomationAuth, async (req, res) => {
+    try {
+      const schema = z.object({
+        dryRun: z.boolean().default(true),
+      });
+      const parsed = schema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ success: false, error: 'Invalid request body', details: parsed.error.issues });
+      }
+      const { dryRun } = parsed.data;
+      console.log(`[Admin] apply-ssot-field-corrections called: dryRun=${dryRun}`);
+
+      const result = await applyFieldCorrections({ dryRun });
+
+      let logWriteFailed = false;
+      if (!dryRun) {
+        const logEntry = {
+          timestamp: new Date().toISOString(),
+          action: 'field-corrections',
+          dryRun,
+          counts: result.counts,
+          updated: result.updated,
+          skipped: result.skipped,
+          errors: result.errors,
+        };
+        try {
+          const logPath = path.resolve('docs/ssot-apply-log.jsonl');
+          fs.mkdirSync(path.dirname(logPath), { recursive: true });
+          fs.appendFileSync(logPath, JSON.stringify(logEntry) + '\n', 'utf8');
+          console.log(`[Admin] apply-ssot-field-corrections audit log written to ${logPath}`);
+        } catch (logErr) {
+          logWriteFailed = true;
+          console.error('[Admin] apply-ssot-field-corrections audit log write FAILED — changes were still applied:', logErr);
+        }
+      }
+
+      res.json({ success: true, result, ...(logWriteFailed ? { logWriteFailed: true } : {}) });
+    } catch (error) {
+      console.error('[Admin] apply-ssot-field-corrections failed:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'apply-ssot-field-corrections failed',
       });
     }
   });

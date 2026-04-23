@@ -1224,20 +1224,22 @@ export class ZohoCRMService {
     const views = [
       {
         name: "January 2025 – New Registrations",
-        description: "Leads created during January 2025 (Created_Time between 2025-01-01 and 2025-01-31)",
+        description: "Leads created during January 2025",
         criteria: {
           group: [
-            { field: { api_name: "Created_Time" }, comparator: "between", value: "2025-01-01", end_value: "2025-01-31" }
+            { field: { api_name: "Created_Time" }, comparator: "greater_equal", value: "2025-01-01T00:00:00+00:00" },
+            { field: { api_name: "Created_Time" }, comparator: "less_equal", value: "2025-01-31T23:59:59+00:00" }
           ],
           group_operator: "and"
         }
       },
       {
         name: "January 2026 – New Registrations",
-        description: "Leads created during January 2026 (Created_Time between 2026-01-01 and 2026-01-31)",
+        description: "Leads created during January 2026",
         criteria: {
           group: [
-            { field: { api_name: "Created_Time" }, comparator: "between", value: "2026-01-01", end_value: "2026-01-31" }
+            { field: { api_name: "Created_Time" }, comparator: "greater_equal", value: "2026-01-01T00:00:00+00:00" },
+            { field: { api_name: "Created_Time" }, comparator: "less_equal", value: "2026-01-31T23:59:59+00:00" }
           ],
           group_operator: "and"
         }
@@ -1255,16 +1257,10 @@ export class ZohoCRMService {
               module: { api_name: "Leads" },
               access_type: "public",
               criteria: view.criteria,
-              sort_by: { api_name: "Created_Time" },
-              sort_order: "desc",
               fields: [
                 { api_name: "Last_Name" },
                 { api_name: "First_Name" },
                 { api_name: "Email" },
-                { api_name: "Created_Time" },
-                { api_name: "CAS_Member" },
-                { api_name: "CANN_Member" },
-                { api_name: "Record_Type" },
                 { api_name: "Lead_Source" }
               ]
             }

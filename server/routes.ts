@@ -1,5 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import fs from "fs";
+import path from "path";
 import { storage, type ResourceFilters } from "./storage";
 import { insertResourceSchema, dynamicFormSubmissionSchema, InsertFormSubmission, insertTownhallRegistrationSchema } from "@shared/schema";
 import { fieldSyncEngine } from "./field-sync-engine";
@@ -2864,12 +2866,68 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { dryRun, confirmConsentDeletion } = parsed.data;
       console.log(`[Admin] apply-ssot-changes called: dryRun=${dryRun}, confirmConsentDeletion=${confirmConsentDeletion}`);
       const result = await applySSOTChanges({ dryRun, confirmConsentDeletion });
-      res.json({ success: true, result });
+
+      let logWriteFailed = false;
+      if (!dryRun) {
+        const logEntry = {
+          timestamp: new Date().toISOString(),
+          dryRun,
+          confirmConsentDeletion,
+          counts: result.counts,
+          deleted: result.deleted,
+          created: result.created,
+          skipped: result.skipped,
+          errors: result.errors,
+        };
+        try {
+          const logPath = path.resolve('docs/ssot-apply-log.jsonl');
+          fs.mkdirSync(path.dirname(logPath), { recursive: true });
+          fs.appendFileSync(logPath, JSON.stringify(logEntry) + '\n', 'utf8');
+          console.log(`[Admin] apply-ssot-changes audit log written to ${logPath}`);
+        } catch (logErr) {
+          logWriteFailed = true;
+          console.error('[Admin] apply-ssot-changes audit log write FAILED — changes were still applied:', logErr);
+        }
+      }
+
+      res.json({ success: true, result, ...(logWriteFailed ? { logWriteFailed: true } : {}) });
     } catch (error) {
       console.error('[Admin] apply-ssot-changes failed:', error);
       res.status(500).json({
         success: false,
         error: error instanceof Error ? error.message : 'apply-ssot-changes failed',
+      });
+    }
+  });
+
+  // SSOT Apply Log — return all past runs
+  app.get("/api/admin/zoho/apply-ssot-log", requireAutomationAuth, async (_req, res) => {
+    try {
+      const logPath = path.resolve('docs/ssot-apply-log.jsonl');
+      if (!fs.existsSync(logPath)) {
+        return res.json({ success: true, runs: [] });
+      }
+      const raw = fs.readFileSync(logPath, 'utf8');
+      const runs: unknown[] = [];
+      const parseErrors: string[] = [];
+      for (const line of raw.split('\n')) {
+        const trimmed = line.trim();
+        if (!trimmed) continue;
+        try {
+          runs.push(JSON.parse(trimmed));
+        } catch {
+          parseErrors.push(trimmed.slice(0, 80));
+        }
+      }
+      if (parseErrors.length > 0) {
+        console.warn(`[Admin] apply-ssot-log: ${parseErrors.length} malformed line(s) skipped`);
+      }
+      res.json({ success: true, runs, ...(parseErrors.length > 0 ? { skippedMalformedLines: parseErrors.length } : {}) });
+    } catch (error) {
+      console.error('[Admin] apply-ssot-log read failed:', error);
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to read apply-ssot-log',
       });
     }
   });

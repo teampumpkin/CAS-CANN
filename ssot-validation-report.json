@@ -1,46 +1,18 @@
 {
-  "generatedAt": "2026-04-23T10:16:12.245Z",
+  "generatedAt": "2026-04-23T10:18:53.796Z",
   "summary": {
     "crmTotalRecords": 247,
     "ssotTotalRows": 232,
     "matchedByZohoId": 159,
-    "matchedByEmail": 69,
-    "removalCandidates": 19,
+    "matchedByEmail": 71,
+    "removalCandidates": 17,
     "removalCandidatesWithConsentData": 17,
-    "newRecordCandidates": 4,
+    "newRecordCandidates": 2,
     "newRecordsMissingEmail": 2,
     "recordsWithDiscrepancies": 227,
     "totalFieldDiscrepancies": 521
   },
   "removalCandidates": [
-    {
-      "zohoId": "6999043000001974001",
-      "crmRecord": {
-        "Source_Form": "CAS Registration",
-        "Company": null,
-        "Email": "vasi.karan@teampumpkin.com",
-        "Institution_Name": null,
-        "CANN_Communications": null,
-        "Record_Type": "Inquiry",
-        "Professional_Designation": null,
-        "First_Name": null,
-        "Industry": null,
-        "Services_Map_Inclusion": null,
-        "subspecialty": null,
-        "Last_Name": "vasi test",
-        "CAS_Member": false,
-        "Amyloidosis_Type": null,
-        "CANN_Member": false,
-        "id": "6999043000001974001",
-        "CAS_Communications": null
-      },
-      "consentDataAtRisk": {
-        "CAS_Communications": null,
-        "CANN_Communications": null,
-        "Services_Map_Inclusion": null,
-        "hasConsentData": false
-      }
-    },
     {
       "zohoId": "6999043000001967018",
       "crmRecord": {
@@ -490,34 +462,6 @@
       }
     },
     {
-      "zohoId": "6999043000001074001",
-      "crmRecord": {
-        "Source_Form": null,
-        "Company": null,
-        "Email": "jane.smith@hospital.ca",
-        "Institution_Name": null,
-        "CANN_Communications": "No",
-        "Record_Type": "Inquiry",
-        "Professional_Designation": null,
-        "First_Name": null,
-        "Industry": null,
-        "Services_Map_Inclusion": "No",
-        "subspecialty": null,
-        "Last_Name": "Unknown",
-        "CAS_Member": false,
-        "Amyloidosis_Type": null,
-        "CANN_Member": false,
-        "id": "6999043000001074001",
-        "CAS_Communications": "No"
-      },
-      "consentDataAtRisk": {
-        "CAS_Communications": "No",
-        "CANN_Communications": "No",
-        "Services_Map_Inclusion": "No",
-        "hasConsentData": false
-      }
-    },
-    {
       "zohoId": "6999043000001023002",
       "crmRecord": {
         "Source_Form": null,
@@ -592,50 +536,6 @@
       "emailMatchAttempted": false,
       "missingEmail": true,
       "rowIndex": 6
-    },
-    {
-      "ssotRow": {
-        "first_name": "Danielle",
-        "last_name": "Murray",
-        "email": "danielle.murray@pch.ca",
-        "institution": "University of British Columbia",
-        "amyloidosis_type": "",
-        "cas_member": "",
-        "cann_member": "",
-        "membership_scenario": "",
-        "cas_contact_permission": "",
-        "cann_contact_permission": "",
-        "map_inclusion_preference": "",
-        "record_origin": "",
-        "zoho_lead_id": "",
-        "source_dataset": "",
-        "notes": ""
-      },
-      "emailMatchAttempted": true,
-      "missingEmail": false,
-      "rowIndex": 230
-    },
-    {
-      "ssotRow": {
-        "first_name": "Karine",
-        "last_name": "Deschenes",
-        "email": "karine.deshenes@icm-mhi.org",
-        "institution": "Montreal Heart Institute",
-        "amyloidosis_type": "",
-        "cas_member": "",
-        "cann_member": "",
-        "membership_scenario": "",
-        "cas_contact_permission": "",
-        "cann_contact_permission": "",
-        "map_inclusion_preference": "",
-        "record_origin": "",
-        "zoho_lead_id": "",
-        "source_dataset": "",
-        "notes": ""
-      },
-      "emailMatchAttempted": true,
-      "missingEmail": false,
-      "rowIndex": 232
     }
   ],
   "matchedWithDiscrepancies": [
@@ -10646,6 +10546,16 @@
       "zohoId": "6999043000001379006",
       "name": "Amanda Fiander",
       "email": "aefiander@gmail.com"
+    },
+    {
+      "zohoId": "6999043000002227001",
+      "name": "Danielle Murray",
+      "email": "danielle.murray@pch.ca"
+    },
+    {
+      "zohoId": "6999043000002228001",
+      "name": "Karine Deschenes",
+      "email": "karine.deshenes@icm-mhi.org"
     }
   ]
 }

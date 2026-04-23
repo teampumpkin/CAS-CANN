@@ -1,17 +1,16 @@
 === CRM vs SSOT Validation Report ===
-Generated: 2026-04-23T10:16:12.245Z
+Generated: 2026-04-23T10:18:53.796Z
 
 --- Summary ---
 CRM total records : 247
 SSOT total rows   : 232
 Matched by Zoho ID: 159
-Matched by email  : 69
+Matched by email  : 71
 
 --- Removal Candidates (CRM records NOT in SSOT) ---
-Total             : 19
+Total             : 17
 With consent data : 17 ⚠️
 
-  [6999043000001974001] vasi test <vasi.karan@teampumpkin.com>
   [6999043000001967018] Devan Hrupp <devan.hrupp@albertahealthservices.ca> ⚠️  HAS CONSENT DATA
          CAS_Communications: Yes
          CANN_Communications: Yes
@@ -76,20 +75,17 @@ With consent data : 17 ⚠️
          CAS_Communications: Yes
          CANN_Communications: Yes
          Services_Map_Inclusion: Yes
-  [6999043000001074001] Unknown <jane.smith@hospital.ca>
   [6999043000001023002] Valérie Fontaine <valerie.fontaine.chum@ssss.gouv.qc.ca> ⚠️  HAS CONSENT DATA
          CAS_Communications: Yes
          CANN_Communications: Yes
          Services_Map_Inclusion: Yes
 
 --- New Record Candidates (SSOT rows NOT in CRM) ---
-Total             : 4
+Total             : 2
 Missing email     : 2 ⚠️
 
   Row 5: Md. Pervez Anwar <NO EMAIL> ⚠️  MISSING EMAIL
   Row 6: Jing Zeng <NO EMAIL> ⚠️  MISSING EMAIL
-  Row 230: Danielle Murray <danielle.murray@pch.ca>
-  Row 232: Karine Deschenes <karine.deshenes@icm-mhi.org>
 
 --- Field-Level Discrepancies (matched records) ---
 Records with diffs : 227

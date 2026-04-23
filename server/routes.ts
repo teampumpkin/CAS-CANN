@@ -3235,21 +3235,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/admin/zoho/create-january-views", requireAutomationAuth, async (req, res) => {
     try {
-      console.log('[Admin] Creating January filtered views in Zoho CRM Leads module...');
-      const result = await zohoCRMService.createJanuaryViews();
+      console.log('[Admin] Recreating registration views in Zoho CRM Leads module...');
+      const result = await zohoCRMService.recreateRegistrationViews();
       res.json({
         success: result.failed.length === 0,
+        deleted: result.deleted,
         created: result.created,
         failed: result.failed,
-        summary: `${result.created.length} January views created, ${result.failed.length} failed`,
+        summary: `Deleted ${result.deleted.length}, created ${result.created.length} registration views, ${result.failed.length} failed`,
         views: [
-          { name: "January 2025 – New Registrations", filter: "Created_Time between 2025-01-01 and 2025-01-31" },
-          { name: "January 2026 – New Registrations", filter: "Created_Time between 2026-01-01 and 2026-01-31" }
+          { name: "2025 Registrations", filter: "Lead_Source contains '2025'" },
+          { name: "2026 Registrations", filter: "Created_Time within 2026" }
         ]
       });
     } catch (error) {
-      console.error('[Admin] January view creation failed:', error);
-      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'January view creation failed' });
+      console.error('[Admin] Registration view recreation failed:', error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'Registration view recreation failed' });
+    }
+  });
+
+  app.post("/api/admin/zoho/recreate-registration-views", requireAutomationAuth, async (req, res) => {
+    try {
+      console.log('[Admin] Recreating registration views in Zoho CRM Leads module...');
+      const result = await zohoCRMService.recreateRegistrationViews();
+      res.json({
+        success: result.failed.length === 0,
+        deleted: result.deleted,
+        created: result.created,
+        failed: result.failed,
+        summary: `Deleted ${result.deleted.length}, created ${result.created.length} registration views, ${result.failed.length} failed`,
+        views: [
+          { name: "2025 Registrations", filter: "Lead_Source contains '2025'" },
+          { name: "2026 Registrations", filter: "Created_Time within 2026" }
+        ]
+      });
+    } catch (error) {
+      console.error('[Admin] Registration view recreation failed:', error);
+      res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'Registration view recreation failed' });
     }
   });
 

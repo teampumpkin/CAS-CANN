@@ -1218,37 +1218,70 @@ export class ZohoCRMService {
   }
 
   async createJanuaryViews(): Promise<{ created: string[]; failed: { name: string; error: string }[] }> {
+    return this.recreateRegistrationViews();
+  }
+
+  async recreateRegistrationViews(): Promise<{ created: string[]; deleted: string[]; failed: { name: string; error: string }[] }> {
     const created: string[] = [];
+    const deleted: string[] = [];
     const failed: { name: string; error: string }[] = [];
 
+    // Step 1: List all existing custom views to find the old January views
+    try {
+      const listResponse = await this.makeRequest<any>("/settings/custom_views?module=Leads", "GET");
+      const existingViews: Array<{ id: string; name: string }> = listResponse?.custom_views || [];
+
+      const toDelete = existingViews.filter((v) =>
+        v.name?.includes("January 2025") ||
+        v.name?.includes("January 2026") ||
+        v.name === "2025 Registrations" ||
+        v.name === "2026 Registrations"
+      );
+
+      for (const v of toDelete) {
+        try {
+          await this.makeRequest<any>(`/settings/custom_views/${v.id}?module=Leads`, "DELETE");
+          console.log(`[Zoho Views] 🗑 Deleted old view: ${v.name} (${v.id})`);
+          deleted.push(v.name);
+        } catch (err) {
+          console.warn(`[Zoho Views] Could not delete view ${v.name}: ${err instanceof Error ? err.message : err}`);
+        }
+      }
+    } catch (err) {
+      console.warn(`[Zoho Views] Could not list views for cleanup: ${err instanceof Error ? err.message : err}`);
+    }
+
+    // Step 2: Define the corrected views
+    // 2025 Registrations — filter by Lead_Source containing "2025" (covers all 2025 Excel import batches)
+    // 2026 Registrations — filter by Created_Time within 2026 (covers web registrations added to Zoho in 2026)
     const views = [
       {
-        name: "January 2025 – New Registrations",
-        description: "Leads created during January 2025",
+        name: "2025 Registrations",
+        description: "All leads from the 2025 registration cycle (identified by Lead Source)",
         criteria: {
           group: [
-            { field: { api_name: "Created_Time" }, comparator: "greater_equal", value: "2025-01-01T00:00:00+00:00" },
-            { field: { api_name: "Created_Time" }, comparator: "less_equal", value: "2025-01-31T23:59:59+00:00" }
+            { field: { api_name: "Lead_Source" }, comparator: "contains", value: "2025" }
           ],
           group_operator: "and"
         }
       },
       {
-        name: "January 2026 – New Registrations",
-        description: "Leads created during January 2026",
+        name: "2026 Registrations",
+        description: "All leads added to the CRM during 2026",
         criteria: {
           group: [
             { field: { api_name: "Created_Time" }, comparator: "greater_equal", value: "2026-01-01T00:00:00+00:00" },
-            { field: { api_name: "Created_Time" }, comparator: "less_equal", value: "2026-01-31T23:59:59+00:00" }
+            { field: { api_name: "Created_Time" }, comparator: "less_equal", value: "2026-12-31T23:59:59+00:00" }
           ],
           group_operator: "and"
         }
       }
     ];
 
+    // Step 3: Create the new views
     for (const view of views) {
       try {
-        console.log(`[Zoho Views] Creating January view: ${view.name}...`);
+        console.log(`[Zoho Views] Creating registration view: ${view.name}...`);
         const payload = {
           custom_views: [
             {
@@ -1261,7 +1294,8 @@ export class ZohoCRMService {
                 { api_name: "Last_Name" },
                 { api_name: "First_Name" },
                 { api_name: "Email" },
-                { api_name: "Lead_Source" }
+                { api_name: "Lead_Source" },
+                { api_name: "Record_Type" }
               ]
             }
           ]
@@ -1270,21 +1304,21 @@ export class ZohoCRMService {
         const response = await this.makeRequest<any>("/settings/custom_views?module=Leads", "POST", payload);
 
         if (response?.custom_views?.[0]?.status === "success" || response?.custom_views?.[0]?.id) {
-          console.log(`[Zoho Views] ✅ Created January view: ${view.name}`);
+          console.log(`[Zoho Views] ✅ Created view: ${view.name}`);
           created.push(view.name);
         } else {
           const errMsg = response?.custom_views?.[0]?.message || JSON.stringify(response);
-          console.error(`[Zoho Views] ❌ Failed January view: ${view.name} — ${errMsg}`);
+          console.error(`[Zoho Views] ❌ Failed view: ${view.name} — ${errMsg}`);
           failed.push({ name: view.name, error: errMsg });
         }
       } catch (error) {
         const errMsg = error instanceof Error ? error.message : "Unknown error";
-        console.error(`[Zoho Views] ❌ Exception for January view ${view.name}: ${errMsg}`);
+        console.error(`[Zoho Views] ❌ Exception for view ${view.name}: ${errMsg}`);
         failed.push({ name: view.name, error: errMsg });
       }
     }
 
-    return { created, failed };
+    return { created, deleted, failed };
   }
 
   async fixEmailTemplates(): Promise<Array<{ name: string; fixed: boolean; changes: string[]; error?: string }>> {

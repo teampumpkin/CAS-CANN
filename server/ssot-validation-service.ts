@@ -278,7 +278,15 @@ export async function runSSOTValidation(): Promise<ValidationReport> {
 
     if (!crmRecord) {
       newRecordCandidates.push({
-        ssotRow: row,
+        ssotRow: {
+          ...row,
+          first_name: firstName,
+          last_name: lastName,
+          email: email || undefined,
+          institution: institution || undefined,
+          discipline: discipline || undefined,
+          subspecialty: subspecialty || undefined,
+        },
         // email was present and we tried it against the CRM email index, but still no match
         emailMatchAttempted: !!email,
         missingEmail: !email,

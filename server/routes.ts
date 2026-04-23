@@ -22,6 +22,25 @@ import { formConfigEngine } from "./form-config-engine";
 import { z } from "zod";
 import { runSSOTValidation, buildHumanReadableSummary, applySSOTChanges, applyFieldCorrections } from "./ssot-validation-service";
 
+const SSOT_LOG_MAX_ENTRIES = 500;
+const SSOT_LOG_MAX_BYTES = 5 * 1024 * 1024; // 5 MB
+const SSOT_LOG_RETURN_LIMIT = 200;
+
+function trimSSOTLog(logPath: string): void {
+  try {
+    const stat = fs.statSync(logPath);
+    const raw = fs.readFileSync(logPath, 'utf8');
+    const lines = raw.split('\n').filter(l => l.trim().length > 0);
+    if (lines.length > SSOT_LOG_MAX_ENTRIES || stat.size > SSOT_LOG_MAX_BYTES) {
+      const kept = lines.slice(-SSOT_LOG_MAX_ENTRIES);
+      fs.writeFileSync(logPath, kept.join('\n') + '\n', 'utf8');
+      console.log(`[Admin] SSOT audit log trimmed: kept ${kept.length} of ${lines.length} entries`);
+    }
+  } catch (trimErr) {
+    console.error('[Admin] SSOT audit log trim failed (non-fatal):', trimErr);
+  }
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Basic ping endpoint for deployment verification
   app.get('/ping', (_req, res) => {
@@ -2883,6 +2902,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const logPath = path.resolve('docs/ssot-apply-log.jsonl');
           fs.mkdirSync(path.dirname(logPath), { recursive: true });
           fs.appendFileSync(logPath, JSON.stringify(logEntry) + '\n', 'utf8');
+          trimSSOTLog(logPath);
           console.log(`[Admin] apply-ssot-changes audit log written to ${logPath}`);
         } catch (logErr) {
           logWriteFailed = true;
@@ -2930,6 +2950,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const logPath = path.resolve('docs/ssot-apply-log.jsonl');
           fs.mkdirSync(path.dirname(logPath), { recursive: true });
           fs.appendFileSync(logPath, JSON.stringify(logEntry) + '\n', 'utf8');
+          trimSSOTLog(logPath);
           console.log(`[Admin] apply-ssot-field-corrections audit log written to ${logPath}`);
         } catch (logErr) {
           logWriteFailed = true;
@@ -2952,7 +2973,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const logPath = path.resolve('docs/ssot-apply-log.jsonl');
       if (!fs.existsSync(logPath)) {
-        return res.json({ success: true, runs: [] });
+        return res.json({ success: true, runs: [], total: 0 });
       }
       const raw = fs.readFileSync(logPath, 'utf8');
       const runs: unknown[] = [];
@@ -2969,7 +2990,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (parseErrors.length > 0) {
         console.warn(`[Admin] apply-ssot-log: ${parseErrors.length} malformed line(s) skipped`);
       }
-      res.json({ success: true, runs, ...(parseErrors.length > 0 ? { skippedMalformedLines: parseErrors.length } : {}) });
+      const recentRuns = runs.slice(-SSOT_LOG_RETURN_LIMIT);
+      res.json({ success: true, runs: recentRuns, total: runs.length, ...(parseErrors.length > 0 ? { skippedMalformedLines: parseErrors.length } : {}) });
     } catch (error) {
       console.error('[Admin] apply-ssot-log read failed:', error);
       res.status(500).json({

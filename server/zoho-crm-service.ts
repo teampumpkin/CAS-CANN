@@ -688,6 +688,14 @@ export class ZohoCRMService {
       );
       if (response.data && response.data.length > 0) {
         const result = response.data[0];
+        if (result.status === 'error') {
+          const zohoCode = result.code || 'UNKNOWN_ERROR';
+          const zohoMessage = result.message || 'Zoho rejected the deletion';
+          const zohoDetails = result.details ? JSON.stringify(result.details) : '';
+          const fullError = `Zoho API rejected deletion: [${zohoCode}] ${zohoMessage}${zohoDetails ? ` — ${zohoDetails}` : ''}`;
+          console.error(`[Zoho v8] Record deletion REJECTED by Zoho API: ${fullError}`);
+          throw new Error(fullError);
+        }
         console.log(`[Zoho v8] Deleted record ${recordId} from ${moduleName}:`, result.status);
         return result;
       }

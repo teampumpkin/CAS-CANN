@@ -1,0 +1,865 @@
+=== CRM vs SSOT Validation Report ===
+Generated: 2026-04-23T10:16:12.245Z
+
+--- Summary ---
+CRM total records : 247
+SSOT total rows   : 232
+Matched by Zoho ID: 159
+Matched by email  : 69
+
+--- Removal Candidates (CRM records NOT in SSOT) ---
+Total             : 19
+With consent data : 17 ⚠️
+
+  [6999043000001974001] vasi test <vasi.karan@teampumpkin.com>
+  [6999043000001967018] Devan Hrupp <devan.hrupp@albertahealthservices.ca> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: No
+  [6999043000001965018] Karine Deschenes <karine.deschenes@icm-mhi.org> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: Yes
+  [6999043000001961002] Danielle Murray <danielle.murray@phc.ca> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: Yes
+  [6999043000001917001] Danielle Murray <danielle.murray@phc.ca> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: Yes
+  [6999043000001916001] Karine Deschenes <karine.deschenes@icm-mhi.org> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: Yes
+  [6999043000001700031] Nina Mason <nina.mason@ahs.ca> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: No
+         Services_Map_Inclusion: No
+  [6999043000001685028] Anne Marie Carr <Info@madhattr.ca> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: No
+         Services_Map_Inclusion: No
+  [6999043000001678034] Melissa Loyola <Melissa.loyola@ahs.ca> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: No
+         Services_Map_Inclusion: No
+  [6999043000001671021] Mervyn Carr <merv.carr@gmail.com> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: No
+         Services_Map_Inclusion: No
+  [6999043000001670050] Kyla Hayes <kyla.hayes@saskhealthauthortiy.ca> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: No
+         Services_Map_Inclusion: No
+  [6999043000001558002] Dorothy Roberts <dorothyroberts1@me.com> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: Yes
+  [6999043000001359201] Robert Millet <Robertjhmiller@gmail.com> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: No
+         Services_Map_Inclusion: No
+  [6999043000001354177] Keith Dares <Kw.dares@gmail.com> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: No
+         Services_Map_Inclusion: No
+  [6999043000001340236] Bosley <debra.bosley@albertahealthservices.ca> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: No
+  [6999043000001141003] Mona Mahal <monamahal2@gmail.com> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: Yes
+  [6999043000001080002] Leanne <leanne.walper@gmail.com> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: Yes
+  [6999043000001074001] Unknown <jane.smith@hospital.ca>
+  [6999043000001023002] Valérie Fontaine <valerie.fontaine.chum@ssss.gouv.qc.ca> ⚠️  HAS CONSENT DATA
+         CAS_Communications: Yes
+         CANN_Communications: Yes
+         Services_Map_Inclusion: Yes
+
+--- New Record Candidates (SSOT rows NOT in CRM) ---
+Total             : 4
+Missing email     : 2 ⚠️
+
+  Row 5: Md. Pervez Anwar <NO EMAIL> ⚠️  MISSING EMAIL
+  Row 6: Jing Zeng <NO EMAIL> ⚠️  MISSING EMAIL
+  Row 230: Danielle Murray <danielle.murray@pch.ca>
+  Row 232: Karine Deschenes <karine.deshenes@icm-mhi.org>
+
+--- Field-Level Discrepancies (matched records) ---
+Records with diffs : 227
+Total field diffs  : 521
+
+  [6999043000001358225] Weiji Sun
+    first_name: SSOT="Weiji" vs CRM="null"
+    last_name: SSOT="Sun" vs CRM="Weiji Sun"
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001345225] Pallavi Ganguli
+    first_name: SSOT="Pallavi" vs CRM="null"
+    last_name: SSOT="Ganguli" vs CRM="Pallavi Ganguli"
+    subspecialty: SSOT="Hematology" vs CRM="null"
+  [6999043000001381011] Alberto Alemán
+    subspecialty: SSOT="Neurology" vs CRM="null"
+  [6999043000001356281] Stoeber
+    first_name: SSOT="Stoeber" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Stoeber"
+    institution: SSOT="null" vs CRM="Stoeber"
+    discipline: SSOT="null" vs CRM="Nurse"
+  [6999043000001346235] Alina Gerrie
+    first_name: SSOT="Alina" vs CRM="null"
+    last_name: SSOT="Gerrie" vs CRM="Alina Gerrie"
+  [6999043000001351212] Amer Ghavanini
+    first_name: SSOT="Amer" vs CRM="null"
+    last_name: SSOT="Ghavanini" vs CRM="Amer Ghavanini"
+    subspecialty: SSOT="Neurologist and Neuromuscular Disorders Subspecialist" vs CRM="null"
+  [6999043000001393001] Ahmed Elmahdy
+    subspecialty: SSOT="Medicine" vs CRM="null"
+  [6999043000001344168] Alex Van
+    first_name: SSOT="Alex" vs CRM="null"
+    last_name: SSOT="Van" vs CRM="Alex Van"
+  [6999043000001333505] Alexandra Marier-Bienvenue
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001347166] Alex Jahangirvand
+    first_name: SSOT="Alex" vs CRM="null"
+    last_name: SSOT="Jahangirvand" vs CRM="Alex Jahangirvand"
+    subspecialty: SSOT="Neurology and Neuromuscular Specialist" vs CRM="null"
+  [6999043000001392001] Alina Haq
+    subspecialty: SSOT="Hospital medicine" vs CRM="null"
+  [6999043000001331277] Allison Alldrit
+    first_name: SSOT="Allison" vs CRM="null"
+    last_name: SSOT="Alldrit" vs CRM="Allison Alldrit"
+  [6999043000001331262] Aws Almufleh
+    first_name: SSOT="Aws" vs CRM="null"
+    last_name: SSOT="Almufleh" vs CRM="Aws Almufleh"
+  [6999043000001386001] Amit Khosla
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001389001] Anastasiia Stepanchuk
+    subspecialty: SSOT="amyloid imaging" vs CRM="null"
+  [6999043000001333222] Andrée-Anne Pelland
+    first_name: SSOT="Andrée-Anne" vs CRM="null"
+    last_name: SSOT="Pelland" vs CRM="Andrée-Anne Pelland"
+  [6999043000001112002] Andrew Cowan
+    first_name: SSOT="Andrew" vs CRM="null"
+    last_name: SSOT="Cowan" vs CRM="Andrew Cowan"
+    institution: SSOT="null" vs CRM="BC Cancer Agency"
+  [6999043000001354167] Anil Gupta
+    first_name: SSOT="Anil" vs CRM="null"
+    last_name: SSOT="Gupta" vs CRM="Anil Gupta"
+    institution: SSOT="One Heart Care
+Trillium Health Partners" vs CRM="One Heart Care Trillium Health Partners"
+  [6999043000001362275] Anique Ducharme
+    subspecialty: SSOT="cardiologie" vs CRM="null"
+  [6999043000001382011] Anita cressman
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001346230] Anna Giulione
+    first_name: SSOT="Anna" vs CRM="null"
+    last_name: SSOT="Giulione" vs CRM="Anna Giulione"
+  [6999043000001342166] Tony Reiman
+    first_name: SSOT="Tony" vs CRM="null"
+    last_name: SSOT="Reiman" vs CRM="Tony Reiman"
+    subspecialty: SSOT="Medical Oncology" vs CRM="null"
+  [6999043000001359191] Ashley Freeman
+    first_name: SSOT="Ashley" vs CRM="null"
+    last_name: SSOT="Freeman" vs CRM="Ashley Freeman"
+    subspecialty: SSOT="Hematology" vs CRM="null"
+  [6999043000001331282] Alexander Tamm
+    first_name: SSOT="Alexander" vs CRM="null"
+    last_name: SSOT="Tamm" vs CRM="Alexander Tamm"
+  [6999043000001395001] Aswani Kumar Balakrishna Pillai
+    first_name: SSOT="Aswani Kumar Balakrishna" vs CRM="Aswani"
+    last_name: SSOT="Pillai" vs CRM="Kumar Balakrishna Pillai"
+    subspecialty: SSOT="Critical care and anaesthesia" vs CRM="null"
+  [6999043000001343211] Benjamin Adam
+    first_name: SSOT="Benjamin" vs CRM="null"
+    last_name: SSOT="Adam" vs CRM="Benjamin Adam"
+  [6999043000001391006] Grayson Beecher
+    subspecialty: SSOT="Neurology (neuromuscular)" vs CRM="null"
+  [6999043000001363283] David Bewick
+    first_name: SSOT="David" vs CRM="null"
+    last_name: SSOT="Bewick" vs CRM="David Bewick"
+  [6999043000001390001] Daniel Cabello-Modesto
+    subspecialty: SSOT="Hematology" vs CRM="null"
+  [6999043000001344198] Calvin Tong
+    first_name: SSOT="Calvin" vs CRM="null"
+    last_name: SSOT="Tong" vs CRM="Calvin Tong"
+  [6999043000001560001] Dorothy Roberts
+    first_name: SSOT="Dorothy" vs CRM="null"
+    last_name: SSOT="Roberts" vs CRM="Dorothy Roberts"
+    institution: SSOT="null" vs CRM="Cardio 1"
+    discipline: SSOT="null" vs CRM="Patient support group coordinator"
+    subspecialty: SSOT="null" vs CRM="Cardiology"
+  [6999043000001382001] Caroline Michel
+    subspecialty: SSOT="cardiologie" vs CRM="null"
+  [6999043000001338161] Christopher Cipkar
+    first_name: SSOT="Christopher" vs CRM="null"
+    last_name: SSOT="Cipkar" vs CRM="Christopher Cipkar"
+  [6999043000001384011] Koushik Chaki
+    subspecialty: SSOT="Cardiology and Diabetes" vs CRM="null"
+  [6999043000001360196] Chantel Anderson
+    first_name: SSOT="Chantel" vs CRM="null"
+    last_name: SSOT="Anderson" vs CRM="Chantel Anderson"
+  [6999043000001331267] Charles Kassardjian
+    first_name: SSOT="Charles" vs CRM="null"
+    last_name: SSOT="Kassardjian" vs CRM="Charles Kassardjian"
+  [6999043000001356271] Chris Hahn
+    first_name: SSOT="Chris" vs CRM="null"
+    last_name: SSOT="Hahn" vs CRM="Chris Hahn"
+  [6999043000001396006] Cigdem Akincioglu
+    subspecialty: SSOT="Nuclear Cardiology" vs CRM="null"
+  [6999043000001349190] Colin Stewart
+    first_name: SSOT="Colin" vs CRM="null"
+    last_name: SSOT="Stewart" vs CRM="Colin Stewart"
+    subspecialty: SSOT="Hematology" vs CRM="null"
+  [6999043000001356261] Danyal Ladha
+    first_name: SSOT="Danyal" vs CRM="null"
+    last_name: SSOT="Ladha" vs CRM="Danyal Ladha"
+  [6999043000001333247] Debra Bosley
+    first_name: SSOT="Debra" vs CRM="null"
+    last_name: SSOT="Bosley" vs CRM="Debra Bosley"
+    email: SSOT="debra.bosley@albertahealthservices.ca" vs CRM="deb.bosley1@gmail.com"
+  [6999043000001252002] Dianne Kirkpatrick
+    first_name: SSOT="Dianne" vs CRM="null"
+    last_name: SSOT="Kirkpatrick" vs CRM="Dianne Kirkpatrick"
+    institution: SSOT="null" vs CRM="Heart Function Clinic"
+  [6999043000001352171] Diego Delgado
+    first_name: SSOT="Diego" vs CRM="null"
+    last_name: SSOT="Delgado" vs CRM="Diego Delgado"
+  [6999043000001342151] Ian Paterson
+    first_name: SSOT="Ian" vs CRM="null"
+    last_name: SSOT="Paterson" vs CRM="Ian Paterson"
+  [6999043000001358230] Mary Halpine
+    first_name: SSOT="Mary" vs CRM="null"
+    last_name: SSOT="Halpine" vs CRM="Mary Halpine"
+  [6999043000001380011] Dr.Muhammad Nadeem
+    subspecialty: SSOT="GP" vs CRM="null"
+  [6999043000001381016] Arup Ghoshal
+    institution: SSOT="Ipswich General Hospital
+Queensland
+Australia" vs CRM="Ipswich General Hospital Queensland Australia"
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001361216] Manar Hamwd
+    first_name: SSOT="Manar" vs CRM="null"
+    last_name: SSOT="Hamwd" vs CRM="Manar Hamwd"
+  [6999043000001356196] Marie-Claude Parent
+    first_name: SSOT="Marie-Claude" vs CRM="null"
+    last_name: SSOT="Parent" vs CRM="Marie-Claude Parent"
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001382006] Dubravka Dodig
+    subspecialty: SSOT="Neuromuscular" vs CRM="null"
+  [6999043000001354182] Ellen lewis
+    first_name: SSOT="Ellen" vs CRM="null"
+    last_name: SSOT="lewis" vs CRM="Ellen lewis"
+    discipline: SSOT="Medical student 
+NP" vs CRM="Medical student NP"
+  [6999043000001384006] Etienne Mahe
+    subspecialty: SSOT="Hematopathology and Molecular Pathology/Hematology" vs CRM="null"
+  [6999043000001385001] Elizabeth Swiggum
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001379001] FABIAN ALEJANDRO AZZARI
+    first_name: SSOT="FABIAN ALEJANDRO" vs CRM="FABIAN"
+    last_name: SSOT="AZZARI" vs CRM="ALEJANDRO AZZARI"
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001352166] Fatima Saqib
+    first_name: SSOT="Fatima" vs CRM="null"
+    last_name: SSOT="Saqib" vs CRM="Fatima Saqib"
+    subspecialty: SSOT="Cardiology, Heart Failure, Heart Attacks" vs CRM="null"
+  [6999043000001364265] Fern Marusiak
+    first_name: SSOT="Fern" vs CRM="null"
+    last_name: SSOT="Marusiak" vs CRM="Fern Marusiak"
+    institution: SSOT="Amyloidosis Program of Calgary
+Cardiac Amyloidosis Clinic, Alberta Health Services" vs CRM="Amyloidosis Program of Calgary Cardiac Amyloidosis Clinic, Alberta Health Services"
+  [6999043000001359206] Fernando Rivera-Theurel
+    first_name: SSOT="Fernando" vs CRM="null"
+    last_name: SSOT="Rivera-Theurel" vs CRM="Fernando Rivera-Theurel"
+  [6999043000001342176] Freya Kelly
+    first_name: SSOT="Freya" vs CRM="null"
+    last_name: SSOT="Kelly" vs CRM="Freya Kelly"
+  [6999043000001357467] Geneviève Matte
+    subspecialty: SSOT="Neurologie" vs CRM="null"
+  [6999043000001398011] Genevieve Morrone
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001398001] Gerald Pfeffer
+    subspecialty: SSOT="Neurogenetics" vs CRM="null"
+  [6999043000001363278] Gordon Jewett
+    first_name: SSOT="Gordon" vs CRM="null"
+    last_name: SSOT="Jewett" vs CRM="Gordon Jewett"
+    subspecialty: SSOT="Neurology" vs CRM="null"
+  [6999043000001350230] Gordon Moe
+    first_name: SSOT="Gordon" vs CRM="null"
+    last_name: SSOT="Moe" vs CRM="Gordon Moe"
+  [6999043000001352247] Hanane Benbarkat
+    subspecialty: SSOT="echographie" vs CRM="null"
+  [6999043000001356256] Michael Heffernan
+    first_name: SSOT="Michael" vs CRM="null"
+    last_name: SSOT="Heffernan" vs CRM="Michael Heffernan"
+  [6999043000001344279] Helene Brown
+    subspecialty: SSOT="cardiologie" vs CRM="null"
+  [6999043000001383006] Dr. HIRAKJYOTI SANYAL
+    first_name: SSOT="Dr. HIRAKJYOTI" vs CRM="Dr."
+    last_name: SSOT="SANYAL" vs CRM="HIRAKJYOTI SANYAL"
+    subspecialty: SSOT="Noninvasive Cardiology" vs CRM="null"
+  [6999043000001355278] Inès Dupuis
+    subspecialty: SSOT="Médecine interne" vs CRM="null"
+  [6999043000001362201] irwindeep sandhu
+    first_name: SSOT="irwindeep" vs CRM="null"
+    last_name: SSOT="sandhu" vs CRM="irwindeep sandhu"
+  [6999043000001331317] Cox
+    first_name: SSOT="Cox" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Cox"
+    institution: SSOT="null" vs CRM="Alberta Health Services - Chinook Regional Hospital - Lethbridge"
+    discipline: SSOT="null" vs CRM="Nurse Practitioner"
+  [6999043000001378002] Janine Mazengarb
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001399001] Jasmine kraitberg
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001347196] Jennifer Koppel
+    first_name: SSOT="Jennifer" vs CRM="null"
+    last_name: SSOT="Koppel" vs CRM="Jennifer Koppel"
+  [6999043000001358260] Penner
+    first_name: SSOT="Penner" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Penner"
+    institution: SSOT="null" vs CRM="Alberta Health Services/Chinook Regional Hospital/ Alberta Healthy Living Program"
+    discipline: SSOT="null" vs CRM="Nurse Clinician"
+  [6999043000001360242] Joëlle Morin
+    subspecialty: SSOT="Cardiologue" vs CRM="null"
+  [6999043000001384021] John Mulvihill
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001103002] Jonathan Isenberg
+    first_name: SSOT="Jonathan" vs CRM="null"
+    last_name: SSOT="Isenberg" vs CRM="Jonathan Isenberg"
+    institution: SSOT="null" vs CRM="BC Cancer Vancouver"
+  [6999043000001381026] Jordan Webber
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001340271] Joshua Solomon
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001347226] Peters
+    first_name: SSOT="Peters" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Peters"
+    institution: SSOT="null" vs CRM="St. Boniface Hospital. WRHA"
+    discipline: SSOT="null" vs CRM="Nurse"
+  [6999043000001361206] Julia Varghese
+    first_name: SSOT="Julia" vs CRM="null"
+    last_name: SSOT="Varghese" vs CRM="Julia Varghese"
+    subspecialty: SSOT="Hematology" vs CRM="null"
+  [6999043000001355146] Julie Côté
+    first_name: SSOT="Julie" vs CRM="null"
+    last_name: SSOT="Côté" vs CRM="Julie Côté"
+    subspecialty: SSOT="Hematology" vs CRM="null"
+  [6999043000001364260] Kai Yi Wu
+    first_name: SSOT="Kai Yi" vs CRM="null"
+    last_name: SSOT="Wu" vs CRM="Kai Yi Wu"
+  [6999043000001333242] Kareem Morant
+    first_name: SSOT="Kareem" vs CRM="null"
+    last_name: SSOT="Morant" vs CRM="Kareem Morant"
+  [6999043000001350240] Kate Elzinga
+    first_name: SSOT="Kate" vs CRM="null"
+    last_name: SSOT="Elzinga" vs CRM="Kate Elzinga"
+  [6999043000001394006] Kathryn Noiles
+    subspecialty: SSOT="Heart Failure" vs CRM="null"
+  [6999043000001361126] Kim Anderson
+    first_name: SSOT="Kim" vs CRM="null"
+    last_name: SSOT="Anderson" vs CRM="Kim Anderson"
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001380001] Kim O'Connor
+    subspecialty: SSOT="cardiologie" vs CRM="null"
+  [6999043000001353216] Kevin Song
+    first_name: SSOT="Kevin" vs CRM="null"
+    last_name: SSOT="Song" vs CRM="Kevin Song"
+  [6999043000001363318] Townsend
+    first_name: SSOT="Kendra" vs CRM="null"
+    institution: SSOT="Not specifically employed by a centre/institution.  Work on informal contract with Dr. A. Lavoie in Regina." vs CRM="Townsend"
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000000945002] Kathleen Turner
+    first_name: SSOT="Kathleen" vs CRM="null"
+    last_name: SSOT="Turner" vs CRM="Kathleen Turner"
+    institution: SSOT="null" vs CRM="University of Ottawa Heart Institute"
+  [6999043000001113002] Lianne Yeager
+    first_name: SSOT="Lianne" vs CRM="null"
+    last_name: SSOT="Yeager" vs CRM="Lianne Yeager"
+    institution: SSOT="null" vs CRM="RGH Heart Function clinic"
+  [6999043000001347181] Leonard Minuk
+    first_name: SSOT="Leonard" vs CRM="null"
+    last_name: SSOT="Minuk" vs CRM="Leonard Minuk"
+  [6999043000001349240] Penner
+    first_name: SSOT="Penner" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Penner"
+    institution: SSOT="null" vs CRM="Saskatchewan Health Authority, Royal University Hospital"
+    discipline: SSOT="null" vs CRM="Nurse Practitioner"
+  [6999043000001333217] Lakshman Vasanthamohan
+    first_name: SSOT="Lakshman" vs CRM="null"
+    last_name: SSOT="Vasanthamohan" vs CRM="Lakshman Vasanthamohan"
+  [6999043000001396011] Lyndsey Ross
+    subspecialty: SSOT="Homecare" vs CRM="null"
+  [6999043000001344173] Brendon Macknak
+    first_name: SSOT="Brendon" vs CRM="null"
+    last_name: SSOT="Macknak" vs CRM="Brendon Macknak"
+  [6999043000001349185] Martha Louzada
+    first_name: SSOT="Martha" vs CRM="null"
+    last_name: SSOT="Louzada" vs CRM="Martha Louzada"
+    subspecialty: SSOT="hematology" vs CRM="null"
+  [6999043000001361196] Masood Rezaei
+    first_name: SSOT="Masood" vs CRM="null"
+    last_name: SSOT="Rezaei" vs CRM="Masood Rezaei"
+    subspecialty: SSOT="cardiology" vs CRM="null"
+  [6999043000001354638] Maude Pagé
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001351217] Melissa Ignaczak
+    first_name: SSOT="Melissa" vs CRM="null"
+    last_name: SSOT="Ignaczak" vs CRM="Melissa Ignaczak"
+  [6999043000001354162] Hira Mian
+    first_name: SSOT="Hira" vs CRM="null"
+    last_name: SSOT="Mian" vs CRM="Hira Mian"
+  [6999043000001401001] Michael Diamant
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001345286] Michel Fluet
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001387011] Michelle Donais
+    subspecialty: SSOT="Heart failure clinic (Clinique d'insuffisance cardiaque)" vs CRM="null"
+  [6999043000001363303] Michelle Hartwick
+    first_name: SSOT="Michelle" vs CRM="null"
+    last_name: SSOT="Hartwick" vs CRM="Michelle Hartwick"
+  [6999043000001361201] Mike Morris
+    first_name: SSOT="Mike" vs CRM="null"
+    last_name: SSOT="Morris" vs CRM="Mike Morris"
+  [6999043000001389006] Mini Baisil Joice
+    first_name: SSOT="Mini Baisil" vs CRM="Mini"
+    last_name: SSOT="Joice" vs CRM="Baisil Joice"
+    subspecialty: SSOT="cardiology" vs CRM="null"
+  [6999043000001331364] Nadia Bouabdallaoui
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001394001] Narjis Ali
+    subspecialty: SSOT="Oncology/Neurology/Cardiology" vs CRM="null"
+  [6999043000001359186] Natalie Ho
+    first_name: SSOT="Natalie" vs CRM="null"
+    last_name: SSOT="Ho" vs CRM="Natalie Ho"
+  [6999043000001391001] Nabila Daud
+    subspecialty: SSOT="Internal medicine/lifestyle medicine" vs CRM="null"
+  [6999043000001400001] Nichola Nichola
+    last_name: SSOT="null" vs CRM="Nichola"
+    institution: SSOT="Heart Function Clinic
+Kelowna General Hospital" vs CRM="Heart Function Clinic Kelowna General Hospital"
+    subspecialty: SSOT="Heart Function" vs CRM="null"
+  [6999043000001333202] Olivier Desplantie
+    first_name: SSOT="Olivier" vs CRM="null"
+    last_name: SSOT="Desplantie" vs CRM="Olivier Desplantie"
+    institution: SSOT="Royal Jubilee Hospital
+Pulse Complete Cardiac Care clinic" vs CRM="Royal Jubilee Hospital Pulse Complete Cardiac Care clinic"
+    subspecialty: SSOT="Cardiology (HF, cardiomyopathies, transplant, cardiac rehab)" vs CRM="null"
+  [6999043000001387001] Perminder Bains
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001360206] Peter Mitoff
+    first_name: SSOT="Peter" vs CRM="null"
+    last_name: SSOT="Mitoff" vs CRM="Peter Mitoff"
+  [6999043000001389011] Cecile Phan
+    subspecialty: SSOT="Neuromuscular neurologist" vs CRM="null"
+  [6999043000001351207] Peiman Marzban
+    first_name: SSOT="Peiman" vs CRM="null"
+    last_name: SSOT="Marzban" vs CRM="Peiman Marzban"
+  [6999043000001398006] Petko Makedonski
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001354172] Peng Wang
+    first_name: SSOT="Peng" vs CRM="null"
+    last_name: SSOT="Wang" vs CRM="Peng Wang"
+  [6999043000001354152] Rajin Choudhury
+    first_name: SSOT="Rajin" vs CRM="null"
+    last_name: SSOT="Choudhury" vs CRM="Rajin Choudhury"
+    subspecialty: SSOT="Cardiac Amyloidosis" vs CRM="null"
+  [6999043000001340216] Rami MASSIE
+    first_name: SSOT="Rami" vs CRM="null"
+    last_name: SSOT="MASSIE" vs CRM="Rami MASSIE"
+    institution: SSOT="Montreal Neurological Hospital
+McGill University Health Center" vs CRM="Montreal Neurological Hospital McGill University Health Center"
+  [6999043000001390011] Rayan Kaedbey
+    subspecialty: SSOT="Hematology" vs CRM="null"
+  [6999043000001381006] Radu Darciuc
+    subspecialty: SSOT="cardiology" vs CRM="null"
+  [6999043000001180002] Reanne Booker
+    first_name: SSOT="Reanne" vs CRM="null"
+    last_name: SSOT="Booker" vs CRM="Reanne Booker"
+    institution: SSOT="null" vs CRM="Arthur JE Child Comprehensive Cancer Centre"
+  [6999043000001364220] Rebecca Wood
+    first_name: SSOT="Rebecca" vs CRM="null"
+    last_name: SSOT="Wood" vs CRM="Rebecca Wood"
+    subspecialty: SSOT="Cardiology, Neurology" vs CRM="null"
+  [6999043000001091001] Remy Hou
+    first_name: SSOT="RUO LAN (REMY)" vs CRM="null"
+    last_name: SSOT="HOU" vs CRM="Remy Hou"
+    institution: SSOT="ARTHUR CHILD CANCER CENTER-OUT PATIENT CLINIC AND INTENSIVE PALLIATIVE INPATIENT UNIT" vs CRM="Arthur Child Cancer Center/ oncology clinic and inpatient palliative oncology care"
+    discipline: SSOT="Registered Nursing" vs CRM="null"
+    subspecialty: SSOT="oncology and hematology" vs CRM="null"
+  [6999043000001381001] Richard Sheppard
+    subspecialty: SSOT="Cardiologue" vs CRM="null"
+  [6999043000001345240] Robert Miller
+    first_name: SSOT="Robert" vs CRM="null"
+    last_name: SSOT="Miller" vs CRM="Robert Miller"
+  [6999043000001528002] Rohini Charan
+    first_name: SSOT="Rohini" vs CRM="null"
+    last_name: SSOT="Charan" vs CRM="Rohini Charan"
+    institution: SSOT="null" vs CRM="Heart Function clinic"
+    discipline: SSOT="null" vs CRM="RN"
+    subspecialty: SSOT="null" vs CRM="cardiology"
+  [6999043000001384016] Rick Perrier
+    subspecialty: SSOT="Neurology" vs CRM="null"
+  [6999043000001352196] Ramm
+    first_name: SSOT="Rose" vs CRM="null"
+    discipline: SSOT="Nursing" vs CRM="Nurse"
+    subspecialty: SSOT="Cardiology, research" vs CRM="null"
+  [6999043000001383001] Stefania Argentin
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001338151] Sameer Chhibber
+    first_name: SSOT="Sameer" vs CRM="null"
+    last_name: SSOT="Chhibber" vs CRM="Sameer Chhibber"
+    subspecialty: SSOT="Neurology" vs CRM="null"
+  [6999043000001388006] Sapojnic Nadejda
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001388001] Sarah Currie
+    subspecialty: SSOT="cardiology" vs CRM="null"
+  [6999043000001381021] Sarah Beingessner
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001352206] Chartrand
+    first_name: SSOT="Sandi" vs CRM="null"
+    discipline: SSOT="Nursing" vs CRM="Nurse"
+    subspecialty: SSOT="Cardiology  Heart failure" vs CRM="null"
+  [6999043000001389016] Sébastien Dubois
+    subspecialty: SSOT="Cardiologu" vs CRM="null"
+  [6999043000001355226] Karan Shahi
+    first_name: SSOT="Karan" vs CRM="null"
+    last_name: SSOT="Shahi" vs CRM="Karan Shahi"
+  [6999043000001331257] Shahin Khayambashi
+    first_name: SSOT="Shahin" vs CRM="null"
+    last_name: SSOT="Khayambashi" vs CRM="Shahin Khayambashi"
+    subspecialty: SSOT="Neurology" vs CRM="null"
+  [6999043000001390016] Shane Arsenault
+    subspecialty: SSOT="Neurology" vs CRM="null"
+  [6999043000001349293] Stéphanie Bechard
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001343186] Stephen Parkin
+    first_name: SSOT="Stephen" vs CRM="null"
+    last_name: SSOT="Parkin" vs CRM="Stephen Parkin"
+    subspecialty: SSOT="Hematology" vs CRM="null"
+  [6999043000001333232] Suzanne Ho
+    first_name: SSOT="Suzanne" vs CRM="null"
+    last_name: SSOT="Ho" vs CRM="Suzanne Ho"
+  [6999043000001356266] Tammy Ryan
+    first_name: SSOT="Tammy" vs CRM="null"
+    last_name: SSOT="Ryan" vs CRM="Tammy Ryan"
+  [6999043000001347161] Tara Dzwiniel
+    first_name: SSOT="Tara" vs CRM="null"
+    last_name: SSOT="Dzwiniel" vs CRM="Tara Dzwiniel"
+    subspecialty: SSOT="Cardiology
+Neurology" vs CRM="Cardiology Neurology"
+  [6999043000001393006] Tarun Sharma
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001390006] Toqeer ahmed
+    subspecialty: SSOT="geriatric" vs CRM="null"
+  [6999043000001348278] Valérie fontaine
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001355216] Victoria DeVito
+    first_name: SSOT="Victoria" vs CRM="null"
+    last_name: SSOT="DeVito" vs CRM="Victoria DeVito"
+  [6999043000000856001] Vimy Barnard-Roberts
+    first_name: SSOT="Vimy" vs CRM="null"
+    last_name: SSOT="Barnard-Roberts" vs CRM="Vimy Barnard-Roberts"
+    institution: SSOT="Mount Sinai Hospital" vs CRM="null"
+    discipline: SSOT="Nursing" vs CRM="null"
+    subspecialty: SSOT="Cardiology" vs CRM="Heart failure"
+  [6999043000001342224] Warner Mampuya
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001388011] Wael Almahmeed
+    subspecialty: SSOT="Imaging and prevention" vs CRM="null"
+  [6999043000001380006] Yang Zhan
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001347384] Ying sia
+    subspecialty: SSOT="Cardiologie" vs CRM="null"
+  [6999043000001364341] Zaki El Haffaf
+    first_name: SSOT="Zaki El" vs CRM="Zaki"
+    last_name: SSOT="Haffaf" vs CRM="El Haffaf"
+    institution: SSOT="Service de médecine génique . Département de médecine 
+Vente hospitalier et universitaire de Montréal CHUM" vs CRM="Service de médecine génique . Département de médecine Vente hospitalier et universitaire de Montréal CHUM"
+    subspecialty: SSOT="Généticien" vs CRM="null"
+  [6999043000001397001] Zaeem A. Siddiqi
+    first_name: SSOT="Zaeem A." vs CRM="Zaeem"
+    last_name: SSOT="Siddiqi" vs CRM="A. Siddiqi"
+    subspecialty: SSOT="Neurology" vs CRM="null"
+  [6999043000001678029] Conor Sheridan
+    first_name: SSOT="Conor" vs CRM="null"
+    last_name: SSOT="Sheridan" vs CRM="Conor Sheridan"
+  [6999043000001380016] Manal Manal
+    last_name: SSOT="null" vs CRM="Manal"
+    subspecialty: SSOT="Neuromuscular" vs CRM="null"
+  [6999043000001681021] Ahmad Didi
+    first_name: SSOT="Ahmad" vs CRM="null"
+    last_name: SSOT="Didi" vs CRM="Ahmad Didi"
+  [6999043000001683015] Mohammed A. Aljama
+    first_name: SSOT="Mohammed A." vs CRM="null"
+    last_name: SSOT="Aljama" vs CRM="Mohammed A. Aljama"
+    institution: SSOT="Juravinski cancer centre
+McMaster University" vs CRM="Juravinski cancer centre, McMaster University"
+  [6999043000001671032] Anita Chan
+    first_name: SSOT="Anita" vs CRM="null"
+    last_name: SSOT="Chan" vs CRM="Anita Chan"
+  [6999043000001664021] Anitha Jambula
+    first_name: SSOT="Anitha" vs CRM="null"
+    last_name: SSOT="Jambula" vs CRM="Anitha Jambula"
+  [6999043000001677012] S. Allan Schaffer
+    first_name: SSOT="S. Allan" vs CRM="null"
+    last_name: SSOT="Schaffer" vs CRM="S. Allan Schaffer"
+    institution: SSOT="Heart Function and Heart Transplant Clinics
+St. Boniface Hospital, Winnipeg
+University of Manitoba" vs CRM="Heart Function and Heart Transplant Clinics, St. Boniface Hospital, Winnipeg, University of Manitoba"
+  [6999043000001669020] Wihlidal
+    first_name: SSOT="Wihlidal" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Wihlidal"
+    institution: SSOT="null" vs CRM="Regina General Hospital Heart Function Clinic"
+    discipline: SSOT="null" vs CRM="Nurse Practitioner"
+  [6999043000001665033] Cathy (Cathleen) Huculak
+    first_name: SSOT="Cathy (Cathleen)" vs CRM="null"
+    last_name: SSOT="Huculak" vs CRM="Cathy (Cathleen) Huculak"
+  [6999043000001670045] Carrie LaFond
+    first_name: SSOT="Carrie" vs CRM="null"
+    last_name: SSOT="LaFond" vs CRM="Carrie LaFond"
+  [6999043000001673033] Young
+    first_name: SSOT="Young" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Young"
+    institution: SSOT="null" vs CRM="Regina General Hospital Heart Function Clinic"
+    discipline: SSOT="null" vs CRM="Pharmacist"
+  [6999043000001700021] Shields
+    first_name: SSOT="Deb" vs CRM="null"
+    institution: SSOT="null" vs CRM="Alberta Health Services- South Health Campus"
+    discipline: SSOT="null" vs CRM="Nurse Clinician"
+  [6999043000000808001] Deborah Kraus
+    first_name: SSOT="Deborah" vs CRM="null"
+    last_name: SSOT="Kraus" vs CRM="Deborah Kraus"
+    institution: SSOT="VGH Neuromuscular Diseases Unit" vs CRM="null"
+    discipline: SSOT="Nursing" vs CRM="null"
+  [6999043000001663035] Dr. Denise Chan
+    first_name: SSOT="Dr. Denise" vs CRM="null"
+    last_name: SSOT="Chan" vs CRM="Dr. Denise Chan"
+    institution: SSOT="Foothills Medical Center (Alberta Health Services)
+South Health Campus (Alberta Health Services)
+EFW Radiology Clinics" vs CRM="Foothills Medical Center (Alberta Health Services), South Health Campus (Alberta Health Services), E"
+  [6999043000001357191] Djalal Abdoulaye Haroun
+    first_name: SSOT="Djalal Abdoulaye" vs CRM="null"
+    last_name: SSOT="Haroun" vs CRM="Djalal Abdoulaye Haroun"
+    institution: SSOT="Institut of cardiology and cardiovascular surgery, Havana, Cuba" vs CRM="Institute of cardiology and cardiovascular surgery, Havana, Cuba"
+    discipline: SSOT="Physycian" vs CRM="Cardiovascular Surgery Resident"
+    subspecialty: SSOT="Cardiovascular Surgery Resident" vs CRM="Adult Cardiovascular Surgery"
+  [6999043000001671016] Zainab Altaha
+    first_name: SSOT="Zainab" vs CRM="null"
+    last_name: SSOT="Altaha" vs CRM="Zainab Altaha"
+  [6999043000001396001] SURESH. P
+    institution: SSOT="SR MEDICARE CENTRE/SNIMS" vs CRM="SR medicare centre /SNIMS"
+    subspecialty: SSOT="Diabetology" vs CRM="null"
+  [6999043000001700026] Emmanuelle Massie
+    first_name: SSOT="Emmanuelle" vs CRM="null"
+    last_name: SSOT="Massie" vs CRM="Emmanuelle Massie"
+  [6999043000001682038] Erma Gardner
+    first_name: SSOT="Erma" vs CRM="null"
+    last_name: SSOT="Gardner" vs CRM="Erma Gardner"
+  [6999043000001663020] Ibraheem Othman
+    first_name: SSOT="Ibraheem" vs CRM="null"
+    last_name: SSOT="Othman" vs CRM="Ibraheem Othman"
+  [6999043000001687026] Ilias Mylonas
+    first_name: SSOT="Ilias" vs CRM="null"
+    last_name: SSOT="Mylonas" vs CRM="Ilias Mylonas"
+  [6999043000001676027] Caifeng (Ivy) Yang
+    first_name: SSOT="Caifeng (Ivy)" vs CRM="null"
+    last_name: SSOT="Yang" vs CRM="Caifeng (Ivy) Yang"
+  [6999043000001680013] Jonathan Howlett
+    first_name: SSOT="Jonathan" vs CRM="null"
+    last_name: SSOT="Howlett" vs CRM="Jonathan Howlett"
+  [6999043000001700036] Jason Hart
+    first_name: SSOT="Jason" vs CRM="null"
+    last_name: SSOT="Hart" vs CRM="Jason Hart"
+  [6999043000001690014] Knight
+    first_name: SSOT="Jennifer" vs CRM="null"
+    institution: SSOT="Edmonton Cardiology Consultants - Cardiac Amyloid Program (Dr. Marc Benoit)" vs CRM="Edmonton Cardiology Consultants"
+    discipline: SSOT="RN/ NP student" vs CRM="Nurse Clinician"
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001683010] Nurkowski
+    first_name: SSOT="Nurkowski" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Nurkowski"
+    institution: SSOT="null" vs CRM="Regina General Hospital Heart Function Clinic"
+    discipline: SSOT="null" vs CRM="Pharmacist"
+  [6999043000000791023] Joyce Verwoerd
+    first_name: SSOT="Joyce" vs CRM="null"
+    last_name: SSOT="Verwoerd" vs CRM="Joyce Verwoerd"
+    institution: SSOT="Abbotsford Regional Hospital Cardiac Clinic" vs CRM="null"
+    discipline: SSOT="Nursing" vs CRM="null"
+  [6999043000001684034] Juan Duero
+    first_name: SSOT="Juan" vs CRM="null"
+    last_name: SSOT="Duero" vs CRM="Juan Duero"
+  [6999043000001357221] Veenhuyzen
+    first_name: SSOT="Jan" vs CRM="null"
+    institution: SSOT="null" vs CRM="University of Calgary (Alberta Health Services)"
+    discipline: SSOT="null" vs CRM="Nurse"
+  [6999043000001667036] Rowles
+    first_name: SSOT="Rowles" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Rowles"
+    institution: SSOT="null" vs CRM="Alberta Health Services"
+    discipline: SSOT="null" vs CRM="Nurse"
+  [6999043000001677007] Karen Yu
+    first_name: SSOT="Karen" vs CRM="null"
+    last_name: SSOT="Yu" vs CRM="Karen Yu"
+  [6999043000001700051] Katie Connolly
+    first_name: SSOT="Katie" vs CRM="null"
+    last_name: SSOT="Connolly" vs CRM="Katie Connolly"
+    institution: SSOT="McMaster University" vs CRM="McMaster university /, St Joseph’s Healthcare Hamilton"
+    subspecialty: SSOT="Cardiology / heart failure / amyloidosis" vs CRM="Cardiology"
+  [6999043000000793012] Kelly McNabb
+    first_name: SSOT="Kelly" vs CRM="null"
+    last_name: SSOT="McNabb" vs CRM="Kelly McNabb"
+    institution: SSOT="Kingston Health Sciences Centre" vs CRM="null"
+    discipline: SSOT="Nursing" vs CRM="null"
+  [6999043000001688007] Yurasek
+    first_name: SSOT="Yurasek" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Yurasek"
+    institution: SSOT="null" vs CRM="Alberta Health Services"
+  [6999043000001684029] Kerri Schellenberg
+    first_name: SSOT="Kerri" vs CRM="null"
+    last_name: SSOT="Schellenberg" vs CRM="Kerri Schellenberg"
+  [6999043000001670040] Gelineau
+    first_name: SSOT="Gelineau" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Gelineau"
+    institution: SSOT="null" vs CRM="WRHA- St Boniface Hospital"
+    discipline: SSOT="null" vs CRM="Nurse"
+  [6999043000001669025] Morgan Krauter
+    first_name: SSOT="Morgan" vs CRM="null"
+    last_name: SSOT="Krauter" vs CRM="Morgan Krauter"
+    institution: SSOT="Royal Victoria Regional Health Centre Heart Function Clinic" vs CRM="Royal Victoria Regional Health Centre, Barrie, ON"
+  [6999043000001675026] Krista Jelisavac
+    first_name: SSOT="Krista" vs CRM="null"
+    last_name: SSOT="Jelisavac" vs CRM="Krista Jelisavac"
+    institution: SSOT="Royal University Hospital Saskatoon, SK 
+Cardiology Outpatient Services" vs CRM="Royal University Hospital Saskatoon, SK , Cardiology Outpatient Services"
+  [6999043000001663025] Kim Ronak
+    first_name: SSOT="Kim" vs CRM="null"
+    last_name: SSOT="Ronak" vs CRM="Kim Ronak"
+  [6999043000001685023] Hayes
+    first_name: SSOT="Kyla" vs CRM="null"
+    institution: SSOT="Regina Amyloidosis Clinic / Regina Heart Function Clinic" vs CRM="CarioNeuro Diagnostics Heart Function Clinic"
+    discipline: SSOT="Nursing" vs CRM="Clinical Nurse Educator"
+    subspecialty: SSOT="Cardiology & oncology" vs CRM="null"
+  [6999043000001690024] Nicole Laferriere
+    first_name: SSOT="Nicole" vs CRM="null"
+    last_name: SSOT="Laferriere" vs CRM="Nicole Laferriere"
+  [6999043000001673038] Lemay
+    first_name: SSOT="Lemay" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Lemay"
+    institution: SSOT="null" vs CRM="SBGH- cardiac clinics"
+    discipline: SSOT="null" vs CRM="Nurse"
+  [6999043000001689017] Litwin
+    first_name: SSOT="Lyndsay" vs CRM="null"
+    institution: SSOT="South Health Campus" vs CRM="Alberta Health Services- South Health Campus"
+    subspecialty: SSOT="Cardiology" vs CRM="null"
+  [6999043000001674033] Lynette Kosar
+    first_name: SSOT="Lynette" vs CRM="null"
+    last_name: SSOT="Kosar" vs CRM="Lynette Kosar"
+  [6999043000001671027] Marc Benoit
+    first_name: SSOT="Marc" vs CRM="null"
+    last_name: SSOT="Benoit" vs CRM="Marc Benoit"
+    institution: SSOT="Royal Alexandra Hospital
+Edmonton Cardiology Consultants" vs CRM="Royal Alexandra Hospital, Edmonton Cardiology Consultants"
+  [6999043000001685033] Matti Allen
+    first_name: SSOT="Matti" vs CRM="null"
+    last_name: SSOT="Allen" vs CRM="Matti Allen"
+    subspecialty: SSOT="Physical Medicine and Rehabilitation - Neuromuscular Medicine" vs CRM="Physical Medicine and Rehabilitation"
+  [6999043000001663015] Vossen-Anweiler
+    first_name: SSOT="Vossen-Anweiler" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Vossen-Anweiler"
+    institution: SSOT="null" vs CRM="Saskatchewan Health Authority"
+    discipline: SSOT="null" vs CRM="Nurse Practitioner"
+  [6999043000001681031] Loyola
+    first_name: SSOT="Melissa" vs CRM="null"
+    institution: SSOT="Tom Baker Cancer Centre soon to be Arthur Child Cancer Center" vs CRM="Alberta Health Services - Arthur Child Cancer Center"
+    discipline: SSOT="Nursing" vs CRM="Nurse Clinician"
+    subspecialty: SSOT="Hematology - Multiple myeloma and amyloidosis" vs CRM="null"
+  [6999043000001688017] Michelle Tsang
+    first_name: SSOT="Michelle" vs CRM="null"
+    last_name: SSOT="Tsang" vs CRM="Michelle Tsang"
+  [6999043000001688012] Mona Mahal
+    first_name: SSOT="Mona" vs CRM="null"
+    last_name: SSOT="Mahal" vs CRM="Mona Mahal"
+  [6999043000001663030] Monique Bailey
+    first_name: SSOT="Monique" vs CRM="null"
+    last_name: SSOT="Bailey" vs CRM="Monique Bailey"
+    institution: SSOT="Heart Function Clinic
+Chinook Regional Hospital" vs CRM="Heart Function Clinic, Chinook Regional Hospital,"
+  [6999043000001664036] nina mason
+    first_name: SSOT="Nina" vs CRM="null"
+    last_name: SSOT="Mason" vs CRM="nina mason"
+    institution: SSOT="Arthur Child Cancer Center" vs CRM="arthurchild cancer center"
+    discipline: SSOT="Clinicla trial nurse" vs CRM="Bachelors of nursing"
+    subspecialty: SSOT="hematology, cardiology critical care" vs CRM="hematology"
+  [6999043000001690019] Richard LeBlanc
+    first_name: SSOT="Richard" vs CRM="null"
+    last_name: SSOT="LeBlanc" vs CRM="Richard LeBlanc"
+  [6999043000001664026] Rami Kotb
+    first_name: SSOT="Rami" vs CRM="null"
+    last_name: SSOT="Kotb" vs CRM="Rami Kotb"
+  [6999043000001679039] Rodolfo Pike
+    first_name: SSOT="Rodolfo" vs CRM="null"
+    last_name: SSOT="Pike" vs CRM="Rodolfo Pike"
+    institution: SSOT="Heart Function Clinic
+NLHS" vs CRM="Heart Function Clinic NLHS"
+  [6999043000001674038] Ryan Davey
+    first_name: SSOT="Ryan" vs CRM="null"
+    last_name: SSOT="Davey" vs CRM="Ryan Davey"
+  [6999043000000790019] Sarah Weatherbee
+    first_name: SSOT="Sarah" vs CRM="null"
+    last_name: SSOT="Weatherbee" vs CRM="Sarah Weatherbee"
+    institution: SSOT="BC Cancer Agency" vs CRM="null"
+    discipline: SSOT="RN" vs CRM="null"
+  [6999043000001684039] Sophie Barnabé
+    first_name: SSOT="Sophie" vs CRM="null"
+    last_name: SSOT="Barnabé" vs CRM="Sophie Barnabé"
+  [6999043000001681026] Scott Ryan
+    first_name: SSOT="Scott" vs CRM="null"
+    last_name: SSOT="Ryan" vs CRM="Scott Ryan"
+  [6999043000001669030] Shannon Duncan
+    first_name: SSOT="Shannon" vs CRM="null"
+    last_name: SSOT="Duncan" vs CRM="Shannon Duncan"
+  [6999043000000802007] Shawn Sud
+    first_name: SSOT="Shawn" vs CRM="null"
+    last_name: SSOT="Sud" vs CRM="Shawn Sud"
+    institution: SSOT="University of Calgary" vs CRM="null"
+    discipline: SSOT="Physician" vs CRM="null"
+  [6999043000001678024] Sita Bhella
+    first_name: SSOT="Sita" vs CRM="null"
+    last_name: SSOT="Bhella" vs CRM="Sita Bhella"
+  [6999043000001682048] Spencer Martin
+    first_name: SSOT="Spencer" vs CRM="null"
+    last_name: SSOT="Martin" vs CRM="Spencer Martin"
+  [6999043000001664031] Shelley Zieroth
+    first_name: SSOT="Shelley" vs CRM="null"
+    last_name: SSOT="Zieroth" vs CRM="Shelley Zieroth"
+    institution: SSOT="St. Boniface Hospital
+Winnipeg, Manitoba" vs CRM="St. Boniface Hospital Winnipeg, Manitoba"
+  [6999043000001682033] Evans
+    first_name: SSOT="Evans" vs CRM="null"
+    last_name: SSOT="null" vs CRM="Evans"
+    institution: SSOT="null" vs CRM="Alberta Health Services-south zone CHR"
+    discipline: SSOT="null" vs CRM="Nurse Clinician"
+  [6999043000001669041] Hilary Hagel
+    first_name: SSOT="Hilary" vs CRM="null"
+    last_name: SSOT="Hagel" vs CRM="Hilary Hagel"
+  [6999043000001643002] Alexis Richard
+    first_name: SSOT="Alexis" vs CRM="null"
+    last_name: SSOT="Richard" vs CRM="Alexis Richard"
+  [6999043000001913001] Devan Hrupp
+    first_name: SSOT="Devan" vs CRM="null"
+    last_name: SSOT="Hrupp" vs CRM="Devan Hrupp"
+    institution: SSOT="South Health Campus" vs CRM="Cardiac Amyloidosis Clinic SHC"
+    discipline: SSOT="null" vs CRM="registered nurse"
+    subspecialty: SSOT="null" vs CRM="Cardio hematology"
+  [6999043000001734002] Alii Bellal Askarzadeh
+    first_name: SSOT="Alii" vs CRM="null"
+    last_name: SSOT="Bellal Askarzadeh" vs CRM="Alii Bellal Askarzadeh"
+    institution: SSOT="SPH Heart Function Clinic UBC" vs CRM="SPH Heart Function Clinic"
+    discipline: SSOT="null" vs CRM="RN, NP student UBC"
+    subspecialty: SSOT="null" vs CRM="Cardiology"

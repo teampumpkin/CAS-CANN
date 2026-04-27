@@ -54,6 +54,20 @@ export default function Header() {
   const [fontSize, setFontSize] = useState(16);
   const [location] = useLocation();
   const { t } = useLanguage();
+  const [currentHash, setCurrentHash] = useState(
+    typeof window !== "undefined" ? window.location.hash : ""
+  );
+
+  // Keep hash in sync with both browser hashchange events and wouter location changes
+  useEffect(() => {
+    setCurrentHash(window.location.hash);
+  }, [location]);
+
+  useEffect(() => {
+    const onHashChange = () => setCurrentHash(window.location.hash);
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   const increaseFontSize = () => {
     if (fontSize < 24) {
@@ -76,12 +90,29 @@ export default function Header() {
     document.documentElement.style.fontSize = "16px";
   };
 
-  // Function to check if current page matches navigation item
+  // Function to check if current page matches navigation item.
+  // When the URL has a hash (e.g. /cann-resources#cann-events), prefer the nav
+  // item that contains an exact path+hash match so only one nav item lights up.
   const isPageActive = (href: string, dropdownItems?: any[]) => {
     if (href === "#" || href === "/") {
       return location === "/";
     }
 
+    const fullPath = location + currentHash;
+
+    // Pass 1 — does THIS nav item have an exact full-path match?
+    if (href === fullPath) return true;
+    if (dropdownItems?.some((item) => item.href === fullPath)) return true;
+
+    // If some OTHER nav item has an exact full-path match, defer to it
+    const otherHasExactMatch = navItems.some((nav) => {
+      if (nav.href === href) return false; // skip self
+      if (nav.href === fullPath) return true;
+      return nav.dropdownItems?.some((d: any) => d.href === fullPath);
+    });
+    if (otherHasExactMatch) return false;
+
+    // Pass 2 — fallback to path-only match
     if (dropdownItems) {
       const dropdownMatch = dropdownItems.some((item) => {
         const itemPath = item.href.split("#")[0];

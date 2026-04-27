@@ -480,124 +480,6 @@ export default function CANNResources() {
           </motion.div>
         </div>
       </section>
-      {/* Training Programs Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-800">
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
-                {t('cannResources.educationalSeries.title')}
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              {t('cannResources.educationalSeries.subtitle')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 shadow-lg border border-pink-500/20 max-w-3xl mx-auto">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-2 flex-shrink-0">
-                    <Users className="w-5 h-5 text-pink-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                      {t('cannResources.membersOnly.title')}
-                    </h3>
-                    <p className="text-gray-600 dark:text-white/70 text-sm">
-                      {t('cannResources.membersOnly.description')}
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  onClick={() =>
-                    (window.location.href = "/about-cann#join-section")
-                  }
-                  size="lg"
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 w-full sm:w-auto sm:flex-shrink-0"
-                >
-                  <Users className="w-4 h-4 mr-2" />
-                  Join CANN
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allEducationalSeries.map((session, index) => (
-              <motion.div
-                key={index}
-                className="h-full"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex flex-col">
-                  {/* Thumbnail Section */}
-                  <div className="relative w-full aspect-video bg-gray-900 overflow-hidden group">
-                    {/* Gradient background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/80 to-[#00DD89]/80 dark:from-[#00AFE6]/70 dark:to-[#00DD89]/70" />
-                    
-                    {/* Subtle dark overlay */}
-                    <div className="absolute inset-0 bg-black/20" />
-                    
-                    {/* Coming Soon badge centered */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="bg-white/95 dark:bg-gray-900/95 rounded-full px-6 py-3 shadow-2xl">
-                        <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">
-                          Coming Soon
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Details Section */}
-                  <CardContent className="p-6 flex-1 flex flex-col">
-                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 px-3 py-1 rounded-full border border-[#00AFE6]/20 mb-3 w-fit">
-                      <Calendar className="w-4 h-4 text-[#00AFE6]" />
-                      <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00DD89]">
-                        {formatEventDate(session.rawDate)}
-                      </span>
-                    </div>
-                    
-                    <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white leading-tight">
-                      {session.topic}
-                    </h3>
-                    
-                    <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
-                      <div className="flex items-start gap-2">
-                        <User className="w-4 h-4 text-[#00AFE6] mt-0.5 flex-shrink-0" />
-                        <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
-                            Speaker:
-                          </div>
-                          <div className="text-sm text-gray-600 dark:text-white/70 font-bold">
-                            {session.speaker}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
       {/* Educational Resources Section */}
       <section className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
@@ -999,6 +881,125 @@ export default function CANNResources() {
               </div>
             </TabsContent>
           </Tabs>
+        </div>
+      </section>
+
+      {/* CANN Educational Series Section (placeholders pending member portal) */}
+      <section className="py-24 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold font-rosarivo mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-white/80 bg-clip-text text-transparent">
+                {t('cannResources.educationalSeries.title')}
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
+              {t('cannResources.educationalSeries.subtitle')}
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 shadow-lg border border-pink-500/20 max-w-3xl mx-auto">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-full p-2 flex-shrink-0">
+                    <Users className="w-5 h-5 text-pink-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                      {t('cannResources.membersOnly.title')}
+                    </h3>
+                    <p className="text-gray-600 dark:text-white/70 text-sm">
+                      {t('cannResources.membersOnly.description')}
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  onClick={() =>
+                    (window.location.href = "/about-cann#join-section")
+                  }
+                  size="lg"
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 rounded-2xl px-8 w-full sm:w-auto sm:flex-shrink-0"
+                >
+                  <Users className="w-4 h-4 mr-2" />
+                  Join CANN
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {allEducationalSeries.map((session, index) => (
+              <motion.div
+                key={index}
+                className="h-full"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 h-full flex flex-col">
+                  {/* Thumbnail Section */}
+                  <div className="relative w-full aspect-video bg-gray-900 overflow-hidden group">
+                    {/* Gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/80 to-[#00DD89]/80 dark:from-[#00AFE6]/70 dark:to-[#00DD89]/70" />
+                    
+                    {/* Subtle dark overlay */}
+                    <div className="absolute inset-0 bg-black/20" />
+                    
+                    {/* Coming Soon badge centered */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-white/95 dark:bg-gray-900/95 rounded-full px-6 py-3 shadow-2xl">
+                        <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+                          Coming Soon
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Details Section */}
+                  <CardContent className="p-6 flex-1 flex flex-col">
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00AFE6]/10 to-[#00DD89]/10 px-3 py-1 rounded-full border border-[#00AFE6]/20 mb-3 w-fit">
+                      <Calendar className="w-4 h-4 text-[#00AFE6]" />
+                      <span className="text-sm font-medium text-[#00AFE6] dark:text-[#00DD89]">
+                        {formatEventDate(session.rawDate)}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white leading-tight">
+                      {session.topic}
+                    </h3>
+                    
+                    <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+                      <div className="flex items-start gap-2">
+                        <User className="w-4 h-4 text-[#00AFE6] mt-0.5 flex-shrink-0" />
+                        <div>
+                          <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">
+                            Speaker:
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-white/70 font-bold">
+                            {session.speaker}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

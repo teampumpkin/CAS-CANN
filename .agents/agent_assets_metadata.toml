@@ -77,22 +77,28 @@ title = "CRM Deep Audit"
 id = "y4YDZTd4zS1REgZ7SYZvf"
 uri = "file://docs/CAS_Duplicate_Merge_Proposal_2026-05-07.xlsx"
 type = "table"
-title = "Duplicate Merge Proposal (read-only)"
+title = "Open during call — Duplicate Proposal"
 
 [[outputs]]
 id = "nQORyTS39JhPmFsahAgmg"
 uri = "file://docs/CAS_Master_Status_Report_2026-05-07.md"
 type = "text"
-title = "Master Status Report — send to client"
+title = "Master Status Report (full detail)"
 
 [[outputs]]
 id = "5yuw-QeRmOtql5S4VQuKn"
 uri = "file://docs/CLIENT_EMAIL_2026-05-07.md"
 type = "text"
-title = "Client Email — copy/paste body"
+title = "Cover email (send before/after)"
 
 [[outputs]]
 id = "erpZ9Hu0e7eqSs-6wOR9r"
 uri = "file://docs/MEETING_AGENDA_2026-05-07.md"
 type = "text"
 title = "Meeting Agenda — your script (private)"
+
+[[outputs]]
+id = "3K37thk1dUFiObTtiXVOq"
+uri = "file://docs/MEETING_BRIEF_FINAL_2026-05-07.md"
+type = "text"
+title = "🎯 FINAL Meeting Brief — use during the call"

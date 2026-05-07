@@ -1,0 +1,100 @@
+Good afternoon all,
+
+Thank you again, Nital, for sharing the document following Team Pumpkin's recent review of the CRM.  This clear and thorough communication is helpful.
+
+As discussed at our meeting today, I have reviewed Nital's document and sourced against the CRM membership list visible to me in my Zoho account (247 Leads). 
+
+Specifically I've reviewed the 17 Leads/Records listed under section #3 in the document and the 2 records listed under section #4 ahead of our scheduled meeting on Monday, May 4th (this was just arranged today so may be news to you, Nital).  
+
+*Please refrain from acting on this feedback until we can review together on Monday:
+
+ 17 Leads/Contacts (listed under section #3 in Nital's document)
+
+Devan Hrupp - Zoho ID 69990430000019 67018 - confirm this record can be deleted (duplicate with Zoho ID 6999043000001913001)
+
+Karine Deschenes - ID 69990430000019 65018 - I see three records (leads) for this member in the CRM.  Keep a single record, the one that has the most info - this seems to be Zoho ID 6999043000001916001.  The other two could be deleted (ending in 5018 and 6001)
+
+Danielle Murray - I see three records for this member in the CRM.  Keep a single record, with the most info - seems to be ID 6999043000001917001.  Delete Zoho ID's 6999043000002227001 and 6999043000001961002
+
+Nina Mason - I see two records - keep both as they have different email addresses - can we link these into one member record and keep both email addresses?  (If both cannot be kept and merged, we could delete Zoho ID ending in 00031)
+
+Anne Marie Carr - I confirm this record can be deleted
+
+Melissa Loyola - Two records Zoho ID ending in 1031 and 1034 contain conflicting information - ?  For discussion on Monday
+
+Merv Carr - I confirm this record can be deleted
+
+Kyla Hayes - Two records -  ID ending in 70050 and 85023 - conflicting information - ?  For discussion on Monday
+
+Dorothy Roberts - Two records, each with different email address (ID's ending in 58002 and 60001) - can we link these into one member record and keep both email addresses?
+
+Robert Millet -  Zoho ID 69990430000013 59201. This is Robert Miller Zoho ID 6999043000001345240 - *There is a typo in the last letter of his surname (letter "t" and "r" - his surname is Miller).  I can confirm whether he wants to receive communication to both email addresses (gmail), or just his professional address (ahs email). 
+
+Keith Dares - I confirm this record can be deleted
+
+Deb Bosley - two records with conflicting information - discuss on Monday.  (keep Zoho ID 33247 email address but CANN should be yes - see ID 40236) 
+
+Mona Mahal - two records - different email addresses - can we link these into one member record and keep both email addresses?  *Note different institution listed in each record (ID's ending in 88012 and 41003) but this is the same person
+
+Leanne Walper - I confirm this record can be deleted
+
+Valerie Fontaine - Two records with conflicting information - for discussion on Monday (IDs ending in 23002 and 48278)
+
+2.  2 Records Skipped (see section #4 in Nital's document)
+
+Anwar Perez - international member, do not have email address - omit this member
+Jing Zeng - email address for this member: Jing.Zeng@albertahealthservices.ca
+
+3.Discrepancies in the data fields when comparing original source (example Excel spreadsheet and CRM)
+
+Lastly, as discussed today, I noted some errors in the CRM data in my Zoho account member list (Leads) when comparing the original source (Microsoft member registration form/Excel spreadsheet) and the CRM data.  The two examples brought forward today are shared below:
+
+Kate Elzinga: She indicated 'Yes' to participation in the map, but in the CRM, this is answered as 'No' (see screenshots from both the original Excel spreadsheet/Microsoft member registration form and the CRM)
+Lyndsay Litwin: She indicated 'Yes' to map, CAS and CANN communications (several registration inputs - Excel spreadsheets and website) but in CRM this is answered as 'No' to all three - see screenshot
+
+I look forward to reviewing/reconciling these members on Monday.
+
+Thanks again,
+Jan
+
+
+
+
+From: Jan Veenhuyzen <jveenhuy@ucalgary.ca>
+Sent: Thursday, April 23, 2026 2:54 PM
+To: Nital Jain <nital.jain@teampumpkin.com>; Jeff Peterson <jeff.peterson@bluemonarch.ca>; Leanne Walper <leanne.walper@bluemonarch.ca>
+Cc: Nowell Fine (AHS) <nowell.fine@albertahealthservices.ca>; Harmeet Monga <harmeet@teampumpkin.com>
+Subject: Re: CAS/CANN CRM: Client Handover & SSOT Reconciliation Complete
+ 
+Thank you, Nital.
+@Jeff - please let us know next steps and how I can be of help.
+Jan
+From: Nital Jain <nital.jain@teampumpkin.com>
+Sent: Thursday, April 23, 2026 9:17 AM
+To: Jeff Peterson <jeff.peterson@bluemonarch.ca>; Leanne Walper <leanne.walper@bluemonarch.ca>
+Cc: Jan Veenhuyzen <jveenhuy@ucalgary.ca>; Nowell Fine (AHS) <nowell.fine@albertahealthservices.ca>; Harmeet Monga <harmeet@teampumpkin.com>
+Subject: CAS/CANN CRM: Client Handover & SSOT Reconciliation Complete
+ 
+[△EXTERNAL]
+
+
+Hi Jeff,
+
+Following our discussion yesterday, the team has verified that the SSOT is complete and ready for campaign activation. 
+The CAS/CANN Zoho CRM is now structurally sound and data-clean.
+
+We completed a three-phase SSOT reconciliation today, April 23, 2026. This process confirmed the system architecture, ensured 100% population of key membership and consent fields, and enforced all membership dependency rules.
+
+The Leads module currently contains 247 records. We require client action on the following to finalize the target count of 232:
+
+- Review 17 non-SSOT consent-protected records.
+- Provide source emails for 2 SSOT records.
+
+Please find the supporting documentation attached. The file includes:
+
+- Tab 1: A summary of the three-phase data synchronization.
+- Tab 2: A comprehensive technical and structural overview of the Zoho CRM implementation, confirming it is ready for activation.
+
+
+Best,
+Nital Jain

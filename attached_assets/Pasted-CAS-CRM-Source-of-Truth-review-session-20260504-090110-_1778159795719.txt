@@ -1,0 +1,2053 @@
+CAS CRM + Source of Truth review session-20260504_090110-Meeting Transcript
+4 May 2026, 03:01pm
+1h 37m 48s
+
+Jeff Peterson started transcription
+
+Nital   0:39
+Hi, good morning, Jeff. Good evening, Jesse. I'm good. How are you?
+
+Jeff Peterson   0:41
+In a tell hurry.
+Good, thanks.
+
+Nital   0:51
+Hermit won't be joining us today. I think you might have missed the email or maybe seen it. I'm not sure. He's under the weather.
+
+Jeff Peterson   1:02
+No problem.
+How are you feeling?
+
+Nital   1:12
+I am actually feeling better now. I wasn't doing well, but the weekend surely helped me.
+
+Jeff Peterson   1:20
+Excellent.
+
+Nital   1:21
+Yeah.
+Is Leanne joining us?
+
+Jeff Peterson   1:36
+I didn't invite her to this one.
+
+Nital   1:38
+CAE.
+Do you think Jan is joining us, or maybe she's...
+
+Jeff Peterson   2:14
+She should be.
+
+Nital   2:15
+Thing.
+Yeah.
+I hope she's not under the impression that this call would have been rescheduled.
+Then she did text.
+
+Jeff Peterson   4:25
+While we're waiting for Jan, Natal and Vasi, where are we with the source of truth discussion? You were looking for approvals to delete some records last week and to add 2 new ones.
+
+Nital   4:41
+Correct, and I think that was an action item as per the document that I shared that I received from Vasi. But since I sat out on the wedding and I wasn't, the meeting and I wasn't doing well, and then Parmeet is not doing well. I didn't really get the updates if there was anything in respect to that that was discussed.
+
+Jeff Peterson   4:49
+Yep.
+
+Nital   5:02
+Jan did send me an email, but she also explicitly added that I do not action on any of the items until we meet today. So yeah, that's where we are at right now.
+
+Jeff Peterson   5:12
+Perfect.
+Okay, no, that sounds good.
+
+vasikaran k   5:21
+Hi, Jeff. Hi, Nita.
+
+Jeff Peterson   5:23
+Hey, good morning. How are you?
+
+vasikaran k   5:24
+Yeah, doing great. How are you?
+
+Jeff Peterson   5:29
+Good, thank you. Just a sec.
+
+vasikaran k   5:34
+So, I'm just adding some points to what you're asking before, single sort of truth. So, the things what you have gave is a detailed things about the duplication and what are the things blocking from us. So, we had a...
+submitted the detailed report according to that we have moved into the batches, validated the CRM data with all those Excel sheets and compared all those duplicates and removed and whatever the ask we kept on that. We have completed that right now.
+So after that, I just now got an email with Nitin.
+So yeah, it's more over shorter, but still some things is flagging off. So let me check that and update you.
+
+Jeff Peterson   6:27
+Okay, are you both going to be able to show your screen and help us to get inside the CRM today?
+
+vasikaran k   6:32
+Yeah, sure.
+
+Jeff Peterson   6:34
+Perfect.
+
+vasikaran k   6:34
+So, yeah.
+
+Jeff Peterson   6:36
+Jen's having difficulty getting into the call, so I'm just working on troubleshooting that with her.
+
+Nital   6:41
+Okay.
+And.
+If needed, I can also reschedule this call on maybe Google Meet and share if Teams is glitching.
+
+Jeff Peterson   6:58
+Possible, let's just see if she can get in.
+
+Nital   7:01
+Okay, sure.
+I couldn't help but notice, Jeff, is that a Platypus Perry mug?
+
+Jeff Peterson   7:57
+Is.
+
+Nital   7:57
+That you are.
+
+Jeff Peterson   7:59
+Ready?
+
+Nital   7:59
+The Platypus Perry from Penis and Fur.
+The mug that you were using.
+
+Jeff Peterson   8:04
+Ohh.
+
+Nital   8:07
+You're clueless.
+
+Jeff Peterson   8:09
+I include this. I'm sorry. I didn't. What are you talking about?
+
+Nital   8:10
+No.
+The one that you use right now to drink something, I'm assuming it's coffee. Is that a platypus berry? Oh no, no, no, it's just some art. I'm just so fascinated by platypus berry from Venus and Ferb. I thought you're so cool to have that.
+
+Jeff Peterson   8:16
+Ohh.
+The.
+It was a Christmas present for my son with cats on it, so...
+
+Nital   8:35
+Okay.
+
+Jeff Peterson   8:36
+Nothing fancy, but it's the right amount of coffee.
+
+vasikaran k   8:52
+So I think my screen is visible to you.
+
+Nital   8:57
+Should we wait for Jan and Jeff before like Vasi starts?
+
+Jeff Peterson   9:01
+Yeah, we should. I was just trying to queue up the visibility to the CRM. That would be great.
+Just hold on for a half a moment here.
+
+vasikaran k   9:11
+Jessica.
+
+Jeff Peterson   9:22
+How are you doing these days, Vasi?
+
+vasikaran k   9:25
+Sorry, Jeff.
+
+Jeff Peterson   9:26
+I just wondered how you're doing these days.
+
+vasikaran k   9:30
+Yeah, so many everyday tech tech related updates are coming, just learning ahead through many things interesting going things on.
+
+Jeff Peterson   9:45
+Too busy.
+
+vasikaran k   9:45
+I'm just wondering how the technology grows and all those things.
+
+Jeff Peterson   9:48
+Yeah.
+Interesting.
+The.
+Good morning.
+
+Jan Veenhuyzen   11:33
+Good morning. Hi everyone. Sorry to keep you all waiting.
+
+Jeff Peterson   11:40
+We're good though. That was a strange message. I hadn't seen that one before.
+
+vasikaran k   11:40
+Hi, good morning.
+
+Jan Veenhuyzen   11:41
+The.
+Yeah.
+Well, leave it to me to find the strangest things.
+Yeah, I'm not exactly sure what happened. I did end up rebooting as you suggested, Jeff, and then I was able to log in. It somehow kept asking me to sign in, even though I was already signed in. So I don't know. Here we are. Apologize.
+
+Jeff Peterson   12:01
+OK, straight.
+All good. Nitel will be right back. It's a bit of a throwback to the 1990s. Reboot your machine to reset the driver and fix it. How was your weekend?
+
+Jan Veenhuyzen   12:10
+Yeah, certainly, yeah.
+Good. Yeah, very nice. Nice. We enjoyed the nice weather. I'm sure you did too. It was just nice to be outdoors. How you tell?
+
+Jeff Peterson   12:19
+Yeah.
+
+Nital   12:20
+Hi, Jan, how are you?
+
+Jan Veenhuyzen   12:22
+I'm good, thanks. How are you?
+
+Nital   12:24
+Good, good, good. We've been waiting for you.
+
+Jan Veenhuyzen   12:26
+Yes, I'm sorry. Sorry to keep you all waiting. Thanks for your patience.
+
+Nital   12:30
+No, that's totally fine. That's totally fine. OK, then I think.
+
+Jan Veenhuyzen   12:34
+Okay, looks like this is the CRM we're looking at, right?
+
+Nital   12:38
+Yes, Vasi is going to help us with all the queries that we had and what it takes for us to get to the targeted number.
+
+Jeff Peterson   12:48
+Perfect. Can I just frame the session a little bit? We've got a few things that we need to tackle here. So I just want to make sure that everybody's on the same page. And if I'm not on the same page, then please somebody correct me as well. Okay. So we have a few key issues that we want to resolve. So one is making sure that we get to the correct number of records.
+and making sure that the data integrity is intact. And so that's record count as well as the right fields available.
+such that we will be able to move away from flat files and other directories so that this becomes the source of truth. So that's issue #1. Issue #2 is we want to make sure that the views that are available to Jan are the ones that she needs to be able to operate. So clarity around the CAN versus the CAS memberships.
+including people that have memberships in both and people in the database that don't have a membership in either.
+Third is we want to get some visibility into the subscription preferences and the Canadian anti-spam legislation.
+Fourth is, we want to understand the process to be able to send out email.
+from inside of the CRM and whether or not we can create a directory sync with Outlook so that we can send email out from Outlook as opposed to directly from inside the CRM. And then lastly is the process to be able to review and send out the newsletter to targeted email lists.
+Is that consistent with what everybody else is expecting?
+
+Jan Veenhuyzen   14:24
+Yeah.
+
+Nital   14:25
+Yes.
+
+vasikaran k   14:27
+Yes.
+
+Jeff Peterson   14:28
+Perfect. OK.
+I'll take a step back for the moment. Where do you want to go next?
+
+Jan Veenhuyzen   14:32
+OK.
+
+vasikaran k   14:37
+So we can start from a single source of truth, which you have discussed at the firstly.
+OK, so let me share a report, so...
+We have completed this single source of truth by three pieces. The first thing is validated the website and the form integration and everything, the data which are submitted in the form against the CRM. That's the best one we have done. And secondly,
+We considered all those Excel sheets which are shared by you and validated completely throughout the CRM, which data is missing, which data is standing alone, and we captured all those data and we have.
+
+Jan Veenhuyzen   15:25
+And.
+
+vasikaran k   15:31
+not removed the data completely, we just isolated the datas. So in this space, third piece, we created just a filter and to Jan to access the CRM very easily, like the 2026 registration. So this is.
+completely based upon the year. So this part and we are working on and this we will be completed and will be reported as to you. So when coming to the single source of truth, so all those three pieces, what we have done to actually in a single source of truth to achieve that.
+So in that validation, we got two test records, including my name and Jane Smith Hospital.ca. So it's a dummy record, but not, these records are not in a sheet, Excel, which you have shared to us. I am considering that as a single source of truth.
+And 2 records we created newly that never existed in the CRM, but existed in the Excel sheet. So we updated and created the two records. So one is a, let me search through that.
+Yes, so this is a record.
+
+Jan Veenhuyzen   17:06
+Vasi, can I just ask a question while you're bringing this up? So is what you see, so we're looking at your screen when you log into Zoho, right?
+
+vasikaran k   17:16
+Sorry, sorry, Jay.
+
+Jan Veenhuyzen   17:17
+This is your, we're looking at your screen right, right when you log into Zoho to look at the CRM. This is, this is your, you're logged into this. This is what we're seeing. Yeah, OK.
+
+vasikaran k   17:22
+Yeah.
+Yes, yes, yes, I am logging into, so I have a access like not a same access which we have shared to you, but this is a different one for two access also.
+
+Jan Veenhuyzen   17:33
+Okay, so when I log into my Zoho account, should I be seeing exactly what you see?
+
+vasikaran k   17:39
+Yes.
+
+Jan Veenhuyzen   17:40
+Okay.
+
+vasikaran k   17:42
+So, you are you are appointed as a admin for this account, so we are I am an extra user for that to control and manage control and manage all of the things, so you have every access and the view what I'm sharing with you.
+
+Jan Veenhuyzen   17:49
+Mhm.
+Mhm.
+
+vasikaran k   18:11
+So this is 1 record we have created. Another one is a Karen.
+
+Jan Veenhuyzen   18:25
+Would it be helpful if I logged in and you could see what I see or do you should we go through the email that I sent last week with the discrepancies that still need to be resolved or?
+I think you're just telling us that you've created these two records, which I think was detailed and it tells report, so probably we don't need to review these two records that have been created.
+
+vasikaran k   18:41
+Yeah.
+So, I mean, so...
+So what's make the single source of truth is believable and we are at the right pace of all those records. That's what I'm trying to explain on this. There's a number of records I've created and we just protected 17 types of data, which mostly not in a Excel sheet, single source of truth.
+And we skipped, like it's kind of not only focused on single source of truth, but I am preparing myself all those contacts to the newsletters without any kind of duplications, without any kind of repeated email IDs and all those things.
+So we also verified all those data is present in CRM and we cleaned the CRM with all duplicate datas, test datas, and to ready for email campaigns.
+
+Jan Veenhuyzen   19:41
+Okay, but if I'm still seeing some duplicates even on this page, so there are some duplicates that still need to be filtered or removed and cleaned, right? So is that a good place for us to move towards next?
+
+vasikaran k   19:48
+Yes, yes, so...
+De.
+Yeah, so right now I'm working on two things. One is the duplication of the datas and it's okay.
+
+Jan Veenhuyzen   20:03
+So I think when there is, like, when I did my, when we met, we weren't at our meeting last week, Vasi, but when we met as a team, we meet, as you know, weekly. And so Harmit, Nital, Jeff, Noel and I met last week. And what we decided at the end of that meeting was that I would go through the report, which was shared with us from Nital.
+and specifically look at the 17 records that were in question. Some of them were, I think most of them were duplicates, and the question really was, can these be removed from the CRM? So I've done that review and provided some feedback. So maybe that's a good place for us to start.
+When I did my review, yes, there were some duplicates. Yes, there is an opportunity to remove some of the duplicates. However, the problem really is the information that's going to be maintained when a record is a duplicate record is removed.
+So what I noticed was that there were some discrepancies between the original source. So for example, if it was the Microsoft Excel form and the fields that we were seeing in the CRM. So 2 things. If there are duplicate records, I noticed that very often one of the records contained more information or more data fields.
+than the other, and so we should always be keeping the record that has the greatest number of data fields.
+
+vasikaran k   21:33
+Yes, yes, yeah.
+
+Jan Veenhuyzen   21:34
+And then.
+The second observation was that there was some conflicting information. So, you know, some of our members have multiple inputs of registration. So, for example, they might have been grandfathered in through Pan. They might have registered in the, using the Microsoft registration form, and then they may have also registered again.
+in the CAS website. So we might have three different records for one person from three different sources. So how do we amalgamate all of that information that we've collected from those three sources so that we're keeping the maximum number, you know, maximum data fields and not losing any of the data that members have sent to us?
+And then the other discrepancy was that some of that information didn't seem to transfer. Like when I look at the Microsoft form, for example, and I gave 2 examples in my email of members who had answered the Microsoft registration form fields in a certain way. But when I look at those fields in the CRM, they were not answered that way.
+
+vasikaran k   22:17
+Uhh...
+
+Jan Veenhuyzen   22:37
+So now we're in a situation where we're not sure we can trust the data.
+
+vasikaran k   22:43
+Okay, okay, I got your point, so.
+I'm not clear about the path you're telling about the Microsoft forms. It's connected deeply with the CM, so I'm primarily working on the two sources which you have included on those three. One is a CAS and the CAN, and another one is another source you are telling about the Microsoft forms right now. So I will look into that and I will make sure every fields and everything's...
+will getting stored in the CRM. I will do that.
+
+Jeff Peterson   23:12
+I'm not, I'm not there yet.
+We've got a working session in place right now, not so that we can push the workout further, but we want to get some traction today. If we can, how do we do that?
+
+Jan Veenhuyzen   23:27
+Maybe we can, maybe we should go through my email, I wonder, Jeff, you know, because that will give us specific examples to look at and maybe that through looking at examples, it will become a little bit more clear about where we need to go. I don't know.
+
+Jeff Peterson   23:36
+Yeah.
+Yeah, I think that's a great idea. Vasi and Natal, I'm...
+I'm, I don't know if concern is the right, the right word for it, but it feels like we're talking about two different things here.
+We're trying to get laser focused on just the data itself. And it feels like we're talking around the problem as opposed to actually just going right through to solve it.
+for lack of a more eloquent way of being able to put it. So.
+How do we just deal with a bite-sized problem at hand, which is making sure that record by record things are clean?
+without pushing it out by another week.
+
+vasikaran k   24:24
+Yes, sure, we can do that. We are not going to push to another week. We can do it and within tomorrow we can do that.
+
+Jeff Peterson   24:26
+The.
+
+Jan Veenhuyzen   24:32
+I.
+
+Jeff Peterson   24:32
+We'll see what we can get done for the moment. Okay, Jan, do you have your email available?
+
+vasikaran k   24:34
+Yes.
+
+Jan Veenhuyzen   24:39
+Yeah, I can bring it up.
+
+Jeff Peterson   24:41
+Okay.
+
+Jan Veenhuyzen   25:05
+Can you see? Am I sharing yet? No.
+
+Nital   25:08
+Yes, you are.
+
+Jeff Peterson   25:08
+Yeah, we can see a very colorful background.
+
+Nital   25:11
+I love the pink, Jan.
+
+Jan Veenhuyzen   25:11
+Yeah.
+Sorry?
+
+Nital   25:15
+I love the pink and purple, the background that we can see.
+
+Jan Veenhuyzen   25:19
+Oh, okay. I'm not sure what you're... I'm not sure what you're seeing.
+
+Nital   25:20
+Your wallpaper.
+
+Jeff Peterson   25:23
+We can see your desk, just the edges of your desktop.
+
+Nital   25:24
+Yeah.
+Yeah.
+
+Jan Veenhuyzen   25:28
+Oh, I see. Okay. Okay, sorry guys, I'm not familiar with Teams.
+
+Nital   25:34
+Now we can't see your screen at all.
+
+Jeff Peterson   25:35
+Thank you.
+You stop sharing. When you share screen, it shows us everything, including all the different windows that are up on whatever monitor you're on. If you share a window, then you can select specifically which window you want to share.
+
+Jan Veenhuyzen   25:37
+Mm-hmm.
+CAE.
+Okay, are you what are you seeing now?
+
+Jeff Peterson   25:57
+Yeah.
+Now we're just seeing the inbox mail.
+Screen.
+
+Jan Veenhuyzen   26:05
+Okay, can you actually see the email or just the inbox?
+
+Jeff Peterson   26:09
+Yeah, we can see the email now.
+
+Jan Veenhuyzen   26:11
+Okay.
+
+Jeff Peterson   26:12
+So item number one, 17 leads, contacts listed under section 3.
+
+Jan Veenhuyzen   26:17
+Yeah, okay, perfect.
+
+Jeff Peterson   26:19
+Good.
+
+Jan Veenhuyzen   26:23
+Okay, so I guess the first thing, I mean, we can go through all these one by one if that's helpful. So for example, there are two Zoho IDs for Devon Krupp. So I noticed in the records that you sent, Etal,
+The question was asking if certain records could be deleted.
+And they were listed by Zoho ID. So I had to do a little bit of digging in my Zoho account to figure out how to identify members by their Zoho ID.
+But when I finally figured that out, I also realized that some of these members had more than two Zoho IDs, for example. So they weren't just a duplicate. They were like a, you know, there were three records. And so which record do we keep and which records do we delete? So in the document that you sent, the question was specifically, can we delete this Zoho ID?
+You know, sometimes it's not that Zoho ID that we should be deleting. It should, you know, it should be other Zoho IDs that contain less information. Does that make sense?
+
+Jeff Peterson   27:48
+And I'm going to pile up a question on top of that as well, which is, is it easier for us to merge records?
+
+vasikaran k   27:49
+Yeah.
+Yes.
+So I just need to make sure I'm deleting a proper duplicate records. That's it. So.
+
+Jan Veenhuyzen   28:04
+Yeah, I guess the point is, Batsy, that there is not an exact duplicate. I'm not sure I'm making myself clear. So if there were two identical carbon copies of 1 member information, then I agree one of those could be deleted and it doesn't matter which one, right? The problem is that there were...
+
+vasikaran k   28:04
+I did.
+
+Jan Veenhuyzen   28:23
+let's say 2 Zoho IDs, and you're asking to delete one of them. I agree that one of them can be deleted, but one record has more information, more data fields complete than the other. So we should always be deleting the record that has the least amount of data.
+
+vasikaran k   28:41
+Yes, short answer.
+
+Jan Veenhuyzen   28:41
+So it's not, it's not, yeah, so it's not just really a simple question of there are two records, can I delete one, flip a coin, and pick one? You know, there has to be a little bit more attention to what we're deleting and what we're keeping.
+
+vasikaran k   28:55
+Yeah, sure, sure. I got that.
+
+Jeff Peterson   28:57
+Yeah.
+
+Jan Veenhuyzen   28:58
+So when, so for example, when a member registers through the website, their information or their registration is populated in the CRM somehow, correct?
+
+vasikaran k   29:10
+Yes.
+
+Jan Veenhuyzen   29:11
+And that is that gets populated into the CRM as a contact.
+
+vasikaran k   29:16
+Yes.
+
+Jan Veenhuyzen   29:17
+and then the contacts are moved into leads, which is essentially, you know, our verification process or our vetting process that once a member has registered and become a contact, if we think this is a legitimate member, they are moved into a lead, or how are you managing that?
+
+vasikaran k   29:26
+Oh.
+Okay.
+So you want to see the pipeline of the prospect, how the leads is evolving, right? So yes, we can do that, but we do have some work behind that, like automation, we need to fix that values and logic, how the leads we are going to determine to move to contacts, and the next stage of prospect, we need to determine the logic.
+Behind that, and once it's fixed, yeah, we can do that.
+
+Jeff Peterson   29:58
+Hold on, no, no, no, I don't. Sorry, I've got an overlay on this one.
+Um...
+As we move through the rest of the session, Dasi.
+When we're asking for questions for inquiry, like just trying to clarify a process or what is happening right now, it's not necessarily a can you do this for us request. My understanding of CRMs, and I may be mistaken with Zoho here, but it goes leads to contacts, not contacts to leads. So I don't need you to flip the order so that it goes contacts to leads.
+We're just asking about...
+how it actually happens in the system when we see it in one table but not in the next, what's the right process?
+
+Jan Veenhuyzen   30:36
+Mhm.
+
+Jeff Peterson   30:37
+Okay, so there's no request to build a workaround at all. It's just asking for clarification on how you've set it up.
+
+Jan Veenhuyzen   30:40
+Yeah.
+Mhm.
+
+vasikaran k   30:47
+Okay, so.
+Okay, so every lead which do have a proper contact details with companies names and weights also get fall into the category of the leads. So this is a current setup right now. So the how the system is designed, we completely wired a backend API with.
+
+Jeff Peterson   30:51
+It.
+
+vasikaran k   31:13
+ID and we just handling every lead submissions and Zoho form field creation every options to pop up everything is programmatically we have designed and also we are making making make made sure.
+Nothing that no data going to be lost, so we every every data will be saved in the protection first database first, and it will be triggered into the Zoho CRM as well, so we do have two lane of verification method and we ensure no data is getting lost, so, and I got this problem with I just completely aware and understandable about this problem like.
+two different Zoho ID, the same contact with the different values. I got that. I'm just verifying, cross-verifying all those values and I'm deleting all those records.
+
+Jeff Peterson   32:05
+Okay, can I propose a process check here? I played in lots of CRMs. This process, if it was me, I'd be looking at 3 records. I'd be, maybe it's just calling out Vasi's screen. Jan, keep the email open on your end. Let's just list a name, look it up, and make a decision to delete or move ahead. Can we do that?
+Like this.
+
+Jan Veenhuyzen   32:28
+Today, yeah, today.
+
+Jeff Peterson   32:29
+It just feels like we're overworking this. I don't need takeaways. We just need to go record by record and actually just do it. I think getting more complicated.
+
+Jan Veenhuyzen   32:36
+Mhm.
+
+vasikaran k   32:36
+Yeah, yeah, sure, so I'll do that.
+It's not global.
+
+Jeff Peterson   32:39
+Sorry, I'm not trying to be rude here with us. I just, it's getting too complicated. We don't need that.
+
+Jan Veenhuyzen   32:41
+But I, yeah.
+
+vasikaran k   32:46
+OK.
+
+Jan Veenhuyzen   32:46
+I think I need to understand what happens to all our data sources, like I, I mean...
+I guess I feel like we don't have a handle on who our members are because the members who have registered through the website, you know, I don't really know where those records are. That's what I'm trying to figure out. So that goes back to my question a couple of minutes ago, which was when a member registers through the CAST website,
+and they submit their registration, where does that info go in the CRM? My understanding was it gets populated as a contact, but I think Jeff is suggesting that it's the other way around. It's populated as a lead. So, Vasi, when I'm a new member, I go to the website, I submit my registration form. Where does that registration form data go? Where does it land?
+
+vasikaran k   33:36
+Leeds into Leeds.
+
+Jan Veenhuyzen   33:37
+Leads, okay. So why then do we have more contacts than leads? When I log into the CRM, I have more contacts than leads.
+
+vasikaran k   33:49
+So till now we didn't any done a cleanup of a contact and all those things. So previously we do have a lot more invalid data and a lot more datas and now we have completely like moreover we done a work on lead section.
+
+Jeff Peterson   34:04
+Yes.
+
+vasikaran k   34:10
+to remove the validating the contacts and all those things. I will check the contact section and let me check all those discrepancies and I'm just trying to finish this as soon as possible within today so we can go ahead for the news later.
+
+Jeff Peterson   34:28
+We'll hold tight for just a second, so, so in a normal CRM workflow.
+Yeah.
+A new record would start off in leads and then we would normally promote it from a lead to a contact.
+which would keep the leads, I think, lighter or archived.
+and the contact list would continue to grow. Is that what's going on here?
+
+vasikaran k   34:52
+Yes.
+
+Jeff Peterson   34:55
+Or is it based on how the data was originally entered where, because we've entered a whole bunch directly into contacts, we might have bypassed the leads.
+
+vasikaran k   35:07
+Um...
+So I don't want to answer this word wrong, so let me check all those things on the contacts and what is conflicting in between that and let me update you shortly.
+
+Jeff Peterson   35:11
+June.
+OK, CAN we?
+Jen would be okay. Can you keep your email open in the background? Can we take a look at Vasi's screen?
+
+Jan Veenhuyzen   35:31
+Sure.
+
+Jeff Peterson   35:44
+And then the other question, Jan, or the other, my other understanding is that the data, when it's populated from the form, does not go directly to the CRM. It goes to the back end team pumpkin database.
+and just the database that feeds the CRM.
+Not the form directly.
+
+Jan Veenhuyzen   35:59
+Okay.
+Those should all be carbon copies of each other along the way, though, correct?
+
+vasikaran k   36:06
+Yes.
+
+Jan Veenhuyzen   36:08
+So I can't, I'm really having a hard time explaining why, you know, when I look at the Microsoft Excel form, for example, which is our original source of truth for 190 of our members, right?
+Why, why does the data on the Microsoft form not match the data in the CRM? Why, why should there be any discrepancies there?
+
+vasikaran k   36:33
+So, as I said before, like just to be, I'm focusing on the two source. I'm just now had a clear about idea about the Amazon Microsoft submission form.
+So I will make sure every lead submission on the Microsoft form falls into the Sierra leads with label, proper label and proper filter.
+
+Nital   36:57
+Just.
+Just to quickly add, so Vasi, the Microsoft data form is essentially the data that was shared through to us in form of sheets. It wasn't sent to us directly through what. So the data that we received from Jeff and Jan, I think.
+
+vasikaran k   37:11
+Okay, okay.
+
+Nital   37:19
+two-ish months ago, the sheets that we had, the data, that was the Microsoft data, if that's what's confusing you right now. Am I correct, Jeff? Right, the...
+
+Jeff Peterson   37:32
+The the the two month ago share, the month and a half ago, was...
+a source of truth that took an extract from the CRM and combined it with a number of legacy data sheets.
+
+Nital   37:47
+Yeah, the legacy data sheets are essentially the Microsoft form data.
+Correct.
+
+Jeff Peterson   37:53
+Let's just take a peek. Let's, if we can take a look at Vasi's screen, and let's just go for a random walk here. The first name on Jen's list of the 17 duplicates was Devin, what was the last name, Jen?
+
+Jan Veenhuyzen   38:00
+Sure.
+
+vasikaran k   38:01
+Yeah.
+
+Jan Veenhuyzen   38:06
+HRUPP.
+
+Jeff Peterson   38:08
+Let's take a look at Devin for up and let's see if we can find Devin in both leads and contacts.
+
+Jan Veenhuyzen   38:18
+So, Bassy, if I can even just show you what I did and like how I found this. Yeah, if you just go up there, I know her name is there on the screen, but if you just search her there, yeah, exactly. And then I went to, no, see, I don't see the same thing as you.
+
+vasikaran k   38:30
+Yep.
+
+Jeff Peterson   38:33
+We'll solve that problem next.
+
+Jan Veenhuyzen   38:35
+Mhm.
+
+Jeff Peterson   38:36
+I think making sure that you have the views that you need is problem #2.
+
+Jan Veenhuyzen   38:41
+Mhm.
+
+Jeff Peterson   38:46
+Okay, so you have this record under both leads and contacts.
+
+vasikaran k   38:46
+CAL.
+Yes, so contact is a primary filter. Only you can get up with the name and their contact addresses. So leads is a completely categorization, whichever leads comes from the forms and submission, which falls under that category. So it's just a different label of view.
+
+Jeff Peterson   39:13
+OK, fair enough.
+
+vasikaran k   39:15
+So whenever we are getting a lead which contains of contact, the contact section have been created under those contact details. So for example, if I have a X hospital is submitting the lead with all those lead data.
+
+Jeff Peterson   39:27
+OK.
+
+vasikaran k   39:34
+which falls under the lead, but contact section will show you the contact details of the X-Hospital, including the Gmail ID and their phone number, nothing else in the contact section.
+So, for example, yeah, this is a problem you are telling about, I think, so, Jan, so there is a two records of the day one.
+And once consists of...
+All those datas.
+But somewhere in this duplication is missing all those
+So since it's filling up the programmatically, I will check that this duplication, what is the issue behind it? So I'm not seeing this behind, this is only a duplication issue. I'm just looking the backend logics and I'm just trying to figure out how the things happened.
+With end up with a duplication, so I'm just trying to fix the poor issue back in, so once it's fixed.
+
+Jan Veenhuyzen   40:43
+Yeah, so Bassi, I think it's because she actually submitted 2 registration forms. I don't think that it's a problem with the system. I think this is legitimate. But for her, it seems like the two records are identical, like the data collected in both of those registrations. So there's one ZOHO ID ending in 7018.
+
+vasikaran k   40:43
+We can.
+
+Jan Veenhuyzen   41:04
+and the other Zoho ID ends in 3001. It seems like those two records contain carbon copy information. So in this case, we can delete one of them. And if you look at my email, we confirm that we can delete the Zoho ID ending in 3001.
+
+vasikaran k   41:18
+****.
+
+Jan Veenhuyzen   41:23
+for this individual.
+
+Jeff Peterson   41:24
+OK.
+
+Jan Veenhuyzen   41:25
+My question is, do all of those records, are they all, you know, accessible and stored forever, essentially? So she has registered twice with identical information. If we delete one of those, do we still keep both of those somewhere?
+
+vasikaran k   41:26
+Sure, sure.
+No, no, no, Jen. So while I'm just telling the process how we're going to delete. So I'm just going to fix what the things cause this duplication in the end. What is the logic behind license? I will fix that first. So I will validate the data which you are concerned about.
+And I will keep the record, whichever which we needs into the single Zoho ID, not a double Zoho ID. So I will not going to delete anything. I just going to maintain a hygiene CRM with all those achieved contact and duplication, all those things. So whenever.
+We feels like we lost something, we can retire later. So I'm just doing the validation first and let me clear you.
+
+Jan Veenhuyzen   42:32
+Like, I guess I would imagine a scenario when somebody registers in that in the CAS website that that information is populated into the CRM. My understanding is that that goes into leads. When leads gets transferred into contacts, it seems to me like that's the process where contacts...
+are pulled from leads and contacts are verified members with accurate information.
+So in my view, in my understanding, if that's correct, then there should always be a higher number of leads and contacts, right? If everything is, if all information is always preserved.
+
+Jeff Peterson   43:07
+It.
+
+vasikaran k   43:14
+Yes, you are correct. So in some chances we did we will not get a complete details of the lead. So the lead number will be always higher. The complete contact details will be will be in contact section.
+
+Jeff Peterson   43:35
+is our source of truth.
+Your database instead of the CRM.
+
+vasikaran k   43:43
+Yes, we do have a we we do have that.
+
+Jeff Peterson   43:48
+When we make a change, whether we merge records or delete records.
+
+Jan Veenhuyzen   43:48
+Yeah.
+
+Jeff Peterson   43:53
+Do you make a change at the database and have that propagate to the CRM? Or do you make two changes, one in the database and one in the CRM?
+
+vasikaran k   44:04
+We are not making the changes in database. We are just trying to pull the data and push the data into the CRM. So sometimes this operation causing some duplicates and some errors like this.
+So.
+
+Jeff Peterson   44:20
+When you make a change to a record, and it may be safer instead of deleting records to merge them.
+When we make a change to the data in the CRM system.
+
+vasikaran k   44:28
+Okay.
+
+Jeff Peterson   44:33
+What happens to your back-end database?
+
+vasikaran k   44:33
+Okay.
+Back end, so CRM delete deletion is had nothing to do about the production completely. It's A2 environment. Every lead submission will be saved in the database and we have a programmatic API connection, so it will automatically.
+
+Jan Veenhuyzen   44:55
+Yeah.
+
+vasikaran k   44:55
+trigger whenever the database got a lead, it will trigger and the lead will be populated into the CRM.
+
+Jeff Peterson   45:06
+CAE.
+
+vasikaran k   45:06
+with our logics and functions.
+
+Jeff Peterson   45:08
+Okay, clear. So let's make a decision on the Devon record here. So we have two leads and one contact with the same individual.
+
+vasikaran k   45:20
+Mhm.
+
+Jeff Peterson   45:21
+And her argument is...
+We should have.
+We understand why we have two leads because she submitted the form twice, Jan, you're saying?
+
+Jan Veenhuyzen   45:32
+That's my best, my best guess, yeah.
+
+Jeff Peterson   45:35
+Yep, fair enough, and...
+And so the way to be able to handle that at a lead level would be merge the records.
+because we don't have any anti-duplication at the form level. So somebody could theoretically go to a form and enter the same submission 100 times and have it generate 100 records in the CRM. Normal CRM process is we generally don't like end users to delete records.
+We would prefer to handle them a different way so that you're not deleting data, but merging them, amalgamating them, hiding them, archiving them, those kinds of things. And it's just a safety protection. So in the source of truth, we could, if we've got bad data and need to delete, we could do that. But there are fail-safes inside of typical CRMs to be able to merge those records.
+
+Jan Veenhuyzen   46:07
+Mm-hmm.
+
+Jeff Peterson   46:23
+So, in theory, we should have two lead records. That's confirming now the process. If we take a look at Devon.
+Do we have a report or a function that you can demonstrate now that would show Devin as a potential duplicate in the leads?
+Table.
+and an opportunity to merge those records.
+
+vasikaran k   46:50
+Okay.
+
+Jeff Peterson   47:02
+I'm not trying to necessarily, Jan, steer us away from deleting the records themselves. What I'm suggesting is when we're talking about we want to preserve some data from one record and some data from the next, it may actually be a faster process for us to be able to merge them and bring them the completed fields from together.
+
+Jan Veenhuyzen   47:05
+Mhm.
+Mhm.
+Yeah.
+Yeah, that makes sense.
+
+Jeff Peterson   47:20
+The only...
+Issue will will be around email; it depends on how we match, so...
+Dawsy.
+
+Jan Veenhuyzen   47:45
+Yeah, I mean, even when I look at, when I look up Jeff and her up and I see all the information stored for this individual, I see two leads and one contact. And when I compare the contact data to the lead data, the answers don't match.
+So for example, I'm looking at her under Elite and it says Cast Communications, yes. When I look at her under Contacts, under Cast Communication, it's answered false.
+
+Jeff Peterson   48:20
+Okay.
+
+Jan Veenhuyzen   48:21
+So I, you know, I feel like I don't have a handle on what Team Pumpkin's single source of truth is. So I appreciated your last question, Jeff. It seems like Team Pumpkin has a data set that I've never seen.
+It's hard for me to reconcile or remember a list against a source of truth that I can't see.
+
+Jeff Peterson   48:46
+As well, and I'm not quite sure how to move forward on this.
+
+Jan Veenhuyzen   48:50
+Mm.
+
+vasikaran k   48:53
+Okay.
+Yeah, so is this and Jan, so I completely understandable is this. So I just now got before all those emails forwarded from Nitin. So let, I'm trying to close this as soon as possible. So I'm just staying this before because without a clear things I can't able to answer your questions in the wrong way.
+So, let me clear all those things. So, yes, this is the issue, but it's but it is very solvable in a few hours.
+
+Jeff Peterson   49:32
+Okay, let's pause here for just a moment.
+No, can you go back to show your screen again, please, Vasi?
+
+vasikaran k   49:40
+Sure.
+
+Jeff Peterson   49:51
+Can you show me the view? I think you've got it pegged at the top, I'm guessing. Can you show me the view of all CAN members?
+
+vasikaran k   49:58
+All CAN numbers. OK, so more custom views, so CAN.
+
+Jeff Peterson   49:58
+Please.
+
+vasikaran k   50:07
+And bus.
+Yeah, here you go.
+
+Jeff Peterson   50:15
+Okay, so the moment we have a total of 23 records including some duplicates.
+There's at least two duplicates on that screen.
+How do we know that they're CAN members?
+
+vasikaran k   50:27
+So here you can see that cast member and CAN member is optional.
+
+Jeff Peterson   50:34
+Okay.
+
+vasikaran k   50:35
+So you can see here the total number of records and what is the source. It's a Excel import. We imported from the data which you have provided.
+
+Jeff Peterson   50:45
+Okay, on that view, just give me a second.
+
+vasikaran k   50:48
+Mhm.
+
+Jeff Peterson   50:49
+So you have professional designation.
+Where's the subspecialty field?
+
+vasikaran k   51:01
+Sub-specialty, so if you want to dig deeper, you just click the record.
+You will have every information inside that.
+
+Jeff Peterson   51:11
+Yeah, okay, so that that's good, so we can get that into the record level, but what about the view level?
+
+vasikaran k   51:18
+What about the view level?
+
+Jeff Peterson   51:20
+Right, so if you look, there's a field that says professional designation that is sourced directly from the form.
+
+vasikaran k   51:26
+Mmh.
+
+Jeff Peterson   51:27
+But there are other fields on the form.
+
+vasikaran k   51:33
+Okay.
+
+Jeff Peterson   51:34
+Not part of the view.
+
+vasikaran k   51:36
+Like, this is a overall view when if if we so you you want to see all those information in top of this cabin view.
+
+Jan Veenhuyzen   51:47
+Mhm.
+
+Jeff Peterson   51:49
+Complete set of complete set of fields that we would find on the submission form.
+Yeah.
+
+vasikaran k   51:57
+Okay.
+
+Jeff Peterson   51:58
+Yeah, there we go. Good.
+Sub-specialty amyloidosis type.
+
+vasikaran k   52:05
+Society.
+
+Jeff Peterson   52:16
+I'm going to take a shot here, but is there anything about the Canadian anti-spam legislation or the opt-in subscription preferences here, or is that somewhere else?
+
+vasikaran k   52:28
+So, I think in that way, subscription preference.
+Yeah, we do have I think the CAN communication we do have already here. The person who opted in for cast communication is a...
+Option here.
+
+Jeff Peterson   52:45
+Yeah, okay, clicking on, let's take a look, go save for a second.
+
+vasikaran k   52:49
+Okay.
+
+Jeff Peterson   52:50
+Sorry, Jen, please jump in if either I'm speaking out of turn or if there's other stuff that you want to see. I'm just trying to make sure that we get a complete view here.
+
+Jan Veenhuyzen   52:56
+Mhm.
+Yeah.
+
+vasikaran k   52:58
+Yes.
+
+Jeff Peterson   53:00
+Good, okay.
+
+Jan Veenhuyzen   53:02
+There should be a CAN communication column too, right? Did I miss that?
+
+vasikaran k   53:10
+So...
+Let me check.
+
+Jeff Peterson   53:16
+You know, the other part, Jan, I'm going to go on a limb here and say if you've been given administrative rights, which you should have, and we need to at some point change VASI from the owner to you on all of these records. But if you've got the admin access, then we should be able to very easily enable you.
+
+Jan Veenhuyzen   53:28
+Mhm.
+
+Jeff Peterson   53:35
+where you should be enabled to set up the views and modify the views that you need. It's not the ideal, it'd be preferred that TeamPump can do this, but the process that we're going through right now, you should have access to be able to do that as well.
+
+Jan Veenhuyzen   53:48
+Have done that.
+So I, yeah, I have done that. So I think that the way that I've enabled my viewing.
+
+Jeff Peterson   53:51
+Okay.
+
+Jan Veenhuyzen   53:59
+Should be, you know, to.
+Demonstrate every everything that I that every feel that we have captured, yeah.
+
+Jeff Peterson   54:06
+Yeah.
+And now, Vasi, you've got a number of these that are set up as private by the looks of it, as well as some public ones. Is that true?
+
+Jan Veenhuyzen   54:11
+You
+
+vasikaran k   54:17
+Sorry, have.
+
+Jeff Peterson   54:19
+Just the drop-down menu that you just were on a second ago, it looks at a number of public views as well as a number of potentially private views.
+
+vasikaran k   54:24
+Okay.
+No, no, no, so every access for Janice is accessible for that.
+
+Jeff Peterson   54:34
+Perfect, okay.
+
+vasikaran k   54:35
+Yeah.
+
+Jan Veenhuyzen   54:41
+So, yeah, I guess I'm looking for some direction about where to go next, Jeff, and maybe, maybe have a good line of sight on this.
+
+vasikaran k   54:48
+Play.
+So, okay, so from my side, there is some hass of work to refine all those things before assuring you the single source of truth without duplication with all those records. I need to assure that. So a few hass of work left over there. So let me solve all those.
+Things you you have raised to before now, and...
+Let us move forward from my side.
+
+Jeff Peterson   55:17
+When can you meet again?
+
+vasikaran k   55:19
+Um...
+I'm giving a complete SSOD by end of this day.
+working on that actively. We will close this today and we can schedule a meet on tomorrow and we can discuss about the newsletter, setup, campaigns and the house of prospects and everything.
+
+Jeff Peterson   55:43
+CAE.
+In the hours that are remaining today, what is it that you'll be doing?
+
+Jan Veenhuyzen   55:47
+CAL.
+
+vasikaran k   55:51
+Right now, I'm working on that.
+
+Jeff Peterson   55:54
+What, what is that?
+
+vasikaran k   55:57
+What? Sorry.
+
+Jeff Peterson   56:01
+Well, by the time we next meet, and then I'm...
+
+vasikaran k   56:04
+So, Neetal can organize this better, Neetal.
+Okay, the same time tomorrow?
+
+Jan Veenhuyzen   56:17
+I think the question, I think the question is what, what are you planning? You said that you were going to move forward to do something to reconcile.
+
+vasikaran k   56:25
+Like the duplicate records, I still need a lot of validation of all those records, all those fields, all those MS form submission, all those historical records, like without any kind of a programmatical validation, I need to go through the every manual validation which.
+
+Jan Veenhuyzen   56:26
+But.
+
+vasikaran k   56:43
+which need to be done now and just need to fix the core issues behind that. So this is the issues created from programmatically. So we need to solve that first. I'm okay. So this will be solved.
+
+Jeff Peterson   57:01
+I think we have two issues then.
+Because what we see on the other end for the data sets are not programmatical.
+They just have to do with the record sets being entered in different forums at different times. Some records came in through the web form. Some records came in through spreadsheets.
+
+vasikaran k   57:20
+Mm.
+Yes.
+
+Jeff Peterson   57:23
+And you can see evidence of that when you look at the duplicates where we have people that have entered different spellings of their first and last name or personal versus professional emails. That's fine, but that doesn't feel like a programmatical error. That just feels like a process change.
+
+Jan Veenhuyzen   57:40
+Mm.
+
+Jeff Peterson   57:40
+If what you're talking about is how the system is fed from the back end database or the tables, how it handles deletions, duplicates, whatever, whatever your program issues are, doesn't feel like what we're seeing on our end.
+I trust that if you think that there's an issue there, then it would be worth solving, but we still need to effectively decide which records are we keeping.
+And are we going to delete or are we going to merge the records? And if we merge the records, do we add a personal email in as well as an option?
+so that we can, when we merge the fields, we can maintain all of the data.
+
+vasikaran k   58:26
+Ohh.
+
+Jeff Peterson   58:27
+Great, and Jen's given clarity as to which ones to keep, which ones to delete. So I think the manual exercise of just going one at a time through them and making sure that we know how to handle it. So.
+
+vasikaran k   58:31
+Yes, yes.
+
+Jeff Peterson   58:39
+So back to the original question is, when you're looking at 3 hours or several hours of work to be able to get this done, to focus on what?
+
+vasikaran k   58:50
+The like, OK, so they, so we do have previously we do have 10 Excel sheets to import every data on CRM, so we just not imported the every data from the CRM UI.
+So, it's everything we I just we just gave into a product production database and 1st we validated and checked the data from our state comparing to the production data and all those things. After that, we decided to push all those changes into the CRM. So, CRM act like as a...
+Under the staging environment, sorry, production environment, and we do have a staging environment of the CRM as a back-end database.
+So this is how in the so we are not manually approaching anything on the CRM front end with UI.
+
+Jeff Peterson   59:36
+Yep.
+You're not, but as we move forward.
+
+vasikaran k   59:48
+Got it.
+So I got every points of Jan, like how to validate all this data and what data needs to be get deleted. I will make sure the data quality. And so if every fields and every contact details and every names are matching.
+which together only the Zoho ID, CRM ID is duplicating, I will try to merge the track out. So as you said, so if the same data which do have a different last name and the different email ID, personal and business mail ID, so I will separate based upon that. So we need to label on something like.
+
+Jan Veenhuyzen   1:00:11
+Okay.
+
+vasikaran k   1:00:28
+This is a lead which on personal mail ID like that we need to set some condition on that to view the valid databases. We just need a cleanup on all those databases.
+
+Jeff Peterson   1:00:48
+Does Jan have the tools available?
+as an administrator of the system to be able to go in and either delete or merge data herself.
+
+vasikaran k   1:00:58
+Yes.
+It's powered by AI, so yes, she can.
+Like it's not handled by a separate environment. It's actually integrated with the development environment of our website.
+
+Jeff Peterson   1:01:15
+Yep, OK.
+But if she goes in, so I'm putting another suggestion on the table here. We don't necessarily take this, but if Jen and I were to meet and go through Jen's view on screen, and she and I were to go through record by record and make decisions on the 17th.
+
+vasikaran k   1:01:23
+Mhm.
+Mhm.
+
+Jeff Peterson   1:01:36
+duplicates plus the net two additions. I'm wondering if the fastest way to be able to solve the system record is not to meet again, but to just Jan, you and I go through it and we'll just make the decisions on what we're deleting, what we're merging, what we need to update the records.
+with a little bit of manual elbow grease. Like we're not talking hundreds here, we're talking about a small handful.
+
+vasikaran k   1:02:02
+Important.
+
+Jeff Peterson   1:02:03
+You've got the access levels to be able to do that.
+
+vasikaran k   1:02:07
+Yes, yes.
+
+Jan Veenhuyzen   1:02:08
+Yeah, I mean, my preference, as you've alluded to before, Jeff, would be not to delete, but just, but to merge. You know, there are, I think, 3 or maybe 4 records that could actually be deleted. Like one is Leanne and there are three patients. So I'm comfortable deleting, actually deleting those. But, you know, for duplicate records like Devon,
+
+Jeff Peterson   1:02:23
+Yeah.
+Yeah.
+
+Jan Veenhuyzen   1:02:28
+crop for example, I prefer to merge. There were a couple others in my email that had three Soho IDs. Let's merge all of those.
+
+Jeff Peterson   1:02:37
+Okay.
+Yeah.
+Your preference at this point, Jen, do you want, I can give you as much time as it will take us, but I don't think once we get in and get oriented, I don't think it's going to take that long for us to go through one by one together and make the decisions on this.
+
+vasikaran k   1:02:50
+Yeah.
+
+Jeff Peterson   1:03:03
+or we can leave it to Tidasi to interpret the email and make the decisions in the meeting and to review the work.
+
+Jan Veenhuyzen   1:03:12
+I think it's probably most efficient for the two of us just to do it, I think. And then if we have questions that require team pumpkin input that, you know.
+I think we can ask for clarification on a small number of things. What do you think?
+
+Jeff Peterson   1:03:29
+Good, if we limit ourselves to three potential.
+courses of action on any given record. So a merge, a delete, or a data update.
+
+Jan Veenhuyzen   1:03:42
+Mhm.
+
+Jeff Peterson   1:03:43
+Okay, so on the back end, there may still be programmatical things that Team Bumpkin needs to deal with. We don't have any capability here, but.
+
+Jan Veenhuyzen   1:03:49
+Yeah.
+
+Jeff Peterson   1:03:53
+to influence that. But if we follow your email, that's extremely well laid out with lots of logic and just go down and make some notes against each record. Now we've handled it.
+We can translate that for Team Pumpkin and then we can take a look to see what actually rippled through the back end afterward to see if there is a programming issue of some kind.
+
+Jan Veenhuyzen   1:04:14
+Mhm.
+Okay, I mean, I think if we back up to the very, a very high level view from my perspective, you know, whatever was in the Microsoft Excel form should just be a carbon copy of what goes into the CRM.
+
+Jeff Peterson   1:04:29
+Yep.
+
+Jan Veenhuyzen   1:04:30
+right? And there are several Excel forms, the PAM members that were grandfathered in, the English and the French CAS members. And then we have the CRM, or sorry, the CAS website registration, which I feel like I've never, ever seen the source of truth of that. So it's hard for me to have any intelligent input into what that member list looks like. Anybody who's registered on the website, it seems like.
+
+Jeff Peterson   1:04:54
+But.
+
+Jan Veenhuyzen   1:04:54
+that it's been populated in a database from Team Pumpkin, and then that goes into the CRM. So I think that I need to see Team Pumpkin's database, you know, where is the original source of repository when members submit a registration form? I need to see that.
+
+vasikaran k   1:05:14
+Okay.
+
+Jan Veenhuyzen   1:05:18
+And the other question is why isn't that the CRM, right? Like that, I think that that should just be the CRM, but maybe there are some technical reasons why it's not that way.
+And again, it's like I'm actually been wondering if we just start from the scratch, start from scratch, to be honest, in this CRM, and we just take a carbon copy of the Microsoft Excel spreadsheet and put it into the CRM. And then, you know, whatever Team Pumpkin's database is, there's their source of truth, the initial repository when members submit a registration form on the website.
+
+Jeff Peterson   1:05:47
+Okay.
+
+Jan Veenhuyzen   1:05:51
+We take that information and put it in the CRM. And that becomes our source of truth. And we start working to clean up the data in that source of truth, because I feel like what I'm seeing in my source of truth in the CRM is not accurate. I can't trust the data. And I randomly picked two members to see if their data sets match from the Excel spreadsheet into what I see in the CRM, and they don't. So we're now in a situation where
+
+Jeff Peterson   1:05:58
+Yeah.
+
+Jan Veenhuyzen   1:06:14
+Even if we do get to 247 records, we're going to have to comb through 247 records with a fine-tooth comb and verify against multiple data sources to make sure it's accurate.
+
+vasikaran k   1:06:29
+Yes.
+
+Jeff Peterson   1:06:31
+So, mass delete.
+Upload the master spreadsheet, start again.
+
+Jan Veenhuyzen   1:06:36
+I guess that's what I'm asking. You know, I'm not, I don't know that that's the right answer, but I'm wondering if that's where, what we should do.
+
+Jeff Peterson   1:06:46
+Can I suggest not initially? Can we do a quick check first? We have the spreadsheet. We have visibility that we have 247 records here. We have the ability to create a view here. The next step would be extract the view. And we'll use some mass matching features to be able to say, show us.
+
+Jan Veenhuyzen   1:06:48
+Sure.
+Sure.
+
+Jeff Peterson   1:07:05
+visually across 247 records where the data doesn't line up. If it's materially different.
+Then I think we follow your solution, which is a nice delete and let's upload.
+
+Jan Veenhuyzen   1:07:16
+Mm.
+
+Jeff Peterson   1:07:17
+If my hypothesis is that it should largely be the same.
+
+Jan Veenhuyzen   1:07:22
+Mhm.
+
+Jeff Peterson   1:07:23
+is we'll find evidence of that and then we can make the decision to then go incrementally one record at a time to tune them. Would that be okay?
+
+Jan Veenhuyzen   1:07:31
+Sure, yeah.
+
+Jeff Peterson   1:07:32
+It's a very short intermediate step, but we just take us a few minutes to just spin up the spreadsheet to do that. So.
+
+Jan Veenhuyzen   1:07:39
+CAE.
+
+Jeff Peterson   1:07:42
+Um...
+Okay, we're a few minutes over time from the hour that we had booked here.
+We have a number of takeaways.
+Jen, when can you meet next?
+With me.
+
+Jan Veenhuyzen   1:08:07
+Yes, sorry, go ahead, Jeff.
+
+Jeff Peterson   1:08:09
+No, I was just saying, when can you and I meet?
+
+Jan Veenhuyzen   1:08:12
+Yeah.
+So, Wednesday looks actually pretty good, and then...
+Early Thursday morning or sort of mid-afternoon onward on Thursday.
+
+Jeff Peterson   1:08:31
+De.
+Great.
+
+vasikaran k   1:08:37
+Works.
+
+Jeff Peterson   1:08:39
+The.
+Okay.
+Does Wednesday afternoon work for you then, John?
+
+Jan Veenhuyzen   1:08:51
+Yeah.
+
+Jeff Peterson   1:08:53
+K.
+
+Jan Veenhuyzen   1:08:55
+Yeah, like noon or one or two, whatever, whatever works for you, Jeff.
+
+Jeff Peterson   1:09:01
+Um, but 115 were wide open, so...
+
+Jan Veenhuyzen   1:09:01
+Three, even.
+
+Jeff Peterson   1:09:06
+Why don't we do that? May I suggest that we ask Team Pumpkin to stand down until you and I have met?
+
+Jan Veenhuyzen   1:09:12
+Sure, yeah.
+
+Jeff Peterson   1:09:17
+Now the other question that I have then, and you've alluded to it, Vasi, but Vasi, are you, is it just this week that you're here to solve this issue?
+
+vasikaran k   1:09:28
+So.
+So I got every points of what Jan and you told. I just took notes of that. I'm starting to work on that.
+
+Jeff Peterson   1:09:40
+OK.
+
+vasikaran k   1:09:44
+It's clear.
+
+Jeff Peterson   1:09:49
+CAE.
+Should mean anyway.
+
+Jan Veenhuyzen   1:09:52
+So, when...
+Yeah, so when you and I meet Jeff, I guess we'll be seeing.
+Potentially, work from today, right?
+
+vasikaran k   1:10:03
+Yes.
+
+Jeff Peterson   1:10:06
+OK.
+
+vasikaran k   1:10:06
+Sure.
+
+Jan Veenhuyzen   1:10:09
+Thanks, Nital.
+
+Jeff Peterson   1:10:11
+If you're available earlier Jan in the week, I can give you time earlier than Wednesday afternoon, but we have pockets early Wednesday before the meeting as well if you want to start early. And then Thursday morning is wide open and I've protected the mornings generally for
+
+Jan Veenhuyzen   1:10:21
+Yeah.
+
+Jeff Peterson   1:10:29
+Um, I already work, so, so we'll find.
+
+Jan Veenhuyzen   1:10:29
+Mhm.
+Yeah, so like...
+So I could meet like at 8 A.m. Wednesday, Jeff, or at one, I think you said you were available after 115-ish. That works too. Thursday morning I can, I'm free until 1030 on Thursday morning.
+K.
+
+Jeff Peterson   1:10:51
+to go through this, which would put us at Wednesday afternoon at the earliest point, if that works for you.
+
+Jan Veenhuyzen   1:10:58
+Okay, so what time did you say Wednesday, 1:30?
+
+Jeff Peterson   1:11:01
+Uh, 130 or 115. 115 is but the earliest I can meet.
+
+Jan Veenhuyzen   1:11:06
+Okay, so why don't we say 130?
+
+Jeff Peterson   1:11:08
+Done.
+
+Jan Veenhuyzen   1:11:08
+And is it okay if I set up a Zoom and then it's just easier for me to share my screen and find things in Zoom? Is that okay?
+
+Jeff Peterson   1:11:16
+Yes, no problem.
+
+Jan Veenhuyzen   1:11:17
+Okay, so I'll set it up from 1:30 till three.
+
+Jeff Peterson   1:11:20
+CAE.
+
+Jan Veenhuyzen   1:11:21
+Okay.
+
+Jeff Peterson   1:11:28
+Okay, and then for Natal and Vasi, we will take good notes.
+And follow up.
+Shortly after that.
+
+Jan Veenhuyzen   1:11:38
+And can I just ask a question? Again, this is not a, you know, a request for action. It's just a question about the possibilities. So is it possible for to set up a process flow where when members register via the CAS website, that the initial repository for that information is the CRM, like it just gets populated directly into the CRM?
+
+Jeff Peterson   1:11:39
+Good.
+
+Jan Veenhuyzen   1:12:02
+as a lead or is that not?
+
+vasikaran k   1:12:05
+Yes, we can do that. So this procedure is we planned to maintain without the data loss. Like if by any chance our server or website goes down, so any like if we made a one-shot.
+population of leads into the database as well as CRM. When if by any chance the lead is not submitted, no, we do not have any logs or any place to find out we missed the lead from the customer.
+
+Jan Veenhuyzen   1:12:41
+Okay.
+
+vasikaran k   1:12:41
+So this is 3 process of a step. So here we can find that development database, sorry, a production database, like whenever the user submitted the form. So we do have a first option over the first validation over this. So this is a time, this is a date, the user have entered their leads.
+So secondly, we do have a source of truth at a CRM. So we can cross verify if any leads have been missed. So also we can validate the tech stack, whether it's actually working or not, whether any back end is causing issue. So we can identify problem easily. So this is made it intentionally instead of.
+pushing the leads into our time to the CRM directly.
+
+Jan Veenhuyzen   1:13:27
+Okay, so there is a good reason to have it not populate directly to the CRM is what I might take away from that.
+
+vasikaran k   1:13:29
+Yes.
+Exactly. Yes, exactly.
+
+Jan Veenhuyzen   1:13:34
+Okay, next question then, follow-up question is, can I have access to the original source or not?
+
+vasikaran k   1:13:43
+Yes, I can give you as a Excel sheets on whatever the database we holds in the rows and columns.
+
+Jeff Peterson   1:13:43
+Yes.
+
+Jan Veenhuyzen   1:14:02
+Okay.
+Maybe that's, I mean, like, I feel, Jeff, that that's maybe, you know, the colorful Excel document that I sent you in March. Like, I'm not actually convinced that that's really the true source of truth. I feel like that needs to be kind of compared against the database that Team Pumpkin has for the initial repository of website.
+registrations. Does that make sense?
+
+Jeff Peterson   1:14:33
+Let me play that back to you slightly differently, just to check my understanding.
+
+Jan Veenhuyzen   1:14:37
+Yeah.
+
+Jeff Peterson   1:14:38
+So you think what, when we talk about what the actual source of truth is right now, is that what you're getting at? So we think that what we see in the database
+is the actual source of truth, and that is reflected in the CRM, but that is different than the colored spreadsheet, therefore.
+Okay, fair enough.
+
+Jan Veenhuyzen   1:14:58
+Yeah, like, yeah, I guess that's right. I'm wondering what is the actual source of truth? Like, I don't feel like we've actually gotten to one. Like, I feel that when you and I, you know, worked on that colorful spreadsheet together, that that was supposed to be all sources, you know, merged into one.
+
+Jeff Peterson   1:15:07
+Oh.
+Correct.
+
+Jan Veenhuyzen   1:15:19
+And if that's the case, then that colorful spreadsheet should match what I see in the CRM, right?
+
+Jeff Peterson   1:15:26
+Except that I think the exercise that we're going through here is to say that the spreadsheet is the source of truth for now. And the CRM and the back-end database both need to be updated to reflect.
+
+Jan Veenhuyzen   1:15:32
+Yeah.
+Yeah.
+
+Jeff Peterson   1:15:39
+the decision logic that you've put into the spreadsheet, right?
+
+Jan Veenhuyzen   1:15:42
+Yeah. So then next question in the colorful spreadsheet, where did the...
+Cast website registrations, where was the source of truth that populated that colorful spreadsheet?
+
+Jeff Peterson   1:15:57
+It.
+
+Jan Veenhuyzen   1:16:03
+Like, for example, I am really, really confident that that colorful spreadsheet is a match to the original sources of the Excel spreadsheet, both French and English, because I went through all of them, every single one of them. The CAS, or sorry, the CAN members, the PAN members that were grandfathered in.
+also a spreadsheet, the original source of truth for website registrations, which Team Pumpkin has on a database I've never seen. So that's the missing piece for me.
+
+Jeff Peterson   1:16:36
+Okay.
+
+Jan Veenhuyzen   1:16:37
+Like.
+
+Jeff Peterson   1:16:38
+And then further to that, there is other data in the underlying database.
+For example, part of CAN, but not part of CAS, and by, and you know, and so forth and so on, that isn't present in the colorful spreadsheet yet, but for which we do have visibility in the CRM, and we've known that for for the better part of a few months now that the database has got fields that we didn't get as part of the original extracts.
+
+Jan Veenhuyzen   1:16:56
+Mhm.
+
+Jeff Peterson   1:17:04
+When we were, we understand that we were looking for ways to be able to update the records and then tap into the existing data set. So, so if I play that back again, your logic is, let's start with all of the data that was collected as part of the database.
+
+Jan Veenhuyzen   1:17:05
+Yeah.
+Mhm.
+
+Jeff Peterson   1:17:22
+What was captured?
+Compared that against the spreadsheet.
+Compare that against what we've got in the CRM, which we assume to be consistent with the database.
+
+Jan Veenhuyzen   1:17:32
+Mm.
+
+Jeff Peterson   1:17:33
+and then make decisions at a record level from there.
+
+Jan Veenhuyzen   1:17:37
+I think so.
+
+Jeff Peterson   1:17:41
+CAE.
+
+Jan Veenhuyzen   1:17:41
+I mean, are you confident that our colorful spreadsheet contains, you know, all members from Team Pumpkin's database, which is the repository for website registrations? Because if that's the case, then we can use that as our source of truth to compare against the CRM.
+
+vasikaran k   1:17:41
+So...
+
+Jeff Peterson   1:17:56
+Yeah.
+I have no way of being confident without actually verifying the underlying data tables and how it was captured.
+
+Jan Veenhuyzen   1:18:04
+Yeah, yeah.
+Okay.
+
+Jeff Peterson   1:18:08
+All we can go with is they gave us a complete extract of what they think the record count is.
+
+Jan Veenhuyzen   1:18:13
+Mhm.
+
+Jeff Peterson   1:18:15
+But.
+I think you're right.
+Vasi with the underlying database.
+When you put the data tables together, and presumably some logic between tables as well.
+is the entire set of data in the database based on what was collected from the form.
+Or.
+Did you add something to the data, additional fields that would not be captured on the form that enriched the data?
+
+vasikaran k   1:18:55
+So no filtration behind that what you have in us. So what are the data which comes in through a form? Everything is 100% on a database. After the from database to CRM, we are applying the logics you have mentioned earlier like.
+every cast communication going to be a CAN communication like those all those logics. So every fields of data is saving as how we are collected. Nothing changes from that.
+
+Jeff Peterson   1:19:36
+Can you give us everything? Can you give us a snapshot of all the data in your database?
+Table.
+
+vasikaran k   1:19:42
+Uhh...
+Yes.
+
+Jeff Peterson   1:19:51
+That's the question you're asking, right, Jen?
+
+Jan Veenhuyzen   1:19:54
+Yeah.
+
+Jeff Peterson   1:19:54
+Start with it all and then figure out where the gaps are, if any, and then we can make a decision as to whether or not we start clean or...
+
+vasikaran k   1:20:03
+Yeah, complete process. Yeah, I can do that.
+
+Jeff Peterson   1:20:05
+after merges and deletions then.
+
+Jan Veenhuyzen   1:20:08
+I think so. I mean, what do you think, Jeff?
+
+vasikaran k   1:20:09
+Yeah.
+
+Jeff Peterson   1:20:15
+is going to be the only way to be sure on that.
+
+Jan Veenhuyzen   1:20:18
+Yeah.
+
+Jeff Peterson   1:20:19
+If the form goes to the back end database first, it's the only way to be sure. But then the other piece that we're poking at is the strength of the relationship between the API, the database, to the CRM. So how does the data flow from the database to the CRM?
+
+Jan Veenhuyzen   1:20:35
+Right.
+Mhm.
+
+Jeff Peterson   1:20:55
+And then we can do the extract on the view in the CRM and the database if we want to do a three-way match and compare that to the spreadsheet and understand where the gaps are.
+
+Jan Veenhuyzen   1:21:03
+Yeah, okay.
+
+Jeff Peterson   1:21:05
+And then from there make a decision as to whether or not we want to start fresh or...
+
+Jan Veenhuyzen   1:21:09
+Mhm.
+
+Jeff Peterson   1:21:10
+surgically merge and delete to update the record.
+
+Jan Veenhuyzen   1:21:12
+Yeah.
+Okay, makes sense.
+
+Jeff Peterson   1:21:21
+Vasi, whenever you're up in the morning, are you able to provide those data snapshots sooner rather than later?
+
+vasikaran k   1:21:29
+Yes, I will work with the developer team with all the snapshot and all those version of the database we do have previously and I will give you a snapshot on that.
+
+Jeff Peterson   1:21:39
+Okay.
+To be clear, we're not trying to double work the issues that you're focusing on.
+But it's the only way to be sure that the only person around the table that can truly validate the quality of the records is Jan.
+based on familiarity with the stakeholder groups and what she needs to be able to operate going forward. So.
+
+vasikaran k   1:21:55
+Okay.
+Okay.
+
+Jeff Peterson   1:22:06
+But I think based on the things that Dasi has demonstrated today in the CRM, Jan, I think we can piece together the missing.
+navigation views and probably sketch together the views that you need if they don't exist in the workflow. Vasi, while you have the screen up, can you show me one more thing, please? Is it possible?
+
+Jan Veenhuyzen   1:22:17
+Mhm.
+Yeah.
+
+Jeff Peterson   1:22:24
+Can you show me where subscription preferences are captured?
+
+vasikaran k   1:22:32
+Okay, so...
+So it's captured with all those leads. You can go for any contacts.
+So, like, OK, I'm saying.
+So what we have set the process now, that is a process we are doing like that. Like we are just taking the every, so you can see a lead source here. So this say SSRT import is lead which we imported from all those forms.
+
+Jeff Peterson   1:22:57
+Yes.
+
+vasikaran k   1:23:06
+And you have a custom view over here.
+So if you click that, you will have every custom view. So if you want only the people who are registered for CAN communication, just click that.
+
+Jeff Peterson   1:23:22
+CAN.
+
+vasikaran k   1:23:22
+And we will see the number of records.
+Who opted for that? So, if I want to see only the cast members, I'm just clicking.
+
+Jeff Peterson   1:23:28
+Okay.
+Yeah.
+
+vasikaran k   1:23:34
+and 215 records popular.
+And you can see that, so this is a we can always personalize this view. So, if you, if you, if you want to dig down more into the data, just we need to go inside and we can see all those datas. So, what is the source came from? Sub-specialty communications.
+
+Jeff Peterson   1:23:59
+Hey, hold on, hold on. Getting too far off course here. Specifically, I need to see where this member, so Katie, opted in to allowing us to be able to communicate with her.
+
+vasikaran k   1:24:01
+OK.
+Okay.
+
+Jeff Peterson   1:24:14
+I need a time stamp on that. Show me exactly when she opted in.
+to the subscription for receiving a newsletter.
+
+vasikaran k   1:24:23
+OK, OK, OK, so right now the times and time stamp is not.
+Verified in Seattle.
+I will do that.
+
+Jeff Peterson   1:24:36
+Hold on, I think there's a bigger requirement around this then. I think this is a bit of a mess.
+
+vasikaran k   1:24:42
+Mm.
+
+Jeff Peterson   1:24:44
+Vasi and Natal, can I ask you guys to take this one away, please? We need a solution this week for this. Look across how you support other Canadian clients.
+
+vasikaran k   1:24:50
+Sure, sure.
+
+Jeff Peterson   1:24:55
+Anytime mass communication goes out the door.
+
+vasikaran k   1:24:55
+Mmh.
+
+Jeff Peterson   1:24:59
+like newsletters, mass email, etc. Canadian anti-spam legislation is explicit that it has to be opted in and there has to be the ability to unsubscribe at the bottom of newsletters and mass emails and there has to be the ability to change subscription preferences.
+The data tables, not the views that you're showing me now, but the data tables behind the scenes have to be explicit on when those transactions were captured, right? So, on today, Jeff Peterson.
+
+vasikaran k   1:25:21
+Okay.
+Mhm.
+
+Jeff Peterson   1:25:29
+decided that I wanted to receive a newsletter and I'm open to receiving fund development requests, but I'm not open to receiving.
+just mass email or something along those lines. That timestamp would be 1026 AM Mountain Time.
+when I opted in or changed my subscription preferences. And then the lists should reflect.
+whether somebody has opted in.
+or not. And anybody who has not opted in cannot receive mass email. That's explicit in legislation. We have to capture that. So if you guys are not doing that here, but you're doing it with a different client, we've got to enable that capability pretty quick and see the data tables, because this needs to be defensible in a court of law.
+
+vasikaran k   1:25:59
+CAL.
+
+Jeff Peterson   1:26:18
+Right, the penalties are pretty steep.
+
+vasikaran k   1:26:22
+Okay.
+
+Jeff Peterson   1:26:22
+If you're not doing this with any other Canadian clients and you need some help with this, let me know. I have the requirements.
+
+Nital   1:26:24
+Just.
+
+vasikaran k   1:26:29
+So, okay, okay. So, marketing opt-in or opt-out options on time stamp is preferable, right?
+
+Jeff Peterson   1:26:39
+Yeah, but go do your homework on this.
+
+vasikaran k   1:26:42
+Yeah, okay.
+
+Jeff Peterson   1:26:42
+and understand what the legislation is and requires and what else you've done for other Canadian clients that you might have had.
+
+vasikaran k   1:26:51
+OK.
+
+Jeff Peterson   1:26:52
+If you need help, let me know. Drop A WhatsApp and we can spin up a quick conversation. I can send you some information if you need it.
+
+vasikaran k   1:26:54
+Yeah.
+Okay.
+
+Jeff Peterson   1:27:02
+But right now, it's on.
+
+Nital   1:27:02
+Just quick thing to add, am I audible? Yeah, I think the time stamp must be saved somewhere on the back end. I'm not reflecting on the CRM right now. But yeah, I think time stamp is definitely something that is stored on the back end. So that's there. But to have it on the CRM is something I think Vasi will have to work with the developer. The marked.
+
+Jeff Peterson   1:27:04
+Mhm.
+
+Nital   1:27:25
+in and out situation is something that I'll definitely look into and get back to.
+
+Jeff Peterson   1:27:31
+Okay, I'd be very surprised if Zoho didn't have those capabilities available already, right? So out of the box, right? Monarch CRM should have all of this. And you've shown evidence here that the view...
+can filter those that have opted in. I just need to see the transaction table should allow for updated subscription preferences. So it's not a one-time opt-in or opt-out when somebody signs up to be a member.
+there should be the option to be able to select subscription preferences and have those captured in a data table.
+And somebody over time can change their subscription preference. Today I may not want newsletters, but as I get to know the organization, I should be able to click a button and go in and update my subscription preferences to start receiving a newsletter. That updated opt-in needs to be recorded in the data table along with the original.
+
+vasikaran k   1:28:08
+So.
+
+Jeff Peterson   1:28:25
+Subscriptions.
+So.
+
+vasikaran k   1:28:30
+So, I have one clarification over this, so...
+
+Jeff Peterson   1:28:35
+Yeah.
+
+vasikaran k   1:28:36
+People's are opting out for CAS and CAN communication, right? So, so that is that is not a proper opt-in for a...
+
+Jeff Peterson   1:28:46
+Correct.
+The legislation is explicit. It's not opt-out, it's opt-in.
+
+vasikaran k   1:28:51
+Okay.
+
+Jeff Peterson   1:28:53
+Okay, which means that, and there are other nuances. All the communications that go out en masse need to make sure that you have the ability to update subscription preferences, including unsubscribe. And then when somebody takes the time to go and do that, it needs to flow through to the CRM, whether it goes through your backend database or other.
+so that the preferences are updated. So the first time somebody says, I'm deciding to change my subscription preferences, the very next communication that comes out from CAS.
+or CAN, should be reflected of the wishes of the person on the other end of it.
+
+vasikaran k   1:29:30
+Yes, I completely agree with that. So, once the newsletter companies are starting, we do have that set up with included into our CRM. So people can, whenever they want, whenever they are feeling, I don't want this communication, they can opt out for that. They do have that rights for that according to the GTP guidelines.
+
+Jeff Peterson   1:29:49
+Good.
+
+vasikaran k   1:29:50
+So, I just want to like, and so every CAS and communication, the people who are opting in, also a person who needs all those newsletters, right? So we are only using specific set of field data into.
+some kind of communication or how? That's my question.
+
+Jeff Peterson   1:30:14
+At the very least, right now, your subscription preferences, I think, should have, would you like to receive newsletters as well as would you like to receive mass email or news or something to that effect about?
+Cast or CAN.
+over time we may add to those subscription preferences. This could be something like if you don't have those features already set up.
+
+vasikaran k   1:30:39
+Mhm.
+
+Jeff Peterson   1:30:40
+If you do have them set up, then we just need to see the proof, the screenshots on where we're asking for changes to subscription preferences, as well as the data tables that are capturing by individual contact. They're changed to subscription preferences, including the timestamp, right? That makes it defensively.
+legally defensible. If we don't have that and we need to do a quick working session to be able to get those requirements.
+filtering through to a design, then happy to spend a bit of time doing that with you. The legislation is very, very clear on this, including the requirements. It has to be an opt-in.
+
+vasikaran k   1:31:18
+Okay, so...
+
+Jeff Peterson   1:31:19
+Okay, and other things related to that, so.
+So just let me know what you need for additional time.
+
+vasikaran k   1:31:26
+So, if this is the case, if this is the case, we just need to add some kind of a fields in the source field of forms, like except that CAN communication, we should provide something like agree to or receive this kind of marketing information, all those things, so they can opt in and out.
+
+Jeff Peterson   1:31:26
+On this number.
+
+vasikaran k   1:31:45
+out for our overall marketing combines.
+
+Jeff Peterson   1:31:50
+Okay, I can't advise you about...
+what to do or what not to do specifically here, but my suggestion.
+is go get familiar with the legal requirements.
+
+vasikaran k   1:32:02
+Okay.
+
+Jeff Peterson   1:32:03
+and then build out the checklist and understand what is available out of the box from the CRM.
+
+vasikaran k   1:32:11
+OK.
+
+Jeff Peterson   1:32:11
+Okay, because we should be going line by line down to make sure that the solution that you've got is compliant and leading.
+So...
+
+vasikaran k   1:32:20
+Okay.
+
+Jeff Peterson   1:32:22
+Um...
+
+vasikaran k   1:32:22
+Sure, sure, yes, we will handle that.
+
+Jan Veenhuyzen   1:32:27
+Can I ask a silly question, Jeff? I ask silly questions all the time.
+
+Jeff Peterson   1:32:27
+Okay.
+You don't ever ask any questions. No, you're good. Keep going.
+
+Jan Veenhuyzen   1:32:35
+This, this will again, this will again demonstrate my IT naivety, but where is, where is, where is the server? I guess I mean, it's probably not even a physical server, but like, I guess the server or wherever all of this information is stored, it's Canadian, it's not in India, right? Like, do you know what I mean?
+so that the anti-spam legislation is actually Canadian, that applies to wherever the information is stored. Yeah, okay. Does that make sense? No.
+
+Jeff Peterson   1:33:04
+No, I think those are two different.
+different things, right? So when we may be right over time to start talking about are we using North American servers and that now we have sensitive or personal data that is stored in two jurisdictions that may be outside of Canada. Team Pumpkin's back-end database may be one of those and the Zoho which is more than likely US based.
+
+Jan Veenhuyzen   1:33:09
+Oh, okay.
+Mhm.
+Mhm.
+Yeah.
+Okay, yeah.
+
+Jeff Peterson   1:33:28
+We would need to confirm. So that's one issue.
+
+Jan Veenhuyzen   1:33:32
+Mhm.
+
+Jeff Peterson   1:33:33
+And when you're dealing with the US, it gets in Department of Homeland Security and being able to access data and all that kind of stuff. The other issue on Canadian anti-spams can be based on where the users are, not where the data is residing. So
+
+Jan Veenhuyzen   1:33:38
+Mhm.
+I see, okay. Gotcha. Okay, thank you.
+
+Jeff Peterson   1:33:49
+No problem. Not a stupid question at all. It's great. And of course, when you start pulling the thread, like remodeling a kitchen, it uncovers a whole bunch of other things. So in the early days, we more than likely are well protected with implied consent based on people that want to be here that have signed up for membership, as we had talked about several months ago.
+
+Jan Veenhuyzen   1:33:52
+I'm go.
+Yeah.
+Great.
+Mhm.
+
+Jeff Peterson   1:34:08
+The next little bit, once we get the features and technology capable and you start to produce information, the goal is to have the ability to update to the subscription preferences so that we can get the explicit opt-in, which is far stronger for defensibility. So, okay, and these tools all exist, like modern CRMs have all of this stuff in it.
+
+Jan Veenhuyzen   1:34:14
+Mhm.
+Yeah.
+Right, gotcha.
+
+Jeff Peterson   1:34:31
+It's just a question of activating it and making sure that we've got all of the front end features on signatures that go out on newsletters that go out. They should have a footer in them that says, you know, click here to update your subscription preferences. And then at the CRM level, and potentially at the back end, Team Pumpkin database, then we're capturing.
+
+Jan Veenhuyzen   1:34:45
+Yeah.
+Yeah.
+
+Jeff Peterson   1:34:51
+The change in the record, and then we're good.
+
+Jan Veenhuyzen   1:34:53
+Gotcha.
+Yeah, okay, that makes sense.
+
+Jeff Peterson   1:34:57
+Huge confidence Jim Pumpkin can get us there fast. It's just making sure that we've got the evidence to showcase. Because at the end of the day, the liability is ultimately the cash liability.
+
+Jan Veenhuyzen   1:35:02
+Mhm.
+Yeah.
+
+Jeff Peterson   1:35:07
+So.
+
+Jan Veenhuyzen   1:35:08
+Okay.
+
+Jeff Peterson   1:35:10
+Cool.
+Is there anything else that we've taken 36 minutes longer than originally?
+planned and thank you all for the extra time. Is there anything else that we need to discuss?
+
+vasikaran k   1:35:25
+No, uh, clear, I'm clear.
+
+Jeff Peterson   1:35:28
+Okay.
+
+Jan Veenhuyzen   1:35:30
+Jeff, do we do we know how to merge, you know, Zoho IDs and delete them if we if we want to do that on Wednesday?
+
+Jeff Peterson   1:35:39
+It'll be, I've done lots of CRM merges before and deletions.
+
+Jan Veenhuyzen   1:35:45
+K.
+
+Jeff Peterson   1:35:46
+We will need to figure it out. I haven't used Zoho before, but I've used other CRMs to do the same thing.
+
+Jan Veenhuyzen   1:35:52
+Okay.
+
+Jeff Peterson   1:35:52
+Yeah.
+
+Jan Veenhuyzen   1:35:54
+Perfect.
+
+Jeff Peterson   1:35:54
+There's a good list of things that I know what I'm looking for when we actually see it. So if you've got the admin rights, then we can go in pretty nimble to be able to play.
+
+Jan Veenhuyzen   1:36:01
+K.
+OK, perfect.
+
+vasikaran k   1:36:04
+So we can always merge all those data in the CRM itself, but the thing lacks is I need to validate on what data goes out, what data stay in. I need to ensure before taking any action. That's what I am planning about and investing time on that.
+before merging. So merging the data will be a quick snapshot. It will merge the entire database based upon the contact details. But I need to verify that.
+
+Jeff Peterson   1:36:34
+Yep.
+If you can get us the back-end database or the back-end data tables first, all of it, whatever you've captured, then we can make some sense for it. But if it looks like the quicker steps are for Jan and I to go in and actually take action on the 17 or 19 records or so.
+
+vasikaran k   1:36:46
+Show.
+
+Jeff Peterson   1:36:55
+We'll do that without asking you to do any.
+Data updates. Okay, we'll just let you know that they're done.
+Okay, but this is a two-step process. We need to validate the data in the backend database and how it lines up against what we can see in the CRM and how that lines up against the spreadsheets to understand our best course of action.
+K. Vasi.
+
+vasikaran k   1:37:20
+Yeah.
+
+Jeff Peterson   1:37:22
+So.
+
+vasikaran k   1:37:24
+Sure, we will handle on this solution.
+
+Jeff Peterson   1:37:28
+Okay, thanks for your flexibility. We're going to bump around for the next couple of days on this one, but this was helpful.
+
+vasikaran k   1:37:31
+Yeah.
+Sean.
+See you. Thank you.
+
+Jeff Peterson   1:37:36
+Okay, folks. Thanks very much, everybody.
+
+Jan Veenhuyzen   1:37:39
+Thanks, everyone.
+
+vasikaran k   1:37:39
+How are you?
+
+Jeff Peterson   1:37:41
+You too, bye bye.
+
+vasikaran k   1:37:42
+Right.
+
+Jeff Peterson stopped transcription

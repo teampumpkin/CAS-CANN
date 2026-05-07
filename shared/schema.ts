@@ -318,6 +318,66 @@ export const insertFormConfigurationSchema = createInsertSchema(formConfiguratio
   updatedAt: true,
 });
 
+// ─────────────────────────────────────────────────────────────────────────
+// CASL (Canadian Anti-Spam Legislation) consent audit trail
+// Every consent change (initial opt-in, later opt-in, opt-out, preference
+// update) writes one row to this table. Required to defend against CASL
+// complaints and to power the unsubscribe / preferences pages.
+// ─────────────────────────────────────────────────────────────────────────
+export const consentHistory = pgTable("consent_history", {
+  id: serial("id").primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(), // lookup key
+  submissionId: integer("submission_id").references(() => formSubmissions.id, { onDelete: "set null" }),
+  zohoCrmId: varchar("zoho_crm_id", { length: 100 }), // matched Zoho Lead/Contact id when known
+  fieldName: varchar("field_name", { length: 100 }).notNull(), // e.g. cas_communications, cann_communications, services_map_inclusion
+  oldValue: varchar("old_value", { length: 50 }),
+  newValue: varchar("new_value", { length: 50 }).notNull(),
+  source: varchar("source", { length: 100 }).notNull(), // 'website_form', 'unsubscribe_page', 'preferences_page', 'admin_change', 'bulk_import_backfill'
+  changedBy: varchar("changed_by", { length: 255 }), // email or admin user
+  ipAddress: varchar("ip_address", { length: 45 }), // IPv4/IPv6
+  userAgent: text("user_agent"),
+  notes: text("notes"),
+  changedAt: timestamp("changed_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_consent_history_email").on(table.email),
+  index("idx_consent_history_zoho_crm_id").on(table.zohoCrmId),
+  index("idx_consent_history_changed_at").on(table.changedAt),
+  index("idx_consent_history_field_name").on(table.fieldName),
+]);
+
+export const insertConsentHistorySchema = createInsertSchema(consentHistory).omit({
+  id: true,
+  changedAt: true,
+});
+
+export type ConsentHistory = typeof consentHistory.$inferSelect;
+export type InsertConsentHistory = z.infer<typeof insertConsentHistorySchema>;
+
+// One-time signed tokens for unsubscribe / preferences self-service pages.
+// Issued per recipient when a mass email is sent. Single-use, expiring.
+export const consentTokens = pgTable("consent_tokens", {
+  id: serial("id").primaryKey(),
+  token: varchar("token", { length: 128 }).notNull().unique(),
+  email: varchar("email", { length: 320 }).notNull(),
+  zohoCrmId: varchar("zoho_crm_id", { length: 100 }),
+  purpose: varchar("purpose", { length: 50 }).notNull().default("preferences"), // 'unsubscribe' | 'preferences'
+  usedAt: timestamp("used_at"),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_consent_tokens_email").on(table.email),
+  index("idx_consent_tokens_expires_at").on(table.expiresAt),
+]);
+
+export const insertConsentTokenSchema = createInsertSchema(consentTokens).omit({
+  id: true,
+  createdAt: true,
+  usedAt: true,
+});
+
+export type ConsentToken = typeof consentTokens.$inferSelect;
+export type InsertConsentToken = z.infer<typeof insertConsentTokenSchema>;
+
 // Field Metadata Cache for Zoho CRM fields - enables efficient dynamic field mapping
 export const fieldMetadataCache = pgTable("field_metadata_cache", {
   id: serial("id").primaryKey(),

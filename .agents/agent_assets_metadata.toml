@@ -102,3 +102,9 @@ id = "3K37thk1dUFiObTtiXVOq"
 uri = "file://docs/MEETING_BRIEF_FINAL_2026-05-07.md"
 type = "text"
 title = "🎯 FINAL Meeting Brief — use during the call"
+
+[[outputs]]
+id = "Wk4ypTGy-yu1p__YkSOlI"
+uri = "file://docs/CAS_JOURNEY_AND_TRUTH_2026-05-07.md"
+type = "text"
+title = "🌟 THE TRUTH — Complete Journey + Honest Status (read this first)"

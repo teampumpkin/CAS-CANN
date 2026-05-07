@@ -3286,10 +3286,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ success: false, error: "grantCode is required in the request body" });
       }
 
-      const clientId = process.env.ZOHO_SELF_CLIENT_ID;
-      const clientSecret = process.env.ZOHO_SELF_CLIENT_SECRET;
+      const clientId = process.env.ZOHO_SELF_CLIENT_ID || process.env.ZOHO_CLIENT_ID;
+      const clientSecret = process.env.ZOHO_SELF_CLIENT_SECRET || process.env.ZOHO_CLIENT_SECRET;
       if (!clientId || !clientSecret) {
-        return res.status(500).json({ success: false, error: "ZOHO_SELF_CLIENT_ID or ZOHO_SELF_CLIENT_SECRET not configured" });
+        return res.status(500).json({ success: false, error: "Zoho client credentials not configured (need ZOHO_SELF_CLIENT_ID/SECRET or ZOHO_CLIENT_ID/SECRET)" });
       }
 
       console.log('[Admin] Exchanging Zoho grant code for new token with automation scope...');

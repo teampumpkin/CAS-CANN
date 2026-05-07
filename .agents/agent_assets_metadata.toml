@@ -173,7 +173,7 @@ title = "🔧 Reconnect Zoho — 5 Minutes, No Deploy Needed"
 id = "ss8e73eracNy6j0PYdIhk"
 uri = "file://docs/CAS_FINAL_GAP_ANALYSIS_2026-05-07.md"
 type = "text"
-title = "CAS Final Gap Analysis (read first)"
+title = "Final Gap Analysis (with post-rescue update)"
 
 [[outputs]]
 id = "-CFl9TAkLWHPlRF20ypRU"
@@ -186,3 +186,9 @@ id = "bMoqGi_lGRZ2CzbLkLw49"
 uri = "file://docs/crm-field-mapping-reference.md"
 type = "text"
 title = "CRM Field Mapping Reference (refreshed May 7)"
+
+[[outputs]]
+id = "c3V_qm_rT9DqYnsRYvoJk"
+uri = "file://docs/CAS_Rescue_Outcome_2026-05-07.xlsx"
+type = "table"
+title = "Rescue Outcome — Cleanup Inventory"

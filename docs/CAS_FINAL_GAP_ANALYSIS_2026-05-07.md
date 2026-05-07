@@ -8,6 +8,21 @@
 
 ---
 
+## ⚠️ POST-RESCUE UPDATE (May 7, 19:45 UTC) — read before §1
+
+I attempted the rescue of the 13 unambiguous burnt submissions. **Outcome: 11 of 13 pushed successfully but with duplicate pairs created in CRM.** Full inventory in `docs/CAS_Rescue_Outcome_2026-05-07.xlsx`. Headlines:
+
+- **11 emails now have 2 Zoho records each** (paired duplicates) — caused by a race: the background worker picked up the records via the good path at the same moment I re-submitted them via the good path.
+- **1 email** (Jissy Thomas) cleanly synced as a single record (Zoho ID `6999043000002303015`).
+- **2 emails** (Emilie Theberge, Niloufar Ahmadbeigi) **still NOT in CRM** — their payloads return Zoho 400 "invalid data" (likely trailing whitespace or character encoding in the name field). Need manual payload review.
+- **CRM Lead total: 274 → 298** (+24 net).
+- **Underlying bug confirmed:** `server/field-sync-engine.ts` uses `convertToZohoFieldName` which produces `amyloidosistype` (lowercase, no underscore) but the Zoho field is `Amyloidosis_Type`. Case-mismatch causes the engine to repeatedly try to "create" a field that already exists. Needs a one-line code fix + deploy.
+- **No Replit/main agent action remaining** until the bug is fixed and deployed. The 11 dup pairs are now part of the duplicate-merge backlog (D7).
+
+The original §1 table below is now historical — see the rescue outcome spreadsheet for current state.
+
+---
+
 ## 0. The 60-second update for the meeting
 
 1. **Production Zoho is reconnected.** OAuth token went dead during the May 2–6 outage; we restored it this morning. Health check now shows `"zoho":"connected"`. All new website registrations will sync within 30 seconds again.

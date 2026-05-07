@@ -156,3 +156,9 @@ id = "0rVVE-QN0zmbk7PTleZqZ"
 uri = "file://docs/CLIENT_UPDATE_FOLLOWUP_TO_JAN_2026-05-07.md"
 type = "text"
 title = "✍️ Follow-up Email to Jan (with 7 questions)"
+
+[[outputs]]
+id = "vAf7vTlNYnv29-T2NPq7y"
+uri = "file://docs/URGENT_PRODUCTION_STATUS_2026-05-07.md"
+type = "text"
+title = "🚨 URGENT — Production Sync is BROKEN — 5-Minute Fix"

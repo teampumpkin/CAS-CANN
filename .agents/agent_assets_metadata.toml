@@ -66,3 +66,9 @@ id = "iF_WoHDdhsEeCwcVL8Efm"
 uri = "file://docs/meeting-briefing-2026-05-06.md"
 type = "text"
 title = "4. Internal briefing (read before the meeting)"
+
+[[outputs]]
+id = "55cKYXYQEjhI0DDklv3YG"
+uri = "file://docs/CAS_CRM_Deep_Audit_2026-05-07.xlsx"
+type = "table"
+title = "CRM Deep Audit (LIVE) — share with Jeff + Jan"

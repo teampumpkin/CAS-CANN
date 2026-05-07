@@ -11,7 +11,7 @@ title = "CAS / CANN Newsletter Campaign Guide"
 id = "prp6uWidHJvX4chPzUUxH"
 uri = "file://attached_assets/CAS_CANN_ValidationReport_2026_04.xlsx"
 type = "table"
-title = "SSOT Validation Report (Excel)"
+title = "April 23 Validation Report (context)"
 
 [[outputs]]
 id = "1ZtDMZ_MFEl_DDbjp0_Eh"
@@ -47,13 +47,13 @@ title = "CAS / CANN CRM — Client Handover Report (Updated April 23, 2026)"
 id = "SO9PhHiqXvgGNOioTWwv1"
 uri = "file://docs/CAS_TeamPumpkin_Database_Snapshot_2026-05-07.xlsx"
 type = "table"
-title = "Database Snapshot"
+title = "Database snapshot (the one Jan asked for)"
 
 [[outputs]]
 id = "02Psvk0GEGQ0H2b-M520v"
 uri = "file://docs/CAS_3Way_Comparison_2026-05-07.xlsx"
 type = "table"
-title = "3-Way Comparison (DB ⇄ SSOT ⇄ CRM)"
+title = "3-Way Comparison (DB / SSOT / CRM)"
 
 [[outputs]]
 id = "FreTJMkSGxegeAMv7fYAB"
@@ -71,13 +71,13 @@ title = "4. Internal briefing (read before the meeting)"
 id = "55cKYXYQEjhI0DDklv3YG"
 uri = "file://docs/CAS_CRM_Deep_Audit_2026-05-07.xlsx"
 type = "table"
-title = "CRM Deep Audit"
+title = "Live CRM Deep Audit"
 
 [[outputs]]
 id = "y4YDZTd4zS1REgZ7SYZvf"
 uri = "file://docs/CAS_Duplicate_Merge_Proposal_2026-05-07.xlsx"
 type = "table"
-title = "Open during call — Duplicate Proposal"
+title = "Duplicate Proposal — walk this LIVE in the call"
 
 [[outputs]]
 id = "nQORyTS39JhPmFsahAgmg"
@@ -107,4 +107,10 @@ title = "🎯 FINAL Meeting Brief — use during the call"
 id = "Wk4ypTGy-yu1p__YkSOlI"
 uri = "file://docs/CAS_JOURNEY_AND_TRUTH_2026-05-07.md"
 type = "text"
-title = "🌟 THE TRUTH — Complete Journey + Honest Status (read this first)"
+title = "Full Journey + Honest Status"
+
+[[outputs]]
+id = "PqshvLTGeQge3_5i-FnmX"
+uri = "file://docs/CLIENT_MEETING_PACKAGE_2026-05-07.md"
+type = "text"
+title = "📦 START HERE — Client Meeting Package + Time Ask"

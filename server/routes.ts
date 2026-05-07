@@ -1488,9 +1488,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       host.includes('amyloid.ca') ||
       process.env.NODE_ENV === 'production';
     
-    // Always use amyloid.ca for production OAuth to match Zoho configuration
+    // Use www.amyloid.ca for production OAuth — the bare amyloid.ca domain
+    // 404s on /oauth/zoho/callback (only the root path is 301-redirected to www
+    // by AWS ALB), which broke the entire OAuth flow. The www. URL must also be
+    // registered in Zoho Developer Console as an authorised redirect URI.
     const baseUrl = isProductionDomain 
-      ? 'https://amyloid.ca' 
+      ? 'https://www.amyloid.ca' 
       : `${req.protocol}://${host}`;
     
     return { isProduction: isProductionDomain, baseUrl };

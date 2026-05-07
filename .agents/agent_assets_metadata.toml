@@ -162,3 +162,9 @@ id = "vAf7vTlNYnv29-T2NPq7y"
 uri = "file://docs/URGENT_PRODUCTION_STATUS_2026-05-07.md"
 type = "text"
 title = "🚨 URGENT — Production Sync is BROKEN — 5-Minute Fix"
+
+[[outputs]]
+id = "AfVapKXffyF3xIJx921gP"
+uri = "file://docs/ZOHO_RECONNECT_NOW_2026-05-07.md"
+type = "text"
+title = "🔧 Reconnect Zoho — 5 Minutes, No Deploy Needed"

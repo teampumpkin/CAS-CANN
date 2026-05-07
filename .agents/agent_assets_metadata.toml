@@ -47,13 +47,13 @@ title = "CAS / CANN CRM — Client Handover Report (Updated April 23, 2026)"
 id = "SO9PhHiqXvgGNOioTWwv1"
 uri = "file://docs/CAS_TeamPumpkin_Database_Snapshot_2026-05-07.xlsx"
 type = "table"
-title = "1. Database Snapshot (attach to email)"
+title = "Database Snapshot"
 
 [[outputs]]
 id = "02Psvk0GEGQ0H2b-M520v"
 uri = "file://docs/CAS_3Way_Comparison_2026-05-07.xlsx"
 type = "table"
-title = "2. 3-Way Comparison: DB vs SSOT vs CRM (attach to email)"
+title = "3-Way Comparison (DB ⇄ SSOT ⇄ CRM)"
 
 [[outputs]]
 id = "FreTJMkSGxegeAMv7fYAB"
@@ -71,10 +71,28 @@ title = "4. Internal briefing (read before the meeting)"
 id = "55cKYXYQEjhI0DDklv3YG"
 uri = "file://docs/CAS_CRM_Deep_Audit_2026-05-07.xlsx"
 type = "table"
-title = "CRM Deep Audit (LIVE) — share with Jeff + Jan"
+title = "CRM Deep Audit"
 
 [[outputs]]
 id = "y4YDZTd4zS1REgZ7SYZvf"
 uri = "file://docs/CAS_Duplicate_Merge_Proposal_2026-05-07.xlsx"
 type = "table"
-title = "Duplicate Merge Proposal (read-only) — share with Jeff + Jan"
+title = "Duplicate Merge Proposal (read-only)"
+
+[[outputs]]
+id = "nQORyTS39JhPmFsahAgmg"
+uri = "file://docs/CAS_Master_Status_Report_2026-05-07.md"
+type = "text"
+title = "Master Status Report — send to client"
+
+[[outputs]]
+id = "5yuw-QeRmOtql5S4VQuKn"
+uri = "file://docs/CLIENT_EMAIL_2026-05-07.md"
+type = "text"
+title = "Client Email — copy/paste body"
+
+[[outputs]]
+id = "erpZ9Hu0e7eqSs-6wOR9r"
+uri = "file://docs/MEETING_AGENDA_2026-05-07.md"
+type = "text"
+title = "Meeting Agenda — your script (private)"

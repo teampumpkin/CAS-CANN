@@ -42,3 +42,27 @@ id = "ppdAEDYdnqQ30oEZJMSTq"
 uri = "file://docs/crm-handover-report.md"
 type = "text"
 title = "CAS / CANN CRM — Client Handover Report (Updated April 23, 2026)"
+
+[[outputs]]
+id = "SO9PhHiqXvgGNOioTWwv1"
+uri = "file://docs/CAS_TeamPumpkin_Database_Snapshot_2026-05-07.xlsx"
+type = "table"
+title = "1. Database Snapshot (attach to email)"
+
+[[outputs]]
+id = "02Psvk0GEGQ0H2b-M520v"
+uri = "file://docs/CAS_3Way_Comparison_2026-05-07.xlsx"
+type = "table"
+title = "2. 3-Way Comparison: DB vs SSOT vs CRM (attach to email)"
+
+[[outputs]]
+id = "FreTJMkSGxegeAMv7fYAB"
+uri = "file://docs/email-to-jeff-jan-2026-05-07.md"
+type = "text"
+title = "3. Email draft to Jeff + Jan (copy-paste into Outlook)"
+
+[[outputs]]
+id = "iF_WoHDdhsEeCwcVL8Efm"
+uri = "file://docs/meeting-briefing-2026-05-06.md"
+type = "text"
+title = "4. Internal briefing (read before the meeting)"

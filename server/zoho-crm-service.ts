@@ -901,6 +901,43 @@ export class ZohoCRMService {
       'mobile': 'Mobile',
       'mobilenumber': 'Mobile',
       'mobile_number': 'Mobile',
+
+      // CAS/CANN custom Zoho fields — explicit mappings to prevent
+      // camelCase-flattening bug (e.g. amyloidosisType -> amyloidosistype).
+      // Form field names are normalized via lowercase + strip-non-alphanum
+      // before lookup; map every variant we know we send.
+      'amyloidosistype': 'Amyloidosis_Type',
+      'amyloidosis_type': 'Amyloidosis_Type',
+      'discipline': 'Professional_Designation',
+      'professionaldesignation': 'Professional_Designation',
+      'professional_designation': 'Professional_Designation',
+      'subspecialty': 'Subspecialty',
+      'institution': 'Account_Name',
+      'account_name': 'Account_Name',
+      'wantsmembership': 'CAS_Member',
+      'wants_membership': 'CAS_Member',
+      'cas_member': 'CAS_Member',
+      'wantscannmembership': 'CANN_Member',
+      'wants_cann_membership': 'CANN_Member',
+      'cann_member': 'CANN_Member',
+      'wantscommunications': 'CAS_Communications',
+      'wants_communications': 'CAS_Communications',
+      'cas_communications': 'CAS_Communications',
+      'canncommunications': 'CANN_Communications',
+      'cann_communications': 'CANN_Communications',
+      'cann_communication_consent': 'CANN_Communication_Consent',
+      'educationalinterests': 'Educational_Interests',
+      'educational_interests': 'Educational_Interests',
+      'interestedinpresenting': 'Interested_in_Presenting',
+      'interested_in_presenting': 'Interested_in_Presenting',
+      'recordtype': 'Record_Type',
+      'record_type': 'Record_Type',
+      'sourceform': 'Source_Form',
+      'source_form': 'Source_Form',
+      'servicesmapinclusion': 'Services_Map_Inclusion',
+      'services_map_inclusion': 'Services_Map_Inclusion',
+      'leadsource': 'Lead_Source',
+      'lead_source': 'Lead_Source',
     };
     
     // Normalize input for lookup

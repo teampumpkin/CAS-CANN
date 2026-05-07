@@ -192,3 +192,9 @@ id = "c3V_qm_rT9DqYnsRYvoJk"
 uri = "file://docs/CAS_Rescue_Outcome_2026-05-07.xlsx"
 type = "table"
 title = "Rescue Outcome — Cleanup Inventory"
+
+[[outputs]]
+id = "ZpqZif3a4i6X_o7eVwog5"
+uri = "file://docs/CAS_Duplicate_Merge_Checklist_2026-05-07.xlsx"
+type = "table"
+title = "Duplicate Merge Checklist for Jan (10 pairs, clickable URLs)"

@@ -89,7 +89,7 @@ title = "Master Status Report (full detail)"
 id = "5yuw-QeRmOtql5S4VQuKn"
 uri = "file://docs/CLIENT_EMAIL_2026-05-07.md"
 type = "text"
-title = "Cover email (send before/after)"
+title = "✉️ Ready-to-Send Email — Jeff + Jan"
 
 [[outputs]]
 id = "erpZ9Hu0e7eqSs-6wOR9r"
@@ -119,10 +119,16 @@ title = "📦 START HERE — Client Meeting Package + Time Ask"
 id = "EzNoESCyCdrIsSl8wJFjB"
 uri = "file://docs/FINAL_SSOT_PROPOSED_2026-05-07.xlsx"
 type = "table"
-title = "📦 FINAL SSOT — The proposed clean dataset (7 sheets)"
+title = "📦 Attachment 1 — Final SSOT Proposed (7 tabs)"
 
 [[outputs]]
 id = "RyFV2hr1AYBFGI55k0zBT"
 uri = "file://docs/CRM_CLEANUP_EXECUTION_PLAN_2026-05-07.md"
 type = "text"
-title = "📨 Execution Plan + Run Order"
+title = "📄 Attachment 2 — Execution Plan"
+
+[[outputs]]
+id = "Pg7G_s0UJBJLQfZekLOeP"
+uri = "file://docs/CLEANUP_RESULTS_2026-05-07.md"
+type = "text"
+title = "📊 Today’s Results Summary"

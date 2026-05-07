@@ -1,8 +1,9 @@
 # CRM Field Mapping Reference
 
 **Document Purpose**: Reconciliation of all front-end form fields to Zoho CRM Leads module field names.
-**Last Updated**: February 24, 2026
-**Prepared For**: Blue Monarch CRM Architectural Review
+**Last Updated**: May 7, 2026 (refreshed against current `casRegistrationSchema` and `buildCentralizedZohoData`)
+**Prepared For**: Blue Monarch CRM Architectural Review · CAS/CANN SSOT cleanup
+**Source of truth**: `shared/schema.ts` (form schema) + `server/zoho-crm-service.ts:1726+` (`buildCentralizedZohoData`)
 
 ---
 
@@ -17,12 +18,21 @@
 | 3 | Full Name | `fullName` | `Last_Name` | Text | Yes (standard) | Zoho standard field |
 | 4 | Email Address | `email` | `Email` | Email | Yes (standard) | Zoho standard field |
 | 5 | Professional Designation | `discipline` | `Professional_Designation` | Text | Yes | Custom field |
-| 6 | Sub-specialty Area of Focus | `subspecialty` | `Description` | Textarea | Yes (standard) | Also stored in custom `subspecialty` field |
+| 6 | Sub-specialty Area of Focus | `subspecialty` | `subspecialty` (custom field, 50-char cap) | Text | Yes (custom) | Stored in the custom `subspecialty` field; truncated to 50 chars by `cleanAndTruncate()`. Not mirrored to `Description` for member records. |
 | 7 | Primary Amyloidosis Type | `amyloidosisType` | `Amyloidosis_Type` | Picklist | Yes | Values: ATTR, AL, Both ATTR and AL, Other |
 | 8 | Centre / Clinic Name | `institution` | `Company` + `Institution_Name` | Text | Yes | Mapped to both standard `Company` and custom `Institution_Name`. Sanitized via `cleanAndTruncate()` |
 | 9 | Services Map Inclusion | `wantsServicesMapInclusion` | `Services_Map_Inclusion` | Picklist | Yes | Values: Yes, No |
 | 10 | CAS Communication Consent | `wantsCommunications` | `CAS_Communications` | Picklist | Yes | Values: Yes, No |
 | 11 | CANN Communication Consent | `cannCommunications` | `CANN_Communications` | Picklist | Yes | Values: Yes, No |
+
+### Services Map Branch (Q9 = "Yes" — added April 2026, NEW since prior version of this doc)
+
+| # | Form Field (UI Label) | Form Data Key | Zoho CRM Field (API Name) | Data Type | Notes |
+|---|----------------------|---------------|--------------------------|-----------|-------|
+| 9a | Centre / Clinic Name | `centerName` | `Map_Clinic_Name` | Text | Only sent when `wantsServicesMapInclusion = "Yes"` |
+| 9b | Centre / Clinic Address | `centerAddress` | `Map_Clinic_Address` | Text | Same gating |
+| 9c | Centre / Clinic Phone | `centerPhone` | `Map_Clinic_Phone` | Text | Sanitized via `sanitizePhone()` upstream |
+| 9d | Centre / Clinic Fax | `centerFax` | `Map_Clinic_Fax` | Text | Sanitized via `sanitizePhone()` upstream |
 
 ### Registration Form Fields (Non-Member / Inquiry Path)
 
@@ -55,7 +65,7 @@
 - Admin batch-update operations
 - Admin re-sync orphan operations
 
-**Verification**: Audit on Feb 24, 2026 confirmed **0 dependency violations** exist across all 245 Leads records.
+**Verification**: Last full audit (Feb 24, 2026, 245 records) confirmed **0 dependency violations**. Re-audit endpoint available at `POST /api/admin/zoho/fix-membership-dependencies` (supports `dryRun`) — should be re-run after the burnt-submission rescue (~13 new records).
 
 ---
 

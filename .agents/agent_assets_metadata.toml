@@ -144,3 +144,15 @@ id = "2K5NBy2sEel8XIWkda4B1"
 uri = "file://docs/SESSION_SUMMARY_2026-05-07.md"
 type = "text"
 title = "📊 Today's Full Session Summary"
+
+[[outputs]]
+id = "1SOLHlUCClJgU6KR0IBCE"
+uri = "file://docs/MSForms_Import_Preview_2026-05-07.xlsx"
+type = "table"
+title = "📊 MS Forms Import Preview (8 tabs — attach to email)"
+
+[[outputs]]
+id = "0rVVE-QN0zmbk7PTleZqZ"
+uri = "file://docs/CLIENT_UPDATE_FOLLOWUP_TO_JAN_2026-05-07.md"
+type = "text"
+title = "✍️ Follow-up Email to Jan (with 7 questions)"

@@ -153,6 +153,23 @@ export class ZohoSyncWorker {
 
       console.log(`[Zoho Sync Worker] ✅ Submission #${submission.id} synced successfully! Zoho ID: ${zohoRecord.id}`);
 
+      // Fire-and-forget notification email to CAS / CANN inboxes (re-enabled 2026-05-07)
+      try {
+        const { emailNotificationService } = await import("./email-notification-service");
+        const isCANN = String(formData.wantsCANNMembership || "").toLowerCase() === "yes" || formData.wantsCANNMembership === true;
+        const isCAS = String(formData.wantsMembership || "").toLowerCase() === "yes" || formData.wantsMembership === true;
+        emailNotificationService.sendRegistrationNotification({
+          fullName: formData.fullName || `${formData.firstName || ""} ${formData.lastName || ""}`.trim() || formData.email || "Unknown",
+          email: formData.email || "",
+          discipline: formData.discipline,
+          institution: formData.institution,
+          membershipType: isCAS && isCANN ? "CAS & CANN" : isCAS ? "CAS" : "Contact",
+          leadId: zohoRecord.id,
+        }).catch((err) => console.error("[Zoho Sync Worker] Notification email failed (non-blocking):", err?.message || err));
+      } catch (notifyErr) {
+        console.error("[Zoho Sync Worker] Could not load notification service:", notifyErr);
+      }
+
     } catch (error) {
       // FAILURE: Increment retry count and schedule next retry with exponential backoff
       const errorMessage = error instanceof Error ? error.message : String(error);

@@ -132,3 +132,15 @@ id = "Pg7G_s0UJBJLQfZekLOeP"
 uri = "file://docs/CLEANUP_RESULTS_2026-05-07.md"
 type = "text"
 title = "📊 Today’s Results Summary"
+
+[[outputs]]
+id = "ahXQcyc7wZP6VI1xHg5pP"
+uri = "file://docs/CLIENT_EMAIL_REPLY_TO_JAN_2026-05-07.md"
+type = "text"
+title = "✍️ Reply to Jan — Ready to Send"
+
+[[outputs]]
+id = "2K5NBy2sEel8XIWkda4B1"
+uri = "file://docs/SESSION_SUMMARY_2026-05-07.md"
+type = "text"
+title = "📊 Today's Full Session Summary"

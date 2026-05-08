@@ -1,0 +1,229 @@
+From 5facf40d1a436a2c03b95561e761215d77daaef9 Mon Sep 17 00:00:00 2001
+From: connect115 <42701579-connect115@users.noreply.replit.com>
+Date: Thu, 7 May 2026 20:01:49 +0000
+Subject: [PATCH] Fix issues with form submissions and improve data accuracy
+
+Update Zoho CRM integration service to correctly map form fields and resolve data submission errors.
+
+Replit-Commit-Author: Agent
+Replit-Commit-Session-Id: ef7bf022-0b3a-4156-9c38-2b98b837c1d1
+Replit-Commit-Checkpoint-Type: full_checkpoint
+Replit-Commit-Event-Id: d7b69e66-de18-4f05-bd14-a20a8faac06c
+Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/e9fe007f-c11f-42ca-a1dd-347ccc032e17/ef7bf022-0b3a-4156-9c38-2b98b837c1d1/xKqF51f
+Replit-Helium-Checkpoint-Created: true
+---
+ .agents/agent_assets_metadata.toml            |   6 +++
+ ..._Duplicate_Merge_Checklist_2026-05-07.xlsx | Bin 0 -> 24607 bytes
+ server/zoho-crm-service.ts                    |  37 ++++++++++++++++++
+ 3 files changed, 43 insertions(+)
+ create mode 100644 docs/CAS_Duplicate_Merge_Checklist_2026-05-07.xlsx
+
+diff --git a/.agents/agent_assets_metadata.toml b/.agents/agent_assets_metadata.toml
+index be5410f..1b78ee5 100644
+--- a/.agents/agent_assets_metadata.toml
++++ b/.agents/agent_assets_metadata.toml
+@@ -192,3 +192,9 @@ id = "c3V_qm_rT9DqYnsRYvoJk"
+ uri = "file://docs/CAS_Rescue_Outcome_2026-05-07.xlsx"
+ type = "table"
+ title = "Rescue Outcome — Cleanup Inventory"
++
++[[outputs]]
++id = "ZpqZif3a4i6X_o7eVwog5"
++uri = "file://docs/CAS_Duplicate_Merge_Checklist_2026-05-07.xlsx"
++type = "table"
++title = "Duplicate Merge Checklist for Jan (10 pairs, clickable URLs)"
+diff --git a/docs/CAS_Duplicate_Merge_Checklist_2026-05-07.xlsx b/docs/CAS_Duplicate_Merge_Checklist_2026-05-07.xlsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..a1c9cda3a84a846e8ec7efc84a29a075e48e7a1c
+GIT binary patch
+literal 24607
+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
+a3|Ly%0p6@^AO+kE+zbbq7#KWaK|BBkwbRc4
+
+literal 0
+HcmV?d00001
+
+diff --git a/server/zoho-crm-service.ts b/server/zoho-crm-service.ts
+index 2681d99..6777aba 100644
+--- a/server/zoho-crm-service.ts
++++ b/server/zoho-crm-service.ts
+@@ -901,6 +901,43 @@ export class ZohoCRMService {
+       'mobile': 'Mobile',
+       'mobilenumber': 'Mobile',
+       'mobile_number': 'Mobile',
++
++      // CAS/CANN custom Zoho fields — explicit mappings to prevent
++      // camelCase-flattening bug (e.g. amyloidosisType -> amyloidosistype).
++      // Form field names are normalized via lowercase + strip-non-alphanum
++      // before lookup; map every variant we know we send.
++      'amyloidosistype': 'Amyloidosis_Type',
++      'amyloidosis_type': 'Amyloidosis_Type',
++      'discipline': 'Professional_Designation',
++      'professionaldesignation': 'Professional_Designation',
++      'professional_designation': 'Professional_Designation',
++      'subspecialty': 'Subspecialty',
++      'institution': 'Account_Name',
++      'account_name': 'Account_Name',
++      'wantsmembership': 'CAS_Member',
++      'wants_membership': 'CAS_Member',
++      'cas_member': 'CAS_Member',
++      'wantscannmembership': 'CANN_Member',
++      'wants_cann_membership': 'CANN_Member',
++      'cann_member': 'CANN_Member',
++      'wantscommunications': 'CAS_Communications',
++      'wants_communications': 'CAS_Communications',
++      'cas_communications': 'CAS_Communications',
++      'canncommunications': 'CANN_Communications',
++      'cann_communications': 'CANN_Communications',
++      'cann_communication_consent': 'CANN_Communication_Consent',
++      'educationalinterests': 'Educational_Interests',
++      'educational_interests': 'Educational_Interests',
++      'interestedinpresenting': 'Interested_in_Presenting',
++      'interested_in_presenting': 'Interested_in_Presenting',
++      'recordtype': 'Record_Type',
++      'record_type': 'Record_Type',
++      'sourceform': 'Source_Form',
++      'source_form': 'Source_Form',
++      'servicesmapinclusion': 'Services_Map_Inclusion',
++      'services_map_inclusion': 'Services_Map_Inclusion',
++      'leadsource': 'Lead_Source',
++      'lead_source': 'Lead_Source',
+     };
+     
+     // Normalize input for lookup
+-- 
+2.50.1
+

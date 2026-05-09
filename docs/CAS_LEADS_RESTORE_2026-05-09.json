@@ -1,0 +1,394 @@
+{
+  "generatedAt": "2026-05-09T08:53:48.798Z",
+  "mode": "live",
+  "layout": {
+    "id": "6999043000000091055",
+    "name": "CAS and CANN"
+  },
+  "before": {
+    "totals": {
+      "leads": 0,
+      "contacts": 274,
+      "accounts": 223
+    },
+    "fields": {
+      "Email": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "Last_Name": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "First_Name": {
+        "populated": 232,
+        "total": 274,
+        "pct": 85
+      },
+      "CAS_Member": {
+        "populated": 214,
+        "total": 274,
+        "pct": 78
+      },
+      "CANN_Member": {
+        "populated": 22,
+        "total": 274,
+        "pct": 8
+      },
+      "Source_Form": {
+        "populated": 241,
+        "total": 274,
+        "pct": 88
+      },
+      "Form_Submission_Date": {
+        "populated": 156,
+        "total": 274,
+        "pct": 57
+      },
+      "Record_Type": {
+        "populated": 256,
+        "total": 274,
+        "pct": 93
+      },
+      "Institution_Name": {
+        "populated": 232,
+        "total": 274,
+        "pct": 85
+      },
+      "Professional_Designation": {
+        "populated": 234,
+        "total": 274,
+        "pct": 85
+      },
+      "Amyloidosis_Type": {
+        "populated": 21,
+        "total": 274,
+        "pct": 8
+      },
+      "CAS_Communications": {
+        "populated": 221,
+        "total": 274,
+        "pct": 81
+      },
+      "CANN_Communications": {
+        "populated": 26,
+        "total": 274,
+        "pct": 9
+      },
+      "Services_Map_Inclusion": {
+        "populated": 16,
+        "total": 274,
+        "pct": 6
+      },
+      "Subspecialty": {
+        "populated": 216,
+        "total": 274,
+        "pct": 79
+      },
+      "Account_Name": {
+        "populated": 263,
+        "total": 274,
+        "pct": 96
+      }
+    }
+  },
+  "after": {
+    "totals": {
+      "leads": 274,
+      "contacts": 0,
+      "accounts": 223
+    },
+    "duplicates": {
+      "leadEmail": 0
+    },
+    "fieldCoverageOnLeads": {
+      "Email": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "Last_Name": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "First_Name": {
+        "populated": 232,
+        "total": 274,
+        "pct": 85
+      },
+      "CAS_Member": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "CANN_Member": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "Source_Form": {
+        "populated": 241,
+        "total": 274,
+        "pct": 88
+      },
+      "Form_Submission_Date": {
+        "populated": 156,
+        "total": 274,
+        "pct": 57
+      },
+      "Record_Type": {
+        "populated": 256,
+        "total": 274,
+        "pct": 93
+      },
+      "Institution_Name": {
+        "populated": 232,
+        "total": 274,
+        "pct": 85
+      },
+      "Professional_Designation": {
+        "populated": 234,
+        "total": 274,
+        "pct": 85
+      },
+      "Amyloidosis_Type": {
+        "populated": 21,
+        "total": 274,
+        "pct": 8
+      },
+      "CAS_Communications": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "CANN_Communications": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "Services_Map_Inclusion": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "subspecialty": {
+        "populated": 201,
+        "total": 274,
+        "pct": 73
+      },
+      "Company": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      },
+      "Lead_Source": {
+        "populated": 274,
+        "total": 274,
+        "pct": 100
+      }
+    }
+  },
+  "verify": {
+    "leadCount": 274,
+    "duplicateEmails": 0,
+    "layoutSampled": 10,
+    "layoutCorrect": 10,
+    "sample": [
+      {
+        "id": "6999043000002358197",
+        "email": "john-buttbenton@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      },
+      {
+        "id": "6999043000002358196",
+        "email": "joesphine-darakjy@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      },
+      {
+        "id": "6999043000002358195",
+        "email": "ljames-venere@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      },
+      {
+        "id": "6999043000002358194",
+        "email": "capla-paprocki@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      },
+      {
+        "id": "6999043000002358193",
+        "email": "foller-donette@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      },
+      {
+        "id": "6999043000002358192",
+        "email": "simonm@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      },
+      {
+        "id": "6999043000002358191",
+        "email": "tollner-morlong@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      },
+      {
+        "id": "6999043000002358190",
+        "email": "leota-dilliard@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      },
+      {
+        "id": "6999043000002358189",
+        "email": "sage-wieser@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      },
+      {
+        "id": "6999043000002358188",
+        "email": "krismarrier@noemail.invalid",
+        "layoutId": "6999043000000091055",
+        "layoutName": "CAS and CANN"
+      }
+    ]
+  },
+  "delete": {
+    "ok": 274,
+    "fail": 0,
+    "failures": []
+  },
+  "subspecialtyBackfill": {
+    "sourcesLoaded": {
+      "SSOT v6": 201,
+      "MS Forms - CAS YES": 0,
+      "MS Forms - CAS NO": 1,
+      "MS Forms - CANN": 0
+    },
+    "subspecialtyMapSize": 202,
+    "leadsTotal": 274,
+    "leadsWithSubspecialtyBefore": 0,
+    "leadsPatched": 201,
+    "leadsPatchFailed": 0,
+    "patchFailures": [],
+    "matchedBySource": {
+      "SSOT v6": 201
+    },
+    "leadsStillMissingAfterBackfill": 73,
+    "sampleStillMissing": [
+      {
+        "id": "6999043000002358197",
+        "email": "john-buttbenton@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358196",
+        "email": "joesphine-darakjy@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358195",
+        "email": "ljames-venere@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358194",
+        "email": "capla-paprocki@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358193",
+        "email": "foller-donette@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358192",
+        "email": "simonm@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358191",
+        "email": "tollner-morlong@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358190",
+        "email": "leota-dilliard@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358189",
+        "email": "sage-wieser@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358188",
+        "email": "krismarrier@noemail.invalid"
+      },
+      {
+        "id": "6999043000002358187",
+        "email": "john.doe@hospital.ca"
+      },
+      {
+        "id": "6999043000002358186",
+        "email": "jane.smith@clinic.ca"
+      },
+      {
+        "id": "6999043000002358185",
+        "email": "karine.deschenes@icm-mhi.org"
+      },
+      {
+        "id": "6999043000002358184",
+        "email": "devan.hrupp@albertahealthservices.ca"
+      },
+      {
+        "id": "6999043000002358183",
+        "email": "alii.askarzadeh@ubc.ca"
+      },
+      {
+        "id": "6999043000002358182",
+        "email": "nitaljain56@gmail.com"
+      },
+      {
+        "id": "6999043000002358181",
+        "email": "vasi@gmail.com"
+      },
+      {
+        "id": "6999043000002358178",
+        "email": "nina.mason@ahs.ca"
+      },
+      {
+        "id": "6999043000002358170",
+        "email": "Info@madhattr.ca"
+      },
+      {
+        "id": "6999043000002358158",
+        "email": "Melissa.loyola@ahs.ca"
+      },
+      {
+        "id": "6999043000002358147",
+        "email": "merv.carr@gmail.com"
+      },
+      {
+        "id": "6999043000002358145",
+        "email": "kyla.hayes@saskhealthauthortiy.ca"
+      },
+      {
+        "id": "6999043000002358130",
+        "email": "cardio1researchdata@gmail.com"
+      },
+      {
+        "id": "6999043000002358129",
+        "email": "dorothyroberts1@me.com"
+      },
+      {
+        "id": "6999043000002358128",
+        "email": "rohini.charan@fraserhealth.ca"
+      }
+    ],
+    "note": "Restore-from-recycle was attempted via Zoho v8/v9 PUT /Contacts/actions/restore but is silently no-op in this org; backfill sourced from SSOT v6 + MS Forms instead (canonical truth).",
+    "truncatedTo50Chars": [
+      "6999043000002358171",
+      "6999043000002343438",
+      "6999043000002341177",
+      "6999043000002341110"
+    ]
+  }
+}

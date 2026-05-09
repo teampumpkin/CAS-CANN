@@ -1879,6 +1879,17 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   // --- Source form tracking ---
   zohoData.Source_Form = formName;
 
+  // --- Form submission timestamp (when user actually submitted, NOT when Zoho record was created) ---
+  // Pulls from formData.submittedAt (ISO string) if provided, otherwise current time.
+  // Critical for accurately tracking submission time even when records are rescued/synced later.
+  if (formData.submittedAt) {
+    zohoData.Form_Submission_Date = formData.submittedAt;
+  } else if (formData._submissionCreatedAt) {
+    zohoData.Form_Submission_Date = formData._submissionCreatedAt;
+  } else {
+    zohoData.Form_Submission_Date = new Date().toISOString();
+  }
+
   return {
     zohoData,
     recordType,

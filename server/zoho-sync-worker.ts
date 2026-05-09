@@ -117,7 +117,14 @@ export class ZohoSyncWorker {
       console.log(`[Zoho Sync Worker] Syncing submission #${submission.id} to Zoho...`);
 
       // Build Zoho data from submission using smart mapping
-      const formData = submission.submissionData as any;
+      // Inject submission.created_at so Form_Submission_Date in Zoho reflects when the user
+      // actually submitted, not when this sync attempt ran (critical for rescued/retried records).
+      const formData = {
+        ...(submission.submissionData as any),
+        _submissionCreatedAt: submission.createdAt
+          ? new Date(submission.createdAt).toISOString()
+          : undefined,
+      } as any;
       console.log(`[Zoho Sync Worker DEBUG] Form data for submission #${submission.id}:`, JSON.stringify(formData, null, 2));
       
       // Get form configuration to check for layout
@@ -245,8 +252,16 @@ export class ZohoSyncWorker {
       // This ensures CANN→CAS dependency, Record_Type, consent field completeness,
       // and Lead_Source differentiation are ALWAYS applied regardless of mapping path
       const { buildCentralizedZohoData } = await import("./zoho-crm-service");
+      // Inject the original submission's created_at so Form_Submission_Date reflects when
+      // the user actually submitted the form, not when this rescue/sync ran.
+      const formDataWithTimestamp = {
+        ...formData,
+        _submissionCreatedAt: (formData as any)._submissionCreatedAt
+          || (formData as any).submittedAt
+          || (formData as any).created_at,
+      };
       const centralResult = buildCentralizedZohoData({
-        formData,
+        formData: formDataWithTimestamp,
         formName,
         isExcelImport: formName.includes('Excel'),
       });
@@ -267,6 +282,9 @@ export class ZohoSyncWorker {
       if (centralResult.zohoData.CANN_Communications !== undefined) mergedData.CANN_Communications = centralResult.zohoData.CANN_Communications;
       if (centralResult.zohoData.CANN_Communication_Consent !== undefined) mergedData.CANN_Communication_Consent = centralResult.zohoData.CANN_Communication_Consent;
       if (centralResult.zohoData.Services_Map_Inclusion !== undefined) mergedData.Services_Map_Inclusion = centralResult.zohoData.Services_Map_Inclusion;
+      // Form_Submission_Date must always reflect the original submission timestamp (from local DB),
+      // never be overridden by smart-mapper output which doesn't know about it.
+      if (centralResult.zohoData.Form_Submission_Date !== undefined) mergedData.Form_Submission_Date = centralResult.zohoData.Form_Submission_Date;
       
       console.log(`[Zoho Sync Worker] Post-processing rules applied: ${centralResult.appliedRules.join('; ')}`);
       

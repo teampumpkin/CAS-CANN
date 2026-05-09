@@ -1,0 +1,101 @@
+{
+  "generatedAt": "2026-05-09T07:51:17.591Z",
+  "zohoCRM": {
+    "totalLeads": 259,
+    "duplicateGroups": 0,
+    "testRecords": 0,
+    "withSubmissionTimestamp": 156,
+    "timestampCoverage": "60%",
+    "casMembers": 228,
+    "cannMembers": 32,
+    "recordTypeBreakdown": {
+      "member": 218,
+      "inquiry": 39,
+      "other": 2
+    },
+    "sourceBreakdown": {
+      "Website - CAS Registration": 27,
+      "Website - CAS/CANN Registration Form": 1,
+      "Website - CAS & CANN Registration": 27,
+      "SSOT Import": 2,
+      "Excel Import - Re-synced": 60,
+      "CAS & CANN Registration": 1,
+      "Excel Import - CAS Registration (2025)": 50,
+      "Excel Import - CAS Registration (French 2025)": 21,
+      "Excel Import - CAS Registration (Historical)": 54,
+      "Excel Import - PANN Membership (Historical)": 10,
+      "Website - CANN Membership": 1,
+      "Website - Join CAS Today (Historical)": 5
+    },
+    "timestampCoverageBySource": {
+      "Website - CAS Registration": {
+        "total": 27,
+        "withTs": 21
+      },
+      "Website - CAS/CANN Registration Form": {
+        "total": 1,
+        "withTs": 0
+      },
+      "Website - CAS & CANN Registration": {
+        "total": 27,
+        "withTs": 9
+      },
+      "SSOT Import": {
+        "total": 2,
+        "withTs": 0
+      },
+      "Excel Import - Re-synced": {
+        "total": 60,
+        "withTs": 60
+      },
+      "CAS & CANN Registration": {
+        "total": 1,
+        "withTs": 1
+      },
+      "Excel Import - CAS Registration (2025)": {
+        "total": 50,
+        "withTs": 1
+      },
+      "Excel Import - CAS Registration (French 2025)": {
+        "total": 21,
+        "withTs": 0
+      },
+      "Excel Import - CAS Registration (Historical)": {
+        "total": 54,
+        "withTs": 54
+      },
+      "Excel Import - PANN Membership (Historical)": {
+        "total": 10,
+        "withTs": 10
+      },
+      "Website - CANN Membership": {
+        "total": 1,
+        "withTs": 0
+      },
+      "Website - Join CAS Today (Historical)": {
+        "total": 5,
+        "withTs": 0
+      }
+    }
+  },
+  "localDatabase": {
+    "totalSubmissions": 175,
+    "synced": 173,
+    "pending": 1,
+    "failed": 1,
+    "withZohoId": 172
+  },
+  "reconciliation": {
+    "zohoLeadsLinkedToLocal": 156,
+    "zohoLeadsHistoricalImports": 103,
+    "localSubmissionsNotSynced": 3
+  },
+  "cleanupActions": {
+    "duplicatesDeleted": 43,
+    "testRecordsDeleted": 1,
+    "orphanedLocalPointersFixed": 32,
+    "timestampsBackfilled": 166,
+    "customFieldAdded": "Form_Submission_Date (datetime)"
+  },
+  "historicalImportsNote": "103 historical imports do not have Form_Submission_Date because the original CSV/Excel files did not include submission dates. Their Lead_Source identifies them clearly (Excel Import - * 2025/Historical/French/PANN)."
+}

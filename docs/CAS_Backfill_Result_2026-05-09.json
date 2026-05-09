@@ -1,0 +1,60 @@
+{
+  "success": 134,
+  "failed": 38,
+  "errors": [
+    {
+      "code": "INVALID_DATA",
+      "details": {
+        "api_name": "id",
+        "json_path": "$.data[16].id"
+      },
+      "message": "the id given seems to be invalid",
+      "status": "error"
+    },
+    {
+      "code": "INVALID_DATA",
+      "details": {
+        "api_name": "id",
+        "json_path": "$.data[21].id"
+      },
+      "message": "the id given seems to be invalid",
+      "status": "error"
+    },
+    {
+      "code": "INVALID_DATA",
+      "details": {
+        "api_name": "id",
+        "json_path": "$.data[22].id"
+      },
+      "message": "the id given seems to be invalid",
+      "status": "error"
+    },
+    {
+      "code": "INVALID_DATA",
+      "details": {
+        "api_name": "id",
+        "json_path": "$.data[0].id"
+      },
+      "message": "the id given seems to be invalid",
+      "status": "error"
+    },
+    {
+      "code": "INVALID_DATA",
+      "details": {
+        "api_name": "id",
+        "json_path": "$.data[1].id"
+      },
+      "message": "the id given seems to be invalid",
+      "status": "error"
+    },
+    {
+      "code": "INVALID_DATA",
+      "details": {
+        "api_name": "id",
+        "json_path": "$.data[2].id"
+      },
+      "message": "the id given seems to be invalid",
+      "status": "error"
+    }
+  ]
+}

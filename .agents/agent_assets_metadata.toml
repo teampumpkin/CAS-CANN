@@ -198,3 +198,33 @@ id = "ZpqZif3a4i6X_o7eVwog5"
 uri = "file://docs/CAS_Duplicate_Merge_Checklist_2026-05-07.xlsx"
 type = "table"
 title = "Duplicate Merge Checklist for Jan (12 pairs, updated)"
+
+[[outputs]]
+id = "xmLnraW1ck0I2W1UEs48z"
+uri = "file://docs/CAS_CRM_RECONCILIATION_2026-05-09.xlsx"
+type = "table"
+title = "Master Reconciliation Workbook (Summary, By Source, Cleanup Audit, Local Submissions)"
+
+[[outputs]]
+id = "wP1oEaCCuUdwcy5d77oKm"
+uri = "file://docs/CAS_MEETING_STATUS_2026-05-09.md"
+type = "text"
+title = "Meeting Status — Final"
+
+[[outputs]]
+id = "uqjCK78AZn8oW5WDffi-J"
+uri = "file://docs/CAS_RECONCILIATION_REPORT_2026-05-09.json"
+type = "unspecified"
+title = "Reconciliation Metrics (JSON)"
+
+[[outputs]]
+id = "oyWV46HQlkeoQXtd4W8dB"
+uri = "file://docs/CAS_DEDUP_PLAN_2026-05-09.json"
+type = "unspecified"
+title = "Deduplication Audit Trail (which IDs kept vs deleted)"
+
+[[outputs]]
+id = "343De5bGqcjZyz8Yf20fi"
+uri = "file://docs/deploy/AWS_QUICK_FIX_2026-05-09.md"
+type = "text"
+title = "For AWS DevOps Team — env-var fix"

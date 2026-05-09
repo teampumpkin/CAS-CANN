@@ -228,3 +228,21 @@ id = "343De5bGqcjZyz8Yf20fi"
 uri = "file://docs/deploy/AWS_QUICK_FIX_2026-05-09.md"
 type = "text"
 title = "For AWS DevOps Team — env-var fix"
+
+[[outputs]]
+id = "IGjiOu06Z8_zlquld9cvW"
+uri = "file://docs/CAS_LAYOUT_MANUAL_CHECKLIST_2026-05-09.md"
+type = "text"
+title = "Manual Layout Checklist (read first)"
+
+[[outputs]]
+id = "cx-GXPPT4lyei3vcjmzdQ"
+uri = "file://docs/CAS_LAYOUT_MANUAL_CHECKLIST_2026-05-09.xlsx"
+type = "table"
+title = "Layout Checklist Workbook (3 tabs: README, Bulk Update Plan, Per-Record Detail)"
+
+[[outputs]]
+id = "9WJZ00Vi4dHv1sXn0BGrN"
+uri = "file://docs/CAS_LAYOUT_AUDIT_2026-05-09.json"
+type = "unspecified"
+title = "Layout Audit (raw JSON, all 259 records)"

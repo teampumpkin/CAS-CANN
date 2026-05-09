@@ -1,122 +1,139 @@
-# CAS Zoho — Live Field Quality Analysis
+# CAS Zoho — Live Field Quality Analysis (CORRECTED)
 
 **Generated:** 2026-05-09 (live data, 259 leads analyzed)
-**Companion file:** `docs/CAS_FIELD_QUALITY_ANALYSIS_2026-05-09.xlsx` (5 tabs)
+**Companion file:** `docs/CAS_FIELD_QUALITY_ANALYSIS_2026-05-09.xlsx`
 
 ---
 
-## 🔴 The two problems in one paragraph
+## ✅ Good news first
 
-1. **Unwanted fields on layout** — 38 of 83 Zoho Lead fields are completely empty (0% populated) across all 259 records. They're showing up as empty rows in every record because the layout includes every field. 14 of those 38 are **junk fields created by a sync bug** (e.g. `centername`, `discipline`, `wantsmembership`) that should be deleted from Zoho entirely.
+You were right — the forms DO collect lots of data, the proper layout DOES exist, and the proper fields ARE populated correctly. Here's the verified state:
 
-2. **Missing data** — `First_Name` is 0% populated (the data is actually in `Last_Name` — forms collect a single "Full Name"), `Company` is only 61% populated (the data is in `Institution_Name`), and `Source_Form` is only 56% populated (older sync code didn't write it).
-
----
-
-## 📊 What I found in live data (per-field)
-
-### ✅ Fields working well (100% populated)
-`Email`, `Last_Name`, `Lead_Source`, `Owner`, `CAS_Member`, `CANN_Member`, `Record_Status`, `Email_Opt_Out`, `Full_Name`, `Locked`, `Is_Converted`, `Change_Log_Time`
-
-### ⚠️ Fields with partial coverage (real data gaps)
-| Field | Coverage | Why |
+| Proper Zoho field | Coverage | Status |
 |---|---|---|
-| `First_Name` | **0%** (0/259) | Forms only collect Full Name → stored in Last_Name instead |
-| `Company` | 61% (159/259) | Data is in `Institution_Name` (97%) — wrong field used |
-| `Source_Form` | 56% (144/259) | Older sync code didn't write it; only newer records have it |
-| `Form_Submission_Date` | 60% (156/259) | 2025 Excel imports had no source dates (known/documented) |
-| `subspecialty` | 90% (232/259) | Some imports lacked this field |
+| Email | 259/259 (100%) | ✅ |
+| Last_Name (carries full name) | 259/259 (100%) | ✅ |
+| Lead_Source | 259/259 (100%) | ✅ |
+| CAS_Member (true) | 228/259 (88%) | ✅ |
+| CANN_Member (true) | 32/259 (12%) | ✅ |
+| CAS_Communications | 257/259 (99%) | ✅ |
+| CANN_Communications | 253/259 (98%) | ✅ |
+| Services_Map_Inclusion | 256/259 (99%) | ✅ |
+| Record_Type | 257/259 (99%) | ✅ |
+| Institution_Name | 250/259 (97%) | ✅ |
+| Professional_Designation | 248/259 (96%) | ✅ |
+| subspecialty | 232/259 (90%) | ✅ |
 
-### 🔴 Fields that should be REMOVED FROM LAYOUT (38 always-empty fields)
-**Custom junk created by sync bug** (also delete from Zoho entirely):
-- `centername`, `centerfax`, `centeraddress`, `centerphone`
-- `discipline`, `institution`, `nomemberemail`, `nomembername`, `nomembermessage`
-
-**Lowercase duplicate fields** (sync wrote to BOTH proper and these — also delete):
-- `wantsmembership` (duplicate of `CAS_Member`)
-- `wantscommunications` (duplicate of `CAS_Communications`)
-- `wantsservicesmapinclusion` (duplicate of `Services_Map_Inclusion`)
-- `wantscannmembership` (duplicate of `CANN_Member`)
-- `canncommunications` (duplicate of `CANN_Communications`)
-
-**Zoho built-ins not used by CAS** (just hide from layout):
-- `Phone`, `Mobile`, `Fax`, `Website`, `Lead_Status`
-- `No_of_Employees`, `Annual_Revenue`, `Salutation`, `Tag`
-- `Street`, `State`, `Zip_Code`, `Country` (address fields not collected)
-- `Converted_Date_Time`, `Lead_Conversion_Time`, `Converted_Account/Contact/Deal`
-- `Last_Visited_Time`, `First_Visited_Time/URL`, `Days_Visited`, `Average_Time_Spent_Minutes`
-- `Number_Of_Chats`, `Visitor_Score`, `Referrer`
-- `Last_Enriched_Time`, `Enrich_Status`
-- `Unsubscribed_Mode`, `Unsubscribed_Time`
+The forms work, the sync writes the right data into the right proper fields. **No data loss.**
 
 ---
 
-## 🛠️ Manual fix checklist for Zoho
+## 🔴 What's actually wrong — TWO problems
 
-### Phase 1 — Delete junk fields (ONE-TIME, ~10 min)
-For each field in the **"Fields to DELETE"** tab of the Excel:
-1. Zoho CRM → **Setup** (gear icon, top-right) → **Modules and Fields**
-2. Click **Leads**
-3. Find the field by name → click the **⋯** menu → **Delete**
-4. Confirm
+### Problem 1: The layout has 14 JUNK FIELDS (some appearing 2–3 times!)
 
-These 14 junk/duplicate fields will be permanently removed. ✅ Tick each as done in the Excel.
+When the forms were first wired up, Zoho's "auto-create fields on import" feature created **lowercase duplicates** of every form field name on the fly. These got added to the layout and were never cleaned up. They're all 0% populated:
 
-### Phase 2 — Edit the layout to remove unused fields (~15 min)
+| Junk field | On layout | Real data is in... |
+|---|---|---|
+| `discipline` | **2 copies** | `Professional_Designation` ✅ |
+| `institution` | **3 copies** | `Institution_Name` ✅ |
+| `centerphone` | **2 copies** | (not used) |
+| `centeraddress` | **2 copies** | (not used) |
+| `nomemberemail` | **2 copies** | `Email` (when filled) |
+| `nomembermessage` | **2 copies** | `Description` (when filled) |
+| `wantsmembership` | **2 copies** | `CAS_Member` ✅ |
+| `wantsservicesmapinclusion` | **2 copies** | `Services_Map_Inclusion` ✅ |
+| `wantscannmembership` | 1 copy | `CANN_Member` ✅ |
+| `wantscommunications` | 1 copy | `CAS_Communications` ✅ |
+| `canncommunications` | 1 copy | `CANN_Communications` ✅ |
+| `centername` | 1 copy | (not used) |
+| `centerfax` | 1 copy | (not used) |
+| `nomembername` | 1 copy | `Last_Name` (when filled) |
+
+**That's 23 layout slots wasted** on junk fields. Removing them shrinks the layout from 83 to 60 slots immediately, with zero data loss.
+
+### Problem 2: 24 unused Zoho built-in fields are also on the layout
+
+These are standard Zoho Lead fields that CAS doesn't use, but they're displayed because the layout includes them by default:
+
+`Phone`, `Mobile`, `Fax`, `Website`, `Salutation`, `Tag`, `Lead_Status`, `Industry`, `No_of_Employees`, `Annual_Revenue`, `Street`, `State`, `Zip_Code`, `Country`, `Description`, `Last_Visited_Time`, `First_Visited_Time`, `First_Visited_URL`, `Average_Time_Spent_Minutes`, `Number_Of_Chats`, `Visitor_Score`, `Referrer`, `Days_Visited`, `Last_Enriched_Time`, `Enrich_Status`, `Converted_Date_Time`, `Lead_Conversion_Time`, `Converted_Account/Contact/Deal`, `Unsubscribed_Mode`, `Unsubscribed_Time`
+
+These should just be hidden from the layout (don't delete — they're Zoho built-ins).
+
+---
+
+## 📊 Real data gaps (small, all explainable)
+
+| Field | Coverage | Cause | Recommendation |
+|---|---|---|---|
+| `Amyloidosis_Type` | 35/259 (14%) | Older imports didn't capture it | Backfill from local DB where present |
+| `First_Name` | 73/259 (28%) | Forms collect single "Full Name" → goes to Last_Name | **Just hide First_Name from layout** |
+| `Source_Form` | 144/259 (56%) | Older sync code didn't write this field | Backfill from `Lead_Source` (1 minute) |
+| `Form_Submission_Date` | 156/259 (60%) | Historical Excel imports had no source dates | Permanent gap, accepted |
+| `Company` | 159/259 (61%) | Standard field unused; data is in Institution_Name | Backfill from `Institution_Name` (1 minute) |
+
+---
+
+## 🛠️ Clean manual checklist for Jeff & Jan
+
+### Phase 1 — Fix the layout (~15 min in Zoho UI)
+
 1. Zoho CRM → **Setup** → **Modules and Fields** → **Leads** → **Layouts**
-2. Edit the **CAS Registration** layout (and **CAS and CANN** layout — both need this)
-3. For each field listed in the **"Layout Cleanup Plan"** tab:
-   - Hover over the field on the canvas → drag it back to the unused-fields panel on the right
-4. Save
+2. Open the **CAS and CANN** layout
+3. **Drag every duplicate field slot back to the unused panel** (right side):
+   - All 3 copies of `institution` → drag to unused
+   - Both copies of `discipline` → drag to unused
+   - Both copies of `centerphone`, `centeraddress`, `nomemberemail`, `nomembermessage`, `wantsmembership`, `wantsservicesmapinclusion` → drag to unused
+   - Single junk fields: `centername`, `centerfax`, `nomembername`, `wantscannmembership`, `wantscommunications`, `canncommunications` → drag to unused
+4. **Drag the 24 Zoho built-ins** (list above) to unused
+5. **Hide the entire "Address Information" section** (5 fields)
+6. **Hide the entire "Visit Summary" section** (8 fields)
+7. **Hide the "Description Information" section** (1 field)
+8. Click **Save**
+9. Repeat for the **CAS Registration** layout
 
-### Phase 3 — Fix the missing data (1 decision needed first)
-Discuss with Jeff & Jan:
+### Phase 2 — Delete the junk fields permanently from the module (optional, ~5 min)
+After Phase 1 confirms nothing breaks, you can also delete these 14 fields entirely:
 
-**A. First_Name / Last_Name split** — Recommended: keep current setup, just hide First_Name from layout. (Splitting names like "Mary O'Sullivan" automatically is risky.)
+Zoho → **Setup** → **Modules and Fields** → **Leads** → **Fields** → find each → **⋯** → **Delete**
 
-**B. Company vs Institution_Name** — Recommended: I can backfill Company from Institution_Name in 1 minute (programmatic). Want me to?
+Fields to delete: `discipline`, `institution`, `centername`, `centerphone`, `centerfax`, `centeraddress`, `nomemberemail`, `nomembername`, `nomembermessage`, `wantsmembership`, `wantsservicesmapinclusion`, `wantscannmembership`, `wantscommunications`, `canncommunications`
 
-**C. Source_Form backfill** — Recommended: I can backfill Source_Form from Lead_Source for the 115 missing records in 1 minute (programmatic). Want me to?
-
----
-
-## 📋 Side-by-side: what's in the layout NOW vs what SHOULD be in the layout
-
-| Currently shown | Recommended |
-|---|---|
-| 83 fields | ~25 fields |
-| Includes 38 always-empty fields | Only fields with actual data |
-| Includes 14 junk/duplicate fields | Junk fields deleted from Zoho |
-| Confusing for staff | Clean, focused on CAS workflow |
-
-**Recommended fields to KEEP on layout:**
-- **Identity:** `Last_Name` (carries full name), `Email`, `Owner`
-- **Membership status:** `CAS_Member`, `CANN_Member`, `Record_Type`
-- **Communications consent:** `CAS_Communications`, `CANN_Communications`
-- **Professional info:** `Institution_Name`, `Professional_Designation`, `subspecialty`, `Amyloidosis_Type`
-- **Source tracking:** `Lead_Source`, `Source_Form`, `Form_Submission_Date`
-- **Map opt-in:** `Services_Map_Inclusion`
-- **Audit:** `Created_Time`, `Modified_Time`, `Last_Activity_Time`
-- **System:** `Email_Opt_Out`, `Record_Status`, `Layout`
-
-That's ~20-25 fields — clean, no clutter, every field has data.
+### Phase 3 — Backfill (I can do this programmatically in 2 min, with your approval)
+1. Backfill `Source_Form` from `Lead_Source` for 115 records → 100% coverage
+2. Backfill `Company` from `Institution_Name` for 91 records → 97% coverage
+3. Backfill `Amyloidosis_Type` from local DB submission_data where available
 
 ---
 
-## 💬 What to tell Jeff & Jan in the meeting
+## ✅ After all 3 phases, your Zoho will look like this
 
-> "I pulled live data from all 259 records and analyzed every field. The layout is showing 38 fields that are always empty — that's why the records look cluttered. Many of those are junk fields auto-created by a sync bug, which we should permanently delete from Zoho.
->
-> The 'missing data' you're seeing is mostly a field-mapping issue, not actually missing — the full name is stored in Last_Name (because the forms collect a single Full Name field), and Institution data is in Institution_Name not Company. I have a manual checklist with every field, every action, and a recommended cleanup plan in the workbook."
+| | Before | After |
+|---|---|---|
+| Fields shown on layout | 83 (with 9 duplicates) | ~25 (no duplicates) |
+| Always-empty fields visible | 38 | 0 |
+| Junk fields in module | 14 | 0 |
+| Coverage of `Source_Form` | 56% | 100% |
+| Coverage of `Company` | 61% | 97% |
+
+Records will display only the fields that matter for CAS workflow: identity, membership status, communication consent, professional info, and source tracking.
 
 ---
 
-## 🔧 What I can automate after the meeting
+## 💬 What to tell Jeff & Jan
 
-If Jeff/Jan approve, I can do these in minutes (no manual Zoho clicking):
-1. ✅ Backfill `Company` from `Institution_Name` (159 → ~250 populated)
-2. ✅ Backfill `Source_Form` from `Lead_Source` (144 → 259 populated)
-3. ✅ Programmatically delete the 14 junk fields from Zoho
-4. ✅ Programmatically remove unused fields from the layout
+> "Good news — all the form data IS reaching Zoho correctly. The proper fields are properly populated. The 'many unwanted fields' problem is that the layout has 14 junk lowercase duplicate fields that were auto-created once when the forms were first wired up. Some are duplicated 2-3 times on the layout — that's why it looks so cluttered. The fix is to drag those out of the layout (15 min in the Zoho UI) and optionally delete them from the module entirely. After that, every field on the layout will have real data in it."
 
-Just say the word and which ones you want done.
+---
+
+## 🤖 What I can automate for you (post-meeting)
+
+If they want, I can do these without anyone clicking in Zoho:
+1. **Programmatic layout cleanup** — remove all 14 junk fields + 24 unused built-ins from both layouts
+2. **Programmatic field deletion** — delete the 14 junk fields from the Leads module
+3. **Backfill Source_Form** — fix 115 records → 100% coverage
+4. **Backfill Company** — fix 91 records → 97% coverage
+5. **Backfill Amyloidosis_Type** — recover from local DB where available
+
+Combined: ~5 minutes of automation. Just say which ones to run.

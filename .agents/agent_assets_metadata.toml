@@ -251,13 +251,13 @@ title = "Layout Audit (raw JSON, all 259 records)"
 id = "fczIUv-zNu-lIpbVLCiF_"
 uri = "file://docs/CAS_FIELD_QUALITY_ANALYSIS_2026-05-09.md"
 type = "text"
-title = "Field Quality Analysis (read first)"
+title = "Corrected Field Analysis (read first)"
 
 [[outputs]]
 id = "IOGCiMZmvmcr09ICAWNPY"
 uri = "file://docs/CAS_FIELD_QUALITY_ANALYSIS_2026-05-09.xlsx"
 type = "table"
-title = "Field Quality Workbook (5 tabs: Summary, All Fields, Layout Cleanup, Fields to DELETE, Missing Data Plan)"
+title = "Field Analysis Workbook (4 tabs: Summary, Junk Fields, Built-ins to Hide, Fields to KEEP)"
 
 [[outputs]]
 id = "eHrqdTKgkO6UYrUTItQrD"

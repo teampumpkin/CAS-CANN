@@ -1877,12 +1877,22 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   // --- Form submission timestamp (when user actually submitted, NOT when Zoho record was created) ---
   // Pulls from formData.submittedAt (ISO string) if provided, otherwise current time.
   // Critical for accurately tracking submission time even when records are rescued/synced later.
+  // Zoho v8 datetime format: "2026-05-09T09:15:11+00:00" (no millis, explicit TZ offset).
+  // JS .toISOString() returns "2026-05-09T09:15:11.000Z" which Zoho rejects with INVALID_DATA.
+  const toZohoDateTime = (v: any): string => {
+    let d = v instanceof Date ? v : new Date(v);
+    if (isNaN(d.getTime())) {
+      console.warn(`[buildCentralizedZohoData] Invalid Form_Submission_Date input: ${JSON.stringify(v)} — falling back to now()`);
+      d = new Date();
+    }
+    return d.toISOString().replace(/\.\d+Z$/, "+00:00");
+  };
   if (formData.submittedAt) {
-    zohoData.Form_Submission_Date = formData.submittedAt;
+    zohoData.Form_Submission_Date = toZohoDateTime(formData.submittedAt);
   } else if (formData._submissionCreatedAt) {
-    zohoData.Form_Submission_Date = formData._submissionCreatedAt;
+    zohoData.Form_Submission_Date = toZohoDateTime(formData._submissionCreatedAt);
   } else {
-    zohoData.Form_Submission_Date = new Date().toISOString();
+    zohoData.Form_Submission_Date = toZohoDateTime(new Date());
   }
 
   return {

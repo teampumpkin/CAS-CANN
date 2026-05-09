@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-05-09T09:16:48.382Z",
+  "zoho_state": {
+    "leads": 261,
+    "contacts": 0,
+    "accounts": 223
+  },
+  "coverage": {
+    "ssot_v6_total": 230,
+    "ssot_v6_in_zoho": 230,
+    "form_submissions_total": 171,
+    "form_submissions_synced": 171,
+    "form_submission_emails_in_zoho": 161
+  },
+  "quality": {
+    "duplicate_emails": 0,
+    "junk_test_data": 0,
+    "missing_email": 0,
+    "missing_company": 0,
+    "missing_source_form": 18,
+    "has_subspecialty": 203,
+    "cas_members": 216,
+    "cann_members": 22
+  },
+  "actions_taken_today": [
+    "13 junk Leads deleted from Zoho (10 (Sample) demo + 3 fake names)",
+    "4 test submissions deleted from local DB (verify@example.com, verifynow@example.com, 2x nitaljain26@gmail.com)",
+    "2 stuck submissions (Emilie Theberge + Niloufar Ahmadbeigi) successfully synced to Zoho",
+    "2 duplicate stub Leads removed (older null-First_Name versions of the 2 above)",
+    "Fixed Form_Submission_Date format bug (millis stripped + TZ offset for Zoho v8)"
+  ]
+}

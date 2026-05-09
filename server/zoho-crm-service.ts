@@ -734,6 +734,31 @@ export class ZohoCRMService {
     }
   }
 
+  /**
+   * Search for a record by exact email match. Returns the first matching record or null.
+   * Uses Zoho v8 search endpoint with the dedicated `email` parameter for fast,
+   * indexed lookup. Returns null on 204 (no match) — does NOT throw.
+   */
+  async searchRecordByEmail(moduleName: string, email: string): Promise<ZohoRecord | null> {
+    try {
+      const trimmed = (email || "").trim();
+      if (!trimmed) return null;
+      const response = await this.makeRequest<ZohoApiResponse<ZohoRecord>>(
+        `/${moduleName}/search?email=${encodeURIComponent(trimmed)}`
+      );
+      if (response?.data && response.data.length > 0) {
+        return response.data[0];
+      }
+      return null;
+    } catch (error: any) {
+      // Zoho returns 204 No Content for "no match" — surface as null, not a thrown error
+      const msg = String(error?.message || error);
+      if (/204|no content|no records found/i.test(msg)) return null;
+      console.error(`[Zoho v8] searchRecordByEmail failed for ${moduleName}/${email}:`, msg);
+      throw error;
+    }
+  }
+
   async getRecord(moduleName: string, recordId: string): Promise<ZohoRecord | null> {
     try {
       const response = await this.makeRequest<ZohoApiResponse<ZohoRecord>>(

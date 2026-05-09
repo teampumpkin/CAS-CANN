@@ -139,8 +139,59 @@ export class ZohoSyncWorker {
       const zohoData = await this.buildZohoDataAsync(formData, submission.formName, submission.zohoModule);
       console.log(`[Zoho Sync Worker DEBUG] Zoho data for submission #${submission.id}:`, JSON.stringify(zohoData, null, 2));
 
-      // Attempt to sync to Zoho with layout if configured
-      const zohoRecord = await zohoCRMService.createRecord(submission.zohoModule, zohoData, layoutId);
+      // ─── DUPLICATE GUARD ────────────────────────────────────────────────
+      // Look up an existing Lead/Contact by email FIRST. If found, update it
+      // (with merge rules) instead of creating a duplicate. Skip lookup only
+      // if email is missing.
+      const submissionEmail = (zohoData.Email || formData.email || "").trim();
+      let existingRecord: any = null;
+      if (submissionEmail) {
+        try {
+          existingRecord = await zohoCRMService.searchRecordByEmail(submission.zohoModule, submissionEmail);
+        } catch (lookupErr) {
+          // If the lookup itself fails, fall through to create — the worst case is
+          // a duplicate that admin tools can clean up. We must not block the sync.
+          console.warn(`[Zoho Sync Worker] Email lookup failed for #${submission.id} (${submissionEmail}); falling back to create:`, lookupErr instanceof Error ? lookupErr.message : lookupErr);
+        }
+      }
+
+      let zohoRecord: any;
+      let actionTaken: "created" | "updated";
+
+      if (existingRecord && existingRecord.id) {
+        // ── UPDATE PATH ─────────────────────────────────────────────────
+        // Merge with upgrade-only rules:
+        //   • CAS_Member / CANN_Member: true wins, never downgrade to false
+        //   • Form_Submission_Date: always update to latest
+        //   • Other fields: latest non-empty wins (existing values preserved if new is blank)
+        const merged: any = { ...zohoData };
+
+        // Upgrade-only membership flags
+        const wasCAS = existingRecord.CAS_Member === true;
+        const wasCANN = existingRecord.CANN_Member === true;
+        if (wasCAS) merged.CAS_Member = true;
+        if (wasCANN) merged.CANN_Member = true;
+
+        // Drop blank/null values from the new payload so we don't wipe existing data
+        for (const key of Object.keys(merged)) {
+          const v = merged[key];
+          if (v === null || v === undefined || v === "") {
+            delete merged[key];
+          }
+        }
+        // Layout cannot be changed via update — never include it
+        delete merged.Layout;
+
+        console.log(`[Zoho Sync Worker] 🔄 Email ${submissionEmail} already exists as Lead ${existingRecord.id} — updating instead of creating duplicate`);
+        zohoRecord = await zohoCRMService.updateRecord(submission.zohoModule, existingRecord.id, merged);
+        // updateRecord returns Zoho's success envelope which may not contain the id field
+        if (!zohoRecord?.id) zohoRecord = { ...zohoRecord, id: existingRecord.id };
+        actionTaken = "updated";
+      } else {
+        // ── CREATE PATH ─────────────────────────────────────────────────
+        zohoRecord = await zohoCRMService.createRecord(submission.zohoModule, zohoData, layoutId);
+        actionTaken = "created";
+      }
 
       // SUCCESS: Update submission as synced
       await storage.updateFormSubmission(submission.id, {
@@ -155,10 +206,10 @@ export class ZohoSyncWorker {
         submissionId: submission.id,
         operation: "crm_push",
         status: "success",
-        details: { zohoCrmId: zohoRecord.id },
+        details: { zohoCrmId: zohoRecord.id, action: actionTaken },
       });
 
-      console.log(`[Zoho Sync Worker] ✅ Submission #${submission.id} synced successfully! Zoho ID: ${zohoRecord.id}`);
+      console.log(`[Zoho Sync Worker] ✅ Submission #${submission.id} ${actionTaken} successfully! Zoho ID: ${zohoRecord.id}`);
 
       // Fire-and-forget notification email to CAS / CANN inboxes (re-enabled 2026-05-07)
       try {

@@ -1,0 +1,52 @@
+{
+  "totalAttempted": 259,
+  "ok": 40,
+  "err": 219,
+  "sampleErrors": [
+    {
+      "id": "6999043000002313002",
+      "code": "INVALID_DATA",
+      "msg": "invalid data",
+      "details": {
+        "api_name": "Layout",
+        "json_path": "$.data[0].Layout"
+      }
+    },
+    {
+      "id": "6999043000002293015",
+      "code": "INVALID_DATA",
+      "msg": "invalid data",
+      "details": {
+        "api_name": "Layout",
+        "json_path": "$.data[10].Layout"
+      }
+    },
+    {
+      "id": "6999043000002288014",
+      "code": "INVALID_DATA",
+      "msg": "invalid data",
+      "details": {
+        "api_name": "Layout",
+        "json_path": "$.data[15].Layout"
+      }
+    },
+    {
+      "id": "6999043000002228001",
+      "code": "INVALID_DATA",
+      "msg": "invalid data",
+      "details": {
+        "api_name": "Layout",
+        "json_path": "$.data[16].Layout"
+      }
+    },
+    {
+      "id": "6999043000002227001",
+      "code": "INVALID_DATA",
+      "msg": "invalid data",
+      "details": {
+        "api_name": "Layout",
+        "json_path": "$.data[17].Layout"
+      }
+    }
+  ]
+}

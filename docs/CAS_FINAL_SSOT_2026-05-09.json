@@ -1,0 +1,120 @@
+{
+  "generatedAt": "2026-05-09T08:13:45.460Z",
+  "totalLeads": 259,
+  "fields": {
+    "Email": {
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    "Last_Name": {
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    "First_Name": {
+      "populated": 73,
+      "total": 259,
+      "pct": 28
+    },
+    "Lead_Source": {
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    "Source_Form": {
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    "Form_Submission_Date": {
+      "populated": 156,
+      "total": 259,
+      "pct": 60
+    },
+    "CAS_Member": {
+      "populated": 228,
+      "total": 259,
+      "pct": 88
+    },
+    "CANN_Member": {
+      "populated": 32,
+      "total": 259,
+      "pct": 12
+    },
+    "CAS_Communications": {
+      "populated": 257,
+      "total": 259,
+      "pct": 99
+    },
+    "CANN_Communications": {
+      "populated": 253,
+      "total": 259,
+      "pct": 98
+    },
+    "Services_Map_Inclusion": {
+      "populated": 256,
+      "total": 259,
+      "pct": 99
+    },
+    "Record_Type": {
+      "populated": 257,
+      "total": 259,
+      "pct": 99
+    },
+    "Institution_Name": {
+      "populated": 250,
+      "total": 259,
+      "pct": 97
+    },
+    "Company": {
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    "Professional_Designation": {
+      "populated": 248,
+      "total": 259,
+      "pct": 96
+    },
+    "subspecialty": {
+      "populated": 232,
+      "total": 259,
+      "pct": 90
+    },
+    "Amyloidosis_Type": {
+      "populated": 35,
+      "total": 259,
+      "pct": 14
+    },
+    "Owner": {
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    "Created_Time": {
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    "Modified_Time": {
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    "Email_Opt_Out": {
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    "Layout": {
+      "populated": 259,
+      "total": 259,
+      "pct": 100,
+      "note": "Verified via single-record GET (Zoho list API omits $layout_id)",
+      "breakdown": {
+        "CAS and CANN": 259
+      }
+    }
+  }
+}

@@ -203,8 +203,10 @@ export class FormConfigEngine {
   }
 
   shouldAutoCreateFields(config: FormConfiguration): boolean {
-    // Default to true for legacy behavior - only disable when explicitly set to false
-    return config.autoCreateFields ?? true;
+    // SAFETY: Default OFF to prevent runtime creation of junk lowercase fields.
+    // Junk fields auto-created previously had to be manually deleted (2026-05-09 cleanup).
+    // Only enable per-form via explicit admin opt-in.
+    return config.autoCreateFields ?? false;
   }
 
   async createFormConfiguration(data: {
@@ -228,8 +230,8 @@ export class FormConfigEngine {
       leadSourceTag: data.leadSourceTag || `Form: ${data.formName}`,
       displayFields: data.displayFields || [],
       submitFields: data.submitFields || {},
-      strictMapping: data.strictMapping ?? false, // Default to false: allow unmapped fields
-      autoCreateFields: data.autoCreateFields ?? true, // Default to true for legacy behavior
+      strictMapping: data.strictMapping ?? true, // SAFETY: strict by default to reject unmapped fields
+      autoCreateFields: data.autoCreateFields ?? false, // SAFETY: never auto-create Zoho fields at runtime
       isActive: true,
       description: data.description || null,
     });
@@ -276,9 +278,9 @@ export class FormConfigEngine {
         formName,
         zohoModule: "Leads",
         leadSourceTag: `Form: ${formName}`,
-        strictMapping: false,
-        autoCreateFields: true,
-        description: `Auto-generated configuration for ${formName}`
+        strictMapping: true,
+        autoCreateFields: false,
+        description: `Auto-generated configuration for ${formName} (safe defaults)`
       });
     }
 

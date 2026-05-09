@@ -1795,11 +1795,11 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
     zohoData.Amyloidosis_Type = formData.amyloidosisType;
   }
 
-  // --- Address/contact info ---
-  if (formData.institutionAddress) zohoData.institutionaddress = cleanAndTruncate(formData.institutionAddress, 50);
-  if (formData.institutionPhone) zohoData.institutionphone = sanitizePhone(formData.institutionPhone);
-  if (formData.institutionFax) zohoData.institutionfax = sanitizePhone(formData.institutionFax);
-  if (formData.province) zohoData.province = formData.province;
+  // --- Address/contact info (mapped to standard Zoho Lead fields) ---
+  if (formData.institutionAddress) zohoData.Street = cleanAndTruncate(formData.institutionAddress, 250);
+  if (formData.institutionPhone) zohoData.Phone = sanitizePhone(formData.institutionPhone);
+  if (formData.institutionFax) zohoData.Fax = sanitizePhone(formData.institutionFax);
+  if (formData.province) zohoData.State = formData.province;
 
   // --- Membership flags with CANN→CAS dependency enforcement ---
   const wantsCAS = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
@@ -1815,7 +1815,6 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
     }
 
     zohoData.CAS_Member = casMember;
-    zohoData.wantsmembership = casMember;
     zohoData.CANN_Member = wantsCANN;
   }
 
@@ -1843,8 +1842,6 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   if (formData.wantsCommunications !== undefined) {
     const wantsCom = formData.wantsCommunications === 'Yes' || formData.wantsCommunications === true;
     zohoData.CAS_Communications = wantsCom ? 'Yes' : 'No';
-    zohoData.wantscommunications = wantsCom;
-    zohoData.communicationconsent = wantsCom;
   }
 
   if (formData.cannCommunications !== undefined) {
@@ -1857,8 +1854,6 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   if (formData.wantsServicesMapInclusion !== undefined) {
     const wantsMap = formData.wantsServicesMapInclusion === 'Yes' || formData.wantsServicesMapInclusion === true;
     zohoData.Services_Map_Inclusion = wantsMap ? 'Yes' : 'No';
-    zohoData.wantsservicesmapinclusion = wantsMap;
-    zohoData.servicesmapconsent = wantsMap;
 
     // --- Services map centre/clinic details (Q9 branching fields) ---
     if (wantsMap) {

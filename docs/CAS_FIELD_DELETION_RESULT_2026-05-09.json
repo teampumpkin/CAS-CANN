@@ -1,0 +1,240 @@
+[
+  {
+    "field": "discipline",
+    "id": "6999043000002291016",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002291016"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "institution",
+    "id": "6999043000002293006",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002293006"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "centername",
+    "id": "6999043000002288005",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002288005"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "centerphone",
+    "id": "6999043000002305013",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002305013"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "centerfax",
+    "id": "6999043000002291007",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002291007"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "centeraddress",
+    "id": "6999043000002299006",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002299006"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "nomemberemail",
+    "id": "6999043000002292004",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002292004"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "nomembername",
+    "id": "6999043000002310014",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002310014"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "nomembermessage",
+    "id": "6999043000002300005",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002300005"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "wantsmembership",
+    "id": "6999043000002294004",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002294004"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "wantsservicesmapinclusion",
+    "id": "6999043000002304006",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002304006"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "wantscannmembership",
+    "id": "6999043000002308004",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002308004"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "wantscommunications",
+    "id": "6999043000002296007",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002296007"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  },
+  {
+    "field": "canncommunications",
+    "id": "6999043000002314002",
+    "httpStatus": 200,
+    "result": {
+      "fields": [
+        {
+          "code": "SUCCESS",
+          "details": {
+            "id": "6999043000002314002"
+          },
+          "message": "field deleted",
+          "status": "success"
+        }
+      ]
+    }
+  }
+]

@@ -2786,7 +2786,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
           if (wantsCANN && !wantsCAS) {
             issues.push('CANN→CAS violation: CANN_Member=true but CAS_Member=false');
             updateData.CAS_Member = true;
-            updateData.wantsmembership = true;
             violationCount++;
           }
           

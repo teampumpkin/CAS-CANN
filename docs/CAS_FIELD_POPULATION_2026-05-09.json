@@ -1,0 +1,671 @@
+{
+  "total": 259,
+  "fields": [
+    {
+      "api": "Owner",
+      "label": "Lead Owner",
+      "type": "ownerlookup",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "Last_Name",
+      "label": "Last Name",
+      "type": "text",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "Email",
+      "label": "Email",
+      "type": "email",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "Lead_Source",
+      "label": "Lead Source",
+      "type": "picklist",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "Full_Name",
+      "label": "Full Name",
+      "type": "text",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "Email_Opt_Out",
+      "label": "Email Opt Out",
+      "type": "boolean",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "id",
+      "label": "Record Id",
+      "type": "bigint",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "Change_Log_Time__s",
+      "label": "Change Log Time",
+      "type": "datetime",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "Converted__s",
+      "label": "Is Converted",
+      "type": "boolean",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "Locked__s",
+      "label": "Locked",
+      "type": "boolean",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "Record_Status__s",
+      "label": "Record Status",
+      "type": "picklist",
+      "custom": false,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "CAS_Member",
+      "label": "CAS Member",
+      "type": "boolean",
+      "custom": true,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "CANN_Member",
+      "label": "CANN Member",
+      "type": "boolean",
+      "custom": true,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "wantsmembership",
+      "label": "wantsMembership",
+      "type": "boolean",
+      "custom": true,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "wantscommunications",
+      "label": "wantsCommunications",
+      "type": "boolean",
+      "custom": true,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "wantsservicesmapinclusion",
+      "label": "wantsServicesMapInclusion",
+      "type": "boolean",
+      "custom": true,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "wantscannmembership",
+      "label": "wantsCANNMembership",
+      "type": "boolean",
+      "custom": true,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "canncommunications",
+      "label": "cannCommunications",
+      "type": "boolean",
+      "custom": true,
+      "populated": 259,
+      "total": 259,
+      "pct": 100
+    },
+    {
+      "api": "CAS_Communications",
+      "label": "CAS Communications",
+      "type": "picklist",
+      "custom": true,
+      "populated": 257,
+      "total": 259,
+      "pct": 99
+    },
+    {
+      "api": "Record_Type",
+      "label": "Record Type",
+      "type": "picklist",
+      "custom": true,
+      "populated": 257,
+      "total": 259,
+      "pct": 99
+    },
+    {
+      "api": "Services_Map_Inclusion",
+      "label": "Services Map Inclusion",
+      "type": "picklist",
+      "custom": true,
+      "populated": 256,
+      "total": 259,
+      "pct": 99
+    },
+    {
+      "api": "CANN_Communications",
+      "label": "CANN Communications",
+      "type": "picklist",
+      "custom": true,
+      "populated": 253,
+      "total": 259,
+      "pct": 98
+    },
+    {
+      "api": "Institution_Name",
+      "label": "Institution Name",
+      "type": "text",
+      "custom": true,
+      "populated": 250,
+      "total": 259,
+      "pct": 97
+    },
+    {
+      "api": "Professional_Designation",
+      "label": "Professional_Designation",
+      "type": "text",
+      "custom": true,
+      "populated": 248,
+      "total": 259,
+      "pct": 96
+    },
+    {
+      "api": "Last_Activity_Time",
+      "label": "Last Activity Time",
+      "type": "datetime",
+      "custom": false,
+      "populated": 245,
+      "total": 259,
+      "pct": 95
+    },
+    {
+      "api": "subspecialty",
+      "label": "subspecialty",
+      "type": "text",
+      "custom": true,
+      "populated": 232,
+      "total": 259,
+      "pct": 90
+    },
+    {
+      "api": "Company",
+      "label": "Company",
+      "type": "text",
+      "custom": false,
+      "populated": 159,
+      "total": 259,
+      "pct": 61
+    },
+    {
+      "api": "Form_Submission_Date",
+      "label": "Form Submission Date",
+      "type": "datetime",
+      "custom": true,
+      "populated": 156,
+      "total": 259,
+      "pct": 60
+    },
+    {
+      "api": "Source_Form",
+      "label": "Source_Form",
+      "type": "text",
+      "custom": true,
+      "populated": 144,
+      "total": 259,
+      "pct": 56
+    },
+    {
+      "api": "First_Name",
+      "label": "First Name",
+      "type": "text",
+      "custom": false,
+      "populated": 73,
+      "total": 259,
+      "pct": 28
+    },
+    {
+      "api": "Amyloidosis_Type",
+      "label": "Amyloidosis Type",
+      "type": "picklist",
+      "custom": true,
+      "populated": 35,
+      "total": 259,
+      "pct": 14
+    },
+    {
+      "api": "Description",
+      "label": "Description",
+      "type": "textarea",
+      "custom": false,
+      "populated": 29,
+      "total": 259,
+      "pct": 11
+    },
+    {
+      "api": "Industry",
+      "label": "Industry",
+      "type": "picklist",
+      "custom": false,
+      "populated": 15,
+      "total": 259,
+      "pct": 6
+    },
+    {
+      "api": "Designation",
+      "label": "Title",
+      "type": "text",
+      "custom": false,
+      "populated": 14,
+      "total": 259,
+      "pct": 5
+    },
+    {
+      "api": "Phone",
+      "label": "Phone",
+      "type": "phone",
+      "custom": false,
+      "populated": 10,
+      "total": 259,
+      "pct": 4
+    },
+    {
+      "api": "City",
+      "label": "City",
+      "type": "text",
+      "custom": false,
+      "populated": 10,
+      "total": 259,
+      "pct": 4
+    },
+    {
+      "api": "Fax",
+      "label": "Fax",
+      "type": "text",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Mobile",
+      "label": "Mobile",
+      "type": "phone",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Website",
+      "label": "Website",
+      "type": "website",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Lead_Status",
+      "label": "Lead Status",
+      "type": "picklist",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "No_of_Employees",
+      "label": "No. of Employees",
+      "type": "integer",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Annual_Revenue",
+      "label": "Annual Revenue",
+      "type": "currency",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Street",
+      "label": "Street",
+      "type": "text",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "State",
+      "label": "State",
+      "type": "text",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Zip_Code",
+      "label": "Zip Code",
+      "type": "text",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Country",
+      "label": "Country",
+      "type": "text",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Salutation",
+      "label": "Salutation",
+      "type": "picklist",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Tag",
+      "label": "Tag",
+      "type": "text",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Converted_Date_Time",
+      "label": "Converted Date Time",
+      "type": "datetime",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Lead_Conversion_Time",
+      "label": "Lead Conversion Time",
+      "type": "integer",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Unsubscribed_Mode",
+      "label": "Unsubscribed Mode",
+      "type": "picklist",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Unsubscribed_Time",
+      "label": "Unsubscribed Time",
+      "type": "datetime",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Converted_Account",
+      "label": "Converted Account",
+      "type": "lookup",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Converted_Contact",
+      "label": "Converted Contact",
+      "type": "lookup",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Converted_Deal",
+      "label": "Converted Deal",
+      "type": "lookup",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Last_Enriched_Time__s",
+      "label": "Last Enriched Time",
+      "type": "datetime",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Enrich_Status__s",
+      "label": "Enrich Status",
+      "type": "picklist",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Last_Visited_Time",
+      "label": "Most Recent Visit",
+      "type": "datetime",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "First_Visited_URL",
+      "label": "First Page Visited",
+      "type": "website",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Average_Time_Spent_Minutes",
+      "label": "Average Time Spent (Minutes)",
+      "type": "double",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Number_Of_Chats",
+      "label": "Number Of Chats",
+      "type": "integer",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Referrer",
+      "label": "Referrer",
+      "type": "website",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Visitor_Score",
+      "label": "Visitor Score",
+      "type": "bigint",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "First_Visited_Time",
+      "label": "First Visit",
+      "type": "datetime",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "Days_Visited",
+      "label": "Days Visited",
+      "type": "integer",
+      "custom": false,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "centername",
+      "label": "centerName",
+      "type": "text",
+      "custom": true,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "centerfax",
+      "label": "centerFax",
+      "type": "text",
+      "custom": true,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "discipline",
+      "label": "discipline",
+      "type": "text",
+      "custom": true,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "nomemberemail",
+      "label": "noMemberEmail",
+      "type": "email",
+      "custom": true,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "institution",
+      "label": "institution",
+      "type": "text",
+      "custom": true,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "centeraddress",
+      "label": "centerAddress",
+      "type": "text",
+      "custom": true,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "nomembermessage",
+      "label": "noMemberMessage",
+      "type": "text",
+      "custom": true,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "centerphone",
+      "label": "centerPhone",
+      "type": "phone",
+      "custom": true,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    },
+    {
+      "api": "nomembername",
+      "label": "noMemberName",
+      "type": "text",
+      "custom": true,
+      "populated": 0,
+      "total": 259,
+      "pct": 0
+    }
+  ]
+}

@@ -246,3 +246,21 @@ id = "9WJZ00Vi4dHv1sXn0BGrN"
 uri = "file://docs/CAS_LAYOUT_AUDIT_2026-05-09.json"
 type = "unspecified"
 title = "Layout Audit (raw JSON, all 259 records)"
+
+[[outputs]]
+id = "fczIUv-zNu-lIpbVLCiF_"
+uri = "file://docs/CAS_FIELD_QUALITY_ANALYSIS_2026-05-09.md"
+type = "text"
+title = "Field Quality Analysis (read first)"
+
+[[outputs]]
+id = "IOGCiMZmvmcr09ICAWNPY"
+uri = "file://docs/CAS_FIELD_QUALITY_ANALYSIS_2026-05-09.xlsx"
+type = "table"
+title = "Field Quality Workbook (5 tabs: Summary, All Fields, Layout Cleanup, Fields to DELETE, Missing Data Plan)"
+
+[[outputs]]
+id = "eHrqdTKgkO6UYrUTItQrD"
+uri = "file://docs/CAS_FIELD_POPULATION_2026-05-09.json"
+type = "unspecified"
+title = "Raw field-by-field population data (JSON)"

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-09T08:53:48.798Z",
+  "generatedAt": "2026-05-09T09:06:03.004Z",
   "mode": "live",
   "layout": {
     "id": "6999043000000091055",
@@ -272,13 +272,46 @@
       "MS Forms - CANN": 0
     },
     "subspecialtyMapSize": 202,
+    "crossSourceConflicts": 0,
+    "sampleConflicts": [],
+    "truncatedTo50Chars": 4,
+    "sampleTruncated": [
+      {
+        "id": "6999043000002358171",
+        "email": "mattallen@toh.ca",
+        "original": "Physical Medicine and Rehabilitation - Neuromuscular Medicine",
+        "truncated": "Physical Medicine and Rehabilitation - Neuromuscul",
+        "source": "SSOT v6"
+      },
+      {
+        "id": "6999043000002343438",
+        "email": "olivier.desplantie@mail.mcgill.ca",
+        "original": "Cardiology (HF, cardiomyopathies, transplant, cardiac rehab)",
+        "truncated": "Cardiology (HF, cardiomyopathies, transplant, card",
+        "source": "SSOT v6"
+      },
+      {
+        "id": "6999043000002341177",
+        "email": "Michelle.donais@chudequebec.ca",
+        "original": "Heart failure clinic (Clinique d'insuffisance cardiaque)",
+        "truncated": "Heart failure clinic (Clinique d'insuffisance card",
+        "source": "SSOT v6"
+      },
+      {
+        "id": "6999043000002341110",
+        "email": "ahmadamer.ghavanini@thp.ca",
+        "original": "Neurologist and Neuromuscular Disorders Subspecialist",
+        "truncated": "Neurologist and Neuromuscular Disorders Subspecial",
+        "source": "SSOT v6"
+      }
+    ],
     "leadsTotal": 274,
-    "leadsWithSubspecialtyBefore": 0,
-    "leadsPatched": 201,
+    "leadsWithSubspecialtyBefore": 201,
+    "leadsPatched": 2,
     "leadsPatchFailed": 0,
     "patchFailures": [],
     "matchedBySource": {
-      "SSOT v6": 201
+      "SSOT v6": 2
     },
     "leadsStillMissingAfterBackfill": 73,
     "sampleStillMissing": [
@@ -383,12 +416,6 @@
         "email": "rohini.charan@fraserhealth.ca"
       }
     ],
-    "note": "Restore-from-recycle was attempted via Zoho v8/v9 PUT /Contacts/actions/restore but is silently no-op in this org; backfill sourced from SSOT v6 + MS Forms instead (canonical truth).",
-    "truncatedTo50Chars": [
-      "6999043000002358171",
-      "6999043000002343438",
-      "6999043000002341177",
-      "6999043000002341110"
-    ]
+    "note": "Restore-from-recycle was attempted via Zoho v8/v9 PUT /Contacts/actions/restore but is silently no-op in this org; backfill sourced from SSOT v6 + MS Forms instead (canonical truth)."
   }
 }

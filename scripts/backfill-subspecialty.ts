@@ -68,13 +68,20 @@ async function fetchAll(module: string, fields: string): Promise<any[]> {
   return out;
 }
 
-function loadSubspecialtyMap(): { map: Map<string, { sub: string; source: string }>; sources: Record<string, number> } {
+function loadSubspecialtyMap(): { map: Map<string, { sub: string; source: string }>; sources: Record<string, number>; conflicts: { email: string; kept: { sub: string; source: string }; rejected: { sub: string; source: string } }[] } {
   const map = new Map<string, { sub: string; source: string }>();
   const sources: Record<string, number> = { 'SSOT v6': 0, 'MS Forms - CAS YES': 0, 'MS Forms - CAS NO': 0, 'MS Forms - CANN': 0 };
+  const conflicts: { email: string; kept: { sub: string; source: string }; rejected: { sub: string; source: string } }[] = [];
   const set = (e: string, sub: string, source: string) => {
     e = normEmail(e); sub = norm(sub);
     if (!e || !sub) return;
-    if (map.has(e)) return; // first writer wins (SSOT loaded first)
+    const existing = map.get(e);
+    if (existing) {
+      if (existing.sub.toLowerCase() !== sub.toLowerCase()) {
+        conflicts.push({ email: e, kept: existing, rejected: { sub, source } });
+      }
+      return; // first writer wins (SSOT loaded first)
+    }
     map.set(e, { sub, source });
     sources[source] = (sources[source] || 0) + 1;
   };
@@ -97,13 +104,14 @@ function loadSubspecialtyMap(): { map: Map<string, { sub: string; source: string
     const rows: any[] = XLSX.utils.sheet_to_json(wb.Sheets['Sheet1'], { defval: '' });
     rows.forEach(r => set(r.email, r.subspecialty, 'MS Forms - CANN'));
   }
-  return { map, sources };
+  return { map, sources, conflicts };
 }
 
 (async () => {
   console.log('[Backfill] Loading subspecialty map from SSOT + MS Forms…');
-  const { map, sources } = loadSubspecialtyMap();
+  const { map, sources, conflicts } = loadSubspecialtyMap();
   console.log(`[Backfill]   ${map.size} unique-email entries  (sources: ${JSON.stringify(sources)})`);
+  console.log(`[Backfill]   ${conflicts.length} cross-source conflicts (SSOT kept on disagreement)`);
 
   console.log('[Backfill] Fetching Leads…');
   const leads = await fetchAll('Leads', 'id,Email,subspecialty');
@@ -115,15 +123,19 @@ function loadSubspecialtyMap(): { map: Map<string, { sub: string; source: string
   const updates: any[] = [];
   const matchedBySource: Record<string, number> = {};
   const noMatch: { id: string; email: string }[] = [];
+  const truncated: { id: string; email: string; original: string; truncated: string; source: string }[] = [];
   for (const l of leads) {
     const e = normEmail(l.Email);
     if (!e) continue;
     const hit = map.get(e);
     if (!hit) { if (!norm(l.subspecialty)) noMatch.push({ id: l.id, email: l.Email }); continue; }
-    if (norm(l.subspecialty) === hit.sub) continue;
-    updates.push({ id: l.id, subspecialty: hit.sub });
+    const sub = hit.sub.length > 50 ? hit.sub.slice(0, 50) : hit.sub;
+    if (sub !== hit.sub) truncated.push({ id: l.id, email: l.Email, original: hit.sub, truncated: sub, source: hit.source });
+    if (norm(l.subspecialty) === sub) continue;
+    updates.push({ id: l.id, subspecialty: sub });
     matchedBySource[hit.source] = (matchedBySource[hit.source] || 0) + 1;
   }
+  console.log(`[Backfill]   ${truncated.length} values truncated to 50 chars (Zoho field max)`);
   console.log(`[Backfill]   ${updates.length} Leads to patch  (matched-by-source: ${JSON.stringify(matchedBySource)})`);
   console.log(`[Backfill]   ${noMatch.length} Leads still missing Subspecialty after backfill`);
 
@@ -172,6 +184,10 @@ function loadSubspecialtyMap(): { map: Map<string, { sub: string; source: string
     subspecialtyBackfill: {
       sourcesLoaded: sources,
       subspecialtyMapSize: map.size,
+      crossSourceConflicts: conflicts.length,
+      sampleConflicts: conflicts.slice(0, 25),
+      truncatedTo50Chars: truncated.length,
+      sampleTruncated: truncated.slice(0, 25),
       leadsTotal: leads.length,
       leadsWithSubspecialtyBefore: before,
       leadsPatched: okU,
@@ -202,6 +218,8 @@ function loadSubspecialtyMap(): { map: Map<string, { sub: string; source: string
     { Metric: 'Source MS Forms - CAS NO (used)', Value: matchedBySource['MS Forms - CAS NO'] || 0 },
     { Metric: 'Source MS Forms - CANN (used)', Value: matchedBySource['MS Forms - CANN'] || 0 },
     { Metric: 'Leads still missing Subspecialty', Value: noMatch.length },
+    { Metric: 'Cross-source conflicts (SSOT kept)', Value: conflicts.length },
+    { Metric: 'Values truncated to 50 chars', Value: truncated.length },
   ];
   XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(summary), 'Summary');
   XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(
@@ -209,6 +227,8 @@ function loadSubspecialtyMap(): { map: Map<string, { sub: string; source: string
   ), 'Lead Field Coverage');
   if (noMatch.length) XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(noMatch.slice(0, 500)), 'Still Missing');
   if (failures.length) XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(failures), 'Patch Failures');
+  if (conflicts.length) XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(conflicts.slice(0, 500).map(c => ({ Email: c.email, Kept_Sub: c.kept.sub, Kept_Source: c.kept.source, Rejected_Sub: c.rejected.sub, Rejected_Source: c.rejected.source }))), 'Conflicts');
+  if (truncated.length) XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(truncated.slice(0, 500)), 'Truncated');
   XLSX.writeFile(wb, REPORT_XLSX);
   console.log(`[Backfill]   XLSX → ${REPORT_XLSX}`);
   console.log('[Backfill] ✅ Done.');

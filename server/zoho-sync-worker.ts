@@ -283,8 +283,19 @@ export class ZohoSyncWorker {
       const hasFieldMappings = formConfig?.fieldMappings && Object.keys(formConfig.fieldMappings as object).length > 0;
       
       let zohoData: any;
-      
-      if (formConfig && (hasSubmitFields || hasFieldMappings)) {
+
+      // KNOWN_CENTRALIZED_FORMS: forms whose every field is explicitly handled by
+      // buildCentralizedZohoData below. Skip smart-mapper entirely for these to
+      // avoid fuzzy nonsense (e.g. wantsMembership → Number_Of_Chats at 80% similarity).
+      const KNOWN_CENTRALIZED_FORMS = new Set([
+        'CAS Registration',
+        'CAS & CANN Registration',
+      ]);
+
+      if (KNOWN_CENTRALIZED_FORMS.has(formName)) {
+        console.log(`[Zoho Sync Worker] Using centralized-only mapping for "${formName}" (smart-mapper bypassed)`);
+        zohoData = {};
+      } else if (formConfig && (hasSubmitFields || hasFieldMappings)) {
         // Use config-based mapping
         console.log(`[Zoho Sync Worker] Using config-based mapping for "${formName}"`);
         const result = await zohoCRMService.formatFieldDataForZohoWithConfig(formData, formConfig);

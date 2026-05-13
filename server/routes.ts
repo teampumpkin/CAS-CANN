@@ -2567,7 +2567,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log('[Admin] Starting batch update of Zoho records with correct field mappings...');
       
       const { dryRun = true, limit = 10 } = req.body;
-      const layoutId = '6999043000000091055'; // CAS and CANN layout
+      const layoutId = '6999043000002392001'; // CAS / CANN - v2 layout
       
       // Get all synced submissions that need fixing
       const submissions = await storage.getFormSubmissions();
@@ -2656,7 +2656,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log('[Admin] Starting re-sync of orphaned records to Zoho CRM...');
       
       const { dryRun = true, limit = 100 } = req.body;
-      const layoutId = '6999043000000091055'; // CAS and CANN layout
+      const layoutId = '6999043000002392001'; // CAS / CANN - v2 layout
       
       // Get orphaned submissions (failed with ORPHANED message)
       const submissions = await storage.getFormSubmissions();

@@ -331,7 +331,6 @@ export class ZohoSyncWorker {
       // This ensures picklist strings always win over smart mapper's boolean values
       if (centralResult.zohoData.CAS_Communications !== undefined) mergedData.CAS_Communications = centralResult.zohoData.CAS_Communications;
       if (centralResult.zohoData.CANN_Communications !== undefined) mergedData.CANN_Communications = centralResult.zohoData.CANN_Communications;
-      if (centralResult.zohoData.CANN_Communication_Consent !== undefined) mergedData.CANN_Communication_Consent = centralResult.zohoData.CANN_Communication_Consent;
       if (centralResult.zohoData.Services_Map_Inclusion !== undefined) mergedData.Services_Map_Inclusion = centralResult.zohoData.Services_Map_Inclusion;
       // Form_Submission_Date must always reflect the original submission timestamp (from local DB),
       // never be overridden by smart-mapper output which doesn't know about it.

@@ -1,0 +1,69 @@
+{
+    "success": true,
+    "module": "Leads",
+    "layoutCount": 2,
+    "layouts": [
+        {
+            "id": "6999043000002392001",
+            "name": "CAS / CANN - v2",
+            "sections": [
+                {
+                    "id": "6999043000002392008",
+                    "name": "Record Image",
+                    "displayLabel": "Lead Image"
+                },
+                {
+                    "id": "6999043000002392009",
+                    "name": "Lead Information",
+                    "displayLabel": "Lead Information"
+                },
+                {
+                    "id": "6999043000002392133",
+                    "name": "Services Map Listing",
+                    "displayLabel": "Services Map Listing"
+                },
+                {
+                    "id": "6999043000002392011",
+                    "name": "Description Information",
+                    "displayLabel": "Description Information"
+                },
+                {
+                    "id": "6999043000002392013",
+                    "name": "Visit Summary",
+                    "displayLabel": "Visit Summary"
+                }
+            ]
+        },
+        {
+            "id": "6999043000000091055",
+            "name": "CAS and CANN",
+            "sections": [
+                {
+                    "id": "6999043000000209005",
+                    "name": "Record Image",
+                    "displayLabel": "Lead Image"
+                },
+                {
+                    "id": "6999043000000209001",
+                    "name": "Lead Information",
+                    "displayLabel": "Lead Information"
+                },
+                {
+                    "id": "6999043000000209002",
+                    "name": "Address Information",
+                    "displayLabel": "Address Information"
+                },
+                {
+                    "id": "6999043000000209003",
+                    "name": "Description Information",
+                    "displayLabel": "Description Information"
+                },
+                {
+                    "id": "6999043000000978130",
+                    "name": "Visit Summary",
+                    "displayLabel": "Visit Summary"
+                }
+            ]
+        }
+    ]
+}

@@ -1820,12 +1820,6 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
     zohoData.Amyloidosis_Type = formData.amyloidosisType;
   }
 
-  // --- Address/contact info (mapped to standard Zoho Lead fields) ---
-  if (formData.institutionAddress) zohoData.Street = cleanAndTruncate(formData.institutionAddress, 250);
-  if (formData.institutionPhone) zohoData.Phone = sanitizePhone(formData.institutionPhone);
-  if (formData.institutionFax) zohoData.Fax = sanitizePhone(formData.institutionFax);
-  if (formData.province) zohoData.State = formData.province;
-
   // --- Membership flags with CANN→CAS dependency enforcement ---
   const wantsCAS = formData.wantsMembership === 'Yes' || formData.wantsMembership === true;
   const wantsCANN = formData.wantsCANNMembership === 'Yes' || formData.wantsCANNMembership === true;
@@ -1872,7 +1866,6 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   if (formData.cannCommunications !== undefined) {
     const wantsCANNCom = formData.cannCommunications === 'Yes' || formData.cannCommunications === true;
     zohoData.CANN_Communications = wantsCANNCom ? 'Yes' : 'No';
-    zohoData.CANN_Communication_Consent = wantsCANNCom ? 'Yes' : 'No';
   }
 
   // --- Services map inclusion consent ---

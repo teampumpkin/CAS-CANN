@@ -1844,6 +1844,8 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   appliedRules.push(`Record_Type set to "${recordType}"`);
 
   // --- Lead_Source ---
+  // Derived from Q1/Q2 answers, NOT from the form name. The /join-cas form is a
+  // single unified form; the four Q1×Q2 combinations decide where the lead lands.
   let leadSource: string;
   if (isExcelImport && isResync) {
     leadSource = 'Excel Import - Re-synced';
@@ -1851,9 +1853,13 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
     leadSource = formName;
   } else if (!isMember) {
     leadSource = 'Website - Contact Inquiry';
-    appliedRules.push('Lead_Source set to "Website - Contact Inquiry" for non-member');
+    appliedRules.push('Lead_Source="Website - Contact Inquiry" (Q1=No, Q2=No)');
+  } else if (wantsCANN) {
+    leadSource = 'Website - CAS & CANN Registration';
+    appliedRules.push('Lead_Source="Website - CAS & CANN Registration" (Q2=Yes)');
   } else {
-    leadSource = `Website - ${formName}`;
+    leadSource = 'Website - CAS Registration';
+    appliedRules.push('Lead_Source="Website - CAS Registration" (Q1=Yes, Q2=No)');
   }
   zohoData.Lead_Source = leadSource;
 

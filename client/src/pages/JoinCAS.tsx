@@ -85,9 +85,10 @@ export default function JoinCAS() {
 
   const submitMutation = useMutation({
     mutationFn: async (formData: CASRegistrationForm): Promise<SubmissionResponse> => {
-      const isCANNMember = formData.wantsCANNMembership === "Yes";
-      const formName = isCANNMember ? "CAS & CANN Registration" : "CAS Registration";
-      
+      // Single unified form. Q1 (wantsMembership) and Q2 (wantsCANNMembership)
+      // determine CAS_Member / CANN_Member / Lead_Source server-side.
+      const formName = "CAS / CANN Registration";
+
       const response = await apiRequest("POST", "/api/cas-cann-registration", {
         formData: formData,
         formName: formName,

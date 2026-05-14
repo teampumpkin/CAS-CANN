@@ -2,7 +2,7 @@ import './_group.css';
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Stethoscope, CheckCircle2, Send, ArrowRight } from "lucide-react";
+import { Stethoscope, CheckCircle2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -29,7 +29,7 @@ import { casRegistrationSchema, type CASRegistrationForm } from "./schema";
 
 const FIELD_INPUT =
   "h-11 bg-white border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6] transition-colors";
-const FIELD_LABEL = "text-sm font-medium text-slate-700";
+const FIELD_LABEL = "text-sm font-medium text-slate-800";
 
 function YesNo({
   value,
@@ -70,16 +70,16 @@ function TextField({
   name,
   label,
   placeholder,
+  description,
   type = "text",
   form,
-  required,
 }: {
   name: any;
   label: string;
   placeholder?: string;
+  description?: string;
   type?: string;
   form: any;
-  required?: boolean;
 }) {
   return (
     <FormField
@@ -87,10 +87,8 @@ function TextField({
       name={name}
       render={({ field }: any) => (
         <FormItem>
-          <FormLabel className={FIELD_LABEL}>
-            {label}
-            {required && <span className="text-[#00AFE6]"> *</span>}
-          </FormLabel>
+          <FormLabel className={FIELD_LABEL}>{label}</FormLabel>
+          {description && <p className="text-xs text-slate-500 -mt-1">{description}</p>}
           <FormControl>
             <Input {...field} type={type} placeholder={placeholder} className={FIELD_INPUT} />
           </FormControl>
@@ -112,36 +110,35 @@ function Section({
 }) {
   return (
     <section className="space-y-5">
-      <div className="space-y-1">
-        <h2 className="text-base font-semibold text-slate-900 tracking-tight">{title}</h2>
-        {description && <p className="text-sm text-slate-500">{description}</p>}
-      </div>
+      {(title || description) && (
+        <div className="space-y-1">
+          {title && (
+            <h2 className="text-xs uppercase tracking-wider font-semibold text-slate-500">{title}</h2>
+          )}
+          {description && <p className="text-sm text-slate-600">{description}</p>}
+        </div>
+      )}
       <div className="space-y-5">{children}</div>
     </section>
   );
 }
 
-function FieldRow({
+function QuestionRow({
   label,
   description,
   children,
-  required,
 }: {
   label: string;
   description?: string;
   children: React.ReactNode;
-  required?: boolean;
 }) {
   return (
     <div className="flex items-start justify-between gap-6 py-1">
       <div className="flex-1 min-w-0">
-        <div className={FIELD_LABEL}>
-          {label}
-          {required && <span className="text-[#00AFE6]"> *</span>}
-        </div>
-        {description && <p className="text-xs text-slate-500 mt-0.5">{description}</p>}
+        <div className={FIELD_LABEL}>{label}</div>
+        {description && <p className="text-xs text-slate-500 mt-1">{description}</p>}
       </div>
-      <div className="flex-shrink-0">{children}</div>
+      <div className="flex-shrink-0 pt-0.5">{children}</div>
     </div>
   );
 }
@@ -204,9 +201,8 @@ export function Redesigned() {
               CAS &amp; CANN
             </span>
           </h1>
-          <p className="text-sm text-slate-500 mt-3 max-w-md mx-auto">
-            Canada's professional community for amyloidosis care. Free, private, and open to all allied health
-            professionals.
+          <p className="text-sm text-slate-600 mt-3 max-w-md mx-auto">
+            Become part of Canada's premier professional network for amyloidosis care.
           </p>
         </div>
 
@@ -216,21 +212,24 @@ export function Redesigned() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden"
           >
-            <div className="p-8 sm:p-10 space-y-10 divide-y divide-slate-100 [&>*:not(:first-child)]:pt-10">
-              {/* 1. Community */}
-              <Section title="Community" description="Choose one or both — they're complementary.">
+            <div className="px-8 sm:px-10 pt-8 pb-2">
+              <h3 className="text-lg font-serif font-semibold text-slate-900">Registration Form</h3>
+              <p className="text-sm text-slate-500 mt-0.5">
+                Complete the form below to join our professional community.
+              </p>
+            </div>
+
+            <div className="px-8 sm:px-10 pb-8 sm:pb-10 pt-6 space-y-10 divide-y divide-slate-100 [&>*:not(:first-child)]:pt-10">
+              {/* Membership */}
+              <Section title="Membership">
                 <FormField
                   control={form.control}
                   name="wantsMembership"
                   render={({ field }) => (
                     <FormItem>
-                      <FieldRow
-                        label="Join Canadian Amyloidosis Society (CAS)?"
-                        description="Access to resources, events & community."
-                        required
-                      >
+                      <QuestionRow label="1. I would like to become a member of the Canadian Amyloidosis Society (CAS).">
                         <YesNo value={field.value as any} onChange={field.onChange} accent="cas" />
-                      </FieldRow>
+                      </QuestionRow>
                       <FormMessage className="text-xs" />
                     </FormItem>
                   )}
@@ -243,48 +242,53 @@ export function Redesigned() {
                   name="wantsCANNMembership"
                   render={({ field }) => (
                     <FormItem>
-                      <FieldRow
-                        label="Join Canadian Amyloidosis Nursing Network (CANN)?"
-                        description="All CANN members are automatically CAS members."
-                        required
+                      <QuestionRow
+                        label="2. I would like to become a member of the Canadian Amyloidosis Nursing Network (CANN)."
+                        description="All CANN members will also be members of the CAS."
                       >
                         <YesNo value={field.value as any} onChange={field.onChange} accent="cann" />
-                      </FieldRow>
+                      </QuestionRow>
                       <FormMessage className="text-xs" />
                     </FormItem>
                   )}
                 />
               </Section>
 
-              {/* 2. Member profile */}
+              {/* Member profile */}
               {isMember && (
-                <Section title="Your professional profile" description="Help us serve you better.">
+                <Section title="Your Information">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <TextField name="fullName" label="Full Name" placeholder="Dr. Jane Doe" form={form} required />
-                    <TextField name="email" label="Email" type="email" placeholder="jane@hospital.ca" form={form} required />
+                    <div className="sm:col-span-2">
+                      <TextField
+                        name="fullName"
+                        label="3. Full Name (First and Last) *"
+                        placeholder="Enter your full name"
+                        form={form}
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <TextField
+                        name="email"
+                        label="4. Email Address *"
+                        type="email"
+                        placeholder="Enter your email address"
+                        form={form}
+                      />
+                    </div>
                     <TextField
                       name="discipline"
-                      label="Professional Designation"
-                      placeholder="e.g. Physician, Nurse"
+                      label="5. Professional designation *"
+                      description="e.g. physician, nurse, genetic counsellor, other"
+                      placeholder="Enter your professional designation"
                       form={form}
-                      required
                     />
                     <TextField
                       name="subspecialty"
-                      label="Sub-specialty"
-                      placeholder="e.g. Cardiology, Hematology"
+                      label="6. Sub-specialty Area of Focus *"
+                      description="e.g., Cardiology, Hematology, Neurology"
+                      placeholder="Enter your sub-specialty"
                       form={form}
-                      required
                     />
-                    <div className="sm:col-span-2">
-                      <TextField
-                        name="institution"
-                        label="Centre / Clinic / Institution"
-                        placeholder="General Hospital"
-                        form={form}
-                        required
-                      />
-                    </div>
                   </div>
 
                   <FormField
@@ -293,18 +297,18 @@ export function Redesigned() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className={FIELD_LABEL}>
-                          Primary patient care type<span className="text-[#00AFE6]"> *</span>
+                          7. In my practice, I primarily care for patients with the following type(s) of amyloidosis: *
                         </FormLabel>
                         <FormControl>
                           <RadioGroup
                             onValueChange={field.onChange}
                             value={field.value}
-                            className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2"
+                            className="flex flex-wrap gap-2 mt-3"
                           >
                             {["ATTR", "AL", "Both ATTR and AL", "Other"].map((type) => (
                               <Label
                                 key={type}
-                                className={`flex items-center justify-center h-11 px-3 rounded-lg border cursor-pointer text-sm font-medium transition-all ${
+                                className={`flex-1 min-w-[120px] flex items-center justify-center h-11 px-4 rounded-lg border cursor-pointer text-sm font-medium whitespace-nowrap transition-all ${
                                   field.value === type
                                     ? "border-[#00AFE6] bg-[#00AFE6]/5 text-[#00AFE6]"
                                     : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
@@ -320,23 +324,27 @@ export function Redesigned() {
                       </FormItem>
                     )}
                   />
+
+                  <TextField
+                    name="institution"
+                    label="8. Centre or Clinic Name / Institution *"
+                    placeholder="Enter your institution name"
+                    form={form}
+                  />
                 </Section>
               )}
 
-              {/* 3. Services map */}
+              {/* Services map */}
               {isMember && (
-                <Section title="Services map" description="Help patients find care near them.">
+                <Section title="Services Map">
                   <FormField
                     control={form.control}
                     name="wantsServicesMapInclusion"
                     render={({ field }) => (
                       <FormItem>
-                        <FieldRow
-                          label="Include your centre on the public Services Map?"
-                          description="Patients across Canada use this map to find specialists."
-                        >
+                        <QuestionRow label="9. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?">
                           <YesNo value={field.value as any} onChange={field.onChange} accent="cas" />
-                        </FieldRow>
+                        </QuestionRow>
                         <FormMessage className="text-xs" />
                       </FormItem>
                     )}
@@ -345,37 +353,49 @@ export function Redesigned() {
                   {wantsServicesMapInclusion === "Yes" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2 animate-in fade-in slide-in-from-top-1 duration-300">
                       <div className="sm:col-span-2">
-                        <TextField name="centerName" label="Centre Name" placeholder="Amyloidosis Clinic" form={form} />
+                        <TextField
+                          name="centerName"
+                          label="Center or Clinic Name"
+                          placeholder="Enter your center or clinic name"
+                          form={form}
+                        />
                       </div>
                       <div className="sm:col-span-2">
                         <TextField
                           name="centerAddress"
-                          label="Address"
-                          placeholder="123 Hospital St, City, Province"
+                          label="Center or Clinic Address"
+                          placeholder="Enter your center or clinic address"
                           form={form}
                         />
                       </div>
-                      <TextField name="centerPhone" label="Phone" placeholder="(555) 555-1234" form={form} />
-                      <TextField name="centerFax" label="Fax (Optional)" placeholder="(555) 555-5678" form={form} />
+                      <TextField
+                        name="centerPhone"
+                        label="Center or Clinic Phone Number"
+                        placeholder="Enter your center or clinic phone number"
+                        form={form}
+                      />
+                      <TextField
+                        name="centerFax"
+                        label="Center or Clinic Fax Number"
+                        placeholder="Enter your center or clinic fax number"
+                        form={form}
+                      />
                     </div>
                   )}
                 </Section>
               )}
 
-              {/* 4. Communications */}
+              {/* Communications */}
               {isMember && (
-                <Section title="Communications" description="Optional email updates — unsubscribe anytime.">
+                <Section title="Communications">
                   <FormField
                     control={form.control}
                     name="wantsCommunications"
                     render={({ field }) => (
                       <FormItem>
-                        <FieldRow
-                          label="Receive CAS communications?"
-                          description="Newsletter, events & research highlights."
-                        >
+                        <QuestionRow label="10. I would like to receive communication from the Canadian Amyloidosis Society (CAS): *">
                           <YesNo value={field.value as any} onChange={field.onChange} accent="cas" />
-                        </FieldRow>
+                        </QuestionRow>
                         <FormMessage className="text-xs" />
                       </FormItem>
                     )}
@@ -389,12 +409,9 @@ export function Redesigned() {
                         name="cannCommunications"
                         render={({ field }) => (
                           <FormItem>
-                            <FieldRow
-                              label="Receive CANN communications?"
-                              description="Nursing-specific events & resources."
-                            >
+                            <QuestionRow label="11. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *">
                               <YesNo value={field.value as any} onChange={field.onChange} accent="cann" />
-                            </FieldRow>
+                            </QuestionRow>
                             <FormMessage className="text-xs" />
                           </FormItem>
                         )}
@@ -406,20 +423,31 @@ export function Redesigned() {
 
               {/* Non-member contact */}
               {declinedBoth && (
-                <Section title="Stay in touch" description="We'd still love to hear from you.">
-                  <TextField name="noMemberName" label="Your Name" placeholder="Jane Doe" form={form} />
-                  <TextField name="noMemberEmail" label="Email" type="email" placeholder="jane@email.com" form={form} />
+                <Section title="Non-member Contact">
+                  <TextField
+                    name="noMemberName"
+                    label="Name *"
+                    placeholder="Enter your name"
+                    form={form}
+                  />
+                  <TextField
+                    name="noMemberEmail"
+                    label="Email *"
+                    type="email"
+                    placeholder="Enter your email"
+                    form={form}
+                  />
                   <FormField
                     control={form.control}
                     name="noMemberMessage"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className={FIELD_LABEL}>Message (Optional)</FormLabel>
+                        <FormLabel className={FIELD_LABEL}>Message / Reason for Contact</FormLabel>
                         <FormControl>
                           <Textarea
                             {...field}
-                            placeholder="How can we help?"
-                            className="min-h-[100px] bg-white border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6]"
+                            placeholder="Please share why you're reaching out"
+                            className="min-h-[110px] bg-white border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6]"
                           />
                         </FormControl>
                         <FormMessage className="text-xs" />
@@ -434,17 +462,14 @@ export function Redesigned() {
             {(isMember || declinedBoth) && (
               <div className="bg-slate-50 border-t border-slate-100 px-8 sm:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p className="text-xs text-slate-500 text-center sm:text-left">
-                  By submitting you agree to our privacy policy.
-                  <br className="hidden sm:block" />
-                  Your data is never shared.
+                  Your information is kept private and never shared.
                 </p>
                 <Button
                   type="submit"
                   className="px-8 h-11 text-sm font-semibold rounded-lg bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-md hover:shadow-lg hover:brightness-105 transition-all border-0"
                 >
                   <Send className="w-4 h-4 mr-2" />
-                  Submit Registration
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  Submit Registration Form
                 </Button>
               </div>
             )}
@@ -459,11 +484,11 @@ export function Redesigned() {
             <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-tr from-[#00AFE6] to-[#00DD89] flex items-center justify-center mb-4">
               <CheckCircle2 className="w-8 h-8 text-white" />
             </div>
-            <DialogTitle className="text-2xl font-serif">Thank you!</DialogTitle>
+            <DialogTitle className="text-2xl font-serif">Membership Registration Submitted!</DialogTitle>
             <DialogDescription className="text-base">
-              Your submission has been received.
+              We've received your form submission and we will be in touch soon with membership details.
               <span className="block mt-3 px-3 py-1 bg-slate-100 rounded-md text-xs font-mono inline-block">
-                Reference: {submissionId}
+                Reference ID: {submissionId}
               </span>
             </DialogDescription>
           </DialogHeader>
@@ -471,7 +496,7 @@ export function Redesigned() {
             onClick={() => setShowConfirmation(false)}
             className="mt-4 rounded-full px-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0"
           >
-            Done
+            Close
           </Button>
         </DialogContent>
       </Dialog>

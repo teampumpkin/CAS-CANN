@@ -182,47 +182,47 @@ function PhonePair({
   required?: boolean;
 }) {
   return (
-    <FormItem>
-      <FormLabel className={FIELD_LABEL}>
+    <div className="space-y-2">
+      <Label className={FIELD_LABEL}>
         {label}
         {required && <span className="text-[#00AFE6]"> *</span>}
-      </FormLabel>
+      </Label>
       <div className="flex gap-2">
         <FormField
           control={form.control}
           name={codeName as any}
           render={({ field }: any) => (
-            <FormControl>
-              <Input
-                {...field}
-                placeholder="+1"
-                className={`${FIELD_INPUT} w-20 text-center`}
-                aria-label={`${label} country/area code`}
-              />
-            </FormControl>
+            <FormItem className="space-y-0">
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder="+1"
+                  className={`${FIELD_INPUT} w-20 text-center`}
+                  aria-label={`${label} country/area code`}
+                />
+              </FormControl>
+            </FormItem>
           )}
         />
         <FormField
           control={form.control}
           name={numberName as any}
           render={({ field }: any) => (
-            <FormControl>
-              <Input
-                {...field}
-                placeholder={placeholder}
-                className={`${FIELD_INPUT} flex-1`}
-                aria-label={`${label} number`}
-              />
-            </FormControl>
+            <FormItem className="flex-1 space-y-0">
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder={placeholder}
+                  className={FIELD_INPUT}
+                  aria-label={`${label} number`}
+                />
+              </FormControl>
+              <FormMessage className="text-xs pt-1" />
+            </FormItem>
           )}
         />
       </div>
-      <FormField
-        control={form.control}
-        name={numberName as any}
-        render={() => <FormMessage className="text-xs" />}
-      />
-    </FormItem>
+    </div>
   );
 }
 

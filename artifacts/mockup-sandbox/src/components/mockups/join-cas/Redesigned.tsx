@@ -24,6 +24,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { Check, ChevronsUpDown, AlertTriangle } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -138,28 +153,221 @@ const CANADIAN_PROVINCES = [
   "Yukon",
 ];
 
-function ProvinceSelect({ form }: { form: any }) {
+const CITIES_BY_PROVINCE: Record<string, string[]> = {
+  "Alberta": ["Calgary", "Edmonton", "Red Deer", "Lethbridge", "St. Albert", "Medicine Hat", "Grande Prairie", "Airdrie", "Fort McMurray"],
+  "British Columbia": ["Vancouver", "Victoria", "Surrey", "Burnaby", "Richmond", "Kelowna", "Abbotsford", "Coquitlam", "Kamloops", "Nanaimo"],
+  "Manitoba": ["Winnipeg", "Brandon", "Steinbach", "Thompson", "Portage la Prairie"],
+  "New Brunswick": ["Moncton", "Saint John", "Fredericton", "Dieppe", "Miramichi"],
+  "Newfoundland and Labrador": ["St. John's", "Mount Pearl", "Corner Brook", "Conception Bay South", "Paradise"],
+  "Northwest Territories": ["Yellowknife", "Hay River", "Inuvik"],
+  "Nova Scotia": ["Halifax", "Sydney", "Dartmouth", "Truro", "New Glasgow"],
+  "Nunavut": ["Iqaluit", "Rankin Inlet", "Arviat"],
+  "Ontario": ["Toronto", "Ottawa", "Mississauga", "Brampton", "Hamilton", "London", "Markham", "Vaughan", "Kitchener", "Windsor", "Kingston", "Sudbury", "Thunder Bay", "Oakville", "Burlington"],
+  "Prince Edward Island": ["Charlottetown", "Summerside", "Stratford", "Cornwall"],
+  "Quebec": ["Montreal", "Quebec City", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Saguenay", "Lévis", "Trois-Rivières"],
+  "Saskatchewan": ["Saskatoon", "Regina", "Prince Albert", "Moose Jaw", "Swift Current"],
+  "Yukon": ["Whitehorse", "Dawson City", "Watson Lake"],
+};
+
+const COUNTRY_CODES: { value: string; label: string; flag: string }[] = [
+  { value: "+1", label: "Canada / US", flag: "🇨🇦" },
+  { value: "+44", label: "United Kingdom", flag: "🇬🇧" },
+  { value: "+91", label: "India", flag: "🇮🇳" },
+  { value: "+86", label: "China", flag: "🇨🇳" },
+  { value: "+33", label: "France", flag: "🇫🇷" },
+  { value: "+49", label: "Germany", flag: "🇩🇪" },
+  { value: "+39", label: "Italy", flag: "🇮🇹" },
+  { value: "+34", label: "Spain", flag: "🇪🇸" },
+  { value: "+61", label: "Australia", flag: "🇦🇺" },
+  { value: "+81", label: "Japan", flag: "🇯🇵" },
+  { value: "+82", label: "South Korea", flag: "🇰🇷" },
+  { value: "+852", label: "Hong Kong", flag: "🇭🇰" },
+  { value: "+65", label: "Singapore", flag: "🇸🇬" },
+  { value: "+971", label: "UAE", flag: "🇦🇪" },
+  { value: "+27", label: "South Africa", flag: "🇿🇦" },
+  { value: "+55", label: "Brazil", flag: "🇧🇷" },
+  { value: "+52", label: "Mexico", flag: "🇲🇽" },
+];
+
+function ProvinceCombobox({ form, mismatch }: { form: any; mismatch?: string }) {
+  const [open, setOpen] = useState(false);
   return (
     <FormField
       control={form.control}
       name="province"
       render={({ field }: any) => (
-        <FormItem>
+        <FormItem className="flex flex-col">
           <FormLabel className={FIELD_LABEL}>Province</FormLabel>
           <p className="text-xs text-slate-500 -mt-1">Auto-filled — change if needed</p>
-          <Select onValueChange={field.onChange} value={field.value || ""}>
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <FormControl>
+                <button
+                  type="button"
+                  className={cn(
+                    FIELD_INPUT,
+                    "flex items-center justify-between w-full px-3 text-left",
+                    !field.value && "text-slate-400"
+                  )}
+                >
+                  {field.value || "Select province"}
+                  <ChevronsUpDown className="h-4 w-4 opacity-50 flex-shrink-0" />
+                </button>
+              </FormControl>
+            </PopoverTrigger>
+            <PopoverContent className="w-[--radix-popover-trigger-width] p-0 z-[100]" align="start">
+              <Command>
+                <CommandInput placeholder="Search province…" />
+                <CommandList>
+                  <CommandEmpty>No province found.</CommandEmpty>
+                  <CommandGroup>
+                    {CANADIAN_PROVINCES.map((p) => (
+                      <CommandItem
+                        key={p}
+                        value={p}
+                        onSelect={() => {
+                          field.onChange(p);
+                          setOpen(false);
+                        }}
+                      >
+                        <Check className={cn("mr-2 h-4 w-4", field.value === p ? "opacity-100" : "opacity-0")} />
+                        {p}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+          {mismatch && (
+            <div className="flex items-start gap-1.5 text-xs text-amber-600 mt-1">
+              <AlertTriangle className="h-3.5 w-3.5 flex-shrink-0 mt-px" />
+              <span>{mismatch}</span>
+            </div>
+          )}
+          <FormMessage className="text-xs" />
+        </FormItem>
+      )}
+    />
+  );
+}
+
+function CityCombobox({
+  form,
+  selectedProvince,
+  mismatch,
+}: {
+  form: any;
+  selectedProvince?: string;
+  mismatch?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const options = selectedProvince ? CITIES_BY_PROVINCE[selectedProvince] || [] : [];
+
+  return (
+    <FormField
+      control={form.control}
+      name="city"
+      render={({ field }: any) => (
+        <FormItem className="flex flex-col">
+          <FormLabel className={FIELD_LABEL}>City</FormLabel>
+          <p className="text-xs text-slate-500 -mt-1">Auto-filled — search and select</p>
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <FormControl>
+                <button
+                  type="button"
+                  className={cn(
+                    FIELD_INPUT,
+                    "flex items-center justify-between w-full px-3 text-left",
+                    !field.value && "text-slate-400"
+                  )}
+                >
+                  {field.value || (selectedProvince ? "Select city" : "Select province first")}
+                  <ChevronsUpDown className="h-4 w-4 opacity-50 flex-shrink-0" />
+                </button>
+              </FormControl>
+            </PopoverTrigger>
+            <PopoverContent className="w-[--radix-popover-trigger-width] p-0 z-[100]" align="start">
+              <Command shouldFilter={true}>
+                <CommandInput
+                  placeholder="Search city…"
+                  value={query}
+                  onValueChange={setQuery}
+                />
+                <CommandList>
+                  <CommandEmpty>
+                    {query.trim() ? (
+                      <button
+                        type="button"
+                        className="text-sm text-[#00AFE6] hover:underline px-3 py-2"
+                        onClick={() => {
+                          field.onChange(query.trim());
+                          setOpen(false);
+                        }}
+                      >
+                        Use "{query.trim()}"
+                      </button>
+                    ) : (
+                      "No city found."
+                    )}
+                  </CommandEmpty>
+                  {options.length > 0 && (
+                    <CommandGroup heading={selectedProvince}>
+                      {options.map((c) => (
+                        <CommandItem
+                          key={c}
+                          value={c}
+                          onSelect={() => {
+                            field.onChange(c);
+                            setOpen(false);
+                          }}
+                        >
+                          <Check className={cn("mr-2 h-4 w-4", field.value === c ? "opacity-100" : "opacity-0")} />
+                          {c}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  )}
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+          {mismatch && (
+            <div className="flex items-start gap-1.5 text-xs text-amber-600 mt-1">
+              <AlertTriangle className="h-3.5 w-3.5 flex-shrink-0 mt-px" />
+              <span>{mismatch}</span>
+            </div>
+          )}
+          <FormMessage className="text-xs" />
+        </FormItem>
+      )}
+    />
+  );
+}
+
+function CountryCodeSelect({ form, name, ariaLabel }: { form: any; name: string; ariaLabel: string }) {
+  return (
+    <FormField
+      control={form.control}
+      name={name as any}
+      render={({ field }: any) => (
+        <FormItem className="space-y-0">
+          <Select onValueChange={field.onChange} value={field.value || "+1"}>
             <FormControl>
-              <SelectTrigger className={FIELD_INPUT}>
-                <SelectValue placeholder="Select province" />
+              <SelectTrigger className={`${FIELD_INPUT} w-[110px]`} aria-label={ariaLabel}>
+                <SelectValue placeholder="+1" />
               </SelectTrigger>
             </FormControl>
-            <SelectContent>
-              {CANADIAN_PROVINCES.map((p) => (
-                <SelectItem key={p} value={p}>{p}</SelectItem>
+            <SelectContent className="z-[100]">
+              {COUNTRY_CODES.map((c) => (
+                <SelectItem key={c.value} value={c.value}>
+                  <span className="mr-1">{c.flag}</span> {c.value}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          <FormMessage className="text-xs" />
         </FormItem>
       )}
     />
@@ -188,22 +396,7 @@ function PhonePair({
         {required && <span className="text-[#00AFE6]"> *</span>}
       </Label>
       <div className="flex gap-2">
-        <FormField
-          control={form.control}
-          name={codeName as any}
-          render={({ field }: any) => (
-            <FormItem className="space-y-0">
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder="+1"
-                  className={`${FIELD_INPUT} w-20 text-center`}
-                  aria-label={`${label} country/area code`}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <CountryCodeSelect form={form} name={codeName} ariaLabel={`${label} country code`} />
         <FormField
           control={form.control}
           name={numberName as any}
@@ -302,10 +495,14 @@ export function Redesigned() {
   const wantsCANNMembership = form.watch("wantsCANNMembership");
   const wantsServicesMapInclusion = form.watch("wantsServicesMapInclusion");
   const postalCode = form.watch("postalCode");
+  const cityValue = form.watch("city");
+  const provinceValue = form.watch("province");
   const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
   const declinedBoth = wantsMembership === "No" && wantsCANNMembership === "No";
 
-  // Auto-fill city + province from postal code prefix (mockup demo)
+  const postalMatch = postalCode ? lookupPostalCode(postalCode) : null;
+
+  // Auto-fill city + province from postal code prefix (overwrites on postal change; user can then edit)
   useEffect(() => {
     if (!postalCode) {
       form.setValue("city", "");
@@ -321,6 +518,16 @@ export function Redesigned() {
       form.setValue("province", "");
     }
   }, [postalCode, form]);
+
+  // Mismatch warnings — compare current values to postal-derived values
+  const provinceMismatch =
+    postalMatch && provinceValue && provinceValue !== postalMatch.province
+      ? `Postal code "${postalCode}" usually belongs to ${postalMatch.province}.`
+      : undefined;
+  const cityMismatch =
+    postalMatch && cityValue && cityValue !== postalMatch.city
+      ? `Postal code "${postalCode}" usually maps to ${postalMatch.city}.`
+      : undefined;
 
   const onSubmit = (data: CASRegistrationForm) => {
     console.log("[Mockup] Submission:", data);
@@ -518,14 +725,8 @@ export function Redesigned() {
                           required
                         />
                         <div className="hidden sm:block" />
-                        <TextField
-                          name="city"
-                          label="City"
-                          description="Auto-filled — edit if needed"
-                          placeholder="Start typing your city…"
-                          form={form}
-                        />
-                        <ProvinceSelect form={form} />
+                        <ProvinceCombobox form={form} mismatch={provinceMismatch} />
+                        <CityCombobox form={form} selectedProvince={provinceValue} mismatch={cityMismatch} />
                         <PhonePair
                           form={form}
                           codeName="phoneCode"

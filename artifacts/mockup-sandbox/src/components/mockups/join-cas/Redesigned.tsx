@@ -50,9 +50,9 @@ import { casRegistrationSchema, type CASRegistrationForm, lookupPostalCode } fro
 /* ---------- shared atoms ---------- */
 
 const FIELD_INPUT =
-  "h-11 bg-white border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6] transition-colors";
+  "h-11 bg-white border border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6] transition-colors";
 const FIELD_INPUT_READONLY =
-  "h-11 bg-slate-50 border-slate-200 rounded-lg text-slate-600 cursor-not-allowed";
+  "h-11 bg-slate-50 border border-slate-200 rounded-lg text-slate-600 cursor-not-allowed";
 const FIELD_LABEL = "text-sm font-medium text-slate-800";
 
 function YesNo({
@@ -110,6 +110,7 @@ function TextField({
   required,
   readOnly,
   inputFilter,
+  filterWarning,
   inputMode,
   maxLength,
 }: {
@@ -122,9 +123,12 @@ function TextField({
   required?: boolean;
   readOnly?: boolean;
   inputFilter?: (v: string) => string;
+  filterWarning?: string;
   inputMode?: "text" | "numeric" | "tel" | "email";
   maxLength?: number;
 }) {
+  const [warning, setWarning] = useState<string | null>(null);
+
   return (
     <FormField
       control={form.control}
@@ -143,7 +147,12 @@ function TextField({
               inputMode={inputMode}
               maxLength={maxLength}
               onChange={(e) => {
-                const next = inputFilter ? inputFilter(e.target.value) : e.target.value;
+                const raw = e.target.value;
+                const next = inputFilter ? inputFilter(raw) : raw;
+                if (inputFilter && next !== raw && filterWarning) {
+                  setWarning(filterWarning);
+                  window.setTimeout(() => setWarning(null), 1800);
+                }
                 field.onChange(next);
               }}
               placeholder={placeholder}
@@ -152,6 +161,12 @@ function TextField({
               className={readOnly ? FIELD_INPUT_READONLY : FIELD_INPUT}
             />
           </FormControl>
+          {warning && (
+            <div className="flex items-start gap-1.5 text-xs text-amber-600 mt-1">
+              <AlertTriangle className="h-3.5 w-3.5 flex-shrink-0 mt-px" />
+              <span>{warning}</span>
+            </div>
+          )}
           <FormMessage className="text-xs" />
         </FormItem>
       )}
@@ -238,7 +253,7 @@ function ProvinceCombobox({ form, mismatch }: { form: any; mismatch?: string }) 
               </FormControl>
             </PopoverTrigger>
             <PopoverContent
-              className="w-[--radix-popover-trigger-width] p-0 z-[100]"
+              className="w-[--radix-popover-trigger-width] p-0 z-[100] bg-white border border-slate-200 shadow-lg"
               align="start"
               sideOffset={4}
               collisionPadding={12}
@@ -317,7 +332,7 @@ function CityCombobox({
               </FormControl>
             </PopoverTrigger>
             <PopoverContent
-              className="w-[--radix-popover-trigger-width] p-0 z-[100]"
+              className="w-[--radix-popover-trigger-width] p-0 z-[100] bg-white border border-slate-200 shadow-lg"
               align="start"
               sideOffset={4}
               collisionPadding={12}
@@ -392,7 +407,7 @@ function CountryCodeSelect({ form, name, ariaLabel }: { form: any; name: string;
                 <SelectValue placeholder="+1" />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className="z-[100] max-h-[240px]" position="popper" sideOffset={4}>
+            <SelectContent className="z-[100] max-h-[240px] bg-white border border-slate-200 shadow-lg" position="popper" sideOffset={4}>
               {COUNTRY_CODES.map((c) => (
                 <SelectItem key={c.value} value={c.value}>
                   <span className="mr-1">{c.flag}</span> {c.value}
@@ -400,6 +415,56 @@ function CountryCodeSelect({ form, name, ariaLabel }: { form: any; name: string;
               ))}
             </SelectContent>
           </Select>
+        </FormItem>
+      )}
+    />
+  );
+}
+
+function PhoneNumberField({
+  form,
+  name,
+  placeholder,
+  label,
+}: {
+  form: any;
+  name: string;
+  placeholder?: string;
+  label: string;
+}) {
+  const [warning, setWarning] = useState<string | null>(null);
+  return (
+    <FormField
+      control={form.control}
+      name={name as any}
+      render={({ field }: any) => (
+        <FormItem className="flex-1 space-y-0">
+          <FormControl>
+            <Input
+              {...field}
+              inputMode="tel"
+              maxLength={20}
+              onChange={(e) => {
+                const raw = e.target.value;
+                const next = DIGITS_FILTER(raw);
+                if (next !== raw) {
+                  setWarning("Only digits, spaces, and ( ) - + are allowed.");
+                  window.setTimeout(() => setWarning(null), 1800);
+                }
+                field.onChange(next);
+              }}
+              placeholder={placeholder}
+              className={FIELD_INPUT}
+              aria-label={`${label} number`}
+            />
+          </FormControl>
+          {warning && (
+            <div className="flex items-start gap-1.5 text-xs text-amber-600 pt-1">
+              <AlertTriangle className="h-3.5 w-3.5 flex-shrink-0 mt-px" />
+              <span>{warning}</span>
+            </div>
+          )}
+          <FormMessage className="text-xs pt-1" />
         </FormItem>
       )}
     />
@@ -429,25 +494,11 @@ function PhonePair({
       </Label>
       <div className="flex gap-2">
         <CountryCodeSelect form={form} name={codeName} ariaLabel={`${label} country code`} />
-        <FormField
-          control={form.control}
-          name={numberName as any}
-          render={({ field }: any) => (
-            <FormItem className="flex-1 space-y-0">
-              <FormControl>
-                <Input
-                  {...field}
-                  inputMode="tel"
-                  maxLength={20}
-                  onChange={(e) => field.onChange(DIGITS_FILTER(e.target.value))}
-                  placeholder={placeholder}
-                  className={FIELD_INPUT}
-                  aria-label={`${label} number`}
-                />
-              </FormControl>
-              <FormMessage className="text-xs pt-1" />
-            </FormItem>
-          )}
+        <PhoneNumberField
+          form={form}
+          name={numberName}
+          placeholder={placeholder}
+          label={label}
         />
       </div>
     </div>
@@ -642,8 +693,8 @@ export function Redesigned() {
               {isMember && (
                 <Section title="Your Information">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <TextField name="firstName" label="First Name" placeholder="Jane" form={form} required inputFilter={ALPHA_FILTER} />
-                    <TextField name="lastName" label="Last Name" placeholder="Doe" form={form} required inputFilter={ALPHA_FILTER} />
+                    <TextField name="firstName" label="First Name" placeholder="Jane" form={form} required inputFilter={ALPHA_FILTER} filterWarning="Numbers and symbols are not allowed in this field." />
+                    <TextField name="lastName" label="Last Name" placeholder="Doe" form={form} required inputFilter={ALPHA_FILTER} filterWarning="Numbers and symbols are not allowed in this field." />
                     <TextField
                       name="primaryEmail"
                       label="Primary Email Address"
@@ -667,6 +718,7 @@ export function Redesigned() {
                       form={form}
                       required
                       inputFilter={ALPHA_FILTER}
+                      filterWarning="Numbers and symbols are not allowed in this field."
                     />
                     <TextField
                       name="subspecialty"
@@ -676,6 +728,7 @@ export function Redesigned() {
                       form={form}
                       required
                       inputFilter={ALPHA_FILTER}
+                      filterWarning="Numbers and symbols are not allowed in this field."
                     />
                   </div>
 
@@ -762,6 +815,7 @@ export function Redesigned() {
                           required
                           inputFilter={POSTAL_FILTER}
                           maxLength={7}
+                          filterWarning="Only letters and numbers (Canadian postal format)."
                         />
                         <div className="hidden sm:block" />
                         <ProvinceCombobox form={form} mismatch={provinceMismatch} />

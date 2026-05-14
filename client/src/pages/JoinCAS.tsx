@@ -286,7 +286,10 @@ export default function JoinCAS() {
                           transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
-                          <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-[#00AFE6]/20 space-y-4 sm:space-y-6 shadow-sm">
+                          <div className="pt-2 space-y-4 sm:space-y-6 border-t border-gray-200 dark:border-gray-700">
+                            <h3 className="text-sm font-semibold uppercase tracking-wider text-[#00AFE6] pt-4">
+                              {t('joinCAS.section.memberInfo') || 'Member Information'}
+                            </h3>
                         {/* Question 3: Full Name */}
                         <FormField
                           control={form.control}
@@ -582,7 +585,10 @@ export default function JoinCAS() {
                           transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
-                          <div className="bg-gradient-to-br from-[#E6F8FF] to-[#F0FBFF] dark:from-[#00AFE6]/10 dark:to-[#00AFE6]/5 p-4 sm:p-6 md:p-8 rounded-2xl border border-[#00AFE6]/20 shadow-sm">
+                          <div className="pt-2 space-y-4 sm:space-y-6 border-t border-gray-200 dark:border-gray-700">
+                            <h3 className="text-sm font-semibold uppercase tracking-wider text-pink-500 pt-4">
+                              {t('joinCAS.section.cannComm') || 'CANN Communications'}
+                            </h3>
                             <FormField
                               control={form.control}
                               name="cannCommunications"
@@ -625,12 +631,10 @@ export default function JoinCAS() {
                           transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
-                          <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/10 p-4 sm:p-6 md:p-8 rounded-2xl border border-amber-300/30 space-y-4 sm:space-y-6 shadow-sm">
-                            <div className="flex items-center gap-3 mb-6">
-                              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 flex items-center justify-center shadow-md">
-                                <Mail className="w-5 h-5 text-white" />
-                              </div>
-                              <h3 className="text-2xl font-bold text-amber-900 dark:text-amber-100">
+                          <div className="pt-2 space-y-4 sm:space-y-6 border-t border-gray-200 dark:border-gray-700">
+                            <div className="flex items-center gap-3 pt-4">
+                              <Mail className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                              <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400">
                                 {t('joinCAS.nonMember.title')}
                               </h3>
                             </div>

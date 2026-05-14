@@ -1,8 +1,8 @@
 import './_group.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Stethoscope, CheckCircle2, Send } from "lucide-react";
+import { Stethoscope, CheckCircle2, Send, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -23,12 +23,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { casRegistrationSchema, type CASRegistrationForm } from "./schema";
+import { casRegistrationSchema, type CASRegistrationForm, lookupPostalCode } from "./schema";
 
-/* ---------- shared atoms (uniform styling) ---------- */
+/* ---------- shared atoms ---------- */
 
 const FIELD_INPUT =
   "h-11 bg-white border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6] transition-colors";
+const FIELD_INPUT_READONLY =
+  "h-11 bg-slate-50 border-slate-200 rounded-lg text-slate-600 cursor-not-allowed";
 const FIELD_LABEL = "text-sm font-medium text-slate-800";
 
 function YesNo({
@@ -73,6 +75,8 @@ function TextField({
   description,
   type = "text",
   form,
+  required,
+  readOnly,
 }: {
   name: any;
   label: string;
@@ -80,6 +84,8 @@ function TextField({
   description?: string;
   type?: string;
   form: any;
+  required?: boolean;
+  readOnly?: boolean;
 }) {
   return (
     <FormField
@@ -87,10 +93,20 @@ function TextField({
       name={name}
       render={({ field }: any) => (
         <FormItem>
-          <FormLabel className={FIELD_LABEL}>{label}</FormLabel>
+          <FormLabel className={FIELD_LABEL}>
+            {label}
+            {required && <span className="text-[#00AFE6]"> *</span>}
+          </FormLabel>
           {description && <p className="text-xs text-slate-500 -mt-1">{description}</p>}
           <FormControl>
-            <Input {...field} type={type} placeholder={placeholder} className={FIELD_INPUT} />
+            <Input
+              {...field}
+              type={type}
+              placeholder={placeholder}
+              readOnly={readOnly}
+              tabIndex={readOnly ? -1 : undefined}
+              className={readOnly ? FIELD_INPUT_READONLY : FIELD_INPUT}
+            />
           </FormControl>
           <FormMessage className="text-xs" />
         </FormItem>
@@ -101,23 +117,14 @@ function TextField({
 
 function Section({
   title,
-  description,
   children,
 }: {
-  title: string;
-  description?: string;
+  title?: string;
   children: React.ReactNode;
 }) {
   return (
     <section className="space-y-5">
-      {(title || description) && (
-        <div className="space-y-1">
-          {title && (
-            <h2 className="text-xs uppercase tracking-wider font-semibold text-slate-500">{title}</h2>
-          )}
-          {description && <p className="text-sm text-slate-600">{description}</p>}
-        </div>
-      )}
+      {title && <h2 className="text-xs uppercase tracking-wider font-semibold text-slate-500">{title}</h2>}
       <div className="space-y-5">{children}</div>
     </section>
   );
@@ -143,7 +150,7 @@ function QuestionRow({
   );
 }
 
-/* ---------- main component ---------- */
+/* ---------- main ---------- */
 
 export function Redesigned() {
   const [submissionId, setSubmissionId] = useState<string | null>(null);
@@ -155,17 +162,21 @@ export function Redesigned() {
     defaultValues: {
       wantsMembership: undefined,
       wantsCANNMembership: undefined,
-      fullName: "",
-      email: "",
+      firstName: "",
+      lastName: "",
+      primaryEmail: "",
+      secondaryEmail: "",
       discipline: "",
       subspecialty: "",
       amyloidosisType: undefined,
       institution: "",
       wantsServicesMapInclusion: undefined,
-      centerName: "",
-      centerAddress: "",
-      centerPhone: "",
-      centerFax: "",
+      streetName: "",
+      postalCode: "",
+      city: "",
+      province: "",
+      phone: "",
+      fax: "",
       wantsCommunications: undefined,
       cannCommunications: undefined,
       noMemberName: "",
@@ -177,8 +188,26 @@ export function Redesigned() {
   const wantsMembership = form.watch("wantsMembership");
   const wantsCANNMembership = form.watch("wantsCANNMembership");
   const wantsServicesMapInclusion = form.watch("wantsServicesMapInclusion");
+  const postalCode = form.watch("postalCode");
   const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
   const declinedBoth = wantsMembership === "No" && wantsCANNMembership === "No";
+
+  // Auto-fill city + province from postal code prefix (mockup demo)
+  useEffect(() => {
+    if (!postalCode) {
+      form.setValue("city", "");
+      form.setValue("province", "");
+      return;
+    }
+    const match = lookupPostalCode(postalCode);
+    if (match) {
+      form.setValue("city", match.city);
+      form.setValue("province", match.province);
+    } else {
+      form.setValue("city", "");
+      form.setValue("province", "");
+    }
+  }, [postalCode, form]);
 
   const onSubmit = (data: CASRegistrationForm) => {
     console.log("[Mockup] Submission:", data);
@@ -206,7 +235,7 @@ export function Redesigned() {
           </p>
         </div>
 
-        {/* Unified form card */}
+        {/* Unified form */}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -254,40 +283,42 @@ export function Redesigned() {
                 />
               </Section>
 
-              {/* Member profile */}
+              {/* Profile */}
               {isMember && (
                 <Section title="Your Information">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="sm:col-span-2">
-                      <TextField
-                        name="fullName"
-                        label="3. Full Name (First and Last) *"
-                        placeholder="Enter your full name"
-                        form={form}
-                      />
-                    </div>
-                    <div className="sm:col-span-2">
-                      <TextField
-                        name="email"
-                        label="4. Email Address *"
-                        type="email"
-                        placeholder="Enter your email address"
-                        form={form}
-                      />
-                    </div>
+                    <TextField name="firstName" label="First Name" placeholder="Jane" form={form} required />
+                    <TextField name="lastName" label="Last Name" placeholder="Doe" form={form} required />
                     <TextField
-                      name="discipline"
-                      label="5. Professional designation *"
-                      description="e.g. physician, nurse, genetic counsellor, other"
-                      placeholder="Enter your professional designation"
+                      name="primaryEmail"
+                      label="Primary Email Address"
+                      type="email"
+                      placeholder="jane@hospital.ca"
+                      form={form}
+                      required
+                    />
+                    <TextField
+                      name="secondaryEmail"
+                      label="Secondary Email Address"
+                      type="email"
+                      placeholder="jane.doe@gmail.com (optional)"
                       form={form}
                     />
                     <TextField
+                      name="discipline"
+                      label="Professional Designation"
+                      description="e.g. physician, nurse, genetic counsellor, other"
+                      placeholder="Enter your professional designation"
+                      form={form}
+                      required
+                    />
+                    <TextField
                       name="subspecialty"
-                      label="6. Sub-specialty Area of Focus *"
+                      label="Sub-specialty Area of Focus"
                       description="e.g., Cardiology, Hematology, Neurology"
                       placeholder="Enter your sub-specialty"
                       form={form}
+                      required
                     />
                   </div>
 
@@ -297,7 +328,8 @@ export function Redesigned() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className={FIELD_LABEL}>
-                          7. In my practice, I primarily care for patients with the following type(s) of amyloidosis: *
+                          In my practice, I primarily care for patients with the following type(s) of amyloidosis:
+                          <span className="text-[#00AFE6]"> *</span>
                         </FormLabel>
                         <FormControl>
                           <RadioGroup
@@ -327,14 +359,15 @@ export function Redesigned() {
 
                   <TextField
                     name="institution"
-                    label="8. Centre or Clinic Name / Institution *"
+                    label="Clinic or Centre Name / Institution"
                     placeholder="Enter your institution name"
                     form={form}
+                    required
                   />
                 </Section>
               )}
 
-              {/* Services map */}
+              {/* Services Map */}
               {isMember && (
                 <Section title="Services Map">
                   <FormField
@@ -342,7 +375,10 @@ export function Redesigned() {
                     name="wantsServicesMapInclusion"
                     render={({ field }) => (
                       <FormItem>
-                        <QuestionRow label="9. Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?">
+                        <QuestionRow
+                          label="Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?"
+                          description="Helps patients across Canada find specialised care near them."
+                        >
                           <YesNo value={field.value as any} onChange={field.onChange} accent="cas" />
                         </QuestionRow>
                         <FormMessage className="text-xs" />
@@ -351,35 +387,59 @@ export function Redesigned() {
                   />
 
                   {wantsServicesMapInclusion === "Yes" && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2 animate-in fade-in slide-in-from-top-1 duration-300">
-                      <div className="sm:col-span-2">
+                    <div className="rounded-xl bg-slate-50/60 border border-slate-100 p-5 space-y-5 animate-in fade-in slide-in-from-top-1 duration-300">
+                      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                        <MapPin className="w-3.5 h-3.5 text-[#00AFE6]" />
+                        Address
+                      </div>
+
+                      <TextField
+                        name="streetName"
+                        label="Street Name"
+                        placeholder="123 Hospital Street"
+                        form={form}
+                        required
+                      />
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <TextField
-                          name="centerName"
-                          label="Center or Clinic Name"
-                          placeholder="Enter your center or clinic name"
+                          name="postalCode"
+                          label="Postal Code"
+                          placeholder="M5G 2C4"
+                          form={form}
+                          required
+                        />
+                        <div /> {/* spacer to keep grid alignment */}
+                        <TextField
+                          name="city"
+                          label="City"
+                          description="Auto-filled by postal code"
+                          placeholder="—"
+                          form={form}
+                          readOnly
+                        />
+                        <TextField
+                          name="province"
+                          label="Province"
+                          description="Auto-filled by postal code"
+                          placeholder="—"
+                          form={form}
+                          readOnly
+                        />
+                        <TextField
+                          name="phone"
+                          label="Phone (with area code)"
+                          placeholder="(416) 555-1234"
+                          form={form}
+                          required
+                        />
+                        <TextField
+                          name="fax"
+                          label="Fax (with area code)"
+                          placeholder="(416) 555-5678"
                           form={form}
                         />
                       </div>
-                      <div className="sm:col-span-2">
-                        <TextField
-                          name="centerAddress"
-                          label="Center or Clinic Address"
-                          placeholder="Enter your center or clinic address"
-                          form={form}
-                        />
-                      </div>
-                      <TextField
-                        name="centerPhone"
-                        label="Center or Clinic Phone Number"
-                        placeholder="Enter your center or clinic phone number"
-                        form={form}
-                      />
-                      <TextField
-                        name="centerFax"
-                        label="Center or Clinic Fax Number"
-                        placeholder="Enter your center or clinic fax number"
-                        form={form}
-                      />
                     </div>
                   )}
                 </Section>
@@ -393,7 +453,7 @@ export function Redesigned() {
                     name="wantsCommunications"
                     render={({ field }) => (
                       <FormItem>
-                        <QuestionRow label="10. I would like to receive communication from the Canadian Amyloidosis Society (CAS): *">
+                        <QuestionRow label="I would like to receive communication from the Canadian Amyloidosis Society (CAS): *">
                           <YesNo value={field.value as any} onChange={field.onChange} accent="cas" />
                         </QuestionRow>
                         <FormMessage className="text-xs" />
@@ -409,7 +469,7 @@ export function Redesigned() {
                         name="cannCommunications"
                         render={({ field }) => (
                           <FormItem>
-                            <QuestionRow label="11. I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *">
+                            <QuestionRow label="I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *">
                               <YesNo value={field.value as any} onChange={field.onChange} accent="cann" />
                             </QuestionRow>
                             <FormMessage className="text-xs" />
@@ -421,21 +481,17 @@ export function Redesigned() {
                 </Section>
               )}
 
-              {/* Non-member contact */}
+              {/* Non-member */}
               {declinedBoth && (
                 <Section title="Non-member Contact">
-                  <TextField
-                    name="noMemberName"
-                    label="Name *"
-                    placeholder="Enter your name"
-                    form={form}
-                  />
+                  <TextField name="noMemberName" label="Name" placeholder="Enter your name" form={form} required />
                   <TextField
                     name="noMemberEmail"
-                    label="Email *"
+                    label="Email"
                     type="email"
                     placeholder="Enter your email"
                     form={form}
+                    required
                   />
                   <FormField
                     control={form.control}
@@ -458,7 +514,7 @@ export function Redesigned() {
               )}
             </div>
 
-            {/* Submit footer */}
+            {/* Submit */}
             {(isMember || declinedBoth) && (
               <div className="bg-slate-50 border-t border-slate-100 px-8 sm:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p className="text-xs text-slate-500 text-center sm:text-left">

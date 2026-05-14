@@ -90,6 +90,16 @@ function YesNo({
   );
 }
 
+/* ---------- input filters ---------- */
+const ALPHA_FILTER = (v: string) => v.replace(/[^A-Za-zÀ-ÿ\s'\-.]/g, "");
+const DIGITS_FILTER = (v: string) => v.replace(/[^0-9\s\-()+ ]/g, "");
+const POSTAL_FILTER = (v: string) => {
+  // Canadian postal pattern: A1A 1A1 (auto-uppercase, auto-space after 3 chars)
+  const cleaned = v.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
+  if (cleaned.length <= 3) return cleaned;
+  return cleaned.slice(0, 3) + " " + cleaned.slice(3);
+};
+
 function TextField({
   name,
   label,
@@ -99,6 +109,9 @@ function TextField({
   form,
   required,
   readOnly,
+  inputFilter,
+  inputMode,
+  maxLength,
 }: {
   name: any;
   label: string;
@@ -108,6 +121,9 @@ function TextField({
   form: any;
   required?: boolean;
   readOnly?: boolean;
+  inputFilter?: (v: string) => string;
+  inputMode?: "text" | "numeric" | "tel" | "email";
+  maxLength?: number;
 }) {
   return (
     <FormField
@@ -124,6 +140,12 @@ function TextField({
             <Input
               {...field}
               type={type}
+              inputMode={inputMode}
+              maxLength={maxLength}
+              onChange={(e) => {
+                const next = inputFilter ? inputFilter(e.target.value) : e.target.value;
+                field.onChange(next);
+              }}
               placeholder={placeholder}
               readOnly={readOnly}
               tabIndex={readOnly ? -1 : undefined}
@@ -215,10 +237,15 @@ function ProvinceCombobox({ form, mismatch }: { form: any; mismatch?: string }) 
                 </button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-[--radix-popover-trigger-width] p-0 z-[100]" align="start">
+            <PopoverContent
+              className="w-[--radix-popover-trigger-width] p-0 z-[100]"
+              align="start"
+              sideOffset={4}
+              collisionPadding={12}
+            >
               <Command>
                 <CommandInput placeholder="Search province…" />
-                <CommandList>
+                <CommandList className="max-h-[220px]">
                   <CommandEmpty>No province found.</CommandEmpty>
                   <CommandGroup>
                     {CANADIAN_PROVINCES.map((p) => (
@@ -289,14 +316,19 @@ function CityCombobox({
                 </button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-[--radix-popover-trigger-width] p-0 z-[100]" align="start">
+            <PopoverContent
+              className="w-[--radix-popover-trigger-width] p-0 z-[100]"
+              align="start"
+              sideOffset={4}
+              collisionPadding={12}
+            >
               <Command shouldFilter={true}>
                 <CommandInput
                   placeholder="Search city…"
                   value={query}
                   onValueChange={setQuery}
                 />
-                <CommandList>
+                <CommandList className="max-h-[220px]">
                   <CommandEmpty>
                     {query.trim() ? (
                       <button
@@ -360,7 +392,7 @@ function CountryCodeSelect({ form, name, ariaLabel }: { form: any; name: string;
                 <SelectValue placeholder="+1" />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className="z-[100]">
+            <SelectContent className="z-[100] max-h-[240px]" position="popper" sideOffset={4}>
               {COUNTRY_CODES.map((c) => (
                 <SelectItem key={c.value} value={c.value}>
                   <span className="mr-1">{c.flag}</span> {c.value}
@@ -405,6 +437,9 @@ function PhonePair({
               <FormControl>
                 <Input
                   {...field}
+                  inputMode="tel"
+                  maxLength={20}
+                  onChange={(e) => field.onChange(DIGITS_FILTER(e.target.value))}
                   placeholder={placeholder}
                   className={FIELD_INPUT}
                   aria-label={`${label} number`}
@@ -607,8 +642,8 @@ export function Redesigned() {
               {isMember && (
                 <Section title="Your Information">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <TextField name="firstName" label="First Name" placeholder="Jane" form={form} required />
-                    <TextField name="lastName" label="Last Name" placeholder="Doe" form={form} required />
+                    <TextField name="firstName" label="First Name" placeholder="Jane" form={form} required inputFilter={ALPHA_FILTER} />
+                    <TextField name="lastName" label="Last Name" placeholder="Doe" form={form} required inputFilter={ALPHA_FILTER} />
                     <TextField
                       name="primaryEmail"
                       label="Primary Email Address"
@@ -631,6 +666,7 @@ export function Redesigned() {
                       placeholder="Enter your professional designation"
                       form={form}
                       required
+                      inputFilter={ALPHA_FILTER}
                     />
                     <TextField
                       name="subspecialty"
@@ -639,6 +675,7 @@ export function Redesigned() {
                       placeholder="Enter your sub-specialty"
                       form={form}
                       required
+                      inputFilter={ALPHA_FILTER}
                     />
                   </div>
 
@@ -723,6 +760,8 @@ export function Redesigned() {
                           placeholder="M5G 2C4"
                           form={form}
                           required
+                          inputFilter={POSTAL_FILTER}
+                          maxLength={7}
                         />
                         <div className="hidden sm:block" />
                         <ProvinceCombobox form={form} mismatch={provinceMismatch} />

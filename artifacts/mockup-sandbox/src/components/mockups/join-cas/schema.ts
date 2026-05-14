@@ -24,6 +24,11 @@ export const casRegistrationSchema = z.object({
   postalCode: z.string().optional(),
   city: z.string().optional(),
   province: z.string().optional(),
+  phoneCode: z.string().optional(),
+  phoneNumber: z.string().optional(),
+  faxCode: z.string().optional(),
+  faxNumber: z.string().optional(),
+  // legacy combined fields (kept for back-compat with Current.tsx)
   phone: z.string().optional(),
   fax: z.string().optional(),
 
@@ -68,7 +73,7 @@ export const casRegistrationSchema = z.object({
   if (data.wantsServicesMapInclusion === "Yes") {
     if (!data.streetName?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Street name is required", path: ["streetName"] });
     if (!data.postalCode?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Postal code is required", path: ["postalCode"] });
-    if (!data.phone?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Phone number is required", path: ["phone"] });
+    if (!data.phoneNumber?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Phone number is required", path: ["phoneNumber"] });
   }
 
   if (data.wantsCANNMembership === "Yes") {

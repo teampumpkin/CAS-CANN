@@ -17,6 +17,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -115,6 +122,110 @@ function TextField({
   );
 }
 
+const CANADIAN_PROVINCES = [
+  "Alberta",
+  "British Columbia",
+  "Manitoba",
+  "New Brunswick",
+  "Newfoundland and Labrador",
+  "Northwest Territories",
+  "Nova Scotia",
+  "Nunavut",
+  "Ontario",
+  "Prince Edward Island",
+  "Quebec",
+  "Saskatchewan",
+  "Yukon",
+];
+
+function ProvinceSelect({ form }: { form: any }) {
+  return (
+    <FormField
+      control={form.control}
+      name="province"
+      render={({ field }: any) => (
+        <FormItem>
+          <FormLabel className={FIELD_LABEL}>Province</FormLabel>
+          <p className="text-xs text-slate-500 -mt-1">Auto-filled — change if needed</p>
+          <Select onValueChange={field.onChange} value={field.value || ""}>
+            <FormControl>
+              <SelectTrigger className={FIELD_INPUT}>
+                <SelectValue placeholder="Select province" />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+              {CANADIAN_PROVINCES.map((p) => (
+                <SelectItem key={p} value={p}>{p}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <FormMessage className="text-xs" />
+        </FormItem>
+      )}
+    />
+  );
+}
+
+function PhonePair({
+  form,
+  codeName,
+  numberName,
+  label,
+  placeholder,
+  required,
+}: {
+  form: any;
+  codeName: string;
+  numberName: string;
+  label: string;
+  placeholder?: string;
+  required?: boolean;
+}) {
+  return (
+    <FormItem>
+      <FormLabel className={FIELD_LABEL}>
+        {label}
+        {required && <span className="text-[#00AFE6]"> *</span>}
+      </FormLabel>
+      <div className="flex gap-2">
+        <FormField
+          control={form.control}
+          name={codeName as any}
+          render={({ field }: any) => (
+            <FormControl>
+              <Input
+                {...field}
+                placeholder="+1"
+                className={`${FIELD_INPUT} w-20 text-center`}
+                aria-label={`${label} country/area code`}
+              />
+            </FormControl>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name={numberName as any}
+          render={({ field }: any) => (
+            <FormControl>
+              <Input
+                {...field}
+                placeholder={placeholder}
+                className={`${FIELD_INPUT} flex-1`}
+                aria-label={`${label} number`}
+              />
+            </FormControl>
+          )}
+        />
+      </div>
+      <FormField
+        control={form.control}
+        name={numberName as any}
+        render={() => <FormMessage className="text-xs" />}
+      />
+    </FormItem>
+  );
+}
+
 function Section({
   title,
   children,
@@ -175,8 +286,10 @@ export function Redesigned() {
       postalCode: "",
       city: "",
       province: "",
-      phone: "",
-      fax: "",
+      phoneCode: "+1",
+      phoneNumber: "",
+      faxCode: "+1",
+      faxNumber: "",
       wantsCommunications: undefined,
       cannCommunications: undefined,
       noMemberName: "",
@@ -408,31 +521,25 @@ export function Redesigned() {
                         <TextField
                           name="city"
                           label="City"
-                          description="Auto-filled by postal code"
-                          placeholder="—"
+                          description="Auto-filled — edit if needed"
+                          placeholder="Start typing your city…"
                           form={form}
-                          readOnly
                         />
-                        <TextField
-                          name="province"
-                          label="Province"
-                          description="Auto-filled by postal code"
-                          placeholder="—"
+                        <ProvinceSelect form={form} />
+                        <PhonePair
                           form={form}
-                          readOnly
-                        />
-                        <TextField
-                          name="phone"
-                          label="Phone (with area code)"
-                          placeholder="(416) 555-1234"
-                          form={form}
+                          codeName="phoneCode"
+                          numberName="phoneNumber"
+                          label="Phone"
+                          placeholder="555-1234"
                           required
                         />
-                        <TextField
-                          name="fax"
-                          label="Fax (with area code)"
-                          placeholder="(416) 555-5678"
+                        <PhonePair
                           form={form}
+                          codeName="faxCode"
+                          numberName="faxNumber"
+                          label="Fax"
+                          placeholder="555-5678"
                         />
                       </div>
                     </div>

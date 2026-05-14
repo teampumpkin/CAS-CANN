@@ -2,7 +2,7 @@ import './_group.css';
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Stethoscope, CheckCircle2, Send, MapPin } from "lucide-react";
+import { Stethoscope, CheckCircle2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -387,12 +387,7 @@ export function Redesigned() {
                   />
 
                   {wantsServicesMapInclusion === "Yes" && (
-                    <div className="rounded-xl bg-slate-50/60 border border-slate-100 p-5 space-y-5 animate-in fade-in slide-in-from-top-1 duration-300">
-                      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                        <MapPin className="w-3.5 h-3.5 text-[#00AFE6]" />
-                        Address
-                      </div>
-
+                    <div className="space-y-5 animate-in fade-in slide-in-from-top-1 duration-300">
                       <TextField
                         name="streetName"
                         label="Street Name"
@@ -409,7 +404,7 @@ export function Redesigned() {
                           form={form}
                           required
                         />
-                        <div /> {/* spacer to keep grid alignment */}
+                        <div className="hidden sm:block" />
                         <TextField
                           name="city"
                           label="City"

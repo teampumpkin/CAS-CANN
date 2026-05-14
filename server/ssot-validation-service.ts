@@ -26,7 +26,6 @@ const CRM_FIELDS = [
   'CANN_Communications',
   'Services_Map_Inclusion',
   'Professional_Designation',
-  'Institution_Name',
   'subspecialty',
   'Amyloidosis_Type',
   'Source_Form',
@@ -501,7 +500,7 @@ export async function applySSOTChanges(options: ApplyChangesOptions): Promise<Ap
         };
         if (firstName) recordData.First_Name = firstName;
         if (email) recordData.Email = email;
-        if (institution) recordData.Institution_Name = institution;
+        if (institution) recordData.Company = institution;
         if (discipline) recordData.Professional_Designation = discipline;
         if (subspecialty) recordData.subspecialty = subspecialty;
 
@@ -539,7 +538,7 @@ const SSOT_TO_CRM_FIELD: Record<string, string> = {
   first_name: 'First_Name',
   last_name: 'Last_Name',
   email: 'Email',
-  institution: 'Institution_Name',
+  institution: 'Company',
   discipline: 'Professional_Designation',
   subspecialty: 'subspecialty',
 };

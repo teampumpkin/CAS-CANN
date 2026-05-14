@@ -1804,10 +1804,12 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
     zohoData.Professional_Designation = formData.discipline;
   }
 
-  // --- Institution (map to both Company and Institution_Name) ---
+  // --- Institution (Q8: single form field → single Zoho field "Company") ---
+  // Note: Institution_Name was previously written too, but the form has only one
+  // institution input, so we now write to Company exclusively. Institution_Name
+  // should be removed from the v2 layout.
   if (formData.institution) {
     zohoData.Company = cleanAndTruncate(formData.institution, 100);
-    zohoData.Institution_Name = cleanAndTruncate(formData.institution, 100);
   }
 
   // --- Subspecialty ---

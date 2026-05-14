@@ -50,9 +50,9 @@ import { casRegistrationSchema, type CASRegistrationForm, lookupPostalCode } fro
 /* ---------- shared atoms ---------- */
 
 const FIELD_INPUT =
-  "h-11 bg-white border border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6] transition-colors";
+  "h-11 bg-white border border-slate-200 rounded-lg shadow-sm text-sm focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6] transition-colors";
 const FIELD_INPUT_READONLY =
-  "h-11 bg-slate-50 border border-slate-200 rounded-lg text-slate-600 cursor-not-allowed";
+  "h-11 bg-slate-50 border border-slate-200 rounded-lg shadow-sm text-sm text-slate-600 cursor-not-allowed";
 const FIELD_LABEL = "text-sm font-medium text-slate-800";
 
 function YesNo({
@@ -92,6 +92,7 @@ function YesNo({
 
 /* ---------- input filters ---------- */
 const ALPHA_FILTER = (v: string) => v.replace(/[^A-Za-zÀ-ÿ\s'\-.]/g, "");
+const INSTITUTION_FILTER = (v: string) => v.replace(/[^A-Za-zÀ-ÿ\s'\-.,&()/]/g, "");
 const DIGITS_FILTER = (v: string) => v.replace(/[^0-9\s\-()+ ]/g, "");
 const POSTAL_FILTER = (v: string) => {
   // Canadian postal pattern: A1A 1A1 (auto-uppercase, auto-space after 3 chars)
@@ -773,6 +774,8 @@ export function Redesigned() {
                     placeholder="Enter your institution name"
                     form={form}
                     required
+                    inputFilter={INSTITUTION_FILTER}
+                    filterWarning="Numbers are not allowed. Use letters and common punctuation only."
                   />
                 </Section>
               )}

@@ -2,7 +2,7 @@ import './_group.css';
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Stethoscope, CheckCircle2, Send } from "lucide-react";
+import { Stethoscope, CheckCircle2, Send, Sun, Moon, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -50,10 +50,10 @@ import { casRegistrationSchema, type CASRegistrationForm, lookupPostalCode } fro
 /* ---------- shared atoms ---------- */
 
 const FIELD_INPUT =
-  "h-11 bg-white border border-slate-200 rounded-lg shadow-sm text-sm focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6] transition-colors";
+  "h-11 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6] transition-colors";
 const FIELD_INPUT_READONLY =
-  "h-11 bg-slate-50 border border-slate-200 rounded-lg shadow-sm text-sm text-slate-600 cursor-not-allowed";
-const FIELD_LABEL = "text-sm font-medium text-slate-800";
+  "h-11 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm text-sm text-slate-600 dark:text-slate-400 cursor-not-allowed";
+const FIELD_LABEL = "text-[13px] font-normal text-slate-600 dark:text-slate-300";
 
 function YesNo({
   value,
@@ -68,9 +68,9 @@ function YesNo({
     accent === "cann"
       ? "bg-pink-500 text-white border-pink-500 shadow-sm"
       : "bg-[#00AFE6] text-white border-[#00AFE6] shadow-sm";
-  const idleClass = "bg-white text-slate-600 border-slate-200 hover:border-slate-300";
+  const idleClass = "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600";
   return (
-    <div className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-1 gap-1">
+    <div className="inline-flex rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-1 gap-1">
       {(["Yes", "No"] as const).map((opt) => {
         const active = value === opt;
         return (
@@ -254,12 +254,12 @@ function ProvinceCombobox({ form, mismatch }: { form: any; mismatch?: string }) 
               </FormControl>
             </PopoverTrigger>
             <PopoverContent
-              className="w-[--radix-popover-trigger-width] p-0 z-[100] bg-white border border-slate-200 shadow-lg"
+              className="w-[--radix-popover-trigger-width] p-0 z-[100] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-lg"
               align="start"
               sideOffset={4}
               collisionPadding={12}
             >
-              <Command>
+              <Command className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                 <CommandInput placeholder="Search province…" />
                 <CommandList className="max-h-[220px]">
                   <CommandEmpty>No province found.</CommandEmpty>
@@ -333,12 +333,12 @@ function CityCombobox({
               </FormControl>
             </PopoverTrigger>
             <PopoverContent
-              className="w-[--radix-popover-trigger-width] p-0 z-[100] bg-white border border-slate-200 shadow-lg"
+              className="w-[--radix-popover-trigger-width] p-0 z-[100] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-lg"
               align="start"
               sideOffset={4}
               collisionPadding={12}
             >
-              <Command shouldFilter={true}>
+              <Command shouldFilter={true} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                 <CommandInput
                   placeholder="Search city…"
                   value={query}
@@ -408,7 +408,7 @@ function CountryCodeSelect({ form, name, ariaLabel }: { form: any; name: string;
                 <SelectValue placeholder="+1" />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className="z-[100] max-h-[240px] bg-white border border-slate-200 shadow-lg" position="popper" sideOffset={4}>
+            <SelectContent className="z-[100] max-h-[240px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-lg text-slate-900 dark:text-slate-100" position="popper" sideOffset={4}>
               {COUNTRY_CODES.map((c) => (
                 <SelectItem key={c.value} value={c.value}>
                   <span className="mr-1">{c.flag}</span> {c.value}
@@ -515,7 +515,7 @@ function Section({
 }) {
   return (
     <section className="space-y-5">
-      {title && <h2 className="text-xs uppercase tracking-wider font-semibold text-slate-500">{title}</h2>}
+      {title && <h2 className="text-[11px] uppercase tracking-[0.12em] font-medium text-slate-400 dark:text-slate-500">{title}</h2>}
       <div className="space-y-5">{children}</div>
     </section>
   );
@@ -533,12 +533,109 @@ function QuestionRow({
   return (
     <div className="flex items-start justify-between gap-6 py-1">
       <div className="flex-1 min-w-0">
-        <div className={FIELD_LABEL}>{label}</div>
-        {description && <p className="text-xs text-slate-500 mt-1">{description}</p>}
+        <div className="text-sm font-normal text-slate-700 dark:text-slate-200">{label}</div>
+        {description && <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{description}</p>}
       </div>
       <div className="flex-shrink-0 pt-0.5">{children}</div>
     </div>
   );
+}
+
+/* ---------- i18n ---------- */
+
+type Lang = "en" | "fr";
+const I18N: Record<string, { en: string; fr: string }> = {
+  badge: { en: "Professional Membership Application", fr: "Demande d'adhésion professionnelle" },
+  titleJoin: { en: "Join", fr: "Rejoindre" },
+  titleBrand: { en: "CAS & CANN", fr: "la SCA et le RCIA" },
+  subtitle: {
+    en: "Become part of Canada's premier professional network for amyloidosis care.",
+    fr: "Rejoignez le principal réseau professionnel canadien dédié aux soins de l'amyloïdose.",
+  },
+  formTitle: { en: "Registration Form", fr: "Formulaire d'inscription" },
+  formDesc: {
+    en: "Complete the form below to join our professional community.",
+    fr: "Remplissez le formulaire ci-dessous pour rejoindre notre communauté professionnelle.",
+  },
+  sectionMembership: { en: "Membership", fr: "Adhésion" },
+  sectionProfile: { en: "Your Information", fr: "Vos renseignements" },
+  sectionServices: { en: "Services Map", fr: "Carte des services" },
+  sectionComms: { en: "Communications", fr: "Communications" },
+  sectionNonMember: { en: "Non-member Contact", fr: "Contact (non-membre)" },
+  qCAS: {
+    en: "1. I would like to become a member of the Canadian Amyloidosis Society (CAS).",
+    fr: "1. Je souhaite devenir membre de la Société canadienne de l'amyloïdose (SCA).",
+  },
+  qCANN: {
+    en: "2. I would like to become a member of the Canadian Amyloidosis Nursing Network (CANN).",
+    fr: "2. Je souhaite devenir membre du Réseau canadien des infirmières en amyloïdose (RCIA).",
+  },
+  cannNote: { en: "All CANN members will also be members of the CAS.", fr: "Tout membre du RCIA est également membre de la SCA." },
+  firstName: { en: "First Name", fr: "Prénom" },
+  lastName: { en: "Last Name", fr: "Nom de famille" },
+  primaryEmail: { en: "Primary Email Address", fr: "Adresse courriel principale" },
+  secondaryEmail: { en: "Secondary Email Address", fr: "Adresse courriel secondaire" },
+  discipline: { en: "Professional Designation", fr: "Titre professionnel" },
+  disciplineHint: {
+    en: "e.g. physician, nurse, genetic counsellor, other",
+    fr: "p. ex. médecin, infirmier/ère, conseiller/ère en génétique, autre",
+  },
+  disciplinePh: { en: "Enter your professional designation", fr: "Saisissez votre titre professionnel" },
+  subspecialty: { en: "Sub-specialty Area of Focus", fr: "Sous-spécialité" },
+  subspecialtyHint: { en: "e.g., Cardiology, Hematology, Neurology", fr: "p. ex. cardiologie, hématologie, neurologie" },
+  subspecialtyPh: { en: "Enter your sub-specialty", fr: "Saisissez votre sous-spécialité" },
+  amyloidQ: {
+    en: "In my practice, I primarily care for patients with the following type(s) of amyloidosis:",
+    fr: "Dans ma pratique, je m'occupe principalement de patients atteints du ou des types d'amyloïdose suivants :",
+  },
+  amyloidBoth: { en: "Both ATTR and AL", fr: "ATTR et AL" },
+  amyloidOther: { en: "Other", fr: "Autre" },
+  institution: { en: "Clinic or Centre Name / Institution", fr: "Nom de la clinique ou de l'établissement" },
+  institutionPh: { en: "Enter your institution name", fr: "Saisissez le nom de votre établissement" },
+  servicesQ: {
+    en: "Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?",
+    fr: "Souhaitez-vous que votre clinique soit incluse dans la carte canadienne des services en amyloïdose ?",
+  },
+  servicesDesc: {
+    en: "Helps patients across Canada find specialised care near them.",
+    fr: "Aide les patients à trouver des soins spécialisés près de chez eux.",
+  },
+  streetName: { en: "Street Name", fr: "Nom de la rue" },
+  postalCode: { en: "Postal Code", fr: "Code postal" },
+  province: { en: "Province", fr: "Province" },
+  provinceHint: { en: "Auto-filled — change if needed", fr: "Rempli automatiquement — modifiable" },
+  provincePh: { en: "Select province", fr: "Sélectionnez une province" },
+  city: { en: "City", fr: "Ville" },
+  cityHint: { en: "Auto-filled — search and select", fr: "Rempli automatiquement — recherchez et sélectionnez" },
+  cityFirst: { en: "Select province first", fr: "Sélectionnez d'abord une province" },
+  cityPh: { en: "Search city…", fr: "Rechercher une ville…" },
+  phone: { en: "Phone", fr: "Téléphone" },
+  fax: { en: "Fax", fr: "Télécopieur" },
+  required: { en: "Required", fr: "Obligatoire" },
+  commsCAS: {
+    en: "I would like to receive communication from the Canadian Amyloidosis Society (CAS):",
+    fr: "Je souhaite recevoir les communications de la SCA :",
+  },
+  commsCANN: {
+    en: "I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN):",
+    fr: "Je souhaite recevoir les communications du RCIA :",
+  },
+  nmName: { en: "Name", fr: "Nom" },
+  nmEmail: { en: "Email", fr: "Courriel" },
+  nmMessage: { en: "Message / Reason for Contact", fr: "Message / Motif" },
+  nmMessagePh: { en: "Please share why you're reaching out", fr: "Indiquez la raison de votre prise de contact" },
+  yourInfoPrivate: { en: "Your information is kept private and never shared.", fr: "Vos renseignements sont confidentiels et ne sont jamais partagés." },
+  submit: { en: "Submit Registration Form", fr: "Envoyer le formulaire" },
+  confirmTitle: { en: "Membership Registration Submitted!", fr: "Inscription envoyée !" },
+  confirmBody: {
+    en: "We've received your form submission and we will be in touch soon with membership details.",
+    fr: "Nous avons bien reçu votre formulaire. Vous serez contacté(e) sous peu avec les détails de votre adhésion.",
+  },
+  refId: { en: "Reference ID", fr: "N° de référence" },
+  close: { en: "Close", fr: "Fermer" },
+};
+function useT(lang: Lang) {
+  return (key: keyof typeof I18N) => I18N[key][lang];
 }
 
 /* ---------- main ---------- */
@@ -546,6 +643,9 @@ function QuestionRow({
 export function Redesigned() {
   const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [lang, setLang] = useState<Lang>("en");
+  const [isDark, setIsDark] = useState(false);
+  const t = useT(lang);
 
   const form = useForm<CASRegistrationForm>({
     resolver: zodResolver(casRegistrationSchema),
@@ -623,22 +723,44 @@ export function Redesigned() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-slate-100 text-slate-900 py-12 px-4 sm:px-6">
+    <div className={isDark ? "dark" : ""}>
+    <div className="min-h-screen w-full bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-12 px-4 sm:px-6 transition-colors">
       <div className="max-w-2xl mx-auto">
+        {/* Toggle bar */}
+        <div className="flex justify-end gap-2 mb-4">
+          <button
+            type="button"
+            onClick={() => setLang(lang === "en" ? "fr" : "en")}
+            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
+            aria-label="Toggle language"
+          >
+            <Languages className="w-3.5 h-3.5" />
+            {lang === "en" ? "EN" : "FR"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsDark(!isDark)}
+            className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 shadow-sm hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+          </button>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-xs font-medium text-slate-600 shadow-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm mb-4">
             <Stethoscope className="w-3.5 h-3.5 text-[#00AFE6]" />
-            Professional Membership Application
+            {t("badge")}
           </div>
           <h1 className="text-4xl font-serif font-bold tracking-tight leading-tight">
-            Join{" "}
+            {t("titleJoin")}{" "}
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-              CAS &amp; CANN
+              {t("titleBrand")}
             </span>
           </h1>
-          <p className="text-sm text-slate-600 mt-3 max-w-md mx-auto">
-            Become part of Canada's premier professional network for amyloidosis care.
+          <p className="text-sm text-slate-600 dark:text-slate-400 mt-3 max-w-md mx-auto">
+            {t("subtitle")}
           </p>
         </div>
 
@@ -646,24 +768,24 @@ export function Redesigned() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden"
+            className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden"
           >
             <div className="px-8 sm:px-10 pt-8 pb-2">
-              <h3 className="text-lg font-serif font-semibold text-slate-900">Registration Form</h3>
-              <p className="text-sm text-slate-500 mt-0.5">
-                Complete the form below to join our professional community.
+              <h3 className="text-lg font-serif font-semibold text-slate-900 dark:text-slate-100">{t("formTitle")}</h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                {t("formDesc")}
               </p>
             </div>
 
-            <div className="px-8 sm:px-10 pb-8 sm:pb-10 pt-6 space-y-10 divide-y divide-slate-100 [&>*:not(:first-child)]:pt-10">
+            <div className="px-8 sm:px-10 pb-8 sm:pb-10 pt-6 space-y-10 divide-y divide-slate-100 dark:divide-slate-800 [&>*:not(:first-child)]:pt-10">
               {/* Membership */}
-              <Section title="Membership">
+              <Section title={t("sectionMembership")}>
                 <FormField
                   control={form.control}
                   name="wantsMembership"
                   render={({ field }) => (
                     <FormItem>
-                      <QuestionRow label="1. I would like to become a member of the Canadian Amyloidosis Society (CAS).">
+                      <QuestionRow label={t("qCAS")}>
                         <YesNo value={field.value as any} onChange={field.onChange} accent="cas" />
                       </QuestionRow>
                       <FormMessage className="text-xs" />
@@ -671,7 +793,7 @@ export function Redesigned() {
                   )}
                 />
 
-                <div className="h-px bg-slate-100" />
+                <div className="h-px bg-slate-100 dark:bg-slate-800" />
 
                 <FormField
                   control={form.control}
@@ -679,8 +801,8 @@ export function Redesigned() {
                   render={({ field }) => (
                     <FormItem>
                       <QuestionRow
-                        label="2. I would like to become a member of the Canadian Amyloidosis Nursing Network (CANN)."
-                        description="All CANN members will also be members of the CAS."
+                        label={t("qCANN")}
+                        description={t("cannNote")}
                       >
                         <YesNo value={field.value as any} onChange={field.onChange} accent="cann" />
                       </QuestionRow>
@@ -692,13 +814,13 @@ export function Redesigned() {
 
               {/* Profile */}
               {isMember && (
-                <Section title="Your Information">
+                <Section title={t("sectionProfile")}>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <TextField name="firstName" label="First Name" placeholder="Jane" form={form} required inputFilter={ALPHA_FILTER} filterWarning="Numbers and symbols are not allowed in this field." />
-                    <TextField name="lastName" label="Last Name" placeholder="Doe" form={form} required inputFilter={ALPHA_FILTER} filterWarning="Numbers and symbols are not allowed in this field." />
+                    <TextField name="firstName" label={t("firstName")} placeholder="Jane" form={form} required inputFilter={ALPHA_FILTER} filterWarning={lang === "fr" ? "Les chiffres et symboles ne sont pas autorisés." : "Numbers and symbols are not allowed in this field."} />
+                    <TextField name="lastName" label={t("lastName")} placeholder="Doe" form={form} required inputFilter={ALPHA_FILTER} filterWarning={lang === "fr" ? "Les chiffres et symboles ne sont pas autorisés." : "Numbers and symbols are not allowed in this field."} />
                     <TextField
                       name="primaryEmail"
-                      label="Primary Email Address"
+                      label={t("primaryEmail")}
                       type="email"
                       placeholder="jane@hospital.ca"
                       form={form}
@@ -706,30 +828,30 @@ export function Redesigned() {
                     />
                     <TextField
                       name="secondaryEmail"
-                      label="Secondary Email Address"
+                      label={t("secondaryEmail")}
                       type="email"
-                      placeholder="jane.doe@gmail.com (optional)"
+                      placeholder={lang === "fr" ? "jane.doe@gmail.com (facultatif)" : "jane.doe@gmail.com (optional)"}
                       form={form}
                     />
                     <TextField
                       name="discipline"
-                      label="Professional Designation"
-                      description="e.g. physician, nurse, genetic counsellor, other"
-                      placeholder="Enter your professional designation"
+                      label={t("discipline")}
+                      description={t("disciplineHint")}
+                      placeholder={t("disciplinePh")}
                       form={form}
                       required
                       inputFilter={ALPHA_FILTER}
-                      filterWarning="Numbers and symbols are not allowed in this field."
+                      filterWarning={lang === "fr" ? "Les chiffres et symboles ne sont pas autorisés." : "Numbers and symbols are not allowed in this field."}
                     />
                     <TextField
                       name="subspecialty"
-                      label="Sub-specialty Area of Focus"
-                      description="e.g., Cardiology, Hematology, Neurology"
-                      placeholder="Enter your sub-specialty"
+                      label={t("subspecialty")}
+                      description={t("subspecialtyHint")}
+                      placeholder={t("subspecialtyPh")}
                       form={form}
                       required
                       inputFilter={ALPHA_FILTER}
-                      filterWarning="Numbers and symbols are not allowed in this field."
+                      filterWarning={lang === "fr" ? "Les chiffres et symboles ne sont pas autorisés." : "Numbers and symbols are not allowed in this field."}
                     />
                   </div>
 
@@ -739,7 +861,7 @@ export function Redesigned() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className={FIELD_LABEL}>
-                          In my practice, I primarily care for patients with the following type(s) of amyloidosis:
+                          {t("amyloidQ")}
                           <span className="text-[#00AFE6]"> *</span>
                         </FormLabel>
                         <FormControl>
@@ -748,17 +870,22 @@ export function Redesigned() {
                             value={field.value}
                             className="flex flex-wrap gap-2 mt-3"
                           >
-                            {["ATTR", "AL", "Both ATTR and AL", "Other"].map((type) => (
+                            {[
+                              { key: "ATTR", label: "ATTR" },
+                              { key: "AL", label: "AL" },
+                              { key: "Both ATTR and AL", label: t("amyloidBoth") },
+                              { key: "Other", label: t("amyloidOther") },
+                            ].map((type) => (
                               <Label
-                                key={type}
-                                className={`flex-1 min-w-[120px] flex items-center justify-center h-11 px-4 rounded-lg border cursor-pointer text-sm font-medium whitespace-nowrap transition-all ${
-                                  field.value === type
+                                key={type.key}
+                                className={`flex-1 min-w-[120px] flex items-center justify-center h-11 px-4 rounded-lg border cursor-pointer text-sm font-normal whitespace-nowrap transition-all ${
+                                  field.value === type.key
                                     ? "border-[#00AFE6] bg-[#00AFE6]/5 text-[#00AFE6]"
-                                    : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
+                                    : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300"
                                 }`}
                               >
-                                <RadioGroupItem value={type} className="sr-only" />
-                                {type}
+                                <RadioGroupItem value={type.key} className="sr-only" />
+                                {type.label}
                               </Label>
                             ))}
                           </RadioGroup>
@@ -770,27 +897,27 @@ export function Redesigned() {
 
                   <TextField
                     name="institution"
-                    label="Clinic or Centre Name / Institution"
-                    placeholder="Enter your institution name"
+                    label={t("institution")}
+                    placeholder={t("institutionPh")}
                     form={form}
                     required
                     inputFilter={INSTITUTION_FILTER}
-                    filterWarning="Numbers are not allowed. Use letters and common punctuation only."
+                    filterWarning={lang === "fr" ? "Les chiffres ne sont pas autorisés. Lettres et ponctuation seulement." : "Numbers are not allowed. Use letters and common punctuation only."}
                   />
                 </Section>
               )}
 
               {/* Services Map */}
               {isMember && (
-                <Section title="Services Map">
+                <Section title={t("sectionServices")}>
                   <FormField
                     control={form.control}
                     name="wantsServicesMapInclusion"
                     render={({ field }) => (
                       <FormItem>
                         <QuestionRow
-                          label="Would you like your centre/clinic included in the Canadian Amyloidosis Services Map?"
-                          description="Helps patients across Canada find specialised care near them."
+                          label={t("servicesQ")}
+                          description={t("servicesDesc")}
                         >
                           <YesNo value={field.value as any} onChange={field.onChange} accent="cas" />
                         </QuestionRow>
@@ -803,7 +930,7 @@ export function Redesigned() {
                     <div className="space-y-5 animate-in fade-in slide-in-from-top-1 duration-300">
                       <TextField
                         name="streetName"
-                        label="Street Name"
+                        label={t("streetName")}
                         placeholder="123 Hospital Street"
                         form={form}
                         required
@@ -812,13 +939,13 @@ export function Redesigned() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <TextField
                           name="postalCode"
-                          label="Postal Code"
+                          label={t("postalCode")}
                           placeholder="M5G 2C4"
                           form={form}
                           required
                           inputFilter={POSTAL_FILTER}
                           maxLength={7}
-                          filterWarning="Only letters and numbers (Canadian postal format)."
+                          filterWarning={lang === "fr" ? "Lettres et chiffres seulement (format canadien)." : "Only letters and numbers (Canadian postal format)."}
                         />
                         <div className="hidden sm:block" />
                         <ProvinceCombobox form={form} mismatch={provinceMismatch} />
@@ -827,7 +954,7 @@ export function Redesigned() {
                           form={form}
                           codeName="phoneCode"
                           numberName="phoneNumber"
-                          label="Phone"
+                          label={t("phone")}
                           placeholder="555-1234"
                           required
                         />
@@ -835,7 +962,7 @@ export function Redesigned() {
                           form={form}
                           codeName="faxCode"
                           numberName="faxNumber"
-                          label="Fax"
+                          label={t("fax")}
                           placeholder="555-5678"
                         />
                       </div>
@@ -846,13 +973,13 @@ export function Redesigned() {
 
               {/* Communications */}
               {isMember && (
-                <Section title="Communications">
+                <Section title={t("sectionComms")}>
                   <FormField
                     control={form.control}
                     name="wantsCommunications"
                     render={({ field }) => (
                       <FormItem>
-                        <QuestionRow label="I would like to receive communication from the Canadian Amyloidosis Society (CAS): *">
+                        <QuestionRow label={`${t("commsCAS")} *`}>
                           <YesNo value={field.value as any} onChange={field.onChange} accent="cas" />
                         </QuestionRow>
                         <FormMessage className="text-xs" />
@@ -862,13 +989,13 @@ export function Redesigned() {
 
                   {wantsCANNMembership === "Yes" && (
                     <>
-                      <div className="h-px bg-slate-100" />
+                      <div className="h-px bg-slate-100 dark:bg-slate-800" />
                       <FormField
                         control={form.control}
                         name="cannCommunications"
                         render={({ field }) => (
                           <FormItem>
-                            <QuestionRow label="I would like to receive communication from the Canadian Amyloidosis Nursing Network (CANN): *">
+                            <QuestionRow label={`${t("commsCANN")} *`}>
                               <YesNo value={field.value as any} onChange={field.onChange} accent="cann" />
                             </QuestionRow>
                             <FormMessage className="text-xs" />
@@ -882,13 +1009,13 @@ export function Redesigned() {
 
               {/* Non-member */}
               {declinedBoth && (
-                <Section title="Non-member Contact">
-                  <TextField name="noMemberName" label="Name" placeholder="Enter your name" form={form} required />
+                <Section title={t("sectionNonMember")}>
+                  <TextField name="noMemberName" label={t("nmName")} placeholder={lang === "fr" ? "Saisissez votre nom" : "Enter your name"} form={form} required />
                   <TextField
                     name="noMemberEmail"
-                    label="Email"
+                    label={t("nmEmail")}
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder={lang === "fr" ? "Saisissez votre courriel" : "Enter your email"}
                     form={form}
                     required
                   />
@@ -897,12 +1024,12 @@ export function Redesigned() {
                     name="noMemberMessage"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className={FIELD_LABEL}>Message / Reason for Contact</FormLabel>
+                        <FormLabel className={FIELD_LABEL}>{t("nmMessage")}</FormLabel>
                         <FormControl>
                           <Textarea
                             {...field}
-                            placeholder="Please share why you're reaching out"
-                            className="min-h-[110px] bg-white border-slate-200 rounded-lg focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6]"
+                            placeholder={t("nmMessagePh")}
+                            className="min-h-[110px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-slate-100 focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6]"
                           />
                         </FormControl>
                         <FormMessage className="text-xs" />
@@ -915,16 +1042,16 @@ export function Redesigned() {
 
             {/* Submit */}
             {(isMember || declinedBoth) && (
-              <div className="bg-slate-50 border-t border-slate-100 px-8 sm:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p className="text-xs text-slate-500 text-center sm:text-left">
-                  Your information is kept private and never shared.
+              <div className="bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800 px-8 sm:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p className="text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
+                  {t("yourInfoPrivate")}
                 </p>
                 <Button
                   type="submit"
-                  className="px-8 h-11 text-sm font-semibold rounded-lg bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-md hover:shadow-lg hover:brightness-105 transition-all border-0"
+                  className="px-8 h-11 text-sm font-medium rounded-lg bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-md hover:shadow-lg hover:brightness-105 transition-all border-0"
                 >
                   <Send className="w-4 h-4 mr-2" />
-                  Submit Registration Form
+                  {t("submit")}
                 </Button>
               </div>
             )}
@@ -934,16 +1061,16 @@ export function Redesigned() {
 
       {/* Confirmation */}
       <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
-        <DialogContent className="sm:max-w-md text-center p-8 rounded-3xl">
+        <DialogContent className="sm:max-w-md text-center p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
           <DialogHeader>
             <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-tr from-[#00AFE6] to-[#00DD89] flex items-center justify-center mb-4">
               <CheckCircle2 className="w-8 h-8 text-white" />
             </div>
-            <DialogTitle className="text-2xl font-serif">Membership Registration Submitted!</DialogTitle>
-            <DialogDescription className="text-base">
-              We've received your form submission and we will be in touch soon with membership details.
-              <span className="block mt-3 px-3 py-1 bg-slate-100 rounded-md text-xs font-mono inline-block">
-                Reference ID: {submissionId}
+            <DialogTitle className="text-2xl font-serif text-slate-900 dark:text-slate-100">{t("confirmTitle")}</DialogTitle>
+            <DialogDescription className="text-base text-slate-600 dark:text-slate-300">
+              {t("confirmBody")}
+              <span className="block mt-3 px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-md text-xs font-mono inline-block">
+                {t("refId")}: {submissionId}
               </span>
             </DialogDescription>
           </DialogHeader>
@@ -951,10 +1078,11 @@ export function Redesigned() {
             onClick={() => setShowConfirmation(false)}
             className="mt-4 rounded-full px-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0"
           >
-            Close
+            {t("close")}
           </Button>
         </DialogContent>
       </Dialog>
+    </div>
     </div>
   );
 }

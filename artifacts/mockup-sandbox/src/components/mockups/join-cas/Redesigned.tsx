@@ -142,12 +142,12 @@ export function Redesigned() {
       <Label
         htmlFor={`${field.name}-${value}`}
         className={cn(
-          "relative flex flex-col items-center p-6 border-2 rounded-2xl cursor-pointer transition-all duration-200 text-center gap-3",
+          "relative flex flex-col items-center py-8 px-6 border-2 rounded-2xl cursor-pointer transition-all duration-300 text-center gap-4",
           isSelected 
             ? brand === 'cann' 
-              ? "border-pink-500 bg-pink-50/50 dark:bg-pink-950/20" 
-              : "border-[#00AFE6] bg-[#00AFE6]/5 dark:bg-[#00AFE6]/10"
-            : "border-muted hover:border-muted-foreground/30 hover:bg-muted/50",
+              ? "border-transparent [background:linear-gradient(to_bottom,rgba(253,242,248,0.9),rgba(253,242,248,0.4))_padding-box,linear-gradient(to_right,#ec4899,#a855f7)_border-box] shadow-md" 
+              : "border-transparent [background:linear-gradient(to_bottom,rgba(230,248,255,0.9),rgba(240,251,255,0.4))_padding-box,linear-gradient(to_right,#00AFE6,#00DD89)_border-box] shadow-md"
+            : "border-slate-200 bg-white hover:border-slate-300 shadow-sm hover:shadow-md",
         )}
       >
         <FormControl>
@@ -155,25 +155,27 @@ export function Redesigned() {
         </FormControl>
         
         <div className={cn(
-          "p-3 rounded-full transition-colors",
+          "w-14 h-14 rounded-full flex items-center justify-center transition-colors shadow-sm",
           isSelected 
-            ? brand === 'cann' ? "bg-pink-100 text-pink-600 dark:bg-pink-900/50" : "bg-[#00AFE6]/10 text-[#00AFE6]"
-            : "bg-muted text-muted-foreground"
+            ? brand === 'cann' ? "bg-gradient-to-tr from-pink-500 to-purple-500 text-white" : "bg-gradient-to-tr from-[#00AFE6] to-[#00DD89] text-white"
+            : "bg-slate-100 text-slate-500"
         )}>
-          <Icon className="w-6 h-6" />
+          <Icon className="w-8 h-8" />
         </div>
         
         <div>
-          <div className="font-semibold text-lg">{title}</div>
-          {description && <div className="text-sm text-muted-foreground mt-1 font-normal">{description}</div>}
+          <div className="font-semibold text-xl text-slate-900">{title}</div>
+          {description && <div className="text-sm text-slate-500 mt-2 font-normal leading-relaxed">{description}</div>}
         </div>
 
         {isSelected && (
           <div className="absolute top-4 right-4">
-            <CheckCircle2 className={cn(
-              "w-5 h-5",
-              brand === 'cann' ? "text-pink-500" : "text-[#00AFE6]"
-            )} />
+            <div className={cn(
+              "rounded-full p-1",
+              brand === 'cann' ? "bg-pink-100 text-pink-500" : "bg-[#00AFE6]/10 text-[#00AFE6]"
+            )}>
+              <CheckCircle2 className="w-5 h-5" />
+            </div>
           </div>
         )}
       </Label>
@@ -181,7 +183,31 @@ export function Redesigned() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-[#00AFE6]/20">
+    <div
+      className="min-h-screen bg-white text-slate-900 selection:bg-[#00AFE6]/20"
+      style={{
+        colorScheme: 'light',
+        ['--background' as any]: '0 0% 100%',
+        ['--foreground' as any]: '222 47% 11%',
+        ['--card' as any]: '0 0% 100%',
+        ['--card-foreground' as any]: '222 47% 11%',
+        ['--muted' as any]: '210 40% 96%',
+        ['--muted-foreground' as any]: '215 16% 47%',
+        ['--border' as any]: '214 32% 91%',
+        ['--input' as any]: '214 32% 91%',
+        ['--ring' as any]: '195 100% 45%',
+        ['--primary' as any]: '195 100% 45%',
+        ['--primary-foreground' as any]: '0 0% 100%',
+        ['--secondary' as any]: '210 40% 96%',
+        ['--secondary-foreground' as any]: '222 47% 11%',
+        ['--accent' as any]: '210 40% 96%',
+        ['--accent-foreground' as any]: '222 47% 11%',
+        ['--destructive' as any]: '0 84% 60%',
+        ['--destructive-foreground' as any]: '0 0% 100%',
+        ['--popover' as any]: '0 0% 100%',
+        ['--popover-foreground' as any]: '222 47% 11%',
+      }}
+    >
       {/* Refined Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
@@ -194,19 +220,25 @@ export function Redesigned() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 sm:px-6 py-12 pb-32">
+      <main className="container mx-auto px-4 sm:px-6 py-12 pb-48">
         <div className="max-w-3xl mx-auto">
           
           {/* Wizard Header */}
-          <div className="mb-12">
-            <h1 className="text-4xl font-rosarivo font-bold mb-4 tracking-tight">
-              Registration
+          <div className="mb-12 text-center">
+            <div className="inline-flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-full px-4 py-1.5 mb-6">
+              <UserPlus className="w-4 h-4 text-[#00AFE6]" />
+              <span className="text-xs font-semibold uppercase tracking-widest text-slate-600">
+                Step {currentStep + 1} of {activeSteps.length} — {activeSteps[currentStep].title}
+              </span>
+            </div>
+            <h1 className="text-5xl font-rosarivo font-bold mb-4 tracking-tight">
+              Join <span className="bg-gradient-to-r from-[#00AFE6] to-teal-400 bg-clip-text text-transparent">CAS</span> &amp; <span className="bg-gradient-to-r from-teal-400 to-[#00DD89] bg-clip-text text-transparent">CANN</span>
             </h1>
             
             {/* Progress Stepper */}
-            <div className="mt-8">
+            <div className="mt-12 px-8">
               <div className="flex items-center justify-between relative">
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-muted/60" />
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-slate-200" />
                 <div 
                   className="absolute left-0 top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-[#00AFE6] to-[#00DD89] transition-all duration-500"
                   style={{ width: `${(currentStep / (activeSteps.length - 1)) * 100}%` }}
@@ -217,18 +249,18 @@ export function Redesigned() {
                   const isCompleted = index < currentStep;
                   
                   return (
-                    <div key={step.id} className="relative z-10 flex flex-col items-center gap-2">
+                    <div key={step.id} className="relative z-10 flex flex-col items-center gap-3">
                       <div className={cn(
-                        "w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ring-4 ring-background",
-                        isActive ? "bg-[#00AFE6] text-white shadow-md shadow-[#00AFE6]/20 scale-110" : 
+                        "w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ring-4 ring-white shadow-sm",
+                        isActive ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white scale-110 shadow-[#00AFE6]/25" : 
                         isCompleted ? "bg-[#00DD89] text-white" : 
-                        "bg-muted text-muted-foreground"
+                        "bg-white border-2 border-slate-200 text-slate-400"
                       )}>
-                        {isCompleted ? <CheckCircle className="w-4 h-4" /> : index + 1}
+                        {isCompleted ? <CheckCircle className="w-5 h-5" /> : index + 1}
                       </div>
                       <span className={cn(
-                        "text-xs font-medium absolute -bottom-6 w-max text-center transition-colors",
-                        isActive ? "text-foreground" : "text-muted-foreground"
+                        "text-sm font-medium absolute -bottom-8 w-max text-center transition-colors",
+                        isActive ? "text-slate-900" : "text-slate-500"
                       )}>
                         {step.title}
                       </span>
@@ -254,37 +286,39 @@ export function Redesigned() {
                   
                   {/* STEP 1: MEMBERSHIP */}
                   {currentStep === 0 && (
-                    <div className="space-y-12">
-                      <div className="space-y-2">
-                        <h2 className="text-2xl font-rosarivo font-semibold">Community Selection</h2>
-                        <p className="text-muted-foreground">Select the organizations you would like to join.</p>
+                    <div className="space-y-20">
+                      <div className="space-y-4">
+                        <h2 className="text-3xl font-rosarivo font-bold text-center">Community Selection</h2>
+                        <p className="text-slate-500 text-center max-w-xl mx-auto text-lg">Both communities welcome physicians, nurses, and allied health professionals. Membership is free and never shared.</p>
                       </div>
 
                       <FormField
                         control={form.control}
                         name="wantsMembership"
                         render={({ field }) => (
-                          <FormItem className="space-y-4">
-                            <FormLabel className="text-base font-semibold flex items-center gap-2">
+                          <FormItem className="space-y-6">
+                            <FormLabel className="text-xl font-semibold flex items-center gap-2 text-slate-900">
                               Canadian Amyloidosis Society (CAS)
                             </FormLabel>
                             <FormControl>
                               <RadioGroup
                                 onValueChange={field.onChange}
                                 defaultValue={field.value}
-                                className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                                className="grid grid-cols-1 sm:grid-cols-2 gap-6"
                               >
                                 <SelectionCard 
                                   field={field} 
                                   value="Yes" 
-                                  icon={CheckCircle2} 
+                                  icon={Sparkles} 
                                   title="Yes, join CAS" 
+                                  description="Access exclusive resources, events & community"
                                 />
                                 <SelectionCard 
                                   field={field} 
                                   value="No" 
                                   icon={ChevronRight} 
                                   title="No, thank you" 
+                                  description="Continue without joining CAS at this time"
                                 />
                               </RadioGroup>
                             </FormControl>
@@ -293,18 +327,16 @@ export function Redesigned() {
                         )}
                       />
 
-                      <div className="w-full h-px bg-border/40" />
-
                       <FormField
                         control={form.control}
                         name="wantsCANNMembership"
                         render={({ field }) => (
-                          <FormItem className="space-y-4">
-                            <div className="space-y-1">
-                              <FormLabel className="text-base font-semibold flex items-center gap-2">
+                          <FormItem className="space-y-6">
+                            <div className="space-y-2">
+                              <FormLabel className="text-xl font-semibold flex items-center gap-2 text-slate-900">
                                 Canadian Amyloidosis Nursing Network (CANN)
                               </FormLabel>
-                              <FormDescription>
+                              <FormDescription className="text-base">
                                 All CANN members are automatically members of CAS.
                               </FormDescription>
                             </div>
@@ -312,13 +344,14 @@ export function Redesigned() {
                               <RadioGroup
                                 onValueChange={field.onChange}
                                 defaultValue={field.value}
-                                className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                                className="grid grid-cols-1 sm:grid-cols-2 gap-6"
                               >
                                 <SelectionCard 
                                   field={field} 
                                   value="Yes" 
                                   icon={Heart} 
                                   title="Yes, join CANN" 
+                                  description="Join the national nursing network for amyloidosis"
                                   brand="cann"
                                 />
                                 <SelectionCard 
@@ -326,6 +359,7 @@ export function Redesigned() {
                                   value="No" 
                                   icon={ChevronRight} 
                                   title="No, thank you" 
+                                  description="Continue without joining CANN at this time"
                                 />
                               </RadioGroup>
                             </FormControl>
@@ -650,7 +684,7 @@ export function Redesigned() {
               </AnimatePresence>
 
               {/* Navigation Controls */}
-              <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-xl border-t z-40">
+              <div className="fixed bottom-0 left-0 right-0 p-6 bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50">
                 <div className="container mx-auto px-4 sm:px-6 max-w-3xl flex justify-between items-center gap-4">
                   {currentStep > 0 ? (
                     <Button 
@@ -670,9 +704,9 @@ export function Redesigned() {
                   {currentStep < activeSteps.length - 1 ? (
                     <Button 
                       type="button" 
-                      size="lg"
                       onClick={nextStep}
-                      className="rounded-full px-8 bg-foreground hover:bg-foreground/90 text-background"
+                      disabled={currentStep === 0 && (wantsMembership === undefined || wantsCANNMembership === undefined)}
+                      className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-10 py-6 text-base font-semibold rounded-full shadow-lg shadow-[#00AFE6]/25 hover:shadow-xl transition-all border-0 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Continue
                       <ChevronRight className="w-4 h-4 ml-2" />
@@ -680,9 +714,8 @@ export function Redesigned() {
                   ) : (
                     <Button 
                       type="submit" 
-                      size="lg"
                       disabled={isSubmitting}
-                      className="rounded-full px-8 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] hover:opacity-90 text-white font-medium border-0"
+                      className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-10 py-6 text-base font-semibold rounded-full shadow-lg shadow-[#00AFE6]/25 hover:shadow-xl transition-all border-0 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? "Submitting..." : "Submit Registration"}
                     </Button>

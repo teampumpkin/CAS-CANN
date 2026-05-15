@@ -35,6 +35,7 @@ import michelleMezeiPhoto from "@assets/Michelle_Mezei_1772024001282.jpeg";
 import victorJimenezPhoto from "@assets/Victor_Jimenez-Zepeda_1772024001277.jpg";
 import janVeenhuyzenPhoto from "@assets/Jan_Veenhuyzen_1772024001281.jpg";
 import geneviereMattePhoto from "@assets/L476N-03WTAMD_MatteG_02_1774257950527.jpg";
+import francoisTournouxPhoto from "@assets/IMG_5225_-_Copy_1778830117607.jpg";
 
 type CommitteeMember = {
   name: string;
@@ -373,6 +374,8 @@ export default function About() {
                 {
                   name: "François Tournoux, MD",
                   institution: "McGill University",
+                  photo: francoisTournouxPhoto,
+                  description: "Dr. François Tournoux is an Associate Professor at McGill University and an Adjunct Professor at the University of Montreal Faculty of Medicine. He is the Director of Non-Invasive Cardiology and of the Echocardiography lab at McGill University Hospital Centre. He is also a FRQS clinical researcher working on developing new technologies and strategies to transform heart failure management and patient experience, with a focus on cardiac imaging, artificial intelligence, telemedicine, exercise, and amyloidosis.\n\nDr. Tournoux completed his cardiology training at the University of Paris in France, followed by a fellowship in echocardiography at Massachusetts General Hospital (Boston, USA). He was the Director of the heart failure clinic at CHUM (Centre Hospitalier de l'Université de Montréal) from 2012 to 2020 and the President of the Quebec Heart Failure Society from 2015 to 2023.",
                 },
                 {
                   name: "Christopher Venner, MD",

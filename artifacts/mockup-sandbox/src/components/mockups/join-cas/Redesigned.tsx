@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -633,6 +634,37 @@ const I18N: Record<string, { en: string; fr: string }> = {
   },
   refId: { en: "Reference ID", fr: "N° de référence" },
   close: { en: "Close", fr: "Fermer" },
+
+  // CASL consent block
+  consentIntro: {
+    en: "The Canadian Amyloidosis Society would like your permission to contact you. Tick the boxes for the messages you'd like to receive — every box is optional, and your membership goes through regardless of what you choose.",
+    fr: "La Société canadienne de l'amyloïdose souhaite votre permission pour vous contacter. Cochez les cases correspondant aux communications que vous désirez recevoir — chaque case est facultative et votre adhésion sera traitée quel que soit votre choix.",
+  },
+  consentCASGroup: { en: "From CAS — Canadian Amyloidosis Society", fr: "De la SCA — Société canadienne de l'amyloïdose" },
+  consentCANNGroup: { en: "From CANN — Canadian Amyloidosis Nursing Network", fr: "Du RCIA — Réseau canadien des infirmières en amyloïdose" },
+  cNewsletter: { en: "Newsletter and society updates", fr: "Infolettre et nouvelles de la société" },
+  cEvents: { en: "Event invitations (Summit, Journal Club, town halls)", fr: "Invitations aux événements (Sommet, Club de lecture, assemblées)" },
+  cResearch: { en: "Research opportunities and surveys", fr: "Possibilités de recherche et sondages" },
+  cFundraising: { en: "Fundraising and awareness campaigns", fr: "Collectes de fonds et campagnes de sensibilisation" },
+  cCannNews: { en: "CANN newsletter and educational series", fr: "Infolettre RCIA et série éducative" },
+  cCannEvents: { en: "CANN event invitations", fr: "Invitations aux événements du RCIA" },
+  consentLegalCAS: {
+    en: "By submitting this form, you consent to be contacted by the Canadian Amyloidosis Society (CAS) — 123 Example Street, Toronto, ON  M5G 2C4 · info@amyloid.ca · amyloid.ca — for the purposes you have selected above.",
+    fr: "En soumettant ce formulaire, vous consentez à être contacté(e) par la Société canadienne de l'amyloïdose (SCA) — 123, rue Exemple, Toronto, ON  M5G 2C4 · info@amyloid.ca · amyloid.ca — aux fins que vous avez sélectionnées ci-dessus.",
+  },
+  consentLegalCANN: {
+    en: "If you selected CANN options, you also consent to be contacted by the Canadian Amyloidosis Nursing Network (CANN), c/o the Canadian Amyloidosis Society — 123 Example Street, Toronto, ON  M5G 2C4 · cann@amyloid.ca · amyloid.ca/cann — and you understand CAS is contacting you on behalf of CANN for those communications.",
+    fr: "Si vous avez sélectionné des options du RCIA, vous consentez également à être contacté(e) par le Réseau canadien des infirmières en amyloïdose (RCIA), a/s de la Société canadienne de l'amyloïdose — 123, rue Exemple, Toronto, ON  M5G 2C4 · cann@amyloid.ca · amyloid.ca/cann — et vous comprenez que la SCA vous contacte au nom du RCIA pour ces communications.",
+  },
+  consentLegalWithdraw: {
+    en: "You may withdraw your consent at any time using the unsubscribe link in any email we send, by emailing info@amyloid.ca, or via the email preferences page linked in every message. Withdrawal requests are honoured within 10 business days. See our Privacy Policy for full details on how we collect and use your information.",
+    fr: "Vous pouvez retirer votre consentement à tout moment en cliquant sur le lien de désabonnement dans tout courriel que nous envoyons, en écrivant à info@amyloid.ca, ou via la page des préférences de courriel liée à chaque message. Les demandes de retrait sont traitées dans un délai de 10 jours ouvrables. Consultez notre Politique de confidentialité pour plus de détails sur la collecte et l'utilisation de vos renseignements.",
+  },
+  privacyPolicy: { en: "Privacy Policy", fr: "Politique de confidentialité" },
+  consentNoneNote: {
+    en: "You haven't selected any communications — that's fine. We'll only contact you about your membership itself.",
+    fr: "Vous n'avez sélectionné aucune communication — c'est très bien. Nous vous contacterons uniquement au sujet de votre adhésion.",
+  },
 };
 function useT(lang: Lang) {
   return (key: keyof typeof I18N) => I18N[key][lang];
@@ -672,6 +704,12 @@ export function Redesigned() {
       faxNumber: "",
       wantsCommunications: undefined,
       cannCommunications: undefined,
+      consentCASNewsletter: false,
+      consentCASEvents: false,
+      consentCASResearch: false,
+      consentCASFundraising: false,
+      consentCANNNewsletter: false,
+      consentCANNEvents: false,
       noMemberName: "",
       noMemberEmail: "",
       noMemberMessage: "",
@@ -682,6 +720,23 @@ export function Redesigned() {
   const wantsCANNMembership = form.watch("wantsCANNMembership");
   const wantsServicesMapInclusion = form.watch("wantsServicesMapInclusion");
   const postalCode = form.watch("postalCode");
+  const consents = form.watch([
+    "consentCASNewsletter",
+    "consentCASEvents",
+    "consentCASResearch",
+    "consentCASFundraising",
+    "consentCANNNewsletter",
+    "consentCANNEvents",
+  ]);
+  const noConsentTicked = !consents.some(Boolean);
+
+  // Reset CANN consents if user changes CANN membership to No
+  useEffect(() => {
+    if (wantsCANNMembership !== "Yes") {
+      if (form.getValues("consentCANNNewsletter")) form.setValue("consentCANNNewsletter", false);
+      if (form.getValues("consentCANNEvents")) form.setValue("consentCANNEvents", false);
+    }
+  }, [wantsCANNMembership, form]);
   const cityValue = form.watch("city");
   const provinceValue = form.watch("province");
   const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
@@ -971,39 +1026,106 @@ export function Redesigned() {
                 </Section>
               )}
 
-              {/* Communications */}
+              {/* Communications — CASL granular consent */}
               {isMember && (
                 <Section title={t("sectionComms")}>
-                  <FormField
-                    control={form.control}
-                    name="wantsCommunications"
-                    render={({ field }) => (
-                      <FormItem>
-                        <QuestionRow label={`${t("commsCAS")} *`}>
-                          <YesNo value={field.value as any} onChange={field.onChange} accent="cas" />
-                        </QuestionRow>
-                        <FormMessage className="text-xs" />
-                      </FormItem>
-                    )}
-                  />
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    {t("consentIntro")}
+                  </p>
 
+                  {/* CAS group */}
+                  <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-900/40 p-4 space-y-3">
+                    <div className="text-xs font-medium uppercase tracking-wider text-[#00AFE6]">
+                      {t("consentCASGroup")}
+                    </div>
+                    <div className="space-y-2.5">
+                      {([
+                        ["consentCASNewsletter", t("cNewsletter")],
+                        ["consentCASEvents", t("cEvents")],
+                        ["consentCASResearch", t("cResearch")],
+                        ["consentCASFundraising", t("cFundraising")],
+                      ] as const).map(([name, label]) => (
+                        <FormField
+                          key={name}
+                          control={form.control}
+                          name={name as any}
+                          render={({ field }) => (
+                            <FormItem className="flex items-start gap-3 space-y-0">
+                              <FormControl>
+                                <Checkbox
+                                  checked={!!field.value}
+                                  onCheckedChange={field.onChange}
+                                  className="mt-0.5 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                                />
+                              </FormControl>
+                              <FormLabel className="text-sm font-normal text-slate-700 dark:text-slate-200 cursor-pointer leading-snug">
+                                {label}
+                              </FormLabel>
+                            </FormItem>
+                          )}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CANN group — only if joining CANN */}
                   {wantsCANNMembership === "Yes" && (
-                    <>
-                      <div className="h-px bg-slate-100 dark:bg-slate-800" />
-                      <FormField
-                        control={form.control}
-                        name="cannCommunications"
-                        render={({ field }) => (
-                          <FormItem>
-                            <QuestionRow label={`${t("commsCANN")} *`}>
-                              <YesNo value={field.value as any} onChange={field.onChange} accent="cann" />
-                            </QuestionRow>
-                            <FormMessage className="text-xs" />
-                          </FormItem>
-                        )}
-                      />
-                    </>
+                    <div className="rounded-xl border border-pink-200 dark:border-pink-900/40 bg-pink-50/40 dark:bg-pink-950/20 p-4 space-y-3">
+                      <div className="text-xs font-medium uppercase tracking-wider text-pink-600 dark:text-pink-400">
+                        {t("consentCANNGroup")}
+                      </div>
+                      <div className="space-y-2.5">
+                        {([
+                          ["consentCANNNewsletter", t("cCannNews")],
+                          ["consentCANNEvents", t("cCannEvents")],
+                        ] as const).map(([name, label]) => (
+                          <FormField
+                            key={name}
+                            control={form.control}
+                            name={name as any}
+                            render={({ field }) => (
+                              <FormItem className="flex items-start gap-3 space-y-0">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={!!field.value}
+                                    onCheckedChange={field.onChange}
+                                    className="mt-0.5 data-[state=checked]:bg-pink-500 data-[state=checked]:border-pink-500"
+                                  />
+                                </FormControl>
+                                <FormLabel className="text-sm font-normal text-slate-700 dark:text-slate-200 cursor-pointer leading-snug">
+                                  {label}
+                                </FormLabel>
+                              </FormItem>
+                            )}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   )}
+
+                  {/* Helpful note when nothing is ticked */}
+                  {noConsentTicked && (
+                    <p className="text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40 rounded-lg px-3 py-2">
+                      {t("consentNoneNote")}
+                    </p>
+                  )}
+
+                  {/* CASL legal fine-print block */}
+                  <div className="text-xs leading-relaxed text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-4 space-y-2">
+                    <p>{t("consentLegalCAS")}</p>
+                    {wantsCANNMembership === "Yes" && <p>{t("consentLegalCANN")}</p>}
+                    <p>
+                      {t("consentLegalWithdraw")}{" "}
+                      <a
+                        href="/privacy-policy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#00AFE6] hover:underline"
+                      >
+                        {t("privacyPolicy")} →
+                      </a>
+                    </p>
+                  </div>
                 </Section>
               )}
 

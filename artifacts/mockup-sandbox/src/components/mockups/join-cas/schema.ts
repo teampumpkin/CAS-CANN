@@ -32,9 +32,17 @@ export const casRegistrationSchema = z.object({
   phone: z.string().optional(),
   fax: z.string().optional(),
 
-  // Communications
+  // Communications (legacy — kept so Current.tsx still compiles)
   wantsCommunications: z.enum(["Yes", "No"]).optional(),
   cannCommunications: z.enum(["Yes", "No"]).optional(),
+
+  // CASL granular consent (express opt-in — unticked by default)
+  consentCASNewsletter: z.boolean().optional().default(false),
+  consentCASEvents: z.boolean().optional().default(false),
+  consentCASResearch: z.boolean().optional().default(false),
+  consentCASFundraising: z.boolean().optional().default(false),
+  consentCANNNewsletter: z.boolean().optional().default(false),
+  consentCANNEvents: z.boolean().optional().default(false),
 
   // Non-member
   noMemberName: z.string().optional(),
@@ -67,19 +75,12 @@ export const casRegistrationSchema = z.object({
     if (!data.amyloidosisType) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please select the type of amyloidosis patients you care for", path: ["amyloidosisType"] });
     if (!data.institution?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Clinic or Centre Name/Institution is required", path: ["institution"] });
     if (!data.wantsServicesMapInclusion) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please indicate map services preference", path: ["wantsServicesMapInclusion"] });
-    if (!data.wantsCommunications) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please select whether you want to receive communications", path: ["wantsCommunications"] });
   }
 
   if (data.wantsServicesMapInclusion === "Yes") {
     if (!data.streetName?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Street name is required", path: ["streetName"] });
     if (!data.postalCode?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Postal code is required", path: ["postalCode"] });
     if (!data.phoneNumber?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Phone number is required", path: ["phoneNumber"] });
-  }
-
-  if (data.wantsCANNMembership === "Yes") {
-    if (!data.cannCommunications) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please select whether you want to receive CANN communications", path: ["cannCommunications"] });
-    }
   }
 
   if (!isMember) {

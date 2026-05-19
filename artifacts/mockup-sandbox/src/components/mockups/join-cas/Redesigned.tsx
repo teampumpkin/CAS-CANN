@@ -514,9 +514,9 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="space-y-5">
+    <section className="space-y-3">
       {title && <h2 className="text-[11px] uppercase tracking-[0.12em] font-medium text-slate-400 dark:text-slate-500">{title}</h2>}
-      <div className="space-y-5">{children}</div>
+      <div className="space-y-4">{children}</div>
     </section>
   );
 }
@@ -777,7 +777,7 @@ export function Redesigned() {
               </p>
             </div>
 
-            <div className="px-8 sm:px-10 pb-8 sm:pb-10 pt-6 space-y-10 divide-y divide-slate-100 dark:divide-slate-800 [&>*:not(:first-child)]:pt-10">
+            <div className="px-8 sm:px-10 pb-8 sm:pb-10 pt-5 space-y-6 divide-y divide-slate-100 dark:divide-slate-800 [&>*:not(:first-child)]:pt-6">
               {/* Membership */}
               <Section title={t("sectionMembership")}>
                 <FormField

@@ -635,11 +635,32 @@ const I18N: Record<string, { en: string; fr: string }> = {
   refId: { en: "Reference ID", fr: "N° de référence" },
   close: { en: "Close", fr: "Fermer" },
 
-  // CASL consent block — single bundled checkbox
+  // CASL consent block — single bundled checkbox. The visible UI is short;
+  // the full legal wording is kept here and snapshot into the consent audit
+  // log on submit so CASL proof-of-consent stays defensible.
   consentIntro: {
-    en: "The Canadian Amyloidosis Society would like your permission to contact you. Ticking the box below is optional, and your membership goes through regardless of what you choose.",
-    fr: "La Société canadienne de l'amyloïdose souhaite votre permission pour vous contacter. Cocher la case ci-dessous est facultatif et votre adhésion sera traitée quel que soit votre choix.",
+    en: "Optional — your membership goes through either way.",
+    fr: "Facultatif — votre adhésion sera traitée dans tous les cas.",
   },
+  consentSingleShort: {
+    en: "Yes, please send me communications from CAS",
+    fr: "Oui, envoyez-moi les communications de la SCA",
+  },
+  consentSingleShortCANN: {
+    en: " and CANN",
+    fr: " et du RCIA",
+  },
+  consentSingleHelp: {
+    en: "See what you'll receive and how to unsubscribe",
+    fr: "Voir ce que vous recevrez et comment vous désabonner",
+  },
+  consentLegalShort: {
+    en: "By submitting, you agree to our",
+    fr: "En soumettant, vous acceptez notre",
+  },
+  privacyPolicy: { en: "Privacy Policy", fr: "Politique de confidentialité" },
+  // Detailed wording — NOT shown in the form UI; lives on /communications-preferences
+  // and is snapshot into the audit log for legal record-keeping.
   consentSingleCAS: {
     en: "Yes, I would like to receive communications from the Canadian Amyloidosis Society — including the newsletter and society updates, event invitations (Summit, Journal Club, town halls), research opportunities and surveys, and fundraising and awareness campaigns.",
     fr: "Oui, je souhaite recevoir des communications de la Société canadienne de l'amyloïdose — y compris l'infolettre et les nouvelles de la société, les invitations aux événements (Sommet, Club de lecture, assemblées), les possibilités de recherche et sondages, ainsi que les collectes de fonds et campagnes de sensibilisation.",
@@ -660,10 +681,9 @@ const I18N: Record<string, { en: string; fr: string }> = {
     en: "You may withdraw your consent at any time using the unsubscribe link in any email we send, by emailing info@amyloid.ca, or via the email preferences page linked in every message. Withdrawal requests are honoured within 10 business days. See our Privacy Policy for full details on how we collect and use your information.",
     fr: "Vous pouvez retirer votre consentement à tout moment en cliquant sur le lien de désabonnement dans tout courriel que nous envoyons, en écrivant à info@amyloid.ca, ou via la page des préférences de courriel liée à chaque message. Les demandes de retrait sont traitées dans un délai de 10 jours ouvrables. Consultez notre Politique de confidentialité pour plus de détails sur la collecte et l'utilisation de vos renseignements.",
   },
-  privacyPolicy: { en: "Privacy Policy", fr: "Politique de confidentialité" },
   consentNoneNote: {
-    en: "You haven't selected any communications — that's fine. We'll only contact you about your membership itself.",
-    fr: "Vous n'avez sélectionné aucune communication — c'est très bien. Nous vous contacterons uniquement au sujet de votre adhésion.",
+    en: "You haven't opted in to communications — that's fine. We'll only contact you about your membership itself.",
+    fr: "Vous n'avez pas accepté les communications — c'est très bien. Nous vous contacterons uniquement au sujet de votre adhésion.",
   },
 };
 function useT(lang: Lang) {
@@ -1026,20 +1046,19 @@ export function Redesigned() {
                 </Section>
               )}
 
-              {/* Communications — single bundled consent checkbox */}
+              {/* Communications — single bundled consent checkbox.
+                  The detailed legal wording lives on /communications-preferences
+                  and in our Privacy Policy. Keeping the visible block short is
+                  good UX without weakening the consent: the audit log snapshots
+                  the full legal text on submit, and the user can read the
+                  complete details before ticking via the link below. */}
               {isMember && (
                 <Section title={t("sectionComms")}>
-                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {t("consentIntro")}
-                  </p>
-
-                  {/* Single consent box — label enumerates every purpose so the
-                      consent is still informed under CASL/PIPEDA. */}
                   <FormField
                     control={form.control}
                     name="consentAll"
                     render={({ field }) => (
-                      <FormItem className="flex items-start gap-3 space-y-0 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-900/40 p-4">
+                      <FormItem className="flex items-start gap-3 space-y-0">
                         <FormControl>
                           <Checkbox
                             checked={!!field.value}
@@ -1047,44 +1066,44 @@ export function Redesigned() {
                             className="mt-0.5 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
                           />
                         </FormControl>
-                        <FormLabel className="text-sm font-normal text-slate-700 dark:text-slate-200 cursor-pointer leading-relaxed">
-                          {t("consentSingleCAS")}
-                          {wantsCANNMembership === "Yes" && (
-                            <>
-                              {" "}
+                        <div className="flex-1 space-y-1">
+                          <FormLabel className="text-sm font-normal text-slate-700 dark:text-slate-200 cursor-pointer leading-snug">
+                            {t("consentSingleShort")}
+                            {wantsCANNMembership === "Yes" && (
                               <span className="text-pink-600 dark:text-pink-400">
-                                {t("consentSingleCANN")}
+                                {t("consentSingleShortCANN")}
                               </span>
-                            </>
-                          )}
-                        </FormLabel>
+                            )}
+                          </FormLabel>
+                          <div className="text-xs text-slate-500 dark:text-slate-400">
+                            <a
+                              href="/communications-preferences"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-[#00AFE6] hover:underline"
+                            >
+                              {t("consentSingleHelp")} →
+                            </a>
+                            <span className="mx-1.5 text-slate-300 dark:text-slate-600">·</span>
+                            <span>{t("consentIntro")}</span>
+                          </div>
+                        </div>
                       </FormItem>
                     )}
                   />
 
-                  {/* Helpful note when the box isn't ticked */}
-                  {noConsentTicked && (
-                    <p className="text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40 rounded-lg px-3 py-2">
-                      {t("consentNoneNote")}
-                    </p>
-                  )}
-
-                  {/* CASL legal fine-print block */}
-                  <div className="text-xs leading-relaxed text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-4 space-y-2">
-                    <p>{t("consentLegalCAS")}</p>
-                    {wantsCANNMembership === "Yes" && <p>{t("consentLegalCANN")}</p>}
-                    <p>
-                      {t("consentLegalWithdraw")}{" "}
-                      <a
-                        href="/privacy-policy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#00AFE6] hover:underline"
-                      >
-                        {t("privacyPolicy")} →
-                      </a>
-                    </p>
-                  </div>
+                  {/* Short legal footer — full text lives behind the Privacy Policy link */}
+                  <p className="text-xs text-slate-500 dark:text-slate-400 pt-2">
+                    {t("consentLegalShort")}{" "}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#00AFE6] hover:underline"
+                    >
+                      {t("privacyPolicy")} →
+                    </a>
+                  </p>
                 </Section>
               )}
 

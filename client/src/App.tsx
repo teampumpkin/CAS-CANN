@@ -63,6 +63,8 @@ const CommandDashboard = lazy(() => import("@/pages/CommandDashboard"));
 const AdminSubmissions = lazy(() => import("@/pages/AdminSubmissions"));
 const CANNTownhallRegistration = lazy(() => import("@/pages/CANNTownhallRegistration"));
 const EventsDownload = lazy(() => import("@/pages/EventsDownload"));
+const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
+const CommunicationsPreferences = lazy(() => import("@/pages/CommunicationsPreferences"));
 
 // Loading component
 const PageLoader = () => (
@@ -131,6 +133,8 @@ function Router() {
         {stagingOnly && <Route path="/admin/submissions" component={AdminSubmissions} />}
         <Route path="/events/cann-townhall/register" component={CANNTownhallRegistration} />
         <Route path="/eventsdownload" component={EventsDownload} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/communications-preferences" component={CommunicationsPreferences} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

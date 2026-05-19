@@ -36,7 +36,14 @@ export const casRegistrationSchema = z.object({
   wantsCommunications: z.enum(["Yes", "No"]).optional(),
   cannCommunications: z.enum(["Yes", "No"]).optional(),
 
-  // CASL granular consent (express opt-in — unticked by default)
+  // CASL consent — single bundled opt-in covering ALL purposes listed in the
+  // visible checkbox label. Per-purpose booleans below are derived from this
+  // single answer so the backend audit log keeps its 6-key shape (and the
+  // future preference centre can still flip them independently).
+  consentAll: z.boolean().optional().default(false),
+
+  // Derived per-purpose flags (always equal to consentAll at submission time;
+  // CANN keys are forced false if the user is not joining CANN).
   consentCASNewsletter: z.boolean().optional().default(false),
   consentCASEvents: z.boolean().optional().default(false),
   consentCASResearch: z.boolean().optional().default(false),

@@ -310,6 +310,71 @@ export async function registerRoutes(app: Express): Promise<Server> {
           formType: formName,
         },
       });
+
+      // STEP 2b: CASL / PIPEDA / Law 25 — write an immutable consent audit row
+      // if the submission carried granular consent fields. Failure here must
+      // NOT block the registration response — log and move on.
+      //
+      // IMPORTANT (CASL s.13 burden of proof): we REFUSE to write a consent
+      // audit row unless the client also sent the exact legal text snapshot
+      // (`_consentLegalText`). A row without the wording the user actually saw
+      // is not defensible evidence — better to log the gap loudly and tag the
+      // submission for remediation than to pollute the audit log.
+      try {
+        const hasGranularConsent =
+          formData.consentCASNewsletter !== undefined ||
+          formData.consentCASEvents !== undefined ||
+          formData.consentCASResearch !== undefined ||
+          formData.consentCASFundraising !== undefined ||
+          formData.consentCANNNewsletter !== undefined ||
+          formData.consentCANNEvents !== undefined;
+        const submitterEmail =
+          formData.primaryEmail || formData.email || formData.noMemberEmail || null;
+        const legalText = formData._consentLegalText;
+        const hasValidLegalText =
+          legalText && typeof legalText === "object" && Object.keys(legalText).length > 0;
+
+        if (hasGranularConsent && submitterEmail && hasValidLegalText) {
+          await storage.createConsentRecord({
+            submissionId: submission.id,
+            email: String(submitterEmail).toLowerCase(),
+            source: "join-cas",
+            formVersion: formData._consentFormVersion || "v1",
+            consents: {
+              cas_newsletter: !!formData.consentCASNewsletter,
+              cas_events: !!formData.consentCASEvents,
+              cas_research: !!formData.consentCASResearch,
+              cas_fundraising: !!formData.consentCASFundraising,
+              cann_newsletter: !!formData.consentCANNNewsletter,
+              cann_events: !!formData.consentCANNEvents,
+            },
+            legalTextShown: legalText,
+            ipAddress:
+              (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ||
+              req.socket?.remoteAddress ||
+              null,
+            userAgent: req.headers["user-agent"] || null,
+            locale: formData._consentLocale || "en",
+          });
+          console.log(`[Consent] ✅ Audit row written for ${submitterEmail} (submission #${submission.id})`);
+        } else if (hasGranularConsent && submitterEmail && !hasValidLegalText) {
+          // Loud signal: the form sent consent flags but no legal-text snapshot.
+          // Tag the submission so an admin can remediate before relying on it.
+          console.error(
+            `[Consent] ⛔ Refusing to write audit row for submission #${submission.id}: ` +
+            `_consentLegalText missing/empty. The granular consent flags are still ` +
+            `stored on the form submission, but this submission is NOT a defensible ` +
+            `CASL record until the legal-text snapshot is supplied. Fix the client.`
+          );
+          // Note: we intentionally skip writing to submission_logs here because
+          // both `operation` and `status` are Postgres enums that don't include
+          // a "warning" / "consent_audit_skipped" value. Console.error above is
+          // a loud signal, and the original submission row already carries the
+          // raw consent flags as evidence the gap occurred.
+        }
+      } catch (consentErr) {
+        console.error("[Consent] ⚠️ Failed to write consent audit row (registration still succeeds):", consentErr);
+      }
       
       console.log(`[CAS/CANN Registration] ✅ Saved locally with ID: ${submission.id}, queued for Zoho sync`);
       
@@ -4286,6 +4351,115 @@ export async function registerRoutes(app: Express): Promise<Server> {
         success: false,
         message: "Failed to delete registration" 
       });
+    }
+  });
+
+  // ============================================================
+  // CASL / PIPEDA / Law 25 — Consent audit admin endpoints
+  // ============================================================
+  // Auth: requires explicit environment-provided credentials. We do NOT reuse
+  // the event-admin fallback creds because consent data is more sensitive
+  // (emails, IPs, withdrawal history). If CONSENT_ADMIN_USERNAME / _PASSWORD
+  // are not set the endpoints fail closed with HTTP 503 rather than accepting
+  // any default.
+  const requireConsentAdminAuth = (req: any, res: any, next: any) => {
+    const u = process.env.CONSENT_ADMIN_USERNAME;
+    const p = process.env.CONSENT_ADMIN_PASSWORD;
+    if (!u || !p) {
+      console.error("[Consent Admin] CONSENT_ADMIN_USERNAME / CONSENT_ADMIN_PASSWORD env vars are not set — endpoints disabled");
+      return res.status(503).json({
+        message: "Consent admin endpoints are disabled. Set CONSENT_ADMIN_USERNAME and CONSENT_ADMIN_PASSWORD environment variables to enable.",
+      });
+    }
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Basic ")) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+    const decoded = Buffer.from(authHeader.split(" ")[1], "base64").toString("utf-8");
+    const [username, password] = decoded.split(":");
+    if (username === u && password === p) return next();
+    return res.status(401).json({ message: "Invalid credentials" });
+  };
+
+  // List consent records (paginated, optional date / source filters)
+  app.get("/api/admin/consent-records", requireConsentAdminAuth, async (req, res) => {
+    try {
+      const { from, to, source, limit } = req.query as Record<string, string>;
+      const records = await storage.listConsentRecords({
+        dateFrom: from ? new Date(from) : undefined,
+        dateTo: to ? new Date(to) : undefined,
+        source: source || undefined,
+        limit: limit ? Number(limit) : 500,
+      });
+      res.json({ success: true, count: records.length, records });
+    } catch (error) {
+      console.error("[Consent Admin] Error listing records:", error);
+      res.status(500).json({ success: false, message: "Failed to list consent records" });
+    }
+  });
+
+  // Lookup all consent history for a given email (chronological)
+  app.get("/api/admin/consent-records/email/:email", requireConsentAdminAuth, async (req, res) => {
+    try {
+      const email = decodeURIComponent(req.params.email).toLowerCase();
+      const records = await storage.getConsentRecordsByEmail(email);
+      res.json({ success: true, email, count: records.length, records });
+    } catch (error) {
+      console.error("[Consent Admin] Error looking up email:", error);
+      res.status(500).json({ success: false, message: "Failed to look up consent records" });
+    }
+  });
+
+  // CSV export — for legal/audit hand-off
+  app.get("/api/admin/consent-records/export", requireConsentAdminAuth, async (req, res) => {
+    try {
+      const records = await storage.listConsentRecords({ limit: 10000 });
+      const escape = (v: any) => {
+        if (v === null || v === undefined) return "";
+        const s = typeof v === "object" ? JSON.stringify(v) : String(v);
+        return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+      };
+      const header = [
+        "id", "submission_id", "email", "source", "form_version",
+        "cas_newsletter", "cas_events", "cas_research", "cas_fundraising",
+        "cann_newsletter", "cann_events",
+        "ip_address", "user_agent", "locale",
+        "withdrawn_at", "withdrawn_via", "withdrawn_reason",
+        "created_at", "legal_text_shown",
+      ];
+      const lines = [header.join(",")];
+      for (const r of records) {
+        const c = (r.consents as any) || {};
+        lines.push([
+          r.id, r.submissionId, r.email, r.source, r.formVersion,
+          c.cas_newsletter, c.cas_events, c.cas_research, c.cas_fundraising,
+          c.cann_newsletter, c.cann_events,
+          r.ipAddress, r.userAgent, r.locale,
+          r.withdrawnAt, r.withdrawnVia, r.withdrawnReason,
+          r.createdAt, r.legalTextShown,
+        ].map(escape).join(","));
+      }
+      res.setHeader("Content-Type", "text/csv");
+      res.setHeader("Content-Disposition", `attachment; filename="consent-records-${new Date().toISOString().slice(0, 10)}.csv"`);
+      res.send(lines.join("\r\n"));
+    } catch (error) {
+      console.error("[Consent Admin] Error exporting CSV:", error);
+      res.status(500).json({ success: false, message: "Failed to export CSV" });
+    }
+  });
+
+  // Record a full withdrawal (called by future unsubscribe page / admin action)
+  app.post("/api/admin/consent-records/withdraw", requireConsentAdminAuth, async (req, res) => {
+    try {
+      const { email, via, reason } = req.body || {};
+      if (!email || !via) {
+        return res.status(400).json({ success: false, message: "email and via are required" });
+      }
+      const record = await storage.withdrawConsent(String(email).toLowerCase(), String(via), reason);
+      res.json({ success: true, record });
+    } catch (error) {
+      console.error("[Consent Admin] Error recording withdrawal:", error);
+      res.status(500).json({ success: false, message: "Failed to record withdrawal" });
     }
   });
 

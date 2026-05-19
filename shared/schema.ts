@@ -623,3 +623,57 @@ export const insertEventAdminSchema = createInsertSchema(eventAdmins).omit({
 
 export type EventAdmin = typeof eventAdmins.$inferSelect;
 export type InsertEventAdmin = z.infer<typeof insertEventAdminSchema>;
+
+// ============================================================================
+// CASL / PIPEDA / Quebec Law 25 — Consent record-keeping
+// ----------------------------------------------------------------------------
+// One row PER consent event (initial collection OR a later update/withdrawal).
+// Stores the EXACT wording the user saw at the moment they consented so we
+// can satisfy CASL s.13 burden-of-proof if challenged. Never delete rows —
+// they are the legal audit trail.
+// ============================================================================
+export const consentRecords = pgTable("consent_records", {
+  id: serial("id").primaryKey(),
+  // Link back to the form submission that triggered this consent event
+  // (nullable so we can also log preference-centre updates that aren't a new submission)
+  submissionId: integer("submission_id").references(() => formSubmissions.id, { onDelete: "set null" }),
+  // Denormalized for fast lookup / preference-centre queries
+  email: varchar("email", { length: 255 }).notNull(),
+  // Where the consent was captured ("join-cas", "preference-centre", "admin-update", "unsubscribe-link")
+  source: varchar("source", { length: 100 }).notNull(),
+  // Which version of the consent form/wording was shown (incremented when legal text changes)
+  formVersion: varchar("form_version", { length: 50 }).notNull().default("v1"),
+  // The 6 granular booleans + any future channels — stored as JSON for flexibility
+  // Shape: { cas_newsletter: bool, cas_events: bool, cas_research: bool,
+  //          cas_fundraising: bool, cann_newsletter: bool, cann_events: bool }
+  consents: jsonb("consents").notNull(),
+  // The EXACT legal text shown to the user (CAS block, CANN block, withdrawal block)
+  // — frozen at point-in-time so we can prove what they agreed to even after the
+  // wording changes on the live site.
+  legalTextShown: jsonb("legal_text_shown").notNull(),
+  // CASL burden-of-proof metadata
+  ipAddress: varchar("ip_address", { length: 64 }),
+  userAgent: text("user_agent"),
+  locale: varchar("locale", { length: 10 }).default("en"),
+  // Withdrawal tracking (CASL s.11 — must be honoured within 10 business days)
+  withdrawnAt: timestamp("withdrawn_at"),
+  withdrawnVia: varchar("withdrawn_via", { length: 100 }),
+  withdrawnReason: text("withdrawn_reason"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_consent_records_email").on(table.email),
+  index("idx_consent_records_submission_id").on(table.submissionId),
+  index("idx_consent_records_created_at").on(table.createdAt),
+  index("idx_consent_records_source").on(table.source),
+]);
+
+export const insertConsentRecordSchema = createInsertSchema(consentRecords).omit({
+  id: true,
+  createdAt: true,
+  withdrawnAt: true,
+  withdrawnVia: true,
+  withdrawnReason: true,
+});
+
+export type ConsentRecord = typeof consentRecords.$inferSelect;
+export type InsertConsentRecord = z.infer<typeof insertConsentRecordSchema>;

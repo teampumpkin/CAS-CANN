@@ -55,6 +55,9 @@ app.use((req, res, next) => {
   const { migrateAutoCreateFields } = await import("./migrations/fix-auto-create-fields");
   await migrateAutoCreateFields();
 
+  const { migrateConsentRecords } = await import("./migrations/add-consent-records");
+  await migrateConsentRecords();
+
   // Initialize dedicated token management system
   const { dedicatedTokenManager } = await import("./dedicated-token-manager");
   await dedicatedTokenManager.initialize();

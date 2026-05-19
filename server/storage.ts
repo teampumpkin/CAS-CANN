@@ -13,6 +13,7 @@ import {
   campaignSyncs,
   townhallRegistrations,
   eventAdmins,
+  consentRecords,
   type User,
   type InsertUser,
   type Resource,
@@ -41,7 +42,10 @@ import {
   type InsertTownhallRegistration,
   type EventAdmin,
   type InsertEventAdmin,
+  type ConsentRecord,
+  type InsertConsentRecord,
 } from "@shared/schema";
+import { ensureConsentRecordsTable } from "./migrations/add-consent-records";
 import { db } from "./db";
 import { eq, and, like, desc, gte, lte, notInArray, isNull, or } from "drizzle-orm";
 
@@ -190,6 +194,13 @@ export interface IStorage {
   // Event admin operations
   getEventAdmin(username: string): Promise<EventAdmin | undefined>;
   createEventAdmin(admin: InsertEventAdmin): Promise<EventAdmin>;
+
+  // CASL/PIPEDA/Law 25 consent records (audit log — append-only)
+  createConsentRecord(record: InsertConsentRecord): Promise<ConsentRecord>;
+  getConsentRecordsByEmail(email: string): Promise<ConsentRecord[]>;
+  getLatestConsentForEmail(email: string): Promise<ConsentRecord | undefined>;
+  listConsentRecords(filters?: { dateFrom?: Date; dateTo?: Date; source?: string; limit?: number }): Promise<ConsentRecord[]>;
+  withdrawConsent(email: string, via: string, reason?: string): Promise<ConsentRecord>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -939,6 +950,73 @@ export class DatabaseStorage implements IStorage {
 
   async createEventAdmin(admin: InsertEventAdmin): Promise<EventAdmin> {
     const [created] = await db.insert(eventAdmins).values(admin).returning();
+    return created;
+  }
+
+  // ============================================================
+  // Consent records — CASL s.13 burden-of-proof audit trail.
+  // Self-heals the table on first write so production environments
+  // that don't run the startup migration are still covered.
+  // ============================================================
+  async createConsentRecord(record: InsertConsentRecord): Promise<ConsentRecord> {
+    await ensureConsentRecordsTable();
+    const [created] = await db.insert(consentRecords).values(record).returning();
+    return created;
+  }
+
+  async getConsentRecordsByEmail(email: string): Promise<ConsentRecord[]> {
+    await ensureConsentRecordsTable();
+    return await db
+      .select()
+      .from(consentRecords)
+      .where(eq(consentRecords.email, email.toLowerCase()))
+      .orderBy(desc(consentRecords.createdAt));
+  }
+
+  async getLatestConsentForEmail(email: string): Promise<ConsentRecord | undefined> {
+    const rows = await this.getConsentRecordsByEmail(email);
+    return rows[0];
+  }
+
+  async listConsentRecords(filters?: { dateFrom?: Date; dateTo?: Date; source?: string; limit?: number }): Promise<ConsentRecord[]> {
+    await ensureConsentRecordsTable();
+    const conditions: any[] = [];
+    if (filters?.dateFrom) conditions.push(gte(consentRecords.createdAt, filters.dateFrom));
+    if (filters?.dateTo) conditions.push(lte(consentRecords.createdAt, filters.dateTo));
+    if (filters?.source) conditions.push(eq(consentRecords.source, filters.source));
+    let query: any = db.select().from(consentRecords);
+    if (conditions.length > 0) query = query.where(and(...conditions));
+    query = query.orderBy(desc(consentRecords.createdAt));
+    if (filters?.limit) query = query.limit(filters.limit);
+    return await query;
+  }
+
+  async withdrawConsent(email: string, via: string, reason?: string): Promise<ConsentRecord> {
+    await ensureConsentRecordsTable();
+    // Append a new row marking full withdrawal — never mutate prior consent rows.
+    // Single insert with withdrawal fields set so the returned row reflects the
+    // final persisted state.
+    const now = new Date();
+    const [created] = await db
+      .insert(consentRecords)
+      .values({
+        email: email.toLowerCase(),
+        source: "withdrawal",
+        formVersion: "v1",
+        consents: {
+          cas_newsletter: false,
+          cas_events: false,
+          cas_research: false,
+          cas_fundraising: false,
+          cann_newsletter: false,
+          cann_events: false,
+        },
+        legalTextShown: { note: `Full withdrawal recorded via ${via}` },
+        withdrawnAt: now,
+        withdrawnVia: via,
+        withdrawnReason: reason,
+      } as any)
+      .returning();
     return created;
   }
 }

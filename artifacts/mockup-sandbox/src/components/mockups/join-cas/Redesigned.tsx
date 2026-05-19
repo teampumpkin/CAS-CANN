@@ -50,6 +50,22 @@ import { casRegistrationSchema, type CASRegistrationForm, lookupPostalCode } fro
 
 /* ---------- shared atoms ---------- */
 
+// Resolve a path against the LIVE app (port 5000), not the mockup sandbox.
+// The sandbox runs on a different vite port; relative hrefs would 404 here.
+function mainAppUrl(path: string): string {
+  if (typeof window === "undefined") return path;
+  try {
+    const url = new URL(window.location.href);
+    url.port = "5000";
+    url.pathname = path;
+    url.search = "";
+    url.hash = "";
+    return url.toString();
+  } catch {
+    return path;
+  }
+}
+
 const FIELD_INPUT =
   "h-11 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-[#00AFE6]/30 focus-visible:border-[#00AFE6] transition-colors";
 const FIELD_INPUT_READONLY =
@@ -852,7 +868,7 @@ export function Redesigned() {
               </p>
             </div>
 
-            <div className="px-8 sm:px-10 pb-8 sm:pb-10 pt-5 space-y-6 divide-y divide-slate-100 dark:divide-slate-800 [&>*:not(:first-child)]:pt-6">
+            <div className="px-8 sm:px-10 pb-8 sm:pb-10 pt-5 space-y-3 divide-y divide-slate-100 dark:divide-slate-800 [&>*:not(:first-child)]:pt-3">
               {/* Membership */}
               <Section title={t("sectionMembership")}>
                 <FormField
@@ -1077,7 +1093,7 @@ export function Redesigned() {
                           </FormLabel>
                           <div className="text-xs text-slate-500 dark:text-slate-400">
                             <a
-                              href="/communications-preferences"
+                              href={mainAppUrl("/communications-preferences")}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-1 text-[#00AFE6] hover:underline"
@@ -1096,7 +1112,7 @@ export function Redesigned() {
                   <p className="text-xs text-slate-500 dark:text-slate-400 pt-2">
                     {t("consentLegalShort")}{" "}
                     <a
-                      href="/privacy-policy"
+                      href={mainAppUrl("/privacy-policy")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#00AFE6] hover:underline"

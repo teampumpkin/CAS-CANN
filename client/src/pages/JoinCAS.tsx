@@ -1218,6 +1218,7 @@ export default function JoinCAS() {
                   {/* Communications — single bundled consent */}
                   {isMember && (
                     <Section title={t("sectionComms")}>
+                      <div className="space-y-2">
                       <FormField
                         control={form.control}
                         name="consentAll"
@@ -1255,7 +1256,7 @@ export default function JoinCAS() {
                         )}
                       />
 
-                      <p className="text-xs text-slate-500 dark:text-slate-400 pl-7 pt-3 leading-relaxed">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 pl-7 leading-relaxed">
                         {t("consentLegalShort")}{" "}
                         <a
                           href="/privacy-policy"
@@ -1266,6 +1267,7 @@ export default function JoinCAS() {
                           {t("privacyPolicy")} →
                         </a>
                       </p>
+                      </div>
                     </Section>
                   )}
 

@@ -795,7 +795,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         layouts: layouts.map(layout => ({
           id: layout.id,
           name: layout.name,
-          sections: layout.sections?.map(s => ({ id: s.id, name: s.name, displayLabel: s.display_label })) || []
+          sections: layout.sections?.map(s => ({ id: s.id, name: s.name, displayLabel: s.display_label, fields: (s as any).fields?.map((f: any) => ({ apiName: f.api_name, label: f.field_label, dataType: f.data_type, customField: f.custom_field || false })) || [] })) || []
         }))
       });
     } catch (error) {

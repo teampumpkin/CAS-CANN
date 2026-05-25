@@ -89,7 +89,14 @@ export const casRegistrationSchema = z.object({
   if (data.wantsServicesMapInclusion === "Yes") {
     if (!data.streetName?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Street name is required", path: ["streetName"] });
     if (!data.postalCode?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Postal code is required", path: ["postalCode"] });
-    if (!data.phoneNumber?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Phone number is required", path: ["phoneNumber"] });
+    if (!data.phoneNumber?.trim()) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Phone number is required", path: ["phoneNumber"] });
+    } else if (data.phoneNumber.replace(/\D/g, "").length !== 10) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please enter a 10-digit phone number including area code", path: ["phoneNumber"] });
+    }
+    if (data.faxNumber?.trim() && data.faxNumber.replace(/\D/g, "").length !== 10) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please enter a 10-digit fax number including area code", path: ["faxNumber"] });
+    }
   }
 
   if (!isMember) {

@@ -113,6 +113,12 @@ function YesNo({
 const ALPHA_FILTER = (v: string) => v.replace(/[^A-Za-zÀ-ÿ\s'\-.]/g, "");
 const INSTITUTION_FILTER = (v: string) => v.replace(/[^A-Za-zÀ-ÿ\s'\-.,&()/]/g, "");
 const DIGITS_FILTER = (v: string) => v.replace(/[^0-9\s\-()+ ]/g, "");
+const PHONE_FILTER = (v: string) => {
+  const digits = v.replace(/\D/g, "").slice(0, 10);
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 6) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+  return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+};
 const POSTAL_FILTER = (v: string) => {
   const cleaned = v.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
   if (cleaned.length <= 3) return cleaned;
@@ -653,6 +659,7 @@ const I18N = {
   cityPh: { en: "Search city…", fr: "Rechercher une ville…" },
   phone: { en: "Phone", fr: "Téléphone" },
   fax: { en: "Fax", fr: "Télécopieur" },
+  filterPhone: { en: "Digits only (10-digit Canadian number with area code)", fr: "Chiffres uniquement (numéro canadien à 10 chiffres avec indicatif régional)" },
   nmName: { en: "Name", fr: "Nom" },
   nmEmail: { en: "Email", fr: "Courriel" },
   nmMessage: { en: "Message / Reason for Contact", fr: "Message / Motif" },
@@ -756,6 +763,7 @@ export default function JoinCAS() {
       phoneNumber: "",
       faxCode: "+1",
       faxNumber: "",
+      // Canadian-only — country code is implicit (+1); UI no longer collects it.
       consentAll: false,
       consentCASNewsletter: false,
       consentCASEvents: false,
@@ -846,8 +854,10 @@ export default function JoinCAS() {
     const all = !!data.consentAll;
     const joiningCANN = data.wantsCANNMembership === "Yes";
     const fullName = [data.firstName, data.lastName].filter(Boolean).join(" ").trim();
-    const fullPhone = [data.phoneCode, data.phoneNumber].filter(Boolean).join(" ").trim();
-    const fullFax = [data.faxCode, data.faxNumber].filter(Boolean).join(" ").trim();
+    // Canadian-only: country code is implicit (+1). Prefix it for the
+    // legacy Zoho centerPhone/centerFax mirror so downstream stays consistent.
+    const fullPhone = data.phoneNumber?.trim() ? `+1 ${data.phoneNumber.trim()}` : "";
+    const fullFax = data.faxNumber?.trim() ? `+1 ${data.faxNumber.trim()}` : "";
     const fullAddress = [data.streetName, data.city, data.province, data.postalCode]
       .filter(Boolean)
       .join(", ")
@@ -1180,20 +1190,24 @@ export default function JoinCAS() {
                               mismatch={cityMismatch}
                               t={t}
                             />
-                            <PhonePair
-                              form={form}
-                              codeName="phoneCode"
-                              numberName="phoneNumber"
+                            <TextField
+                              name="phoneNumber"
                               label={t("phone")}
-                              placeholder="555-1234"
-                              required
-                            />
-                            <PhonePair
+                              placeholder="416-555-1234"
                               form={form}
-                              codeName="faxCode"
-                              numberName="faxNumber"
+                              required
+                              inputFilter={PHONE_FILTER}
+                              maxLength={12}
+                              filterWarning={t("filterPhone")}
+                            />
+                            <TextField
+                              name="faxNumber"
                               label={t("fax")}
-                              placeholder="555-5678"
+                              placeholder="416-555-5678"
+                              form={form}
+                              inputFilter={PHONE_FILTER}
+                              maxLength={12}
+                              filterWarning={t("filterPhone")}
                             />
                           </div>
                         </div>

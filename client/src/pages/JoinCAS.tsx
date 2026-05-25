@@ -618,6 +618,8 @@ const I18N = {
   },
   amyloidBoth: { en: "Both ATTR and AL", fr: "ATTR et AL" },
   amyloidOther: { en: "Other", fr: "Autre" },
+  amyloidOtherLabel: { en: "Please specify amyloidosis type", fr: "Veuillez préciser le type d'amylose" },
+  amyloidOtherPh: { en: "e.g., AA, ALECT2, hereditary", fr: "ex. AA, ALECT2, héréditaire" },
   institution: {
     en: "Clinic or Centre Name / Institution",
     fr: "Nom de la clinique ou de l'établissement",
@@ -743,6 +745,7 @@ export default function JoinCAS() {
       discipline: "",
       subspecialty: "",
       amyloidosisType: undefined,
+      amyloidosisTypeOther: "",
       institution: "",
       wantsServicesMapInclusion: undefined,
       streetName: "",
@@ -856,8 +859,16 @@ export default function JoinCAS() {
     //  - legacy fields (fullName/email/centerAddress/centerPhone/centerFax/
     //    wantsCommunications/cannCommunications) so the existing server-side
     //    Zoho mapper keeps populating the right fields without changes.
+    // If "Other" is selected, embed the user-specified value into amyloidosisType
+    // so the existing Zoho mapper receives the actual type text.
+    const resolvedAmyloidosisType =
+      data.amyloidosisType === "Other" && data.amyloidosisTypeOther?.trim()
+        ? `Other: ${data.amyloidosisTypeOther.trim()}`
+        : data.amyloidosisType;
+
     const payload = {
       ...data,
+      amyloidosisType: resolvedAmyloidosisType,
       // legacy-shape mirror for back-compat
       fullName,
       email: data.primaryEmail,
@@ -1092,6 +1103,18 @@ export default function JoinCAS() {
                           </FormItem>
                         )}
                       />
+
+                      {form.watch("amyloidosisType") === "Other" && (
+                        <div className="animate-in fade-in slide-in-from-top-1 duration-300">
+                          <TextField
+                            name="amyloidosisTypeOther"
+                            label={t("amyloidOtherLabel")}
+                            placeholder={t("amyloidOtherPh")}
+                            form={form}
+                            required
+                          />
+                        </div>
+                      )}
 
                       <TextField
                         name="institution"

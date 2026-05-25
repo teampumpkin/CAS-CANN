@@ -16,6 +16,7 @@ export const casRegistrationSchema = z.object({
   discipline: z.string().optional(),
   subspecialty: z.string().optional(),
   amyloidosisType: z.enum(["ATTR", "AL", "Both ATTR and AL", "Other"]).optional(),
+  amyloidosisTypeOther: z.string().optional(),
   institution: z.string().optional(),
 
   // Services Map
@@ -80,6 +81,7 @@ export const casRegistrationSchema = z.object({
     if (!data.discipline?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Professional designation is required", path: ["discipline"] });
     if (!data.subspecialty?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Sub-specialty area is required", path: ["subspecialty"] });
     if (!data.amyloidosisType) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please select the type of amyloidosis patients you care for", path: ["amyloidosisType"] });
+    if (data.amyloidosisType === "Other" && !data.amyloidosisTypeOther?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please specify the amyloidosis type", path: ["amyloidosisTypeOther"] });
     if (!data.institution?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Clinic or Centre Name/Institution is required", path: ["institution"] });
     if (!data.wantsServicesMapInclusion) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please indicate map services preference", path: ["wantsServicesMapInclusion"] });
   }

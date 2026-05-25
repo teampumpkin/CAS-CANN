@@ -1890,7 +1890,11 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
     // --- Services map centre/clinic details (Q9 branching fields) ---
     if (wantsMap) {
       if (formData.centerName) zohoData.Map_Clinic_Name = formData.centerName;
-      if (formData.centerAddress) zohoData.Map_Clinic_Address = formData.centerAddress;
+      // Address is stored as 4 separate Zoho fields (no merged Map_Clinic_Address).
+      if (formData.streetName) zohoData.Map_Street = String(formData.streetName).trim();
+      if (formData.city) zohoData.Map_City = String(formData.city).trim();
+      if (formData.province) zohoData.Map_Province = String(formData.province).trim();
+      if (formData.postalCode) zohoData.Map_Postal_Code = String(formData.postalCode).trim().toUpperCase();
       if (formData.centerPhone) zohoData.Map_Clinic_Phone = formData.centerPhone;
       if (formData.centerFax) zohoData.Map_Clinic_Fax = formData.centerFax;
     }

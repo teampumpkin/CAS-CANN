@@ -1230,8 +1230,8 @@ export default function JoinCAS() {
                                 className="mt-0.5 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
                               />
                             </FormControl>
-                            <div className="flex-1 space-y-1">
-                              <FormLabel className="text-sm font-normal text-slate-700 dark:text-slate-200 cursor-pointer leading-snug">
+                            <div className="flex-1 space-y-1.5 min-w-0">
+                              <FormLabel className="block text-sm font-normal text-slate-700 dark:text-slate-200 cursor-pointer leading-snug">
                                 {t("consentSingleShort")}
                                 {wantsCANNMembership === "Yes" && (
                                   <span className="text-pink-600 dark:text-pink-400">
@@ -1239,30 +1239,29 @@ export default function JoinCAS() {
                                   </span>
                                 )}
                               </FormLabel>
-                              <div className="text-xs text-slate-500 dark:text-slate-400">
-                                <a
-                                  href="/communications-preferences"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 text-[#00AFE6] hover:underline"
-                                >
-                                  {t("consentSingleHelp")} →
-                                </a>
-                                <span className="mx-1.5 text-slate-300 dark:text-slate-600">·</span>
-                                <span>{t("consentIntro")}</span>
-                              </div>
+                              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                {t("consentIntro")}
+                              </p>
+                              <a
+                                href="/communications-preferences"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-xs text-[#00AFE6] hover:underline"
+                              >
+                                {t("consentSingleHelp")} →
+                              </a>
                             </div>
                           </FormItem>
                         )}
                       />
 
-                      <p className="text-xs text-slate-500 dark:text-slate-400 pt-2">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 pl-7 pt-3 leading-relaxed">
                         {t("consentLegalShort")}{" "}
                         <a
                           href="/privacy-policy"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#00AFE6] hover:underline"
+                          className="text-[#00AFE6] hover:underline whitespace-nowrap"
                         >
                           {t("privacyPolicy")} →
                         </a>

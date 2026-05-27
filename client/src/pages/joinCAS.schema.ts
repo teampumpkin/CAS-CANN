@@ -9,6 +9,7 @@ export const casRegistrationSchema = z.object({
   }),
 
   // Profile
+  salutation: z.string().optional(),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   primaryEmail: z.string().optional(),

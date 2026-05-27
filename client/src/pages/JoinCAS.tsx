@@ -599,6 +599,8 @@ const I18N = {
     en: "All CANN members will also be members of the CAS.",
     fr: "Tout membre du RCIA est également membre de la SCA.",
   },
+  salutation: { en: "Salutation", fr: "Civilité" },
+  salutationPh: { en: "Select", fr: "Sélectionner" },
   firstName: { en: "First Name", fr: "Prénom" },
   lastName: { en: "Last Name", fr: "Nom de famille" },
   primaryEmail: { en: "Primary Email Address", fr: "Adresse courriel principale" },
@@ -745,6 +747,7 @@ export default function JoinCAS() {
     defaultValues: {
       wantsMembership: undefined,
       wantsCANNMembership: undefined,
+      salutation: "",
       firstName: "",
       lastName: "",
       primaryEmail: "",
@@ -1019,6 +1022,31 @@ export default function JoinCAS() {
                   {isMember && (
                     <Section title={t("sectionProfile")}>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <FormField
+                          control={form.control}
+                          name="salutation"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className={FIELD_LABEL}>{t("salutation")}</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value || ""}>
+                                <FormControl>
+                                  <SelectTrigger className="h-11">
+                                    <SelectValue placeholder={t("salutationPh")} />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="Mr.">Mr.</SelectItem>
+                                  <SelectItem value="Mrs.">Mrs.</SelectItem>
+                                  <SelectItem value="Ms.">Ms.</SelectItem>
+                                  <SelectItem value="Dr.">Dr.</SelectItem>
+                                  <SelectItem value="Prof.">Prof.</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage className="text-xs" />
+                            </FormItem>
+                          )}
+                        />
+                        <div className="hidden sm:block" />
                         <TextField
                           name="firstName"
                           label={t("firstName")}

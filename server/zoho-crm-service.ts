@@ -1797,13 +1797,25 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
 
   // --- Standard identity fields ---
   // Prefer split first/last when the new form provides them; fall back to fullName for legacy callers.
+  if (formData.salutation) zohoData.Salutation = String(formData.salutation).trim();
   if (formData.firstName || formData.lastName) {
     if (formData.firstName) zohoData.First_Name = String(formData.firstName).trim();
     if (formData.lastName) zohoData.Last_Name = String(formData.lastName).trim();
   } else if (formData.fullName) {
     zohoData.Last_Name = formData.fullName;
   }
-  if (formData.email) zohoData.Email = formData.email;
+  // Email mapping: new form sends primaryEmail/secondaryEmail → Primary_Email_Address/Secondary_Email_Address on V3.
+  // Legacy callers still set `email`; mirror that to both standard Email and Primary_Email_Address for back-compat.
+  if (formData.primaryEmail) {
+    zohoData.Primary_Email_Address = formData.primaryEmail;
+    zohoData.Email = formData.primaryEmail;
+  } else if (formData.email) {
+    zohoData.Email = formData.email;
+    zohoData.Primary_Email_Address = formData.email;
+  }
+  if (formData.secondaryEmail) {
+    zohoData.Secondary_Email_Address = formData.secondaryEmail;
+  }
 
   // --- Professional info ---
   if (formData.discipline) {

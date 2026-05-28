@@ -288,9 +288,10 @@ export class ZohoSyncWorker {
       // buildCentralizedZohoData below. Skip smart-mapper entirely for these to
       // avoid fuzzy nonsense (e.g. wantsMembership → Number_Of_Chats at 80% similarity).
       const KNOWN_CENTRALIZED_FORMS = new Set([
-        'CAS / CANN Registration',  // current unified form name
-        'CAS Registration',          // legacy — kept for in-flight queued submissions
-        'CAS & CANN Registration',   // legacy — kept for in-flight queued submissions
+        'CAS/CANN Registration Form', // current /join-cas form name (sent by client)
+        'CAS / CANN Registration',    // alternate spacing — kept for safety
+        'CAS Registration',           // legacy — kept for in-flight queued submissions
+        'CAS & CANN Registration',    // legacy — kept for in-flight queued submissions
       ]);
 
       if (KNOWN_CENTRALIZED_FORMS.has(formName)) {

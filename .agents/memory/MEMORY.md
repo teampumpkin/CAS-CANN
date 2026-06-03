@@ -1,0 +1,1 @@
+- [Zoho CRM v8 quirks](zoho-crm-quirks.md) — picklist rename keeps old value; layout-required fields invisible in metadata; "Other" amyloidosis must split into Amyloidosis_Type_Other.

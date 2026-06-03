@@ -1836,8 +1836,26 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   }
 
   // --- Amyloidosis type (Amyloidosis_Type is the active field; amyloidosistype is deactivated — do NOT send it) ---
+  // V3 layout has a conditional rule: when Amyloidosis_Type = "Other", the
+  // companion text field Amyloidosis_Type_Other becomes REQUIRED. The form sends
+  // the free text either as a separate `amyloidosisTypeOther` field or embedded in
+  // the picklist value as "Other: <text>". Normalize both shapes so the picklist
+  // value stays a valid option ("Other") and the detail lands in its own field.
   if (formData.amyloidosisType) {
-    zohoData.Amyloidosis_Type = formData.amyloidosisType;
+    const rawType = String(formData.amyloidosisType).trim();
+    // Match only exact "Other" or "Other: <detail>" — not words like "Otherness".
+    const otherMatch = rawType.match(/^other(?:\s*:\s*(.*))?$/i);
+    if (otherMatch) {
+      zohoData.Amyloidosis_Type = 'Other';
+      const separate = String(formData.amyloidosisTypeOther || '').trim();
+      const embedded = String(otherMatch[1] || '').trim();
+      const detail = separate || embedded;
+      if (detail) {
+        zohoData.Amyloidosis_Type_Other = detail;
+      }
+    } else {
+      zohoData.Amyloidosis_Type = rawType;
+    }
   }
 
   // --- Membership flags with CANN→CAS dependency enforcement ---

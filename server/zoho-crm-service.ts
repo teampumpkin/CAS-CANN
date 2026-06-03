@@ -1931,9 +1931,25 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   }
 
   // --- Non-member inquiry fields ---
+  // Non-members only provide a single "name" field and an email. V3 requires both
+  // First_Name and Primary_Email_Address, so split the name and mirror the email.
   if (!isMember) {
-    if (formData.noMemberName) zohoData.Last_Name = formData.noMemberName;
-    if (formData.noMemberEmail) zohoData.Email = formData.noMemberEmail;
+    if (formData.noMemberName) {
+      const fullName = String(formData.noMemberName).trim();
+      const parts = fullName.split(/\s+/).filter(Boolean);
+      if (parts.length > 1) {
+        zohoData.First_Name = parts.slice(0, -1).join(' ');
+        zohoData.Last_Name = parts[parts.length - 1];
+      } else if (parts.length === 1) {
+        // Single token: V3 requires both names, so use it for both.
+        zohoData.First_Name = parts[0];
+        zohoData.Last_Name = parts[0];
+      }
+    }
+    if (formData.noMemberEmail) {
+      zohoData.Email = formData.noMemberEmail;
+      zohoData.Primary_Email_Address = formData.noMemberEmail;
+    }
     if (formData.noMemberMessage) zohoData.Description = formData.noMemberMessage;
   }
 

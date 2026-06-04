@@ -1215,11 +1215,8 @@ export default function JoinCAS() {
                     </Section>
                   )}
 
-                  {/* Communications — single bundled consent.
-                      TEMPORARILY HIDDEN until team finalizes the consent copy and
-                      the linked Communications Preferences + Privacy Policy pages.
-                      Change `false &&` back to `isMember &&` to restore. */}
-                  {false && isMember && (
+                  {/* Communications — single bundled consent. */}
+                  {isMember && (
                     <Section title={t("sectionComms")}>
                       <FormField
                         control={form.control}

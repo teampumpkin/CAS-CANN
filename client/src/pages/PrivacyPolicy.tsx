@@ -9,7 +9,7 @@ const LAST_UPDATED = "May 19, 2026";
 const CONTACT = {
   org: "Canadian Amyloidosis Society (CAS) / Société canadienne de l'amyloïdose (SCA)",
   address: "[CAS mailing address — to be confirmed]",
-  email: "info@amyloid.ca",
+  email: "cas@amyloid.ca",
   privacyOfficerName: "[Privacy Officer name — to be confirmed]",
   privacyOfficerEmail: "privacy@amyloid.ca",
   cannEmail: "cann@amyloid.ca",

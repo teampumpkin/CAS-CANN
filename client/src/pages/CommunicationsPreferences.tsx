@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const CONTACT_EMAIL = "info@amyloid.ca";
+const CONTACT_EMAIL = "cas@amyloid.ca";
 
 export default function CommunicationsPreferences() {
   const { language } = useLanguage();

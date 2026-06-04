@@ -198,9 +198,13 @@ export default function CommunicationsPreferences() {
                 <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#00AFE6] hover:underline">
                   {CONTACT_EMAIL}
                 </a>
+                {fr ? ", ou " : ", or "}
+                <a href="mailto:cann@amyloid.ca" className="text-[#00AFE6] hover:underline">
+                  cann@amyloid.ca
+                </a>
                 {fr
                   ? " — indiquez « Désabonnement » dans l'objet et précisez si vous souhaitez vous retirer de tout ou d'un sujet précis."
-                  : ' — put "Unsubscribe" in the subject line, tell us whether you want out of everything or just one topic.'}
+                  : ' put "Unsubscribe" in the subject line, tell us whether you want out of everything or just one topic.'}
               </li>
               <li>
                 {fr

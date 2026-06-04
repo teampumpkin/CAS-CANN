@@ -11,7 +11,7 @@ const CONTACT = {
   address: "[CAS mailing address — to be confirmed]",
   email: "cas@amyloid.ca",
   privacyOfficerName: "[Privacy Officer name — to be confirmed]",
-  privacyOfficerEmail: "privacy@amyloid.ca",
+  privacyOfficerEmail: "[Privacy Officer email — to be confirmed]",
   cannEmail: "cann@amyloid.ca",
 };
 
@@ -211,8 +211,8 @@ export default function PrivacyPolicy() {
         <Section id="sharing" icon={<Globe className="w-5 h-5 text-[#00AFE6]" />} title={fr ? "5. Avec qui nous partageons (CAS et RCIA)" : "5. Who we share with (CAS and CANN)"}>
           <p>
             {fr
-              ? `Nous ne vendons jamais vos renseignements. Nous partageons uniquement avec : (a) notre fournisseur de CRM (Zoho) qui stocke et synchronise vos données d'adhésion ; (b) notre fournisseur d'envoi de courriels lorsque vous avez accepté les communications ; (c) les autorités si la loi l'exige. Le RCIA est un sous-groupe interne de la SCA — il n'est pas un tiers, mais nous le précisons clairement dans toute communication envoyée en son nom.`
-              : `We never sell your information. We only share with: (a) our CRM provider (Zoho) which stores and syncs your membership data; (b) our email-sending provider when you opted in to communications; (c) authorities when required by law. CANN is an internal sub-group of CAS — not a third party — but we always make this clear in any communication we send on its behalf.`}
+              ? `Nous ne vendons jamais vos renseignements. Nous partageons uniquement avec : (a) notre fournisseur de CRM (Zoho) qui stocke et synchronise vos données d'adhésion ; (b) notre fournisseur d'envoi de courriels lorsque vous avez accepté les communications ; (c) les autorités si la loi l'exige. Le RCIA est un sous-groupe interne de la SCA — il n'est pas un tiers.`
+              : `We never sell your information. We only share with: (a) our CRM provider (Zoho) which stores and syncs your membership data; (b) our email-sending provider when you opted in to communications; (c) authorities when required by law. CANN is an internal sub-group of CAS — not a third party.`}
           </p>
         </Section>
 
@@ -278,8 +278,8 @@ export default function PrivacyPolicy() {
           </ul>
           <p className="mt-3">
             {fr ? "Pour exercer un droit, écrivez à " : "To exercise a right, email "}
-            <a href={`mailto:${CONTACT.privacyOfficerEmail}`} className="text-[#00AFE6] hover:underline font-medium">
-              {CONTACT.privacyOfficerEmail}
+            <a href={`mailto:${CONTACT.email}`} className="text-[#00AFE6] hover:underline font-medium">
+              {CONTACT.email}
             </a>
             {fr ? ". Nous répondons dans les 30 jours." : ". We respond within 30 days."}
           </p>
@@ -335,10 +335,8 @@ export default function PrivacyPolicy() {
               </div>
               <div>{CONTACT.org}</div>
               <div>{CONTACT.address}</div>
-              <div>
-                <a href={`mailto:${CONTACT.privacyOfficerEmail}`} className="text-[#00AFE6] hover:underline">
-                  {CONTACT.privacyOfficerEmail}
-                </a>
+              <div className="text-slate-500 dark:text-slate-400">
+                {CONTACT.privacyOfficerEmail}
               </div>
             </div>
           </CardContent>

@@ -78,7 +78,7 @@ export default function CommunicationsPreferences() {
           icon: Stethoscope,
           title: "Invitations aux événements du RCIA",
           freq: "3 à 5 par année",
-          desc: "Ateliers, événements de réseautage et formations spécifiques au RCIA.",
+          desc: "Ateliers, événements de réseautage et séances éducatives spécifiques au RCIA.",
         },
       ]
     : [
@@ -92,7 +92,7 @@ export default function CommunicationsPreferences() {
           icon: Stethoscope,
           title: "CANN event invitations",
           freq: "3–5 per year",
-          desc: "CANN-specific workshops, networking events and training sessions.",
+          desc: "CANN-specific workshops, networking events and educational sessions.",
         },
       ];
 

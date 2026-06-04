@@ -29,13 +29,13 @@ export default function CommunicationsPreferences() {
         {
           icon: Microscope,
           title: "Possibilités de recherche et sondages",
-          freq: "Occasionnelle (4 à 6 par année)",
+          freq: "2 à 3 par année",
           desc: "Études de recherche, essais cliniques en recrutement et sondages pour aider à façonner les priorités de la communauté.",
         },
         {
           icon: HeartHandshake,
           title: "Collectes de fonds et campagnes de sensibilisation",
-          freq: "3 à 5 par année",
+          freq: "Occasionnelle 1 à 3 par année",
           desc: "Campagnes pour financer notre travail — toujours optionnelles, jamais agressives.",
         },
       ]
@@ -55,13 +55,13 @@ export default function CommunicationsPreferences() {
         {
           icon: Microscope,
           title: "Research opportunities and surveys",
-          freq: "Occasional (4–6 per year)",
+          freq: "2-3 per year",
           desc: "Research studies, clinical trials currently recruiting, and surveys that help shape community priorities.",
         },
         {
           icon: HeartHandshake,
           title: "Fundraising and awareness campaigns",
-          freq: "3–5 per year",
+          freq: "Occasional 1-3 per year",
           desc: "Campaigns to fund our work — always optional, never pushy.",
         },
       ];

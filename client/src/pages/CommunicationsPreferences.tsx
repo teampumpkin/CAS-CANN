@@ -72,7 +72,7 @@ export default function CommunicationsPreferences() {
           icon: BookOpen,
           title: "Infolettre RCIA et série éducative",
           freq: "6 à 10 par année",
-          desc: "Mises à jour cliniques pour les infirmières en amyloïdose, modules éducatifs et résumés de la pratique.",
+          desc: "Nouvelles du RCIA, mises à jour cliniques et détails sur la série éducative récurrente du RCIA.",
         },
         {
           icon: Stethoscope,
@@ -86,7 +86,7 @@ export default function CommunicationsPreferences() {
           icon: BookOpen,
           title: "CANN newsletter and educational series",
           freq: "6–10 per year",
-          desc: "Clinical updates for amyloidosis nurses, educational modules and practice digests.",
+          desc: "CANN news, clinical updates and details for the regularly occurring CANN educational series.",
         },
         {
           icon: Stethoscope,
@@ -163,8 +163,8 @@ export default function CommunicationsPreferences() {
           </div>
           <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
             {fr
-              ? "Réservé aux membres du RCIA. La SCA envoie ces messages au nom du RCIA — nous le précisons toujours clairement dans le pied de page de chaque courriel."
-              : "Reserved for CANN members. CAS sends these messages on CANN's behalf — we always make this clear in the footer of every email."}
+              ? "Réservé aux membres du RCIA."
+              : "Reserved for CANN members."}
           </p>
           <div className="grid sm:grid-cols-2 gap-4">
             {cannTopics.map((t) => (

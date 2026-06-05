@@ -276,3 +276,9 @@ id = "47ylW5XBa8_DWVpskCSi4"
 uri = "file://docs/CAS_FINAL_AUDIT_2026-05-09.xlsx"
 type = "table"
 title = "CAS Final Audit — May 9, 2026"
+
+[[outputs]]
+id = "m19JCyRlmOTSQ7tn387qy"
+uri = "file://exports/CAS_Zoho_Import_Template.xlsx"
+type = "table"
+title = "CAS → Zoho Import Template"

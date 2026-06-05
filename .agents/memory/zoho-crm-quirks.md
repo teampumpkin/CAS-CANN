@@ -30,6 +30,11 @@ description: Non-obvious Zoho CRM v8 API behaviors that bit us mapping the /join
 **Rule:** The /join-cas form sends `amyloidosisType` as `"Other: <free text>"` (embedded) but ALSO sends `amyloidosisTypeOther` separately. The centralized mapper (`buildCentralizedZohoData`) must map this to `Amyloidosis_Type = "Other"` + `Amyloidosis_Type_Other = <free text>`, otherwise the conditional-required rule rejects the create and the submission never syncs.
 **Why:** Found that every "Other" submission would 400 with MANDATORY_NOT_FOUND on Amyloidosis_Type_Other.
 
+## Module-level field list != layout field list (source-of-truth for the template)
+**Rule:** `GET /settings/fields?module=Leads` returns ALL fields that exist anywhere in the Leads module (71), not the fields placed on a given layout. To know what is actually on the "CAS and CANN V3" layout (56 fields), fetch `GET /settings/layouts?module=Leads`, find the layout by id, and walk `sections[].fields[]`. `Salutation` and `Email` exist at the module level but `Email` is NOT on the V3 layout (confirms why Email reads back null); `Salutation` IS on the layout but is optional.
+**Why:** Built an import-template column list from the form's mapping CODE instead of the live layout, which let a stale `Salutation` mapping leak in. Verifying against the module fields list was still wrong — only the layout walk is authoritative.
+**How to apply:** Any "what columns does the import need" question must be answered from the layout walk, not the module fields list and not the mapper code.
+
 ## Other API gotchas
 - COQL endpoint (`POST /coql`) returns `OAUTH_SCOPE_MISMATCH` — our token lacks that scope. Read records with a plain `GET /Leads/<id>?fields=...` raw fetch instead.
 - `searchRecordByEmail` throws a harmless "Unexpected end of JSON input" (empty body) then the worker falls back to create — expected, not a bug.

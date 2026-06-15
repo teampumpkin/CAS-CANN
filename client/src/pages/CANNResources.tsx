@@ -186,11 +186,6 @@ export default function CANNResources() {
 
   const educationalSeries = [
     {
-      rawDate: "2025-10-07",
-      speaker: t('cannResources.series.session1.speaker'),
-      topic: t('cannResources.series.session1.topic'),
-    },
-    {
       rawDate: "2025-05-13",
       speaker: t('cannResources.series.session2.speaker'),
       topic: t('cannResources.series.session2.topic'),
@@ -231,6 +226,22 @@ export default function CANNResources() {
       topic: undefined as string | undefined,
       presentationTitle: t('cannResources.events.eduSeries.presentationTitle'),
       speaker: t('cannResources.events.eduSeries.speaker'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.eduSeries.credits'),
+      type: t('cannResources.events.types.webinar'),
+    },
+    {
+      id: 8,
+      title: t('cannResources.events.eduSeries.title'),
+      date: t('cannResources.series.session1.date'),
+      rawDate: "2025-10-07", // October 7, 2025 EST
+      time: t('cannResources.events.eduSeries.time'),
+      location: t('cannResources.events.eduSeries.location'),
+      format: t('cannResources.events.eduSeries.format'),
+      description: t('cannResources.events.eduSeries.description'),
+      topic: undefined as string | undefined,
+      presentationTitle: t('cannResources.series.session1.topic'),
+      speaker: t('cannResources.series.session1.speaker'),
       registrationDeadline: t('cannResources.events.noRegistration'),
       cmeCredits: t('cannResources.events.eduSeries.credits'),
       type: t('cannResources.events.types.webinar'),

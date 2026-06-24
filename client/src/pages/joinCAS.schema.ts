@@ -21,6 +21,7 @@ export const casRegistrationSchema = z.object({
 
   // Services Map
   wantsServicesMapInclusion: z.enum(["Yes", "No"]).optional(),
+  mapClinicName: z.string().optional(),
   streetName: z.string().optional(),
   postalCode: z.string().optional(),
   city: z.string().optional(),
@@ -87,6 +88,7 @@ export const casRegistrationSchema = z.object({
   }
 
   if (data.wantsServicesMapInclusion === "Yes") {
+    if (!data.mapClinicName?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Clinic / Centre name is required", path: ["mapClinicName"] });
     if (!data.streetName?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Street name is required", path: ["streetName"] });
     if (!data.postalCode?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Postal code is required", path: ["postalCode"] });
     if (!data.phoneNumber?.trim()) {

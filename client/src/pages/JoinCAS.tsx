@@ -642,6 +642,8 @@ const I18N = {
     en: "Helps patients across Canada find specialised care near them.",
     fr: "Aide les patients à trouver des soins spécialisés près de chez eux.",
   },
+  mapClinicName: { en: "Clinic / Centre Name", fr: "Nom de la clinique / du centre" },
+  mapClinicNamePh: { en: "Enter the clinic or centre name", fr: "Saisissez le nom de la clinique ou du centre" },
   streetName: { en: "Street Name", fr: "Nom de la rue" },
   postalCode: { en: "Postal Code", fr: "Code postal" },
   province: { en: "Province", fr: "Province" },
@@ -755,6 +757,7 @@ export default function JoinCAS() {
       amyloidosisTypeOther: "",
       institution: "",
       wantsServicesMapInclusion: undefined,
+      mapClinicName: "",
       streetName: "",
       postalCode: "",
       city: "",
@@ -882,7 +885,7 @@ export default function JoinCAS() {
       // legacy-shape mirror for back-compat
       fullName,
       email: data.primaryEmail,
-      centerName: data.institution,
+      centerName: data.mapClinicName,
       centerAddress: fullAddress,
       centerPhone: fullPhone,
       centerFax: fullFax,
@@ -1163,6 +1166,13 @@ export default function JoinCAS() {
 
                       {wantsServicesMapInclusion === "Yes" && (
                         <div className="space-y-5 animate-in fade-in slide-in-from-top-1 duration-300">
+                          <TextField
+                            name="mapClinicName"
+                            label={t("mapClinicName")}
+                            placeholder={t("mapClinicNamePh")}
+                            form={form}
+                            required
+                          />
                           <TextField
                             name="streetName"
                             label={t("streetName")}

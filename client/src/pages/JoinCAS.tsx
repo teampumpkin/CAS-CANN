@@ -627,8 +627,8 @@ const I18N = {
   amyloidOtherLabel: { en: "Please specify amyloidosis type", fr: "Veuillez préciser le type d'amylose" },
   amyloidOtherPh: { en: "e.g., AA, ALECT2, hereditary", fr: "ex. AA, ALECT2, héréditaire" },
   institution: {
-    en: "Clinic or Centre Name / Institution",
-    fr: "Nom de la clinique ou de l'établissement",
+    en: "Institution name",
+    fr: "Nom de l'établissement",
   },
   institutionPh: {
     en: "Enter your institution name",

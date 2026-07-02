@@ -271,6 +271,10 @@ const newsItems = [
     description: "In December 2025, Health Canada provided the Notice of Compliance for vutrisiran (Amvuttra, Alnylam Pharmaceuticals) for the treatment of wild-type or hereditary transthyretin-mediated amyloidosis cardiomyopathy. The approval broadens the indication for vutrisiran, from its existing indication for the treatment of stage 1 or stage 2 polyneuropathy in patients with hereditary transthyretin-mediated amyloidosis.",
     category: "Regulatory",
   },
+];
+
+// Past News Items Data - preserved announcements
+const pastNewsItems = [
   {
     id: 2,
     title: "MAGNITUDE Clinical Trial Enrollment Hold Lifted",
@@ -1271,6 +1275,68 @@ export default function Events() {
               </motion.div>
             ))}
           </div>
+
+          {/* Past News Subsection */}
+          {pastNewsItems.length > 0 && (
+            <>
+              <motion.div
+                className="text-center mb-10"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-2xl sm:text-3xl font-bold font-rosarivo text-gray-800 dark:text-white mb-3">
+                  Past News
+                </h3>
+                <p className="text-base text-gray-600 dark:text-white/70 max-w-2xl mx-auto leading-relaxed px-4">
+                  A record of previous news and announcements from the amyloidosis community.
+                </p>
+              </motion.div>
+
+              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-16">
+                {pastNewsItems.map((item, index) => (
+                  <motion.div
+                    key={`past-news-${item.id}`}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="h-full"
+                  >
+                    <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden group">
+                      <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <Newspaper className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                          </div>
+                          <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
+                            {item.category}
+                          </Badge>
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug group-hover:text-[#00AFE6] transition-colors duration-300">
+                          {item.title}
+                        </h3>
+                      </div>
+                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
+                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 whitespace-pre-line">
+                          {item.description}
+                          {(item as any).descriptionLink && (
+                            <Link href={(item as any).descriptionLink.href}>
+                              <span className="text-[#00AFE6] hover:text-[#00DD89] font-semibold underline cursor-pointer transition-colors duration-200">
+                                {(item as any).descriptionLink.text}
+                              </span>
+                            </Link>
+                          )}
+                          {(item as any).descriptionAfterLink && (item as any).descriptionAfterLink}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </>
+          )}
 
           {/* Newsletters Subsection - Hidden for now */}
           {false && (<><motion.div

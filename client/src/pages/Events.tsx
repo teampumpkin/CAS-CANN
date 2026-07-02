@@ -523,6 +523,7 @@ export default function Events() {
   const [activeTab, setActiveTab] = useState("overview");
   const [journalClubTab, setJournalClubTab] = useState("upcoming");
   const [summitTab, setSummitTab] = useState("upcoming");
+  const [newsTab, setNewsTab] = useState("current");
   const [selectedNewsletter, setSelectedNewsletter] = useState<
     (typeof newsletters)[0] | null
   >(null);
@@ -1233,11 +1234,39 @@ export default function Events() {
             and internationally</p>
           </motion.div>
 
+          {/* News Tabs */}
+          <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-2">
+            <div className="bg-gradient-to-r from-gray-100/80 to-blue-100/60 dark:bg-white/5 backdrop-blur-xl border border-[#00AFE6]/20 dark:border-white/20 rounded-2xl p-1 sm:p-2 shadow-2xl inline-flex min-w-max">
+              <button
+                onClick={() => setNewsTab("current")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  newsTab === "current"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+                data-testid="tab-current-news"
+              >
+                {t("eventsPage.currentNews")}
+              </button>
+              <button
+                onClick={() => setNewsTab("past")}
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
+                  newsTab === "past"
+                    ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-lg"
+                    : "text-gray-600 dark:text-white/80 hover:text-gray-800 dark:hover:text-white hover:bg-gray-200/50 dark:hover:bg-white/10"
+                }`}
+                data-testid="tab-past-news"
+              >
+                {t("eventsPage.pastNews")}
+              </button>
+            </div>
+          </div>
+
           {/* News Items */}
           <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-16">
-            {newsItems.map((item, index) => (
+            {(newsTab === "current" ? newsItems : pastNewsItems).map((item, index) => (
               <motion.div
-                key={`news-${item.id}`}
+                key={`${newsTab}-news-${item.id}`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -1275,68 +1304,6 @@ export default function Events() {
               </motion.div>
             ))}
           </div>
-
-          {/* Past News Subsection */}
-          {pastNewsItems.length > 0 && (
-            <>
-              <motion.div
-                className="text-center mb-10"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="text-2xl sm:text-3xl font-bold font-rosarivo text-gray-800 dark:text-white mb-3">
-                  Past News
-                </h3>
-                <p className="text-base text-gray-600 dark:text-white/70 max-w-2xl mx-auto leading-relaxed px-4">
-                  A record of previous news and announcements from the amyloidosis community.
-                </p>
-              </motion.div>
-
-              <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-16">
-                {pastNewsItems.map((item, index) => (
-                  <motion.div
-                    key={`past-news-${item.id}`}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="h-full"
-                  >
-                    <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden group">
-                      <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
-                        <div className="flex justify-between items-start mb-4">
-                          <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <Newspaper className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
-                          </div>
-                          <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
-                            {item.category}
-                          </Badge>
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug group-hover:text-[#00AFE6] transition-colors duration-300">
-                          {item.title}
-                        </h3>
-                      </div>
-                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
-                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 whitespace-pre-line">
-                          {item.description}
-                          {(item as any).descriptionLink && (
-                            <Link href={(item as any).descriptionLink.href}>
-                              <span className="text-[#00AFE6] hover:text-[#00DD89] font-semibold underline cursor-pointer transition-colors duration-200">
-                                {(item as any).descriptionLink.text}
-                              </span>
-                            </Link>
-                          )}
-                          {(item as any).descriptionAfterLink && (item as any).descriptionAfterLink}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </>
-          )}
 
           {/* Newsletters Subsection - Hidden for now */}
           {false && (<><motion.div

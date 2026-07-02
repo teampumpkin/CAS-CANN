@@ -32,6 +32,7 @@ import eventImage2 from "@assets/252564000002356792_zc_v1_1755005815011_event_2_
 import eventImage3 from "@assets/252564000002356792_zc_v1_1755028042016_event_3_1768993082234.png";
 import summitBannerImg from "@assets/252564000002356792_zc_v1_1755030579235_screenshot_2025_08_12_a_1768993082234.png";
 import summitQrCodeImg from "@assets/252564000002356792_zc_v1_1757952404533_summit_registration_qr__1768993082235.png";
+import heartFailureUpdateImg from "@assets/IMG_2567_1782991924430.jpeg";
 
 // Journal Club Sessions Data
 const journalClubSessions = [
@@ -270,6 +271,21 @@ const newsItems = [
     date: "2025-12-15",
     description: "In December 2025, Health Canada provided the Notice of Compliance for vutrisiran (Amvuttra, Alnylam Pharmaceuticals) for the treatment of wild-type or hereditary transthyretin-mediated amyloidosis cardiomyopathy. The approval broadens the indication for vutrisiran, from its existing indication for the treatment of stage 1 or stage 2 polyneuropathy in patients with hereditary transthyretin-mediated amyloidosis.",
     category: "Regulatory",
+  },
+  {
+    id: 4,
+    title: "CAS at the Heart Failure Update 2026",
+    date: "2026-05-01",
+    imageOnly: heartFailureUpdateImg,
+    imageAlt: "CAS booth at the Heart Failure Update 2026 in Montreal",
+    category: "Event",
+  },
+  {
+    id: 5,
+    title: "CAS at the Heart Failure Update 2026",
+    date: "2026-05-01",
+    description: "The CAS was part of the Heart Failure Update 2026, held in Montreal PQ on May 1-2, including a booth in the Exhibit Hall. The Heart Failure Update is Canada's largest heart failure meeting, and leading Canadian and international experts came together to share latest advances in heart failure care, clinical practice, and research. This year there was a significant amount of amyloidosis content on the program agenda. We thank the organizers of the Heart Failure Update for allowing the CAS to be part of this exciting event.",
+    category: "Event",
   },
 ];
 
@@ -1274,32 +1290,42 @@ export default function Events() {
                 className="h-full"
               >
                 <Card className="bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/20 hover:border-[#00AFE6]/50 dark:hover:border-[#00AFE6]/60 hover:shadow-2xl hover:shadow-[#00AFE6]/15 transition-all duration-500 h-full flex flex-col rounded-3xl overflow-hidden group">
-                  <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                        <Newspaper className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                  {(item as any).imageOnly ? (
+                    <img
+                      src={(item as any).imageOnly}
+                      alt={(item as any).imageAlt || item.title}
+                      className="w-full h-full object-cover min-h-[300px]"
+                    />
+                  ) : (
+                    <>
+                      <div className="relative p-6 bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-transparent">
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="w-16 h-16 bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <Newspaper className="w-8 h-8 text-[#00AFE6] group-hover:text-[#00DD89] transition-colors duration-300" />
+                          </div>
+                          <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
+                            {item.category}
+                          </Badge>
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug group-hover:text-[#00AFE6] transition-colors duration-300">
+                          {item.title}
+                        </h3>
                       </div>
-                      <Badge className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white border-0 px-2 py-1 text-xs font-medium rounded">
-                        {item.category}
-                      </Badge>
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-800 dark:text-white leading-snug group-hover:text-[#00AFE6] transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                  </div>
-                  <CardContent className="p-6 pt-4 flex flex-col flex-1">
-                    <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 whitespace-pre-line">
-                      {item.description}
-                      {(item as any).descriptionLink && (
-                        <Link href={(item as any).descriptionLink.href}>
-                          <span className="text-[#00AFE6] hover:text-[#00DD89] font-semibold underline cursor-pointer transition-colors duration-200">
-                            {(item as any).descriptionLink.text}
-                          </span>
-                        </Link>
-                      )}
-                      {(item as any).descriptionAfterLink && (item as any).descriptionAfterLink}
-                    </p>
-                  </CardContent>
+                      <CardContent className="p-6 pt-4 flex flex-col flex-1">
+                        <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 whitespace-pre-line">
+                          {item.description}
+                          {(item as any).descriptionLink && (
+                            <Link href={(item as any).descriptionLink.href}>
+                              <span className="text-[#00AFE6] hover:text-[#00DD89] font-semibold underline cursor-pointer transition-colors duration-200">
+                                {(item as any).descriptionLink.text}
+                              </span>
+                            </Link>
+                          )}
+                          {(item as any).descriptionAfterLink && (item as any).descriptionAfterLink}
+                        </p>
+                      </CardContent>
+                    </>
+                  )}
                 </Card>
               </motion.div>
             ))}

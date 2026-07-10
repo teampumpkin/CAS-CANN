@@ -53,6 +53,37 @@ The system uses a **"save first, sync second"** approach designed so that **no s
 | Website database (PostgreSQL) | Immediate safety copy of every submission and its sync status | Kept as the permanent local record |
 | Zoho CRM — Leads module | The working record used for membership management and email campaigns | Managed per CRM data policies |
 
+## Worked examples
+
+**Example 1 — A nurse joins CANN**
+
+Maria, a cardiology nurse in Halifax, answers *No* to CAS membership but *Yes* to CANN. She fills in her professional details and ticks the consent box.
+
+- She is saved instantly to the website database, then synced to Zoho within seconds.
+- Because CANN membership automatically includes CAS membership, her CRM record shows **both** `CANN_Member = true` and `CAS_Member = true`.
+- Her record is classified as **"Member"**, sourced as **"Website - CAS & CANN Registration"**, and both communication consents are recorded as **"Yes"**.
+
+**Example 2 — A physician joins CAS and opts into the Services Map**
+
+Dr. Chen, a hematologist in Vancouver, answers *Yes* to CAS, *No* to CANN, and opts to have his clinic listed on the Amyloidosis Services Map.
+
+- His CRM record shows `CAS_Member = true`, `CANN_Member = false`, classified as **"Member"**, sourced as **"Website - CAS Registration"**.
+- His clinic name, street, city, province, and postal code are stored in the dedicated Map fields, ready for the Services Map.
+
+**Example 3 — A visitor sends an inquiry without joining**
+
+A caregiver answers *No* to both membership questions and writes a message asking about support resources.
+
+- Only name, email, and message are collected.
+- The CRM record is classified as **"Inquiry"** with source **"Website - Contact Inquiry"** — so inquiry contacts can be excluded from member-only email campaigns.
+
+**Example 4 — An existing member submits the form again**
+
+Dr. Chen (from Example 2) later re-submits the form to join CANN, but forgets to tick the CAS box.
+
+- The system finds his existing CRM record by email and **updates** it rather than creating a duplicate.
+- His `CANN_Member` flag is upgraded to `true`; his existing `CAS_Member = true` is **kept** (membership is never downgraded by a re-submission).
+
 ---
 
 # Part 2: Technical Reference
@@ -173,9 +204,89 @@ Before creating a Lead, the worker **searches Zoho by `Email`**:
   - Text fields: the latest submission wins.
   - Membership flags (`CAS_Member`, `CANN_Member`): **upgrade-only** — once `true`, they are never reverted to `false` by a later submission.
 
-## 2.6 Data protection notes
+## 2.6 Data protection, privacy & compliance
 
-- Form input is validated server-side (Zod schemas) before storage.
-- The Zoho connection uses OAuth 2.0; credentials are stored as server-side environment secrets, never in the codebase or browser.
-- The visitor-facing form communicates over HTTPS.
-- The local PostgreSQL copy provides an audit trail of every submission and its sync outcome.
+- **Validation**: form input is validated server-side (Zod schemas) before storage — malformed submissions are rejected with clear errors, never silently altered.
+- **Transport security**: the visitor-facing form communicates over HTTPS only.
+- **Credential handling**: the Zoho connection uses OAuth 2.0 (Self Client). Credentials are stored as server-side environment secrets, never in the codebase or browser.
+- **Audit trail**: the local PostgreSQL copy provides a permanent record of every submission, its timestamps, and its sync outcome.
+- **CASL (Canada's Anti-Spam Legislation)**: express consent for electronic communications is collected via the consent checkbox and stored as explicit "Yes"/"No" values (`CAS_Communications`, `CANN_Communications`) in the CRM. Email campaigns should segment on these fields.
+- **PIPEDA considerations**: the form collects only the personal information needed for membership administration and the public Services Map (which is opt-in). Individuals who wish to access, correct, or delete their data can be handled by locating their record by email in Zoho and, if required, the local `form_submissions` table.
+
+## 2.7 Admin tools & data remediation
+
+The system includes administrative endpoints for maintaining CRM data quality:
+
+| Tool | What it does |
+|------|--------------|
+| **Fix membership dependencies** (`POST /api/admin/zoho/fix-membership-dependencies`) | Scans existing Zoho records for CANN→CAS rule violations (CANN member not flagged as CAS member) and for records missing `Record_Type`. Fixes contradictory states and back-fills the classification on historical records. Supports a **dry-run mode** that reports what would change without changing anything. |
+| **Re-sync orphans** | Finds submissions saved locally that never reached Zoho and pushes them through the centralized mapping again. |
+| **Batch update** | Applies the centralized field mapping and business rules to a batch of existing records — useful after mapping rules change. |
+
+All three tools route through the same `buildCentralizedZohoData()` function, so business rules are applied identically no matter how a record reaches Zoho.
+
+## 2.8 Troubleshooting & FAQ (for administrators)
+
+**Q: A person says they submitted the form, but I can't find them in Zoho.**
+Check in this order: (1) Search Zoho Leads by their email — they may exist under a different spelling. (2) The sync may still be retrying — check the `form_submissions` table for their record and its `syncStatus`/`retryCount`. (3) If `processingStatus` is `failed` after 50 attempts, the submission is safe in the local database and can be re-synced with the re-sync tool.
+
+**Q: Zoho was down for a day. Did we lose submissions?**
+No. Every submission is saved locally first. The sync worker retries automatically for roughly 4 days, and a re-queue job rescues anything stuck. Once Zoho recovers, pending submissions flow through on their own — no action needed.
+
+**Q: There's a duplicate person in Zoho. How did that happen?**
+Dedupe matches on the `Email` field. Duplicates typically mean the person used two different email addresses. Merge them in Zoho; the membership flags follow upgrade-only logic, so keep whichever flags are `true`.
+
+**Q: A CANN member shows `CAS_Member = false` in Zoho.**
+This violates the CANN→CAS rule — usually a legacy record from before the rule existed. Run the **fix membership dependencies** tool (dry-run first) to correct it and any others.
+
+**Q: Someone asked to stop receiving emails.**
+Set `CAS_Communications` and/or `CANN_Communications` to "No" on their Zoho record, and honour the change in campaign segments. The original consent record remains in the local database for CASL audit purposes.
+
+**Q: We renamed or added a field in Zoho. What needs updating?**
+Field mapping lives in `buildCentralizedZohoData()` in `server/zoho-crm-service.ts`. Any new/renamed CRM field must be updated there (and in this document). Note: renaming a Zoho picklist value does **not** update existing records — old values remain until remediated.
+
+## 2.9 Change management
+
+When any of the following change, this document must be updated and the mapping code reviewed:
+
+- Form fields added, removed, or renamed on `/join-cas`
+- Zoho CRM custom fields or picklist values changed
+- Business rules (membership dependency, classification, lead sources) revised
+- Consent wording or CASL practices updated
+
+---
+
+# Glossary
+
+| Term | Meaning |
+|------|---------|
+| **CAS** | Canadian Amyloidosis Society |
+| **CANN** | Canadian Amyloidosis Nursing Network (an affiliate of CAS) |
+| **CRM** | Customer Relationship Management system — here, Zoho CRM, where member records are managed |
+| **Lead** | Zoho's name for a contact record in the Leads module; every form submission becomes or updates a Lead |
+| **Sync** | The automatic transfer of a submission from the website's database to Zoho CRM |
+| **Upsert** | "Update or insert" — update the existing record if one matches, otherwise create a new one |
+| **Dedupe** | Duplicate prevention — matching incoming submissions to existing records by email |
+| **OAuth** | The secure authorization standard used to connect the website to Zoho without sharing passwords |
+| **API** | Application Programming Interface — the channel through which the website talks to Zoho |
+| **CASL** | Canada's Anti-Spam Legislation — requires consent for commercial electronic messages |
+| **PIPEDA** | Personal Information Protection and Electronic Documents Act — Canada's federal privacy law |
+| **PostgreSQL** | The database used by the website to store submissions locally |
+| **Backoff** | Retry strategy where the wait time between attempts increases progressively |
+
+---
+
+# Document control
+
+| Item | Detail |
+|------|--------|
+| Document title | CAS Website — Join Form Data Flow Documentation |
+| Version | 1.0 |
+| Date | July 2026 |
+| Scope | Join CAS/CANN form (`/join-cas`) → Zoho CRM data flow only |
+| Out of scope | Event registrations, resource uploads, admin bulk imports (documented separately if needed) |
+| Review trigger | Any change listed under "Change management" (section 2.9) |
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.0 | July 2026 | Initial version |

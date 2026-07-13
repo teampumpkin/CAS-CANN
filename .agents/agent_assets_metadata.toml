@@ -282,3 +282,9 @@ id = "m19JCyRlmOTSQ7tn387qy"
 uri = "file://exports/CAS_Zoho_Import_Template.xlsx"
 type = "table"
 title = "CAS → Zoho Import Template (updated)"
+
+[[outputs]]
+id = "34hMEnuquaes8iVKvswZX"
+uri = "file://docs/CAS-Join-Form-Data-Flow.docx"
+type = "word_document"
+title = "CAS Join Form Data Flow Documentation (v1.0 — complete)"

@@ -288,3 +288,9 @@ id = "34hMEnuquaes8iVKvswZX"
 uri = "file://docs/CAS-Join-Form-Data-Flow.docx"
 type = "word_document"
 title = "CAS Join Form Data Flow Documentation (v1.0 — complete)"
+
+[[outputs]]
+id = "z5B1MSOnOk1v5gz4m0eH1"
+uri = "file://.local/db-dump/cas-db-dump-20260713-123941.sql.gz"
+type = "unspecified"
+title = "CAS Database Dump (compressed .gz)"

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import summitPosterImg from "@assets/2026_CAS_SUMMIT_Banner_1775840808880.png";
+import summitPosterImg from "@assets/2026_CAS_SUMMIT_Banner_1_1784121427159.png";
 import summitPhoto1 from "@assets/2d226423-9ba2-4a2b-b87c-05bf881cd89a_1771244987107.jpg";
 import summitPhoto2 from "@assets/6110ba86-43ba-413c-9bf7-00e4a1ce8c19_1771244987108.jpg";
 import summitPhoto3 from "@assets/d33be37a-54c0-47a5-891b-f018d610f554_1771244987108.jpg";
@@ -131,7 +131,7 @@ export default function SummitRecapSection() {
             <div className="rounded-2xl overflow-hidden border border-[#00AFE6]/20 dark:border-white/10 shadow-xl shadow-[#00AFE6]/10 cursor-pointer hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:border-[#00AFE6]/40 transition-all duration-300">
               <img
                 src={summitPosterImg}
-                alt="2026 Canadian Amyloidosis Summit - Save the Date"
+                alt="2026 Canadian Amyloidosis Summit - Registration Open, October 23-25, 2026"
                 className="w-full h-auto hover:scale-[1.01] transition-transform duration-300"
                 loading="lazy"
               />

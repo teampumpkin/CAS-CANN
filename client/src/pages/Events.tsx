@@ -121,9 +121,9 @@ const allEvents = [
     description:
       "This annual educational conference is jointly hosted by the CAS and Transthyretin Amyloidosis Canada (TAC). The Summit unites both amyloidosis healthcare professionals and patients with accredited scientific sessions for professionals and dedicated sessions for patients/caregivers.",
     image: summitSaveTheDateImg,
-    registrationUrl: "",
+    registrationUrl: "https://madhattr.ca/event/canadian-amyloidosis-summit-october-23-october-25-2026/",
     isFeatured: true,
-    isComingSoon: true,
+    isComingSoon: false,
   },
   {
     id: 2,
@@ -542,7 +542,7 @@ const categorizeEvents = () => {
 };
 
 export default function Events() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeTab, setActiveTab] = useState("overview");
   const [journalClubTab, setJournalClubTab] = useState("upcoming");
   const [summitTab, setSummitTab] = useState("upcoming");
@@ -836,8 +836,19 @@ export default function Events() {
                     </p>
 
                     <div className="space-y-4">
-                      <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
-                        {t("eventsPage.registrationComingSoon")}
+                      <a
+                        href="https://madhattr.ca/event/canadian-amyloidosis-summit-october-23-october-25-2026/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/30 hover:scale-[1.02] transition-all duration-300"
+                      >
+                        {t("eventsPage.registerForEvent")}
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                      <p className="text-sm text-gray-500 dark:text-white/60">
+                        {language === 'fr'
+                          ? "L'inscription se fait sur le site de Transthyretin Amyloidosis Canada (TAC)."
+                          : "Registration is hosted on the Transthyretin Amyloidosis Canada (TAC) website."}
                       </p>
                     </div>
                   </div>

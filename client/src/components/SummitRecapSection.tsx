@@ -15,8 +15,10 @@ export default function SummitRecapSection() {
     : "En partenariat avec Amylose à Transthyrétine Canada (TAC), le Sommet canadien sur l'amylose s'est tenu à Toronto la fin de semaine du 1er au 2 novembre 2025, avec plus de 120 participants. Cet événement hybride proposait des sessions parallèles pour les professionnels de la santé et les patients/familles, avec une accréditation EMC pour les sessions des professionnels de la santé.";
 
   const description2 = language === 'en'
-    ? "The Summit featured interesting presentations and panel discussions from many national and internationally recognized leaders from the amyloidosis community. The CAS also held its first Annual General Meeting (AGM) at the Summit. Planning for the 2026 Canadian Amyloidosis Summit this fall is already underway. Stay tuned for future updates and hope you can join us!"
-    : "Le Sommet a présenté des présentations et des discussions en panel intéressantes de nombreux leaders nationaux et internationaux reconnus de la communauté de l'amylose. La SCA a également tenu sa première Assemblée générale annuelle (AGA) lors du Sommet. La planification du Sommet canadien sur l'amylose 2026 cet automne est déjà en cours. Restez à l'écoute pour les futures mises à jour et nous espérons que vous pourrez vous joindre à nous!";
+    ? "The Summit featured interesting presentations and panel discussions from many national and internationally recognized leaders from the amyloidosis community. The CAS also held its first Annual General Meeting (AGM) at the Summit. Registration is now open for the 2026 Canadian Amyloidosis Summit, October 23–25, 2026 in Toronto. We hope you can join us!"
+    : "Le Sommet a présenté des présentations et des discussions en panel intéressantes de nombreux leaders nationaux et internationaux reconnus de la communauté de l'amylose. La SCA a également tenu sa première Assemblée générale annuelle (AGA) lors du Sommet. L'inscription est maintenant ouverte pour le Sommet canadien sur l'amylose 2026, du 23 au 25 octobre 2026 à Toronto. Nous espérons que vous pourrez vous joindre à nous!";
+
+  const registrationUrl = "https://madhattr.ca/event/canadian-amyloidosis-summit-october-23-october-25-2026/";
 
   const photos = [
     { src: summitPhoto1, alt: "Summit keynote presentation" },
@@ -135,6 +137,21 @@ export default function SummitRecapSection() {
               />
             </div>
           </Link>
+          <div className="text-center mt-8">
+            <a
+              href={registrationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/30 hover:scale-[1.02] transition-all duration-300"
+            >
+              {language === 'en' ? 'Register for the 2026 Summit' : "S'inscrire au Sommet 2026"}
+            </a>
+            <p className="text-sm text-gray-500 dark:text-white/60 mt-3">
+              {language === 'en'
+                ? 'Registration is hosted on the Transthyretin Amyloidosis Canada (TAC) website.'
+                : "L'inscription se fait sur le site de Transthyretin Amyloidosis Canada (TAC)."}
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>

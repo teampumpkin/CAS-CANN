@@ -23,7 +23,7 @@ import { Tabs, TabsContent } from "@/components/ui/tabs";
 import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
-import summit2026BannerImg from "@assets/2026_CAS_SUMMIT_Banner_2_1784121495197.png";
+import summit2026BannerImg from "@assets/2026_CAS_SUMMIT_Banner_2_1784127223772.png";
 import cannLogoDarkImg from "@assets/CANN-RGB-dark-theme_1756219144378.png";
 import cannLogoLightImg from "@assets/CANN-RGB-light-theme_1756219058912.png";
 import casLogoImg from "@assets/l_cas_vert_rgb_1753253116732.png";

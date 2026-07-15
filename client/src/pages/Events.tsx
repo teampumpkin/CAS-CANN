@@ -266,6 +266,13 @@ const allEvents = [
 // News Items Data
 const newsItems = [
   {
+    id: 6,
+    title: "CARDIO-TTRansform Clinical Trial Results Released",
+    date: "2026-07-09",
+    description: "The CARDIO-TTRansform Phase III clinical trial results for Eplontersen (Wainua, AstraZeneca Pharmaceuticals) in patients with transthyretin-mediated amyloid cardiomyopathy (ATTR-CM) were released on July 9, 2026. Compared with placebo, treatment with Eplontersen did not meet the primary efficacy endpoint of the composite outcome of cardiovascular (CV) mortality and recurrent CV clinical events up to 140 weeks. In this contemporary ATTR-CM patient population treated with standard of care, including a majority on a TTR stabilizer, adding eplontersen did not provide a statistically significant benefit. Eplontersen was generally well tolerated, with a safety profile consistent with previous results.",
+    category: "Clinical Trial",
+  },
+  {
     id: 1,
     title: "Health Canada Notice of Compliance for Vutrisiran",
     date: "2025-12-15",

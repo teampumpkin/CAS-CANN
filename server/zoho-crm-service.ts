@@ -1804,14 +1804,12 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
   } else if (formData.fullName) {
     zohoData.Last_Name = formData.fullName;
   }
-  // Email mapping: new form sends primaryEmail/secondaryEmail → Primary_Email_Address/Secondary_Email_Address on V3.
-  // Legacy callers still set `email`; mirror that to both standard Email and Primary_Email_Address for back-compat.
+  // Email mapping: the primary email maps to the standard Zoho "Email" field (API name: Email).
+  // The legacy custom field Primary_Email_Address is being retired, so we no longer write to it.
   if (formData.primaryEmail) {
-    zohoData.Primary_Email_Address = formData.primaryEmail;
     zohoData.Email = formData.primaryEmail;
   } else if (formData.email) {
     zohoData.Email = formData.email;
-    zohoData.Primary_Email_Address = formData.email;
   }
   if (formData.secondaryEmail) {
     zohoData.Secondary_Email_Address = formData.secondaryEmail;
@@ -1932,7 +1930,7 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
 
   // --- Non-member inquiry fields ---
   // Non-members only provide a single "name" field and an email. V3 requires both
-  // First_Name and Primary_Email_Address, so split the name and mirror the email.
+  // First_Name and Email, so split the name and set the standard Email field.
   if (!isMember) {
     if (formData.noMemberName) {
       const fullName = String(formData.noMemberName).trim();
@@ -1948,7 +1946,6 @@ export function buildCentralizedZohoData(options: CentralizedMappingOptions): Ce
     }
     if (formData.noMemberEmail) {
       zohoData.Email = formData.noMemberEmail;
-      zohoData.Primary_Email_Address = formData.noMemberEmail;
     }
     if (formData.noMemberMessage) zohoData.Description = formData.noMemberMessage;
   }

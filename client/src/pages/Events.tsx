@@ -23,6 +23,7 @@ import { Tabs, TabsContent } from "@/components/ui/tabs";
 import ParallaxBackground from "../components/ParallaxBackground";
 import healthcareProfessionalImg from "@assets/DSC02826_1750068895453.jpg";
 import summitSaveTheDateImg from "@assets/2025 Amyloidosis Summit Save the Date_page-0001_1753250815238.jpg";
+import summit2026BannerImg from "@assets/2026_CAS_SUMMIT_Banner_2_1784127223772.png";
 import cannLogoDarkImg from "@assets/CANN-RGB-dark-theme_1756219144378.png";
 import cannLogoLightImg from "@assets/CANN-RGB-light-theme_1756219058912.png";
 import casLogoImg from "@assets/l_cas_vert_rgb_1753253116732.png";
@@ -121,9 +122,9 @@ const allEvents = [
     description:
       "This annual educational conference is jointly hosted by the CAS and Transthyretin Amyloidosis Canada (TAC). The Summit unites both amyloidosis healthcare professionals and patients with accredited scientific sessions for professionals and dedicated sessions for patients/caregivers.",
     image: summitSaveTheDateImg,
-    registrationUrl: "",
+    registrationUrl: "https://madhattr.ca/event/canadian-amyloidosis-summit-october-23-october-25-2026/",
     isFeatured: true,
-    isComingSoon: true,
+    isComingSoon: false,
   },
   {
     id: 2,
@@ -265,6 +266,13 @@ const allEvents = [
 
 // News Items Data
 const newsItems = [
+  {
+    id: 6,
+    title: "CARDIO-TTRansform Clinical Trial Results Released",
+    date: "2026-07-09",
+    description: "The CARDIO-TTRansform Phase III clinical trial results for Eplontersen (Wainua, AstraZeneca Pharmaceuticals) in patients with transthyretin-mediated amyloid cardiomyopathy (ATTR-CM) were released on July 9, 2026. Compared with placebo, treatment with Eplontersen did not meet the primary efficacy endpoint of the composite outcome of cardiovascular (CV) mortality and recurrent CV clinical events up to 140 weeks. In this contemporary ATTR-CM patient population treated with standard of care, including a majority on a TTR stabilizer, adding eplontersen did not provide a statistically significant benefit. Eplontersen was generally well tolerated, with a safety profile consistent with previous results.",
+    category: "Clinical Trial",
+  },
   {
     id: 1,
     title: "Health Canada Notice of Compliance for Vutrisiran",
@@ -535,7 +543,7 @@ const categorizeEvents = () => {
 };
 
 export default function Events() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeTab, setActiveTab] = useState("overview");
   const [journalClubTab, setJournalClubTab] = useState("upcoming");
   const [summitTab, setSummitTab] = useState("upcoming");
@@ -798,6 +806,15 @@ export default function Events() {
                       {t("eventsPage.eventDetails")}
                     </h3>
 
+                    <div className="rounded-2xl overflow-hidden border border-[#00AFE6]/20 dark:border-white/10 shadow-lg mb-10">
+                      <img
+                        src={summit2026BannerImg}
+                        alt="2026 Canadian Amyloidosis Summit - Registration Open, October 23-25, 2026"
+                        className="w-full h-auto"
+                        loading="lazy"
+                      />
+                    </div>
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
                       <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
                         <Calendar className="w-8 h-8 text-[#00AFE6]" />
@@ -829,8 +846,19 @@ export default function Events() {
                     </p>
 
                     <div className="space-y-4">
-                      <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
-                        {t("eventsPage.registrationComingSoon")}
+                      <a
+                        href="https://madhattr.ca/event/canadian-amyloidosis-summit-october-23-october-25-2026/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:shadow-[#00AFE6]/30 hover:scale-[1.02] transition-all duration-300"
+                      >
+                        {t("eventsPage.registerForEvent")}
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                      <p className="text-sm text-gray-500 dark:text-white/60">
+                        {language === 'fr'
+                          ? "L'inscription se fait sur le site de Transthyretin Amyloidosis Canada (TAC)."
+                          : "Registration is hosted on the Transthyretin Amyloidosis Canada (TAC) website."}
                       </p>
                     </div>
                   </div>

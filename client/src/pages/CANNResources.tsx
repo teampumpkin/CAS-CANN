@@ -855,8 +855,19 @@ export default function CANNResources() {
                           </div>
 
                           <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 leading-tight group-hover:text-pink-500 transition-colors duration-300">
-                            {event.title}
+                            {event.presentationTitle || event.title}
                           </h3>
+                          {event.speaker && (
+                            <div className="flex items-start gap-2 text-sm">
+                              <User className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
+                              <div>
+                                <span className="font-medium text-gray-600 dark:text-white/70">{t('cannResources.events.speakerLabel')}</span>
+                                <p className="text-gray-800 dark:text-white font-bold mt-1 whitespace-pre-line">
+                                  {event.speaker}
+                                </p>
+                              </div>
+                            </div>
+                          )}
                         </div>
 
                         <CardContent className="p-8 pt-0 flex flex-col flex-1">

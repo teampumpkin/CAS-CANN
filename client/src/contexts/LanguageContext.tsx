@@ -1013,6 +1013,7 @@ const translations = {
     'cannResources.events.summit.format': 'In-person',
     'cannResources.events.summit.description': 'Annual educational conference hosted by the Canadian Amyloidosis Society and Transthyretin Amyloidosis Canada, featuring leading specialists and patient advocates sharing the latest advances in treatment and care.',
     'cannResources.events.summit.credits': 'TBD',
+    'cannResources.events.summit.registration': 'Registration is now open! Click the button below to register.',
     
     // Past CANN Events
     'cannResources.pastEvents.title': 'Past Events',
@@ -2232,6 +2233,7 @@ const translations = {
     'cannResources.events.summit.format': 'En personne',
     'cannResources.events.summit.description': 'Conférence éducative annuelle organisée par la Canadian Amyloidosis Society et Transthyretin Amyloidosis Canada, réunissant des spécialistes de premier plan et des défenseurs des patients partageant les dernières avancées en matière de traitement et de soins.',
     'cannResources.events.summit.credits': 'À déterminer',
+    'cannResources.events.summit.registration': 'Les inscriptions sont maintenant ouvertes! Cliquez sur le bouton ci-dessous pour vous inscrire.',
     
     // Événements CANN Passés
     'cannResources.pastEvents.title': 'Événements Passés',

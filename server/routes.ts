@@ -336,6 +336,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           email: member.email,
           fullName: member.fullName,
           role: member.role,
+          status: member.status,
           discipline: member.discipline,
           subspecialty: member.subspecialty,
           institution: member.institution,

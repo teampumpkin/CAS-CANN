@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
@@ -148,6 +148,9 @@ function Router() {
 }
 
 function App() {
+  const [location] = useLocation();
+  // Member portal / auth screens are a standalone app experience — no marketing footer.
+  const hideFooter = ["/members-portal", "/login", "/forgot-password"].includes(location);
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
@@ -172,7 +175,7 @@ function App() {
               <main id="main-content" className="pt-24">
                 <Router />
               </main>
-              <Footer />
+              {!hideFooter && <Footer />}
               <EnhancedScrollIndicator />
               <PerformanceOptimizer />
             </div>

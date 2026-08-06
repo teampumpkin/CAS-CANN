@@ -25,6 +25,7 @@ import {
   Mail,
   CheckCircle,
   Sparkles,
+  Activity,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -55,12 +56,21 @@ interface Member {
   amyloidosisType?: string;
   isCASMember: boolean;
   isCANNMember: boolean;
+  status?: string;
   wantsCommunications?: boolean;
   wantsCANNCommunications?: boolean;
   wantsServicesMapInclusion?: boolean;
   createdAt?: string;
   lastLoginAt?: string;
 }
+
+const ROLE_LABELS: Record<string, string> = {
+  cas_member: "CAS Member",
+  cann_member: "CANN Member",
+  cas_cann_member: "CAS & CANN Member",
+  admin: "Administrator",
+};
+const yn = (v?: boolean) => (v ? "Yes" : "No");
 
 interface MemberEvent {
   id: number;
@@ -251,7 +261,7 @@ export default function MembersPortal() {
       <button
         onClick={() => { setSection(item.key); if (item.key !== "profile") setIsEditing(false); }}
         data-testid={`tab-${item.key}`}
-        className={`flex items-center gap-3 rounded-xl font-medium transition-all ${mobile ? "px-4 py-2 shrink-0" : "w-full px-4 py-3"} ${
+        className={`flex items-center gap-3 rounded-xl font-medium transition-all text-left ${mobile ? "px-4 py-2 shrink-0" : "w-full justify-start px-4 py-3"} ${
           isActive
             ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white shadow-md shadow-[#00AFE6]/25"
             : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5"
@@ -510,20 +520,51 @@ export default function MembersPortal() {
                 </Form>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-7">
                 {[
-                  { icon: User, label: "Full Name", value: member?.fullName },
-                  { icon: Mail, label: "Email", value: member?.email },
-                  { icon: Stethoscope, label: "Discipline", value: member?.discipline },
-                  { icon: Sparkles, label: "Subspecialty", value: member?.subspecialty },
-                  { icon: Building, label: "Institution", value: member?.institution },
-                  { icon: CheckCircle, label: "Member Since", value: member?.createdAt ? formatDate(member.createdAt) : undefined },
-                ].map(({ icon: Icon, label, value }) => (
-                  <div key={label} className={`${PANEL} flex items-start gap-3 p-4`}>
-                    <div className={`${ICON_TILE} h-10 w-10 shrink-0`}><Icon className="w-4.5 h-4.5 text-[#00AFE6]" /></div>
-                    <div className="min-w-0">
-                      <p className="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500">{label}</p>
-                      <p className="font-medium text-slate-900 dark:text-white truncate">{value || "—"}</p>
+                  {
+                    title: "Personal Information",
+                    fields: [
+                      { icon: User, label: "Full Name", value: member?.fullName },
+                      { icon: Mail, label: "Email", value: member?.email },
+                      { icon: Stethoscope, label: "Discipline", value: member?.discipline },
+                      { icon: Sparkles, label: "Subspecialty", value: member?.subspecialty },
+                      { icon: Building, label: "Institution", value: member?.institution },
+                      { icon: Activity, label: "Amyloidosis Type", value: member?.amyloidosisType },
+                    ],
+                  },
+                  {
+                    title: "Membership",
+                    fields: [
+                      { icon: Shield, label: "Membership Type", value: member?.role ? ROLE_LABELS[member.role] || member.role : undefined },
+                      { icon: CheckCircle, label: "Account Status", value: member?.status },
+                      { icon: CheckCircle, label: "CAS Member", value: yn(member?.isCASMember) },
+                      { icon: CheckCircle, label: "CANN Member", value: yn(member?.isCANNMember) },
+                      { icon: Calendar, label: "Member Since", value: member?.createdAt ? formatDate(member.createdAt) : undefined },
+                      { icon: Clock, label: "Last Login", value: member?.lastLoginAt ? formatDate(member.lastLoginAt) : undefined },
+                    ],
+                  },
+                  {
+                    title: "Communication Preferences",
+                    fields: [
+                      { icon: Mail, label: "CAS Communications", value: yn(member?.wantsCommunications) },
+                      { icon: Mail, label: "CANN Communications", value: yn(member?.wantsCANNCommunications) },
+                      { icon: MapPin, label: "Services Map Inclusion", value: yn(member?.wantsServicesMapInclusion) },
+                    ],
+                  },
+                ].map((sec) => (
+                  <div key={sec.title}>
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-[#0092c4] dark:text-[#4dd0f5] mb-3">{sec.title}</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {sec.fields.map(({ icon: Icon, label, value }) => (
+                        <div key={label} className={`${PANEL} flex items-start gap-3 p-4`}>
+                          <div className={`${ICON_TILE} h-10 w-10 shrink-0`}><Icon className="w-4.5 h-4.5 text-[#00AFE6]" /></div>
+                          <div className="min-w-0">
+                            <p className="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500">{label}</p>
+                            <p className="font-medium text-slate-900 dark:text-white truncate">{value || "—"}</p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}

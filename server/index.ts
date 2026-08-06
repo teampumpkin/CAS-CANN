@@ -1,10 +1,46 @@
 import express, { type Request, Response, NextFunction } from "express";
+import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
 import { registerRoutes } from "./routes";
 import { serveStatic, log } from "./static";
+import { pool } from "./db";
 
 const app = express();
+
+// Behind AWS ALB / any reverse proxy in production so secure cookies work.
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Member session middleware (backs the member login portal).
+// Sessions are stored in the `member_sessions` table via connect-pg-simple.
+const PgSession = connectPgSimple(session);
+if (!process.env.SESSION_SECRET && process.env.NODE_ENV === "production") {
+  console.warn("[Session] SESSION_SECRET is not set in production — set it in the environment.");
+}
+app.use(
+  session({
+    store: new PgSession({
+      pool,
+      tableName: "member_sessions",
+      createTableIfMissing: false, // created by the add-member-tables migration
+    }),
+    name: "cas.sid",
+    secret: process.env.SESSION_SECRET || "dev-session-secret-change-in-production",
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+    },
+  }),
+);
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -57,6 +93,9 @@ app.use((req, res, next) => {
 
   const { migrateConsentRecords } = await import("./migrations/add-consent-records");
   await migrateConsentRecords();
+
+  const { migrateMemberTables } = await import("./migrations/add-member-tables");
+  await migrateMemberTables();
 
   // Initialize dedicated token management system
   const { dedicatedTokenManager } = await import("./dedicated-token-manager");
@@ -124,7 +163,8 @@ app.use((req, res, next) => {
   server.listen({
     port,
     host: "0.0.0.0",
-    reusePort: true,
+    // reusePort is unsupported on macOS (ENOTSUP); enable only where supported (e.g. Linux/Replit)
+    reusePort: process.platform !== "darwin",
   }, () => {
     log(`🚀 Server listening on 0.0.0.0:${port} (${process.env.NODE_ENV || 'development'})`);
   });

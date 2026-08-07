@@ -785,7 +785,18 @@ export const memberEvents = pgTable("member_events", {
   duration: integer("duration"), // Duration in minutes
   speakers: text("speakers").array(),
   tags: text("tags").array(),
-  accessLevel: memberRoleEnum("access_level").notNull().default("cas_member"), // Who can access
+  // Fields matching the public CAS/CANN event card structure
+  presentationTitle: varchar("presentation_title", { length: 500 }),
+  speaker: varchar("speaker", { length: 500 }),
+  topic: varchar("topic", { length: 500 }),
+  timeLabel: varchar("time_label", { length: 120 }), // e.g. "5:00 PM - 6:00 PM EST"
+  format: varchar("format", { length: 120 }), // e.g. "Virtual", "In-person"
+  cmeCredits: varchar("cme_credits", { length: 120 }), // e.g. "1 hour"
+  registrationUrl: varchar("registration_url", { length: 500 }),
+  registrationStatus: varchar("registration_status", { length: 255 }), // e.g. "Registration is OPEN!"
+  requiresCannMembership: boolean("requires_cann_membership").notNull().default(false),
+  audience: varchar("audience", { length: 20 }).notNull().default("members"), // everyone | members | both
+  accessLevel: memberRoleEnum("access_level").notNull().default("cas_member"), // Who can access (members audience)
   isPublished: boolean("is_published").notNull().default(false),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),

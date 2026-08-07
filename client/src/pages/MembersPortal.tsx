@@ -87,6 +87,15 @@ interface MemberEvent {
   speakers?: string[];
   tags?: string[];
   accessLevel: string;
+  presentationTitle?: string | null;
+  speaker?: string | null;
+  topic?: string | null;
+  timeLabel?: string | null;
+  format?: string | null;
+  cmeCredits?: string | null;
+  registrationUrl?: string | null;
+  registrationStatus?: string | null;
+  requiresCannMembership?: boolean;
 }
 
 interface ApiResponse<T> {
@@ -410,20 +419,25 @@ export default function MembersPortal() {
                             )}
                           </div>
                           <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{event.title}</h3>
+                          {event.presentationTitle && <p className="text-sm font-medium text-[#0092c4] dark:text-[#4dd0f5] mt-0.5">{event.presentationTitle}</p>}
                           {event.description && <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 mb-3">{event.description}</p>}
-                          <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-slate-500 dark:text-slate-400">
-                            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-[#00AFE6]" />{formatDate(event.eventDate)}</span>
+                          {event.topic && <p className="text-sm text-slate-600 dark:text-slate-400 italic mt-1">“{event.topic}”</p>}
+                          <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-slate-500 dark:text-slate-400 mt-1">
+                            <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-[#00AFE6]" />{formatDate(event.eventDate)}</span>
+                            {event.timeLabel && <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-[#00AFE6]" />{event.timeLabel}</span>}
                             {event.location && <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-[#00AFE6]" />{event.location}</span>}
-                            {event.duration && <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-[#00AFE6]" />{event.duration} min</span>}
+                            {event.format && <span className="flex items-center gap-1.5"><Video className="w-4 h-4 text-[#00AFE6]" />{event.format}</span>}
+                            {event.cmeCredits && <span className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-[#00AFE6]" />{event.cmeCredits}</span>}
                           </div>
-                          {event.speakers && event.speakers.length > 0 && (
-                            <div className="mt-2 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400"><Users className="w-4 h-4 text-[#00AFE6]" />{event.speakers.join(", ")}</div>
+                          {(event.speaker || (event.speakers && event.speakers.length > 0)) && (
+                            <div className="mt-2 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400"><Users className="w-4 h-4 text-[#00AFE6]" />{event.speaker || event.speakers!.join(", ")}</div>
                           )}
+                          {event.registrationStatus && <p className="mt-2 text-sm font-medium text-[#00a866] dark:text-[#4ff0b0]">{event.registrationStatus}</p>}
                         </div>
                       </div>
-                      {event.meetingLink && (
-                        <Button className={`${GRAD_BTN} shrink-0`} onClick={() => window.open(event.meetingLink, "_blank")} data-testid={`button-join-event-${event.id}`}>
-                          Join Event<ExternalLink className="w-4 h-4 ml-2" />
+                      {(event.registrationUrl || event.meetingLink) && (
+                        <Button className={`${GRAD_BTN} shrink-0`} onClick={() => window.open(event.registrationUrl || event.meetingLink!, "_blank")} data-testid={`button-join-event-${event.id}`}>
+                          {event.registrationUrl ? "Register" : "Join Event"}<ExternalLink className="w-4 h-4 ml-2" />
                         </Button>
                       )}
                     </div>

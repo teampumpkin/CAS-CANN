@@ -119,6 +119,18 @@ export function ensureMemberTables(): Promise<void> {
     await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS recording_mime_type VARCHAR(120)`);
     await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS recording_size_bytes BIGINT`);
 
+    // Public CAS/CANN event card fields + audience
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS presentation_title VARCHAR(500)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS speaker VARCHAR(500)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS topic VARCHAR(500)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS time_label VARCHAR(120)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS format VARCHAR(120)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS cme_credits VARCHAR(120)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS registration_url VARCHAR(500)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS registration_status VARCHAR(255)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS requires_cann_membership BOOLEAN NOT NULL DEFAULT false`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS audience VARCHAR(20) NOT NULL DEFAULT 'members'`);
+
     // Admin-approved clinics shown on the public Canada services map (sourced from leads)
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS map_clinics (

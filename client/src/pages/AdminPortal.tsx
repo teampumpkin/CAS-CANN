@@ -255,7 +255,11 @@ function LeadsSection() {
 }
 
 // ============================ Resources & Events ============================
-const EMPTY_EVENT = { title: "", eventType: "webinar", eventDate: "", location: "", meetingLink: "", recordingUrl: "", accessLevel: "cas_member", description: "", isPublished: true };
+const EMPTY_EVENT = {
+  title: "", eventType: "webinar", audience: "everyone", eventDate: "", timeLabel: "", location: "", format: "",
+  presentationTitle: "", speaker: "", topic: "", cmeCredits: "", registrationStatus: "", registrationUrl: "",
+  meetingLink: "", recordingUrl: "", accessLevel: "cas_member", requiresCannMembership: false, description: "", isPublished: true,
+};
 
 function ResourcesSection({ toast }: { toast: any }) {
   const [form, setForm] = useState<any>(EMPTY_EVENT);
@@ -293,34 +297,65 @@ function ResourcesSection({ toast }: { toast: any }) {
           <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-4">New event</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Labeled label="Title" required className="md:col-span-2">
-              <input className={FIELD} placeholder="e.g. Cardiac Amyloidosis Webinar" value={form.title} onChange={(e) => set("title", e.target.value)} data-testid="event-title" />
+              <input className={FIELD} placeholder="e.g. CANN Educational Series" value={form.title} onChange={(e) => set("title", e.target.value)} data-testid="event-title" />
+            </Labeled>
+            <Labeled label="Presentation title" className="md:col-span-2">
+              <input className={FIELD} placeholder="Session/talk title (optional)" value={form.presentationTitle} onChange={(e) => set("presentationTitle", e.target.value)} />
+            </Labeled>
+            <Labeled label="Speaker(s)">
+              <input className={FIELD} placeholder="e.g. Dr. Jane Doe, RN" value={form.speaker} onChange={(e) => set("speaker", e.target.value)} />
+            </Labeled>
+            <Labeled label="Topic">
+              <input className={FIELD} placeholder="Session topic (optional)" value={form.topic} onChange={(e) => set("topic", e.target.value)} />
             </Labeled>
             <Labeled label="Event type">
               <select className={FIELD} value={form.eventType} onChange={(e) => set("eventType", e.target.value)}>
-                <option value="webinar">Webinar</option><option value="conference">Conference</option><option value="workshop">Workshop</option><option value="recording">Recording</option>
+                <option value="webinar">Webinar</option><option value="meeting">Meeting</option><option value="conference">Conference</option><option value="workshop">Workshop</option><option value="townhall">Townhall</option>
               </select>
             </Labeled>
-            <Labeled label="Date & time">
+            <Labeled label="Audience">
+              <select className={FIELD} value={form.audience} onChange={(e) => set("audience", e.target.value)} data-testid="event-audience">
+                <option value="everyone">Everyone (public pages)</option>
+                <option value="members">Members only (portal)</option>
+                <option value="both">Both public &amp; members</option>
+              </select>
+            </Labeled>
+            <Labeled label="Date">
               <input type="datetime-local" className={FIELD} value={form.eventDate} onChange={(e) => set("eventDate", e.target.value)} data-testid="event-date" />
             </Labeled>
-            <Labeled label="Location">
-              <input className={FIELD} placeholder="e.g. Virtual" value={form.location} onChange={(e) => set("location", e.target.value)} />
+            <Labeled label="Time (label)">
+              <input className={FIELD} placeholder="e.g. 5:00 PM – 6:00 PM EST" value={form.timeLabel} onChange={(e) => set("timeLabel", e.target.value)} />
             </Labeled>
-            <Labeled label="Who can access">
+            <Labeled label="Location">
+              <input className={FIELD} placeholder="e.g. Toronto, ON" value={form.location} onChange={(e) => set("location", e.target.value)} />
+            </Labeled>
+            <Labeled label="Format">
+              <input className={FIELD} placeholder="e.g. Virtual / In-person" value={form.format} onChange={(e) => set("format", e.target.value)} />
+            </Labeled>
+            <Labeled label="CME credits">
+              <input className={FIELD} placeholder="e.g. 1 hour" value={form.cmeCredits} onChange={(e) => set("cmeCredits", e.target.value)} />
+            </Labeled>
+            <Labeled label="Registration status">
+              <input className={FIELD} placeholder="e.g. Registration is open" value={form.registrationStatus} onChange={(e) => set("registrationStatus", e.target.value)} />
+            </Labeled>
+            <Labeled label="Registration link">
+              <input className={FIELD} placeholder="https://…" value={form.registrationUrl} onChange={(e) => set("registrationUrl", e.target.value)} />
+            </Labeled>
+            <Labeled label="Meeting link (virtual join)">
+              <input className={FIELD} placeholder="https://…" value={form.meetingLink} onChange={(e) => set("meetingLink", e.target.value)} />
+            </Labeled>
+            <Labeled label="Member access level">
               <select className={FIELD} value={form.accessLevel} onChange={(e) => set("accessLevel", e.target.value)}>
                 <option value="cas_member">CAS members</option><option value="cann_member">CANN members</option><option value="cas_cann_member">CAS &amp; CANN</option><option value="admin">Admins</option>
               </select>
             </Labeled>
-            <Labeled label="Meeting link (for upcoming)">
-              <input className={FIELD} placeholder="https://…" value={form.meetingLink} onChange={(e) => set("meetingLink", e.target.value)} />
-            </Labeled>
-            <Labeled label="Recording URL (for past)">
-              <input className={FIELD} placeholder="https://…" value={form.recordingUrl} onChange={(e) => set("recordingUrl", e.target.value)} />
-            </Labeled>
             <Labeled label="Description" className="md:col-span-2">
               <textarea rows={3} className={FIELD} placeholder="Short summary of the event" value={form.description} onChange={(e) => set("description", e.target.value)} />
             </Labeled>
-            <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 md:col-span-2">
+            <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+              <input type="checkbox" checked={form.requiresCannMembership} onChange={(e) => set("requiresCannMembership", e.target.checked)} /> Requires CANN membership
+            </label>
+            <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
               <input type="checkbox" checked={form.isPublished} onChange={(e) => set("isPublished", e.target.checked)} /> Publish immediately
             </label>
           </div>

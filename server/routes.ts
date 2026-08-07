@@ -458,6 +458,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const events = await storage.getMemberEvents({ isPublished: true });
       
       const filteredEvents = events.filter(event => {
+        if (event.eventType === "recording") return false; // recordings live in the Recordings tab
         if (req.member!.role === "admin") return true;
         if (event.accessLevel === "cas_member") return true;
         if (event.accessLevel === "cann_member" && req.member!.isCANNMember) return true;
@@ -479,6 +480,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
           speakers: event.speakers,
           tags: event.tags,
           accessLevel: event.accessLevel,
+          presentationTitle: (event as any).presentationTitle,
+          speaker: (event as any).speaker,
+          topic: (event as any).topic,
+          timeLabel: (event as any).timeLabel,
+          format: (event as any).format,
+          cmeCredits: (event as any).cmeCredits,
+          registrationUrl: (event as any).registrationUrl,
+          registrationStatus: (event as any).registrationStatus,
+          requiresCannMembership: (event as any).requiresCannMembership,
         })),
       });
     } catch (error) {
@@ -618,6 +628,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         thumbnailUrl: b.thumbnailUrl || null, duration: b.duration ? parseInt(b.duration) : null,
         speakers: Array.isArray(b.speakers) ? b.speakers : (b.speakers ? String(b.speakers).split(",").map((x: string) => x.trim()) : null),
         tags: Array.isArray(b.tags) ? b.tags : null, accessLevel: b.accessLevel || "cas_member", isPublished: b.isPublished ?? false,
+        // public CAS/CANN card fields
+        presentationTitle: b.presentationTitle || null, speaker: b.speaker || null, topic: b.topic || null,
+        timeLabel: b.timeLabel || null, format: b.format || null, cmeCredits: b.cmeCredits || null,
+        registrationUrl: b.registrationUrl || null, registrationStatus: b.registrationStatus || null,
+        requiresCannMembership: b.requiresCannMembership ?? false, audience: b.audience || "members",
       } as any);
       res.json({ success: true, event: created });
     } catch (e) { console.error("[Admin] create event error", e); res.status(500).json({ success: false, message: "Failed to create event" }); }
@@ -763,6 +778,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/map-clinics", async (_req, res) => {
     try { res.json({ success: true, clinics: await storage.getMapClinics(true) }); }
     catch (e) { res.status(500).json({ success: false, clinics: [] }); }
+  });
+
+  // Public: events flagged for everyone (consumed by the public CAS/CANN event pages)
+  app.get("/api/events", async (_req, res) => {
+    try {
+      const events = await storage.getMemberEvents({ isPublished: true });
+      res.json({ success: true, events: events.filter((e: any) => e.audience === "everyone" || e.audience === "both") });
+    } catch (e) { res.status(500).json({ success: false, events: [] }); }
   });
 
 

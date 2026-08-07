@@ -1,17 +1,43 @@
 import { motion } from 'framer-motion';
 import { Search, FileText, Heart, Users, MapPin, Building2, Phone, Mail, TrendingUp } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'wouter';
+import { useQuery } from '@tanstack/react-query';
 import InteractiveCanadaMap from './InteractiveCanadaMap';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { healthcareCenters, HealthcareCenter } from '@/data/healthcareCenters';
+import { healthcareCenters as staticCenters, HealthcareCenter } from '@/data/healthcareCenters';
 import HealthcareCenterModal from './HealthcareCenterModal';
 
+// Approximate {x,y} positions (relative to the Canada map image) per province code,
+// used to place admin-added clinics whose leads only provide a province.
+const PROVINCE_COORDS: Record<string, { x: number; y: number }> = {
+  BC: { x: 12, y: 70 }, AB: { x: 22, y: 66 }, SK: { x: 32, y: 66 }, MB: { x: 41, y: 66 },
+  ON: { x: 55, y: 78 }, QC: { x: 66, y: 72 }, NB: { x: 76, y: 78 }, NS: { x: 80, y: 80 },
+  PE: { x: 79, y: 76 }, NL: { x: 82, y: 62 }, YT: { x: 12, y: 40 }, NT: { x: 26, y: 42 }, NU: { x: 42, y: 40 },
+};
 
 export default function DirectoryPreviewSection() {
   const { t } = useLanguage();
   const [selectedCenter, setSelectedCenter] = useState<HealthcareCenter | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Admin-curated clinics (from leads) published via the admin portal.
+  const { data: mapData } = useQuery<{ clinics: any[] }>({ queryKey: ["/api/map-clinics"] });
+  const healthcareCenters = useMemo<HealthcareCenter[]>(() => {
+    const approved = (mapData?.clinics || []).map((c): HealthcareCenter => ({
+      id: `lead-${c.id}`,
+      name: c.name,
+      city: c.city || '',
+      province: c.province,
+      coordinates: PROVINCE_COORDS[c.province] || { x: 50, y: 60 },
+      type: (c.type as HealthcareCenter['type']) || 'clinic',
+      specialties: c.specialties || [],
+      contact: { phone: c.phone || '', email: c.email || '', address: c.address || '' },
+      services: c.services || [],
+      description: c.description || 'Clinic listed via the Canadian Amyloidosis Services Map.',
+    }));
+    return [...staticCenters, ...approved];
+  }, [mapData]);
 
   const handleCenterClick = (center: HealthcareCenter) => {
     setSelectedCenter(center);

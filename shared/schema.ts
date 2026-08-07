@@ -866,3 +866,39 @@ export const updateProfileSchema = z.object({
 });
 
 export type UpdateProfileRequest = z.infer<typeof updateProfileSchema>;
+
+// ============================================================================
+// Map clinics — admin-approved clinics shown on the public Canada services map.
+// Sourced from join-form leads that opted into the services map (or added manually).
+// ============================================================================
+export const mapClinics = pgTable("map_clinics", {
+  id: serial("id").primaryKey(),
+  submissionId: integer("submission_id").references(() => formSubmissions.id, { onDelete: "set null" }),
+  name: varchar("name", { length: 255 }).notNull(),
+  city: varchar("city", { length: 120 }),
+  province: varchar("province", { length: 10 }).notNull(), // 2-letter code: BC, AB, ON, ...
+  address: varchar("address", { length: 500 }),
+  phone: varchar("phone", { length: 60 }),
+  email: varchar("email", { length: 255 }),
+  website: varchar("website", { length: 500 }),
+  type: varchar("type", { length: 40 }).notNull().default("clinic"), // hospital | clinic | research | specialty
+  specialties: text("specialties").array(),
+  services: text("services").array(),
+  description: text("description"),
+  isPublished: boolean("is_published").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_map_clinics_province").on(table.province),
+  index("idx_map_clinics_is_published").on(table.isPublished),
+  index("idx_map_clinics_submission_id").on(table.submissionId),
+]);
+
+export const insertMapClinicSchema = createInsertSchema(mapClinics).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type MapClinic = typeof mapClinics.$inferSelect;
+export type InsertMapClinic = z.infer<typeof insertMapClinicSchema>;

@@ -112,6 +112,31 @@ export function ensureMemberTables(): Promise<void> {
     await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_events_event_date ON member_events (event_date)`);
     await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_events_access_level ON member_events (access_level)`);
     await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_events_is_published ON member_events (is_published)`);
+
+    // Admin-approved clinics shown on the public Canada services map (sourced from leads)
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS map_clinics (
+        id SERIAL PRIMARY KEY,
+        submission_id INTEGER REFERENCES form_submissions(id) ON DELETE SET NULL,
+        name VARCHAR(255) NOT NULL,
+        city VARCHAR(120),
+        province VARCHAR(10) NOT NULL,
+        address VARCHAR(500),
+        phone VARCHAR(60),
+        email VARCHAR(255),
+        website VARCHAR(500),
+        type VARCHAR(40) NOT NULL DEFAULT 'clinic',
+        specialties TEXT[],
+        services TEXT[],
+        description TEXT,
+        is_published BOOLEAN NOT NULL DEFAULT true,
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW()
+      )
+    `);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_map_clinics_province ON map_clinics (province)`);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_map_clinics_is_published ON map_clinics (is_published)`);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_map_clinics_submission_id ON map_clinics (submission_id)`);
   })().catch((err) => {
     cachedPromise = null;
     throw err;

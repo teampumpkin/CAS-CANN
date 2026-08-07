@@ -47,12 +47,15 @@ import {
   members,
   passwordResets,
   memberEvents,
+  mapClinics,
   type Member,
   type InsertMember,
   type PasswordReset,
   type InsertPasswordReset,
   type MemberEvent,
   type InsertMemberEvent,
+  type MapClinic,
+  type InsertMapClinic,
 } from "@shared/schema";
 import { ensureConsentRecordsTable } from "./migrations/add-consent-records";
 import { db } from "./db";
@@ -231,6 +234,14 @@ export interface IStorage {
   getMemberEvent(id: number): Promise<MemberEvent | undefined>;
   createMemberEvent(event: InsertMemberEvent): Promise<MemberEvent>;
   updateMemberEvent(id: number, updates: Partial<MemberEvent>): Promise<MemberEvent | undefined>;
+  deleteMemberEvent(id: number): Promise<boolean>;
+
+  // Map clinics (admin-curated clinics for the public services map)
+  getMapClinics(onlyPublished?: boolean): Promise<MapClinic[]>;
+  getMapClinicBySubmission(submissionId: number): Promise<MapClinic | undefined>;
+  createMapClinic(clinic: InsertMapClinic): Promise<MapClinic>;
+  updateMapClinic(id: number, updates: Partial<MapClinic>): Promise<MapClinic | undefined>;
+  deleteMapClinic(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -1171,6 +1182,44 @@ export class DatabaseStorage implements IStorage {
       .where(eq(memberEvents.id, id))
       .returning();
     return updated || undefined;
+  }
+
+  async deleteMemberEvent(id: number): Promise<boolean> {
+    const result = await db.delete(memberEvents).where(eq(memberEvents.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  // ===== Map clinics =====
+  async getMapClinics(onlyPublished = false): Promise<MapClinic[]> {
+    return await db
+      .select()
+      .from(mapClinics)
+      .where(onlyPublished ? eq(mapClinics.isPublished, true) : undefined)
+      .orderBy(desc(mapClinics.createdAt));
+  }
+
+  async getMapClinicBySubmission(submissionId: number): Promise<MapClinic | undefined> {
+    const [clinic] = await db.select().from(mapClinics).where(eq(mapClinics.submissionId, submissionId));
+    return clinic || undefined;
+  }
+
+  async createMapClinic(clinic: InsertMapClinic): Promise<MapClinic> {
+    const [created] = await db.insert(mapClinics).values(clinic).returning();
+    return created;
+  }
+
+  async updateMapClinic(id: number, updates: Partial<MapClinic>): Promise<MapClinic | undefined> {
+    const [updated] = await db
+      .update(mapClinics)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(mapClinics.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteMapClinic(id: number): Promise<boolean> {
+    const result = await db.delete(mapClinics).where(eq(mapClinics.id, id));
+    return (result.rowCount || 0) > 0;
   }
 }
 

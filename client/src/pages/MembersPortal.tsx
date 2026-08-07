@@ -307,7 +307,16 @@ export default function MembersPortal() {
             {NAV.map((item) => <NavButton key={item.key} item={item} />)}
           </nav>
 
-          <div className="mt-auto pt-5">
+          <div className="mt-auto pt-5 space-y-1.5">
+            {member?.role === "admin" && (
+              <button
+                onClick={() => setLocation("/admin-portal")}
+                className="flex items-center gap-3 rounded-xl w-full justify-start px-4 py-2.5 text-sm font-medium text-[#0092c4] dark:text-[#4dd0f5] hover:bg-[#00AFE6]/10"
+                data-testid="link-admin-console"
+              >
+                <Shield className="w-4 h-4" /> Admin Console
+              </button>
+            )}
             <Button
               variant="outline"
               onClick={() => logoutMutation.mutate()}

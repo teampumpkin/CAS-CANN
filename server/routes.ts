@@ -11,7 +11,7 @@ import { oauthService } from "./oauth-service";
 import { dedicatedTokenManager } from "./dedicated-token-manager";
 import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
-import { requireAutomationAuth, requireMemberAuth, type AuthenticatedRequest } from "./auth-middleware";
+import { requireAutomationAuth, requireMemberAuth, requireAdmin, type AuthenticatedRequest } from "./auth-middleware";
 import { verifyPassword, hashPassword, generateOTP, hashOTP, verifyOTP, getOTPExpiryDate, sendPasswordResetEmail } from "./auth-service";
 // import { notificationService, notificationConfigSchema } from "./notification-service"; // Disabled for production
 // REMOVED: formScalabilityService - No longer used after endpoint consolidation
@@ -514,6 +514,153 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ success: false, message: "Failed to get recordings" });
     }
   });
+
+  // ===================== Admin portal routes (requireAdmin) =====================
+  const PROVINCE_CODE: Record<string, string> = {
+    "british columbia": "BC", bc: "BC", alberta: "AB", ab: "AB", saskatchewan: "SK", sk: "SK",
+    manitoba: "MB", mb: "MB", ontario: "ON", on: "ON", quebec: "QC", qc: "QC", "québec": "QC",
+    "new brunswick": "NB", nb: "NB", "nova scotia": "NS", ns: "NS", "prince edward island": "PE", pe: "PE", pei: "PE",
+    "newfoundland and labrador": "NL", nl: "NL", newfoundland: "NL", yukon: "YT", yt: "YT",
+    "northwest territories": "NT", nt: "NT", nunavut: "NU", nu: "NU",
+  };
+  const toProvinceCode = (v?: string): string => {
+    if (!v) return "";
+    const k = String(v).trim().toLowerCase();
+    return PROVINCE_CODE[k] || (String(v).trim().length === 2 ? String(v).trim().toUpperCase() : "");
+  };
+  const firstVal = (obj: any, keys: string[]): string | undefined => {
+    for (const k of keys) {
+      const val = obj?.[k];
+      if (val !== undefined && val !== null && String(val).trim() !== "") return String(val).trim();
+    }
+    return undefined;
+  };
+  const wantsMap = (data: any): boolean => {
+    const v = firstVal(data, ["servicesMapConsent", "wantsServicesMapInclusion", "wantsServicesMap", "mapInclusion"]);
+    return v === "Yes" || v === "yes" || v === "true";
+  };
+  const extractClinic = (sub: any) => {
+    const d = sub.submissionData || {};
+    const name = firstVal(d, ["mapClinicName", "mapInstitutionName", "centerName", "institutionName", "clinicName", "institution"]) || firstVal(d, ["fullName"]) || "Clinic";
+    const city = firstVal(d, ["mapCity", "city"]);
+    const province = toProvinceCode(firstVal(d, ["mapProvince", "province"]));
+    const address = firstVal(d, ["mapClinicAddress", "institutionAddress", "streetName", "address"]);
+    const phone = firstVal(d, ["mapClinicPhone", "centerPhone", "institutionPhone", "phoneNumber", "phone"]);
+    const email = firstVal(d, ["primaryEmail", "emailAddress", "email"]);
+    const discipline = firstVal(d, ["discipline"]);
+    return { name, city, province, address, phone, email, discipline };
+  };
+  const leadName = (d: any) => firstVal(d, ["fullName", "name"]) || [firstVal(d, ["firstName"]), firstVal(d, ["lastName"])].filter(Boolean).join(" ") || "—";
+  const leadEmail = (d: any) => firstVal(d, ["primaryEmail", "emailAddress", "email", "noMemberEmail"]) || "—";
+
+  // --- Leads ---
+  app.get("/api/admin/leads", requireMemberAuth, requireAdmin, async (_req: AuthenticatedRequest, res) => {
+    try {
+      const subs = await storage.getFormSubmissions();
+      const leads = subs.map((s) => {
+        const d = (s.submissionData || {}) as any;
+        return {
+          id: s.id, formName: s.formName, sourceForm: s.sourceForm,
+          name: leadName(d), email: leadEmail(d),
+          discipline: firstVal(d, ["discipline"]) || null,
+          institution: firstVal(d, ["institutionName", "institution", "mapClinicName", "centerName"]) || null,
+          wantsMap: wantsMap(d), syncStatus: s.syncStatus, zohoCrmId: s.zohoCrmId, createdAt: s.createdAt,
+        };
+      });
+      res.json({ success: true, leads });
+    } catch (e) { console.error("[Admin] leads error", e); res.status(500).json({ success: false, message: "Failed to load leads" }); }
+  });
+  app.get("/api/admin/leads/:id", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
+    try {
+      const sub = await storage.getFormSubmission(parseInt(req.params.id));
+      if (!sub) return res.status(404).json({ success: false, message: "Lead not found" });
+      res.json({ success: true, lead: sub });
+    } catch (e) { res.status(500).json({ success: false, message: "Failed to load lead" }); }
+  });
+
+  // --- Events / recordings ---
+  app.get("/api/admin/events", requireMemberAuth, requireAdmin, async (_req: AuthenticatedRequest, res) => {
+    try { res.json({ success: true, events: await storage.getMemberEvents() }); }
+    catch (e) { res.status(500).json({ success: false, message: "Failed to load events" }); }
+  });
+  app.post("/api/admin/events", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
+    try {
+      const b = req.body || {};
+      if (!b.title || !b.eventDate || !b.eventType) return res.status(400).json({ success: false, message: "title, eventDate and eventType are required" });
+      const created = await storage.createMemberEvent({
+        title: b.title, description: b.description || null, eventDate: new Date(b.eventDate), eventType: b.eventType,
+        location: b.location || null, meetingLink: b.meetingLink || null, recordingUrl: b.recordingUrl || null,
+        thumbnailUrl: b.thumbnailUrl || null, duration: b.duration ? parseInt(b.duration) : null,
+        speakers: Array.isArray(b.speakers) ? b.speakers : (b.speakers ? String(b.speakers).split(",").map((x: string) => x.trim()) : null),
+        tags: Array.isArray(b.tags) ? b.tags : null, accessLevel: b.accessLevel || "cas_member", isPublished: b.isPublished ?? false,
+      } as any);
+      res.json({ success: true, event: created });
+    } catch (e) { console.error("[Admin] create event error", e); res.status(500).json({ success: false, message: "Failed to create event" }); }
+  });
+  app.put("/api/admin/events/:id", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
+    try {
+      const b = req.body || {}; const updates: any = { ...b };
+      if (b.eventDate) updates.eventDate = new Date(b.eventDate);
+      if (b.duration !== undefined) updates.duration = b.duration ? parseInt(b.duration) : null;
+      if (typeof b.speakers === "string") updates.speakers = b.speakers.split(",").map((x: string) => x.trim()).filter(Boolean);
+      const updated = await storage.updateMemberEvent(parseInt(req.params.id), updates);
+      if (!updated) return res.status(404).json({ success: false, message: "Event not found" });
+      res.json({ success: true, event: updated });
+    } catch (e) { res.status(500).json({ success: false, message: "Failed to update event" }); }
+  });
+  app.delete("/api/admin/events/:id", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
+    try { res.json({ success: await storage.deleteMemberEvent(parseInt(req.params.id)) }); }
+    catch (e) { res.status(500).json({ success: false, message: "Failed to delete event" }); }
+  });
+
+  // --- Services map ---
+  app.get("/api/admin/map/candidates", requireMemberAuth, requireAdmin, async (_req: AuthenticatedRequest, res) => {
+    try {
+      const subs = await storage.getFormSubmissions();
+      const existing = await storage.getMapClinics();
+      const used = new Set(existing.map((c) => c.submissionId).filter(Boolean));
+      const candidates = subs.filter((s) => wantsMap(s.submissionData)).filter((s) => !used.has(s.id))
+        .map((s) => ({ submissionId: s.id, ...extractClinic(s), createdAt: s.createdAt }));
+      res.json({ success: true, candidates });
+    } catch (e) { console.error("[Admin] map candidates error", e); res.status(500).json({ success: false, message: "Failed to load candidates" }); }
+  });
+  app.get("/api/admin/map/clinics", requireMemberAuth, requireAdmin, async (_req: AuthenticatedRequest, res) => {
+    try { res.json({ success: true, clinics: await storage.getMapClinics() }); }
+    catch (e) { res.status(500).json({ success: false, message: "Failed to load clinics" }); }
+  });
+  app.post("/api/admin/map/clinics", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
+    try {
+      const b = req.body || {}; let payload: any;
+      if (b.submissionId) {
+        const sub = await storage.getFormSubmission(parseInt(b.submissionId));
+        if (!sub) return res.status(404).json({ success: false, message: "Lead not found" });
+        const c = extractClinic(sub);
+        payload = { submissionId: sub.id, name: c.name, city: c.city || null, province: c.province || b.province || "", address: c.address || null, phone: c.phone || null, email: c.email || null, type: "clinic", specialties: c.discipline ? [c.discipline] : null, isPublished: true };
+      } else {
+        payload = { name: b.name, city: b.city || null, province: toProvinceCode(b.province) || b.province, address: b.address || null, phone: b.phone || null, email: b.email || null, type: b.type || "clinic", specialties: b.specialties || null, isPublished: b.isPublished ?? true };
+      }
+      if (!payload.name || !payload.province) return res.status(400).json({ success: false, message: "name and a valid province are required" });
+      res.json({ success: true, clinic: await storage.createMapClinic(payload) });
+    } catch (e) { console.error("[Admin] add clinic error", e); res.status(500).json({ success: false, message: "Failed to add clinic" }); }
+  });
+  app.put("/api/admin/map/clinics/:id", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
+    try {
+      const updated = await storage.updateMapClinic(parseInt(req.params.id), req.body || {});
+      if (!updated) return res.status(404).json({ success: false, message: "Clinic not found" });
+      res.json({ success: true, clinic: updated });
+    } catch (e) { res.status(500).json({ success: false, message: "Failed to update clinic" }); }
+  });
+  app.delete("/api/admin/map/clinics/:id", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
+    try { res.json({ success: await storage.deleteMapClinic(parseInt(req.params.id)) }); }
+    catch (e) { res.status(500).json({ success: false, message: "Failed to delete clinic" }); }
+  });
+
+  // Public: published map clinics (consumed by the Canada services map)
+  app.get("/api/map-clinics", async (_req, res) => {
+    try { res.json({ success: true, clinics: await storage.getMapClinics(true) }); }
+    catch (e) { res.status(500).json({ success: false, clinics: [] }); }
+  });
+
 
   // User API routes
   app.get("/api/users/:id", async (req, res) => {

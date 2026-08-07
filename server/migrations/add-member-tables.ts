@@ -113,6 +113,12 @@ export function ensureMemberTables(): Promise<void> {
     await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_events_access_level ON member_events (access_level)`);
     await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_events_is_published ON member_events (is_published)`);
 
+    // Uploaded recording file columns (member-only recordings served via stream endpoint)
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS recording_storage_key VARCHAR(500)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS recording_file_name VARCHAR(255)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS recording_mime_type VARCHAR(120)`);
+    await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS recording_size_bytes BIGINT`);
+
     // Admin-approved clinics shown on the public Canada services map (sourced from leads)
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS map_clinics (

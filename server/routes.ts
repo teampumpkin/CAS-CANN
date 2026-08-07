@@ -13,6 +13,17 @@ import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
 import { requireAutomationAuth, requireMemberAuth, requireAdmin, type AuthenticatedRequest } from "./auth-middleware";
 import { verifyPassword, hashPassword, generateOTP, hashOTP, verifyOTP, getOTPExpiryDate, sendPasswordResetEmail } from "./auth-service";
+import multerLib from "multer";
+import { recordingStorage, RECORDINGS_TMP_DIR } from "./recording-storage";
+
+// Multer for member-recording uploads (temp dir; the storage adapter persists the file).
+const recordingUpload = multerLib({
+  storage: multerLib.diskStorage({
+    destination: (_req, _file, cb) => cb(null, RECORDINGS_TMP_DIR),
+    filename: (_req, file, cb) => cb(null, `${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`),
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 * 1024 }, // 5 GB
+});
 // import { notificationService, notificationConfigSchema } from "./notification-service"; // Disabled for production
 // REMOVED: formScalabilityService - No longer used after endpoint consolidation
 import { errorHandlingService, errorClassificationSchema } from "./error-handling-service";
@@ -486,7 +497,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const events = await storage.getMemberEvents({ isPublished: true });
       
       const recordings = events.filter(event => {
-        if (!event.recordingUrl) return false;
+        if (!event.recordingUrl && !event.recordingStorageKey) return false;
         if (req.member!.role === "admin") return true;
         if (event.accessLevel === "cas_member") return true;
         if (event.accessLevel === "cann_member" && req.member!.isCANNMember) return true;
@@ -503,6 +514,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           eventDate: event.eventDate,
           eventType: event.eventType,
           recordingUrl: event.recordingUrl,
+          streamUrl: event.recordingStorageKey ? `/api/members/recordings/${event.id}/stream` : null,
           thumbnailUrl: event.thumbnailUrl,
           duration: event.duration,
           speakers: event.speakers,
@@ -609,8 +621,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (e) { res.status(500).json({ success: false, message: "Failed to update event" }); }
   });
   app.delete("/api/admin/events/:id", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
-    try { res.json({ success: await storage.deleteMemberEvent(parseInt(req.params.id)) }); }
-    catch (e) { res.status(500).json({ success: false, message: "Failed to delete event" }); }
+    try {
+      const ev = await storage.getMemberEvent(parseInt(req.params.id));
+      if (ev?.recordingStorageKey) await recordingStorage.delete(ev.recordingStorageKey);
+      res.json({ success: await storage.deleteMemberEvent(parseInt(req.params.id)) });
+    } catch (e) { res.status(500).json({ success: false, message: "Failed to delete event" }); }
   });
 
   // --- Services map ---
@@ -654,6 +669,82 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try { res.json({ success: await storage.deleteMapClinic(parseInt(req.params.id)) }); }
     catch (e) { res.status(500).json({ success: false, message: "Failed to delete clinic" }); }
   });
+
+  // --- Recording uploads (member-only files, persisted via the storage adapter) ---
+  app.post("/api/admin/recordings", requireMemberAuth, requireAdmin, recordingUpload.single("file"), async (req: AuthenticatedRequest, res) => {
+    const file = (req as any).file;
+    try {
+      const b: any = req.body || {};
+      if (!file) return res.status(400).json({ success: false, message: "A recording file is required" });
+      if (!b.title) { fs.unlink(file.path, () => {}); return res.status(400).json({ success: false, message: "title is required" }); }
+      const key = `${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`;
+      const info = await recordingStorage.put(key, file.path, file.mimetype);
+      fs.unlink(file.path, () => {});
+      const ev = await storage.createMemberEvent({
+        title: b.title, description: b.description || null,
+        eventDate: b.eventDate ? new Date(b.eventDate) : new Date(), eventType: "recording",
+        location: null, meetingLink: null, recordingUrl: null, thumbnailUrl: b.thumbnailUrl || null,
+        duration: b.duration ? parseInt(b.duration) : null, speakers: null, tags: null,
+        accessLevel: b.accessLevel || "cas_member",
+        isPublished: b.isPublished === "true" || b.isPublished === true,
+        recordingStorageKey: key, recordingFileName: file.originalname, recordingMimeType: file.mimetype, recordingSizeBytes: info.size,
+      } as any);
+      res.json({ success: true, recording: ev });
+    } catch (e) {
+      if (file) fs.unlink(file.path, () => {});
+      console.error("[Admin] recording upload error", e);
+      res.status(500).json({ success: false, message: "Upload failed" });
+    }
+  });
+
+  app.post("/api/admin/recordings/:id/file", requireMemberAuth, requireAdmin, recordingUpload.single("file"), async (req: AuthenticatedRequest, res) => {
+    const file = (req as any).file;
+    try {
+      const ev = await storage.getMemberEvent(parseInt(req.params.id));
+      if (!ev) { if (file) fs.unlink(file.path, () => {}); return res.status(404).json({ success: false, message: "Recording not found" }); }
+      if (!file) return res.status(400).json({ success: false, message: "A file is required" });
+      if (ev.recordingStorageKey) await recordingStorage.delete(ev.recordingStorageKey);
+      const key = `${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`;
+      const info = await recordingStorage.put(key, file.path, file.mimetype);
+      fs.unlink(file.path, () => {});
+      const updated = await storage.updateMemberEvent(ev.id, { recordingStorageKey: key, recordingFileName: file.originalname, recordingMimeType: file.mimetype, recordingSizeBytes: info.size } as any);
+      res.json({ success: true, recording: updated });
+    } catch (e) {
+      if (file) fs.unlink(file.path, () => {});
+      console.error("[Admin] replace recording error", e);
+      res.status(500).json({ success: false, message: "Upload failed" });
+    }
+  });
+
+  // Member-only recording stream with HTTP Range support
+  app.get("/api/members/recordings/:id/stream", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const ev = await storage.getMemberEvent(parseInt(req.params.id));
+      if (!ev || !ev.recordingStorageKey) return res.status(404).json({ success: false, message: "Recording not found" });
+      const m = req.member!;
+      if (!ev.isPublished && m.role !== "admin") return res.status(404).json({ success: false, message: "Not found" });
+      const allowed = m.role === "admin" || ev.accessLevel === "cas_member" ||
+        (ev.accessLevel === "cann_member" && m.isCANNMember) ||
+        (ev.accessLevel === "cas_cann_member" && m.isCASMember && m.isCANNMember);
+      if (!allowed) return res.status(403).json({ success: false, message: "You don't have access to this recording." });
+      const info = await recordingStorage.stat(ev.recordingStorageKey);
+      if (!info) return res.status(404).json({ success: false, message: "File missing" });
+      const total = info.size;
+      const ct = ev.recordingMimeType || "application/octet-stream";
+      const range = req.headers.range;
+      if (range) {
+        const match = /bytes=(\d+)-(\d*)/.exec(range);
+        const start = match ? parseInt(match[1]) : 0;
+        const end = match && match[2] ? Math.min(parseInt(match[2]), total - 1) : total - 1;
+        res.status(206).set({ "Content-Range": `bytes ${start}-${end}/${total}`, "Accept-Ranges": "bytes", "Content-Length": String(end - start + 1), "Content-Type": ct });
+        recordingStorage.createReadStream(ev.recordingStorageKey, { start, end }).pipe(res);
+      } else {
+        res.set({ "Content-Length": String(total), "Content-Type": ct, "Accept-Ranges": "bytes" });
+        recordingStorage.createReadStream(ev.recordingStorageKey).pipe(res);
+      }
+    } catch (e) { console.error("[Member] stream error", e); res.status(500).json({ success: false, message: "Stream failed" }); }
+  });
+
 
   // Public: published map clinics (consumed by the Canada services map)
   app.get("/api/map-clinics", async (_req, res) => {

@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, varchar, timestamp, json, jsonb, pgEnum, unique, index } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, bigint, boolean, varchar, timestamp, json, jsonb, pgEnum, unique, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -777,6 +777,11 @@ export const memberEvents = pgTable("member_events", {
   meetingLink: varchar("meeting_link", { length: 500 }), // Zoom/Teams link for virtual events
   recordingUrl: varchar("recording_url", { length: 500 }), // URL to recording after event
   thumbnailUrl: varchar("thumbnail_url", { length: 500 }),
+  // Uploaded recording file (member-only; served via authenticated stream endpoint)
+  recordingStorageKey: varchar("recording_storage_key", { length: 500 }),
+  recordingFileName: varchar("recording_file_name", { length: 255 }),
+  recordingMimeType: varchar("recording_mime_type", { length: 120 }),
+  recordingSizeBytes: bigint("recording_size_bytes", { mode: "number" }),
   duration: integer("duration"), // Duration in minutes
   speakers: text("speakers").array(),
   tags: text("tags").array(),

@@ -81,6 +81,7 @@ interface MemberEvent {
   location?: string;
   meetingLink?: string;
   recordingUrl?: string;
+  streamUrl?: string | null;
   thumbnailUrl?: string;
   duration?: number;
   speakers?: string[];
@@ -137,6 +138,7 @@ export default function MembersPortal() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [playing, setPlaying] = useState<MemberEvent | null>(null);
 
   const { data: authData, isLoading: authLoading, error: authError } = useQuery<ApiResponse<Member>>({
     queryKey: ["/api/auth/me"],
@@ -457,7 +459,7 @@ export default function MembersPortal() {
                         <Video className="w-12 h-12 text-[#00AFE6]/60" />
                       )}
                       <button
-                        onClick={() => window.open(recording.recordingUrl, "_blank")}
+                        onClick={() => (recording.streamUrl ? setPlaying(recording) : window.open(recording.recordingUrl, "_blank"))}
                         className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors"
                         data-testid={`button-play-recording-${recording.id}`}
                       >
@@ -623,6 +625,25 @@ export default function MembersPortal() {
           )}
         </main>
       </div>
+
+      {/* Recording player modal (authenticated stream) */}
+      {playing && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={() => setPlaying(null)}>
+          <div className="w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-white font-medium truncate pr-4">{playing.title}</p>
+              <button onClick={() => setPlaying(null)} className="text-white/80 hover:text-white shrink-0" aria-label="Close"><X className="w-6 h-6" /></button>
+            </div>
+            <video
+              src={playing.streamUrl || undefined}
+              controls
+              autoPlay
+              className="w-full rounded-2xl bg-black aspect-video"
+              data-testid="recording-player"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

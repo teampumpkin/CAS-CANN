@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import {
   LayoutDashboard, Users, CalendarCog, MapPinned, LogOut, Search, X, Plus,
   Trash2, Eye, EyeOff, MapPin, CheckCircle2, ShieldCheck, Mail, Building2, ExternalLink, Loader2,
+  Video, UploadCloud, FileVideo,
 } from "lucide-react";
 
 // ---- design tokens (match CAS site: Rosarivo serif + cyan→green) ----
@@ -18,7 +19,7 @@ const PANEL = "rounded-2xl border border-slate-200/70 dark:border-white/10 bg-wh
 const NAV_ACTIVE = `${GRAD} text-white shadow-md shadow-[#00AFE6]/25`;
 const NAV_IDLE = "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5";
 
-type Section = "leads" | "resources" | "map";
+type Section = "leads" | "resources" | "recordings" | "map";
 
 interface Lead {
   id: number; formName: string; name: string; email: string;
@@ -41,6 +42,7 @@ const fmtDate = (s?: string) => (s ? new Date(s).toLocaleDateString("en-CA", { y
 const NAV: { key: Section; label: string; icon: typeof Users }[] = [
   { key: "leads", label: "Leads", icon: Users },
   { key: "resources", label: "Resources & Events", icon: CalendarCog },
+  { key: "recordings", label: "Recordings", icon: Video },
   { key: "map", label: "Services Map", icon: MapPinned },
 ];
 
@@ -142,6 +144,7 @@ export default function AdminPortal() {
           </div>
           {section === "leads" && <LeadsSection />}
           {section === "resources" && <ResourcesSection toast={toast} />}
+          {section === "recordings" && <RecordingsSection toast={toast} />}
           {section === "map" && <MapSection toast={toast} />}
         </main>
       </div>
@@ -317,6 +320,116 @@ function ResourcesSection({ toast }: { toast: any }) {
                   {ev.isPublished ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}{ev.isPublished ? "Published" : "Draft"}
                 </button>
                 <button onClick={() => remove.mutate(ev.id)} className="shrink-0 text-slate-400 hover:text-red-500" data-testid={`event-delete-${ev.id}`}><Trash2 className="w-4 h-4" /></button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ============================ Recordings (file upload) ============================
+const humanSize = (n?: number) => {
+  if (!n) return "—";
+  const u = ["B", "KB", "MB", "GB"]; let i = 0, v = n;
+  while (v >= 1024 && i < u.length - 1) { v /= 1024; i++; }
+  return `${v.toFixed(1)} ${u[i]}`;
+};
+
+function uploadRecording(fd: FormData, onProgress: (p: number) => void): Promise<any> {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/admin/recordings");
+    xhr.withCredentials = true;
+    xhr.upload.onprogress = (e) => { if (e.lengthComputable) onProgress(Math.round((e.loaded / e.total) * 100)); };
+    xhr.onload = () => { try { resolve(JSON.parse(xhr.responseText)); } catch { reject(new Error("Bad response")); } };
+    xhr.onerror = () => reject(new Error("Network error"));
+    xhr.send(fd);
+  });
+}
+
+function RecordingsSection({ toast }: { toast: any }) {
+  const { data, isLoading } = useQuery<{ events: any[] }>({ queryKey: ["/api/admin/events"] });
+  const recordings = (data?.events || []).filter((e) => e.recordingStorageKey || e.eventType === "recording");
+  const [form, setForm] = useState<any>({ title: "", accessLevel: "cas_member", eventDate: "", description: "", isPublished: true });
+  const [file, setFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [pct, setPct] = useState(0);
+  const set = (k: string, v: any) => setForm((f: any) => ({ ...f, [k]: v }));
+  const invalidate = () => queryClient.invalidateQueries({ queryKey: ["/api/admin/events"] });
+
+  const submit = async () => {
+    if (!file) return toast({ title: "Choose a video file first", variant: "destructive" });
+    if (!form.title) return toast({ title: "Title is required", variant: "destructive" });
+    const fd = new FormData();
+    fd.append("file", file);
+    Object.entries(form).forEach(([k, v]) => fd.append(k, String(v)));
+    setUploading(true); setPct(0);
+    try {
+      const r = await uploadRecording(fd, setPct);
+      if (r.success) { toast({ title: "Recording uploaded" }); setFile(null); setForm({ title: "", accessLevel: "cas_member", eventDate: "", description: "", isPublished: true }); invalidate(); }
+      else toast({ title: "Upload failed", description: r.message, variant: "destructive" });
+    } catch { toast({ title: "Upload failed", variant: "destructive" }); }
+    finally { setUploading(false); }
+  };
+
+  const toggle = useMutation({ mutationFn: async ({ id, isPublished }: any) => (await apiRequest("PUT", `/api/admin/events/${id}`, { isPublished })).json(), onSuccess: invalidate });
+  const remove = useMutation({ mutationFn: async (id: number) => (await apiRequest("DELETE", `/api/admin/events/${id}`, {})).json(), onSuccess: () => { toast({ title: "Recording deleted" }); invalidate(); } });
+
+  return (
+    <div>
+      <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">Upload member-only recordings. Files are stored via the configured storage backend and streamed to members through an authenticated endpoint (never a public link).</p>
+
+      {/* Upload card */}
+      <div className={`${PANEL} p-5 mb-5`}>
+        <label className={`flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed ${file ? "border-[#00AFE6]/60 bg-[#00AFE6]/5" : "border-slate-300 dark:border-white/15"} px-6 py-8 cursor-pointer text-center`}>
+          <input type="file" accept="video/*,audio/*" className="hidden" onChange={(e) => setFile(e.target.files?.[0] || null)} data-testid="recording-file" />
+          <div className={`${ICON_TILE} h-12 w-12`}>{file ? <FileVideo className="w-6 h-6 text-[#00AFE6]" /> : <UploadCloud className="w-6 h-6 text-[#00AFE6]" />}</div>
+          {file ? <div><p className="font-medium text-slate-900 dark:text-white text-sm">{file.name}</p><p className="text-xs text-slate-500">{humanSize(file.size)}</p></div>
+                : <div><p className="font-medium text-slate-700 dark:text-slate-200 text-sm">Click to choose a video file</p><p className="text-xs text-slate-400">MP4, MOV, WebM…</p></div>}
+        </label>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+          <input className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm md:col-span-2" placeholder="Title *" value={form.title} onChange={(e) => set("title", e.target.value)} data-testid="recording-title" />
+          <select className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" value={form.accessLevel} onChange={(e) => set("accessLevel", e.target.value)}>
+            <option value="cas_member">CAS members</option><option value="cann_member">CANN members</option><option value="cas_cann_member">CAS &amp; CANN</option><option value="admin">Admins</option>
+          </select>
+          <input type="datetime-local" className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" value={form.eventDate} onChange={(e) => set("eventDate", e.target.value)} />
+          <textarea className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm md:col-span-2" placeholder="Description" value={form.description} onChange={(e) => set("description", e.target.value)} />
+          <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 md:col-span-2"><input type="checkbox" checked={form.isPublished} onChange={(e) => set("isPublished", e.target.checked)} /> Publish immediately</label>
+        </div>
+
+        {uploading && (
+          <div className="mt-4">
+            <div className="h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden"><div className={`${GRAD} h-full transition-all`} style={{ width: `${pct}%` }} /></div>
+            <p className="text-xs text-slate-500 mt-1">Uploading… {pct}%</p>
+          </div>
+        )}
+        <div className="flex justify-end mt-4">
+          <Button className={GRAD_BTN} disabled={uploading} onClick={submit} data-testid="recording-upload">
+            {uploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <UploadCloud className="w-4 h-4 mr-2" />}Upload recording
+          </Button>
+        </div>
+      </div>
+
+      {/* List */}
+      <div className={`${PANEL} overflow-hidden`}>
+        {isLoading ? <div className="py-14 text-center"><Loader2 className="w-6 h-6 animate-spin text-[#00AFE6] mx-auto" /></div>
+        : recordings.length === 0 ? <div className="py-14 text-center text-slate-500 dark:text-slate-400">No recordings uploaded yet.</div>
+        : (
+          <div className="divide-y divide-slate-100 dark:divide-white/5">
+            {recordings.map((r) => (
+              <div key={r.id} className="flex items-center gap-4 px-4 py-3" data-testid={`recording-row-${r.id}`}>
+                <div className={`${ICON_TILE} h-10 w-10 shrink-0`}><Video className="w-5 h-5 text-[#00AFE6]" /></div>
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-slate-900 dark:text-white truncate">{r.title}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{r.recordingFileName || "—"} · {humanSize(r.recordingSizeBytes)} · {String(r.accessLevel).replace("_", " ")}</p>
+                </div>
+                <button onClick={() => toggle.mutate({ id: r.id, isPublished: !r.isPublished })} className={`shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium ${r.isPublished ? "bg-[#00DD89]/15 text-[#00a866] dark:text-[#4ff0b0]" : "bg-slate-100 dark:bg-white/5 text-slate-500"}`} data-testid={`recording-publish-${r.id}`}>
+                  {r.isPublished ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}{r.isPublished ? "Published" : "Draft"}
+                </button>
+                <button onClick={() => remove.mutate(r.id)} className="shrink-0 text-slate-400 hover:text-red-500" data-testid={`recording-delete-${r.id}`}><Trash2 className="w-4 h-4" /></button>
               </div>
             ))}
           </div>

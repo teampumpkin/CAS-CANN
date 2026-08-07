@@ -18,6 +18,19 @@ const ICON_TILE = "bg-gradient-to-br from-[#00AFE6]/20 to-[#00DD89]/20 rounded-x
 const PANEL = "rounded-2xl border border-slate-200/70 dark:border-white/10 bg-white dark:bg-white/[0.03] shadow-sm";
 const NAV_ACTIVE = `${GRAD} text-white shadow-md shadow-[#00AFE6]/25`;
 const NAV_IDLE = "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5";
+const FIELD =
+  "w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/[0.02] px-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#00AFE6]/40 focus:border-[#00AFE6]/50 transition";
+
+function Labeled({ label, required, children, className = "" }: { label: string; required?: boolean; children: any; className?: string }) {
+  return (
+    <label className={`block ${className}`}>
+      <span className="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5">
+        {label}{required && <span className="text-[#00AFE6]"> *</span>}
+      </span>
+      {children}
+    </label>
+  );
+}
 
 type Section = "leads" | "resources" | "recordings" | "map";
 
@@ -274,25 +287,43 @@ function ResourcesSection({ toast }: { toast: any }) {
       </div>
 
       {showForm && (
-        <div className={`${PANEL} p-5 mb-5`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <input className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm md:col-span-2" placeholder="Title *" value={form.title} onChange={(e) => set("title", e.target.value)} data-testid="event-title" />
-            <select className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" value={form.eventType} onChange={(e) => set("eventType", e.target.value)}>
-              <option value="webinar">Webinar</option><option value="conference">Conference</option><option value="workshop">Workshop</option><option value="recording">Recording</option>
-            </select>
-            <input type="datetime-local" className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" value={form.eventDate} onChange={(e) => set("eventDate", e.target.value)} data-testid="event-date" />
-            <input className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" placeholder="Location (e.g. Virtual)" value={form.location} onChange={(e) => set("location", e.target.value)} />
-            <select className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" value={form.accessLevel} onChange={(e) => set("accessLevel", e.target.value)}>
-              <option value="cas_member">CAS members</option><option value="cann_member">CANN members</option><option value="cas_cann_member">CAS &amp; CANN</option><option value="admin">Admins</option>
-            </select>
-            <input className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" placeholder="Meeting link (for upcoming)" value={form.meetingLink} onChange={(e) => set("meetingLink", e.target.value)} />
-            <input className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" placeholder="Recording URL (for past)" value={form.recordingUrl} onChange={(e) => set("recordingUrl", e.target.value)} />
-            <textarea className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm md:col-span-2" placeholder="Description" value={form.description} onChange={(e) => set("description", e.target.value)} />
+        <div className={`${PANEL} p-6 mb-5`}>
+          <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-4">New event</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Labeled label="Title" required className="md:col-span-2">
+              <input className={FIELD} placeholder="e.g. Cardiac Amyloidosis Webinar" value={form.title} onChange={(e) => set("title", e.target.value)} data-testid="event-title" />
+            </Labeled>
+            <Labeled label="Event type">
+              <select className={FIELD} value={form.eventType} onChange={(e) => set("eventType", e.target.value)}>
+                <option value="webinar">Webinar</option><option value="conference">Conference</option><option value="workshop">Workshop</option><option value="recording">Recording</option>
+              </select>
+            </Labeled>
+            <Labeled label="Date & time">
+              <input type="datetime-local" className={FIELD} value={form.eventDate} onChange={(e) => set("eventDate", e.target.value)} data-testid="event-date" />
+            </Labeled>
+            <Labeled label="Location">
+              <input className={FIELD} placeholder="e.g. Virtual" value={form.location} onChange={(e) => set("location", e.target.value)} />
+            </Labeled>
+            <Labeled label="Who can access">
+              <select className={FIELD} value={form.accessLevel} onChange={(e) => set("accessLevel", e.target.value)}>
+                <option value="cas_member">CAS members</option><option value="cann_member">CANN members</option><option value="cas_cann_member">CAS &amp; CANN</option><option value="admin">Admins</option>
+              </select>
+            </Labeled>
+            <Labeled label="Meeting link (for upcoming)">
+              <input className={FIELD} placeholder="https://…" value={form.meetingLink} onChange={(e) => set("meetingLink", e.target.value)} />
+            </Labeled>
+            <Labeled label="Recording URL (for past)">
+              <input className={FIELD} placeholder="https://…" value={form.recordingUrl} onChange={(e) => set("recordingUrl", e.target.value)} />
+            </Labeled>
+            <Labeled label="Description" className="md:col-span-2">
+              <textarea rows={3} className={FIELD} placeholder="Short summary of the event" value={form.description} onChange={(e) => set("description", e.target.value)} />
+            </Labeled>
             <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 md:col-span-2">
               <input type="checkbox" checked={form.isPublished} onChange={(e) => set("isPublished", e.target.checked)} /> Publish immediately
             </label>
           </div>
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end gap-2 mt-5">
+            <Button variant="outline" className="rounded-xl" onClick={() => setShowForm(false)}>Cancel</Button>
             <Button className={GRAD_BTN} disabled={create.isPending} onClick={() => create.mutate(form)} data-testid="event-save">
               {create.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Plus className="w-4 h-4 mr-2" />}Create event
             </Button>
@@ -356,6 +387,7 @@ function RecordingsSection({ toast }: { toast: any }) {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [pct, setPct] = useState(0);
+  const [showForm, setShowForm] = useState(false);
   const set = (k: string, v: any) => setForm((f: any) => ({ ...f, [k]: v }));
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ["/api/admin/events"] });
 
@@ -368,7 +400,7 @@ function RecordingsSection({ toast }: { toast: any }) {
     setUploading(true); setPct(0);
     try {
       const r = await uploadRecording(fd, setPct);
-      if (r.success) { toast({ title: "Recording uploaded" }); setFile(null); setForm({ title: "", accessLevel: "cas_member", eventDate: "", description: "", isPublished: true }); invalidate(); }
+      if (r.success) { toast({ title: "Recording uploaded" }); setFile(null); setForm({ title: "", accessLevel: "cas_member", eventDate: "", description: "", isPublished: true }); setShowForm(false); invalidate(); }
       else toast({ title: "Upload failed", description: r.message, variant: "destructive" });
     } catch { toast({ title: "Upload failed", variant: "destructive" }); }
     finally { setUploading(false); }
@@ -379,39 +411,60 @@ function RecordingsSection({ toast }: { toast: any }) {
 
   return (
     <div>
-      <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">Upload member-only recordings. Files are stored via the configured storage backend and streamed to members through an authenticated endpoint (never a public link).</p>
-
-      {/* Upload card */}
-      <div className={`${PANEL} p-5 mb-5`}>
-        <label className={`flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed ${file ? "border-[#00AFE6]/60 bg-[#00AFE6]/5" : "border-slate-300 dark:border-white/15"} px-6 py-8 cursor-pointer text-center`}>
-          <input type="file" accept="video/*,audio/*" className="hidden" onChange={(e) => setFile(e.target.files?.[0] || null)} data-testid="recording-file" />
-          <div className={`${ICON_TILE} h-12 w-12`}>{file ? <FileVideo className="w-6 h-6 text-[#00AFE6]" /> : <UploadCloud className="w-6 h-6 text-[#00AFE6]" />}</div>
-          {file ? <div><p className="font-medium text-slate-900 dark:text-white text-sm">{file.name}</p><p className="text-xs text-slate-500">{humanSize(file.size)}</p></div>
-                : <div><p className="font-medium text-slate-700 dark:text-slate-200 text-sm">Click to choose a video file</p><p className="text-xs text-slate-400">MP4, MOV, WebM…</p></div>}
-        </label>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
-          <input className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm md:col-span-2" placeholder="Title *" value={form.title} onChange={(e) => set("title", e.target.value)} data-testid="recording-title" />
-          <select className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" value={form.accessLevel} onChange={(e) => set("accessLevel", e.target.value)}>
-            <option value="cas_member">CAS members</option><option value="cann_member">CANN members</option><option value="cas_cann_member">CAS &amp; CANN</option><option value="admin">Admins</option>
-          </select>
-          <input type="datetime-local" className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm" value={form.eventDate} onChange={(e) => set("eventDate", e.target.value)} />
-          <textarea className="rounded-xl border border-slate-200 dark:border-white/10 bg-transparent px-3 py-2 text-sm md:col-span-2" placeholder="Description" value={form.description} onChange={(e) => set("description", e.target.value)} />
-          <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 md:col-span-2"><input type="checkbox" checked={form.isPublished} onChange={(e) => set("isPublished", e.target.checked)} /> Publish immediately</label>
-        </div>
-
-        {uploading && (
-          <div className="mt-4">
-            <div className="h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden"><div className={`${GRAD} h-full transition-all`} style={{ width: `${pct}%` }} /></div>
-            <p className="text-xs text-slate-500 mt-1">Uploading… {pct}%</p>
-          </div>
-        )}
-        <div className="flex justify-end mt-4">
-          <Button className={GRAD_BTN} disabled={uploading} onClick={submit} data-testid="recording-upload">
-            {uploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <UploadCloud className="w-4 h-4 mr-2" />}Upload recording
-          </Button>
-        </div>
+      <div className="flex items-center justify-between gap-4 mb-4">
+        <p className="text-sm text-slate-500 dark:text-slate-400">Upload member-only recordings. Files are stored via the configured storage backend and streamed to members through an authenticated endpoint (never a public link).</p>
+        <Button className={GRAD_BTN} onClick={() => setShowForm((s) => !s)} data-testid="recording-add">
+          {showForm ? <X className="w-4 h-4 mr-2" /> : <UploadCloud className="w-4 h-4 mr-2" />}{showForm ? "Close" : "Upload recording"}
+        </Button>
       </div>
+
+      {/* Upload form — only via CTA */}
+      {showForm && (
+        <div className={`${PANEL} p-6 mb-5`}>
+          <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-4">New recording</h3>
+          <Labeled label="Recording file" required>
+            <label className={`flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed ${file ? "border-[#00AFE6]/60 bg-[#00AFE6]/5" : "border-slate-300 dark:border-white/15"} px-6 py-8 cursor-pointer text-center`}>
+              <input type="file" accept="video/*,audio/*" className="hidden" onChange={(e) => setFile(e.target.files?.[0] || null)} data-testid="recording-file" />
+              <div className={`${ICON_TILE} h-12 w-12`}>{file ? <FileVideo className="w-6 h-6 text-[#00AFE6]" /> : <UploadCloud className="w-6 h-6 text-[#00AFE6]" />}</div>
+              {file ? <div><p className="font-medium text-slate-900 dark:text-white text-sm">{file.name}</p><p className="text-xs text-slate-500">{humanSize(file.size)}</p></div>
+                    : <div><p className="font-medium text-slate-700 dark:text-slate-200 text-sm">Click to choose a video file</p><p className="text-xs text-slate-400">MP4, MOV, WebM…</p></div>}
+            </label>
+          </Labeled>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <Labeled label="Title" required className="md:col-span-2">
+              <input className={FIELD} placeholder="e.g. AL Amyloidosis Masterclass" value={form.title} onChange={(e) => set("title", e.target.value)} data-testid="recording-title" />
+            </Labeled>
+            <Labeled label="Who can access">
+              <select className={FIELD} value={form.accessLevel} onChange={(e) => set("accessLevel", e.target.value)}>
+                <option value="cas_member">CAS members</option><option value="cann_member">CANN members</option><option value="cas_cann_member">CAS &amp; CANN</option><option value="admin">Admins</option>
+              </select>
+            </Labeled>
+            <Labeled label="Recorded on">
+              <input type="datetime-local" className={FIELD} value={form.eventDate} onChange={(e) => set("eventDate", e.target.value)} />
+            </Labeled>
+            <Labeled label="Description" className="md:col-span-2">
+              <textarea rows={3} className={FIELD} placeholder="Short summary of the recording" value={form.description} onChange={(e) => set("description", e.target.value)} />
+            </Labeled>
+            <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 md:col-span-2">
+              <input type="checkbox" checked={form.isPublished} onChange={(e) => set("isPublished", e.target.checked)} /> Publish immediately
+            </label>
+          </div>
+
+          {uploading && (
+            <div className="mt-4">
+              <div className="h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden"><div className={`${GRAD} h-full transition-all`} style={{ width: `${pct}%` }} /></div>
+              <p className="text-xs text-slate-500 mt-1">Uploading… {pct}%</p>
+            </div>
+          )}
+          <div className="flex justify-end gap-2 mt-5">
+            <Button variant="outline" className="rounded-xl" onClick={() => setShowForm(false)}>Cancel</Button>
+            <Button className={GRAD_BTN} disabled={uploading} onClick={submit} data-testid="recording-upload">
+              {uploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <UploadCloud className="w-4 h-4 mr-2" />}Upload recording
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* List */}
       <div className={`${PANEL} overflow-hidden`}>

@@ -35,9 +35,11 @@ function Labeled({ label, required, children, className = "" }: { label: string;
 type Section = "leads" | "resources" | "recordings" | "map";
 
 interface Lead {
-  id: number; formName: string; name: string; email: string;
-  discipline?: string | null; institution?: string | null; wantsMap: boolean;
-  syncStatus: string; zohoCrmId?: string | null; createdAt?: string;
+  id: number; name: string; email: string;
+  phone?: string | null; discipline?: string | null; subspecialty?: string | null;
+  institution?: string | null; amyloidosisType?: string | null;
+  wantsCAS?: boolean; wantsCANN?: boolean; wantsMap: boolean; communications?: boolean;
+  formName: string; sourceForm?: string; syncStatus: string; zohoCrmId?: string | null; createdAt?: string;
 }
 interface EventRow {
   id: number; title: string; description?: string; eventDate: string; eventType: string;
@@ -166,24 +168,29 @@ export default function AdminPortal() {
 }
 
 // ============================ Leads ============================
+const YesNo = ({ v }: { v?: boolean }) =>
+  v ? <span className="inline-flex items-center rounded-full bg-[#00DD89]/15 text-[#00a866] dark:text-[#4ff0b0] px-2 py-0.5 text-xs font-semibold">Yes</span>
+    : <span className="text-slate-400 text-xs">No</span>;
+
 function LeadsSection() {
   const [q, setQ] = useState("");
-  const [selected, setSelected] = useState<number | null>(null);
   const { data, isLoading } = useQuery<{ leads: Lead[] }>({ queryKey: ["/api/admin/leads"] });
-  const { data: detail } = useQuery<{ lead: any }>({ queryKey: [`/api/admin/leads/${selected}`], enabled: selected != null });
   const leads = data?.leads || [];
   const filtered = useMemo(() => {
     const s = q.trim().toLowerCase();
     if (!s) return leads;
-    return leads.filter((l) => [l.name, l.email, l.institution, l.formName].filter(Boolean).some((v) => String(v).toLowerCase().includes(s)));
+    return leads.filter((l) => [l.name, l.email, l.institution, l.discipline, l.formName].filter(Boolean).some((v) => String(v).toLowerCase().includes(s)));
   }, [leads, q]);
+
+  const TH = "px-4 py-3 font-semibold whitespace-nowrap";
+  const TD = "px-4 py-3 whitespace-nowrap";
 
   return (
     <div>
       <div className="flex flex-wrap items-center gap-3 mb-4">
-        <div className="relative flex-1 min-w-[220px]">
+        <div className="relative flex-1 min-w-[220px] max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search leads by name, email, institution…" className="pl-10 rounded-xl" data-testid="admin-leads-search" />
+          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search leads…" className="pl-10 rounded-xl" data-testid="admin-leads-search" />
         </div>
         <span className="text-sm text-slate-500 dark:text-slate-400">{filtered.length} of {leads.length} leads</span>
       </div>
@@ -195,28 +202,46 @@ function LeadsSection() {
           <div className="py-16 text-center text-slate-500 dark:text-slate-400">No leads found.</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="text-sm min-w-max">
               <thead>
                 <tr className="text-left text-xs uppercase tracking-wide text-slate-400 border-b border-slate-200/70 dark:border-white/10">
-                  <th className="px-4 py-3 font-semibold">Name</th>
-                  <th className="px-4 py-3 font-semibold">Email</th>
-                  <th className="px-4 py-3 font-semibold hidden md:table-cell">Institution</th>
-                  <th className="px-4 py-3 font-semibold hidden lg:table-cell">Form</th>
-                  <th className="px-4 py-3 font-semibold">Map</th>
-                  <th className="px-4 py-3 font-semibold hidden sm:table-cell">Date</th>
-                  <th className="px-4 py-3"></th>
+                  <th className={TH}>Name</th>
+                  <th className={TH}>Email</th>
+                  <th className={TH}>Phone</th>
+                  <th className={TH}>Discipline</th>
+                  <th className={TH}>Subspecialty</th>
+                  <th className={TH}>Institution</th>
+                  <th className={TH}>Amyloidosis Type</th>
+                  <th className={TH}>CAS</th>
+                  <th className={TH}>CANN</th>
+                  <th className={TH}>Services Map</th>
+                  <th className={TH}>Comms</th>
+                  <th className={TH}>Form</th>
+                  <th className={TH}>Sync</th>
+                  <th className={TH}>Zoho ID</th>
+                  <th className={TH}>Date</th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.map((l) => (
                   <tr key={l.id} className="border-b border-slate-100 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/[0.02]" data-testid={`lead-row-${l.id}`}>
-                    <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{l.name}</td>
-                    <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{l.email}</td>
-                    <td className="px-4 py-3 text-slate-600 dark:text-slate-300 hidden md:table-cell">{l.institution || "—"}</td>
-                    <td className="px-4 py-3 text-slate-500 hidden lg:table-cell">{l.formName}</td>
-                    <td className="px-4 py-3">{l.wantsMap ? <span className="inline-flex items-center gap-1 rounded-full bg-[#00DD89]/15 text-[#00a866] dark:text-[#4ff0b0] px-2 py-0.5 text-xs font-semibold"><MapPin className="w-3 h-3" />Yes</span> : <span className="text-slate-400 text-xs">No</span>}</td>
-                    <td className="px-4 py-3 text-slate-500 hidden sm:table-cell">{fmtDate(l.createdAt)}</td>
-                    <td className="px-4 py-3 text-right"><button onClick={() => setSelected(l.id)} className="text-[#0092c4] dark:text-[#4dd0f5] font-medium hover:underline text-xs" data-testid={`lead-view-${l.id}`}>View</button></td>
+                    <td className={`${TD} font-medium text-slate-900 dark:text-white`}>{l.name}</td>
+                    <td className={`${TD} text-slate-600 dark:text-slate-300`}>{l.email}</td>
+                    <td className={`${TD} text-slate-600 dark:text-slate-300`}>{l.phone || "—"}</td>
+                    <td className={`${TD} text-slate-600 dark:text-slate-300`}>{l.discipline || "—"}</td>
+                    <td className={`${TD} text-slate-600 dark:text-slate-300`}>{l.subspecialty || "—"}</td>
+                    <td className={`${TD} text-slate-600 dark:text-slate-300`}>{l.institution || "—"}</td>
+                    <td className={`${TD} text-slate-600 dark:text-slate-300`}>{l.amyloidosisType || "—"}</td>
+                    <td className={TD}><YesNo v={l.wantsCAS} /></td>
+                    <td className={TD}><YesNo v={l.wantsCANN} /></td>
+                    <td className={TD}><YesNo v={l.wantsMap} /></td>
+                    <td className={TD}><YesNo v={l.communications} /></td>
+                    <td className={`${TD} text-slate-500`}>{l.formName}</td>
+                    <td className={TD}>
+                      <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${l.syncStatus === "synced" ? "bg-[#00DD89]/15 text-[#00a866] dark:text-[#4ff0b0]" : l.syncStatus === "failed" ? "bg-red-500/15 text-red-500" : "bg-slate-100 dark:bg-white/5 text-slate-500"}`}>{l.syncStatus}</span>
+                    </td>
+                    <td className={`${TD} text-slate-500`}>{l.zohoCrmId || "—"}</td>
+                    <td className={`${TD} text-slate-500`}>{fmtDate(l.createdAt)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -224,30 +249,7 @@ function LeadsSection() {
           </div>
         )}
       </div>
-
-      {selected != null && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-black/40" onClick={() => setSelected(null)}>
-          <div className="w-full max-w-md h-full bg-white dark:bg-[#0f1626] shadow-2xl overflow-y-auto p-6" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold font-rosarivo text-slate-900 dark:text-white">Lead detail</h3>
-              <button onClick={() => setSelected(null)} className="text-slate-400 hover:text-slate-600"><X className="w-5 h-5" /></button>
-            </div>
-            {!detail ? <Loader2 className="w-6 h-6 animate-spin text-[#00AFE6]" /> : (
-              <div className="space-y-2">
-                <p className="text-xs text-slate-400">Submission #{detail.lead.id} · {detail.lead.formName} · {fmtDate(detail.lead.createdAt)}</p>
-                <div className="rounded-xl border border-slate-200/70 dark:border-white/10 divide-y divide-slate-100 dark:divide-white/5">
-                  {Object.entries(detail.lead.submissionData || {}).map(([k, v]) => (
-                    <div key={k} className="flex gap-3 px-3 py-2 text-sm">
-                      <span className="w-40 shrink-0 text-slate-400 break-words">{k}</span>
-                      <span className="text-slate-800 dark:text-slate-200 break-words">{typeof v === "object" ? JSON.stringify(v) : String(v)}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <p className="text-xs text-slate-400 mt-2">Scroll horizontally to see all columns →</p>
     </div>
   );
 }

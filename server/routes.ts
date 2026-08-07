@@ -569,14 +569,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/admin/leads", requireMemberAuth, requireAdmin, async (_req: AuthenticatedRequest, res) => {
     try {
       const subs = await storage.getFormSubmissions();
+      const yesish = (v?: string) => (v ? /^(yes|true)/i.test(v) : false);
       const leads = subs.map((s) => {
         const d = (s.submissionData || {}) as any;
         return {
-          id: s.id, formName: s.formName, sourceForm: s.sourceForm,
-          name: leadName(d), email: leadEmail(d),
+          id: s.id,
+          name: leadName(d),
+          email: leadEmail(d),
+          phone: firstVal(d, ["institutionPhone", "phoneNumber", "phone", "centerPhone", "mapClinicPhone"]) || null,
           discipline: firstVal(d, ["discipline"]) || null,
+          subspecialty: firstVal(d, ["subspecialty"]) || null,
           institution: firstVal(d, ["institutionName", "institution", "mapClinicName", "centerName"]) || null,
-          wantsMap: wantsMap(d), syncStatus: s.syncStatus, zohoCrmId: s.zohoCrmId, createdAt: s.createdAt,
+          amyloidosisType: firstVal(d, ["amyloidosisType", "amyloidosis_type"]) || null,
+          wantsCAS: yesish(firstVal(d, ["wantsMembership", "membershipRequest"])) || /cas/i.test(firstVal(d, ["membershipRequest"]) || ""),
+          wantsCANN: yesish(firstVal(d, ["wantsCANNMembership"])) || /cann/i.test(firstVal(d, ["membershipRequest"]) || ""),
+          wantsMap: wantsMap(d),
+          communications: yesish(firstVal(d, ["wantsCommunications", "followUpConsent", "cannCommunications"])),
+          formName: s.formName,
+          sourceForm: s.sourceForm,
+          syncStatus: s.syncStatus,
+          zohoCrmId: s.zohoCrmId || null,
+          createdAt: s.createdAt,
         };
       });
       res.json({ success: true, leads });

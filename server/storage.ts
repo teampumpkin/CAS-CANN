@@ -14,6 +14,13 @@ import {
   townhallRegistrations,
   eventAdmins,
   consentRecords,
+  adminUsers,
+  adminLoginAttempts,
+  mapClinics,
+  type MapClinic,
+  type InsertMapClinic,
+  type AdminUser,
+  type InsertAdminUser,
   type User,
   type InsertUser,
   type Resource,
@@ -47,7 +54,7 @@ import {
 } from "@shared/schema";
 import { ensureConsentRecordsTable } from "./migrations/add-consent-records";
 import { db } from "./db";
-import { eq, and, like, desc, gte, lte, notInArray, isNull, or } from "drizzle-orm";
+import { eq, and, like, desc, gte, lte, notInArray, isNull, or, sql, count } from "drizzle-orm";
 
 export interface ResourceFilters {
   amyloidosisType?: string;
@@ -194,6 +201,22 @@ export interface IStorage {
   // Event admin operations
   getEventAdmin(username: string): Promise<EventAdmin | undefined>;
   createEventAdmin(admin: InsertEventAdmin): Promise<EventAdmin>;
+
+  // Admin authentication (W3)
+  getAdminUserByEmail(email: string): Promise<AdminUser | undefined>;
+  getAdminUserById(id: number): Promise<AdminUser | undefined>;
+  createAdminUser(admin: InsertAdminUser): Promise<AdminUser>;
+  updateAdminLastLogin(id: number): Promise<void>;
+  updateAdminPassword(id: number, passwordHash: string): Promise<void>;
+  countRecentFailedLogins(args: { email: string; withinMinutes: number }): Promise<number>;
+  recordFailedLogin(args: { email: string; ipAddress?: string | null; userAgent?: string | null }): Promise<void>;
+  clearFailedLogins(args: { email: string }): Promise<void>;
+
+  // Services map published clinics (W2)
+  getMapClinics(): Promise<MapClinic[]>;
+  getMapClinicByZohoId(zohoRecordId: string): Promise<MapClinic | undefined>;
+  upsertMapClinic(clinic: InsertMapClinic): Promise<MapClinic>;
+  deleteMapClinicByZohoId(zohoRecordId: string): Promise<boolean>;
 
   // CASL/PIPEDA/Law 25 consent records (audit log — append-only)
   createConsentRecord(record: InsertConsentRecord): Promise<ConsentRecord>;
@@ -1018,6 +1041,119 @@ export class DatabaseStorage implements IStorage {
       } as any)
       .returning();
     return created;
+  }
+
+  // ==========================================================================
+  // Admin authentication (W3)
+  // ==========================================================================
+
+  /** Callers must pass an already-normalized (lowercase, trimmed) email. */
+  async getAdminUserByEmail(email: string): Promise<AdminUser | undefined> {
+    const [admin] = await db
+      .select()
+      .from(adminUsers)
+      .where(eq(adminUsers.email, email));
+    return admin;
+  }
+
+  async getAdminUserById(id: number): Promise<AdminUser | undefined> {
+    const [admin] = await db
+      .select()
+      .from(adminUsers)
+      .where(eq(adminUsers.id, id));
+    return admin;
+  }
+
+  async createAdminUser(admin: InsertAdminUser): Promise<AdminUser> {
+    const [created] = await db
+      .insert(adminUsers)
+      .values({ ...admin, email: admin.email.trim().toLowerCase() })
+      .returning();
+    return created;
+  }
+
+  async updateAdminLastLogin(id: number): Promise<void> {
+    await db
+      .update(adminUsers)
+      .set({ lastLoginAt: new Date(), updatedAt: new Date() })
+      .where(eq(adminUsers.id, id));
+  }
+
+  async updateAdminPassword(id: number, passwordHash: string): Promise<void> {
+    await db
+      .update(adminUsers)
+      .set({ passwordHash, updatedAt: new Date() })
+      .where(eq(adminUsers.id, id));
+  }
+
+  /**
+   * Counts failures for ONE email inside a rolling window. Scoping per email
+   * matters: a global counter would let a single attacker lock out every admin.
+   */
+  async countRecentFailedLogins({
+    email,
+    withinMinutes,
+  }: { email: string; withinMinutes: number }): Promise<number> {
+    const since = new Date(Date.now() - withinMinutes * 60_000);
+    const [row] = await db
+      .select({ value: count() })
+      .from(adminLoginAttempts)
+      .where(
+        and(
+          eq(adminLoginAttempts.email, email),
+          gte(adminLoginAttempts.attemptedAt, since),
+        ),
+      );
+    return Number(row?.value ?? 0);
+  }
+
+  async recordFailedLogin({
+    email,
+    ipAddress,
+    userAgent,
+  }: { email: string; ipAddress?: string | null; userAgent?: string | null }): Promise<void> {
+    await db.insert(adminLoginAttempts).values({ email, ipAddress, userAgent });
+  }
+
+  async clearFailedLogins({ email }: { email: string }): Promise<void> {
+    await db.delete(adminLoginAttempts).where(eq(adminLoginAttempts.email, email));
+  }
+
+  // ==========================================================================
+  // Services map published clinics (W2)
+  // ==========================================================================
+
+  async getMapClinics(): Promise<MapClinic[]> {
+    return await db.select().from(mapClinics).orderBy(desc(mapClinics.publishedAt));
+  }
+
+  async getMapClinicByZohoId(zohoRecordId: string): Promise<MapClinic | undefined> {
+    const [row] = await db
+      .select()
+      .from(mapClinics)
+      .where(eq(mapClinics.zohoRecordId, zohoRecordId));
+    return row;
+  }
+
+  /** Re-publishing an already-published record refreshes it rather than failing. */
+  async upsertMapClinic(clinic: InsertMapClinic): Promise<MapClinic> {
+    const [row] = await db
+      .insert(mapClinics)
+      .values(clinic)
+      .onConflictDoUpdate({
+        target: mapClinics.zohoRecordId,
+        set: { ...clinic, updatedAt: new Date() },
+      })
+      .returning();
+    return row;
+  }
+
+  async deleteMapClinicByZohoId(zohoRecordId: string): Promise<boolean> {
+    const result = await db
+      .delete(mapClinics)
+      .where(eq(mapClinics.zohoRecordId, zohoRecordId))
+      .returning();
+    return result.length > 0;
   }
 }
 

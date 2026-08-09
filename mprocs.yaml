@@ -1,0 +1,62 @@
+# mprocs — local dev runner for CAS-CANN
+#
+#   brew install mprocs   # if not already installed
+#   mprocs                # picks up this file automatically
+#
+# Keys: <j/k> switch process · <s> start · <x> stop · <r> restart · <q> quit
+#
+# Why the commands are not just `npm run dev`:
+# `tsx` does not auto-load .env and `dotenv` is not installed, so the npm
+# scripts only work when DATABASE_URL is already exported in your shell.
+# `--env-file-if-exists` (Node 20.12+) loads it here without failing when the
+# file is absent, e.g. in CI.
+
+procs:
+  # ---------------------------------------------------------------------------
+  # Postgres health check. Runs once at startup; press <r> to re-run.
+  # Connects with the app's real DATABASE_URL, so a pass here means the server
+  # will connect too — unlike pg_isready, which only proves the port is open.
+  # ---------------------------------------------------------------------------
+  db:
+    shell: npx tsx --env-file-if-exists=.env scripts/check-postgres.ts
+    autostart: true
+    autorestart: false
+
+  # ---------------------------------------------------------------------------
+  # Express + Vite dev server. Serves the API and the client from one process
+  # (see server/vite.ts). Port comes from .env — currently 5001.
+  # ---------------------------------------------------------------------------
+  app:
+    shell: npx tsx --env-file-if-exists=.env server/index.ts
+    env:
+      NODE_ENV: development
+    autostart: true
+    autorestart: false
+    stop: SIGINT
+
+  # ---------------------------------------------------------------------------
+  # Test suite in watch mode. Needs no database — storage is mocked.
+  # Off by default; press <s> to start.
+  # ---------------------------------------------------------------------------
+  test:
+    shell: npx vitest
+    autostart: false
+    autorestart: false
+
+  # ---------------------------------------------------------------------------
+  # Typechecker in watch mode.
+  # NOTE: this reports ~33 pre-existing errors in client/src and server/routes.ts
+  # that are unrelated to current work. Off by default.
+  # ---------------------------------------------------------------------------
+  types:
+    shell: npx tsc --noEmit --watch --preserveWatchOutput
+    autostart: false
+    autorestart: false
+
+  # ---------------------------------------------------------------------------
+  # Scratch shell in the project root, for db:push, seed-admin, git, etc.
+  # ---------------------------------------------------------------------------
+  shell:
+    shell: $SHELL
+    autostart: false
+    autorestart: false

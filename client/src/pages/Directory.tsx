@@ -5,7 +5,10 @@ import canadaMapPath from '@assets/Canada Map_1750069387234.png';
 import healthcareProfessionalImg from '@assets/DSC02826_1750068895453.jpg';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { healthcareCenters, HealthcareCenter } from '@/data/healthcareCenters';
+import { HealthcareCenter } from '@/data/healthcareCenters';
+import { useMapClinics } from '@/hooks/useMapClinics';
+import { normalizeProvinceCode } from '@/data/canadianCities';
+import { useMemo } from 'react';
 import HealthcareCenterModal from '@/components/HealthcareCenterModal';
 import InteractiveCanadaMap from '@/components/InteractiveCanadaMap';
 
@@ -20,31 +23,48 @@ export default function Directory() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const provinces = [
-    { name: 'British Columbia', code: 'BC', centers: 5, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Alberta', code: 'AB', centers: 3, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Saskatchewan', code: 'SK', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Manitoba', code: 'MB', centers: 2, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Ontario', code: 'ON', centers: 8, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Quebec', code: 'QC', centers: 4, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'New Brunswick', code: 'NB', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Nova Scotia', code: 'NS', centers: 2, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Prince Edward Island', code: 'PE', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Newfoundland and Labrador', code: 'NL', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Northwest Territories', code: 'NT', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Yukon', code: 'YT', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' },
-    { name: 'Nunavut', code: 'NU', centers: 1, color: 'from-[#00AFE6] to-[#00DD89]' }
-  ];
+  // Published clinics only — each approved by an admin in the console.
+  const { clinics, loading } = useMapClinics();
 
-  const programTypes = [
-    { name: 'Comprehensive Care', description: 'Full-service amyloidosis treatment programs', count: 12 },
-    { name: 'Cardiac Amyloidosis', description: 'Heart-focused amyloidosis specialists', count: 8 },
-    { name: 'Hematology/Oncology', description: 'AL amyloidosis treatment centers', count: 6 },
-    { name: 'Neurology', description: 'Neurological amyloidosis specialists', count: 4 },
-    { name: 'Nephrology', description: 'Kidney-focused amyloidosis care', count: 5 },
-    { name: 'Research/Clinical Trials', description: 'Active research and trial participation', count: 3 },
-    { name: 'Diagnostic Services', description: 'Specialized diagnostic capabilities', count: 7 }
-  ];
+  const PROVINCE_NAMES: Record<string, string> = {
+    bc: 'British Columbia', ab: 'Alberta', sk: 'Saskatchewan', mb: 'Manitoba',
+    on: 'Ontario', qc: 'Quebec', nb: 'New Brunswick', ns: 'Nova Scotia',
+    pe: 'Prince Edward Island', nl: 'Newfoundland and Labrador',
+    nt: 'Northwest Territories', nu: 'Nunavut', yt: 'Yukon',
+  };
+
+  // Only provinces that actually have a published centre, with real counts.
+  // NOTE: `Map` is imported from lucide-react in this file and shadows the JS
+  // Map constructor, so these tallies use plain objects.
+  const provinces = useMemo(() => {
+    const counts: Record<string, number> = {};
+    clinics.forEach((c) => {
+      const code = normalizeProvinceCode(c.province);
+      if (code) counts[code] = (counts[code] ?? 0) + 1;
+    });
+    return Object.entries(counts)
+      .map(([code, centers]) => ({
+        code,
+        name: PROVINCE_NAMES[code] ?? code.toUpperCase(),
+        centers,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [clinics]);
+
+  // Specialties come from what members reported (amyloidosis type,
+  // sub-specialty). The old hardcoded programme taxonomy does not exist in the
+  // data, so the filter is built from the values actually present.
+  const specialtyOptions = useMemo(() => {
+    const counts: Record<string, number> = {};
+    clinics.forEach((c) =>
+      c.specialties.forEach((sp) => {
+        counts[sp] = (counts[sp] ?? 0) + 1;
+      }),
+    );
+    return Object.entries(counts)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+  }, [clinics]);
 
   const treatmentCenters = [
     {
@@ -96,14 +116,16 @@ export default function Directory() {
     }
   ];
 
-  const filteredCenters = healthcareCenters.filter(center => {
+  const filteredCenters = clinics.filter(center => {
     const matchesSearch = center.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       center.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
       center.province.toLowerCase().includes(searchTerm.toLowerCase()) ||
       center.specialties.some(specialty => specialty.toLowerCase().includes(searchTerm.toLowerCase()));
     
-    const matchesProvince = !selectedProvince || center.province === selectedProvince;
-    const matchesProgramType = !selectedProgramType || center.type === selectedProgramType.toLowerCase();
+    const matchesProvince =
+      !selectedProvince || normalizeProvinceCode(center.province) === selectedProvince;
+    const matchesProgramType =
+      !selectedProgramType || center.specialties.includes(selectedProgramType);
     
     return matchesSearch && matchesProvince && matchesProgramType;
   });
@@ -219,13 +241,13 @@ export default function Directory() {
                   <div className="grid grid-cols-2 gap-6 mb-8">
                     <div className="bg-gradient-to-br from-[#00AFE6]/15 to-[#00DD89]/15 dark:from-[#00AFE6]/20 dark:to-[#00DD89]/20 rounded-2xl p-6 border border-[#00AFE6]/20 dark:border-[#00AFE6]/30">
                       <Building2 className="w-8 h-8 text-[#00AFE6] mx-auto mb-4" />
-                      <div className="text-3xl font-bold text-[#00AFE6] mb-2">{healthcareCenters.length}</div>
+                      <div className="text-3xl font-bold text-[#00AFE6] mb-2">{clinics.length}</div>
                       <div className="text-sm text-gray-600 dark:text-white/60">Treatment Centers</div>
                     </div>
                     
                     <div className="bg-gradient-to-br from-[#00DD89]/15 to-[#00AFE6]/15 dark:from-[#00DD89]/20 to-[#00AFE6]/20 rounded-2xl p-6 border border-[#00DD89]/20 dark:border-[#00DD89]/30">
                       <Heart className="w-8 h-8 text-[#00DD89] mx-auto mb-4" />
-                      <div className="text-3xl font-bold text-[#00DD89] mb-2">13</div>
+                      <div className="text-3xl font-bold text-[#00DD89] mb-2">{provinces.length}</div>
                       <div className="text-sm text-gray-600 dark:text-white/60">Provinces/Territories</div>
                     </div>
                   </div>
@@ -278,7 +300,7 @@ export default function Directory() {
             </h2>
             
             <p className="text-xl text-gray-600 dark:text-white/70 leading-relaxed max-w-3xl mx-auto">
-              Browse our comprehensive database of {healthcareCenters.length} verified healthcare centers across Canada specializing in amyloidosis care.
+              Browse {clinics.length} amyloidosis {clinics.length === 1 ? 'centre' : 'centres'} across Canada, each reviewed and published by the Canadian Amyloidosis Society.
             </p>
           </motion.div>
 
@@ -309,7 +331,23 @@ export default function Directory() {
             </div>
           </div>
 
-          {viewMode === 'list' ? (
+          {loading ? (
+            <div className="py-24 text-center">
+              <div className="w-8 h-8 border-2 border-[#00AFE6] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+              <p className="text-gray-600 dark:text-white/70">Loading healthcare centres…</p>
+            </div>
+          ) : clinics.length === 0 ? (
+            <div className="py-24 text-center">
+              <Building2 className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                No centres published yet
+              </h3>
+              <p className="text-gray-600 dark:text-white/70 max-w-md mx-auto">
+                Centres appear here once the Canadian Amyloidosis Society has reviewed
+                and approved them.
+              </p>
+            </div>
+          ) : viewMode === 'list' ? (
             <>
               {/* Filter Controls */}
               <div className="mb-8 bg-gradient-to-br from-gray-50/80 to-white/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-gray-400/30">
@@ -351,11 +389,12 @@ export default function Directory() {
                       onChange={(e) => setSelectedProgramType(e.target.value || null)}
                       className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-3xl text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00AFE6]/20 focus:border-[#00AFE6] transition-all duration-300"
                     >
-                      <option value="">All Types</option>
-                      <option value="hospital">Hospital</option>
-                      <option value="clinic">Clinic</option>
-                      <option value="research">Research</option>
-                      <option value="specialty">Specialty</option>
+                      <option value="">All Specialties</option>
+                      {specialtyOptions.map((sp) => (
+                        <option key={sp.name} value={sp.name}>
+                          {sp.name} ({sp.count})
+                        </option>
+                      ))}
                     </select>
                   </div>
                   
@@ -378,7 +417,7 @@ export default function Directory() {
                 {/* Results Summary */}
                 <div className="mt-4 flex items-center justify-between text-sm text-gray-600 dark:text-white/70">
                   <span>
-                    Showing {filteredCenters.length} of {healthcareCenters.length} healthcare centers
+                    Showing {filteredCenters.length} of {clinics.length} healthcare centres
                   </span>
                   {filteredCenters.length === 0 && (searchTerm || selectedProvince || selectedProgramType) && (
                     <span className="text-orange-600 dark:text-orange-400 flex items-center gap-2">
@@ -516,7 +555,7 @@ export default function Directory() {
               
               <div className="relative w-full max-w-4xl mx-auto">
                 <InteractiveCanadaMap 
-                  healthcareCenters={healthcareCenters}
+                  healthcareCenters={clinics}
                   onCenterClick={handleCenterClick}
                 />
               </div>

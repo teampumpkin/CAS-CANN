@@ -3,7 +3,10 @@ export interface HealthcareCenter {
   name: string;
   city: string;
   province: string;
-  coordinates: { x: number; y: number }; // Relative to Canada map image
+  coordinates: { x: number; y: number }; // Legacy: percentage offsets, unused by the map
+  /** Real coordinates. Preferred over the city lookup when present. */
+  lat?: number;
+  lng?: number;
   type: 'hospital' | 'clinic' | 'research' | 'specialty';
   specialties: string[];
   contact: {

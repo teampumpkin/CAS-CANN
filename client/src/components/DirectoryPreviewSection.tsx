@@ -4,12 +4,19 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import InteractiveCanadaMap from './InteractiveCanadaMap';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { healthcareCenters, HealthcareCenter } from '@/data/healthcareCenters';
+import { HealthcareCenter } from '@/data/healthcareCenters';
+import { useMapClinics } from '@/hooks/useMapClinics';
+import { useSiteStats } from '@/hooks/useSiteStats';
 import HealthcareCenterModal from './HealthcareCenterModal';
 
 
 export default function DirectoryPreviewSection() {
   const { t } = useLanguage();
+  // Published clinics only — approved by an admin in the console.
+  const { clinics, loading } = useMapClinics();
+  // Network Reach figures come from Postgres — derived from live data, with
+  // optional CAS-set overrides. Previously these were hardcoded literals.
+  const { byKey: stat } = useSiteStats();
   const [selectedCenter, setSelectedCenter] = useState<HealthcareCenter | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -96,10 +103,19 @@ export default function DirectoryPreviewSection() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-center justify-items-center">
             {/* Interactive Map Visualization */}
             <div className="lg:col-span-3 relative w-full order-2 lg:order-1">
-              <InteractiveCanadaMap 
-                healthcareCenters={healthcareCenters}
-                onCenterClick={handleCenterClick}
-              />
+              {loading ? (
+                <div className="h-80 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-700">
+                  <div className="text-center">
+                    <div className="w-8 h-8 border-2 border-[#00AFE6] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Loading the network map…</p>
+                  </div>
+                </div>
+              ) : (
+                <InteractiveCanadaMap
+                  healthcareCenters={clinics}
+                  onCenterClick={handleCenterClick}
+                />
+              )}
             </div>
 
             {/* Enhanced Statistics Display */}
@@ -131,7 +147,7 @@ export default function DirectoryPreviewSection() {
                     <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative z-10">
                       <div className="text-2xl lg:text-4xl font-black bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1 lg:mb-3 group-hover:scale-110 transition-transform duration-300">
-                        150+
+                        {stat("healthcare_providers")?.value ?? "—"}
                       </div>
                       <div className="text-[#00AFE6] dark:text-[#00AFE6] text-xs lg:text-sm font-semibold tracking-wide">{t('directory.healthcareProviders')}</div>
                     </div>
@@ -147,7 +163,7 @@ export default function DirectoryPreviewSection() {
                     <div className="absolute inset-0 bg-gradient-to-br from-[#00DD89]/5 to-[#00AFE6]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative z-10">
                       <div className="text-2xl lg:text-4xl font-black bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-1 lg:mb-3 group-hover:scale-110 transition-transform duration-300">
-                        13
+                        {stat("provinces")?.value ?? "—"}
                       </div>
                       <div className="text-[#00DD89] dark:text-[#00DD89] text-xs lg:text-sm font-semibold tracking-wide">{t('directory.provincesAndTerritories')}</div>
                     </div>
@@ -163,7 +179,7 @@ export default function DirectoryPreviewSection() {
                     <div className="absolute inset-0 bg-gradient-to-br from-[#00AFE6]/5 to-[#00DD89]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative z-10">
                       <div className="text-2xl lg:text-4xl font-black bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent mb-1 lg:mb-3 group-hover:scale-110 transition-transform duration-300">
-                        25+
+                        {stat("major_cities")?.value ?? "—"}
                       </div>
                       <div className="text-[#00AFE6] dark:text-[#00AFE6] text-xs lg:text-sm font-semibold tracking-wide">{t('directory.majorCities')}</div>
                     </div>
@@ -179,7 +195,7 @@ export default function DirectoryPreviewSection() {
                     <div className="absolute inset-0 bg-gradient-to-br from-[#00DD89]/5 to-[#00AFE6]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative z-10">
                       <div className="text-2xl lg:text-4xl font-black bg-gradient-to-r from-[#00DD89] to-[#00AFE6] bg-clip-text text-transparent mb-1 lg:mb-3 group-hover:scale-110 transition-transform duration-300">
-                        500+
+                        {stat("resources")?.value ?? "—"}
                       </div>
                       <div className="text-[#00DD89] dark:text-[#00DD89] text-xs lg:text-sm font-semibold tracking-wide">{t('directory.resourcesAvailable')}</div>
                     </div>

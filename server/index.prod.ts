@@ -21,6 +21,7 @@
 
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
+import { configureAuth } from "./session-middleware";
 import { serveStatic, log } from "./static";
 
 const app = express();
@@ -67,6 +68,10 @@ app.use((req, res, next) => {
 
   const { migrateRetryColumns } = await import("./migrations/add-retry-columns");
   await migrateRetryColumns();
+
+  // Admin auth tables + session store (W3).
+  const { ensureAdminAuthTables } = await import("./migrations/add-admin-auth");
+  await ensureAdminAuthTables();
   
   const { migrateAutoCreateFields } = await import("./migrations/fix-auto-create-fields");
   await migrateAutoCreateFields();
@@ -86,6 +91,10 @@ app.use((req, res, next) => {
   const { zohoSyncWorker } = await import("./zoho-sync-worker");
   zohoSyncWorker.start();
   console.log('[Server] Zoho background sync worker started');
+
+  // Session middleware and /api/admin/auth/* — must precede registerRoutes
+  // so protected routes can rely on req.session being populated.
+  configureAuth(app);
 
   const server = await registerRoutes(app);
 

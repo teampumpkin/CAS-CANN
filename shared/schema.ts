@@ -677,3 +677,131 @@ export const insertConsentRecordSchema = createInsertSchema(consentRecords).omit
 
 export type ConsentRecord = typeof consentRecords.$inferSelect;
 export type InsertConsentRecord = z.infer<typeof insertConsentRecordSchema>;
+
+// ============================================================================
+// Admin authentication (W3)
+// ----------------------------------------------------------------------------
+// Replaces the env-var credentials at routes.ts and the two vestigial tables
+// (`users`, which stores plaintext, and `event_admins`, which was never used).
+// See docs/SERVICES_MAP_AND_MEMBER_ACCESS_PLAN_2026-08-07.md §5 W3.
+// ============================================================================
+export const adminRoleEnum = pgEnum("admin_role", ["admin", "superadmin"]);
+
+export const adminUsers = pgTable("admin_users", {
+  id: serial("id").primaryKey(),
+  // Always stored lowercase + trimmed. 320 = RFC 5321 maximum.
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+  role: adminRoleEnum("role").notNull().default("admin"),
+  isActive: boolean("is_active").notNull().default(true),
+  lastLoginAt: timestamp("last_login_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_admin_users_email").on(table.email),
+  index("idx_admin_users_active").on(table.isActive),
+]);
+
+// One row per failed login attempt, scoped per email so a single attacker
+// cannot lock every admin out at once. Rows older than the lockout window are
+// ignored by the counter and can be pruned.
+export const adminLoginAttempts = pgTable("admin_login_attempts", {
+  id: serial("id").primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  ipAddress: varchar("ip_address", { length: 45 }),
+  userAgent: text("user_agent"),
+  attemptedAt: timestamp("attempted_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_admin_login_attempts_email").on(table.email),
+  index("idx_admin_login_attempts_attempted_at").on(table.attemptedAt),
+]);
+
+export const insertAdminUserSchema = createInsertSchema(adminUsers).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  lastLoginAt: true,
+});
+
+export type AdminUser = typeof adminUsers.$inferSelect;
+export type InsertAdminUser = z.infer<typeof insertAdminUserSchema>;
+export type AdminLoginAttempt = typeof adminLoginAttempts.$inferSelect;
+
+// ============================================================================
+// Services map — published clinics (W2)
+// ----------------------------------------------------------------------------
+// The public read model. Zoho remains the source of member data; a row here
+// means an admin has reviewed the record and published it to the public map.
+// Written only by the admin approval action — there is no background sync.
+// ============================================================================
+export const mapClinics = pgTable("map_clinics", {
+  id: serial("id").primaryKey(),
+  // The Zoho Lead this was published from.
+  zohoRecordId: varchar("zoho_record_id", { length: 100 }).notNull().unique(),
+  clinicName: varchar("clinic_name", { length: 255 }).notNull(),
+  street: varchar("street", { length: 255 }),
+  city: varchar("city", { length: 120 }),
+  province: varchar("province", { length: 10 }),
+  postalCode: varchar("postal_code", { length: 20 }),
+  phone: varchar("phone", { length: 50 }),
+  fax: varchar("fax", { length: 50 }),
+  // Clinical detail carried over from the Lead, so the public map can show
+  // what a centre actually treats rather than an empty panel.
+  contactName: varchar("contact_name", { length: 255 }),
+  designation: varchar("designation", { length: 150 }),
+  subspecialty: varchar("subspecialty", { length: 255 }),
+  amyloidosisType: varchar("amyloidosis_type", { length: 100 }),
+  latitude: text("latitude"),
+  longitude: text("longitude"),
+  // How the coordinates were obtained: 'city_lookup' | 'geocoded' | 'manual'
+  coordinateSource: varchar("coordinate_source", { length: 30 }),
+  publishedBy: varchar("published_by", { length: 255 }),
+  publishedAt: timestamp("published_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_map_clinics_zoho_record_id").on(table.zohoRecordId),
+  index("idx_map_clinics_province").on(table.province),
+]);
+
+export const insertMapClinicSchema = createInsertSchema(mapClinics).omit({
+  id: true,
+  publishedAt: true,
+  updatedAt: true,
+});
+
+export type MapClinic = typeof mapClinics.$inferSelect;
+export type InsertMapClinic = z.infer<typeof insertMapClinicSchema>;
+
+// ============================================================================
+// Site statistics — the "Network Reach" figures on the homepage
+// ----------------------------------------------------------------------------
+// Values are DERIVED from live tables by default (published clinics, resources).
+// A row here exists only to override a derived figure — for cases where CAS
+// counts something the database doesn't hold. Absent row = show the real count.
+// ============================================================================
+export const siteStats = pgTable("site_stats", {
+  id: serial("id").primaryKey(),
+  // 'healthcare_providers' | 'provinces' | 'major_cities' | 'resources'
+  statKey: varchar("stat_key", { length: 60 }).notNull().unique(),
+  // Displayed verbatim when set, e.g. "150+". Null means use the derived count.
+  manualValue: varchar("manual_value", { length: 30 }),
+  note: text("note"),
+  updatedBy: varchar("updated_by", { length: 255 }),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_site_stats_key").on(table.statKey),
+]);
+
+export const insertSiteStatSchema = createInsertSchema(siteStats).omit({
+  id: true,
+  updatedAt: true,
+});
+
+export type SiteStat = typeof siteStats.$inferSelect;
+export type InsertSiteStat = z.infer<typeof insertSiteStatSchema>;
+
+/** Fields safe to serialize to a client. Never includes passwordHash. */
+export type PublicAdminUser = Pick<
+  AdminUser,
+  "id" | "email" | "role" | "isActive" | "lastLoginAt" | "createdAt"
+>;

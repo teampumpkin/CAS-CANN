@@ -65,6 +65,8 @@ const CANNTownhallRegistration = lazy(() => import("@/pages/CANNTownhallRegistra
 const EventsDownload = lazy(() => import("@/pages/EventsDownload"));
 const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 const CommunicationsPreferences = lazy(() => import("@/pages/CommunicationsPreferences"));
+const AdminLogin = lazy(() => import("@/pages/AdminLogin"));
+const AdminConsole = lazy(() => import("@/pages/AdminConsole"));
 
 // Loading component
 const PageLoader = () => (
@@ -84,7 +86,8 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/about-amyloidosis" component={AboutAmyloidosis} />
         <Route path="/governance" component={Governance} />
-        {stagingOnly && <Route path="/directory" component={Directory} />}
+        {/* Directory + interactive map — enabled in all environments */}
+        <Route path="/directory" component={Directory} />
         {/* <Route path="/resource-library" component={Resources} /> */}
         <Route path="/partnerships" component={Partnerships} />
 
@@ -133,6 +136,14 @@ function Router() {
         {stagingOnly && <Route path="/admin/submissions" component={AdminSubmissions} />}
         <Route path="/events/cann-townhall/register" component={CANNTownhallRegistration} />
         <Route path="/eventsdownload" component={EventsDownload} />
+        {/* Admin login — gated by AUTHENTICATION, not by environment, so it
+            must exist in production. The other /admin/* pages are stagingOnly
+            because they have no login of their own. */}
+        <Route path="/admin" component={AdminLogin} />
+        {/* Console tabs. Each guards itself against a missing session and
+            redirects back to /admin. */}
+        <Route path="/admin/leads" component={AdminConsole} />
+        <Route path="/admin/services-map" component={AdminConsole} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/communications-preferences" component={CommunicationsPreferences} />
         <Route component={NotFound} />

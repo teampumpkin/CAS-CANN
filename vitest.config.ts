@@ -1,0 +1,16 @@
+import { defineConfig } from "vitest/config";
+import path from "path";
+
+export default defineConfig({
+  test: {
+    environment: "node",
+    include: ["server/**/*.test.ts", "shared/**/*.test.ts"],
+    // Server tests share module-level mocks; keep files isolated.
+    isolate: true,
+  },
+  resolve: {
+    alias: {
+      "@shared": path.resolve(import.meta.dirname, "shared"),
+    },
+  },
+});

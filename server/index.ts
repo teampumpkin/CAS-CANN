@@ -1,5 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
+import { configureAuth } from "./session-middleware";
 import { serveStatic, log } from "./static";
 
 const app = express();
@@ -51,6 +52,10 @@ app.use((req, res, next) => {
   // Run database migrations
   const { migrateRetryColumns } = await import("./migrations/add-retry-columns");
   await migrateRetryColumns();
+
+  // Admin auth tables + session store (W3).
+  const { ensureAdminAuthTables } = await import("./migrations/add-admin-auth");
+  await ensureAdminAuthTables();
   
   const { migrateAutoCreateFields } = await import("./migrations/fix-auto-create-fields");
   await migrateAutoCreateFields();
@@ -82,6 +87,10 @@ app.use((req, res, next) => {
   // Initialize notification service (DISABLED for production)
   // const { notificationService } = await import("./notification-service");
   // Note: notificationService initializes automatically via its constructor
+
+  // Session middleware and /api/admin/auth/* — must precede registerRoutes
+  // so protected routes can rely on req.session being populated.
+  configureAuth(app);
 
   const server = await registerRoutes(app);
 
@@ -124,7 +133,10 @@ app.use((req, res, next) => {
   server.listen({
     port,
     host: "0.0.0.0",
-    reusePort: true,
+    // reusePort (SO_REUSEPORT) is unsupported on macOS and throws ENOTSUP;
+    // it's only needed for Linux multi-process deploys (Replit autoscale), so
+    // skip it on darwin for local dev.
+    ...(process.platform === "darwin" ? {} : { reusePort: true }),
   }, () => {
     log(`🚀 Server listening on 0.0.0.0:${port} (${process.env.NODE_ENV || 'development'})`);
   });

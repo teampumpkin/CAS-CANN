@@ -54,7 +54,9 @@ app.use(
     rolling: true,
     cookie: {
       httpOnly: true,
-      secure: true,
+      // "auto" = secure cookie only when the connection is HTTPS (honors trust proxy).
+      // Prevents the browser from dropping the session cookie when staging is served over HTTP.
+      secure: "auto",
       sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
     },

@@ -35,7 +35,8 @@ app.use(
     rolling: true,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      // "auto" = secure cookie only over HTTPS (honors trust proxy); works on HTTP dev/staging too.
+      secure: "auto",
       sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
     },

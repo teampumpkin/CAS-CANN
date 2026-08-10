@@ -392,7 +392,13 @@ export default function InteractiveCanadaMap({
                       </div>
                     )}
                     <button
-                      onClick={() => onCenterClick(selectedCenter)}
+                      onClick={() => {
+                        // Hand off to the full-details modal; leaving this one
+                        // open stacks two dialogs on top of each other.
+                        const center = selectedCenter;
+                        setSelectedCenter(null);
+                        onCenterClick(center);
+                      }}
                       className="w-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-xl hover:scale-[1.02] transition-all duration-200"
                     >
                       View Full Details

@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MapPin, Phone, Mail, Globe, Building2, Heart, Users, Award, Calendar } from 'lucide-react';
 import { HealthcareCenter } from '@/data/healthcareCenters';
@@ -31,11 +32,15 @@ export default function HealthcareCenterModal({ center, isOpen, onClose }: Healt
 
   const TypeIcon = getTypeIcon(center.type);
 
-  return (
+  // Portalled to document.body: framer-motion ancestors on the pages that
+  // render this carry a transform, which makes `fixed` resolve against them
+  // instead of the viewport. z sits above the site header (z-[9999]) and the
+  // map's own detail dialog (z-[10000]).
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-[10001] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -188,6 +193,7 @@ export default function HealthcareCenterModal({ center, isOpen, onClose }: Healt
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

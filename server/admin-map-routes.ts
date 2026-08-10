@@ -42,18 +42,48 @@ const APPROVAL_FIELD = "Map_Approved";
 const ZOHO_PAGE_SIZE = 200;
 const MAX_PAGES = 5; // 1000 leads — well beyond current volume
 
-/** Cached so we don't re-read module metadata on every request. */
-let approvalFieldExists: boolean | null = null;
+/**
+ * Whether Map_Approved exists in the CRM.
+ *
+ * Cached with a TTL rather than forever: a field created after the server
+ * booted must be picked up without a restart.
+ *
+ * A failed lookup is NEVER cached, and is reported distinctly from a
+ * successful lookup that found nothing. Conflating the two means one transient
+ * Zoho error — or a token missing ZohoCRM.settings.ALL — permanently convinces
+ * the console that the field is absent, silently disabling the CRM mirror and
+ * showing an admin a banner that contradicts what they can see in Zoho.
+ */
+interface ApprovalFieldState {
+  present: boolean;
+  /** False when the check itself failed, so `present` is not trustworthy. */
+  verified: boolean;
+  error?: string;
+}
 
-async function hasApprovalField(): Promise<boolean> {
-  if (approvalFieldExists !== null) return approvalFieldExists;
+const APPROVAL_FIELD_TTL_MS = 5 * 60 * 1000;
+let approvalFieldCache: { value: boolean; at: number } | null = null;
+
+async function getApprovalFieldState(): Promise<ApprovalFieldState> {
+  if (approvalFieldCache && Date.now() - approvalFieldCache.at < APPROVAL_FIELD_TTL_MS) {
+    return { present: approvalFieldCache.value, verified: true };
+  }
   try {
     const fields = await zohoCRMService.getModuleFields("Leads");
-    approvalFieldExists = fields.some((f) => f.api_name === APPROVAL_FIELD);
-  } catch {
-    approvalFieldExists = false;
+    const present = fields.some((f) => f.api_name === APPROVAL_FIELD);
+    approvalFieldCache = { value: present, at: Date.now() };
+    return { present, verified: true };
+  } catch (error: any) {
+    const message = String(error?.message ?? error);
+    console.error("[AdminMap] could not verify Map_Approved exists:", message);
+    // Deliberately not cached — retry on the next request.
+    return { present: false, verified: false, error: message.slice(0, 300) };
   }
-  return approvalFieldExists;
+}
+
+/** Convenience for the write paths, which only care whether it is safe to mirror. */
+async function hasApprovalField(): Promise<boolean> {
+  return (await getApprovalFieldState()).present;
 }
 
 function toCandidate(r: any) {
@@ -121,7 +151,8 @@ export function registerAdminMapRoutes(app: Express): void {
     try {
       await ensureMapClinicsTable();
 
-      const includeApproval = await hasApprovalField();
+      const approvalField = await getApprovalFieldState();
+      const includeApproval = approvalField.present;
       const fields = includeApproval
         ? `${CANDIDATE_FIELDS},${APPROVAL_FIELD}`
         : CANDIDATE_FIELDS;
@@ -149,6 +180,8 @@ export function registerAdminMapRoutes(app: Express): void {
         published,
         scanned: collected.length,
         approvalFieldPresent: includeApproval,
+        approvalFieldVerified: approvalField.verified,
+        approvalFieldError: approvalField.error ?? null,
       });
     } catch (error: any) {
       const message = String(error?.message ?? error);

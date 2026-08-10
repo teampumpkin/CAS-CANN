@@ -56,7 +56,7 @@ interface PublishedClinic {
 
 type Load =
   | { status: "loading" }
-  | { status: "ready"; candidates: Candidate[]; published: PublishedClinic[]; approvalFieldPresent: boolean }
+  | { status: "ready"; candidates: Candidate[]; published: PublishedClinic[]; approvalFieldPresent: boolean; approvalFieldVerified: boolean; approvalFieldError: string | null }
   | { status: "not-connected"; message: string; detail?: string }
   | { status: "error"; message: string; detail?: string };
 
@@ -88,6 +88,8 @@ export default function ServicesMapPanel() {
           candidates: body.candidates ?? [],
           published: body.published ?? [],
           approvalFieldPresent: !!body.approvalFieldPresent,
+          approvalFieldVerified: body.approvalFieldVerified !== false,
+          approvalFieldError: body.approvalFieldError ?? null,
         });
       } else if (res.status === 503) {
         setLoad({ status: "not-connected", message: body.message });
@@ -250,7 +252,24 @@ export default function ServicesMapPanel() {
 
   return (
     <div className="space-y-5">
-      {!load.approvalFieldPresent && (
+      {!load.approvalFieldVerified ? (
+        <div className="flex items-start gap-2.5 rounded-xl bg-[#2a1616] border border-red-500/25 p-3">
+          <AlertTriangle className="w-4 h-4 mt-0.5 text-red-400 shrink-0" />
+          <div className="min-w-0">
+            <p className="text-xs text-red-200/90 leading-relaxed">
+              Could not check whether <code className="font-mono">Map_Approved</code> exists in
+              Zoho, so approvals are being recorded here only. This is a CRM connection or
+              permission problem, not a missing field — the token may lack the{" "}
+              <code className="font-mono">ZohoCRM.settings.ALL</code> scope.
+            </p>
+            {load.approvalFieldError && (
+              <pre className="mt-2 text-[11px] text-red-300/70 bg-black/30 rounded p-2 overflow-x-auto whitespace-pre-wrap">
+                {load.approvalFieldError}
+              </pre>
+            )}
+          </div>
+        </div>
+      ) : !load.approvalFieldPresent ? (
         <div className="flex items-start gap-2.5 rounded-xl bg-[#1d2436] border border-amber-500/20 p-3">
           <Info className="w-4 h-4 mt-0.5 text-amber-400 shrink-0" />
           <p className="text-xs text-amber-200/80 leading-relaxed">
@@ -259,7 +278,7 @@ export default function ServicesMapPanel() {
             they will sync automatically from then on.
           </p>
         </div>
-      )}
+      ) : null}
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* ---------------- Candidates ---------------- */}

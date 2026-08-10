@@ -44,8 +44,8 @@ export function configureAuth(app: Express): void {
     store = new MemoryStore({ checkPeriod: 86_400_000 });
   }
 
-  // Behind the ALB, TLS terminates upstream; without this Express sees http
-  // and refuses to set a `secure` cookie.
+  // TLS terminates at nginx upstream, which forwards to Express over plain
+  // HTTP. Without this, req.protocol reads "http" and req.secure is false.
   app.set("trust proxy", 1);
 
   app.use(
@@ -57,7 +57,14 @@ export function configureAuth(app: Express): void {
       store,
       cookie: {
         httpOnly: true,
-        secure: isProduction,
+        // "auto", not `isProduction`. With `secure: true`, express-session
+        // silently refuses to set the cookie whenever it cannot prove the
+        // connection is HTTPS — which is what happens if the upstream proxy
+        // does not forward X-Forwarded-Proto. The symptom is a 200 from
+        // /login with no Set-Cookie, then 401 from every later request.
+        // "auto" sets the Secure flag when it can detect TLS and falls back
+        // to a working cookie when it cannot.
+        secure: "auto",
         sameSite: "lax",
         maxAge: EIGHT_HOURS_MS,
         path: "/",

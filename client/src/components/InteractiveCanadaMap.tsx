@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Users, Award, Hospital, Stethoscope, X } from "lucide-react";
 
@@ -207,17 +208,18 @@ export default function InteractiveCanadaMap({
           </svg>
 
           {/* Cluster list */}
+          {createPortal(
           <AnimatePresence>
             {openCluster && (
               <motion.div
-                className="absolute inset-0 bg-black/60 backdrop-blur-md rounded-lg flex items-center justify-center z-40"
+                className="fixed inset-0 z-[10000] bg-black/70 backdrop-blur-md flex items-center justify-center p-4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setOpenCluster(null)}
               >
                 <motion.div
-                  className="bg-white dark:bg-gray-900/95 backdrop-blur-lg rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl border border-gray-200 dark:border-gray-700/50 max-h-[80vh] flex flex-col"
+                  className="bg-white dark:bg-gray-900/95 backdrop-blur-lg rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-700/50 max-h-[85vh] flex flex-col"
                   initial={{ scale: 0.9, opacity: 0, y: 30 }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   exit={{ scale: 0.9, opacity: 0, y: 30 }}
@@ -287,20 +289,23 @@ export default function InteractiveCanadaMap({
                 </motion.div>
               </motion.div>
             )}
-          </AnimatePresence>
+          </AnimatePresence>,
+          document.body,
+          )}
 
           {/* Single-centre detail */}
+          {createPortal(
           <AnimatePresence>
             {selectedCenter && (
               <motion.div
-                className="absolute inset-0 bg-black/60 backdrop-blur-md rounded-lg flex items-center justify-center z-50"
+                className="fixed inset-0 z-[10000] bg-black/70 backdrop-blur-md flex items-center justify-center p-4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedCenter(null)}
               >
                 <motion.div
-                  className="relative bg-gray-900/95 backdrop-blur-lg text-white rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl border border-gray-700"
+                  className="relative bg-gray-900/95 backdrop-blur-lg text-white rounded-2xl max-w-lg w-full shadow-2xl border border-gray-700 max-h-[85vh] flex flex-col overflow-hidden"
                   initial={{ scale: 0.9, opacity: 0, y: 30 }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   exit={{ scale: 0.9, opacity: 0, y: 30 }}
@@ -308,12 +313,14 @@ export default function InteractiveCanadaMap({
                 >
                   <button
                     onClick={() => setSelectedCenter(null)}
-                    className="absolute top-4 right-4 w-10 h-10 bg-gray-700/80 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors"
+                    className="absolute top-4 right-4 z-10 w-10 h-10 bg-gray-700/80 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors"
                     aria-label="Close"
                   >
                     <X className="w-5 h-5 text-gray-300" />
                   </button>
 
+                  {/* Only this region scrolls, so the close button stays put. */}
+                  <div className="overflow-y-auto p-6 sm:p-8">
                   <div className="flex items-start gap-4 mb-6 pr-10">
                     <div
                       className={`w-16 h-16 rounded-full border-4 border-white shadow-xl flex items-center justify-center shrink-0 ${
@@ -391,10 +398,13 @@ export default function InteractiveCanadaMap({
                       View Full Details
                     </button>
                   </div>
+                  </div>
                 </motion.div>
               </motion.div>
             )}
-          </AnimatePresence>
+          </AnimatePresence>,
+          document.body,
+          )}
         </div>
       </div>
 

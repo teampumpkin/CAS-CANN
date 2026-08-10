@@ -189,6 +189,9 @@ export default function Header() {
     },
     { name: t("nav.contactUs"), href: "/contact" },
     { name: t("nav.joinCASCANN"), href: "/join-cas", isPrimary: true },
+    // UI only — member login is not built yet (Milestone 2, still pending).
+    // Rendered as an inert button so nothing navigates to a page that would 404.
+    { name: t("nav.memberLogin"), href: "#", isMemberLogin: true },
   ];
 
   useEffect(() => {
@@ -262,6 +265,21 @@ export default function Header() {
                       )}
                     </motion.a>
                   ) : (
+                    item.isMemberLogin ? (
+                    <motion.button
+                      type="button"
+                      aria-label={item.name}
+                      data-testid="button-member-login"
+                      className="flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative whitespace-nowrap text-gray-700 hover:text-gray-900 bg-white border-gray-300/70 shadow-sm hover:shadow-md hover:border-[#00AFE6]/40"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {item.name}
+                    </motion.button>
+                    ) : (
                     <motion.a
                       href={item.href}
                       className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 text-sm font-semibold border relative whitespace-nowrap ${
@@ -282,6 +300,7 @@ export default function Header() {
                         <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full"></div>
                       )}
                     </motion.a>
+                    )
                   )}
 
                   {/* Dropdown Menu */}

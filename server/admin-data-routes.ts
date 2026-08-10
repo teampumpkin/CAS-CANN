@@ -62,13 +62,16 @@ export function registerAdminDataRoutes(app: Express): void {
     const perPage = clampInt(req.query.per_page, DEFAULT_PER_PAGE, 1, MAX_PER_PAGE);
 
     try {
-      const { data, info } = await zohoCRMService.listRecords("Leads", {
+      const [{ data, info }, total] = await Promise.all([
+        zohoCRMService.listRecords("Leads", {
         page,
         per_page: perPage,
         fields: LEAD_FIELDS,
-        sort_by: "Created_Time",
-        sort_order: "desc",
-      });
+          sort_by: "Created_Time",
+          sort_order: "desc",
+        }),
+        zohoCRMService.countRecords("Leads"),
+      ]);
 
       res.json({
         leads: data.map((r: any) => ({
@@ -98,7 +101,10 @@ export function registerAdminDataRoutes(app: Express): void {
         })),
         page,
         perPage,
-        count: info?.count ?? data.length,
+        // Records on this page, versus the module total. Conflating the two
+        // made a 50-row page read as "50 of 50 leads" against 298 records.
+        pageCount: info?.count ?? data.length,
+        total,
         moreRecords: info?.more_records ?? false,
       });
     } catch (error: any) {

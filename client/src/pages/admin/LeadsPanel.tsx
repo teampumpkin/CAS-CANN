@@ -38,7 +38,10 @@ interface LeadsResponse {
   leads: LeadRow[];
   page: number;
   perPage: number;
-  count: number;
+  /** Records on this page. */
+  pageCount: number;
+  /** Total across the module — null if Zoho could not supply it. */
+  total: number | null;
   moreRecords: boolean;
 }
 
@@ -158,7 +161,12 @@ export default function LeadsPanel() {
     );
   }
 
-  const { leads, moreRecords, count } = state.data;
+  const { leads, moreRecords, total, page: currentPage } = state.data;
+  // Row range for this page, so the counter reflects position in the whole
+  // set rather than implying the page is everything.
+  const rangeStart = leads.length === 0 ? 0 : (currentPage - 1) * PER_PAGE + 1;
+  const rangeEnd = (currentPage - 1) * PER_PAGE + leads.length;
+
   const needle = query.trim().toLowerCase();
   const visible = needle
     ? leads.filter((l) =>
@@ -187,7 +195,11 @@ export default function LeadsPanel() {
         </div>
         <div className="flex items-center gap-3">
           <span className="text-sm text-slate-400 whitespace-nowrap" data-testid="text-leads-count">
-            {visible.length} of {leads.length} leads
+            {needle
+              ? `${visible.length} of ${leads.length} on this page`
+              : total != null
+                ? `${rangeStart}–${rangeEnd} of ${total} leads`
+                : `${leads.length} leads on this page`}
           </span>
           <button
             onClick={() => load(page, true)}

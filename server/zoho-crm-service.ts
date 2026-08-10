@@ -825,6 +825,26 @@ export class ZohoCRMService {
     return { data: response.data ?? [], info: response.info };
   }
 
+  /**
+   * READ-ONLY. Total record count for a module.
+   *
+   * listRecords' `info.count` is the size of the current page, not the module
+   * total, so it cannot answer "how many leads are there".
+   */
+  async countRecords(moduleName: string): Promise<number | null> {
+    try {
+      const r = await this.makeRequest<{ count?: number }>(
+        `/${moduleName}/actions/count`,
+        "GET",
+      );
+      return typeof r?.count === "number" ? r.count : null;
+    } catch (error: any) {
+      // A missing total is not worth failing the request over.
+      console.warn(`[Zoho v8] countRecords(${moduleName}) failed:`, error?.message ?? error);
+      return null;
+    }
+  }
+
   async getFieldsForModule(moduleName: string): Promise<ZohoField[]> {
     try {
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(

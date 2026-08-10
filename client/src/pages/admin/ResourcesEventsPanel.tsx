@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CalendarDays, Plus, Eye, EyeOff, Trash2 } from "lucide-react";
+import { CalendarDays, Plus, Eye, EyeOff, Trash2, X } from "lucide-react";
 
 /**
  * Resources & Events moderation.
@@ -67,6 +67,7 @@ const SAMPLE_ITEMS: ResourceEvent[] = [
 
 export default function ResourcesEventsPanel() {
   const [items] = useState<ResourceEvent[]>(SAMPLE_ITEMS);
+  const [showForm, setShowForm] = useState(false);
 
   return (
     <div className="space-y-5">
@@ -77,13 +78,26 @@ export default function ResourcesEventsPanel() {
         </p>
         <button
           type="button"
+          onClick={() => setShowForm((v) => !v)}
+          aria-expanded={showForm}
           className="h-11 px-5 shrink-0 rounded-xl bg-gradient-to-r from-[#3BA9E0] to-[#4BD6C0] text-white text-sm font-semibold flex items-center gap-2 hover:brightness-110 transition"
           data-testid="button-add-event"
         >
-          <Plus className="w-4 h-4" aria-hidden="true" />
-          Add event
+          {showForm ? (
+            <>
+              <X className="w-4 h-4" aria-hidden="true" />
+              Close
+            </>
+          ) : (
+            <>
+              <Plus className="w-4 h-4" aria-hidden="true" />
+              Add event
+            </>
+          )}
         </button>
       </div>
+
+      {showForm && <NewEventForm onCancel={() => setShowForm(false)} />}
 
       {/* List */}
       <div className="rounded-2xl border border-white/10 bg-[#0f1a28] overflow-hidden">
@@ -161,5 +175,218 @@ function KindBadge({ kind }: { kind: ItemKind }) {
     <span className="shrink-0 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-gradient-to-r from-[#5CC8F5] to-[#5FE3B4] text-[#0b1420]">
       {kind}
     </span>
+  );
+}
+
+
+/* ---------------------------------------------------------------------------
+   New event form.
+
+   UI only: fields are uncontrolled and nothing is submitted. Field names match
+   what the events endpoint should accept, so wiring this up later is adding a
+   handler rather than rebuilding the form.
+--------------------------------------------------------------------------- */
+
+const EVENT_TYPES = ["Webinar", "Recording", "Conference", "Meeting", "Townhall"];
+const AUDIENCES = ["Public", "CAS member", "CANN member"];
+/** Mirrors the access tiers agreed for gated content. */
+const ACCESS_LEVELS = ["Public", "Members", "CANN only"];
+
+function NewEventForm({ onCancel }: { onCancel: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="rounded-2xl border border-white/10 bg-[#0f1a28] p-6"
+      data-testid="form-new-event"
+    >
+      <h3 className="text-white font-semibold mb-5">New event</h3>
+
+      <div className="space-y-4">
+        <Field label="Title" required>
+          <Input name="title" placeholder="e.g. CANN Educational Series" />
+        </Field>
+
+        <Field label="Presentation title">
+          <Input name="presentationTitle" placeholder="Session/talk title (optional)" />
+        </Field>
+
+        <Row>
+          <Field label="Speaker(s)">
+            <Input name="speakers" placeholder="e.g. Dr. Jane Doe, RN" />
+          </Field>
+          <Field label="Topic">
+            <Input name="topic" placeholder="Session topic (optional)" />
+          </Field>
+        </Row>
+
+        <Row>
+          <Field label="Event type">
+            <Select name="eventType" options={EVENT_TYPES} />
+          </Field>
+          <Field label="Audience">
+            <Select name="audience" options={AUDIENCES} />
+          </Field>
+        </Row>
+
+        <Row>
+          <Field label="Date">
+            <Input name="date" type="date" />
+          </Field>
+          <Field label="Time (label)">
+            <Input name="time" placeholder="e.g. 5:00 PM – 6:00 PM EST" />
+          </Field>
+        </Row>
+
+        <Row>
+          <Field label="Location">
+            <Input name="location" placeholder="e.g. Toronto, ON" />
+          </Field>
+          <Field label="Format">
+            <Input name="format" placeholder="e.g. Virtual / In-person" />
+          </Field>
+        </Row>
+
+        <Row>
+          <Field label="CME credits">
+            <Input name="cmeCredits" placeholder="e.g. 1 hour" />
+          </Field>
+          <Field label="Registration status">
+            <Input name="registrationStatus" placeholder="e.g. Registration is open" />
+          </Field>
+        </Row>
+
+        <Row>
+          <Field label="Registration link">
+            <Input name="registrationUrl" type="url" placeholder="https://..." />
+          </Field>
+          <Field label="Meeting link (virtual join)">
+            <Input name="meetingUrl" type="url" placeholder="https://..." />
+          </Field>
+        </Row>
+
+        <Row>
+          <Field label="Member access level">
+            <Select name="accessLevel" options={ACCESS_LEVELS} />
+          </Field>
+          <div />
+        </Row>
+
+        <Field label="Description">
+          <textarea
+            name="description"
+            rows={3}
+            placeholder="Short summary of the event"
+            className="w-full rounded-lg bg-[#0b131f] border border-white/10 px-3 py-2.5 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-[#00AFE6]/50 resize-y"
+          />
+        </Field>
+
+        <div className="grid md:grid-cols-2 gap-4 pt-1">
+          <Checkbox name="requiresCannMembership" label="Requires CANN membership" />
+          <Checkbox name="publishImmediately" label="Publish immediately" defaultChecked />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-end gap-3 pt-6">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="h-11 px-5 rounded-xl bg-[#131f2d] border border-white/10 text-slate-300 text-sm font-medium hover:text-white hover:bg-[#182636] transition"
+          data-testid="button-cancel-event"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          className="h-11 px-5 rounded-xl bg-gradient-to-r from-[#3BA9E0] to-[#4BD6C0] text-white text-sm font-semibold flex items-center gap-2 hover:brightness-110 transition"
+          data-testid="button-create-event"
+        >
+          <Plus className="w-4 h-4" aria-hidden="true" />
+          Create event
+        </button>
+      </div>
+    </motion.div>
+  );
+}
+
+function Row({ children }: { children: React.ReactNode }) {
+  return <div className="grid md:grid-cols-2 gap-4">{children}</div>;
+}
+
+function Field({
+  label,
+  required,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="block">
+      <span className="block text-xs text-slate-400 mb-1.5">
+        {label}
+        {required && <span className="text-[#4EC8F0]"> *</span>}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+function Input({
+  name,
+  type = "text",
+  placeholder,
+}: {
+  name: string;
+  type?: string;
+  placeholder?: string;
+}) {
+  return (
+    <input
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      className="w-full h-11 rounded-lg bg-[#0b131f] border border-white/10 px-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-[#00AFE6]/50"
+    />
+  );
+}
+
+function Select({ name, options }: { name: string; options: string[] }) {
+  return (
+    <select
+      name={name}
+      defaultValue=""
+      className="w-full h-11 rounded-lg bg-[#0b131f] border border-white/10 px-3 text-sm text-slate-200 focus:outline-none focus:border-[#00AFE6]/50"
+    >
+      <option value="" />
+      {options.map((o) => (
+        <option key={o} value={o}>
+          {o}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+function Checkbox({
+  name,
+  label,
+  defaultChecked,
+}: {
+  name: string;
+  label: string;
+  defaultChecked?: boolean;
+}) {
+  return (
+    <label className="flex items-center gap-2.5 text-sm text-slate-300 cursor-pointer">
+      <input
+        type="checkbox"
+        name={name}
+        defaultChecked={defaultChecked}
+        className="w-4 h-4 rounded accent-[#00AFE6]"
+      />
+      {label}
+    </label>
   );
 }

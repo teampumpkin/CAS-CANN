@@ -46,7 +46,7 @@ type State =
   | { status: "loading" }
   | { status: "ready"; data: LeadsResponse }
   | { status: "not-connected"; message: string }
-  | { status: "error"; message: string };
+  | { status: "error"; message: string; detail?: string };
 
 const PER_PAGE = 50;
 
@@ -75,6 +75,7 @@ export default function LeadsPanel() {
         setState({
           status: "error",
           message: body.message ?? "Could not load leads.",
+          detail: body.detail,
         });
       }
     } catch {
@@ -139,7 +140,12 @@ export default function LeadsPanel() {
           <h3 className="text-white text-lg font-semibold mb-2">
             Couldn't load leads
           </h3>
-          <p className="text-slate-400 text-sm max-w-md mb-6">{state.message}</p>
+          <p className="text-slate-400 text-sm max-w-md mb-4">{state.message}</p>
+          {state.detail && (
+            <pre className="text-left text-[11px] text-slate-500 bg-black/30 border border-white/10 rounded-lg p-3 mb-6 max-w-xl overflow-x-auto whitespace-pre-wrap">
+              {state.detail}
+            </pre>
+          )}
           <button
             onClick={() => load(page)}
             className="px-5 py-2.5 rounded-xl bg-[#182636] border border-white/10 text-slate-200 text-sm font-semibold"

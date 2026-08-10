@@ -76,7 +76,22 @@ function toCandidate(r: any) {
 }
 
 function zohoUnavailable(message: string) {
-  return /no.*token|not authorized|invalid.*token|INVALID_TOKEN|OAUTH/i.test(message);
+  return /no.*token|not authorized|invalid.*token|INVALID_TOKEN|OAUTH|AUTHENTICATION_FAILURE|Error 401/i.test(
+    message,
+  );
+}
+
+/**
+ * Zoho's own error text, safe to show an authenticated admin.
+ *
+ * Withholding it means the only way to learn why a CRM call failed is server
+ * logs, which the person hitting the console usually cannot read. Admins
+ * already have full CRM visibility through this UI, so there is nothing here
+ * they are not entitled to see.
+ */
+function zohoDetail(error: any): string {
+  const raw = String(error?.message ?? error);
+  return raw.replace(/Zoho-oauthtoken\s+\S+/gi, "Zoho-oauthtoken [redacted]").slice(0, 400);
 }
 
 export function registerAdminMapRoutes(app: Express): void {
@@ -128,7 +143,11 @@ export function registerAdminMapRoutes(app: Express): void {
         return;
       }
       console.error("[AdminMap] candidates failed:", message);
-      res.status(502).json({ code: "zoho_error", message: "Could not load map candidates." });
+      res.status(502).json({
+        code: "zoho_error",
+        message: "Could not load map candidates.",
+        detail: zohoDetail(error),
+      });
     }
   });
 

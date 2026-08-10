@@ -97,7 +97,7 @@ export function registerAdminDataRoutes(app: Express): void {
 
       // No OAuth token yet is the expected first-run state — say so plainly
       // instead of surfacing a generic 500.
-      if (/no.*token|not authorized|invalid.*token|INVALID_TOKEN|OAUTH/i.test(message)) {
+      if (/no.*token|not authorized|invalid.*token|INVALID_TOKEN|OAUTH|AUTHENTICATION_FAILURE|Error 401/i.test(message)) {
         res.status(503).json({
           code: "zoho_not_connected",
           message:
@@ -110,6 +110,7 @@ export function registerAdminDataRoutes(app: Express): void {
       res.status(502).json({
         code: "zoho_error",
         message: "Could not load leads from Zoho CRM.",
+        detail: message.replace(/Zoho-oauthtoken\s+\S+/gi, "Zoho-oauthtoken [redacted]").slice(0, 400),
       });
     }
   });

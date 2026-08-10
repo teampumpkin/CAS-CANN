@@ -57,8 +57,8 @@ interface PublishedClinic {
 type Load =
   | { status: "loading" }
   | { status: "ready"; candidates: Candidate[]; published: PublishedClinic[]; approvalFieldPresent: boolean }
-  | { status: "not-connected"; message: string }
-  | { status: "error"; message: string };
+  | { status: "not-connected"; message: string; detail?: string }
+  | { status: "error"; message: string; detail?: string };
 
 function resolveCoords(city: string | null, province: string | null) {
   return lookupCityCoordinates(city, province);
@@ -92,7 +92,7 @@ export default function ServicesMapPanel() {
       } else if (res.status === 503) {
         setLoad({ status: "not-connected", message: body.message });
       } else {
-        setLoad({ status: "error", message: body.message ?? "Could not load candidates." });
+        setLoad({ status: "error", message: body.message ?? "Could not load candidates.", detail: body.detail });
       }
     } catch {
       setLoad({ status: "error", message: "Could not reach the server." });
@@ -197,7 +197,12 @@ export default function ServicesMapPanel() {
             <PlugZap className="w-7 h-7 text-amber-400" />
           </div>
           <h3 className="text-white text-lg font-semibold mb-2">Zoho CRM is not connected</h3>
-          <p className="text-slate-400 text-sm max-w-md mb-6">{load.message}</p>
+          <p className="text-slate-400 text-sm max-w-md mb-4">{load.message}</p>
+          {load.detail && (
+            <pre className="text-left text-[11px] text-slate-500 bg-black/30 border border-white/10 rounded-lg p-3 mb-6 max-w-xl overflow-x-auto whitespace-pre-wrap">
+              {load.detail}
+            </pre>
+          )}
           <a
             href="/oauth/zoho/connect"
             className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white text-sm font-semibold"
@@ -217,7 +222,12 @@ export default function ServicesMapPanel() {
             <AlertTriangle className="w-7 h-7 text-red-400" />
           </div>
           <h3 className="text-white text-lg font-semibold mb-2">Couldn't load candidates</h3>
-          <p className="text-slate-400 text-sm mb-6">{load.message}</p>
+          <p className="text-slate-400 text-sm mb-4">{load.message}</p>
+          {load.detail && (
+            <pre className="text-left text-[11px] text-slate-500 bg-black/30 border border-white/10 rounded-lg p-3 mb-6 max-w-xl overflow-x-auto whitespace-pre-wrap">
+              {load.detail}
+            </pre>
+          )}
           <button
             onClick={fetchAll}
             className="px-5 py-2.5 rounded-xl bg-[#182636] border border-white/10 text-slate-200 text-sm font-semibold"

@@ -62,6 +62,7 @@ const Login = lazy(() => import("@/pages/Login"));
 const ForgotPassword = lazy(() => import("@/pages/ForgotPassword"));
 const MembersPortal = lazy(() => import("@/pages/MembersPortal"));
 const AdminPortal = lazy(() => import("@/pages/AdminPortal"));
+const AdminLogin = lazy(() => import("@/pages/AdminLogin"));
 const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));
 const CommandDashboard = lazy(() => import("@/pages/CommandDashboard"));
 const AdminSubmissions = lazy(() => import("@/pages/AdminSubmissions"));
@@ -132,6 +133,7 @@ function Router() {
         {stagingOnly && <Route path="/login" component={Login} />}
         {stagingOnly && <Route path="/forgot-password" component={ForgotPassword} />}
         {stagingOnly && <Route path="/members-portal" component={MembersPortal} />}
+        {stagingOnly && <Route path="/admin-login" component={AdminLogin} />}
         {stagingOnly && <Route path="/admin-portal" component={AdminPortal} />}
         <Route path="/join-cann" component={JoinCAS} />
         <Route path="/join-cann-today" component={JoinCAS} />
@@ -152,7 +154,7 @@ function Router() {
 function App() {
   const [location] = useLocation();
   // Member portal / auth screens are a standalone app experience — no marketing footer.
-  const hideFooter = ["/members-portal", "/admin-portal", "/login", "/forgot-password"].includes(location);
+  const hideFooter = ["/members-portal", "/admin-portal", "/admin-login", "/login", "/forgot-password"].includes(location);
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>

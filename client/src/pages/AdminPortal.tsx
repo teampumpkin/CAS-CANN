@@ -72,13 +72,13 @@ export default function AdminPortal() {
 
   const logout = useMutation({
     mutationFn: async () => (await apiRequest("POST", "/api/auth/logout", {})).json(),
-    onSuccess: () => { queryClient.clear(); setLocation("/login"); },
+    onSuccess: () => { queryClient.clear(); setLocation("/admin-login"); },
   });
 
   if (authLoading) {
     return <div className="min-h-screen bg-slate-50 dark:bg-[#0b1120] flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-[#00AFE6]" /></div>;
   }
-  if (!auth?.success) { setLocation("/login"); return null; }
+  if (!auth?.success) { setLocation("/admin-login"); return null; }
   if (!isAdmin) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-[#0b1120] flex items-center justify-center px-4">

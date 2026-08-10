@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import LeadsPanel from "./admin/LeadsPanel";
 import ServicesMapPanel from "./admin/ServicesMapPanel";
 import ResourcesEventsPanel from "./admin/ResourcesEventsPanel";
+import RecordingsPanel from "./admin/RecordingsPanel";
 import {
   LayoutGrid,
   ShieldCheck,
@@ -259,6 +260,8 @@ export default function AdminConsole() {
             <ServicesMapPanel />
           ) : activeTab === "resources" ? (
             <ResourcesEventsPanel />
+          ) : activeTab === "recordings" ? (
+            <RecordingsPanel />
           ) : (
             <EmptyState
               icon={active.icon}

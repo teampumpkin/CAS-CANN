@@ -3,6 +3,7 @@ import { Link, useLocation, useRoute } from "wouter";
 import { motion } from "framer-motion";
 import LeadsPanel from "./admin/LeadsPanel";
 import ServicesMapPanel from "./admin/ServicesMapPanel";
+import ResourcesEventsPanel from "./admin/ResourcesEventsPanel";
 import {
   LayoutGrid,
   ShieldCheck,
@@ -256,6 +257,8 @@ export default function AdminConsole() {
             <LeadsPanel />
           ) : activeTab === "services-map" ? (
             <ServicesMapPanel />
+          ) : activeTab === "resources" ? (
+            <ResourcesEventsPanel />
           ) : (
             <EmptyState
               icon={active.icon}

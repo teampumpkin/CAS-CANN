@@ -25,8 +25,6 @@ const LEAD_FIELDS = [
   "Professional_Designation",
   // Zoho's API name for this one is lowercase.
   "subspecialty",
-  "Phone",
-  "Mobile",
   "Lead_Source",
   "Record_Type",
   "Amyloidosis_Type",
@@ -35,6 +33,7 @@ const LEAD_FIELDS = [
   "CANN_Member",
   "Services_Map_Inclusion",
   "Map_Clinic_Name",
+  "Map_Clinic_Phone",
   "Map_City",
   "Map_Province",
   "Created_Time",
@@ -43,6 +42,19 @@ const LEAD_FIELDS = [
 
 const MAX_PER_PAGE = 200;
 const DEFAULT_PER_PAGE = 50;
+
+/**
+ * 46 of 298 records carry a placeholder in Map_Clinic_Phone — "NA", "none",
+ * "-" — rather than a number. Rendering those in a phone column is noise, so
+ * anything without enough digits to be a phone number is treated as absent.
+ */
+function normalizePhone(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  const digits = (trimmed.match(/\d/g) ?? []).length;
+  return digits >= 7 ? trimmed : null;
+}
 
 function clampInt(value: unknown, fallback: number, min: number, max: number) {
   const n = Number(value);
@@ -86,7 +98,9 @@ export function registerAdminDataRoutes(app: Express): void {
           // is the older field kept as a fallback for pre-migration records.
           designation: r.Professional_Designation ?? r.Designation ?? null,
           subspecialty: r.subspecialty ?? null,
-          phone: r.Phone ?? r.Mobile ?? null,
+          // The join form never collects a personal number; Map_Clinic_Phone is
+          // the only phone in the record.
+          phone: normalizePhone(r.Map_Clinic_Phone),
           leadSource: r.Lead_Source ?? null,
           recordType: r.Record_Type ?? null,
           amyloidosisType: r.Amyloidosis_Type ?? null,

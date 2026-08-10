@@ -20,48 +20,12 @@
 // ============================================================================
 
 import express, { type Request, Response, NextFunction } from "express";
-import session from "express-session";
-import connectPgSimple from "connect-pg-simple";
 import { registerRoutes } from "./routes";
 import { serveStatic, log } from "./static";
-import { pool } from "./db";
 
 const app = express();
-
-// Behind AWS ALB in production so secure cookies work.
-app.set("trust proxy", 1);
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// Member session middleware (backs the member login portal).
-// Sessions are stored in the `member_sessions` table via connect-pg-simple.
-const PgSession = connectPgSimple(session);
-if (!process.env.SESSION_SECRET) {
-  console.warn("[Session] SESSION_SECRET is not set — set it in the environment.");
-}
-app.use(
-  session({
-    store: new PgSession({
-      pool,
-      tableName: "member_sessions",
-      createTableIfMissing: false, // created by the add-member-tables migration
-    }),
-    name: "cas.sid",
-    secret: process.env.SESSION_SECRET || "dev-session-secret-change-in-production",
-    resave: false,
-    saveUninitialized: false,
-    rolling: true,
-    cookie: {
-      httpOnly: true,
-      // "auto" = secure cookie only when the connection is HTTPS (honors trust proxy).
-      // Prevents the browser from dropping the session cookie when staging is served over HTTP.
-      secure: "auto",
-      sameSite: "lax",
-      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-    },
-  }),
-);
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -106,9 +70,6 @@ app.use((req, res, next) => {
   
   const { migrateAutoCreateFields } = await import("./migrations/fix-auto-create-fields");
   await migrateAutoCreateFields();
-
-  const { migrateMemberTables } = await import("./migrations/add-member-tables");
-  await migrateMemberTables();
 
   const { dedicatedTokenManager } = await import("./dedicated-token-manager");
   await dedicatedTokenManager.initialize();

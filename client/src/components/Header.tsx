@@ -189,7 +189,6 @@ export default function Header() {
     },
     { name: t("nav.contactUs"), href: "/contact" },
     { name: t("nav.joinCASCANN"), href: "/join-cas", isPrimary: true },
-    ...(stagingOnly ? [{ name: "Member Login", href: "/login" }] : []),
   ];
 
   useEffect(() => {

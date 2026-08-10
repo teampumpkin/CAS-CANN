@@ -1,4 +1,4 @@
-import { Switch, Route, useLocation } from "wouter";
+import { Switch, Route } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
@@ -58,10 +58,6 @@ const Events = lazy(() => import("@/pages/Events"));
 const stagingOnly = isStaging();
 const TestForms = lazy(() => import("@/pages/TestForms"));
 const CANNMembershipForm = lazy(() => import("@/pages/CANNMembershipForm"));
-const Login = lazy(() => import("@/pages/Login"));
-const ForgotPassword = lazy(() => import("@/pages/ForgotPassword"));
-const MembersPortal = lazy(() => import("@/pages/MembersPortal"));
-const AdminPortal = lazy(() => import("@/pages/AdminPortal"));
 const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));
 const CommandDashboard = lazy(() => import("@/pages/CommandDashboard"));
 const AdminSubmissions = lazy(() => import("@/pages/AdminSubmissions"));
@@ -129,10 +125,6 @@ function Router() {
         <Route path="/accessibility" component={AccessibilityStatement} />
         {stagingOnly && <Route path="/contributor-portal" component={ContributorPortal} />}
         {stagingOnly && <Route path="/test-forms" component={TestForms} />}
-        {stagingOnly && <Route path="/login" component={Login} />}
-        {stagingOnly && <Route path="/forgot-password" component={ForgotPassword} />}
-        {stagingOnly && <Route path="/members-portal" component={MembersPortal} />}
-        {stagingOnly && <Route path="/admin-portal" component={AdminPortal} />}
         <Route path="/join-cann" component={JoinCAS} />
         <Route path="/join-cann-today" component={JoinCAS} />
         <Route path="/cann-membership" component={JoinCAS} />
@@ -150,9 +142,6 @@ function Router() {
 }
 
 function App() {
-  const [location] = useLocation();
-  // Member portal / auth screens are a standalone app experience — no marketing footer.
-  const hideFooter = ["/members-portal", "/admin-portal", "/login", "/forgot-password"].includes(location);
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
@@ -177,7 +166,7 @@ function App() {
               <main id="main-content" className="pt-24">
                 <Router />
               </main>
-              {!hideFooter && <Footer />}
+              <Footer />
               <EnhancedScrollIndicator />
               <PerformanceOptimizer />
             </div>

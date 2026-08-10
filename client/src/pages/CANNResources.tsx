@@ -20,7 +20,6 @@ import {
   User,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import ParallaxBackground from "../components/ParallaxBackground";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -48,8 +47,6 @@ export default function CANNResources() {
   const [isCopied, setIsCopied] = useState(false);
   const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null);
   const [activeEventTab, setActiveEventTab] = useState("upcoming");
-  // Admin-created events flagged for everyone (from the admin portal)
-  const { data: publicEventsData } = useQuery<any>({ queryKey: ["/api/events"] });
 
   useEffect(() => {
     // Handle hash navigation for anchor links
@@ -373,31 +370,10 @@ export default function CANNResources() {
     parseLocalDate(b.rawDate).getTime() - parseLocalDate(a.rawDate).getTime()
   );
 
-  // Admin "everyone" events, mapped to the CANN event card shape.
-  const adminPublicEvents = ((publicEventsData?.events || []) as any[]).map((e) => ({
-    id: `db-${e.id}`,
-    title: e.title,
-    presentationTitle: e.presentationTitle || undefined,
-    speaker: e.speaker || undefined,
-    topic: e.topic || undefined,
-    rawDate: String(e.eventDate || "").slice(0, 10),
-    displayDate: e.eventDate ? new Date(e.eventDate).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" }) : "",
-    time: e.timeLabel || "",
-    location: e.location || "",
-    format: e.format || "",
-    description: e.description || "",
-    registrationDeadline: e.registrationStatus || "",
-    registrationUrl: e.registrationUrl || undefined,
-    requiresCANNMembership: e.requiresCannMembership || false,
-    cmeCredits: e.cmeCredits || "",
-    type: e.eventType || "Event",
-  }));
-  const mergedEvents = [...allCANNEvents, ...adminPublicEvents];
-
   // Categorize events into upcoming and past
   const categorizeEvents = () => {
-    const upcoming = mergedEvents.filter(event => !isEventPast(event.rawDate));
-    const past = mergedEvents.filter(event => isEventPast(event.rawDate));
+    const upcoming = allCANNEvents.filter(event => !isEventPast(event.rawDate));
+    const past = allCANNEvents.filter(event => isEventPast(event.rawDate));
     
     // Sort upcoming by date (soonest first) - using local date parsing
     upcoming.sort((a, b) => {

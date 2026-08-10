@@ -196,10 +196,10 @@ export default function LeadsPanel() {
         <div className="flex items-center gap-3">
           <span className="text-sm text-slate-400 whitespace-nowrap" data-testid="text-leads-count">
             {needle
-              ? `${visible.length} of ${leads.length} on this page`
+              ? `${visible.length} matching${total != null ? ` · ${total} leads` : ""}`
               : total != null
                 ? `${rangeStart}–${rangeEnd} of ${total} leads`
-                : `${leads.length} leads on this page`}
+                : `${leads.length} leads`}
           </span>
           <button
             onClick={() => load(page, true)}

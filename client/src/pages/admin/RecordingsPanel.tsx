@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Video, UploadCloud, Eye, EyeOff, Trash2 } from "lucide-react";
+import { Video, UploadCloud, Eye, EyeOff, Trash2, X } from "lucide-react";
 
 /**
  * Recordings moderation.
@@ -33,6 +33,7 @@ const SAMPLE_RECORDINGS: Recording[] = [
 
 export default function RecordingsPanel() {
   const [items] = useState<Recording[]>(SAMPLE_RECORDINGS);
+  const [showForm, setShowForm] = useState(false);
 
   return (
     <div className="space-y-5">
@@ -45,13 +46,26 @@ export default function RecordingsPanel() {
         </p>
         <button
           type="button"
+          onClick={() => setShowForm((v) => !v)}
+          aria-expanded={showForm}
           className="h-11 px-5 shrink-0 rounded-xl bg-gradient-to-r from-[#3BA9E0] to-[#4BD6C0] text-white text-sm font-semibold flex items-center gap-2 hover:brightness-110 transition"
           data-testid="button-upload-recording"
         >
-          <UploadCloud className="w-4 h-4" aria-hidden="true" />
-          Upload recording
+          {showForm ? (
+            <>
+              <X className="w-4 h-4" aria-hidden="true" />
+              Close
+            </>
+          ) : (
+            <>
+              <UploadCloud className="w-4 h-4" aria-hidden="true" />
+              Upload recording
+            </>
+          )}
         </button>
       </div>
+
+      {showForm && <NewRecordingForm onCancel={() => setShowForm(false)} />}
 
       {/* List */}
       <div className="rounded-2xl border border-white/10 bg-[#0f1a28] overflow-hidden">
@@ -116,5 +130,138 @@ export default function RecordingsPanel() {
         )}
       </div>
     </div>
+  );
+}
+
+
+/* ---------------------------------------------------------------------------
+   New recording form.
+
+   UI only: the file input selects a file but nothing is uploaded, and there is
+   no storage backend behind it yet. Field names match what the recordings
+   endpoint should accept.
+--------------------------------------------------------------------------- */
+
+/** Mirrors the access tiers agreed for gated content. */
+const ACCESS_LEVELS = ["Public", "Members", "CANN only"];
+
+function NewRecordingForm({ onCancel }: { onCancel: () => void }) {
+  const [fileName, setFileName] = useState<string | null>(null);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="rounded-2xl border border-white/10 bg-[#0f1a28] p-6"
+      data-testid="form-new-recording"
+    >
+      <h3 className="text-white font-semibold mb-5">New recording</h3>
+
+      <div className="space-y-4">
+        {/* Drop zone */}
+        <div>
+          <span className="block text-xs text-slate-400 mb-1.5">
+            Recording file<span className="text-[#4EC8F0]"> *</span>
+          </span>
+          <label
+            className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-white/15 bg-[#0b131f]/40 py-14 px-6 cursor-pointer hover:border-[#00AFE6]/40 hover:bg-[#0b131f]/70 transition-colors"
+            data-testid="dropzone-recording"
+          >
+            <span className="w-12 h-12 rounded-xl bg-[#132234] border border-white/5 flex items-center justify-center">
+              <UploadCloud className="w-5 h-5 text-[#4EC8F0]" aria-hidden="true" />
+            </span>
+            <span className="text-slate-200 text-sm">
+              {fileName ?? "Click to choose a video file"}
+            </span>
+            <span className="text-xs text-slate-500">MP4, MOV, WebM…</span>
+            <input
+              type="file"
+              name="file"
+              accept="video/mp4,video/quicktime,video/webm"
+              className="sr-only"
+              onChange={(e) => setFileName(e.target.files?.[0]?.name ?? null)}
+              data-testid="input-recording-file"
+            />
+          </label>
+        </div>
+
+        <label className="block">
+          <span className="block text-xs text-slate-400 mb-1.5">
+            Title<span className="text-[#4EC8F0]"> *</span>
+          </span>
+          <input
+            name="title"
+            placeholder="e.g. AL Amyloidosis Masterclass"
+            className="w-full h-11 rounded-lg bg-[#0b131f] border border-white/10 px-3 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-[#00AFE6]/50"
+          />
+        </label>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <label className="block">
+            <span className="block text-xs text-slate-400 mb-1.5">Who can access</span>
+            <select
+              name="accessLevel"
+              defaultValue=""
+              className="w-full h-11 rounded-lg bg-[#0b131f] border border-white/10 px-3 text-sm text-slate-200 focus:outline-none focus:border-[#00AFE6]/50"
+            >
+              <option value="" />
+              {ACCESS_LEVELS.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="block">
+            <span className="block text-xs text-slate-400 mb-1.5">Recorded on</span>
+            <input
+              name="recordedOn"
+              type="date"
+              className="w-full h-11 rounded-lg bg-[#0b131f] border border-white/10 px-3 text-sm text-slate-200 focus:outline-none focus:border-[#00AFE6]/50"
+            />
+          </label>
+        </div>
+
+        <label className="block">
+          <span className="block text-xs text-slate-400 mb-1.5">Description</span>
+          <textarea
+            name="description"
+            rows={3}
+            placeholder="Short summary of the recording"
+            className="w-full rounded-lg bg-[#0b131f] border border-white/10 px-3 py-2.5 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-[#00AFE6]/50 resize-y"
+          />
+        </label>
+
+        <label className="flex items-center gap-2.5 text-sm text-slate-300 cursor-pointer pt-1">
+          <input
+            type="checkbox"
+            name="publishImmediately"
+            defaultChecked
+            className="w-4 h-4 rounded accent-[#00AFE6]"
+          />
+          Publish immediately
+        </label>
+      </div>
+
+      <div className="flex items-center justify-end gap-3 pt-6">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="h-11 px-5 rounded-xl bg-[#131f2d] border border-white/10 text-slate-300 text-sm font-medium hover:text-white hover:bg-[#182636] transition"
+          data-testid="button-cancel-recording"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          className="h-11 px-5 rounded-xl bg-gradient-to-r from-[#3BA9E0] to-[#4BD6C0] text-white text-sm font-semibold flex items-center gap-2 hover:brightness-110 transition"
+          data-testid="button-submit-recording"
+        >
+          <UploadCloud className="w-4 h-4" aria-hidden="true" />
+          Upload recording
+        </button>
+      </div>
+    </motion.div>
   );
 }

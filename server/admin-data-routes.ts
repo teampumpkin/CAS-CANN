@@ -22,6 +22,11 @@ const LEAD_FIELDS = [
   "Email",
   "Company",
   "Designation",
+  "Professional_Designation",
+  // Zoho's API name for this one is lowercase.
+  "subspecialty",
+  "Phone",
+  "Mobile",
   "Lead_Source",
   "Record_Type",
   "Amyloidosis_Type",
@@ -74,7 +79,11 @@ export function registerAdminDataRoutes(app: Express): void {
             null,
           email: r.Email ?? null,
           company: r.Company ?? null,
-          designation: r.Designation ?? null,
+          // The form writes discipline to Professional_Designation; Designation
+          // is the older field kept as a fallback for pre-migration records.
+          designation: r.Professional_Designation ?? r.Designation ?? null,
+          subspecialty: r.subspecialty ?? null,
+          phone: r.Phone ?? r.Mobile ?? null,
           leadSource: r.Lead_Source ?? null,
           recordType: r.Record_Type ?? null,
           amyloidosisType: r.Amyloidosis_Type ?? null,

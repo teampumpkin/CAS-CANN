@@ -9,8 +9,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Search,
-  Mail,
-  Building2,
 } from "lucide-react";
 
 /**
@@ -23,8 +21,10 @@ export interface LeadRow {
   id: string;
   name: string | null;
   email: string | null;
+  phone: string | null;
   company: string | null;
   designation: string | null;
+  subspecialty: string | null;
   leadSource: string | null;
   recordType: string | null;
   amyloidosisType: string | null;
@@ -162,7 +162,7 @@ export default function LeadsPanel() {
   const needle = query.trim().toLowerCase();
   const visible = needle
     ? leads.filter((l) =>
-        [l.name, l.email, l.company, l.designation]
+        [l.name, l.email, l.phone, l.company, l.designation, l.subspecialty]
           .filter(Boolean)
           .some((v) => v!.toLowerCase().includes(needle)),
       )
@@ -180,15 +180,14 @@ export default function LeadsPanel() {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Filter this page by name, email, institution…"
+            placeholder="Search leads…"
             className="w-full h-11 pl-10 pr-4 rounded-xl bg-[#0f1a28] border border-white/10 text-slate-200 text-sm placeholder:text-slate-500 focus:outline-none focus:border-[#00AFE6]/50"
             data-testid="input-leads-filter"
           />
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-xs text-slate-500" data-testid="text-leads-count">
-            {visible.length} of {leads.length} on this page
-            {count ? ` · ${count} total` : ""}
+          <span className="text-sm text-slate-400 whitespace-nowrap" data-testid="text-leads-count">
+            {visible.length} of {leads.length} leads
           </span>
           <button
             onClick={() => load(page, true)}
@@ -225,12 +224,13 @@ export default function LeadsPanel() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm" data-testid="table-leads">
               <thead>
-                <tr className="text-left text-[11px] uppercase tracking-wider text-slate-500 border-b border-white/5">
+                <tr className="text-left text-[11px] uppercase tracking-wider text-slate-500 border-b border-white/10">
                   <Th>Name</Th>
+                  <Th>Email</Th>
+                  <Th>Phone</Th>
+                  <Th>Discipline</Th>
+                  <Th>Subspecialty</Th>
                   <Th>Institution</Th>
-                  <Th>Type</Th>
-                  <Th>Consents</Th>
-                  <Th>Submitted</Th>
                 </tr>
               </thead>
               <tbody>
@@ -240,69 +240,15 @@ export default function LeadsPanel() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.2, delay: Math.min(i * 0.012, 0.3) }}
-                    className="border-b border-white/5 last:border-0 hover:bg-white/[0.02]"
+                    className="border-b border-white/5 last:border-0 hover:bg-white/[0.03]"
                     data-testid="row-lead"
                   >
-                    <Td>
-                      <div className="text-slate-100 font-medium">
-                        {lead.name ?? "—"}
-                      </div>
-                      {lead.email && (
-                        <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-0.5">
-                          <Mail className="w-3 h-3 shrink-0" aria-hidden="true" />
-                          <span className="truncate">{lead.email}</span>
-                        </div>
-                      )}
-                    </Td>
-                    <Td>
-                      <div className="flex items-center gap-1.5 text-slate-300">
-                        {lead.company && (
-                          <Building2
-                            className="w-3.5 h-3.5 shrink-0 text-slate-500"
-                            aria-hidden="true"
-                          />
-                        )}
-                        <span className="truncate max-w-[220px]">
-                          {lead.company ?? "—"}
-                        </span>
-                      </div>
-                      {lead.designation && (
-                        <div className="text-xs text-slate-500 mt-0.5 truncate max-w-[220px]">
-                          {lead.designation}
-                        </div>
-                      )}
-                    </Td>
-                    <Td>
-                      <span className="text-slate-300">
-                        {lead.recordType ?? lead.leadSource ?? "—"}
-                      </span>
-                      {lead.amyloidosisType && (
-                        <div className="text-xs text-slate-500 mt-0.5">
-                          {lead.amyloidosisType}
-                        </div>
-                      )}
-                    </Td>
-                    <Td>
-                      <div className="flex flex-wrap gap-1">
-                        {lead.cannMember === "Yes" && <Tag tone="cyan">CANN</Tag>}
-                        {lead.casCommunications === "Yes" && (
-                          <Tag tone="slate">Comms</Tag>
-                        )}
-                        {lead.servicesMapInclusion === "Yes" && (
-                          <Tag tone="green">Map</Tag>
-                        )}
-                        {!lead.cannMember &&
-                          !lead.casCommunications &&
-                          !lead.servicesMapInclusion && (
-                            <span className="text-slate-600">—</span>
-                          )}
-                      </div>
-                    </Td>
-                    <Td>
-                      <span className="text-slate-400 text-xs whitespace-nowrap">
-                        {formatDate(lead.createdTime)}
-                      </span>
-                    </Td>
+                    <Td className="text-slate-100 font-medium">{lead.name || <Empty />}</Td>
+                    <Td className="text-slate-300">{lead.email || <Empty />}</Td>
+                    <Td className="text-slate-300 whitespace-nowrap">{lead.phone || <Empty />}</Td>
+                    <Td className="text-slate-300">{lead.designation || <Empty />}</Td>
+                    <Td className="text-slate-300">{lead.subspecialty || <Empty />}</Td>
+                    <Td className="text-slate-300">{lead.company || <Empty />}</Td>
                   </motion.tr>
                 ))}
               </tbody>
@@ -348,41 +294,20 @@ function Panel({ children }: { children: React.ReactNode }) {
 }
 
 function Th({ children }: { children: React.ReactNode }) {
-  return <th className="font-semibold px-5 py-3.5">{children}</th>;
+  return <th className="font-semibold px-5 py-3 whitespace-nowrap">{children}</th>;
 }
 
-function Td({ children }: { children: React.ReactNode }) {
-  return <td className="px-5 py-3.5 align-top">{children}</td>;
-}
-
-function Tag({
+function Td({
   children,
-  tone,
+  className = "",
 }: {
   children: React.ReactNode;
-  tone: "cyan" | "green" | "slate";
+  className?: string;
 }) {
-  const tones = {
-    cyan: "bg-[#00AFE6]/15 text-[#4EC8F0] border-[#00AFE6]/30",
-    green: "bg-[#00DD89]/15 text-[#4BE0AC] border-[#00DD89]/30",
-    slate: "bg-white/5 text-slate-400 border-white/10",
-  };
-  return (
-    <span
-      className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${tones[tone]}`}
-    >
-      {children}
-    </span>
-  );
+  return <td className={`px-5 py-3.5 align-middle ${className}`}>{children}</td>;
 }
 
-function formatDate(iso: string | null) {
-  if (!iso) return "—";
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleDateString("en-CA", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+/** Em dash for a blank cell — clearer than an empty box. */
+function Empty() {
+  return <span className="text-slate-600">—</span>;
 }

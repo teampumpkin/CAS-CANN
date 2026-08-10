@@ -10,6 +10,37 @@ let cachedPromise: Promise<void> | null = null;
 export function ensureMapClinicsTable(): Promise<void> {
   if (cachedPromise) return cachedPromise;
   cachedPromise = (async () => {
+    // A `map_clinics` table also existed in the member-portal prototype, keyed
+    // on submission_id with a different column set. CREATE TABLE IF NOT EXISTS
+    // silently does nothing when it is present, and every query here then
+    // fails at runtime with `column "zoho_record_id" does not exist`.
+    //
+    // Detect that shape and move it aside rather than dropping it, so the rows
+    // remain inspectable and the failure cannot recur on a redeploy.
+    // to_regclass resolves through search_path, matching how every other
+    // statement here addresses the table. Hardcoding 'public' would miss a
+    // legacy table in whatever schema the connection actually uses.
+    const legacy = await db.execute(sql`
+      SELECT
+        to_regclass('map_clinics') IS NOT NULL AS table_exists,
+        COALESCE((
+          SELECT count(*) FROM pg_attribute
+           WHERE attrelid = to_regclass('map_clinics')
+             AND attname = 'zoho_record_id'
+             AND NOT attisdropped
+        ), 0)::int AS has_zoho_col
+    `);
+    const { table_exists, has_zoho_col } = legacy.rows[0] as any;
+
+    if (table_exists === true && Number(has_zoho_col) === 0) {
+      const parked = `map_clinics_legacy_${Date.now()}`;
+      console.warn(
+        `[Migration] map_clinics exists without zoho_record_id (member-portal ` +
+          `prototype schema). Renaming to ${parked} and creating the current table.`,
+      );
+      await db.execute(sql.raw(`ALTER TABLE map_clinics RENAME TO ${parked}`));
+    }
+
     await db.execute(sql`
       CREATE TABLE IF NOT EXISTS map_clinics (
         id SERIAL PRIMARY KEY,

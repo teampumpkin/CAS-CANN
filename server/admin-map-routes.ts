@@ -75,6 +75,23 @@ function toCandidate(r: any) {
   };
 }
 
+/**
+ * Distinguishes a database fault from a CRM fault.
+ *
+ * Both surface here as a thrown Error, and reporting a Postgres problem as
+ * "zoho_error" sends whoever is debugging to the wrong system entirely — which
+ * is exactly what happened when a stale map_clinics table from the member-portal
+ * prototype produced `column "zoho_record_id" does not exist`.
+ */
+function isDatabaseError(error: any): boolean {
+  const msg = String(error?.message ?? error);
+  // Postgres SQLSTATE codes: 42xxx = syntax/undefined object, 23xxx = constraint.
+  if (typeof error?.code === "string" && /^(42|23|54|55)/.test(error.code)) return true;
+  return /column .* does not exist|relation .* does not exist|violates .* constraint|syntax error at or near/i.test(
+    msg,
+  );
+}
+
 function zohoUnavailable(message: string) {
   return /no.*token|not authorized|invalid.*token|INVALID_TOKEN|OAUTH|AUTHENTICATION_FAILURE|Error 401/i.test(
     message,
@@ -135,6 +152,17 @@ export function registerAdminMapRoutes(app: Express): void {
       });
     } catch (error: any) {
       const message = String(error?.message ?? error);
+
+      if (isDatabaseError(error)) {
+        console.error("[AdminMap] DATABASE error while loading candidates:", message);
+        res.status(500).json({
+          code: "database_error",
+          message: "A database problem prevented loading candidates.",
+          detail: zohoDetail(error),
+        });
+        return;
+      }
+
       if (zohoUnavailable(message)) {
         res.status(503).json({
           code: "zoho_not_connected",

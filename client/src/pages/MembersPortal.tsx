@@ -26,6 +26,8 @@ import {
   CheckCircle,
   Sparkles,
   Activity,
+  Library,
+  FileText,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -107,7 +109,20 @@ interface ApiResponse<T> {
   member?: Member;
 }
 
-type SectionKey = "events" | "recordings" | "profile" | "settings";
+type SectionKey = "events" | "resources" | "profile" | "settings";
+
+interface MemberResource {
+  id: number;
+  title: string;
+  description?: string;
+  kind: string; // video | document
+  category?: string | null;
+  fileName?: string | null;
+  mimeType?: string | null;
+  sizeBytes?: number | null;
+  thumbnailUrl?: string | null;
+  fileUrl: string;
+}
 
 // ---- Shared design tokens (CAS site: Rosarivo serif + cyan→green) ----
 const GRAD_BTN =
@@ -134,7 +149,7 @@ function initialsOf(name?: string) {
 
 const NAV: { key: SectionKey; label: string; icon: typeof Calendar; desc: string }[] = [
   { key: "events", label: "Events", icon: Calendar, desc: "Exclusive events for CAS and CANN members" },
-  { key: "recordings", label: "Recordings", icon: Video, desc: "Watch past events and educational content" },
+  { key: "resources", label: "Resources", icon: Library, desc: "Members-only videos and study materials" },
   { key: "profile", label: "Profile", icon: User, desc: "View and edit your membership information" },
   { key: "settings", label: "Settings", icon: Settings, desc: "Update your account password" },
 ];
@@ -147,7 +162,7 @@ export default function MembersPortal() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [playing, setPlaying] = useState<MemberEvent | null>(null);
+  const [playing, setPlaying] = useState<MemberResource | null>(null);
 
   const { data: authData, isLoading: authLoading, error: authError } = useQuery<ApiResponse<Member>>({
     queryKey: ["/api/auth/me"],
@@ -163,14 +178,14 @@ export default function MembersPortal() {
     enabled: !!authData?.success,
   });
 
-  const { data: recordingsData, isLoading: recordingsLoading } = useQuery<ApiResponse<MemberEvent[]>>({
-    queryKey: ["/api/members/recordings"],
+  const { data: recordingsData, isLoading: recordingsLoading } = useQuery<{ success: boolean; resources?: MemberResource[] }>({
+    queryKey: ["/api/members/resources"],
     enabled: !!authData?.success,
   });
 
   const member = profileData?.profile || authData?.member;
   const events = eventsData?.events || [];
-  const recordings = recordingsData?.recordings || [];
+  const resources = recordingsData?.resources || [];
 
   const profileForm = useForm<UpdateProfileRequest>({
     resolver: zodResolver(updateProfileSchema),
@@ -447,45 +462,54 @@ export default function MembersPortal() {
             )
           )}
 
-          {/* ---------------- Recordings ---------------- */}
-          {section === "recordings" && (
+          {/* ---------------- Resources (videos + study materials) ---------------- */}
+          {section === "resources" && (
             recordingsLoading ? (
               <div className="text-center py-16"><Spinner className="h-8 w-8 mx-auto" /></div>
-            ) : recordings.length === 0 ? (
+            ) : resources.length === 0 ? (
               <div className={`${PANEL} text-center py-16`}>
-                <div className={`${ICON_TILE} h-16 w-16 mx-auto mb-4`}><Video className="w-7 h-7 text-[#00AFE6]" /></div>
-                <p className="text-slate-600 dark:text-slate-300 font-medium">No recordings available yet.</p>
-                <p className="text-sm text-slate-400 dark:text-slate-500 mt-1">Recordings will appear here after events conclude.</p>
+                <div className={`${ICON_TILE} h-16 w-16 mx-auto mb-4`}><Library className="w-7 h-7 text-[#00AFE6]" /></div>
+                <p className="text-slate-600 dark:text-slate-300 font-medium">No resources available yet.</p>
+                <p className="text-sm text-slate-400 dark:text-slate-500 mt-1">Videos and study materials will appear here.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {recordings.map((recording, i) => (
+                {resources.map((r, i) => (
                   <motion.div
-                    key={recording.id}
+                    key={r.id}
                     initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: i * 0.06 }}
                     className={`${PANEL} group overflow-hidden hover:border-[#00AFE6]/50 hover:shadow-xl hover:shadow-[#00AFE6]/10 transition-all duration-300`}
-                    data-testid={`recording-card-${recording.id}`}
+                    data-testid={`resource-card-${r.id}`}
                   >
-                    <div className="relative aspect-video flex items-center justify-center bg-gradient-to-br from-[#00AFE6]/15 via-[#00DD89]/10 to-slate-100 dark:to-white/[0.03]">
-                      {recording.thumbnailUrl ? (
-                        <img src={recording.thumbnailUrl} alt={recording.title} className="w-full h-full object-cover" />
-                      ) : (
-                        <Video className="w-12 h-12 text-[#00AFE6]/60" />
-                      )}
+                    {r.kind === "video" ? (
                       <button
-                        onClick={() => (recording.streamUrl ? setPlaying(recording) : window.open(recording.recordingUrl, "_blank"))}
-                        className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors"
-                        data-testid={`button-play-recording-${recording.id}`}
+                        onClick={() => setPlaying(r)}
+                        className="relative w-full aspect-video flex items-center justify-center bg-gradient-to-br from-[#00AFE6]/15 via-[#00DD89]/10 to-slate-100 dark:to-white/[0.03]"
+                        data-testid={`button-play-resource-${r.id}`}
                       >
-                        <span className="h-14 w-14 rounded-full bg-white/90 text-[#0092c4] flex items-center justify-center shadow-lg scale-90 group-hover:scale-100 transition-transform">
-                          <Play className="w-6 h-6 ml-0.5 fill-current" />
+                        {r.thumbnailUrl ? <img src={r.thumbnailUrl} alt={r.title} className="w-full h-full object-cover" /> : <Video className="w-12 h-12 text-[#00AFE6]/60" />}
+                        <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors">
+                          <span className="h-14 w-14 rounded-full bg-white/90 text-[#0092c4] flex items-center justify-center shadow-lg scale-90 group-hover:scale-100 transition-transform"><Play className="w-6 h-6 ml-0.5 fill-current" /></span>
                         </span>
                       </button>
-                    </div>
+                    ) : (
+                      <div className="w-full aspect-video flex items-center justify-center bg-gradient-to-br from-[#00AFE6]/10 via-[#00DD89]/5 to-slate-100 dark:to-white/[0.03]">
+                        <FileText className="w-12 h-12 text-[#00AFE6]/60" />
+                      </div>
+                    )}
                     <div className="p-5">
-                      <span className="inline-flex items-center rounded-full bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-2.5 py-0.5 text-xs font-semibold capitalize mb-2">{recording.eventType}</span>
-                      <h3 className="font-semibold text-slate-900 dark:text-white">{recording.title}</h3>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{formatDate(recording.eventDate)}</p>
+                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize mb-2 ${r.kind === "video" ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white" : "bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300"}`}>{r.kind}</span>
+                      <h3 className="font-semibold text-slate-900 dark:text-white">{r.title}</h3>
+                      {r.description && <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">{r.description}</p>}
+                      <div className="mt-3">
+                        {r.kind === "video" ? (
+                          <Button className={`${GRAD_BTN} h-9`} onClick={() => setPlaying(r)}><Play className="w-4 h-4 mr-1.5 fill-current" />Play</Button>
+                        ) : (
+                          <a href={r.fileUrl} target="_blank" rel="noopener noreferrer">
+                            <Button className={`${GRAD_BTN} h-9`}><ExternalLink className="w-4 h-4 mr-1.5" />Open / Download</Button>
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </motion.div>
                 ))}
@@ -649,7 +673,7 @@ export default function MembersPortal() {
               <button onClick={() => setPlaying(null)} className="text-white/80 hover:text-white shrink-0" aria-label="Close"><X className="w-6 h-6" /></button>
             </div>
             <video
-              src={playing.streamUrl || undefined}
+              src={playing.fileUrl}
               controls
               autoPlay
               className="w-full rounded-2xl bg-black aspect-video"

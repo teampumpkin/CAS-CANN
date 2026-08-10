@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import {
   LayoutDashboard, Users, CalendarCog, MapPinned, LogOut, Search, X, Plus,
   Trash2, Eye, EyeOff, MapPin, CheckCircle2, ShieldCheck, Mail, Building2, ExternalLink, Loader2,
-  Video, UploadCloud, FileVideo,
+  Video, UploadCloud, FileVideo, Library, FileText, Download,
 } from "lucide-react";
 
 // ---- design tokens (match CAS site: Rosarivo serif + cyan→green) ----
@@ -32,7 +32,7 @@ function Labeled({ label, required, children, className = "" }: { label: string;
   );
 }
 
-type Section = "leads" | "resources" | "recordings" | "map";
+type Section = "leads" | "events" | "resources" | "map";
 
 interface Lead {
   id: number; name: string; email: string;
@@ -56,8 +56,8 @@ const fmtDate = (s?: string) => (s ? new Date(s).toLocaleDateString("en-CA", { y
 
 const NAV: { key: Section; label: string; icon: typeof Users }[] = [
   { key: "leads", label: "Leads", icon: Users },
-  { key: "resources", label: "Resources & Events", icon: CalendarCog },
-  { key: "recordings", label: "Recordings", icon: Video },
+  { key: "events", label: "Events", icon: CalendarCog },
+  { key: "resources", label: "Resources", icon: Library },
   { key: "map", label: "Services Map", icon: MapPinned },
 ];
 
@@ -158,8 +158,8 @@ export default function AdminPortal() {
             </h1>
           </div>
           {section === "leads" && <LeadsSection />}
-          {section === "resources" && <ResourcesSection toast={toast} />}
-          {section === "recordings" && <RecordingsSection toast={toast} />}
+          {section === "events" && <ResourcesSection toast={toast} />}
+          {section === "resources" && <ResourceLibrarySection toast={toast} />}
           {section === "map" && <MapSection toast={toast} />}
         </main>
       </div>
@@ -405,10 +405,10 @@ const humanSize = (n?: number) => {
   return `${v.toFixed(1)} ${u[i]}`;
 };
 
-function uploadRecording(fd: FormData, onProgress: (p: number) => void): Promise<any> {
+function uploadFile(url: string, fd: FormData, onProgress: (p: number) => void): Promise<any> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/admin/recordings");
+    xhr.open("POST", url);
     xhr.withCredentials = true;
     xhr.upload.onprogress = (e) => { if (e.lengthComputable) onProgress(Math.round((e.loaded / e.total) * 100)); };
     xhr.onload = () => { try { resolve(JSON.parse(xhr.responseText)); } catch { reject(new Error("Bad response")); } };
@@ -417,71 +417,77 @@ function uploadRecording(fd: FormData, onProgress: (p: number) => void): Promise
   });
 }
 
-function RecordingsSection({ toast }: { toast: any }) {
-  const { data, isLoading } = useQuery<{ events: any[] }>({ queryKey: ["/api/admin/events"] });
-  const recordings = (data?.events || []).filter((e) => e.recordingStorageKey || e.eventType === "recording");
-  const [form, setForm] = useState<any>({ title: "", accessLevel: "cas_member", eventDate: "", description: "", isPublished: true });
+function ResourceLibrarySection({ toast }: { toast: any }) {
+  const { data, isLoading } = useQuery<{ resources: any[] }>({ queryKey: ["/api/admin/member-resources"] });
+  const resources = data?.resources || [];
+  const [form, setForm] = useState<any>({ title: "", kind: "auto", category: "", accessLevel: "cas_member", description: "", isPublished: true });
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [pct, setPct] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const set = (k: string, v: any) => setForm((f: any) => ({ ...f, [k]: v }));
-  const invalidate = () => queryClient.invalidateQueries({ queryKey: ["/api/admin/events"] });
+  const invalidate = () => queryClient.invalidateQueries({ queryKey: ["/api/admin/member-resources"] });
 
   const submit = async () => {
-    if (!file) return toast({ title: "Choose a video file first", variant: "destructive" });
+    if (!file) return toast({ title: "Choose a file first", variant: "destructive" });
     if (!form.title) return toast({ title: "Title is required", variant: "destructive" });
     const fd = new FormData();
     fd.append("file", file);
-    Object.entries(form).forEach(([k, v]) => fd.append(k, String(v)));
+    const kind = form.kind === "auto" ? (file.type.startsWith("video/") ? "video" : "document") : form.kind;
+    fd.append("title", form.title); fd.append("kind", kind); fd.append("category", form.category);
+    fd.append("accessLevel", form.accessLevel); fd.append("description", form.description); fd.append("isPublished", String(form.isPublished));
     setUploading(true); setPct(0);
     try {
-      const r = await uploadRecording(fd, setPct);
-      if (r.success) { toast({ title: "Recording uploaded" }); setFile(null); setForm({ title: "", accessLevel: "cas_member", eventDate: "", description: "", isPublished: true }); setShowForm(false); invalidate(); }
+      const r = await uploadFile("/api/admin/member-resources", fd, setPct);
+      if (r.success) { toast({ title: "Resource uploaded" }); setFile(null); setForm({ title: "", kind: "auto", category: "", accessLevel: "cas_member", description: "", isPublished: true }); setShowForm(false); invalidate(); }
       else toast({ title: "Upload failed", description: r.message, variant: "destructive" });
     } catch { toast({ title: "Upload failed", variant: "destructive" }); }
     finally { setUploading(false); }
   };
 
-  const toggle = useMutation({ mutationFn: async ({ id, isPublished }: any) => (await apiRequest("PUT", `/api/admin/events/${id}`, { isPublished })).json(), onSuccess: invalidate });
-  const remove = useMutation({ mutationFn: async (id: number) => (await apiRequest("DELETE", `/api/admin/events/${id}`, {})).json(), onSuccess: () => { toast({ title: "Recording deleted" }); invalidate(); } });
+  const toggle = useMutation({ mutationFn: async ({ id, isPublished }: any) => (await apiRequest("PUT", `/api/admin/member-resources/${id}`, { isPublished })).json(), onSuccess: invalidate });
+  const remove = useMutation({ mutationFn: async (id: number) => (await apiRequest("DELETE", `/api/admin/member-resources/${id}`, {})).json(), onSuccess: () => { toast({ title: "Resource deleted" }); invalidate(); } });
 
   return (
     <div>
       <div className="flex items-center justify-between gap-4 mb-4">
-        <p className="text-sm text-slate-500 dark:text-slate-400">Upload member-only recordings. Files are stored via the configured storage backend and streamed to members through an authenticated endpoint (never a public link).</p>
-        <Button className={GRAD_BTN} onClick={() => setShowForm((s) => !s)} data-testid="recording-add">
-          {showForm ? <X className="w-4 h-4 mr-2" /> : <UploadCloud className="w-4 h-4 mr-2" />}{showForm ? "Close" : "Upload recording"}
+        <p className="text-sm text-slate-500 dark:text-slate-400">Member-only library: upload <strong>video recordings</strong> or <strong>study materials</strong> (PDF or any format). Files are stored via the configured storage backend and served to members through an authenticated endpoint (never a public link).</p>
+        <Button className={GRAD_BTN} onClick={() => setShowForm((s) => !s)} data-testid="resource-add">
+          {showForm ? <X className="w-4 h-4 mr-2" /> : <UploadCloud className="w-4 h-4 mr-2" />}{showForm ? "Close" : "Upload resource"}
         </Button>
       </div>
 
-      {/* Upload form — only via CTA */}
       {showForm && (
         <div className={`${PANEL} p-6 mb-5`}>
-          <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-4">New recording</h3>
-          <Labeled label="Recording file" required>
+          <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-4">New resource</h3>
+          <Labeled label="File" required>
             <label className={`flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed ${file ? "border-[#00AFE6]/60 bg-[#00AFE6]/5" : "border-slate-300 dark:border-white/15"} px-6 py-8 cursor-pointer text-center`}>
-              <input type="file" accept="video/*,audio/*" className="hidden" onChange={(e) => setFile(e.target.files?.[0] || null)} data-testid="recording-file" />
-              <div className={`${ICON_TILE} h-12 w-12`}>{file ? <FileVideo className="w-6 h-6 text-[#00AFE6]" /> : <UploadCloud className="w-6 h-6 text-[#00AFE6]" />}</div>
+              <input type="file" accept="video/*,application/pdf,image/*,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt" className="hidden" onChange={(e) => setFile(e.target.files?.[0] || null)} data-testid="resource-file" />
+              <div className={`${ICON_TILE} h-12 w-12`}>{file ? (file.type.startsWith("video/") ? <FileVideo className="w-6 h-6 text-[#00AFE6]" /> : <FileText className="w-6 h-6 text-[#00AFE6]" />) : <UploadCloud className="w-6 h-6 text-[#00AFE6]" />}</div>
               {file ? <div><p className="font-medium text-slate-900 dark:text-white text-sm">{file.name}</p><p className="text-xs text-slate-500">{humanSize(file.size)}</p></div>
-                    : <div><p className="font-medium text-slate-700 dark:text-slate-200 text-sm">Click to choose a video file</p><p className="text-xs text-slate-400">MP4, MOV, WebM…</p></div>}
+                    : <div><p className="font-medium text-slate-700 dark:text-slate-200 text-sm">Click to choose a file</p><p className="text-xs text-slate-400">Video (MP4/MOV/WebM) or study material (PDF, DOCX, PPTX…)</p></div>}
             </label>
           </Labeled>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <Labeled label="Title" required className="md:col-span-2">
-              <input className={FIELD} placeholder="e.g. AL Amyloidosis Masterclass" value={form.title} onChange={(e) => set("title", e.target.value)} data-testid="recording-title" />
+              <input className={FIELD} placeholder="e.g. AL Amyloidosis Masterclass" value={form.title} onChange={(e) => set("title", e.target.value)} data-testid="resource-title" />
+            </Labeled>
+            <Labeled label="Type">
+              <select className={FIELD} value={form.kind} onChange={(e) => set("kind", e.target.value)}>
+                <option value="auto">Auto-detect from file</option><option value="video">Video</option><option value="document">Study material / document</option>
+              </select>
+            </Labeled>
+            <Labeled label="Category">
+              <input className={FIELD} placeholder="e.g. Study material, Webinar recording" value={form.category} onChange={(e) => set("category", e.target.value)} />
             </Labeled>
             <Labeled label="Who can access">
               <select className={FIELD} value={form.accessLevel} onChange={(e) => set("accessLevel", e.target.value)}>
                 <option value="cas_member">CAS members</option><option value="cann_member">CANN members</option><option value="cas_cann_member">CAS &amp; CANN</option><option value="admin">Admins</option>
               </select>
             </Labeled>
-            <Labeled label="Recorded on">
-              <input type="datetime-local" className={FIELD} value={form.eventDate} onChange={(e) => set("eventDate", e.target.value)} />
-            </Labeled>
             <Labeled label="Description" className="md:col-span-2">
-              <textarea rows={3} className={FIELD} placeholder="Short summary of the recording" value={form.description} onChange={(e) => set("description", e.target.value)} />
+              <textarea rows={3} className={FIELD} placeholder="Short summary of the resource" value={form.description} onChange={(e) => set("description", e.target.value)} />
             </Labeled>
             <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 md:col-span-2">
               <input type="checkbox" checked={form.isPublished} onChange={(e) => set("isPublished", e.target.checked)} /> Publish immediately
@@ -496,30 +502,32 @@ function RecordingsSection({ toast }: { toast: any }) {
           )}
           <div className="flex justify-end gap-2 mt-5">
             <Button variant="outline" className="rounded-xl" onClick={() => setShowForm(false)}>Cancel</Button>
-            <Button className={GRAD_BTN} disabled={uploading} onClick={submit} data-testid="recording-upload">
-              {uploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <UploadCloud className="w-4 h-4 mr-2" />}Upload recording
+            <Button className={GRAD_BTN} disabled={uploading} onClick={submit} data-testid="resource-upload">
+              {uploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <UploadCloud className="w-4 h-4 mr-2" />}Upload resource
             </Button>
           </div>
         </div>
       )}
 
-      {/* List */}
       <div className={`${PANEL} overflow-hidden`}>
         {isLoading ? <div className="py-14 text-center"><Loader2 className="w-6 h-6 animate-spin text-[#00AFE6] mx-auto" /></div>
-        : recordings.length === 0 ? <div className="py-14 text-center text-slate-500 dark:text-slate-400">No recordings uploaded yet.</div>
+        : resources.length === 0 ? <div className="py-14 text-center text-slate-500 dark:text-slate-400">No resources uploaded yet.</div>
         : (
           <div className="divide-y divide-slate-100 dark:divide-white/5">
-            {recordings.map((r) => (
-              <div key={r.id} className="flex items-center gap-4 px-4 py-3" data-testid={`recording-row-${r.id}`}>
-                <div className={`${ICON_TILE} h-10 w-10 shrink-0`}><Video className="w-5 h-5 text-[#00AFE6]" /></div>
+            {resources.map((r) => (
+              <div key={r.id} className="flex items-center gap-4 px-4 py-3" data-testid={`resource-row-${r.id}`}>
+                <div className={`${ICON_TILE} h-10 w-10 shrink-0`}>{r.kind === "video" ? <Video className="w-5 h-5 text-[#00AFE6]" /> : <FileText className="w-5 h-5 text-[#00AFE6]" />}</div>
                 <div className="min-w-0 flex-1">
-                  <p className="font-medium text-slate-900 dark:text-white truncate">{r.title}</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{r.recordingFileName || "—"} · {humanSize(r.recordingSizeBytes)} · {String(r.accessLevel).replace("_", " ")}</p>
+                  <div className="flex items-center gap-2">
+                    <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize ${r.kind === "video" ? "bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white" : "bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300"}`}>{r.kind}</span>
+                    <span className="font-medium text-slate-900 dark:text-white truncate">{r.title}</span>
+                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{r.fileName || "—"} · {humanSize(r.sizeBytes)} · {String(r.accessLevel).replace("_", " ")}{r.category ? ` · ${r.category}` : ""}</p>
                 </div>
-                <button onClick={() => toggle.mutate({ id: r.id, isPublished: !r.isPublished })} className={`shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium ${r.isPublished ? "bg-[#00DD89]/15 text-[#00a866] dark:text-[#4ff0b0]" : "bg-slate-100 dark:bg-white/5 text-slate-500"}`} data-testid={`recording-publish-${r.id}`}>
+                <button onClick={() => toggle.mutate({ id: r.id, isPublished: !r.isPublished })} className={`shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium ${r.isPublished ? "bg-[#00DD89]/15 text-[#00a866] dark:text-[#4ff0b0]" : "bg-slate-100 dark:bg-white/5 text-slate-500"}`} data-testid={`resource-publish-${r.id}`}>
                   {r.isPublished ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}{r.isPublished ? "Published" : "Draft"}
                 </button>
-                <button onClick={() => remove.mutate(r.id)} className="shrink-0 text-slate-400 hover:text-red-500" data-testid={`recording-delete-${r.id}`}><Trash2 className="w-4 h-4" /></button>
+                <button onClick={() => remove.mutate(r.id)} className="shrink-0 text-slate-400 hover:text-red-500" data-testid={`resource-delete-${r.id}`}><Trash2 className="w-4 h-4" /></button>
               </div>
             ))}
           </div>

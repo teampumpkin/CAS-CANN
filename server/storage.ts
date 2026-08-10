@@ -48,6 +48,7 @@ import {
   passwordResets,
   memberEvents,
   mapClinics,
+  memberResources,
   type Member,
   type InsertMember,
   type PasswordReset,
@@ -56,6 +57,8 @@ import {
   type InsertMemberEvent,
   type MapClinic,
   type InsertMapClinic,
+  type MemberResource,
+  type InsertMemberResource,
 } from "@shared/schema";
 import { ensureConsentRecordsTable } from "./migrations/add-consent-records";
 import { db } from "./db";
@@ -242,6 +245,13 @@ export interface IStorage {
   createMapClinic(clinic: InsertMapClinic): Promise<MapClinic>;
   updateMapClinic(id: number, updates: Partial<MapClinic>): Promise<MapClinic | undefined>;
   deleteMapClinic(id: number): Promise<boolean>;
+
+  // Member resources (uploaded videos + study materials)
+  getMemberResources(onlyPublished?: boolean): Promise<MemberResource[]>;
+  getMemberResource(id: number): Promise<MemberResource | undefined>;
+  createMemberResource(resource: InsertMemberResource): Promise<MemberResource>;
+  updateMemberResource(id: number, updates: Partial<MemberResource>): Promise<MemberResource | undefined>;
+  deleteMemberResource(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -1219,6 +1229,39 @@ export class DatabaseStorage implements IStorage {
 
   async deleteMapClinic(id: number): Promise<boolean> {
     const result = await db.delete(mapClinics).where(eq(mapClinics.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  // ===== Member resources =====
+  async getMemberResources(onlyPublished = false): Promise<MemberResource[]> {
+    return await db
+      .select()
+      .from(memberResources)
+      .where(onlyPublished ? eq(memberResources.isPublished, true) : undefined)
+      .orderBy(desc(memberResources.createdAt));
+  }
+
+  async getMemberResource(id: number): Promise<MemberResource | undefined> {
+    const [r] = await db.select().from(memberResources).where(eq(memberResources.id, id));
+    return r || undefined;
+  }
+
+  async createMemberResource(resource: InsertMemberResource): Promise<MemberResource> {
+    const [created] = await db.insert(memberResources).values(resource).returning();
+    return created;
+  }
+
+  async updateMemberResource(id: number, updates: Partial<MemberResource>): Promise<MemberResource | undefined> {
+    const [updated] = await db
+      .update(memberResources)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(memberResources.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteMemberResource(id: number): Promise<boolean> {
+    const result = await db.delete(memberResources).where(eq(memberResources.id, id));
     return (result.rowCount || 0) > 0;
   }
 }

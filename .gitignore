@@ -15,3 +15,5 @@ vite.config.ts.*
 replit.nix
 .cache
 .config
+# Uploaded member resource files (local dev storage)
+uploads/

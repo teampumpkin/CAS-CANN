@@ -789,6 +789,107 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
 
+  // ===================== Member resources library (videos + study materials) =====================
+  const detectKind = (mime?: string) => (mime && mime.startsWith("video/") ? "video" : "document");
+
+  app.get("/api/admin/member-resources", requireMemberAuth, requireAdmin, async (_req: AuthenticatedRequest, res) => {
+    try { res.json({ success: true, resources: await storage.getMemberResources() }); }
+    catch (e) { res.status(500).json({ success: false, message: "Failed to load resources" }); }
+  });
+
+  app.post("/api/admin/member-resources", requireMemberAuth, requireAdmin, recordingUpload.single("file"), async (req: AuthenticatedRequest, res) => {
+    const file = (req as any).file;
+    try {
+      const b: any = req.body || {};
+      if (!file) return res.status(400).json({ success: false, message: "A file is required" });
+      if (!b.title) { fs.unlink(file.path, () => {}); return res.status(400).json({ success: false, message: "title is required" }); }
+      const key = `resources/${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`;
+      const info = await recordingStorage.put(key, file.path, file.mimetype);
+      fs.unlink(file.path, () => {});
+      const created = await storage.createMemberResource({
+        title: b.title, description: b.description || null,
+        kind: (b.kind && b.kind !== "auto") ? b.kind : detectKind(file.mimetype), category: b.category || null,
+        storageKey: key, fileName: file.originalname, mimeType: file.mimetype, sizeBytes: info.size,
+        accessLevel: b.accessLevel || "cas_member", isPublished: b.isPublished === "true" || b.isPublished === true,
+      } as any);
+      res.json({ success: true, resource: created });
+    } catch (e) {
+      if (file) fs.unlink(file.path, () => {});
+      console.error("[Admin] resource upload error", e);
+      res.status(500).json({ success: false, message: "Upload failed" });
+    }
+  });
+
+  app.put("/api/admin/member-resources/:id", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
+    try {
+      const updated = await storage.updateMemberResource(parseInt(req.params.id), req.body || {});
+      if (!updated) return res.status(404).json({ success: false, message: "Resource not found" });
+      res.json({ success: true, resource: updated });
+    } catch (e) { res.status(500).json({ success: false, message: "Failed to update resource" }); }
+  });
+
+  app.delete("/api/admin/member-resources/:id", requireMemberAuth, requireAdmin, async (req: AuthenticatedRequest, res) => {
+    try {
+      const r = await storage.getMemberResource(parseInt(req.params.id));
+      if (r?.storageKey) await recordingStorage.delete(r.storageKey);
+      res.json({ success: await storage.deleteMemberResource(parseInt(req.params.id)) });
+    } catch (e) { res.status(500).json({ success: false, message: "Failed to delete resource" }); }
+  });
+
+  // Member: list resources (access-filtered)
+  app.get("/api/members/resources", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const m = req.member!;
+      const all = await storage.getMemberResources(true);
+      const allowed = all.filter((r) =>
+        m.role === "admin" || r.accessLevel === "cas_member" ||
+        (r.accessLevel === "cann_member" && m.isCANNMember) ||
+        (r.accessLevel === "cas_cann_member" && m.isCASMember && m.isCANNMember));
+      res.json({
+        success: true,
+        resources: allowed.map((r) => ({
+          id: r.id, title: r.title, description: r.description, kind: r.kind, category: r.category,
+          fileName: r.fileName, mimeType: r.mimeType, sizeBytes: r.sizeBytes, thumbnailUrl: r.thumbnailUrl,
+          accessLevel: r.accessLevel, createdAt: r.createdAt,
+          fileUrl: `/api/members/resources/${r.id}/file`,
+        })),
+      });
+    } catch (e) { res.status(500).json({ success: false, message: "Failed to load resources" }); }
+  });
+
+  // Member-only file serving (Range for video; inline for PDF; attachment otherwise)
+  app.get("/api/members/resources/:id/file", requireMemberAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const r = await storage.getMemberResource(parseInt(req.params.id));
+      if (!r || !r.storageKey) return res.status(404).json({ success: false, message: "Resource not found" });
+      const m = req.member!;
+      if (!r.isPublished && m.role !== "admin") return res.status(404).json({ success: false, message: "Not found" });
+      const allowed = m.role === "admin" || r.accessLevel === "cas_member" ||
+        (r.accessLevel === "cann_member" && m.isCANNMember) ||
+        (r.accessLevel === "cas_cann_member" && m.isCASMember && m.isCANNMember);
+      if (!allowed) return res.status(403).json({ success: false, message: "You don't have access to this resource." });
+      const stat = await recordingStorage.stat(r.storageKey);
+      if (!stat) return res.status(404).json({ success: false, message: "File missing" });
+      const total = stat.size;
+      const ct = r.mimeType || "application/octet-stream";
+      const isVideo = r.kind === "video" || ct.startsWith("video/");
+      const inline = isVideo || ct === "application/pdf" || ct.startsWith("image/");
+      const disp = `${inline ? "inline" : "attachment"}; filename="${(r.fileName || "resource").replace(/"/g, "")}"`;
+      const range = req.headers.range;
+      if (range && isVideo) {
+        const mt = /bytes=(\d+)-(\d*)/.exec(range);
+        const start = mt ? parseInt(mt[1]) : 0;
+        const end = mt && mt[2] ? Math.min(parseInt(mt[2]), total - 1) : total - 1;
+        res.status(206).set({ "Content-Range": `bytes ${start}-${end}/${total}`, "Accept-Ranges": "bytes", "Content-Length": String(end - start + 1), "Content-Type": ct, "Content-Disposition": disp });
+        recordingStorage.createReadStream(r.storageKey, { start, end }).pipe(res);
+      } else {
+        res.set({ "Content-Length": String(total), "Content-Type": ct, "Accept-Ranges": "bytes", "Content-Disposition": disp });
+        recordingStorage.createReadStream(r.storageKey).pipe(res);
+      }
+    } catch (e) { console.error("[Member] resource file error", e); res.status(500).json({ success: false, message: "Failed" }); }
+  });
+
+
   // User API routes
   app.get("/api/users/:id", async (req, res) => {
     const user = await storage.getUser(parseInt(req.params.id));

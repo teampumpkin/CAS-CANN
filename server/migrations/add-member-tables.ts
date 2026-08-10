@@ -155,6 +155,29 @@ export function ensureMemberTables(): Promise<void> {
     await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_map_clinics_province ON map_clinics (province)`);
     await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_map_clinics_is_published ON map_clinics (is_published)`);
     await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_map_clinics_submission_id ON map_clinics (submission_id)`);
+
+    // Member resources library (uploaded videos + study materials, member-only)
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS member_resources (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        description TEXT,
+        kind VARCHAR(20) NOT NULL DEFAULT 'document',
+        category VARCHAR(120),
+        storage_key VARCHAR(500) NOT NULL,
+        file_name VARCHAR(255),
+        mime_type VARCHAR(160),
+        size_bytes BIGINT,
+        thumbnail_url VARCHAR(500),
+        access_level member_role NOT NULL DEFAULT 'cas_member',
+        is_published BOOLEAN NOT NULL DEFAULT true,
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW()
+      )
+    `);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_resources_kind ON member_resources (kind)`);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_resources_access_level ON member_resources (access_level)`);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_resources_is_published ON member_resources (is_published)`);
   })().catch((err) => {
     cachedPromise = null;
     throw err;

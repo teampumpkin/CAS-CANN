@@ -918,3 +918,36 @@ export const insertMapClinicSchema = createInsertSchema(mapClinics).omit({
 
 export type MapClinic = typeof mapClinics.$inferSelect;
 export type InsertMapClinic = z.infer<typeof insertMapClinicSchema>;
+
+// ============================================================================
+// Member resources — a member-only library of uploaded files.
+// A "resource" is either a video (recording) or a document (study material:
+// PDF or any other format). Served via an authenticated endpoint.
+// ============================================================================
+export const memberResources = pgTable("member_resources", {
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  kind: varchar("kind", { length: 20 }).notNull().default("document"), // video | document
+  category: varchar("category", { length: 120 }), // e.g. "Study material", "Webinar recording"
+  storageKey: varchar("storage_key", { length: 500 }).notNull(),
+  fileName: varchar("file_name", { length: 255 }),
+  mimeType: varchar("mime_type", { length: 160 }),
+  sizeBytes: bigint("size_bytes", { mode: "number" }),
+  thumbnailUrl: varchar("thumbnail_url", { length: 500 }),
+  accessLevel: memberRoleEnum("access_level").notNull().default("cas_member"),
+  isPublished: boolean("is_published").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+}, (table) => [
+  index("idx_member_resources_kind").on(table.kind),
+  index("idx_member_resources_access_level").on(table.accessLevel),
+  index("idx_member_resources_is_published").on(table.isPublished),
+]);
+
+export const insertMemberResourceSchema = createInsertSchema(memberResources).omit({
+  id: true, createdAt: true, updatedAt: true,
+});
+
+export type MemberResource = typeof memberResources.$inferSelect;
+export type InsertMemberResource = z.infer<typeof insertMemberResourceSchema>;

@@ -60,7 +60,6 @@ const TABS: TabDef[] = [
   {
     id: "resources",
     label: "Resources & Events",
-    hidden: true,
     title: "Resources & Events",
     icon: CalendarDays,
     emptyTitle: "No resources or events yet",
@@ -70,7 +69,6 @@ const TABS: TabDef[] = [
   {
     id: "recordings",
     label: "Recordings",
-    hidden: true,
     title: "Recordings",
     icon: Video,
     emptyTitle: "No recordings yet",

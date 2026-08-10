@@ -143,6 +143,8 @@ function Router() {
         {/* Console tabs. Each guards itself against a missing session and
             redirects back to /admin. */}
         <Route path="/admin/leads" component={AdminConsole} />
+        <Route path="/admin/resources" component={AdminConsole} />
+        <Route path="/admin/recordings" component={AdminConsole} />
         <Route path="/admin/services-map" component={AdminConsole} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/communications-preferences" component={CommunicationsPreferences} />

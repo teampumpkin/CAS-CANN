@@ -96,7 +96,9 @@ export const casRegistrationSchema = z.object({
     } else if (data.phoneNumber.replace(/\D/g, "").length !== 10) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please enter a 10-digit phone number including area code", path: ["phoneNumber"] });
     }
-    if (data.faxNumber?.trim() && data.faxNumber.replace(/\D/g, "").length !== 10) {
+    if (!data.faxNumber?.trim()) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Fax number is required", path: ["faxNumber"] });
+    } else if (data.faxNumber.replace(/\D/g, "").length !== 10) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please enter a 10-digit fax number including area code", path: ["faxNumber"] });
     }
   }

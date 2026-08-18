@@ -77,10 +77,12 @@ function YesNo({
   value,
   onChange,
   accent = "cas",
+  disabledOption,
 }: {
   value?: "Yes" | "No";
   onChange: (v: "Yes" | "No") => void;
   accent?: "cas" | "cann";
+  disabledOption?: "Yes" | "No";
 }) {
   const activeClass =
     accent === "cann"
@@ -92,14 +94,16 @@ function YesNo({
     <div className="inline-flex rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-1 gap-1">
       {(["Yes", "No"] as const).map((opt) => {
         const active = value === opt;
+        const disabled = opt === disabledOption;
         return (
           <button
             key={opt}
             type="button"
-            onClick={() => onChange(opt)}
+            disabled={disabled}
+            onClick={() => !disabled && onChange(opt)}
             className={`px-5 sm:px-6 h-9 text-sm font-medium rounded-md border transition-all ${
               active ? activeClass : idleClass
-            }`}
+            } ${disabled ? "opacity-40 cursor-not-allowed" : ""}`}
           >
             {opt}
           </button>
@@ -555,15 +559,17 @@ function QuestionRow({
   label,
   description,
   children,
+  required,
 }: {
   label: string;
   description?: string;
   children: React.ReactNode;
+  required?: boolean;
 }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-6 py-1">
       <div className="flex-1 min-w-0">
-        <div className="text-sm font-normal text-slate-700 dark:text-slate-200">{label}</div>
+        <div className="text-sm font-normal text-slate-700 dark:text-slate-200">{label}{required && <span className="text-[#00AFE6]"> *</span>}</div>
         {description && (
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{description}</p>
         )}
@@ -788,6 +794,14 @@ export default function JoinCAS() {
   const provinceValue = form.watch("province");
   const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
   const declinedBoth = wantsMembership === "No" && wantsCANNMembership === "No";
+
+  // For members (Q1 or Q2 = Yes), Services Map inclusion is mandatory: auto-select
+  // "Yes" and lock out "No" so a member can never opt out of the services map.
+  useEffect(() => {
+    if (isMember && form.getValues("wantsServicesMapInclusion") !== "Yes") {
+      form.setValue("wantsServicesMapInclusion", "Yes", { shouldValidate: false });
+    }
+  }, [isMember]);
 
   const postalMatch = postalCode ? lookupPostalCode(postalCode) : null;
 
@@ -1152,11 +1166,13 @@ export default function JoinCAS() {
                             <QuestionRow
                               label={t("servicesQ")}
                               description={t("servicesDesc")}
+                              required
                             >
                               <YesNo
                                 value={field.value as any}
                                 onChange={field.onChange}
                                 accent="cas"
+                                disabledOption="No"
                               />
                             </QuestionRow>
                             <FormMessage className="text-xs" />
@@ -1215,6 +1231,7 @@ export default function JoinCAS() {
                               label={t("fax")}
                               placeholder="416-555-5678"
                               form={form}
+                              required
                               inputFilter={PHONE_FILTER}
                               maxLength={12}
                               filterWarning={t("filterPhone")}

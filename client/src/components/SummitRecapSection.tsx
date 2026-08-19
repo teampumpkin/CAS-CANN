@@ -32,6 +32,7 @@ export default function SummitRecapSection() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6">
+        {/* Section heading */}
         <motion.div
           className="text-center mb-8"
           initial={{ opacity: 0, y: 30 }}
@@ -40,17 +41,46 @@ export default function SummitRecapSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-[#00AFE6]/30 dark:border-white/20 rounded-full px-6 py-3 mb-4 shadow-lg shadow-[#00AFE6]/10"
+            className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-[#00AFE6]/30 dark:border-white/20 rounded-full px-6 py-3 shadow-lg shadow-[#00AFE6]/10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             <div className="w-2 h-2 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] rounded-full animate-pulse"></div>
             <span className="text-gray-900 dark:text-white/90 font-medium tracking-wide">
-              {language === 'en' ? 'Event Recap' : 'Récapitulatif de l\'événement'}
+              {language === 'en' ? 'CAS Summit Events' : 'Événements du Sommet SCA'}
             </span>
           </motion.div>
+        </motion.div>
 
+        {/* Summit banner at top of section */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <Link href="/events-and-news#summit">
+            <div className="rounded-2xl overflow-hidden border border-[#00AFE6]/20 dark:border-white/10 shadow-xl shadow-[#00AFE6]/10 cursor-pointer hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:border-[#00AFE6]/40 transition-all duration-300">
+              <img
+                src={summitPosterImg}
+                alt="2026 Canadian Amyloidosis Summit - Cancelled"
+                className="w-full h-auto hover:scale-[1.01] transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+          </Link>
+        </motion.div>
+
+        {/* Summit 2025 recap heading + text + images below the banner */}
+        <motion.div
+          className="text-center mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
           <h2 className="crawford-section-title mb-4">
             <span className="text-gray-900 dark:text-white">Canadian Amyloidosis </span>
             <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
@@ -59,7 +89,7 @@ export default function SummitRecapSection() {
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10 items-start mb-12">
+        <div className="grid lg:grid-cols-2 gap-10 items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -118,24 +148,6 @@ export default function SummitRecapSection() {
             </motion.div>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <Link href="/events-and-news#summit">
-            <div className="rounded-2xl overflow-hidden border border-[#00AFE6]/20 dark:border-white/10 shadow-xl shadow-[#00AFE6]/10 cursor-pointer hover:shadow-2xl hover:shadow-[#00AFE6]/20 hover:border-[#00AFE6]/40 transition-all duration-300">
-              <img
-                src={summitPosterImg}
-                alt="2026 Canadian Amyloidosis Summit - Save the Date"
-                className="w-full h-auto hover:scale-[1.01] transition-transform duration-300"
-                loading="lazy"
-              />
-            </div>
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

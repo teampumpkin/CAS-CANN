@@ -345,6 +345,7 @@ export default function CANNResources() {
       registrationDeadline: t('cannResources.comingSoon'),
       cmeCredits: t('cannResources.events.summit.credits'),
       type: t('cannResources.events.types.conference'),
+      isCancelled: true,
     },
   ];
 
@@ -726,10 +727,12 @@ export default function CANNResources() {
                         <CardContent className="p-6 pt-0 flex flex-col flex-1">
                           {/* Event Details */}
                           <div className="space-y-2 mb-4">
-                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
-                              <Calendar className="w-4 h-4 text-pink-500" />
-                              <span>{event.displayDate || formatEventDate(event.rawDate)}</span>
-                            </div>
+                            {!(event as any).isCancelled && (
+                              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
+                                <Calendar className="w-4 h-4 text-pink-500" />
+                                <span>{event.displayDate || formatEventDate(event.rawDate)}</span>
+                              </div>
+                            )}
                             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-white/70">
                               <Clock className="w-4 h-4 text-pink-500" />
                               <span>{event.time}</span>
@@ -766,7 +769,13 @@ export default function CANNResources() {
                           )}
 
                           {/* CTA Section */}
-                          {event.registrationUrl ? (
+                          {(event as any).isCancelled ? (
+                            <div className="text-center p-3 bg-red-500/10 dark:bg-red-500/15 rounded-xl border border-red-500/40">
+                              <div className="text-sm font-semibold text-red-600 dark:text-red-400">
+                                {t('summit.cancelledNotice')}
+                              </div>
+                            </div>
+                          ) : event.registrationUrl ? (
                             <div className="text-center p-3 bg-gradient-to-r from-pink-500/15 to-purple-600/15 rounded-xl border border-pink-500/40 shadow-md shadow-pink-500/10 relative overflow-hidden space-y-2">
                               <div className="absolute inset-0 bg-gradient-to-r from-pink-500/5 to-purple-600/5 opacity-50 animate-pulse"></div>
                               <div className="relative z-10">

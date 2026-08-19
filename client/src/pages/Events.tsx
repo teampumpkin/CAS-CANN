@@ -815,19 +815,7 @@ export default function Events() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
-                      <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00AFE6]/10 to-[#00DD89]/10 rounded-2xl border border-[#00AFE6]/20">
-                        <Calendar className="w-8 h-8 text-[#00AFE6]" />
-                        <div className="text-center">
-                          <p className="text-sm font-medium text-gray-500 dark:text-white/60 mb-1">
-                            {t("eventsPage.dates")}
-                          </p>
-                          <p className="text-gray-800 dark:text-white font-semibold">
-                            {t("events.summit.date")}
-                          </p>
-                        </div>
-                      </div>
-
+                    <div className="grid grid-cols-1 max-w-sm mx-auto gap-8 mb-10">
                       <div className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 rounded-2xl border border-[#00DD89]/20">
                         <MapPin className="w-8 h-8 text-[#00DD89]" />
                         <div className="text-center">
@@ -846,8 +834,8 @@ export default function Events() {
                     </p>
 
                     <div className="space-y-4">
-                      <p className="text-sm text-amber-600 dark:text-amber-400 font-medium">
-                        {t("eventsPage.registrationComingSoon")}
+                      <p className="text-sm text-red-600 dark:text-red-400 font-semibold">
+                        {t("summit.cancelledNotice")}
                       </p>
                     </div>
                   </div>

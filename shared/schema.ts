@@ -887,7 +887,11 @@ export type UpdateProfileRequest = z.infer<typeof updateProfileSchema>;
 // Map clinics — admin-approved clinics shown on the public Canada services map.
 // Sourced from join-form leads that opted into the services map (or added manually).
 // ============================================================================
-export const mapClinics = pgTable("map_clinics", {
+// NOTE: physical table is `member_map_clinics` (not `map_clinics`) to avoid a
+// name collision with a differently-shaped `map_clinics` table that exists on
+// the shared/prod database from a separate feature. The JS symbol stays
+// `mapClinics` so no call sites change.
+export const mapClinics = pgTable("member_map_clinics", {
   id: serial("id").primaryKey(),
   submissionId: integer("submission_id").references(() => formSubmissions.id, { onDelete: "set null" }),
   name: varchar("name", { length: 255 }).notNull(),
@@ -905,9 +909,9 @@ export const mapClinics = pgTable("map_clinics", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 }, (table) => [
-  index("idx_map_clinics_province").on(table.province),
-  index("idx_map_clinics_is_published").on(table.isPublished),
-  index("idx_map_clinics_submission_id").on(table.submissionId),
+  index("idx_member_map_clinics_province").on(table.province),
+  index("idx_member_map_clinics_is_published").on(table.isPublished),
+  index("idx_member_map_clinics_submission_id").on(table.submissionId),
 ]);
 
 export const insertMapClinicSchema = createInsertSchema(mapClinics).omit({

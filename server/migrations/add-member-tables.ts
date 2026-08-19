@@ -135,9 +135,13 @@ export function ensureMemberTables(): Promise<void> {
     await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS requires_cann_membership BOOLEAN NOT NULL DEFAULT false`);
     await db.execute(sql`ALTER TABLE member_events ADD COLUMN IF NOT EXISTS audience VARCHAR(20) NOT NULL DEFAULT 'members'`);
 
-    // Admin-approved clinics shown on the public Canada services map (sourced from leads)
+    // Admin-approved clinics shown on the public Canada services map (sourced from leads).
+    // Physical name is `member_map_clinics` to avoid colliding with a differently-shaped
+    // `map_clinics` table that already exists on the shared/prod database from a separate
+    // feature (keyed on zoho_record_id). Creating a distinct table sidesteps the collision
+    // entirely and leaves that table untouched.
     await db.execute(sql`
-      CREATE TABLE IF NOT EXISTS map_clinics (
+      CREATE TABLE IF NOT EXISTS member_map_clinics (
         id SERIAL PRIMARY KEY,
         submission_id INTEGER REFERENCES form_submissions(id) ON DELETE SET NULL,
         name VARCHAR(255) NOT NULL,
@@ -156,10 +160,9 @@ export function ensureMemberTables(): Promise<void> {
         updated_at TIMESTAMP DEFAULT NOW()
       )
     `);
-    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_map_clinics_province ON map_clinics (province)`);
-    await db.execute(sql`ALTER TABLE map_clinics ADD COLUMN IF NOT EXISTS is_published BOOLEAN NOT NULL DEFAULT true`);
-    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_map_clinics_is_published ON map_clinics (is_published)`);
-    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_map_clinics_submission_id ON map_clinics (submission_id)`);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_map_clinics_province ON member_map_clinics (province)`);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_map_clinics_is_published ON member_map_clinics (is_published)`);
+    await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_member_map_clinics_submission_id ON member_map_clinics (submission_id)`);
 
     // Member resources library (uploaded videos + study materials, member-only)
     await db.execute(sql`

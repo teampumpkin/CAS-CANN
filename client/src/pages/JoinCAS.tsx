@@ -795,14 +795,6 @@ export default function JoinCAS() {
   const isMember = wantsMembership === "Yes" || wantsCANNMembership === "Yes";
   const declinedBoth = wantsMembership === "No" && wantsCANNMembership === "No";
 
-  // For members (Q1 or Q2 = Yes), Services Map inclusion is mandatory: auto-select
-  // "Yes" and lock out "No" so a member can never opt out of the services map.
-  useEffect(() => {
-    if (isMember && form.getValues("wantsServicesMapInclusion") !== "Yes") {
-      form.setValue("wantsServicesMapInclusion", "Yes", { shouldValidate: false });
-    }
-  }, [isMember]);
-
   const postalMatch = postalCode ? lookupPostalCode(postalCode) : null;
 
   // Auto-fill city + province from postal code prefix — but only when:
@@ -1172,7 +1164,6 @@ export default function JoinCAS() {
                                 value={field.value as any}
                                 onChange={field.onChange}
                                 accent="cas"
-                                disabledOption="No"
                               />
                             </QuestionRow>
                             <FormMessage className="text-xs" />

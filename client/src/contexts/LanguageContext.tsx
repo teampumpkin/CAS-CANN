@@ -132,6 +132,7 @@ const translations = {
     'events.communityCalendarDesc': 'Learn about different events and programs for the amyloidosis community within the CAS, Canada and abroad.',
     'events.joinEvent': 'Join Event',
     'events.stayTuned': 'Stay Tuned',
+    'events.cancelled': 'Cancelled',
     
     // Event Cards
     'events.summit.title': 'Canadian Amyloidosis Summit',
@@ -1387,6 +1388,7 @@ const translations = {
     'events.communityCalendarDesc': 'Découvrez les différents événements et programmes pour la communauté de l\'amylose au sein de la SCA, au Canada et à l\'étranger.',
     'events.joinEvent': 'Rejoindre l\'événement',
     'events.stayTuned': 'Restez à l\'écoute',
+    'events.cancelled': 'Annulé',
     
     // Event Cards
     'events.summit.title': 'Sommet Canadien sur l\'Amylose',

@@ -97,7 +97,7 @@ const allSessions: Session[] = [
     rawDate: "2026-09-24",
     dateKey: "journalClub.dates.sept2026",
     topics: [
-      { topicKey: "journalClub.topics.tbd", presenterName: "" },
+      { topicKey: "journalClub.topics.greatMasquerader", presenterName: "Dr. Hanane Benbarkat, University of Montreal" },
     ],
     location: "Virtual",
     registrationNotRequired: true,

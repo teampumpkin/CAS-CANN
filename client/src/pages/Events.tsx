@@ -101,7 +101,12 @@ const journalClubSessions = [
   },
   {
     rawDate: "2026-09-24",
-    topics: [],
+    topics: [
+      {
+        title: "The Great Masquerader: a Vasculitis Mimic with Cardiac and Neurological Manifestations",
+        presenter: "Dr. Hanane Benbarkat, University of Montreal",
+      },
+    ],
   },
   {
     rawDate: "2026-11-26",

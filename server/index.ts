@@ -98,6 +98,10 @@ app.use((req, res, next) => {
   const { migrateMemberTables } = await import("./migrations/add-member-tables");
   await migrateMemberTables();
 
+  // Admin console auth tables (ported from staging, W3).
+  const { ensureAdminAuthTables } = await import("./migrations/add-admin-auth");
+  await ensureAdminAuthTables();
+
   // Initialize dedicated token management system
   const { dedicatedTokenManager } = await import("./dedicated-token-manager");
   await dedicatedTokenManager.initialize();
@@ -122,6 +126,16 @@ app.use((req, res, next) => {
   // Initialize notification service (DISABLED for production)
   // const { notificationService } = await import("./notification-service");
   // Note: notificationService initializes automatically via its constructor
+
+  // Admin console routes (ported from staging). Registered BEFORE
+  // registerRoutes so requireAdmin sees the session middleware mounted above,
+  // and so the console endpoints are not shadowed by legacy handlers.
+  const { registerAdminAuthRoutes } = await import("./admin-auth-routes");
+  const { registerAdminDataRoutes } = await import("./admin-data-routes");
+  const { registerAdminMapRoutes } = await import("./admin-map-routes");
+  registerAdminAuthRoutes(app);
+  registerAdminDataRoutes(app);
+  registerAdminMapRoutes(app);
 
   const server = await registerRoutes(app);
 

@@ -66,6 +66,9 @@ const AdminLogin = lazy(() => import("@/pages/AdminLogin"));
 const DataSyncAdmin = lazy(() => import("@/pages/DataSyncAdmin"));
 const CommandDashboard = lazy(() => import("@/pages/CommandDashboard"));
 const AdminSubmissions = lazy(() => import("@/pages/AdminSubmissions"));
+// New admin console (ported from staging): admin_users auth, own login page.
+const AdminConsoleLogin = lazy(() => import("@/pages/AdminConsoleLogin"));
+const AdminConsole = lazy(() => import("@/pages/AdminConsole"));
 const CANNTownhallRegistration = lazy(() => import("@/pages/CANNTownhallRegistration"));
 const EventsDownload = lazy(() => import("@/pages/EventsDownload"));
 const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
@@ -143,6 +146,16 @@ function Router() {
         {stagingOnly && <Route path="/admin/submissions" component={AdminSubmissions} />}
         <Route path="/events/cann-townhall/register" component={CANNTownhallRegistration} />
         <Route path="/eventsdownload" component={EventsDownload} />
+        {/* Admin console login — gated by AUTHENTICATION (admin_users), not by
+            environment, so it must exist in production. Distinct from the
+            legacy member-session /admin-login + /admin-portal above. */}
+        <Route path="/admin" component={AdminConsoleLogin} />
+        {/* Console tabs. Each guards itself against a missing session and
+            redirects back to /admin. */}
+        <Route path="/admin/leads" component={AdminConsole} />
+        <Route path="/admin/resources" component={AdminConsole} />
+        <Route path="/admin/recordings" component={AdminConsole} />
+        <Route path="/admin/services-map" component={AdminConsole} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/communications-preferences" component={CommunicationsPreferences} />
         <Route component={NotFound} />

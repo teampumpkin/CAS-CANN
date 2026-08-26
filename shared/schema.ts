@@ -955,3 +955,108 @@ export const insertMemberResourceSchema = createInsertSchema(memberResources).om
 
 export type MemberResource = typeof memberResources.$inferSelect;
 export type InsertMemberResource = z.infer<typeof insertMemberResourceSchema>;
+
+// ============================================================================
+// Admin console authentication (ported from the staging branch, W3)
+// ----------------------------------------------------------------------------
+// A separate authority from the member portal: admins live in `admin_users`
+// (bcrypt), members in `members` (scrypt). Neither accepts the other's
+// credentials. See docs/SERVICES_MAP_AND_MEMBER_ACCESS_PLAN_2026-08-07.md §5 W3.
+// ============================================================================
+export const adminRoleEnum = pgEnum("admin_role", ["admin", "superadmin"]);
+
+export const adminUsers = pgTable("admin_users", {
+  id: serial("id").primaryKey(),
+  // Always stored lowercase + trimmed. 320 = RFC 5321 maximum.
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+  role: adminRoleEnum("role").notNull().default("admin"),
+  isActive: boolean("is_active").notNull().default(true),
+  lastLoginAt: timestamp("last_login_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_admin_users_email").on(table.email),
+  index("idx_admin_users_active").on(table.isActive),
+]);
+
+// One row per failed login attempt, scoped per email so a single attacker
+// cannot lock every admin out at once. Rows older than the lockout window are
+// ignored by the counter and can be pruned.
+export const adminLoginAttempts = pgTable("admin_login_attempts", {
+  id: serial("id").primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  ipAddress: varchar("ip_address", { length: 45 }),
+  userAgent: text("user_agent"),
+  attemptedAt: timestamp("attempted_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_admin_login_attempts_email").on(table.email),
+  index("idx_admin_login_attempts_attempted_at").on(table.attemptedAt),
+]);
+
+export const insertAdminUserSchema = createInsertSchema(adminUsers).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  lastLoginAt: true,
+});
+
+export type AdminUser = typeof adminUsers.$inferSelect;
+export type InsertAdminUser = z.infer<typeof insertAdminUserSchema>;
+export type AdminLoginAttempt = typeof adminLoginAttempts.$inferSelect;
+
+/** Fields safe to serialize to a client. Never includes passwordHash. */
+export type PublicAdminUser = Pick<
+  AdminUser,
+  "id" | "email" | "role" | "isActive" | "lastLoginAt" | "createdAt"
+>;
+
+// ============================================================================
+// Admin console services map — published clinics (ported from staging, W2)
+// ----------------------------------------------------------------------------
+// The public read model for the admin console's services map. Zoho remains the
+// source of member data; a row here means an admin reviewed the Lead and
+// published it. Written only by the admin approval action — no background sync.
+//
+// JS symbol is `adminMapClinics` because this branch's member portal already
+// exports `mapClinics` (physical `member_map_clinics`, keyed on submission_id).
+// This table is the staging console's `map_clinics`, keyed on zoho_record_id —
+// the same physical table both deployments share on the shared database.
+// ============================================================================
+export const adminMapClinics = pgTable("map_clinics", {
+  id: serial("id").primaryKey(),
+  // The Zoho Lead this was published from.
+  zohoRecordId: varchar("zoho_record_id", { length: 100 }).notNull().unique(),
+  clinicName: varchar("clinic_name", { length: 255 }).notNull(),
+  street: varchar("street", { length: 255 }),
+  city: varchar("city", { length: 120 }),
+  province: varchar("province", { length: 10 }),
+  postalCode: varchar("postal_code", { length: 20 }),
+  phone: varchar("phone", { length: 50 }),
+  fax: varchar("fax", { length: 50 }),
+  // Clinical detail carried over from the Lead, so the public map can show
+  // what a centre actually treats rather than an empty panel.
+  contactName: varchar("contact_name", { length: 255 }),
+  designation: varchar("designation", { length: 150 }),
+  subspecialty: varchar("subspecialty", { length: 255 }),
+  amyloidosisType: varchar("amyloidosis_type", { length: 100 }),
+  latitude: text("latitude"),
+  longitude: text("longitude"),
+  // How the coordinates were obtained: 'city_lookup' | 'geocoded' | 'manual'
+  coordinateSource: varchar("coordinate_source", { length: 30 }),
+  publishedBy: varchar("published_by", { length: 255 }),
+  publishedAt: timestamp("published_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_map_clinics_zoho_record_id").on(table.zohoRecordId),
+  index("idx_map_clinics_province").on(table.province),
+]);
+
+export const insertAdminMapClinicSchema = createInsertSchema(adminMapClinics).omit({
+  id: true,
+  publishedAt: true,
+  updatedAt: true,
+});
+
+export type AdminMapClinic = typeof adminMapClinics.$inferSelect;
+export type InsertAdminMapClinic = z.infer<typeof insertAdminMapClinicSchema>;

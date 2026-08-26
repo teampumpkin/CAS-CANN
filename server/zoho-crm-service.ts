@@ -798,6 +798,53 @@ export class ZohoCRMService {
   /**
    * Get all fields for a specific module (for metadata caching)
    */
+  /**
+   * READ-ONLY. Lists records and preserves Zoho's pagination envelope, which
+   * getRecords() discards.
+   *
+   * Issues a plain GET against /{module} — no COQL POST, no mutation of any
+   * kind. Used by the admin console's Leads view.
+   */
+  async listRecords(
+    moduleName: string,
+    options: { page?: number; per_page?: number; fields?: string; sort_by?: string; sort_order?: "asc" | "desc" } = {},
+  ): Promise<{ data: ZohoRecord[]; info: ZohoApiResponse<ZohoRecord>["info"] }> {
+    const params = new URLSearchParams();
+    if (options.page) params.append("page", String(options.page));
+    if (options.per_page) params.append("per_page", String(options.per_page));
+    if (options.fields) params.append("fields", options.fields);
+    if (options.sort_by) params.append("sort_by", options.sort_by);
+    if (options.sort_order) params.append("sort_order", options.sort_order);
+
+    const qs = params.toString() ? `?${params.toString()}` : "";
+    const response = await this.makeRequest<ZohoApiResponse<ZohoRecord>>(
+      `/${moduleName}${qs}`,
+      "GET",
+    );
+
+    return { data: response.data ?? [], info: response.info };
+  }
+
+  /**
+   * READ-ONLY. Total record count for a module.
+   *
+   * listRecords' `info.count` is the size of the current page, not the module
+   * total, so it cannot answer "how many leads are there".
+   */
+  async countRecords(moduleName: string): Promise<number | null> {
+    try {
+      const r = await this.makeRequest<{ count?: number }>(
+        `/${moduleName}/actions/count`,
+        "GET",
+      );
+      return typeof r?.count === "number" ? r.count : null;
+    } catch (error: any) {
+      // A missing total is not worth failing the request over.
+      console.warn(`[Zoho v8] countRecords(${moduleName}) failed:`, error?.message ?? error);
+      return null;
+    }
+  }
+
   async getFieldsForModule(moduleName: string): Promise<ZohoField[]> {
     try {
       const response = await this.makeRequest<ZohoApiResponse<ZohoField>>(

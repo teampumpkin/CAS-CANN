@@ -59,10 +59,17 @@ import {
   type InsertMapClinic,
   type MemberResource,
   type InsertMemberResource,
+  adminUsers,
+  adminLoginAttempts,
+  adminMapClinics,
+  type AdminUser,
+  type InsertAdminUser,
+  type AdminMapClinic,
+  type InsertAdminMapClinic,
 } from "@shared/schema";
 import { ensureConsentRecordsTable } from "./migrations/add-consent-records";
 import { db } from "./db";
-import { eq, and, like, desc, gte, lte, notInArray, isNull, or } from "drizzle-orm";
+import { eq, and, like, desc, gte, lte, notInArray, isNull, or, count } from "drizzle-orm";
 
 export interface ResourceFilters {
   amyloidosisType?: string;
@@ -252,6 +259,24 @@ export interface IStorage {
   createMemberResource(resource: InsertMemberResource): Promise<MemberResource>;
   updateMemberResource(id: number, updates: Partial<MemberResource>): Promise<MemberResource | undefined>;
   deleteMemberResource(id: number): Promise<boolean>;
+
+  // Admin console authentication (ported from staging, W3)
+  getAdminUserByEmail(email: string): Promise<AdminUser | undefined>;
+  getAdminUserById(id: number): Promise<AdminUser | undefined>;
+  createAdminUser(admin: InsertAdminUser): Promise<AdminUser>;
+  updateAdminLastLogin(id: number): Promise<void>;
+  updateAdminPassword(id: number, passwordHash: string): Promise<void>;
+  countRecentFailedLogins(args: { email: string; withinMinutes: number }): Promise<number>;
+  recordFailedLogin(args: { email: string; ipAddress?: string | null; userAgent?: string | null }): Promise<void>;
+  clearFailedLogins(args: { email: string }): Promise<void>;
+
+  // Admin console services map (ported from staging, W2). Distinct from the
+  // member-portal map methods above: these operate on the zoho-keyed
+  // `map_clinics` table (schema symbol adminMapClinics).
+  getAdminMapClinics(): Promise<AdminMapClinic[]>;
+  getAdminMapClinicByZohoId(zohoRecordId: string): Promise<AdminMapClinic | undefined>;
+  upsertAdminMapClinic(clinic: InsertAdminMapClinic): Promise<AdminMapClinic>;
+  deleteAdminMapClinicByZohoId(zohoRecordId: string): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -1263,6 +1288,119 @@ export class DatabaseStorage implements IStorage {
   async deleteMemberResource(id: number): Promise<boolean> {
     const result = await db.delete(memberResources).where(eq(memberResources.id, id));
     return (result.rowCount || 0) > 0;
+  }
+
+  // ==========================================================================
+  // Admin console authentication (ported from staging, W3)
+  // ==========================================================================
+
+  /** Callers must pass an already-normalized (lowercase, trimmed) email. */
+  async getAdminUserByEmail(email: string): Promise<AdminUser | undefined> {
+    const [admin] = await db
+      .select()
+      .from(adminUsers)
+      .where(eq(adminUsers.email, email));
+    return admin;
+  }
+
+  async getAdminUserById(id: number): Promise<AdminUser | undefined> {
+    const [admin] = await db
+      .select()
+      .from(adminUsers)
+      .where(eq(adminUsers.id, id));
+    return admin;
+  }
+
+  async createAdminUser(admin: InsertAdminUser): Promise<AdminUser> {
+    const [created] = await db
+      .insert(adminUsers)
+      .values({ ...admin, email: admin.email.trim().toLowerCase() })
+      .returning();
+    return created;
+  }
+
+  async updateAdminLastLogin(id: number): Promise<void> {
+    await db
+      .update(adminUsers)
+      .set({ lastLoginAt: new Date(), updatedAt: new Date() })
+      .where(eq(adminUsers.id, id));
+  }
+
+  async updateAdminPassword(id: number, passwordHash: string): Promise<void> {
+    await db
+      .update(adminUsers)
+      .set({ passwordHash, updatedAt: new Date() })
+      .where(eq(adminUsers.id, id));
+  }
+
+  /**
+   * Counts failures for ONE email inside a rolling window. Scoping per email
+   * matters: a global counter would let a single attacker lock out every admin.
+   */
+  async countRecentFailedLogins({
+    email,
+    withinMinutes,
+  }: { email: string; withinMinutes: number }): Promise<number> {
+    const since = new Date(Date.now() - withinMinutes * 60_000);
+    const [row] = await db
+      .select({ value: count() })
+      .from(adminLoginAttempts)
+      .where(
+        and(
+          eq(adminLoginAttempts.email, email),
+          gte(adminLoginAttempts.attemptedAt, since),
+        ),
+      );
+    return Number(row?.value ?? 0);
+  }
+
+  async recordFailedLogin({
+    email,
+    ipAddress,
+    userAgent,
+  }: { email: string; ipAddress?: string | null; userAgent?: string | null }): Promise<void> {
+    await db.insert(adminLoginAttempts).values({ email, ipAddress, userAgent });
+  }
+
+  async clearFailedLogins({ email }: { email: string }): Promise<void> {
+    await db.delete(adminLoginAttempts).where(eq(adminLoginAttempts.email, email));
+  }
+
+  // ==========================================================================
+  // Admin console services map published clinics (ported from staging, W2)
+  // ==========================================================================
+
+  async getAdminMapClinics(): Promise<AdminMapClinic[]> {
+    return await db.select().from(adminMapClinics).orderBy(desc(adminMapClinics.publishedAt));
+  }
+
+  async getAdminMapClinicByZohoId(zohoRecordId: string): Promise<AdminMapClinic | undefined> {
+    const [row] = await db
+      .select()
+      .from(adminMapClinics)
+      .where(eq(adminMapClinics.zohoRecordId, zohoRecordId));
+    return row;
+  }
+
+  /** Re-publishing an already-published record refreshes it rather than failing. */
+  async upsertAdminMapClinic(clinic: InsertAdminMapClinic): Promise<AdminMapClinic> {
+    const [row] = await db
+      .insert(adminMapClinics)
+      .values(clinic)
+      .onConflictDoUpdate({
+        target: adminMapClinics.zohoRecordId,
+        set: { ...clinic, updatedAt: new Date() },
+      })
+      .returning();
+    return row;
+  }
+
+  async deleteAdminMapClinicByZohoId(zohoRecordId: string): Promise<boolean> {
+    const result = await db
+      .delete(adminMapClinics)
+      .where(eq(adminMapClinics.zohoRecordId, zohoRecordId))
+      .returning();
+    return result.length > 0;
   }
 }
 

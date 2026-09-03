@@ -184,33 +184,9 @@ export default function CANNResources() {
     },
   ];
 
-  const educationalSeries = [
-    {
-      rawDate: "2025-05-13",
-      speaker: t('cannResources.series.session2.speaker'),
-      topic: t('cannResources.series.session2.topic'),
-    },
-    {
-      rawDate: "2025-01-28",
-      speaker: t('cannResources.series.session3.speaker'),
-      topic: t('cannResources.series.session3.topic'),
-    },
-    {
-      rawDate: "2024-10-08",
-      speaker: t('cannResources.series.session4.speaker'),
-      topic: t('cannResources.series.session4.topic'),
-    },
-    {
-      rawDate: "2024-04-16",
-      speaker: t('cannResources.series.session5.speaker'),
-      topic: t('cannResources.series.session5.topic'),
-    },
-    {
-      rawDate: "2023-12-13",
-      speaker: t('cannResources.series.session6.speaker'),
-      topic: t('cannResources.series.session6.topic'),
-    },
-  ];
+  // Historical CANN Educational Series sessions now live in allCANNEvents below
+  // (as past webinar events) so they appear in BOTH the "Past Events" tab and
+  // the Educational Series list, which is derived from allCANNEvents.
 
   // All CANN events with rawDate for automatic past/upcoming categorization
   const allCANNEvents = [
@@ -242,6 +218,81 @@ export default function CANNResources() {
       topic: undefined as string | undefined,
       presentationTitle: t('cannResources.series.session1.topic'),
       speaker: t('cannResources.series.session1.speaker'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.eduSeries.credits'),
+      type: t('cannResources.events.types.webinar'),
+    },
+    {
+      id: 10,
+      title: t('cannResources.events.eduSeries.title'),
+      rawDate: "2025-05-13",
+      time: t('cannResources.events.eduSeries.time'),
+      location: t('cannResources.events.eduSeries.location'),
+      format: t('cannResources.events.eduSeries.format'),
+      description: t('cannResources.events.eduSeries.description'),
+      topic: undefined as string | undefined,
+      presentationTitle: t('cannResources.series.session2.topic'),
+      speaker: t('cannResources.series.session2.speaker'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.eduSeries.credits'),
+      type: t('cannResources.events.types.webinar'),
+    },
+    {
+      id: 11,
+      title: t('cannResources.events.eduSeries.title'),
+      rawDate: "2025-01-28",
+      time: t('cannResources.events.eduSeries.time'),
+      location: t('cannResources.events.eduSeries.location'),
+      format: t('cannResources.events.eduSeries.format'),
+      description: t('cannResources.events.eduSeries.description'),
+      topic: undefined as string | undefined,
+      presentationTitle: t('cannResources.series.session3.topic'),
+      speaker: t('cannResources.series.session3.speaker'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.eduSeries.credits'),
+      type: t('cannResources.events.types.webinar'),
+    },
+    {
+      id: 12,
+      title: t('cannResources.events.eduSeries.title'),
+      rawDate: "2024-10-08",
+      time: t('cannResources.events.eduSeries.time'),
+      location: t('cannResources.events.eduSeries.location'),
+      format: t('cannResources.events.eduSeries.format'),
+      description: t('cannResources.events.eduSeries.description'),
+      topic: undefined as string | undefined,
+      presentationTitle: t('cannResources.series.session4.topic'),
+      speaker: t('cannResources.series.session4.speaker'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.eduSeries.credits'),
+      type: t('cannResources.events.types.webinar'),
+    },
+    {
+      id: 13,
+      title: t('cannResources.events.eduSeries.title'),
+      rawDate: "2024-04-16",
+      time: t('cannResources.events.eduSeries.time'),
+      location: t('cannResources.events.eduSeries.location'),
+      format: t('cannResources.events.eduSeries.format'),
+      description: t('cannResources.events.eduSeries.description'),
+      topic: undefined as string | undefined,
+      presentationTitle: t('cannResources.series.session5.topic'),
+      speaker: t('cannResources.series.session5.speaker'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.eduSeries.credits'),
+      type: t('cannResources.events.types.webinar'),
+    },
+    {
+      id: 14,
+      title: t('cannResources.events.eduSeries.title'),
+      rawDate: "2023-12-13",
+      time: t('cannResources.events.eduSeries.time'),
+      location: t('cannResources.events.eduSeries.location'),
+      format: t('cannResources.events.eduSeries.format'),
+      description: t('cannResources.events.eduSeries.description'),
+      topic: undefined as string | undefined,
+      presentationTitle: t('cannResources.series.session6.topic'),
+      speaker: t('cannResources.series.session6.speaker'),
       registrationDeadline: t('cannResources.events.noRegistration'),
       cmeCredits: t('cannResources.events.eduSeries.credits'),
       type: t('cannResources.events.types.webinar'),
@@ -366,7 +417,7 @@ export default function CANNResources() {
       topic: event.presentationTitle || '',
     }));
 
-  const allEducationalSeries = [...pastEduEventSessions, ...educationalSeries].sort((a, b) =>
+  const allEducationalSeries = [...pastEduEventSessions].sort((a, b) =>
     parseLocalDate(b.rawDate).getTime() - parseLocalDate(a.rawDate).getTime()
   );
 

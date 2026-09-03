@@ -98,6 +98,7 @@ const allSessions: Session[] = [
     dateKey: "journalClub.dates.sept2026",
     topics: [
       { topicKey: "journalClub.topics.greatMasquerader", presenterName: "Dr. Hanane Benbarkat, University of Montreal" },
+      { topicKey: "journalClub.topics.amyloidAction", presenterName: "Tracy Joshi, NP, Horizon Health Network, New Brunswick" },
     ],
     location: "Virtual",
     registrationNotRequired: true,

@@ -106,6 +106,10 @@ const journalClubSessions = [
         title: "The Great Masquerader: a Vasculitis Mimic with Cardiac and Neurological Manifestations",
         presenter: "Dr. Hanane Benbarkat, University of Montreal",
       },
+      {
+        title: "Amyloid Action: join us to learn more about the newly established patient support and advocacy organization making waves in New Brunswick and interesting case discussion - eastern Canada hATTR population",
+        presenter: "Tracy Joshi, NP, Horizon Health Network, New Brunswick",
+      },
     ],
   },
   {

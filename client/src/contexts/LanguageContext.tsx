@@ -69,6 +69,9 @@ const translations = {
     
     // About Amyloidosis Section
     'about.badge': 'Medical Information',
+    'inMemoriam.badge': 'In Memoriam',
+    'inMemoriam.name': 'Anne Marie Carr',
+    'inMemoriam.body': 'It is with great sadness that we announce the passing of Anne Marie Carr. Born in Rutherglen, Scotland, she moved to South Africa in 1986, where she met her husband, Merv, and they eventually moved to Canada with their son. Following her diagnosis with transthyretin amyloidosis, Anne Marie worked tirelessly to spare others the long, difficult path she endured. She founded the patient support organization Transthyretin Amyloidosis Canada (TAC) the same year as she was diagnosed. Over eleven years, despite her illness, she continued to travel and present at conferences locally and internationally and became a respected authority on the disease. TAC founded the Canadian Amyloidosis Summit, an annual event that became the focal point of the amyloidosis community in Canada, later partnering with the Canadian Amyloidosis Society to host it. Anne Marie lived by the motto "a life lived well", and hers was certainly that and much more. She leaves a tremendous legacy of kindness and advocacy helping many people and families living with amyloidosis.',
     'about.title.what': 'What is',
     'about.title.amyloidosis': 'Amyloidosis',
     'about.subtitle': 'Amyloidosis is a rare disease with life-altering consequences—but early detection can dramatically improve outcomes. The Canadian Amyloidosis Society is building a trusted national hub for clinicians, researchers, and families seeking answers.',
@@ -1292,6 +1295,9 @@ const translations = {
     
     // About Amyloidosis Section
     'about.badge': 'Information Médicale',
+    'inMemoriam.badge': 'En mémoire',
+    'inMemoriam.name': 'Anne Marie Carr',
+    'inMemoriam.body': 'C\'est avec une grande tristesse que nous annonçons le décès d\'Anne Marie Carr. Née à Rutherglen, en Écosse, elle s\'est installée en Afrique du Sud en 1986, où elle a rencontré son mari, Merv, et ils ont finalement déménagé au Canada avec leur fils. À la suite de son diagnostic d\'amylose à transthyrétine, Anne Marie a travaillé sans relâche pour épargner aux autres le long et difficile parcours qu\'elle a enduré. Elle a fondé l\'organisation de soutien aux patients Transthyretin Amyloidosis Canada (TAC) l\'année même de son diagnostic. Pendant onze ans, malgré sa maladie, elle a continué à voyager et à présenter lors de conférences locales et internationales, devenant une autorité respectée sur la maladie. La TAC a fondé le Sommet canadien sur l\'amylose, un événement annuel devenu le point de ralliement de la communauté de l\'amylose au Canada, s\'associant plus tard à la Société canadienne d\'amylose pour l\'organiser. Anne Marie vivait selon la devise « une vie bien vécue », et la sienne le fut assurément, et bien plus encore. Elle laisse un immense héritage de bonté et de défense des intérêts, ayant aidé de nombreuses personnes et familles vivant avec l\'amylose.',
     'about.title.what': 'Qu\'est-ce que l\'',
     'about.title.amyloidosis': 'Amylose',
     'about.subtitle': 'L\'amylose est une maladie rare aux conséquences qui changent la vie—mais une détection précoce peut considérablement améliorer les résultats. La Société Canadienne d\'Amylose construit un hub national de confiance pour les cliniciens, chercheurs et familles cherchant des réponses.',

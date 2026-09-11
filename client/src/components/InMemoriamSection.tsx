@@ -68,8 +68,8 @@ export default function InMemoriamSection() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-80px" }}
           >
-            <div className="relative rounded-xl bg-gradient-to-b from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 p-3 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
-              <div className="p-[3px] rounded-md bg-gradient-to-br from-[#00AFE6] to-[#00DD89]">
+            <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 p-3 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
+              <div className="relative p-[3px] rounded-md bg-gradient-to-br from-[#00AFE6] to-[#00DD89]">
                 <div className="rounded-[5px] bg-white dark:bg-gray-800 p-2">
                   <img
                     src={anneMarieCarrImg}
@@ -78,14 +78,14 @@ export default function InMemoriamSection() {
                     loading="lazy"
                   />
                 </div>
-              </div>
 
-              {/* Floral accents on the frame corners */}
-              <div className="pointer-events-none absolute inset-0 text-[#00DD89]/85 dark:text-[#00DD89]/75">
-                <CornerFlourish className="absolute -top-4 -left-4 w-20 h-20 sm:w-24 sm:h-24" />
-                <CornerFlourish className="absolute -top-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 -scale-x-100" />
-                <CornerFlourish className="absolute -bottom-4 -left-4 w-20 h-20 sm:w-24 sm:h-24 -scale-y-100" />
-                <CornerFlourish className="absolute -bottom-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 -scale-x-100 -scale-y-100" />
+                {/* Floral accents inside the frame corners (clipped to the frame) */}
+                <div className="pointer-events-none absolute inset-0 z-10 text-[#00DD89]/90 dark:text-[#00DD89]/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)]">
+                  <CornerFlourish className="absolute top-0 left-0 w-16 h-16 sm:w-20 sm:h-20" />
+                  <CornerFlourish className="absolute top-0 right-0 w-16 h-16 sm:w-20 sm:h-20 -scale-x-100" />
+                  <CornerFlourish className="absolute bottom-0 left-0 w-16 h-16 sm:w-20 sm:h-20 -scale-y-100" />
+                  <CornerFlourish className="absolute bottom-0 right-0 w-16 h-16 sm:w-20 sm:h-20 -scale-x-100 -scale-y-100" />
+                </div>
               </div>
             </div>
           </motion.div>

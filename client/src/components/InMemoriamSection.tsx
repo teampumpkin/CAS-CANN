@@ -51,11 +51,11 @@ export default function InMemoriamSection() {
   return (
     <section className="relative py-16 lg:py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200/70 dark:border-white/10 overflow-hidden">
       {/* Floral frame around the whole section */}
-      <div className="pointer-events-none absolute inset-0 text-[#00DD89]/45 dark:text-[#00DD89]/35">
-        <CornerFlourish className="absolute top-0 left-0 w-28 h-28 sm:w-40 sm:h-40" />
-        <CornerFlourish className="absolute top-0 right-0 w-28 h-28 sm:w-40 sm:h-40 -scale-x-100" />
-        <CornerFlourish className="absolute bottom-0 left-0 w-28 h-28 sm:w-40 sm:h-40 -scale-y-100" />
-        <CornerFlourish className="absolute bottom-0 right-0 w-28 h-28 sm:w-40 sm:h-40 -scale-x-100 -scale-y-100" />
+      <div className="pointer-events-none absolute inset-0 text-[#00DD89]/70 dark:text-[#00DD89]/55">
+        <CornerFlourish className="absolute top-0 left-0 w-36 h-36 sm:w-56 sm:h-56" />
+        <CornerFlourish className="absolute top-0 right-0 w-36 h-36 sm:w-56 sm:h-56 -scale-x-100" />
+        <CornerFlourish className="absolute bottom-0 left-0 w-36 h-36 sm:w-56 sm:h-56 -scale-y-100" />
+        <CornerFlourish className="absolute bottom-0 right-0 w-36 h-36 sm:w-56 sm:h-56 -scale-x-100 -scale-y-100" />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
@@ -68,7 +68,7 @@ export default function InMemoriamSection() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-80px" }}
           >
-            <div className="rounded-xl bg-gradient-to-b from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 p-3 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
+            <div className="relative rounded-xl bg-gradient-to-b from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 p-3 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
               <div className="p-[3px] rounded-md bg-gradient-to-br from-[#00AFE6] to-[#00DD89]">
                 <div className="rounded-[5px] bg-white dark:bg-gray-800 p-2">
                   <img
@@ -78,6 +78,14 @@ export default function InMemoriamSection() {
                     loading="lazy"
                   />
                 </div>
+              </div>
+
+              {/* Floral accents on the frame corners */}
+              <div className="pointer-events-none absolute inset-0 text-[#00DD89]/85 dark:text-[#00DD89]/75">
+                <CornerFlourish className="absolute -top-4 -left-4 w-20 h-20 sm:w-24 sm:h-24" />
+                <CornerFlourish className="absolute -top-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 -scale-x-100" />
+                <CornerFlourish className="absolute -bottom-4 -left-4 w-20 h-20 sm:w-24 sm:h-24 -scale-y-100" />
+                <CornerFlourish className="absolute -bottom-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 -scale-x-100 -scale-y-100" />
               </div>
             </div>
           </motion.div>

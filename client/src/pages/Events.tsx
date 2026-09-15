@@ -107,8 +107,8 @@ const journalClubSessions = [
         presenter: "Dr. Hanane Benbarkat, University of Montreal",
       },
       {
-        title: "Amyloid Action: join us to learn more about the newly established patient support and advocacy organization making waves in New Brunswick and interesting case discussion - eastern Canada hATTR population",
-        presenter: "Tracy Joshi, NP, Horizon Health Network, New Brunswick",
+        title: "Amyloid Action: Patient Advocacy, Awareness, and Early Diagnosis in Atlantic Canada, plus Clinical Reflections on the Eastern Canadian ATTRv Population",
+        presenter: "Tracy Joshi, DNP, FNP-BC, Nurse Practitioner, Horizon Health Network, New Brunswick\nRachel Brothers, Amyloid Action Co-Founder and Board Member",
       },
     ],
   },
@@ -1114,8 +1114,8 @@ export default function Events() {
                                     {topic.title}
                                   </h4>
                                   <div className={`${isPast ? "text-gray-400 dark:text-gray-500" : "text-gray-700 dark:text-gray-300"}`}>
-                                    <span className="text-lg font-semibold">
-                                      {t("eventsPage.presenter")}: {topic.presenter}
+                                    <span className="text-lg font-semibold whitespace-pre-line">
+                                      {t(topic.presenter.includes('\n') ? "eventsPage.presenters" : "eventsPage.presenter")}: {topic.presenter}
                                     </span>
                                   </div>
                                 </div>

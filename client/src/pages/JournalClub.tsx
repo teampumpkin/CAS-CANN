@@ -98,7 +98,7 @@ const allSessions: Session[] = [
     dateKey: "journalClub.dates.sept2026",
     topics: [
       { topicKey: "journalClub.topics.greatMasquerader", presenterName: "Dr. Hanane Benbarkat, University of Montreal" },
-      { topicKey: "journalClub.topics.amyloidAction", presenterName: "Tracy Joshi, NP, Horizon Health Network, New Brunswick" },
+      { topicKey: "journalClub.topics.amyloidAction", presenterName: "Tracy Joshi, DNP, FNP-BC, Nurse Practitioner, Horizon Health Network, New Brunswick\nRachel Brothers, Amyloid Action Co-Founder and Board Member" },
     ],
     location: "Virtual",
     registrationNotRequired: true,
@@ -317,8 +317,8 @@ export default function JournalClub() {
                                     {t(topicItem.topicKey)}
                                   </h3>
                                   <div className="text-gray-700 dark:text-gray-300">
-                                    <span className="text-lg font-semibold">
-                                      {t('journalClub.session.presenter')}: {topicItem.presenterName}
+                                    <span className="text-lg font-semibold whitespace-pre-line">
+                                      {t(topicItem.presenterName.includes('\n') ? 'journalClub.session.presenters' : 'journalClub.session.presenter')}: {topicItem.presenterName}
                                     </span>
                                   </div>
                                 </div>
@@ -437,8 +437,8 @@ export default function JournalClub() {
                                     {t(topicItem.topicKey)}
                                   </h3>
                                   <div className="text-gray-600 dark:text-gray-400">
-                                    <span className="text-lg font-semibold">
-                                      {t('journalClub.session.presenter')}: {topicItem.presenterName}
+                                    <span className="text-lg font-semibold whitespace-pre-line">
+                                      {t(topicItem.presenterName.includes('\n') ? 'journalClub.session.presenters' : 'journalClub.session.presenter')}: {topicItem.presenterName}
                                     </span>
                                   </div>
                                 </div>

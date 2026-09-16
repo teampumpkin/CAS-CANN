@@ -1125,39 +1125,124 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // BULLETPROOF: CAS/CANN Registration endpoint - ALWAYS succeeds by saving locally first
+  // CRM-FIRST: CAS/CANN Registration endpoint — pushes to Zoho CRM synchronously,
+  // then saves to the local database. If the CRM push fails or times out, the row
+  // lands as pending/pending and the background sync worker (10s poll, 50-retry
+  // ladder) becomes the BACKUP mechanism. The user always gets a 201.
   app.post("/api/cas-cann-registration", async (req, res) => {
+    // Declared outside the try so the catch block knows whether the lead
+    // was already captured in Zoho when a later DB step fails.
+    let zohoCrmId: string | null = null;
+    let zohoAction: "created" | "updated" | null = null;
     try {
       console.log("[CAS/CANN Registration] Received:", req.body);
-      
+
       const { formData, formName } = req.body;
-      
+
       // Validate form data (basic validation)
       if (!formData || !formName) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          message: "Invalid request: missing form data or form name" 
+          message: "Invalid request: missing form data or form name"
         });
       }
-      
-      // STEP 1: Save to local database FIRST (this ALWAYS succeeds)
+
+      // STEP 1: Push to Zoho CRM FIRST, synchronously, with a hard timeout budget.
+      // The Zoho client retries 429s/401s internally and can take tens of seconds;
+      // the timeout caps user-facing latency. A timed-out push that later succeeds
+      // in Zoho is harmless: the worker's dedupe-by-email guard updates the existing
+      // record instead of creating a duplicate.
+      const submittedAt = new Date();
+      const CRM_PUSH_TIMEOUT_MS = 10000;
+      let crmError: string | null = null;
+      let timeoutHandle: NodeJS.Timeout | undefined;
+      try {
+        const { pushToZohoCRM } = await import("./zoho-push-service");
+        const pushPromise = pushToZohoCRM({
+          formData,
+          formName,
+          zohoModule: "Leads",
+          submittedAt,
+          logLabel: "live registration request",
+        });
+        // Keep the push promise handled even if it loses the race to the timeout,
+        // otherwise its eventual rejection becomes an unhandled promise rejection.
+        pushPromise.catch(() => {});
+        const result = await Promise.race([
+          pushPromise,
+          new Promise<never>((_, reject) => {
+            timeoutHandle = setTimeout(
+              () => reject(new Error(`Synchronous CRM push timed out after ${CRM_PUSH_TIMEOUT_MS / 1000}s`)),
+              CRM_PUSH_TIMEOUT_MS,
+            );
+          }),
+        ]);
+        zohoCrmId = result.zohoCrmId;
+        zohoAction = result.action;
+        console.log(`[CAS/CANN Registration] ✅ CRM-first push succeeded (${zohoAction}), Zoho ID: ${zohoCrmId}`);
+      } catch (crmErr) {
+        crmError = crmErr instanceof Error ? crmErr.message : String(crmErr);
+        console.error(`[CAS/CANN Registration] ⚠️ Synchronous CRM push failed — falling back to background sync worker:`, crmError);
+      } finally {
+        if (timeoutHandle) clearTimeout(timeoutHandle);
+      }
+
+      // STEP 2: Save to local database (ALWAYS — either as the synced record,
+      // or as a pending queue entry for the backup worker)
       const submission = await storage.createFormSubmission({
         formName: formName,
         submissionData: formData,
         sourceForm: "CAS/CANN Registration Form",
         zohoModule: "Leads",
       });
-      
-      // STEP 2: Log receipt
+
+      if (zohoCrmId) {
+        // CRM push already succeeded — mark the row synced immediately so the
+        // background worker doesn't push it a second time.
+        await storage.updateFormSubmission(submission.id, {
+          processingStatus: "completed",
+          syncStatus: "synced",
+          zohoCrmId: zohoCrmId,
+          lastSyncAt: new Date(),
+          errorMessage: null,
+        });
+      } else if (crmError) {
+        // Row stays pending/pending (table defaults) so the worker picks it up;
+        // record why the synchronous push failed for the audit endpoints.
+        await storage.updateFormSubmission(submission.id, {
+          errorMessage: `Synchronous CRM push failed (queued for background retry): ${crmError}`,
+        });
+      }
+
+      // STEP 2a: Log receipt (+ CRM push outcome)
       await storage.createSubmissionLog({
         submissionId: submission.id,
         operation: "received",
         status: "success",
-        details: { 
-          message: "Form submission received and queued for Zoho sync",
+        details: {
+          message: zohoCrmId
+            ? "Form submission received and synced to Zoho CRM immediately"
+            : "Form submission received and queued for Zoho sync (backup worker)",
           formType: formName,
         },
       });
+
+      if (zohoCrmId) {
+        await storage.createSubmissionLog({
+          submissionId: submission.id,
+          operation: "crm_push",
+          status: "success",
+          details: { zohoCrmId: zohoCrmId, action: zohoAction, path: "synchronous" },
+        });
+      } else if (crmError) {
+        await storage.createSubmissionLog({
+          submissionId: submission.id,
+          operation: "crm_push",
+          status: "failed",
+          errorMessage: crmError,
+          details: { path: "synchronous", fallback: "queued for background sync worker" },
+        });
+      }
 
       // STEP 2b: CASL / PIPEDA / Law 25 — write an immutable consent audit row
       // if the submission carried granular consent fields. Failure here must
@@ -1224,25 +1309,62 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.error("[Consent] ⚠️ Failed to write consent audit row (registration still succeeds):", consentErr);
       }
       
-      console.log(`[CAS/CANN Registration] ✅ Saved locally with ID: ${submission.id}, queued for Zoho sync`);
-      
-      // STEP 3: Return success immediately (user never sees Zoho failures)
+      console.log(
+        zohoCrmId
+          ? `[CAS/CANN Registration] ✅ Saved locally with ID: ${submission.id}, already synced to Zoho (${zohoCrmId})`
+          : `[CAS/CANN Registration] ✅ Saved locally with ID: ${submission.id}, queued for Zoho sync (backup worker)`
+      );
+
+      // STEP 3: Return success (user never sees Zoho failures)
       res.status(201).json({
         success: true,
         message: "Registration submitted successfully",
         submissionId: submission.id,
         formName: formName,
+        ...(zohoCrmId ? { zohoCrmId } : {}),
       });
-      
-      // Background worker will sync to Zoho asynchronously
-      console.log(`[CAS/CANN Registration] ℹ️  Submission #${submission.id} will be synced to Zoho by background worker`);
-      
+
+      if (zohoCrmId) {
+        // STEP 4: Fire-and-forget notification email to CAS / CANN inboxes.
+        // On the backup path the worker sends this after its eventual successful
+        // push, so each submission is emailed exactly once.
+        try {
+          const { emailNotificationService } = await import("./email-notification-service");
+          const isCANN = String(formData.wantsCANNMembership || "").toLowerCase() === "yes" || formData.wantsCANNMembership === true;
+          const isCAS = String(formData.wantsMembership || "").toLowerCase() === "yes" || formData.wantsMembership === true;
+          emailNotificationService.sendRegistrationNotification({
+            fullName: formData.fullName || `${formData.firstName || ""} ${formData.lastName || ""}`.trim() || formData.email || "Unknown",
+            email: formData.email || "",
+            discipline: formData.discipline,
+            institution: formData.institution,
+            membershipType: isCAS && isCANN ? "CAS & CANN" : isCAS ? "CAS" : "Contact",
+            leadId: zohoCrmId,
+          }).catch((err) => console.error("[CAS/CANN Registration] Notification email failed (non-blocking):", err?.message || err));
+        } catch (notifyErr) {
+          console.error("[CAS/CANN Registration] Could not load notification service:", notifyErr);
+        }
+      } else {
+        // Background worker will sync to Zoho asynchronously (and send the email on success)
+        console.log(`[CAS/CANN Registration] ℹ️  Submission #${submission.id} will be synced to Zoho by background worker`);
+      }
+
     } catch (error) {
       console.error("[CAS/CANN Registration] ❌ Error saving submission:", error);
+      if (zohoCrmId) {
+        // The lead is already captured in Zoho — telling the user it failed would
+        // be false, and retrying would just create noise. Log loudly for ops.
+        console.error(`[CAS/CANN Registration] ⚠️ DB save failed AFTER successful CRM push. Lead is safe in Zoho (ID: ${zohoCrmId}) but has no local submission row — needs manual reconciliation.`);
+        return res.status(201).json({
+          success: true,
+          message: "Registration submitted successfully",
+          formName: req.body?.formName,
+          zohoCrmId: zohoCrmId,
+        });
+      }
       // Even database errors should be rare, but log them
-      res.status(500).json({ 
+      res.status(500).json({
         success: false,
-        message: "Failed to save registration. Please try again or contact support." 
+        message: "Failed to save registration. Please try again or contact support."
       });
     }
   });

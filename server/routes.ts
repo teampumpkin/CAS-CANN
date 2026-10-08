@@ -15,6 +15,7 @@ import { requireAutomationAuth, requireMemberAuth, requireAdmin, type Authentica
 import { verifyPassword, hashPassword, generateOTP, hashOTP, verifyOTP, getOTPExpiryDate, sendPasswordResetEmail } from "./auth-service";
 import multerLib from "multer";
 import { recordingStorage, RECORDINGS_TMP_DIR } from "./recording-storage";
+import { registerStagingGate } from "./staging-gate";
 
 // Multer for member-recording uploads (temp dir; the storage adapter persists the file).
 const recordingUpload = multerLib({
@@ -54,6 +55,10 @@ function trimSSOTLog(logPath: string): void {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Staging only: password-protect the site. Must come first so it covers every
+  // route below and the page/asset serving registered after registerRoutes.
+  registerStagingGate(app);
+
   // Basic ping endpoint for deployment verification
   app.get('/ping', (_req, res) => {
     res.status(200).send('pong');

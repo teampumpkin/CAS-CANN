@@ -34,18 +34,15 @@ export const casRegistrationSchema = z.object({
   phone: z.string().optional(),
   fax: z.string().optional(),
 
-  // Communications (legacy — kept so Current.tsx still compiles)
+  // Communications — CASL opt-in, one Yes/No per organisation. These names are
+  // what the server maps to Zoho's CAS_Communications / CANN_Communications.
+  // cannCommunications is only asked when the person is joining CANN.
   wantsCommunications: z.enum(["Yes", "No"]).optional(),
   cannCommunications: z.enum(["Yes", "No"]).optional(),
 
-  // CASL consent — single bundled opt-in covering ALL purposes listed in the
-  // visible checkbox label. Per-purpose booleans below are derived from this
-  // single answer so the backend audit log keeps its 6-key shape (and the
-  // future preference centre can still flip them independently).
-  consentAll: z.boolean().optional().default(false),
-
-  // Derived per-purpose flags (always equal to consentAll at submission time;
-  // CANN keys are forced false if the user is not joining CANN).
+  // Derived per-purpose flags so the backend audit log keeps its 6-key shape
+  // (and the future preference centre can still flip them independently):
+  // CAS keys follow wantsCommunications, CANN keys follow cannCommunications.
   consentCASNewsletter: z.boolean().optional().default(false),
   consentCASEvents: z.boolean().optional().default(false),
   consentCASResearch: z.boolean().optional().default(false),
@@ -85,6 +82,8 @@ export const casRegistrationSchema = z.object({
     if (data.amyloidosisType === "Other" && !data.amyloidosisTypeOther?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please specify the amyloidosis type", path: ["amyloidosisTypeOther"] });
     if (!data.institution?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Clinic or Centre Name/Institution is required", path: ["institution"] });
     if (!data.wantsServicesMapInclusion) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please indicate map services preference", path: ["wantsServicesMapInclusion"] });
+    if (!data.wantsCommunications) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please choose whether you'd like communications from CAS", path: ["wantsCommunications"] });
+    if (data.wantsCANNMembership === "Yes" && !data.cannCommunications) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Please choose whether you'd like communications from CANN", path: ["cannCommunications"] });
   }
 
   if (data.wantsServicesMapInclusion === "Yes") {

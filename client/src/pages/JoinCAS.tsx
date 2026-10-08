@@ -26,7 +26,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -688,14 +687,17 @@ const I18N = {
   refId: { en: "Reference ID", fr: "N° de référence" },
   close: { en: "Close", fr: "Fermer" },
   consentIntro: {
-    en: "Optional — your membership goes through either way.",
-    fr: "Facultatif — votre adhésion sera traitée dans tous les cas.",
+    en: "Your membership goes through either way.",
+    fr: "Votre adhésion sera traitée dans tous les cas.",
   },
-  consentSingleShort: {
-    en: "Yes, please send me communications from CAS",
-    fr: "Oui, envoyez-moi les communications de la SCA",
+  commsCASQ: {
+    en: "Would you like to receive communications from CAS?",
+    fr: "Souhaitez-vous recevoir les communications de la SCA ?",
   },
-  consentSingleShortCANN: { en: " and CANN", fr: " et du RCIA" },
+  commsCANNQ: {
+    en: "Would you like to receive communications from CANN?",
+    fr: "Souhaitez-vous recevoir les communications du RCIA ?",
+  },
   consentSingleHelp: {
     en: "See what you'll receive and how to unsubscribe",
     fr: "Voir ce que vous recevrez et comment vous désabonner",
@@ -773,7 +775,8 @@ export default function JoinCAS() {
       faxCode: "+1",
       faxNumber: "",
       // Canadian-only — country code is implicit (+1); UI no longer collects it.
-      consentAll: false,
+      wantsCommunications: undefined,
+      cannCommunications: undefined,
       consentCASNewsletter: false,
       consentCASEvents: false,
       consentCASResearch: false,
@@ -857,11 +860,12 @@ export default function JoinCAS() {
   });
 
   const onSubmit = async (data: CASRegistrationForm) => {
-    // Mirror the single bundled consentAll into each per-purpose flag so the
-    // backend audit log keeps its 6-key shape. CANN keys stay false if the user
-    // is not joining CANN.
-    const all = !!data.consentAll;
+    // Mirror each Yes/No communications answer into its per-purpose flags so the
+    // backend audit log keeps its 6-key shape. CANN stays "No" if the user is
+    // not joining CANN (the question is hidden then, but may hold an old answer).
     const joiningCANN = data.wantsCANNMembership === "Yes";
+    const casComms = data.wantsCommunications === "Yes";
+    const cannComms = joiningCANN && data.cannCommunications === "Yes";
     const fullName = [data.firstName, data.lastName].filter(Boolean).join(" ").trim();
     // Canadian-only: country code is implicit (+1). Prefix it for the
     // legacy Zoho centerPhone/centerFax mirror so downstream stays consistent.
@@ -895,15 +899,15 @@ export default function JoinCAS() {
       centerAddress: fullAddress,
       centerPhone: fullPhone,
       centerFax: fullFax,
-      wantsCommunications: all ? "Yes" : "No",
-      cannCommunications: all && joiningCANN ? "Yes" : "No",
+      wantsCommunications: casComms ? "Yes" : "No",
+      cannCommunications: cannComms ? "Yes" : "No",
       // derived per-purpose consent flags
-      consentCASNewsletter: all,
-      consentCASEvents: all,
-      consentCASResearch: all,
-      consentCASFundraising: all,
-      consentCANNNewsletter: all && joiningCANN,
-      consentCANNEvents: all && joiningCANN,
+      consentCASNewsletter: casComms,
+      consentCASEvents: casComms,
+      consentCASResearch: casComms,
+      consentCASFundraising: casComms,
+      consentCANNNewsletter: cannComms,
+      consentCANNEvents: cannComms,
     };
     await submitMutation.mutateAsync(payload);
   };
@@ -1233,56 +1237,77 @@ export default function JoinCAS() {
                     </Section>
                   )}
 
-                  {/* Communications — single bundled consent. */}
+                  {/* Communications — one Yes/No per organisation (CANN only when joining CANN). */}
                   {isMember && (
                     <Section title={t("sectionComms")}>
                       <FormField
                         control={form.control}
-                        name="consentAll"
+                        name="wantsCommunications"
                         render={({ field }) => (
-                          <FormItem className="flex items-start gap-3 space-y-0">
-                            <FormControl>
-                              <Checkbox
-                                checked={!!field.value}
-                                onCheckedChange={field.onChange}
-                                className="mt-0.5 data-[state=checked]:bg-[#00AFE6] data-[state=checked]:border-[#00AFE6]"
+                          <FormItem>
+                            <QuestionRow
+                              label={t("commsCASQ")}
+                              description={t("consentIntro")}
+                              required
+                            >
+                              <YesNo
+                                value={field.value as any}
+                                onChange={field.onChange}
+                                accent="cas"
                               />
-                            </FormControl>
-                            <div className="flex-1 min-w-0">
-                              <FormLabel className="block text-sm font-normal text-slate-700 dark:text-slate-200 cursor-pointer leading-snug">
-                                {t("consentSingleShort")}
-                                {wantsCANNMembership === "Yes" && (
-                                  <span className="text-pink-600 dark:text-pink-400">
-                                    {t("consentSingleShortCANN")}
-                                  </span>
-                                )}
-                              </FormLabel>
-                              <div className="mt-1 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-                                {t("consentIntro")}{" "}
-                                <a
-                                  href="/communications-preferences"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-[#00AFE6] hover:underline whitespace-nowrap"
-                                >
-                                  {t("consentSingleHelp")} →
-                                </a>
-                              </div>
-                              <div className="mt-1 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-                                {t("consentLegalShort")}{" "}
-                                <a
-                                  href="/privacy-policy"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-[#00AFE6] hover:underline whitespace-nowrap"
-                                >
-                                  {t("privacyPolicy")} →
-                                </a>
-                              </div>
-                            </div>
+                            </QuestionRow>
+                            <FormMessage className="text-xs" />
                           </FormItem>
                         )}
                       />
+
+                      {wantsCANNMembership === "Yes" && (
+                        <>
+                          <div className="h-px bg-slate-100 dark:bg-slate-800" />
+                          <FormField
+                            control={form.control}
+                            name="cannCommunications"
+                            render={({ field }) => (
+                              <FormItem>
+                                <QuestionRow
+                                  label={t("commsCANNQ")}
+                                  description={t("consentIntro")}
+                                  required
+                                >
+                                  <YesNo
+                                    value={field.value as any}
+                                    onChange={field.onChange}
+                                    accent="cann"
+                                  />
+                                </QuestionRow>
+                                <FormMessage className="text-xs" />
+                              </FormItem>
+                            )}
+                          />
+                        </>
+                      )}
+
+                      <div className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                        <a
+                          href="/communications-preferences"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#00AFE6] hover:underline"
+                        >
+                          {t("consentSingleHelp")} →
+                        </a>
+                        <div className="mt-1">
+                          {t("consentLegalShort")}{" "}
+                          <a
+                            href="/privacy-policy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#00AFE6] hover:underline whitespace-nowrap"
+                          >
+                            {t("privacyPolicy")} →
+                          </a>
+                        </div>
+                      </div>
                     </Section>
                   )}
 

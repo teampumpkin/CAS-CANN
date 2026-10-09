@@ -15,6 +15,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import { Link } from "wouter";
+import { CASEducationalSessionsCard } from "@/components/CASEducationalSessionsSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -746,6 +747,30 @@ export default function Events() {
           </motion.p>
         </div>
       </section>
+      {/* CAS Educational Sessions - first event on the page */}
+      <section id="cas-educational-sessions" className="py-24 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-rosarivo leading-tight">
+              <span className="text-gray-800 dark:text-white">
+                {language === "en" ? "CAS " : "Sessions éducatives "}
+              </span>
+              <span className="bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                {language === "en" ? "Educational Sessions" : "de la SCA"}
+              </span>
+            </h2>
+          </motion.div>
+
+          <CASEducationalSessionsCard />
+        </div>
+      </section>
+
       {/* Section 5: Featured Event Section */}
       <section id="summit" className="py-24 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-white/10 relative overflow-hidden">
         {/* Background Effects */}

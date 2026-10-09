@@ -194,6 +194,19 @@ export default function CANNResources() {
   // All CANN events with rawDate for automatic past/upcoming categorization
   const allCANNEvents = [
     {
+      id: 13,
+      title: t('casEduSessions.title'),
+      date: t('casEduSessions.date'),
+      rawDate: "2026-12-03", // December 3, 2026 EST
+      time: t('casEduSessions.time'),
+      location: t('casEduSessions.format'),
+      format: t('casEduSessions.format'),
+      description: `${t('casEduSessions.description')} ${t('casEduSessions.welcome')}`,
+      registrationDeadline: t('casEduSessions.registration'),
+      type: t('casEduSessions.type'),
+      pinFirst: true, // always listed first among upcoming events
+    },
+    {
       id: 1,
       title: t('cannResources.events.eduSeries.title'),
       date: t('cannResources.events.eduSeries.date'),
@@ -452,6 +465,8 @@ export default function CANNResources() {
     
     // Sort upcoming by date (soonest first) - using local date parsing
     upcoming.sort((a, b) => {
+      const pinned = Number(!!(b as any).pinFirst) - Number(!!(a as any).pinFirst);
+      if (pinned !== 0) return pinned;
       const dateA = parseLocalDate(a.rawDate);
       const dateB = parseLocalDate(b.rawDate);
       return dateA.getTime() - dateB.getTime();

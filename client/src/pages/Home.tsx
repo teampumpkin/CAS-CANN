@@ -2,6 +2,7 @@ import Hero from '@/components/Hero';
 import WelcomeSection from '@/components/WelcomeSection';
 import AboutAmyloidosisSection from '@/components/AboutAmyloidosisSection';
 import InMemoriamSection from '@/components/InMemoriamSection';
+import CASEducationalSessionsSection from '@/components/CASEducationalSessionsSection';
 import SummitRecapSection from '@/components/SummitRecapSection';
 import DirectoryPreviewSection from '@/components/DirectoryPreviewSection';
 import EventsNewsletterSection from '@/components/EventsNewsletterSection';
@@ -16,6 +17,7 @@ export default function Home() {
       <WelcomeSection />
       <AboutAmyloidosisSection />
       <InMemoriamSection />
+      <CASEducationalSessionsSection />
       <SummitRecapSection />
       {showMapSection && <DirectoryPreviewSection />}
       <EventsNewsletterSection />

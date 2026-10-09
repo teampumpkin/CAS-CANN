@@ -22,6 +22,18 @@ export default function EventsNewsletterSection() {
   const { t } = useLanguage();
   const events = [
     {
+      icon: GraduationCap,
+      titleKey: "casEduSessions.title",
+      descriptionKey: "casEduSessions.description",
+      dateKey: "casEduSessions.date",
+      timeKey: "casEduSessions.time",
+      gradient: "from-[#00AFE6] to-[#0088CC]",
+      bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
+      typeKey: "casEduSessions.format",
+      extraKeys: ["casEduSessions.welcome", "casEduSessions.registration"],
+      footer: "casEduSessions",
+    },
+    {
       icon: Users,
       titleKey: "events.summit.title",
       descriptionKey: "events.summit.description",
@@ -29,6 +41,7 @@ export default function EventsNewsletterSection() {
       gradient: "from-[#00AFE6] to-[#0088CC]",
       bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
       typeKey: "events.summit.type",
+      footer: "cancelled",
     },
     {
       icon: Video,
@@ -38,6 +51,7 @@ export default function EventsNewsletterSection() {
       gradient: "from-[#00DD89] to-[#00BB77]",
       bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
       typeKey: "events.journalClub.type",
+      footer: "journalClub",
     },
     {
       icon: Globe,
@@ -47,6 +61,7 @@ export default function EventsNewsletterSection() {
       gradient: "from-[#00AFE6] to-[#00DD89]",
       bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
       typeKey: "events.international.type",
+      footer: "international",
     },
   ];
 
@@ -335,7 +350,7 @@ export default function EventsNewsletterSection() {
           </div>
 
           {/* Events grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             {events.map((event, index) => (
               <motion.div
                 key={index}
@@ -377,23 +392,40 @@ export default function EventsNewsletterSection() {
                       {/* Date - fixed height for alignment */}
                       <div className="flex items-start gap-2 text-sm font-semibold text-[#00AFE6] dark:text-[#00AFE6] mb-5 min-h-[44px]">
                         <Calendar className="w-4 h-4 shrink-0 mt-0.5" />
-                        <span>{t(event.dateKey)}</span>
+                        <span>
+                          {t(event.dateKey)}
+                          {event.timeKey && <><br />{t(event.timeKey)}</>}
+                        </span>
                       </div>
 
                       {/* Description */}
                       <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 mb-8 flex-1 min-h-[80px]">
                         {t(event.descriptionKey)}
+                        {event.extraKeys?.map((key) => (
+                          <span key={key} className="block mt-3">{t(key)}</span>
+                        ))}
                       </p>
 
                       {/* Footer */}
                       <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
-                        {index === 0 ? (
+                        {event.footer === "casEduSessions" ? (
+                          <a href="/events-and-news#cas-educational-sessions" className="block">
+                            <motion.button
+                              className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00AFE6] to-[#00DD89] text-white px-6 py-4 rounded-2xl text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:from-[#0088CC] group-hover:to-[#00BB77]"
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              <span>{t("casEduSessions.learnMore")}</span>
+                              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                            </motion.button>
+                          </a>
+                        ) : event.footer === "cancelled" ? (
                           <div className="block">
                             <div className="w-full inline-flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-4 rounded-2xl text-sm font-bold uppercase tracking-wide shadow-lg">
                               <span>{t("events.cancelled")}</span>
                             </div>
                           </div>
-                        ) : index === 2 ? (
+                        ) : event.footer === "international" ? (
                           <a
                             href="https://www.isaamyloidosis.org"
                             target="_blank"

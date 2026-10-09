@@ -172,6 +172,7 @@ export default function Header() {
       href: "/events-and-news",
       hasDropdown: true,
       dropdownItems: [
+        { name: t("nav.casEduSessions"), href: "/events-and-news#cas-educational-sessions" },
         { name: t("nav.summit"), href: "/events-and-news#summit" },
         { name: t("nav.journalClub"), href: "/journal-club" },
         { name: t("nav.cannEvents"), href: "/cann-resources#cann-events" },

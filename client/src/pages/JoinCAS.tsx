@@ -560,7 +560,7 @@ function QuestionRow({
   children,
   required,
 }: {
-  label: string;
+  label: React.ReactNode;
   description?: string;
   children: React.ReactNode;
   required?: boolean;
@@ -690,14 +690,13 @@ const I18N = {
     en: "Your membership goes through either way.",
     fr: "Votre adhésion sera traitée dans tous les cas.",
   },
-  commsCASQ: {
-    en: "Would you like to receive communications from CAS?",
-    fr: "Souhaitez-vous recevoir les communications de la SCA ?",
+  // Communications question, built as commsQ + (commsQCANN when joining CANN) + commsQEnd.
+  commsQ: {
+    en: "Would you like to receive communications from CAS",
+    fr: "Souhaitez-vous recevoir les communications de la SCA",
   },
-  commsCANNQ: {
-    en: "Would you like to receive communications from CANN?",
-    fr: "Souhaitez-vous recevoir les communications du RCIA ?",
-  },
+  commsQCANN: { en: " and CANN", fr: " et du RCIA" },
+  commsQEnd: { en: "?", fr: " ?" },
   consentSingleHelp: {
     en: "See what you'll receive and how to unsubscribe",
     fr: "Voir ce que vous recevrez et comment vous désabonner",
@@ -776,7 +775,6 @@ export default function JoinCAS() {
       faxNumber: "",
       // Canadian-only — country code is implicit (+1); UI no longer collects it.
       wantsCommunications: undefined,
-      cannCommunications: undefined,
       consentCASNewsletter: false,
       consentCASEvents: false,
       consentCASResearch: false,
@@ -860,12 +858,12 @@ export default function JoinCAS() {
   });
 
   const onSubmit = async (data: CASRegistrationForm) => {
-    // Mirror each Yes/No communications answer into its per-purpose flags so the
-    // backend audit log keeps its 6-key shape. CANN stays "No" if the user is
-    // not joining CANN (the question is hidden then, but may hold an old answer).
+    // The single communications answer covers CAS, and CANN too when joining
+    // CANN. Mirror it into each per-purpose flag so the backend audit log keeps
+    // its 6-key shape; CANN stays "No" if the user is not joining CANN.
     const joiningCANN = data.wantsCANNMembership === "Yes";
     const casComms = data.wantsCommunications === "Yes";
-    const cannComms = joiningCANN && data.cannCommunications === "Yes";
+    const cannComms = joiningCANN && casComms;
     const fullName = [data.firstName, data.lastName].filter(Boolean).join(" ").trim();
     // Canadian-only: country code is implicit (+1). Prefix it for the
     // legacy Zoho centerPhone/centerFax mirror so downstream stays consistent.
@@ -1237,7 +1235,7 @@ export default function JoinCAS() {
                     </Section>
                   )}
 
-                  {/* Communications — one Yes/No per organisation (CANN only when joining CANN). */}
+                  {/* Communications — one Yes/No covering CAS, and CANN too when joining CANN. */}
                   {isMember && (
                     <Section title={t("sectionComms")}>
                       <FormField
@@ -1246,7 +1244,17 @@ export default function JoinCAS() {
                         render={({ field }) => (
                           <FormItem>
                             <QuestionRow
-                              label={t("commsCASQ")}
+                              label={
+                                <>
+                                  {t("commsQ")}
+                                  {wantsCANNMembership === "Yes" && (
+                                    <span className="text-pink-600 dark:text-pink-400">
+                                      {t("commsQCANN")}
+                                    </span>
+                                  )}
+                                  {t("commsQEnd")}
+                                </>
+                              }
                               description={t("consentIntro")}
                               required
                             >
@@ -1260,32 +1268,6 @@ export default function JoinCAS() {
                           </FormItem>
                         )}
                       />
-
-                      {wantsCANNMembership === "Yes" && (
-                        <>
-                          <div className="h-px bg-slate-100 dark:bg-slate-800" />
-                          <FormField
-                            control={form.control}
-                            name="cannCommunications"
-                            render={({ field }) => (
-                              <FormItem>
-                                <QuestionRow
-                                  label={t("commsCANNQ")}
-                                  description={t("consentIntro")}
-                                  required
-                                >
-                                  <YesNo
-                                    value={field.value as any}
-                                    onChange={field.onChange}
-                                    accent="cann"
-                                  />
-                                </QuestionRow>
-                                <FormMessage className="text-xs" />
-                              </FormItem>
-                            )}
-                          />
-                        </>
-                      )}
 
                       <div className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
                         <a

@@ -202,7 +202,7 @@ export default function CANNResources() {
       time: t('casEduSessions.time'),
       location: t('casEduSessions.format'),
       format: t('casEduSessions.format'),
-      description: `${t('casEduSessions.description')} ${t('casEduSessions.welcome')}`,
+      description: `${t('casEduSessions.descriptionCANN')} ${t('casEduSessions.welcome')}`,
       registrationDeadline: t('casEduSessions.registration'),
       type: t('casEduSessions.type'),
       pinFirst: true, // always listed first among upcoming events

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Calendar, Clock, MapPin } from "lucide-react";
+import { Calendar, Clock, MapPin, Megaphone } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 /** Event details card for the Dec 3, 2026 CAS Educational Sessions (same design as the Summit event card). */
@@ -47,6 +47,14 @@ export function CASEducationalSessionsCard() {
           <p className="text-gray-800 dark:text-white font-semibold text-lg mb-6">
             {t("casEduSessions.welcome")}
           </p>
+          <div className="flex items-center gap-3 sm:gap-4 my-8">
+            <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent to-[#00AFE6]" />
+            <Megaphone className="w-6 h-6 text-[#00AFE6] shrink-0" />
+            <span className="text-lg sm:text-2xl font-bold font-rosarivo bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+              {t("casEduSessions.agenda")}
+            </span>
+            <div className="flex-1 h-0.5 bg-gradient-to-l from-transparent to-[#00DD89]" />
+          </div>
           <p className="text-sm text-gray-500 dark:text-white/60">
             {t("casEduSessions.registration")}
           </p>

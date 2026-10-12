@@ -553,7 +553,7 @@ const categorizeEvents = () => {
 };
 
 export default function Events() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeTab, setActiveTab] = useState("overview");
   const [journalClubTab, setJournalClubTab] = useState("upcoming");
   const [summitTab, setSummitTab] = useState("upcoming");

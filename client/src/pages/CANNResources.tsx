@@ -18,6 +18,7 @@ import {
   Copy,
   Check,
   User,
+  Megaphone,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
@@ -202,6 +203,7 @@ export default function CANNResources() {
       registrationDeadline: t('casEduSessions.registration'),
       type: t('casEduSessions.type'),
       pinFirst: true, // always listed first among upcoming events
+      highlight: t('casEduSessions.agenda'),
     },
     {
       id: 1,
@@ -825,6 +827,18 @@ export default function CANNResources() {
                           <p className="text-gray-600 dark:text-white/70 text-sm leading-relaxed flex-1 mb-4">
                             {event.description}
                           </p>
+
+                          {/* Optional highlighted callout */}
+                          {(event as any).highlight && (
+                            <div className="flex items-center gap-3 mb-5 mt-1">
+                              <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent to-pink-500" />
+                              <Megaphone className="w-5 h-5 text-pink-500 shrink-0" />
+                              <span className="text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                                {(event as any).highlight}
+                              </span>
+                              <div className="flex-1 h-0.5 bg-gradient-to-l from-transparent to-purple-600" />
+                            </div>
+                          )}
 
                           {/* Optional CME Credits */}
                           {event.cmeCredits && (

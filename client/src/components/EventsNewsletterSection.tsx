@@ -13,6 +13,7 @@ import {
   Stethoscope,
   GraduationCap,
   Building2,
+  Megaphone,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
@@ -31,6 +32,7 @@ export default function EventsNewsletterSection() {
       bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
       typeKey: "casEduSessions.format",
       extraKeys: ["casEduSessions.welcome", "casEduSessions.registration"],
+      highlightKey: "casEduSessions.agenda",
       footer: "casEduSessions",
     },
     {
@@ -405,6 +407,16 @@ export default function EventsNewsletterSection() {
                           <span key={key} className="block mt-3">{t(key)}</span>
                         ))}
                       </p>
+                      {event.highlightKey && (
+                        <div className="flex items-center gap-3 mb-6 -mt-2">
+                          <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent to-[#00AFE6]" />
+                          <Megaphone className="w-5 h-5 text-[#00AFE6] shrink-0" />
+                          <span className="text-lg font-bold font-rosarivo bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
+                            {t(event.highlightKey)}
+                          </span>
+                          <div className="flex-1 h-0.5 bg-gradient-to-l from-transparent to-[#00DD89]" />
+                        </div>
+                      )}
 
                       {/* Footer */}
                       <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">

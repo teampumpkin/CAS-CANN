@@ -18,7 +18,6 @@ import {
   Copy,
   Check,
   User,
-  Megaphone,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -206,7 +205,10 @@ export default function CANNResources() {
       registrationDeadline: t('casEduSessions.registration'),
       type: t('casEduSessions.type'),
       pinFirst: true, // always listed first among upcoming events
-      highlight: t('casEduSessions.agenda'),
+      speakers: [
+        { name: t('casEduSessions.speaker1.name'), affiliation: t('casEduSessions.speaker1.affiliation'), title: t('casEduSessions.speaker1.title') },
+        { name: t('casEduSessions.speaker2.name'), affiliation: t('casEduSessions.speaker2.affiliation'), title: t('casEduSessions.speaker2.title') },
+      ],
     },
     {
       id: 1,
@@ -852,15 +854,22 @@ export default function CANNResources() {
                             {event.description}
                           </p>
 
-                          {/* Optional highlighted callout */}
-                          {(event as any).highlight && (
-                            <div className="flex items-center gap-3 mb-5 mt-1">
-                              <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent to-pink-500" />
-                              <Megaphone className="w-5 h-5 text-pink-500 shrink-0" />
-                              <span className="text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                                {(event as any).highlight}
-                              </span>
-                              <div className="flex-1 h-0.5 bg-gradient-to-l from-transparent to-purple-600" />
+                          {/* Optional speakers list */}
+                          {(event as any).speakers && (
+                            <div className="mb-4 p-3 bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 border border-pink-200 dark:border-pink-800 rounded-xl space-y-2">
+                              <div className="text-xs font-medium text-pink-600 dark:text-pink-400">
+                                {t('casEduSessions.speakersLabel')}
+                              </div>
+                              {((event as any).speakers as { name: string; affiliation: string; title: string }[]).map((speaker) => (
+                                <div key={speaker.name}>
+                                  <div className="text-sm text-gray-800 dark:text-white font-semibold">
+                                    {speaker.name}, <span className="font-normal text-gray-600 dark:text-white/70">{speaker.affiliation}</span>
+                                  </div>
+                                  <div className="text-sm text-gray-800 dark:text-white font-medium italic">
+                                    "{speaker.title}"
+                                  </div>
+                                </div>
+                              ))}
                             </div>
                           )}
 

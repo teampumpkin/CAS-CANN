@@ -13,10 +13,10 @@ import {
   Stethoscope,
   GraduationCap,
   Building2,
-  Megaphone,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
+import { casEduSpeakers } from "@/components/CASEducationalSessionsSection";
 import casLogo from "@assets/l_cas_vert_rgb_1753253116732.png";
 
 export default function EventsNewsletterSection() {
@@ -32,7 +32,7 @@ export default function EventsNewsletterSection() {
       bgGradient: "from-[#00AFE6]/15 to-[#00DD89]/15",
       typeKey: "casEduSessions.format",
       extraKeys: ["casEduSessions.welcome", "casEduSessions.registration"],
-      highlightKey: "casEduSessions.agenda",
+      speakers: casEduSpeakers,
       footer: "casEduSessions",
     },
     {
@@ -407,14 +407,19 @@ export default function EventsNewsletterSection() {
                           <span key={key} className="block mt-3">{t(key)}</span>
                         ))}
                       </p>
-                      {event.highlightKey && (
-                        <div className="flex items-center gap-3 mb-6 -mt-2">
-                          <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent to-[#00AFE6]" />
-                          <Megaphone className="w-5 h-5 text-[#00AFE6] shrink-0" />
-                          <span className="text-lg font-bold font-rosarivo bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-                            {t(event.highlightKey)}
-                          </span>
-                          <div className="flex-1 h-0.5 bg-gradient-to-l from-transparent to-[#00DD89]" />
+                      {event.speakers && (
+                        <div className="mb-6 -mt-2 p-4 rounded-2xl bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 border border-[#00DD89]/20 space-y-3">
+                          <p className="text-xs font-semibold uppercase tracking-wide text-[#00AFE6]">
+                            {t("casEduSessions.speakersLabel")}
+                          </p>
+                          {event.speakers.map((speaker) => (
+                            <div key={speaker.name}>
+                              <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                                {t(speaker.name)}, <span className="font-normal text-gray-500 dark:text-gray-400">{t(speaker.affiliation)}</span>
+                              </p>
+                              <p className="text-sm italic text-gray-700 dark:text-gray-300">"{t(speaker.title)}"</p>
+                            </div>
+                          ))}
                         </div>
                       )}
 

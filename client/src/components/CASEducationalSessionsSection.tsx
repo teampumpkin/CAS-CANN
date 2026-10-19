@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
-import { Calendar, Clock, MapPin, Megaphone } from "lucide-react";
+import { Calendar, Clock, MapPin, Mic } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+/** Speakers for the Dec 3, 2026 CAS Educational Sessions (translation keys). */
+export const casEduSpeakers = [
+  { name: "casEduSessions.speaker1.name", affiliation: "casEduSessions.speaker1.affiliation", title: "casEduSessions.speaker1.title" },
+  { name: "casEduSessions.speaker2.name", affiliation: "casEduSessions.speaker2.affiliation", title: "casEduSessions.speaker2.title" },
+];
 
 /** Event details card for the Dec 3, 2026 CAS Educational Sessions (same design as the Summit event card). */
 export function CASEducationalSessionsCard() {
@@ -41,20 +47,31 @@ export function CASEducationalSessionsCard() {
             ))}
           </div>
 
-          <p className="text-gray-600 dark:text-white/70 mb-6 leading-relaxed text-lg">
+          <p className="text-gray-600 dark:text-white/70 mb-8 leading-relaxed text-lg">
             {t("casEduSessions.description")}
           </p>
+
+          <h4 className="text-xl font-bold text-gray-800 dark:text-white mb-4 font-rosarivo">
+            {t("casEduSessions.speakersLabel")}
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            {casEduSpeakers.map((speaker) => (
+              <div
+                key={speaker.name}
+                className="flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-[#00DD89]/10 to-[#00AFE6]/10 rounded-2xl border border-[#00DD89]/20"
+              >
+                <Mic className="w-8 h-8 text-[#00DD89]" />
+                <div className="text-center">
+                  <p className="text-gray-800 dark:text-white font-semibold">{t(speaker.name)}</p>
+                  <p className="text-sm text-gray-500 dark:text-white/60 mb-2">{t(speaker.affiliation)}</p>
+                  <p className="text-gray-700 dark:text-white/80 font-medium italic">"{t(speaker.title)}"</p>
+                </div>
+              </div>
+            ))}
+          </div>
           <p className="text-gray-800 dark:text-white font-semibold text-lg mb-6">
             {t("casEduSessions.welcome")}
           </p>
-          <div className="flex items-center gap-3 sm:gap-4 my-8">
-            <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent to-[#00AFE6]" />
-            <Megaphone className="w-6 h-6 text-[#00AFE6] shrink-0" />
-            <span className="text-lg sm:text-2xl font-bold font-rosarivo bg-gradient-to-r from-[#00AFE6] to-[#00DD89] bg-clip-text text-transparent">
-              {t("casEduSessions.agenda")}
-            </span>
-            <div className="flex-1 h-0.5 bg-gradient-to-l from-transparent to-[#00DD89]" />
-          </div>
           <p className="text-sm text-gray-500 dark:text-white/60">
             {t("casEduSessions.registration")}
           </p>

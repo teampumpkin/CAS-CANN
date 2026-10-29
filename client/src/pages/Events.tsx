@@ -114,7 +114,7 @@ const journalClubSessions = [
     ],
   },
   {
-    rawDate: "2026-11-26",
+    rawDate: "2027-02-26",
     topics: [],
   },
 ];
@@ -247,8 +247,8 @@ const allEvents = [
   },
   {
     id: 13,
-    title: "CAS Journal Club November 2026",
-    date: "2026-11-26",
+    title: "CAS Journal Club February 2027",
+    date: "2027-02-26",
     time: "5:00 PM - 6:00 PM EST",
     location: "Virtual Event",
     type: "Journal Club",

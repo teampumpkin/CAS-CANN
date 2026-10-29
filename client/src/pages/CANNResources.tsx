@@ -404,6 +404,20 @@ export default function CANNResources() {
       type: t('cannResources.events.types.webinar'),
     },
     {
+      id: 15,
+      title: t('cannResources.events.eduSeries.title'),
+      // Placeholder until the date is set; rawDate is end of month so it stays upcoming through February
+      rawDate: "2027-02-28",
+      displayDate: t('cannResources.events.eduSeriesFeb2027.date'),
+      time: t('cannResources.events.eduSeriesFeb2027.time'),
+      location: t('cannResources.events.eduSeries.location'),
+      format: t('cannResources.events.eduSeries.format'),
+      description: t('cannResources.events.eduSeries.description'),
+      registrationDeadline: t('cannResources.events.noRegistration'),
+      cmeCredits: t('cannResources.events.eduSeries.credits'),
+      type: t('cannResources.events.types.webinar'),
+    },
+    {
       id: 5,
       title: t('cannResources.events.summit.title'),
       date: t('cannResources.events.summit.date'),

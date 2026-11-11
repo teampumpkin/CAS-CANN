@@ -104,7 +104,7 @@ const allSessions: Session[] = [
     registrationNotRequired: true,
   },
   {
-    rawDate: "2027-02-26",
+    rawDate: "2027-02-25",
     dateKey: "journalClub.dates.feb2027",
     topics: [
       { topicKey: "journalClub.topics.tbd", presenterName: "" },

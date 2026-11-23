@@ -12,7 +12,6 @@ import { dedicatedTokenManager } from "./dedicated-token-manager";
 import { reportingService, reportFiltersSchema } from "./reporting-service";
 import { fieldMetadataCacheService } from "./field-metadata-cache-service";
 import { requireAutomationAuth } from "./auth-middleware";
-import { registerOpsV026Routes } from "./ops-v026-routes"; // TEMPORARY v0.26 DB relink (remove after use)
 // import { notificationService, notificationConfigSchema } from "./notification-service"; // Disabled for production
 // REMOVED: formScalabilityService - No longer used after endpoint consolidation
 import { errorHandlingService, errorClassificationSchema } from "./error-handling-service";
@@ -43,7 +42,6 @@ function trimSSOTLog(logPath: string): void {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  registerOpsV026Routes(app); // TEMPORARY v0.26 DB relink endpoints, token-protected (remove after use)
   // Basic ping endpoint for deployment verification
   app.get('/ping', (_req, res) => {
     res.status(200).send('pong');

@@ -49,6 +49,12 @@ import { ensureConsentRecordsTable } from "./migrations/add-consent-records";
 import { db } from "./db";
 import { eq, and, like, desc, gte, lte, notInArray, isNull, or } from "drizzle-orm";
 
+// Status fields a new form submission may be created with (normally they take the
+// table defaults: pending/pending).
+export type FormSubmissionInitialState = Partial<
+  Pick<FormSubmission, "processingStatus" | "syncStatus" | "zohoCrmId" | "lastSyncAt" | "errorMessage" | "nextRetryAt">
+>;
+
 export interface ResourceFilters {
   amyloidosisType?: string;
   resourceType?: string;
@@ -110,7 +116,8 @@ export interface IStorage {
   // Form submission operations
   getFormSubmissions(filters?: FormSubmissionFilters): Promise<FormSubmission[]>;
   getFormSubmission(id: number): Promise<FormSubmission | undefined>;
-  createFormSubmission(submission: InsertFormSubmission): Promise<FormSubmission>;
+  createFormSubmission(submission: InsertFormSubmission, initialState?: FormSubmissionInitialState): Promise<FormSubmission>;
+  markPendingSubmissionSynced(id: number, zohoCrmId: string): Promise<boolean>;
   updateFormSubmission(id: number, updates: Partial<FormSubmission>): Promise<FormSubmission | undefined>;
   deleteFormSubmission(id: number): Promise<boolean>;
   getFormSubmissionsByStatus(processingStatus: string, syncStatus: string): Promise<FormSubmission[]>;
@@ -347,12 +354,39 @@ export class DatabaseStorage implements IStorage {
     return submission || undefined;
   }
 
-  async createFormSubmission(submission: InsertFormSubmission): Promise<FormSubmission> {
+  async createFormSubmission(submission: InsertFormSubmission, initialState?: FormSubmissionInitialState): Promise<FormSubmission> {
     const [newSubmission] = await db
       .insert(formSubmissions)
-      .values(submission)
+      .values({ ...submission, ...(initialState ?? {}) })
       .returning();
     return newSubmission;
+  }
+
+  // Record a CRM push that finished after the request timed out. Only claims a
+  // row nobody else has touched (still pending/pending), so it does not race the
+  // sync worker before the row is due for retry. Returns true if this call marked
+  // the row synced.
+  async markPendingSubmissionSynced(id: number, zohoCrmId: string): Promise<boolean> {
+    const now = new Date();
+    const updated = await db
+      .update(formSubmissions)
+      .set({
+        processingStatus: "completed",
+        syncStatus: "synced",
+        zohoCrmId,
+        lastSyncAt: now,
+        errorMessage: null,
+        updatedAt: now,
+      })
+      .where(
+        and(
+          eq(formSubmissions.id, id),
+          eq(formSubmissions.processingStatus, "pending"),
+          eq(formSubmissions.syncStatus, "pending"),
+        )
+      )
+      .returning({ id: formSubmissions.id });
+    return updated.length > 0;
   }
 
   async updateFormSubmission(id: number, updates: Partial<FormSubmission>): Promise<FormSubmission | undefined> {

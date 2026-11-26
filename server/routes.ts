@@ -277,6 +277,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Fire-and-forget notification email to the CAS / CANN inboxes for one
+  // registration (same payload the background sync worker sends).
+  const sendCasCannRegistrationNotification = async (formData: any, leadId: string) => {
+    try {
+      const { emailNotificationService } = await import("./email-notification-service");
+      const isCANN = String(formData.wantsCANNMembership || "").toLowerCase() === "yes" || formData.wantsCANNMembership === true;
+      const isCAS = String(formData.wantsMembership || "").toLowerCase() === "yes" || formData.wantsMembership === true;
+      emailNotificationService.sendRegistrationNotification({
+        fullName: formData.fullName || `${formData.firstName || ""} ${formData.lastName || ""}`.trim() || formData.email || "Unknown",
+        email: formData.email || "",
+        discipline: formData.discipline,
+        institution: formData.institution,
+        membershipType: isCAS && isCANN ? "CAS & CANN" : isCAS ? "CAS" : "Contact",
+        leadId,
+      }).catch((err) => console.error("[CAS/CANN Registration] Notification email failed (non-blocking):", err?.message || err));
+    } catch (notifyErr) {
+      console.error("[CAS/CANN Registration] Could not load notification service:", notifyErr);
+    }
+  };
+
   // CRM-FIRST: CAS/CANN Registration endpoint — pushes to Zoho CRM synchronously,
   // then saves to the local database. If the CRM push fails or times out, the row
   // lands as pending/pending and the background sync worker (10s poll, 50-retry
@@ -286,6 +306,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     // was already captured in Zoho when a later DB step fails.
     let zohoCrmId: string | null = null;
     let zohoAction: "created" | "updated" | null = null;
+    // Set once the inbox notification has gone out, so no path sends it twice.
+    let notificationSent = false;
+    // The synchronous push, kept so a push that outlives the timeout can still be
+    // recorded (or at least emailed) — the catch block below needs them too.
+    let crmTimedOut = false;
+    let pushPromise: Promise<{ zohoCrmId: string; action: "created" | "updated" }> | null = null;
+    let submissionSaved = false;
     try {
       console.log("[CAS/CANN Registration] Received:", req.body);
 
@@ -301,16 +328,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // STEP 1: Push to Zoho CRM FIRST, synchronously, with a hard timeout budget.
       // The Zoho client retries 429s/401s internally and can take tens of seconds;
-      // the timeout caps user-facing latency. A timed-out push that later succeeds
-      // in Zoho is harmless: the worker's dedupe-by-email guard updates the existing
-      // record instead of creating a duplicate.
+      // the timeout caps user-facing latency. A push that times out (or fails with
+      // an unclear outcome) may still land in Zoho later, and Zoho's search index
+      // lags new records, so the worker's dedupe-by-email could miss it. The row is
+      // therefore held back from the worker for CRM_RETRY_GRACE_MS, and a late
+      // success is recorded on the row directly (see STEP 2).
       const submittedAt = new Date();
       const CRM_PUSH_TIMEOUT_MS = 10000;
+      const CRM_RETRY_GRACE_MS = 10 * 60 * 1000;
       let crmError: string | null = null;
       let timeoutHandle: NodeJS.Timeout | undefined;
       try {
         const { pushToZohoCRM } = await import("./zoho-push-service");
-        const pushPromise = pushToZohoCRM({
+        pushPromise = pushToZohoCRM({
           formData,
           formName,
           zohoModule: "Leads",
@@ -323,10 +353,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const result = await Promise.race([
           pushPromise,
           new Promise<never>((_, reject) => {
-            timeoutHandle = setTimeout(
-              () => reject(new Error(`Synchronous CRM push timed out after ${CRM_PUSH_TIMEOUT_MS / 1000}s`)),
-              CRM_PUSH_TIMEOUT_MS,
-            );
+            timeoutHandle = setTimeout(() => {
+              crmTimedOut = true;
+              reject(new Error(`Synchronous CRM push timed out after ${CRM_PUSH_TIMEOUT_MS / 1000}s`));
+            }, CRM_PUSH_TIMEOUT_MS);
           }),
         ]);
         zohoCrmId = result.zohoCrmId;
@@ -340,60 +370,94 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // STEP 2: Save to local database (ALWAYS — either as the synced record,
-      // or as a pending queue entry for the backup worker)
-      const submission = await storage.createFormSubmission({
-        formName: formName,
-        submissionData: formData,
-        sourceForm: "CAS/CANN Registration Form",
-        zohoModule: "Leads",
-      });
+      // or as a pending queue entry for the backup worker). The row is written in
+      // its final state in ONE insert: a row that is briefly pending would be
+      // visible to the worker, which would push it to Zoho a second time.
+      const submission = await storage.createFormSubmission(
+        {
+          formName: formName,
+          submissionData: formData,
+          sourceForm: "CAS/CANN Registration Form",
+          zohoModule: "Leads",
+        },
+        zohoCrmId
+          ? {
+              // CRM push already succeeded — the worker must never pick this row up.
+              processingStatus: "completed",
+              syncStatus: "synced",
+              zohoCrmId: zohoCrmId,
+              lastSyncAt: new Date(),
+              errorMessage: null,
+            }
+          : {
+              // pending/pending (table defaults) so the worker retries it, but not
+              // before the grace period: the synchronous push may still complete.
+              errorMessage: `Synchronous CRM push failed (queued for background retry): ${crmError}`,
+              nextRetryAt: new Date(Date.now() + CRM_RETRY_GRACE_MS),
+            },
+      );
 
-      if (zohoCrmId) {
-        // CRM push already succeeded — mark the row synced immediately so the
-        // background worker doesn't push it a second time.
-        await storage.updateFormSubmission(submission.id, {
-          processingStatus: "completed",
-          syncStatus: "synced",
-          zohoCrmId: zohoCrmId,
-          lastSyncAt: new Date(),
-          errorMessage: null,
-        });
-      } else if (crmError) {
-        // Row stays pending/pending (table defaults) so the worker picks it up;
-        // record why the synchronous push failed for the audit endpoints.
-        await storage.updateFormSubmission(submission.id, {
-          errorMessage: `Synchronous CRM push failed (queued for background retry): ${crmError}`,
-        });
+      submissionSaved = true;
+
+      if (!zohoCrmId && crmTimedOut && pushPromise) {
+        // If the timed-out push still succeeds, record it on the row (only while the
+        // row is untouched pending/pending) and send the inbox email once, so the
+        // worker never re-pushes it. A late failure leaves the row for the worker.
+        pushPromise
+          .then(async (late) => {
+            const claimed = await storage.markPendingSubmissionSynced(submission.id, late.zohoCrmId);
+            if (!claimed) return;
+            console.log(`[CAS/CANN Registration] ✅ Late CRM push succeeded for submission #${submission.id} (${late.action}), Zoho ID: ${late.zohoCrmId}`);
+            try {
+              await storage.createSubmissionLog({
+                submissionId: submission.id,
+                operation: "crm_push",
+                status: "success",
+                details: { zohoCrmId: late.zohoCrmId, action: late.action, path: "synchronous (completed after timeout)" },
+              });
+            } catch (logErr) {
+              console.error(`[CAS/CANN Registration] Could not write late crm_push log for #${submission.id}:`, logErr);
+            }
+            await sendCasCannRegistrationNotification(formData, late.zohoCrmId);
+          })
+          .catch((lateErr) => {
+            console.error(`[CAS/CANN Registration] Late CRM push outcome for #${submission.id} not recorded:`, lateErr?.message || lateErr);
+          });
       }
 
-      // STEP 2a: Log receipt (+ CRM push outcome)
-      await storage.createSubmissionLog({
-        submissionId: submission.id,
-        operation: "received",
-        status: "success",
-        details: {
-          message: zohoCrmId
-            ? "Form submission received and synced to Zoho CRM immediately"
-            : "Form submission received and queued for Zoho sync (backup worker)",
-          formType: formName,
-        },
-      });
-
-      if (zohoCrmId) {
+      // STEP 2a: Log receipt (+ CRM push outcome). Audit logs only — a failure
+      // here must not stop the response or the notification email.
+      try {
         await storage.createSubmissionLog({
           submissionId: submission.id,
-          operation: "crm_push",
+          operation: "received",
           status: "success",
-          details: { zohoCrmId: zohoCrmId, action: zohoAction, path: "synchronous" },
+          details: {
+            message: zohoCrmId
+              ? "Form submission received and synced to Zoho CRM immediately"
+              : "Form submission received and queued for Zoho sync (backup worker)",
+            formType: formName,
+          },
         });
-      } else if (crmError) {
-        await storage.createSubmissionLog({
-          submissionId: submission.id,
-          operation: "crm_push",
-          status: "failed",
-          errorMessage: crmError,
-          details: { path: "synchronous", fallback: "queued for background sync worker" },
-        });
+
+        if (zohoCrmId) {
+          await storage.createSubmissionLog({
+            submissionId: submission.id,
+            operation: "crm_push",
+            status: "success",
+            details: { zohoCrmId: zohoCrmId, action: zohoAction, path: "synchronous" },
+          });
+        } else if (crmError) {
+          await storage.createSubmissionLog({
+            submissionId: submission.id,
+            operation: "crm_push",
+            status: "failed",
+            errorMessage: crmError,
+            details: { path: "synchronous", fallback: "queued for background sync worker" },
+          });
+        }
+      } catch (logErr) {
+        console.error(`[CAS/CANN Registration] ⚠️ Could not write submission logs for #${submission.id} (registration still succeeds):`, logErr);
       }
 
       // STEP 2b: CASL / PIPEDA / Law 25 — write an immutable consent audit row
@@ -478,23 +542,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       if (zohoCrmId) {
         // STEP 4: Fire-and-forget notification email to CAS / CANN inboxes.
-        // On the backup path the worker sends this after its eventual successful
-        // push, so each submission is emailed exactly once.
-        try {
-          const { emailNotificationService } = await import("./email-notification-service");
-          const isCANN = String(formData.wantsCANNMembership || "").toLowerCase() === "yes" || formData.wantsCANNMembership === true;
-          const isCAS = String(formData.wantsMembership || "").toLowerCase() === "yes" || formData.wantsMembership === true;
-          emailNotificationService.sendRegistrationNotification({
-            fullName: formData.fullName || `${formData.firstName || ""} ${formData.lastName || ""}`.trim() || formData.email || "Unknown",
-            email: formData.email || "",
-            discipline: formData.discipline,
-            institution: formData.institution,
-            membershipType: isCAS && isCANN ? "CAS & CANN" : isCAS ? "CAS" : "Contact",
-            leadId: zohoCrmId,
-          }).catch((err) => console.error("[CAS/CANN Registration] Notification email failed (non-blocking):", err?.message || err));
-        } catch (notifyErr) {
-          console.error("[CAS/CANN Registration] Could not load notification service:", notifyErr);
-        }
+        // On the backup path the worker (or the late-success handler above) sends
+        // this instead, so each submission is emailed exactly once.
+        notificationSent = true;
+        await sendCasCannRegistrationNotification(formData, zohoCrmId);
       } else {
         // Background worker will sync to Zoho asynchronously (and send the email on success)
         console.log(`[CAS/CANN Registration] ℹ️  Submission #${submission.id} will be synced to Zoho by background worker`);
@@ -502,16 +553,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     } catch (error) {
       console.error("[CAS/CANN Registration] ❌ Error saving submission:", error);
+      if (res.headersSent) return;
       if (zohoCrmId) {
         // The lead is already captured in Zoho — telling the user it failed would
         // be false, and retrying would just create noise. Log loudly for ops.
         console.error(`[CAS/CANN Registration] ⚠️ DB save failed AFTER successful CRM push. Lead is safe in Zoho (ID: ${zohoCrmId}) but has no local submission row — needs manual reconciliation.`);
+        // No row means no worker will ever email this one — send it here.
+        if (!notificationSent) {
+          notificationSent = true;
+          await sendCasCannRegistrationNotification(req.body?.formData || {}, zohoCrmId);
+        }
         return res.status(201).json({
           success: true,
           message: "Registration submitted successfully",
           formName: req.body?.formName,
           zohoCrmId: zohoCrmId,
         });
+      }
+      if (crmTimedOut && pushPromise && !submissionSaved) {
+        // The DB save failed, but the timed-out push may still land in Zoho. There is
+        // no row for the worker or the late-success handler, so log it for
+        // reconciliation and send the inbox email if it does.
+        const lateFormData = req.body?.formData || {};
+        pushPromise
+          .then(async (late) => {
+            console.error(`[CAS/CANN Registration] ⚠️ Late CRM push succeeded (Zoho ID: ${late.zohoCrmId}) but the DB save failed — no local submission row, needs manual reconciliation.`);
+            await sendCasCannRegistrationNotification(lateFormData, late.zohoCrmId);
+          })
+          .catch(() => {});
       }
       // Even database errors should be rare, but log them
       res.status(500).json({
